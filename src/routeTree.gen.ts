@@ -9,13 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppStreakRouteImport } from './routes/_app.streak'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppQuizRouteImport } from './routes/_app.quiz'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
 import { Route as AppLibraryRouteImport } from './routes/_app.library'
+import { Route as AppLeaderboardRouteImport } from './routes/_app.leaderboard'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
+import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
+import { Route as AppPaperPaperIdRouteImport } from './routes/_app.paper.$paperId'
 
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -24,6 +38,16 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppStreakRoute = AppStreakRouteImport.update({
+  id: '/streak',
+  path: '/streak',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppQuizRoute = AppQuizRouteImport.update({
   id: '/quiz',
@@ -35,9 +59,24 @@ const AppProgressRoute = AppProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => AppRoute,
 } as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppLibraryRoute = AppLibraryRouteImport.update({
   id: '/library',
   path: '/library',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
   getParentRoute: () => AppRoute,
 } as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
@@ -45,52 +84,139 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAchievementsRoute = AppAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => AppQuizRoute,
+} as any)
+const AppPaperPaperIdRoute = AppPaperPaperIdRouteImport.update({
+  id: '/paper/$paperId',
+  path: '/paper/$paperId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pricing': typeof PricingRoute
+  '/achievements': typeof AppAchievementsRoute
   '/dashboard': typeof AppDashboardRoute
+  '/leaderboard': typeof AppLeaderboardRoute
   '/library': typeof AppLibraryRoute
+  '/notifications': typeof AppNotificationsRoute
+  '/onboarding': typeof AppOnboardingRoute
   '/progress': typeof AppProgressRoute
-  '/quiz': typeof AppQuizRoute
+  '/quiz': typeof AppQuizRouteWithChildren
+  '/settings': typeof AppSettingsRoute
+  '/streak': typeof AppStreakRoute
+  '/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/quiz/setup': typeof AppQuizSetupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/pricing': typeof PricingRoute
+  '/achievements': typeof AppAchievementsRoute
   '/dashboard': typeof AppDashboardRoute
+  '/leaderboard': typeof AppLeaderboardRoute
   '/library': typeof AppLibraryRoute
+  '/notifications': typeof AppNotificationsRoute
+  '/onboarding': typeof AppOnboardingRoute
   '/progress': typeof AppProgressRoute
-  '/quiz': typeof AppQuizRoute
+  '/quiz': typeof AppQuizRouteWithChildren
+  '/settings': typeof AppSettingsRoute
+  '/streak': typeof AppStreakRoute
+  '/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/quiz/setup': typeof AppQuizSetupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/pricing': typeof PricingRoute
+  '/_app/achievements': typeof AppAchievementsRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/leaderboard': typeof AppLeaderboardRoute
   '/_app/library': typeof AppLibraryRoute
+  '/_app/notifications': typeof AppNotificationsRoute
+  '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/progress': typeof AppProgressRoute
-  '/_app/quiz': typeof AppQuizRoute
+  '/_app/quiz': typeof AppQuizRouteWithChildren
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/streak': typeof AppStreakRoute
+  '/_app/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/_app/quiz/setup': typeof AppQuizSetupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/library' | '/progress' | '/quiz'
+  fullPaths:
+    | '/'
+    | '/pricing'
+    | '/achievements'
+    | '/dashboard'
+    | '/leaderboard'
+    | '/library'
+    | '/notifications'
+    | '/onboarding'
+    | '/progress'
+    | '/quiz'
+    | '/settings'
+    | '/streak'
+    | '/paper/$paperId'
+    | '/quiz/setup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/library' | '/progress' | '/quiz'
+  to:
+    | '/'
+    | '/pricing'
+    | '/achievements'
+    | '/dashboard'
+    | '/leaderboard'
+    | '/library'
+    | '/notifications'
+    | '/onboarding'
+    | '/progress'
+    | '/quiz'
+    | '/settings'
+    | '/streak'
+    | '/paper/$paperId'
+    | '/quiz/setup'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/pricing'
+    | '/_app/achievements'
     | '/_app/dashboard'
+    | '/_app/leaderboard'
     | '/_app/library'
+    | '/_app/notifications'
+    | '/_app/onboarding'
     | '/_app/progress'
     | '/_app/quiz'
+    | '/_app/settings'
+    | '/_app/streak'
+    | '/_app/paper/$paperId'
+    | '/_app/quiz/setup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  PricingRoute: typeof PricingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -104,6 +230,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/streak': {
+      id: '/_app/streak'
+      path: '/streak'
+      fullPath: '/streak'
+      preLoaderRoute: typeof AppStreakRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/quiz': {
       id: '/_app/quiz'
@@ -119,11 +259,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProgressRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/onboarding': {
+      id: '/_app/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/library': {
       id: '/_app/library'
       path: '/library'
       fullPath: '/library'
       preLoaderRoute: typeof AppLibraryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/leaderboard': {
+      id: '/_app/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof AppLeaderboardRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/dashboard': {
@@ -133,21 +294,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/achievements': {
+      id: '/_app/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AppAchievementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/quiz/setup': {
+      id: '/_app/quiz/setup'
+      path: '/setup'
+      fullPath: '/quiz/setup'
+      preLoaderRoute: typeof AppQuizSetupRouteImport
+      parentRoute: typeof AppQuizRoute
+    }
+    '/_app/paper/$paperId': {
+      id: '/_app/paper/$paperId'
+      path: '/paper/$paperId'
+      fullPath: '/paper/$paperId'
+      preLoaderRoute: typeof AppPaperPaperIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppQuizRouteChildren {
+  AppQuizSetupRoute: typeof AppQuizSetupRoute
+}
+
+const AppQuizRouteChildren: AppQuizRouteChildren = {
+  AppQuizSetupRoute: AppQuizSetupRoute,
+}
+
+const AppQuizRouteWithChildren =
+  AppQuizRoute._addFileChildren(AppQuizRouteChildren)
+
 interface AppRouteChildren {
+  AppAchievementsRoute: typeof AppAchievementsRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppLeaderboardRoute: typeof AppLeaderboardRoute
   AppLibraryRoute: typeof AppLibraryRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppOnboardingRoute: typeof AppOnboardingRoute
   AppProgressRoute: typeof AppProgressRoute
-  AppQuizRoute: typeof AppQuizRoute
+  AppQuizRoute: typeof AppQuizRouteWithChildren
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppStreakRoute: typeof AppStreakRoute
+  AppPaperPaperIdRoute: typeof AppPaperPaperIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAchievementsRoute: AppAchievementsRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppLeaderboardRoute: AppLeaderboardRoute,
   AppLibraryRoute: AppLibraryRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppOnboardingRoute: AppOnboardingRoute,
   AppProgressRoute: AppProgressRoute,
-  AppQuizRoute: AppQuizRoute,
+  AppQuizRoute: AppQuizRouteWithChildren,
+  AppSettingsRoute: AppSettingsRoute,
+  AppStreakRoute: AppStreakRoute,
+  AppPaperPaperIdRoute: AppPaperPaperIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -155,16 +362,8 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  PricingRoute: PricingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

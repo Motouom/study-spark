@@ -36,14 +36,14 @@ function Nav() {
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <a href="#features" className="hover:text-foreground">Features</a>
           <a href="#how" className="hover:text-foreground">How it works</a>
-          <a href="#pricing" className="hover:text-foreground">Pricing</a>
+          <Link to="/pricing" className="hover:text-foreground">Pricing</Link>
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm">
             <Link to="/library">Browse</Link>
           </Button>
           <Button asChild size="sm">
-            <Link to="/dashboard">
+            <Link to="/onboarding">
               Open app <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </Button>
