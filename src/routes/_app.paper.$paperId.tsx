@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_app/paper/$paperId")({
   loader: ({ params }) => {
     const paper = PAPERS.find((p) => p.id === params.paperId);
     if (!paper) throw notFound();
-    return paper;
+    return { paper };
   },
   errorComponent: ({ error }) => (
     <div className="p-10 text-center text-sm text-muted-foreground">
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/_app/paper/$paperId")({
 });
 
 function PaperDetail() {
-  const paper = Route.useLoaderData();
+  const { paper } = Route.useLoaderData();
   const related = PAPERS.filter((p) => p.subject === paper.subject && p.id !== paper.id).slice(0, 4);
 
   return (
