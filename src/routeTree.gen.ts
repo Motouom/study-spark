@@ -11,10 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppQuizRouteImport } from './routes/_app.quiz'
 import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
 import { Route as AppLibraryRouteImport } from './routes/_app.library'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
+import { Route as AppPaperPaperIdRouteImport } from './routes/_app.paper.$paperId'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -25,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppQuizRoute = AppQuizRouteImport.update({
   id: '/quiz',
   path: '/quiz',
@@ -33,6 +42,11 @@ const AppQuizRoute = AppQuizRouteImport.update({
 const AppProgressRoute = AppProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLibraryRoute = AppLibraryRouteImport.update({
@@ -45,20 +59,38 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => AppQuizRoute,
+} as any)
+const AppPaperPaperIdRoute = AppPaperPaperIdRouteImport.update({
+  id: '/paper/$paperId',
+  path: '/paper/$paperId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
   '/library': typeof AppLibraryRoute
+  '/onboarding': typeof AppOnboardingRoute
   '/progress': typeof AppProgressRoute
-  '/quiz': typeof AppQuizRoute
+  '/quiz': typeof AppQuizRouteWithChildren
+  '/settings': typeof AppSettingsRoute
+  '/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/quiz/setup': typeof AppQuizSetupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AppDashboardRoute
   '/library': typeof AppLibraryRoute
+  '/onboarding': typeof AppOnboardingRoute
   '/progress': typeof AppProgressRoute
-  '/quiz': typeof AppQuizRoute
+  '/quiz': typeof AppQuizRouteWithChildren
+  '/settings': typeof AppSettingsRoute
+  '/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/quiz/setup': typeof AppQuizSetupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -66,22 +98,48 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/library': typeof AppLibraryRoute
+  '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/progress': typeof AppProgressRoute
-  '/_app/quiz': typeof AppQuizRoute
+  '/_app/quiz': typeof AppQuizRouteWithChildren
+  '/_app/settings': typeof AppSettingsRoute
+  '/_app/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/_app/quiz/setup': typeof AppQuizSetupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/library' | '/progress' | '/quiz'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/library'
+    | '/onboarding'
+    | '/progress'
+    | '/quiz'
+    | '/settings'
+    | '/paper/$paperId'
+    | '/quiz/setup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/library' | '/progress' | '/quiz'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/library'
+    | '/onboarding'
+    | '/progress'
+    | '/quiz'
+    | '/settings'
+    | '/paper/$paperId'
+    | '/quiz/setup'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_app/dashboard'
     | '/_app/library'
+    | '/_app/onboarding'
     | '/_app/progress'
     | '/_app/quiz'
+    | '/_app/settings'
+    | '/_app/paper/$paperId'
+    | '/_app/quiz/setup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/quiz': {
       id: '/_app/quiz'
       path: '/quiz'
@@ -117,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/progress'
       fullPath: '/progress'
       preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/onboarding': {
+      id: '/_app/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/library': {
@@ -133,21 +205,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/quiz/setup': {
+      id: '/_app/quiz/setup'
+      path: '/setup'
+      fullPath: '/quiz/setup'
+      preLoaderRoute: typeof AppQuizSetupRouteImport
+      parentRoute: typeof AppQuizRoute
+    }
+    '/_app/paper/$paperId': {
+      id: '/_app/paper/$paperId'
+      path: '/paper/$paperId'
+      fullPath: '/paper/$paperId'
+      preLoaderRoute: typeof AppPaperPaperIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
+
+interface AppQuizRouteChildren {
+  AppQuizSetupRoute: typeof AppQuizSetupRoute
+}
+
+const AppQuizRouteChildren: AppQuizRouteChildren = {
+  AppQuizSetupRoute: AppQuizSetupRoute,
+}
+
+const AppQuizRouteWithChildren =
+  AppQuizRoute._addFileChildren(AppQuizRouteChildren)
 
 interface AppRouteChildren {
   AppDashboardRoute: typeof AppDashboardRoute
   AppLibraryRoute: typeof AppLibraryRoute
+  AppOnboardingRoute: typeof AppOnboardingRoute
   AppProgressRoute: typeof AppProgressRoute
-  AppQuizRoute: typeof AppQuizRoute
+  AppQuizRoute: typeof AppQuizRouteWithChildren
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppPaperPaperIdRoute: typeof AppPaperPaperIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDashboardRoute: AppDashboardRoute,
   AppLibraryRoute: AppLibraryRoute,
+  AppOnboardingRoute: AppOnboardingRoute,
   AppProgressRoute: AppProgressRoute,
-  AppQuizRoute: AppQuizRoute,
+  AppQuizRoute: AppQuizRouteWithChildren,
+  AppSettingsRoute: AppSettingsRoute,
+  AppPaperPaperIdRoute: AppPaperPaperIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
