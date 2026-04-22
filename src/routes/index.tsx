@@ -40,11 +40,11 @@ function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm">
-            <Link to="/sign-in">Sign in</Link>
+            <Link to="/library">Browse</Link>
           </Button>
           <Button asChild size="sm">
-            <Link to="/sign-up">
-              Get started <ArrowRight className="ml-1 h-4 w-4" />
+            <Link to="/dashboard">
+              Open app <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -79,7 +79,7 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-6 text-base">
-              <Link to="/sign-up">
+              <Link to="/dashboard">
                 Start studying free <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
@@ -293,7 +293,7 @@ function Pricing() {
               <Li>Daily streaks</Li>
             </ul>
             <Button asChild variant="outline" className="mt-8 w-full">
-              <Link to="/sign-up">Get started</Link>
+              <Link to="/dashboard">Get started</Link>
             </Button>
           </div>
           <div className="relative rounded-2xl border border-foreground bg-foreground p-8 text-background">
@@ -317,7 +317,7 @@ function Pricing() {
               asChild
               className="mt-8 w-full bg-background text-foreground hover:bg-background/90"
             >
-              <Link to="/sign-up">Join waitlist</Link>
+              <Link to="/dashboard">Join waitlist</Link>
             </Button>
           </div>
         </div>
@@ -354,7 +354,7 @@ function CTA() {
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg" className="h-12 px-6">
-            <Link to="/sign-up">
+            <Link to="/dashboard">
               Start studying free <ArrowRight className="ml-1.5 h-4 w-4" />
             </Link>
           </Button>
