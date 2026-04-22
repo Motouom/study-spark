@@ -125,9 +125,13 @@ function LibraryPage() {
                   <Badge variant="secondary">Free</Badge>
                 )}
               </div>
-              <h3 className="mt-4 text-base font-medium leading-snug text-foreground">
+              <Link
+                to="/paper/$paperId"
+                params={{ paperId: p.id }}
+                className="mt-4 text-base font-medium leading-snug text-foreground hover:underline"
+              >
                 {p.title}
-              </h3>
+              </Link>
               <div className="mt-1 flex flex-wrap gap-1.5 text-xs text-muted-foreground">
                 <span>{p.examBoard}</span>·<span>{p.year}</span>·
                 <span>{p.questions} questions</span>
@@ -137,7 +141,7 @@ function LibraryPage() {
               </div>
               <div className="mt-4 flex gap-2">
                 <Button asChild size="sm" className="flex-1">
-                  <Link to="/quiz">Start quiz</Link>
+                  <Link to="/paper/$paperId" params={{ paperId: p.id }}>Open paper</Link>
                 </Button>
                 <Button size="icon" variant="outline" aria-label="Download">
                   <Download className="h-4 w-4" />
