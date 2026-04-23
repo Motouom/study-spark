@@ -62,7 +62,7 @@ function Dashboard() {
         description="You're 14 days in. Don't break the chain."
       >
         <Button asChild>
-          <Link to="/quiz/setup">
+          <Link to="/quiz/setup" search={{}}>
             Start a quiz <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </Button>
@@ -84,7 +84,7 @@ function Dashboard() {
               </p>
             </div>
             <Button asChild size="lg">
-              <Link to="/quiz" search={{ subject: todayQ.subject, count: 5 }}>
+              <Link to="/quiz" search={{ subject: todayQ.subject, count: 5, mode: "daily" }}>
                 <Zap className="mr-1.5 h-4 w-4" /> Take the challenge
               </Link>
             </Button>
