@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SigninRouteImport } from './routes/signin'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +26,11 @@ import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
 import { Route as AppPaperPaperIdRouteImport } from './routes/_app.paper.$paperId'
 
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
@@ -103,6 +109,7 @@ const AppPaperPaperIdRoute = AppPaperPaperIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/pricing': typeof PricingRoute
+  '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
   '/dashboard': typeof AppDashboardRoute
   '/leaderboard': typeof AppLeaderboardRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/pricing': typeof PricingRoute
+  '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
   '/dashboard': typeof AppDashboardRoute
   '/leaderboard': typeof AppLeaderboardRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/signin': typeof SigninRoute
   '/_app/achievements': typeof AppAchievementsRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/leaderboard': typeof AppLeaderboardRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/pricing'
+    | '/signin'
     | '/achievements'
     | '/dashboard'
     | '/leaderboard'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/pricing'
+    | '/signin'
     | '/achievements'
     | '/dashboard'
     | '/leaderboard'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/pricing'
+    | '/signin'
     | '/_app/achievements'
     | '/_app/dashboard'
     | '/_app/leaderboard'
@@ -206,10 +218,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   PricingRoute: typeof PricingRoute
+  SigninRoute: typeof SigninRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
@@ -363,7 +383,17 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   PricingRoute: PricingRoute,
+  SigninRoute: SigninRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
