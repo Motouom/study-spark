@@ -11,16 +11,22 @@ export type Subject =
 
 export type ExamBoard = "WASSCE" | "JAMB" | "KCSE" | "NECTA" | "GCE";
 
+export type CountryCode = "NG" | "GH" | "KE" | "TZ" | "UG" | "CM" | "ZM";
+
 export interface PastPaper {
   id: string;
   title: string;
+  description: string;
+  tags: string[];
   subject: Subject;
   examBoard: ExamBoard;
+  country: CountryCode;
   year: number;
   questions: number;
   downloads: number;
   isPremium: boolean;
   duration: number; // minutes
+  pages: number;
 }
 
 export const SUBJECTS: Subject[] = [
@@ -47,90 +53,172 @@ export const COUNTRIES = [
   { code: "ZM", name: "Zambia", flag: "🇿🇲", boards: ["GCE"] },
 ] as const;
 
+export const COUNTRY_BY_BOARD: Record<ExamBoard, CountryCode> = {
+  WASSCE: "NG",
+  JAMB: "NG",
+  KCSE: "KE",
+  NECTA: "TZ",
+  GCE: "CM",
+};
+
 const seed = (n: number) => {
   let x = Math.sin(n) * 10000;
   return x - Math.floor(x);
 };
 
+const TAG_BANK = ["algebra", "essay", "reading", "mechanics", "organic", "ecology", "macro", "maps", "colonial", "poetry"];
+
 export const PAPERS: PastPaper[] = Array.from({ length: 48 }).map((_, i) => {
   const subject = SUBJECTS[i % SUBJECTS.length];
   const examBoard = EXAM_BOARDS[i % EXAM_BOARDS.length];
   const year = 2015 + (i % 10);
+  const country = COUNTRY_BY_BOARD[examBoard];
+  const tag = TAG_BANK[i % TAG_BANK.length];
   return {
     id: `paper-${i + 1}`,
     title: `${subject} ${examBoard} ${year}`,
+    description: `Official ${examBoard} ${subject} examination from ${year}. Covers ${tag}, full theory and practical sections.`,
+    tags: [tag, subject.toLowerCase(), examBoard.toLowerCase()],
     subject,
     examBoard,
+    country,
     year,
     questions: 30 + Math.floor(seed(i + 1) * 30),
     downloads: 200 + Math.floor(seed(i + 7) * 4800),
     isPremium: i % 9 === 0,
     duration: 60 + Math.floor(seed(i + 3) * 90),
+    pages: 8 + Math.floor(seed(i + 5) * 16),
   };
 });
 
-export interface QuizQuestion {
+// =================================================================
+// Quiz engine — supports many question types
+// =================================================================
+
+export type QuestionType =
+  | "mcq"
+  | "true_false"
+  | "fill_blank"
+  | "match"
+  | "image_mcq"
+  | "audio_mcq"
+  | "essay";
+
+export type Difficulty = "easy" | "medium" | "hard";
+
+export interface QuizQuestionBase {
   id: string;
   subject: Subject;
-  question: string;
-  choices: string[];
-  correctIndex: number;
+  type: QuestionType;
+  difficulty: Difficulty;
+  prompt: string;
   explanation: string;
 }
+
+export interface MCQQuestion extends QuizQuestionBase {
+  type: "mcq" | "image_mcq" | "audio_mcq";
+  choices: string[];
+  correctIndex: number;
+  imageHint?: string; // a short text used to render a mock image card
+  audioHint?: string; // mock audio transcript
+}
+
+export interface TrueFalseQuestion extends QuizQuestionBase {
+  type: "true_false";
+  answer: boolean;
+}
+
+export interface FillBlankQuestion extends QuizQuestionBase {
+  type: "fill_blank";
+  // prompt should contain "____"
+  acceptedAnswers: string[]; // case-insensitive match
+}
+
+export interface MatchQuestion extends QuizQuestionBase {
+  type: "match";
+  // user matches lefts to rights. correct mapping: lefts[i] -> rights[i]
+  lefts: string[];
+  rights: string[];
+}
+
+export interface EssayQuestion extends QuizQuestionBase {
+  type: "essay";
+  rubric: string[];
+  minWords: number;
+}
+
+export type QuizQuestion =
+  | MCQQuestion
+  | TrueFalseQuestion
+  | FillBlankQuestion
+  | MatchQuestion
+  | EssayQuestion;
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: "q1",
+    type: "mcq",
+    difficulty: "easy",
     subject: "Mathematics",
-    question: "If 2x + 3 = 11, what is the value of x?",
+    prompt: "If 2x + 3 = 11, what is the value of x?",
     choices: ["2", "3", "4", "5"],
     correctIndex: 2,
     explanation: "2x = 11 − 3 = 8, so x = 4.",
   },
   {
     id: "q2",
+    type: "mcq",
+    difficulty: "easy",
     subject: "Physics",
-    question: "What is the SI unit of electric current?",
+    prompt: "What is the SI unit of electric current?",
     choices: ["Volt", "Watt", "Ampere", "Ohm"],
     correctIndex: 2,
     explanation: "The ampere (A) is the SI base unit of electric current.",
   },
   {
     id: "q3",
+    type: "true_false",
+    difficulty: "easy",
     subject: "Chemistry",
-    question: "Which gas is most abundant in the Earth's atmosphere?",
-    choices: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
-    correctIndex: 2,
+    prompt: "Nitrogen is the most abundant gas in Earth's atmosphere.",
+    answer: true,
     explanation: "Nitrogen makes up about 78% of the atmosphere.",
   },
   {
     id: "q4",
+    type: "fill_blank",
+    difficulty: "medium",
     subject: "Biology",
-    question: "The powerhouse of the cell is the:",
-    choices: ["Nucleus", "Mitochondrion", "Ribosome", "Golgi apparatus"],
-    correctIndex: 1,
+    prompt: "The powerhouse of the cell is the ____.",
+    acceptedAnswers: ["mitochondrion", "mitochondria"],
     explanation: "Mitochondria produce most of the cell's ATP.",
   },
   {
     id: "q5",
+    type: "mcq",
+    difficulty: "easy",
     subject: "English",
-    question: "Choose the correctly spelled word:",
+    prompt: "Choose the correctly spelled word:",
     choices: ["Recieve", "Receive", "Recive", "Receeve"],
     correctIndex: 1,
     explanation: "I before E except after C — receive.",
   },
   {
     id: "q6",
+    type: "match",
+    difficulty: "medium",
     subject: "Geography",
-    question: "The longest river in Africa is the:",
-    choices: ["Congo", "Niger", "Zambezi", "Nile"],
-    correctIndex: 3,
-    explanation: "The Nile, at ~6,650 km, is Africa's longest river.",
+    prompt: "Match each river to the country it primarily flows through.",
+    lefts: ["Nile", "Niger", "Zambezi", "Congo"],
+    rights: ["Egypt", "Nigeria", "Zambia", "DRC"],
+    explanation: "These are the dominant countries each river flows through.",
   },
   {
     id: "q7",
+    type: "mcq",
+    difficulty: "medium",
     subject: "Economics",
-    question: "Opportunity cost refers to:",
+    prompt: "Opportunity cost refers to:",
     choices: [
       "The money paid for a good",
       "The next best alternative forgone",
@@ -142,27 +230,91 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: "q8",
+    type: "mcq",
+    difficulty: "hard",
     subject: "Mathematics",
-    question: "What is the area of a circle with radius 7? (use π = 22/7)",
+    prompt: "What is the area of a circle with radius 7? (use π = 22/7)",
     choices: ["44", "154", "49", "22"],
     correctIndex: 1,
     explanation: "A = πr² = (22/7) × 49 = 154.",
   },
   {
     id: "q9",
+    type: "fill_blank",
+    difficulty: "medium",
     subject: "History",
-    question: "Ghana gained independence in which year?",
-    choices: ["1957", "1960", "1963", "1966"],
-    correctIndex: 0,
+    prompt: "Ghana gained independence in the year ____.",
+    acceptedAnswers: ["1957"],
     explanation: "Ghana became the first sub-Saharan African country to gain independence on 6 March 1957.",
   },
   {
     id: "q10",
+    type: "mcq",
+    difficulty: "medium",
     subject: "Literature",
-    question: "Who wrote 'Things Fall Apart'?",
+    prompt: "Who wrote 'Things Fall Apart'?",
     choices: ["Wole Soyinka", "Chinua Achebe", "Ngũgĩ wa Thiong'o", "Chimamanda Adichie"],
     correctIndex: 1,
     explanation: "Chinua Achebe published 'Things Fall Apart' in 1958.",
+  },
+  {
+    id: "q11",
+    type: "image_mcq",
+    difficulty: "medium",
+    subject: "Geography",
+    prompt: "The diagram shows a topographic feature with concentric contour lines closing inward. What does it represent?",
+    imageHint: "Concentric rings — contour map",
+    choices: ["Valley", "Hill or peak", "Plateau", "Depression"],
+    correctIndex: 1,
+    explanation: "Concentric closed contours with values increasing inward represent a hill or peak.",
+  },
+  {
+    id: "q12",
+    type: "audio_mcq",
+    difficulty: "medium",
+    subject: "English",
+    prompt: "Listen to the passage. What is the speaker's main argument?",
+    audioHint: "\"Education is not preparation for life — education is life itself.\"",
+    choices: [
+      "Education only matters in school",
+      "Education is itself a way of living",
+      "Schools teach the wrong things",
+      "Adults should stop learning",
+    ],
+    correctIndex: 1,
+    explanation: "The speaker quotes John Dewey's idea that education is integral to life, not a precursor to it.",
+  },
+  {
+    id: "q13",
+    type: "true_false",
+    difficulty: "easy",
+    subject: "Physics",
+    prompt: "Sound travels faster in water than in air.",
+    answer: true,
+    explanation: "Sound travels ~1480 m/s in water vs ~343 m/s in air, because water is denser and less compressible.",
+  },
+  {
+    id: "q14",
+    type: "essay",
+    difficulty: "hard",
+    subject: "History",
+    prompt: "Discuss the social and economic causes of the Scramble for Africa (1881–1914).",
+    rubric: [
+      "Identify at least 3 distinct causes",
+      "Distinguish economic vs social motivations",
+      "Reference at least one specific event or treaty",
+    ],
+    minWords: 80,
+    explanation: "Strong answers cover industrial demand for raw materials, the Berlin Conference (1884–85), nationalism, and 'civilizing mission' ideology.",
+  },
+  {
+    id: "q15",
+    type: "fill_blank",
+    difficulty: "easy",
+    subject: "Chemistry",
+    prompt: "The chemical symbol for gold is ____.",
+    acceptedAnswers: ["Au"],
+    explanation: "From the Latin 'aurum'.",
   },
 ];
 
@@ -258,3 +410,29 @@ export const NOTIFICATIONS: Notification[] = [
   { id: "n4", title: "Weekly summary", body: "You scored 82% average this week — up 12% from last week.", time: "2 days ago", type: "system", read: true },
   { id: "n5", title: "Friend joined", body: "Kofi joined StudyFlow. Add them on the leaderboard.", time: "3 days ago", type: "system", read: true },
 ];
+
+// ---------- Connected devices (mock multi-device sync) ----------
+export interface Device {
+  id: string;
+  name: string;
+  type: "phone" | "laptop" | "tablet";
+  location: string;
+  lastActive: string;
+  current: boolean;
+}
+
+export const DEVICES: Device[] = [
+  { id: "d1", name: "iPhone 14", type: "phone", location: "Accra, Ghana", lastActive: "Active now", current: true },
+  { id: "d2", name: "MacBook Air", type: "laptop", location: "Accra, Ghana", lastActive: "2 hours ago", current: false },
+  { id: "d3", name: "Samsung Tab S9", type: "tablet", location: "Kumasi, Ghana", lastActive: "Yesterday", current: false },
+];
+
+// ---------- Daily challenge ----------
+export const DAILY_CHALLENGE = {
+  date: new Date().toISOString().slice(0, 10),
+  title: "Mixed Sciences Sprint",
+  description: "10 fast questions across Physics, Chemistry, and Biology.",
+  xp: 150,
+  questions: 10,
+  difficulty: "medium" as Difficulty,
+};

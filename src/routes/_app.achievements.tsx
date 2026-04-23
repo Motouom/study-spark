@@ -105,6 +105,7 @@ function AchievementsPage() {
           <p className="mt-1.5 text-sm text-background/70">Take a quiz today and unlock the next milestone.</p>
           <Link
             to="/quiz/setup"
+            search={{} as never}
             className="mt-4 inline-flex items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-background/90"
           >
             Start a quiz

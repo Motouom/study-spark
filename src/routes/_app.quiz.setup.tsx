@@ -137,14 +137,14 @@ function QuizSetup() {
 
           <div className="flex items-center justify-between gap-3">
             <Button variant="ghost" asChild>
-              <Link to="/quiz">Cancel</Link>
+              <Link to="/quiz" search={{} as never}>Cancel</Link>
             </Button>
             <Button
               size="lg"
               onClick={() =>
                 navigate({
                   to: "/quiz",
-                  search: { subject, board, difficulty, count, timed },
+                  search: { subject, board, difficulty, count, timed, mode: "normal" } as never,
                 })
               }
             >
