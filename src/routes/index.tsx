@@ -40,11 +40,11 @@ function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm">
-            <Link to="/library">Browse</Link>
+            <Link to="/signin">Sign in</Link>
           </Button>
           <Button asChild size="sm">
             <Link to="/onboarding">
-              Open app <ArrowRight className="ml-1 h-4 w-4" />
+              Get started <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </Button>
         </div>

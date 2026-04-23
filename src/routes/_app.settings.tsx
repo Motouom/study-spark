@@ -12,11 +12,12 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { COUNTRIES, EXAM_BOARDS, SUBJECTS } from "@/lib/mock-data";
+import { COUNTRIES, DEVICES, EXAM_BOARDS, SUBJECTS } from "@/lib/mock-data";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Laptop, LogOut, Smartphone, Sparkles, Tablet } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — StudyFlow" }] }),
@@ -66,9 +67,30 @@ function SettingsPage() {
       <PageHeader title="Settings" description="Manage your profile, exam prep, and preferences." />
 
       <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
-        <Section title="Profile" description="Your basic information.">
+        <Section title="Profile" description="Customize how you appear in StudyFlow.">
+          <Row label="Avatar">
+            <div className="flex items-center gap-4">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground font-display text-xl text-background">
+                {name.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm">Upload</Button>
+                <Button variant="ghost" size="sm">Remove</Button>
+              </div>
+            </div>
+          </Row>
           <Row label="Display name">
             <Input value={name} onChange={(e) => setName(e.target.value)} className="max-w-md" />
+          </Row>
+          <Row label="Username" hint="Shown on the leaderboard">
+            <Input defaultValue="akua_m" className="max-w-md" />
+          </Row>
+          <Row label="Bio" hint="A short note about yourself">
+            <Textarea
+              defaultValue="Form 6 student from Accra. Future medical student."
+              rows={3}
+              className="max-w-md"
+            />
           </Row>
           <Row label="Email">
             <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="max-w-md" />
@@ -163,6 +185,39 @@ function SettingsPage() {
               </Link>
             </Button>
           </div>
+        </Section>
+
+        <Section
+          title="Connected devices"
+          description="StudyFlow keeps your progress synced across every device you sign in on."
+        >
+          <ul className="divide-y divide-border">
+            {DEVICES.map((d) => {
+              const Icon = d.type === "phone" ? Smartphone : d.type === "tablet" ? Tablet : Laptop;
+              return (
+                <li key={d.id} className="flex items-center gap-4 py-3 first:pt-0 last:pb-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2 text-sm font-medium">
+                      {d.name}
+                      {d.current && <Badge variant="secondary" className="text-[10px]">This device</Badge>}
+                    </div>
+                    <div className="text-xs text-muted-foreground">{d.location} · {d.lastActive}</div>
+                  </div>
+                  {!d.current && (
+                    <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                      <LogOut className="mr-1 h-3.5 w-3.5" /> Sign out
+                    </Button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          <p className="text-xs text-muted-foreground">
+            Sign in on any device with the same email to sync your streaks, bookmarks, and quiz history.
+          </p>
         </Section>
 
         <div className="flex justify-end gap-2">
