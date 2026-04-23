@@ -45,7 +45,8 @@ export const Route = createFileRoute("/_app/paper/$paperId")({
 });
 
 function PaperDetail() {
-  const { paper } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  const paper = data!.paper;
   const related = PAPERS.filter((p) => p.subject === paper.subject && p.id !== paper.id).slice(0, 4);
   const country = COUNTRIES.find((c) => c.code === paper.country);
 
@@ -93,7 +94,7 @@ function PaperDetail() {
             </Badge>
             <p className="mt-3 text-sm text-muted-foreground">{paper.description}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {paper.tags.map((t) => (
+              {paper.tags.map((t: string) => (
                 <Badge key={t} variant="outline" className="text-[10px] uppercase tracking-wider">
                   {t}
                 </Badge>
@@ -114,7 +115,7 @@ function PaperDetail() {
               </div>
             </dl>
             <Button asChild className="mt-5 w-full">
-              <Link to="/quiz/setup" search={{ subject: paper.subject, board: paper.examBoard }}>
+              <Link to="/quiz/setup" search={{ subject: paper.subject, board: paper.examBoard, difficulty: undefined, count: undefined, timed: undefined, mode: undefined }}>
                 <GraduationCap className="mr-1.5 h-4 w-4" /> Start quiz from paper
               </Link>
             </Button>
