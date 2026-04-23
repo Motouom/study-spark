@@ -377,9 +377,9 @@ function QuizPage() {
             </Badge>
           )}
           <Button variant="outline" size="sm" asChild>
-            <Link to="/quiz/setup">
-              <Settings2 className="mr-1 h-4 w-4" /> Customize
-            </Link>
+          <Link to="/quiz/setup" search={{} as never}>
+            <Settings2 className="mr-1 h-4 w-4" /> Customize
+          </Link>
           </Button>
         </div>
       </PageHeader>

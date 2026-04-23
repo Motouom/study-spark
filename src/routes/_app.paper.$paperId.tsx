@@ -45,8 +45,8 @@ export const Route = createFileRoute("/_app/paper/$paperId")({
 });
 
 function PaperDetail() {
-  const data = Route.useLoaderData();
-  const paper = data!.paper;
+  const data = Route.useLoaderData() as { paper: typeof PAPERS[number] };
+  const paper = data.paper;
   const related = PAPERS.filter((p) => p.subject === paper.subject && p.id !== paper.id).slice(0, 4);
   const country = COUNTRIES.find((c) => c.code === paper.country);
 
@@ -115,7 +115,7 @@ function PaperDetail() {
               </div>
             </dl>
             <Button asChild className="mt-5 w-full">
-              <Link to="/quiz/setup" search={{ subject: paper.subject, board: paper.examBoard, difficulty: undefined, count: undefined, timed: undefined, mode: undefined }}>
+              <Link to="/quiz/setup" search={{ subject: paper.subject, board: paper.examBoard } as never}>
                 <GraduationCap className="mr-1.5 h-4 w-4" /> Start quiz from paper
               </Link>
             </Button>

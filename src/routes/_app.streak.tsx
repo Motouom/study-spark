@@ -106,7 +106,7 @@ function StreakPage() {
               <p className="mt-1.5 text-sm text-background/70">A 5-minute quiz keeps your 14-day streak alive.</p>
             </div>
             <Button asChild className="mt-5 bg-background text-foreground hover:bg-background/90">
-              <Link to="/quiz/setup">Start now</Link>
+              <Link to="/quiz/setup" search={{} as never}>Start now</Link>
             </Button>
           </div>
         </section>
