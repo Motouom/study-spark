@@ -15,6 +15,7 @@ import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
+import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
 import { Route as AppStreakRouteImport } from './routes/_app.streak'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppQuizRouteImport } from './routes/_app.quiz'
@@ -55,6 +56,11 @@ const IndexRoute = IndexRouteImport.update({
 const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ControlPanel9k3xRoute,
+} as any)
+const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
 const AppStreakRoute = AppStreakRouteImport.update({
@@ -133,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/quiz': typeof AppQuizRouteWithChildren
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
+  '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/paper/$paperId': typeof AppPaperPaperIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/quiz': typeof AppQuizRouteWithChildren
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
+  '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
   '/paper/$paperId': typeof AppPaperPaperIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
@@ -172,6 +180,7 @@ export interface FileRoutesById {
   '/_app/quiz': typeof AppQuizRouteWithChildren
   '/_app/settings': typeof AppSettingsRoute
   '/_app/streak': typeof AppStreakRoute
+  '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/_app/paper/$paperId': typeof AppPaperPaperIdRoute
   '/_app/quiz/setup': typeof AppQuizSetupRoute
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/settings'
     | '/streak'
+    | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
     | '/paper/$paperId'
     | '/quiz/setup'
@@ -211,6 +221,7 @@ export interface FileRouteTypes {
     | '/quiz'
     | '/settings'
     | '/streak'
+    | '/control-panel-9k3x/users'
     | '/control-panel-9k3x'
     | '/paper/$paperId'
     | '/quiz/setup'
@@ -231,6 +242,7 @@ export interface FileRouteTypes {
     | '/_app/quiz'
     | '/_app/settings'
     | '/_app/streak'
+    | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
     | '/_app/paper/$paperId'
     | '/_app/quiz/setup'
@@ -286,6 +298,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/control-panel-9k3x/'
       preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/users': {
+      id: '/control-panel-9k3x/users'
+      path: '/users'
+      fullPath: '/control-panel-9k3x/users'
+      preLoaderRoute: typeof ControlPanel9k3xUsersRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
     '/_app/streak': {
@@ -417,10 +436,12 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface ControlPanel9k3xRouteChildren {
+  ControlPanel9k3xUsersRoute: typeof ControlPanel9k3xUsersRoute
   ControlPanel9k3xIndexRoute: typeof ControlPanel9k3xIndexRoute
 }
 
 const ControlPanel9k3xRouteChildren: ControlPanel9k3xRouteChildren = {
+  ControlPanel9k3xUsersRoute: ControlPanel9k3xUsersRoute,
   ControlPanel9k3xIndexRoute: ControlPanel9k3xIndexRoute,
 }
 
