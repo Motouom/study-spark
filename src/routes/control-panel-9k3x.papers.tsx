@@ -86,7 +86,7 @@ function PapersAdmin() {
                     </div>
                   </td>
                   <td className="px-4 py-3">{p.subject}</td>
-                  <td className="px-4 py-3">{p.board}</td>
+                  <td className="px-4 py-3">{p.examBoard}</td>
                   <td className="px-4 py-3 font-mono text-xs">{p.year}</td>
                   <td className="px-4 py-3">
                     {status === "published" ? (
