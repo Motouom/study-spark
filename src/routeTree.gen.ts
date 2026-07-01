@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3x'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppStreakRouteImport } from './routes/_app.streak'
@@ -34,6 +35,11 @@ const SigninRoute = SigninRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ControlPanel9k3xRoute = ControlPanel9k3xRouteImport.update({
+  id: '/control-panel-9k3x',
+  path: '/control-panel-9k3x',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -108,6 +114,7 @@ const AppPaperPaperIdRoute = AppPaperPaperIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/control-panel-9k3x': typeof ControlPanel9k3xRoute
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/control-panel-9k3x': typeof ControlPanel9k3xRoute
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/control-panel-9k3x': typeof ControlPanel9k3xRoute
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/_app/achievements': typeof AppAchievementsRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/control-panel-9k3x'
     | '/pricing'
     | '/signin'
     | '/achievements'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/control-panel-9k3x'
     | '/pricing'
     | '/signin'
     | '/achievements'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_app'
+    | '/control-panel-9k3x'
     | '/pricing'
     | '/signin'
     | '/_app/achievements'
@@ -217,6 +229,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  ControlPanel9k3xRoute: typeof ControlPanel9k3xRoute
   PricingRoute: typeof PricingRoute
   SigninRoute: typeof SigninRoute
 }
@@ -235,6 +248,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/control-panel-9k3x': {
+      id: '/control-panel-9k3x'
+      path: '/control-panel-9k3x'
+      fullPath: '/control-panel-9k3x'
+      preLoaderRoute: typeof ControlPanel9k3xRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app': {
@@ -382,18 +402,10 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  ControlPanel9k3xRoute: ControlPanel9k3xRoute,
   PricingRoute: PricingRoute,
   SigninRoute: SigninRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
