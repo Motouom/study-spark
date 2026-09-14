@@ -200,6 +200,7 @@ function QuestionTracker({
             const status = byQuestion.get(questionNumber);
             const currentStatus = status?.status;
             const pending = savingKey === `${documentId}:${questionNumber}`;
+            const canComplete = Boolean(status?.startedAt);
             return (
               <div key={questionNumber} className="rounded-lg border border-border p-3">
                 <div className="mb-2 flex items-center justify-between">
@@ -223,13 +224,13 @@ function QuestionTracker({
                   <MarkButton
                     label={pending && currentStatus === "passed" ? "Saving" : "Passed"}
                     active={currentStatus === "passed"}
-                    disabled={pending}
+                    disabled={pending || !canComplete}
                     onClick={() => onMark(documentId, questionNumber, "passed")}
                   />
                   <MarkButton
                     label={pending && currentStatus === "failed" ? "Saving" : "Failed"}
                     active={currentStatus === "failed"}
-                    disabled={pending}
+                    disabled={pending || !canComplete}
                     onClick={() => onMark(documentId, questionNumber, "failed")}
                   />
                 </div>
@@ -296,7 +297,7 @@ function MarkButton({
           // The hook stores the user-visible error and rolls back the optimistic state.
         });
       }}
-      className={`min-h-10 rounded-md border px-2 py-2 text-xs transition-colors disabled:cursor-wait disabled:opacity-70 ${
+      className={`min-h-10 rounded-md border px-2 py-2 text-xs transition-colors disabled:cursor-not-allowed disabled:opacity-55 ${
         active
           ? "border-foreground bg-foreground text-background"
           : "border-border bg-background hover:bg-secondary"
