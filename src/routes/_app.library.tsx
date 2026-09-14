@@ -5,7 +5,7 @@ import { getStudentLibrary } from "@/lib/server-api";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Lock, Search, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, Lock, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
@@ -34,12 +34,27 @@ function LibraryPage() {
       : SUBJECTS.filter((item) => courseDocuments.some((document) => document.subject === item))
     : subjects;
   const [q, setQ] = useState("");
-  const [subject, setSubject] = useState<Subject | "all">("all");
+  const [subject, setSubject] = useState<Subject | null>(null);
+
+  const subjectCards = useMemo(
+    () =>
+      effectiveSubjects.map((item) => {
+        const documents = courseDocuments.filter((document) => document.subject === item);
+        const unlocked = documents.filter((document) => !document.isLocked).length;
+
+        return {
+          name: item,
+          total: documents.length,
+          unlocked,
+        };
+      }),
+    [courseDocuments, effectiveSubjects],
+  );
 
   const filteredDocuments = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return courseDocuments.filter((document) => {
-      if (subject !== "all" && document.subject !== subject) return false;
+      if (!subject || document.subject !== subject) return false;
       if (!needle) return true;
       return [document.title, document.subject].join(" ").toLowerCase().includes(needle);
     });
@@ -64,45 +79,70 @@ function LibraryPage() {
           </div>
         )}
 
-        <div className="rounded-xl border border-border bg-card p-4">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-            <div className="relative flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Search your papers..."
-                className="h-11 pl-9"
-              />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <button onClick={() => setSubject("all")} className={chipCls(subject === "all")}>
-                All subjects
-              </button>
-              {effectiveSubjects.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setSubject(item)}
-                  className={chipCls(subject === item)}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
         <div className="flex items-center gap-2 rounded-lg border border-success/30 bg-success/10 p-3 text-sm text-success">
           <ShieldCheck className="h-4 w-4" />
           Questions are opened inside the app only. Copying, downloads, and bulk viewing are
           disabled in the student flow.
         </div>
 
-        {filteredDocuments.length > 0 ? (
+        {!subject ? (
           <section className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-medium">Papers</h2>
-              <Badge variant="secondary">{filteredDocuments.length}</Badge>
+              <h2 className="text-sm font-medium">Subjects</h2>
+              <Badge variant="secondary">{subjectCards.length}</Badge>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              {subjectCards.map((item) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  onClick={() => {
+                    setSubject(item.name);
+                    setQ("");
+                  }}
+                  className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
+                      <BookOpen className="h-5 w-5" />
+                    </div>
+                    <Badge variant="secondary">{item.total}</Badge>
+                  </div>
+                  <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {item.unlocked} available now · {item.total - item.unlocked} premium
+                  </p>
+                </button>
+              ))}
+            </div>
+          </section>
+        ) : filteredDocuments.length > 0 ? (
+          <section className="space-y-3">
+            <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
+              <div className="flex items-center justify-between gap-3">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setSubject(null);
+                    setQ("");
+                  }}
+                >
+                  <ArrowLeft className="mr-1.5 h-4 w-4" />
+                  Subjects
+                </Button>
+                <Badge variant="secondary">{filteredDocuments.length}</Badge>
+              </div>
+              <div className="relative">
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder={`Search ${subject} papers...`}
+                  className="h-11 pl-9"
+                />
+              </div>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
               {filteredDocuments.map((document) =>
@@ -148,9 +188,7 @@ function LibraryPage() {
                     <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
                       {document.title}
                     </h3>
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      Protected structural paper
-                    </p>
+                    <p className="mt-2 text-xs text-muted-foreground">Protected structural paper</p>
                   </Link>
                 ),
               )}
@@ -165,7 +203,7 @@ function LibraryPage() {
               className="mt-4"
               onClick={() => {
                 setQ("");
-                setSubject("all");
+                setSubject(null);
               }}
             >
               Clear filters
@@ -175,12 +213,4 @@ function LibraryPage() {
       </div>
     </>
   );
-}
-
-function chipCls(active: boolean) {
-  return `rounded-full border px-4 py-1.5 text-sm transition-colors ${
-    active
-      ? "border-foreground bg-foreground text-background"
-      : "border-border bg-background hover:border-foreground/40"
-  }`;
 }

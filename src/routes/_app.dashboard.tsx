@@ -2,16 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getDashboardData } from "@/lib/server-api";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  ArrowRight,
-  BookOpen,
-  Flame,
-  Target,
-  TrendingUp,
-  Sparkles,
-  FileText,
-  Lock,
-} from "lucide-react";
+import { BookOpen, Flame, Target, TrendingUp, Sparkles, FileText, Lock } from "lucide-react";
 import { lazy, Suspense, useMemo } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
@@ -81,34 +72,7 @@ function Dashboard() {
       ? content.topics
       : topics;
   const availablePapers = content.documents;
-  const lastProgressByDocument = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const item of structuralProgress) {
-      const existing = map.get(item.documentId);
-      if (!existing || new Date(item.updatedAt).getTime() > new Date(existing).getTime()) {
-        map.set(item.documentId, item.updatedAt);
-      }
-    }
-    return map;
-  }, [structuralProgress]);
-  const papersWithProgress = useMemo(
-    () =>
-      availablePapers
-        .map((paper) => ({
-          ...paper,
-          lastProgressAt: lastProgressByDocument.get(paper.id) ?? null,
-          markedQuestions: structuralProgress.filter((item) => item.documentId === paper.id).length,
-        }))
-        .sort((a, b) => {
-          const aProgress = a.lastProgressAt ? new Date(a.lastProgressAt).getTime() : 0;
-          const bProgress = b.lastProgressAt ? new Date(b.lastProgressAt).getTime() : 0;
-          if (aProgress !== bProgress) return bProgress - aProgress;
-          return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-        }),
-    [availablePapers, lastProgressByDocument, structuralProgress],
-  );
-  const featuredPaper = papersWithProgress[0] ?? null;
-  const recent = papersWithProgress.slice(0, 4);
+  const featuredPaper = availablePapers[0] ?? null;
   const subjectBreakdown = useMemo(
     () => calculateStructuralMastery(structuralProgress, availablePapers),
     [availablePapers, structuralProgress],
@@ -134,7 +98,6 @@ function Dashboard() {
       };
     });
   }, [structuralProgress]);
-  const suggestedSubject = effectiveProfile?.subjects[0] ?? "your first subject";
   const recentStructural = structuralProgress.slice(0, 5);
   const premium = isPremiumActive(effectiveProfile);
 
@@ -254,70 +217,6 @@ function Dashboard() {
           />
         </Suspense>
       )}
-
-      <section className="grid gap-4 lg:grid-cols-3">
-        <div className="min-w-0 overflow-hidden rounded-xl border border-border bg-card p-4 sm:p-6 lg:col-span-2">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="text-base font-medium">Pick up where you left off</h2>
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/library">
-                See all <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          <ul className="divide-y divide-border">
-            {recent.length > 0 ? (
-              recent.map((p) => (
-                <li
-                  key={p.id}
-                  className="flex min-w-0 flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <div className="min-w-0">
-                    <Link
-                      to="/course/$documentId"
-                      params={{ documentId: p.id }}
-                      className="block break-words text-sm font-medium leading-snug hover:underline sm:line-clamp-2"
-                    >
-                      {p.title}
-                    </Link>
-                    <div className="text-xs text-muted-foreground">
-                      {p.subject} ·{" "}
-                      {p.markedQuestions > 0
-                        ? `${p.markedQuestions} marked · last worked ${new Date(
-                            p.lastProgressAt ?? p.updatedAt,
-                          ).toLocaleDateString()}`
-                        : `updated ${new Date(p.updatedAt).toLocaleDateString()}`}
-                    </div>
-                  </div>
-                  <Button asChild variant="outline" size="sm" className="w-full shrink-0 sm:w-auto">
-                    <Link to="/course/$documentId" params={{ documentId: p.id }}>
-                      Open
-                    </Link>
-                  </Button>
-                </li>
-              ))
-            ) : (
-              <li className="py-8 text-sm text-muted-foreground">
-                No papers match your profile yet. Published admin papers will appear here.
-              </li>
-            )}
-          </ul>
-        </div>
-
-        <div className="min-w-0 overflow-hidden rounded-xl border border-border bg-foreground p-4 text-background sm:p-6">
-          <div className="text-xs uppercase tracking-wider text-background/60">Suggested next</div>
-          <h3 className="mt-2 break-words font-display text-2xl">Start with {suggestedSubject}</h3>
-          <p className="mt-1.5 text-sm text-background/70 sm:line-clamp-none">
-            Open a structural paper and mark each question as started, passed, or failed.
-          </p>
-          <Button
-            asChild
-            className="mt-5 w-full bg-background text-foreground hover:bg-background/90"
-          >
-            <Link to="/library">View papers</Link>
-          </Button>
-        </div>
-      </section>
 
       {premium && (
         <section className="rounded-xl border border-border bg-card p-4 sm:p-6">

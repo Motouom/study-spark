@@ -162,26 +162,14 @@ function QuestionTracker({
   ) => Promise<StructuralQuestionProgress>;
 }) {
   const byQuestion = new Map(progress.map((item) => [item.questionNumber, item]));
-  const totals = {
-    started: progress.filter((item) => item.status === "started").length,
-    passed: progress.filter((item) => item.status === "passed").length,
-    failed: progress.filter((item) => item.status === "failed").length,
-  };
 
   return (
     <aside className="flex max-h-none min-w-0 flex-col rounded-xl border border-border bg-card p-4 xl:sticky xl:top-5 xl:max-h-[calc(100dvh-8rem)]">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-sm font-medium">Question progress</h2>
           <p className="mt-1 text-xs text-muted-foreground">Mark each structural question.</p>
         </div>
         <Badge variant="secondary">{questionNumbers.length}</Badge>
-      </div>
-
-      <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
-        <MiniStat label="Started" value={totals.started} />
-        <MiniStat label="Passed" value={totals.passed} />
-        <MiniStat label="Failed" value={totals.failed} />
       </div>
 
       {error && (
@@ -240,15 +228,6 @@ function QuestionTracker({
         </div>
       )}
     </aside>
-  );
-}
-
-function MiniStat({ label, value }: { label: string; value: number }) {
-  return (
-    <div className="rounded-lg bg-secondary/50 px-2 py-2">
-      <div className="font-display text-xl">{value}</div>
-      <div className="text-muted-foreground">{label}</div>
-    </div>
   );
 }
 
