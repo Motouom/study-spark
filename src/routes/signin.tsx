@@ -4,13 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight, Mail } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  emailAuthConfigured,
+  googleAuthConfigured,
+  requestEmailMagicLink,
+  signInWithGoogle,
+} from "@/lib/auth";
+import { useStudyProfile } from "@/hooks/use-study-profile";
 
 export const Route = createFileRoute("/signin")({
   head: () => ({
     meta: [
-      { title: "Sign in — StudyFlow" },
-      { name: "description", content: "Sign in to StudyFlow to keep your progress synced across devices." },
+      { title: "Sign in — StudySpark" },
+      {
+        name: "description",
+        content: "Sign in to StudySpark to keep your progress synced across devices.",
+      },
     ],
   }),
   component: SignIn,
@@ -18,12 +28,59 @@ export const Route = createFileRoute("/signin")({
 
 function SignIn() {
   const navigate = useNavigate();
+  const { user, profile, loaded } = useStudyProfile();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState<null | "google" | "email">(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
-  function go(type: "google" | "email") {
-    setLoading(type);
-    setTimeout(() => navigate({ to: "/dashboard" }), 700);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const errorDescription =
+      searchParams.get("error_description") ?? hashParams.get("error_description");
+
+    if (errorDescription) {
+      setNotice(decodeURIComponent(errorDescription.replace(/\+/g, " ")));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loaded || !user) return;
+    void navigate({ to: profile ? "/dashboard" : "/onboarding", replace: true });
+  }, [loaded, navigate, profile, user]);
+
+  if (loaded && user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
+        <p className="text-sm text-muted-foreground">
+          {profile ? "Opening your dashboard..." : "Opening profile setup..."}
+        </p>
+      </div>
+    );
+  }
+
+  async function continueWithGoogle() {
+    setNotice(null);
+    setLoading("google");
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Google sign-in failed.");
+      setLoading(null);
+    }
+  }
+
+  async function continueWithEmail() {
+    setNotice(null);
+    setLoading("email");
+    try {
+      await requestEmailMagicLink(email);
+      setNotice("Check your inbox for the sign-in link.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Email sign-in failed.");
+    } finally {
+      setLoading(null);
+    }
   }
 
   return (
@@ -31,14 +88,13 @@ function SignIn() {
       {/* Form side */}
       <div className="flex flex-col px-6 py-10 md:px-12">
         <div>
-          <Link to="/">
-            <Logo />
-          </Link>
+          <Logo />
         </div>
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center">
           <h1 className="font-display text-4xl text-foreground">Welcome back.</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to keep your streak, papers, and progress synced across all your devices.
+            Sign in to keep your streak, topic practice, and progress synced across all your
+            devices.
           </p>
 
           <div className="mt-8 space-y-3">
@@ -46,11 +102,11 @@ function SignIn() {
               size="lg"
               variant="outline"
               className="h-12 w-full justify-center gap-3 text-base"
-              onClick={() => go("google")}
+              onClick={() => void continueWithGoogle()}
               disabled={loading !== null}
             >
               <GoogleIcon />
-              {loading === "google" ? "Signing you in..." : "Continue with Google"}
+              {loading === "google" ? "Opening Google..." : "Continue with Google"}
             </Button>
 
             <div className="flex items-center gap-3 py-2">
@@ -62,7 +118,7 @@ function SignIn() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                if (email) go("email");
+                if (email) void continueWithEmail();
               }}
               className="space-y-2"
             >
@@ -81,17 +137,37 @@ function SignIn() {
                   className="h-12 pl-9"
                 />
               </div>
-              <Button type="submit" className="h-12 w-full" disabled={loading !== null || !email}>
-                {loading === "email" ? "Sending magic link..." : "Continue with email"} <ArrowRight className="ml-1 h-4 w-4" />
+              <Button
+                type="submit"
+                className="h-12 w-full"
+                disabled={loading !== null || !email || !emailAuthConfigured()}
+              >
+                {loading === "email" ? "Sending magic link..." : "Continue with email"}{" "}
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </form>
           </div>
+
+          {notice && (
+            <p className="mt-4 rounded-lg border border-border bg-surface p-3 text-xs text-muted-foreground">
+              {notice}
+            </p>
+          )}
+
+          {!googleAuthConfigured() && !emailAuthConfigured() && (
+            <p className="mt-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-xs text-warning-foreground">
+              Supabase is not configured in this environment.
+            </p>
+          )}
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
             By continuing you agree to our terms and privacy policy.
             <br />
             New here?{" "}
-            <Link to="/onboarding" className="font-medium text-foreground underline-offset-4 hover:underline">
+            <Link
+              to="/onboarding"
+              className="font-medium text-foreground underline-offset-4 hover:underline"
+            >
               Set up your profile →
             </Link>
           </p>
@@ -106,20 +182,10 @@ function SignIn() {
           <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" /> Synced & secure
           </div>
-          <div>
-            <p className="font-display text-3xl leading-snug text-foreground md:text-4xl">
-              "I went from D's to A's in three months. The streaks made me actually open the app every day."
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground font-display text-sm text-background">
-                K
-              </div>
-              <div>
-                <div className="text-sm font-medium">Kwame Asante</div>
-                <div className="text-xs text-muted-foreground">WASSCE 2024 · Ghana</div>
-              </div>
-            </div>
-          </div>
+          <p className="font-display text-3xl leading-snug text-foreground md:text-4xl">
+            Sign in, create your study profile, and unlock only the structural papers that match
+            your class, series, and subjects.
+          </p>
         </div>
       </div>
     </div>

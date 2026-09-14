@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Forces on an inclined plane</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Block on a rough inclined plane</text>
+  <polygon class="fill" points="120,330 630,330 630,120"/>
+  <rect class="fill" x="348" y="195" width="96" height="58" transform="rotate(-22 396 224)"/>
+  <line class="line" x1="396" y1="224" x2="396" y2="110"/><text x="406" y="116">R</text>
+  <line class="line" x1="396" y1="224" x2="396" y2="345"/><text x="406" y="326">W</text>
+  <line class="line" x1="396" y1="224" x2="500" y2="180"/><text x="512" y="184">T</text>
+  <path class="thin" d="M560 330a70 70 0 0 0-26-54"/><text x="546" y="303" class="small">30 degrees</text>
+</svg>

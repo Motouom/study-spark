@@ -3,10 +3,8 @@ import { Logo } from "@/components/Logo";
 import {
   LayoutDashboard,
   Library,
-  GraduationCap,
   TrendingUp,
   Settings,
-  Home,
   Flame,
   Trophy,
   Users,
@@ -14,17 +12,17 @@ import {
   Search,
   Menu,
   Sparkles,
+  LogOut,
+  ShieldCheck,
+  Brain,
+  PlayCircle,
+  BookOpenText,
+  LifeBuoy,
 } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
   CommandDialog,
   CommandEmpty,
@@ -40,17 +38,31 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { NOTIFICATIONS, PAPERS } from "@/lib/mock-data";
+import { classLabel, seriesLabel, type StudentProfile } from "@/lib/study-reference-data";
+import { getStudentShell } from "@/lib/server-api";
+import { supabaseConfigured } from "@/lib/supabase";
+import { useStudyProfile } from "@/hooks/use-study-profile";
+import { useStudyContent } from "@/hooks/use-study-content";
+import { useStructuralProgress } from "@/hooks/use-structural-progress";
+import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
+import { useAdminSession } from "@/hooks/use-admin-session";
+import { signOut } from "@/lib/auth";
+import { isPremiumActive } from "@/components/PremiumGate";
 
 export const Route = createFileRoute("/_app")({
+  loader: async () => {
+    return getStudentShell();
+  },
   component: AppLayout,
 });
 
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/library", label: "Past papers", icon: Library },
-  { to: "/quiz", label: "Quiz mode", icon: GraduationCap },
+  { to: "/library", label: "Papers", icon: Library },
   { to: "/progress", label: "Progress", icon: TrendingUp },
+  { to: "/learning-path", label: "Learning path", icon: Brain },
+  { to: "/courses", label: "Courses", icon: PlayCircle },
+  { to: "/textbooks", label: "Textbooks", icon: BookOpenText },
   { to: "/achievements", label: "Achievements", icon: Trophy },
   { to: "/leaderboard", label: "Leaderboard", icon: Users },
 ] as const;
@@ -84,13 +96,36 @@ function NavItem({
   );
 }
 
-function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarContent({
+  onNavigate,
+  profile,
+  displayName,
+  unreadCount,
+  isAdmin,
+}: {
+  onNavigate?: () => void;
+  profile: StudentProfile | null;
+  displayName?: string | null;
+  unreadCount: number;
+  isAdmin: boolean;
+}) {
   const location = useLocation();
-  const unread = NOTIFICATIONS.filter((n) => !n.read).length;
+  const navigate = useNavigate();
+  const { summary } = useStructuralProgress();
+  const shownName = displayName ?? profile?.name ?? "Student";
+  const initials = shownName.slice(0, 1).toUpperCase();
+  const premium = isPremiumActive(profile);
+
+  async function handleSignOut() {
+    await signOut();
+    onNavigate?.();
+    await navigate({ to: "/signin", replace: true });
+  }
+
   return (
     <>
       <div className="px-5 py-5">
-        <Logo />
+        <Logo to="/dashboard" />
       </div>
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-3">
         {NAV.map((n) => (
@@ -105,10 +140,24 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         ))}
         <div className="pt-2">
           <NavItem
+            to="/search"
+            icon={Search}
+            label="Advanced search"
+            active={location.pathname.startsWith("/search")}
+            onClick={onNavigate}
+          />
+          <NavItem
             to="/notifications"
             icon={Bell}
-            label={unread > 0 ? `Notifications (${unread})` : "Notifications"}
+            label={unreadCount > 0 ? `Notifications (${unreadCount})` : "Notifications"}
             active={location.pathname.startsWith("/notifications")}
+            onClick={onNavigate}
+          />
+          <NavItem
+            to="/support"
+            icon={LifeBuoy}
+            label="Support"
+            active={location.pathname.startsWith("/support")}
             onClick={onNavigate}
           />
           <NavItem
@@ -118,53 +167,93 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             active={location.pathname.startsWith("/settings")}
             onClick={onNavigate}
           />
+          {isAdmin && (
+            <NavItem
+              to="/control-panel-9k3x"
+              icon={ShieldCheck}
+              label="Admin panel"
+              active={location.pathname.startsWith("/control-panel-9k3x")}
+              onClick={onNavigate}
+            />
+          )}
         </div>
       </nav>
 
       <Link
-        to="/streak"
+        to={premium ? "/streak" : "/pricing"}
         onClick={onNavigate}
         className="m-3 block rounded-lg border border-border bg-card p-4 transition-colors hover:bg-sidebar-accent/40"
       >
         <div className="flex items-center gap-2">
           <Flame className="h-4 w-4 text-accent" />
-          <span className="text-sm font-medium">14 day streak</span>
+          <span className="text-sm font-medium">
+            {premium ? `${summary.currentStreak} day streak` : "Premium streaks"}
+          </span>
         </div>
         <p className="mt-1.5 text-xs text-muted-foreground">
-          Keep it alive — study at least one quiz today.
+          {premium
+            ? summary.currentStreak > 0
+              ? "Mark another structural question today to keep it going."
+              : "Mark your first structural question to start building momentum."
+            : "Upgrade to unlock daily streaks and weekly streak freezes."}
         </p>
       </Link>
 
       <div className="border-t border-sidebar-border p-3">
         <div className="flex items-center gap-3 rounded-md px-2 py-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground font-display text-sm text-background">
-            A
+            {initials}
           </div>
           <div className="min-w-0 flex-1">
-            <div className="truncate text-sm font-medium">Akua Mensah</div>
-            <div className="truncate text-xs text-muted-foreground">Free plan</div>
+            <div className="truncate text-sm font-medium">{shownName}</div>
+            <div className="truncate text-xs text-muted-foreground">
+              {profile
+                ? `${classLabel(profile.classLevel)} · ${seriesLabel(profile.series)}`
+                : "profile required"}
+            </div>
           </div>
-          <Link to="/pricing" onClick={onNavigate}>
-            <Sparkles className="h-4 w-4 text-accent" />
-          </Link>
-        </div>
-        <div className="mt-1 space-y-0.5">
           <Link
-            to="/"
+            to="/pricing"
             onClick={onNavigate}
-            className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+            className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-medium"
           >
-            <Home className="h-4 w-4" />
-            Back to home
+            <Sparkles className="h-3.5 w-3.5 text-accent" />
+            {profile?.plan === "premium" ? "Premium" : "Free"}
           </Link>
         </div>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => void handleSignOut()}
+          className="mt-2 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
+        >
+          <LogOut className="h-4 w-4" />
+          Sign out
+        </Button>
       </div>
     </>
   );
 }
 
-function CommandMenu({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
+function CommandMenu({
+  open,
+  setOpen,
+  isAdmin,
+}: {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+  isAdmin: boolean;
+}) {
   const navigate = useNavigate();
+  const { topics } = Route.useLoaderData();
+  const { profile } = useStudyProfile();
+  const content = useStudyContent(profile);
+  const searchTopics = supabaseConfigured()
+    ? content.topics
+    : content.enabled
+      ? content.topics
+      : topics;
   const go = (path: string) => {
     setOpen(false);
     // Small timeout so dialog close animation doesn't fight navigation
@@ -172,7 +261,7 @@ function CommandMenu({ open, setOpen }: { open: boolean; setOpen: (v: boolean) =
   };
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search papers, subjects, or pages..." />
+      <CommandInput placeholder="Search topics, subjects, or pages..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Pages">
@@ -188,18 +277,38 @@ function CommandMenu({ open, setOpen }: { open: boolean; setOpen: (v: boolean) =
           <CommandItem onSelect={() => go("/pricing")}>
             <Sparkles className="mr-2 h-4 w-4" /> Upgrade to Premium
           </CommandItem>
+          <CommandItem onSelect={() => go("/learning-path")}>
+            <Brain className="mr-2 h-4 w-4" /> Learning path
+          </CommandItem>
+          <CommandItem onSelect={() => go("/courses")}>
+            <PlayCircle className="mr-2 h-4 w-4" /> Courses
+          </CommandItem>
+          <CommandItem onSelect={() => go("/textbooks")}>
+            <BookOpenText className="mr-2 h-4 w-4" /> Textbooks
+          </CommandItem>
+          <CommandItem onSelect={() => go("/search")}>
+            <Search className="mr-2 h-4 w-4" /> Advanced search
+          </CommandItem>
+          <CommandItem onSelect={() => go("/support")}>
+            <LifeBuoy className="mr-2 h-4 w-4" /> Support
+          </CommandItem>
+          {isAdmin && (
+            <CommandItem onSelect={() => go("/control-panel-9k3x")}>
+              <ShieldCheck className="mr-2 h-4 w-4" /> Admin panel
+            </CommandItem>
+          )}
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Past papers">
-          {PAPERS.slice(0, 8).map((p) => (
+        <CommandGroup heading="Topics">
+          {searchTopics.slice(0, 8).map((topic) => (
             <CommandItem
-              key={p.id}
-              onSelect={() => go(`/paper/${p.id}`)}
-              value={`${p.title} ${p.subject} ${p.examBoard}`}
+              key={topic.id}
+              onSelect={() => go("/library")}
+              value={`${topic.title} ${topic.subject}`}
             >
               <Library className="mr-2 h-4 w-4" />
-              <span className="flex-1">{p.title}</span>
-              <span className="text-xs text-muted-foreground">{p.examBoard}</span>
+              <span className="flex-1">{topic.title}</span>
+              <span className="text-xs text-muted-foreground">{topic.subject}</span>
             </CommandItem>
           ))}
         </CommandGroup>
@@ -209,10 +318,33 @@ function CommandMenu({ open, setOpen }: { open: boolean; setOpen: (v: boolean) =
 }
 
 function AppLayout() {
+  const { session } = Route.useLoaderData();
+  const { user, loaded, profile: savedProfile, displayName } = useStudyProfile();
+  const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? session.profile);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
-  const unread = NOTIFICATIONS.filter((n) => !n.read).length;
+  const navigate = useNavigate();
+  const { notifications, unreadCount } = useLearnerNotifications();
+  const admin = useAdminSession();
+  const showAdminLink = admin.isAdmin;
+
+  useEffect(() => {
+    if (supabaseConfigured() && loaded && !user) {
+      void navigate({ to: "/signin" });
+      return;
+    }
+
+    if (
+      supabaseConfigured() &&
+      loaded &&
+      user &&
+      !savedProfile &&
+      location.pathname !== "/onboarding"
+    ) {
+      void navigate({ to: "/onboarding" });
+    }
+  }, [loaded, location.pathname, navigate, savedProfile, user]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -225,14 +357,52 @@ function AppLayout() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
+  if (supabaseConfigured() && !loaded) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
+        <div>
+          <Logo to="/dashboard" />
+          <p className="mt-4 text-sm text-muted-foreground">Checking your study profile...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (supabaseConfigured() && loaded && !user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
+        <p className="text-sm text-muted-foreground">Opening sign in...</p>
+      </div>
+    );
+  }
+
+  if (
+    supabaseConfigured() &&
+    loaded &&
+    user &&
+    !savedProfile &&
+    location.pathname !== "/onboarding"
+  ) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
+        <p className="text-sm text-muted-foreground">Opening profile setup...</p>
+      </div>
+    );
+  }
+
   // Mobile bottom tab bar (compressed to 5 items)
   const mobileNav = NAV.slice(0, 4);
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-dvh overflow-hidden bg-background">
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
-        <SidebarContent />
+      <aside className="fixed inset-y-0 left-0 hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
+        <SidebarContent
+          profile={profile}
+          displayName={displayName}
+          unreadCount={unreadCount}
+          isAdmin={showAdminLink}
+        />
       </aside>
 
       {/* Mobile top bar */}
@@ -247,33 +417,53 @@ function AppLayout() {
             <SheetHeader className="sr-only">
               <SheetTitle>Navigation</SheetTitle>
             </SheetHeader>
-            <SidebarContent onNavigate={() => setMobileOpen(false)} />
+            <SidebarContent
+              profile={profile}
+              displayName={displayName}
+              unreadCount={unreadCount}
+              isAdmin={showAdminLink}
+              onNavigate={() => setMobileOpen(false)}
+            />
           </SheetContent>
         </Sheet>
-        <Logo />
+        <Logo to="/dashboard" />
         <div className="flex items-center gap-1">
           <Button variant="ghost" size="icon" aria-label="Search" onClick={() => setCmdOpen(true)}>
             <Search className="h-5 w-5" />
           </Button>
-          <Link to="/notifications" aria-label="Notifications" className="relative inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary">
+          <Link
+            to="/notifications"
+            aria-label="Notifications"
+            className="relative inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary"
+          >
             <Bell className="h-5 w-5" />
-            {unread > 0 && (
+            {unreadCount > 0 && (
               <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-accent" />
             )}
           </Link>
         </div>
       </div>
 
-      <main className="flex-1 overflow-x-hidden pt-14 pb-16 md:pt-0 md:pb-0">
+      <main className="h-dvh flex-1 overflow-y-auto overflow-x-hidden pt-14 pb-16 md:pl-64 md:pt-0 md:pb-0">
         {/* Desktop top utility bar */}
         <div className="hidden h-12 items-center justify-end gap-2 border-b border-border px-6 md:flex md:px-10">
+          {showAdminLink && (
+            <Button asChild variant="outline" size="sm" className="gap-1.5">
+              <Link to="/control-panel-9k3x">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Admin panel
+              </Link>
+            </Button>
+          )}
           <button
             onClick={() => setCmdOpen(true)}
             className="flex h-9 items-center gap-2 rounded-md border border-border bg-card px-3 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <Search className="h-3.5 w-3.5" />
             Search...
-            <kbd className="ml-3 rounded border border-border bg-secondary px-1.5 py-0.5 font-mono text-[10px]">⌘K</kbd>
+            <kbd className="ml-3 rounded border border-border bg-secondary px-1.5 py-0.5 font-mono text-[10px]">
+              ⌘K
+            </kbd>
           </button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -282,7 +472,7 @@ function AppLayout() {
                 className="relative inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary"
               >
                 <Bell className="h-4 w-4" />
-                {unread > 0 && (
+                {unreadCount > 0 && (
                   <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-accent" />
                 )}
               </button>
@@ -290,21 +480,23 @@ function AppLayout() {
             <DropdownMenuContent align="end" className="w-80 p-0">
               <div className="flex items-center justify-between border-b border-border px-4 py-3">
                 <span className="text-sm font-medium">Notifications</span>
-                {unread > 0 && <Badge variant="secondary">{unread} new</Badge>}
+                {unreadCount > 0 && <Badge variant="secondary">{unreadCount} new</Badge>}
               </div>
               <div className="max-h-80 overflow-y-auto">
-                {NOTIFICATIONS.slice(0, 5).map((n) => (
-                  <div
-                    key={n.id}
-                    className={`border-b border-border px-4 py-3 text-sm last:border-0 ${
-                      !n.read ? "bg-secondary/40" : ""
-                    }`}
-                  >
-                    <div className="font-medium">{n.title}</div>
-                    <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">{n.body}</p>
-                    <div className="mt-1 text-[11px] text-muted-foreground">{n.time}</div>
+                {notifications.length > 0 ? (
+                  notifications.slice(0, 5).map((item) => (
+                    <div key={item.id} className="border-b border-border px-4 py-3 text-sm">
+                      <div className="font-medium">{item.title}</div>
+                      <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
+                        {item.body}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="px-4 py-8 text-center text-sm text-muted-foreground">
+                    No notifications yet.
                   </div>
-                ))}
+                )}
               </div>
               <Link
                 to="/notifications"
@@ -338,7 +530,7 @@ function AppLayout() {
         })}
       </nav>
 
-      <CommandMenu open={cmdOpen} setOpen={setCmdOpen} />
+      <CommandMenu open={cmdOpen} setOpen={setCmdOpen} isAdmin={showAdminLink} />
     </div>
   );
 }

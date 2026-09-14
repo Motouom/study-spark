@@ -2,45 +2,120 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Logo } from "@/components/Logo";
-import { Check, Sparkles, X, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { Check, Sparkles, X, ArrowLeft, Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useStudyProfile } from "@/hooks/use-study-profile";
+import { supabase } from "@/lib/supabase";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — StudyFlow" },
-      { name: "description", content: "Simple, fair pricing. Free forever for past papers." },
+      { title: "Pricing — StudySpark" },
+      { name: "description", content: "Simple pricing for protected Cameroon structural papers." },
     ],
   }),
   component: PricingPage,
 });
 
 const features = [
-  { name: "500+ past papers", free: true, premium: true },
-  { name: "Free answers & explanations", free: true, premium: true },
-  { name: "Quiz mode", free: true, premium: true },
-  { name: "Download & share PDFs", free: true, premium: true },
-  { name: "Daily streaks & basic stats", free: true, premium: true },
+  { name: "1-2 free preview papers", free: true, premium: false },
+  { name: "Unlimited protected papers", free: false, premium: true },
+  { name: "Protected in-app papers", free: false, premium: true },
+  { name: "Free answers & explanations", free: false, premium: true },
+  { name: "Practice mode", free: false, premium: true },
+  { name: "Class and series access control", free: true, premium: true },
+  { name: "Daily streaks & basic stats", free: false, premium: true },
   { name: "AI-personalized learning paths", free: false, premium: true },
   { name: "Full courses & video lessons", free: false, premium: true },
   { name: "Digital textbooks", free: false, premium: true },
   { name: "Advanced full-text search", free: false, premium: true },
   { name: "Streak freezes (1/week)", free: false, premium: true },
-  { name: "Priority support", false: false, premium: true } as unknown as { name: string; free: boolean; premium: boolean },
+  { name: "Priority support", free: true, premium: true },
 ] as { name: string; free: boolean; premium: boolean }[];
 
 function PricingPage() {
   const [yearly, setYearly] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkingPayment, setCheckingPayment] = useState(false);
+  const [paymentMessage, setPaymentMessage] = useState<string | null>(null);
+  const { user, profile } = useStudyProfile();
+  const returnPath = user && profile ? "/dashboard" : "/";
   const monthly = 1500;
-  const yearlyPrice = 12000; // ₦12,000/year ~ ₦1,000/mo
+  const yearlyPrice = 12000;
+
+  useEffect(() => {
+    if (!user || !supabase) return;
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("payment_return")) return;
+
+    setCheckingPayment(true);
+    supabase.auth
+      .getSession()
+      .then(({ data }) =>
+        fetch("/api/payments/fapshi/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${data.session?.access_token ?? ""}`,
+          },
+          body: JSON.stringify({}),
+        }),
+      )
+      .then(async (response) => {
+        const payload = await response.json().catch(() => ({}));
+        if (response.ok && payload.status === "successful") {
+          setPaymentMessage("Payment confirmed. Premium is now active on your account.");
+          window.setTimeout(() => window.location.assign("/dashboard"), 1200);
+          return;
+        }
+        setPaymentMessage(
+          payload.status === "pending" || payload.status === "created"
+            ? "Payment is still pending. We will unlock Premium as soon as Fapshi confirms it."
+            : "Payment has not been confirmed yet. If you paid, wait a moment and refresh.",
+        );
+      })
+      .catch(() => setPaymentMessage("Payment could not be checked right now. Please try again."))
+      .finally(() => setCheckingPayment(false));
+  }, [user]);
+
+  async function startCheckout() {
+    if (!user || !supabase) {
+      window.location.assign("/signin");
+      return;
+    }
+
+    setCheckoutLoading(true);
+    setPaymentMessage(null);
+    try {
+      const { data } = await supabase.auth.getSession();
+      const response = await fetch("/api/payments/fapshi/initiate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${data.session?.access_token ?? ""}`,
+        },
+        body: JSON.stringify({ interval: yearly ? "yearly" : "monthly" }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.checkoutUrl) {
+        throw new Error(payload.error ?? "Payment could not be started.");
+      }
+      window.location.assign(payload.checkoutUrl);
+    } catch (error) {
+      setPaymentMessage(error instanceof Error ? error.message : "Payment could not be started.");
+      setCheckoutLoading(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Logo />
+          <Logo to={returnPath} />
           <Button asChild variant="ghost" size="sm">
-            <Link to="/"><ArrowLeft className="mr-1 h-4 w-4" /> Back home</Link>
+            <Link to={returnPath}>
+              <ArrowLeft className="mr-1 h-4 w-4" /> Back
+            </Link>
           </Button>
         </div>
       </header>
@@ -54,7 +129,8 @@ function PricingPage() {
             Simple. <span className="italic text-muted-foreground">Fair.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            Past papers and answers are free forever. Upgrade only if you want AI tutoring and full courses.
+            Free learners can preview selected papers. Premium unlocks protected papers, progress,
+            guided revision, tutoring, and deeper analytics.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card p-1">
@@ -76,40 +152,67 @@ function PricingPage() {
         <section className="mx-auto max-w-5xl px-6 pb-20">
           <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-8">
-              <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">Free</h3>
+              <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                Free
+              </h3>
               <div className="mt-3 flex items-baseline gap-1">
-                <span className="font-display text-5xl">₦0</span>
+                <span className="font-display text-5xl">FCFA 0</span>
                 <span className="text-muted-foreground">/forever</span>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">For every student. No card needed.</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Preview the platform before upgrading. No card needed.
+              </p>
               <Button asChild variant="outline" className="mt-6 w-full">
                 <Link to="/dashboard">Get started</Link>
               </Button>
               <ul className="mt-6 space-y-3 text-sm">
-                {features.filter((f) => f.free).map((f) => (
-                  <li key={f.name} className="flex items-start gap-2.5">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
-                    <span>{f.name}</span>
-                  </li>
-                ))}
+                {features
+                  .filter((f) => f.free)
+                  .map((f) => (
+                    <li key={f.name} className="flex items-start gap-2.5">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                      <span>{f.name}</span>
+                    </li>
+                  ))}
               </ul>
             </div>
 
             <div className="relative rounded-2xl border border-foreground bg-foreground p-8 text-background">
-              <Badge className="absolute -top-3 right-6 bg-accent text-accent-foreground">Recommended</Badge>
-              <h3 className="text-sm font-medium uppercase tracking-wider text-background/60">Premium</h3>
+              <Badge className="absolute -top-3 right-6 bg-accent text-accent-foreground">
+                Recommended
+              </Badge>
+              <h3 className="text-sm font-medium uppercase tracking-wider text-background/60">
+                Premium
+              </h3>
               <div className="mt-3 flex items-baseline gap-1">
                 <span className="font-display text-5xl">
-                  ₦{yearly ? Math.round(yearlyPrice / 12).toLocaleString() : monthly.toLocaleString()}
+                  FCFA{" "}
+                  {yearly
+                    ? Math.round(yearlyPrice / 12).toLocaleString()
+                    : monthly.toLocaleString()}
                 </span>
                 <span className="text-background/60">/month</span>
               </div>
               <p className="mt-2 text-sm text-background/60">
-                {yearly ? `Billed yearly · ₦${yearlyPrice.toLocaleString()}` : "Billed monthly"}
+                {yearly ? `Billed yearly · FCFA ${yearlyPrice.toLocaleString()}` : "Billed monthly"}
               </p>
-              <Button asChild className="mt-6 w-full bg-background text-foreground hover:bg-background/90">
-                <Link to="/dashboard">Start free trial</Link>
+              <Button
+                className="mt-6 w-full bg-background text-foreground hover:bg-background/90"
+                disabled={checkoutLoading || checkingPayment}
+                onClick={startCheckout}
+              >
+                {checkoutLoading ? (
+                  <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
+                ) : (
+                  <Sparkles className="mr-1.5 h-4 w-4" />
+                )}
+                Pay with Fapshi
               </Button>
+              {paymentMessage ? (
+                <p className="mt-3 rounded-lg bg-background/10 px-3 py-2 text-sm text-background/80">
+                  {paymentMessage}
+                </p>
+              ) : null}
               <ul className="mt-6 space-y-3 text-sm">
                 {features.map((f) => (
                   <li key={f.name} className="flex items-start gap-2.5">
@@ -118,7 +221,9 @@ function PricingPage() {
                     ) : (
                       <X className="mt-0.5 h-4 w-4 shrink-0 text-background/30" />
                     )}
-                    <span className={f.premium ? "" : "text-background/40 line-through"}>{f.name}</span>
+                    <span className={f.premium ? "" : "text-background/40 line-through"}>
+                      {f.name}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -133,13 +238,24 @@ function PricingPage() {
               <span className="text-center">Premium</span>
             </div>
             {features.map((f) => (
-              <div key={f.name} className="grid grid-cols-3 border-b border-border px-6 py-3.5 text-sm last:border-0">
+              <div
+                key={f.name}
+                className="grid grid-cols-3 border-b border-border px-6 py-3.5 text-sm last:border-0"
+              >
                 <span>{f.name}</span>
                 <span className="flex justify-center">
-                  {f.free ? <Check className="h-4 w-4 text-success" /> : <X className="h-4 w-4 text-muted-foreground/40" />}
+                  {f.free ? (
+                    <Check className="h-4 w-4 text-success" />
+                  ) : (
+                    <X className="h-4 w-4 text-muted-foreground/40" />
+                  )}
                 </span>
                 <span className="flex justify-center">
-                  {f.premium ? <Check className="h-4 w-4 text-success" /> : <X className="h-4 w-4 text-muted-foreground/40" />}
+                  {f.premium ? (
+                    <Check className="h-4 w-4 text-success" />
+                  ) : (
+                    <X className="h-4 w-4 text-muted-foreground/40" />
+                  )}
                 </span>
               </div>
             ))}
@@ -150,10 +266,22 @@ function PricingPage() {
             <h2 className="font-display text-3xl">Common questions</h2>
             <div className="mt-6 space-y-4">
               {[
-                { q: "Can I really use it free forever?", a: "Yes. All past papers and answers are free, with no ads. We make money from premium subscriptions." },
-                { q: "Can I cancel anytime?", a: "Of course. Cancel from settings — no calls, no friction." },
-                { q: "Do you support mobile money?", a: "Yes. We accept MTN MoMo, Airtel, M-Pesa, and cards across Africa." },
-                { q: "Is there a student discount?", a: "Premium is already priced for students. Schools get bulk pricing — contact us." },
+                {
+                  q: "Can students use the basics free?",
+                  a: "Yes. Free learners can open one or two preview papers. The full protected learner experience is Premium.",
+                },
+                {
+                  q: "Can I cancel anytime?",
+                  a: "Of course. Cancel from settings — no calls, no friction.",
+                },
+                {
+                  q: "Do you support mobile money?",
+                  a: "The payment plan should prioritize MTN MoMo and Orange Money for Cameroon.",
+                },
+                {
+                  q: "Is there a student discount?",
+                  a: "Premium is already priced for students. Schools get bulk pricing — contact us.",
+                },
               ].map((f) => (
                 <div key={f.q} className="rounded-xl border border-border bg-card p-5">
                   <h3 className="text-base font-medium">{f.q}</h3>
@@ -168,7 +296,7 @@ function PricingPage() {
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
           <Logo />
-          <p>© {new Date().getFullYear()} StudyFlow. Made for African students.</p>
+          <p>© {new Date().getFullYear()} StudySpark. Made for Cameroon students.</p>
         </div>
       </footer>
     </div>

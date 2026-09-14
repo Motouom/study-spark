@@ -9,39 +9,49 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SigninRouteImport } from './routes/signin'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3x'
-import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
-import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
-import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
-import { Route as ControlPanel9k3xQuizzesRouteImport } from './routes/control-panel-9k3x.quizzes'
-import { Route as ControlPanel9k3xPapersRouteImport } from './routes/control-panel-9k3x.papers'
-import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
-import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
-import { Route as AppStreakRouteImport } from './routes/_app.streak'
-import { Route as AppSettingsRouteImport } from './routes/_app.settings'
-import { Route as AppQuizRouteImport } from './routes/_app.quiz'
-import { Route as AppProgressRouteImport } from './routes/_app.progress'
-import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
-import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
-import { Route as AppLibraryRouteImport } from './routes/_app.library'
-import { Route as AppLeaderboardRouteImport } from './routes/_app.leaderboard'
-import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3x'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as SigninRouteImport } from './routes/signin'
 import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
+import { Route as AppCoursesRouteImport } from './routes/_app.courses'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppLeaderboardRouteImport } from './routes/_app.leaderboard'
+import { Route as AppLearningPathRouteImport } from './routes/_app.learning-path'
+import { Route as AppLibraryRouteImport } from './routes/_app.library'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
+import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppQuizRouteImport } from './routes/_app.quiz'
+import { Route as AppSearchRouteImport } from './routes/_app.search'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppStreakRouteImport } from './routes/_app.streak'
+import { Route as AppSupportRouteImport } from './routes/_app.support'
+import { Route as AppTextbooksRouteImport } from './routes/_app.textbooks'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
+import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
+import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
+import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
+import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
+import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
+import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
-import { Route as AppPaperPaperIdRouteImport } from './routes/_app.paper.$paperId'
+import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
+import { Route as ApiAiLearningPathRouteImport } from './routes/api.ai.learning-path'
+import { Route as ApiAiProgressInsightRouteImport } from './routes/api.ai.progress-insight'
+import { Route as ApiPaymentsFapshiInitiateRouteImport } from './routes/api.payments.fapshi.initiate'
+import { Route as ApiPaymentsFapshiVerifyRouteImport } from './routes/api.payments.fapshi.verify'
+import { Route as ApiPaymentsFapshiWebhookRouteImport } from './routes/api.payments.fapshi.webhook'
 
-const SigninRoute = SigninRouteImport.update({
-  id: '/signin',
-  path: '/signin',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControlPanel9k3xRoute = ControlPanel9k3xRouteImport.update({
@@ -49,44 +59,99 @@ const ControlPanel9k3xRoute = ControlPanel9k3xRouteImport.update({
   path: '/control-panel-9k3x',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppRoute = AppRouteImport.update({
-  id: '/_app',
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppAchievementsRoute = AppAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoursesRoute = AppCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearningPathRoute = AppLearningPathRouteImport.update({
+  id: '/learning-path',
+  path: '/learning-path',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLibraryRoute = AppLibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuizRoute = AppQuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSearchRoute = AppSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppStreakRoute = AppStreakRouteImport.update({
+  id: '/streak',
+  path: '/streak',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSupportRoute = AppSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTextbooksRoute = AppTextbooksRouteImport.update({
+  id: '/textbooks',
+  path: '/textbooks',
+  getParentRoute: () => AppRoute,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ControlPanel9k3xRoute,
-} as any)
-const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => ControlPanel9k3xRoute,
-} as any)
-const ControlPanel9k3xSettingsRoute =
-  ControlPanel9k3xSettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => ControlPanel9k3xRoute,
-  } as any)
-const ControlPanel9k3xQuizzesRoute = ControlPanel9k3xQuizzesRouteImport.update({
-  id: '/quizzes',
-  path: '/quizzes',
-  getParentRoute: () => ControlPanel9k3xRoute,
-} as any)
-const ControlPanel9k3xPapersRoute = ControlPanel9k3xPapersRouteImport.update({
-  id: '/papers',
-  path: '/papers',
-  getParentRoute: () => ControlPanel9k3xRoute,
-} as any)
-const ControlPanel9k3xLogsRoute = ControlPanel9k3xLogsRouteImport.update({
-  id: '/logs',
-  path: '/logs',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
 const ControlPanel9k3xIntegrationsRoute =
@@ -95,54 +160,31 @@ const ControlPanel9k3xIntegrationsRoute =
     path: '/integrations',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
-const AppStreakRoute = AppStreakRouteImport.update({
-  id: '/streak',
-  path: '/streak',
-  getParentRoute: () => AppRoute,
+const ControlPanel9k3xLogsRoute = ControlPanel9k3xLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
-const AppSettingsRoute = AppSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppRoute,
+const ControlPanel9k3xQuestionsRoute =
+  ControlPanel9k3xQuestionsRouteImport.update({
+    id: '/questions',
+    path: '/questions',
+    getParentRoute: () => ControlPanel9k3xRoute,
+  } as any)
+const ControlPanel9k3xSettingsRoute =
+  ControlPanel9k3xSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => ControlPanel9k3xRoute,
+  } as any)
+const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
-const AppQuizRoute = AppQuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppProgressRoute = AppProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppOnboardingRoute = AppOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppNotificationsRoute = AppNotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppLibraryRoute = AppLibraryRouteImport.update({
-  id: '/library',
-  path: '/library',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
-  id: '/leaderboard',
-  path: '/leaderboard',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppDashboardRoute = AppDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppAchievementsRoute = AppAchievementsRouteImport.update({
-  id: '/achievements',
-  path: '/achievements',
+const AppCourseDocumentIdRoute = AppCourseDocumentIdRouteImport.update({
+  id: '/course/$documentId',
+  path: '/course/$documentId',
   getParentRoute: () => AppRoute,
 } as any)
 const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
@@ -150,11 +192,38 @@ const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => AppQuizRoute,
 } as any)
-const AppPaperPaperIdRoute = AppPaperPaperIdRouteImport.update({
-  id: '/paper/$paperId',
-  path: '/paper/$paperId',
-  getParentRoute: () => AppRoute,
+const ApiAiFormatPaperRoute = ApiAiFormatPaperRouteImport.update({
+  id: '/api/ai/format-paper',
+  path: '/api/ai/format-paper',
+  getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAiLearningPathRoute = ApiAiLearningPathRouteImport.update({
+  id: '/api/ai/learning-path',
+  path: '/api/ai/learning-path',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiProgressInsightRoute = ApiAiProgressInsightRouteImport.update({
+  id: '/api/ai/progress-insight',
+  path: '/api/ai/progress-insight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPaymentsFapshiInitiateRoute =
+  ApiPaymentsFapshiInitiateRouteImport.update({
+    id: '/api/payments/fapshi/initiate',
+    path: '/api/payments/fapshi/initiate',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPaymentsFapshiVerifyRoute = ApiPaymentsFapshiVerifyRouteImport.update({
+  id: '/api/payments/fapshi/verify',
+  path: '/api/payments/fapshi/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPaymentsFapshiWebhookRoute =
+  ApiPaymentsFapshiWebhookRouteImport.update({
+    id: '/api/payments/fapshi/webhook',
+    path: '/api/payments/fapshi/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -162,48 +231,70 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
+  '/courses': typeof AppCoursesRoute
   '/dashboard': typeof AppDashboardRoute
   '/leaderboard': typeof AppLeaderboardRoute
+  '/learning-path': typeof AppLearningPathRoute
   '/library': typeof AppLibraryRoute
   '/notifications': typeof AppNotificationsRoute
   '/onboarding': typeof AppOnboardingRoute
   '/progress': typeof AppProgressRoute
   '/quiz': typeof AppQuizRouteWithChildren
+  '/search': typeof AppSearchRoute
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
+  '/support': typeof AppSupportRoute
+  '/textbooks': typeof AppTextbooksRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
-  '/control-panel-9k3x/papers': typeof ControlPanel9k3xPapersRoute
-  '/control-panel-9k3x/quizzes': typeof ControlPanel9k3xQuizzesRoute
+  '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
-  '/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
+  '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
+  '/api/ai/learning-path': typeof ApiAiLearningPathRoute
+  '/api/ai/progress-insight': typeof ApiAiProgressInsightRoute
+  '/api/payments/fapshi/initiate': typeof ApiPaymentsFapshiInitiateRoute
+  '/api/payments/fapshi/verify': typeof ApiPaymentsFapshiVerifyRoute
+  '/api/payments/fapshi/webhook': typeof ApiPaymentsFapshiWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
+  '/courses': typeof AppCoursesRoute
   '/dashboard': typeof AppDashboardRoute
   '/leaderboard': typeof AppLeaderboardRoute
+  '/learning-path': typeof AppLearningPathRoute
   '/library': typeof AppLibraryRoute
   '/notifications': typeof AppNotificationsRoute
   '/onboarding': typeof AppOnboardingRoute
   '/progress': typeof AppProgressRoute
   '/quiz': typeof AppQuizRouteWithChildren
+  '/search': typeof AppSearchRoute
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
+  '/support': typeof AppSupportRoute
+  '/textbooks': typeof AppTextbooksRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
-  '/control-panel-9k3x/papers': typeof ControlPanel9k3xPapersRoute
-  '/control-panel-9k3x/quizzes': typeof ControlPanel9k3xQuizzesRoute
+  '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
-  '/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
+  '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
+  '/api/ai/learning-path': typeof ApiAiLearningPathRoute
+  '/api/ai/progress-insight': typeof ApiAiProgressInsightRoute
+  '/api/payments/fapshi/initiate': typeof ApiPaymentsFapshiInitiateRoute
+  '/api/payments/fapshi/verify': typeof ApiPaymentsFapshiVerifyRoute
+  '/api/payments/fapshi/webhook': typeof ApiPaymentsFapshiWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -213,24 +304,35 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/_app/achievements': typeof AppAchievementsRoute
+  '/_app/courses': typeof AppCoursesRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/leaderboard': typeof AppLeaderboardRoute
+  '/_app/learning-path': typeof AppLearningPathRoute
   '/_app/library': typeof AppLibraryRoute
   '/_app/notifications': typeof AppNotificationsRoute
   '/_app/onboarding': typeof AppOnboardingRoute
   '/_app/progress': typeof AppProgressRoute
   '/_app/quiz': typeof AppQuizRouteWithChildren
+  '/_app/search': typeof AppSearchRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/streak': typeof AppStreakRoute
+  '/_app/support': typeof AppSupportRoute
+  '/_app/textbooks': typeof AppTextbooksRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
-  '/control-panel-9k3x/papers': typeof ControlPanel9k3xPapersRoute
-  '/control-panel-9k3x/quizzes': typeof ControlPanel9k3xQuizzesRoute
+  '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
-  '/_app/paper/$paperId': typeof AppPaperPaperIdRoute
+  '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
   '/_app/quiz/setup': typeof AppQuizSetupRoute
+  '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
+  '/api/ai/learning-path': typeof ApiAiLearningPathRoute
+  '/api/ai/progress-insight': typeof ApiAiProgressInsightRoute
+  '/api/payments/fapshi/initiate': typeof ApiPaymentsFapshiInitiateRoute
+  '/api/payments/fapshi/verify': typeof ApiPaymentsFapshiVerifyRoute
+  '/api/payments/fapshi/webhook': typeof ApiPaymentsFapshiWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -240,48 +342,70 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signin'
     | '/achievements'
+    | '/courses'
     | '/dashboard'
     | '/leaderboard'
+    | '/learning-path'
     | '/library'
     | '/notifications'
     | '/onboarding'
     | '/progress'
     | '/quiz'
+    | '/search'
     | '/settings'
     | '/streak'
+    | '/support'
+    | '/textbooks'
+    | '/auth/callback'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
-    | '/control-panel-9k3x/papers'
-    | '/control-panel-9k3x/quizzes'
+    | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
-    | '/paper/$paperId'
+    | '/course/$documentId'
     | '/quiz/setup'
+    | '/api/ai/format-paper'
+    | '/api/ai/learning-path'
+    | '/api/ai/progress-insight'
+    | '/api/payments/fapshi/initiate'
+    | '/api/payments/fapshi/verify'
+    | '/api/payments/fapshi/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/pricing'
     | '/signin'
     | '/achievements'
+    | '/courses'
     | '/dashboard'
     | '/leaderboard'
+    | '/learning-path'
     | '/library'
     | '/notifications'
     | '/onboarding'
     | '/progress'
     | '/quiz'
+    | '/search'
     | '/settings'
     | '/streak'
+    | '/support'
+    | '/textbooks'
+    | '/auth/callback'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
-    | '/control-panel-9k3x/papers'
-    | '/control-panel-9k3x/quizzes'
+    | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x'
-    | '/paper/$paperId'
+    | '/course/$documentId'
     | '/quiz/setup'
+    | '/api/ai/format-paper'
+    | '/api/ai/learning-path'
+    | '/api/ai/progress-insight'
+    | '/api/payments/fapshi/initiate'
+    | '/api/payments/fapshi/verify'
+    | '/api/payments/fapshi/webhook'
   id:
     | '__root__'
     | '/'
@@ -290,24 +414,35 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signin'
     | '/_app/achievements'
+    | '/_app/courses'
     | '/_app/dashboard'
     | '/_app/leaderboard'
+    | '/_app/learning-path'
     | '/_app/library'
     | '/_app/notifications'
     | '/_app/onboarding'
     | '/_app/progress'
     | '/_app/quiz'
+    | '/_app/search'
     | '/_app/settings'
     | '/_app/streak'
+    | '/_app/support'
+    | '/_app/textbooks'
+    | '/auth/callback'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
-    | '/control-panel-9k3x/papers'
-    | '/control-panel-9k3x/quizzes'
+    | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
-    | '/_app/paper/$paperId'
+    | '/_app/course/$documentId'
     | '/_app/quiz/setup'
+    | '/api/ai/format-paper'
+    | '/api/ai/learning-path'
+    | '/api/ai/progress-insight'
+    | '/api/payments/fapshi/initiate'
+    | '/api/payments/fapshi/verify'
+    | '/api/payments/fapshi/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -316,29 +451,22 @@ export interface RootRouteChildren {
   ControlPanel9k3xRoute: typeof ControlPanel9k3xRouteWithChildren
   PricingRoute: typeof PricingRoute
   SigninRoute: typeof SigninRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
+  ApiAiFormatPaperRoute: typeof ApiAiFormatPaperRoute
+  ApiAiLearningPathRoute: typeof ApiAiLearningPathRoute
+  ApiAiProgressInsightRoute: typeof ApiAiProgressInsightRoute
+  ApiPaymentsFapshiInitiateRoute: typeof ApiPaymentsFapshiInitiateRoute
+  ApiPaymentsFapshiVerifyRoute: typeof ApiPaymentsFapshiVerifyRoute
+  ApiPaymentsFapshiWebhookRoute: typeof ApiPaymentsFapshiWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/control-panel-9k3x': {
-      id: '/control-panel-9k3x'
-      path: '/control-panel-9k3x'
-      fullPath: '/control-panel-9k3x'
-      preLoaderRoute: typeof ControlPanel9k3xRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app': {
@@ -348,116 +476,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/control-panel-9k3x': {
+      id: '/control-panel-9k3x'
+      path: '/control-panel-9k3x'
+      fullPath: '/control-panel-9k3x'
+      preLoaderRoute: typeof ControlPanel9k3xRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/control-panel-9k3x/': {
-      id: '/control-panel-9k3x/'
-      path: '/'
-      fullPath: '/control-panel-9k3x/'
-      preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/control-panel-9k3x/users': {
-      id: '/control-panel-9k3x/users'
-      path: '/users'
-      fullPath: '/control-panel-9k3x/users'
-      preLoaderRoute: typeof ControlPanel9k3xUsersRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/control-panel-9k3x/settings': {
-      id: '/control-panel-9k3x/settings'
-      path: '/settings'
-      fullPath: '/control-panel-9k3x/settings'
-      preLoaderRoute: typeof ControlPanel9k3xSettingsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/quizzes': {
-      id: '/control-panel-9k3x/quizzes'
-      path: '/quizzes'
-      fullPath: '/control-panel-9k3x/quizzes'
-      preLoaderRoute: typeof ControlPanel9k3xQuizzesRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/papers': {
-      id: '/control-panel-9k3x/papers'
-      path: '/papers'
-      fullPath: '/control-panel-9k3x/papers'
-      preLoaderRoute: typeof ControlPanel9k3xPapersRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/logs': {
-      id: '/control-panel-9k3x/logs'
-      path: '/logs'
-      fullPath: '/control-panel-9k3x/logs'
-      preLoaderRoute: typeof ControlPanel9k3xLogsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/integrations': {
-      id: '/control-panel-9k3x/integrations'
-      path: '/integrations'
-      fullPath: '/control-panel-9k3x/integrations'
-      preLoaderRoute: typeof ControlPanel9k3xIntegrationsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/_app/streak': {
-      id: '/_app/streak'
-      path: '/streak'
-      fullPath: '/streak'
-      preLoaderRoute: typeof AppStreakRouteImport
+    '/_app/achievements': {
+      id: '/_app/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AppAchievementsRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/settings': {
-      id: '/_app/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AppSettingsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/quiz': {
-      id: '/_app/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof AppQuizRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/progress': {
-      id: '/_app/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof AppProgressRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/onboarding': {
-      id: '/_app/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AppOnboardingRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/notifications': {
-      id: '/_app/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof AppNotificationsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/library': {
-      id: '/_app/library'
-      path: '/library'
-      fullPath: '/library'
-      preLoaderRoute: typeof AppLibraryRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/leaderboard': {
-      id: '/_app/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof AppLeaderboardRouteImport
+    '/_app/courses': {
+      id: '/_app/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof AppCoursesRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/dashboard': {
@@ -467,11 +518,144 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/achievements': {
-      id: '/_app/achievements'
-      path: '/achievements'
-      fullPath: '/achievements'
-      preLoaderRoute: typeof AppAchievementsRouteImport
+    '/_app/leaderboard': {
+      id: '/_app/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof AppLeaderboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/learning-path': {
+      id: '/_app/learning-path'
+      path: '/learning-path'
+      fullPath: '/learning-path'
+      preLoaderRoute: typeof AppLearningPathRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/library': {
+      id: '/_app/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof AppLibraryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/onboarding': {
+      id: '/_app/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/quiz': {
+      id: '/_app/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof AppQuizRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/search': {
+      id: '/_app/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof AppSearchRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/streak': {
+      id: '/_app/streak'
+      path: '/streak'
+      fullPath: '/streak'
+      preLoaderRoute: typeof AppStreakRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/support': {
+      id: '/_app/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof AppSupportRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/textbooks': {
+      id: '/_app/textbooks'
+      path: '/textbooks'
+      fullPath: '/textbooks'
+      preLoaderRoute: typeof AppTextbooksRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/control-panel-9k3x/': {
+      id: '/control-panel-9k3x/'
+      path: '/'
+      fullPath: '/control-panel-9k3x/'
+      preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/integrations': {
+      id: '/control-panel-9k3x/integrations'
+      path: '/integrations'
+      fullPath: '/control-panel-9k3x/integrations'
+      preLoaderRoute: typeof ControlPanel9k3xIntegrationsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/logs': {
+      id: '/control-panel-9k3x/logs'
+      path: '/logs'
+      fullPath: '/control-panel-9k3x/logs'
+      preLoaderRoute: typeof ControlPanel9k3xLogsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/questions': {
+      id: '/control-panel-9k3x/questions'
+      path: '/questions'
+      fullPath: '/control-panel-9k3x/questions'
+      preLoaderRoute: typeof ControlPanel9k3xQuestionsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/settings': {
+      id: '/control-panel-9k3x/settings'
+      path: '/settings'
+      fullPath: '/control-panel-9k3x/settings'
+      preLoaderRoute: typeof ControlPanel9k3xSettingsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/users': {
+      id: '/control-panel-9k3x/users'
+      path: '/users'
+      fullPath: '/control-panel-9k3x/users'
+      preLoaderRoute: typeof ControlPanel9k3xUsersRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/_app/course/$documentId': {
+      id: '/_app/course/$documentId'
+      path: '/course/$documentId'
+      fullPath: '/course/$documentId'
+      preLoaderRoute: typeof AppCourseDocumentIdRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/quiz/setup': {
@@ -481,12 +665,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppQuizSetupRouteImport
       parentRoute: typeof AppQuizRoute
     }
-    '/_app/paper/$paperId': {
-      id: '/_app/paper/$paperId'
-      path: '/paper/$paperId'
-      fullPath: '/paper/$paperId'
-      preLoaderRoute: typeof AppPaperPaperIdRouteImport
-      parentRoute: typeof AppRoute
+    '/api/ai/format-paper': {
+      id: '/api/ai/format-paper'
+      path: '/api/ai/format-paper'
+      fullPath: '/api/ai/format-paper'
+      preLoaderRoute: typeof ApiAiFormatPaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/learning-path': {
+      id: '/api/ai/learning-path'
+      path: '/api/ai/learning-path'
+      fullPath: '/api/ai/learning-path'
+      preLoaderRoute: typeof ApiAiLearningPathRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/progress-insight': {
+      id: '/api/ai/progress-insight'
+      path: '/api/ai/progress-insight'
+      fullPath: '/api/ai/progress-insight'
+      preLoaderRoute: typeof ApiAiProgressInsightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/payments/fapshi/initiate': {
+      id: '/api/payments/fapshi/initiate'
+      path: '/api/payments/fapshi/initiate'
+      fullPath: '/api/payments/fapshi/initiate'
+      preLoaderRoute: typeof ApiPaymentsFapshiInitiateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/payments/fapshi/verify': {
+      id: '/api/payments/fapshi/verify'
+      path: '/api/payments/fapshi/verify'
+      fullPath: '/api/payments/fapshi/verify'
+      preLoaderRoute: typeof ApiPaymentsFapshiVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/payments/fapshi/webhook': {
+      id: '/api/payments/fapshi/webhook'
+      path: '/api/payments/fapshi/webhook'
+      fullPath: '/api/payments/fapshi/webhook'
+      preLoaderRoute: typeof ApiPaymentsFapshiWebhookRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -504,30 +723,40 @@ const AppQuizRouteWithChildren =
 
 interface AppRouteChildren {
   AppAchievementsRoute: typeof AppAchievementsRoute
+  AppCoursesRoute: typeof AppCoursesRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
+  AppLearningPathRoute: typeof AppLearningPathRoute
   AppLibraryRoute: typeof AppLibraryRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
   AppOnboardingRoute: typeof AppOnboardingRoute
   AppProgressRoute: typeof AppProgressRoute
   AppQuizRoute: typeof AppQuizRouteWithChildren
+  AppSearchRoute: typeof AppSearchRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppStreakRoute: typeof AppStreakRoute
-  AppPaperPaperIdRoute: typeof AppPaperPaperIdRoute
+  AppSupportRoute: typeof AppSupportRoute
+  AppTextbooksRoute: typeof AppTextbooksRoute
+  AppCourseDocumentIdRoute: typeof AppCourseDocumentIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppAchievementsRoute: AppAchievementsRoute,
+  AppCoursesRoute: AppCoursesRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
+  AppLearningPathRoute: AppLearningPathRoute,
   AppLibraryRoute: AppLibraryRoute,
   AppNotificationsRoute: AppNotificationsRoute,
   AppOnboardingRoute: AppOnboardingRoute,
   AppProgressRoute: AppProgressRoute,
   AppQuizRoute: AppQuizRouteWithChildren,
+  AppSearchRoute: AppSearchRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppStreakRoute: AppStreakRoute,
-  AppPaperPaperIdRoute: AppPaperPaperIdRoute,
+  AppSupportRoute: AppSupportRoute,
+  AppTextbooksRoute: AppTextbooksRoute,
+  AppCourseDocumentIdRoute: AppCourseDocumentIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -535,8 +764,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 interface ControlPanel9k3xRouteChildren {
   ControlPanel9k3xIntegrationsRoute: typeof ControlPanel9k3xIntegrationsRoute
   ControlPanel9k3xLogsRoute: typeof ControlPanel9k3xLogsRoute
-  ControlPanel9k3xPapersRoute: typeof ControlPanel9k3xPapersRoute
-  ControlPanel9k3xQuizzesRoute: typeof ControlPanel9k3xQuizzesRoute
+  ControlPanel9k3xQuestionsRoute: typeof ControlPanel9k3xQuestionsRoute
   ControlPanel9k3xSettingsRoute: typeof ControlPanel9k3xSettingsRoute
   ControlPanel9k3xUsersRoute: typeof ControlPanel9k3xUsersRoute
   ControlPanel9k3xIndexRoute: typeof ControlPanel9k3xIndexRoute
@@ -545,8 +773,7 @@ interface ControlPanel9k3xRouteChildren {
 const ControlPanel9k3xRouteChildren: ControlPanel9k3xRouteChildren = {
   ControlPanel9k3xIntegrationsRoute: ControlPanel9k3xIntegrationsRoute,
   ControlPanel9k3xLogsRoute: ControlPanel9k3xLogsRoute,
-  ControlPanel9k3xPapersRoute: ControlPanel9k3xPapersRoute,
-  ControlPanel9k3xQuizzesRoute: ControlPanel9k3xQuizzesRoute,
+  ControlPanel9k3xQuestionsRoute: ControlPanel9k3xQuestionsRoute,
   ControlPanel9k3xSettingsRoute: ControlPanel9k3xSettingsRoute,
   ControlPanel9k3xUsersRoute: ControlPanel9k3xUsersRoute,
   ControlPanel9k3xIndexRoute: ControlPanel9k3xIndexRoute,
@@ -561,7 +788,23 @@ const rootRouteChildren: RootRouteChildren = {
   ControlPanel9k3xRoute: ControlPanel9k3xRouteWithChildren,
   PricingRoute: PricingRoute,
   SigninRoute: SigninRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
+  ApiAiFormatPaperRoute: ApiAiFormatPaperRoute,
+  ApiAiLearningPathRoute: ApiAiLearningPathRoute,
+  ApiAiProgressInsightRoute: ApiAiProgressInsightRoute,
+  ApiPaymentsFapshiInitiateRoute: ApiPaymentsFapshiInitiateRoute,
+  ApiPaymentsFapshiVerifyRoute: ApiPaymentsFapshiVerifyRoute,
+  ApiPaymentsFapshiWebhookRoute: ApiPaymentsFapshiWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

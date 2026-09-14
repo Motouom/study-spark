@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Balanced diet plate</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Balanced diet plate</text>
+  <circle class="line" cx="380" cy="220" r="145"/>
+  <path class="thin" d="M380 75v290M235 220h290M279 118c60 52 130 58 202 0"/>
+  <text x="278" y="180">Carbohydrates</text><text x="417" y="180">Proteins</text><text x="275" y="276">Vegetables</text><text x="420" y="276">Fruits</text>
+  <text x="88" y="380" class="small">Use the plate to plan meals and explain deficiency risks.</text>
+</svg>

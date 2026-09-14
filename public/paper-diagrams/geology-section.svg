@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Geological cross-section</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Geological cross-section</text>
+  <path class="fill" d="M70 150c95-60 180 20 270-20 105-46 195-36 340 35v185H70z"/>
+  <path class="thin" d="M70 225c140-30 245 45 365 4 110-37 170-15 245 25"/>
+  <path class="thin" d="M70 280c140-8 230 38 355 18 120-19 180 5 255 32"/>
+  <line class="line" x1="305" y1="128" x2="455" y2="350"/><line class="line" x1="500" y1="134" x2="402" y2="350"/>
+  <text x="318" y="95" class="small">faults</text><text x="94" y="206" class="small">sandstone</text><text x="94" y="263" class="small">shale</text><text x="94" y="326" class="small">granite</text>
+</svg>

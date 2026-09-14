@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Climograph</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Climate data for a Cameroon station</text>
+  <line class="line" x1="90" y1="330" x2="690" y2="330"/><line class="line" x1="90" y1="70" x2="90" y2="330"/>
+  <rect x="115" y="270" width="26" height="40" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="160" y="255" width="26" height="55" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="205" y="215" width="26" height="95" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="250" y="180" width="26" height="130" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="295" y="135" width="26" height="175" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="340" y="105" width="26" height="205" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="385" y="80" width="26" height="230" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="430" y="90" width="26" height="220" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="475" y="130" width="26" height="180" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="520" y="175" width="26" height="135" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="565" y="230" width="26" height="80" fill="#fff" stroke="#17120f" stroke-width="1.5"/><rect x="610" y="265" width="26" height="45" fill="#fff" stroke="#17120f" stroke-width="1.5"/>
+  <path class="line" d="M128 250L173 244L218 235L263 220L308 205L353 195L398 190L443 195L488 205L533 220L578 235L623 246"/>
+  <text x="102" y="358" class="tiny">J F M A M J J A S O N D</text><text x="25" y="80" class="small">Rainfall</text><text x="615" y="92" class="small">Temp.</text>
+</svg>

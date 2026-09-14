@@ -1,7 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
+  "name": "studyspark",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
+  "vars": {
+    "STUDYSPARK_DATA_SOURCE": "demo",
+  },
+  // After creating the production D1 database, uncomment and fill this binding.
+  // "d1_databases": [
+  //   {
+  //     "binding": "STUDYSPARK_DB",
+  //     "database_name": "studyspark",
+  //     "database_id": "replace-with-cloudflare-d1-database-id"
+  //   }
+  // ]
 }

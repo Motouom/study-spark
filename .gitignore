@@ -14,11 +14,45 @@ dist-ssr
 .vinxi
 .tanstack/**
 .nitro
+
+# Local environment files and secrets
+.env
+.env.*
+.env.local
+.env.*.local
+.dev.vars
 *.local
+!.env.example
+
+# Framework, bundler, and package-manager caches
+.vite/
+.cache/
+.parcel-cache/
+.turbo/
+.next/
+.nuxt/
+.svelte-kit/
+*.tsbuildinfo
+
+# Test and coverage output
+coverage/
+playwright-report/
+test-results/
+blob-report/
+.nyc_output/
 
 # Wrangler / Cloudflare
 .wrangler/
-.dev.vars
+
+# Vercel / Netlify
+.vercel/
+.netlify/
+
+# Local Supabase runtime
+supabase/.branches/
+supabase/.temp/
+supabase/.env
+supabase/.env.local
 
 # Editor directories and files
 .vscode/*
@@ -30,3 +64,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS and temporary files
+Thumbs.db
+*.tmp
+*.temp
+*.bak

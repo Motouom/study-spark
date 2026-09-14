@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Network topology</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: School computer network</text>
+  <rect class="fill" x="325" y="170" width="110" height="70" rx="10"/><text x="350" y="211">Switch</text>
+  <rect class="fill" x="130" y="90" width="115" height="62" rx="8"/><text x="158" y="128">PC 1</text><line class="line" x1="188" y1="152" x2="380" y2="205"/><rect class="fill" x="570" y="90" width="115" height="62" rx="8"/><text x="598" y="128">PC 2</text><line class="line" x1="628" y1="152" x2="380" y2="205"/><rect class="fill" x="130" y="300" width="115" height="62" rx="8"/><text x="158" y="338">Printer</text><line class="line" x1="188" y1="362" x2="380" y2="205"/><rect class="fill" x="570" y="300" width="115" height="62" rx="8"/><text x="598" y="338">Server</text><line class="line" x1="628" y1="362" x2="380" y2="205"/>
+  <text x="286" y="282" class="small">Identify devices, IP addressing, and security controls.</text>
+</svg>

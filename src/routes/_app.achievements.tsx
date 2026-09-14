@@ -1,80 +1,93 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
-import { ACHIEVEMENTS, type Achievement } from "@/lib/mock-data";
-import { Badge } from "@/components/ui/badge";
+import { Award, Clock, Flame, Lock, Medal, Target } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import * as Icons from "lucide-react";
-import { Lock } from "lucide-react";
+import { useStructuralProgress } from "@/hooks/use-structural-progress";
+import { PremiumGate } from "@/components/PremiumGate";
 
 export const Route = createFileRoute("/_app/achievements")({
-  head: () => ({ meta: [{ title: "Achievements — StudyFlow" }] }),
+  head: () => ({ meta: [{ title: "Achievements — StudySpark" }] }),
   component: AchievementsPage,
 });
 
-const rarityStyle: Record<Achievement["rarity"], string> = {
-  common: "bg-secondary text-secondary-foreground",
-  rare: "bg-chart-1/15 text-chart-1",
-  epic: "bg-chart-4/15 text-chart-4",
-  legendary: "bg-accent/20 text-accent-foreground",
-};
-
-function AchievementCard({ a }: { a: Achievement }) {
-  const Icon = (Icons[a.icon as keyof typeof Icons] as Icons.LucideIcon) || Icons.Award;
-  return (
-    <div
-      className={`relative rounded-xl border p-5 ${
-        a.earned ? "border-border bg-card" : "border-dashed border-border bg-card/60"
-      }`}
-    >
-      <div className="flex items-start justify-between">
-        <div
-          className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-            a.earned ? "bg-foreground text-background" : "bg-muted text-muted-foreground"
-          }`}
-        >
-          {a.earned ? <Icon className="h-6 w-6" /> : <Lock className="h-5 w-5" />}
-        </div>
-        <Badge className={`capitalize ${rarityStyle[a.rarity]} hover:${rarityStyle[a.rarity]}`} variant="secondary">
-          {a.rarity}
-        </Badge>
-      </div>
-      <h3 className={`mt-4 text-base font-medium ${a.earned ? "" : "text-muted-foreground"}`}>{a.name}</h3>
-      <p className="mt-1 text-xs text-muted-foreground">{a.description}</p>
-      {a.earned ? (
-        <p className="mt-3 text-xs text-success">Earned · {a.earnedDate}</p>
-      ) : (
-        <div className="mt-3">
-          <Progress value={a.progress ?? 0} className="h-1.5" />
-          <p className="mt-1.5 text-xs text-muted-foreground">{a.progress ?? 0}% complete</p>
-        </div>
-      )}
-    </div>
-  );
-}
-
 function AchievementsPage() {
-  const earned = ACHIEVEMENTS.filter((a) => a.earned);
-  const locked = ACHIEVEMENTS.filter((a) => !a.earned);
-  const xp = earned.length * 250;
-  const level = Math.floor(xp / 1000) + 1;
-  const levelProgress = (xp % 1000) / 10;
+  const { progress, summary, error } = useStructuralProgress();
+  const milestones = [
+    {
+      title: "Mark your first structural question",
+      description: "Start tracking real paper practice.",
+      complete: summary.totalStarted >= 1,
+      progress: summary.totalStarted >= 1 ? 100 : 0,
+      icon: Award,
+    },
+    {
+      title: "Practice three study days",
+      description: "Build consistency across separate days.",
+      complete: summary.totalStudyDays >= 3,
+      progress: Math.min(100, Math.round((summary.totalStudyDays / 3) * 100)),
+      icon: Flame,
+    },
+    {
+      title: "Reach 80% structural mastery",
+      description: "Pass most of the questions you attempt.",
+      complete: summary.completionRate >= 80,
+      progress: summary.completionRate,
+      icon: Target,
+    },
+    {
+      title: "Pass 20 structural questions",
+      description: "Show real command over full-paper questions.",
+      complete: summary.passed >= 20,
+      progress: Math.min(100, Math.round((summary.passed / 20) * 100)),
+      icon: Medal,
+    },
+    {
+      title: "Study for one focused hour",
+      description: "Accumulate measured solving time.",
+      complete: summary.totalDurationSeconds >= 3600,
+      progress: Math.min(100, Math.round((summary.totalDurationSeconds / 3600) * 100)),
+      icon: Clock,
+    },
+    {
+      title: "Recover from failed work",
+      description: "Turn weak questions into revision targets.",
+      complete: summary.failed >= 5 && summary.passed >= 5,
+      progress: Math.min(100, Math.round(((summary.failed + summary.passed) / 10) * 100)),
+      icon: Target,
+    },
+  ];
+  const earned = milestones.filter((milestone) => milestone.complete).length;
+  const xp = progress.length * 25 + summary.passed * 15 + earned * 100;
+  const level = Math.max(1, Math.floor(xp / 300) + 1);
+  const levelProgress = Math.min(100, Math.round(((xp % 300) / 300) * 100));
 
   return (
     <>
-      <PageHeader title="Achievements" description="Earn badges as you study. Keep climbing." />
+      <PageHeader title="Achievements" description="Badges unlock from real study activity." />
 
       <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
+        <PremiumGate
+          title="Premium achievements"
+          description="Upgrade to unlock XP, milestones, badges, and advanced learning motivation."
+        >
+        {error && (
+          <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+            Achievements could not be loaded: {error}
+          </div>
+        )}
+
         <div className="rounded-xl border border-border bg-card p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-wider text-muted-foreground">Your level</p>
               <div className="mt-1 flex items-baseline gap-3">
                 <span className="font-display text-5xl">{level}</span>
-                <span className="text-sm text-muted-foreground">{xp.toLocaleString()} XP</span>
+                <span className="text-sm text-muted-foreground">{xp} XP</span>
               </div>
             </div>
             <div className="text-sm text-muted-foreground">
-              <span className="text-foreground font-medium">{earned.length}</span> of {ACHIEVEMENTS.length} earned
+              <span className="font-medium text-foreground">{earned}</span> earned
             </div>
           </div>
           <div className="mt-5">
@@ -87,30 +100,50 @@ function AchievementsPage() {
         </div>
 
         <section>
-          <h2 className="mb-3 text-sm font-medium text-muted-foreground">Earned ({earned.length})</h2>
+          <h2 className="mb-3 text-sm font-medium text-muted-foreground">Next milestones</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {earned.map((a) => <AchievementCard key={a.id} a={a} />)}
+            {milestones.map((milestone) => {
+              const Icon = milestone.complete ? milestone.icon : Lock;
+              return (
+                <div
+                  key={milestone.title}
+                  className={`rounded-xl border bg-card p-5 ${
+                    milestone.complete ? "border-border" : "border-dashed border-border"
+                  }`}
+                >
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                      milestone.complete
+                        ? "bg-accent/15 text-accent"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 text-base font-medium">{milestone.title}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground">{milestone.description}</p>
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    {milestone.progress}% complete
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
-        <section>
-          <h2 className="mb-3 text-sm font-medium text-muted-foreground">Locked ({locked.length})</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {locked.map((a) => <AchievementCard key={a.id} a={a} />)}
+        {earned === 0 && (
+          <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+            <Award className="mx-auto h-10 w-10 text-muted-foreground" />
+            <h3 className="mt-4 text-base font-medium">No achievements yet</h3>
+            <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
+              Mark structural paper questions to earn badges from real progress.
+            </p>
+            <Button asChild className="mt-5">
+              <Link to="/library">Open papers</Link>
+            </Button>
           </div>
-        </section>
-
-        <div className="rounded-xl border border-border bg-foreground p-6 text-background md:p-8">
-          <h3 className="font-display text-2xl">Want more badges?</h3>
-          <p className="mt-1.5 text-sm text-background/70">Take a quiz today and unlock the next milestone.</p>
-          <Link
-            to="/quiz/setup"
-            search={{} as never}
-            className="mt-4 inline-flex items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground hover:bg-background/90"
-          >
-            Start a quiz
-          </Link>
-        </div>
+        )}
+        </PremiumGate>
       </div>
     </>
   );

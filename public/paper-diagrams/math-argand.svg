@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Argand diagram</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Argand diagram</text>
+  <line class="line" x1="95" y1="220" x2="680" y2="220"/><line class="line" x1="380" y1="350" x2="380" y2="75"/>
+  <circle class="thin" cx="380" cy="220" r="105"/><line class="line" x1="380" y1="220" x2="485" y2="115"/>
+  <path class="thin" d="M430 220a50 50 0 0 0-15-35"/><text x="438" y="192" class="small">45 degrees</text>
+  <text x="650" y="248">Re</text><text x="397" y="88">Im</text><text x="492" y="112">z</text>
+</svg>

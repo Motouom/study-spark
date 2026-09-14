@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Plant cell diagram</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Generalised plant cell</text>
+  <rect class="fill" x="120" y="90" width="500" height="260" rx="38"/>
+  <rect class="thin" x="148" y="118" width="444" height="204" rx="30"/>
+  <ellipse class="fill" cx="330" cy="218" rx="76" ry="52"/><circle class="fill" cx="330" cy="218" r="18"/>
+  <ellipse class="thin" cx="505" cy="218" rx="62" ry="42"/>
+  <path class="thin" d="M195 180c34-28 76-25 105 6M430 285c50 20 85 8 110-24"/>
+  <text x="620" y="145" class="small">cell wall</text><line class="thin" x1="592" y1="140" x2="615" y2="140"/>
+  <text x="220" y="72" class="small">nucleus</text><line class="thin" x1="300" y1="78" x2="324" y2="196"/>
+  <text x="535" y="270" class="small">vacuole</text>
+</svg>

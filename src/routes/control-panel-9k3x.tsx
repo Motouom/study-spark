@@ -1,14 +1,11 @@
 import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import {
   LayoutDashboard,
   Users,
   FileText,
-  GraduationCap,
   Plug,
   ScrollText,
   Settings as SettingsIcon,
@@ -26,8 +23,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-const SESSION_KEY = "sf_admin_session_v1";
+import { supabase } from "@/lib/supabase";
+import { useAdminSession } from "@/hooks/use-admin-session";
+import { signOut } from "@/lib/auth";
 
 export const Route = createFileRoute("/control-panel-9k3x")({
   head: () => ({
@@ -43,59 +41,56 @@ export const Route = createFileRoute("/control-panel-9k3x")({
 const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/control-panel-9k3x", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/control-panel-9k3x/users", label: "Users", icon: Users },
-  { to: "/control-panel-9k3x/papers", label: "Past papers", icon: FileText },
-  { to: "/control-panel-9k3x/quizzes", label: "Quizzes", icon: GraduationCap },
+  { to: "/control-panel-9k3x/questions", label: "Papers", icon: FileText },
   { to: "/control-panel-9k3x/integrations", label: "Integrations", icon: Plug },
   { to: "/control-panel-9k3x/logs", label: "Audit logs", icon: ScrollText },
   { to: "/control-panel-9k3x/settings", label: "Settings", icon: SettingsIcon },
 ];
 
 function AdminShell() {
-  const [authed, setAuthed] = useState(false);
-  const [ready, setReady] = useState(false);
+  const admin = useAdminSession();
 
-  useEffect(() => {
-    setAuthed(sessionStorage.getItem(SESSION_KEY) === "1");
-    setReady(true);
-  }, []);
-
-  if (!ready) return null;
-  if (!authed) return <AdminLogin onAuthed={() => setAuthed(true)} />;
-  return <AdminLayout onLogout={() => { sessionStorage.removeItem(SESSION_KEY); setAuthed(false); }} />;
-}
-
-function AdminLogin({ onAuthed }: { onAuthed: () => void }) {
-  const [email, setEmail] = useState("admin@studyflow.io");
-  const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
-  const [step, setStep] = useState<"creds" | "mfa">("creds");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  function submitCreds(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    if (password.length < 6) return setError("Invalid credentials.");
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setStep("mfa");
-    }, 600);
+  if (admin.loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background text-sm text-muted-foreground">
+        Verifying admin session...
+      </div>
+    );
   }
 
-  function submitMfa(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    if (otp.length !== 6) return setError("Enter the 6-digit code.");
-    setLoading(true);
-    setTimeout(() => {
-      sessionStorage.setItem(SESSION_KEY, "1");
-      onAuthed();
-    }, 500);
+  if (!admin.isAdmin) {
+    return (
+      <AdminAccessDenied
+        message={admin.error}
+        email={admin.user?.email ?? null}
+        rawRole={admin.rawRole}
+        onRefresh={() => void admin.reload()}
+      />
+    );
+  }
+  return <AdminLayout role={admin.role} email={admin.user?.email ?? "admin"} />;
+}
+
+function AdminAccessDenied({
+  message,
+  email,
+  rawRole,
+  onRefresh,
+}: {
+  message: string | null;
+  email: string | null;
+  rawRole: unknown;
+  onRefresh: () => void;
+}) {
+  const navigate = useNavigate();
+
+  async function handleSignOut() {
+    await signOut();
+    await navigate({ to: "/signin", replace: true });
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-background to-secondary/30 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
         <div className="mb-8 flex flex-col items-center gap-3 text-center">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card shadow-elevated">
@@ -104,78 +99,49 @@ function AdminLogin({ onAuthed }: { onAuthed: () => void }) {
           <div>
             <h1 className="font-display text-2xl">Restricted area</h1>
             <p className="mt-1 text-xs text-muted-foreground">
-              Authorized personnel only. All activity is logged.
+              Authorized personnel only. Roles are enforced by Supabase.
             </p>
           </div>
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 shadow-elevated">
-          {step === "creds" ? (
-            <form onSubmit={submitCreds} className="space-y-4">
-              <div className="space-y-1.5">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete="current-password"
-                  placeholder="••••••••"
-                />
-              </div>
-              {error && <p className="text-xs text-destructive">{error}</p>}
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Verifying..." : "Continue"}
-              </Button>
-              <p className="text-center text-[11px] text-muted-foreground">
-                Hint (mock): any password ≥ 6 chars, then any 6-digit code.
-              </p>
-            </form>
-          ) : (
-            <form onSubmit={submitMfa} className="space-y-4">
-              <div className="space-y-1.5">
-                <Label htmlFor="otp">Two-factor code</Label>
-                <Input
-                  id="otp"
-                  inputMode="numeric"
-                  maxLength={6}
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-                  placeholder="123456"
-                  className="text-center font-mono text-lg tracking-widest"
-                />
-                <p className="text-[11px] text-muted-foreground">
-                  A code was sent to your authenticator app.
-                </p>
-              </div>
-              {error && <p className="text-xs text-destructive">{error}</p>}
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Signing in..." : "Sign in"}
-              </Button>
-              <button
-                type="button"
-                onClick={() => setStep("creds")}
-                className="w-full text-center text-[11px] text-muted-foreground hover:text-foreground"
-              >
-                ← Use a different account
-              </button>
-            </form>
-          )}
+          <p className="text-sm text-muted-foreground">
+            {message ??
+              "Sign in with an account whose Supabase app metadata role is admin, reviewer, or super_admin."}
+          </p>
+          <div className="mt-4 rounded-lg border border-border bg-secondary/30 p-3 text-xs">
+            <div className="flex justify-between gap-3">
+              <span className="text-muted-foreground">Signed-in email</span>
+              <span className="max-w-52 truncate font-mono">{email ?? "No active user"}</span>
+            </div>
+            <div className="mt-2 flex justify-between gap-3">
+              <span className="text-muted-foreground">JWT admin role</span>
+              <span className="max-w-52 truncate font-mono">
+                {typeof rawRole === "string" ? rawRole : "None"}
+              </span>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-2">
+            <Button onClick={onRefresh} variant="outline">
+              Refresh role
+            </Button>
+            <Button onClick={() => void handleSignOut()} variant="outline">
+              Sign out
+            </Button>
+            <Button asChild className="flex-1">
+              <Link to="/signin">Sign in</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/dashboard">Dashboard</Link>
+            </Button>
+          </div>
         </div>
-
-        <p className="mt-6 text-center text-[11px] text-muted-foreground">
-          Not looking for admin? <Link to="/" className="underline hover:text-foreground">Return home</Link>
-        </p>
       </div>
     </div>
   );
 }
 
-function AdminLayout({ onLogout }: { onLogout: () => void }) {
+function AdminLayout({ role, email }: { role: string | null; email: string }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -188,7 +154,7 @@ function AdminLayout({ onLogout }: { onLogout: () => void }) {
             <Shield className="h-4 w-4" />
           </div>
           <div>
-            <div className="text-sm font-medium">StudyFlow</div>
+            <div className="text-sm font-medium">StudySpark</div>
             <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Admin</div>
           </div>
         </div>
@@ -218,9 +184,11 @@ function AdminLayout({ onLogout }: { onLogout: () => void }) {
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-success" />
               <span className="text-xs">Production</span>
-              <Badge variant="secondary" className="ml-auto text-[10px]">v2.4.0</Badge>
+              <Badge variant="secondary" className="ml-auto text-[10px]">
+                {role ?? "admin"}
+              </Badge>
             </div>
-            <p className="mt-1 text-[10px] text-muted-foreground">All systems normal</p>
+            <p className="mt-1 text-[10px] text-muted-foreground">Supabase enforced</p>
           </div>
         </div>
       </aside>
@@ -230,7 +198,7 @@ function AdminLayout({ onLogout }: { onLogout: () => void }) {
         <header className="flex h-14 items-center gap-3 border-b border-border bg-background px-6">
           <div className="relative flex-1 max-w-md">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-            <Input placeholder="Search users, papers, transactions..." className="h-9 pl-9 text-sm" />
+            <Input placeholder="Search users, papers, subjects..." className="h-9 pl-9 text-sm" />
           </div>
           <Button variant="ghost" size="icon" aria-label="Notifications" className="relative">
             <Bell className="h-4 w-4" />
@@ -239,22 +207,29 @@ function AdminLayout({ onLogout }: { onLogout: () => void }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-2 rounded-md border border-border px-2 py-1.5 text-sm hover:bg-secondary">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-[10px] text-background">AD</div>
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-[10px] text-background">
+                  AD
+                </div>
                 <span className="hidden sm:inline">Admin</span>
                 <ChevronDown className="h-3 w-3 text-muted-foreground" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52">
-              <DropdownMenuLabel>admin@studyflow.io</DropdownMenuLabel>
+              <DropdownMenuLabel>{email}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate({ to: "/control-panel-9k3x/settings" })}>
                 <SettingsIcon className="mr-2 h-4 w-4" /> Settings
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => navigate({ to: "/" })}>
+              <DropdownMenuItem onClick={() => navigate({ to: "/dashboard" })}>
                 Return to site
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={onLogout} className="text-destructive focus:text-destructive">
+              <DropdownMenuItem
+                onClick={() => {
+                  void signOut().then(() => navigate({ to: "/signin", replace: true }));
+                }}
+                className="text-destructive focus:text-destructive"
+              >
                 <LogOut className="mr-2 h-4 w-4" /> Sign out
               </DropdownMenuItem>
             </DropdownMenuContent>

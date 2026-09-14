@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,17 +12,18 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
-  Download,
+  Lock,
 } from "lucide-react";
+import { useStudyProfile } from "@/hooks/use-study-profile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "StudyFlow — The study app that makes you want to come back" },
+      { title: "StudySpark — Cameroon protected practice" },
       {
         name: "description",
         content:
-          "All-in-one study platform for African secondary school students. Past questions, quizzes, and progress analytics.",
+          "Protected in-app study questions for Cameroon students by class, series, subject, and topic.",
       },
     ],
   }),
@@ -34,9 +36,15 @@ function Nav() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Logo />
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#features" className="hover:text-foreground">Features</a>
-          <a href="#how" className="hover:text-foreground">How it works</a>
-          <Link to="/pricing" className="hover:text-foreground">Pricing</Link>
+          <a href="#features" className="hover:text-foreground">
+            Features
+          </a>
+          <a href="#how" className="hover:text-foreground">
+            How it works
+          </a>
+          <Link to="/pricing" className="hover:text-foreground">
+            Pricing
+          </Link>
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm">
@@ -65,17 +73,20 @@ function Hero() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <Badge variant="secondary" className="mb-6 gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs">
+          <Badge
+            variant="secondary"
+            className="mb-6 gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs"
+          >
             <Sparkles className="h-3 w-3 text-accent" />
-            Free answers. No ads. Made for Africa.
+            Cameroon syllabus. Protected questions. No downloads.
           </Badge>
           <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-foreground md:text-7xl">
             The study app that makes you{" "}
             <span className="italic text-muted-foreground">want to come back.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-            Past questions, guided learning paths, and progress that actually motivates you —
-            built for WASSCE, JAMB, KCSE and beyond.
+            Professionally formatted in-app questions, guided topic practice, and progress that
+            follows your class and series.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-6 text-base">
@@ -84,11 +95,11 @@ function Hero() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="h-12 px-6 text-base">
-              <Link to="/library">Browse past papers</Link>
+              <Link to="/library">Browse my topics</Link>
             </Button>
           </div>
           <p className="mt-5 text-xs text-muted-foreground">
-            Free forever for past papers · Premium unlocks AI tutoring
+            Questions stay inside the app · Premium features can come later
           </p>
         </motion.div>
 
@@ -103,19 +114,25 @@ function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-destructive/40" />
               <span className="h-2.5 w-2.5 rounded-full bg-warning/60" />
               <span className="h-2.5 w-2.5 rounded-full bg-success/60" />
-              <span className="ml-3 text-xs text-muted-foreground">studyflow.app/dashboard</span>
+              <span className="ml-3 text-xs text-muted-foreground">studyspark.cm/dashboard</span>
             </div>
             <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-3">
-              <PreviewStat icon={<Flame className="h-4 w-4" />} label="Day streak" value="14" />
-              <PreviewStat icon={<BookOpen className="h-4 w-4" />} label="Quizzes taken" value="47" />
-              <PreviewStat icon={<LineChart className="h-4 w-4" />} label="Avg score" value="82%" />
+              <PreviewStat icon={<Flame className="h-4 w-4" />} label="Day streak" value="0" />
+              <PreviewStat
+                icon={<BookOpen className="h-4 w-4" />}
+                label="Questions marked"
+                value="0"
+              />
+              <PreviewStat icon={<LineChart className="h-4 w-4" />} label="Avg score" value="0%" />
               <div className="md:col-span-3 rounded-xl border border-border bg-background p-5">
                 <div className="mb-3 flex items-center justify-between">
                   <h3 className="text-sm font-medium">This week's progress</h3>
-                  <span className="text-xs text-success">+12% vs last week</span>
+                  <span className="text-xs text-muted-foreground">
+                    starts after your first marked question
+                  </span>
                 </div>
                 <div className="flex h-28 items-end gap-2">
-                  {[40, 55, 48, 70, 82, 65, 88].map((h, i) => (
+                  {[0, 0, 0, 0, 0, 0, 0].map((h, i) => (
                     <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
                       <div
                         className="w-full rounded-t-md bg-foreground/80"
@@ -160,8 +177,8 @@ function Features() {
   const items = [
     {
       icon: <BookOpen className="h-5 w-5" />,
-      title: "500+ past questions",
-      desc: "WASSCE, JAMB, KCSE, NECTA & GCE — filter by subject, year and exam board.",
+      title: "Class-based access",
+      desc: "Form 3 to Upper Sixth students see only the subjects and topics allowed for their class and series.",
     },
     {
       icon: <Sparkles className="h-5 w-5" />,
@@ -179,9 +196,9 @@ function Features() {
       desc: "Small, satisfying wins that turn study into a habit you'll keep.",
     },
     {
-      icon: <Download className="h-5 w-5" />,
-      title: "Download & share",
-      desc: "Take papers offline. Share with classmates. Study anywhere, no data needed.",
+      icon: <Lock className="h-5 w-5" />,
+      title: "Protected delivery",
+      desc: "Questions are opened in-app, one session at a time, with no download or PDF export flow.",
     },
     {
       icon: <ShieldCheck className="h-5 w-5" />,
@@ -219,13 +236,13 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Pick your exam",
-      desc: "Choose WASSCE, JAMB, KCSE — or whatever you're prepping for.",
+      title: "Set your profile",
+      desc: "Choose language, level, class, series, and subjects.",
     },
     {
       n: "02",
-      title: "Practice with past papers",
-      desc: "Real questions, full answers, timed quiz mode. Learn what's actually on the exam.",
+      title: "Practice by topic",
+      desc: "Open professionally formatted structural papers inside the app.",
     },
     {
       n: "03",
@@ -243,8 +260,8 @@ function HowItWorks() {
               From <span className="italic">overwhelmed</span> to ready, in three steps.
             </h2>
             <p className="mt-5 max-w-md text-muted-foreground">
-              Most students don't fail because they aren't smart. They fail because they don't
-              know what to study. StudyFlow fixes that.
+              Most students don't fail because they aren't smart. They fail because they don't know
+              what to study. StudySpark fixes that.
             </p>
           </div>
           <div className="space-y-3">
@@ -287,9 +304,9 @@ function Pricing() {
               <span className="text-muted-foreground">/forever</span>
             </div>
             <ul className="mt-6 space-y-2.5 text-sm text-foreground">
-              <Li>500+ past papers with answers</Li>
-              <Li>Quiz mode & basic analytics</Li>
-              <Li>Download & share PDFs</Li>
+              <Li>Protected in-app papers</Li>
+              <Li>Structural progress tracking</Li>
+              <Li>Class and series access control</Li>
               <Li>Daily streaks</Li>
             </ul>
             <Button asChild variant="outline" className="mt-8 w-full">
@@ -349,8 +366,7 @@ function CTA() {
           Ready to actually <span className="italic text-muted-foreground">enjoy</span> studying?
         </h2>
         <p className="mx-auto mt-5 max-w-lg text-muted-foreground">
-          Join thousands of students preparing smarter — across Cameroon, Nigeria, Ghana, Kenya
-          and beyond.
+          Join Cameroon students preparing smarter with structured, protected topic practice.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg" className="h-12 px-6">
@@ -374,13 +390,31 @@ function Footer() {
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
         <Logo />
-        <p>© {new Date().getFullYear()} StudyFlow. Made for African students.</p>
+        <p>© {new Date().getFullYear()} StudySpark. Made for Cameroon students.</p>
       </div>
     </footer>
   );
 }
 
 function Landing() {
+  const navigate = useNavigate();
+  const { user, profile, loaded } = useStudyProfile();
+
+  useEffect(() => {
+    if (!loaded || !user) return;
+    void navigate({ to: profile ? "/dashboard" : "/onboarding", replace: true });
+  }, [loaded, navigate, profile, user]);
+
+  if (loaded && user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
+        <p className="text-sm text-muted-foreground">
+          {profile ? "Opening your dashboard..." : "Opening profile setup..."}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Nav />

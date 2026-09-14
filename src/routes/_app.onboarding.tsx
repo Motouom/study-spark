@@ -1,42 +1,131 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { COUNTRIES, SUBJECTS, EXAM_BOARDS, type Subject, type ExamBoard } from "@/lib/mock-data";
-import { ArrowRight, Check, GraduationCap, MapPin, BookOpen } from "lucide-react";
+import {
+  CAMEROON_REGIONS,
+  CLASS_LEVELS,
+  COUNTRIES,
+  LANGUAGES,
+  SERIES_OPTIONS,
+  subjectsForSeries,
+  type ClassLevel,
+  type Language,
+  type Level,
+  type Series,
+  type Subject,
+} from "@/lib/study-reference-data";
+import { ArrowRight, Check, GraduationCap, Languages, BookOpen, MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useStudyProfile } from "@/hooks/use-study-profile";
+import { getSupabaseDisplayName } from "@/hooks/use-supabase-user";
+import { supabase } from "@/lib/supabase";
+import { useBrowserLocation } from "@/hooks/use-browser-location";
 
 export const Route = createFileRoute("/_app/onboarding")({
-  head: () => ({ meta: [{ title: "Welcome — StudyFlow" }] }),
+  head: () => ({ meta: [{ title: "Welcome — StudySpark" }] }),
   component: Onboarding,
 });
 
 function Onboarding() {
   const navigate = useNavigate();
+  const { user, profile, saveProfile } = useStudyProfile();
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
-  const [country, setCountry] = useState<string | null>(null);
-  const [board, setBoard] = useState<ExamBoard | null>(null);
+  const [language, setLanguage] = useState<Language | null>(null);
+  const [country, setCountry] = useState("Cameroon");
+  const [region, setRegion] = useState("");
+  const [city, setCity] = useState("");
+  const [locationVerified, setLocationVerified] = useState(false);
+  const [locationLatitude, setLocationLatitude] = useState<number | null>(null);
+  const [locationLongitude, setLocationLongitude] = useState<number | null>(null);
+  const [locationVerifiedAt, setLocationVerifiedAt] = useState<string | null>(null);
+  const [level, setLevel] = useState<Level | null>(null);
+  const [classLevel, setClassLevel] = useState<ClassLevel | null>(null);
+  const [series, setSeries] = useState<Series | null>(null);
   const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const browserLocation = useBrowserLocation();
 
   const toggleSubject = (s: Subject) =>
     setSubjects((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
 
   const next = () => setStep((s) => s + 1);
-  const finish = () => navigate({ to: "/dashboard" });
+  const handleUseAnotherAccount = async () => {
+    setError(null);
+    if (supabase) await supabase.auth.signOut();
+    await navigate({ to: "/signin" });
+  };
+
+  const finish = async () => {
+    if (!language || !level || !classLevel || !series) return;
+    setSaving(true);
+    setError(null);
+    const nextProfile = {
+      name: name.trim(),
+      language,
+      country,
+      region,
+      city: city.trim(),
+      locationVerified,
+      locationLatitude,
+      locationLongitude,
+      locationVerifiedAt,
+      level,
+      classLevel,
+      series,
+      subjects,
+    };
+
+    try {
+      await saveProfile(nextProfile);
+      await navigate({ to: "/dashboard" });
+    } catch (err) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : typeof err === "object" && err !== null && "message" in err
+            ? String(err.message)
+            : "The profile could not be saved.";
+      setError(
+        `${message} Please make sure the Supabase database setup SQL has been run, then try again.`,
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  useEffect(() => {
+    const displayName = getSupabaseDisplayName(user);
+    if (!name && displayName) setName(displayName);
+  }, [name, user]);
+
+  useEffect(() => {
+    if (profile) void navigate({ to: "/dashboard" });
+  }, [navigate, profile]);
 
   const stepValid =
     (step === 0 && name.trim().length > 0) ||
-    (step === 1 && country !== null) ||
-    (step === 2 && board !== null) ||
-    (step === 3 && subjects.length >= 1);
+    (step === 1 && language !== null) ||
+    (step === 2 && country.trim().length > 0 && region.trim().length > 0) ||
+    (step === 3 && level !== null && classLevel !== null) ||
+    (step === 4 && series !== null && subjects.length >= 1);
+
+  const availableClasses = CLASS_LEVELS.filter((item) => !level || item.level === level);
+  const availableSeries = SERIES_OPTIONS.filter((item) => item.level === level);
+  const availableSubjects = subjectsForSeries(series);
+
+  useEffect(() => {
+    setSubjects((current) => current.filter((subject) => availableSubjects.includes(subject)));
+  }, [availableSubjects]);
 
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] bg-surface px-4 py-12 md:min-h-screen md:py-20">
+    <div className="min-h-[calc(100dvh-7.5rem)] bg-surface px-4 py-6 md:min-h-[calc(100dvh-3rem)] md:py-10">
       <div className="mx-auto max-w-xl">
-        <div className="mb-8 flex items-center gap-2">
-          {[0, 1, 2, 3].map((i) => (
+        <div className="mb-6 flex items-center gap-2">
+          {[0, 1, 2, 3, 4].map((i) => (
             <div
               key={i}
               className={`h-1 flex-1 rounded-full transition-colors ${
@@ -53,17 +142,17 @@ function Onboarding() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25 }}
-            className="rounded-2xl border border-border bg-card p-8 md:p-10"
+            className="rounded-2xl border border-border bg-card p-6 md:p-8"
           >
             {step === 0 && (
               <div>
                 <h1 className="font-display text-3xl text-foreground md:text-4xl">
-                  Welcome to StudyFlow
+                  Welcome to StudySpark
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Let's set up your study space. Takes 30 seconds.
                 </p>
-                <label className="mt-8 block text-sm font-medium">What should we call you?</label>
+                <label className="mt-6 block text-sm font-medium">What should we call you?</label>
                 <Input
                   autoFocus
                   value={name}
@@ -77,29 +166,29 @@ function Onboarding() {
             {step === 1 && (
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
-                  <MapPin className="h-5 w-5" />
+                  <Languages className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  Where are you studying?
+                  Choose your study language
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  We'll show you the right exams for your country.
+                  Your structural papers will follow this language first.
                 </p>
-                <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                  {COUNTRIES.map((c) => {
-                    const sel = country === c.code;
+                <div className="mt-5 grid grid-cols-2 gap-2">
+                  {LANGUAGES.map((item) => {
+                    const sel = language === item.id;
                     return (
                       <button
-                        key={c.code}
-                        onClick={() => setCountry(c.code)}
+                        key={item.id}
+                        onClick={() => setLanguage(item.id)}
                         className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors ${
                           sel
                             ? "border-foreground bg-secondary"
                             : "border-border bg-background hover:border-foreground/40"
                         }`}
                       >
-                        <span className="text-2xl">{c.flag}</span>
-                        <span className="text-sm font-medium">{c.name}</span>
+                        <span className="text-sm font-medium">{item.label}</span>
+                        <span className="text-xs text-muted-foreground">Cameroon syllabus</span>
                       </button>
                     );
                   })}
@@ -110,26 +199,137 @@ function Onboarding() {
             {step === 2 && (
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
+                  <MapPin className="h-5 w-5" />
+                </div>
+                <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
+                  Add your location
+                </h1>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  This places you in the right country, regional, and local leaderboard.
+                </p>
+                <label className="mt-6 block text-sm font-medium">Country</label>
+                <div className="mt-2 grid grid-cols-1 gap-2">
+                  {COUNTRIES.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setCountry(item)}
+                      className={`flex items-center justify-between rounded-lg border p-4 text-left transition-colors ${
+                        country === item
+                          ? "border-foreground bg-secondary"
+                          : "border-border bg-background hover:border-foreground/40"
+                      }`}
+                    >
+                      <span className="font-medium">{item}</span>
+                      {country === item && <Check className="h-4 w-4" />}
+                    </button>
+                  ))}
+                </div>
+                <label className="mt-5 block text-sm font-medium">Region</label>
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  {CAMEROON_REGIONS.map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setRegion(item)}
+                      className={`rounded-lg border p-3 text-left text-sm transition-colors ${
+                        region === item
+                          ? "border-foreground bg-secondary"
+                          : "border-border bg-background hover:border-foreground/40"
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+                <label className="mt-5 block text-sm font-medium">Town or city</label>
+                <Input
+                  value={city}
+                  onChange={(event) => setCity(event.target.value)}
+                  placeholder="Example: Douala, Yaounde, Buea"
+                  className="mt-2 h-11"
+                />
+                <Button
+                  type="button"
+                  variant={locationVerified ? "outline" : "default"}
+                  className="mt-4"
+                  disabled={browserLocation.verifying}
+                  onClick={async () => {
+                    try {
+                      const verified = await browserLocation.verifyLocation();
+                      setLocationLatitude(verified.latitude);
+                      setLocationLongitude(verified.longitude);
+                      setLocationVerifiedAt(verified.verifiedAt);
+                      setLocationVerified(true);
+                    } catch {
+                      setLocationVerified(false);
+                    }
+                  }}
+                >
+                  {browserLocation.verifying
+                    ? "Verifying location..."
+                    : locationVerified
+                      ? "Location verified"
+                      : "Verify with browser location"}
+                </Button>
+                {(browserLocation.error || locationVerified) && (
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {locationVerified
+                      ? "Your device location was captured for leaderboard verification."
+                      : browserLocation.error}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {step === 3 && (
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
                   <GraduationCap className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  Which exam are you preparing for?
+                  Choose your class
                 </h1>
-                <p className="mt-2 text-sm text-muted-foreground">Pick one for now — you can change later.</p>
-                <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {EXAM_BOARDS.map((b) => {
-                    const sel = board === b;
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Select Ordinary or Advanced Level, then your class.
+                </p>
+                <div className="mt-5 grid grid-cols-2 gap-2">
+                  {(["ordinary", "advanced"] as const).map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        setLevel(item);
+                        setClassLevel(null);
+                        setSeries(null);
+                        setSubjects([]);
+                      }}
+                      className={`rounded-lg border p-4 text-left text-sm capitalize transition-colors ${
+                        level === item
+                          ? "border-foreground bg-secondary"
+                          : "border-border bg-background hover:border-foreground/40"
+                      }`}
+                    >
+                      {item} level
+                    </button>
+                  ))}
+                </div>
+                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {availableClasses.map((item) => {
+                    const sel = classLevel === item.id;
                     return (
                       <button
-                        key={b}
-                        onClick={() => setBoard(b)}
+                        key={item.id}
+                        onClick={() => {
+                          setLevel(item.level);
+                          setClassLevel(item.id);
+                        }}
                         className={`flex items-center justify-between rounded-lg border p-4 text-left transition-colors ${
                           sel
                             ? "border-foreground bg-secondary"
                             : "border-border bg-background hover:border-foreground/40"
                         }`}
                       >
-                        <span className="font-medium">{b}</span>
+                        <span className="font-medium">{item.label}</span>
                         {sel && <Check className="h-4 w-4" />}
                       </button>
                     );
@@ -138,7 +338,7 @@ function Onboarding() {
               </div>
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary text-foreground">
                   <BookOpen className="h-5 w-5" />
@@ -147,10 +347,36 @@ function Onboarding() {
                   Pick your subjects
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Choose 3-6. We'll tailor your dashboard around them.
+                  Choose your series and the subjects you want on your dashboard.
                 </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {SUBJECTS.map((s) => {
+                <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {availableSeries.map((item) => {
+                    const sel = series === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => {
+                          setSeries(item.id);
+                          setSubjects((current) =>
+                            current.filter((subject) =>
+                              subjectsForSeries(item.id).includes(subject),
+                            ),
+                          );
+                        }}
+                        className={`flex items-center justify-between rounded-lg border p-4 text-left transition-colors ${
+                          sel
+                            ? "border-foreground bg-secondary"
+                            : "border-border bg-background hover:border-foreground/40"
+                        }`}
+                      >
+                        <span className="font-medium">{item.label}</span>
+                        {sel && <Check className="h-4 w-4" />}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {availableSubjects.map((s) => {
                     const sel = subjects.includes(s);
                     return (
                       <button
@@ -178,17 +404,23 @@ function Onboarding() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="mt-6 flex items-center justify-between">
-          <Button variant="ghost" asChild>
-            <Link to="/dashboard">Skip for now</Link>
+        {error && (
+          <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+            {error}
+          </div>
+        )}
+
+        <div className="mt-5 flex items-center justify-between">
+          <Button variant="ghost" onClick={() => void handleUseAnotherAccount()}>
+            Use another account
           </Button>
-          {step < 3 ? (
+          {step < 4 ? (
             <Button onClick={next} disabled={!stepValid}>
               Continue <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           ) : (
-            <Button onClick={finish} disabled={!stepValid}>
-              Get started <ArrowRight className="ml-1 h-4 w-4" />
+            <Button onClick={finish} disabled={!stepValid || saving}>
+              {saving ? "Saving..." : "Get started"} <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           )}
         </div>

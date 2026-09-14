@@ -1,0 +1,82 @@
+# todo
+
+- [x] clone the repository into the productivity workspace
+- [x] review the current product direction against the cameroon study app concept
+- [x] fix the dependency conflict so the project can install and build cleanly
+- [x] replace broad africa placeholder content with cameroon class, series, subject, topic, and question data
+- [x] update onboarding so students choose language, level, class, series, and allowed subjects
+- [x] replace the past-paper library with a restricted subject and topic question bank
+- [x] remove download, share, and pdf-first study flows from the student experience
+- [x] rework the admin area into a structured question content management workflow
+- [x] add a database design note for sql-backed question storage and admin uploads
+- [x] run build and lint after the refactor
+- [x] add sql migrations for users, profiles, content, attempts, and audit logs
+- [x] create typed Supabase data access for profiles, topics, questions, attempts, and admin uploads
+- [x] connect student routes to Supabase instead of local placeholder filtering
+- [x] connect admin question management to Supabase RPC functions
+- [x] add a server-side access-control check for every question query
+- [x] add Supabase seed content and implementation notes for the production database
+- [x] rerun format, lint, and build after backend integration
+- [x] remove the retired D1 demo database path
+- [x] document the Supabase environment and migration commands
+- [x] replace mocked google sign-in redirect with configured oauth flow
+- [x] replace mocked admin password and code flow with configured auth endpoint
+- [x] move student data loaders behind tanstack start server functions
+- [x] connect student sign-in to supabase auth
+- [x] document google oauth and supabase vite environment setup
+- [x] rerun format, lint, build, and route checks after auth changes
+- [x] remove optimistic onboarding save in production mode
+- [x] require a successful Supabase profile row before dashboard access
+- [x] remove demo-profile fallback from the authenticated learner shell when Supabase is configured
+- [x] switch Supabase profile flow back to strict database save before dashboard access
+- [x] remove local profile fallback from the Supabase-configured profile loader
+- [x] remove non-functional learner settings controls
+- [x] add settings save status and profile save error feedback
+- [x] add learner attempt loading from Supabase practice_attempts
+- [x] save completed quiz attempts to Supabase with percentage scores
+- [x] show learner-facing errors when progress and achievement data cannot load
+- [x] show learner-facing errors when profile-matched content cannot load
+- [x] show learner-facing errors when completed quiz progress cannot be saved
+- [x] connect dashboard stats, weekly performance, and subject mastery to real attempts
+- [x] connect progress summary and subject mastery to real attempts
+- [x] connect streak page and sidebar streak to real attempts
+- [x] derive learner achievements from real attempts
+- [x] stop learner routes from showing mock content when Supabase is configured
+- [x] remove database-configured fallback pools from dashboard, library, quiz setup, quiz, and command search
+- [x] add learner loading states while profile, content, and attempts are fetched
+- [x] restrict onboarding and settings subject choices by selected series
+- [x] expand Supabase learner seed content across ordinary and advanced level subjects
+- [x] prevent quiz setup from starting when the selected filters have no real questions
+- [x] stop repeating the same question to satisfy requested quiz count
+- [x] replace word-count-only essay grading with rubric keyword matching
+- [x] add basic in-app question copy, cut, and context-menu protection
+- [x] save quiz question ids, selected answers, and duration with practice attempts
+- [x] show recent saved attempts on the dashboard
+- [x] show weak topic recommendations from real attempt history
+- [x] derive learner notifications from real profile, content, and attempt data
+- [x] connect sidebar and header notification badges to real learner notifications
+- [x] add a learner identity watermark to the protected quiz screen
+- [x] prevent authenticated learner pages from flashing demo profile data while Supabase loads
+- [x] add Supabase Data API grants for learner tables while preserving RLS
+- [x] add secure Supabase admin RPCs for topics, questions, learners, and audit logs
+- [x] replace the local admin password gate with Supabase app metadata roles
+- [x] replace admin placeholder users, logs, integrations, quizzes, and settings with live Supabase views
+- [x] remove retired PDF, paper route, local demo backend, and D1 seed files
+- [x] rename admin content management from papers to questions
+- [x] rerun format, lint, and build after secure admin implementation
+- [x] add secure Supabase course document storage for full Markdown uploads
+- [x] add admin Markdown file upload with automatic emoji cleanup
+- [x] show published Markdown course documents only to matching learners
+- [x] add a protected in-app course document reader
+- [x] expand the Cameroon subject catalogue for ordinary and advanced levels
+- [x] add broad Cameroon GCE topic shells for admin content creation
+- [x] filter admin topic selectors by the selected subject
+
+## remaining learner-side verification
+
+- [ ] rerun database/supabase/000_full_studyspark_setup.sql in the Supabase SQL editor after attempt-detail columns were added
+- [ ] confirm a new Google user can create a profile and stay on the dashboard without local fallback
+- [ ] confirm quiz completion inserts a row into public.practice_attempts
+- [ ] confirm dashboard and progress update after a completed quiz
+- [ ] confirm profile edits in settings change allowed subjects and topics immediately
+- [ ] confirm account deletion works after database/supabase/003_delete_current_user.sql is applied

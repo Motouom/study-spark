@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Parabola and inverse sketch axes</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Graph sketch axes</text>
+  <line class="line" x1="95" y1="325" x2="680" y2="325"/><line class="line" x1="380" y1="360" x2="380" y2="65"/>
+  <path class="line" d="M215 285c55-160 275-160 330 0"/>
+  <line class="thin dash" x1="120" y1="345" x2="630" y2="95"/>
+  <text x="645" y="342">x</text><text x="392" y="82">y</text><text x="523" y="265">y = h(x)</text><text x="510" y="118">y = x</text>
+</svg>

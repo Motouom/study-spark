@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Cumulative frequency curve</title>
+  <desc id="desc">Clean black and white Cameroon GCE style question diagram.</desc>
+  <rect width="760" height="420" fill="#fff"/>
+  <style>
+    text{font-family:Arial,Helvetica,sans-serif;font-size:18px;fill:#17120f}
+    .small{font-size:14px}.tiny{font-size:12px}.label{font-weight:700}
+    .line{stroke:#17120f;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .thin{stroke:#17120f;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .dash{stroke-dasharray:8 7}.fill{fill:#fff;stroke:#17120f;stroke-width:2}
+  </style>
+  
+  <text x="28" y="36" class="label">Figure 1: Cumulative frequency curve</text>
+  <line class="line" x1="100" y1="330" x2="675" y2="330"/><line class="line" x1="100" y1="330" x2="100" y2="75"/>
+  <path class="line" d="M115 318C190 310 230 285 285 245S380 165 465 125 585 92 650 85"/>
+  <line class="thin dash" x1="100" y1="205" x2="360" y2="205"/><line class="thin dash" x1="360" y1="205" x2="360" y2="330"/>
+  <text x="55" y="211" class="small">Q2</text><text x="347" y="356" class="small">median</text><text x="640" y="356" class="small">mark</text><text x="28" y="90" class="small">cum. freq.</text>
+</svg>
