@@ -182,8 +182,8 @@ function Features() {
     },
     {
       icon: <Sparkles className="h-5 w-5" />,
-      title: "Answers, free",
-      desc: "Unlike Kawlo, every answer is unlocked. We don't paywall the basics.",
+      title: "Free preview papers",
+      desc: "Learners can try selected protected papers before upgrading to unlimited premium access.",
     },
     {
       icon: <LineChart className="h-5 w-5" />,
@@ -291,8 +291,12 @@ function Pricing() {
         <div className="text-center">
           <p className="text-sm text-muted-foreground">Pricing</p>
           <h2 className="mt-2 font-display text-4xl text-foreground md:text-5xl">
-            Free where it matters.
+            Start free. Upgrade when you need more.
           </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
+            Free learners can preview StudySpark. Premium unlocks unlimited protected papers,
+            AI-guided revision, textbooks, courses, and deeper progress analytics.
+          </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           <div className="rounded-2xl border border-border bg-card p-8">
@@ -300,14 +304,14 @@ function Pricing() {
               Free
             </h3>
             <div className="mt-3 flex items-baseline gap-1">
-              <span className="font-display text-5xl">₦0</span>
+              <span className="font-display text-5xl">FCFA 0</span>
               <span className="text-muted-foreground">/forever</span>
             </div>
             <ul className="mt-6 space-y-2.5 text-sm text-foreground">
-              <Li>Protected in-app papers</Li>
+              <Li>1-2 free preview papers</Li>
               <Li>Structural progress tracking</Li>
               <Li>Class and series access control</Li>
-              <Li>Daily streaks</Li>
+              <Li>Priority support</Li>
             </ul>
             <Button asChild variant="outline" className="mt-8 w-full">
               <Link to="/dashboard">Get started</Link>
@@ -315,17 +319,18 @@ function Pricing() {
           </div>
           <div className="relative rounded-2xl border border-foreground bg-foreground p-8 text-background">
             <Badge className="absolute -top-3 right-6 bg-accent text-accent-foreground">
-              Coming soon
+              Recommended
             </Badge>
             <h3 className="text-sm font-medium uppercase tracking-wider text-background/60">
               Premium
             </h3>
             <div className="mt-3 flex items-baseline gap-1">
-              <span className="font-display text-5xl">₦1,500</span>
+              <span className="font-display text-5xl">FCFA 1,500</span>
               <span className="text-background/60">/month</span>
             </div>
             <ul className="mt-6 space-y-2.5 text-sm">
               <Li dark>Everything in Free</Li>
+              <Li dark>Unlimited protected papers</Li>
               <Li dark>AI-personalized learning paths</Li>
               <Li dark>Full courses & digital books</Li>
               <Li dark>Advanced full-text search</Li>
@@ -334,7 +339,7 @@ function Pricing() {
               asChild
               className="mt-8 w-full bg-background text-foreground hover:bg-background/90"
             >
-              <Link to="/dashboard">Join waitlist</Link>
+              <Link to="/pricing">Pay with Fapshi</Link>
             </Button>
           </div>
         </div>
