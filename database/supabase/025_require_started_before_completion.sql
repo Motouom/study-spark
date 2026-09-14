@@ -91,7 +91,7 @@ begin
     duration_value,
     now()
   )
-  on conflict on constraint structural_question_progress_user_id_document_id_question_number_key
+  on conflict on constraint structural_question_progress_user_id_document_id_question_n_key
   do update set
     status = excluded.status,
     started_at = coalesce(public.structural_question_progress.started_at, excluded.started_at),

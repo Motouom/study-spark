@@ -1,6 +1,4 @@
--- Fix ambiguous document_id references in the learner progress RPC.
--- The function returns a document_id column, so unqualified references inside
--- PL/pgSQL can collide with table columns.
+-- Use the exact generated unique-constraint name for structural question progress upserts.
 
 create or replace function public.mark_structural_question_progress(
   target_document_id uuid,
@@ -61,6 +59,10 @@ begin
   where progress.user_id = current_user_id
     and progress.document_id = target_document_id
     and progress.question_number = target_question_number;
+
+  if target_status in ('passed', 'failed') and existing_progress.id is null then
+    raise exception 'start the question before marking it passed or failed';
+  end if;
 
   started_value := coalesce(existing_progress.started_at, now());
   completed_value := case when target_status = 'started' then null else now() end;
