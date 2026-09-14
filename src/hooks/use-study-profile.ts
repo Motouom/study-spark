@@ -6,6 +6,8 @@ import { getSupabaseDisplayName, useSupabaseUser } from "@/hooks/use-supabase-us
 const PROFILE_PREFIX = "studyspark.profile.";
 const SAVE_TIMEOUT_MS = 12000;
 const PROFILE_CHANGED_EVENT = "studyspark:profile-changed";
+const SUBSCRIPTION_REFRESH_KEY = "studyspark.subscription-refreshed-at";
+const SUBSCRIPTION_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 
 type ProfileChangedDetail = {
   userId: string;
@@ -32,6 +34,23 @@ type ProfileRow = {
 
 function profileKey(userId: string) {
   return `${PROFILE_PREFIX}${userId}`;
+}
+
+export function clearStudySparkLocalData() {
+  for (const key of Object.keys(localStorage)) {
+    if (key.startsWith(PROFILE_PREFIX) || key === SUBSCRIPTION_REFRESH_KEY) {
+      localStorage.removeItem(key);
+    }
+  }
+}
+
+function shouldRefreshSubscription() {
+  const lastRefresh = Number(sessionStorage.getItem(SUBSCRIPTION_REFRESH_KEY) ?? "0");
+  return !lastRefresh || Date.now() - lastRefresh > SUBSCRIPTION_REFRESH_INTERVAL_MS;
+}
+
+function markSubscriptionRefreshed() {
+  sessionStorage.setItem(SUBSCRIPTION_REFRESH_KEY, String(Date.now()));
 }
 
 function readLocalProfile(userId: string) {
@@ -112,15 +131,25 @@ export function useStudyProfile() {
 
     if (supabaseConfigured() && supabase) {
       setLoaded(false);
-      supabase.rpc("refresh_my_subscription_status").then(() =>
-        supabase
-        .from("student_profiles")
-        .select(
-          "name, language, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
+      const refreshPromise = shouldRefreshSubscription()
+        ? supabase
+            .rpc("refresh_my_subscription_status")
+            .then(() => markSubscriptionRefreshed())
+            .catch((error) => {
+              console.warn("Could not refresh subscription status", error);
+            })
+        : Promise.resolve();
+
+      refreshPromise
+        .then(() =>
+          supabase
+            .from("student_profiles")
+            .select(
+              "name, language, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
+            )
+            .eq("user_id", user.id)
+            .maybeSingle(),
         )
-        .eq("user_id", user.id)
-        .maybeSingle()
-      )
         .then(({ data, error }) => {
           if (error) {
             console.error("Could not load study profile", error);

@@ -1,4 +1,5 @@
 import { supabase, supabaseConfigured } from "./supabase";
+import { clearStudySparkLocalData } from "@/hooks/use-study-profile";
 
 export function googleAuthConfigured() {
   return supabaseConfigured();
@@ -47,13 +48,13 @@ export async function requestEmailMagicLink(email: string) {
 }
 
 export async function signOut() {
-  localStorage.clear();
+  clearStudySparkLocalData();
   if (supabase) await supabase.auth.signOut();
 }
 
 export async function deleteCurrentAccount() {
   if (!supabase) {
-    localStorage.clear();
+    clearStudySparkLocalData();
     return;
   }
 
