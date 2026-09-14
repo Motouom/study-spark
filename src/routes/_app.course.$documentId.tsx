@@ -10,7 +10,7 @@ import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
 import { formatDuration } from "@/hooks/use-structural-progress";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
 
@@ -125,27 +125,11 @@ function StudyProgressPanel({
   progress: ReturnType<typeof usePaperStudyProgress>;
   documentTitle: string;
 }) {
-  const [difficultParts, setDifficultParts] = useState(progress.reflection?.difficultParts ?? "");
-  const [confidence, setConfidence] = useState(progress.reflection?.confidence ?? 3);
-  const [addToRevision, setAddToRevision] = useState(progress.reflection?.addToRevision ?? true);
   const [saved, setSaved] = useState(false);
-
-  useEffect(() => {
-    if (!progress.reflection) return;
-    setDifficultParts(progress.reflection.difficultParts ?? "");
-    setConfidence(progress.reflection.confidence);
-    setAddToRevision(progress.reflection.addToRevision);
-  }, [progress.reflection]);
 
   async function checkpoint(type: PaperCheckpointType) {
     setSaved(false);
     await progress.addCheckpoint(type);
-    setSaved(true);
-  }
-
-  async function reflect() {
-    setSaved(false);
-    await progress.saveReflection({ confidence, difficultParts, addToRevision });
     setSaved(true);
   }
 
@@ -164,8 +148,8 @@ function StudyProgressPanel({
           </div>
           <h2 className="mt-3 text-base font-medium">Track this paper quietly</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            StudySpark now tracks reading time, scroll depth, checkpoints, and reflection for{" "}
-            {documentTitle}.
+            StudySpark tracks reading time, scroll depth, and useful checkpoints for {documentTitle}
+            .
           </p>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4 lg:w-[28rem]">
@@ -201,45 +185,6 @@ function StudyProgressPanel({
           disabled={progress.saving}
           onClick={() => checkpoint("bookmark")}
         />
-      </div>
-
-      <div className="mt-4 grid gap-3 border-t border-border pt-4 lg:grid-cols-[14rem_minmax(0,1fr)_auto] lg:items-end">
-        <label className="text-sm">
-          <span className="font-medium">Confidence</span>
-          <select
-            value={confidence}
-            onChange={(event) => setConfidence(Number(event.target.value))}
-            className="mt-2 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
-          >
-            <option value={1}>1 - Lost</option>
-            <option value={2}>2 - Shaky</option>
-            <option value={3}>3 - Okay</option>
-            <option value={4}>4 - Good</option>
-            <option value={5}>5 - Strong</option>
-          </select>
-        </label>
-        <label className="text-sm">
-          <span className="font-medium">Hard parts</span>
-          <textarea
-            value={difficultParts}
-            onChange={(event) => setDifficultParts(event.target.value)}
-            placeholder="Write the topic, section, or question idea that needs revision..."
-            className="mt-2 min-h-10 w-full resize-y rounded-md border border-input bg-background px-3 py-2 text-sm"
-          />
-        </label>
-        <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-2 text-xs text-muted-foreground">
-            <input
-              type="checkbox"
-              checked={addToRevision}
-              onChange={(event) => setAddToRevision(event.target.checked)}
-            />
-            Add to revision
-          </label>
-          <Button type="button" disabled={progress.saving} onClick={() => void reflect()}>
-            {progress.saving ? "Saving..." : "Save reflection"}
-          </Button>
-        </div>
       </div>
 
       {saved && (

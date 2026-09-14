@@ -14,7 +14,6 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
             { data: profile },
             { data: sessions },
             { data: checkpoints },
-            { data: reflections },
             { data: documents },
           ] = await Promise.all([
             supabase
@@ -33,11 +32,6 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
               .eq("user_id", user.id)
               .order("created_at", { ascending: false }),
             supabase
-              .from("paper_study_reflections")
-              .select("document_id,confidence,difficult_parts,add_to_revision,updated_at")
-              .eq("user_id", user.id)
-              .order("updated_at", { ascending: false }),
-            supabase
               .from("course_documents")
               .select("id,title,subject,status")
               .eq("status", "published"),
@@ -45,7 +39,6 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
 
           const rows = sessions ?? [];
           const checkpointRows = checkpoints ?? [];
-          const reflectionRows = reflections ?? [];
           const papersRead = new Set(rows.map((item) => item.document_id)).size;
           const completedPapers = new Set(
             rows.filter((item) => item.completed).map((item) => item.document_id),
@@ -118,7 +111,6 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
                 },
                 recentSessions: rows.slice(0, 20),
                 recentCheckpoints: checkpointRows.slice(0, 20),
-                reflections: reflectionRows.slice(0, 10),
                 instruction:
                   "Write 3 short paragraphs: current study habit, what needs review, and exactly what to do next.",
               }),

@@ -43,8 +43,7 @@ export function useContentProtection(enabled = true, documentId?: string | null)
     const preventKeyboard = (event: KeyboardEvent) => {
       if (shouldBlockKeyboardEvent(event)) prevent(event);
     };
-    const protectVisibility = () => {
-      document.body.classList.toggle("protected-content-hidden", document.hidden);
+    const recordVisibilityHidden = () => {
       if (document.hidden) recordEvent("visibility_hidden");
     };
     const beforePrint = () => {
@@ -65,7 +64,7 @@ export function useContentProtection(enabled = true, documentId?: string | null)
     document.addEventListener("dragstart", prevent, true);
     document.addEventListener("selectstart", prevent, true);
     document.addEventListener("keydown", preventKeyboard, true);
-    document.addEventListener("visibilitychange", protectVisibility, true);
+    document.addEventListener("visibilitychange", recordVisibilityHidden, true);
     window.addEventListener("beforeprint", beforePrint);
     window.addEventListener("afterprint", afterPrint);
 
@@ -87,7 +86,7 @@ export function useContentProtection(enabled = true, documentId?: string | null)
       document.removeEventListener("dragstart", prevent, true);
       document.removeEventListener("selectstart", prevent, true);
       document.removeEventListener("keydown", preventKeyboard, true);
-      document.removeEventListener("visibilitychange", protectVisibility, true);
+      document.removeEventListener("visibilitychange", recordVisibilityHidden, true);
       window.removeEventListener("beforeprint", beforePrint);
       window.removeEventListener("afterprint", afterPrint);
     };

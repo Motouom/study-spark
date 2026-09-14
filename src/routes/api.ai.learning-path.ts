@@ -14,7 +14,6 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             { data: profile },
             { data: sessions },
             { data: checkpoints },
-            { data: reflections },
             { data: documents },
           ] = await Promise.all([
             supabase
@@ -33,11 +32,6 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               .eq("user_id", user.id)
               .order("created_at", { ascending: false }),
             supabase
-              .from("paper_study_reflections")
-              .select("document_id,confidence,difficult_parts,add_to_revision,updated_at")
-              .eq("user_id", user.id)
-              .order("updated_at", { ascending: false }),
-            supabase
               .from("course_documents")
               .select("id,title,subject,level,class_levels,series,status")
               .eq("status", "published"),
@@ -50,7 +44,6 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           );
           const sessionRows = sessions ?? [];
           const checkpointRows = checkpoints ?? [];
-          const reflectionRows = reflections ?? [];
           const startedDocumentIds = new Set(sessionRows.map((item) => item.document_id));
           const unfinishedPapers = matchingDocuments
             .filter((document) =>
@@ -69,17 +62,6 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           const subjectReviewSignals = new Map<string, number>();
           for (const item of checkpointRows) {
             if (item.checkpoint_type !== "review") continue;
-            const document = matchingDocuments.find(
-              (candidate) => candidate.id === item.document_id,
-            );
-            if (!document) continue;
-            subjectReviewSignals.set(
-              String(document.subject),
-              (subjectReviewSignals.get(String(document.subject)) ?? 0) + 1,
-            );
-          }
-          for (const item of reflectionRows) {
-            if (!item.add_to_revision) continue;
             const document = matchingDocuments.find(
               (candidate) => candidate.id === item.document_id,
             );
@@ -108,9 +90,8 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                 nextPapers,
                 recentSessions: sessionRows.slice(0, 20),
                 recentCheckpoints: checkpointRows.slice(0, 20),
-                reflections: reflectionRows.slice(0, 10),
                 instruction:
-                  'Return JSON in this exact shape: {"days":[{"day":1,"title":"short action title","paper":"one supplied paper title or Progress dashboard","target":"specific reading, checkpoint, or reflection target","focus":"specific revision focus"}]}. Create exactly 7 days. Do not use Markdown tables.',
+                  'Return JSON in this exact shape: {"days":[{"day":1,"title":"short action title","paper":"one supplied paper title or Progress dashboard","target":"specific reading or checkpoint target","focus":"specific revision focus"}]}. Create exactly 7 days. Do not use Markdown tables.',
               }),
               maxTokens: 760,
             });

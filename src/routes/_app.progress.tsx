@@ -6,7 +6,7 @@ import { formatDuration } from "@/hooks/use-structural-progress";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { PremiumGate } from "@/components/PremiumGate";
 import { Badge } from "@/components/ui/badge";
-import { Bookmark, BookOpen, Clock, Target, TrendingUp } from "lucide-react";
+import { Bookmark, BookOpen, CheckCircle2, Clock, TrendingUp } from "lucide-react";
 import {
   Area,
   AreaChart,
@@ -57,19 +57,18 @@ function ProgressPage() {
       };
     });
   }, [progress.sessions]);
-  const revisionItems = progress.reflections.filter((item) => item.addToRevision).slice(0, 8);
   const recentCheckpoints = progress.checkpoints.slice(0, 8);
 
   return (
     <>
       <PageHeader
         title="Your progress"
-        description="Track reading sessions, bookmarks, review points, and confidence."
+        description="Track reading sessions, bookmarks, review points, and study depth."
       />
       <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium progress analytics"
-          description="Upgrade to unlock reading history, revision signals, confidence tracking, and study streaks."
+          description="Upgrade to unlock reading history, checkpoint signals, study depth, and streaks."
         >
           {progress.error && (
             <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
@@ -97,14 +96,10 @@ function ProgressPage() {
               hint={`${progress.summary.sessionsStarted} sessions`}
             />
             <ProgressStat
-              icon={Target}
-              label="Confidence"
-              value={
-                progress.summary.averageConfidence
-                  ? `${progress.summary.averageConfidence}/5`
-                  : "New"
-              }
-              hint={`${progress.summary.revisionCount} revision notes`}
+              icon={CheckCircle2}
+              label="Understood"
+              value={String(progress.summary.understoodCount)}
+              hint={`${progress.summary.reviewCount} review marks`}
             />
           </section>
 
@@ -152,37 +147,11 @@ function ProgressPage() {
                 <Signal label="Understood" value={progress.summary.understoodCount} />
                 <Signal label="Needs review" value={progress.summary.reviewCount} />
                 <Signal label="Bookmarks" value={progress.summary.bookmarkCount} />
-                <Signal label="Added to revision" value={progress.summary.revisionCount} />
               </div>
             </div>
           </section>
 
-          <section className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-xl border border-border bg-card p-5">
-              <h2 className="text-base font-medium">Revision queue</h2>
-              <p className="text-xs text-muted-foreground">Papers you asked to revisit.</p>
-              <div className="mt-4 divide-y divide-border">
-                {revisionItems.length > 0 ? (
-                  revisionItems.map((item) => {
-                    const paper = documentsById.get(item.documentId);
-                    return (
-                      <div key={item.id} className="py-3">
-                        <div className="text-sm font-medium">{paper?.title ?? "Paper"}</div>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          Confidence {item.confidence}/5
-                          {item.difficultParts ? ` · ${item.difficultParts}` : ""}
-                        </p>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p className="py-4 text-sm text-muted-foreground">
-                    Save a paper reflection and tick “Add to revision” to build this list.
-                  </p>
-                )}
-              </div>
-            </div>
-
+          <section>
             <div className="rounded-xl border border-border bg-card p-5">
               <h2 className="text-base font-medium">Recent checkpoints</h2>
               <p className="text-xs text-muted-foreground">

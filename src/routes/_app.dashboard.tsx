@@ -78,15 +78,7 @@ function Dashboard() {
       const checkpointScore =
         readingProgress.checkpoints.filter((item) => item.documentId === session.documentId)
           .length * 5;
-      const reflectionScore = readingProgress.reflections.some(
-        (item) => item.documentId === session.documentId && item.addToRevision,
-      )
-        ? 10
-        : 0;
-      const score = Math.min(
-        100,
-        session.maxScrollPercent * 0.75 + checkpointScore + reflectionScore,
-      );
+      const score = Math.min(100, session.maxScrollPercent * 0.8 + checkpointScore);
       const current = subjects.get(subject) ?? { score: 0, count: 0 };
       current.score += score;
       current.count += 1;
@@ -98,12 +90,7 @@ function Dashboard() {
         mastery: value.count > 0 ? Math.round(value.score / value.count) : 0,
       }))
       .sort((a, b) => b.mastery - a.mastery);
-  }, [
-    documentsById,
-    readingProgress.checkpoints,
-    readingProgress.reflections,
-    readingProgress.sessions,
-  ]);
+  }, [documentsById, readingProgress.checkpoints, readingProgress.sessions]);
   const progressData = useMemo(() => {
     const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const today = new Date();
@@ -286,7 +273,7 @@ function Dashboard() {
             </ul>
           ) : (
             <p className="py-6 text-sm text-muted-foreground">
-              Open a paper, read, bookmark, and save reflections to build your progress.
+              Open a paper, read, bookmark, and mark review points to build your progress.
             </p>
           )}
         </section>

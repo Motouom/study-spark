@@ -179,22 +179,36 @@ export function usePaperStudyProgress(documentId?: string | null) {
     };
   }, [documentId, user, userLoaded]);
 
-  const syncSession = useCallback(async (ended = false) => {
+  const syncSession = useCallback(async (ended = false, updateState = false) => {
     if (!sessionIdRef.current || !supabaseConfigured() || !supabase) return;
 
     const maxScrollPercent = Math.max(maxScrollRef.current, getScrollPercent());
     maxScrollRef.current = maxScrollPercent;
-    const patch = {
+    const patch: {
+      duration_seconds: number;
+      max_scroll_percent: number;
+      completed: boolean;
+      ended_at?: string;
+    } = {
       duration_seconds: secondsRef.current,
       max_scroll_percent: maxScrollPercent,
       completed: maxScrollPercent >= 85,
-      ended_at: ended ? new Date().toISOString() : undefined,
     };
 
-    const { data, error } = await supabase
+    if (ended) patch.ended_at = new Date().toISOString();
+
+    const query = supabase
       .from("paper_study_sessions")
       .update(patch)
-      .eq("id", sessionIdRef.current)
+      .eq("id", sessionIdRef.current);
+
+    if (!updateState) {
+      const { error } = await query;
+      if (error) console.warn("Could not update paper study session", error.message);
+      return;
+    }
+
+    const { data, error } = await query
       .select(
         "id, document_id, started_at, ended_at, duration_seconds, max_scroll_percent, completed, updated_at",
       )
@@ -217,9 +231,9 @@ export function usePaperStudyProgress(documentId?: string | null) {
     const tick = window.setInterval(() => {
       if (document.visibilityState !== "visible") return;
       secondsRef.current += 5;
-      void syncSession(false);
+      void syncSession(false, false);
     }, 5000);
-    const handleBeforeUnload = () => void syncSession(true);
+    const handleBeforeUnload = () => void syncSession(true, false);
 
     window.addEventListener("scroll", updateScroll, { passive: true });
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -228,7 +242,7 @@ export function usePaperStudyProgress(documentId?: string | null) {
       window.clearInterval(tick);
       window.removeEventListener("scroll", updateScroll);
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      void syncSession(true);
+      void syncSession(true, false);
     };
   }, [session?.id, syncSession]);
 
@@ -259,7 +273,7 @@ export function usePaperStudyProgress(documentId?: string | null) {
 
       const saved = checkpointFromRow(data as CheckpointRow);
       setCheckpoints((current) => [saved, ...current]);
-      void syncSession(false);
+      void syncSession(false, true);
       return saved;
     },
     [documentId, syncSession, user],
@@ -296,7 +310,7 @@ export function usePaperStudyProgress(documentId?: string | null) {
 
       const saved = reflectionFromRow(data as ReflectionRow);
       setReflection(saved);
-      void syncSession(true);
+      void syncSession(false, true);
       return saved;
     },
     [documentId, syncSession, user],

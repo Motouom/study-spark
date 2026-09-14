@@ -31,7 +31,6 @@ function LearningPathPage() {
     ...progress.checkpoints
       .filter((item) => item.checkpointType === "review")
       .map((item) => item.documentId),
-    ...progress.reflections.filter((item) => item.addToRevision).map((item) => item.documentId),
   ]);
   const weakest = [
     ...new Set(
@@ -258,14 +257,13 @@ function LearningPathPage() {
                       <span>{item.mastery}%</span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Marked for review from reading checkpoints or reflections.
+                      Marked for review from reading checkpoints.
                     </p>
                   </div>
                 ))}
                 {weakest.length === 0 && (
                   <p className="rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground">
-                    Use “Need review” or add papers to revision and your weak areas will appear
-                    here.
+                    Use “Need review” while reading and your weak areas will appear here.
                   </p>
                 )}
               </div>
@@ -273,8 +271,8 @@ function LearningPathPage() {
                 <Link to="/progress">View detailed progress</Link>
               </Button>
               <div className="mt-5 rounded-lg bg-secondary/40 p-3 text-xs text-muted-foreground">
-                Recommended session: read one paper, bookmark confusing parts, save a reflection,
-                then revisit the papers added to revision.
+                Recommended session: read one paper, mark confusing parts for review, then revisit
+                those checkpoints.
               </div>
             </aside>
           </div>
