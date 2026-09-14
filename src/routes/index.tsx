@@ -294,8 +294,8 @@ function Pricing() {
             Start free. Upgrade when you need more.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
-            Free learners can preview StudySpark. Premium unlocks unlimited protected papers,
-            AI-guided revision, textbooks, courses, and deeper progress analytics.
+            Free learners can preview selected papers. Premium unlocks protected papers, progress,
+            guided revision, tutoring, and deeper analytics.
           </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
@@ -309,7 +309,6 @@ function Pricing() {
             </div>
             <ul className="mt-6 space-y-2.5 text-sm text-foreground">
               <Li>1-2 free preview papers</Li>
-              <Li>Structural progress tracking</Li>
               <Li>Class and series access control</Li>
               <Li>Priority support</Li>
             </ul>
@@ -331,9 +330,15 @@ function Pricing() {
             <ul className="mt-6 space-y-2.5 text-sm">
               <Li dark>Everything in Free</Li>
               <Li dark>Unlimited protected papers</Li>
+              <Li dark>Protected in-app papers</Li>
+              <Li dark>Free answers & explanations</Li>
+              <Li dark>Practice mode</Li>
+              <Li dark>Daily streaks & basic stats</Li>
               <Li dark>AI-personalized learning paths</Li>
-              <Li dark>Full courses & digital books</Li>
+              <Li dark>Full courses & video lessons</Li>
+              <Li dark>Digital textbooks</Li>
               <Li dark>Advanced full-text search</Li>
+              <Li dark>Streak freezes (1/week)</Li>
             </ul>
             <Button
               asChild
