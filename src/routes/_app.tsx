@@ -84,7 +84,7 @@ function NavItem({
     <Link
       to={to}
       onClick={onClick}
-      className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${
+      className={`flex min-h-10 items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${
         active
           ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
           : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
@@ -394,7 +394,7 @@ function AppLayout() {
   const mobileNav = NAV.slice(0, 4);
 
   return (
-    <div className="flex h-dvh overflow-hidden bg-background">
+    <div className="flex h-dvh min-w-0 overflow-hidden bg-background">
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
         <SidebarContent
@@ -444,7 +444,7 @@ function AppLayout() {
         </div>
       </div>
 
-      <main className="h-dvh flex-1 overflow-y-auto overflow-x-hidden pt-14 pb-16 md:pl-64 md:pt-0 md:pb-0">
+      <main className="h-dvh min-w-0 flex-1 overflow-y-auto overflow-x-hidden pt-14 pb-16 md:pl-64 md:pt-0 md:pb-0">
         {/* Desktop top utility bar */}
         <div className="hidden h-12 items-center justify-end gap-2 border-b border-border px-6 md:flex md:px-10">
           {showAdminLink && (
@@ -545,13 +545,13 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <div className="border-b border-border bg-background px-6 py-6 md:px-10 md:py-8">
-      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <h1 className="font-display text-3xl text-foreground md:text-4xl">{title}</h1>
+    <div className="border-b border-border bg-background px-4 py-5 sm:px-6 md:px-10 md:py-8">
+      <div className="flex min-w-0 flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div className="min-w-0">
+          <h1 className="break-words font-display text-2xl text-foreground md:text-4xl">{title}</h1>
           {description && <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>}
         </div>
-        {children}
+        {children && <div className="flex flex-wrap items-center gap-2">{children}</div>}
       </div>
     </div>
   );

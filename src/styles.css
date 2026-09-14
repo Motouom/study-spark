@@ -167,6 +167,8 @@
   }
   html,
   body {
+    min-height: 100%;
+    overflow-x: hidden;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -196,6 +198,31 @@
     -webkit-touch-callout: none;
     -webkit-user-drag: none;
     user-select: none;
+  }
+
+  .protected-markdown {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .protected-markdown p,
+  .protected-markdown li,
+  .protected-markdown td,
+  .protected-markdown th {
+    overflow-wrap: anywhere;
+  }
+
+  .protected-markdown .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.25rem;
+  }
+
+  .protected-markdown img {
+    height: auto;
+    max-width: 100%;
   }
 
   body.protected-content-hidden .protected-content {

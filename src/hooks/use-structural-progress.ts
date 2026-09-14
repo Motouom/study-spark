@@ -212,6 +212,7 @@ export function useStructuralProgress(documentId?: string | null) {
   const { user, loaded: userLoaded } = useSupabaseUser();
   const [progress, setProgress] = useState<StructuralQuestionProgress[]>([]);
   const [loading, setLoading] = useState(false);
+  const [savingKey, setSavingKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const loadProgress = useCallback(() => {
@@ -233,7 +234,11 @@ export function useStructuralProgress(documentId?: string | null) {
 
     if (documentId) query = query.eq("document_id", documentId);
 
+    let cancelled = false;
+
     query.then(({ data, error }) => {
+      if (cancelled) return;
+
       if (error) {
         console.error("Could not load structural progress", error);
         setProgress([]);
@@ -246,16 +251,58 @@ export function useStructuralProgress(documentId?: string | null) {
       setLoading(false);
       setError(null);
     });
+
+    return () => {
+      cancelled = true;
+    };
   }, [documentId, user, userLoaded]);
 
   useEffect(() => {
-    loadProgress();
+    return loadProgress();
   }, [loadProgress]);
 
   const markQuestion = useCallback(
     async (targetDocumentId: string, questionNumber: number, status: StructuralQuestionStatus) => {
       if (!user) throw new Error("You must be signed in to update progress.");
       if (!supabaseConfigured() || !supabase) throw new Error("Supabase is not configured.");
+
+      const key = `${targetDocumentId}:${questionNumber}`;
+      const now = new Date();
+      const nowIso = now.toISOString();
+      let previousProgress: StructuralQuestionProgress[] = [];
+
+      setSavingKey(key);
+      setError(null);
+      setProgress((current) => {
+        previousProgress = current;
+        const existing = current.find(
+          (item) => item.documentId === targetDocumentId && item.questionNumber === questionNumber,
+        );
+        const startedAt = existing?.startedAt ?? nowIso;
+        const completedAt = status === "started" ? null : nowIso;
+        const durationSeconds =
+          status === "started"
+            ? null
+            : Math.max(0, Math.round((now.getTime() - new Date(startedAt).getTime()) / 1000));
+        const optimistic: StructuralQuestionProgress = {
+          id: existing?.id ?? `pending-${key}`,
+          documentId: targetDocumentId,
+          questionNumber,
+          status,
+          startedAt,
+          completedAt,
+          durationSeconds,
+          updatedAt: nowIso,
+        };
+
+        return [
+          optimistic,
+          ...current.filter(
+            (item) =>
+              !(item.documentId === targetDocumentId && item.questionNumber === questionNumber),
+          ),
+        ];
+      });
 
       const { data, error } = await supabase
         .rpc("mark_structural_question_progress", {
@@ -265,7 +312,13 @@ export function useStructuralProgress(documentId?: string | null) {
         })
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error("Could not mark structural progress", error);
+        setProgress(previousProgress);
+        setError(error.message);
+        setSavingKey(null);
+        throw error;
+      }
 
       const saved = progressFromRow(data as ProgressRow);
       setProgress((current) => [
@@ -276,6 +329,7 @@ export function useStructuralProgress(documentId?: string | null) {
         ),
       ]);
       setError(null);
+      setSavingKey(null);
       return saved;
     },
     [user],
@@ -284,6 +338,7 @@ export function useStructuralProgress(documentId?: string | null) {
   return {
     progress,
     loading,
+    savingKey,
     error,
     summary: useMemo(() => summarizeStructuralProgress(progress), [progress]),
     reload: loadProgress,

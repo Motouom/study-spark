@@ -57,7 +57,7 @@ function CourseDocumentPage() {
         </Button>
       </PageHeader>
 
-      <div className="px-6 py-6 md:px-10 md:py-8">
+      <div className="px-4 py-5 sm:px-6 md:px-10 md:py-8">
         {error && (
           <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
             Document could not be loaded: {error}
@@ -81,8 +81,8 @@ function CourseDocumentPage() {
           </div>
         )}
 
-        {document && (
-          document.isLocked ? (
+        {document &&
+          (document.isLocked ? (
             <div className="mx-auto max-w-xl rounded-xl border border-border bg-card p-8 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
                 <Lock className="h-5 w-5" />
@@ -105,12 +105,12 @@ function CourseDocumentPage() {
               </div>
             </div>
           ) : (
-            <div className="grid gap-5 xl:grid-cols-[18rem_minmax(0,1fr)]">
+            <div className="grid min-w-0 gap-5 xl:grid-cols-[18rem_minmax(0,1fr)]">
               <QuestionTracker
                 documentId={document.id}
                 questionNumbers={questionNumbers}
                 progress={structuralProgress.progress}
-                saving={structuralProgress.loading}
+                savingKey={structuralProgress.savingKey}
                 error={structuralProgress.error}
                 onMark={structuralProgress.markQuestion}
               />
@@ -120,8 +120,7 @@ function CourseDocumentPage() {
                 userId={user?.id ?? "anonymous"}
               />
             </div>
-          )
-        )}
+          ))}
       </div>
     </>
   );
@@ -142,14 +141,14 @@ function QuestionTracker({
   documentId,
   questionNumbers,
   progress,
-  saving,
+  savingKey,
   error,
   onMark,
 }: {
   documentId: string;
   questionNumbers: number[];
   progress: StructuralQuestionProgress[];
-  saving: boolean;
+  savingKey: string | null;
   error: string | null;
   onMark: (
     documentId: string,
@@ -165,7 +164,7 @@ function QuestionTracker({
   };
 
   return (
-    <aside className="flex max-h-[calc(100vh-8rem)] flex-col rounded-xl border border-border bg-card p-4 xl:sticky xl:top-5">
+    <aside className="flex max-h-none min-w-0 flex-col rounded-xl border border-border bg-card p-4 xl:sticky xl:top-5 xl:max-h-[calc(100dvh-8rem)]">
       <div className="flex items-start justify-between gap-3">
         <div>
           <h2 className="text-sm font-medium">Question progress</h2>
@@ -191,10 +190,11 @@ function QuestionTracker({
           No question numbers were detected. Use labels like Q1, Q2, Q3 in the uploaded paper.
         </p>
       ) : (
-        <div className="mt-4 min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
+        <div className="mt-4 max-h-[24rem] min-h-0 flex-1 space-y-3 overflow-y-auto pr-1 xl:max-h-none">
           {questionNumbers.map((questionNumber) => {
             const status = byQuestion.get(questionNumber);
             const currentStatus = status?.status;
+            const pending = savingKey === `${documentId}:${questionNumber}`;
             return (
               <div key={questionNumber} className="rounded-lg border border-border p-3">
                 <div className="mb-2 flex items-center justify-between">
@@ -210,21 +210,21 @@ function QuestionTracker({
                 </div>
                 <div className="grid grid-cols-3 gap-1">
                   <MarkButton
-                    label="Started"
+                    label={pending && currentStatus === "started" ? "Saving" : "Started"}
                     active={currentStatus === "started"}
-                    disabled={saving}
+                    disabled={pending}
                     onClick={() => onMark(documentId, questionNumber, "started")}
                   />
                   <MarkButton
-                    label="Passed"
+                    label={pending && currentStatus === "passed" ? "Saving" : "Passed"}
                     active={currentStatus === "passed"}
-                    disabled={saving}
+                    disabled={pending}
                     onClick={() => onMark(documentId, questionNumber, "passed")}
                   />
                   <MarkButton
-                    label="Failed"
+                    label={pending && currentStatus === "failed" ? "Saving" : "Failed"}
                     active={currentStatus === "failed"}
-                    disabled={saving}
+                    disabled={pending}
                     onClick={() => onMark(documentId, questionNumber, "failed")}
                   />
                 </div>
@@ -286,8 +286,12 @@ function MarkButton({
     <button
       type="button"
       disabled={disabled}
-      onClick={() => void onClick()}
-      className={`rounded-md border px-2 py-1.5 text-xs transition-colors disabled:opacity-50 ${
+      onClick={() => {
+        onClick().catch(() => {
+          // The hook stores the user-visible error and rolls back the optimistic state.
+        });
+      }}
+      className={`min-h-10 rounded-md border px-2 py-2 text-xs transition-colors disabled:cursor-wait disabled:opacity-70 ${
         active
           ? "border-foreground bg-foreground text-background"
           : "border-border bg-background hover:bg-secondary"
@@ -311,13 +315,13 @@ function ProtectedMarkdown({
 
   return (
     <article
-      className="protected-content relative select-none overflow-hidden rounded-xl border border-border bg-card p-5 md:p-8"
+      className="protected-content relative min-w-0 select-none overflow-hidden rounded-xl border border-border bg-card p-4 sm:p-5 md:p-8"
       onCopy={(event) => event.preventDefault()}
       onCut={(event) => event.preventDefault()}
       onContextMenu={(event) => event.preventDefault()}
     >
-      <div className="pointer-events-none absolute inset-0 grid rotate-[-18deg] select-none place-items-center opacity-[0.045]">
-        <span className="whitespace-nowrap text-3xl font-semibold text-foreground">
+      <div className="pointer-events-none absolute inset-0 grid rotate-[-18deg] select-none place-items-center overflow-hidden opacity-[0.045]">
+        <span className="whitespace-nowrap text-xl font-semibold text-foreground sm:text-3xl">
           {trace} · StudySpark protected material
         </span>
       </div>
@@ -329,16 +333,18 @@ function ProtectedMarkdown({
           Protected view
         </span>
       </div>
-      <div className="protected-markdown relative font-serif text-base leading-7">
+      <div className="protected-markdown relative font-serif text-[0.95rem] leading-7 sm:text-base">
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}
           rehypePlugins={[rehypeKatex]}
           components={{
             h1: ({ children }) => (
-              <h1 className="mb-4 font-display text-3xl font-semibold leading-tight">{children}</h1>
+              <h1 className="mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl">
+                {children}
+              </h1>
             ),
             h2: ({ children }) => (
-              <h2 className="mb-3 mt-8 font-display text-2xl font-semibold leading-tight">
+              <h2 className="mb-3 mt-8 font-display text-xl font-semibold leading-tight sm:text-2xl">
                 {children}
               </h2>
             ),
@@ -359,7 +365,7 @@ function ProtectedMarkdown({
             li: ({ children }) => <li className="leading-8">{children}</li>,
             table: ({ children }) => (
               <div className="my-5 overflow-x-auto rounded-lg border border-border">
-                <table className="w-full min-w-[36rem] border-collapse text-sm">{children}</table>
+                <table className="w-full min-w-[32rem] border-collapse text-sm">{children}</table>
               </div>
             ),
             th: ({ children }) => (
