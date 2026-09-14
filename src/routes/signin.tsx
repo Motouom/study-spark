@@ -51,7 +51,7 @@ function SignIn() {
 
   if (loaded && user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
+      <div className="flex min-h-dvh items-center justify-center bg-background px-6 text-center">
         <p className="text-sm text-muted-foreground">
           {profile ? "Opening your dashboard..." : "Opening profile setup..."}
         </p>
@@ -84,7 +84,7 @@ function SignIn() {
   }
 
   return (
-    <div className="grid min-h-screen md:grid-cols-2">
+    <div className="grid min-h-dvh md:grid-cols-2">
       {/* Form side */}
       <div className="flex flex-col px-6 py-10 md:px-12">
         <div>

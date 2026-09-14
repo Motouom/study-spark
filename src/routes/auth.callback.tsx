@@ -52,7 +52,7 @@ function AuthCallback() {
   }, [navigate]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background px-6">
+    <main className="flex min-h-dvh items-center justify-center bg-background px-6">
       <div className="w-full max-w-sm rounded-xl border border-border bg-card p-6 text-center">
         <h1 className="font-display text-2xl text-foreground">
           {error ? "Sign-in could not finish" : "Finishing sign-in..."}

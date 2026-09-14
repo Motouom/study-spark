@@ -175,6 +175,14 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+
+  body {
+    margin: 0;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
   .font-display {
     font-family: var(--font-display);
     letter-spacing: -0.01em;

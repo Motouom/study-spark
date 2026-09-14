@@ -394,9 +394,9 @@ function AppLayout() {
   const mobileNav = NAV.slice(0, 4);
 
   return (
-    <div className="flex h-dvh min-w-0 overflow-hidden bg-background">
+    <div className="grid h-dvh min-w-0 overflow-hidden bg-background md:grid-cols-[clamp(13.5rem,18vw,16rem)_minmax(0,1fr)]">
       {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
+      <aside className="hidden h-dvh min-h-0 shrink-0 flex-col border-r border-sidebar-border bg-sidebar md:flex">
         <SidebarContent
           profile={profile}
           displayName={displayName}
@@ -444,7 +444,7 @@ function AppLayout() {
         </div>
       </div>
 
-      <main className="h-dvh min-w-0 flex-1 overflow-y-auto overflow-x-hidden pt-14 pb-16 md:pl-64 md:pt-0 md:pb-0">
+      <main className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-16 md:pt-0 md:pb-0">
         {/* Desktop top utility bar */}
         <div className="hidden h-12 items-center justify-end gap-2 border-b border-border px-6 md:flex md:px-10">
           {showAdminLink && (
