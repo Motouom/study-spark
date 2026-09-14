@@ -1,9 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  aiConfigured,
-  fallbackInsight,
-  generateAiText,
-} from "@/lib/ai";
+import { aiConfigured, fallbackInsight, generateAiText } from "@/lib/ai";
 import { getAuthenticatedSupabase, getAuthenticatedUser } from "@/lib/server-supabase";
 
 export const Route = createFileRoute("/api/ai/progress-insight")({
@@ -76,27 +72,32 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
 
           if (!aiConfigured()) return Response.json({ insight: fallback, source: "fallback" });
 
-          const insight = await generateAiText({
-            system:
-              "You are StudySpark's learner progress analyst. Be precise, supportive, and practical. Never invent marks or papers. Do not give exam answers.",
-            prompt: JSON.stringify({
-              learner: profile,
-              summary: {
-                totalStarted: rows.length,
-                passed,
-                failed,
-                active,
-                averageSeconds,
-                weakestSubjects,
-              },
-              recentProgress: rows.slice(0, 25),
-              instruction:
-                "Write 3 short paragraphs: current standing, weakest area, and exactly what to do next.",
-            }),
-            maxTokens: 520,
-          });
+          try {
+            const insight = await generateAiText({
+              system:
+                "You are StudySpark's learner progress analyst. Be precise, supportive, and practical. Never invent marks or papers. Do not give exam answers.",
+              prompt: JSON.stringify({
+                learner: profile,
+                summary: {
+                  totalStarted: rows.length,
+                  passed,
+                  failed,
+                  active,
+                  averageSeconds,
+                  weakestSubjects,
+                },
+                recentProgress: rows.slice(0, 25),
+                instruction:
+                  "Write 3 short paragraphs: current standing, weakest area, and exactly what to do next.",
+              }),
+              maxTokens: 520,
+            });
 
-          return Response.json({ insight, source: "ai" });
+            return Response.json({ insight, source: "ai" });
+          } catch (aiError) {
+            console.warn("AI progress insight provider failed; using local fallback", aiError);
+            return Response.json({ insight: fallback, source: "fallback" });
+          }
         } catch (error) {
           if (error instanceof Response) return error;
           console.error("AI progress insight failed", error);
