@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { isPremiumActive, PremiumBadge } from "@/components/PremiumGate";
+import { PremiumBadge } from "@/components/PremiumGate";
+import { isPremiumActive } from "@/lib/premium";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { LifeBuoy, Mail } from "lucide-react";
 

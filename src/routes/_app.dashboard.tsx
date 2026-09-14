@@ -12,7 +12,7 @@ import {
   useStructuralProgress,
 } from "@/hooks/use-structural-progress";
 import { supabaseConfigured } from "@/lib/supabase";
-import { isPremiumActive } from "@/components/PremiumGate";
+import { isPremiumActive } from "@/lib/premium";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
 
@@ -100,14 +100,14 @@ function Dashboard() {
   }, [structuralProgress]);
   const recentStructural = structuralProgress.slice(0, 5);
   const premium = isPremiumActive(effectiveProfile);
+  const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
+
+  if (pageLoading) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <div className="min-w-0 space-y-6 px-4 py-5 sm:px-6 md:px-10 md:py-8">
-      {useRemoteOnly && (!profileLoaded || content.loading) && (
-        <div className="rounded-lg border border-border bg-card p-3 text-sm text-muted-foreground">
-          Loading your profile, papers, and progress...
-        </div>
-      )}
       {structuralError && (
         <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
           Structural progress could not be loaded: {structuralError}
@@ -261,6 +261,36 @@ function Dashboard() {
           )}
         </section>
       )}
+    </div>
+  );
+}
+
+function DashboardSkeleton() {
+  return (
+    <div className="min-w-0 space-y-6 px-4 py-5 sm:px-6 md:px-10 md:py-8">
+      <section className="rounded-xl border border-border bg-card p-4 sm:p-6 md:p-8">
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="flex-1">
+            <div className="h-4 w-28 animate-pulse rounded bg-secondary" />
+            <div className="mt-4 h-8 w-full max-w-xl animate-pulse rounded bg-secondary" />
+            <div className="mt-3 h-4 w-full max-w-md animate-pulse rounded bg-secondary" />
+          </div>
+          <div className="h-11 w-36 animate-pulse rounded-md bg-secondary" />
+        </div>
+      </section>
+      <section className="grid gap-4 md:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div key={index} className="rounded-xl border border-border bg-card p-5">
+            <div className="h-4 w-24 animate-pulse rounded bg-secondary" />
+            <div className="mt-4 h-9 w-16 animate-pulse rounded bg-secondary" />
+            <div className="mt-3 h-3 w-32 animate-pulse rounded bg-secondary" />
+          </div>
+        ))}
+      </section>
+      <section className="grid gap-4 lg:grid-cols-2">
+        <div className="h-80 animate-pulse rounded-xl border border-border bg-card" />
+        <div className="h-80 animate-pulse rounded-xl border border-border bg-card" />
+      </section>
     </div>
   );
 }

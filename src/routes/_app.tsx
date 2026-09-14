@@ -47,7 +47,7 @@ import { useStructuralProgress } from "@/hooks/use-structural-progress";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
 import { signOut } from "@/lib/auth";
-import { isPremiumActive } from "@/components/PremiumGate";
+import { isPremiumActive } from "@/lib/premium";
 
 export const Route = createFileRoute("/_app")({
   loader: async () => {

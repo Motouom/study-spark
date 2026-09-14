@@ -3,19 +3,8 @@ import { Lock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import type { StudentProfile } from "@/lib/study-reference-data";
+import { isPremiumActive } from "@/lib/premium";
 import type { ReactNode } from "react";
-
-export function isPremiumPlan(plan: string | null | undefined) {
-  return plan === "premium";
-}
-
-export function isPremiumActive(profile: Pick<StudentProfile, "plan" | "premiumUntil"> | null | undefined) {
-  if (profile?.plan !== "premium") return false;
-  if (!profile.premiumUntil) return true;
-  const expiry = new Date(profile.premiumUntil).getTime();
-  return Number.isFinite(expiry) && expiry > Date.now();
-}
 
 export function PremiumBadge() {
   return (
@@ -35,7 +24,8 @@ export function PremiumGate({
   description: string;
   children: ReactNode;
 }) {
-  const { profile } = useStudyProfile();
+  const { profile, loaded } = useStudyProfile();
+  if (!loaded) return <PremiumGateSkeleton />;
   if (isPremiumActive(profile)) return <>{children}</>;
 
   return (
@@ -54,6 +44,23 @@ export function PremiumGate({
           Upgrade to Premium
         </Link>
       </Button>
+    </div>
+  );
+}
+
+function PremiumGateSkeleton() {
+  return (
+    <div className="space-y-4">
+      <div className="rounded-xl border border-border bg-card p-5">
+        <div className="h-5 w-44 animate-pulse rounded bg-secondary" />
+        <div className="mt-3 h-4 w-full max-w-lg animate-pulse rounded bg-secondary" />
+        <div className="mt-2 h-4 w-2/3 animate-pulse rounded bg-secondary" />
+      </div>
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="h-28 animate-pulse rounded-xl border border-border bg-card" />
+        <div className="h-28 animate-pulse rounded-xl border border-border bg-card" />
+        <div className="h-28 animate-pulse rounded-xl border border-border bg-card" />
+      </div>
     </div>
   );
 }

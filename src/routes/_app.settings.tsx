@@ -32,7 +32,7 @@ import { deleteCurrentAccount, signOut } from "@/lib/auth";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useBrowserLocation } from "@/hooks/use-browser-location";
 import { useSubscription } from "@/hooks/use-subscription";
-import { isPremiumActive } from "@/components/PremiumGate";
+import { isPremiumActive } from "@/lib/premium";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — StudySpark" }] }),

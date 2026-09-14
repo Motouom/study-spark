@@ -22,6 +22,7 @@ type ContentState = {
   topics: Topic[];
   documents: CourseDocument[];
   loading: boolean;
+  loaded: boolean;
   error: string | null;
 };
 
@@ -39,17 +40,18 @@ export function useStudyContent(profile: StudentProfile | null) {
     topics: [],
     documents: [],
     loading: false,
+    loaded: false,
     error: null,
   });
 
   useEffect(() => {
     if (!profile || !supabaseConfigured() || !supabase) {
-      setState({ topics: [], documents: [], loading: false, error: null });
+      setState({ topics: [], documents: [], loading: false, loaded: true, error: null });
       return;
     }
 
     let active = true;
-    setState((current) => ({ ...current, loading: true, error: null }));
+    setState((current) => ({ ...current, loading: true, loaded: false, error: null }));
 
     Promise.all([
       supabase
@@ -72,6 +74,7 @@ export function useStudyContent(profile: StudentProfile | null) {
           topics: [],
           documents: [],
           loading: false,
+          loaded: true,
           error: error?.message ?? "Study content could not be loaded.",
         });
         return;
@@ -103,7 +106,7 @@ export function useStudyContent(profile: StudentProfile | null) {
         isLocked: Boolean(row.is_locked),
       }));
 
-      setState({ topics, documents, loading: false, error: null });
+      setState({ topics, documents, loading: false, loaded: true, error: null });
     });
 
     return () => {

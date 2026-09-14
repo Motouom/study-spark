@@ -21,11 +21,12 @@ export const Route = createFileRoute("/_app/library")({
 
 function LibraryPage() {
   const { profile, subjects } = Route.useLoaderData();
-  const { profile: savedProfile } = useStudyProfile();
+  const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const effectiveProfile = savedProfile ?? profile;
   const content = useStudyContent(savedProfile);
   const courseDocuments = content.documents;
   const useRemoteOnly = supabaseConfigured();
+  const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
   const effectiveSubjects = savedProfile
     ? content.enabled
       ? Array.from(
@@ -60,6 +61,10 @@ function LibraryPage() {
     });
   }, [courseDocuments, q, subject]);
 
+  if (pageLoading) {
+    return <LibrarySkeleton />;
+  }
+
   return (
     <>
       <PageHeader
@@ -73,12 +78,6 @@ function LibraryPage() {
             Study content could not be loaded: {content.error}
           </div>
         )}
-        {useRemoteOnly && content.loading && (
-          <div className="rounded-lg border border-border bg-card p-3 text-sm text-muted-foreground">
-            Loading your papers...
-          </div>
-        )}
-
         <div className="flex items-center gap-2 rounded-lg border border-success/30 bg-success/10 p-3 text-sm text-success">
           <ShieldCheck className="h-4 w-4" />
           Questions are opened inside the app only. Copying, downloads, and bulk viewing are
@@ -212,5 +211,20 @@ function LibraryPage() {
         )}
       </div>
     </>
+  );
+}
+
+function LibrarySkeleton() {
+  return (
+    <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
+      <div className="h-9 w-36 animate-pulse rounded bg-secondary" />
+      <div className="h-4 w-full max-w-sm animate-pulse rounded bg-secondary" />
+      <div className="h-12 animate-pulse rounded-lg border border-border bg-card" />
+      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div key={index} className="h-36 animate-pulse rounded-xl border border-border bg-card" />
+        ))}
+      </section>
+    </div>
   );
 }

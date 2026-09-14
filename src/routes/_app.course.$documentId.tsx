@@ -6,6 +6,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useContentProtection } from "@/hooks/use-content-protection";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { supabaseConfigured } from "@/lib/supabase";
 import { lazy, Suspense } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
@@ -17,11 +18,17 @@ export const Route = createFileRoute("/_app/course/$documentId")({
 
 function CourseDocumentPage() {
   const { documentId } = Route.useParams();
-  const { profile } = useStudyProfile();
+  const { profile, loaded: profileLoaded } = useStudyProfile();
   const { user } = useSupabaseUser();
-  const { documents, loading, error } = useStudyContent(profile);
-  const document = documents.find((item) => item.id === documentId);
+  const content = useStudyContent(profile);
+  const document = content.documents.find((item) => item.id === documentId);
+  const pageLoading =
+    supabaseConfigured() && (!profileLoaded || !content.loaded || content.loading);
   useContentProtection(Boolean(document), document?.id);
+
+  if (pageLoading) {
+    return <CourseDocumentSkeleton />;
+  }
 
   return (
     <>
@@ -38,19 +45,19 @@ function CourseDocumentPage() {
       </PageHeader>
 
       <div className="px-4 py-5 sm:px-6 md:px-10 md:py-8">
-        {error && (
+        {content.error && (
           <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-            Document could not be loaded: {error}
+            Document could not be loaded: {content.error}
           </div>
         )}
 
-        {loading && (
+        {content.loading && (
           <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
             Loading protected document...
           </div>
         )}
 
-        {!loading && !document && (
+        {!content.loading && !document && (
           <div className="rounded-xl border border-border bg-card p-8 text-center">
             <BookOpen className="mx-auto h-8 w-8 text-muted-foreground" />
             <h2 className="mt-4 text-base font-medium">Document unavailable</h2>
@@ -103,5 +110,22 @@ function CourseDocumentPage() {
           ))}
       </div>
     </>
+  );
+}
+
+function CourseDocumentSkeleton() {
+  return (
+    <div className="space-y-6 px-4 py-5 sm:px-6 md:px-10 md:py-8">
+      <div className="h-10 w-full max-w-2xl animate-pulse rounded bg-secondary" />
+      <div className="h-5 w-60 animate-pulse rounded bg-secondary" />
+      <div className="h-11 w-32 animate-pulse rounded-md bg-secondary" />
+      <div className="space-y-4 rounded-xl border border-border bg-card p-5">
+        <div className="h-6 w-3/4 animate-pulse rounded bg-secondary" />
+        <div className="h-4 w-full animate-pulse rounded bg-secondary" />
+        <div className="h-4 w-full animate-pulse rounded bg-secondary" />
+        <div className="h-4 w-5/6 animate-pulse rounded bg-secondary" />
+        <div className="h-56 animate-pulse rounded bg-secondary" />
+      </div>
+    </div>
   );
 }
