@@ -19,11 +19,17 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "StudySpark — Cameroon protected practice" },
+      { title: "StudySpark - Cameroon GCE practice app" },
       {
         name: "description",
         content:
-          "Protected in-app study questions for Cameroon students by class, series, subject, and topic.",
+          "Practise Cameroon GCE structural papers in-app, track your progress, and follow a focused revision path for your class, series, and subjects.",
+      },
+      { property: "og:title", content: "StudySpark - Cameroon GCE practice app" },
+      {
+        property: "og:description",
+        content:
+          "Protected GCE structural papers, class-based access, progress tracking, and AI-guided revision for Cameroon students.",
       },
     ],
   }),

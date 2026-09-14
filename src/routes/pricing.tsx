@@ -11,7 +11,17 @@ export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
       { title: "Pricing — StudySpark" },
-      { name: "description", content: "Simple pricing for protected Cameroon structural papers." },
+      {
+        name: "description",
+        content:
+          "StudySpark pricing for Cameroon students: preview selected GCE papers free, then upgrade for protected papers, AI learning paths, courses, textbooks, and progress analytics.",
+      },
+      { property: "og:title", content: "StudySpark pricing for Cameroon students" },
+      {
+        property: "og:description",
+        content:
+          "Start free and upgrade when you need unlimited protected GCE papers and guided revision.",
+      },
     ],
   }),
   component: PricingPage,

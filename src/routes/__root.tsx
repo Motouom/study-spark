@@ -2,6 +2,11 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 
+const siteUrl = "https://study-spark-uruh.vercel.app";
+const siteTitle = "StudySpark - Cameroon GCE practice and progress";
+const siteDescription =
+  "StudySpark helps Cameroon students practise protected GCE structural papers by class, series, subject, and topic with progress tracking and AI-guided revision.";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -31,23 +36,35 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "StudySpark — Cameroon protected practice" },
+      { title: siteTitle },
+      { name: "description", content: siteDescription },
+      { name: "robots", content: "index, follow" },
+      { name: "googlebot", content: "index, follow, max-image-preview:large" },
       {
-        name: "description",
+        name: "keywords",
         content:
-          "Protected in-app structural papers for Cameroon secondary school students by class, series, subject, and topic.",
+          "StudySpark, Cameroon GCE, Cameroon past questions, GCE Advanced Level, GCE Ordinary Level, Cameroon secondary school, structural papers, Form 3, Form 4, Form 5, Lower Sixth, Upper Sixth, revision app Cameroon",
       },
       { name: "author", content: "StudySpark" },
-      { property: "og:title", content: "StudySpark — Cameroon protected practice" },
-      {
-        property: "og:description",
-        content: "Structural papers, class-based access, and progress that motivates you.",
-      },
+      { name: "application-name", content: "StudySpark" },
+      { name: "apple-mobile-web-app-title", content: "StudySpark" },
+      { name: "theme-color", content: "#1b1714" },
+      { name: "geo.region", content: "CM" },
+      { name: "geo.placename", content: "Cameroon" },
+      { property: "og:title", content: siteTitle },
+      { property: "og:description", content: siteDescription },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: siteUrl },
+      { property: "og:site_name", content: "StudySpark" },
+      { property: "og:locale", content: "en_CM" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: siteTitle },
+      { name: "twitter:description", content: siteDescription },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: siteUrl },
+      { rel: "manifest", href: "/site.webmanifest" },
       {
         rel: "icon",
         type: "image/svg+xml",
@@ -68,6 +85,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <script src="/chunk-reload.js" defer />
         <Scripts />
       </body>
     </html>

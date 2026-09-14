@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /control-panel-9k3x
+Disallow: /dashboard
+Disallow: /library
+Disallow: /progress
+Disallow: /learning-path
+Disallow: /courses
+Disallow: /textbooks
+Disallow: /achievements
+Disallow: /leaderboard
+Disallow: /settings
+Disallow: /notifications
+
+Sitemap: https://study-spark-uruh.vercel.app/sitemap.xml

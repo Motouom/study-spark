@@ -1,0 +1,12 @@
+{
+  "name": "StudySpark - Cameroon GCE practice",
+  "short_name": "StudySpark",
+  "description": "Protected Cameroon GCE structural papers, progress tracking, and guided revision.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf8",
+  "theme_color": "#1b1714",
+  "lang": "en-CM",
+  "categories": ["education", "productivity"]
+}
