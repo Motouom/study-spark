@@ -1,10 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  aiConfigured,
-  fallbackLearningPath,
-  generateAiText,
-  parseAiLearningPath,
-} from "@/lib/ai";
+import { aiConfigured, fallbackLearningPath, generateAiText, parseAiLearningPath } from "@/lib/ai";
 import { getAuthenticatedSupabase, getAuthenticatedUser } from "@/lib/server-supabase";
 
 export const Route = createFileRoute("/api/ai/learning-path")({
@@ -15,15 +10,31 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           const user = await getAuthenticatedUser(request);
           const supabase = getAuthenticatedSupabase(request);
 
-          const [{ data: profile }, { data: progress }, { data: documents }] = await Promise.all([
+          const [
+            { data: profile },
+            { data: sessions },
+            { data: checkpoints },
+            { data: reflections },
+            { data: documents },
+          ] = await Promise.all([
             supabase
               .from("student_profiles")
               .select("name,class_level,series,subjects,plan,premium_until")
               .eq("user_id", user.id)
               .maybeSingle(),
             supabase
-              .from("structural_question_progress")
-              .select("document_id,question_number,status,duration_seconds,updated_at")
+              .from("paper_study_sessions")
+              .select("document_id,duration_seconds,max_scroll_percent,completed,updated_at")
+              .eq("user_id", user.id)
+              .order("updated_at", { ascending: false }),
+            supabase
+              .from("paper_study_checkpoints")
+              .select("document_id,checkpoint_type,scroll_percent,created_at")
+              .eq("user_id", user.id)
+              .order("created_at", { ascending: false }),
+            supabase
+              .from("paper_study_reflections")
+              .select("document_id,confidence,difficult_parts,add_to_revision,updated_at")
               .eq("user_id", user.id)
               .order("updated_at", { ascending: false }),
             supabase
@@ -37,26 +48,48 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             (document) =>
               profileSubjects.size === 0 || profileSubjects.has(String(document.subject)),
           );
-          const startedDocumentIds = new Set((progress ?? []).map((item) => item.document_id));
+          const sessionRows = sessions ?? [];
+          const checkpointRows = checkpoints ?? [];
+          const reflectionRows = reflections ?? [];
+          const startedDocumentIds = new Set(sessionRows.map((item) => item.document_id));
           const unfinishedPapers = matchingDocuments
-            .filter((document) => startedDocumentIds.has(document.id))
+            .filter((document) =>
+              sessionRows.some(
+                (session) =>
+                  session.document_id === document.id &&
+                  (!session.completed || Number(session.max_scroll_percent ?? 0) < 85),
+              ),
+            )
             .slice(0, 4)
             .map((document) => String(document.title));
           const nextPapers = matchingDocuments
             .filter((document) => !startedDocumentIds.has(document.id))
             .slice(0, 5)
             .map((document) => String(document.title));
-          const subjectFailures = new Map<string, number>();
-          for (const item of progress ?? []) {
-            if (item.status !== "failed") continue;
-            const document = matchingDocuments.find((candidate) => candidate.id === item.document_id);
+          const subjectReviewSignals = new Map<string, number>();
+          for (const item of checkpointRows) {
+            if (item.checkpoint_type !== "review") continue;
+            const document = matchingDocuments.find(
+              (candidate) => candidate.id === item.document_id,
+            );
             if (!document) continue;
-            subjectFailures.set(
+            subjectReviewSignals.set(
               String(document.subject),
-              (subjectFailures.get(String(document.subject)) ?? 0) + 1,
+              (subjectReviewSignals.get(String(document.subject)) ?? 0) + 1,
             );
           }
-          const weakestSubjects = [...subjectFailures.entries()]
+          for (const item of reflectionRows) {
+            if (!item.add_to_revision) continue;
+            const document = matchingDocuments.find(
+              (candidate) => candidate.id === item.document_id,
+            );
+            if (!document) continue;
+            subjectReviewSignals.set(
+              String(document.subject),
+              (subjectReviewSignals.get(String(document.subject)) ?? 0) + 1,
+            );
+          }
+          const weakestSubjects = [...subjectReviewSignals.entries()]
             .sort((a, b) => b[1] - a[1])
             .slice(0, 3)
             .map(([subject]) => subject);
@@ -73,9 +106,11 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                 weakestSubjects,
                 unfinishedPapers,
                 nextPapers,
-                recentProgress: (progress ?? []).slice(0, 30),
+                recentSessions: sessionRows.slice(0, 20),
+                recentCheckpoints: checkpointRows.slice(0, 20),
+                reflections: reflectionRows.slice(0, 10),
                 instruction:
-                  "Return JSON in this exact shape: {\"days\":[{\"day\":1,\"title\":\"short action title\",\"paper\":\"one supplied paper title or Progress dashboard\",\"target\":\"specific question-count or review target\",\"focus\":\"specific revision focus\"}]}. Create exactly 7 days. Do not use Markdown tables.",
+                  'Return JSON in this exact shape: {"days":[{"day":1,"title":"short action title","paper":"one supplied paper title or Progress dashboard","target":"specific reading, checkpoint, or reflection target","focus":"specific revision focus"}]}. Create exactly 7 days. Do not use Markdown tables.',
               }),
               maxTokens: 760,
             });

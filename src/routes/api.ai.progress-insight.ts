@@ -10,15 +10,31 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
           const user = await getAuthenticatedUser(request);
           const supabase = getAuthenticatedSupabase(request);
 
-          const [{ data: profile }, { data: progress }, { data: documents }] = await Promise.all([
+          const [
+            { data: profile },
+            { data: sessions },
+            { data: checkpoints },
+            { data: reflections },
+            { data: documents },
+          ] = await Promise.all([
             supabase
               .from("student_profiles")
               .select("name,class_level,series,subjects,plan,premium_until")
               .eq("user_id", user.id)
               .maybeSingle(),
             supabase
-              .from("structural_question_progress")
-              .select("document_id,question_number,status,duration_seconds,updated_at")
+              .from("paper_study_sessions")
+              .select("document_id,duration_seconds,max_scroll_percent,completed,updated_at")
+              .eq("user_id", user.id)
+              .order("updated_at", { ascending: false }),
+            supabase
+              .from("paper_study_checkpoints")
+              .select("document_id,checkpoint_type,scroll_percent,created_at")
+              .eq("user_id", user.id)
+              .order("created_at", { ascending: false }),
+            supabase
+              .from("paper_study_reflections")
+              .select("document_id,confidence,difficult_parts,add_to_revision,updated_at")
               .eq("user_id", user.id)
               .order("updated_at", { ascending: false }),
             supabase
@@ -27,46 +43,60 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
               .eq("status", "published"),
           ]);
 
-          const rows = progress ?? [];
-          const passed = rows.filter((item) => item.status === "passed").length;
-          const failed = rows.filter((item) => item.status === "failed").length;
-          const active = rows.filter((item) => item.status === "started").length;
-          const timed = rows.filter((item) => Number(item.duration_seconds ?? 0) > 0);
-          const averageSeconds =
-            timed.length > 0
+          const rows = sessions ?? [];
+          const checkpointRows = checkpoints ?? [];
+          const reflectionRows = reflections ?? [];
+          const papersRead = new Set(rows.map((item) => item.document_id)).size;
+          const completedPapers = new Set(
+            rows.filter((item) => item.completed).map((item) => item.document_id),
+          ).size;
+          const totalDurationSeconds = rows.reduce(
+            (sum, item) => sum + Number(item.duration_seconds ?? 0),
+            0,
+          );
+          const averageDepth =
+            rows.length > 0
               ? Math.round(
-                  timed.reduce((sum, item) => sum + Number(item.duration_seconds ?? 0), 0) /
-                    timed.length,
+                  rows.reduce((sum, item) => sum + Number(item.max_scroll_percent ?? 0), 0) /
+                    rows.length,
                 )
               : 0;
           const documentsById = new Map((documents ?? []).map((item) => [item.id, item]));
-          const subjectStats = new Map<string, { passed: number; failed: number; total: number }>();
+          const subjectStats = new Map<string, { review: number; depth: number; total: number }>();
           for (const item of rows) {
             const subject = documentsById.get(item.document_id)?.subject ?? "Unassigned";
-            const current = subjectStats.get(subject) ?? { passed: 0, failed: 0, total: 0 };
+            const current = subjectStats.get(subject) ?? { review: 0, depth: 0, total: 0 };
             current.total += 1;
-            if (item.status === "passed") current.passed += 1;
-            if (item.status === "failed") current.failed += 1;
+            current.depth += Number(item.max_scroll_percent ?? 0);
+            subjectStats.set(subject, current);
+          }
+          for (const item of checkpointRows) {
+            if (item.checkpoint_type !== "review") continue;
+            const subject = documentsById.get(item.document_id)?.subject ?? "Unassigned";
+            const current = subjectStats.get(subject) ?? { review: 0, depth: 0, total: 0 };
+            current.review += 1;
             subjectStats.set(subject, current);
           }
           const weakestSubjects = [...subjectStats.entries()]
             .sort((a, b) => {
-              const aRate = a[1].total > 0 ? a[1].passed / a[1].total : 0;
-              const bRate = b[1].total > 0 ? b[1].passed / b[1].total : 0;
-              return aRate - bRate || b[1].failed - a[1].failed;
+              const aDepth = a[1].total > 0 ? a[1].depth / a[1].total : 0;
+              const bDepth = b[1].total > 0 ? b[1].depth / b[1].total : 0;
+              return b[1].review - a[1].review || aDepth - bDepth;
             })
             .slice(0, 3)
             .map(([subject]) => subject);
 
           const fallback = fallbackInsight({
-            totalStarted: rows.length,
-            passed,
-            failed,
-            active,
-            averageDuration:
-              averageSeconds > 60
-                ? `${Math.floor(averageSeconds / 60)}m ${averageSeconds % 60}s`
-                : `${averageSeconds}s`,
+            papersRead,
+            completedPapers,
+            reviewCount: checkpointRows.filter((item) => item.checkpoint_type === "review").length,
+            bookmarkCount: checkpointRows.filter((item) => item.checkpoint_type === "bookmark")
+              .length,
+            averageDepth,
+            totalDuration:
+              totalDurationSeconds > 60
+                ? `${Math.floor(totalDurationSeconds / 60)}m ${totalDurationSeconds % 60}s`
+                : `${totalDurationSeconds}s`,
             weakestSubjects,
           });
 
@@ -79,16 +109,18 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
               prompt: JSON.stringify({
                 learner: profile,
                 summary: {
-                  totalStarted: rows.length,
-                  passed,
-                  failed,
-                  active,
-                  averageSeconds,
+                  sessions: rows.length,
+                  papersRead,
+                  completedPapers,
+                  totalDurationSeconds,
+                  averageDepth,
                   weakestSubjects,
                 },
-                recentProgress: rows.slice(0, 25),
+                recentSessions: rows.slice(0, 20),
+                recentCheckpoints: checkpointRows.slice(0, 20),
+                reflections: reflectionRows.slice(0, 10),
                 instruction:
-                  "Write 3 short paragraphs: current standing, weakest area, and exactly what to do next.",
+                  "Write 3 short paragraphs: current study habit, what needs review, and exactly what to do next.",
               }),
               maxTokens: 520,
             });

@@ -35,10 +35,10 @@ export default function PremiumDashboardCharts({
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-base font-medium">Weekly performance</h2>
-            <p className="text-xs text-muted-foreground">Daily structural pass rate</p>
+            <p className="text-xs text-muted-foreground">Daily average reading depth</p>
           </div>
           <span className="text-xs text-muted-foreground">
-            {totalStarted > 0 ? `${totalStarted} marked` : "No structural progress yet"}
+            {totalStarted > 0 ? `${totalStarted} study sessions` : "No study sessions yet"}
           </span>
         </div>
         <div className="h-56 min-w-0 sm:h-64">
@@ -82,7 +82,7 @@ export default function PremiumDashboardCharts({
 
       <div className="min-w-0 rounded-xl border border-border bg-card p-4 sm:p-6">
         <h2 className="text-base font-medium">Mastery by subject</h2>
-        <p className="text-xs text-muted-foreground">Last 30 days</p>
+        <p className="text-xs text-muted-foreground">Reading depth and study signals</p>
         <div className="mt-4 h-56 min-w-0 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={subjectBreakdown} margin={{ top: 8, right: 4, bottom: 0, left: -24 }}>

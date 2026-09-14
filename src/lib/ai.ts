@@ -23,22 +23,21 @@ export function aiConfigured() {
 }
 
 export function fallbackInsight(input: {
-  totalStarted: number;
-  passed: number;
-  failed: number;
-  active: number;
-  averageDuration: string;
+  papersRead: number;
+  completedPapers: number;
+  reviewCount: number;
+  bookmarkCount: number;
+  averageDepth: number;
+  totalDuration: string;
   weakestSubjects: string[];
 }) {
   const weakText =
-    input.weakestSubjects.length > 0
-      ? input.weakestSubjects.join(", ")
-      : "your selected subjects";
+    input.weakestSubjects.length > 0 ? input.weakestSubjects.join(", ") : "your selected subjects";
 
   return [
-    `You have marked ${input.totalStarted} structural questions: ${input.passed} passed, ${input.failed} failed, and ${input.active} still in progress.`,
-    `Your next priority should be ${weakText}. Start by retrying failed questions before opening a fresh paper.`,
-    `Your average completed-question time is ${input.averageDuration}. Aim for careful accuracy first, then reduce time once your pass rate is stable.`,
+    `You have opened ${input.papersRead} papers and read through ${input.completedPapers}. Your average reading depth is ${input.averageDepth}%.`,
+    `Your next priority should be ${weakText}. Start with the papers you marked for review before opening fresh material.`,
+    `You have saved ${input.reviewCount} review marks and ${input.bookmarkCount} bookmarks across ${input.totalDuration} of study time. Use those signals to build your next revision session.`,
   ].join("\n\n");
 }
 

@@ -1,13 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookOpen, Lock, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, BookOpen, Bookmark, CheckCircle2, Clock, Lock, Sparkles } from "lucide-react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useContentProtection } from "@/hooks/use-content-protection";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { supabaseConfigured } from "@/lib/supabase";
-import { lazy, Suspense } from "react";
+import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
+import { formatDuration } from "@/hooks/use-structural-progress";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
 
@@ -22,6 +25,7 @@ function CourseDocumentPage() {
   const { user } = useSupabaseUser();
   const content = useStudyContent(profile);
   const document = content.documents.find((item) => item.id === documentId);
+  const studyProgress = usePaperStudyProgress(document?.id);
   const pageLoading =
     supabaseConfigured() && (!profileLoaded || !content.loaded || content.loading);
   useContentProtection(Boolean(document), document?.id);
@@ -92,7 +96,8 @@ function CourseDocumentPage() {
               </div>
             </div>
           ) : (
-            <div className="min-w-0">
+            <div className="min-w-0 space-y-4">
+              <StudyProgressPanel progress={studyProgress} documentTitle={document.title} />
               <Suspense
                 fallback={
                   <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
@@ -110,6 +115,170 @@ function CourseDocumentPage() {
           ))}
       </div>
     </>
+  );
+}
+
+function StudyProgressPanel({
+  progress,
+  documentTitle,
+}: {
+  progress: ReturnType<typeof usePaperStudyProgress>;
+  documentTitle: string;
+}) {
+  const [difficultParts, setDifficultParts] = useState(progress.reflection?.difficultParts ?? "");
+  const [confidence, setConfidence] = useState(progress.reflection?.confidence ?? 3);
+  const [addToRevision, setAddToRevision] = useState(progress.reflection?.addToRevision ?? true);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    if (!progress.reflection) return;
+    setDifficultParts(progress.reflection.difficultParts ?? "");
+    setConfidence(progress.reflection.confidence);
+    setAddToRevision(progress.reflection.addToRevision);
+  }, [progress.reflection]);
+
+  async function checkpoint(type: PaperCheckpointType) {
+    setSaved(false);
+    await progress.addCheckpoint(type);
+    setSaved(true);
+  }
+
+  async function reflect() {
+    setSaved(false);
+    await progress.saveReflection({ confidence, difficultParts, addToRevision });
+    setSaved(true);
+  }
+
+  return (
+    <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="secondary">Study session</Badge>
+            {progress.summary.completed && (
+              <Badge variant="outline" className="gap-1 text-success">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                Read through
+              </Badge>
+            )}
+          </div>
+          <h2 className="mt-3 text-base font-medium">Track this paper quietly</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            StudySpark now tracks reading time, scroll depth, checkpoints, and reflection for{" "}
+            {documentTitle}.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4 lg:w-[28rem]">
+          <MiniMetric label="Time" value={formatDuration(progress.summary.durationSeconds)} />
+          <MiniMetric label="Read" value={`${progress.summary.maxScrollPercent}%`} />
+          <MiniMetric label="Review" value={String(progress.summary.reviewCount)} />
+          <MiniMetric label="Saved" value={String(progress.summary.bookmarkCount)} />
+        </div>
+      </div>
+
+      {progress.error && (
+        <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+          {progress.error}
+        </div>
+      )}
+
+      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+        <CheckpointButton
+          icon={CheckCircle2}
+          label="I understand this"
+          disabled={progress.saving}
+          onClick={() => checkpoint("understood")}
+        />
+        <CheckpointButton
+          icon={Clock}
+          label="Need review"
+          disabled={progress.saving}
+          onClick={() => checkpoint("review")}
+        />
+        <CheckpointButton
+          icon={Bookmark}
+          label="Bookmark"
+          disabled={progress.saving}
+          onClick={() => checkpoint("bookmark")}
+        />
+      </div>
+
+      <div className="mt-4 grid gap-3 border-t border-border pt-4 lg:grid-cols-[14rem_minmax(0,1fr)_auto] lg:items-end">
+        <label className="text-sm">
+          <span className="font-medium">Confidence</span>
+          <select
+            value={confidence}
+            onChange={(event) => setConfidence(Number(event.target.value))}
+            className="mt-2 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+          >
+            <option value={1}>1 - Lost</option>
+            <option value={2}>2 - Shaky</option>
+            <option value={3}>3 - Okay</option>
+            <option value={4}>4 - Good</option>
+            <option value={5}>5 - Strong</option>
+          </select>
+        </label>
+        <label className="text-sm">
+          <span className="font-medium">Hard parts</span>
+          <textarea
+            value={difficultParts}
+            onChange={(event) => setDifficultParts(event.target.value)}
+            placeholder="Write the topic, section, or question idea that needs revision..."
+            className="mt-2 min-h-10 w-full resize-y rounded-md border border-input bg-background px-3 py-2 text-sm"
+          />
+        </label>
+        <div className="flex flex-col gap-2">
+          <label className="flex items-center gap-2 text-xs text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={addToRevision}
+              onChange={(event) => setAddToRevision(event.target.checked)}
+            />
+            Add to revision
+          </label>
+          <Button type="button" disabled={progress.saving} onClick={() => void reflect()}>
+            {progress.saving ? "Saving..." : "Save reflection"}
+          </Button>
+        </div>
+      </div>
+
+      {saved && (
+        <p className="mt-3 text-xs text-success">Saved. This paper now counts toward progress.</p>
+      )}
+    </section>
+  );
+}
+
+function MiniMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg bg-secondary/50 px-3 py-2">
+      <div className="text-muted-foreground">{label}</div>
+      <div className="mt-1 font-medium">{value}</div>
+    </div>
+  );
+}
+
+function CheckpointButton({
+  icon: Icon,
+  label,
+  disabled,
+  onClick,
+}: {
+  icon: typeof CheckCircle2;
+  label: string;
+  disabled: boolean;
+  onClick: () => Promise<void>;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={() => void onClick()}
+      className="flex min-h-11 items-center justify-center gap-2 rounded-md border border-border bg-background px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-60"
+    >
+      <Icon className="h-4 w-4" />
+      {label}
+    </button>
   );
 }
 

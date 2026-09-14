@@ -5,11 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { PremiumGate } from "@/components/PremiumGate";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import {
-  calculateStructuralMastery,
-  countStructuralQuestions,
-  useStructuralProgress,
-} from "@/hooks/use-structural-progress";
+import { countStructuralQuestions, formatDuration } from "@/hooks/use-structural-progress";
+import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { ArrowRight, Brain, Clock, FileText, Target, TrendingUp } from "lucide-react";
 import { useAiActions } from "@/hooks/use-ai-actions";
 import type { AiLearningPathDay } from "@/hooks/use-ai-actions";
@@ -23,41 +20,51 @@ export const Route = createFileRoute("/_app/learning-path")({
 function LearningPathPage() {
   const { profile } = useStudyProfile();
   const content = useStudyContent(profile);
-  const { progress } = useStructuralProgress();
+  const progress = usePaperStudyOverview();
   const ai = useAiActions();
   const [aiPath, setAiPath] = useState<{
     days: AiLearningPathDay[];
     source: "ai" | "fallback";
   } | null>(null);
-  const mastery = calculateStructuralMastery(progress, content.documents);
-  const weakest = [...mastery].sort((a, b) => a.mastery - b.mastery).slice(0, 4);
-  const startedIds = new Set(progress.map((item) => item.documentId));
+  const startedIds = new Set(progress.sessions.map((item) => item.documentId));
+  const reviewDocumentIds = new Set([
+    ...progress.checkpoints
+      .filter((item) => item.checkpointType === "review")
+      .map((item) => item.documentId),
+    ...progress.reflections.filter((item) => item.addToRevision).map((item) => item.documentId),
+  ]);
+  const weakest = [
+    ...new Set(
+      content.documents
+        .filter((document) => reviewDocumentIds.has(document.id))
+        .map((document) => document.subject),
+    ),
+  ].slice(0, 4);
   const unfinishedStarted = content.documents
     .filter((document) => startedIds.has(document.id))
     .map((document) => {
-      const marks = progress.filter((item) => item.documentId === document.id);
-      const passed = marks.filter((item) => item.status === "passed").length;
-      const failed = marks.filter((item) => item.status === "failed").length;
-      const started = marks.filter((item) => item.status === "started").length;
-      const totalQuestions = Math.max(countStructuralQuestions(document.markdownContent), marks.length);
+      const sessions = progress.sessions.filter((item) => item.documentId === document.id);
+      const bestDepth = Math.max(...sessions.map((item) => item.maxScrollPercent), 0);
+      const totalTime = sessions.reduce((sum, item) => sum + item.durationSeconds, 0);
+      const reviewCount = progress.checkpoints.filter(
+        (item) => item.documentId === document.id && item.checkpointType === "review",
+      ).length;
       return {
         document,
-        marks,
-        passed,
-        failed,
-        started,
-        totalQuestions,
-        completion: totalQuestions > 0 ? Math.round((marks.length / totalQuestions) * 100) : 0,
+        bestDepth,
+        totalTime,
+        reviewCount,
+        completion: bestDepth,
       };
     })
-    .filter((item) => item.completion < 100 || item.started > 0 || item.failed > 0)
-    .sort((a, b) => b.started + b.failed - (a.started + a.failed))
+    .filter((item) => item.completion < 85 || item.reviewCount > 0)
+    .sort((a, b) => b.reviewCount - a.reviewCount || a.bestDepth - b.bestDepth)
     .slice(0, 3);
   const nextPapers = content.documents
     .filter((document) => !document.isLocked && !startedIds.has(document.id))
     .slice(0, 4);
   const weeklyTarget = Math.max(12, Math.min(40, (profile?.subjects.length ?? 1) * 8));
-  const markedThisWeek = progress.filter((item) => {
+  const markedThisWeek = progress.sessions.filter((item) => {
     const updated = new Date(item.updatedAt);
     const start = new Date();
     start.setDate(start.getDate() - 6);
@@ -70,7 +77,7 @@ function LearningPathPage() {
     <>
       <PageHeader
         title="Learning path"
-        description="A focused revision route generated from your structural paper activity."
+        description="A focused revision route generated from your reading sessions and review marks."
       />
       <div className="px-6 py-6 md:px-10 md:py-8">
         <PremiumGate
@@ -87,7 +94,7 @@ function LearningPathPage() {
                       <h2 className="text-base font-medium">AI learning path</h2>
                     </div>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Build a 7-day plan from your unfinished papers and weak areas.
+                      Build a 7-day plan from your reading sessions, bookmarks, and weak areas.
                     </p>
                   </div>
                   <Button
@@ -157,7 +164,7 @@ function LearningPathPage() {
                   </div>
                   <div className="mt-2 font-display text-3xl">{weeklyPercent}%</div>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    {markedThisWeek} of {weeklyTarget} question marks
+                    {markedThisWeek} of {weeklyTarget} study sessions
                   </p>
                 </div>
                 <div className="rounded-xl border border-border bg-card p-4">
@@ -165,7 +172,7 @@ function LearningPathPage() {
                     <FileText className="h-4 w-4" /> Active papers
                   </div>
                   <div className="mt-2 font-display text-3xl">{unfinishedStarted.length}</div>
-                  <p className="mt-1 text-xs text-muted-foreground">papers to continue</p>
+                  <p className="mt-1 text-xs text-muted-foreground">papers to finish or review</p>
                 </div>
                 <div className="rounded-xl border border-border bg-card p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -194,7 +201,8 @@ function LearningPathPage() {
                           <div>
                             <div className="text-sm font-medium">{item.document.title}</div>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              {item.passed} passed · {item.failed} failed · {item.started} in progress
+                              {item.bestDepth}% read · {formatDuration(item.totalTime)} ·{" "}
+                              {item.reviewCount} review marks
                             </p>
                           </div>
                           <Badge variant="secondary">{item.completion}% done</Badge>
@@ -206,34 +214,35 @@ function LearningPathPage() {
               )}
 
               <div className="rounded-xl border border-border bg-card p-5">
-              <div className="flex items-center gap-2">
-                <Brain className="h-5 w-5" />
-                <h2 className="text-base font-medium">Recommended next papers</h2>
-              </div>
-              <div className="mt-4 space-y-3">
-                {nextPapers.map((paper, index) => (
-                  <Link
-                    key={paper.id}
-                    to="/course/$documentId"
-                    params={{ documentId: paper.id }}
-                    className="flex items-center justify-between rounded-lg border border-border p-4 hover:bg-secondary/40"
-                  >
+                <div className="flex items-center gap-2">
+                  <Brain className="h-5 w-5" />
+                  <h2 className="text-base font-medium">Recommended next papers</h2>
+                </div>
+                <div className="mt-4 space-y-3">
+                  {nextPapers.map((paper, index) => (
+                    <Link
+                      key={paper.id}
+                      to="/course/$documentId"
+                      params={{ documentId: paper.id }}
+                      className="flex items-center justify-between rounded-lg border border-border p-4 hover:bg-secondary/40"
+                    >
                       <div>
                         <Badge variant="secondary">Step {index + 1}</Badge>
                         <div className="mt-2 text-sm font-medium">{paper.title}</div>
                         <p className="mt-1 text-xs text-muted-foreground">
-                          {paper.subject} · {countStructuralQuestions(paper.markdownContent)} questions
+                          {paper.subject} · {countStructuralQuestions(paper.markdownContent)}{" "}
+                          questions
                         </p>
                       </div>
                       <ArrowRight className="h-4 w-4" />
-                  </Link>
-                ))}
-                {nextPapers.length === 0 && (
-                  <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
-                    No new unlocked papers match your current profile.
-                  </p>
-                )}
-              </div>
+                    </Link>
+                  ))}
+                  {nextPapers.length === 0 && (
+                    <p className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                      No new unlocked papers match your current profile.
+                    </p>
+                  )}
+                </div>
               </div>
             </section>
             <aside className="rounded-xl border border-border bg-card p-5">
@@ -249,16 +258,14 @@ function LearningPathPage() {
                       <span>{item.mastery}%</span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {item.passed} passed · {item.failed} failed · {item.coverage}% coverage
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Mastery combines pass rate, coverage, completion, and failed/unfinished work.
+                      Marked for review from reading checkpoints or reflections.
                     </p>
                   </div>
                 ))}
                 {weakest.length === 0 && (
                   <p className="rounded-lg border border-dashed border-border p-4 text-sm text-muted-foreground">
-                    Start marking questions and your personalized weak areas will appear here.
+                    Use “Need review” or add papers to revision and your weak areas will appear
+                    here.
                   </p>
                 )}
               </div>
@@ -266,8 +273,8 @@ function LearningPathPage() {
                 <Link to="/progress">View detailed progress</Link>
               </Button>
               <div className="mt-5 rounded-lg bg-secondary/40 p-3 text-xs text-muted-foreground">
-                Recommended session: solve 3 to 5 structural questions, mark each result honestly,
-                then review failed items before opening a fresh paper.
+                Recommended session: read one paper, bookmark confusing parts, save a reflection,
+                then revisit the papers added to revision.
               </div>
             </aside>
           </div>

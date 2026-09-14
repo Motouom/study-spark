@@ -6,13 +6,10 @@ import { BookOpen, Flame, Target, TrendingUp, Sparkles, FileText, Lock } from "l
 import { lazy, Suspense, useMemo } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
-import {
-  calculateStructuralMastery,
-  formatDuration,
-  useStructuralProgress,
-} from "@/hooks/use-structural-progress";
+import { formatDuration } from "@/hooks/use-structural-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 import { isPremiumActive } from "@/lib/premium";
+import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
 
@@ -58,11 +55,7 @@ function Stat({
 function Dashboard() {
   const { profile, topics } = Route.useLoaderData();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
-  const {
-    progress: structuralProgress,
-    summary: structuralSummary,
-    error: structuralError,
-  } = useStructuralProgress();
+  const readingProgress = usePaperStudyOverview();
   const useRemoteOnly = supabaseConfigured();
   const effectiveProfile = useRemoteOnly ? savedProfile : (savedProfile ?? profile);
   const content = useStudyContent(savedProfile);
@@ -73,32 +66,71 @@ function Dashboard() {
       : topics;
   const availablePapers = content.documents;
   const featuredPaper = availablePapers[0] ?? null;
-  const subjectBreakdown = useMemo(
-    () => calculateStructuralMastery(structuralProgress, availablePapers),
-    [availablePapers, structuralProgress],
+  const documentsById = useMemo(
+    () => new Map(availablePapers.map((document) => [document.id, document])),
+    [availablePapers],
   );
+  const subjectBreakdown = useMemo(() => {
+    const subjects = new Map<string, { score: number; count: number }>();
+    for (const session of readingProgress.sessions) {
+      const subject = documentsById.get(session.documentId)?.subject;
+      if (!subject) continue;
+      const checkpointScore =
+        readingProgress.checkpoints.filter((item) => item.documentId === session.documentId)
+          .length * 5;
+      const reflectionScore = readingProgress.reflections.some(
+        (item) => item.documentId === session.documentId && item.addToRevision,
+      )
+        ? 10
+        : 0;
+      const score = Math.min(
+        100,
+        session.maxScrollPercent * 0.75 + checkpointScore + reflectionScore,
+      );
+      const current = subjects.get(subject) ?? { score: 0, count: 0 };
+      current.score += score;
+      current.count += 1;
+      subjects.set(subject, current);
+    }
+    return [...subjects.entries()]
+      .map(([subject, value]) => ({
+        subject,
+        mastery: value.count > 0 ? Math.round(value.score / value.count) : 0,
+      }))
+      .sort((a, b) => b.mastery - a.mastery);
+  }, [
+    documentsById,
+    readingProgress.checkpoints,
+    readingProgress.reflections,
+    readingProgress.sessions,
+  ]);
   const progressData = useMemo(() => {
     const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const today = new Date();
     return Array.from({ length: 7 }, (_, offset) => {
       const date = new Date(today);
       date.setDate(today.getDate() - (6 - offset));
-      const dayStructural = structuralProgress.filter((item) => {
-        const updatedAt = new Date(item.updatedAt);
+      const daySessions = readingProgress.sessions.filter((item) => {
+        const updatedAt = new Date(item.startedAt);
         return (
           updatedAt.getFullYear() === date.getFullYear() &&
           updatedAt.getMonth() === date.getMonth() &&
           updatedAt.getDate() === date.getDate()
         );
       });
-      const passed = dayStructural.filter((item) => item.status === "passed").length;
       return {
         day: labels[date.getDay()],
-        score: dayStructural.length > 0 ? Math.round((passed / dayStructural.length) * 100) : 0,
+        score:
+          daySessions.length > 0
+            ? Math.round(
+                daySessions.reduce((sum, item) => sum + item.maxScrollPercent, 0) /
+                  daySessions.length,
+              )
+            : 0,
       };
     });
-  }, [structuralProgress]);
-  const recentStructural = structuralProgress.slice(0, 5);
+  }, [readingProgress.sessions]);
+  const recentSessions = readingProgress.sessions.slice(0, 5);
   const premium = isPremiumActive(effectiveProfile);
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
 
@@ -108,9 +140,9 @@ function Dashboard() {
 
   return (
     <div className="min-w-0 space-y-6 px-4 py-5 sm:px-6 md:px-10 md:py-8">
-      {structuralError && (
+      {readingProgress.error && (
         <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-          Structural progress could not be loaded: {structuralError}
+          Study progress could not be loaded: {readingProgress.error}
         </div>
       )}
       {content.error && (
@@ -153,28 +185,28 @@ function Dashboard() {
           <Stat
             icon={Flame}
             label="Current streak"
-            value={String(structuralSummary.currentStreak)}
-            hint={structuralSummary.currentStreak > 0 ? "structural practice days" : "start today"}
+            value={String(readingProgress.summary.currentStreak)}
+            hint={readingProgress.summary.currentStreak > 0 ? "study days" : "start today"}
             tone="accent"
           />
           <Stat
             icon={BookOpen}
-            label="Questions started"
-            value={String(structuralSummary.totalStarted)}
-            hint={structuralSummary.totalStarted > 0 ? "structural questions" : "new account"}
+            label="Papers opened"
+            value={String(readingProgress.summary.papersRead)}
+            hint={`${readingProgress.summary.completedPapers} read through`}
           />
           <Stat
             icon={Target}
-            label="Pass rate"
-            value={`${structuralSummary.completionRate}%`}
-            hint={`${structuralSummary.passed} passed · ${structuralSummary.failed} failed`}
+            label="Avg. read depth"
+            value={`${readingProgress.summary.averageScrollPercent}%`}
+            hint={`${readingProgress.summary.reviewCount} review marks`}
             tone="success"
           />
           <Stat
             icon={TrendingUp}
-            label="Avg. time"
-            value={formatDuration(structuralSummary.averageDurationSeconds)}
-            hint={`${formatDuration(structuralSummary.totalDurationSeconds)} total`}
+            label="Study time"
+            value={formatDuration(readingProgress.summary.totalDurationSeconds)}
+            hint={`${readingProgress.summary.bookmarkCount} bookmarks`}
           />
         </section>
       ) : (
@@ -213,7 +245,7 @@ function Dashboard() {
           <PremiumDashboardCharts
             progressData={progressData}
             subjectBreakdown={subjectBreakdown}
-            totalStarted={structuralSummary.totalStarted}
+            totalStarted={readingProgress.summary.sessionsStarted}
           />
         </Suspense>
       )}
@@ -229,26 +261,24 @@ function Dashboard() {
               <Link to="/progress">View progress</Link>
             </Button>
           </div>
-          {recentStructural.length > 0 ? (
+          {recentSessions.length > 0 ? (
             <ul className="divide-y divide-border">
-              {recentStructural.map((item) => {
+              {recentSessions.map((item) => {
+                const paper = documentsById.get(item.documentId);
                 return (
                   <li
                     key={item.id}
                     className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div>
-                      <div className="text-sm font-medium">Question {item.questionNumber}</div>
+                      <div className="text-sm font-medium">{paper?.title ?? "Paper session"}</div>
                       <div className="text-xs text-muted-foreground">
-                        {item.completedAt
-                          ? `${formatDuration(item.durationSeconds)} · ${new Date(
-                              item.updatedAt,
-                            ).toLocaleDateString()}`
-                          : `Started ${new Date(item.updatedAt).toLocaleDateString()}`}
+                        {formatDuration(item.durationSeconds)} · {item.maxScrollPercent}% read ·{" "}
+                        {new Date(item.updatedAt).toLocaleDateString()}
                       </div>
                     </div>
-                    <Badge variant={item.status === "passed" ? "default" : "secondary"}>
-                      {item.status}
+                    <Badge variant={item.completed ? "default" : "secondary"}>
+                      {item.completed ? "read through" : "in progress"}
                     </Badge>
                   </li>
                 );
@@ -256,7 +286,7 @@ function Dashboard() {
             </ul>
           ) : (
             <p className="py-6 text-sm text-muted-foreground">
-              Open a paper and mark a question as started, passed, or failed.
+              Open a paper, read, bookmark, and save reflections to build your progress.
             </p>
           )}
         </section>
