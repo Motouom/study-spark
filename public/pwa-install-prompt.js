@@ -4,6 +4,7 @@
   var LAST_SHOWN_KEY = "studyspark:pwa-install-last-shown-at";
   var DISMISS_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
   var SHOW_COOLDOWN_MS = 8 * 60 * 60 * 1000;
+  var FALLBACK_DELAY_MS = 12000;
   var promptEvent = null;
   var promptNode = null;
 
@@ -50,7 +51,7 @@
   }
 
   function canShowPrompt() {
-    if (!promptEvent || isStandalone()) return false;
+    if (isStandalone()) return false;
     if (storageNumber(ACCEPTED_KEY)) return false;
 
     var dismissedAt = storageNumber(DISMISS_KEY);
@@ -70,6 +71,9 @@
     if (!canShowPrompt() || promptNode) return;
 
     var message = messages[Math.floor(Math.random() * messages.length)];
+    var hasNativePrompt = Boolean(promptEvent);
+    var fallbackText =
+      "If your browser does not open the install prompt, use the browser menu and choose Install app or Add to Home screen.";
     var shell = document.createElement("aside");
     shell.setAttribute("role", "dialog");
     shell.setAttribute("aria-label", "Install StudySpark");
@@ -101,12 +105,17 @@
       "</div>" +
       '<div style="margin-top:3px;color:#716b64;font-size:13px;line-height:1.45">' +
       message.body +
+      (!hasNativePrompt
+        ? '<br /><span style="display:block;margin-top:6px">' + fallbackText + "</span>"
+        : "") +
       "</div>" +
       "</div>" +
       '<button type="button" data-pwa-dismiss aria-label="Dismiss install prompt" style="width:34px;height:34px;border:0;border-radius:10px;background:#f4f0ea;color:#1b1714;font-size:20px;line-height:1;cursor:pointer">×</button>' +
       "</div>" +
       '<div style="display:flex;gap:8px;padding:0 14px 14px">' +
-      '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>' +
+      (hasNativePrompt
+        ? '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>'
+        : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>') +
       '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>' +
       "</div>";
 
@@ -120,18 +129,20 @@
       removePrompt();
     });
 
-    shell.querySelector("[data-pwa-install]").addEventListener("click", function () {
-      var event = promptEvent;
-      removePrompt();
-      if (!event) return;
+    if (hasNativePrompt) {
+      shell.querySelector("[data-pwa-install]").addEventListener("click", function () {
+        var event = promptEvent;
+        removePrompt();
+        if (!event) return;
 
-      event.prompt();
-      event.userChoice.then(function (choice) {
-        if (choice && choice.outcome === "accepted") storageSet(ACCEPTED_KEY, 1);
-        else storageSet(LAST_SHOWN_KEY, now());
-        promptEvent = null;
+        event.prompt();
+        event.userChoice.then(function (choice) {
+          if (choice && choice.outcome === "accepted") storageSet(ACCEPTED_KEY, 1);
+          else storageSet(LAST_SHOWN_KEY, now());
+          promptEvent = null;
+        });
       });
-    });
+    }
 
     document.body.appendChild(shell);
     promptNode = shell;
@@ -145,6 +156,8 @@
     var delay = 18000 + Math.floor(Math.random() * 22000);
     window.setTimeout(createPrompt, delay);
   });
+
+  window.setTimeout(createPrompt, FALLBACK_DELAY_MS);
 
   window.addEventListener("appinstalled", function () {
     storageSet(ACCEPTED_KEY, 1);
