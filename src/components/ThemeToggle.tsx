@@ -1,6 +1,5 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme, type Theme } from "@/hooks/use-theme";
-import { Button } from "@/components/ui/button";
 
 const options: { value: Theme; label: string }[] = [
   { value: "light", label: "Light" },
@@ -10,8 +9,8 @@ const options: { value: Theme; label: string }[] = [
 
 interface ThemeToggleProps {
   /**
-   * "icon"   — simple toggle button that switches light ↔ dark (default, for toolbars/sidebar)
-   * "select" — segmented Light / Dark / System picker (for settings page)
+   * "icon"    — labeled toggle button (Sun/Moon + "Light"/"Dark") for toolbars and sidebar
+   * "select"  — segmented Light / Dark / System picker for the settings page
    */
   variant?: "icon" | "select";
 }
@@ -45,27 +44,30 @@ export function ThemeToggle({ variant = "icon" }: ThemeToggleProps) {
     );
   }
 
-  // Simple toggle: press to flip between light and dark.
-  // When on system, pressing locks to the opposite of the current resolved theme.
+  // Labeled toggle button: shows current mode name so students know exactly what it does
+  const isDark = resolvedTheme === "dark";
+
   function handleToggle() {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    setTheme(isDark ? "light" : "dark");
   }
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+    <button
       onClick={handleToggle}
-      className="relative h-9 w-9"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="flex h-9 items-center gap-1.5 rounded-md border border-border bg-secondary px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent/10 hover:text-foreground"
     >
-      {/* Sun shown in light mode, hidden in dark */}
-      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      {/* Moon hidden in light mode, shown in dark */}
-      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">
-        {resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      </span>
-    </Button>
+      {isDark ? (
+        <>
+          <Sun className="h-3.5 w-3.5" />
+          Light mode
+        </>
+      ) : (
+        <>
+          <Moon className="h-3.5 w-3.5" />
+          Dark mode
+        </>
+      )}
+    </button>
   );
 }
