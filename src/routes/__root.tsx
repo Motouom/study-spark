@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import appCss from "../styles.css?url";
 
@@ -107,6 +108,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <script src="/chunk-reload.js" defer />
         <script src="/pwa-register.js" defer />
         <script src="/pwa-install-prompt.js" defer />
+        <SpeedInsights />
         <Scripts />
       </body>
     </html>
