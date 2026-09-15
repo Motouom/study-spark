@@ -1,5 +1,6 @@
 import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   LayoutDashboard,
   Library,
@@ -221,12 +222,16 @@ function SidebarContent({
             {profile?.plan === "premium" ? "Premium" : "Free"}
           </Link>
         </div>
+        {/* Theme toggle row — full width pill */}
+        <div className="mt-2">
+          <ThemeToggle />
+        </div>
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => void handleSignOut()}
-          className="mt-2 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
+          className="mt-1 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
         >
           <LogOut className="h-4 w-4" />
           Sign out
@@ -325,7 +330,7 @@ function AppLayout() {
   const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { notifications, unreadCount } = useLearnerNotifications();
+  const { notifications, unreadCount, markAsRead } = useLearnerNotifications();
   const admin = useAdminSession();
   const showAdminLink = admin.isAdmin;
 
@@ -485,12 +490,24 @@ function AppLayout() {
               <div className="max-h-80 overflow-y-auto">
                 {notifications.length > 0 ? (
                   notifications.slice(0, 5).map((item) => (
-                    <div key={item.id} className="border-b border-border px-4 py-3 text-sm">
-                      <div className="font-medium">{item.title}</div>
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => markAsRead(item.id)}
+                      className={`block w-full border-b border-border px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/70 ${
+                        item.read ? "bg-background" : "bg-accent/5"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-medium">{item.title}</span>
+                        {!item.read && (
+                          <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                        )}
+                      </div>
                       <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
                         {item.body}
                       </p>
-                    </div>
+                    </button>
                   ))
                 ) : (
                   <div className="px-4 py-8 text-center text-sm text-muted-foreground">
