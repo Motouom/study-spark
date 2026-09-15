@@ -1,5 +1,6 @@
-import { Moon, Sun } from "lucide-react";
 import { useTheme, type Theme } from "@/hooks/use-theme";
+import { Switch } from "@/components/ui/switch";
+import { Moon, Sun } from "lucide-react";
 
 const options: { value: Theme; label: string }[] = [
   { value: "light", label: "Light" },
@@ -9,8 +10,8 @@ const options: { value: Theme; label: string }[] = [
 
 interface ThemeToggleProps {
   /**
-   * "icon"    — labeled toggle button (Sun/Moon + "Light"/"Dark") for toolbars and sidebar
-   * "select"  — segmented Light / Dark / System picker for the settings page
+   * "icon"   — pill row with "Dark Mode" label + Switch toggle (for toolbar/sidebar)
+   * "select" — segmented Light / Dark / System picker (for settings page)
    */
   variant?: "icon" | "select";
 }
@@ -44,7 +45,6 @@ export function ThemeToggle({ variant = "icon" }: ThemeToggleProps) {
     );
   }
 
-  // Labeled toggle button: shows current mode name so students know exactly what it does
   const isDark = resolvedTheme === "dark";
 
   function handleToggle() {
@@ -53,21 +53,21 @@ export function ThemeToggle({ variant = "icon" }: ThemeToggleProps) {
 
   return (
     <button
-      onClick={handleToggle}
+      role="switch"
+      aria-checked={isDark}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="flex h-9 items-center gap-1.5 rounded-md border border-border bg-secondary px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent/10 hover:text-foreground"
+      onClick={handleToggle}
+      className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:bg-secondary/60"
     >
-      {isDark ? (
-        <>
-          <Sun className="h-3.5 w-3.5" />
-          Light mode
-        </>
-      ) : (
-        <>
-          <Moon className="h-3.5 w-3.5" />
-          Dark mode
-        </>
-      )}
+      <span className="text-sm font-medium text-foreground">
+        {isDark ? "Dark Mode" : "Light Mode"}
+      </span>
+      <Switch
+        checked={isDark}
+        onCheckedChange={handleToggle}
+        aria-hidden="true"
+        tabIndex={-1}
+      />
     </button>
   );
 }
