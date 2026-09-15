@@ -1,21 +1,18 @@
-import { Monitor, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme, type Theme } from "@/hooks/use-theme";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
-const options: { value: Theme; label: string; icon: typeof Sun }[] = [
-  { value: "light", label: "Light", icon: Sun },
-  { value: "dark", label: "Dark", icon: Moon },
-  { value: "system", label: "System", icon: Monitor },
+const options: { value: Theme; label: string }[] = [
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+  { value: "system", label: "System" },
 ];
 
 interface ThemeToggleProps {
-  /** "icon" shows a single icon button (default for toolbars), "select" shows a row label + icons for settings pages */
+  /**
+   * "icon"   — simple toggle button that switches light ↔ dark (default, for toolbars/sidebar)
+   * "select" — segmented Light / Dark / System picker (for settings page)
+   */
   variant?: "icon" | "select";
 }
 
@@ -25,52 +22,50 @@ export function ThemeToggle({ variant = "icon" }: ThemeToggleProps) {
   if (variant === "select") {
     return (
       <div className="flex items-center gap-1 rounded-lg border border-border bg-secondary p-1">
-        {options.map(({ value, label, icon: Icon }) => (
-          <button
-            key={value}
-            onClick={() => setTheme(value)}
-            aria-label={label}
-            aria-pressed={theme === value}
-            className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-              theme === value
-                ? "bg-background text-foreground shadow-soft"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Icon className="h-3.5 w-3.5" />
-            {label}
-          </button>
-        ))}
+        {options.map(({ value, label }) => {
+          const Icon = value === "light" ? Sun : value === "dark" ? Moon : null;
+          return (
+            <button
+              key={value}
+              onClick={() => setTheme(value)}
+              aria-label={label}
+              aria-pressed={theme === value}
+              className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+                theme === value
+                  ? "bg-background text-foreground shadow-soft"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {Icon && <Icon className="h-3.5 w-3.5" />}
+              {label}
+            </button>
+          );
+        })}
       </div>
     );
   }
 
+  // Simple toggle: press to flip between light and dark.
+  // When on system, pressing locks to the opposite of the current resolved theme.
+  function handleToggle() {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  }
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label="Toggle theme"
-          className="relative h-9 w-9"
-        >
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        {options.map(({ value, label, icon: Icon }) => (
-          <DropdownMenuItem
-            key={value}
-            onClick={() => setTheme(value)}
-            className={theme === value ? "bg-accent/10 font-medium" : ""}
-          >
-            <Icon className="mr-2 h-4 w-4" />
-            {label}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant="ghost"
+      size="icon"
+      aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      onClick={handleToggle}
+      className="relative h-9 w-9"
+    >
+      {/* Sun shown in light mode, hidden in dark */}
+      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      {/* Moon hidden in light mode, shown in dark */}
+      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <span className="sr-only">
+        {resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      </span>
+    </Button>
   );
 }
