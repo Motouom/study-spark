@@ -75,6 +75,7 @@ After deployment:
 
 - Open the public landing page.
 - Confirm the install prompt shows `StudySpark`, the StudySpark icon, and the Cameroon GCE practice description.
+- Leave the public page open long enough to confirm the StudySpark install nudge appears only when the browser reports the app is installable.
 - Open `/pricing`.
 - Sign in with Google.
 - Complete or confirm learner onboarding.
@@ -116,6 +117,14 @@ Service worker update strategy:
 - Change `CACHE_VERSION` whenever cached PWA assets change.
 - `service-worker.js` is served with `no-store` so browsers check for updates after deploy.
 - Build assets remain immutable under `/assets/`; they are not cached by the service worker.
+
+Install prompt strategy:
+
+- `public/pwa-install-prompt.js` listens for the browser `beforeinstallprompt` event.
+- The app shows a small install nudge after a short randomized delay instead of forcing an immediate prompt.
+- Dismissed prompts stay quiet for 7 days.
+- `Later` pauses the prompt for 8 hours.
+- The nudge is hidden after installation or when the app is already running in standalone mode.
 
 ## 8. Troubleshooting
 

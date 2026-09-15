@@ -92,6 +92,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         {children}
         <script src="/chunk-reload.js" defer />
         <script src="/pwa-register.js" defer />
+        <script src="/pwa-install-prompt.js" defer />
         <Scripts />
       </body>
     </html>
