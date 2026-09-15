@@ -1,5 +1,6 @@
 import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   LayoutDashboard,
   Library,
@@ -221,12 +222,16 @@ function SidebarContent({
             {profile?.plan === "premium" ? "Premium" : "Free"}
           </Link>
         </div>
+        {/* Theme toggle row — full width pill */}
+        <div className="mt-2">
+          <ThemeToggle />
+        </div>
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => void handleSignOut()}
-          className="mt-2 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
+          className="mt-1 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
         >
           <LogOut className="h-4 w-4" />
           Sign out

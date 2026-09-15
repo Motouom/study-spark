@@ -62,6 +62,7 @@
 }
 
 :root {
+  color-scheme: light;
   --radius: 0.75rem;
 
   /* Notion-style warm off-white */
@@ -121,6 +122,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.16 0.008 60);
   --foreground: oklch(0.96 0.004 80);
   --surface: oklch(0.2 0.01 60);
@@ -192,12 +194,12 @@
 @layer utilities {
   .grid-bg {
     background-image:
-      linear-gradient(to right, oklch(0 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0 0 0 / 0.04) 1px, transparent 1px);
+      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
     background-size: 32px 32px;
   }
   .dot-bg {
-    background-image: radial-gradient(oklch(0 0 0 / 0.08) 1px, transparent 1px);
+    background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
     background-size: 16px 16px;
   }
 
@@ -236,6 +238,15 @@
   body.protected-content-hidden .protected-content {
     filter: blur(18px);
   }
+}
+
+/* KaTeX dark mode — override the bundled stylesheet's hardcoded ink colors */
+.dark .protected-markdown .katex,
+.dark .protected-markdown .katex * {
+  color: var(--color-foreground);
+}
+.dark .protected-markdown .katex-html {
+  color: var(--color-foreground);
 }
 
 @media print {
