@@ -325,7 +325,7 @@ function AppLayout() {
   const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { notifications, unreadCount } = useLearnerNotifications();
+  const { notifications, unreadCount, markAsRead } = useLearnerNotifications();
   const admin = useAdminSession();
   const showAdminLink = admin.isAdmin;
 
@@ -485,12 +485,24 @@ function AppLayout() {
               <div className="max-h-80 overflow-y-auto">
                 {notifications.length > 0 ? (
                   notifications.slice(0, 5).map((item) => (
-                    <div key={item.id} className="border-b border-border px-4 py-3 text-sm">
-                      <div className="font-medium">{item.title}</div>
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => markAsRead(item.id)}
+                      className={`block w-full border-b border-border px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/70 ${
+                        item.read ? "bg-background" : "bg-accent/5"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="font-medium">{item.title}</span>
+                        {!item.read && (
+                          <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
+                        )}
+                      </div>
                       <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
                         {item.body}
                       </p>
-                    </div>
+                    </button>
                   ))
                 ) : (
                   <div className="px-4 py-8 text-center text-sm text-muted-foreground">

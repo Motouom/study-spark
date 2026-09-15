@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
 import {
   CAMEROON_REGIONS,
   CLASS_LEVELS,
@@ -24,7 +25,7 @@ import {
 import { getStudentSession } from "@/lib/server-api";
 import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Check, LogOut, Sparkles, Trash2, TriangleAlert } from "lucide-react";
+import { Bell, Check, LogOut, Sparkles, Trash2, TriangleAlert } from "lucide-react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { getSupabaseDisplayName } from "@/hooks/use-supabase-user";
 import { useStudyProfile } from "@/hooks/use-study-profile";
@@ -33,6 +34,10 @@ import { supabaseConfigured } from "@/lib/supabase";
 import { useBrowserLocation } from "@/hooks/use-browser-location";
 import { useSubscription } from "@/hooks/use-subscription";
 import { isPremiumActive } from "@/lib/premium";
+import {
+  useLearnerNotificationPreferences,
+  type LearnerNotificationKind,
+} from "@/hooks/use-learner-notifications";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — StudySpark" }] }),
@@ -81,11 +86,39 @@ function Row({
   );
 }
 
+const NOTIFICATION_OPTIONS: Array<{
+  kind: LearnerNotificationKind;
+  label: string;
+  hint: string;
+}> = [
+  {
+    kind: "content",
+    label: "Paper updates",
+    hint: "New matching papers and useful study content prompts.",
+  },
+  {
+    kind: "progress",
+    label: "Progress insights",
+    hint: "Weak subject reminders and review suggestions.",
+  },
+  {
+    kind: "streak",
+    label: "Streak nudges",
+    hint: "Short reminders that help you keep a study habit alive.",
+  },
+  {
+    kind: "membership",
+    label: "Account and payments",
+    hint: "Premium, renewal, and payment status updates.",
+  },
+];
+
 function SettingsPage() {
   const { session } = Route.useLoaderData();
   const navigate = useNavigate();
   const { user, loaded, profile: savedProfile, saveProfile } = useStudyProfile();
   const { subscription } = useSubscription();
+  const { preferences, setKindEnabled } = useLearnerNotificationPreferences();
   const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? session.profile);
   const premiumActive = isPremiumActive(profile);
   const fallbackProfile = profile ?? session.profile;
@@ -408,6 +441,36 @@ function SettingsPage() {
                 >
                   {saving ? "Saving..." : "Save profile"}
                 </Button>
+              </div>
+            </Section>
+
+            <Section
+              title="Notifications"
+              description="Choose which learner updates appear in your notification center."
+            >
+              <div className="space-y-3">
+                {NOTIFICATION_OPTIONS.map((option) => (
+                  <div
+                    key={option.kind}
+                    className="flex items-start justify-between gap-4 rounded-lg border border-border bg-background p-4"
+                  >
+                    <div className="flex min-w-0 gap-3">
+                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary">
+                        <Bell className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium">{option.label}</div>
+                        <p className="mt-1 text-sm text-muted-foreground">{option.hint}</p>
+                      </div>
+                    </div>
+                    <Switch
+                      checked={preferences[option.kind]}
+                      onCheckedChange={(checked) => setKindEnabled(option.kind, checked)}
+                      aria-label={`${option.label} notifications`}
+                      className="mt-1 shrink-0"
+                    />
+                  </div>
+                ))}
               </div>
             </Section>
 
