@@ -74,6 +74,8 @@ Vercel should build and deploy automatically.
 After deployment:
 
 - Open the public landing page.
+- Confirm the install prompt shows `StudySpark`, the StudySpark icon, and the Cameroon GCE practice description.
+- Leave the public page open long enough to confirm the StudySpark install nudge appears only when the browser reports the app is installable.
 - Open `/pricing`.
 - Sign in with Google.
 - Complete or confirm learner onboarding.
@@ -85,8 +87,46 @@ After deployment:
 - Request AI progress analysis and confirm either AI or fallback content appears.
 - Start a sandbox Fapshi payment and verify the payment return path.
 - Confirm private pages are not listed in `public/sitemap.xml`.
+- In Android Chrome, install the app and confirm it opens within the `study-spark-uruh.vercel.app` scope.
+- Turn network offline and confirm navigation shows the StudySpark offline message instead of a blank page.
 
-## 7. Troubleshooting
+## 7. PWA Behavior
+
+StudySpark is installable, but offline behavior is intentionally conservative.
+
+Cached by the service worker:
+
+- `/offline.html`
+- `/site.webmanifest`
+- `/favicon.ico`
+- StudySpark install icons under `/icons/`
+
+Not cached by the service worker:
+
+- Authenticated routes such as `/dashboard`, `/library`, `/course/:documentId`, `/progress`, and `/settings`
+- Supabase API responses
+- Protected paper markdown/content
+- Payment routes and Fapshi responses
+- AI-generated responses
+
+This protects learner data on shared phones and avoids stale private study material after sign-out or account switching. Offline users see an explicit reconnect message. Full offline paper reading should only be added later with per-user encrypted storage, sign-out cache clearing, and a clear sync/conflict strategy.
+
+Service worker update strategy:
+
+- `public/service-worker.js` uses a versioned cache name.
+- Change `CACHE_VERSION` whenever cached PWA assets change.
+- `service-worker.js` is served with `no-store` so browsers check for updates after deploy.
+- Build assets remain immutable under `/assets/`; they are not cached by the service worker.
+
+Install prompt strategy:
+
+- `public/pwa-install-prompt.js` listens for the browser `beforeinstallprompt` event.
+- The app shows a small install nudge after a short randomized delay instead of forcing an immediate prompt.
+- Dismissed prompts stay quiet for 7 days.
+- `Later` pauses the prompt for 8 hours.
+- The nudge is hidden after installation or when the app is already running in standalone mode.
+
+## 8. Troubleshooting
 
 ### Blank page after deploy
 
@@ -102,6 +142,7 @@ Actions:
 - Check browser console for 404 asset names.
 - Check Vercel deployment logs.
 - Confirm `vercel.json` CSP allows required runtime scripts and API hosts.
+- Confirm the service worker cache name was bumped if offline assets changed.
 
 ### Google sign-in fails
 
@@ -130,6 +171,6 @@ Check:
 - `AI_BASE_URL` is correct.
 - Server logs show whether the fallback path was used.
 
-## 8. Rollback
+## 9. Rollback
 
 Use Vercel's rollback feature from the project dashboard if a production deployment breaks. If the database schema changed, confirm whether rollback also needs a forward-compatible SQL patch. Avoid destructive database rollback during active user traffic.

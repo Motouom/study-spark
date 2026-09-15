@@ -48,6 +48,8 @@ export const Route = createRootRoute({
       { name: "author", content: "StudySpark" },
       { name: "application-name", content: "StudySpark" },
       { name: "apple-mobile-web-app-title", content: "StudySpark" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       { name: "theme-color", media: "(prefers-color-scheme: light)", content: "#fdf8f0" },
       { name: "theme-color", media: "(prefers-color-scheme: dark)", content: "#272016" },
       { name: "geo.region", content: "CM" },
@@ -66,6 +68,7 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "canonical", href: siteUrl },
       { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "apple-touch-icon", sizes: "180x180", href: "/icons/apple-touch-icon.png" },
       {
         rel: "icon",
         type: "image/svg+xml",
@@ -102,6 +105,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
         <script src="/chunk-reload.js" defer />
+        <script src="/pwa-register.js" defer />
+        <script src="/pwa-install-prompt.js" defer />
         <Scripts />
       </body>
     </html>
