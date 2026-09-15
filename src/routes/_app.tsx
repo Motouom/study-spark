@@ -1,5 +1,6 @@
 import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   LayoutDashboard,
   Library,
@@ -221,16 +222,19 @@ function SidebarContent({
             {profile?.plan === "premium" ? "Premium" : "Free"}
           </Link>
         </div>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => void handleSignOut()}
-          className="mt-2 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
-        >
-          <LogOut className="h-4 w-4" />
-          Sign out
-        </Button>
+        <div className="mt-2 flex items-center justify-between gap-2">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => void handleSignOut()}
+            className="flex-1 justify-start gap-2 text-muted-foreground hover:text-foreground"
+          >
+            <LogOut className="h-4 w-4" />
+            Sign out
+          </Button>
+          <ThemeToggle />
+        </div>
       </div>
     </>
   );
@@ -431,6 +435,7 @@ function AppLayout() {
           <Button variant="ghost" size="icon" aria-label="Search" onClick={() => setCmdOpen(true)}>
             <Search className="h-5 w-5" />
           </Button>
+          <ThemeToggle />
           <Link
             to="/notifications"
             aria-label="Notifications"
@@ -465,6 +470,7 @@ function AppLayout() {
               ⌘K
             </kbd>
           </button>
+          <ThemeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button

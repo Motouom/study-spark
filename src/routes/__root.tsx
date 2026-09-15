@@ -48,7 +48,8 @@ export const Route = createRootRoute({
       { name: "author", content: "StudySpark" },
       { name: "application-name", content: "StudySpark" },
       { name: "apple-mobile-web-app-title", content: "StudySpark" },
-      { name: "theme-color", content: "#1b1714" },
+      { name: "theme-color", media: "(prefers-color-scheme: light)", content: "#fdf8f0" },
+      { name: "theme-color", media: "(prefers-color-scheme: dark)", content: "#272016" },
       { name: "geo.region", content: "CM" },
       { name: "geo.placename", content: "Cameroon" },
       { property: "og:title", content: siteTitle },
@@ -78,12 +79,27 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  // Inline script runs synchronously before first paint to prevent flash of wrong theme
+  const themeScript = `
+    (function(){
+      try {
+        var t = localStorage.getItem('studyspark-theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (t === 'dark' || (t !== 'light' && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch(e){}
+    })();
+  `.trim();
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
+        {/* eslint-disable-next-line react/no-danger */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
         <script src="/chunk-reload.js" defer />
         <Scripts />

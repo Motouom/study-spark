@@ -3,6 +3,7 @@ import { PageHeader } from "./_app";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   Select,
   SelectContent,
@@ -442,6 +443,15 @@ function SettingsPage() {
                   {saving ? "Saving..." : "Save profile"}
                 </Button>
               </div>
+            </Section>
+
+            <Section
+              title="Appearance"
+              description="Choose how StudySpark looks on this device. Your preference is saved in the browser."
+            >
+              <Row label="Color theme" hint="System follows your OS preference automatically">
+                <ThemeToggle variant="select" />
+              </Row>
             </Section>
 
             <Section

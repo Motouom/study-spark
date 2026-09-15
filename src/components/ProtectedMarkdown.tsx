@@ -97,7 +97,7 @@ export default function ProtectedMarkdown({
               </span>
             ),
             img: ({ src, alt }) => (
-              <span className="my-6 block rounded-lg border border-border bg-white p-4">
+              <span className="my-6 block rounded-lg border border-border bg-card p-4">
                 <img
                   src={src ?? ""}
                   alt={alt ?? "Question diagram"}
