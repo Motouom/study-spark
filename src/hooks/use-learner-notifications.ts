@@ -60,9 +60,7 @@ function readPreferences(userId: string): LearnerNotificationPreferences {
         typeof parsed.progress === "boolean" ? parsed.progress : DEFAULT_PREFERENCES.progress,
       streak: typeof parsed.streak === "boolean" ? parsed.streak : DEFAULT_PREFERENCES.streak,
       membership:
-        typeof parsed.membership === "boolean"
-          ? parsed.membership
-          : DEFAULT_PREFERENCES.membership,
+        typeof parsed.membership === "boolean" ? parsed.membership : DEFAULT_PREFERENCES.membership,
     };
   } catch {
     window.localStorage.removeItem(getPreferencesKey(userId));
@@ -77,7 +75,9 @@ function readNotificationIds(userId: string) {
     const saved = window.localStorage.getItem(getReadKey(userId));
     const parsed = saved ? JSON.parse(saved) : [];
     return new Set(
-      Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : [],
+      Array.isArray(parsed)
+        ? parsed.filter((item): item is string => typeof item === "string")
+        : [],
     );
   } catch {
     window.localStorage.removeItem(getReadKey(userId));
@@ -260,8 +260,8 @@ export function useLearnerNotifications() {
           subjectAttempts.length > 0 ? Math.round((passed / subjectAttempts.length) * 100) : null;
         return { subject, score };
       })
-      .filter((item): item is { subject: (typeof item)["subject"]; score: number } =>
-        item.score !== null,
+      .filter(
+        (item): item is { subject: (typeof item)["subject"]; score: number } => item.score !== null,
       )
       .sort((a, b) => a.score - b.score)[0];
 

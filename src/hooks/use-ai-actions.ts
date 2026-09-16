@@ -35,7 +35,7 @@ export function useAiActions() {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const run = useCallback(async <T,>(key: string, action: () => Promise<T>) => {
+  const run = useCallback(async <T>(key: string, action: () => Promise<T>) => {
     setLoading(key);
     setError(null);
     try {

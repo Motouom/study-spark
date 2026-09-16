@@ -71,78 +71,78 @@ function AchievementsPage() {
           title="Premium achievements"
           description="Upgrade to unlock XP, milestones, badges, and advanced learning motivation."
         >
-        {error && (
-          <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-            Achievements could not be loaded: {error}
-          </div>
-        )}
+          {error && (
+            <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+              Achievements could not be loaded: {error}
+            </div>
+          )}
 
-        <div className="rounded-xl border border-border bg-card p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">Your level</p>
-              <div className="mt-1 flex items-baseline gap-3">
-                <span className="font-display text-5xl">{level}</span>
-                <span className="text-sm text-muted-foreground">{xp} XP</span>
+          <div className="rounded-xl border border-border bg-card p-6 md:p-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Your level</p>
+                <div className="mt-1 flex items-baseline gap-3">
+                  <span className="font-display text-5xl">{level}</span>
+                  <span className="text-sm text-muted-foreground">{xp} XP</span>
+                </div>
+              </div>
+              <div className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">{earned}</span> earned
               </div>
             </div>
-            <div className="text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">{earned}</span> earned
+            <div className="mt-5">
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>Level {level}</span>
+                <span>Level {level + 1}</span>
+              </div>
+              <Progress value={levelProgress} className="mt-1.5 h-2" />
             </div>
           </div>
-          <div className="mt-5">
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>Level {level}</span>
-              <span>Level {level + 1}</span>
-            </div>
-            <Progress value={levelProgress} className="mt-1.5 h-2" />
-          </div>
-        </div>
 
-        <section>
-          <h2 className="mb-3 text-sm font-medium text-muted-foreground">Next milestones</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {milestones.map((milestone) => {
-              const Icon = milestone.complete ? milestone.icon : Lock;
-              return (
-                <div
-                  key={milestone.title}
-                  className={`rounded-xl border bg-card p-5 ${
-                    milestone.complete ? "border-border" : "border-dashed border-border"
-                  }`}
-                >
+          <section>
+            <h2 className="mb-3 text-sm font-medium text-muted-foreground">Next milestones</h2>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {milestones.map((milestone) => {
+                const Icon = milestone.complete ? milestone.icon : Lock;
+                return (
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-                      milestone.complete
-                        ? "bg-accent/15 text-accent"
-                        : "bg-muted text-muted-foreground"
+                    key={milestone.title}
+                    className={`rounded-xl border bg-card p-5 ${
+                      milestone.complete ? "border-border" : "border-dashed border-border"
                     }`}
                   >
-                    <Icon className="h-5 w-5" />
+                    <div
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                        milestone.complete
+                          ? "bg-accent/15 text-accent"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-4 text-base font-medium">{milestone.title}</h3>
+                    <p className="mt-1 text-xs text-muted-foreground">{milestone.description}</p>
+                    <p className="mt-3 text-xs text-muted-foreground">
+                      {milestone.progress}% complete
+                    </p>
                   </div>
-                  <h3 className="mt-4 text-base font-medium">{milestone.title}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{milestone.description}</p>
-                  <p className="mt-3 text-xs text-muted-foreground">
-                    {milestone.progress}% complete
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+                );
+              })}
+            </div>
+          </section>
 
-        {earned === 0 && (
-          <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
-            <Award className="mx-auto h-10 w-10 text-muted-foreground" />
-            <h3 className="mt-4 text-base font-medium">No achievements yet</h3>
-            <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-              Mark structural paper questions to earn badges from real progress.
-            </p>
-            <Button asChild className="mt-5">
-              <Link to="/library">Open papers</Link>
-            </Button>
-          </div>
-        )}
+          {earned === 0 && (
+            <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+              <Award className="mx-auto h-10 w-10 text-muted-foreground" />
+              <h3 className="mt-4 text-base font-medium">No achievements yet</h3>
+              <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
+                Mark structural paper questions to earn badges from real progress.
+              </p>
+              <Button asChild className="mt-5">
+                <Link to="/library">Open papers</Link>
+              </Button>
+            </div>
+          )}
         </PremiumGate>
       </div>
     </>

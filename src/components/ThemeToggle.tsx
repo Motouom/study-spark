@@ -62,12 +62,7 @@ export function ThemeToggle({ variant = "icon" }: ThemeToggleProps) {
       <span className="text-sm font-medium text-foreground">
         {isDark ? "Dark Mode" : "Light Mode"}
       </span>
-      <Switch
-        checked={isDark}
-        onCheckedChange={handleToggle}
-        aria-hidden="true"
-        tabIndex={-1}
-      />
+      <Switch checked={isDark} onCheckedChange={handleToggle} aria-hidden="true" tabIndex={-1} />
     </button>
   );
 }

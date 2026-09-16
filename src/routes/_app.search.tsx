@@ -22,7 +22,10 @@ function AdvancedSearchPage() {
     if (!needle) return documents.slice(0, 20);
     return documents
       .filter((document) =>
-        [document.title, document.subject, document.markdownContent].join(" ").toLowerCase().includes(needle),
+        [document.title, document.subject, document.markdownContent]
+          .join(" ")
+          .toLowerCase()
+          .includes(needle),
       )
       .slice(0, 50);
   }, [documents, query]);

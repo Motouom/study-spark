@@ -320,7 +320,9 @@ function QuestionsAdmin() {
           </Field>
 
           <div className="mt-3 flex flex-col gap-3 rounded-lg border border-border bg-secondary/30 p-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <span>{documentDraft.markdownContent.length.toLocaleString()} characters ready to save.</span>
+            <span>
+              {documentDraft.markdownContent.length.toLocaleString()} characters ready to save.
+            </span>
             <Button
               type="button"
               variant="outline"

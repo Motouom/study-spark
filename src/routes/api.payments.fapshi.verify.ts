@@ -13,7 +13,9 @@ export const Route = createFileRoute("/api/payments/fapshi/verify")({
 
           let query = supabase
             .from("payment_transactions")
-            .select("id, user_id, subscription_id, amount_xaf, billing_interval, provider_transaction_id, status")
+            .select(
+              "id, user_id, subscription_id, amount_xaf, billing_interval, provider_transaction_id, status",
+            )
             .eq("user_id", user.id)
             .in("status", ["created", "pending"]);
 
@@ -32,7 +34,9 @@ export const Route = createFileRoute("/api/payments/fapshi/verify")({
             return Response.json({ status: "not_found" }, { status: 404 });
           }
 
-          const providerStatus = await fetchFapshiPaymentStatus(transaction.provider_transaction_id);
+          const providerStatus = await fetchFapshiPaymentStatus(
+            transaction.provider_transaction_id,
+          );
           const result = await applyVerifiedFapshiStatus(supabase, transaction, providerStatus);
 
           return Response.json(result);

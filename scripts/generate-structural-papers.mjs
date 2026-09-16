@@ -4,45 +4,485 @@ import { join } from "node:path";
 const outDir = join(process.cwd(), "content", "papers");
 
 const subjects = [
-  ["Mathematics", "ordinary", "form_5", "general, science, technical", ["Number and calculation", "Algebra and graphs", "Geometry and mensuration", "Trigonometry", "Statistics and probability", "Vectors and transformations", "Commercial arithmetic", "Sequences and variation"]],
-  ["Additional Mathematics", "ordinary", "form_5", "science, technical", ["Functions", "Quadratics and inequalities", "Polynomial and remainder theorem", "Trigonometry", "Coordinate geometry", "Differentiation", "Integration", "Vectors and matrices"]],
-  ["Pure Mathematics with Mechanics", "advanced", "upper_sixth", "a_science", ["Algebra", "Binomial theorem", "Functions", "Trigonometry", "Calculus", "Differential equations", "Vectors", "Mechanics"]],
-  ["Pure Mathematics with Statistics", "advanced", "upper_sixth", "a_science", ["Algebra", "Series", "Functions", "Calculus", "Probability", "Discrete distributions", "Continuous distributions", "Hypothesis testing"]],
-  ["Further Mathematics", "advanced", "upper_sixth", "a_science", ["Complex numbers", "Matrices", "Further calculus", "Numerical methods", "Differential equations", "Mechanics", "Statistics", "Proof"]],
-  ["English Language", "ordinary", "form_5", "general, science, arts, commercial, technical", ["Comprehension", "Summary", "Directed writing", "Essay writing", "Grammar", "Vocabulary", "Register", "Oral English"]],
-  ["English Literature", "advanced", "upper_sixth", "a_arts", ["Drama", "Poetry", "Prose", "African literature", "Characterisation", "Theme", "Narrative technique", "Context"]],
-  ["French", "ordinary", "form_5", "general, science, arts, commercial, technical", ["Comprehension", "Grammar", "Translation", "Essay writing", "Vocabulary", "Dialogue", "Letter writing", "Culture"]],
-  ["Special Bilingual Education French", "ordinary", "form_5", "arts", ["Advanced comprehension", "Translation", "Expression ecrite", "Grammar", "Oral production", "Culture", "Register", "Text analysis"]],
-  ["Religious Studies", "ordinary", "form_5", "general, arts", ["Old Testament", "New Testament", "Christian ethics", "African traditional religion", "Islam", "Church history", "Moral decision making", "Religion and society"]],
-  ["Philosophy", "advanced", "upper_sixth", "a_arts", ["Logic and argument", "Epistemology", "Ethics", "Political philosophy", "Metaphysics", "African philosophy", "Philosophy of science", "Human freedom"]],
-  ["Citizenship Education", "ordinary", "form_5", "general, arts", ["State and nation", "Rights and duties", "Democracy", "Elections", "Constitution", "Peace and conflict", "National integration", "Civic responsibility"]],
-  ["Physics", "advanced", "upper_sixth", "a_science", ["Measurements", "Mechanics", "Waves", "Electricity", "Magnetism", "Thermal physics", "Atomic physics", "Practical analysis"]],
-  ["Chemistry", "advanced", "upper_sixth", "a_science", ["Atomic structure", "Bonding", "Energetics", "Kinetics", "Equilibrium", "Organic chemistry", "Electrochemistry", "Qualitative analysis"]],
-  ["Biology", "advanced", "upper_sixth", "a_science", ["Cell biology", "Biochemistry", "Genetics", "Ecology", "Plant physiology", "Animal physiology", "Evolution", "Practical biology"]],
-  ["Human Biology", "ordinary", "form_5", "general, science", ["Cells and tissues", "Nutrition", "Respiration", "Circulation", "Excretion", "Coordination", "Reproduction", "Disease and immunity"]],
-  ["Geology", "advanced", "upper_sixth", "a_science, a_arts", ["Earth structure", "Minerals", "Rocks", "Plate tectonics", "Weathering", "Stratigraphy", "Economic geology", "Geological maps"]],
-  ["Economics", "advanced", "upper_sixth", "a_arts, a_commercial", ["Basic concepts", "Demand and supply", "Elasticity", "Production and costs", "Market structures", "National income", "Money and banking", "International trade"]],
-  ["Geography", "advanced", "upper_sixth", "a_arts", ["Map work", "Geomorphology", "Climatology", "Population", "Settlement", "Agriculture", "Industry", "Regional geography of Cameroon"]],
-  ["History", "advanced", "upper_sixth", "a_arts", ["Cameroon history", "West Africa", "European imperialism", "World wars", "Decolonisation", "Cold War", "Nationalism", "International organisations"]],
-  ["Commerce", "ordinary", "form_5", "commercial, technical", ["Trade", "Retail and wholesale", "Business units", "Transport", "Warehousing", "Insurance", "Banking", "International trade"]],
-  ["Accounting", "ordinary", "form_5", "commercial", ["Source documents", "Books of original entry", "Ledger accounts", "Trial balance", "Final accounts", "Control accounts", "Bank reconciliation", "Depreciation"]],
-  ["Business Studies", "ordinary", "form_5", "commercial, technical", ["Enterprise", "Business ownership", "Management", "Marketing", "Finance", "Human resources", "Production", "Business environment"]],
-  ["Computer Science", "advanced", "upper_sixth", "a_science", ["Data representation", "Computer architecture", "Algorithms", "Programming", "Databases", "Networks", "Systems analysis", "Cybersecurity"]],
-  ["ICT", "ordinary", "form_5", "commercial, technical, science", ["Computer systems", "Word processing", "Spreadsheets", "Databases", "Internet", "Presentation software", "Digital safety", "ICT in society"]],
-  ["Food and Nutrition", "ordinary", "form_5", "general", ["Nutrients", "Meal planning", "Food hygiene", "Cooking methods", "Food preservation", "Diet and health", "Consumer education", "Practical planning"]],
-  ["Food Science and Nutrition", "advanced", "upper_sixth", "a_science", ["Food chemistry", "Microbiology", "Nutritional biochemistry", "Food processing", "Quality control", "Diet therapy", "Public health nutrition", "Food product development"]],
-  ["Logic", "ordinary", "form_5", "general, arts", ["Terms and propositions", "Categorical logic", "Truth tables", "Arguments", "Fallacies", "Definitions", "Induction", "Deduction"]],
-  ["Agricultural Science", "advanced", "upper_sixth", "a_science", ["Soil science", "Crop production", "Animal production", "Farm management", "Agricultural economics", "Pests and diseases", "Agroforestry", "Practical agriculture"]],
+  [
+    "Mathematics",
+    "ordinary",
+    "form_5",
+    "general, science, technical",
+    [
+      "Number and calculation",
+      "Algebra and graphs",
+      "Geometry and mensuration",
+      "Trigonometry",
+      "Statistics and probability",
+      "Vectors and transformations",
+      "Commercial arithmetic",
+      "Sequences and variation",
+    ],
+  ],
+  [
+    "Additional Mathematics",
+    "ordinary",
+    "form_5",
+    "science, technical",
+    [
+      "Functions",
+      "Quadratics and inequalities",
+      "Polynomial and remainder theorem",
+      "Trigonometry",
+      "Coordinate geometry",
+      "Differentiation",
+      "Integration",
+      "Vectors and matrices",
+    ],
+  ],
+  [
+    "Pure Mathematics with Mechanics",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Algebra",
+      "Binomial theorem",
+      "Functions",
+      "Trigonometry",
+      "Calculus",
+      "Differential equations",
+      "Vectors",
+      "Mechanics",
+    ],
+  ],
+  [
+    "Pure Mathematics with Statistics",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Algebra",
+      "Series",
+      "Functions",
+      "Calculus",
+      "Probability",
+      "Discrete distributions",
+      "Continuous distributions",
+      "Hypothesis testing",
+    ],
+  ],
+  [
+    "Further Mathematics",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Complex numbers",
+      "Matrices",
+      "Further calculus",
+      "Numerical methods",
+      "Differential equations",
+      "Mechanics",
+      "Statistics",
+      "Proof",
+    ],
+  ],
+  [
+    "English Language",
+    "ordinary",
+    "form_5",
+    "general, science, arts, commercial, technical",
+    [
+      "Comprehension",
+      "Summary",
+      "Directed writing",
+      "Essay writing",
+      "Grammar",
+      "Vocabulary",
+      "Register",
+      "Oral English",
+    ],
+  ],
+  [
+    "English Literature",
+    "advanced",
+    "upper_sixth",
+    "a_arts",
+    [
+      "Drama",
+      "Poetry",
+      "Prose",
+      "African literature",
+      "Characterisation",
+      "Theme",
+      "Narrative technique",
+      "Context",
+    ],
+  ],
+  [
+    "French",
+    "ordinary",
+    "form_5",
+    "general, science, arts, commercial, technical",
+    [
+      "Comprehension",
+      "Grammar",
+      "Translation",
+      "Essay writing",
+      "Vocabulary",
+      "Dialogue",
+      "Letter writing",
+      "Culture",
+    ],
+  ],
+  [
+    "Special Bilingual Education French",
+    "ordinary",
+    "form_5",
+    "arts",
+    [
+      "Advanced comprehension",
+      "Translation",
+      "Expression ecrite",
+      "Grammar",
+      "Oral production",
+      "Culture",
+      "Register",
+      "Text analysis",
+    ],
+  ],
+  [
+    "Religious Studies",
+    "ordinary",
+    "form_5",
+    "general, arts",
+    [
+      "Old Testament",
+      "New Testament",
+      "Christian ethics",
+      "African traditional religion",
+      "Islam",
+      "Church history",
+      "Moral decision making",
+      "Religion and society",
+    ],
+  ],
+  [
+    "Philosophy",
+    "advanced",
+    "upper_sixth",
+    "a_arts",
+    [
+      "Logic and argument",
+      "Epistemology",
+      "Ethics",
+      "Political philosophy",
+      "Metaphysics",
+      "African philosophy",
+      "Philosophy of science",
+      "Human freedom",
+    ],
+  ],
+  [
+    "Citizenship Education",
+    "ordinary",
+    "form_5",
+    "general, arts",
+    [
+      "State and nation",
+      "Rights and duties",
+      "Democracy",
+      "Elections",
+      "Constitution",
+      "Peace and conflict",
+      "National integration",
+      "Civic responsibility",
+    ],
+  ],
+  [
+    "Physics",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Measurements",
+      "Mechanics",
+      "Waves",
+      "Electricity",
+      "Magnetism",
+      "Thermal physics",
+      "Atomic physics",
+      "Practical analysis",
+    ],
+  ],
+  [
+    "Chemistry",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Atomic structure",
+      "Bonding",
+      "Energetics",
+      "Kinetics",
+      "Equilibrium",
+      "Organic chemistry",
+      "Electrochemistry",
+      "Qualitative analysis",
+    ],
+  ],
+  [
+    "Biology",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Cell biology",
+      "Biochemistry",
+      "Genetics",
+      "Ecology",
+      "Plant physiology",
+      "Animal physiology",
+      "Evolution",
+      "Practical biology",
+    ],
+  ],
+  [
+    "Human Biology",
+    "ordinary",
+    "form_5",
+    "general, science",
+    [
+      "Cells and tissues",
+      "Nutrition",
+      "Respiration",
+      "Circulation",
+      "Excretion",
+      "Coordination",
+      "Reproduction",
+      "Disease and immunity",
+    ],
+  ],
+  [
+    "Geology",
+    "advanced",
+    "upper_sixth",
+    "a_science, a_arts",
+    [
+      "Earth structure",
+      "Minerals",
+      "Rocks",
+      "Plate tectonics",
+      "Weathering",
+      "Stratigraphy",
+      "Economic geology",
+      "Geological maps",
+    ],
+  ],
+  [
+    "Economics",
+    "advanced",
+    "upper_sixth",
+    "a_arts, a_commercial",
+    [
+      "Basic concepts",
+      "Demand and supply",
+      "Elasticity",
+      "Production and costs",
+      "Market structures",
+      "National income",
+      "Money and banking",
+      "International trade",
+    ],
+  ],
+  [
+    "Geography",
+    "advanced",
+    "upper_sixth",
+    "a_arts",
+    [
+      "Map work",
+      "Geomorphology",
+      "Climatology",
+      "Population",
+      "Settlement",
+      "Agriculture",
+      "Industry",
+      "Regional geography of Cameroon",
+    ],
+  ],
+  [
+    "History",
+    "advanced",
+    "upper_sixth",
+    "a_arts",
+    [
+      "Cameroon history",
+      "West Africa",
+      "European imperialism",
+      "World wars",
+      "Decolonisation",
+      "Cold War",
+      "Nationalism",
+      "International organisations",
+    ],
+  ],
+  [
+    "Commerce",
+    "ordinary",
+    "form_5",
+    "commercial, technical",
+    [
+      "Trade",
+      "Retail and wholesale",
+      "Business units",
+      "Transport",
+      "Warehousing",
+      "Insurance",
+      "Banking",
+      "International trade",
+    ],
+  ],
+  [
+    "Accounting",
+    "ordinary",
+    "form_5",
+    "commercial",
+    [
+      "Source documents",
+      "Books of original entry",
+      "Ledger accounts",
+      "Trial balance",
+      "Final accounts",
+      "Control accounts",
+      "Bank reconciliation",
+      "Depreciation",
+    ],
+  ],
+  [
+    "Business Studies",
+    "ordinary",
+    "form_5",
+    "commercial, technical",
+    [
+      "Enterprise",
+      "Business ownership",
+      "Management",
+      "Marketing",
+      "Finance",
+      "Human resources",
+      "Production",
+      "Business environment",
+    ],
+  ],
+  [
+    "Computer Science",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Data representation",
+      "Computer architecture",
+      "Algorithms",
+      "Programming",
+      "Databases",
+      "Networks",
+      "Systems analysis",
+      "Cybersecurity",
+    ],
+  ],
+  [
+    "ICT",
+    "ordinary",
+    "form_5",
+    "commercial, technical, science",
+    [
+      "Computer systems",
+      "Word processing",
+      "Spreadsheets",
+      "Databases",
+      "Internet",
+      "Presentation software",
+      "Digital safety",
+      "ICT in society",
+    ],
+  ],
+  [
+    "Food and Nutrition",
+    "ordinary",
+    "form_5",
+    "general",
+    [
+      "Nutrients",
+      "Meal planning",
+      "Food hygiene",
+      "Cooking methods",
+      "Food preservation",
+      "Diet and health",
+      "Consumer education",
+      "Practical planning",
+    ],
+  ],
+  [
+    "Food Science and Nutrition",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Food chemistry",
+      "Microbiology",
+      "Nutritional biochemistry",
+      "Food processing",
+      "Quality control",
+      "Diet therapy",
+      "Public health nutrition",
+      "Food product development",
+    ],
+  ],
+  [
+    "Logic",
+    "ordinary",
+    "form_5",
+    "general, arts",
+    [
+      "Terms and propositions",
+      "Categorical logic",
+      "Truth tables",
+      "Arguments",
+      "Fallacies",
+      "Definitions",
+      "Induction",
+      "Deduction",
+    ],
+  ],
+  [
+    "Agricultural Science",
+    "advanced",
+    "upper_sixth",
+    "a_science",
+    [
+      "Soil science",
+      "Crop production",
+      "Animal production",
+      "Farm management",
+      "Agricultural economics",
+      "Pests and diseases",
+      "Agroforestry",
+      "Practical agriculture",
+    ],
+  ],
 ];
 
 function slug(value) {
-  return value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+  return value
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 function cleanTitle(subject, paper) {
-  const level = subjects.find(([candidate]) => candidate === subject)?.[1] === "advanced"
-    ? "ADVANCED LEVEL"
-    : "ORDINARY LEVEL";
+  const level =
+    subjects.find(([candidate]) => candidate === subject)?.[1] === "advanced"
+      ? "ADVANCED LEVEL"
+      : "ORDINARY LEVEL";
   return `CAMEROON GCE ${level} ${subject} P2 SET ${paper}`.toUpperCase();
 }
 
@@ -72,40 +512,62 @@ function subjectTask(subject, topic, n, paper) {
   const c = paper * 3 + n;
 
   if (isMath(subject)) {
-    if (/trigonometry/i.test(topic)) return `In triangle ABC, AB = ${a + 4} cm, AC = ${b + 5} cm, and angle BAC = ${30 + ((n * 5) % 45)} degrees. Determine the missing side or angle and interpret the result.`;
-    if (/calculus|differentiation|integration/i.test(topic)) return `For f(x) = x^3 - ${a}x^2 + ${b}x - ${c}, find the required derivative, stationary value, tangent, area, or integral connected to the function.`;
-    if (/mechanics/i.test(topic)) return `A particle of mass ${a} kg moves under forces (${b}i - ${paper + 3}j) N and (${paper - n}i + ${c}j) N. Analyse the motion and resultant effect.`;
-    if (/statistics|probability|distribution|testing/i.test(topic)) return `The marks of ${30 + n} candidates are grouped into intervals of width ${paper + 4}. Use the data description to estimate centre, spread, probability, or a test conclusion.`;
-    if (/vectors|matrices/i.test(topic)) return `Given vectors or matrices with entries involving ${a}, ${b}, and ${c}, determine the required resultant, inverse, transformation, or intersection condition.`;
-    if (/series|sequence|binomial/i.test(topic)) return `A sequence begins with u1 = ${paper + 2} and follows u(n+1) = ${paper + 1}u(n) - ${n}. Establish the pattern and solve the required sum or approximation.`;
-    if (/complex|proof|numerical/i.test(topic)) return `Solve a structured problem in ${topic.toLowerCase()} using exact reasoning first, then give a numerical or graphical interpretation where required.`;
+    if (/trigonometry/i.test(topic))
+      return `In triangle ABC, AB = ${a + 4} cm, AC = ${b + 5} cm, and angle BAC = ${30 + ((n * 5) % 45)} degrees. Determine the missing side or angle and interpret the result.`;
+    if (/calculus|differentiation|integration/i.test(topic))
+      return `For f(x) = x^3 - ${a}x^2 + ${b}x - ${c}, find the required derivative, stationary value, tangent, area, or integral connected to the function.`;
+    if (/mechanics/i.test(topic))
+      return `A particle of mass ${a} kg moves under forces (${b}i - ${paper + 3}j) N and (${paper - n}i + ${c}j) N. Analyse the motion and resultant effect.`;
+    if (/statistics|probability|distribution|testing/i.test(topic))
+      return `The marks of ${30 + n} candidates are grouped into intervals of width ${paper + 4}. Use the data description to estimate centre, spread, probability, or a test conclusion.`;
+    if (/vectors|matrices/i.test(topic))
+      return `Given vectors or matrices with entries involving ${a}, ${b}, and ${c}, determine the required resultant, inverse, transformation, or intersection condition.`;
+    if (/series|sequence|binomial/i.test(topic))
+      return `A sequence begins with u1 = ${paper + 2} and follows u(n+1) = ${paper + 1}u(n) - ${n}. Establish the pattern and solve the required sum or approximation.`;
+    if (/complex|proof|numerical/i.test(topic))
+      return `Solve a structured problem in ${topic.toLowerCase()} using exact reasoning first, then give a numerical or graphical interpretation where required.`;
     return `Given f(x) = x^3 - ${a}x^2 + ${b}x - ${c}, investigate its roots, signs, and graph over a suitable interval.`;
   }
 
   if (isScience(subject)) {
-    if (/physics|mechanics|waves|electricity|magnetism|thermal|atomic/i.test(subject + topic)) return `A laboratory setup for ${topic.toLowerCase()} records readings ${a}, ${b}, ${c}, and ${c + n} in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.`;
-    if (/chemistry|bonding|organic|electrochemistry|kinetics|equilibrium/i.test(subject + topic)) return `Experiment ${n} studies ${topic.toLowerCase()} by changing concentration ${a / 10} mol dm-3, temperature ${20 + n} degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.`;
-    if (/biology|nutrition|agricultural/i.test(subject + topic)) return `A biological investigation on ${topic.toLowerCase()} compares sample A with sample B after ${n + 2} days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.`;
-    if (/computer|ict|algorithm|database|network|cyber/i.test(subject + topic)) return `A school system with ${30 + n} learner records must process ${topic.toLowerCase()} securely. Design or analyse the algorithm, data representation, database, network, or safety control required.`;
-    if (/geology|rocks|minerals|tectonics|maps/i.test(subject + topic)) return `A field study on ${topic.toLowerCase()} describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.`;
+    if (/physics|mechanics|waves|electricity|magnetism|thermal|atomic/i.test(subject + topic))
+      return `A laboratory setup for ${topic.toLowerCase()} records readings ${a}, ${b}, ${c}, and ${c + n} in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.`;
+    if (/chemistry|bonding|organic|electrochemistry|kinetics|equilibrium/i.test(subject + topic))
+      return `Experiment ${n} studies ${topic.toLowerCase()} by changing concentration ${a / 10} mol dm-3, temperature ${20 + n} degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.`;
+    if (/biology|nutrition|agricultural/i.test(subject + topic))
+      return `A biological investigation on ${topic.toLowerCase()} compares sample A with sample B after ${n + 2} days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.`;
+    if (/computer|ict|algorithm|database|network|cyber/i.test(subject + topic))
+      return `A school system with ${30 + n} learner records must process ${topic.toLowerCase()} securely. Design or analyse the algorithm, data representation, database, network, or safety control required.`;
+    if (/geology|rocks|minerals|tectonics|maps/i.test(subject + topic))
+      return `A field study on ${topic.toLowerCase()} describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.`;
     return `A practical investigation on ${topic.toLowerCase()} produces ${4 + paper} readings with one possible error. Analyse the data, method, conclusion, and correction.`;
   }
 
   if (isHumanities(subject)) {
-    if (/english language|french|bilingual/i.test(subject)) return `Read original passage ${n}: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on ${topic.toLowerCase()}.`;
-    if (/literature/i.test(subject)) return `Original passage ${n} presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how ${topic.toLowerCase()} shapes meaning and reader response.`;
-    if (/history/i.test(subject)) return `Source ${n} describes political change, resistance, reform, or nationalism in Cameroon, Africa, or the wider world. Use it to examine ${topic.toLowerCase()} with evidence.`;
-    if (/citizenship/i.test(subject)) return `Community case ${n} involves rights, duties, elections, public property, conflict, and peaceful participation. Apply ${topic.toLowerCase()} to resolve the case.`;
-    if (/philosophy|logic/i.test(subject)) return `Argument ${n} defends a claim about knowledge, morality, freedom, or society. Analyse it using ${topic.toLowerCase()} and test its validity.`;
-    if (/religious/i.test(subject)) return `Moral case ${n} in family, school, or public life is presented for religious and ethical interpretation. Use ${topic.toLowerCase()} to support your answer.`;
+    if (/english language|french|bilingual/i.test(subject))
+      return `Read original passage ${n}: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on ${topic.toLowerCase()}.`;
+    if (/literature/i.test(subject))
+      return `Original passage ${n} presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how ${topic.toLowerCase()} shapes meaning and reader response.`;
+    if (/history/i.test(subject))
+      return `Source ${n} describes political change, resistance, reform, or nationalism in Cameroon, Africa, or the wider world. Use it to examine ${topic.toLowerCase()} with evidence.`;
+    if (/citizenship/i.test(subject))
+      return `Community case ${n} involves rights, duties, elections, public property, conflict, and peaceful participation. Apply ${topic.toLowerCase()} to resolve the case.`;
+    if (/philosophy|logic/i.test(subject))
+      return `Argument ${n} defends a claim about knowledge, morality, freedom, or society. Analyse it using ${topic.toLowerCase()} and test its validity.`;
+    if (/religious/i.test(subject))
+      return `Moral case ${n} in family, school, or public life is presented for religious and ethical interpretation. Use ${topic.toLowerCase()} to support your answer.`;
     return `Original source ${n} raises a question about ${topic.toLowerCase()}. Interpret, explain, and evaluate it in Cameroon GCE essay style.`;
   }
 
   if (isBusiness(subject)) {
-    if (/accounting/i.test(subject)) return `A business records transactions involving cash ${a * 1000}, credit sales ${b * 1000}, purchases ${c * 1000}, returns, and depreciation. Prepare or correct the required accounting records.`;
-    if (/economics/i.test(subject)) return `Market case ${n} for a staple good changes after income, price, taxation, and supply conditions shift. Analyse ${topic.toLowerCase()} using diagrams and Cameroon examples.`;
-    if (/commerce/i.test(subject)) return `Trader case ${n} in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.`;
-    if (/business/i.test(subject)) return `Enterprise case ${n} must decide on ownership, finance, staffing, production, marketing, and ethics. Apply ${topic.toLowerCase()} to the decision.`;
+    if (/accounting/i.test(subject))
+      return `A business records transactions involving cash ${a * 1000}, credit sales ${b * 1000}, purchases ${c * 1000}, returns, and depreciation. Prepare or correct the required accounting records.`;
+    if (/economics/i.test(subject))
+      return `Market case ${n} for a staple good changes after income, price, taxation, and supply conditions shift. Analyse ${topic.toLowerCase()} using diagrams and Cameroon examples.`;
+    if (/commerce/i.test(subject))
+      return `Trader case ${n} in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.`;
+    if (/business/i.test(subject))
+      return `Enterprise case ${n} must decide on ownership, finance, staffing, production, marketing, and ethics. Apply ${topic.toLowerCase()} to the decision.`;
     return `A business case involving ${topic.toLowerCase()} requires calculation, judgement, and clear recommendations.`;
   }
 
@@ -176,7 +638,9 @@ function ordinaryMathQuestion(n) {
   const base = questions[(n - 1) % questions.length];
   const cycle = Math.floor((n - 1) / questions.length);
   if (cycle === 0) return base;
-  return base.replace(`**Q${((n - 1) % questions.length) + 1}.**`, `**Q${n}.**`).replace(/\*\((\d+) marks\)\*/g, (_, m) => `*(${Number(m) + cycle} marks)*`);
+  return base
+    .replace(`**Q${((n - 1) % questions.length) + 1}.**`, `**Q${n}.**`)
+    .replace(/\*\((\d+) marks\)\*/g, (_, m) => `*(${Number(m) + cycle} marks)*`);
 }
 
 const advancedMathSectionTitles = [
@@ -250,7 +714,9 @@ function paperBody(subject, level, classLevel, series, topics, paper) {
 
   for (let section = 0; section < 8; section += 1) {
     const sectionTitle = isMath(subject)
-      ? (/^mathematics$/i.test(subject) ? ordinaryMathSectionTitles[section] : advancedMathSectionTitles[section])
+      ? /^mathematics$/i.test(subject)
+        ? ordinaryMathSectionTitles[section]
+        : advancedMathSectionTitles[section]
       : topics[section].toUpperCase();
     lines.push(`## SECTION ${section + 1}: ${sectionTitle}`, "");
     for (let offset = 1; offset <= 5; offset += 1) {

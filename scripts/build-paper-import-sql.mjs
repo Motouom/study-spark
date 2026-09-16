@@ -30,9 +30,7 @@ function parseManifest() {
   const lines = readFileSync(manifestPath, "utf8").split("\n").slice(1).filter(Boolean);
 
   return lines.map((line) => {
-    const match = line.match(
-      /^"([^"]+)",([^,]+),([^,]+),"([^"]+)",(\d+),"([^"]+)","([^"]+)"$/,
-    );
+    const match = line.match(/^"([^"]+)",([^,]+),([^,]+),"([^"]+)",(\d+),"([^"]+)","([^"]+)"$/);
     if (!match) {
       throw new Error(`Could not parse manifest line: ${line}`);
     }
