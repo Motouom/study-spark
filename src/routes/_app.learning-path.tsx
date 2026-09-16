@@ -265,7 +265,7 @@ function LearningPathPage() {
                   <div key={item.subject} className="rounded-lg bg-secondary/40 p-3">
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">{item.subject}</span>
-                      <span>{item.mastery}%</span>
+                      <span>{item.reviewCount} to review</span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
                       Marked for review from reading checkpoints.
