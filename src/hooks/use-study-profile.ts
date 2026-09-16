@@ -99,7 +99,7 @@ function profileFromRow(row: ProfileRow): StudentProfile {
     level: row.level as StudentProfile["level"],
     classLevel: row.class_level as StudentProfile["classLevel"],
     series: row.series as StudentProfile["series"],
-    subjects: row.subjects ?? [],
+    subjects: (row.subjects ?? []) as StudentProfile["subjects"],
     plan: row.plan === "premium" ? "premium" : "free",
     premiumUntil: row.premium_until ?? null,
   });
@@ -131,44 +131,44 @@ export function useStudyProfile() {
 
     if (supabaseConfigured() && supabase) {
       setLoaded(false);
-      const refreshPromise = shouldRefreshSubscription()
-        ? supabase
-            .rpc("refresh_my_subscription_status")
-            .then(() => markSubscriptionRefreshed())
-            .catch((error) => {
-              console.warn("Could not refresh subscription status", error);
-            })
-        : Promise.resolve();
+      const client = supabase;
 
-      refreshPromise
-        .then(() =>
-          supabase
-            .from("student_profiles")
-            .select(
-              "name, language, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
-            )
-            .eq("user_id", user.id)
-            .maybeSingle(),
-        )
-        .then(({ data, error }) => {
-          if (error) {
-            console.error("Could not load study profile", error);
-            setProfileState(null);
-            setLoaded(true);
-            return;
+      void (async () => {
+        if (shouldRefreshSubscription()) {
+          try {
+            await client.rpc("refresh_my_subscription_status");
+            markSubscriptionRefreshed();
+          } catch (error) {
+            console.warn("Could not refresh subscription status", error);
           }
+        }
 
-          const remoteProfile = data ? profileFromRow(data as ProfileRow) : null;
+        const { data, error } = await client
+          .from("student_profiles")
+          .select(
+            "name, language, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
+          )
+          .eq("user_id", user.id)
+          .maybeSingle();
 
-          if (remoteProfile) {
-            localStorage.setItem(profileKey(user.id), JSON.stringify(remoteProfile));
-          } else {
-            localStorage.removeItem(profileKey(user.id));
-          }
-
-          setProfileState(remoteProfile);
+        if (error) {
+          console.error("Could not load study profile", error);
+          setProfileState(null);
           setLoaded(true);
-        });
+          return;
+        }
+
+        const remoteProfile = data ? profileFromRow(data as unknown as ProfileRow) : null;
+
+        if (remoteProfile) {
+          localStorage.setItem(profileKey(user.id), JSON.stringify(remoteProfile));
+        } else {
+          localStorage.removeItem(profileKey(user.id));
+        }
+
+        setProfileState(remoteProfile);
+        setLoaded(true);
+      })();
       return;
     }
 
