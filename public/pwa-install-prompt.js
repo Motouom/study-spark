@@ -2,26 +2,16 @@
   var DISMISS_KEY = "studyspark:pwa-install-dismissed-at";
   var ACCEPTED_KEY = "studyspark:pwa-install-accepted";
   var LAST_SHOWN_KEY = "studyspark:pwa-install-last-shown-at";
-  var DISMISS_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
-  var SHOW_COOLDOWN_MS = 8 * 60 * 60 * 1000;
-  var FALLBACK_DELAY_MS = 12000;
+  var DISMISS_COOLDOWN_MS = 12 * 60 * 60 * 1000;
+  var SHOW_COOLDOWN_MS = 20 * 60 * 1000;
+  var FALLBACK_DELAY_MS = 6000;
   var promptEvent = null;
   var promptNode = null;
 
-  var messages = [
-    {
-      title: "Install StudySpark",
-      body: "Open your GCE papers faster from your home screen.",
-    },
-    {
-      title: "StudySpark works better installed",
-      body: "Keep the app close when it is time to revise.",
-    },
-    {
-      title: "Add StudySpark to this device",
-      body: "A cleaner app view for dashboard, papers, and progress.",
-    },
-  ];
+  var isIOS =
+    /iphone|ipad|ipod/i.test(window.navigator.userAgent) ||
+    (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+  var isAndroid = /android/i.test(window.navigator.userAgent);
 
   function now() {
     return Date.now();
@@ -46,8 +36,14 @@
   function isStandalone() {
     return (
       window.matchMedia("(display-mode: standalone)").matches ||
+      window.matchMedia("(display-mode: fullscreen)").matches ||
+      window.matchMedia("(display-mode: minimal-ui)").matches ||
       window.navigator.standalone === true
     );
+  }
+
+  function isSafari() {
+    return /^((?!chrome|android|crios|fxios).)*safari/i.test(window.navigator.userAgent);
   }
 
   function canShowPrompt() {
@@ -67,13 +63,57 @@
     promptNode = null;
   }
 
+  function stepRow(number, text) {
+    return (
+      '<div style="display:flex;gap:10px;align-items:flex-start;margin-top:8px">' +
+      '<span style="width:22px;height:22px;border-radius:50%;background:#1b1714;color:#fff7ed;font-size:12px;font-weight:800;display:grid;place-items:center;flex:0 0 auto">' +
+      number +
+      "</span>" +
+      '<span style="font-size:13px;line-height:1.5;color:#3a342e">' +
+      text +
+      "</span>" +
+      "</div>"
+    );
+  }
+
+  function platformSteps() {
+    if (isIOS) {
+      return {
+        title: "Add StudySpark to your Home Screen",
+        body: "Takes 10 seconds — no App Store needed.",
+        html:
+          stepRow(
+            1,
+            "Tap the <b>Share</b> button <span style='display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #c9c2ba;border-radius:5px;vertical-align:middle'>&#8593;</span> at the bottom of Safari.",
+          ) +
+          stepRow(2, "Scroll down and tap <b>Add to Home Screen</b>.") +
+          stepRow(3, "Tap <b>Add</b> in the top-right corner."),
+      };
+    }
+    if (isAndroid) {
+      return {
+        title: "Install StudySpark",
+        body: "Get the app view for your dashboard and papers.",
+        html:
+          stepRow(1, "Open the <b>&#8942;</b> menu at the top-right of your browser.") +
+          stepRow(2, "Tap <b>Add to Home screen</b> or <b>Install app</b>.") +
+          stepRow(3, "Confirm by tapping <b>Install</b>."),
+      };
+    }
+    return {
+      title: "Install StudySpark",
+      body: "Open your GCE papers faster from your home screen.",
+      html:
+        stepRow(1, "Open your browser menu ( <b>&#8942;</b> or <b>&#8993;</b> ).") +
+        stepRow(2, "Choose <b>Install app</b> or <b>Add to Home screen</b>."),
+    };
+  }
+
   function createPrompt() {
     if (!canShowPrompt() || promptNode) return;
 
-    var message = messages[Math.floor(Math.random() * messages.length)];
     var hasNativePrompt = Boolean(promptEvent);
-    var fallbackText =
-      "If your browser does not open the install prompt, use the browser menu and choose Install app or Add to Home screen.";
+    var steps = platformSteps();
     var shell = document.createElement("aside");
     shell.setAttribute("role", "dialog");
     shell.setAttribute("aria-label", "Install StudySpark");
@@ -94,29 +134,32 @@
       "overflow:hidden",
     ].join(";");
 
+    var actionButtons = hasNativePrompt
+      ? '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>' +
+        '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>'
+      : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>' +
+        '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>';
+
     shell.innerHTML =
-      '<div style="display:flex;gap:12px;padding:14px 14px 12px;align-items:flex-start">' +
+      '<div style="display:flex;gap:12px;padding:14px 14px 4px;align-items:flex-start">' +
       '<div style="width:42px;height:42px;border-radius:12px;background:#1b1714;display:grid;place-items:center;flex:0 0 auto">' +
       '<img src="/icons/icon-192.png" alt="" width="30" height="30" style="display:block;border-radius:8px" />' +
       "</div>" +
       '<div style="min-width:0;flex:1">' +
       '<div style="font-weight:800;font-size:15px;line-height:1.25">' +
-      message.title +
+      steps.title +
       "</div>" +
       '<div style="margin-top:3px;color:#716b64;font-size:13px;line-height:1.45">' +
-      message.body +
-      (!hasNativePrompt
-        ? '<br /><span style="display:block;margin-top:6px">' + fallbackText + "</span>"
-        : "") +
+      steps.body +
       "</div>" +
       "</div>" +
       '<button type="button" data-pwa-dismiss aria-label="Dismiss install prompt" style="width:34px;height:34px;border:0;border-radius:10px;background:#f4f0ea;color:#1b1714;font-size:20px;line-height:1;cursor:pointer">×</button>' +
       "</div>" +
+      '<div style="padding:4px 20px 12px">' +
+      steps.html +
+      "</div>" +
       '<div style="display:flex;gap:8px;padding:0 14px 14px">' +
-      (hasNativePrompt
-        ? '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>'
-        : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>') +
-      '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>' +
+      actionButtons +
       "</div>";
 
     shell.querySelector("[data-pwa-dismiss]").addEventListener("click", function () {
@@ -124,9 +167,11 @@
       removePrompt();
     });
 
-    shell.querySelector("[data-pwa-later]").addEventListener("click", function () {
-      storageSet(LAST_SHOWN_KEY, now());
-      removePrompt();
+    shell.querySelectorAll("[data-pwa-later]").forEach(function (node) {
+      node.addEventListener("click", function () {
+        storageSet(LAST_SHOWN_KEY, now());
+        removePrompt();
+      });
     });
 
     if (hasNativePrompt) {
@@ -152,9 +197,8 @@
   window.addEventListener("beforeinstallprompt", function (event) {
     event.preventDefault();
     promptEvent = event;
-
-    var delay = 18000 + Math.floor(Math.random() * 22000);
-    window.setTimeout(createPrompt, delay);
+    removePrompt();
+    window.setTimeout(createPrompt, 2000);
   });
 
   window.setTimeout(createPrompt, FALLBACK_DELAY_MS);
