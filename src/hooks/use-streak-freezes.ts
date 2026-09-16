@@ -33,7 +33,8 @@ function weekStartKey(date: Date) {
 }
 
 export function useStreakFreezes() {
-  const { user, loading: userLoading } = useSupabaseUser();
+  const { user, loaded: userLoaded } = useSupabaseUser();
+  const userLoading = !userLoaded;
   const [freezes, setFreezes] = useState<StreakFreeze[]>([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
