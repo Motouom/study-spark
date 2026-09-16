@@ -196,8 +196,8 @@ export function useStudyProfile() {
 
       if (supabaseConfigured() && supabase) {
         const { data, error } = await withTimeout(
-          supabase
-            .rpc("update_student_profile", {
+          Promise.resolve(
+            supabase.rpc("update_student_profile", {
               profile_name: nextProfile.name,
               profile_language: nextProfile.language,
               profile_country: nextProfile.country,
@@ -211,8 +211,8 @@ export function useStudyProfile() {
               profile_class_level: nextProfile.classLevel,
               profile_series: nextProfile.series,
               profile_subjects: nextProfile.subjects,
-            })
-            .single(),
+            }),
+          ).then((result) => result),
           "Saving took too long. Check your Supabase connection and database tables.",
         );
 
@@ -221,7 +221,10 @@ export function useStudyProfile() {
           throw error;
         }
 
-        nextProfile = profileFromRow(data as ProfileRow);
+        const rows = Array.isArray(data) ? data : data ? [data] : [];
+        if (rows[0]) {
+          nextProfile = profileFromRow(rows[0] as unknown as ProfileRow);
+        }
       }
 
       localStorage.setItem(profileKey(user.id), JSON.stringify(nextProfile));
