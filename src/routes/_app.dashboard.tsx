@@ -2,7 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getDashboardData } from "@/lib/server-api";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Flame, Target, TrendingUp, Sparkles, FileText, Lock } from "lucide-react";
+import {
+  BookOpen,
+  Flame,
+  Target,
+  TrendingUp,
+  Sparkles,
+  FileText,
+  Lock,
+  PlayCircle,
+} from "lucide-react";
 import { lazy, Suspense, useMemo } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
@@ -12,6 +21,50 @@ import { isPremiumActive } from "@/lib/premium";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
+
+function sameLocalDay(a: Date, b: Date) {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
+
+function DailyGoalRing({ percent }: { percent: number }) {
+  const radius = 26;
+  const circumference = 2 * Math.PI * radius;
+  const dash = (percent / 100) * circumference;
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-border bg-background/70 px-4 py-3">
+      <svg width="64" height="64" viewBox="0 0 64 64" className="-rotate-90">
+        <circle
+          cx="32"
+          cy="32"
+          r={radius}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="6"
+          className="text-secondary"
+        />
+        <circle
+          cx="32"
+          cy="32"
+          r={radius}
+          fill="none"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeDasharray={`${dash} ${circumference}`}
+          className="text-accent transition-[stroke-dasharray] duration-500"
+        />
+      </svg>
+      <div>
+        <div className="text-xs text-muted-foreground">Today's goal</div>
+        <div className="font-display text-lg text-foreground">{percent}%</div>
+        <div className="text-[11px] text-muted-foreground">15 min of study</div>
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/_app/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — StudySpark" }] }),
@@ -65,11 +118,37 @@ function Dashboard() {
       ? content.topics
       : topics;
   const availablePapers = content.documents;
-  const featuredPaper = availablePapers[0] ?? null;
   const documentsById = useMemo(
     () => new Map(availablePapers.map((document) => [document.id, document])),
     [availablePapers],
   );
+
+  // "Continue where you left off": the most recent unfinished session on an
+  // unlocked paper; otherwise the first unlocked paper as a starting point.
+  const continuePaper = useMemo(() => {
+    const unfinished = readingProgress.sessions.find(
+      (session) => !session.completed && documentsById.get(session.documentId)?.isLocked === false,
+    );
+    if (unfinished) {
+      return {
+        document: documentsById.get(unfinished.documentId) ?? null,
+        resumePercent: unfinished.maxScrollPercent,
+      };
+    }
+    const firstUnlocked = availablePapers.find((document) => !document.isLocked) ?? null;
+    return { document: firstUnlocked, resumePercent: 0 };
+  }, [availablePapers, documentsById, readingProgress.sessions]);
+  const featuredPaper = continuePaper.document;
+
+  const DAILY_GOAL_SECONDS = 15 * 60;
+  const todaySeconds = useMemo(() => {
+    const today = new Date();
+    return readingProgress.sessions
+      .filter((session) => sameLocalDay(new Date(session.updatedAt), today))
+      .reduce((sum, session) => sum + session.durationSeconds, 0);
+  }, [readingProgress.sessions]);
+  const dailyGoalPercent = Math.min(100, Math.round((todaySeconds / DAILY_GOAL_SECONDS) * 100));
+
   const subjectBreakdown = useMemo(() => {
     const subjects = new Map<string, { score: number; count: number }>();
     for (const session of readingProgress.sessions) {
@@ -139,31 +218,40 @@ function Dashboard() {
       )}
 
       <section className="min-w-0 overflow-hidden rounded-xl border border-accent/30 bg-gradient-to-br from-accent/15 via-accent/5 to-transparent p-4 sm:p-6 md:p-8">
-        <div className="flex flex-col items-start gap-5 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col items-start gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2 text-xs text-accent">
-              <Sparkles className="h-3.5 w-3.5" /> Current paper
+              <Sparkles className="h-3.5 w-3.5" />
+              {continuePaper.resumePercent > 0
+                ? "Continue where you left off"
+                : "Recommended paper"}
             </div>
             <h2 className="mt-2 break-words font-display text-2xl text-foreground md:text-3xl">
               {featuredPaper ? featuredPaper.title : "Open your paper library"}
             </h2>
             <p className="mt-1.5 text-sm text-muted-foreground">
               {featuredPaper
-                ? `Protected structural paper for ${featuredPaper.subject}.`
+                ? continuePaper.resumePercent > 0
+                  ? `You're ${continuePaper.resumePercent}% through this ${featuredPaper.subject} paper — pick up right there.`
+                  : `Protected structural paper for ${featuredPaper.subject}.`
                 : "No published paper is available for your profile yet."}
             </p>
           </div>
-          {featuredPaper ? (
-            <Button asChild size="lg">
-              <Link to="/course/$documentId" params={{ documentId: featuredPaper.id }}>
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <DailyGoalRing percent={dailyGoalPercent} />
+            {featuredPaper ? (
+              <Button asChild size="lg">
+                <Link to="/course/$documentId" params={{ documentId: featuredPaper.id }}>
+                  <PlayCircle className="mr-1.5 h-4 w-4" />
+                  {continuePaper.resumePercent > 0 ? "Continue reading" : "Start reading"}
+                </Link>
+              </Button>
+            ) : (
+              <Button size="lg" disabled>
                 <FileText className="mr-1.5 h-4 w-4" /> Open paper
-              </Link>
-            </Button>
-          ) : (
-            <Button size="lg" disabled>
-              <FileText className="mr-1.5 h-4 w-4" /> Open paper
-            </Button>
-          )}
+              </Button>
+            )}
+          </div>
         </div>
       </section>
 

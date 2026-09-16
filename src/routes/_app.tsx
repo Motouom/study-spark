@@ -154,6 +154,15 @@ function SidebarContent({
             active={location.pathname.startsWith("/notifications")}
             onClick={onNavigate}
           />
+          {premium && (
+            <NavItem
+              to="/streak"
+              icon={Flame}
+              label="Streak"
+              active={location.pathname.startsWith("/streak")}
+              onClick={onNavigate}
+            />
+          )}
           <NavItem
             to="/support"
             icon={LifeBuoy}
@@ -285,6 +294,11 @@ function CommandMenu({
           <CommandItem onSelect={() => go("/learning-path")}>
             <Brain className="mr-2 h-4 w-4" /> Learning path
           </CommandItem>
+          {isPremiumActive(profile) && (
+            <CommandItem onSelect={() => go("/streak")}>
+              <Flame className="mr-2 h-4 w-4" /> Streak
+            </CommandItem>
+          )}
           <CommandItem onSelect={() => go("/courses")}>
             <PlayCircle className="mr-2 h-4 w-4" /> Courses
           </CommandItem>

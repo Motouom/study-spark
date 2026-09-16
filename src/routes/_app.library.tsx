@@ -9,6 +9,7 @@ import { ArrowLeft, BookOpen, FileText, Lock, Search, ShieldCheck, Sparkles } fr
 import { useMemo, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
+import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 
 export const Route = createFileRoute("/_app/library")({
@@ -36,20 +37,39 @@ function LibraryPage() {
     : subjects;
   const [q, setQ] = useState("");
   const [subject, setSubject] = useState<Subject | null>(null);
+  const readingProgress = usePaperStudyOverview();
+
+  const subjectProgress = useMemo(() => {
+    const bySubject = new Map<string, { total: number; reached: number }>();
+    for (const document of courseDocuments) {
+      const entry = bySubject.get(document.subject) ?? { total: 0, reached: 0 };
+      entry.total += 1;
+      const session = readingProgress.sessions.find((item) => item.documentId === document.id);
+      if (session && (session.maxScrollPercent > 0 || session.completed)) entry.reached += 1;
+      bySubject.set(document.subject, entry);
+    }
+    return bySubject;
+  }, [courseDocuments, readingProgress.sessions]);
 
   const subjectCards = useMemo(
     () =>
       effectiveSubjects.map((item) => {
         const documents = courseDocuments.filter((document) => document.subject === item);
         const unlocked = documents.filter((document) => !document.isLocked).length;
+        const progress = subjectProgress.get(item);
+        const startedPercent =
+          progress && progress.total > 0
+            ? Math.round((progress.reached / progress.total) * 100)
+            : 0;
 
         return {
           name: item,
           total: documents.length,
           unlocked,
+          startedPercent,
         };
       }),
-    [courseDocuments, effectiveSubjects],
+    [courseDocuments, effectiveSubjects, subjectProgress],
   );
 
   const filteredDocuments = useMemo(() => {
@@ -105,7 +125,7 @@ function LibraryPage() {
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
                       <BookOpen className="h-5 w-5" />
                     </div>
-                    <Badge variant="secondary">{item.total}</Badge>
+                    <SubjectRing percent={item.startedPercent} />
                   </div>
                   <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
                   <p className="mt-2 text-xs text-muted-foreground">
@@ -211,6 +231,41 @@ function LibraryPage() {
         )}
       </div>
     </>
+  );
+}
+
+function SubjectRing({ percent }: { percent: number }) {
+  const radius = 15;
+  const circumference = 2 * Math.PI * radius;
+  const dash = (Math.max(2, percent) / 100) * circumference;
+  return (
+    <div className="relative h-10 w-10" title={`${percent}% of papers started`}>
+      <svg viewBox="0 0 36 36" className="h-10 w-10 -rotate-90">
+        <circle
+          cx="18"
+          cy="18"
+          r={radius}
+          fill="none"
+          strokeWidth="3"
+          className="stroke-secondary"
+        />
+        {percent > 0 && (
+          <circle
+            cx="18"
+            cy="18"
+            r={radius}
+            fill="none"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeDasharray={`${dash} ${circumference}`}
+            className="stroke-accent"
+          />
+        )}
+      </svg>
+      <span className="absolute inset-0 grid place-items-center text-[10px] font-semibold text-foreground">
+        {percent}%
+      </span>
+    </div>
   );
 }
 

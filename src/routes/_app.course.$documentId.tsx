@@ -2,7 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, BookOpen, Bookmark, CheckCircle2, Clock, Lock, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  Bookmark,
+  CheckCircle2,
+  Clock,
+  Lock,
+  PlayCircle,
+  Sparkles,
+} from "lucide-react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useContentProtection } from "@/hooks/use-content-protection";
@@ -10,7 +19,7 @@ import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
 import { formatDuration } from "@/hooks/use-structural-progress";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
 
@@ -97,6 +106,7 @@ function CourseDocumentPage() {
             </div>
           ) : (
             <div className="min-w-0 space-y-4">
+              <ReadingProgressBar />
               <StudyProgressPanel progress={studyProgress} documentTitle={document.title} />
               <Suspense
                 fallback={
@@ -115,6 +125,41 @@ function CourseDocumentPage() {
           ))}
       </div>
     </>
+  );
+}
+
+function ReadingProgressBar() {
+  const [percent, setPercent] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const element = document.documentElement;
+      const scrollable = Math.max(1, element.scrollHeight - window.innerHeight);
+      setPercent(Math.max(0, Math.min(100, Math.round((window.scrollY / scrollable) * 100))));
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <div
+      className="sticky top-0 z-20 -mx-1 h-1.5 overflow-hidden rounded-full bg-secondary"
+      role="progressbar"
+      aria-label="Reading progress"
+      aria-valuenow={percent}
+      aria-valuemin={0}
+      aria-valuemax={100}
+    >
+      <div
+        className="h-full rounded-full bg-accent transition-[width] duration-150"
+        style={{ width: `${percent}%` }}
+      />
+    </div>
   );
 }
 
@@ -186,6 +231,26 @@ function StudyProgressPanel({
           onClick={() => checkpoint("bookmark")}
         />
       </div>
+
+      {!progress.summary.completed && progress.summary.maxScrollPercent > 5 && (
+        <button
+          type="button"
+          onClick={() => {
+            const scrollable = Math.max(
+              1,
+              document.documentElement.scrollHeight - window.innerHeight,
+            );
+            window.scrollTo({
+              top: (progress.summary.maxScrollPercent / 100) * scrollable,
+              behavior: "smooth",
+            });
+          }}
+          className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline"
+        >
+          <PlayCircle className="h-3.5 w-3.5" />
+          Resume at {progress.summary.maxScrollPercent}%
+        </button>
+      )}
 
       {saved && (
         <p className="mt-3 text-xs text-success">Saved. This paper now counts toward progress.</p>

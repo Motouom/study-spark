@@ -5,16 +5,46 @@ import { Input } from "@/components/ui/input";
 import { PremiumBadge } from "@/components/PremiumGate";
 import { isPremiumActive } from "@/lib/premium";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import { LifeBuoy, Mail } from "lucide-react";
+import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { classLabel, seriesLabel } from "@/lib/study-reference-data";
+import { CheckCircle2, LifeBuoy, Mail } from "lucide-react";
+import { useState } from "react";
 
 export const Route = createFileRoute("/_app/support")({
   head: () => ({ meta: [{ title: "Support — StudySpark" }] }),
   component: SupportPage,
 });
 
+const SUPPORT_EMAIL = "support@studyspark.cm";
+
 function SupportPage() {
   const { profile } = useStudyProfile();
+  const { user } = useSupabaseUser();
   const premium = isPremiumActive(profile);
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [opened, setOpened] = useState(false);
+
+  const mailtoHref = (() => {
+    const details = [
+      `Plan: ${premium ? "Premium" : "Free"}`,
+      profile
+        ? `Level: ${classLabel(profile.classLevel)} · Series: ${seriesLabel(profile.series)}`
+        : null,
+      profile ? `Subjects: ${profile.subjects.join(", ")}` : null,
+      user?.email ? `Account: ${user.email}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const body = `${message.trim()}\n\n---\n${details}`;
+    const params = new URLSearchParams({
+      subject: subject.trim() || "StudySpark support request",
+      body,
+    });
+    return `mailto:${SUPPORT_EMAIL}?${params.toString()}`;
+  })();
+
+  const canSend = subject.trim().length > 0 && message.trim().length > 0;
 
   return (
     <>
@@ -32,15 +62,38 @@ function SupportPage() {
             {premium ? <PremiumBadge /> : null}
           </div>
           <div className="mt-5 grid gap-3">
-            <Input placeholder="Subject" />
+            <Input
+              placeholder="Subject"
+              value={subject}
+              onChange={(event) => setSubject(event.target.value)}
+            />
             <textarea
               placeholder="Describe the issue..."
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
               className="min-h-40 rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
-            <Button className="w-fit">
+            <Button
+              className="w-fit"
+              disabled={!canSend}
+              onClick={() => {
+                window.location.href = mailtoHref;
+                setOpened(true);
+              }}
+            >
               <Mail className="mr-1.5 h-4 w-4" />
-              Prepare request
+              Send request
             </Button>
+            {opened && (
+              <p className="flex items-center gap-1.5 text-xs text-success">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                Your email app should have opened with the request pre-filled. We reply within 24
+                hours.
+              </p>
+            )}
+            <p className="text-xs text-muted-foreground">
+              Your plan, level, and subjects are attached automatically so we can help faster.
+            </p>
           </div>
         </section>
       </div>
