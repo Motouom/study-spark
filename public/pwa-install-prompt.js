@@ -8,6 +8,16 @@
   var promptEvent = null;
   var promptNode = null;
 
+  // Recover an install event that fired before this deferred script ran.
+  try {
+    if (window.__pwaInstallPrompt) {
+      promptEvent = window.__pwaInstallPrompt;
+      window.__pwaInstallPrompt = null;
+    }
+  } catch (_error) {
+    // Ignore; the normal listener below still covers the common case.
+  }
+
   var isIOS =
     /iphone|ipad|ipod/i.test(window.navigator.userAgent) ||
     (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
@@ -200,6 +210,10 @@
     removePrompt();
     window.setTimeout(createPrompt, 2000);
   });
+
+  if (promptEvent) {
+    window.setTimeout(createPrompt, 2000);
+  }
 
   window.setTimeout(createPrompt, FALLBACK_DELAY_MS);
 
