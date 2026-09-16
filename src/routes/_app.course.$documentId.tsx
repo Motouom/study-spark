@@ -19,6 +19,7 @@ import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
 import { formatDuration } from "@/hooks/use-structural-progress";
+import { getScrollPercent, onContainerScroll, scrollToPercent } from "@/lib/scroll-progress";
 import { lazy, Suspense, useEffect, useState } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
@@ -132,16 +133,15 @@ function ReadingProgressBar() {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
-    const update = () => {
-      const element = document.documentElement;
-      const scrollable = Math.max(1, element.scrollHeight - window.innerHeight);
-      setPercent(Math.max(0, Math.min(100, Math.round((window.scrollY / scrollable) * 100))));
-    };
+    const update = () => setPercent(getScrollPercent());
     update();
-    window.addEventListener("scroll", update, { passive: true });
+    // Content height changes as the markdown renders; re-measure briefly.
+    const interval = window.setInterval(update, 1000);
+    const removeScrollListener = onContainerScroll(update);
     window.addEventListener("resize", update);
     return () => {
-      window.removeEventListener("scroll", update);
+      window.clearInterval(interval);
+      removeScrollListener();
       window.removeEventListener("resize", update);
     };
   }, []);
@@ -235,16 +235,7 @@ function StudyProgressPanel({
       {!progress.summary.completed && progress.summary.maxScrollPercent > 5 && (
         <button
           type="button"
-          onClick={() => {
-            const scrollable = Math.max(
-              1,
-              document.documentElement.scrollHeight - window.innerHeight,
-            );
-            window.scrollTo({
-              top: (progress.summary.maxScrollPercent / 100) * scrollable,
-              behavior: "smooth",
-            });
-          }}
+          onClick={() => scrollToPercent(progress.summary.maxScrollPercent)}
           className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline"
         >
           <PlayCircle className="h-3.5 w-3.5" />

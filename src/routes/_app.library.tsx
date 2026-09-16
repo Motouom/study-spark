@@ -40,12 +40,20 @@ function LibraryPage() {
   const readingProgress = usePaperStudyOverview();
 
   const subjectProgress = useMemo(() => {
+    // Best depth per paper across sessions (each visit creates a new
+    // session row, so the latest row alone would read 0%).
+    const bestByDoc = new Map<string, number>();
+    for (const session of readingProgress.sessions) {
+      bestByDoc.set(
+        session.documentId,
+        Math.max(bestByDoc.get(session.documentId) ?? 0, session.maxScrollPercent),
+      );
+    }
     const bySubject = new Map<string, { total: number; reached: number }>();
     for (const document of courseDocuments) {
       const entry = bySubject.get(document.subject) ?? { total: 0, reached: 0 };
       entry.total += 1;
-      const session = readingProgress.sessions.find((item) => item.documentId === document.id);
-      if (session && (session.maxScrollPercent > 0 || session.completed)) entry.reached += 1;
+      if ((bestByDoc.get(document.id) ?? 0) > 0) entry.reached += 1;
       bySubject.set(document.subject, entry);
     }
     return bySubject;

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { getScrollPercent, onContainerScroll } from "@/lib/scroll-progress";
 
 export type PaperCheckpointType = "understood" | "review" | "bookmark";
 
@@ -95,13 +96,6 @@ function reflectionFromRow(row: ReflectionRow): PaperStudyReflection {
     addToRevision: row.add_to_revision,
     updatedAt: row.updated_at,
   };
-}
-
-function getScrollPercent() {
-  if (typeof document === "undefined") return 0;
-  const element = document.documentElement;
-  const scrollable = Math.max(1, element.scrollHeight - window.innerHeight);
-  return Math.max(0, Math.min(100, Math.round((window.scrollY / scrollable) * 100)));
 }
 
 export function usePaperStudyProgress(documentId?: string | null) {
@@ -235,12 +229,12 @@ export function usePaperStudyProgress(documentId?: string | null) {
     }, 5000);
     const handleBeforeUnload = () => void syncSession(true, false);
 
-    window.addEventListener("scroll", updateScroll, { passive: true });
+    const removeScrollListener = onContainerScroll(updateScroll);
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
       window.clearInterval(tick);
-      window.removeEventListener("scroll", updateScroll);
+      removeScrollListener();
       window.removeEventListener("beforeunload", handleBeforeUnload);
       void syncSession(true, false);
     };

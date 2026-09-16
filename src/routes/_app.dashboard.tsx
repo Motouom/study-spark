@@ -18,7 +18,7 @@ import { useStudyContent } from "@/hooks/use-study-content";
 import { formatDuration } from "@/hooks/use-structural-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 import { isPremiumActive } from "@/lib/premium";
-import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
+import { usePaperStudyOverview, type PaperStudySession } from "@/hooks/use-paper-study-progress";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
 
@@ -123,21 +123,39 @@ function Dashboard() {
     [availablePapers],
   );
 
-  // "Continue where you left off": the most recent unfinished session on an
-  // unlocked paper; otherwise the first unlocked paper as a starting point.
+  // Best scroll depth reached per paper across all sessions (a paper gets a
+  // new session row on every visit, so the latest row alone would read 0%).
+  const bestPercentByDoc = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const session of readingProgress.sessions) {
+      map.set(
+        session.documentId,
+        Math.max(map.get(session.documentId) ?? 0, session.maxScrollPercent),
+      );
+    }
+    return map;
+  }, [readingProgress.sessions]);
+
+  // "Continue where you left off": the most recently touched unfinished
+  // unlocked paper, showing its best depth; otherwise the first unlocked paper.
   const continuePaper = useMemo(() => {
-    const unfinished = readingProgress.sessions.find(
-      (session) => !session.completed && documentsById.get(session.documentId)?.isLocked === false,
-    );
+    const unfinished = readingProgress.sessions.find((session) => {
+      const document = documentsById.get(session.documentId);
+      return (
+        document &&
+        document.isLocked === false &&
+        (bestPercentByDoc.get(session.documentId) ?? 0) < 85
+      );
+    });
     if (unfinished) {
       return {
         document: documentsById.get(unfinished.documentId) ?? null,
-        resumePercent: unfinished.maxScrollPercent,
+        resumePercent: bestPercentByDoc.get(unfinished.documentId) ?? 0,
       };
     }
     const firstUnlocked = availablePapers.find((document) => !document.isLocked) ?? null;
     return { document: firstUnlocked, resumePercent: 0 };
-  }, [availablePapers, documentsById, readingProgress.sessions]);
+  }, [availablePapers, bestPercentByDoc, documentsById, readingProgress.sessions]);
   const featuredPaper = continuePaper.document;
 
   const DAILY_GOAL_SECONDS = 15 * 60;
@@ -148,16 +166,22 @@ function Dashboard() {
       .reduce((sum, session) => sum + session.durationSeconds, 0);
   }, [readingProgress.sessions]);
   const dailyGoalPercent = Math.min(100, Math.round((todaySeconds / DAILY_GOAL_SECONDS) * 100));
+  const averageReadDepth =
+    bestPercentByDoc.size > 0
+      ? Math.round(
+          [...bestPercentByDoc.values()].reduce((sum, value) => sum + value, 0) /
+            bestPercentByDoc.size,
+        )
+      : 0;
 
   const subjectBreakdown = useMemo(() => {
     const subjects = new Map<string, { score: number; count: number }>();
-    for (const session of readingProgress.sessions) {
-      const subject = documentsById.get(session.documentId)?.subject;
+    for (const [documentId, bestPercent] of bestPercentByDoc) {
+      const subject = documentsById.get(documentId)?.subject;
       if (!subject) continue;
       const checkpointScore =
-        readingProgress.checkpoints.filter((item) => item.documentId === session.documentId)
-          .length * 5;
-      const score = Math.min(100, session.maxScrollPercent * 0.8 + checkpointScore);
+        readingProgress.checkpoints.filter((item) => item.documentId === documentId).length * 5;
+      const score = Math.min(100, bestPercent * 0.8 + checkpointScore);
       const current = subjects.get(subject) ?? { score: 0, count: 0 };
       current.score += score;
       current.count += 1;
@@ -169,7 +193,7 @@ function Dashboard() {
         mastery: value.count > 0 ? Math.round(value.score / value.count) : 0,
       }))
       .sort((a, b) => b.mastery - a.mastery);
-  }, [documentsById, readingProgress.checkpoints, readingProgress.sessions]);
+  }, [bestPercentByDoc, documentsById, readingProgress.checkpoints]);
   const progressData = useMemo(() => {
     const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const today = new Date();
@@ -196,7 +220,24 @@ function Dashboard() {
       };
     });
   }, [readingProgress.sessions]);
-  const recentSessions = readingProgress.sessions.slice(0, 5);
+  // One row per paper: the session with the best depth for that paper.
+  const recentSessions = useMemo(() => {
+    const bestByDoc = new Map<string, PaperStudySession>();
+    for (const session of readingProgress.sessions) {
+      const current = bestByDoc.get(session.documentId);
+      if (
+        !current ||
+        session.maxScrollPercent > current.maxScrollPercent ||
+        (session.maxScrollPercent === current.maxScrollPercent &&
+          new Date(session.updatedAt) > new Date(current.updatedAt))
+      ) {
+        bestByDoc.set(session.documentId, session);
+      }
+    }
+    return [...bestByDoc.values()]
+      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+      .slice(0, 5);
+  }, [readingProgress.sessions]);
   const premium = isPremiumActive(effectiveProfile);
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
 
@@ -273,7 +314,7 @@ function Dashboard() {
           <Stat
             icon={Target}
             label="Avg. read depth"
-            value={`${readingProgress.summary.averageScrollPercent}%`}
+            value={`${averageReadDepth}%`}
             hint={`${readingProgress.summary.reviewCount} review marks`}
             tone="success"
           />
