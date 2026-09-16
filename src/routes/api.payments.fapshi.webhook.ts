@@ -26,7 +26,9 @@ export const Route = createFileRoute("/api/payments/fapshi/webhook")({
 
           let query = supabase
             .from("payment_transactions")
-            .select("id, user_id, subscription_id, amount_xaf, billing_interval, provider_transaction_id, status")
+            .select(
+              "id, user_id, subscription_id, amount_xaf, billing_interval, provider_transaction_id, status",
+            )
             .limit(1);
 
           if (payload.transId) {
@@ -44,10 +46,10 @@ export const Route = createFileRoute("/api/payments/fapshi/webhook")({
             return Response.json({ received: true, matched: false });
           }
 
-          const providerStatus = payload.transId
-            ? await fetchFapshiPaymentStatus(payload.transId)
+          const providerStatus = transaction.provider_transaction_id
+            ? await fetchFapshiPaymentStatus(transaction.provider_transaction_id)
             : {
-                transId: transaction.provider_transaction_id ?? "",
+                transId: "",
                 status: payload.status ?? "CREATED",
                 ...payload,
               };

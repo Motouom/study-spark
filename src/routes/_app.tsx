@@ -334,6 +334,13 @@ function AppLayout() {
   const admin = useAdminSession();
   const showAdminLink = admin.isAdmin;
 
+  const premiumExpiringDays =
+    profile?.plan === "premium" && profile.premiumUntil
+      ? Math.ceil((new Date(profile.premiumUntil).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+      : null;
+  const showExpiryBanner =
+    premiumExpiringDays !== null && premiumExpiringDays >= 0 && premiumExpiringDays <= 7;
+
   useEffect(() => {
     if (supabaseConfigured() && loaded && !user) {
       void navigate({ to: "/signin" });
@@ -500,9 +507,7 @@ function AppLayout() {
                     >
                       <div className="flex items-center justify-between gap-3">
                         <span className="font-medium">{item.title}</span>
-                        {!item.read && (
-                          <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />
-                        )}
+                        {!item.read && <span className="h-2 w-2 shrink-0 rounded-full bg-accent" />}
                       </div>
                       <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
                         {item.body}
@@ -524,6 +529,19 @@ function AppLayout() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+
+        {showExpiryBanner && (
+          <div className="flex flex-col gap-2 border-b border-warning/30 bg-warning/10 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 md:px-10">
+            <span className="text-warning-foreground">
+              Your Premium access ends in{" "}
+              {premiumExpiringDays === 1 ? "1 day" : `${premiumExpiringDays} days`}. Renew early to
+              keep uninterrupted access.
+            </span>
+            <Button asChild size="sm" variant="outline" className="shrink-0">
+              <Link to="/pricing">Renew Premium</Link>
+            </Button>
+          </div>
+        )}
 
         <Outlet />
       </main>

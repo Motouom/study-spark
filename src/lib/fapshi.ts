@@ -40,9 +40,9 @@ function requireEnv(name: string) {
 }
 
 function fapshiBaseUrl() {
-  return readEnv("FAPSHI_ENVIRONMENT") === "live"
-    ? "https://live.fapshi.com"
-    : "https://sandbox.fapshi.com";
+  return readEnv("FAPSHI_ENVIRONMENT") === "sandbox"
+    ? "https://sandbox.fapshi.com"
+    : "https://live.fapshi.com";
 }
 
 function fapshiHeaders() {
@@ -144,7 +144,8 @@ export async function applyVerifiedFapshiStatus(
     typeof providerPayload.amount === "number"
       ? providerPayload.amount
       : Number(providerPayload.amount);
-  const amountMatches = Number.isFinite(providerAmount) && providerAmount === transaction.amount_xaf;
+  const amountMatches =
+    Number.isFinite(providerAmount) && providerAmount === transaction.amount_xaf;
   const verifiedAt = status === "successful" && amountMatches ? new Date().toISOString() : null;
   let premiumUntil: string | null = null;
 

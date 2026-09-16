@@ -34,6 +34,7 @@ import { deleteCurrentAccount, signOut } from "@/lib/auth";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useBrowserLocation } from "@/hooks/use-browser-location";
 import { useSubscription } from "@/hooks/use-subscription";
+import { usePaymentHistory, type PaymentRecord } from "@/hooks/use-payment-history";
 import { isPremiumActive } from "@/lib/premium";
 import {
   useLearnerNotificationPreferences,
@@ -119,6 +120,13 @@ function SettingsPage() {
   const navigate = useNavigate();
   const { user, loaded, profile: savedProfile, saveProfile } = useStudyProfile();
   const { subscription } = useSubscription();
+  const {
+    transactions: paymentHistory,
+    loaded: historyLoaded,
+    error: historyError,
+    refresh: refreshHistory,
+  } = usePaymentHistory();
+  const [retryingId, setRetryingId] = useState<string | null>(null);
   const { preferences, setKindEnabled } = useLearnerNotificationPreferences();
   const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? session.profile);
   const premiumActive = isPremiumActive(profile);
@@ -141,6 +149,28 @@ function SettingsPage() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
   const browserLocation = useBrowserLocation();
+
+  async function retryPayment(record: PaymentRecord) {
+    setRetryingId(record.id);
+    try {
+      const response = await fetch("/api/payments/fapshi/initiate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          interval: record.billing_interval === "yearly" ? "yearly" : "monthly",
+        }),
+      });
+      const payload = (await response.json()) as { checkoutUrl?: string; error?: string };
+      if (response.ok && payload.checkoutUrl) {
+        window.location.assign(payload.checkoutUrl);
+        return;
+      }
+      throw new Error(payload.error ?? "Payment could not be started.");
+    } catch {
+      setRetryingId(null);
+    }
+  }
+
   const selectedLevel =
     CLASS_LEVELS.find((item) => item.id === classLevel)?.level ?? fallbackProfile.level;
   const availableSeries = useMemo(
@@ -529,6 +559,67 @@ function SettingsPage() {
                   </Link>
                 </Button>
               </div>
+            </Section>
+
+            <Section
+              title="Payment history"
+              description="Your recent Premium payments. Failed or expired payments can be retried."
+            >
+              {historyError && (
+                <p className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                  {historyError}
+                </p>
+              )}
+              {!historyLoaded ? (
+                <p className="text-sm text-muted-foreground">Loading payment history...</p>
+              ) : paymentHistory.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No payments yet.</p>
+              ) : (
+                <div className="space-y-2">
+                  {paymentHistory.map((record) => (
+                    <div
+                      key={record.id}
+                      className="flex flex-col gap-2 rounded-lg border border-border bg-background p-4 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium">
+                            Premium {record.billing_interval} · FCFA{" "}
+                            {record.amount_xaf.toLocaleString()}
+                          </span>
+                          <Badge
+                            variant={
+                              record.status === "successful"
+                                ? "default"
+                                : record.status === "failed" || record.status === "expired"
+                                  ? "destructive"
+                                  : "secondary"
+                            }
+                          >
+                            {record.status}
+                          </Badge>
+                        </div>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {new Date(record.created_at).toLocaleString()}
+                          {record.provider_transaction_id
+                            ? ` · Ref ${record.provider_transaction_id}`
+                            : ""}
+                        </p>
+                      </div>
+                      {(record.status === "failed" || record.status === "expired") && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={retryingId === record.id}
+                          onClick={() => retryPayment(record)}
+                        >
+                          {retryingId === record.id ? "Starting..." : "Retry payment"}
+                        </Button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </Section>
 
             <Section
