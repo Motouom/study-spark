@@ -511,11 +511,21 @@ function Multi({
   );
 }
 
-function StatCard({ label, value, tone }: { label: string; value: string; tone?: "warn" }) {
+function StatCard({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone?: "warn" | "success";
+}) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
       <div className="text-xs text-muted-foreground">{label}</div>
-      <div className={`mt-1.5 font-display text-2xl ${tone === "warn" ? "text-warning" : ""}`}>
+      <div
+        className={`mt-1.5 font-display text-2xl ${tone === "warn" ? "text-warning" : tone === "success" ? "text-success" : ""}`}
+      >
         {value}
       </div>
     </div>

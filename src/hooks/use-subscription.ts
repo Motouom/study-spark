@@ -14,6 +14,18 @@ export type SubscriptionSummary = {
   lastPaymentCreatedAt: string | null;
 };
 
+type SubscriptionRow = {
+  plan?: string | null;
+  premium_until?: string | null;
+  subscription_status?: string | null;
+  billing_interval?: string | null;
+  current_period_end?: string | null;
+  auto_renew?: boolean | null;
+  last_payment_status?: string | null;
+  last_payment_amount_xaf?: number | null;
+  last_payment_created_at?: string | null;
+};
+
 export function useSubscription() {
   const { user, loaded: userLoaded } = useSupabaseUser();
   const [subscription, setSubscription] = useState<SubscriptionSummary | null>(null);
@@ -28,33 +40,41 @@ export function useSubscription() {
     }
 
     setLoaded(false);
-    supabase
-      .rpc("refresh_my_subscription_status")
-      .then(() => supabase.rpc("list_my_subscription").maybeSingle())
-      .then(({ data, error }) => {
+    const client = supabase;
+    void (async () => {
+      try {
+        await client.rpc("refresh_my_subscription_status");
+        const { data, error } = await client.rpc("list_my_subscription").maybeSingle();
+
         if (error) {
           console.error("Could not load subscription", error);
           setSubscription(null);
           return;
         }
 
+        const row = data as SubscriptionRow | null;
         setSubscription(
-          data
+          row
             ? {
-                plan: data.plan === "premium" ? "premium" : "free",
-                premiumUntil: data.premium_until ?? null,
-                subscriptionStatus: data.subscription_status ?? null,
-                billingInterval: data.billing_interval ?? null,
-                currentPeriodEnd: data.current_period_end ?? null,
-                autoRenew: Boolean(data.auto_renew),
-                lastPaymentStatus: data.last_payment_status ?? null,
-                lastPaymentAmountXaf: data.last_payment_amount_xaf ?? null,
-                lastPaymentCreatedAt: data.last_payment_created_at ?? null,
+                plan: row.plan === "premium" ? "premium" : "free",
+                premiumUntil: row.premium_until ?? null,
+                subscriptionStatus: row.subscription_status ?? null,
+                billingInterval: row.billing_interval ?? null,
+                currentPeriodEnd: row.current_period_end ?? null,
+                autoRenew: Boolean(row.auto_renew),
+                lastPaymentStatus: row.last_payment_status ?? null,
+                lastPaymentAmountXaf: row.last_payment_amount_xaf ?? null,
+                lastPaymentCreatedAt: row.last_payment_created_at ?? null,
               }
             : null,
         );
-      })
-      .finally(() => setLoaded(true));
+      } catch (error) {
+        console.error("Could not load subscription", error);
+        setSubscription(null);
+      } finally {
+        setLoaded(true);
+      }
+    })();
   }, [user, userLoaded]);
 
   return { subscription, loaded };

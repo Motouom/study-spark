@@ -190,6 +190,7 @@ function SettingsPage() {
     try {
       await saveProfile({
         ...profile,
+        language: profile?.language ?? "english",
         name: name.trim(),
         country,
         region,

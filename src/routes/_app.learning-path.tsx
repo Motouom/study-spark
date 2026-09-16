@@ -38,7 +38,18 @@ function LearningPathPage() {
         .filter((document) => reviewDocumentIds.has(document.id))
         .map((document) => document.subject),
     ),
-  ].slice(0, 4);
+  ]
+    .slice(0, 4)
+    .map((subject) => ({
+      subject,
+      reviewCount: progress.checkpoints.filter(
+        (item) =>
+          item.checkpointType === "review" &&
+          content.documents.some(
+            (document) => document.id === item.documentId && document.subject === subject,
+          ),
+      ).length,
+    }));
   const unfinishedStarted = content.documents
     .filter((document) => startedIds.has(document.id))
     .map((document) => {
@@ -254,7 +265,7 @@ function LearningPathPage() {
                   <div key={item.subject} className="rounded-lg bg-secondary/40 p-3">
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">{item.subject}</span>
-                      <span>{item.mastery}%</span>
+                      <span>{item.reviewCount} to review</span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
                       Marked for review from reading checkpoints.

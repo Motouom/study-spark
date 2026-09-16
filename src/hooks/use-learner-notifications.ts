@@ -260,7 +260,9 @@ export function useLearnerNotifications() {
           subjectAttempts.length > 0 ? Math.round((passed / subjectAttempts.length) * 100) : null;
         return { subject, score };
       })
-      .filter((item): item is { subject: string; score: number } => item.score !== null)
+      .filter((item): item is { subject: (typeof item)["subject"]; score: number } =>
+        item.score !== null,
+      )
       .sort((a, b) => a.score - b.score)[0];
 
     if (weakSubject && weakSubject.score < 70) {
