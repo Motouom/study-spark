@@ -38,7 +38,18 @@ function LearningPathPage() {
         .filter((document) => reviewDocumentIds.has(document.id))
         .map((document) => document.subject),
     ),
-  ].slice(0, 4);
+  ]
+    .slice(0, 4)
+    .map((subject) => ({
+      subject,
+      reviewCount: progress.checkpoints.filter(
+        (item) =>
+          item.checkpointType === "review" &&
+          content.documents.some(
+            (document) => document.id === item.documentId && document.subject === subject,
+          ),
+      ).length,
+    }));
   const unfinishedStarted = content.documents
     .filter((document) => startedIds.has(document.id))
     .map((document) => {
