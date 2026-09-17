@@ -65,7 +65,7 @@ function ProgressPage() {
         title="Your progress"
         description="Track reading sessions, bookmarks, review points, and study depth."
       />
-      <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
+      <div className="space-y-6 px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium progress analytics"
           description="Upgrade to unlock reading history, checkpoint signals, study depth, and streaks."
@@ -76,7 +76,7 @@ function ProgressPage() {
             </div>
           )}
 
-          <section className="grid gap-4 md:grid-cols-4">
+          <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             <ProgressStat
               icon={BookOpen}
               label="Papers opened"
@@ -104,7 +104,7 @@ function ProgressPage() {
           </section>
 
           <section className="grid gap-4 lg:grid-cols-[1fr_22rem]">
-            <div className="rounded-xl border border-border bg-card p-5">
+            <div className="min-w-0 overflow-hidden rounded-xl border border-border bg-card p-5">
               <h2 className="text-base font-medium">Reading depth this week</h2>
               <p className="text-xs text-muted-foreground">
                 Average paper scroll depth for each study day.

@@ -127,7 +127,7 @@ function LeaderboardPage() {
         }
       />
 
-      <div className="space-y-5 px-6 py-6 md:px-10 md:py-8">
+      <div className="space-y-5 px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium leaderboard"
           description="Upgrade to compare your verified structural progress by class, city, region, country, and level."
@@ -211,50 +211,48 @@ function LeaderboardPage() {
 
           {!loading && filteredRows.length > 0 && (
             <section className="overflow-hidden rounded-xl border border-border bg-card">
-              <div className="grid grid-cols-[4rem_minmax(12rem,1.4fr)_minmax(12rem,1fr)_minmax(10rem,1fr)_repeat(4,minmax(7rem,0.7fr))] gap-4 border-b border-border px-4 py-3 text-xs text-muted-foreground">
-                <span>Rank</span>
-                <span>Learner</span>
-                <span>Level</span>
-                <span>Location</span>
-                <span>Passed</span>
-                <span>Pass rate</span>
-                <span>Avg. time</span>
-                <span>Days</span>
-              </div>
-              <div className="divide-y divide-border">
-                {filteredRows.map((row, index) => (
-                  <div
-                    key={row.user_id}
-                    className="grid grid-cols-[4rem_minmax(12rem,1.4fr)_minmax(12rem,1fr)_minmax(10rem,1fr)_repeat(4,minmax(7rem,0.7fr))] gap-4 px-4 py-4 text-sm"
-                  >
-                    <span className="flex items-center gap-1 font-medium">
-                      {index < 3 && <Medal className="h-4 w-4 text-accent" />}#{index + 1}
-                    </span>
-                    <span>
-                      <span className="block font-medium">{row.name}</span>
-                      <span className="text-xs text-muted-foreground">
-                        {seriesLabel(row.series)}
-                      </span>
-                    </span>
-                    <span className="text-muted-foreground">
-                      {levelLabel(row.level)} · {classLabel(row.class_level)}
-                    </span>
-                    <span className="text-muted-foreground">
-                      {[row.city, row.region, row.country].filter(Boolean).join(", ")}
-                      <span
-                        className={
-                          row.location_verified ? "ml-1 text-success" : "ml-1 text-muted-foreground"
-                        }
-                      >
-                        {row.location_verified ? "verified" : "self-reported"}
-                      </span>
-                    </span>
-                    <span>{row.questions_passed}</span>
-                    <span>{row.pass_rate}%</span>
-                    <span>{formatDuration(row.average_duration_seconds)}</span>
-                    <span>{row.study_days}</span>
+              {/* Horizontally scrollable on mobile, full grid on desktop */}
+              <div className="overflow-x-auto">
+                <div className="min-w-[640px]">
+                  <div className="grid grid-cols-[3rem_1fr_1fr_repeat(3,6rem)] gap-3 border-b border-border px-4 py-3 text-xs text-muted-foreground md:grid-cols-[3.5rem_minmax(10rem,1.4fr)_minmax(9rem,1fr)_minmax(8rem,1fr)_repeat(4,minmax(5rem,0.7fr))] md:gap-4">
+                    <span>Rank</span>
+                    <span>Learner</span>
+                    <span className="hidden md:block">Level</span>
+                    <span>Location</span>
+                    <span>Passed</span>
+                    <span>Rate</span>
+                    <span className="hidden md:block">Time</span>
+                    <span className="hidden md:block">Days</span>
                   </div>
-                ))}
+                  <div className="divide-y divide-border">
+                    {filteredRows.map((row, index) => (
+                      <div
+                        key={row.user_id}
+                        className="grid grid-cols-[3rem_1fr_1fr_repeat(3,6rem)] gap-3 px-4 py-3 text-sm md:grid-cols-[3.5rem_minmax(10rem,1.4fr)_minmax(9rem,1fr)_minmax(8rem,1fr)_repeat(4,minmax(5rem,0.7fr))] md:gap-4 md:py-4"
+                      >
+                        <span className="flex items-center gap-1 font-medium">
+                          {index < 3 && <Medal className="h-4 w-4 text-accent" />}#{index + 1}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block truncate font-medium">{row.name}</span>
+                          <span className="text-xs text-muted-foreground">
+                            {seriesLabel(row.series)}
+                          </span>
+                        </span>
+                        <span className="hidden min-w-0 text-muted-foreground md:block">
+                          <span className="line-clamp-2">{levelLabel(row.level)} · {classLabel(row.class_level)}</span>
+                        </span>
+                        <span className="min-w-0 truncate text-muted-foreground">
+                          {[row.city, row.region].filter(Boolean).join(", ") || row.country}
+                        </span>
+                        <span>{row.questions_passed}</span>
+                        <span>{row.pass_rate}%</span>
+                        <span className="hidden md:block">{formatDuration(row.average_duration_seconds)}</span>
+                        <span className="hidden md:block">{row.study_days}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </section>
           )}

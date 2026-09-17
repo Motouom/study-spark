@@ -25,7 +25,7 @@ function TextbooksPage() {
         title="Digital textbooks"
         description="Premium reading collections built from your approved paper library."
       />
-      <div className="px-6 py-6 md:px-10 md:py-8">
+      <div className="px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium textbooks"
           description="Upgrade to access full digital textbooks, reading packs, and organized revision notes."
@@ -56,7 +56,7 @@ function TextbooksPage() {
                     </div>
                     <Badge variant="secondary">{papers.length} sources</Badge>
                   </div>
-                  <h2 className="mt-4 text-base font-medium">{subject} textbook</h2>
+                  <h2 className="mt-4 min-w-0 truncate text-base font-medium">{subject} textbook</h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     A paper-linked digital reading pack built from your approved {subject} content.
                   </p>
@@ -79,7 +79,7 @@ function TextbooksPage() {
                       (heading) => (
                         <div
                           key={heading}
-                          className="rounded-lg border border-border px-3 py-2 text-xs"
+                          className="truncate rounded-lg border border-border px-3 py-2 text-xs"
                         >
                           {heading}
                         </div>

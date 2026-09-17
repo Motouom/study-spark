@@ -278,7 +278,7 @@ function Dashboard() {
                 : "No published paper is available for your profile yet."}
             </p>
           </div>
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+          <div className="flex shrink-0 flex-col items-start gap-4 sm:flex-row sm:items-center">
             <DailyGoalRing percent={dailyGoalPercent} />
             {featuredPaper ? (
               <Button asChild size="lg">
@@ -297,7 +297,7 @@ function Dashboard() {
       </section>
 
       {premium ? (
-        <section className="grid gap-4 md:grid-cols-4">
+        <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           <Stat
             icon={Flame}
             label="Current streak"

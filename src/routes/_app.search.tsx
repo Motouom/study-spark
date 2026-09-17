@@ -36,7 +36,7 @@ function AdvancedSearchPage() {
         title="Advanced search"
         description="Search paper titles, subjects, and protected Markdown content."
       />
-      <div className="px-6 py-6 md:px-10 md:py-8">
+      <div className="px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium search"
           description="Upgrade to search deeply across all matching protected papers and revision content."
@@ -56,16 +56,16 @@ function AdvancedSearchPage() {
                 key={document.id}
                 to="/course/$documentId"
                 params={{ documentId: document.id }}
-                className="flex items-center justify-between rounded-xl border border-border bg-card p-4 hover:bg-secondary/30"
+                className="flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 hover:bg-secondary/30"
               >
-                <div className="flex items-center gap-3">
-                  <FileText className="h-5 w-5" />
-                  <div>
-                    <div className="text-sm font-medium">{document.title}</div>
-                    <p className="text-xs text-muted-foreground">{document.subject}</p>
+                <div className="flex min-w-0 items-center gap-3">
+                  <FileText className="h-5 w-5 shrink-0" />
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-medium">{document.title}</div>
+                    <p className="truncate text-xs text-muted-foreground">{document.subject}</p>
                   </div>
                 </div>
-                <Badge variant="secondary">{document.level}</Badge>
+                <Badge variant="secondary" className="shrink-0">{document.level}</Badge>
               </Link>
             ))}
           </div>
