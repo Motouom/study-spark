@@ -31,7 +31,7 @@ function CoursesPage() {
         title="Courses"
         description="Premium course tracks organized by subject, paper coverage, and revision progress."
       />
-      <div className="px-6 py-6 md:px-10 md:py-8">
+      <div className="px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium courses"
           description="Upgrade to access full subject courses, lesson sequences, and video-supported revision."
@@ -60,7 +60,7 @@ function CoursesPage() {
                     </div>
                     <Badge variant="secondary">{subjectMastery}% mastery</Badge>
                   </div>
-                  <h2 className="mt-4 text-base font-medium">{subject}</h2>
+                  <h2 className="mt-4 min-w-0 truncate text-base font-medium">{subject}</h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     Structured paper track, revision milestones, and guided structural practice.
                   </p>

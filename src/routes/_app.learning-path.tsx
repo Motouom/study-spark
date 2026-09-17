@@ -89,13 +89,13 @@ function LearningPathPage() {
         title="Learning path"
         description="A focused revision route generated from your reading sessions and review marks."
       />
-      <div className="px-6 py-6 md:px-10 md:py-8">
+      <div className="px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium learning path"
           description="Upgrade to get prioritized papers, weak-area guidance, and a structured revision order."
         >
           <div className="grid gap-5 lg:grid-cols-[1fr_22rem]">
-            <section className="space-y-5">
+            <section className="min-w-0 space-y-5">
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
@@ -167,7 +167,7 @@ function LearningPathPage() {
                 )}
               </div>
 
-              <div className="grid gap-3 md:grid-cols-3">
+              <div className="grid grid-cols-3 gap-3 md:gap-3">
                 <div className="rounded-xl border border-border bg-card p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Target className="h-4 w-4" /> Weekly target

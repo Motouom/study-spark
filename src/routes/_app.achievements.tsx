@@ -66,7 +66,7 @@ function AchievementsPage() {
     <>
       <PageHeader title="Achievements" description="Badges unlock from real study activity." />
 
-      <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
+      <div className="space-y-6 px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium achievements"
           description="Upgrade to unlock XP, milestones, badges, and advanced learning motivation."

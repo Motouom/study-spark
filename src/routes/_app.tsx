@@ -128,7 +128,7 @@ function SidebarContent({
       <div className="px-5 py-5">
         <Logo to="/dashboard" />
       </div>
-      <nav className="flex-1 space-y-0.5 overflow-y-auto px-3">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto overscroll-contain px-3">
         {NAV.map((n) => (
           <NavItem
             key={n.to}
@@ -439,7 +439,7 @@ function AppLayout() {
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex w-72 flex-col p-0">
+          <SheetContent side="left" className="flex h-full w-[min(18rem,85vw)] flex-col p-0">
             <SheetHeader className="sr-only">
               <SheetTitle>Navigation</SheetTitle>
             </SheetHeader>
@@ -470,7 +470,7 @@ function AppLayout() {
         </div>
       </div>
 
-      <main className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-16 md:pt-0 md:pb-0">
+      <main className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-20 md:pt-0 md:pb-0" style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' } as React.CSSProperties}>
         {/* Desktop top utility bar */}
         <div className="hidden h-12 items-center justify-end gap-2 border-b border-border px-6 md:flex md:px-10">
           {showAdminLink && (
@@ -561,7 +561,7 @@ function AppLayout() {
       </main>
 
       {/* Mobile bottom tab bar */}
-      <nav className="fixed inset-x-0 bottom-0 z-30 flex h-16 items-center justify-around border-t border-border bg-background/95 backdrop-blur md:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border bg-background/95 backdrop-blur md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom))', paddingBottom: 'env(safe-area-inset-bottom)' }}>
         {mobileNav.map((n) => {
           const active = location.pathname.startsWith(n.to);
           return (

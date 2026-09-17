@@ -197,7 +197,7 @@ function StudyProgressPanel({
             .
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4 lg:w-[28rem]">
+        <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4 lg:max-w-sm lg:shrink-0">
           <MiniMetric label="Time" value={formatDuration(progress.summary.durationSeconds)} />
           <MiniMetric label="Read" value={`${progress.summary.maxScrollPercent}%`} />
           <MiniMetric label="Review" value={String(progress.summary.reviewCount)} />

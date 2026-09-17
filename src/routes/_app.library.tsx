@@ -100,13 +100,13 @@ function LibraryPage() {
         description={`${classLabel(effectiveProfile.classLevel)} · ${seriesLabel(effectiveProfile.series)} · ${effectiveProfile.language}`}
       />
 
-      <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
+      <div className="space-y-6 px-4 py-6 md:px-10 md:py-8">
         {content.error && (
           <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
             Study content could not be loaded: {content.error}
           </div>
         )}
-        <div className="flex items-center gap-2 rounded-lg border border-success/30 bg-success/10 p-3 text-sm text-success">
+        <div className="flex min-w-0 items-center gap-2 rounded-lg border border-success/30 bg-success/10 p-3 text-sm text-success">
           <ShieldCheck className="h-4 w-4" />
           Questions are opened inside the app only. Copying, downloads, and bulk viewing are
           disabled in the student flow.
