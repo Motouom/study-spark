@@ -128,7 +128,7 @@ function SidebarContent({
       <div className="px-5 py-5">
         <Logo to="/dashboard" />
       </div>
-      <nav className="flex-1 space-y-0.5 overflow-y-auto px-3">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto overscroll-contain px-3">
         {NAV.map((n) => (
           <NavItem
             key={n.to}
@@ -439,7 +439,7 @@ function AppLayout() {
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="flex w-72 flex-col p-0">
+          <SheetContent side="left" className="flex h-full w-[min(18rem,85vw)] flex-col p-0">
             <SheetHeader className="sr-only">
               <SheetTitle>Navigation</SheetTitle>
             </SheetHeader>
