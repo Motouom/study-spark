@@ -125,13 +125,31 @@ export function usePaperStudyProgress(documentId?: string | null) {
     setError(null);
 
     Promise.all([
+      // Use upsert-style: resume the most recent open session for this doc
+      // rather than creating a new one on every mount (prevents orphan sessions
+      // after screen wake / tab focus return).
       supabase
         .from("paper_study_sessions")
-        .insert({ user_id: user.id, document_id: documentId })
         .select(
           "id, document_id, started_at, ended_at, duration_seconds, max_scroll_percent, completed, updated_at",
         )
-        .single(),
+        .eq("user_id", user.id)
+        .eq("document_id", documentId)
+        .is("ended_at", null)
+        .order("started_at", { ascending: false })
+        .limit(1)
+        .maybeSingle()
+        .then(async ({ data: existing }) => {
+          if (existing) return { data: existing, error: null };
+          // No open session — create one
+          return supabase
+            .from("paper_study_sessions")
+            .insert({ user_id: user.id, document_id: documentId })
+            .select(
+              "id, document_id, started_at, ended_at, duration_seconds, max_scroll_percent, completed, updated_at",
+            )
+            .single();
+        }),
       supabase
         .from("paper_study_checkpoints")
         .select("id, document_id, checkpoint_type, note, scroll_percent, created_at")
