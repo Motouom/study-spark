@@ -38,7 +38,7 @@ function CourseDocumentPage() {
   const studyProgress = usePaperStudyProgress(document?.id);
   const pageLoading =
     supabaseConfigured() && (!profileLoaded || !content.loaded || content.loading);
-  useContentProtection(Boolean(document), document?.id);
+  useContentProtection(Boolean(document && !document.isLocked), document?.id);
 
   if (pageLoading) {
     return <CourseDocumentSkeleton />;
@@ -171,11 +171,20 @@ function StudyProgressPanel({
   documentTitle: string;
 }) {
   const [saved, setSaved] = useState(false);
+  const [checkpointError, setCheckpointError] = useState<string | null>(null);
 
   async function checkpoint(type: PaperCheckpointType) {
     setSaved(false);
-    await progress.addCheckpoint(type);
-    setSaved(true);
+    setCheckpointError(null);
+    try {
+      await progress.addCheckpoint(type);
+      setSaved(true);
+      window.setTimeout(() => setSaved(false), 4000);
+    } catch (error) {
+      setCheckpointError(
+        error instanceof Error ? error.message : "Could not save this checkpoint.",
+      );
+    }
   }
 
   return (
@@ -243,6 +252,7 @@ function StudyProgressPanel({
         </button>
       )}
 
+      {checkpointError && <p className="mt-3 text-xs text-destructive">{checkpointError}</p>}
       {saved && (
         <p className="mt-3 text-xs text-success">Saved. This paper now counts toward progress.</p>
       )}

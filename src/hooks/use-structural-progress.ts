@@ -64,7 +64,7 @@ function sameLocalDay(a: Date, b: Date) {
   );
 }
 
-function dayKey(date: Date) {
+export function dayKey(date: Date) {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
@@ -97,11 +97,14 @@ export function summarizeStructuralProgress(progress: StructuralQuestionProgress
 
   let currentStreak = 0;
   const cursor = new Date();
-  if (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-    while (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-      currentStreak += 1;
-      cursor.setDate(cursor.getDate() - 1);
-    }
+  // A streak stays alive until the current day ends: if today has no activity
+  // yet, continue counting from yesterday so users don't see 0 all morning.
+  if (!sortedDays.some((day) => sameLocalDay(day, cursor))) {
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  while (sortedDays.some((day) => sameLocalDay(day, cursor))) {
+    currentStreak += 1;
+    cursor.setDate(cursor.getDate() - 1);
   }
 
   let longestStreak = 0;
@@ -208,9 +211,20 @@ export function calculateStructuralMastery(
     );
 }
 
+// Module-level cache shared by every instance of this hook (layout sidebar,
+// notifications, pages) so the full progress list is fetched once per user
+// instead of once per mounting component.
+type ProgressCache = { userId: string; rows: StructuralQuestionProgress[] };
+
+let progressCache: ProgressCache | null = null;
+
 export function useStructuralProgress(documentId?: string | null) {
   const { user, loaded: userLoaded } = useSupabaseUser();
-  const [progress, setProgress] = useState<StructuralQuestionProgress[]>([]);
+  const [progress, setProgress] = useState<StructuralQuestionProgress[]>(() =>
+    user && progressCache && progressCache.userId === user.id
+      ? progressCache.rows.filter((item) => !documentId || item.documentId === documentId)
+      : [],
+  );
   const [loading, setLoading] = useState(false);
   const [savingKey, setSavingKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -218,6 +232,15 @@ export function useStructuralProgress(documentId?: string | null) {
   const loadProgress = useCallback(() => {
     if (!userLoaded || !user || !supabaseConfigured() || !supabase) {
       setProgress([]);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
+    if (progressCache && progressCache.userId === user.id) {
+      setProgress(
+        progressCache.rows.filter((item) => !documentId || item.documentId === documentId),
+      );
       setLoading(false);
       setError(null);
       return;
@@ -247,7 +270,9 @@ export function useStructuralProgress(documentId?: string | null) {
         return;
       }
 
-      setProgress(((data ?? []) as ProgressRow[]).map(progressFromRow));
+      const rows = ((data ?? []) as ProgressRow[]).map(progressFromRow);
+      progressCache = { userId: user.id, rows };
+      setProgress(rows.filter((item) => !documentId || item.documentId === documentId));
       setLoading(false);
       setError(null);
     });
@@ -321,6 +346,17 @@ export function useStructuralProgress(documentId?: string | null) {
       }
 
       const saved = progressFromRow(data as ProgressRow);
+      if (progressCache && progressCache.userId === user.id) {
+        progressCache.rows = [
+          saved,
+          ...progressCache.rows.filter(
+            (item) =>
+              !(
+                item.documentId === saved.documentId && item.questionNumber === saved.questionNumber
+              ),
+          ),
+        ];
+      }
       setProgress((current) => [
         saved,
         ...current.filter(

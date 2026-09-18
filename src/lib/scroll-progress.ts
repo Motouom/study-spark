@@ -3,16 +3,19 @@ let cachedAt = 0;
 
 function findScrollContainer(): HTMLElement | null {
   // The app layout scrolls inside <main> (overflow-y-auto), not the window.
-  // Cache briefly to avoid querySelector on every scroll event.
+  // Cache briefly to avoid querySelector on every scroll event, but only cache
+  // a positive <main> result: caching "main not scrollable yet" would pin the
+  // fallback for 5s while content is still loading.
   if (cachedContainer && cachedContainer.isConnected && Date.now() - cachedAt < 5000) {
     return cachedContainer;
   }
   const main = document.querySelector("main");
-  const container =
-    main instanceof HTMLElement && main.scrollHeight > main.clientHeight ? main : null;
-  cachedContainer = container;
-  cachedAt = Date.now();
-  return container ?? (document.scrollingElement as HTMLElement | null);
+  if (main instanceof HTMLElement && main.scrollHeight > main.clientHeight) {
+    cachedContainer = main;
+    cachedAt = Date.now();
+    return main;
+  }
+  return (document.scrollingElement as HTMLElement | null) ?? null;
 }
 
 export function getScrollPercent(): number {
@@ -37,8 +40,10 @@ export function scrollToPercent(percent: number) {
 }
 
 export function onContainerScroll(handler: () => void) {
-  const container = findScrollContainer();
-  const target: HTMLElement | Window = container ?? window;
-  target.addEventListener("scroll", handler, { passive: true });
-  return () => target.removeEventListener("scroll", handler);
+  // Scroll events don't bubble, but they do propagate in the capture phase.
+  // Listening on document with capture catches scrolls from any container
+  // (including <main> once it becomes the real scroller after content loads),
+  // so the listener never binds to the wrong target.
+  document.addEventListener("scroll", handler, { passive: true, capture: true });
+  return () => document.removeEventListener("scroll", handler, { capture: true });
 }

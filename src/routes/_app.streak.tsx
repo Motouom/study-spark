@@ -2,9 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Calendar, Flame, Snowflake, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useStructuralProgress } from "@/hooks/use-structural-progress";
+import { dayKey, useStructuralProgress } from "@/hooks/use-structural-progress";
 import { PremiumGate } from "@/components/PremiumGate";
 import { useStreakFreezes } from "@/hooks/use-streak-freezes";
+
+function localDateKey(date: Date) {
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
 
 export const Route = createFileRoute("/_app/streak")({
   head: () => ({ meta: [{ title: "Streak — StudySpark" }] }),
@@ -124,14 +130,21 @@ function StreakPage() {
                       const offset = week[dayIndex];
                       const date = new Date();
                       date.setDate(date.getDate() - (90 - offset));
-                      const key = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+                      const key = dayKey(date);
+                      const state = activeDays.has(key)
+                        ? "studied"
+                        : freezeDays.has(localDateKey(date))
+                          ? "frozen"
+                          : "idle";
                       return (
                         <span
                           key={dayIndex}
+                          role="img"
+                          aria-label={`${date.toLocaleDateString()}: ${state}`}
                           className={`h-4 w-4 rounded-sm ${
-                            activeDays.has(key)
+                            state === "studied"
                               ? "bg-foreground"
-                              : freezeDays.has(date.toISOString().slice(0, 10))
+                              : state === "frozen"
                                 ? "bg-accent"
                                 : "bg-secondary"
                           }`}

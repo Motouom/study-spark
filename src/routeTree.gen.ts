@@ -31,10 +31,12 @@ import { Route as AppSupportRouteImport } from './routes/_app.support'
 import { Route as AppTextbooksRouteImport } from './routes/_app.textbooks'
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
+import { Route as ControlPanel9k3xCoursesRouteImport } from './routes/control-panel-9k3x.courses'
 import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
 import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
 import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
 import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
+import { Route as ControlPanel9k3xTextbooksRouteImport } from './routes/control-panel-9k3x.textbooks'
 import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
 import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
@@ -155,6 +157,11 @@ const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
+const ControlPanel9k3xCoursesRoute = ControlPanel9k3xCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => ControlPanel9k3xRoute,
+} as any)
 const ControlPanel9k3xIntegrationsRoute =
   ControlPanel9k3xIntegrationsRouteImport.update({
     id: '/integrations',
@@ -176,6 +183,12 @@ const ControlPanel9k3xSettingsRoute =
   ControlPanel9k3xSettingsRouteImport.update({
     id: '/settings',
     path: '/settings',
+    getParentRoute: () => ControlPanel9k3xRoute,
+  } as any)
+const ControlPanel9k3xTextbooksRoute =
+  ControlPanel9k3xTextbooksRouteImport.update({
+    id: '/textbooks',
+    path: '/textbooks',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
 const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
@@ -252,10 +265,12 @@ export interface FileRoutesByFullPath {
   '/support': typeof AppSupportRoute
   '/textbooks': typeof AppTextbooksRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
+  '/control-panel-9k3x/textbooks': typeof ControlPanel9k3xTextbooksRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
@@ -288,10 +303,12 @@ export interface FileRoutesByTo {
   '/support': typeof AppSupportRoute
   '/textbooks': typeof AppTextbooksRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
+  '/control-panel-9k3x/textbooks': typeof ControlPanel9k3xTextbooksRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
@@ -327,10 +344,12 @@ export interface FileRoutesById {
   '/_app/support': typeof AppSupportRoute
   '/_app/textbooks': typeof AppTextbooksRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
+  '/control-panel-9k3x/textbooks': typeof ControlPanel9k3xTextbooksRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
@@ -366,10 +385,12 @@ export interface FileRouteTypes {
     | '/support'
     | '/textbooks'
     | '/auth/callback'
+    | '/control-panel-9k3x/courses'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
+    | '/control-panel-9k3x/textbooks'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
     | '/course/$documentId'
@@ -402,10 +423,12 @@ export interface FileRouteTypes {
     | '/support'
     | '/textbooks'
     | '/auth/callback'
+    | '/control-panel-9k3x/courses'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
+    | '/control-panel-9k3x/textbooks'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x'
     | '/course/$documentId'
@@ -440,10 +463,12 @@ export interface FileRouteTypes {
     | '/_app/support'
     | '/_app/textbooks'
     | '/auth/callback'
+    | '/control-panel-9k3x/courses'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
+    | '/control-panel-9k3x/textbooks'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
     | '/_app/course/$documentId'
@@ -629,6 +654,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
+    '/control-panel-9k3x/courses': {
+      id: '/control-panel-9k3x/courses'
+      path: '/courses'
+      fullPath: '/control-panel-9k3x/courses'
+      preLoaderRoute: typeof ControlPanel9k3xCoursesRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
     '/control-panel-9k3x/integrations': {
       id: '/control-panel-9k3x/integrations'
       path: '/integrations'
@@ -655,6 +687,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/control-panel-9k3x/settings'
       preLoaderRoute: typeof ControlPanel9k3xSettingsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/textbooks': {
+      id: '/control-panel-9k3x/textbooks'
+      path: '/textbooks'
+      fullPath: '/control-panel-9k3x/textbooks'
+      preLoaderRoute: typeof ControlPanel9k3xTextbooksRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
     '/control-panel-9k3x/users': {
@@ -782,19 +821,23 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface ControlPanel9k3xRouteChildren {
+  ControlPanel9k3xCoursesRoute: typeof ControlPanel9k3xCoursesRoute
   ControlPanel9k3xIntegrationsRoute: typeof ControlPanel9k3xIntegrationsRoute
   ControlPanel9k3xLogsRoute: typeof ControlPanel9k3xLogsRoute
   ControlPanel9k3xQuestionsRoute: typeof ControlPanel9k3xQuestionsRoute
   ControlPanel9k3xSettingsRoute: typeof ControlPanel9k3xSettingsRoute
+  ControlPanel9k3xTextbooksRoute: typeof ControlPanel9k3xTextbooksRoute
   ControlPanel9k3xUsersRoute: typeof ControlPanel9k3xUsersRoute
   ControlPanel9k3xIndexRoute: typeof ControlPanel9k3xIndexRoute
 }
 
 const ControlPanel9k3xRouteChildren: ControlPanel9k3xRouteChildren = {
+  ControlPanel9k3xCoursesRoute: ControlPanel9k3xCoursesRoute,
   ControlPanel9k3xIntegrationsRoute: ControlPanel9k3xIntegrationsRoute,
   ControlPanel9k3xLogsRoute: ControlPanel9k3xLogsRoute,
   ControlPanel9k3xQuestionsRoute: ControlPanel9k3xQuestionsRoute,
   ControlPanel9k3xSettingsRoute: ControlPanel9k3xSettingsRoute,
+  ControlPanel9k3xTextbooksRoute: ControlPanel9k3xTextbooksRoute,
   ControlPanel9k3xUsersRoute: ControlPanel9k3xUsersRoute,
   ControlPanel9k3xIndexRoute: ControlPanel9k3xIndexRoute,
 }

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { supabase } from "@/lib/supabase";
 
 export type PaymentRecord = {
   id: string;
@@ -20,10 +21,15 @@ export function usePaymentHistory() {
   const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
-    if (!user) return;
+    if (!user || !supabase) return;
     setError(null);
     try {
-      const response = await fetch("/api/payments/history");
+      const { data } = await supabase.auth.getSession();
+      const token = data.session?.access_token;
+      if (!token) throw new Error("You must be signed in to view payment history.");
+      const response = await fetch("/api/payments/history", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const payload = (await response.json()) as { transactions?: PaymentRecord[]; error?: string };
       if (!response.ok) throw new Error(payload.error ?? "Could not load payment history.");
       setTransactions(payload.transactions ?? []);

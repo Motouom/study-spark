@@ -14,6 +14,7 @@ import {
 } from "@/lib/study-reference-data";
 import { useEffect, useMemo, useState } from "react";
 import { PremiumGate } from "@/components/PremiumGate";
+import { isPremiumActive } from "@/lib/premium";
 
 export const Route = createFileRoute("/_app/leaderboard")({
   head: () => ({ meta: [{ title: "Leaderboard — StudySpark" }] }),
@@ -85,12 +86,22 @@ function LeaderboardPage() {
 
   const myRank = user ? filteredRows.findIndex((row) => row.user_id === user.id) + 1 : 0;
 
-  useEffect(() => {
-    if (!profile) return;
-    setSelectedLevel(profile.level);
-  }, [profile]);
+  const profileLevel = profile?.level;
+  const premiumActive = isPremiumActive(profile);
 
   useEffect(() => {
+    if (!profileLevel) return;
+    setSelectedLevel(profileLevel);
+  }, [profileLevel]);
+
+  useEffect(() => {
+    // Don't fetch rankings for free users — the data sits behind the paywall.
+    if (!premiumActive) {
+      setRows([]);
+      setError(null);
+      setLoading(false);
+      return;
+    }
     if (!supabaseConfigured() || !supabase) {
       setRows([]);
       setError("Supabase is not configured.");
@@ -114,7 +125,7 @@ function LeaderboardPage() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [premiumActive]);
 
   return (
     <>
@@ -159,6 +170,7 @@ function LeaderboardPage() {
                 <button
                   key={level}
                   type="button"
+                  aria-pressed={selectedLevel === level}
                   onClick={() => setSelectedLevel(level)}
                   className={`rounded-full border px-4 py-2 text-sm ${
                     selectedLevel === level
@@ -183,6 +195,7 @@ function LeaderboardPage() {
                 <button
                   key={scope}
                   type="button"
+                  aria-pressed={selectedScope === scope}
                   onClick={() => setSelectedScope(scope)}
                   disabled={scope === "city" && !profile?.city.trim()}
                   className={`rounded-full border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50 ${

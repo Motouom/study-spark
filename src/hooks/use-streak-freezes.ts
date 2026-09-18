@@ -25,11 +25,17 @@ function mapFreeze(row: StreakFreezeRow): StreakFreeze {
   };
 }
 
+function localDateKey(date: Date) {
+  const month = `${date.getMonth() + 1}`.padStart(2, "0");
+  const day = `${date.getDate()}`.padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
 function weekStartKey(date: Date) {
   const copy = new Date(date);
   const day = (copy.getDay() + 6) % 7;
   copy.setDate(copy.getDate() - day);
-  return copy.toISOString().slice(0, 10);
+  return localDateKey(copy);
 }
 
 export function useStreakFreezes() {
@@ -76,7 +82,7 @@ export function useStreakFreezes() {
     setSaving(true);
     setError(null);
     const { error } = await supabase.rpc("use_streak_freeze", {
-      target_date: new Date().toISOString().slice(0, 10),
+      target_date: localDateKey(new Date()),
     });
     setSaving(false);
 

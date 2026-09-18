@@ -22,8 +22,9 @@ function CoursesPage() {
   const { profile } = useStudyProfile();
   const { documents } = useStudyContent(profile);
   const { progress } = useStructuralProgress();
-  const subjects = [...new Set(documents.map((document) => document.subject))].sort();
-  const mastery = calculateStructuralMastery(progress, documents);
+  const courseDocuments = documents.filter((document) => document.contentKind === "course");
+  const subjects = [...new Set(courseDocuments.map((document) => document.subject))].sort();
+  const mastery = calculateStructuralMastery(progress, courseDocuments);
 
   return (
     <>
@@ -38,7 +39,7 @@ function CoursesPage() {
         >
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {subjects.map((subject) => {
-              const papers = documents.filter((document) => document.subject === subject);
+              const papers = courseDocuments.filter((document) => document.subject === subject);
               const subjectProgress = progress.filter((item) =>
                 papers.some((paper) => paper.id === item.documentId),
               );

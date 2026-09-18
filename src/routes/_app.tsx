@@ -40,7 +40,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { classLabel, seriesLabel, type StudentProfile } from "@/lib/study-reference-data";
-import { getStudentShell } from "@/lib/server-api";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
@@ -51,9 +50,6 @@ import { signOut } from "@/lib/auth";
 import { isPremiumActive } from "@/lib/premium";
 
 export const Route = createFileRoute("/_app")({
-  loader: async () => {
-    return getStudentShell();
-  },
   component: AppLayout,
 });
 
@@ -228,7 +224,7 @@ function SidebarContent({
             className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-medium"
           >
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            {profile?.plan === "premium" ? "Premium" : "Free"}
+            {isPremiumActive(profile) ? "Premium" : "Free"}
           </Link>
         </div>
         {/* Theme toggle row — full width pill */}
@@ -260,14 +256,9 @@ function CommandMenu({
   isAdmin: boolean;
 }) {
   const navigate = useNavigate();
-  const { topics } = Route.useLoaderData();
   const { profile } = useStudyProfile();
   const content = useStudyContent(profile);
-  const searchTopics = supabaseConfigured()
-    ? content.topics
-    : content.enabled
-      ? content.topics
-      : topics;
+  const searchTopics = content.topics;
   const go = (path: string) => {
     setOpen(false);
     // Small timeout so dialog close animation doesn't fight navigation
@@ -337,9 +328,8 @@ function CommandMenu({
 }
 
 function AppLayout() {
-  const { session } = Route.useLoaderData();
-  const { user, loaded, profile: savedProfile, displayName } = useStudyProfile();
-  const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? session.profile);
+  const { user, loaded, profile: savedProfile, profileError, displayName } = useStudyProfile();
+  const profile = savedProfile;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
@@ -366,11 +356,12 @@ function AppLayout() {
       loaded &&
       user &&
       !savedProfile &&
+      !profileError &&
       location.pathname !== "/onboarding"
     ) {
       void navigate({ to: "/onboarding" });
     }
-  }, [loaded, location.pathname, navigate, savedProfile, user]);
+  }, [loaded, location.pathname, navigate, profileError, savedProfile, user]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -407,6 +398,7 @@ function AppLayout() {
     loaded &&
     user &&
     !savedProfile &&
+    !profileError &&
     location.pathname !== "/onboarding"
   ) {
     return (
@@ -514,7 +506,20 @@ function AppLayout() {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => markAsRead(item.id)}
+                      onClick={() => {
+                        markAsRead(item.id);
+                        setCmdOpen(false);
+                        void navigate({
+                          to:
+                            item.kind === "content"
+                              ? "/library"
+                              : item.kind === "progress"
+                                ? "/progress"
+                                : item.kind === "streak"
+                                  ? "/streak"
+                                  : "/pricing",
+                        });
+                      }}
                       className={`block w-full border-b border-border px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/70 ${
                         item.read ? "bg-background" : "bg-accent/5"
                       }`}
@@ -547,9 +552,10 @@ function AppLayout() {
         {showExpiryBanner && (
           <div className="flex flex-col gap-2 border-b border-warning/30 bg-warning/10 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 md:px-10">
             <span className="text-warning-foreground">
-              Your Premium access ends in{" "}
-              {premiumExpiringDays === 1 ? "1 day" : `${premiumExpiringDays} days`}. Renew early to
-              keep uninterrupted access.
+              {premiumExpiringDays === 0
+                ? "Your Premium access ends today."
+                : `Your Premium access ends in ${premiumExpiringDays === 1 ? "1 day" : `${premiumExpiringDays} days`}.`}{" "}
+              Renew early to keep uninterrupted access.
             </span>
             <Button asChild size="sm" variant="outline" className="shrink-0">
               <Link to="/pricing">Renew Premium</Link>
@@ -568,6 +574,7 @@ function AppLayout() {
             <Link
               key={n.to}
               to={n.to}
+              aria-current={active ? "page" : undefined}
               className={`flex flex-1 flex-col items-center gap-1 py-2 text-[10px] ${
                 active ? "text-foreground" : "text-muted-foreground"
               }`}

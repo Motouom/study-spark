@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { SUBJECTS, type Subject, classLabel, seriesLabel } from "@/lib/study-reference-data";
-import { getStudentLibrary } from "@/lib/server-api";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,16 +13,11 @@ import { supabaseConfigured } from "@/lib/supabase";
 
 export const Route = createFileRoute("/_app/library")({
   head: () => ({ meta: [{ title: "Papers — StudySpark" }] }),
-  loader: async () => {
-    return getStudentLibrary();
-  },
   component: LibraryPage,
 });
 
 function LibraryPage() {
-  const { profile, subjects } = Route.useLoaderData();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
-  const effectiveProfile = savedProfile ?? profile;
   const content = useStudyContent(savedProfile);
   const courseDocuments = content.documents;
   const useRemoteOnly = supabaseConfigured();
@@ -34,7 +28,7 @@ function LibraryPage() {
           new Set([...content.subjects, ...courseDocuments.map((document) => document.subject)]),
         )
       : SUBJECTS.filter((item) => courseDocuments.some((document) => document.subject === item))
-    : subjects;
+    : SUBJECTS;
   const [q, setQ] = useState("");
   const [subject, setSubject] = useState<Subject | null>(null);
   const readingProgress = usePaperStudyOverview();
@@ -97,7 +91,11 @@ function LibraryPage() {
     <>
       <PageHeader
         title="Papers"
-        description={`${classLabel(effectiveProfile.classLevel)} · ${seriesLabel(effectiveProfile.series)} · ${effectiveProfile.language}`}
+        description={
+          savedProfile
+            ? `${classLabel(savedProfile.classLevel)} · ${seriesLabel(savedProfile.series)} · ${savedProfile.language}`
+            : "Your class and series"
+        }
       />
 
       <div className="space-y-6 px-4 py-6 md:px-10 md:py-8">

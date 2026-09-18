@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { getDashboardData } from "@/lib/server-api";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -68,9 +67,6 @@ function DailyGoalRing({ percent }: { percent: number }) {
 
 export const Route = createFileRoute("/_app/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — StudySpark" }] }),
-  loader: async () => {
-    return getDashboardData();
-  },
   component: Dashboard,
 });
 
@@ -106,17 +102,12 @@ function Stat({
 }
 
 function Dashboard() {
-  const { profile, topics } = Route.useLoaderData();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const readingProgress = usePaperStudyOverview();
   const useRemoteOnly = supabaseConfigured();
-  const effectiveProfile = useRemoteOnly ? savedProfile : (savedProfile ?? profile);
+  const effectiveProfile = savedProfile;
   const content = useStudyContent(savedProfile);
-  const effectiveTopics = useRemoteOnly
-    ? content.topics
-    : content.enabled
-      ? content.topics
-      : topics;
+  const effectiveTopics = content.topics;
   const availablePapers = content.documents;
   const documentsById = useMemo(
     () => new Map(availablePapers.map((document) => [document.id, document])),
@@ -162,7 +153,7 @@ function Dashboard() {
   const todaySeconds = useMemo(() => {
     const today = new Date();
     return readingProgress.sessions
-      .filter((session) => sameLocalDay(new Date(session.updatedAt), today))
+      .filter((session) => sameLocalDay(new Date(session.startedAt), today))
       .reduce((sum, session) => sum + session.durationSeconds, 0);
   }, [readingProgress.sessions]);
   const dailyGoalPercent = Math.min(100, Math.round((todaySeconds / DAILY_GOAL_SECONDS) * 100));

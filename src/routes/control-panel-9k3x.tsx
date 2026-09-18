@@ -14,6 +14,8 @@ import {
   Search,
   Bell,
   ChevronDown,
+  PlayCircle,
+  BookOpenText,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -42,6 +44,8 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/control-panel-9k3x", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/control-panel-9k3x/users", label: "Users", icon: Users },
   { to: "/control-panel-9k3x/questions", label: "Papers", icon: FileText },
+  { to: "/control-panel-9k3x/courses", label: "Courses", icon: PlayCircle },
+  { to: "/control-panel-9k3x/textbooks", label: "Textbooks", icon: BookOpenText },
   { to: "/control-panel-9k3x/integrations", label: "Integrations", icon: Plug },
   { to: "/control-panel-9k3x/logs", label: "Audit logs", icon: ScrollText },
   { to: "/control-panel-9k3x/settings", label: "Settings", icon: SettingsIcon },

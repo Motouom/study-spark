@@ -49,44 +49,82 @@ function PricingPage() {
   const [checkingPayment, setCheckingPayment] = useState(false);
   const [paymentMessage, setPaymentMessage] = useState<string | null>(null);
   const { user, profile } = useStudyProfile();
+  const userId = user?.id;
   const returnPath = user && profile ? "/dashboard" : "/";
   const monthly = 1500;
   const yearlyPrice = 12000;
 
   useEffect(() => {
-    if (!user || !supabase) return;
+    if (!userId || !supabase) return;
     const params = new URLSearchParams(window.location.search);
     if (!params.has("payment_return")) return;
 
+    // Strip the return flag so refreshes/back-navigation don't re-trigger
+    // verification, and remember which transaction to verify.
+    params.delete("payment_return");
+    const query = params.toString();
+    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
+
+    const transactionId = sessionStorage.getItem("studyspark.checkout.transactionId") ?? undefined;
     setCheckingPayment(true);
-    supabase.auth
-      .getSession()
-      .then(({ data }) =>
-        fetch("/api/payments/fapshi/verify", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${data.session?.access_token ?? ""}`,
-          },
-          body: JSON.stringify({}),
-        }),
-      )
-      .then(async (response) => {
-        const payload = await response.json().catch(() => ({}));
-        if (response.ok && payload.status === "successful") {
-          setPaymentMessage("Payment confirmed. Premium is now active on your account.");
-          window.setTimeout(() => window.location.assign("/dashboard"), 1200);
+    const client = supabase;
+
+    const verifyOnce = async () => {
+      const { data } = await client.auth.getSession();
+      return fetch("/api/payments/fapshi/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${data.session?.access_token ?? ""}`,
+        },
+        body: JSON.stringify(transactionId ? { transactionId } : {}),
+      }).then(async (response) => ({
+        ok: response.ok,
+        payload: (await response.json().catch(() => ({}))) as {
+          status?: string;
+          error?: string;
+        },
+      }));
+    };
+
+    // Fapshi may lag behind the redirect: poll a few times before giving up.
+    const poll = async () => {
+      const maxAttempts = 5;
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+          const { ok, payload } = await verifyOnce();
+          if (ok && payload.status === "successful") {
+            sessionStorage.removeItem("studyspark.checkout.transactionId");
+            setPaymentMessage("Payment confirmed. Premium is now active on your account.");
+            window.setTimeout(() => window.location.assign("/dashboard"), 1200);
+            return;
+          }
+          if (
+            ok &&
+            (payload.status === "pending" || payload.status === "created") &&
+            attempt < maxAttempts
+          ) {
+            await new Promise((resolve) => window.setTimeout(resolve, 4000));
+            continue;
+          }
+          setPaymentMessage(
+            payload.status === "pending" || payload.status === "created"
+              ? "Payment is still pending. We will unlock Premium as soon as Fapshi confirms it."
+              : "Payment has not been confirmed yet. If you paid, wait a moment and refresh.",
+          );
           return;
+        } catch {
+          if (attempt === maxAttempts) {
+            setPaymentMessage("Payment could not be checked right now. Please try again.");
+            return;
+          }
+          await new Promise((resolve) => window.setTimeout(resolve, 4000));
         }
-        setPaymentMessage(
-          payload.status === "pending" || payload.status === "created"
-            ? "Payment is still pending. We will unlock Premium as soon as Fapshi confirms it."
-            : "Payment has not been confirmed yet. If you paid, wait a moment and refresh.",
-        );
-      })
-      .catch(() => setPaymentMessage("Payment could not be checked right now. Please try again."))
-      .finally(() => setCheckingPayment(false));
-  }, [user]);
+      }
+    };
+
+    void poll().finally(() => setCheckingPayment(false));
+  }, [userId]);
 
   async function startCheckout() {
     if (!user || !supabase) {
@@ -110,6 +148,10 @@ function PricingPage() {
       if (!response.ok || !payload.checkoutUrl) {
         throw new Error(payload.error ?? "Payment could not be started.");
       }
+      sessionStorage.setItem(
+        "studyspark.checkout.transactionId",
+        String(payload.transactionId ?? ""),
+      );
       window.location.assign(payload.checkoutUrl);
     } catch (error) {
       setPaymentMessage(error instanceof Error ? error.message : "Payment could not be started.");

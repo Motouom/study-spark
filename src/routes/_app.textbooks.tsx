@@ -16,7 +16,8 @@ export const Route = createFileRoute("/_app/textbooks")({
 function TextbooksPage() {
   const { profile } = useStudyProfile();
   const { documents } = useStudyContent(profile);
-  const subjects = [...new Set(documents.map((document) => document.subject))].sort();
+  const textbookDocuments = documents.filter((document) => document.contentKind === "textbook");
+  const subjects = [...new Set(textbookDocuments.map((document) => document.subject))].sort();
   const headingPattern = /(?:^|\n)#{1,3}\s+(.+)/g;
 
   return (
@@ -32,7 +33,7 @@ function TextbooksPage() {
         >
           <div className="grid gap-4 md:grid-cols-2">
             {subjects.map((subject) => {
-              const papers = documents.filter((document) => document.subject === subject);
+              const papers = textbookDocuments.filter((document) => document.subject === subject);
               const headings = [
                 ...new Set(
                   papers

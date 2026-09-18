@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { applyVerifiedFapshiStatus, fetchFapshiPaymentStatus } from "@/lib/fapshi";
 import { getAuthenticatedUser, getServiceSupabase } from "@/lib/server-supabase";
+import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const Route = createFileRoute("/api/payments/fapshi/verify")({
   server: {
@@ -8,6 +9,8 @@ export const Route = createFileRoute("/api/payments/fapshi/verify")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
+          const limiter = rateLimit(`payments:verify:${user.id}`, 30, 60 * 60 * 1000);
+          if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const body = (await request.json().catch(() => ({}))) as { transactionId?: string };
           const supabase = getServiceSupabase();
 

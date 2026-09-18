@@ -47,6 +47,34 @@ export async function requestEmailMagicLink(email: string) {
   if (error) throw error;
 }
 
+export async function signInWithEmailPassword(email: string, password: string) {
+  if (!supabase) {
+    throw new Error(
+      "Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.",
+    );
+  }
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+}
+
+export async function signUpWithEmailPassword(email: string, password: string) {
+  if (!supabase) {
+    throw new Error(
+      "Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.",
+    );
+  }
+
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${window.location.origin}/auth/callback`,
+    },
+  });
+  if (error) throw error;
+}
+
 export async function signOut() {
   clearStudySparkLocalData();
   if (supabase) await supabase.auth.signOut();

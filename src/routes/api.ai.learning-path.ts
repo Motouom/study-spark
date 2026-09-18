@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { aiConfigured, fallbackLearningPath, generateAiText, parseAiLearningPath } from "@/lib/ai";
 import { getAuthenticatedSupabase, getAuthenticatedUser } from "@/lib/server-supabase";
+import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const Route = createFileRoute("/api/ai/learning-path")({
   server: {
@@ -8,6 +9,8 @@ export const Route = createFileRoute("/api/ai/learning-path")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
+          const limiter = rateLimit(`ai:learning-path:${user.id}`, 10, 60 * 60 * 1000);
+          if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const supabase = getAuthenticatedSupabase(request);
 
           const [
@@ -38,6 +41,22 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           ]);
 
           const profileSubjects = new Set((profile?.subjects ?? []) as string[]);
+
+          // Learning paths are a Premium feature — enforce server-side, not
+          // just in the UI.
+          const plan = String(profile?.plan ?? "free");
+          const premiumUntil = profile?.premium_until
+            ? new Date(String(profile.premium_until))
+            : null;
+          const isPremium =
+            plan === "premium" && (!premiumUntil || premiumUntil.getTime() > Date.now());
+          if (!isPremium) {
+            return Response.json(
+              { error: "Learning paths are a Premium feature." },
+              { status: 403 },
+            );
+          }
+
           const matchingDocuments = (documents ?? []).filter(
             (document) =>
               profileSubjects.size === 0 || profileSubjects.has(String(document.subject)),

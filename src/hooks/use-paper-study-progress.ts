@@ -123,15 +123,31 @@ export function usePaperStudyProgress(documentId?: string | null) {
     let cancelled = false;
     setLoading(true);
     setError(null);
+    const client = supabase;
 
     Promise.all([
-      supabase
+      // Resume the still-open session for this paper instead of inserting a
+      // new row on every visit/refresh.
+      client
         .from("paper_study_sessions")
-        .insert({ user_id: user.id, document_id: documentId })
         .select(
           "id, document_id, started_at, ended_at, duration_seconds, max_scroll_percent, completed, updated_at",
         )
-        .single(),
+        .eq("document_id", documentId)
+        .is("ended_at", null)
+        .order("started_at", { ascending: false })
+        .limit(1)
+        .maybeSingle()
+        .then(async ({ data: openSession }) => {
+          if (openSession) return { data: openSession, error: null };
+          return client
+            .from("paper_study_sessions")
+            .insert({ user_id: user.id, document_id: documentId })
+            .select(
+              "id, document_id, started_at, ended_at, duration_seconds, max_scroll_percent, completed, updated_at",
+            )
+            .single();
+        }),
       supabase
         .from("paper_study_checkpoints")
         .select("id, document_id, checkpoint_type, note, scroll_percent, created_at")
@@ -359,11 +375,13 @@ function summarizeReadingProgress(
     .sort((a, b) => b.getTime() - a.getTime());
   let currentStreak = 0;
   const cursor = new Date();
-  if (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-    while (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-      currentStreak += 1;
-      cursor.setDate(cursor.getDate() - 1);
-    }
+  // Preserve yesterday's chain until the current day ends.
+  if (!sortedDays.some((day) => sameLocalDay(day, cursor))) {
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  while (sortedDays.some((day) => sameLocalDay(day, cursor))) {
+    currentStreak += 1;
+    cursor.setDate(cursor.getDate() - 1);
   }
 
   return {

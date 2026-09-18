@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { aiConfigured, fallbackInsight, generateAiText } from "@/lib/ai";
 import { getAuthenticatedSupabase, getAuthenticatedUser } from "@/lib/server-supabase";
+import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const Route = createFileRoute("/api/ai/progress-insight")({
   server: {
@@ -8,6 +9,8 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
+          const limiter = rateLimit(`ai:progress-insight:${user.id}`, 10, 60 * 60 * 1000);
+          if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const supabase = getAuthenticatedSupabase(request);
 
           const [

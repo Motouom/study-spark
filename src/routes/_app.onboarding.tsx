@@ -174,12 +174,19 @@ function Onboarding() {
                 <p className="mt-2 text-sm text-muted-foreground">
                   Your structural papers will follow this language first.
                 </p>
-                <div className="mt-5 grid grid-cols-2 gap-2">
+                <div
+                  className="mt-5 grid grid-cols-2 gap-2"
+                  role="radiogroup"
+                  aria-label="Study language"
+                >
                   {LANGUAGES.map((item) => {
                     const sel = language === item.id;
                     return (
                       <button
                         key={item.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={sel}
                         onClick={() => setLanguage(item.id)}
                         className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors ${
                           sel
@@ -293,10 +300,13 @@ function Onboarding() {
                 <p className="mt-2 text-sm text-muted-foreground">
                   Select Ordinary or Advanced Level, then your class.
                 </p>
-                <div className="mt-5 grid grid-cols-2 gap-2">
+                <div className="mt-5 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Level">
                   {(["ordinary", "advanced"] as const).map((item) => (
                     <button
                       key={item}
+                      type="button"
+                      role="radio"
+                      aria-checked={level === item}
                       onClick={() => {
                         setLevel(item);
                         setClassLevel(null);
@@ -313,12 +323,19 @@ function Onboarding() {
                     </button>
                   ))}
                 </div>
-                <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div
+                  className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2"
+                  role="radiogroup"
+                  aria-label="Class"
+                >
                   {availableClasses.map((item) => {
                     const sel = classLevel === item.id;
                     return (
                       <button
                         key={item.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={sel}
                         onClick={() => {
                           setLevel(item.level);
                           setClassLevel(item.id);
@@ -349,12 +366,19 @@ function Onboarding() {
                 <p className="mt-2 text-sm text-muted-foreground">
                   Choose your series and the subjects you want on your dashboard.
                 </p>
-                <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div
+                  className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2"
+                  role="radiogroup"
+                  aria-label="Series"
+                >
                   {availableSeries.map((item) => {
                     const sel = series === item.id;
                     return (
                       <button
                         key={item.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={sel}
                         onClick={() => {
                           setSeries(item.id);
                           setSubjects((current) =>
@@ -381,6 +405,8 @@ function Onboarding() {
                     return (
                       <button
                         key={s}
+                        type="button"
+                        aria-pressed={sel}
                         onClick={() => toggleSubject(s)}
                         className={`rounded-full border px-4 py-2 text-sm transition-colors ${
                           sel

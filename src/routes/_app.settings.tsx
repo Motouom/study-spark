@@ -19,11 +19,11 @@ import {
   COUNTRIES,
   SERIES_OPTIONS,
   subjectsForSeries,
+  DEFAULT_PROFILE,
   type ClassLevel,
   type Series,
   type Subject,
 } from "@/lib/study-reference-data";
-import { getStudentSession } from "@/lib/server-api";
 import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Bell, Check, LogOut, Sparkles, Trash2, TriangleAlert } from "lucide-react";
@@ -43,9 +43,6 @@ import {
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — StudySpark" }] }),
-  loader: async () => {
-    return { session: await getStudentSession() };
-  },
   component: SettingsPage,
 });
 
@@ -116,7 +113,6 @@ const NOTIFICATION_OPTIONS: Array<{
 ];
 
 function SettingsPage() {
-  const { session } = Route.useLoaderData();
   const navigate = useNavigate();
   const { user, loaded, profile: savedProfile, saveProfile } = useStudyProfile();
   const { subscription } = useSubscription();
@@ -127,10 +123,11 @@ function SettingsPage() {
     refresh: refreshHistory,
   } = usePaymentHistory();
   const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [retryError, setRetryError] = useState<string | null>(null);
   const { preferences, setKindEnabled } = useLearnerNotificationPreferences();
-  const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? session.profile);
+  const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? DEFAULT_PROFILE);
   const premiumActive = isPremiumActive(profile);
-  const fallbackProfile = profile ?? session.profile;
+  const fallbackProfile = profile ?? DEFAULT_PROFILE;
   const [name, setName] = useState(fallbackProfile.name);
   const [country, setCountry] = useState(fallbackProfile.country);
   const [region, setRegion] = useState(fallbackProfile.region);
@@ -152,6 +149,7 @@ function SettingsPage() {
 
   async function retryPayment(record: PaymentRecord) {
     setRetryingId(record.id);
+    setRetryError(null);
     try {
       const response = await fetch("/api/payments/fapshi/initiate", {
         method: "POST",
@@ -166,7 +164,8 @@ function SettingsPage() {
         return;
       }
       throw new Error(payload.error ?? "Payment could not be started.");
-    } catch {
+    } catch (error) {
+      setRetryError(error instanceof Error ? error.message : "Payment could not be started.");
       setRetryingId(null);
     }
   }
@@ -301,7 +300,7 @@ function SettingsPage() {
                 />
               </Row>
               <Row label="Email" hint="Managed by your sign-in provider">
-                <Input value={session.user.email} disabled type="email" className="max-w-md" />
+                <Input value={user?.email ?? ""} disabled type="email" className="max-w-md" />
               </Row>
               <Row label="Country" hint="Used for national rankings">
                 <Select value={country} onValueChange={setCountry}>
@@ -568,6 +567,11 @@ function SettingsPage() {
               {historyError && (
                 <p className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
                   {historyError}
+                </p>
+              )}
+              {retryError && (
+                <p className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                  {retryError}
                 </p>
               )}
               {!historyLoaded ? (
