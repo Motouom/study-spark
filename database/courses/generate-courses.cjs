@@ -109,8 +109,23 @@ for (const course of COURSES) {
   );
 }
 
-const sql = ["begin;", ...topicInserts, ...docInserts, "commit;"].join("\n\n");
+const resetCourseDocuments =
+  "delete from public.course_documents\n" +
+  "where content_kind = 'course'\n" +
+  "  and topic_id like 'course-%';";
+
+const sql = [
+  "begin;",
+  ...topicInserts,
+  resetCourseDocuments,
+  ...docInserts,
+  "commit;",
+].join("\n\n");
 
 fs.writeFileSync(path.join(__dirname, "insert_courses.sql"), sql);
+fs.writeFileSync(
+  path.join(BASE, "..", "supabase", "033_expanded_gce_course_catalog.sql"),
+  sql,
+);
 console.log(`Generated ${topicInserts.length} topics and ${docInserts.length} course documents.`);
 console.log("Total SQL size:", (sql.length / 1024).toFixed(0), "KB");
