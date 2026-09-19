@@ -1,13 +1,28 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
-import { SUBJECTS, type Subject, classLabel, seriesLabel } from "@/lib/study-reference-data";
+import {
+  SUBJECTS,
+  type Series,
+  type Subject,
+  classLabel,
+  seriesLabel,
+} from "@/lib/study-reference-data";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, BookOpen, FileText, Lock, Search, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  FileText,
+  Lock,
+  Search,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from "lucide-react";
 import { useMemo, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import { useStudyContent } from "@/hooks/use-study-content";
+import { useStudyContent, type CourseDocument } from "@/hooks/use-study-content";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 
@@ -33,16 +48,20 @@ function LibraryPage() {
   const [subject, setSubject] = useState<Subject | null>(null);
   const readingProgress = usePaperStudyOverview();
 
-  const subjectProgress = useMemo(() => {
-    // Best depth per paper across sessions (each visit creates a new
-    // session row, so the latest row alone would read 0%).
-    const bestByDoc = new Map<string, number>();
+  // Best depth per paper across sessions (each visit creates a new session
+  // row, so the latest row alone would read 0%).
+  const bestByDoc = useMemo(() => {
+    const map = new Map<string, number>();
     for (const session of readingProgress.sessions) {
-      bestByDoc.set(
+      map.set(
         session.documentId,
-        Math.max(bestByDoc.get(session.documentId) ?? 0, session.maxScrollPercent),
+        Math.max(map.get(session.documentId) ?? 0, session.maxScrollPercent),
       );
     }
+    return map;
+  }, [readingProgress.sessions]);
+
+  const subjectProgress = useMemo(() => {
     const bySubject = new Map<string, { total: number; reached: number }>();
     for (const document of courseDocuments) {
       const entry = bySubject.get(document.subject) ?? { total: 0, reached: 0 };
@@ -51,37 +70,49 @@ function LibraryPage() {
       bySubject.set(document.subject, entry);
     }
     return bySubject;
-  }, [courseDocuments, readingProgress.sessions]);
+  }, [bestByDoc, courseDocuments]);
 
   const subjectCards = useMemo(
     () =>
-      effectiveSubjects.map((item) => {
-        const documents = courseDocuments.filter((document) => document.subject === item);
-        const unlocked = documents.filter((document) => !document.isLocked).length;
-        const progress = subjectProgress.get(item);
-        const startedPercent =
-          progress && progress.total > 0
-            ? Math.round((progress.reached / progress.total) * 100)
-            : 0;
+      effectiveSubjects
+        .map((item) => {
+          const documents = courseDocuments.filter((document) => document.subject === item);
+          const unlocked = documents.filter((document) => !document.isLocked).length;
+          const progress = subjectProgress.get(item);
+          const startedPercent =
+            progress && progress.total > 0
+              ? Math.round((progress.reached / progress.total) * 100)
+              : 0;
 
-        return {
-          name: item,
-          total: documents.length,
-          unlocked,
-          startedPercent,
-        };
-      }),
+          return {
+            name: item,
+            total: documents.length,
+            unlocked,
+            startedPercent,
+          };
+        })
+        .filter((item) => item.total > 0)
+        .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name)),
     [courseDocuments, effectiveSubjects, subjectProgress],
   );
 
+  const needle = q.trim().toLowerCase();
+  const searchActive = needle.length > 0;
+
   const filteredDocuments = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return courseDocuments.filter((document) => {
-      if (!subject || document.subject !== subject) return false;
-      if (!needle) return true;
-      return [document.title, document.subject].join(" ").toLowerCase().includes(needle);
-    });
-  }, [courseDocuments, q, subject]);
+    return courseDocuments
+      .filter((document) => {
+        if (!searchActive && subject && document.subject !== subject) return false;
+        if (!needle) return true;
+        return [document.title, document.subject, ...(document.series ?? [])]
+          .join(" ")
+          .toLowerCase()
+          .includes(needle);
+      })
+      .sort((a, b) => a.title.localeCompare(b.title));
+  }, [courseDocuments, needle, searchActive, subject]);
+
+  const clearSearch = () => setQ("");
 
   if (pageLoading) {
     return <LibrarySkeleton />;
@@ -110,7 +141,35 @@ function LibraryPage() {
           disabled in the student flow.
         </div>
 
-        {!subject ? (
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search all papers by title, subject, or series..."
+            className="h-11 pl-9 pr-10"
+            aria-label="Search papers"
+          />
+          {searchActive && (
+            <button
+              type="button"
+              onClick={clearSearch}
+              aria-label="Clear search"
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+
+        {searchActive ? (
+          <SearchResults
+            documents={filteredDocuments}
+            bestByDoc={bestByDoc}
+            query={q}
+            onClear={clearSearch}
+          />
+        ) : !subject ? (
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="text-sm font-medium">Subjects</h2>
@@ -121,10 +180,7 @@ function LibraryPage() {
                 <button
                   key={item.name}
                   type="button"
-                  onClick={() => {
-                    setSubject(item.name);
-                    setQ("");
-                  }}
+                  onClick={() => setSubject(item.name)}
                   className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -145,78 +201,21 @@ function LibraryPage() {
           <section className="space-y-3">
             <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
               <div className="flex items-center justify-between gap-3">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setSubject(null);
-                    setQ("");
-                  }}
-                >
+                <Button type="button" variant="ghost" size="sm" onClick={() => setSubject(null)}>
                   <ArrowLeft className="mr-1.5 h-4 w-4" />
                   Subjects
                 </Button>
                 <Badge variant="secondary">{filteredDocuments.length}</Badge>
               </div>
-              <div className="relative">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
-                  placeholder={`Search ${subject} papers...`}
-                  className="h-11 pl-9"
-                />
-              </div>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
-              {filteredDocuments.map((document) =>
-                document.isLocked ? (
-                  <article
-                    key={document.id}
-                    className="rounded-xl border border-border bg-card p-4 opacity-90"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
-                        <Lock className="h-5 w-5" />
-                      </div>
-                      <Badge variant="outline">Premium</Badge>
-                    </div>
-                    <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug">
-                      {document.title}
-                    </h3>
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      This paper matches your profile and unlocks with Premium.
-                    </p>
-                    <Button asChild size="sm" className="mt-4">
-                      <Link to="/pricing">
-                        <Sparkles className="mr-1.5 h-4 w-4" />
-                        Unlock
-                      </Link>
-                    </Button>
-                  </article>
-                ) : (
-                  <Link
-                    key={document.id}
-                    to="/course/$documentId"
-                    params={{ documentId: document.id }}
-                    className="group rounded-xl border border-border bg-card p-4 transition-shadow hover:shadow-card"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
-                        <FileText className="h-5 w-5" />
-                      </div>
-                      <Badge variant="secondary">
-                        {document.accessStatus === "free_preview" ? "Free" : document.subject}
-                      </Badge>
-                    </div>
-                    <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
-                      {document.title}
-                    </h3>
-                    <p className="mt-2 text-xs text-muted-foreground">Protected structural paper</p>
-                  </Link>
-                ),
-              )}
+              {filteredDocuments.map((document) => (
+                <PaperCard
+                  key={document.id}
+                  document={document}
+                  bestPercent={bestByDoc.get(document.id) ?? 0}
+                />
+              ))}
             </div>
           </section>
         ) : (
@@ -240,12 +239,122 @@ function LibraryPage() {
   );
 }
 
+function SearchResults({
+  documents,
+  bestByDoc,
+  query,
+  onClear,
+}: {
+  documents: CourseDocument[];
+  bestByDoc: Map<string, number>;
+  query: string;
+  onClear: () => void;
+}) {
+  if (documents.length === 0) {
+    return (
+      <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+        <p className="text-sm text-muted-foreground">No papers match “{query}”.</p>
+        <Button variant="outline" size="sm" className="mt-4" onClick={onClear}>
+          Clear search
+        </Button>
+      </div>
+    );
+  }
+  return (
+    <section className="space-y-3">
+      <div className="flex items-center justify-between">
+        <h2 className="text-sm font-medium">Search results</h2>
+        <Badge variant="secondary">{documents.length}</Badge>
+      </div>
+      <div className="grid gap-3 md:grid-cols-2">
+        {documents.map((document) => (
+          <PaperCard
+            key={document.id}
+            document={document}
+            bestPercent={bestByDoc.get(document.id) ?? 0}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPercent: number }) {
+  const series = document.series.map((id) => seriesLabel(id as Series)).join(", ");
+  if (document.isLocked) {
+    return (
+      <article className="rounded-xl border border-border bg-card p-4 opacity-90">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
+            <Lock className="h-5 w-5" />
+          </div>
+          <Badge variant="outline">Premium</Badge>
+        </div>
+        <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug">{document.title}</h3>
+        <p className="mt-2 text-xs text-muted-foreground">
+          {series ? `${series} · ` : ""}This paper matches your profile and unlocks with Premium.
+        </p>
+        <Button asChild size="sm" className="mt-4">
+          <Link to="/pricing">
+            <Sparkles className="mr-1.5 h-4 w-4" />
+            Unlock
+          </Link>
+        </Button>
+      </article>
+    );
+  }
+
+  const inProgress = bestPercent > 0 && bestPercent < 85;
+  const readThrough = bestPercent >= 85;
+  return (
+    <Link
+      to="/course/$documentId"
+      params={{ documentId: document.id }}
+      className="group rounded-xl border border-border bg-card p-4 transition-shadow hover:shadow-card"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
+          <FileText className="h-5 w-5" />
+        </div>
+        <Badge variant={inProgress ? "default" : readThrough ? "success" : "secondary"}>
+          {inProgress
+            ? `${bestPercent}% read`
+            : readThrough
+              ? "Read through"
+              : document.accessStatus === "free_preview"
+                ? "Free"
+                : "Ready"}
+        </Badge>
+      </div>
+      <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
+        {document.title}
+      </h3>
+      <p className="mt-2 text-xs text-muted-foreground">
+        {series ? `${series} · ` : ""}Protected structural paper
+      </p>
+      {bestPercent > 0 && (
+        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
+          <div
+            className="h-full rounded-full bg-accent transition-[width] duration-500"
+            style={{ width: `${Math.min(100, bestPercent)}%` }}
+          />
+        </div>
+      )}
+    </Link>
+  );
+}
+
 function SubjectRing({ percent }: { percent: number }) {
   const radius = 15;
   const circumference = 2 * Math.PI * radius;
   const dash = (Math.max(2, percent) / 100) * circumference;
   return (
-    <div className="relative h-10 w-10" title={`${percent}% of papers started`}>
+    <div
+      className="relative h-10 w-10"
+      role="img"
+      aria-label={`${percent}% of papers started`}
+      title={`${percent}% of papers started`}
+    >
       <svg viewBox="0 0 36 36" className="h-10 w-10 -rotate-90">
         <circle
           cx="18"
