@@ -7,7 +7,9 @@ import {
   BookOpen,
   Bookmark,
   CheckCircle2,
+  ChevronDown,
   Clock,
+  ListChecks,
   Lock,
   PlayCircle,
   Sparkles,
@@ -20,7 +22,8 @@ import { supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
 import { formatDuration } from "@/hooks/use-structural-progress";
 import { getScrollPercent, onContainerScroll, scrollToPercent } from "@/lib/scroll-progress";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { slugifyHeading } from "@/components/ProtectedMarkdown";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
 
@@ -123,6 +126,7 @@ function CourseDocumentPage() {
                 documentTitle={document.title}
                 kindLabel={isCourse ? "course" : isTextbook ? "textbook" : "paper"}
               />
+              {isCourse && <CourseContents markdown={document.markdownContent} />}
               <Suspense
                 fallback={
                   <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
@@ -140,6 +144,87 @@ function CourseDocumentPage() {
           ))}
       </div>
     </>
+  );
+}
+
+function CourseContents({ markdown }: { markdown: string }) {
+  const [open, setOpen] = useState(false);
+
+  const units = useMemo(() => {
+    const result: { unit: string; lessons: string[] }[] = [];
+    let current: { unit: string; lessons: string[] } | null = null;
+    for (const line of markdown.split("\n")) {
+      const unitMatch = line.match(/^## (.+)$/);
+      const lessonMatch = line.match(/^### (.+)$/);
+      if (unitMatch) {
+        const title = unitMatch[1].trim();
+        if (/^how to use this course$/i.test(title)) continue;
+        current = { unit: title, lessons: [] };
+        result.push(current);
+      } else if (lessonMatch && current) {
+        const title = lessonMatch[1].trim();
+        if (/^answers?$/i.test(title)) continue;
+        current.lessons.push(title);
+      }
+    }
+    return result;
+  }, [markdown]);
+
+  if (units.length === 0) return null;
+
+  return (
+    <section className="rounded-xl border border-border bg-card">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+        aria-expanded={open}
+      >
+        <div className="flex items-center gap-2">
+          <ListChecks className="h-4 w-4 text-muted-foreground" />
+          <span className="text-sm font-medium">Course contents</span>
+          <Badge variant="secondary">{units.length} units</Badge>
+        </div>
+        <ChevronDown
+          className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+      {open && (
+        <div className="border-t border-border p-3">
+          <ol className="space-y-3">
+            {units.map((unit, index) => (
+              <li key={unit.unit}>
+                <a
+                  href={`#${slugifyHeading(unit.unit)}`}
+                  onClick={() => setOpen(false)}
+                  className="flex items-start gap-2 text-sm font-medium hover:text-accent"
+                >
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-secondary text-[11px]">
+                    {index + 1}
+                  </span>
+                  {unit.unit}
+                </a>
+                {unit.lessons.length > 0 && (
+                  <ul className="mt-1.5 space-y-1 border-l border-border pl-4">
+                    {unit.lessons.map((lesson) => (
+                      <li key={lesson}>
+                        <a
+                          href={`#${slugifyHeading(lesson)}`}
+                          onClick={() => setOpen(false)}
+                          className="block text-xs text-muted-foreground hover:text-accent"
+                        >
+                          {lesson}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </section>
   );
 }
 

@@ -7,6 +7,14 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
 
+export function slugifyHeading(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
+
 export default function ProtectedMarkdown({
   document,
   owner,
@@ -49,12 +57,20 @@ export default function ProtectedMarkdown({
               </h1>
             ),
             h2: ({ children }) => (
-              <h2 className="mb-3 mt-8 font-display text-xl font-semibold leading-tight sm:text-2xl">
+              <h2
+                id={slugifyHeading(String(children ?? ""))}
+                className="mb-3 mt-8 scroll-mt-24 font-display text-xl font-semibold leading-tight sm:text-2xl"
+              >
                 {children}
               </h2>
             ),
             h3: ({ children }) => (
-              <h3 className="mb-3 mt-6 text-lg font-semibold leading-snug">{children}</h3>
+              <h3
+                id={slugifyHeading(String(children ?? ""))}
+                className="mb-3 mt-6 scroll-mt-24 text-lg font-semibold leading-snug"
+              >
+                {children}
+              </h3>
             ),
             p: ({ children }) => <p className="my-4 leading-8">{children}</p>,
             strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
