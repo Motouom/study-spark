@@ -38,6 +38,16 @@ function CourseDocumentPage() {
   const studyProgress = usePaperStudyProgress(document?.id);
   const pageLoading =
     supabaseConfigured() && (!profileLoaded || !content.loaded || content.loading);
+  const isCourse = document?.contentKind === "course";
+  const isTextbook = document?.contentKind === "textbook";
+  const backTo = isCourse ? "/courses" : isTextbook ? "/textbooks" : "/library";
+  const backLabel = isCourse ? "My courses" : isTextbook ? "My textbooks" : "My topics";
+  const kindLabel = isCourse
+    ? "Course lesson"
+    : isTextbook
+      ? "Textbook chapter"
+      : "Protected paper";
+
   useContentProtection(Boolean(document && !document.isLocked), document?.id);
 
   if (pageLoading) {
@@ -46,14 +56,11 @@ function CourseDocumentPage() {
 
   return (
     <>
-      <PageHeader
-        title={document?.title ?? "Course document"}
-        description="Protected in-app study material"
-      >
+      <PageHeader title={document?.title ?? "Course document"} description={kindLabel}>
         <Button asChild variant="outline" size="sm">
-          <Link to="/library">
+          <Link to={backTo}>
             <ArrowLeft className="mr-1.5 h-4 w-4" />
-            My topics
+            {backLabel}
           </Link>
         </Button>
       </PageHeader>
@@ -88,10 +95,13 @@ function CourseDocumentPage() {
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
                 <Lock className="h-5 w-5" />
               </div>
-              <h2 className="mt-4 font-display text-2xl">Premium paper</h2>
+              <h2 className="mt-4 font-display text-2xl">
+                {isCourse ? "Premium course" : isTextbook ? "Premium textbook" : "Premium paper"}
+              </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                This paper matches your class, series, and subjects, but it is locked on the Free
-                plan. Free learners can open only the first preview papers.
+                This {isCourse ? "course" : isTextbook ? "textbook" : "paper"} matches your class,
+                series, and subjects, but it is locked on the Free plan. Free learners can open only
+                the first preview papers.
               </p>
               <div className="mt-5 flex justify-center gap-2">
                 <Button asChild>
@@ -101,18 +111,22 @@ function CourseDocumentPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link to="/library">Back to papers</Link>
+                  <Link to={backTo}>Back to {backLabel.toLowerCase()}</Link>
                 </Button>
               </div>
             </div>
           ) : (
             <div className="min-w-0 space-y-4">
               <ReadingProgressBar />
-              <StudyProgressPanel progress={studyProgress} documentTitle={document.title} />
+              <StudyProgressPanel
+                progress={studyProgress}
+                documentTitle={document.title}
+                kindLabel={isCourse ? "course" : isTextbook ? "textbook" : "paper"}
+              />
               <Suspense
                 fallback={
                   <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
-                    Preparing protected paper...
+                    Preparing protected {kindLabel}...
                   </div>
                 }
               >
@@ -166,9 +180,11 @@ function ReadingProgressBar() {
 function StudyProgressPanel({
   progress,
   documentTitle,
+  kindLabel,
 }: {
   progress: ReturnType<typeof usePaperStudyProgress>;
   documentTitle: string;
+  kindLabel: string;
 }) {
   const [saved, setSaved] = useState(false);
   const [checkpointError, setCheckpointError] = useState<string | null>(null);
@@ -200,7 +216,7 @@ function StudyProgressPanel({
               </Badge>
             )}
           </div>
-          <h2 className="mt-3 text-base font-medium">Track this paper quietly</h2>
+          <h2 className="mt-3 text-base font-medium">Track this {kindLabel} quietly</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             StudySpark tracks reading time, scroll depth, and useful checkpoints for {documentTitle}
             .
@@ -254,7 +270,9 @@ function StudyProgressPanel({
 
       {checkpointError && <p className="mt-3 text-xs text-destructive">{checkpointError}</p>}
       {saved && (
-        <p className="mt-3 text-xs text-success">Saved. This paper now counts toward progress.</p>
+        <p className="mt-3 text-xs text-success">
+          Saved. This {kindLabel} now counts toward progress.
+        </p>
       )}
     </section>
   );
