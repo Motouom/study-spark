@@ -18,6 +18,7 @@ import { formatDuration } from "@/hooks/use-structural-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 import { isPremiumActive } from "@/lib/premium";
 import { usePaperStudyOverview, type PaperStudySession } from "@/hooks/use-paper-study-progress";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
 
@@ -111,6 +112,7 @@ function Stat({
 function Dashboard() {
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const readingProgress = usePaperStudyOverview();
+  const { currentStreak } = useUnifiedStreak();
   const useRemoteOnly = supabaseConfigured();
   const effectiveProfile = savedProfile;
   const content = useStudyContent(savedProfile);
@@ -304,8 +306,8 @@ function Dashboard() {
           <Stat
             icon={Flame}
             label="Current streak"
-            value={String(readingProgress.summary.currentStreak)}
-            hint={readingProgress.summary.currentStreak > 0 ? "study days" : "start today"}
+            value={String(currentStreak)}
+            hint={currentStreak > 0 ? "study days" : "start today"}
             tone="accent"
           />
           <Stat

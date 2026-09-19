@@ -4,6 +4,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { formatDuration } from "@/hooks/use-structural-progress";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { PremiumGate } from "@/components/PremiumGate";
 import { Badge } from "@/components/ui/badge";
 import { Bookmark, BookOpen, CheckCircle2, Clock, Flame, TrendingUp } from "lucide-react";
@@ -28,6 +29,7 @@ function ProgressPage() {
   const { profile, loaded: profileLoaded } = useStudyProfile();
   const content = useStudyContent(profile);
   const progress = usePaperStudyOverview();
+  const { currentStreak } = useUnifiedStreak();
   const useRemoteOnly = supabaseConfigured();
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
   const documentsById = useMemo(
@@ -129,8 +131,8 @@ function ProgressPage() {
             <ProgressStat
               icon={Flame}
               label="Current streak"
-              value={String(progress.summary.currentStreak)}
-              hint={progress.summary.currentStreak > 0 ? "study days" : "start today"}
+              value={String(currentStreak)}
+              hint={currentStreak > 0 ? "study days" : "start today"}
             />
           </section>
 

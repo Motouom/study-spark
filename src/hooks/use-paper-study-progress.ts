@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { useStreakFreezeDays } from "@/hooks/use-streak-freezes";
+import { computeCurrentStreak, dayKey, sortedStudyDays } from "@/lib/streak";
 import { getScrollPercent, onContainerScroll } from "@/lib/scroll-progress";
 
 export type PaperCheckpointType = "understood" | "review" | "bookmark";
@@ -349,40 +351,15 @@ export function usePaperStudyProgress(documentId?: string | null) {
   };
 }
 
-function sameLocalDay(a: Date, b: Date) {
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
-  );
-}
-
-function dayKey(date: Date) {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-}
-
 function summarizeReadingProgress(
   sessions: PaperStudySession[],
   checkpoints: PaperStudyCheckpoint[],
   reflections: PaperStudyReflection[],
+  freezeDays: Set<string> = new Set(),
 ) {
   const studyDays = new Set(sessions.map((item) => dayKey(new Date(item.startedAt))));
-  const sortedDays = [...studyDays]
-    .map((key) => {
-      const [year, month, day] = key.split("-").map(Number);
-      return new Date(year, month - 1, day);
-    })
-    .sort((a, b) => b.getTime() - a.getTime());
-  let currentStreak = 0;
-  const cursor = new Date();
-  // Preserve yesterday's chain until the current day ends.
-  if (!sortedDays.some((day) => sameLocalDay(day, cursor))) {
-    cursor.setDate(cursor.getDate() - 1);
-  }
-  while (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-    currentStreak += 1;
-    cursor.setDate(cursor.getDate() - 1);
-  }
+  const sortedDays = sortedStudyDays(studyDays);
+  const currentStreak = computeCurrentStreak(sortedDays, freezeDays);
 
   return {
     sessionsStarted: sessions.length,
@@ -415,6 +392,7 @@ function summarizeReadingProgress(
 
 export function usePaperStudyOverview() {
   const { user, loaded: userLoaded } = useSupabaseUser();
+  const { freezeDays } = useStreakFreezeDays();
   const [sessions, setSessions] = useState<PaperStudySession[]>([]);
   const [checkpoints, setCheckpoints] = useState<PaperStudyCheckpoint[]>([]);
   const [reflections, setReflections] = useState<PaperStudyReflection[]>([]);
@@ -487,8 +465,8 @@ export function usePaperStudyOverview() {
     error,
     reload: load,
     summary: useMemo(
-      () => summarizeReadingProgress(sessions, checkpoints, reflections),
-      [checkpoints, reflections, sessions],
+      () => summarizeReadingProgress(sessions, checkpoints, reflections, freezeDays),
+      [checkpoints, freezeDays, reflections, sessions],
     ),
   };
 }

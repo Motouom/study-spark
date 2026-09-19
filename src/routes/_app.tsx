@@ -43,7 +43,7 @@ import { classLabel, seriesLabel, type StudentProfile } from "@/lib/study-refere
 import { supabaseConfigured } from "@/lib/supabase";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
-import { useStructuralProgress } from "@/hooks/use-structural-progress";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
 import { signOut } from "@/lib/auth";
@@ -108,7 +108,7 @@ function SidebarContent({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { summary } = useStructuralProgress();
+  const { currentStreak } = useUnifiedStreak();
   const shownName = displayName ?? profile?.name ?? "Student";
   const initials = shownName.slice(0, 1).toUpperCase();
   const premium = isPremiumActive(profile);
@@ -193,14 +193,14 @@ function SidebarContent({
         <div className="flex items-center gap-2">
           <Flame className="h-4 w-4 text-accent" />
           <span className="text-sm font-medium">
-            {premium ? `${summary.currentStreak} day streak` : "Premium streaks"}
+            {premium ? `${currentStreak} day streak` : "Premium streaks"}
           </span>
         </div>
         <p className="mt-1.5 text-xs text-muted-foreground">
           {premium
-            ? summary.currentStreak > 0
-              ? "Mark another structural question today to keep it going."
-              : "Mark your first structural question to start building momentum."
+            ? currentStreak > 0
+              ? "Mark a question or read a paper today to keep it going."
+              : "Mark a question or read a paper to start building momentum."
             : "Upgrade to unlock daily streaks and weekly streak freezes."}
         </p>
       </Link>
