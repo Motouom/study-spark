@@ -35,7 +35,14 @@ function DailyGoalRing({ percent }: { percent: number }) {
   const dash = (percent / 100) * circumference;
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-background/70 px-4 py-3">
-      <svg width="64" height="64" viewBox="0 0 64 64" className="-rotate-90">
+      <svg
+        width="64"
+        height="64"
+        viewBox="0 0 64 64"
+        className="-rotate-90"
+        role="img"
+        aria-label={`${percent}% of today's 15 minute study goal`}
+      >
         <circle
           cx="32"
           cy="32"
@@ -129,11 +136,17 @@ function Dashboard() {
 
   // "Continue where you left off": the most recently touched unfinished
   // unlocked paper, showing its best depth; otherwise the first unlocked paper.
+  // Only papers are featured here — courses and textbooks live on their own pages.
+  const papers = useMemo(
+    () => availablePapers.filter((document) => document.contentKind === "paper"),
+    [availablePapers],
+  );
   const continuePaper = useMemo(() => {
     const unfinished = readingProgress.sessions.find((session) => {
       const document = documentsById.get(session.documentId);
       return (
         document &&
+        document.contentKind === "paper" &&
         document.isLocked === false &&
         (bestPercentByDoc.get(session.documentId) ?? 0) < 85
       );
@@ -144,9 +157,9 @@ function Dashboard() {
         resumePercent: bestPercentByDoc.get(unfinished.documentId) ?? 0,
       };
     }
-    const firstUnlocked = availablePapers.find((document) => !document.isLocked) ?? null;
+    const firstUnlocked = papers.find((document) => !document.isLocked) ?? null;
     return { document: firstUnlocked, resumePercent: 0 };
-  }, [availablePapers, bestPercentByDoc, documentsById, readingProgress.sessions]);
+  }, [bestPercentByDoc, documentsById, papers, readingProgress.sessions]);
   const featuredPaper = continuePaper.document;
 
   const DAILY_GOAL_SECONDS = 15 * 60;
@@ -168,8 +181,9 @@ function Dashboard() {
   const subjectBreakdown = useMemo(() => {
     const subjects = new Map<string, { score: number; count: number }>();
     for (const [documentId, bestPercent] of bestPercentByDoc) {
-      const subject = documentsById.get(documentId)?.subject;
-      if (!subject) continue;
+      const document = documentsById.get(documentId);
+      if (!document || document.contentKind !== "paper") continue;
+      const subject = document.subject;
       const checkpointScore =
         readingProgress.checkpoints.filter((item) => item.documentId === documentId).length * 5;
       const score = Math.min(100, bestPercent * 0.8 + checkpointScore);
@@ -192,22 +206,16 @@ function Dashboard() {
       const date = new Date(today);
       date.setDate(today.getDate() - (6 - offset));
       const daySessions = readingProgress.sessions.filter((item) => {
-        const updatedAt = new Date(item.startedAt);
+        const startedAt = new Date(item.startedAt);
         return (
-          updatedAt.getFullYear() === date.getFullYear() &&
-          updatedAt.getMonth() === date.getMonth() &&
-          updatedAt.getDate() === date.getDate()
+          startedAt.getFullYear() === date.getFullYear() &&
+          startedAt.getMonth() === date.getMonth() &&
+          startedAt.getDate() === date.getDate()
         );
       });
       return {
         day: labels[date.getDay()],
-        score:
-          daySessions.length > 0
-            ? Math.round(
-                daySessions.reduce((sum, item) => sum + item.maxScrollPercent, 0) /
-                  daySessions.length,
-              )
-            : 0,
+        minutes: Math.round(daySessions.reduce((sum, item) => sum + item.durationSeconds, 0) / 60),
       };
     });
   }, [readingProgress.sessions]);
@@ -215,6 +223,8 @@ function Dashboard() {
   const recentSessions = useMemo(() => {
     const bestByDoc = new Map<string, PaperStudySession>();
     for (const session of readingProgress.sessions) {
+      const document = documentsById.get(session.documentId);
+      if (!document || document.contentKind !== "paper") continue;
       const current = bestByDoc.get(session.documentId);
       if (
         !current ||
@@ -228,7 +238,7 @@ function Dashboard() {
     return [...bestByDoc.values()]
       .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
       .slice(0, 5);
-  }, [readingProgress.sessions]);
+  }, [documentsById, readingProgress.sessions]);
   const premium = isPremiumActive(effectiveProfile);
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
 
@@ -279,8 +289,10 @@ function Dashboard() {
                 </Link>
               </Button>
             ) : (
-              <Button size="lg" disabled>
-                <FileText className="mr-1.5 h-4 w-4" /> Open paper
+              <Button asChild size="lg">
+                <Link to="/library">
+                  <FileText className="mr-1.5 h-4 w-4" /> Open paper library
+                </Link>
               </Button>
             )}
           </div>
