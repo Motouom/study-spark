@@ -17,7 +17,7 @@ import {
   ShieldCheck,
   Brain,
   PlayCircle,
-  BookOpenText,
+  BookMarked,
   LifeBuoy,
 } from "lucide-react";
 import type { ReactNode } from "react";
@@ -59,7 +59,7 @@ const NAV = [
   { to: "/progress", label: "Progress", icon: TrendingUp },
   { to: "/learning-path", label: "Learning path", icon: Brain },
   { to: "/courses", label: "Courses", icon: PlayCircle },
-  { to: "/textbooks", label: "Textbooks", icon: BookOpenText },
+  { to: "/cheatsheets", label: "Cheatsheets", icon: BookMarked },
   { to: "/achievements", label: "Achievements", icon: Trophy },
   { to: "/leaderboard", label: "Leaderboard", icon: Users },
 ] as const;
@@ -293,8 +293,8 @@ function CommandMenu({
           <CommandItem onSelect={() => go("/courses")}>
             <PlayCircle className="mr-2 h-4 w-4" /> Courses
           </CommandItem>
-          <CommandItem onSelect={() => go("/textbooks")}>
-            <BookOpenText className="mr-2 h-4 w-4" /> Textbooks
+          <CommandItem onSelect={() => go("/cheatsheets")}>
+            <BookMarked className="mr-2 h-4 w-4" /> Cheatsheets
           </CommandItem>
           <CommandItem onSelect={() => go("/search")}>
             <Search className="mr-2 h-4 w-4" /> Advanced search

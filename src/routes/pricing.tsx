@@ -14,7 +14,7 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "StudySpark pricing for Cameroon students: preview selected GCE papers free, then upgrade for protected papers, AI learning paths, courses, textbooks, and progress analytics.",
+          "StudySpark pricing for Cameroon students: preview selected GCE papers free, then upgrade for protected papers, AI learning paths, courses, cheatsheets, and progress analytics.",
       },
       { property: "og:title", content: "StudySpark pricing for Cameroon students" },
       {
@@ -37,7 +37,7 @@ const features = [
   { name: "Daily streaks & basic stats", free: false, premium: true },
   { name: "AI-personalized learning paths", free: false, premium: true },
   { name: "Full courses & video lessons", free: false, premium: true },
-  { name: "Digital textbooks", free: false, premium: true },
+  { name: "Exam cheatsheets", free: false, premium: true },
   { name: "Advanced full-text search", free: false, premium: true },
   { name: "Streak freezes (1/week)", free: false, premium: true },
   { name: "Priority support", free: true, premium: true },

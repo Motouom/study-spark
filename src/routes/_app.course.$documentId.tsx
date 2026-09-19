@@ -44,8 +44,20 @@ function CourseDocumentPage() {
   const isCourse = document?.contentKind === "course";
   const isTextbook = document?.contentKind === "textbook";
   const isCheatsheet = document?.contentKind === "cheatsheet";
-  const backTo = isCourse ? "/courses" : isTextbook ? "/textbooks" : "/library";
-  const backLabel = isCourse ? "My courses" : isTextbook ? "My textbooks" : "My topics";
+  const backTo = isCourse
+    ? "/courses"
+    : isTextbook
+      ? "/library"
+      : isCheatsheet
+        ? "/cheatsheets"
+        : "/library";
+  const backLabel = isCourse
+    ? "My courses"
+    : isTextbook
+      ? "My topics"
+      : isCheatsheet
+        ? "My cheatsheets"
+        : "My topics";
   const kindLabel = isCourse
     ? "Course lesson"
     : isTextbook
