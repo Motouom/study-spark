@@ -15,7 +15,7 @@ export type CourseDocument = {
   markdownContent: string;
   updatedAt: string;
   accessStatus: "free_preview" | "premium" | "premium_locked";
-  contentKind: "course" | "textbook" | "paper";
+  contentKind: "course" | "textbook" | "paper" | "cheatsheet";
   isLocked: boolean;
 };
 
@@ -131,7 +131,9 @@ export function useStudyContent(profile: StudentProfile | null) {
             ? row.access_status
             : "free_preview",
         contentKind:
-          row.content_kind === "textbook" || row.content_kind === "paper"
+          row.content_kind === "textbook" ||
+          row.content_kind === "paper" ||
+          row.content_kind === "cheatsheet"
             ? row.content_kind
             : "course",
         isLocked: Boolean(row.is_locked),

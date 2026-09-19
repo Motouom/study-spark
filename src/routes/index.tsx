@@ -342,7 +342,7 @@ function Pricing() {
               <Li dark>Daily streaks & basic stats</Li>
               <Li dark>AI-personalized learning paths</Li>
               <Li dark>Full courses & video lessons</Li>
-              <Li dark>Digital textbooks</Li>
+              <Li dark>Exam cheatsheets</Li>
               <Li dark>Advanced full-text search</Li>
               <Li dark>Streak freezes (1/week)</Li>
             </ul>

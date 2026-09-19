@@ -43,13 +43,35 @@ function CourseDocumentPage() {
     supabaseConfigured() && (!profileLoaded || !content.loaded || content.loading);
   const isCourse = document?.contentKind === "course";
   const isTextbook = document?.contentKind === "textbook";
-  const backTo = isCourse ? "/courses" : isTextbook ? "/textbooks" : "/library";
-  const backLabel = isCourse ? "My courses" : isTextbook ? "My textbooks" : "My topics";
+  const isCheatsheet = document?.contentKind === "cheatsheet";
+  const backTo = isCourse
+    ? "/courses"
+    : isTextbook
+      ? "/library"
+      : isCheatsheet
+        ? "/cheatsheets"
+        : "/library";
+  const backLabel = isCourse
+    ? "My courses"
+    : isTextbook
+      ? "My topics"
+      : isCheatsheet
+        ? "My cheatsheets"
+        : "My topics";
   const kindLabel = isCourse
     ? "Course lesson"
     : isTextbook
       ? "Textbook chapter"
-      : "Protected paper";
+      : isCheatsheet
+        ? "Revision cheatsheet"
+        : "Protected paper";
+  const progressKindLabel = isCourse
+    ? "course"
+    : isTextbook
+      ? "textbook"
+      : isCheatsheet
+        ? "cheatsheet"
+        : "paper";
 
   useContentProtection(Boolean(document && !document.isLocked), document?.id);
 
@@ -124,7 +146,7 @@ function CourseDocumentPage() {
               <StudyProgressPanel
                 progress={studyProgress}
                 documentTitle={document.title}
-                kindLabel={isCourse ? "course" : isTextbook ? "textbook" : "paper"}
+                kindLabel={progressKindLabel}
               />
               {isCourse && <CourseContents markdown={document.markdownContent} />}
               <Suspense

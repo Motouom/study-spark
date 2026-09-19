@@ -55,3 +55,76 @@ Exposé de 5 minutes sur un thème d'actualité (préparez : introduction, 2 arg
 - La dissertation et l'oral portent le plus de points : entraînez-vous chaque semaine.
 - La qualité de la langue pèse plus que la quantité : privilégiez des phrases correctes.
 - Constituez un carnet de citations par œuvre et par thème.
+## Carte complete de couverture GCE
+
+Ce cours doit servir de vrai parcours de revision pour le Advanced Level, pas de simple fiche courte. L'examen GCE demande a l'eleve de connaitre, appliquer, organiser et evaluer les notions. Pour progresser, il faut donc lire, pratiquer, corriger et revenir sur les erreurs.
+
+Pour Cours de Français — Advanced Level, GCE Cameroun, travaille avec cette carte de couverture:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Chaque bloc doit etre maitrise avant l'examen. L'eleve doit pouvoir expliquer les definitions sans regarder le cours, repondre a des questions courtes, rediger une reponse organisee et utiliser des exemples camerounais lorsque la question le demande.
+
+## Methode d'etude et competences d'examen
+
+### Lecon: transformer le cours en points
+
+Apprendre une lecon ne suffit pas. Les points viennent d'une reponse claire. Apres chaque unite, ferme le cours et ecris les definitions essentielles de memoire. Ensuite, traite une question courte, une question structuree et une situation d'application.
+
+Pour les questions objectives, lis d'abord l'enonce, souligne les mots importants et elimine les reponses impossibles. Pour les questions de redaction, commence par l'idee principale, developpe avec des exemples precis, puis termine par une phrase qui repond directement a la question.
+
+### Lecon: routine hebdomadaire
+
+1. Lire la premiere unite et produire un resume.
+2. Refaire les exemples sans regarder les solutions.
+3. Etudier la deuxieme unite et noter les erreurs.
+4. Repondre aux questions d'entrainement en temps limite.
+5. Revoir les points faibles.
+6. Construire un lexique personnel.
+7. Preparer des fiches de revision.
+8. Traiter une serie mixte.
+9. Corriger proprement les erreurs.
+10. Faire une simulation d'examen.
+
+## Banque d'entrainement supplementaire
+
+1. Define five key terms from the topic and use each in a sentence.
+2. Answer one structured question with introduction, development and conclusion.
+3. Create a revision card for each unit in the course.
+4. Explain one Cameroon example that connects the topic to real life.
+
+5. Preparez une explication orale de cinq minutes sur l'unite la plus difficile.
+6. Notez trois erreurs frequentes et la maniere de les eviter.
+7. Creez une question a choix multiples avec quatre propositions.
+8. Redigez une reponse structuree complete.
+9. Reliez une notion du cours a une situation camerounaise.
+10. Faites une liste finale de dix points a maitriser avant l'examen.
+
+### Guide de correction
+
+Une bonne reponse utilise le vocabulaire exact, suit une organisation claire, donne des exemples pertinents et repond directement a la question. Si la reponse contient des calculs, il faut montrer la formule, la substitution, les etapes, la reponse et l'unite. Si la reponse est redigee, il faut une idee claire, une explication et une conclusion courte.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu'il ressemble a une simple introduction. Avant de quitter Cours de Français — Advanced Level, GCE Cameroun, l'eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D'abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l'ecole, de la famille, d'une ville camerounaise, d'un marche, d'un centre de sante ou d'une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l'ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l'effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l'examen
+
+Avant l'examen, l'eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n'est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.

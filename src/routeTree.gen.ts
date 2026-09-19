@@ -15,6 +15,7 @@ import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
+import { Route as AppCheatsheetsRouteImport } from './routes/_app.cheatsheets'
 import { Route as AppCoursesRouteImport } from './routes/_app.courses'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
 import { Route as AppLeaderboardRouteImport } from './routes/_app.leaderboard'
@@ -28,15 +29,14 @@ import { Route as AppSearchRouteImport } from './routes/_app.search'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppStreakRouteImport } from './routes/_app.streak'
 import { Route as AppSupportRouteImport } from './routes/_app.support'
-import { Route as AppTextbooksRouteImport } from './routes/_app.textbooks'
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
+import { Route as ControlPanel9k3xCheatsheetsRouteImport } from './routes/control-panel-9k3x.cheatsheets'
 import { Route as ControlPanel9k3xCoursesRouteImport } from './routes/control-panel-9k3x.courses'
 import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
 import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
 import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
 import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
-import { Route as ControlPanel9k3xTextbooksRouteImport } from './routes/control-panel-9k3x.textbooks'
 import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
 import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
@@ -75,6 +75,11 @@ const SigninRoute = SigninRouteImport.update({
 const AppAchievementsRoute = AppAchievementsRouteImport.update({
   id: '/achievements',
   path: '/achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCheatsheetsRoute = AppCheatsheetsRouteImport.update({
+  id: '/cheatsheets',
+  path: '/cheatsheets',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCoursesRoute = AppCoursesRouteImport.update({
@@ -142,11 +147,6 @@ const AppSupportRoute = AppSupportRouteImport.update({
   path: '/support',
   getParentRoute: () => AppRoute,
 } as any)
-const AppTextbooksRoute = AppTextbooksRouteImport.update({
-  id: '/textbooks',
-  path: '/textbooks',
-  getParentRoute: () => AppRoute,
-} as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
   id: '/auth/callback',
   path: '/auth/callback',
@@ -157,6 +157,12 @@ const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
+const ControlPanel9k3xCheatsheetsRoute =
+  ControlPanel9k3xCheatsheetsRouteImport.update({
+    id: '/cheatsheets',
+    path: '/cheatsheets',
+    getParentRoute: () => ControlPanel9k3xRoute,
+  } as any)
 const ControlPanel9k3xCoursesRoute = ControlPanel9k3xCoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
@@ -183,12 +189,6 @@ const ControlPanel9k3xSettingsRoute =
   ControlPanel9k3xSettingsRouteImport.update({
     id: '/settings',
     path: '/settings',
-    getParentRoute: () => ControlPanel9k3xRoute,
-  } as any)
-const ControlPanel9k3xTextbooksRoute =
-  ControlPanel9k3xTextbooksRouteImport.update({
-    id: '/textbooks',
-    path: '/textbooks',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
 const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
@@ -250,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
+  '/cheatsheets': typeof AppCheatsheetsRoute
   '/courses': typeof AppCoursesRoute
   '/dashboard': typeof AppDashboardRoute
   '/leaderboard': typeof AppLeaderboardRoute
@@ -263,14 +264,13 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
   '/support': typeof AppSupportRoute
-  '/textbooks': typeof AppTextbooksRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
-  '/control-panel-9k3x/textbooks': typeof ControlPanel9k3xTextbooksRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
@@ -288,6 +288,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/achievements': typeof AppAchievementsRoute
+  '/cheatsheets': typeof AppCheatsheetsRoute
   '/courses': typeof AppCoursesRoute
   '/dashboard': typeof AppDashboardRoute
   '/leaderboard': typeof AppLeaderboardRoute
@@ -301,14 +302,13 @@ export interface FileRoutesByTo {
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
   '/support': typeof AppSupportRoute
-  '/textbooks': typeof AppTextbooksRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
-  '/control-panel-9k3x/textbooks': typeof ControlPanel9k3xTextbooksRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
@@ -329,6 +329,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/signin': typeof SigninRoute
   '/_app/achievements': typeof AppAchievementsRoute
+  '/_app/cheatsheets': typeof AppCheatsheetsRoute
   '/_app/courses': typeof AppCoursesRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/leaderboard': typeof AppLeaderboardRoute
@@ -342,14 +343,13 @@ export interface FileRoutesById {
   '/_app/settings': typeof AppSettingsRoute
   '/_app/streak': typeof AppStreakRoute
   '/_app/support': typeof AppSupportRoute
-  '/_app/textbooks': typeof AppTextbooksRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
-  '/control-panel-9k3x/textbooks': typeof ControlPanel9k3xTextbooksRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
@@ -370,6 +370,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signin'
     | '/achievements'
+    | '/cheatsheets'
     | '/courses'
     | '/dashboard'
     | '/leaderboard'
@@ -383,14 +384,13 @@ export interface FileRouteTypes {
     | '/settings'
     | '/streak'
     | '/support'
-    | '/textbooks'
     | '/auth/callback'
+    | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
-    | '/control-panel-9k3x/textbooks'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
     | '/course/$documentId'
@@ -408,6 +408,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signin'
     | '/achievements'
+    | '/cheatsheets'
     | '/courses'
     | '/dashboard'
     | '/leaderboard'
@@ -421,14 +422,13 @@ export interface FileRouteTypes {
     | '/settings'
     | '/streak'
     | '/support'
-    | '/textbooks'
     | '/auth/callback'
+    | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
-    | '/control-panel-9k3x/textbooks'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x'
     | '/course/$documentId'
@@ -448,6 +448,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signin'
     | '/_app/achievements'
+    | '/_app/cheatsheets'
     | '/_app/courses'
     | '/_app/dashboard'
     | '/_app/leaderboard'
@@ -461,14 +462,13 @@ export interface FileRouteTypes {
     | '/_app/settings'
     | '/_app/streak'
     | '/_app/support'
-    | '/_app/textbooks'
     | '/auth/callback'
+    | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
-    | '/control-panel-9k3x/textbooks'
     | '/control-panel-9k3x/users'
     | '/control-panel-9k3x/'
     | '/_app/course/$documentId'
@@ -540,6 +540,13 @@ declare module '@tanstack/react-router' {
       path: '/achievements'
       fullPath: '/achievements'
       preLoaderRoute: typeof AppAchievementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/cheatsheets': {
+      id: '/_app/cheatsheets'
+      path: '/cheatsheets'
+      fullPath: '/cheatsheets'
+      preLoaderRoute: typeof AppCheatsheetsRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/courses': {
@@ -633,13 +640,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSupportRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/textbooks': {
-      id: '/_app/textbooks'
-      path: '/textbooks'
-      fullPath: '/textbooks'
-      preLoaderRoute: typeof AppTextbooksRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/auth/callback': {
       id: '/auth/callback'
       path: '/auth/callback'
@@ -652,6 +652,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/control-panel-9k3x/'
       preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/cheatsheets': {
+      id: '/control-panel-9k3x/cheatsheets'
+      path: '/cheatsheets'
+      fullPath: '/control-panel-9k3x/cheatsheets'
+      preLoaderRoute: typeof ControlPanel9k3xCheatsheetsRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
     '/control-panel-9k3x/courses': {
@@ -687,13 +694,6 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/control-panel-9k3x/settings'
       preLoaderRoute: typeof ControlPanel9k3xSettingsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/textbooks': {
-      id: '/control-panel-9k3x/textbooks'
-      path: '/textbooks'
-      fullPath: '/control-panel-9k3x/textbooks'
-      preLoaderRoute: typeof ControlPanel9k3xTextbooksRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
     '/control-panel-9k3x/users': {
@@ -782,6 +782,7 @@ const AppQuizRouteWithChildren =
 
 interface AppRouteChildren {
   AppAchievementsRoute: typeof AppAchievementsRoute
+  AppCheatsheetsRoute: typeof AppCheatsheetsRoute
   AppCoursesRoute: typeof AppCoursesRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppLeaderboardRoute: typeof AppLeaderboardRoute
@@ -795,12 +796,12 @@ interface AppRouteChildren {
   AppSettingsRoute: typeof AppSettingsRoute
   AppStreakRoute: typeof AppStreakRoute
   AppSupportRoute: typeof AppSupportRoute
-  AppTextbooksRoute: typeof AppTextbooksRoute
   AppCourseDocumentIdRoute: typeof AppCourseDocumentIdRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppAchievementsRoute: AppAchievementsRoute,
+  AppCheatsheetsRoute: AppCheatsheetsRoute,
   AppCoursesRoute: AppCoursesRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppLeaderboardRoute: AppLeaderboardRoute,
@@ -814,30 +815,29 @@ const AppRouteChildren: AppRouteChildren = {
   AppSettingsRoute: AppSettingsRoute,
   AppStreakRoute: AppStreakRoute,
   AppSupportRoute: AppSupportRoute,
-  AppTextbooksRoute: AppTextbooksRoute,
   AppCourseDocumentIdRoute: AppCourseDocumentIdRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface ControlPanel9k3xRouteChildren {
+  ControlPanel9k3xCheatsheetsRoute: typeof ControlPanel9k3xCheatsheetsRoute
   ControlPanel9k3xCoursesRoute: typeof ControlPanel9k3xCoursesRoute
   ControlPanel9k3xIntegrationsRoute: typeof ControlPanel9k3xIntegrationsRoute
   ControlPanel9k3xLogsRoute: typeof ControlPanel9k3xLogsRoute
   ControlPanel9k3xQuestionsRoute: typeof ControlPanel9k3xQuestionsRoute
   ControlPanel9k3xSettingsRoute: typeof ControlPanel9k3xSettingsRoute
-  ControlPanel9k3xTextbooksRoute: typeof ControlPanel9k3xTextbooksRoute
   ControlPanel9k3xUsersRoute: typeof ControlPanel9k3xUsersRoute
   ControlPanel9k3xIndexRoute: typeof ControlPanel9k3xIndexRoute
 }
 
 const ControlPanel9k3xRouteChildren: ControlPanel9k3xRouteChildren = {
+  ControlPanel9k3xCheatsheetsRoute: ControlPanel9k3xCheatsheetsRoute,
   ControlPanel9k3xCoursesRoute: ControlPanel9k3xCoursesRoute,
   ControlPanel9k3xIntegrationsRoute: ControlPanel9k3xIntegrationsRoute,
   ControlPanel9k3xLogsRoute: ControlPanel9k3xLogsRoute,
   ControlPanel9k3xQuestionsRoute: ControlPanel9k3xQuestionsRoute,
   ControlPanel9k3xSettingsRoute: ControlPanel9k3xSettingsRoute,
-  ControlPanel9k3xTextbooksRoute: ControlPanel9k3xTextbooksRoute,
   ControlPanel9k3xUsersRoute: ControlPanel9k3xUsersRoute,
   ControlPanel9k3xIndexRoute: ControlPanel9k3xIndexRoute,
 }

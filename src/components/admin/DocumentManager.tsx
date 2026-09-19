@@ -57,6 +57,13 @@ const CONFIGS: Record<CourseContentKind, DocumentManagerConfig> = {
     uploadLabel: "Upload textbook chapter",
     noun: "textbook chapter",
   },
+  cheatsheet: {
+    contentKind: "cheatsheet",
+    title: "Cheatsheets",
+    description: "Upload, update, publish, and retire quick revision sheets.",
+    uploadLabel: "Upload cheatsheet",
+    noun: "cheatsheet",
+  },
 };
 
 function removeEmojis(value: string) {

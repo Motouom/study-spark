@@ -138,7 +138,7 @@ function Dashboard() {
 
   // "Continue where you left off": the most recently touched unfinished
   // unlocked paper, showing its best depth; otherwise the first unlocked paper.
-  // Only papers are featured here — courses and textbooks live on their own pages.
+  // Only papers are featured here — courses and cheatsheets live on their own pages.
   const papers = useMemo(
     () => availablePapers.filter((document) => document.contentKind === "paper"),
     [availablePapers],
