@@ -158,12 +158,12 @@ function CourseContents({ markdown }: { markdown: string }) {
       const lessonMatch = line.match(/^### (.+)$/);
       if (unitMatch) {
         const title = unitMatch[1].trim();
-        if (/^how to use this course$/i.test(title)) continue;
+        if (/^(how to use this course|practice questions?)/i.test(title)) continue;
         current = { unit: title, lessons: [] };
         result.push(current);
       } else if (lessonMatch && current) {
         const title = lessonMatch[1].trim();
-        if (/^answers?$/i.test(title)) continue;
+        if (/^answers?\b/i.test(title)) continue;
         current.lessons.push(title);
       }
     }
