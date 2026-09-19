@@ -1408,6 +1408,100 @@ function sqlStr(value) {
   return "'" + String(value).replace(/'/g, "''") + "'";
 }
 
+function stableDocumentId(topicId) {
+  const crypto = require("crypto");
+  const hex = crypto.createHash("md5").update(`studyspark:${topicId}`).digest("hex");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
+function enrichCheatsheet(sheet) {
+  const cleanBody = sheet.body.trim();
+  const isFrench = sheet.subject === "French";
+  if (isFrench) {
+    return `# ${sheet.title}
+
+## Objectif de la fiche
+
+Utilise cette fiche pour reviser rapidement **${sheet.topic}** en ${sheet.subject}. Ce n'est pas un cours complet. C'est une fiche GCE pour retenir les points essentiels, eviter les pieges et s'entrainer avant les sujets complets.
+
+## Points essentiels
+
+${cleanBody}
+
+## Comment le GCE peut tester ce point
+
+1. Une question peut demander une definition exacte.
+2. Une question peut verifier la grammaire, le vocabulaire ou la methode.
+3. Les mauvaises reponses viennent souvent des fautes frequentes.
+4. Une bonne reponse est courte, claire et directement liee a la question.
+
+## Methode rapide
+
+- Lis la fiche une fois lentement.
+- Cache la fiche et ecris cinq points importants.
+- Corrige les mots oublies.
+- Transforme un point en question courte.
+- Redige une reponse structuree de trois a cinq phrases.
+
+## Pieges frequents
+
+- Traduire mot a mot depuis l'anglais.
+- Oublier les accords.
+- Confondre le temps verbal demande.
+- Donner une reponse trop vague.
+- Ne pas respecter le verbe de consigne.
+
+## Verification finale
+
+Tu peux quitter cette fiche lorsque tu peux expliquer le point sans regarder, donner un exemple correct et repondre a une petite question sans hesiter.`;
+  }
+
+  return `# ${sheet.title}
+
+## What this sheet is for
+
+Use this cheatsheet for fast revision of **${sheet.topic}** in ${sheet.subject}. It is not a full course lesson. It is a focused GCE revision card for quick recall, exam traps, and short practice before moving into full papers.
+
+## Core facts
+
+${cleanBody}
+
+## How examiners usually test this
+
+1. They ask for exact definitions, not loose explanations.
+2. They test whether you can choose the correct method quickly.
+3. They include traps based on common learner mistakes.
+4. They reward answers that are short, accurate, and connected to the question.
+5. They may use familiar Cameroon settings such as farms, markets, classrooms, businesses, hospitals, weather, banks, transport, or family budgets.
+
+## Memory anchors
+
+- Read the heading and say the topic aloud before revising.
+- Cover the sheet and write five key facts from memory.
+- Reopen the sheet and correct missing words, units, formulas, names, or examples.
+- Turn one fact into a Paper 1 multiple-choice question.
+- Turn another fact into a Paper 2 structured answer.
+
+## Common traps
+
+- Giving an example when the question asks for a definition.
+- Writing a long answer when the question asks to state.
+- Forgetting units, labels, signs, formula conditions, dates, or keywords.
+- Copying a memorised sentence that does not answer the exact question.
+- Ignoring words like **not**, **except**, **best**, **main**, **first**, or **most likely**.
+
+## Quick practice routine
+
+1. Spend two minutes reading only the key facts.
+2. Spend three minutes answering the practice questions without looking.
+3. Spend two minutes checking and rewriting corrections.
+4. Spend one minute saying the topic aloud as if teaching a friend.
+
+## Self-check before leaving
+
+You are ready to leave this cheatsheet when you can explain the main facts without looking, answer the practice questions, identify one common trap, and write one clean exam sentence using the correct vocabulary.`;
+}
+
 const topicInserts = [];
 const docInserts = [];
 
@@ -1422,10 +1516,15 @@ for (const sheet of SHEETS) {
       `array[${O_CLASSES.map(sqlStr).join(",")}]::text[], array[${O_SERIES.map(sqlStr).join(",")}]::text[], 0, 15)\n` +
       `on conflict (id) do update set title = excluded.title, updated_at = now();`,
   );
+  const markdown = enrichCheatsheet(sheet);
+  const documentId = stableDocumentId(topicId);
   docInserts.push(
-    `insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, doc_type, markdown_content)\n` +
-      `values (${sqlStr(topicId)}, ${sqlStr(sheet.subject)}, ${sqlStr(sheet.title)}, ${sqlStr(sheet.subject === "French" ? "french" : "english")}, 'ordinary', ` +
-      `array[${O_CLASSES.map(sqlStr).join(",")}]::text[], array[${O_SERIES.map(sqlStr).join(",")}]::text[], 'published', 'cheatsheet', ${sqlStr(sheet.body)});`,
+    `insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, doc_type, content_kind, markdown_content)\n` +
+      `values (${sqlStr(documentId)}::uuid, ${sqlStr(topicId)}, ${sqlStr(sheet.subject)}, ${sqlStr(sheet.title)}, ${sqlStr(sheet.subject === "French" ? "french" : "english")}, 'ordinary', ` +
+      `array[${O_CLASSES.map(sqlStr).join(",")}]::text[], array[${O_SERIES.map(sqlStr).join(",")}]::text[], 'published', 'cheatsheet', 'cheatsheet', ${sqlStr(markdown)})\n` +
+      `on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, ` +
+      `level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, doc_type = excluded.doc_type, ` +
+      `content_kind = excluded.content_kind, markdown_content = excluded.markdown_content, updated_at = now();`,
   );
 }
 

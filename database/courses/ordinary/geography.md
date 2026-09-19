@@ -168,3 +168,96 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 ### Ordinary Level readiness check
 
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | map reading, scale, grid references and fieldwork | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | weather, climate, landforms, soils and vegetation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | population, settlement, agriculture, industry and transport | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | regional geography of Cameroon, Africa and the wider world | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Calculate gradient from contour information on a map extract. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how relief influences settlement in the Western Highlands. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Describe three effects of rapid urbanisation in Yaounde or Douala. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Compare subsistence and plantation agriculture using Cameroon examples. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Geography, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- map reading, scale, grid references and fieldwork
+- weather, climate, landforms, soils and vegetation
+- population, settlement, agriculture, industry and transport
+- regional geography of Cameroon, Africa and the wider world
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Geography, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- map reading, scale, grid references and fieldwork
+- weather, climate, landforms, soils and vegetation
+- population, settlement, agriculture, industry and transport
+- regional geography of Cameroon, Africa and the wider world
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.

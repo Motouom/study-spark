@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const BASE = __dirname;
-const MIN_WORDS = 2200;
+const MIN_WORDS = 4200;
 
 const SUBJECT_FOCUS = {
   Accounting: {
@@ -287,6 +287,105 @@ function wordCount(text) {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
+function completeWorkbookExpansion(subject, level, focus, isFrench) {
+  const coverageRows = focus.coverage
+    .map(
+      (item, index) =>
+        `| ${index + 1} | ${item} | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |`,
+    )
+    .join("\n");
+  const practiceRows = focus.practice
+    .map(
+      (item, index) =>
+        `| ${index + 1} | ${item} | Write a full answer, underline the command word, then mark your answer against the guide below. |`,
+    )
+    .join("\n");
+
+  if (isFrench) {
+    return `
+
+## Cahier complet de maitrise GCE
+
+Cette partie transforme le cours en parcours de travail. Elle n'est pas une simple conclusion: elle sert de cahier de revision. Un eleve doit l'utiliser apres les lecons principales pour verifier la comprehension, corriger les lacunes et se preparer a repondre comme au GCE.
+
+### Carte de maitrise
+
+| No | Domaine | Ce qu'il faut savoir faire |
+| --- | --- | --- |
+${coverageRows}
+
+Pour chaque domaine, l'eleve doit produire trois preuves: une definition exacte, un exemple precis et une reponse structuree. Si une preuve manque, la notion n'est pas encore maitrisee. Il faut alors relire la lecon, refaire un exemple et corriger les erreurs dans un cahier.
+
+### Lecon de methode: comprendre avant de memoriser
+
+La memorisation seule ne suffit pas. Une bonne preparation commence par les mots-cles. L'eleve doit d'abord ecrire les mots importants du chapitre, puis expliquer chaque mot en une phrase courte. Ensuite, il doit construire un exemple camerounais: une salle de classe, un marche, une ferme, une entreprise, un hopital, une mairie, une banque, une famille ou une situation de transport. L'exemple rend la reponse concrete et aide a eviter les phrases vagues.
+
+Apres l'exemple, l'eleve doit repondre a une question. Une reponse courte doit etre directe. Une reponse structuree doit avoir un ordre clair: idee principale, explication, exemple, conclusion courte. Une question qui demande de comparer doit montrer les ressemblances et les differences. Une question qui demande d'evaluer doit presenter les forces, les limites et un jugement final.
+
+### Exercices de consolidation
+
+| No | Question | Travail attendu |
+| --- | --- | --- |
+${practiceRows}
+
+### Correction personnelle
+
+Apres chaque exercice, l'eleve doit corriger en quatre etapes. D'abord, verifier si le verbe de consigne a ete respecte. Ensuite, verifier si les mots techniques sont exacts. Puis, ajouter un exemple lorsque la reponse est trop generale. Enfin, reecrire la reponse proprement. La progression vient de la correction, pas seulement du nombre de questions traitees.
+
+### Revision espacee
+
+Jour 1: lire la lecon et faire les definitions. Jour 2: refaire les exemples sans regarder. Jour 4: traiter deux questions en temps limite. Jour 7: corriger les erreurs et construire une fiche courte. Jour 14: faire une mini simulation. Cette methode evite l'oubli rapide et rend la preparation plus solide.
+`;
+  }
+
+  return `
+
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+${coverageRows}
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+${practiceRows}
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+`;
+}
+
 function titleOf(markdown) {
   return markdown.match(/^# (.+)$/m)?.[1]?.trim() ?? "StudySpark Course";
 }
@@ -426,11 +525,14 @@ function strengthen(filePath) {
   const level = levelFromFile(filePath);
   const focus = SUBJECT_FOCUS[subject] ?? DEFAULT_FOCUS;
   const isFrench = filePath.includes("french") || filePath.includes("bilingual");
-  const addition = raw.includes("## GCE Complete Coverage Map") || raw.includes("## Carte complete de couverture GCE")
+  const addition = raw.includes("## Complete GCE Mastery Workbook") ||
+    raw.includes("## Cahier complet de maitrise GCE")
     ? reinforcementExpansion(subject, level, focus, isFrench)
-    : isFrench
-      ? frenchExpansion(title, subject, level, focus)
-      : englishExpansion(title, subject, level, focus);
+    : raw.includes("## GCE Complete Coverage Map") || raw.includes("## Carte complete de couverture GCE")
+      ? completeWorkbookExpansion(subject, level, focus, isFrench)
+      : isFrench
+        ? frenchExpansion(title, subject, level, focus)
+        : englishExpansion(title, subject, level, focus);
 
   fs.writeFileSync(filePath, `${raw}\n${addition.trim()}\n`);
   return true;
