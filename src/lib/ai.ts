@@ -43,46 +43,66 @@ export function fallbackInsight(input: {
 
 export function fallbackLearningPath(input: {
   weakestSubjects: string[];
-  unfinishedPapers: string[];
+  difficultyRanking: {
+    title: string;
+    subject: string;
+    bestDepth: number;
+    reviewCount: number;
+    avgConfidence: number | null;
+    difficultParts: string[];
+    addToRevision: boolean;
+    difficultyScore: number;
+  }[];
   nextPapers: string[];
 }) {
-  const focus = input.weakestSubjects[0] ?? "your weakest subject";
-  const continuePaper = input.unfinishedPapers[0];
+  const hardest = input.difficultyRanking[0];
+  const second = input.difficultyRanking[1];
+  const third = input.difficultyRanking[2];
   const freshPaper = input.nextPapers[0];
+  const focus = input.weakestSubjects[0] ?? hardest?.subject ?? "your weakest subject";
+
+  const hardestFocus = hardest?.difficultParts?.length
+    ? `Focus on: ${hardest.difficultParts.join("; ")}`
+    : "Identify the exact step where your working breaks down.";
 
   return [
     {
       day: 1,
-      title: `Review ${focus}`,
-      paper: continuePaper ?? "Current weakest paper",
-      target: "Rework 5 failed or difficult questions",
-      focus: "Identify the exact step where your working breaks down.",
+      title: `Attack your hardest paper: ${focus}`,
+      paper: hardest?.title ?? "Current weakest paper",
+      target: `Rework the ${hardest?.reviewCount ?? 5} questions you marked for review`,
+      focus: hardestFocus,
     },
     {
       day: 2,
-      title: continuePaper ? "Continue active paper" : "Start a matching paper",
-      paper: continuePaper ?? freshPaper ?? "Next available paper",
+      title: second ? "Finish the second-hardest paper" : "Continue active paper",
+      paper: second?.title ?? hardest?.title ?? "Next available paper",
       target: "Mark at least 6 structural questions",
-      focus: "Keep full working and mark each question honestly.",
+      focus: second?.difficultParts?.length
+        ? `Focus on: ${second.difficultParts.join("; ")}`
+        : "Keep full working and mark each question honestly.",
     },
     {
       day: 3,
-      title: freshPaper ? "Open a fresh paper" : "Repeat weak questions",
-      paper: freshPaper ?? continuePaper ?? "Lowest-mastery paper",
+      title: third ? "Revisit a low-confidence paper" : "Open a fresh paper",
+      paper: third?.title ?? freshPaper ?? "Lowest-mastery paper",
       target: "Complete 4 timed questions",
-      focus: "Improve accuracy before increasing speed.",
+      focus:
+        third?.avgConfidence !== null && third?.avgConfidence !== undefined
+          ? `Your confidence here was ${third.avgConfidence}/5 — rebuild it with timed practice.`
+          : "Improve accuracy before increasing speed.",
     },
     {
       day: 4,
       title: "Error-log revision",
-      paper: continuePaper ?? freshPaper ?? "Active paper",
+      paper: hardest?.title ?? "Active paper",
       target: "Correct every failed question from the week",
       focus: "Write the corrected method beside each mistake.",
     },
     {
       day: 5,
       title: "Timed structural practice",
-      paper: freshPaper ?? continuePaper ?? "Next available paper",
+      paper: freshPaper ?? hardest?.title ?? "Next available paper",
       target: "Solve 5 questions under exam timing",
       focus: "Track time per question and avoid skipping sub-parts.",
     },
