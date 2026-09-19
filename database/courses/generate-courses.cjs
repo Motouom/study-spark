@@ -72,6 +72,14 @@ function sqlStr(value) {
   return "'" + String(value).replace(/'/g, "''") + "'";
 }
 
+function stableCourseId(topicId) {
+  // Deterministic UUID from the topic id. Keeping seeded course ids stable
+  // prevents reading-progress foreign keys from breaking when content is refreshed.
+  const crypto = require("crypto");
+  const hex = crypto.createHash("md5").update(`studyspark:${topicId}`).digest("hex");
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
+
 const topicInserts = [];
 const docInserts = [];
 
@@ -102,22 +110,20 @@ for (const course of COURSES) {
       `on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();`,
   );
 
+  const documentId = stableCourseId(topicId);
   docInserts.push(
-    `insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)\n` +
-      `values (${sqlStr(topicId)}, ${sqlStr(course.subject)}, ${sqlStr(title)}, ${sqlStr(language)}, ${sqlStr(level)}, ` +
-      `array[${classLevels.map(sqlStr).join(",")}]::text[], array[${series.map(sqlStr).join(",")}]::text[], 'published', ${sqlStr(markdown)});`,
+    `insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)\n` +
+      `values (${sqlStr(documentId)}::uuid, ${sqlStr(topicId)}, ${sqlStr(course.subject)}, ${sqlStr(title)}, ${sqlStr(language)}, ${sqlStr(level)}, ` +
+      `array[${classLevels.map(sqlStr).join(",")}]::text[], array[${series.map(sqlStr).join(",")}]::text[], 'published', ${sqlStr(markdown)}, 'course', 'course')\n` +
+      `on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, ` +
+      `level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, ` +
+      `content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();`,
   );
 }
-
-const resetCourseDocuments =
-  "delete from public.course_documents\n" +
-  "where content_kind = 'course'\n" +
-  "  and topic_id like 'course-%';";
 
 const sql = [
   "begin;",
   ...topicInserts,
-  resetCourseDocuments,
   ...docInserts,
   "commit;",
 ].join("\n\n");

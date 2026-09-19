@@ -160,12 +160,8 @@ insert into public.topics (id, subject, title, description, level, class_levels,
 values ('course-fsn-advanced', 'Food Science and Nutrition', 'Complete A-Level Food Science and Nutrition Course — Cameroon GCE', 'This course supports A-Level Food Science and Nutrition (subject code 0741). It deepens O-Level Food and Nutrition with food chemistry, microbiology, dietetics and food service man', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 105)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
-delete from public.course_documents
-where content_kind = 'course'
-  and topic_id like 'course-%';
-
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-math-ordinary', 'Mathematics', 'Complete O-Level Mathematics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Mathematics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('36f49849-61bd-21db-89a3-3a7fa3447369'::uuid, 'course-math-ordinary', 'Mathematics', 'Complete O-Level Mathematics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Mathematics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -471,10 +467,11 @@ The simplest method to solve a quadratic equation is by factorising, if possible
 
 When a quadratic equation does not factorise easily, you must use the quadratic formula: x = (-b ± √(b² - 4ac)) / 2a. The expression under the square root, b² - 4ac, is called the discriminant. It tells you the nature of the roots: if it is positive, there are two distinct real roots; if it is zero, there is one repeated real root; if it is negative, there are no real roots. To use the formula, you must first identify the values of a, b, and c from the standard form of the equation.
 
-Completing the square is another method used to solve quadratic equations and to find the vertex of a parabola. It involves rewriting the quadratic in the form (x + p)² = q. For example, to solve x² + 6x');
+Completing the square is another method used to solve quadratic equations and to find the vertex of a parabola. It involves rewriting the quadratic in the form (x + p)² = q. For example, to solve x² + 6x', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-eng-ordinary', 'English Language', 'Complete O-Level English Language Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level English Language Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('b6afcb5e-7dac-6b11-133b-a578b1fd1f14'::uuid, 'course-eng-ordinary', 'English Language', 'Complete O-Level English Language Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level English Language Course — Cameroon GCE
 
 ## How to use this course
 
@@ -814,10 +811,11 @@ The summary question asks you to condense a passage (usually "in not more than 1
 
 **Step 2 — Write the summary in your own words:**
 
-*"Young people abandon the villages for several reasons. Educational opportunities are limited, as secondary schools stop at Form Three, forcing ambitious students to move to towns. Healthcare is equally poor, with the nearest hospital far away. The land has been over-cultivated and can no longer support a family, so farming offers no future. In the towns, they hope');
+*"Young people abandon the villages for several reasons. Educational opportunities are limited, as secondary schools stop at Form Three, forcing ambitious students to move to towns. Healthcare is equally poor, with the nearest hospital far away. The land has been over-cultivated and can no longer support a family, so farming offers no future. In the towns, they hope', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-phys-ordinary', 'Physics', 'Complete O-Level Physics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Physics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('48ce7c7f-ed89-0025-8bd8-ee3399637256'::uuid, 'course-phys-ordinary', 'Physics', 'Complete O-Level Physics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Physics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1003,10 +1001,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-chem-ordinary', 'Chemistry', 'Complete O-Level Chemistry Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Chemistry Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('e16f37f6-862d-6afa-bbb6-6f0657bb3ca5'::uuid, 'course-chem-ordinary', 'Chemistry', 'Complete O-Level Chemistry Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Chemistry Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1180,10 +1179,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-bio-ordinary', 'Biology', 'Complete O-Level Biology Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Biology Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('cc639224-8b82-c5dd-7635-c6f4e6731db9'::uuid, 'course-bio-ordinary', 'Biology', 'Complete O-Level Biology Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Biology Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1354,10 +1354,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-econ-ordinary', 'Economics', 'Complete O-Level Economics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Economics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('26078b9e-e349-7cd6-1954-083d34d93509'::uuid, 'course-econ-ordinary', 'Economics', 'Complete O-Level Economics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Economics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1522,10 +1523,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-comm-ordinary', 'Commerce', 'Complete O-Level Commerce Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Commerce Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('f8ca8bfa-9cc7-3358-38e2-671d36b6751b'::uuid, 'course-comm-ordinary', 'Commerce', 'Complete O-Level Commerce Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Commerce Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1681,10 +1683,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-cs-ordinary', 'Computer Science', 'Complete O-Level Computer Science Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Computer Science Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('55676f67-102a-9fbc-ccba-3128ad6476c3'::uuid, 'course-cs-ordinary', 'Computer Science', 'Complete O-Level Computer Science Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Computer Science Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1848,10 +1851,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-ict-ordinary', 'ICT', 'Complete O-Level ICT Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level ICT Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('d236e3c3-dd71-7de4-106a-31437696596d'::uuid, 'course-ict-ordinary', 'ICT', 'Complete O-Level ICT Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level ICT Course — Cameroon GCE
 
 ## How to use this course
 
@@ -1989,10 +1993,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-fr-ordinary', 'French', 'Cours complet de Français — Niveau Ordinary, GCE Cameroun', 'french', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Cours complet de Français — Niveau Ordinary, GCE Cameroun
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('ef8666db-c172-7365-e905-0e6a65cd96cd'::uuid, 'course-fr-ordinary', 'French', 'Cours complet de Français — Niveau Ordinary, GCE Cameroun', 'french', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Cours complet de Français — Niveau Ordinary, GCE Cameroun
 
 ## Comment utiliser ce cours
 
@@ -2159,10 +2164,11 @@ Les questions structurees demandent de l''ordre. Commence par identifier le verb
 
 ### Travail final avant l''examen
 
-Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.');
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-hist-ordinary', 'History', 'Complete O-Level History Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level History Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('dbeb4557-e308-eec7-e057-60c9772fc6fe'::uuid, 'course-hist-ordinary', 'History', 'Complete O-Level History Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level History Course — Cameroon GCE
 
 ## How to use this course
 
@@ -2317,10 +2323,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-geo-ordinary', 'Geography', 'Complete O-Level Geography Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Geography Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('36cd583b-4db0-8aff-71ae-84fefc49a845'::uuid, 'course-geo-ordinary', 'Geography', 'Complete O-Level Geography Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Geography Course — Cameroon GCE
 
 ## How to use this course
 
@@ -2489,10 +2496,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-civ-ordinary', 'Citizenship Education', 'Complete O-Level Citizenship Education Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Citizenship Education Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('48139a16-e011-709b-e833-2a87d8a4547c'::uuid, 'course-civ-ordinary', 'Citizenship Education', 'Complete O-Level Citizenship Education Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Citizenship Education Course — Cameroon GCE
 
 ## How to use this course
 
@@ -2651,10 +2659,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-rel-ordinary', 'Religious Studies', 'Complete O-Level Religious Studies Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Religious Studies Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('aae400e6-e608-6aa5-eb98-b8b936c4b090'::uuid, 'course-rel-ordinary', 'Religious Studies', 'Complete O-Level Religious Studies Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Religious Studies Course — Cameroon GCE
 
 ## How to use this course
 
@@ -2806,10 +2815,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-log-ordinary', 'Logic', 'Complete O-Level Logic Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Logic Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('374df7e4-9f9d-0799-d5dc-7ce4c90a6660'::uuid, 'course-log-ordinary', 'Logic', 'Complete O-Level Logic Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Logic Course — Cameroon GCE
 
 ## How to use this course
 
@@ -2968,10 +2978,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-agr-ordinary', 'Agricultural Science', 'Complete O-Level Agricultural Science Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Agricultural Science Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('e2dc1b68-5fda-8edc-6354-07852387d73d'::uuid, 'course-agr-ordinary', 'Agricultural Science', 'Complete O-Level Agricultural Science Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Agricultural Science Course — Cameroon GCE
 
 ## How to use this course
 
@@ -3120,10 +3131,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-hbio-ordinary', 'Human Biology', 'Complete O-Level Human Biology Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Human Biology Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('a5fb604f-6d70-7bdb-3705-b0cc5cba04c2'::uuid, 'course-hbio-ordinary', 'Human Biology', 'Complete O-Level Human Biology Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Human Biology Course — Cameroon GCE
 
 ## How to use this course
 
@@ -3270,10 +3282,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-amath-ordinary', 'Additional Mathematics', 'Complete O-Level Additional Mathematics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Additional Mathematics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('a4ff6448-a9ed-6611-00c6-14dd2faad355'::uuid, 'course-amath-ordinary', 'Additional Mathematics', 'Complete O-Level Additional Mathematics Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Additional Mathematics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -3418,10 +3431,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-fnut-ordinary', 'Food and Nutrition', 'Complete O-Level Food and Nutrition Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Food and Nutrition Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('5026b355-46c5-cd01-5fbd-92d0ca38840b'::uuid, 'course-fnut-ordinary', 'Food and Nutrition', 'Complete O-Level Food and Nutrition Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Food and Nutrition Course — Cameroon GCE
 
 ## How to use this course
 
@@ -3578,10 +3592,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-lit-ordinary', 'English Literature', 'Complete O-Level English Literature Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level English Literature Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('ae853fc5-6b8f-5857-fa43-e518e7c3e36f'::uuid, 'course-lit-ordinary', 'English Literature', 'Complete O-Level English Literature Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level English Literature Course — Cameroon GCE
 
 ## How to use this course
 
@@ -3720,10 +3735,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-acct-ordinary', 'Accounting', 'Complete O-Level Accounting Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Accounting Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('7159f882-e3ac-fddf-b432-a2a2ac485965'::uuid, 'course-acct-ordinary', 'Accounting', 'Complete O-Level Accounting Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Accounting Course — Cameroon GCE
 
 ## How to use this course
 
@@ -3864,10 +3880,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-biz-ordinary', 'Business Studies', 'Complete O-Level Business Studies Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Business Studies Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('affa832f-1ea9-e940-f7fb-610355068973'::uuid, 'course-biz-ordinary', 'Business Studies', 'Complete O-Level Business Studies Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Business Studies Course — Cameroon GCE
 
 ## How to use this course
 
@@ -4008,10 +4025,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-geol-ordinary', 'Geology', 'Complete O-Level Geology Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Geology Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('122922a2-9fcd-ed24-53ac-dfbe59d1b445'::uuid, 'course-geol-ordinary', 'Geology', 'Complete O-Level Geology Course — Cameroon GCE', 'english', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Complete O-Level Geology Course — Cameroon GCE
 
 ## How to use this course
 
@@ -4150,10 +4168,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-sbf-ordinary', 'Special Bilingual Education French', 'Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun', 'french', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('b4498002-32dc-d9ca-d1a6-4aecf72c4508'::uuid, 'course-sbf-ordinary', 'Special Bilingual Education French', 'Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun', 'french', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 'published', '# Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun
 
 ## Comment utiliser ce cours
 
@@ -4289,10 +4308,11 @@ Les questions structurees demandent de l''ordre. Commence par identifier le verb
 
 ### Travail final avant l''examen
 
-Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.');
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-pmm-advanced', 'Pure Mathematics with Mechanics', 'Complete A-Level Pure Mathematics with Mechanics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Pure Mathematics with Mechanics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('9ae10413-ed84-48bb-1a45-6cbb8636221e'::uuid, 'course-pmm-advanced', 'Pure Mathematics with Mechanics', 'Complete A-Level Pure Mathematics with Mechanics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Pure Mathematics with Mechanics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -4451,10 +4471,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-pms-advanced', 'Pure Mathematics with Statistics', 'Complete A-Level Pure Mathematics with Statistics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Pure Mathematics with Statistics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('b01b3e41-aec9-c897-a2c7-f532dd132c21'::uuid, 'course-pms-advanced', 'Pure Mathematics with Statistics', 'Complete A-Level Pure Mathematics with Statistics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Pure Mathematics with Statistics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -4609,10 +4630,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-fmath-advanced', 'Further Mathematics', 'Complete A-Level Further Mathematics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Further Mathematics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('c67e81de-fffb-8033-f73c-60f319aaa5fc'::uuid, 'course-fmath-advanced', 'Further Mathematics', 'Complete A-Level Further Mathematics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Further Mathematics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -4747,10 +4769,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-amaths-advanced', 'Mathematics', 'Complete A-Level Mathematics Course (Subsidiary) — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Mathematics Course (Subsidiary) — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('33649247-32c4-4231-81cc-c8df17b3d06a'::uuid, 'course-amaths-advanced', 'Mathematics', 'Complete A-Level Mathematics Course (Subsidiary) — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Mathematics Course (Subsidiary) — Cameroon GCE
 
 ## What this course is
 
@@ -4886,10 +4909,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-aphys-advanced', 'Physics', 'Complete A-Level Physics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Physics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('9a764c21-e5c5-1a9b-9017-013676b6cf74'::uuid, 'course-aphys-advanced', 'Physics', 'Complete A-Level Physics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Physics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5046,10 +5070,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-achem-advanced', 'Chemistry', 'Complete A-Level Chemistry Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Chemistry Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('d90bed88-f3d8-7034-65cd-11a96e126539'::uuid, 'course-achem-advanced', 'Chemistry', 'Complete A-Level Chemistry Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Chemistry Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5216,10 +5241,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-abio-advanced', 'Biology', 'Complete A-Level Biology Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Biology Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('842bea05-c7be-6c99-fbba-b1c747e89068'::uuid, 'course-abio-advanced', 'Biology', 'Complete A-Level Biology Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Biology Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5376,10 +5402,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-aecon-advanced', 'Economics', 'Complete A-Level Economics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Economics Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('d025ded7-b2d7-3a58-7444-72a8f41f9628'::uuid, 'course-aecon-advanced', 'Economics', 'Complete A-Level Economics Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Economics Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5534,10 +5561,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-aacct-advanced', 'Accounting', 'Complete A-Level Accounting Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Accounting Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('f20ac9e1-8084-8a3b-0b04-26ddab66e95d'::uuid, 'course-aacct-advanced', 'Accounting', 'Complete A-Level Accounting Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Accounting Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5694,10 +5722,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-alit-advanced', 'English Literature', 'Complete A-Level English Literature Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level English Literature Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('79c38a0a-d370-c05e-47cf-c8b5041078d1'::uuid, 'course-alit-advanced', 'English Literature', 'Complete A-Level English Literature Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level English Literature Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5849,10 +5878,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-aeng-advanced', 'English Language', 'Complete A-Level English Language Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level English Language Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('218582dc-c5b9-09d0-f98c-5b7b49753368'::uuid, 'course-aeng-advanced', 'English Language', 'Complete A-Level English Language Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level English Language Course — Cameroon GCE
 
 ## How to use this course
 
@@ -5977,10 +6007,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-afr-advanced', 'French', 'Cours de Français — Advanced Level, GCE Cameroun', 'french', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Cours de Français — Advanced Level, GCE Cameroun
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('dd0cf24c-1ace-421d-4170-c723a5dee170'::uuid, 'course-afr-advanced', 'French', 'Cours de Français — Advanced Level, GCE Cameroun', 'french', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Cours de Français — Advanced Level, GCE Cameroun
 
 ## Comment utiliser ce cours
 
@@ -6109,10 +6140,11 @@ Les questions structurees demandent de l''ordre. Commence par identifier le verb
 
 ### Travail final avant l''examen
 
-Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.');
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-ahist-advanced', 'History', 'Complete A-Level History Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level History Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('3ed396c0-ea3b-b0e4-6d57-d4429383705d'::uuid, 'course-ahist-advanced', 'History', 'Complete A-Level History Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level History Course — Cameroon GCE
 
 ## How to use this course
 
@@ -6263,10 +6295,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-acs-advanced', 'Computer Science', 'Complete A-Level Computer Science Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Computer Science Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('9cf8d580-4790-8a4a-0d0d-9e8bba4eab6c'::uuid, 'course-acs-advanced', 'Computer Science', 'Complete A-Level Computer Science Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Computer Science Course — Cameroon GCE
 
 ## How to use this course
 
@@ -6409,10 +6442,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-phil-advanced', 'Philosophy', 'Complete A-Level Philosophy Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Philosophy Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('9c700b1f-2fbf-456d-2cd0-25f2da5e0e24'::uuid, 'course-phil-advanced', 'Philosophy', 'Complete A-Level Philosophy Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Philosophy Course — Cameroon GCE
 
 ## How to use this course
 
@@ -6556,10 +6590,11 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
-insert into public.course_documents (topic_id, subject, title, language, level, class_levels, series, status, markdown_content)
-values ('course-fsn-advanced', 'Food Science and Nutrition', 'Complete A-Level Food Science and Nutrition Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Food Science and Nutrition Course — Cameroon GCE
+insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
+values ('5c2f1197-5c66-a2cc-b860-3cfc38da255e'::uuid, 'course-fsn-advanced', 'Food Science and Nutrition', 'Complete A-Level Food Science and Nutrition Course — Cameroon GCE', 'english', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 'published', '# Complete A-Level Food Science and Nutrition Course — Cameroon GCE
 
 ## How to use this course
 
@@ -6689,6 +6724,7 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
-A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.');
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
+on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
 commit;
