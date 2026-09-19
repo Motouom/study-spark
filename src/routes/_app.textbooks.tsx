@@ -57,7 +57,9 @@ function TextbooksPage() {
                     </div>
                     <Badge variant="secondary">{papers.length} sources</Badge>
                   </div>
-                  <h2 className="mt-4 min-w-0 truncate text-base font-medium">{subject} textbook</h2>
+                  <h2 className="mt-4 min-w-0 truncate text-base font-medium">
+                    {subject} textbook
+                  </h2>
                   <p className="mt-1 text-sm text-muted-foreground">
                     A paper-linked digital reading pack built from your approved {subject} content.
                   </p>

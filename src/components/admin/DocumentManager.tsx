@@ -28,16 +28,16 @@ const ALL_CLASS_LEVELS = CLASS_LEVELS.map((item) => item.id) as ClassLevel[];
 const ALL_SERIES = SERIES_OPTIONS.map((item) => item.id) as Series[];
 
 export type DocumentManagerConfig = {
-  contentKind: CourseContentKind | "all";
+  contentKind: CourseContentKind;
   title: string;
   description: string;
   uploadLabel: string;
   noun: string;
 };
 
-const CONFIGS: Record<CourseContentKind | "all", DocumentManagerConfig> = {
-  all: {
-    contentKind: "all",
+const CONFIGS: Record<CourseContentKind, DocumentManagerConfig> = {
+  paper: {
+    contentKind: "paper",
     title: "Papers",
     description: "Upload, update, publish, and retire protected structural question papers.",
     uploadLabel: "Upload paper",
@@ -92,7 +92,7 @@ function uppercaseTitle(value: string) {
   return value.toUpperCase();
 }
 
-export function DocumentManager({ kind }: { kind: CourseContentKind | "all" }) {
+export function DocumentManager({ kind }: { kind: CourseContentKind }) {
   const config = CONFIGS[kind];
   const {
     topics,
@@ -112,10 +112,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind | "all" }) {
   const ai = useAiActions();
 
   const kindDocuments = useMemo(
-    () =>
-      config.contentKind === "all"
-        ? documents
-        : documents.filter((document) => document.contentKind === config.contentKind),
+    () => documents.filter((document) => document.contentKind === config.contentKind),
     [config.contentKind, documents],
   );
 
@@ -141,7 +138,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind | "all" }) {
         ...documentDraft,
         topicId: topic.id,
         status: "published",
-        contentKind: config.contentKind === "all" ? "course" : config.contentKind,
+        contentKind: config.contentKind,
         title: uppercaseTitle(documentDraft.title.trim().replace(/\s+/g, " ")),
         markdownContent: removeEmojis(documentDraft.markdownContent),
       });
@@ -399,7 +396,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind | "all" }) {
   );
 }
 
-function emptyDocument(contentKind: CourseContentKind | "all"): CourseDocumentDraft {
+function emptyDocument(contentKind: CourseContentKind): CourseDocumentDraft {
   return {
     topicId: "",
     subject: "Mathematics",
@@ -409,7 +406,7 @@ function emptyDocument(contentKind: CourseContentKind | "all"): CourseDocumentDr
     classLevels: ALL_CLASS_LEVELS,
     series: ALL_SERIES,
     status: "published",
-    contentKind: contentKind === "all" ? "course" : contentKind,
+    contentKind,
     markdownContent: "",
   };
 }

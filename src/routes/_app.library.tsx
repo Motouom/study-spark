@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_app/library")({
 function LibraryPage() {
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const content = useStudyContent(savedProfile);
-  const courseDocuments = content.documents;
+  const courseDocuments = content.documents.filter((document) => document.contentKind === "paper");
   const useRemoteOnly = supabaseConfigured();
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
   const effectiveSubjects = savedProfile

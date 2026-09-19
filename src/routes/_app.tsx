@@ -462,7 +462,10 @@ function AppLayout() {
         </div>
       </div>
 
-      <main className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-20 md:pt-0 md:pb-0" style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' } as React.CSSProperties}>
+      <main
+        className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-20 md:pt-0 md:pb-0"
+        style={{ paddingBottom: "calc(4rem + env(safe-area-inset-bottom))" } as React.CSSProperties}
+      >
         {/* Desktop top utility bar */}
         <div className="hidden h-12 items-center justify-end gap-2 border-b border-border px-6 md:flex md:px-10">
           {showAdminLink && (
@@ -567,7 +570,13 @@ function AppLayout() {
       </main>
 
       {/* Mobile bottom tab bar */}
-      <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border bg-background/95 backdrop-blur md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom))', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <nav
+        className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border bg-background/95 backdrop-blur md:hidden"
+        style={{
+          height: "calc(4rem + env(safe-area-inset-bottom))",
+          paddingBottom: "env(safe-area-inset-bottom)",
+        }}
+      >
         {mobileNav.map((n) => {
           const active = location.pathname.startsWith(n.to);
           return (

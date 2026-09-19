@@ -6,5 +6,5 @@ export const Route = createFileRoute("/control-panel-9k3x/questions")({
 });
 
 function PapersAdmin() {
-  return <DocumentManager kind="all" />;
+  return <DocumentManager kind="paper" />;
 }

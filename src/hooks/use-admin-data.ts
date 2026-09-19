@@ -21,7 +21,7 @@ export type AdminTopic = {
   estimatedMinutes: number;
 };
 
-export type CourseContentKind = "course" | "textbook";
+export type CourseContentKind = "course" | "textbook" | "paper";
 
 export type AdminCourseDocument = {
   id: string;
@@ -129,7 +129,8 @@ function mapCourseDocument(row: Record<string, unknown>): AdminCourseDocument {
     classLevels: (row.class_levels ?? []) as ClassLevel[],
     series: (row.series ?? []) as Series[],
     status: row.status as ContentStatus,
-    contentKind: row.content_kind === "textbook" ? "textbook" : "course",
+    contentKind:
+      row.content_kind === "textbook" || row.content_kind === "paper" ? row.content_kind : "course",
     markdownContent: String(row.markdown_content ?? ""),
     updatedAt: String(row.updated_at ?? ""),
   };

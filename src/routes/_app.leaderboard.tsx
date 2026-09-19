@@ -253,14 +253,18 @@ function LeaderboardPage() {
                           </span>
                         </span>
                         <span className="hidden min-w-0 text-muted-foreground md:block">
-                          <span className="line-clamp-2">{levelLabel(row.level)} · {classLabel(row.class_level)}</span>
+                          <span className="line-clamp-2">
+                            {levelLabel(row.level)} · {classLabel(row.class_level)}
+                          </span>
                         </span>
                         <span className="min-w-0 truncate text-muted-foreground">
                           {[row.city, row.region].filter(Boolean).join(", ") || row.country}
                         </span>
                         <span>{row.questions_passed}</span>
                         <span>{row.pass_rate}%</span>
-                        <span className="hidden md:block">{formatDuration(row.average_duration_seconds)}</span>
+                        <span className="hidden md:block">
+                          {formatDuration(row.average_duration_seconds)}
+                        </span>
                         <span className="hidden md:block">{row.study_days}</span>
                       </div>
                     ))}
