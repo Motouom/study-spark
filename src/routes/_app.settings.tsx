@@ -207,6 +207,37 @@ function SettingsPage() {
     );
   }, [availableSubjects]);
 
+  const hasChanges = useMemo(() => {
+    if (!savedProfile) return false;
+    return (
+      name.trim() !== savedProfile.name ||
+      country !== savedProfile.country ||
+      region !== savedProfile.region ||
+      city.trim() !== savedProfile.city ||
+      classLevel !== savedProfile.classLevel ||
+      series !== savedProfile.series ||
+      subjects.length !== savedProfile.subjects.length ||
+      subjects.some((subject) => !savedProfile.subjects.includes(subject as Subject))
+    );
+  }, [city, classLevel, country, name, region, savedProfile, series, subjects]);
+
+  const resetForm = () => {
+    if (!savedProfile) return;
+    setName(savedProfile.name);
+    setCountry(savedProfile.country);
+    setRegion(savedProfile.region);
+    setCity(savedProfile.city);
+    setLocationVerified(savedProfile.locationVerified);
+    setLocationLatitude(savedProfile.locationLatitude);
+    setLocationLongitude(savedProfile.locationLongitude);
+    setLocationVerifiedAt(savedProfile.locationVerifiedAt);
+    setClassLevel(savedProfile.classLevel);
+    setSeries(savedProfile.series);
+    setSubjects(savedProfile.subjects);
+    setSaveError(null);
+    setSaved(false);
+  };
+
   async function saveStudyProfile() {
     if (supabaseConfigured() && !profile) {
       setSaveError("Your profile has not finished loading. Please wait a moment and try again.");
@@ -459,7 +490,18 @@ function SettingsPage() {
                   Profile saved. Your dashboard access has been updated.
                 </p>
               )}
-              <div className="flex justify-end">
+              <div className="flex flex-wrap items-center justify-end gap-3">
+                {hasChanges && (
+                  <span className="text-xs text-muted-foreground">Unsaved changes</span>
+                )}
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={resetForm}
+                  disabled={!hasChanges || saving}
+                >
+                  Reset
+                </Button>
                 <Button
                   onClick={saveStudyProfile}
                   disabled={
@@ -467,7 +509,8 @@ function SettingsPage() {
                     !country.trim() ||
                     !region.trim() ||
                     subjects.length === 0 ||
-                    saving
+                    saving ||
+                    !hasChanges
                   }
                 >
                   {saving ? "Saving..." : "Save profile"}

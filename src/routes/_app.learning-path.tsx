@@ -203,29 +203,33 @@ function LearningPathPage() {
                 )}
               </div>
 
-              <div className="grid grid-cols-3 gap-3 md:gap-3">
-                <div className="rounded-xl border border-border bg-card p-4">
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                <div className="rounded-xl border border-border bg-card p-3 md:p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Target className="h-4 w-4" /> Weekly target
                   </div>
                   <div className="mt-2 font-display text-3xl">{weeklyPercent}%</div>
-                  <p className="mt-1 text-xs text-muted-foreground">
+                  <p className="mt-1 text-[11px] text-muted-foreground md:text-xs">
                     {markedThisWeek} of {weeklyTarget} study sessions
                   </p>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4">
+                <div className="rounded-xl border border-border bg-card p-3 md:p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <FileText className="h-4 w-4" /> Active papers
                   </div>
                   <div className="mt-2 font-display text-3xl">{unfinishedStarted.length}</div>
-                  <p className="mt-1 text-xs text-muted-foreground">papers to finish or review</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground md:text-xs">
+                    papers to finish or review
+                  </p>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4">
+                <div className="rounded-xl border border-border bg-card p-3 md:p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <TrendingUp className="h-4 w-4" /> Focus subjects
                   </div>
                   <div className="mt-2 font-display text-3xl">{weakest.length}</div>
-                  <p className="mt-1 text-xs text-muted-foreground">ranked by mastery</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground md:text-xs">
+                    ranked by mastery
+                  </p>
                 </div>
               </div>
 

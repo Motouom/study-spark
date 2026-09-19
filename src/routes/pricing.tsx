@@ -283,34 +283,36 @@ function PricingPage() {
           </div>
 
           {/* Comparison table */}
-          <div className="mt-14 overflow-hidden rounded-2xl border border-border bg-card">
-            <div className="grid grid-cols-3 border-b border-border px-6 py-4 text-sm font-medium">
-              <span>Feature</span>
-              <span className="text-center text-muted-foreground">Free</span>
-              <span className="text-center">Premium</span>
-            </div>
-            {features.map((f) => (
-              <div
-                key={f.name}
-                className="grid grid-cols-3 border-b border-border px-6 py-3.5 text-sm last:border-0"
-              >
-                <span>{f.name}</span>
-                <span className="flex justify-center">
-                  {f.free ? (
-                    <Check className="h-4 w-4 text-success" />
-                  ) : (
-                    <X className="h-4 w-4 text-muted-foreground/40" />
-                  )}
-                </span>
-                <span className="flex justify-center">
-                  {f.premium ? (
-                    <Check className="h-4 w-4 text-success" />
-                  ) : (
-                    <X className="h-4 w-4 text-muted-foreground/40" />
-                  )}
-                </span>
+          <div className="mt-14 overflow-x-auto rounded-2xl border border-border bg-card">
+            <div className="min-w-[560px]">
+              <div className="grid grid-cols-3 border-b border-border px-6 py-4 text-sm font-medium">
+                <span>Feature</span>
+                <span className="text-center text-muted-foreground">Free</span>
+                <span className="text-center">Premium</span>
               </div>
-            ))}
+              {features.map((f) => (
+                <div
+                  key={f.name}
+                  className="grid grid-cols-3 border-b border-border px-6 py-3.5 text-sm last:border-0"
+                >
+                  <span className="pr-4">{f.name}</span>
+                  <span className="flex justify-center">
+                    {f.free ? (
+                      <Check className="h-4 w-4 text-success" />
+                    ) : (
+                      <X className="h-4 w-4 text-muted-foreground/40" />
+                    )}
+                  </span>
+                  <span className="flex justify-center">
+                    {f.premium ? (
+                      <Check className="h-4 w-4 text-success" />
+                    ) : (
+                      <X className="h-4 w-4 text-muted-foreground/40" />
+                    )}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* FAQ */}
