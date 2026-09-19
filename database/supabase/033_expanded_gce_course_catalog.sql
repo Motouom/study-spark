@@ -9,155 +9,155 @@ values ('course-eng-ordinary', 'English Language', 'Complete O-Level English Lan
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-phys-ordinary', 'Physics', 'Complete O-Level Physics Course — Cameroon GCE', 'This course covers GCE O-Level Physics (subject code 0580). Physics rewards method: define terms precisely, quote formulas, substitute with units, and check whether the answer is s', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 126)
+values ('course-phys-ordinary', 'Physics', 'Complete O-Level Physics Course — Cameroon GCE', 'This course covers GCE O-Level Physics (subject code 0580). Physics rewards method: define terms precisely, quote formulas, substitute with units, and check whether the answer is s', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 203)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-chem-ordinary', 'Chemistry', 'Complete O-Level Chemistry Course — Cameroon GCE', 'This course covers GCE O-Level Chemistry (subject code 0515). Chemistry marks come from three habits: writing balanced equations, showing working in mole calculations, and using co', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 121)
+values ('course-chem-ordinary', 'Chemistry', 'Complete O-Level Chemistry Course — Cameroon GCE', 'This course covers GCE O-Level Chemistry (subject code 0515). Chemistry marks come from three habits: writing balanced equations, showing working in mole calculations, and using co', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 200)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-bio-ordinary', 'Biology', 'Complete O-Level Biology Course — Cameroon GCE', 'This course covers GCE O-Level Biology (subject code 0510) and Human Biology (0565). Biology marks come from precise vocabulary and labelled diagrams. Learn the definitions word-fo', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 129)
+values ('course-bio-ordinary', 'Biology', 'Complete O-Level Biology Course — Cameroon GCE', 'This course covers GCE O-Level Biology (subject code 0510) and Human Biology (0565). Biology marks come from precise vocabulary and labelled diagrams. Learn the definitions word-fo', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 207)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-econ-ordinary', 'Economics', 'Complete O-Level Economics Course — Cameroon GCE', 'This course covers GCE O-Level Economics (subject code 0525). Economics answers one question everywhere: how do people and societies use scarce resources? Use Cameroonian examples ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 114)
+values ('course-econ-ordinary', 'Economics', 'Complete O-Level Economics Course — Cameroon GCE', 'This course covers GCE O-Level Economics (subject code 0525). Economics answers one question everywhere: how do people and societies use scarce resources? Use Cameroonian examples ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 193)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-comm-ordinary', 'Commerce', 'Complete O-Level Commerce Course — Cameroon GCE', 'This course covers GCE O-Level Commerce (subject code 0520). Commerce studies how goods move from producer to consumer. Answers score best when you name real institutions: Douala p', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 110)
+values ('course-comm-ordinary', 'Commerce', 'Complete O-Level Commerce Course — Cameroon GCE', 'This course covers GCE O-Level Commerce (subject code 0520). Commerce studies how goods move from producer to consumer. Answers score best when you name real institutions: Douala p', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 189)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-cs-ordinary', 'Computer Science', 'Complete O-Level Computer Science Course — Cameroon GCE', 'This course covers GCE O-Level Computer Science (subject code 0595) and supports ICT (0596). Computer Science rewards precision: exact definitions, correct terminology, and careful', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 112)
+values ('course-cs-ordinary', 'Computer Science', 'Complete O-Level Computer Science Course — Cameroon GCE', 'This course covers GCE O-Level Computer Science (subject code 0595) and supports ICT (0596). Computer Science rewards precision: exact definitions, correct terminology, and careful', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 191)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-ict-ordinary', 'ICT', 'Complete O-Level ICT Course — Cameroon GCE', 'This course covers GCE O-Level ICT (subject code 0596). ICT focuses on using computer systems and applications effectively — the practical paper (word processing, spreadsheets, dat', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 93)
+values ('course-ict-ordinary', 'ICT', 'Complete O-Level ICT Course — Cameroon GCE', 'This course covers GCE O-Level ICT (subject code 0596). ICT focuses on using computer systems and applications effectively — the practical paper (word processing, spreadsheets, dat', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 171)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-fr-ordinary', 'French', 'Cours complet de Français — Niveau Ordinary, GCE Cameroun', 'Ce cours couvre le français au GCE Ordinary Level (code 0545) : grammaire, conjugaison, compréhension, traduction et composition. Le français est une matière obligatoire du tronc c', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 90)
+values ('course-fr-ordinary', 'French', 'Cours complet de Français — Niveau Ordinary, GCE Cameroun', 'Ce cours couvre le français au GCE Ordinary Level (code 0545) : grammaire, conjugaison, compréhension, traduction et composition. Le français est une matière obligatoire du tronc c', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 154)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-hist-ordinary', 'History', 'Complete O-Level History Course — Cameroon GCE', 'This course covers GCE O-Level History (subject code 0560): Cameroon history, African history, and world history. History marks come from precise dates, named people and places, an', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 115)
+values ('course-hist-ordinary', 'History', 'Complete O-Level History Course — Cameroon GCE', 'This course covers GCE O-Level History (subject code 0560): Cameroon history, African history, and world history. History marks come from precise dates, named people and places, an', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 194)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-geo-ordinary', 'Geography', 'Complete O-Level Geography Course — Cameroon GCE', 'This course covers GCE O-Level Geography (subject code 0550): physical geography, human geography, map work, and fieldwork. Geography marks come from precise terminology, sketch ma', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 119)
+values ('course-geo-ordinary', 'Geography', 'Complete O-Level Geography Course — Cameroon GCE', 'This course covers GCE O-Level Geography (subject code 0550): physical geography, human geography, map work, and fieldwork. Geography marks come from precise terminology, sketch ma', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 197)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-civ-ordinary', 'Citizenship Education', 'Complete O-Level Citizenship Education Course — Cameroon GCE', 'This course covers GCE O-Level Citizenship Education (subject code 0562). It teaches rights, duties, institutions and civic values, with Cameroon as the living case study. Answers ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 117)
+values ('course-civ-ordinary', 'Citizenship Education', 'Complete O-Level Citizenship Education Course — Cameroon GCE', 'This course covers GCE O-Level Citizenship Education (subject code 0562). It teaches rights, duties, institutions and civic values, with Cameroon as the living case study. Answers ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 196)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-rel-ordinary', 'Religious Studies', 'Complete O-Level Religious Studies Course — Cameroon GCE', 'This course covers GCE O-Level Religious Studies (subject code 0585). The paper tests knowledge of the Bible (Old and New Testament), religious teachings, and their application to ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 105)
+values ('course-rel-ordinary', 'Religious Studies', 'Complete O-Level Religious Studies Course — Cameroon GCE', 'This course covers GCE O-Level Religious Studies (subject code 0585). The paper tests knowledge of the Bible (Old and New Testament), religious teachings, and their application to ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 183)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-log-ordinary', 'Logic', 'Complete O-Level Logic Course — Cameroon GCE', 'This course covers GCE O-Level Logic (subject code 0590). Logic teaches you to reason correctly and detect bad arguments — a skill that improves every other subject. Marks come fro', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 105)
+values ('course-log-ordinary', 'Logic', 'Complete O-Level Logic Course — Cameroon GCE', 'This course covers GCE O-Level Logic (subject code 0590). Logic teaches you to reason correctly and detect bad arguments — a skill that improves every other subject. Marks come fro', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 183)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-agr-ordinary', 'Agricultural Science', 'Complete O-Level Agricultural Science Course — Cameroon GCE', 'This course covers GCE O-Level Agricultural Science (subject code 0597) and supports A-Level Agricultural Science. Agriculture is Cameroon''s backbone — the exam rewards answers gro', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 111)
+values ('course-agr-ordinary', 'Agricultural Science', 'Complete O-Level Agricultural Science Course — Cameroon GCE', 'This course covers GCE O-Level Agricultural Science (subject code 0597) and supports A-Level Agricultural Science. Agriculture is Cameroon''s backbone — the exam rewards answers gro', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 190)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-hbio-ordinary', 'Human Biology', 'Complete O-Level Human Biology Course — Cameroon GCE', 'This course covers GCE O-Level Human Biology (subject code 0565) — the human-focused alternative to Biology. It shares the Biology syllabus core but emphasises human anatomy, physi', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 114)
+values ('course-hbio-ordinary', 'Human Biology', 'Complete O-Level Human Biology Course — Cameroon GCE', 'This course covers GCE O-Level Human Biology (subject code 0565) — the human-focused alternative to Biology. It shares the Biology syllabus core but emphasises human anatomy, physi', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 192)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-amath-ordinary', 'Additional Mathematics', 'Complete O-Level Additional Mathematics Course — Cameroon GCE', 'This course covers GCE O-Level Additional Mathematics (subject code 0575), the bridge between O-Level and A-Level mathematics. It introduces calculus, advanced trigonometry and pol', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 99)
+values ('course-amath-ordinary', 'Additional Mathematics', 'Complete O-Level Additional Mathematics Course — Cameroon GCE', 'This course covers GCE O-Level Additional Mathematics (subject code 0575), the bridge between O-Level and A-Level mathematics. It introduces calculus, advanced trigonometry and pol', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 177)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-fnut-ordinary', 'Food and Nutrition', 'Complete O-Level Food and Nutrition Course — Cameroon GCE', 'This course covers GCE O-Level Food and Nutrition (subject code 0540) and supports Food Science and Nutrition at A-Level. It combines nutrition science, food preparation and meal m', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 115)
+values ('course-fnut-ordinary', 'Food and Nutrition', 'Complete O-Level Food and Nutrition Course — Cameroon GCE', 'This course covers GCE O-Level Food and Nutrition (subject code 0540) and supports Food Science and Nutrition at A-Level. It combines nutrition science, food preparation and meal m', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 193)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-lit-ordinary', 'English Literature', 'Complete O-Level English Literature Course — Cameroon GCE', 'This course covers GCE O-Level Literature in English (subject code 0535). The O-Level paper tests the same skills as A-Level — close reading, quotation, analysis — at a more guided', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 91)
+values ('course-lit-ordinary', 'English Literature', 'Complete O-Level English Literature Course — Cameroon GCE', 'This course covers GCE O-Level Literature in English (subject code 0535). The O-Level paper tests the same skills as A-Level — close reading, quotation, analysis — at a more guided', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 169)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-acct-ordinary', 'Accounting', 'Complete O-Level Accounting Course — Cameroon GCE', 'This course covers GCE O-Level Accounting (subject code 0505), core of the Commercial series. O-Level accounting is about formats and double entry — learn the layouts and the rules', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 100)
+values ('course-acct-ordinary', 'Accounting', 'Complete O-Level Accounting Course — Cameroon GCE', 'This course covers GCE O-Level Accounting (subject code 0505), core of the Commercial series. O-Level accounting is about formats and double entry — learn the layouts and the rules', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 180)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-biz-ordinary', 'Business Studies', 'Complete O-Level Business Studies Course — Cameroon GCE', 'This course covers GCE O-Level Business Studies (subject code 0598). Business Studies teaches how enterprises are created, financed, marketed and managed. Score by applying concept', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 101)
+values ('course-biz-ordinary', 'Business Studies', 'Complete O-Level Business Studies Course — Cameroon GCE', 'This course covers GCE O-Level Business Studies (subject code 0598). Business Studies teaches how enterprises are created, financed, marketed and managed. Score by applying concept', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 179)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-geol-ordinary', 'Geology', 'Complete O-Level Geology Course — Cameroon GCE', 'This course covers GCE O-Level Geology (subject code 0555). Geology studies the earth, its materials and processes. Cameroon is a geologist''s classroom — from Mount Cameroon''s volc', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 100)
+values ('course-geol-ordinary', 'Geology', 'Complete O-Level Geology Course — Cameroon GCE', 'This course covers GCE O-Level Geology (subject code 0555). Geology studies the earth, its materials and processes. Cameroon is a geologist''s classroom — from Mount Cameroon''s volc', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 178)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-sbf-ordinary', 'Special Bilingual Education French', 'Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun', 'Ce cours couvre l''Éducation Bilingue Spéciale — Français (code 0546) au GCE Ordinary Level. Cette matière s''adresse aux candidats du système anglophone qui choisissent le français ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 74)
+values ('course-sbf-ordinary', 'Special Bilingual Education French', 'Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun', 'Ce cours couvre l''Éducation Bilingue Spéciale — Français (code 0546) au GCE Ordinary Level. Cette matière s''adresse aux candidats du système anglophone qui choisissent le français ', 'ordinary', array['form_3','form_4','form_5']::text[], array['general','science','arts','commercial','technical']::text[], 0, 138)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-pmm-advanced', 'Pure Mathematics with Mechanics', 'Complete A-Level Pure Mathematics with Mechanics Course — Cameroon GCE', 'This course covers GCE A-Level Pure Mathematics with Mechanics (subject code 0770), the core subject of the Science series (S1). A-Level mathematics demands precision: every line o', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 110)
+values ('course-pmm-advanced', 'Pure Mathematics with Mechanics', 'Complete A-Level Pure Mathematics with Mechanics Course — Cameroon GCE', 'This course covers GCE A-Level Pure Mathematics with Mechanics (subject code 0770), the core subject of the Science series (S1). A-Level mathematics demands precision: every line o', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 188)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-pms-advanced', 'Pure Mathematics with Statistics', 'Complete A-Level Pure Mathematics with Statistics Course — Cameroon GCE', 'This course covers GCE A-Level Pure Mathematics with Statistics (subject code 0775), the mathematics of the Commercial series (A6) and an option for Arts. Statistics is the most pr', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 107)
+values ('course-pms-advanced', 'Pure Mathematics with Statistics', 'Complete A-Level Pure Mathematics with Statistics Course — Cameroon GCE', 'This course covers GCE A-Level Pure Mathematics with Statistics (subject code 0775), the mathematics of the Commercial series (A6) and an option for Arts. Statistics is the most pr', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 185)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-fmath-advanced', 'Further Mathematics', 'Complete A-Level Further Mathematics Course — Cameroon GCE', 'This course covers GCE A-Level Further Mathematics (subject code 0771), the extension paper for strong mathematicians (often paired with Pure Math with Mechanics or Statistics). It', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 96)
+values ('course-fmath-advanced', 'Further Mathematics', 'Complete A-Level Further Mathematics Course — Cameroon GCE', 'This course covers GCE A-Level Further Mathematics (subject code 0771), the extension paper for strong mathematicians (often paired with Pure Math with Mechanics or Statistics). It', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 174)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-amaths-advanced', 'Mathematics', 'Complete A-Level Mathematics Course (Subsidiary) — Cameroon GCE', 'Complete structured course for Mathematics.', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 89)
+values ('course-amaths-advanced', 'Mathematics', 'Complete A-Level Mathematics Course (Subsidiary) — Cameroon GCE', 'Complete structured course for Mathematics.', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 167)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-aphys-advanced', 'Physics', 'Complete A-Level Physics Course — Cameroon GCE', 'This course covers GCE A-Level Physics (subject code 0780), core of the Science series. A-Level physics = O-Level physics with calculus, vectors and deeper explanation. The examine', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 110)
+values ('course-aphys-advanced', 'Physics', 'Complete A-Level Physics Course — Cameroon GCE', 'This course covers GCE A-Level Physics (subject code 0780), core of the Science series. A-Level physics = O-Level physics with calculus, vectors and deeper explanation. The examine', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 188)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-achem-advanced', 'Chemistry', 'Complete A-Level Chemistry Course — Cameroon GCE', 'This course covers GCE A-Level Chemistry (subject code 0715), core of the Science series. A-Level chemistry is built on three pillars: physical (energetics, kinetics, equilibria), ', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 120)
+values ('course-achem-advanced', 'Chemistry', 'Complete A-Level Chemistry Course — Cameroon GCE', 'This course covers GCE A-Level Chemistry (subject code 0715), core of the Science series. A-Level chemistry is built on three pillars: physical (energetics, kinetics, equilibria), ', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 199)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-abio-advanced', 'Biology', 'Complete A-Level Biology Course — Cameroon GCE', 'This course covers GCE A-Level Biology (subject code 0710), core of the Science series (S2–S5). A-Level biology demands depth: explain HOW and WHY, use precise terminology, and lin', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 126)
+values ('course-abio-advanced', 'Biology', 'Complete A-Level Biology Course — Cameroon GCE', 'This course covers GCE A-Level Biology (subject code 0710), core of the Science series (S2–S5). A-Level biology demands depth: explain HOW and WHY, use precise terminology, and lin', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 205)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-aecon-advanced', 'Economics', 'Complete A-Level Economics Course — Cameroon GCE', 'This course covers GCE A-Level Economics (subject code 0725), core of the Commercial series (A6) and popular in Arts. A-Level economics = O-Level depth plus analysis and evaluation', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 121)
+values ('course-aecon-advanced', 'Economics', 'Complete A-Level Economics Course — Cameroon GCE', 'This course covers GCE A-Level Economics (subject code 0725), core of the Commercial series (A6) and popular in Arts. A-Level economics = O-Level depth plus analysis and evaluation', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 199)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-aacct-advanced', 'Accounting', 'Complete A-Level Accounting Course — Cameroon GCE', 'This course covers GCE A-Level Accounting (subject code 0705), core of the Commercial series (A6). Accounting rewards format discipline: learn the layout of each statement and acco', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 117)
+values ('course-aacct-advanced', 'Accounting', 'Complete A-Level Accounting Course — Cameroon GCE', 'This course covers GCE A-Level Accounting (subject code 0705), core of the Commercial series (A6). Accounting rewards format discipline: learn the layout of each statement and acco', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 197)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-alit-advanced', 'English Literature', 'Complete A-Level English Literature Course — Cameroon GCE', 'This course covers GCE A-Level Literature in English (subject code 0735) and supports O-Level Literature (0535). Literature rewards close reading: every claim about a text must be ', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 105)
+values ('course-alit-advanced', 'English Literature', 'Complete A-Level English Literature Course — Cameroon GCE', 'This course covers GCE A-Level Literature in English (subject code 0735) and supports O-Level Literature (0535). Literature rewards close reading: every claim about a text must be ', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 183)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-aeng-advanced', 'English Language', 'Complete A-Level English Language Course — Cameroon GCE', 'This course covers GCE A-Level English Language (subject code 0730). A-Level English demands mature writing: precise comprehension, controlled summary, and sustained composition wi', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 90)
+values ('course-aeng-advanced', 'English Language', 'Complete A-Level English Language Course — Cameroon GCE', 'This course covers GCE A-Level English Language (subject code 0730). A-Level English demands mature writing: precise comprehension, controlled summary, and sustained composition wi', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 168)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-afr-advanced', 'French', 'Cours de Français — Advanced Level, GCE Cameroun', 'Ce cours couvre le français au GCE Advanced Level (code 0745). Le niveau A exige : une expression écrite soutenue, une compréhension fine de textes littéraires et d''actualité, la t', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 70)
+values ('course-afr-advanced', 'French', 'Cours de Français — Advanced Level, GCE Cameroun', 'Ce cours couvre le français au GCE Advanced Level (code 0745). Le niveau A exige : une expression écrite soutenue, une compréhension fine de textes littéraires et d''actualité, la t', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 133)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-ahist-advanced', 'History', 'Complete A-Level History Course — Cameroon GCE', 'This course covers GCE A-Level History (subject code 0760), core of the Arts series. A-Level history demands analysis and argument: essays need a thesis, evidence, and evaluation o', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 120)
+values ('course-ahist-advanced', 'History', 'Complete A-Level History Course — Cameroon GCE', 'This course covers GCE A-Level History (subject code 0760), core of the Arts series. A-Level history demands analysis and argument: essays need a thesis, evidence, and evaluation o', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 198)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-acs-advanced', 'Computer Science', 'Complete A-Level Computer Science Course — Cameroon GCE', 'This course covers GCE A-Level Computer Science (subject code 0795) and ICT (0796). A-Level demands depth in programming, data structures, systems and networks. The practical paper', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 105)
+values ('course-acs-advanced', 'Computer Science', 'Complete A-Level Computer Science Course — Cameroon GCE', 'This course covers GCE A-Level Computer Science (subject code 0795) and ICT (0796). A-Level demands depth in programming, data structures, systems and networks. The practical paper', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 184)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-phil-advanced', 'Philosophy', 'Complete A-Level Philosophy Course — Cameroon GCE', 'This course covers GCE A-Level Philosophy (subject code 0790), core of the Arts series. Philosophy rewards clarity: define terms, present arguments step by step, consider objection', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 103)
+values ('course-phil-advanced', 'Philosophy', 'Complete A-Level Philosophy Course — Cameroon GCE', 'This course covers GCE A-Level Philosophy (subject code 0790), core of the Arts series. Philosophy rewards clarity: define terms, present arguments step by step, consider objection', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 181)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.topics (id, subject, title, description, level, class_levels, series, question_count, estimated_minutes)
-values ('course-fsn-advanced', 'Food Science and Nutrition', 'Complete A-Level Food Science and Nutrition Course — Cameroon GCE', 'This course supports A-Level Food Science and Nutrition (subject code 0741). It deepens O-Level Food and Nutrition with food chemistry, microbiology, dietetics and food service man', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 105)
+values ('course-fsn-advanced', 'Food Science and Nutrition', 'Complete A-Level Food Science and Nutrition Course — Cameroon GCE', 'This course supports A-Level Food Science and Nutrition (subject code 0741). It deepens O-Level Food and Nutrition with food chemistry, microbiology, dietetics and food service man', 'advanced', array['lower_sixth','upper_sixth']::text[], array['a_science','a_arts','a_commercial']::text[], 0, 183)
 on conflict (id) do update set title = excluded.title, description = excluded.description, estimated_minutes = excluded.estimated_minutes, updated_at = now();
 
 insert into public.course_documents (id, topic_id, subject, title, language, level, class_levels, series, status, markdown_content, content_kind, doc_type)
@@ -1001,6 +1001,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | measurement, mechanics, forces, energy and pressure | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | thermal physics, waves, light and sound | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | electricity, magnetism, electronics and electromagnetism | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | atomic physics, radioactivity, practical skills and uncertainty | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Calculate acceleration from a velocity-time graph. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how a vacuum flask reduces heat transfer. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Solve a series-parallel circuit with current and potential difference. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | State precautions for an Ohm''s law practical. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Physics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- measurement, mechanics, forces, energy and pressure
+- thermal physics, waves, light and sound
+- electricity, magnetism, electronics and electromagnetism
+- atomic physics, radioactivity, practical skills and uncertainty
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Physics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- measurement, mechanics, forces, energy and pressure
+- thermal physics, waves, light and sound
+- electricity, magnetism, electronics and electromagnetism
+- atomic physics, radioactivity, practical skills and uncertainty
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -1158,6 +1251,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Chemistry, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- atomic structure, bonding, periodicity and chemical formulae
+- mole calculations, equations, gases and solution concentration
+- acids, bases, salts, redox, electrolysis and energetics
+- metals, non-metals, organic chemistry and qualitative analysis
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | atomic structure, bonding, periodicity and chemical formulae | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | mole calculations, equations, gases and solution concentration | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | acids, bases, salts, redox, electrolysis and energetics | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | metals, non-metals, organic chemistry and qualitative analysis | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Balance an ionic equation and identify the oxidising agent. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Calculate the mass of salt formed from a known volume and concentration of acid. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Describe a safe preparation of a soluble salt. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Use test results to identify two cations and one anion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Chemistry, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- atomic structure, bonding, periodicity and chemical formulae
+- mole calculations, equations, gases and solution concentration
+- acids, bases, salts, redox, electrolysis and energetics
+- metals, non-metals, organic chemistry and qualitative analysis
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Chemistry, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -1354,6 +1540,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | cell structure, biological molecules and enzymes | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | nutrition, transport, respiration, excretion and coordination | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | reproduction, genetics, evolution and variation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | ecology, disease, immunity and practical biological investigations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Draw and label a plant cell and state the function of each labelled part. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how villi are adapted for absorption. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Use a genetic cross to predict offspring ratios. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Design a fair test to investigate the effect of temperature on enzyme action. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Biology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- cell structure, biological molecules and enzymes
+- nutrition, transport, respiration, excretion and coordination
+- reproduction, genetics, evolution and variation
+- ecology, disease, immunity and practical biological investigations
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Biology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- cell structure, biological molecules and enzymes
+- nutrition, transport, respiration, excretion and coordination
+- reproduction, genetics, evolution and variation
+- ecology, disease, immunity and practical biological investigations
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -1523,6 +1802,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | scarcity, opportunity cost, demand, supply and markets | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | production, costs, firms, market structures and labour | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | national income, money, banking, inflation and unemployment | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | public finance, international trade and Cameroon development issues | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Use a demand-and-supply diagram to explain a rise in cocoa prices. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Distinguish fixed cost from variable cost with examples. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Explain four causes of inflation in an economy. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Evaluate two policies that can reduce youth unemployment. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Economics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- scarcity, opportunity cost, demand, supply and markets
+- production, costs, firms, market structures and labour
+- national income, money, banking, inflation and unemployment
+- public finance, international trade and Cameroon development issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Economics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- scarcity, opportunity cost, demand, supply and markets
+- production, costs, firms, market structures and labour
+- national income, money, banking, inflation and unemployment
+- public finance, international trade and Cameroon development issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -1662,6 +2034,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Commerce, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- trade, channels of distribution and aids to trade
+- banking, insurance, transport, warehousing and communication
+- consumer protection, business documents and payment methods
+- international trade, entrepreneurship and Cameroon market examples
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | trade, channels of distribution and aids to trade | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | banking, insurance, transport, warehousing and communication | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | consumer protection, business documents and payment methods | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | international trade, entrepreneurship and Cameroon market examples | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Explain why a wholesaler may still be useful to small retailers. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Compare cheque, mobile money and bank transfer for a trader in Douala. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Describe four documents used in a credit sale. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain the role of insurance in a transport business. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Commerce, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- trade, channels of distribution and aids to trade
+- banking, insurance, transport, warehousing and communication
+- consumer protection, business documents and payment methods
+- international trade, entrepreneurship and Cameroon market examples
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Commerce, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -1851,6 +2316,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | data representation, logic, algorithms and programming | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | computer architecture, operating systems and utility software | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | databases, networks, web systems and cybersecurity | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | systems development, testing, documentation and ethical issues | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Write pseudocode to find the largest value in a list. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Convert a denary number to binary and hexadecimal. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Design a simple relational table structure for a school library. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain three controls that protect learner accounts from unauthorised access. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Computer Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- data representation, logic, algorithms and programming
+- computer architecture, operating systems and utility software
+- databases, networks, web systems and cybersecurity
+- systems development, testing, documentation and ethical issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Computer Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- data representation, logic, algorithms and programming
+- computer architecture, operating systems and utility software
+- databases, networks, web systems and cybersecurity
+- systems development, testing, documentation and ethical issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -1972,6 +2530,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving ICT, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- computer hardware, software, storage and input/output devices
+- word processing, spreadsheets, databases and presentation skills
+- networks, internet services, communication and cybersecurity
+- ICT in school, business, government and everyday Cameroon life
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | computer hardware, software, storage and input/output devices | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | word processing, spreadsheets, databases and presentation skills | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | networks, internet services, communication and cybersecurity | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | ICT in school, business, government and everyday Cameroon life | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | State spreadsheet formulae for total, average and percentage. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Design a database table for student records. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Explain two benefits and two risks of online learning. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Describe steps to protect a computer from malware. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving ICT, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- computer hardware, software, storage and input/output devices
+- word processing, spreadsheets, databases and presentation skills
+- networks, internet services, communication and cybersecurity
+- ICT in school, business, government and everyday Cameroon life
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving ICT, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -2164,6 +2815,87 @@ Les questions structurees demandent de l''ordre. Commence par identifier le verb
 
 ### Travail final avant l''examen
 
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.
+## Cahier complet de maitrise GCE
+
+Cette partie transforme le cours en parcours de travail. Elle n''est pas une simple conclusion: elle sert de cahier de revision. Un eleve doit l''utiliser apres les lecons principales pour verifier la comprehension, corriger les lacunes et se preparer a repondre comme au GCE.
+
+### Carte de maitrise
+
+| No | Domaine | Ce qu''il faut savoir faire |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+Pour chaque domaine, l''eleve doit produire trois preuves: une definition exacte, un exemple precis et une reponse structuree. Si une preuve manque, la notion n''est pas encore maitrisee. Il faut alors relire la lecon, refaire un exemple et corriger les erreurs dans un cahier.
+
+### Lecon de methode: comprendre avant de memoriser
+
+La memorisation seule ne suffit pas. Une bonne preparation commence par les mots-cles. L''eleve doit d''abord ecrire les mots importants du chapitre, puis expliquer chaque mot en une phrase courte. Ensuite, il doit construire un exemple camerounais: une salle de classe, un marche, une ferme, une entreprise, un hopital, une mairie, une banque, une famille ou une situation de transport. L''exemple rend la reponse concrete et aide a eviter les phrases vagues.
+
+Apres l''exemple, l''eleve doit repondre a une question. Une reponse courte doit etre directe. Une reponse structuree doit avoir un ordre clair: idee principale, explication, exemple, conclusion courte. Une question qui demande de comparer doit montrer les ressemblances et les differences. Une question qui demande d''evaluer doit presenter les forces, les limites et un jugement final.
+
+### Exercices de consolidation
+
+| No | Question | Travail attendu |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction personnelle
+
+Apres chaque exercice, l''eleve doit corriger en quatre etapes. D''abord, verifier si le verbe de consigne a ete respecte. Ensuite, verifier si les mots techniques sont exacts. Puis, ajouter un exemple lorsque la reponse est trop generale. Enfin, reecrire la reponse proprement. La progression vient de la correction, pas seulement du nombre de questions traitees.
+
+### Revision espacee
+
+Jour 1: lire la lecon et faire les definitions. Jour 2: refaire les exemples sans regarder. Jour 4: traiter deux questions en temps limite. Jour 7: corriger les erreurs et construire une fiche courte. Jour 14: faire une mini simulation. Cette methode evite l''oubli rapide et rend la preparation plus solide.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours complet de Français — Niveau Ordinary, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D''abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l''ecole, de la famille, d''une ville camerounaise, d''un marche, d''un centre de sante ou d''une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l''ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l''effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l''examen
+
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours complet de Français — Niveau Ordinary, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D''abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l''ecole, de la famille, d''une ville camerounaise, d''un marche, d''un centre de sante ou d''une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l''ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l''effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l''examen
+
 Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -2302,6 +3034,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving History, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- Cameroon before, during and after colonial rule
+- African resistance, nationalism and independence movements
+- world wars, diplomacy, international organisations and decolonisation
+- historical source analysis, chronology and essay argument
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | Cameroon before, during and after colonial rule | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | African resistance, nationalism and independence movements | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | world wars, diplomacy, international organisations and decolonisation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | historical source analysis, chronology and essay argument | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Explain three causes of German annexation of Cameroon. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Assess the role of nationalism in African independence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Use a source extract to identify bias and reliability. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Write an essay introduction with a clear historical argument. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving History, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- Cameroon before, during and after colonial rule
+- African resistance, nationalism and independence movements
+- world wars, diplomacy, international organisations and decolonisation
+- historical source analysis, chronology and essay argument
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving History, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -2496,6 +3321,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | map reading, scale, grid references and fieldwork | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | weather, climate, landforms, soils and vegetation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | population, settlement, agriculture, industry and transport | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | regional geography of Cameroon, Africa and the wider world | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Calculate gradient from contour information on a map extract. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how relief influences settlement in the Western Highlands. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Describe three effects of rapid urbanisation in Yaounde or Douala. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Compare subsistence and plantation agriculture using Cameroon examples. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Geography, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- map reading, scale, grid references and fieldwork
+- weather, climate, landforms, soils and vegetation
+- population, settlement, agriculture, industry and transport
+- regional geography of Cameroon, Africa and the wider world
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Geography, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- map reading, scale, grid references and fieldwork
+- weather, climate, landforms, soils and vegetation
+- population, settlement, agriculture, industry and transport
+- regional geography of Cameroon, Africa and the wider world
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -2659,6 +3577,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Citizenship Education, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Citizenship Education, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -2794,6 +3805,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Religious Studies, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Religious Studies, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Religious Studies, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -2978,6 +4082,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Logic, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Logic, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -3110,6 +4307,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Agricultural Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- soil formation, fertility, erosion control and conservation
+- crop production, pests, diseases, weeds and storage
+- animal production, nutrition, housing and disease control
+- farm management, records, marketing and Cameroon agricultural systems
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | soil formation, fertility, erosion control and conservation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | crop production, pests, diseases, weeds and storage | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | animal production, nutrition, housing and disease control | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | farm management, records, marketing and Cameroon agricultural systems | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Describe how a farmer in the Western Highlands can reduce soil erosion on a slope. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Compare organic manure and inorganic fertiliser in crop production. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Explain four signs of disease in poultry and the correct control measures. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Prepare a simple farm budget and identify two risks to profit. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Agricultural Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- soil formation, fertility, erosion control and conservation
+- crop production, pests, diseases, weeds and storage
+- animal production, nutrition, housing and disease control
+- farm management, records, marketing and Cameroon agricultural systems
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Agricultural Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -3282,6 +4572,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | cell structure, biological molecules and enzymes | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | nutrition, transport, respiration, excretion and coordination | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | reproduction, genetics, evolution and variation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | ecology, disease, immunity and practical biological investigations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Draw and label a plant cell and state the function of each labelled part. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how villi are adapted for absorption. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Use a genetic cross to predict offspring ratios. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Design a fair test to investigate the effect of temperature on enzyme action. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Biology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- cell structure, biological molecules and enzymes
+- nutrition, transport, respiration, excretion and coordination
+- reproduction, genetics, evolution and variation
+- ecology, disease, immunity and practical biological investigations
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Biology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- cell structure, biological molecules and enzymes
+- nutrition, transport, respiration, excretion and coordination
+- reproduction, genetics, evolution and variation
+- ecology, disease, immunity and practical biological investigations
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -3410,6 +4793,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Additional Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- functions, mapping, inequalities and advanced algebra
+- coordinate geometry, trigonometry and identities
+- differentiation, integration and applications
+- vectors, binomial expansion, sequences and introductory mechanics
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | functions, mapping, inequalities and advanced algebra | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | coordinate geometry, trigonometry and identities | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | differentiation, integration and applications | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | vectors, binomial expansion, sequences and introductory mechanics | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Solve a quadratic inequality and represent the answer on a number line. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Find the equation of a tangent to a curve at a stated point. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Use trigonometric identities to simplify an expression before solving. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Integrate a polynomial expression and use limits to find an area. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Additional Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- functions, mapping, inequalities and advanced algebra
+- coordinate geometry, trigonometry and identities
+- differentiation, integration and applications
+- vectors, binomial expansion, sequences and introductory mechanics
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Additional Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -3592,6 +5068,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Food and Nutrition, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Food and Nutrition, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -3714,6 +5283,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Literature, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Literature, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Literature, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -3880,6 +5542,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | double entry bookkeeping and ledger balancing | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | trial balance, suspense accounts, control accounts and error correction | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | final accounts for sole traders, clubs, partnerships and companies | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | depreciation, bad debts, provisions, ratios and cash-flow interpretation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Prepare a purchases ledger control account and explain two causes of disagreement. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Correct four bookkeeping errors and show the suspense account balance. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Prepare an income statement and statement of financial position from adjusted trial balance data. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Use gross-profit margin, current ratio and return on capital employed to advise a trader. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Accounting, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- double entry bookkeeping and ledger balancing
+- trial balance, suspense accounts, control accounts and error correction
+- final accounts for sole traders, clubs, partnerships and companies
+- depreciation, bad debts, provisions, ratios and cash-flow interpretation
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Accounting, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- double entry bookkeeping and ledger balancing
+- trial balance, suspense accounts, control accounts and error correction
+- final accounts for sole traders, clubs, partnerships and companies
+- depreciation, bad debts, provisions, ratios and cash-flow interpretation
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -4004,6 +5759,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Business Studies, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Business Studies, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Business Studies, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -4168,6 +6016,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Ordinary Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Geology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Geology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Ordinary Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -4287,6 +6228,87 @@ Pour les questions objectives, lis d''abord l''enonce, souligne les mots importa
 ### Guide de correction
 
 Une bonne reponse utilise le vocabulaire exact, suit une organisation claire, donne des exemples pertinents et repond directement a la question. Si la reponse contient des calculs, il faut montrer la formule, la substitution, les etapes, la reponse et l''unite. Si la reponse est redigee, il faut une idee claire, une explication et une conclusion courte.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D''abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l''ecole, de la famille, d''une ville camerounaise, d''un marche, d''un centre de sante ou d''une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l''ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l''effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l''examen
+
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.
+## Cahier complet de maitrise GCE
+
+Cette partie transforme le cours en parcours de travail. Elle n''est pas une simple conclusion: elle sert de cahier de revision. Un eleve doit l''utiliser apres les lecons principales pour verifier la comprehension, corriger les lacunes et se preparer a repondre comme au GCE.
+
+### Carte de maitrise
+
+| No | Domaine | Ce qu''il faut savoir faire |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+Pour chaque domaine, l''eleve doit produire trois preuves: une definition exacte, un exemple precis et une reponse structuree. Si une preuve manque, la notion n''est pas encore maitrisee. Il faut alors relire la lecon, refaire un exemple et corriger les erreurs dans un cahier.
+
+### Lecon de methode: comprendre avant de memoriser
+
+La memorisation seule ne suffit pas. Une bonne preparation commence par les mots-cles. L''eleve doit d''abord ecrire les mots importants du chapitre, puis expliquer chaque mot en une phrase courte. Ensuite, il doit construire un exemple camerounais: une salle de classe, un marche, une ferme, une entreprise, un hopital, une mairie, une banque, une famille ou une situation de transport. L''exemple rend la reponse concrete et aide a eviter les phrases vagues.
+
+Apres l''exemple, l''eleve doit repondre a une question. Une reponse courte doit etre directe. Une reponse structuree doit avoir un ordre clair: idee principale, explication, exemple, conclusion courte. Une question qui demande de comparer doit montrer les ressemblances et les differences. Une question qui demande d''evaluer doit presenter les forces, les limites et un jugement final.
+
+### Exercices de consolidation
+
+| No | Question | Travail attendu |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction personnelle
+
+Apres chaque exercice, l''eleve doit corriger en quatre etapes. D''abord, verifier si le verbe de consigne a ete respecte. Ensuite, verifier si les mots techniques sont exacts. Puis, ajouter un exemple lorsque la reponse est trop generale. Enfin, reecrire la reponse proprement. La progression vient de la correction, pas seulement du nombre de questions traitees.
+
+### Revision espacee
+
+Jour 1: lire la lecon et faire les definitions. Jour 2: refaire les exemples sans regarder. Jour 4: traiter deux questions en temps limite. Jour 7: corriger les erreurs et construire une fiche courte. Jour 14: faire une mini simulation. Cette methode evite l''oubli rapide et rend la preparation plus solide.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D''abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l''ecole, de la famille, d''une ville camerounaise, d''un marche, d''un centre de sante ou d''une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l''ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l''effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l''examen
+
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.
 ## Renforcement approfondi du programme
 
 Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours de Français — Éducation Bilingue Spéciale, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
@@ -4471,6 +6493,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | number, algebra, functions and graphs | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | geometry, trigonometry, mensuration and transformations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | statistics, probability and commercial arithmetic | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | problem solving, proof, estimation and calculator discipline | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Solve simultaneous equations and check the result by substitution. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Use sine rule or cosine rule in a triangle problem. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Calculate mean, median, mode and interpret a cumulative frequency graph. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Solve a compound interest problem in FCFA and explain each step. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -4630,6 +6745,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | number, algebra, functions and graphs | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | geometry, trigonometry, mensuration and transformations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | statistics, probability and commercial arithmetic | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | problem solving, proof, estimation and calculator discipline | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Solve simultaneous equations and check the result by substitution. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Use sine rule or cosine rule in a triangle problem. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Calculate mean, median, mode and interpret a cumulative frequency graph. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Solve a compound interest problem in FCFA and explain each step. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -4748,6 +6956,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | number, algebra, functions and graphs | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | geometry, trigonometry, mensuration and transformations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | statistics, probability and commercial arithmetic | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | problem solving, proof, estimation and calculator discipline | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Solve simultaneous equations and check the result by substitution. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Use sine rule or cosine rule in a triangle problem. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Calculate mean, median, mode and interpret a cumulative frequency graph. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Solve a compound interest problem in FCFA and explain each step. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -4909,6 +7210,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | number, algebra, functions and graphs | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | geometry, trigonometry, mensuration and transformations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | statistics, probability and commercial arithmetic | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | problem solving, proof, estimation and calculator discipline | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Solve simultaneous equations and check the result by substitution. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Use sine rule or cosine rule in a triangle problem. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Calculate mean, median, mode and interpret a cumulative frequency graph. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Solve a compound interest problem in FCFA and explain each step. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Mathematics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- number, algebra, functions and graphs
+- geometry, trigonometry, mensuration and transformations
+- statistics, probability and commercial arithmetic
+- problem solving, proof, estimation and calculator discipline
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -5049,6 +7443,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Physics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- measurement, mechanics, forces, energy and pressure
+- thermal physics, waves, light and sound
+- electricity, magnetism, electronics and electromagnetism
+- atomic physics, radioactivity, practical skills and uncertainty
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | measurement, mechanics, forces, energy and pressure | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | thermal physics, waves, light and sound | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | electricity, magnetism, electronics and electromagnetism | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | atomic physics, radioactivity, practical skills and uncertainty | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Calculate acceleration from a velocity-time graph. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how a vacuum flask reduces heat transfer. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Solve a series-parallel circuit with current and potential difference. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | State precautions for an Ohm''s law practical. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Physics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- measurement, mechanics, forces, energy and pressure
+- thermal physics, waves, light and sound
+- electricity, magnetism, electronics and electromagnetism
+- atomic physics, radioactivity, practical skills and uncertainty
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Physics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -5241,6 +7728,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | atomic structure, bonding, periodicity and chemical formulae | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | mole calculations, equations, gases and solution concentration | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | acids, bases, salts, redox, electrolysis and energetics | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | metals, non-metals, organic chemistry and qualitative analysis | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Balance an ionic equation and identify the oxidising agent. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Calculate the mass of salt formed from a known volume and concentration of acid. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Describe a safe preparation of a soluble salt. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Use test results to identify two cations and one anion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Chemistry, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- atomic structure, bonding, periodicity and chemical formulae
+- mole calculations, equations, gases and solution concentration
+- acids, bases, salts, redox, electrolysis and energetics
+- metals, non-metals, organic chemistry and qualitative analysis
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Chemistry, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- atomic structure, bonding, periodicity and chemical formulae
+- mole calculations, equations, gases and solution concentration
+- acids, bases, salts, redox, electrolysis and energetics
+- metals, non-metals, organic chemistry and qualitative analysis
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -5402,6 +7982,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | cell structure, biological molecules and enzymes | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | nutrition, transport, respiration, excretion and coordination | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | reproduction, genetics, evolution and variation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | ecology, disease, immunity and practical biological investigations | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Draw and label a plant cell and state the function of each labelled part. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Explain how villi are adapted for absorption. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Use a genetic cross to predict offspring ratios. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Design a fair test to investigate the effect of temperature on enzyme action. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Biology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- cell structure, biological molecules and enzymes
+- nutrition, transport, respiration, excretion and coordination
+- reproduction, genetics, evolution and variation
+- ecology, disease, immunity and practical biological investigations
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Biology, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- cell structure, biological molecules and enzymes
+- nutrition, transport, respiration, excretion and coordination
+- reproduction, genetics, evolution and variation
+- ecology, disease, immunity and practical biological investigations
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -5540,6 +8213,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Economics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- scarcity, opportunity cost, demand, supply and markets
+- production, costs, firms, market structures and labour
+- national income, money, banking, inflation and unemployment
+- public finance, international trade and Cameroon development issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | scarcity, opportunity cost, demand, supply and markets | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | production, costs, firms, market structures and labour | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | national income, money, banking, inflation and unemployment | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | public finance, international trade and Cameroon development issues | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Use a demand-and-supply diagram to explain a rise in cocoa prices. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Distinguish fixed cost from variable cost with examples. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Explain four causes of inflation in an economy. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Evaluate two policies that can reduce youth unemployment. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Economics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- scarcity, opportunity cost, demand, supply and markets
+- production, costs, firms, market structures and labour
+- national income, money, banking, inflation and unemployment
+- public finance, international trade and Cameroon development issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Economics, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -5722,6 +8488,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | double entry bookkeeping and ledger balancing | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | trial balance, suspense accounts, control accounts and error correction | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | final accounts for sole traders, clubs, partnerships and companies | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | depreciation, bad debts, provisions, ratios and cash-flow interpretation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Prepare a purchases ledger control account and explain two causes of disagreement. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Correct four bookkeeping errors and show the suspense account balance. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Prepare an income statement and statement of financial position from adjusted trial balance data. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Use gross-profit margin, current ratio and return on capital employed to advise a trader. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Accounting, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- double entry bookkeeping and ledger balancing
+- trial balance, suspense accounts, control accounts and error correction
+- final accounts for sole traders, clubs, partnerships and companies
+- depreciation, bad debts, provisions, ratios and cash-flow interpretation
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Accounting, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- double entry bookkeeping and ledger balancing
+- trial balance, suspense accounts, control accounts and error correction
+- final accounts for sole traders, clubs, partnerships and companies
+- depreciation, bad debts, provisions, ratios and cash-flow interpretation
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -5878,6 +8737,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Literature, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Literature, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -5986,6 +8938,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Language, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Language, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving English Language, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -6119,6 +9164,87 @@ Pour les questions objectives, lis d''abord l''enonce, souligne les mots importa
 ### Guide de correction
 
 Une bonne reponse utilise le vocabulaire exact, suit une organisation claire, donne des exemples pertinents et repond directement a la question. Si la reponse contient des calculs, il faut montrer la formule, la substitution, les etapes, la reponse et l''unite. Si la reponse est redigee, il faut une idee claire, une explication et une conclusion courte.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours de Français — Advanced Level, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D''abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l''ecole, de la famille, d''une ville camerounaise, d''un marche, d''un centre de sante ou d''une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l''ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l''effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l''examen
+
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.
+## Cahier complet de maitrise GCE
+
+Cette partie transforme le cours en parcours de travail. Elle n''est pas une simple conclusion: elle sert de cahier de revision. Un eleve doit l''utiliser apres les lecons principales pour verifier la comprehension, corriger les lacunes et se preparer a repondre comme au GCE.
+
+### Carte de maitrise
+
+| No | Domaine | Ce qu''il faut savoir faire |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+Pour chaque domaine, l''eleve doit produire trois preuves: une definition exacte, un exemple precis et une reponse structuree. Si une preuve manque, la notion n''est pas encore maitrisee. Il faut alors relire la lecon, refaire un exemple et corriger les erreurs dans un cahier.
+
+### Lecon de methode: comprendre avant de memoriser
+
+La memorisation seule ne suffit pas. Une bonne preparation commence par les mots-cles. L''eleve doit d''abord ecrire les mots importants du chapitre, puis expliquer chaque mot en une phrase courte. Ensuite, il doit construire un exemple camerounais: une salle de classe, un marche, une ferme, une entreprise, un hopital, une mairie, une banque, une famille ou une situation de transport. L''exemple rend la reponse concrete et aide a eviter les phrases vagues.
+
+Apres l''exemple, l''eleve doit repondre a une question. Une reponse courte doit etre directe. Une reponse structuree doit avoir un ordre clair: idee principale, explication, exemple, conclusion courte. Une question qui demande de comparer doit montrer les ressemblances et les differences. Une question qui demande d''evaluer doit presenter les forces, les limites et un jugement final.
+
+### Exercices de consolidation
+
+| No | Question | Travail attendu |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction personnelle
+
+Apres chaque exercice, l''eleve doit corriger en quatre etapes. D''abord, verifier si le verbe de consigne a ete respecte. Ensuite, verifier si les mots techniques sont exacts. Puis, ajouter un exemple lorsque la reponse est trop generale. Enfin, reecrire la reponse proprement. La progression vient de la correction, pas seulement du nombre de questions traitees.
+
+### Revision espacee
+
+Jour 1: lire la lecon et faire les definitions. Jour 2: refaire les exemples sans regarder. Jour 4: traiter deux questions en temps limite. Jour 7: corriger les erreurs et construire une fiche courte. Jour 14: faire une mini simulation. Cette methode evite l''oubli rapide et rend la preparation plus solide.
+## Renforcement approfondi du programme
+
+Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours de Français — Advanced Level, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+Pour chaque axe, fais trois actions. D''abord, ecris les definitions essentielles. Ensuite, construis un exemple personnel tire de l''ecole, de la famille, d''une ville camerounaise, d''un marche, d''un centre de sante ou d''une situation administrative. Enfin, reponds a une question en temps limite. Cette methode permet de verifier que la notion est comprise et pas seulement lue.
+
+### Methode Paper 1
+
+Les questions objectives testent souvent les details. Cherche le mot qui change tout: sauf, incorrect, meilleur, principal, cause, consequence, toujours, jamais. Si deux reponses semblent proches, compare-les avec la definition du cours. Une bonne reponse doit etre totalement vraie et directement liee a la question.
+
+### Methode Paper 2
+
+Les questions structurees demandent de l''ordre. Commence par identifier le verbe de consigne: definir, expliquer, comparer, calculer, decrire, evaluer. Ensuite, choisis le format. Une definition doit etre courte et exacte. Une explication doit montrer la cause et l''effet. Une comparaison doit presenter les ressemblances et les differences. Une evaluation doit donner les avantages, les limites et une conclusion.
+
+### Travail final avant l''examen
+
+Avant l''examen, l''eleve doit etre capable de presenter chaque unite en cinq minutes. Si une unite ne peut pas etre expliquee sans lire le cours, elle n''est pas encore maitrisee. Reviens alors aux exemples, refais les questions et corrige chaque erreur dans un cahier de progression.
 ## Renforcement approfondi du programme
 
 Cette section complete le cours pour eviter qu''il ressemble a une simple introduction. Avant de quitter Cours de Français — Advanced Level, GCE Cameroun, l''eleve doit reviser ces axes en profondeur:
@@ -6295,6 +9421,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | Cameroon before, during and after colonial rule | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | African resistance, nationalism and independence movements | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | world wars, diplomacy, international organisations and decolonisation | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | historical source analysis, chronology and essay argument | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Explain three causes of German annexation of Cameroon. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Assess the role of nationalism in African independence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Use a source extract to identify bias and reliability. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Write an essay introduction with a clear historical argument. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving History, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- Cameroon before, during and after colonial rule
+- African resistance, nationalism and independence movements
+- world wars, diplomacy, international organisations and decolonisation
+- historical source analysis, chronology and essay argument
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving History, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- Cameroon before, during and after colonial rule
+- African resistance, nationalism and independence movements
+- world wars, diplomacy, international organisations and decolonisation
+- historical source analysis, chronology and essay argument
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -6421,6 +9640,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Computer Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- data representation, logic, algorithms and programming
+- computer architecture, operating systems and utility software
+- databases, networks, web systems and cybersecurity
+- systems development, testing, documentation and ethical issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | data representation, logic, algorithms and programming | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | computer architecture, operating systems and utility software | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | databases, networks, web systems and cybersecurity | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | systems development, testing, documentation and ethical issues | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Write pseudocode to find the largest value in a list. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Convert a denary number to binary and hexadecimal. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Design a simple relational table structure for a school library. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain three controls that protect learner accounts from unauthorised access. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Computer Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- data representation, logic, algorithms and programming
+- computer architecture, operating systems and utility software
+- databases, networks, web systems and cybersecurity
+- systems development, testing, documentation and ethical issues
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Computer Science, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
@@ -6590,6 +9902,99 @@ Paper 2 rewards structure. A strong answer normally has four parts: the principl
 
 ### Advanced Level readiness check
 
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Philosophy, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Philosophy, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
 A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.', 'course', 'course')
 on conflict (id) do update set topic_id = excluded.topic_id, subject = excluded.subject, title = excluded.title, language = excluded.language, level = excluded.level, class_levels = excluded.class_levels, series = excluded.series, status = excluded.status, markdown_content = excluded.markdown_content, content_kind = excluded.content_kind, doc_type = excluded.doc_type, updated_at = now();
 
@@ -6703,6 +10108,99 @@ Use these questions after completing the course. They are original StudySpark pr
 Strong answers define terms accurately, use correct subject vocabulary, show logical steps and finish with the exact demand of the question. For calculations, marks are normally earned for the formula, substitution, working, answer and unit. For essay subjects, marks are earned for relevant points, accurate evidence, explanation, balance and conclusion. For practical or application questions, marks come from procedure, observation, precaution, interpretation and safety where relevant.
 
 When checking your own work, use this simple rule: if another learner cannot follow your answer without you explaining it aloud, the written answer is not yet ready for the GCE. Rewrite it more clearly, add the missing step, and practise again.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Food Science and Nutrition, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
+## Complete GCE Mastery Workbook
+
+This section turns the course into a working study pack. It is not extra decoration. It is the part a serious learner uses after reading the lessons to test understanding, repair weak areas, and practise writing answers in the way Cameroon GCE examiners expect.
+
+### Mastery map
+
+| No | Syllabus area | What you must be able to do |
+| --- | --- | --- |
+| 1 | core definitions, vocabulary and syllabus concepts | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 2 | worked examples that show how marks are awarded | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 3 | Cameroon-based applications and realistic examination scenarios | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+| 4 | revision, self-testing and final-paper technique | Explain the concept, give one Cameroon example, answer one short question, and correct one mistake. |
+
+For each area, produce three proofs of mastery. First, write the key definitions without looking. Second, give one concrete Cameroon example. Third, answer one short or structured question and correct it carefully. If one proof is missing, the topic is not finished. Go back to the lesson, redo the example, and write the correction before moving on.
+
+### Lesson method: from reading to exam marks
+
+A learner does not earn GCE marks by merely recognizing a topic. Marks come from accurate recall, correct method, relevant examples, and clear written structure. Start every unit by listing the key words. Then explain each word in one sentence. After that, connect the idea to a realistic setting: a school laboratory, a farm, a local market, a health centre, a council office, a transport business, a bank, a weather station, a family budget, or a community problem.
+
+When answering, obey the command word. **State** means give a short answer. **Define** means give the exact meaning. **Describe** means give features in order. **Explain** means show why or how. **Compare** means give similarities and differences. **Evaluate** means give strengths, weaknesses, and a judgement. Many learners lose marks because they know the topic but answer the wrong command.
+
+### Worked-answer discipline
+
+For calculation subjects, always use the same answer frame: formula, substitution, working, answer, unit. For science subjects, include observations, equations, conditions, safety and conclusion where relevant. For social science and arts subjects, use paragraphs: point, explanation, evidence, link to question. For language subjects, plan first, write clean sentences, and revise grammar before final submission.
+
+### Consolidation tasks
+
+| No | Practice task | What a complete answer should contain |
+| --- | --- | --- |
+| 1 | Define five key terms from the topic and use each in a sentence. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 2 | Answer one structured question with introduction, development and conclusion. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 3 | Create a revision card for each unit in the course. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+| 4 | Explain one Cameroon example that connects the topic to real life. | Write a full answer, underline the command word, then mark your answer against the guide below. |
+
+### Correction clinic
+
+After each task, mark your answer in four passes. Pass one: check whether you answered the exact command word. Pass two: check the technical vocabulary, formula, spelling, diagram labels, or dates. Pass three: check whether the answer has a Cameroon example where useful. Pass four: rewrite the answer more cleanly. This is how weak answers become exam-ready answers.
+
+### Paper 1 practice routine
+
+Paper 1 rewards fast and careful thinking. For ten minutes, practise only objective questions from one unit. For each wrong answer, write why your choice was wrong and why the correct option is better. The wrong options often reveal the actual weakness: a confused definition, a wrong formula, a missed unit, a reversed cause-and-effect relationship, or a careless reading of the word "not" or "except".
+
+### Paper 2 practice routine
+
+Paper 2 rewards organized writing. Choose one structured question and spend three minutes planning before writing. Underline the command word, list the points, then write the answer. When finished, check whether every sentence earns marks. Remove vague lines such as "it is good" or "it helps people" unless you explain exactly how.
+
+### Spaced revision plan
+
+Day 1: read the unit and write definitions. Day 2: redo examples without looking. Day 4: answer two questions under time pressure. Day 7: correct errors and make a compact revision card. Day 14: attempt a mixed mini-test. Day 21: explain the whole unit aloud in five minutes. If the explanation breaks, that is the next topic to revise.
+## Deep Syllabus Reinforcement
+
+This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Food Science and Nutrition, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
+
+- core definitions, vocabulary and syllabus concepts
+- worked examples that show how marks are awarded
+- Cameroon-based applications and realistic examination scenarios
+- revision, self-testing and final-paper technique
+
+For each strand, use the three-layer method. First, write the definitions and key facts from memory. Second, solve or explain one worked example slowly, showing every step. Third, answer a fresh GCE-style question under time pressure. This prevents passive reading. It also shows the learner which ideas are truly understood and which ideas only look familiar.
+
+### Paper 1 mastery
+
+Paper 1 rewards speed, accuracy and careful reading. Do not begin by guessing. Read the question stem, identify the command word, then predict the answer before checking the options. If the question asks for an exception, mark it immediately. If the options contain numbers, estimate first so that impossible answers are eliminated. If the options contain definitions, compare each one with the exact wording in the course.
+
+### Paper 2 mastery
+
+Paper 2 rewards structure. A strong answer normally has four parts: the principle, the method, the working or explanation, and the final statement. In calculation subjects, always write formula, substitution, answer and unit. In essay subjects, use a clear paragraph for each point and connect evidence to the question. In practical subjects, include precautions, sources of error and ways to improve reliability.
+
+### Advanced Level readiness check
+
+A learner is ready to move from this course to full papers when they can explain every unit without reading, answer mixed questions without choosing the topic first, correct their own mistakes, and keep their working neat enough for another person to follow. If any of those checks fail, the course is not finished. Return to the weak unit and repeat the practice cycle.
 ## Deep Syllabus Reinforcement
 
 This reinforcement section makes the course closer to a serious GCE study pack. Before leaving Food Science and Nutrition, a learner should revisit the major syllabus strands below and prove mastery with examples, corrections and timed answers.
