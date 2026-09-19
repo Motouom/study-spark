@@ -80,6 +80,7 @@ export const Route = createRootRoute({
       { name: "author", content: "StudySpark" },
       { name: "application-name", content: "StudySpark" },
       { name: "apple-mobile-web-app-title", content: "StudySpark" },
+      { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       { name: "theme-color", media: "(prefers-color-scheme: light)", content: "#fdf8f0" },
