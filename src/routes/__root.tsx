@@ -1,12 +1,17 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
+import {
+  DEFAULT_SEO_DESCRIPTION,
+  DEFAULT_SEO_TITLE,
+  OG_IMAGE_URL,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 import appCss from "../styles.css?url";
 
-const siteUrl = "https://study-spark-237.vercel.app";
-const siteTitle = "StudySpark - Cameroon GCE practice and progress";
-const siteDescription =
-  "StudySpark helps Cameroon students practise protected GCE structural papers by class, series, subject, and topic with progress tracking and AI-guided revision.";
+const siteTitle = DEFAULT_SEO_TITLE;
+const siteDescription = DEFAULT_SEO_DESCRIPTION;
 
 function NotFoundComponent() {
   return (
@@ -77,8 +82,8 @@ export const Route = createRootRoute({
           "StudySpark, Cameroon GCE, Cameroon past questions, GCE Advanced Level, GCE Ordinary Level, Cameroon secondary school, structural papers, Form 3, Form 4, Form 5, Lower Sixth, Upper Sixth, revision app Cameroon",
       },
       { name: "author", content: "StudySpark" },
-      { name: "application-name", content: "StudySpark" },
-      { name: "apple-mobile-web-app-title", content: "StudySpark" },
+      { name: "application-name", content: SITE_NAME },
+      { name: "apple-mobile-web-app-title", content: SITE_NAME },
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
@@ -89,16 +94,20 @@ export const Route = createRootRoute({
       { property: "og:title", content: siteTitle },
       { property: "og:description", content: siteDescription },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: siteUrl },
-      { property: "og:site_name", content: "StudySpark" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:site_name", content: SITE_NAME },
       { property: "og:locale", content: "en_CM" },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "StudySpark Cameroon GCE revision app preview" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: siteTitle },
       { name: "twitter:description", content: siteDescription },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "canonical", href: siteUrl },
       { rel: "manifest", href: "/site.webmanifest" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/icons/apple-touch-icon.png" },
       {

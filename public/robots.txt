@@ -8,10 +8,18 @@ Disallow: /library
 Disallow: /progress
 Disallow: /learning-path
 Disallow: /courses
+Disallow: /cheatsheets
+Disallow: /course/
 Disallow: /textbooks
 Disallow: /achievements
 Disallow: /leaderboard
 Disallow: /settings
 Disallow: /notifications
+Disallow: /onboarding
+Disallow: /quiz
+Disallow: /search
+Disallow: /streak
+Disallow: /support
+Disallow: /signin
 
 Sitemap: https://study-spark-237.vercel.app/sitemap.xml

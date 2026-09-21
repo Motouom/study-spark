@@ -15,23 +15,38 @@ import {
   Lock,
 } from "lucide-react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
+import { canonicalUrl, educationalAppSchema, OG_IMAGE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "StudySpark - Cameroon GCE practice app" },
+      { title: "StudySpark - Cameroon GCE revision, past questions, and progress" },
       {
         name: "description",
         content:
-          "Practise Cameroon GCE structural papers in-app, track your progress, and follow a focused revision path for your class, series, and subjects.",
+          "Prepare for Cameroon GCE O Level and A Level with protected structural papers, Form 3 to Upper Sixth subjects, topic courses, cheatsheets, and progress tracking.",
       },
-      { property: "og:title", content: "StudySpark - Cameroon GCE practice app" },
+      {
+        property: "og:title",
+        content: "StudySpark - Cameroon GCE revision for O Level and A Level",
+      },
       {
         property: "og:description",
         content:
-          "Protected GCE structural papers, class-based access, progress tracking, and AI-guided revision for Cameroon students.",
+          "Protected Cameroon GCE papers, topic revision, cheatsheets, AI-guided learning paths, and progress tracking for Cameroonian students.",
       },
+      { property: "og:url", content: canonicalUrl("/") },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:alt", content: "StudySpark Cameroon GCE revision dashboard" },
+      { name: "twitter:title", content: "StudySpark - Cameroon GCE revision app" },
+      {
+        name: "twitter:description",
+        content:
+          "Practise GCE O Level and A Level papers by class, series, subject, and topic with StudySpark.",
+      },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
+    links: [{ rel: "canonical", href: canonicalUrl("/") }],
   }),
   component: Landing,
 });
@@ -84,15 +99,15 @@ function Hero() {
             className="mb-6 gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs"
           >
             <Sparkles className="h-3 w-3 text-accent" />
-            Cameroon syllabus. Protected questions. No downloads.
+            Cameroon GCE O Level and A Level revision. Protected questions. No downloads.
           </Badge>
           <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-foreground md:text-7xl">
-            The study app that makes you{" "}
+            Cameroon GCE revision that makes you{" "}
             <span className="italic text-muted-foreground">want to come back.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-            Professionally formatted in-app questions, guided topic practice, and progress that
-            follows your class and series.
+            Study O Level and A Level structural papers, Form 3 to Upper Sixth topics, exam
+            cheatsheets, and guided progress built for Cameroonian learners.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-6 text-base">
@@ -120,7 +135,9 @@ function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-destructive/40" />
               <span className="h-2.5 w-2.5 rounded-full bg-warning/60" />
               <span className="h-2.5 w-2.5 rounded-full bg-success/60" />
-              <span className="ml-3 text-xs text-muted-foreground">studyspark.cm/dashboard</span>
+              <span className="ml-3 text-xs text-muted-foreground">
+                study-spark-237.vercel.app/dashboard
+              </span>
             </div>
             <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-3">
               <PreviewStat icon={<Flame className="h-4 w-4" />} label="Day streak" value="0" />
@@ -184,17 +201,17 @@ function Features() {
     {
       icon: <BookOpen className="h-5 w-5" />,
       title: "Class-based access",
-      desc: "Form 3 to Upper Sixth students see only the subjects and topics allowed for their class and series.",
+      desc: "Form 3, Form 4, Form 5, Lower Sixth, and Upper Sixth students see subjects and topics that match their class, series, and language.",
     },
     {
       icon: <Sparkles className="h-5 w-5" />,
       title: "Free preview papers",
-      desc: "Learners can try selected protected papers before upgrading to unlimited premium access.",
+      desc: "Try selected Cameroon GCE-style protected papers before upgrading to unlimited premium access.",
     },
     {
       icon: <LineChart className="h-5 w-5" />,
       title: "Progress that motivates",
-      desc: "See exactly which topics you're mastering and what to study next.",
+      desc: "Track passed and failed questions, weak topics, reading sessions, and the study areas to attack next.",
     },
     {
       icon: <Flame className="h-5 w-5" />,
@@ -204,7 +221,7 @@ function Features() {
     {
       icon: <Lock className="h-5 w-5" />,
       title: "Protected delivery",
-      desc: "Questions are opened in-app, one session at a time, with no download or PDF export flow.",
+      desc: "Past-question style papers, topic courses, and cheatsheets open in-app with no download or PDF export flow.",
     },
     {
       icon: <ShieldCheck className="h-5 w-5" />,
@@ -221,6 +238,11 @@ function Features() {
             Everything you need.{" "}
             <span className="italic text-muted-foreground">Nothing you don't.</span>
           </h2>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Built around Cameroon GCE revision for Mathematics, Further Mathematics, Physics,
+            Chemistry, Biology, ICT, Computer Science, Food and Nutrition, Agricultural Science,
+            Geography, History, English, French, Religious Studies, and more.
+          </p>
         </div>
         <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
@@ -243,17 +265,17 @@ function HowItWorks() {
     {
       n: "01",
       title: "Set your profile",
-      desc: "Choose language, level, class, series, and subjects.",
+      desc: "Choose English or French, class, series, and subjects for your Cameroon GCE path.",
     },
     {
       n: "02",
       title: "Practice by topic",
-      desc: "Open professionally formatted structural papers inside the app.",
+      desc: "Open topic-based courses, cheatsheets, and professionally formatted structural papers inside the app.",
     },
     {
       n: "03",
       title: "Track and improve",
-      desc: "Watch your scores climb. Get nudged toward your weak topics. Keep your streak alive.",
+      desc: "Mark questions passed or failed, review weak topics, and keep your streak alive.",
     },
   ];
   return (
@@ -266,8 +288,9 @@ function HowItWorks() {
               From <span className="italic">overwhelmed</span> to ready, in three steps.
             </h2>
             <p className="mt-5 max-w-md text-muted-foreground">
-              Most students don't fail because they aren't smart. They fail because they don't know
-              what to study. StudySpark fixes that.
+              Most students don't fail because they aren't smart. They struggle because they don't
+              know which GCE questions, subjects, and topics deserve attention today. StudySpark
+              fixes that.
             </p>
           </div>
           <div className="space-y-3">
@@ -300,8 +323,8 @@ function Pricing() {
             Start free. Upgrade when you need more.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
-            Free learners can preview selected papers. Premium unlocks protected papers, progress,
-            guided revision, tutoring, and deeper analytics.
+            Free learners can preview selected GCE papers. Premium unlocks protected papers, topic
+            courses, exam cheatsheets, AI-guided revision, and deeper progress analytics.
           </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
@@ -382,7 +405,8 @@ function CTA() {
           Ready to actually <span className="italic text-muted-foreground">enjoy</span> studying?
         </h2>
         <p className="mx-auto mt-5 max-w-lg text-muted-foreground">
-          Join Cameroon students preparing smarter with structured, protected topic practice.
+          Join Cameroonian students preparing smarter for GCE O Level, GCE A Level, Probatoire,
+          Terminale, and subject exams with structured, protected topic practice.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg" className="h-12 px-6">
@@ -433,6 +457,10 @@ function Landing() {
 
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalAppSchema()) }}
+      />
       <Nav />
       <main>
         <Hero />
