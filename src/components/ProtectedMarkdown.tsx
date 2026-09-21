@@ -19,6 +19,7 @@ export function slugifyHeading(value: string) {
 
 const CHEMICAL_FORMULA_PATTERN =
   /\b(?:H|He|Li|Be|B|C|N|O|F|Ne|Na|Mg|Al|Si|P|S|Cl|Ar|K|Ca|Fe|Cu|Zn|Ag|I|Ba|Pb|Mn|Cr|Br|Hg|Au|Sn|Co|Ni|NH4|OH|NO3|SO4|CO3|PO4)(?:\d+)?(?:(?:H|He|Li|Be|B|C|N|O|F|Ne|Na|Mg|Al|Si|P|S|Cl|Ar|K|Ca|Fe|Cu|Zn|Ag|I|Ba|Pb|Mn|Cr|Br|Hg|Au|Sn|Co|Ni|NH4|OH|NO3|SO4|CO3|PO4)(?:\d+)?)+(?:[+-])?\b/g;
+const QUESTION_LABEL_PATTERN = /^(?:question|q)\.?\s*(\d+)\s*[:.)-]?\s*/i;
 
 function renderFormula(value: string) {
   const parts = value.split(/(\d+)/g);
@@ -60,14 +61,61 @@ function formatStudyInline(children: ReactNode): ReactNode {
   });
 }
 
+function plainText(children: ReactNode): string {
+  if (typeof children === "string" || typeof children === "number") return String(children);
+  if (Array.isArray(children)) return children.map(plainText).join("");
+  if (isValidElement<{ children?: ReactNode }>(children)) return plainText(children.props.children);
+  return "";
+}
+
+function splitSimpleQuestionLabel(children: ReactNode) {
+  const splitText = (value: string) => {
+    const match = value.match(QUESTION_LABEL_PATTERN);
+    if (!match) return null;
+    return {
+      questionNumber: Number(match[1]),
+      rest: value.slice(match[0].length).trimStart(),
+    };
+  };
+
+  if (typeof children === "string") {
+    return splitText(children);
+  }
+
+  if (
+    isValidElement<{ children?: ReactNode }>(children) &&
+    (children.type === "strong" || children.type === "em") &&
+    typeof children.props.children === "string"
+  ) {
+    return splitText(children.props.children);
+  }
+
+  const items = Children.toArray(children);
+  if (items.length === 0) return null;
+  const first = splitSimpleQuestionLabel(items[0]);
+  if (!first) return null;
+  return {
+    questionNumber: first.questionNumber,
+    rest: [first.rest, ...items.slice(1).map(plainText)].join("").trimStart(),
+  };
+}
+
+function questionNumberFromChildren(children: ReactNode) {
+  const text = plainText(children).trim();
+  const match = text.match(QUESTION_LABEL_PATTERN);
+  return match ? Number(match[1]) : null;
+}
+
 export default function ProtectedMarkdown({
   document,
   owner,
   userId,
+  renderQuestionControls,
 }: {
   document: CourseDocument;
   owner: string;
   userId: string;
+  renderQuestionControls?: (questionNumber: number) => ReactNode;
 }) {
   const trace = `${owner} · ${userId.slice(0, 8)} · ${document.id.slice(0, 8)} · ${new Date().toLocaleDateString()}`;
   const isCourse = document.contentKind === "course";
@@ -124,41 +172,72 @@ export default function ProtectedMarkdown({
                 {formatStudyInline(children)}
               </h1>
             ),
-            h2: ({ children }) => (
-              <h2
-                id={slugifyHeading(String(children ?? ""))}
-                className={
-                  isCourse
-                    ? "course-unit-heading mb-5 mt-10 flex scroll-mt-24 items-center gap-3 rounded-xl border border-border bg-card/85 px-4 py-3 font-display text-xl font-semibold leading-tight shadow-sm sm:text-2xl"
-                    : "mb-3 mt-8 scroll-mt-24 font-display text-xl font-semibold leading-tight sm:text-2xl"
-                }
-              >
-                {isCourse && (
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                    <BookOpenCheck className="h-4 w-4" />
-                  </span>
-                )}
-                {formatStudyInline(children)}
-              </h2>
-            ),
-            h3: ({ children }) => (
-              <h3
-                id={slugifyHeading(String(children ?? ""))}
-                className={
-                  isCourse
-                    ? "course-lesson-heading mb-3 mt-7 flex scroll-mt-24 items-center gap-2 text-lg font-semibold leading-snug"
-                    : "mb-3 mt-6 scroll-mt-24 text-lg font-semibold leading-snug"
-                }
-              >
-                {isCourse && <ListChecks className="h-4 w-4 text-accent" />}
-                {formatStudyInline(children)}
-              </h3>
-            ),
-            p: ({ children }) => (
-              <p className={isCourse ? "my-4 max-w-5xl leading-8 text-foreground/90" : "my-4 leading-8"}>
-                {formatStudyInline(children)}
-              </p>
-            ),
+            h2: ({ children }) => {
+              const questionNumber = questionNumberFromChildren(children);
+              return (
+                <h2
+                  id={slugifyHeading(String(children ?? ""))}
+                  className={
+                    isCourse
+                      ? "course-unit-heading mb-5 mt-10 flex scroll-mt-24 items-center gap-3 rounded-xl border border-border bg-card/85 px-4 py-3 font-display text-xl font-semibold leading-tight shadow-sm sm:text-2xl"
+                      : "mb-3 mt-8 scroll-mt-24 font-display text-xl font-semibold leading-tight sm:text-2xl"
+                  }
+                >
+                  {isCourse && (
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                      <BookOpenCheck className="h-4 w-4" />
+                    </span>
+                  )}
+                  {questionNumber ? `Q${questionNumber}` : formatStudyInline(children)}
+                  {questionNumber ? renderQuestionControls?.(questionNumber) : null}
+                </h2>
+              );
+            },
+            h3: ({ children }) => {
+              const questionNumber = questionNumberFromChildren(children);
+              return (
+                <h3
+                  id={slugifyHeading(String(children ?? ""))}
+                  className={
+                    isCourse
+                      ? "course-lesson-heading mb-3 mt-7 flex scroll-mt-24 items-center gap-2 text-lg font-semibold leading-snug"
+                      : "mb-3 mt-6 flex scroll-mt-24 flex-wrap items-center gap-2 text-lg font-semibold leading-snug"
+                  }
+                >
+                  {isCourse && <ListChecks className="h-4 w-4 text-accent" />}
+                  {questionNumber ? `Q${questionNumber}` : formatStudyInline(children)}
+                  {questionNumber ? renderQuestionControls?.(questionNumber) : null}
+                </h3>
+              );
+            },
+            p: ({ children }) => {
+              const questionLead = splitSimpleQuestionLabel(children);
+              if (questionLead && renderQuestionControls) {
+                return (
+                  <section className="my-5 rounded-lg border border-border bg-background/45 p-3 sm:p-4">
+                    <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="font-sans text-base font-semibold leading-tight">
+                        Q{questionLead.questionNumber}
+                      </h3>
+                      {renderQuestionControls(questionLead.questionNumber)}
+                    </div>
+                    {questionLead.rest ? (
+                      <p className="my-0 leading-8">{formatStudyInline(questionLead.rest)}</p>
+                    ) : null}
+                  </section>
+                );
+              }
+
+              return (
+                <p
+                  className={
+                    isCourse ? "my-4 max-w-5xl leading-8 text-foreground/90" : "my-4 leading-8"
+                  }
+                >
+                  {formatStudyInline(children)}
+                </p>
+              );
+            },
             strong: ({ children }) => (
               <strong className="font-semibold">{formatStudyInline(children)}</strong>
             ),
