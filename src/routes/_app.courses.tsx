@@ -261,13 +261,17 @@ function CoursesPage() {
                         onClick={() => setSubject(item.name)}
                         className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                       >
-                        <div className="flex items-start justify-between gap-3">
+                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
                           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
                             <BookOpen className="h-5 w-5" />
                           </div>
-                          <Badge variant="secondary">{item.subjectMastery}% mastery</Badge>
+                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                            {item.subjectMastery}% mastery
+                          </Badge>
                         </div>
-                        <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
+                        <h3 className="mt-4 break-words text-base font-medium leading-snug">
+                          {item.name}
+                        </h3>
                         <p className="mt-2 text-xs text-muted-foreground">
                           {item.topics} topics · {item.courses} course
                           {item.courses === 1 ? "" : "s"}
@@ -412,7 +416,10 @@ function TopicCard({ topic }: { topic: CourseTopic }) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
           <ListChecks className="h-5 w-5" />
         </div>
-        <Badge variant={topic.stats.bestDepth > 0 ? "default" : "secondary"}>
+        <Badge
+          variant={topic.stats.bestDepth > 0 ? "default" : "secondary"}
+          className="shrink-0 whitespace-nowrap"
+        >
           {topic.stats.bestDepth > 0 ? `${topic.stats.bestDepth}% read` : "Topic"}
         </Badge>
       </div>

@@ -104,13 +104,15 @@ function CheatsheetsPage() {
                         onClick={() => setSubject(item.name)}
                         className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
                             <BookMarked className="h-5 w-5" />
                           </div>
-                          <Badge variant="secondary">{item.total} topics</Badge>
+                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                            {item.total} topics
+                          </Badge>
                         </div>
-                        <h3 className="mt-4 min-w-0 truncate text-base font-medium">
+                        <h3 className="mt-4 min-w-0 break-words text-base font-medium leading-snug">
                           {item.name} cheatsheets
                         </h3>
                         <p className="mt-2 text-xs text-muted-foreground">
@@ -231,7 +233,10 @@ function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
           <FileText className="h-5 w-5" />
         </div>
-        <Badge variant={sheet.isLocked ? "outline" : "secondary"}>
+        <Badge
+          variant={sheet.isLocked ? "outline" : "secondary"}
+          className="shrink-0 whitespace-nowrap"
+        >
           {sheet.isLocked ? "Premium" : "Topic"}
         </Badge>
       </div>
