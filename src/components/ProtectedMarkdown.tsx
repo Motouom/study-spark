@@ -20,6 +20,22 @@ export function slugifyHeading(value: string) {
 const CHEMICAL_FORMULA_PATTERN =
   /\b(?:H|He|Li|Be|B|C|N|O|F|Ne|Na|Mg|Al|Si|P|S|Cl|Ar|K|Ca|Fe|Cu|Zn|Ag|I|Ba|Pb|Mn|Cr|Br|Hg|Au|Sn|Co|Ni|NH4|OH|NO3|SO4|CO3|PO4)(?:\d+)?(?:(?:H|He|Li|Be|B|C|N|O|F|Ne|Na|Mg|Al|Si|P|S|Cl|Ar|K|Ca|Fe|Cu|Zn|Ag|I|Ba|Pb|Mn|Cr|Br|Hg|Au|Sn|Co|Ni|NH4|OH|NO3|SO4|CO3|PO4)(?:\d+)?)+(?:[+-])?\b/g;
 const QUESTION_LABEL_PATTERN = /^(?:question|q)\.?\s*(\d+)\s*[:.)-]?\s*/i;
+const QUESTION_LINE_PATTERN =
+  /^(\s*)(?:#{1,6}\s*)?(?:[*_]{1,3})?(?:question|q)\.?\s*(\d+)\s*(?:[:.)-])?(?:[*_]{1,3})?\s*(.*)$/i;
+
+function normalizeQuestionHeadings(markdown: string) {
+  return markdown
+    .split("\n")
+    .map((line) => {
+      const match = line.match(QUESTION_LINE_PATTERN);
+      if (!match) return line;
+
+      const [, indent, questionNumber, rest] = match;
+      const normalizedHeading = `${indent}### Q${Number(questionNumber)}`;
+      return rest.trim() ? `${normalizedHeading}\n${indent}${rest.trimStart()}` : normalizedHeading;
+    })
+    .join("\n");
+}
 
 function renderFormula(value: string) {
   const parts = value.split(/(\d+)/g);
@@ -126,6 +142,9 @@ export default function ProtectedMarkdown({
   const trace = `${owner} · ${userId.slice(0, 8)} · ${document.id.slice(0, 8)} · ${new Date().toLocaleDateString()}`;
   const isCourse = document.contentKind === "course";
   const isCheatsheet = document.contentKind === "cheatsheet";
+  const markdownContent = renderQuestionControls
+    ? normalizeQuestionHeadings(document.markdownContent)
+    : document.markdownContent;
   const markdownClass = isCourse
     ? "protected-markdown course-markdown relative font-sans text-[0.95rem] leading-7 sm:text-base"
     : isCheatsheet
@@ -367,7 +386,7 @@ export default function ProtectedMarkdown({
             ),
           }}
         >
-          {document.markdownContent}
+          {markdownContent}
         </ReactMarkdown>
       </div>
     </article>
