@@ -167,11 +167,16 @@ export default function ProtectedMarkdown({
       <div
         aria-hidden="true"
         data-trace={trace}
-        className="pointer-events-none absolute inset-0 grid rotate-[-18deg] select-none place-items-center overflow-hidden opacity-[0.045]"
+        className="pointer-events-none absolute inset-[-12%] grid rotate-[-18deg] select-none grid-cols-2 place-items-center gap-10 overflow-hidden opacity-[0.105] sm:grid-cols-3 md:gap-14"
       >
-        <span className="whitespace-nowrap text-xl font-semibold text-foreground sm:text-3xl">
-          StudySpark
-        </span>
+        {Array.from({ length: 12 }).map((_, index) => (
+          <span
+            key={index}
+            className="whitespace-nowrap text-2xl font-semibold tracking-normal text-foreground sm:text-4xl"
+          >
+            StudySpark
+          </span>
+        ))}
       </div>
       <div className="relative mb-6 flex flex-wrap items-center gap-2">
         <Badge variant="secondary">{document.subject}</Badge>
