@@ -6,23 +6,35 @@ import { Check, Sparkles, X, ArrowLeft, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { supabase } from "@/lib/supabase";
+import { canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — StudySpark" },
+      { title: "StudySpark Pricing - Cameroon GCE premium revision" },
       {
         name: "description",
         content:
-          "StudySpark pricing for Cameroon students: preview selected GCE papers free, then upgrade for protected papers, AI learning paths, courses, cheatsheets, and progress analytics.",
+          "StudySpark pricing for Cameroonian learners: preview selected GCE papers free, then upgrade for protected O Level and A Level papers, topic courses, cheatsheets, AI learning paths, and progress analytics.",
       },
-      { property: "og:title", content: "StudySpark pricing for Cameroon students" },
+      { property: "og:title", content: "StudySpark pricing for Cameroon GCE students" },
       {
         property: "og:description",
         content:
-          "Start free and upgrade when you need unlimited protected GCE papers and guided revision.",
+          "Start free and upgrade for unlimited protected GCE papers, topic courses, exam cheatsheets, and guided revision.",
       },
+      { property: "og:url", content: canonicalUrl("/pricing") },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:alt", content: "StudySpark premium pricing for Cameroon students" },
+      { name: "twitter:title", content: "StudySpark Pricing - Cameroon GCE Premium" },
+      {
+        name: "twitter:description",
+        content:
+          "Free preview access, then FCFA pricing for protected GCE papers, courses, cheatsheets, and progress tools.",
+      },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
+    links: [{ rel: "canonical", href: canonicalUrl("/pricing") }],
   }),
   component: PricingPage,
 });
@@ -161,6 +173,10 @@ function PricingPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingSchema()) }}
+      />
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Logo to={returnPath} />
@@ -178,11 +194,12 @@ function PricingPage() {
             <Sparkles className="h-3 w-3 text-accent" /> Free where it matters
           </Badge>
           <h1 className="font-display text-5xl text-foreground md:text-7xl">
-            Simple. <span className="italic text-muted-foreground">Fair.</span>
+            Simple GCE revision pricing. <span className="italic text-muted-foreground">Fair.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            Free learners can preview selected papers. Premium unlocks protected papers, progress,
-            guided revision, tutoring, and deeper analytics.
+            Free learners can preview selected Cameroon GCE papers. Premium unlocks protected O
+            Level and A Level papers, topic courses, exam cheatsheets, AI-guided revision, tutoring,
+            and deeper analytics.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card p-1">
@@ -322,7 +339,7 @@ function PricingPage() {
               {[
                 {
                   q: "Can students use the basics free?",
-                  a: "Yes. Free learners can open one or two preview papers. The full protected learner experience is Premium.",
+                  a: "Yes. Free learners can open one or two preview papers before upgrading. The full protected GCE learner experience is Premium.",
                 },
                 {
                   q: "Can I cancel anytime?",
@@ -330,11 +347,11 @@ function PricingPage() {
                 },
                 {
                   q: "Do you support mobile money?",
-                  a: "The payment plan should prioritize MTN MoMo and Orange Money for Cameroon.",
+                  a: "Payments are built around Cameroon-friendly FCFA checkout through Fapshi, with mobile money support depending on the available Fapshi channels.",
                 },
                 {
                   q: "Is there a student discount?",
-                  a: "Premium is already priced for students. Schools get bulk pricing — contact us.",
+                  a: "Premium is already priced for students in Cameroon. Schools and study groups can request bulk pricing.",
                 },
               ].map((f) => (
                 <div key={f.q} className="rounded-xl border border-border bg-card p-5">
