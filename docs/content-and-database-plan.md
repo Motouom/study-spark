@@ -29,3 +29,9 @@ Question access must be enforced server-side. The frontend can hide locked conte
 ## content protection
 
 The app can reduce casual copying with disabled text selection, no download endpoints, one-question-at-a-time delivery, randomized order, watermarking, and app-switch detection in test mode. It cannot fully prevent someone from photographing the screen, so leaked content should be made less useful through personalization and limited exposure.
+
+## content quality and sourcing
+
+Content publication must follow [StudySpark Content Quality, Review, and Legal Sourcing Process](content-quality-sourcing.md).
+
+Current implementation note: `course_documents` supports publish status and learner access protection, but source, permission, reviewer, and version metadata are not yet enforced as database columns. Until a metadata migration exists, reviewers must keep a controlled review register and avoid publishing content whose source and review status are unknown.

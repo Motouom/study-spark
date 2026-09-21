@@ -9,6 +9,7 @@ This folder contains the working documentation for StudySpark.
 - [Supabase migration discipline](supabase-migrations.md): database migration inventory, production apply process, verification SQL, and forward-fix guidance.
 - [Supabase auth setup](supabase-auth-setup.md): Google OAuth and Supabase redirect configuration.
 - [Content and database plan](content-and-database-plan.md): content model and protected delivery direction.
+- [Content quality and legal sourcing](content-quality-sourcing.md): source, review, correction, protection, and publication process for educational content.
 
 ## Documentation Rules
 
