@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import {
@@ -22,6 +22,7 @@ import {
   FRENCH_SEO_TITLE,
   OG_IMAGE_URL,
 } from "@/lib/seo";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/fr")({
   head: () => ({
@@ -55,12 +56,23 @@ export const Route = createFileRoute("/fr")({
 
 function FrenchLanding() {
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const { setLocale } = useI18n();
   const { user, profile, loaded } = useStudyProfile();
 
   useEffect(() => {
+    setLocale("fr");
+  }, [setLocale]);
+
+  useEffect(() => {
+    if (pathname !== "/fr") return;
     if (!loaded || !user) return;
     void navigate({ to: profile ? "/dashboard" : "/onboarding", replace: true });
-  }, [loaded, navigate, profile, user]);
+  }, [loaded, navigate, pathname, profile, user]);
+
+  if (pathname !== "/fr") {
+    return <Outlet />;
+  }
 
   if (loaded && user) {
     return (

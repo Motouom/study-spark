@@ -103,6 +103,13 @@ with check (public.is_admin());
 create index if not exists content_issue_reports_admin_idx
 on public.content_issue_reports (status, created_at desc);
 
+drop function if exists public.admin_upsert_course_document(uuid, text, text, text, text, text, text[], text[], text, text, text, text, text, text, text, text, text, text, text, text);
+drop function if exists public.admin_unpublish_course_document(uuid);
+drop function if exists public.admin_archive_course_document(uuid);
+drop function if exists public.report_content_issue(uuid, integer, text, text, text);
+drop function if exists public.admin_list_content_issue_reports(text);
+drop function if exists public.admin_resolve_content_issue_report(uuid, text, text);
+
 create or replace function public.admin_upsert_course_document(
   document_id uuid,
   document_topic_id text,
@@ -478,6 +485,7 @@ revoke all on function public.admin_upsert_course_document(
   text, text, text, text, text, text, text, text, text
 ) from public;
 revoke all on function public.admin_unpublish_course_document(uuid) from public;
+revoke all on function public.admin_archive_course_document(uuid) from public;
 revoke all on function public.report_content_issue(uuid, integer, text, text, text) from public;
 revoke all on function public.admin_list_content_issue_reports(text) from public;
 revoke all on function public.admin_resolve_content_issue_report(uuid, text, text) from public;
@@ -487,6 +495,7 @@ grant execute on function public.admin_upsert_course_document(
   text, text, text, text, text, text, text, text, text
 ) to authenticated;
 grant execute on function public.admin_unpublish_course_document(uuid) to authenticated;
+grant execute on function public.admin_archive_course_document(uuid) to authenticated;
 grant execute on function public.report_content_issue(uuid, integer, text, text, text) to authenticated;
 grant execute on function public.admin_list_content_issue_reports(text) to authenticated;
 grant execute on function public.admin_resolve_content_issue_report(uuid, text, text) to authenticated;

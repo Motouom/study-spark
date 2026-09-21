@@ -4,6 +4,8 @@ import { Logo } from "@/components/Logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { alternateLinks, canonicalUrl, frenchPricingSchema, OG_IMAGE_URL } from "@/lib/seo";
+import { useI18n } from "@/lib/i18n";
+import { useEffect } from "react";
 
 const description =
   "Tarifs StudySpark pour les élèves francophones du Cameroun: aperçu gratuit puis Premium pour les sujets protégés, cours, fiches, parcours guidé et suivi de progression.";
@@ -57,6 +59,12 @@ const features = [
 ] as const;
 
 function FrenchPricingPage() {
+  const { setLocale } = useI18n();
+
+  useEffect(() => {
+    setLocale("fr");
+  }, [setLocale]);
+
   return (
     <div className="min-h-screen bg-background">
       <script
