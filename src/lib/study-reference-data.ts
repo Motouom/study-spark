@@ -5,6 +5,8 @@ export type Language = "english" | "french";
 // Francophone Level: ordinary = Collège (6e-3e), advanced = Lycée (2nde-Tle)
 export type Level = "ordinary" | "advanced";
 
+export type Exam = "school" | "gce_ol" | "gce_al" | "bepc" | "probatoire" | "baccalaureat";
+
 export type ClassLevel =
   // GCE Anglophone
   | "form_3"
@@ -315,7 +317,7 @@ export const SUBJECTS: Subject[] = [...GCE_SUBJECTS, ...FR_SUBJECTS];
 // ─────────────────────────────────────────────────────────────────────────────
 // GCE Series → Subjects
 // ─────────────────────────────────────────────────────────────────────────────
-export const GCE_SERIES_SUBJECTS: Record<Series, Subject[]> = {
+export const GCE_SERIES_SUBJECTS: Partial<Record<Series, Subject[]>> = {
   general: [
     "Mathematics",
     "English Language",
@@ -415,20 +417,6 @@ export const GCE_SERIES_SUBJECTS: Record<Series, Subject[]> = {
     "Business Studies",
     "ICT",
   ],
-  // Francophone series — no subjects in GCE mapping
-  tronc_commun: [],
-  a1: [],
-  a2: [],
-  a4: [],
-  abi: [],
-  c: [],
-  d: [],
-  e: [],
-  ti: [],
-  acc: [],
-  cg: [],
-  fig: [],
-  ses: [],
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -436,7 +424,7 @@ export const GCE_SERIES_SUBJECTS: Record<Series, Subject[]> = {
 // Based on official OBC (Office du Baccalauréat du Cameroun) nomenclature
 // Sources: Kamerpower, Camexamen, Résultats-en-Ligne
 // ─────────────────────────────────────────────────────────────────────────────
-export const FR_SERIES_SUBJECTS: Record<Series, Subject[]> = {
+export const FR_SERIES_SUBJECTS: Partial<Record<Series, Subject[]>> = {
   // Collège — Tronc Commun (all students, preparing for BEPC)
   tronc_commun: [
     "Français",
@@ -620,21 +608,31 @@ export const FR_SERIES_SUBJECTS: Record<Series, Subject[]> = {
     "Informatique",
     "Éducation Physique et Sportive",
   ],
-  // GCE series — no subjects in francophone mapping
-  general: [],
-  science: [],
-  arts: [],
-  commercial: [],
-  technical: [],
-  a_science: [],
-  a_arts: [],
-  a_commercial: [],
 };
 
 // Combined mapping (both systems)
 export const SERIES_SUBJECTS: Record<Series, Subject[]> = {
-  ...GCE_SERIES_SUBJECTS,
-  ...FR_SERIES_SUBJECTS,
+  general: GCE_SERIES_SUBJECTS.general ?? [],
+  science: GCE_SERIES_SUBJECTS.science ?? [],
+  arts: GCE_SERIES_SUBJECTS.arts ?? [],
+  commercial: GCE_SERIES_SUBJECTS.commercial ?? [],
+  technical: GCE_SERIES_SUBJECTS.technical ?? [],
+  a_science: GCE_SERIES_SUBJECTS.a_science ?? [],
+  a_arts: GCE_SERIES_SUBJECTS.a_arts ?? [],
+  a_commercial: GCE_SERIES_SUBJECTS.a_commercial ?? [],
+  tronc_commun: FR_SERIES_SUBJECTS.tronc_commun ?? [],
+  a1: FR_SERIES_SUBJECTS.a1 ?? [],
+  a2: FR_SERIES_SUBJECTS.a2 ?? [],
+  a4: FR_SERIES_SUBJECTS.a4 ?? [],
+  abi: FR_SERIES_SUBJECTS.abi ?? [],
+  c: FR_SERIES_SUBJECTS.c ?? [],
+  d: FR_SERIES_SUBJECTS.d ?? [],
+  e: FR_SERIES_SUBJECTS.e ?? [],
+  ti: FR_SERIES_SUBJECTS.ti ?? [],
+  acc: FR_SERIES_SUBJECTS.acc ?? [],
+  cg: FR_SERIES_SUBJECTS.cg ?? [],
+  fig: FR_SERIES_SUBJECTS.fig ?? [],
+  ses: FR_SERIES_SUBJECTS.ses ?? [],
 };
 
 export function subjectsForSeries(series: Series | null | undefined) {
@@ -658,6 +656,57 @@ export function levelLabelForSystem(level: Level, system: EducationSystem) {
     return level === "ordinary" ? "Collège (1er cycle)" : "Lycée (2nd cycle)";
   }
   return level === "ordinary" ? "Ordinary Level" : "Advanced Level";
+}
+
+export function examForClassLevel(classLevel: ClassLevel): Exam {
+  switch (classLevel) {
+    case "form_5":
+      return "gce_ol";
+    case "upper_sixth":
+      return "gce_al";
+    case "troisieme":
+      return "bepc";
+    case "premiere":
+      return "probatoire";
+    case "terminale":
+      return "baccalaureat";
+    default:
+      return "school";
+  }
+}
+
+export function examLabel(exam: Exam) {
+  switch (exam) {
+    case "gce_ol":
+      return "GCE Ordinary Level";
+    case "gce_al":
+      return "GCE Advanced Level";
+    case "bepc":
+      return "BEPC";
+    case "probatoire":
+      return "Probatoire";
+    case "baccalaureat":
+      return "Baccalauréat";
+    default:
+      return "School assessment";
+  }
+}
+
+export function examLabelForClassLevel(classLevel: ClassLevel) {
+  return examLabel(examForClassLevel(classLevel));
+}
+
+export function classCycleLabel(classLevel: ClassLevel) {
+  if (["sixieme", "cinquieme", "quatrieme", "troisieme"].includes(classLevel)) {
+    return "Collège";
+  }
+  if (["seconde", "premiere", "terminale"].includes(classLevel)) {
+    return "Lycée";
+  }
+  if (["lower_sixth", "upper_sixth"].includes(classLevel)) {
+    return "Advanced Level";
+  }
+  return "Ordinary Level";
 }
 
 export const DEFAULT_PROFILE: StudentProfile = {

@@ -8,6 +8,9 @@ import {
   COUNTRIES,
   LANGUAGES,
   classLevelsForSystem,
+  classCycleLabel,
+  educationSystemForLanguage,
+  examLabelForClassLevel,
   levelLabelForSystem,
   seriesOptionsForSystem,
   subjectsForSeries,
@@ -208,6 +211,7 @@ function Onboarding() {
                         aria-checked={sel}
                         onClick={() => {
                           setLanguage(item.id);
+                          resetCurriculumPath(educationSystemForLanguage(item.id));
                         }}
                         className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors ${
                           sel
@@ -407,7 +411,12 @@ function Onboarding() {
                             : "border-border bg-background hover:border-foreground/40"
                         }`}
                       >
-                        <span className="font-medium">{item.label}</span>
+                        <span>
+                          <span className="block font-medium">{item.label}</span>
+                          <span className="mt-1 block text-xs text-muted-foreground">
+                            {classCycleLabel(item.id)} · {examLabelForClassLevel(item.id)}
+                          </span>
+                        </span>
                         {sel && <Check className="h-4 w-4" />}
                       </button>
                     );
