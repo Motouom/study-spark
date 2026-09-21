@@ -243,7 +243,7 @@ function CommandMenu({
   const navigate = useNavigate();
   const { t } = useI18n();
   const { profile } = useStudyProfile();
-  const content = useStudyContent(profile);
+  const content = useStudyContent(open ? profile : null);
   const searchTopics = content.topics;
   const go = (path: string) => {
     setOpen(false);

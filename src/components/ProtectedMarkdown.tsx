@@ -23,6 +23,11 @@ const QUESTION_LABEL_PATTERN = /^(?:question|q)\.?\s*(\d+)\s*[:.)-]?\s*/i;
 const QUESTION_LINE_PATTERN =
   /^(\s*)(?:#{1,6}\s*)?(?:[*_]{1,3})?(?:question|q)\.?\s*(\d+)\s*(?:[:.)-])?(?:[*_]{1,3})?\s*(.*)$/i;
 
+type QuestionLabelSplit = {
+  questionNumber: number;
+  rest: string;
+};
+
 function normalizeQuestionHeadings(markdown: string) {
   return markdown
     .split("\n")
@@ -77,7 +82,7 @@ function formatStudyInline(children: ReactNode): ReactNode {
   });
 }
 
-function plainText(children: ReactNode, seen = new WeakSet<object>()): string {
+function plainText(children: ReactNode, seen: WeakSet<object> = new WeakSet<object>()): string {
   if (typeof children === "string" || typeof children === "number") return String(children);
   if (Array.isArray(children)) return children.map((child) => plainText(child, seen)).join("");
   if (isValidElement<{ children?: ReactNode }>(children)) {
@@ -88,8 +93,8 @@ function plainText(children: ReactNode, seen = new WeakSet<object>()): string {
   return "";
 }
 
-function splitSimpleQuestionLabel(children: ReactNode) {
-  const splitText = (value: string) => {
+function splitSimpleQuestionLabel(children: ReactNode): QuestionLabelSplit | null {
+  const splitText = (value: string): QuestionLabelSplit | null => {
     const match = value.match(QUESTION_LABEL_PATTERN);
     if (!match) return null;
     return {
@@ -118,7 +123,7 @@ function splitSimpleQuestionLabel(children: ReactNode) {
   if (!first) return null;
   return {
     questionNumber: first.questionNumber,
-    rest: [first.rest, ...items.slice(1).map(plainText)].join("").trimStart(),
+    rest: [first.rest, ...items.slice(1).map((item) => plainText(item))].join("").trimStart(),
   };
 }
 

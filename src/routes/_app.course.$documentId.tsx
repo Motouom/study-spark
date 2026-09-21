@@ -112,7 +112,7 @@ function CourseDocumentPage() {
     setQuestionLocalError(null);
     try {
       const existing = questionByNumber.get(questionNumber);
-      if (status !== "started" && (!existing || existing.status === "not_started")) {
+      if (status !== "started" && !existing) {
         setQuestionLocalError("Start this question first, then mark it passed or failed.");
         return;
       }

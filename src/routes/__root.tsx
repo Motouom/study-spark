@@ -161,20 +161,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
     })();
   `.trim();
 
-  const pwaCaptureScript = `
-    (function(){
-      window.__pwaInstallPrompt = null;
-      window.addEventListener('beforeinstallprompt', function (e) {
-        e.preventDefault();
-        window.__pwaInstallPrompt = e;
-      });
-    })();
-  `.trim();
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: pwaCaptureScript }} />
         <HeadContent />
       </head>
       <body>

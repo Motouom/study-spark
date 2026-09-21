@@ -161,7 +161,12 @@ async function main() {
       process.exitCode = 1;
     }
   } finally {
+    const exited = new Promise((resolve) => {
+      chrome.once("exit", resolve);
+      chrome.once("error", resolve);
+    });
     chrome.kill("SIGTERM");
+    await Promise.race([exited, new Promise((resolve) => setTimeout(resolve, 2000))]);
     await rm(userDataDir, { recursive: true, force: true });
   }
 }
