@@ -521,18 +521,22 @@ function strengthen(filePath) {
   }
 
   const title = titleOf(raw);
-  const subject = subjectFromTitle(title) ?? title.replace(/^Complete (O-Level|A-Level) /, "").replace(/ Course.*$/, "");
+  const subject =
+    subjectFromTitle(title) ??
+    title.replace(/^Complete (O-Level|A-Level) /, "").replace(/ Course.*$/, "");
   const level = levelFromFile(filePath);
   const focus = SUBJECT_FOCUS[subject] ?? DEFAULT_FOCUS;
   const isFrench = filePath.includes("french") || filePath.includes("bilingual");
-  const addition = raw.includes("## Complete GCE Mastery Workbook") ||
+  const addition =
+    raw.includes("## Complete GCE Mastery Workbook") ||
     raw.includes("## Cahier complet de maitrise GCE")
-    ? reinforcementExpansion(subject, level, focus, isFrench)
-    : raw.includes("## GCE Complete Coverage Map") || raw.includes("## Carte complete de couverture GCE")
-      ? completeWorkbookExpansion(subject, level, focus, isFrench)
-      : isFrench
-        ? frenchExpansion(title, subject, level, focus)
-        : englishExpansion(title, subject, level, focus);
+      ? reinforcementExpansion(subject, level, focus, isFrench)
+      : raw.includes("## GCE Complete Coverage Map") ||
+          raw.includes("## Carte complete de couverture GCE")
+        ? completeWorkbookExpansion(subject, level, focus, isFrench)
+        : isFrench
+          ? frenchExpansion(title, subject, level, focus)
+          : englishExpansion(title, subject, level, focus);
 
   fs.writeFileSync(filePath, `${raw}\n${addition.trim()}\n`);
   return true;

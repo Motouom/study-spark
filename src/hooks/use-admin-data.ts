@@ -31,18 +31,9 @@ export type SourceType =
   | "user_reported"
   | "other";
 export type PermissionStatus =
-  | "needs_review"
-  | "approved"
-  | "licensed"
-  | "public_domain"
-  | "restricted"
-  | "rejected";
+  "needs_review" | "approved" | "licensed" | "public_domain" | "restricted" | "rejected";
 export type ReviewStatus =
-  | "not_reviewed"
-  | "metadata_reviewed"
-  | "content_reviewed"
-  | "approved"
-  | "changes_requested";
+  "not_reviewed" | "metadata_reviewed" | "content_reviewed" | "approved" | "changes_requested";
 
 export type AdminCourseDocument = {
   id: string;
@@ -404,11 +395,7 @@ export function useAdminData() {
   );
 
   const resolveContentIssueReport = useCallback(
-    async (
-      reportId: string,
-      status: ContentIssueReport["status"],
-      notes: string,
-    ) => {
+    async (reportId: string, status: ContentIssueReport["status"], notes: string) => {
       await rpc("admin_resolve_content_issue_report", {
         report_id: reportId,
         next_status: status,

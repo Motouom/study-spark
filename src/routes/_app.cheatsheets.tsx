@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import type { CourseDocument } from "@/hooks/use-study-content";
 import { ArrowLeft, BookMarked, FileText, ListChecks, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/cheatsheets")({
   head: () => ({ meta: [{ title: "Cheatsheets — StudySpark" }] }),
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/_app/cheatsheets")({
 });
 
 function CheatsheetsPage() {
+  const { t } = useI18n();
   const { profile } = useStudyProfile();
   const { documents } = useStudyContent(profile);
   const [subject, setSubject] = useState<string | null>(null);
@@ -63,22 +65,18 @@ function CheatsheetsPage() {
 
   return (
     <>
-      <PageHeader
-        title="Cheatsheets"
-        description="Fast GCE revision cards for formulas, definitions, exam traps, and last-minute practice."
-      />
+      <PageHeader title={t("cheatsheets.title")} description={t("cheatsheets.description")} />
       <div className="px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
-          title="Premium cheatsheets"
-          description="Upgrade to access focused revision cards across your selected subjects."
+          title={t("cheatsheets.premiumTitle")}
+          description={t("cheatsheets.premiumDescription")}
         >
           {cheatsheets.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
               <BookMarked className="mx-auto h-10 w-10 text-muted-foreground" />
-              <h2 className="mt-4 text-base font-medium">No cheatsheets for your profile yet</h2>
+              <h2 className="mt-4 text-base font-medium">{t("cheatsheets.emptyTitle")}</h2>
               <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-                Cheatsheets will appear here when revision cards match your class, series, language,
-                and selected subjects.
+                {t("cheatsheets.emptyDescription")}
               </p>
             </div>
           ) : (
@@ -87,7 +85,7 @@ function CheatsheetsPage() {
                 value={q}
                 onChange={setQ}
                 onClear={clearSearch}
-                placeholder="Search cheatsheet topics, formulas, or subject..."
+                placeholder={t("cheatsheets.searchPlaceholder")}
               />
 
               {searchActive ? (
@@ -95,7 +93,7 @@ function CheatsheetsPage() {
               ) : !subject ? (
                 <section className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium">Subjects</h2>
+                    <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
                     <Badge variant="secondary">{subjectCards.length}</Badge>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -106,13 +104,15 @@ function CheatsheetsPage() {
                         onClick={() => setSubject(item.name)}
                         className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
                             <BookMarked className="h-5 w-5" />
                           </div>
-                          <Badge variant="secondary">{item.total} topics</Badge>
+                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                            {item.total} topics
+                          </Badge>
                         </div>
-                        <h3 className="mt-4 min-w-0 truncate text-base font-medium">
+                        <h3 className="mt-4 min-w-0 break-words text-base font-medium leading-snug">
                           {item.name} cheatsheets
                         </h3>
                         <p className="mt-2 text-xs text-muted-foreground">
@@ -146,7 +146,10 @@ function CheatsheetsPage() {
                   </div>
                 </section>
               ) : (
-                <EmptyFiltered onClear={() => setSubject(null)} label="No cheatsheets match this subject." />
+                <EmptyFiltered
+                  onClear={() => setSubject(null)}
+                  label="No cheatsheets match this subject."
+                />
               )}
             </div>
           )}
@@ -230,7 +233,10 @@ function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
           <FileText className="h-5 w-5" />
         </div>
-        <Badge variant={sheet.isLocked ? "outline" : "secondary"}>
+        <Badge
+          variant={sheet.isLocked ? "outline" : "secondary"}
+          className="shrink-0 whitespace-nowrap"
+        >
           {sheet.isLocked ? "Premium" : "Topic"}
         </Badge>
       </div>

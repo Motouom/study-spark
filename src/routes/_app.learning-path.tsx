@@ -328,7 +328,7 @@ function LearningPathPage() {
                 )}
               </div>
               <Button asChild variant="outline" className="mt-4 w-full">
-                <Link to="/progress">View detailed progress</Link>
+                <Link to="/dashboard">View dashboard</Link>
               </Button>
               <div className="mt-5 rounded-lg bg-secondary/40 p-3 text-xs text-muted-foreground">
                 Recommended session: read one paper, mark confusing parts for review, then revisit

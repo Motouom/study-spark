@@ -14,6 +14,8 @@ import {
   signUpWithEmailPassword,
 } from "@/lib/auth";
 import { useStudyProfile } from "@/hooks/use-study-profile";
+import { useI18n } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const Route = createFileRoute("/signin")({
   head: () => ({
@@ -29,6 +31,7 @@ export const Route = createFileRoute("/signin")({
 });
 
 function SignIn() {
+  const { t } = useI18n();
   const navigate = useNavigate();
   const { user, profile, loaded } = useStudyProfile();
   const [email, setEmail] = useState("");
@@ -57,7 +60,7 @@ function SignIn() {
     return (
       <div className="flex min-h-dvh items-center justify-center bg-background px-6 text-center">
         <p className="text-sm text-muted-foreground">
-          {profile ? "Opening your dashboard..." : "Opening profile setup..."}
+          {profile ? t("signin.openingDashboard") : t("signin.openingProfile")}
         </p>
       </div>
     );
@@ -124,11 +127,11 @@ function SignIn() {
           <Logo />
         </div>
         <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center">
-          <h1 className="font-display text-4xl text-foreground">Welcome back.</h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to keep your streak, topic practice, and progress synced across all your
-            devices.
-          </p>
+          <div className="mb-4 flex justify-end">
+            <LanguageSwitcher className="h-9 w-36" />
+          </div>
+          <h1 className="font-display text-4xl text-foreground">{t("signin.title")}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{t("signin.subtitle")}</p>
 
           <div className="mt-8 space-y-3">
             <Button
@@ -139,12 +142,14 @@ function SignIn() {
               disabled={loading !== null}
             >
               <GoogleIcon />
-              {loading === "google" ? "Opening Google..." : "Continue with Google"}
+              {loading === "google" ? t("signin.openingGoogle") : t("signin.continueGoogle")}
             </Button>
 
             <div className="flex items-center gap-3 py-2">
               <Separator className="flex-1" />
-              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">or</span>
+              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
+                {t("signin.or")}
+              </span>
               <Separator className="flex-1" />
             </div>
 
@@ -156,7 +161,7 @@ function SignIn() {
               className="space-y-2"
             >
               <label className="text-xs font-medium text-muted-foreground" htmlFor="email">
-                Email address
+                {t("signin.emailAddress")}
               </label>
               <div className="relative">
                 <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -175,14 +180,14 @@ function SignIn() {
                 className="h-12 w-full"
                 disabled={loading !== null || !email || !emailAuthConfigured()}
               >
-                {loading === "email" ? "Sending magic link..." : "Continue with email"}{" "}
+                {loading === "email" ? "Sending magic link..." : t("signin.continueEmail")}{" "}
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </form>
 
             <details className="rounded-lg border border-border bg-card p-3">
               <summary className="cursor-pointer text-xs font-medium text-muted-foreground">
-                Or sign in with email and password
+                {t("signin.passwordSummary")}
               </summary>
               <form
                 onSubmit={(e) => {
@@ -238,14 +243,14 @@ function SignIn() {
           )}
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
-            By continuing you agree to our terms and privacy policy.
+            {t("signin.agreement")}
             <br />
             New here?{" "}
             <Link
               to="/onboarding"
               className="font-medium text-foreground underline-offset-4 hover:underline"
             >
-              Set up your profile →
+              {t("signin.setupProfile")} →
             </Link>
           </p>
         </div>

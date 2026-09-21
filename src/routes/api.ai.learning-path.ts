@@ -1,5 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { aiConfigured, fallbackLearningPath, generateAiText, parseAiLearningPath } from "@/lib/ai";
+import {
+  aiConfigured,
+  fallbackLearningPath,
+  generateAiText,
+  logAiFailure,
+  parseAiLearningPath,
+} from "@/lib/ai";
 import { getAuthenticatedSupabase, getAuthenticatedUser } from "@/lib/server-supabase";
 import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
@@ -49,9 +55,7 @@ function buildDifficultyRanking(
   const entries = documents.map((document) => {
     const docSessions = sessions.filter((session) => session.document_id === document.id);
     const docQuestions = questionProgress.filter((item) => item.document_id === document.id);
-    const timedQuestions = docQuestions.filter(
-      (item) => Number(item.duration_seconds ?? 0) > 0,
-    );
+    const timedQuestions = docQuestions.filter((item) => Number(item.duration_seconds ?? 0) > 0);
     const averageQuestionSeconds =
       timedQuestions.length > 0
         ? Math.round(
@@ -109,7 +113,8 @@ function buildDifficultyRanking(
     let score = 0;
     score += failedQuestions.length * 5;
     score += slowQuestions.length * 2;
-    score += passedQuestions.length > 0 ? Math.max(0, failedQuestions.length / passedQuestions.length) : 0;
+    score +=
+      passedQuestions.length > 0 ? Math.max(0, failedQuestions.length / passedQuestions.length) : 0;
     score += reviewCount * 3;
     score += (100 - bestDepth) / 20;
     if (avgConfidence !== null) score += (5 - avgConfidence) * 2;
@@ -270,7 +275,17 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             difficultyRanking,
             nextPapers,
           });
-          if (!aiConfigured()) return Response.json({ days: fallback, source: "fallback" });
+          if (!aiConfigured()) {
+            logAiFailure("ai.learning_path.fallback", new Error("AI is not configured."), {
+              userId: user.id,
+            });
+            return Response.json({
+              days: fallback,
+              source: "fallback",
+              message:
+                "StudySpark used your question outcomes and study history to build a local learning path.",
+            });
+          }
 
           try {
             const planText = await generateAiText({
@@ -302,14 +317,22 @@ export const Route = createFileRoute("/api/ai/learning-path")({
 
             return Response.json({ days, source: "ai" });
           } catch (aiError) {
-            console.warn("AI learning path provider failed; using local fallback", aiError);
-            return Response.json({ days: fallback, source: "fallback" });
+            logAiFailure("ai.learning_path.provider_failed", aiError, { userId: user.id });
+            return Response.json({
+              days: fallback,
+              source: "fallback",
+              message:
+                "AI was unavailable, so StudySpark built a safe plan from your failed questions, slow questions, and review marks.",
+            });
           }
         } catch (error) {
           if (error instanceof Response) return error;
           console.error("AI learning path failed", error);
           return Response.json(
-            { error: error instanceof Error ? error.message : "Learning path generation failed." },
+            {
+              error:
+                "Learning path could not be prepared right now. Please try again after a moment.",
+            },
             { status: 500 },
           );
         }

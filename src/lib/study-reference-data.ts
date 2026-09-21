@@ -1,17 +1,58 @@
+export type EducationSystem = "gce" | "francophone";
 export type Language = "english" | "french";
+
+// GCE Level: ordinary = Form 3-5, advanced = Lower/Upper Sixth
+// Francophone Level: ordinary = Collège (6e-3e), advanced = Lycée (2nde-Tle)
 export type Level = "ordinary" | "advanced";
-export type ClassLevel = "form_3" | "form_4" | "form_5" | "lower_sixth" | "upper_sixth";
+
+export type Exam = "school" | "gce_ol" | "gce_al" | "bepc" | "probatoire" | "baccalaureat";
+
+export type ClassLevel =
+  // GCE Anglophone
+  | "form_3"
+  | "form_4"
+  | "form_5"
+  | "lower_sixth"
+  | "upper_sixth"
+  // Francophone
+  | "sixieme"
+  | "cinquieme"
+  | "quatrieme"
+  | "troisieme"
+  | "seconde"
+  | "premiere"
+  | "terminale";
+
 export type Series =
+  // GCE Ordinary Level
   | "general"
   | "science"
   | "arts"
   | "commercial"
   | "technical"
+  // GCE Advanced Level
   | "a_science"
   | "a_arts"
-  | "a_commercial";
+  | "a_commercial"
+  // Francophone Collège (BEPC)
+  | "tronc_commun"
+  // Francophone Lycée General
+  | "a1"
+  | "a2"
+  | "a4"
+  | "abi"
+  | "c"
+  | "d"
+  | "e"
+  | "ti"
+  // Francophone Lycée Technical (STT)
+  | "acc"
+  | "cg"
+  | "fig"
+  | "ses";
 
 export type Subject =
+  // GCE subjects
   | "Mathematics"
   | "Additional Mathematics"
   | "Pure Mathematics with Mechanics"
@@ -40,13 +81,47 @@ export type Subject =
   | "Food and Nutrition"
   | "Food Science and Nutrition"
   | "Logic"
-  | "Agricultural Science";
+  | "Agricultural Science"
+  // Francophone subjects
+  | "Mathématiques"
+  | "Physique"
+  | "Chimie"
+  | "Physique-Chimie"
+  | "Sciences de la Vie et de la Terre"
+  | "Français"
+  | "Philosophie"
+  | "Anglais"
+  | "Histoire-Géographie"
+  | "Éducation à la Citoyenneté et à la Morale"
+  | "Économie"
+  | "Comptabilité"
+  | "Informatique"
+  | "Éducation Physique et Sportive"
+  | "Latin"
+  | "Grec"
+  | "Langues Vivantes II"
+  | "Technologie des Matériaux"
+  | "Dessin de Construction"
+  | "Mécanique Appliquée"
+  | "Système d'Information"
+  | "Économie d'Entreprise"
+  | "Techniques Commerciales"
+  | "Droit"
+  | "Courrier"
+  | "Gestion des Systèmes d'Information"
+  | "Fiscalité"
+  | "Mathématiques Appliquées"
+  | "Sciences Économiques et Sociales"
+  | "Travaux Pratiques de Biologie"
+  | "Travaux Pratiques de Physique"
+  | "Travaux Pratiques de Chimie";
 
 export type ContentStatus = "draft" | "review" | "published" | "unpublished" | "archived";
 
 export interface StudentProfile {
   name: string;
   language: Language;
+  educationSystem: EducationSystem;
   country: string;
   region: string;
   city: string;
@@ -77,8 +152,12 @@ export interface Topic {
 
 export const LANGUAGES: { id: Language; label: string }[] = [
   { id: "english", label: "English" },
-  { id: "french", label: "Francais" },
+  { id: "french", label: "Français" },
 ];
+
+export function educationSystemForLanguage(language: Language): EducationSystem {
+  return language === "french" ? "francophone" : "gce";
+}
 
 export const COUNTRIES = ["Cameroon"] as const;
 
@@ -95,7 +174,10 @@ export const CAMEROON_REGIONS = [
   "West",
 ] as const;
 
-export const CLASS_LEVELS: { id: ClassLevel; label: string; level: Level }[] = [
+// ─────────────────────────────────────────────────────────────────────────────
+// GCE Class Levels
+// ─────────────────────────────────────────────────────────────────────────────
+export const GCE_CLASS_LEVELS: { id: ClassLevel; label: string; level: Level }[] = [
   { id: "form_3", label: "Form 3", level: "ordinary" },
   { id: "form_4", label: "Form 4", level: "ordinary" },
   { id: "form_5", label: "Form 5", level: "ordinary" },
@@ -103,7 +185,28 @@ export const CLASS_LEVELS: { id: ClassLevel; label: string; level: Level }[] = [
   { id: "upper_sixth", label: "Upper Sixth", level: "advanced" },
 ];
 
-export const SERIES_OPTIONS: { id: Series; label: string; level: Level }[] = [
+// Francophone Class Levels
+// Collège (1er cycle): 6e → 3e (BEPC at end of 3e)
+// Lycée (2nd cycle): 2nde → 1ère (Probatoire) → Tle (Baccalauréat)
+export const FR_CLASS_LEVELS: { id: ClassLevel; label: string; level: Level }[] = [
+  { id: "sixieme", label: "Sixième", level: "ordinary" },
+  { id: "cinquieme", label: "Cinquième", level: "ordinary" },
+  { id: "quatrieme", label: "Quatrième", level: "ordinary" },
+  { id: "troisieme", label: "Troisième", level: "ordinary" },
+  { id: "seconde", label: "Seconde", level: "advanced" },
+  { id: "premiere", label: "Première", level: "advanced" },
+  { id: "terminale", label: "Terminale", level: "advanced" },
+];
+
+export const CLASS_LEVELS: { id: ClassLevel; label: string; level: Level }[] = [
+  ...GCE_CLASS_LEVELS,
+  ...FR_CLASS_LEVELS,
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GCE Series
+// ─────────────────────────────────────────────────────────────────────────────
+export const GCE_SERIES_OPTIONS: { id: Series; label: string; level: Level }[] = [
   { id: "general", label: "General", level: "ordinary" },
   { id: "science", label: "Science", level: "ordinary" },
   { id: "arts", label: "Arts", level: "ordinary" },
@@ -114,7 +217,35 @@ export const SERIES_OPTIONS: { id: Series; label: string; level: Level }[] = [
   { id: "a_commercial", label: "Advanced Commercial", level: "advanced" },
 ];
 
-export const SUBJECTS: Subject[] = [
+// Francophone Series / Filières
+// Collège: tronc commun (all students follow same curriculum)
+// Lycée General: A1, A2, A4, ABI, C, D, E, TI
+// Lycée Technical (STT): ACC, CG, FIG, SES
+export const FR_SERIES_OPTIONS: { id: Series; label: string; level: Level }[] = [
+  { id: "tronc_commun", label: "Tronc Commun (BEPC)", level: "ordinary" },
+  { id: "a1", label: "A1 — Lettres (Latin & Grec)", level: "advanced" },
+  { id: "a2", label: "A2 — Lettres (Latin & LVII)", level: "advanced" },
+  { id: "a4", label: "A4 — Lettres (Langues Vivantes)", level: "advanced" },
+  { id: "abi", label: "ABI — Lettres Bilingues", level: "advanced" },
+  { id: "c", label: "C — Mathématiques & Sciences Physiques", level: "advanced" },
+  { id: "d", label: "D — Mathématiques & Sciences de la Vie", level: "advanced" },
+  { id: "e", label: "E — Mathématiques & Techniques", level: "advanced" },
+  { id: "ti", label: "TI — Technologies de l'Information", level: "advanced" },
+  { id: "acc", label: "ACC — Action et Communication Commerciales", level: "advanced" },
+  { id: "cg", label: "CG — Comptabilité et Gestion", level: "advanced" },
+  { id: "fig", label: "FIG — Fiscalité et Informatique de Gestion", level: "advanced" },
+  { id: "ses", label: "SES — Sciences Économiques et Sociales", level: "advanced" },
+];
+
+export const SERIES_OPTIONS: { id: Series; label: string; level: Level }[] = [
+  ...GCE_SERIES_OPTIONS,
+  ...FR_SERIES_OPTIONS,
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Subjects
+// ─────────────────────────────────────────────────────────────────────────────
+export const GCE_SUBJECTS: Subject[] = [
   "Mathematics",
   "Additional Mathematics",
   "Pure Mathematics with Mechanics",
@@ -146,7 +277,47 @@ export const SUBJECTS: Subject[] = [
   "Agricultural Science",
 ];
 
-export const SERIES_SUBJECTS: Record<Series, Subject[]> = {
+export const FR_SUBJECTS: Subject[] = [
+  "Mathématiques",
+  "Physique",
+  "Chimie",
+  "Physique-Chimie",
+  "Sciences de la Vie et de la Terre",
+  "Français",
+  "Philosophie",
+  "Anglais",
+  "Histoire-Géographie",
+  "Éducation à la Citoyenneté et à la Morale",
+  "Économie",
+  "Comptabilité",
+  "Informatique",
+  "Éducation Physique et Sportive",
+  "Latin",
+  "Grec",
+  "Langues Vivantes II",
+  "Technologie des Matériaux",
+  "Dessin de Construction",
+  "Mécanique Appliquée",
+  "Système d'Information",
+  "Économie d'Entreprise",
+  "Techniques Commerciales",
+  "Droit",
+  "Courrier",
+  "Gestion des Systèmes d'Information",
+  "Fiscalité",
+  "Mathématiques Appliquées",
+  "Sciences Économiques et Sociales",
+  "Travaux Pratiques de Biologie",
+  "Travaux Pratiques de Physique",
+  "Travaux Pratiques de Chimie",
+];
+
+export const SUBJECTS: Subject[] = [...GCE_SUBJECTS, ...FR_SUBJECTS];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GCE Series → Subjects
+// ─────────────────────────────────────────────────────────────────────────────
+export const GCE_SERIES_SUBJECTS: Partial<Record<Series, Subject[]>> = {
   general: [
     "Mathematics",
     "English Language",
@@ -248,13 +419,300 @@ export const SERIES_SUBJECTS: Record<Series, Subject[]> = {
   ],
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Francophone Series → Subjects
+// Based on official OBC (Office du Baccalauréat du Cameroun) nomenclature
+// Sources: Kamerpower, Camexamen, Résultats-en-Ligne
+// ─────────────────────────────────────────────────────────────────────────────
+export const FR_SERIES_SUBJECTS: Partial<Record<Series, Subject[]>> = {
+  // Collège — Tronc Commun (all students, preparing for BEPC)
+  tronc_commun: [
+    "Français",
+    "Mathématiques",
+    "Physique-Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Histoire-Géographie",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Anglais",
+    "Informatique",
+    "Éducation Physique et Sportive",
+    "Langues Vivantes II",
+  ],
+  // Série A1 — Lettres (Latin & Grec)
+  a1: [
+    "Français",
+    "Histoire-Géographie",
+    "Anglais",
+    "Philosophie",
+    "Mathématiques",
+    "Physique-Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Latin",
+    "Grec",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // Série A2 — Lettres (Latin & LVII)
+  a2: [
+    "Français",
+    "Histoire-Géographie",
+    "Anglais",
+    "Philosophie",
+    "Mathématiques",
+    "Physique-Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Latin",
+    "Langues Vivantes II",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // Série A4 — Lettres (Langues Vivantes)
+  a4: [
+    "Français",
+    "Histoire-Géographie",
+    "Anglais",
+    "Philosophie",
+    "Mathématiques",
+    "Physique-Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Langues Vivantes II",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // Série ABI — Lettres Bilingues
+  abi: [
+    "Français",
+    "Histoire-Géographie",
+    "Anglais",
+    "Langues Vivantes II",
+    "Mathématiques",
+    "Physique-Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // Série C — Mathématiques & Sciences Physiques
+  c: [
+    "Français",
+    "Mathématiques",
+    "Physique",
+    "Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Histoire-Géographie",
+    "Anglais",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+    "Travaux Pratiques de Physique",
+    "Travaux Pratiques de Chimie",
+    "Travaux Pratiques de Biologie",
+  ],
+  // Série D — Mathématiques & Sciences de la Vie et de la Terre
+  d: [
+    "Français",
+    "Mathématiques",
+    "Sciences de la Vie et de la Terre",
+    "Physique",
+    "Chimie",
+    "Histoire-Géographie",
+    "Anglais",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+    "Travaux Pratiques de Biologie",
+    "Travaux Pratiques de Physique",
+    "Travaux Pratiques de Chimie",
+  ],
+  // Série E — Mathématiques & Techniques
+  e: [
+    "Français",
+    "Mathématiques",
+    "Physique-Chimie",
+    "Technologie des Matériaux",
+    "Dessin de Construction",
+    "Mécanique Appliquée",
+    "Histoire-Géographie",
+    "Anglais",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // Série TI — Technologies de l'Information
+  ti: [
+    "Français",
+    "Mathématiques",
+    "Système d'Information",
+    "Physique",
+    "Sciences de la Vie et de la Terre",
+    "Économie d'Entreprise",
+    "Histoire-Géographie",
+    "Anglais",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Éducation Physique et Sportive",
+    "Informatique",
+  ],
+  // STT — ACC: Action et Communication Commerciales
+  acc: [
+    "Français",
+    "Histoire-Géographie",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Anglais",
+    "Mathématiques",
+    "Économie d'Entreprise",
+    "Techniques Commerciales",
+    "Droit",
+    "Courrier",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // STT — CG: Comptabilité et Gestion
+  cg: [
+    "Français",
+    "Histoire-Géographie",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Anglais",
+    "Mathématiques",
+    "Économie d'Entreprise",
+    "Comptabilité",
+    "Droit",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // STT — FIG: Fiscalité et Informatique de Gestion
+  fig: [
+    "Français",
+    "Histoire-Géographie",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Anglais",
+    "Mathématiques",
+    "Économie d'Entreprise",
+    "Comptabilité",
+    "Fiscalité",
+    "Gestion des Systèmes d'Information",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+  // STT — SES: Sciences Économiques et Sociales
+  ses: [
+    "Français",
+    "Histoire-Géographie",
+    "Éducation à la Citoyenneté et à la Morale",
+    "Anglais",
+    "Mathématiques",
+    "Sciences Économiques et Sociales",
+    "Économie d'Entreprise",
+    "Informatique",
+    "Éducation Physique et Sportive",
+  ],
+};
+
+// Combined mapping (both systems)
+export const SERIES_SUBJECTS: Record<Series, Subject[]> = {
+  general: GCE_SERIES_SUBJECTS.general ?? [],
+  science: GCE_SERIES_SUBJECTS.science ?? [],
+  arts: GCE_SERIES_SUBJECTS.arts ?? [],
+  commercial: GCE_SERIES_SUBJECTS.commercial ?? [],
+  technical: GCE_SERIES_SUBJECTS.technical ?? [],
+  a_science: GCE_SERIES_SUBJECTS.a_science ?? [],
+  a_arts: GCE_SERIES_SUBJECTS.a_arts ?? [],
+  a_commercial: GCE_SERIES_SUBJECTS.a_commercial ?? [],
+  tronc_commun: FR_SERIES_SUBJECTS.tronc_commun ?? [],
+  a1: FR_SERIES_SUBJECTS.a1 ?? [],
+  a2: FR_SERIES_SUBJECTS.a2 ?? [],
+  a4: FR_SERIES_SUBJECTS.a4 ?? [],
+  abi: FR_SERIES_SUBJECTS.abi ?? [],
+  c: FR_SERIES_SUBJECTS.c ?? [],
+  d: FR_SERIES_SUBJECTS.d ?? [],
+  e: FR_SERIES_SUBJECTS.e ?? [],
+  ti: FR_SERIES_SUBJECTS.ti ?? [],
+  acc: FR_SERIES_SUBJECTS.acc ?? [],
+  cg: FR_SERIES_SUBJECTS.cg ?? [],
+  fig: FR_SERIES_SUBJECTS.fig ?? [],
+  ses: FR_SERIES_SUBJECTS.ses ?? [],
+};
+
 export function subjectsForSeries(series: Series | null | undefined) {
   return series ? SERIES_SUBJECTS[series] : SUBJECTS;
+}
+
+export function classLevelsForSystem(system: EducationSystem) {
+  return system === "francophone" ? FR_CLASS_LEVELS : GCE_CLASS_LEVELS;
+}
+
+export function seriesOptionsForSystem(system: EducationSystem) {
+  return system === "francophone" ? FR_SERIES_OPTIONS : GCE_SERIES_OPTIONS;
+}
+
+export function subjectsForSystem(system: EducationSystem) {
+  return system === "francophone" ? FR_SUBJECTS : GCE_SUBJECTS;
+}
+
+export function levelLabelForSystem(level: Level, system: EducationSystem) {
+  if (system === "francophone") {
+    return level === "ordinary" ? "Collège (1er cycle)" : "Lycée (2nd cycle)";
+  }
+  return level === "ordinary" ? "Ordinary Level" : "Advanced Level";
+}
+
+export function examForClassLevel(classLevel: ClassLevel): Exam {
+  switch (classLevel) {
+    case "form_5":
+      return "gce_ol";
+    case "upper_sixth":
+      return "gce_al";
+    case "troisieme":
+      return "bepc";
+    case "premiere":
+      return "probatoire";
+    case "terminale":
+      return "baccalaureat";
+    default:
+      return "school";
+  }
+}
+
+export function examLabel(exam: Exam) {
+  switch (exam) {
+    case "gce_ol":
+      return "GCE Ordinary Level";
+    case "gce_al":
+      return "GCE Advanced Level";
+    case "bepc":
+      return "BEPC";
+    case "probatoire":
+      return "Probatoire";
+    case "baccalaureat":
+      return "Baccalauréat";
+    default:
+      return "School assessment";
+  }
+}
+
+export function examLabelForClassLevel(classLevel: ClassLevel) {
+  return examLabel(examForClassLevel(classLevel));
+}
+
+export function classCycleLabel(classLevel: ClassLevel) {
+  if (["sixieme", "cinquieme", "quatrieme", "troisieme"].includes(classLevel)) {
+    return "Collège";
+  }
+  if (["seconde", "premiere", "terminale"].includes(classLevel)) {
+    return "Lycée";
+  }
+  if (["lower_sixth", "upper_sixth"].includes(classLevel)) {
+    return "Advanced Level";
+  }
+  return "Ordinary Level";
 }
 
 export const DEFAULT_PROFILE: StudentProfile = {
   name: "Amina",
   language: "english",
+  educationSystem: "gce",
   country: "Cameroon",
   region: "Centre",
   city: "Yaounde",
@@ -268,7 +726,31 @@ export const DEFAULT_PROFILE: StudentProfile = {
   subjects: ["Mathematics", "Physics", "Chemistry", "Biology", "English Language"],
 };
 
+export const DEFAULT_FR_PROFILE: StudentProfile = {
+  name: "Amadou",
+  language: "french",
+  educationSystem: "francophone",
+  country: "Cameroon",
+  region: "Centre",
+  city: "Yaounde",
+  locationVerified: false,
+  locationLatitude: null,
+  locationLongitude: null,
+  locationVerifiedAt: null,
+  level: "advanced",
+  classLevel: "terminale",
+  series: "c",
+  subjects: [
+    "Mathématiques",
+    "Physique",
+    "Chimie",
+    "Sciences de la Vie et de la Terre",
+    "Français",
+  ],
+};
+
 export const TOPICS: Topic[] = [
+  // GCE topics (existing)
   {
     id: "math-quadratics",
     subject: "Mathematics",
@@ -365,6 +847,151 @@ export const TOPICS: Topic[] = [
     mastery: 55,
     estimatedMinutes: 45,
   },
+  // Francophone topics (new)
+  {
+    id: "fr-math-algebre",
+    subject: "Mathématiques",
+    title: "Algèbre et équations",
+    description: "Équations du premier et second degré, systèmes d'équations.",
+    level: "ordinary",
+    classLevels: ["sixieme", "cinquieme", "quatrieme", "troisieme"],
+    series: ["tronc_commun"],
+    questionCount: 38,
+    mastery: 65,
+    estimatedMinutes: 30,
+  },
+  {
+    id: "fr-physique-mouvement",
+    subject: "Physique",
+    title: "Mouvement et forces",
+    description: "Vitesse, accélération, lois de Newton et calculs simples.",
+    level: "ordinary",
+    classLevels: ["quatrieme", "troisieme"],
+    series: ["tronc_commun"],
+    questionCount: 32,
+    mastery: 58,
+    estimatedMinutes: 25,
+  },
+  {
+    id: "fr-svt-cellule",
+    subject: "Sciences de la Vie et de la Terre",
+    title: "La cellule",
+    description: "Organites cellulaires, osmose, diffusion et microscopie.",
+    level: "ordinary",
+    classLevels: ["sixieme", "cinquieme", "quatrieme", "troisieme"],
+    series: ["tronc_commun"],
+    questionCount: 40,
+    mastery: 80,
+    estimatedMinutes: 26,
+  },
+  {
+    id: "fr-francais-texte",
+    subject: "Français",
+    title: "Étude de texte",
+    description: "Analyse de textes littéraires, figures de style et argumentation.",
+    level: "ordinary",
+    classLevels: ["sixieme", "cinquieme", "quatrieme", "troisieme"],
+    series: ["tronc_commun"],
+    questionCount: 30,
+    mastery: 75,
+    estimatedMinutes: 22,
+  },
+  {
+    id: "fr-math-calcul",
+    subject: "Mathématiques",
+    title: "Analyse — Dérivation",
+    description: "Limites, dérivées, variations et représentation graphique.",
+    level: "advanced",
+    classLevels: ["premiere", "terminale"],
+    series: ["c", "d", "e", "ti"],
+    questionCount: 50,
+    mastery: 60,
+    estimatedMinutes: 42,
+  },
+  {
+    id: "fr-physique-electro",
+    subject: "Physique",
+    title: "Électromagnétisme",
+    description: "Champs électriques et magnétiques, circuits et induction.",
+    level: "advanced",
+    classLevels: ["premiere", "terminale"],
+    series: ["c", "e", "ti"],
+    questionCount: 45,
+    mastery: 55,
+    estimatedMinutes: 38,
+  },
+  {
+    id: "fr-svt-genetique",
+    subject: "Sciences de la Vie et de la Terre",
+    title: "Génétique et évolution",
+    description: "Lois de Mendel, ADN, mutation et sélection naturelle.",
+    level: "advanced",
+    classLevels: ["premiere", "terminale"],
+    series: ["c", "d", "ti"],
+    questionCount: 42,
+    mastery: 62,
+    estimatedMinutes: 35,
+  },
+  {
+    id: "fr-philo-liberte",
+    subject: "Philosophie",
+    title: "La liberté",
+    description: "Notions de liberté, déterminisme et responsabilité morale.",
+    level: "advanced",
+    classLevels: ["terminale"],
+    series: ["a1", "a2", "a4", "abi"],
+    questionCount: 28,
+    mastery: 70,
+    estimatedMinutes: 30,
+  },
+  {
+    id: "fr-hg-afrique",
+    subject: "Histoire-Géographie",
+    title: "L'Afrique contemporaine",
+    description: "Décolonisation, indépendances et défis du développement.",
+    level: "advanced",
+    classLevels: ["premiere", "terminale"],
+    series: ["a1", "a2", "a4", "abi", "c", "d", "e", "ti", "acc", "cg", "fig", "ses"],
+    questionCount: 35,
+    mastery: 68,
+    estimatedMinutes: 28,
+  },
+  {
+    id: "fr-economie-marche",
+    subject: "Économie",
+    title: "Le marché et les prix",
+    description: "Offre, demande, équilibre du marché et politiques de prix.",
+    level: "advanced",
+    classLevels: ["premiere", "terminale"],
+    series: ["c", "d", "e", "ti", "acc", "cg", "fig", "ses"],
+    questionCount: 40,
+    mastery: 58,
+    estimatedMinutes: 32,
+  },
+  {
+    id: "fr-compta-bilan",
+    subject: "Comptabilité",
+    title: "Le bilan comptable",
+    description: "Actif, passif, résultat et lecture du bilan d'entreprise.",
+    level: "advanced",
+    classLevels: ["premiere", "terminale"],
+    series: ["cg", "fig"],
+    questionCount: 33,
+    mastery: 64,
+    estimatedMinutes: 28,
+  },
+  {
+    id: "fr-info-programmation",
+    subject: "Informatique",
+    title: "Algorithmique et programmation",
+    description: "Structures de contrôle, tableaux et fonctions de base.",
+    level: "advanced",
+    classLevels: ["seconde", "premiere", "terminale"],
+    series: ["c", "d", "e", "ti", "acc", "cg", "fig", "ses"],
+    questionCount: 36,
+    mastery: 72,
+    estimatedMinutes: 30,
+  },
 ];
 
 const seed = (n: number) => {
@@ -443,6 +1070,7 @@ export const LEADERBOARD = [
     name: "Amina Talla",
     classLevel: "Form 5",
     series: "Science",
+    educationSystem: "gce" as EducationSystem,
     xp: 12450,
     streak: 32,
     you: false,
@@ -452,6 +1080,7 @@ export const LEADERBOARD = [
     name: "Junior Ngassa",
     classLevel: "Upper Sixth",
     series: "Advanced Science",
+    educationSystem: "gce" as EducationSystem,
     xp: 11200,
     streak: 28,
     you: false,
@@ -461,15 +1090,17 @@ export const LEADERBOARD = [
     name: "Brenda Nfor",
     classLevel: "Lower Sixth",
     series: "Advanced Arts",
+    educationSystem: "gce" as EducationSystem,
     xp: 10870,
     streak: 24,
     you: false,
   },
   {
     rank: 4,
-    name: "Amina",
-    classLevel: "Form 5",
-    series: "Science",
+    name: "Amadou",
+    classLevel: "Terminale",
+    series: "C",
+    educationSystem: "francophone" as EducationSystem,
     xp: 8920,
     streak: 14,
     you: true,

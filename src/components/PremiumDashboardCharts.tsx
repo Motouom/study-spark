@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useI18n } from "@/lib/i18n";
 
 type ProgressPoint = {
   day: string;
@@ -29,6 +30,7 @@ export default function PremiumDashboardCharts({
   subjectBreakdown: SubjectBreakdown[];
   totalStarted: number;
 }) {
+  const { t } = useI18n();
   const hasProgress = progressData.some((point) => point.minutes > 0);
   const hasSubjects = subjectBreakdown.length > 0;
   return (
@@ -36,11 +38,13 @@ export default function PremiumDashboardCharts({
       <div className="min-w-0 rounded-xl border border-border bg-card p-4 sm:p-6 lg:col-span-2">
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-base font-medium">Weekly performance</h2>
-            <p className="text-xs text-muted-foreground">Daily study minutes</p>
+            <h2 className="text-base font-medium">{t("dashboard.weeklyPerformance")}</h2>
+            <p className="text-xs text-muted-foreground">{t("dashboard.weeklyPerformanceHint")}</p>
           </div>
           <span className="text-xs text-muted-foreground">
-            {totalStarted > 0 ? `${totalStarted} study sessions` : "No study sessions yet"}
+            {totalStarted > 0
+              ? `${totalStarted} ${t("dashboard.studySessions")}`
+              : t("dashboard.noSessionsYet")}
           </span>
         </div>
         <div className="h-56 min-w-0 sm:h-64">
@@ -83,15 +87,15 @@ export default function PremiumDashboardCharts({
             </ResponsiveContainer>
           ) : (
             <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-              Study for a few minutes to see your weekly trend.
+              {t("dashboard.weeklyEmpty")}
             </div>
           )}
         </div>
       </div>
 
       <div className="min-w-0 rounded-xl border border-border bg-card p-4 sm:p-6">
-        <h2 className="text-base font-medium">Mastery by subject</h2>
-        <p className="text-xs text-muted-foreground">Reading depth and study signals</p>
+        <h2 className="text-base font-medium">{t("dashboard.masteryBySubject")}</h2>
+        <p className="text-xs text-muted-foreground">{t("dashboard.masteryBySubjectHint")}</p>
         <div className="mt-4 h-56 min-w-0 sm:h-64">
           {hasSubjects ? (
             <ResponsiveContainer width="100%" height="100%">
@@ -126,7 +130,7 @@ export default function PremiumDashboardCharts({
             </ResponsiveContainer>
           ) : (
             <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-              Your subject mastery will appear here once you start studying.
+              {t("dashboard.masteryEmpty")}
             </div>
           )}
         </div>

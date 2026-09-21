@@ -10,6 +10,8 @@ import {
   FileText,
   Lock,
   PlayCircle,
+  CheckCircle2,
+  Bookmark,
 } from "lucide-react";
 import { lazy, Suspense, useMemo } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
@@ -19,6 +21,7 @@ import { supabaseConfigured } from "@/lib/supabase";
 import { isPremiumActive } from "@/lib/premium";
 import { usePaperStudyOverview, type PaperStudySession } from "@/hooks/use-paper-study-progress";
 import { useUnifiedStreak } from "@/hooks/use-unified-streak";
+import { useI18n } from "@/lib/i18n";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
 
@@ -31,6 +34,7 @@ function sameLocalDay(a: Date, b: Date) {
 }
 
 function DailyGoalRing({ percent }: { percent: number }) {
+  const { t } = useI18n();
   const radius = 26;
   const circumference = 2 * Math.PI * radius;
   const dash = (percent / 100) * circumference;
@@ -42,7 +46,7 @@ function DailyGoalRing({ percent }: { percent: number }) {
         viewBox="0 0 64 64"
         className="-rotate-90"
         role="img"
-        aria-label={`${percent}% of today's 15 minute study goal`}
+        aria-label={`${percent}% ${t("dashboard.dailyGoal")}`}
       >
         <circle
           cx="32"
@@ -65,9 +69,9 @@ function DailyGoalRing({ percent }: { percent: number }) {
         />
       </svg>
       <div>
-        <div className="text-xs text-muted-foreground">Today's goal</div>
+        <div className="text-xs text-muted-foreground">{t("dashboard.dailyGoal")}</div>
         <div className="font-display text-lg text-foreground">{percent}%</div>
-        <div className="text-[11px] text-muted-foreground">15 min of study</div>
+        <div className="text-[11px] text-muted-foreground">{t("dashboard.dailyGoalHint")}</div>
       </div>
     </div>
   );
@@ -110,13 +114,13 @@ function Stat({
 }
 
 function Dashboard() {
+  const { t } = useI18n();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const readingProgress = usePaperStudyOverview();
   const { currentStreak } = useUnifiedStreak();
   const useRemoteOnly = supabaseConfigured();
   const effectiveProfile = savedProfile;
   const content = useStudyContent(savedProfile);
-  const effectiveTopics = content.topics;
   const availablePapers = content.documents;
   const documentsById = useMemo(
     () => new Map(availablePapers.map((document) => [document.id, document])),
@@ -267,8 +271,8 @@ function Dashboard() {
             <div className="flex items-center gap-2 text-xs text-accent">
               <Sparkles className="h-3.5 w-3.5" />
               {continuePaper.resumePercent > 0
-                ? "Continue where you left off"
-                : "Recommended paper"}
+                ? t("dashboard.whereLeftOff")
+                : t("dashboard.recommendedPaper")}
             </div>
             <h2 className="mt-2 break-words font-display text-2xl text-foreground md:text-3xl">
               {featuredPaper ? featuredPaper.title : "Open your paper library"}
@@ -278,7 +282,7 @@ function Dashboard() {
                 ? continuePaper.resumePercent > 0
                   ? `You're ${continuePaper.resumePercent}% through this ${featuredPaper.subject} paper — pick up right there.`
                   : `Protected structural paper for ${featuredPaper.subject}.`
-                : "No published paper is available for your profile yet."}
+                : t("dashboard.noPaper")}
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-start gap-4 sm:flex-row sm:items-center">
@@ -287,13 +291,15 @@ function Dashboard() {
               <Button asChild size="lg">
                 <Link to="/course/$documentId" params={{ documentId: featuredPaper.id }}>
                   <PlayCircle className="mr-1.5 h-4 w-4" />
-                  {continuePaper.resumePercent > 0 ? "Continue reading" : "Start reading"}
+                  {continuePaper.resumePercent > 0
+                    ? t("dashboard.continueReading")
+                    : t("dashboard.startReading")}
                 </Link>
               </Button>
             ) : (
               <Button asChild size="lg">
                 <Link to="/library">
-                  <FileText className="mr-1.5 h-4 w-4" /> Open paper library
+                  <FileText className="mr-1.5 h-4 w-4" /> {t("dashboard.openLibrary")}
                 </Link>
               </Button>
             )}
@@ -305,29 +311,29 @@ function Dashboard() {
         <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           <Stat
             icon={Flame}
-            label="Current streak"
+            label={t("dashboard.currentStreak")}
             value={String(currentStreak)}
-            hint={currentStreak > 0 ? "study days" : "start today"}
+            hint={currentStreak > 0 ? "study days" : t("dashboard.startToday")}
             tone="accent"
           />
           <Stat
             icon={BookOpen}
-            label="Papers opened"
+            label={t("dashboard.papersOpened")}
             value={String(readingProgress.summary.papersRead)}
-            hint={`${readingProgress.summary.completedPapers} read through`}
+            hint={`${readingProgress.summary.completedPapers} ${t("dashboard.readThrough")}`}
           />
           <Stat
             icon={Target}
-            label="Avg. read depth"
+            label={t("dashboard.avgReadDepth")}
             value={`${averageReadDepth}%`}
-            hint={`${readingProgress.summary.reviewCount} review marks`}
+            hint={`${readingProgress.summary.reviewCount} ${t("dashboard.reviewMarks")}`}
             tone="success"
           />
           <Stat
             icon={TrendingUp}
-            label="Study time"
+            label={t("dashboard.studyTime")}
             value={formatDuration(readingProgress.summary.totalDurationSeconds)}
-            hint={`${readingProgress.summary.bookmarkCount} bookmarks`}
+            hint={`${readingProgress.summary.bookmarkCount} ${t("dashboard.bookmarksHint")}`}
           />
         </section>
       ) : (
@@ -338,17 +344,16 @@ function Dashboard() {
                 <Lock className="h-5 w-5" />
               </div>
               <div>
-                <h2 className="text-base font-medium">Premium progress analytics</h2>
+                <h2 className="text-base font-medium">{t("dashboard.analyticsTitle")}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Upgrade to unlock streaks, pass rate, timing, mastery, achievements, and your
-                  personalized learning path.
+                  {t("dashboard.analyticsDescription")}
                 </p>
               </div>
             </div>
             <Button asChild>
               <Link to="/pricing">
                 <Sparkles className="mr-1.5 h-4 w-4" />
-                View Premium
+                {t("common.viewPremium")}
               </Link>
             </Button>
           </div>
@@ -372,46 +377,95 @@ function Dashboard() {
       )}
 
       {premium && (
-        <section className="rounded-xl border border-border bg-card p-4 sm:p-6">
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-base font-medium">Recent structural progress</h2>
-              <p className="text-xs text-muted-foreground">Latest paper question marks</p>
+        <section className="grid gap-4 lg:grid-cols-[1fr_20rem]">
+          <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
+            <div className="mb-4">
+              <h2 className="text-base font-medium">{t("dashboard.paperActivity")}</h2>
+              <p className="text-xs text-muted-foreground">
+                {t("dashboard.paperActivityDescription")}
+              </p>
             </div>
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/progress">View progress</Link>
-            </Button>
-          </div>
-          {recentSessions.length > 0 ? (
-            <ul className="divide-y divide-border">
-              {recentSessions.map((item) => {
-                const paper = documentsById.get(item.documentId);
-                return (
-                  <li
-                    key={item.id}
-                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div>
-                      <div className="text-sm font-medium">{paper?.title ?? "Paper session"}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {formatDuration(item.durationSeconds)} · {item.maxScrollPercent}% read ·{" "}
-                        {new Date(item.updatedAt).toLocaleDateString()}
+            {recentSessions.length > 0 ? (
+              <ul className="divide-y divide-border">
+                {recentSessions.map((item) => {
+                  const paper = documentsById.get(item.documentId);
+                  return (
+                    <li
+                      key={item.id}
+                      className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <div>
+                        <div className="text-sm font-medium">{paper?.title ?? "Paper session"}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {formatDuration(item.durationSeconds)} · {item.maxScrollPercent}% read ·{" "}
+                          {new Date(item.updatedAt).toLocaleDateString()}
+                        </div>
                       </div>
-                    </div>
-                    <Badge variant={item.completed ? "default" : "secondary"}>
-                      {item.completed ? "read through" : "in progress"}
-                    </Badge>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p className="py-6 text-sm text-muted-foreground">
-              Open a paper, read, bookmark, and mark review points to build your progress.
+                      <Badge variant={item.completed ? "default" : "secondary"}>
+                        {item.completed ? "read through" : "in progress"}
+                      </Badge>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="py-6 text-sm text-muted-foreground">
+                Open a paper, mark questions, bookmark, and add review points to build your
+                progress.
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
+            <h2 className="text-base font-medium">{t("dashboard.studySignals")}</h2>
+            <p className="text-xs text-muted-foreground">
+              {t("dashboard.studySignalsDescription")}
             </p>
-          )}
+            <div className="mt-4 space-y-3">
+              <Signal
+                icon={CheckCircle2}
+                label="Understood"
+                value={readingProgress.summary.understoodCount}
+              />
+              <Signal
+                icon={TrendingUp}
+                label="Needs review"
+                value={readingProgress.summary.reviewCount}
+              />
+              <Signal
+                icon={Bookmark}
+                label="Bookmarks"
+                value={readingProgress.summary.bookmarkCount}
+              />
+              <Signal
+                icon={Target}
+                label="Revision"
+                value={readingProgress.summary.revisionCount}
+              />
+            </div>
+          </div>
         </section>
       )}
+    </div>
+  );
+}
+
+function Signal({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof Bookmark;
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-lg bg-secondary/50 px-3 py-2 text-sm">
+      <span className="flex items-center gap-2 text-muted-foreground">
+        <Icon className="h-4 w-4" />
+        {label}
+      </span>
+      <span className="font-medium">{value}</span>
     </div>
   );
 }

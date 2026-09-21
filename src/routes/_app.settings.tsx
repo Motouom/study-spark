@@ -15,12 +15,19 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import {
   CAMEROON_REGIONS,
-  CLASS_LEVELS,
   COUNTRIES,
-  SERIES_OPTIONS,
+  LANGUAGES,
+  classLevelsForSystem,
+  classCycleLabel,
+  educationSystemForLanguage,
+  examLabelForClassLevel,
+  levelLabelForSystem,
+  seriesOptionsForSystem,
   subjectsForSeries,
   DEFAULT_PROFILE,
   type ClassLevel,
+  type EducationSystem,
+  type Language,
   type Series,
   type Subject,
 } from "@/lib/study-reference-data";
@@ -40,6 +47,7 @@ import {
   useLearnerNotificationPreferences,
   type LearnerNotificationKind,
 } from "@/hooks/use-learner-notifications";
+import { languageToLocale, useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — StudySpark" }] }),
@@ -113,6 +121,7 @@ const NOTIFICATION_OPTIONS: Array<{
 ];
 
 function SettingsPage() {
+  const { setLocale, t } = useI18n();
   const navigate = useNavigate();
   const { user, loaded, profile: savedProfile, saveProfile } = useStudyProfile();
   const { subscription } = useSubscription();
@@ -129,6 +138,10 @@ function SettingsPage() {
   const premiumActive = isPremiumActive(profile);
   const fallbackProfile = profile ?? DEFAULT_PROFILE;
   const [name, setName] = useState(fallbackProfile.name);
+  const [language, setLanguage] = useState<Language>(fallbackProfile.language);
+  const [educationSystem, setEducationSystem] = useState<EducationSystem>(
+    fallbackProfile.educationSystem ?? educationSystemForLanguage(fallbackProfile.language),
+  );
   const [country, setCountry] = useState(fallbackProfile.country);
   const [region, setRegion] = useState(fallbackProfile.region);
   const [city, setCity] = useState(fallbackProfile.city);
@@ -146,6 +159,18 @@ function SettingsPage() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
   const browserLocation = useBrowserLocation();
+
+  const resetCurriculumPath = (nextSystem: EducationSystem) => {
+    const nextClassLevels = classLevelsForSystem(nextSystem);
+    const nextSeriesOptions = seriesOptionsForSystem(nextSystem);
+    const nextClassLevel = nextClassLevels.find((item) => item.level === selectedLevel)?.id;
+    const nextSeries = nextSeriesOptions.find((item) => item.level === selectedLevel)?.id;
+
+    setEducationSystem(nextSystem);
+    setClassLevel(nextClassLevel ?? nextClassLevels[0]?.id ?? classLevel);
+    setSeries(nextSeries ?? nextSeriesOptions[0]?.id ?? series);
+    setSubjects([]);
+  };
 
   async function retryPayment(record: PaymentRecord) {
     setRetryingId(record.id);
@@ -170,11 +195,13 @@ function SettingsPage() {
     }
   }
 
+  const systemClassLevels = classLevelsForSystem(educationSystem);
+  const systemSeriesOptions = seriesOptionsForSystem(educationSystem);
   const selectedLevel =
-    CLASS_LEVELS.find((item) => item.id === classLevel)?.level ?? fallbackProfile.level;
+    systemClassLevels.find((item) => item.id === classLevel)?.level ?? fallbackProfile.level;
   const availableSeries = useMemo(
-    () => SERIES_OPTIONS.filter((item) => item.level === selectedLevel),
-    [selectedLevel],
+    () => systemSeriesOptions.filter((item) => item.level === selectedLevel),
+    [selectedLevel, systemSeriesOptions],
   );
   const availableSubjects = useMemo(() => subjectsForSeries(series), [series]);
 
@@ -186,6 +213,10 @@ function SettingsPage() {
     if (!savedProfile && displayName) setName(displayName);
     if (savedProfile) {
       setName(savedProfile.name);
+      setLanguage(savedProfile.language);
+      setEducationSystem(
+        savedProfile.educationSystem ?? educationSystemForLanguage(savedProfile.language),
+      );
       setCountry(savedProfile.country);
       setRegion(savedProfile.region);
       setCity(savedProfile.city);
@@ -211,6 +242,9 @@ function SettingsPage() {
     if (!savedProfile) return false;
     return (
       name.trim() !== savedProfile.name ||
+      language !== savedProfile.language ||
+      educationSystem !==
+        (savedProfile.educationSystem ?? educationSystemForLanguage(savedProfile.language)) ||
       country !== savedProfile.country ||
       region !== savedProfile.region ||
       city.trim() !== savedProfile.city ||
@@ -219,11 +253,26 @@ function SettingsPage() {
       subjects.length !== savedProfile.subjects.length ||
       subjects.some((subject) => !savedProfile.subjects.includes(subject as Subject))
     );
-  }, [city, classLevel, country, name, region, savedProfile, series, subjects]);
+  }, [
+    city,
+    classLevel,
+    country,
+    educationSystem,
+    language,
+    name,
+    region,
+    savedProfile,
+    series,
+    subjects,
+  ]);
 
   const resetForm = () => {
     if (!savedProfile) return;
     setName(savedProfile.name);
+    setLanguage(savedProfile.language);
+    setEducationSystem(
+      savedProfile.educationSystem ?? educationSystemForLanguage(savedProfile.language),
+    );
     setCountry(savedProfile.country);
     setRegion(savedProfile.region);
     setCity(savedProfile.city);
@@ -250,7 +299,8 @@ function SettingsPage() {
     try {
       await saveProfile({
         ...profile,
-        language: profile?.language ?? "english",
+        language,
+        educationSystem,
         name: name.trim(),
         country,
         region,
@@ -303,7 +353,7 @@ function SettingsPage() {
 
   return (
     <>
-      <PageHeader title="Settings" description="Manage your profile, exam prep, and preferences." />
+      <PageHeader title={t("settings.title")} description={t("settings.description")} />
 
       <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
         {supabaseConfigured() && (!loaded || !profile) ? (
@@ -312,7 +362,7 @@ function SettingsPage() {
           </section>
         ) : (
           <>
-            <Section title="Profile" description="Customize your learner identity and access.">
+            <Section title={t("settings.profile")} description={t("settings.profileDescription")}>
               <Row label="Avatar">
                 <div className="flex items-center gap-4">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground font-display text-xl text-background">
@@ -323,15 +373,53 @@ function SettingsPage() {
                   </p>
                 </div>
               </Row>
-              <Row label="Display name">
+              <Row label={t("settings.displayName")}>
                 <Input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="max-w-md"
                 />
               </Row>
-              <Row label="Email" hint="Managed by your sign-in provider">
+              <Row label={t("common.email")} hint={t("settings.emailHint")}>
                 <Input value={user?.email ?? ""} disabled type="email" className="max-w-md" />
+              </Row>
+              <Row label={t("common.language")} hint={t("settings.languageHint")}>
+                <Select
+                  value={language}
+                  onValueChange={(value) => {
+                    const nextLanguage = value as Language;
+                    setLanguage(nextLanguage);
+                    setLocale(languageToLocale(nextLanguage));
+                  }}
+                >
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {LANGUAGES.map((item) => (
+                      <SelectItem key={item.id} value={item.id}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Row>
+              <Row
+                label={t("settings.curriculumPath")}
+                hint="Controls class, series, subjects, and content access"
+              >
+                <Select
+                  value={educationSystem}
+                  onValueChange={(value) => resetCurriculumPath(value as EducationSystem)}
+                >
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="gce">GCE Anglophone</SelectItem>
+                    <SelectItem value="francophone">Francophone BEPC, Probatoire, Bac</SelectItem>
+                  </SelectContent>
+                </Select>
               </Row>
               <Row label="Country" hint="Used for national rankings">
                 <Select value={country} onValueChange={setCountry}>
@@ -410,9 +498,9 @@ function SettingsPage() {
                   onValueChange={(value) => {
                     const nextClassLevel = value as ClassLevel;
                     const nextLevel =
-                      CLASS_LEVELS.find((item) => item.id === nextClassLevel)?.level ??
+                      systemClassLevels.find((item) => item.id === nextClassLevel)?.level ??
                       selectedLevel;
-                    const nextSeriesOptions = SERIES_OPTIONS.filter(
+                    const nextSeriesOptions = systemSeriesOptions.filter(
                       (item) => item.level === nextLevel,
                     );
 
@@ -426,13 +514,17 @@ function SettingsPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {CLASS_LEVELS.map((item) => (
+                    {systemClassLevels.map((item) => (
                       <SelectItem key={item.id} value={item.id}>
-                        {item.label}
+                        {item.label} · {examLabelForClassLevel(item.id)}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {levelLabelForSystem(selectedLevel, educationSystem)} ·{" "}
+                  {classCycleLabel(classLevel)} · {examLabelForClassLevel(classLevel)}
+                </p>
               </Row>
               <Row label="Series">
                 <Select
@@ -513,7 +605,7 @@ function SettingsPage() {
                     !hasChanges
                   }
                 >
-                  {saving ? "Saving..." : "Save profile"}
+                  {saving ? "Saving..." : t("settings.saveProfile")}
                 </Button>
               </div>
             </Section>

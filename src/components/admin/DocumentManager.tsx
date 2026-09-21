@@ -18,16 +18,18 @@ import {
 } from "lucide-react";
 import { lazy, Suspense, useMemo, useState, type ReactNode } from "react";
 import {
-  CLASS_LEVELS,
-  LANGUAGES,
-  SERIES_OPTIONS,
-  SUBJECTS,
   type ClassLevel,
   type Language,
   type Series,
   type Subject,
   classLabel,
+  classLevelsForSystem,
+  educationSystemForLanguage,
+  examLabelForClassLevel,
+  levelLabelForSystem,
+  seriesOptionsForSystem,
   seriesLabel,
+  subjectsForSystem,
 } from "@/lib/study-reference-data";
 import {
   useAdminData,
@@ -45,8 +47,53 @@ import type { ContentStatus } from "@/lib/study-reference-data";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
 
-const ALL_CLASS_LEVELS = CLASS_LEVELS.map((item) => item.id) as ClassLevel[];
-const ALL_SERIES = SERIES_OPTIONS.map((item) => item.id) as Series[];
+function languageLabel(language: Language) {
+  return language === "french" ? "Français" : "English";
+}
+
+function optionsForLanguage(language: Language) {
+  const system = educationSystemForLanguage(language);
+  return {
+    system,
+    classLevels: classLevelsForSystem(system),
+    subjects: subjectsForSystem(system),
+    series: seriesOptionsForSystem(system),
+  };
+}
+
+function normalizeDocumentForLanguage(
+  draft: CourseDocumentDraft,
+  language: Language,
+): CourseDocumentDraft {
+  const options = optionsForLanguage(language);
+  const classLevels = draft.classLevels.filter((id) =>
+    options.classLevels.some((item) => item.id === id),
+  );
+  const normalizedClassLevels =
+    classLevels.length > 0 ? classLevels : options.classLevels.map((item) => item.id);
+  const firstLevel = options.classLevels.find(
+    (item) => item.id === normalizedClassLevels[0],
+  )?.level;
+  const level = firstLevel ?? (language === "french" ? "advanced" : "ordinary");
+  const series = draft.series.filter((id) =>
+    options.series.some((item) => item.id === id && item.level === level),
+  );
+  const fallbackSeries = options.series
+    .filter((item) => item.level === level)
+    .map((item) => item.id);
+  const subject = options.subjects.includes(draft.subject) ? draft.subject : options.subjects[0];
+
+  return {
+    ...draft,
+    language,
+    curriculumPath: language === "french" ? "francophone" : "gce",
+    level,
+    subject,
+    topicId: "",
+    classLevels: normalizedClassLevels,
+    series: series.length > 0 ? series : fallbackSeries,
+  };
+}
 
 export type DocumentManagerConfig = {
   contentKind: CourseContentKind;
@@ -152,6 +199,13 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
     () => topics.filter((topic) => topic.subject === documentDraft.subject),
     [documentDraft.subject, topics],
   );
+  const curriculumOptions = optionsForLanguage(documentDraft.language);
+  const availableSeries = curriculumOptions.series.filter(
+    (item) => item.level === documentDraft.level,
+  );
+  const selectedExams = Array.from(
+    new Set(documentDraft.classLevels.map((classLevel) => examLabelForClassLevel(classLevel))),
+  );
 
   function firstTopicForSubject(subject: Subject) {
     return topics.find((topic) => topic.subject === subject);
@@ -163,15 +217,18 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
   }
 
   function validateDraft(status: ContentStatus) {
-    if (documentTopics.length === 0) return `No course section exists yet for ${documentDraft.subject}.`;
+    if (documentTopics.length === 0)
+      return `No course section exists yet for ${documentDraft.subject}.`;
     if (documentDraft.markdownContent.trim().length < 20) return "Markdown content is too short.";
     if (documentDraft.classLevels.length === 0) return "Select at least one class level.";
     if (documentDraft.series.length === 0) return "Select at least one series.";
     if (status !== "published") return null;
     if (!previewed) return "Preview the learner view before publishing.";
     if (!documentDraft.exam.trim()) return "Published content requires an exam.";
-    if (!documentDraft.contentYear.trim()) return "Published content requires a year or syllabus version.";
-    if (!documentDraft.sourceReference.trim()) return "Published content requires a source reference.";
+    if (!documentDraft.contentYear.trim())
+      return "Published content requires a year or syllabus version.";
+    if (!documentDraft.sourceReference.trim())
+      return "Published content requires a source reference.";
     if (documentDraft.reviewStatus !== "approved") {
       return "Published content must be approved by review.";
     }
@@ -325,12 +382,8 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
               <Input
                 required
                 value={documentDraft.title}
-                onChange={(e) =>
-                  updateDraft({ title: uppercaseTitle(e.target.value) })
-                }
-                onBlur={(e) =>
-                  updateDraft({ title: uppercaseTitle(e.target.value) })
-                }
+                onChange={(e) => updateDraft({ title: uppercaseTitle(e.target.value) })}
+                onBlur={(e) => updateDraft({ title: uppercaseTitle(e.target.value) })}
                 className="uppercase"
                 placeholder={
                   config.contentKind === "textbook"
@@ -342,7 +395,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
             <Field label="Subject">
               <Select
                 value={documentDraft.subject}
-                options={SUBJECTS}
+                options={curriculumOptions.subjects}
                 onChange={(value) => {
                   const subject = value as Subject;
                   const topic = topics.find((item) => item.subject === subject);
@@ -356,10 +409,12 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
             <Field label="Language">
               <Select
                 value={documentDraft.language}
-                options={LANGUAGES.map((item) => item.id)}
-                onChange={(value) =>
-                  updateDraft({ language: value as Language })
-                }
+                options={["english", "french"]}
+                label={(value) => languageLabel(value as Language)}
+                onChange={(value) => {
+                  setPreviewed(false);
+                  setDocumentDraft(normalizeDocumentForLanguage(documentDraft, value as Language));
+                }}
               />
             </Field>
             <Field label="Status">
@@ -379,23 +434,30 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
             <Field label="Class levels">
               <Multi
                 values={documentDraft.classLevels}
-                options={CLASS_LEVELS.map((item) => item.id)}
-                label={classLabel}
-                onChange={(classLevels) =>
-                  updateDraft({
-                    classLevels: classLevels as ClassLevel[],
-                  })
+                options={curriculumOptions.classLevels.map((item) => item.id)}
+                label={(value) =>
+                  `${classLabel(value as ClassLevel)} · ${examLabelForClassLevel(value as ClassLevel)}`
                 }
+                onChange={(classLevels) => {
+                  setPreviewed(false);
+                  setDocumentDraft(
+                    normalizeDocumentForLanguage(
+                      {
+                        ...documentDraft,
+                        classLevels: classLevels as ClassLevel[],
+                      },
+                      documentDraft.language,
+                    ),
+                  );
+                }}
               />
             </Field>
             <Field label="Series">
               <Multi
                 values={documentDraft.series}
-                options={SERIES_OPTIONS.map((item) => item.id)}
+                options={availableSeries.map((item) => item.id)}
                 label={seriesLabel}
-                onChange={(series) =>
-                  updateDraft({ series: series as Series[] })
-                }
+                onChange={(series) => updateDraft({ series: series as Series[] })}
               />
             </Field>
             <Field label="Curriculum path">
@@ -444,9 +506,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                   "restricted",
                   "rejected",
                 ]}
-                onChange={(value) =>
-                  updateDraft({ permissionStatus: value as PermissionStatus })
-                }
+                onChange={(value) => updateDraft({ permissionStatus: value as PermissionStatus })}
               />
             </Field>
             <Field label="Review status">
@@ -488,6 +548,20 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
               placeholder="What changed and why this version is safe to publish."
             />
           </Field>
+
+          <div className="mt-4 rounded-lg border border-border bg-secondary/30 p-3 text-xs text-muted-foreground">
+            <div className="font-medium text-foreground">Curriculum metadata</div>
+            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+              <span>{languageLabel(documentDraft.language)}</span>
+              <span>{levelLabelForSystem(documentDraft.level, curriculumOptions.system)}</span>
+              <span>{selectedExams.join(", ")}</span>
+              <span>{documentDraft.series.map((id) => seriesLabel(id)).join(", ")}</span>
+            </div>
+            <p className="mt-2">
+              For French papers, use French language, francophone classes, filières, and a title
+              that includes exam and year, for example: BACCALAURÉAT D — MATHÉMATIQUES — 2026.
+            </p>
+          </div>
 
           <Field label="Markdown content">
             <Textarea
@@ -534,7 +608,12 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
               <Eye className="mr-1.5 h-3.5 w-3.5" />
               Preview learner view
             </Button>
-            <Button type="button" variant="outline" disabled={saving} onClick={() => void saveDocument("review")}>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={saving}
+              onClick={() => void saveDocument("review")}
+            >
               <Send className="mr-1.5 h-3.5 w-3.5" />
               Send to review
             </Button>
@@ -561,7 +640,9 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                 </div>
                 <Badge variant="outline">Previewed</Badge>
               </div>
-              <Suspense fallback={<div className="text-sm text-muted-foreground">Preparing preview...</div>}>
+              <Suspense
+                fallback={<div className="text-sm text-muted-foreground">Preparing preview...</div>}
+              >
                 <ProtectedMarkdown
                   document={{
                     id: documentDraft.id ?? "00000000-0000-0000-0000-000000000000",
@@ -608,27 +689,36 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
 }
 
 function emptyDocument(contentKind: CourseContentKind): CourseDocumentDraft {
-  return {
-    topicId: "",
-    subject: "Mathematics",
-    title: "",
-    language: "english",
-    level: "advanced",
-    classLevels: ALL_CLASS_LEVELS,
-    series: ALL_SERIES,
-    status: "published",
-    contentKind,
-    markdownContent: "",
-    curriculumPath: "gce",
-    exam: "",
-    contentYear: "",
-    sourceType: "internal",
-    sourceReference: "",
-    permissionStatus: "needs_review",
-    reviewStatus: "not_reviewed",
-    contentVersion: "1.0.0",
-    changeNote: "",
-  };
+  const englishOptions = optionsForLanguage("english");
+  const defaultLevel = "advanced";
+  return normalizeDocumentForLanguage(
+    {
+      topicId: "",
+      subject: "Mathematics",
+      title: "",
+      language: "english",
+      level: defaultLevel,
+      classLevels: englishOptions.classLevels
+        .filter((item) => item.level === defaultLevel)
+        .map((item) => item.id),
+      series: englishOptions.series
+        .filter((item) => item.level === defaultLevel)
+        .map((item) => item.id),
+      status: "published",
+      contentKind,
+      markdownContent: "",
+      curriculumPath: "gce",
+      exam: "",
+      contentYear: "",
+      sourceType: "internal",
+      sourceReference: "",
+      permissionStatus: "needs_review",
+      reviewStatus: "not_reviewed",
+      contentVersion: "1.0.0",
+      changeNote: "",
+    },
+    "english",
+  );
 }
 
 function DocumentList({
@@ -664,13 +754,18 @@ function DocumentList({
           {documents.map((document) => (
             <div key={document.id} className="flex items-center justify-between gap-4 px-4 py-3">
               <div className="min-w-0">
-                <div className="truncate text-sm font-medium">{document.title}</div>
-                <div className="mt-0.5 text-xs text-muted-foreground">
-                  {document.subject} · {document.markdownContent.length} chars
-                  {" · "}
-                  {document.status}
-                  {document.reviewStatus ? ` · ${document.reviewStatus}` : ""}
-                  {document.contentKind === "textbook" ? " · textbook" : ""}
+                <div className="line-clamp-2 break-words text-sm font-medium leading-snug">
+                  {document.title}
+                </div>
+                <div className="mt-1 flex flex-wrap gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                  <span>{document.subject}</span>
+                  <span>{languageLabel(document.language)}</span>
+                  <span>{document.classLevels.map((id) => classLabel(id)).join(", ")}</span>
+                  <span>{document.series.map((id) => seriesLabel(id)).join(", ")}</span>
+                  <span>{document.markdownContent.length} chars</span>
+                  <span>{document.status}</span>
+                  {document.reviewStatus && <span>{document.reviewStatus}</span>}
+                  {document.contentKind === "textbook" && <span>textbook</span>}
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-1">
@@ -735,7 +830,9 @@ function ContentIssueReports({
     notes: string,
   ) => Promise<void>;
 }) {
-  const openReports = reports.filter((report) => report.status === "open" || report.status === "reviewing");
+  const openReports = reports.filter(
+    (report) => report.status === "open" || report.status === "reviewing",
+  );
   const [notes, setNotes] = useState<Record<string, string>>({});
 
   if (reports.length === 0) return null;
@@ -749,7 +846,9 @@ function ContentIssueReports({
             Reports from the learner document view, grouped with this content type.
           </p>
         </div>
-        <Badge variant={openReports.length > 0 ? "default" : "secondary"}>{openReports.length} open</Badge>
+        <Badge variant={openReports.length > 0 ? "default" : "secondary"}>
+          {openReports.length} open
+        </Badge>
       </div>
       <div className="divide-y divide-border">
         {reports.slice(0, 8).map((report) => (
@@ -778,14 +877,18 @@ function ContentIssueReports({
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => void onResolve(report.id, "reviewing", notes[report.id] ?? report.adminNotes)}
+                onClick={() =>
+                  void onResolve(report.id, "reviewing", notes[report.id] ?? report.adminNotes)
+                }
               >
                 <AlertTriangle className="mr-1.5 h-3.5 w-3.5" />
                 Review
               </Button>
               <Button
                 size="sm"
-                onClick={() => void onResolve(report.id, "resolved", notes[report.id] ?? report.adminNotes)}
+                onClick={() =>
+                  void onResolve(report.id, "resolved", notes[report.id] ?? report.adminNotes)
+                }
               >
                 <CheckCircle2 className="mr-1.5 h-3.5 w-3.5" />
                 Resolve
@@ -810,10 +913,12 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 function Select({
   value,
   options,
+  label,
   onChange,
 }: {
   value: string;
   options: string[];
+  label?: (value: string) => string;
   onChange: (value: string) => void;
 }) {
   return (
@@ -827,7 +932,7 @@ function Select({
       </option>
       {options.map((option) => (
         <option key={option} value={option}>
-          {option}
+          {label ? label(option) : option}
         </option>
       ))}
     </select>

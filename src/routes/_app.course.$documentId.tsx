@@ -227,7 +227,10 @@ function CourseDocumentPage() {
                 />
               )}
               {isCourse && <CourseContents markdown={document.markdownContent} />}
-              <ReportContentIssue documentId={document.id} isPaper={document.contentKind === "paper"} />
+              <ReportContentIssue
+                documentId={document.id}
+                isPaper={document.contentKind === "paper"}
+              />
               <Suspense
                 fallback={
                   <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
@@ -322,10 +325,16 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
         <div>
           <h2 className="text-sm font-medium">Report a content issue</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Tell admins about wrong answers, broken formatting, metadata mistakes, or missing solutions.
+            Tell admins about wrong answers, broken formatting, metadata mistakes, or missing
+            solutions.
           </p>
         </div>
-        <Button type="button" variant="outline" size="sm" onClick={() => setOpen((value) => !value)}>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => setOpen((value) => !value)}
+        >
           {open ? "Close report" : "Report issue"}
         </Button>
       </div>
@@ -340,7 +349,9 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
         <form onSubmit={submitReport} className="mt-4 grid gap-3">
           <div className="grid gap-3 sm:grid-cols-3">
             <label className="text-sm">
-              <span className="mb-1.5 block text-xs font-medium text-muted-foreground">Issue type</span>
+              <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                Issue type
+              </span>
               <select
                 value={issueType}
                 onChange={(event) => setIssueType(event.target.value)}
@@ -356,7 +367,9 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
             </label>
             {isPaper && (
               <label className="text-sm">
-                <span className="mb-1.5 block text-xs font-medium text-muted-foreground">Question</span>
+                <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                  Question
+                </span>
                 <Input
                   inputMode="numeric"
                   value={questionNumber}
@@ -366,7 +379,9 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
               </label>
             )}
             <label className="text-sm">
-              <span className="mb-1.5 block text-xs font-medium text-muted-foreground">Topic or section</span>
+              <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                Topic or section
+              </span>
               <Input
                 value={topicTitle}
                 onChange={(event) => setTopicTitle(event.target.value)}
