@@ -5,12 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
   CAMEROON_REGIONS,
-  CLASS_LEVELS,
   COUNTRIES,
   LANGUAGES,
-  SERIES_OPTIONS,
+  classLevelsForSystem,
+  levelLabelForSystem,
+  seriesOptionsForSystem,
   subjectsForSeries,
   type ClassLevel,
+  type EducationSystem,
   type Language,
   type Level,
   type Series,
@@ -34,6 +36,7 @@ function Onboarding() {
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [language, setLanguage] = useState<Language | null>(null);
+  const [educationSystem, setEducationSystem] = useState<EducationSystem>("gce");
   const [country, setCountry] = useState("Cameroon");
   const [region, setRegion] = useState("");
   const [city, setCity] = useState("");
@@ -52,6 +55,14 @@ function Onboarding() {
   const toggleSubject = (s: Subject) =>
     setSubjects((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
 
+  const resetCurriculumPath = (nextSystem: EducationSystem) => {
+    setEducationSystem(nextSystem);
+    setLevel(null);
+    setClassLevel(null);
+    setSeries(null);
+    setSubjects([]);
+  };
+
   const next = () => setStep((s) => s + 1);
   const handleUseAnotherAccount = async () => {
     setError(null);
@@ -66,6 +77,7 @@ function Onboarding() {
     const nextProfile = {
       name: name.trim(),
       language,
+      educationSystem,
       country,
       region,
       city: city.trim(),
@@ -108,18 +120,23 @@ function Onboarding() {
 
   const stepValid =
     (step === 0 && name.trim().length > 0) ||
-    (step === 1 && language !== null) ||
+    (step === 1 && language !== null && educationSystem !== null) ||
     (step === 2 && country.trim().length > 0 && region.trim().length > 0) ||
     (step === 3 && level !== null && classLevel !== null) ||
     (step === 4 && series !== null && subjects.length >= 1);
 
-  const availableClasses = CLASS_LEVELS.filter((item) => !level || item.level === level);
-  const availableSeries = SERIES_OPTIONS.filter((item) => item.level === level);
+  const systemClassLevels = classLevelsForSystem(educationSystem);
+  const systemSeriesOptions = seriesOptionsForSystem(educationSystem);
+
+  const availableClasses = systemClassLevels.filter((item) => !level || item.level === level);
+  const availableSeries = systemSeriesOptions.filter((item) => item.level === level);
   const availableSubjects = subjectsForSeries(series);
 
   useEffect(() => {
     setSubjects((current) => current.filter((subject) => availableSubjects.includes(subject)));
   }, [availableSubjects]);
+
+  const levelOptions: Level[] = ["ordinary", "advanced"];
 
   return (
     <div className="min-h-[calc(100dvh-7.5rem)] bg-surface px-4 py-6 md:min-h-[calc(100dvh-3rem)] md:py-10">
@@ -172,7 +189,7 @@ function Onboarding() {
                   Choose your study language
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Your structural papers will follow this language first.
+                  Choose your interface language and the Cameroon curriculum you follow.
                 </p>
                 <div
                   className="mt-5 grid grid-cols-2 gap-2"
@@ -181,13 +198,17 @@ function Onboarding() {
                 >
                   {LANGUAGES.map((item) => {
                     const sel = language === item.id;
+                    const sysLabel =
+                      item.id === "english" ? "English interface" : "Interface en français";
                     return (
                       <button
                         key={item.id}
                         type="button"
                         role="radio"
                         aria-checked={sel}
-                        onClick={() => setLanguage(item.id)}
+                        onClick={() => {
+                          setLanguage(item.id);
+                        }}
                         className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors ${
                           sel
                             ? "border-foreground bg-secondary"
@@ -195,7 +216,45 @@ function Onboarding() {
                         }`}
                       >
                         <span className="text-sm font-medium">{item.label}</span>
-                        <span className="text-xs text-muted-foreground">Cameroon syllabus</span>
+                        <span className="text-xs text-muted-foreground">{sysLabel}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="mt-6 text-sm font-medium">Curriculum path</p>
+                <div
+                  className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2"
+                  role="radiogroup"
+                  aria-label="Curriculum path"
+                >
+                  {[
+                    {
+                      id: "gce" as EducationSystem,
+                      title: "GCE Anglophone",
+                      hint: "Forms, O-Level, Lower Sixth, Upper Sixth",
+                    },
+                    {
+                      id: "francophone" as EducationSystem,
+                      title: "Francophone",
+                      hint: "Sixième to Terminale, BEPC, Probatoire, Bac",
+                    },
+                  ].map((item) => {
+                    const sel = educationSystem === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        role="radio"
+                        aria-checked={sel}
+                        onClick={() => resetCurriculumPath(item.id)}
+                        className={`flex flex-col items-start gap-1 rounded-lg border p-3 text-left transition-colors ${
+                          sel
+                            ? "border-foreground bg-secondary"
+                            : "border-border bg-background hover:border-foreground/40"
+                        }`}
+                      >
+                        <span className="text-sm font-medium">{item.title}</span>
+                        <span className="text-xs text-muted-foreground">{item.hint}</span>
                       </button>
                     );
                   })}
@@ -298,10 +357,12 @@ function Onboarding() {
                   Choose your class
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Select Ordinary or Advanced Level, then your class.
+                  {educationSystem === "francophone"
+                    ? "Select your cycle (Collège or Lycée), then your class."
+                    : "Select Ordinary or Advanced Level, then your class."}
                 </p>
                 <div className="mt-5 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Level">
-                  {(["ordinary", "advanced"] as const).map((item) => (
+                  {levelOptions.map((item) => (
                     <button
                       key={item}
                       type="button"
@@ -313,13 +374,13 @@ function Onboarding() {
                         setSeries(null);
                         setSubjects([]);
                       }}
-                      className={`rounded-lg border p-4 text-left text-sm capitalize transition-colors ${
+                      className={`rounded-lg border p-4 text-left text-sm transition-colors ${
                         level === item
                           ? "border-foreground bg-secondary"
                           : "border-border bg-background hover:border-foreground/40"
                       }`}
                     >
-                      {item} level
+                      {levelLabelForSystem(item, educationSystem)}
                     </button>
                   ))}
                 </div>
@@ -361,10 +422,12 @@ function Onboarding() {
                   <BookOpen className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  Pick your subjects
+                  {educationSystem === "francophone" ? "Choisis ta filière" : "Pick your subjects"}
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Choose your series and the subjects you want on your dashboard.
+                  {educationSystem === "francophone"
+                    ? "Choisis ta série et les matières pour ton tableau de bord."
+                    : "Choose your series and the subjects you want on your dashboard."}
                 </p>
                 <div
                   className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2"
