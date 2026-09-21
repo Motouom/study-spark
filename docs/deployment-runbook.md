@@ -217,11 +217,14 @@ Likely causes:
 
 Actions:
 
-- Hard refresh the page.
+- Let the app recover once automatically. `public/chunk-reload.js` detects stale dynamic imports and missing `/assets/*.js` files, then performs one controlled reload.
+- If the friendly `Refresh needed` screen appears, click `Refresh StudySpark`.
 - Check browser console for 404 asset names.
 - Check Vercel deployment logs.
 - Confirm `vercel.json` CSP allows required runtime scripts and API hosts.
 - Confirm the service worker cache name was bumped if offline assets changed.
+- Confirm HTML/app-shell routes are still served with `Cache-Control: no-store, max-age=0, must-revalidate`.
+- Confirm `/assets/*` remains immutable because Vite emits hashed filenames.
 
 ### Google sign-in fails
 
