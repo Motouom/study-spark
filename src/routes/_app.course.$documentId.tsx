@@ -13,6 +13,7 @@ import {
   Lock,
   PlayCircle,
   Sparkles,
+  XCircle,
 } from "lucide-react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
@@ -20,7 +21,13 @@ import { useContentProtection } from "@/hooks/use-content-protection";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
-import { formatDuration } from "@/hooks/use-structural-progress";
+import {
+  countStructuralQuestions,
+  formatDuration,
+  useStructuralProgress,
+  type StructuralQuestionStatus,
+} from "@/hooks/use-structural-progress";
+import { useTopicUnderstandingProgress } from "@/hooks/use-topic-understanding-progress";
 import { getScrollPercent, onContainerScroll, scrollToPercent } from "@/lib/scroll-progress";
 import { slugifyHeading } from "@/components/ProtectedMarkdown";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
@@ -39,6 +46,8 @@ function CourseDocumentPage() {
   const content = useStudyContent(profile);
   const document = content.documents.find((item) => item.id === documentId);
   const studyProgress = usePaperStudyProgress(document?.id);
+  const questionProgress = useStructuralProgress(document?.id);
+  const topicProgress = useTopicUnderstandingProgress(document?.id);
   const pageLoading =
     supabaseConfigured() && (!profileLoaded || !content.loaded || content.loading);
   const isCourse = document?.contentKind === "course";
@@ -148,6 +157,21 @@ function CourseDocumentPage() {
                 documentTitle={document.title}
                 kindLabel={progressKindLabel}
               />
+              {document.contentKind === "paper" && (
+                <QuestionOutcomePanel
+                  documentId={document.id}
+                  markdown={document.markdownContent}
+                  progress={questionProgress}
+                />
+              )}
+              {(isCourse || isCheatsheet) && (
+                <TopicUnderstandingPanel
+                  markdown={document.markdownContent}
+                  documentTitle={document.title}
+                  isCheatsheet={isCheatsheet}
+                  progress={topicProgress}
+                />
+              )}
               {isCourse && <CourseContents markdown={document.markdownContent} />}
               <Suspense
                 fallback={
@@ -250,6 +274,28 @@ function CourseContents({ markdown }: { markdown: string }) {
   );
 }
 
+type TrackableTopic = {
+  key: string;
+  title: string;
+  href: string;
+};
+
+function trackableTopics(markdown: string, documentTitle: string, isCheatsheet: boolean) {
+  const headings = [...markdown.matchAll(/^## (.+)$/gm)]
+    .map((match) => match[1].trim())
+    .filter((title) => !/^(how to use this course|practice questions?|answers?)$/i.test(title));
+
+  const titles = headings.length > 0 ? headings : [documentTitle];
+  return titles.map((title, index): TrackableTopic => {
+    const slug = slugifyHeading(title) || `topic-${index + 1}`;
+    return {
+      key: `${index + 1}-${slug}`,
+      title,
+      href: headings.length > 0 || !isCheatsheet ? `#${slug}` : "#top",
+    };
+  });
+}
+
 function ReadingProgressBar() {
   const [percent, setPercent] = useState(0);
 
@@ -281,6 +327,189 @@ function ReadingProgressBar() {
         style={{ width: `${percent}%` }}
       />
     </div>
+  );
+}
+
+function QuestionOutcomePanel({
+  documentId,
+  markdown,
+  progress,
+}: {
+  documentId: string;
+  markdown: string;
+  progress: ReturnType<typeof useStructuralProgress>;
+}) {
+  const [localError, setLocalError] = useState<string | null>(null);
+  const questionCount = countStructuralQuestions(markdown);
+  const questions = useMemo(
+    () => Array.from({ length: questionCount }, (_, index) => index + 1),
+    [questionCount],
+  );
+  const byQuestion = useMemo(
+    () => new Map(progress.progress.map((item) => [item.questionNumber, item])),
+    [progress.progress],
+  );
+
+  async function mark(questionNumber: number, status: StructuralQuestionStatus) {
+    setLocalError(null);
+    try {
+      const existing = byQuestion.get(questionNumber);
+      if (status !== "started" && !existing) {
+        await progress.markQuestion(documentId, questionNumber, "started");
+      }
+      await progress.markQuestion(documentId, questionNumber, status);
+    } catch (error) {
+      setLocalError(error instanceof Error ? error.message : "Could not save question progress.");
+    }
+  }
+
+  if (questionCount === 0) return null;
+
+  return (
+    <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <Badge variant="secondary">Question outcomes</Badge>
+          <h2 className="mt-3 text-base font-medium">Mark what you passed and failed</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            This is the main progress signal. Reading percentage is only context.
+          </p>
+        </div>
+        <div className="grid grid-cols-3 gap-2 text-xs sm:min-w-64">
+          <MiniMetric label="Started" value={String(progress.summary.totalStarted)} />
+          <MiniMetric label="Passed" value={String(progress.summary.passed)} />
+          <MiniMetric label="Failed" value={String(progress.summary.failed)} />
+        </div>
+      </div>
+
+      {(progress.error || localError) && (
+        <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+          {localError ?? progress.error}
+        </div>
+      )}
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        {questions.map((questionNumber) => {
+          const item = byQuestion.get(questionNumber);
+          const status = item?.status ?? "not_started";
+          const saving = progress.savingKey === `${documentId}:${questionNumber}`;
+          return (
+            <div key={questionNumber} className="rounded-lg border border-border bg-background p-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-medium">Q{questionNumber}</span>
+                <StatusBadge status={status} />
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <OutcomeButton
+                  label="Passed"
+                  active={status === "passed"}
+                  disabled={saving}
+                  onClick={() => mark(questionNumber, "passed")}
+                />
+                <OutcomeButton
+                  label="Failed"
+                  active={status === "failed"}
+                  destructive
+                  disabled={saving}
+                  onClick={() => mark(questionNumber, "failed")}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function TopicUnderstandingPanel({
+  markdown,
+  documentTitle,
+  isCheatsheet,
+  progress,
+}: {
+  markdown: string;
+  documentTitle: string;
+  isCheatsheet: boolean;
+  progress: ReturnType<typeof useTopicUnderstandingProgress>;
+}) {
+  const [localError, setLocalError] = useState<string | null>(null);
+  const topics = useMemo(
+    () => trackableTopics(markdown, documentTitle, isCheatsheet),
+    [documentTitle, isCheatsheet, markdown],
+  );
+
+  async function mark(topic: TrackableTopic, status: "understood" | "review") {
+    setLocalError(null);
+    try {
+      await progress.markTopic({
+        topicKey: topic.key,
+        topicTitle: topic.title,
+        status,
+      });
+    } catch (error) {
+      setLocalError(error instanceof Error ? error.message : "Could not save topic progress.");
+    }
+  }
+
+  if (topics.length === 0) return null;
+
+  return (
+    <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <Badge variant="secondary">Topic understanding</Badge>
+          <h2 className="mt-3 text-base font-medium">
+            Mark each {isCheatsheet ? "cheatsheet topic" : "course topic"}
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Use this to separate topics you understand from topics that need revision.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-xs sm:min-w-44">
+          <MiniMetric label="Understood" value={String(progress.summary.understood)} />
+          <MiniMetric label="Review" value={String(progress.summary.review)} />
+        </div>
+      </div>
+
+      {(progress.error || localError) && (
+        <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+          {localError ?? progress.error}
+        </div>
+      )}
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        {topics.map((topic) => {
+          const item = progress.byTopic.get(topic.key);
+          const saving = progress.savingKey === topic.key;
+          return (
+            <div key={topic.key} className="rounded-lg border border-border bg-background p-3">
+              <div className="flex items-start justify-between gap-3">
+                <a href={topic.href} className="min-w-0 text-sm font-medium hover:text-accent">
+                  {topic.title}
+                </a>
+                {item && <StatusBadge status={item.status} />}
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                <OutcomeButton
+                  label="Understood"
+                  active={item?.status === "understood"}
+                  disabled={saving}
+                  onClick={() => mark(topic, "understood")}
+                />
+                <OutcomeButton
+                  label="Need review"
+                  active={item?.status === "review"}
+                  destructive
+                  disabled={saving}
+                  onClick={() => mark(topic, "review")}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -415,6 +644,71 @@ function CheckpointButton({
       <Icon className="h-4 w-4" />
       {label}
     </button>
+  );
+}
+
+function OutcomeButton({
+  label,
+  active,
+  destructive = false,
+  disabled,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  destructive?: boolean;
+  disabled: boolean;
+  onClick: () => Promise<void>;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={() => void onClick()}
+      className={`flex min-h-10 items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
+        active
+          ? destructive
+            ? "border-destructive bg-destructive text-destructive-foreground"
+            : "border-success bg-success text-success-foreground"
+          : "border-border bg-card hover:bg-secondary"
+      }`}
+    >
+      {active ? (
+        destructive ? (
+          <XCircle className="h-4 w-4" />
+        ) : (
+          <CheckCircle2 className="h-4 w-4" />
+        )
+      ) : null}
+      {label}
+    </button>
+  );
+}
+
+function StatusBadge({
+  status,
+}: {
+  status: "not_started" | "started" | "passed" | "failed" | "understood" | "review";
+}) {
+  const labelByStatus = {
+    not_started: "Not marked",
+    started: "Started",
+    passed: "Passed",
+    failed: "Failed",
+    understood: "Understood",
+    review: "Need review",
+  };
+  const className =
+    status === "passed" || status === "understood"
+      ? "text-success"
+      : status === "failed" || status === "review"
+        ? "text-destructive"
+        : "text-muted-foreground";
+
+  return (
+    <Badge variant="outline" className={className}>
+      {labelByStatus[status]}
+    </Badge>
   );
 }
 

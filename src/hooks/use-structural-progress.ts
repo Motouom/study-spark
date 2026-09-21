@@ -236,7 +236,9 @@ export function useStructuralProgress(documentId?: string | null) {
       }
 
       const rows = ((data ?? []) as ProgressRow[]).map(progressFromRow);
-      progressCache = { userId: user.id, rows };
+      if (!documentId) {
+        progressCache = { userId: user.id, rows };
+      }
       setProgress(rows.filter((item) => !documentId || item.documentId === documentId));
       setLoading(false);
       setError(null);

@@ -204,7 +204,7 @@ export function usePaperStudyProgress(documentId?: string | null) {
     } = {
       duration_seconds: secondsRef.current,
       max_scroll_percent: maxScrollPercent,
-      completed: maxScrollPercent >= 85,
+      completed: false,
     };
 
     if (ended) patch.ended_at = new Date().toISOString();
@@ -365,7 +365,9 @@ function summarizeReadingProgress(
     sessionsStarted: sessions.length,
     papersRead: new Set(sessions.map((item) => item.documentId)).size,
     completedPapers: new Set(
-      sessions.filter((item) => item.completed).map((item) => item.documentId),
+      checkpoints
+        .filter((item) => item.checkpointType === "understood")
+        .map((item) => item.documentId),
     ).size,
     totalDurationSeconds: sessions.reduce((sum, item) => sum + item.durationSeconds, 0),
     averageScrollPercent:
