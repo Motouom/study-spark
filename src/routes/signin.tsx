@@ -233,6 +233,16 @@ function SignIn() {
           {notice && (
             <p className="mt-4 rounded-lg border border-border bg-surface p-3 text-xs text-muted-foreground">
               {notice}
+              {(notice.toLowerCase().includes("fail") ||
+                notice.toLowerCase().includes("error") ||
+                notice.toLowerCase().includes("not confirmed")) && (
+                <a
+                  href="/support"
+                  className="ml-2 font-medium text-accent underline underline-offset-2"
+                >
+                  Get help →
+                </a>
+              )}
             </p>
           )}
 
