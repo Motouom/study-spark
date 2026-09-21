@@ -102,7 +102,7 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "StudySpark, Cameroon GCE, Cameroon past questions, GCE Advanced Level, GCE Ordinary Level, Cameroon secondary school, structural papers, Form 3, Form 4, Form 5, Lower Sixth, Upper Sixth, revision app Cameroon",
+          "StudySpark, Cameroon GCE, Cameroon past questions, GCE Advanced Level, GCE Ordinary Level, BEPC Cameroun, Probatoire Cameroun, Baccalaureat Cameroun, Terminale, Premiere, sujets Cameroun, revision app Cameroon",
       },
       { name: "author", content: "StudySpark" },
       { name: "application-name", content: SITE_NAME },
@@ -120,6 +120,7 @@ export const Route = createRootRoute({
       { property: "og:url", content: SITE_URL },
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:locale", content: "en_CM" },
+      { property: "og:locale:alternate", content: "fr_CM" },
       { property: "og:image", content: OG_IMAGE_URL },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },

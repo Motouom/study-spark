@@ -7,8 +7,22 @@ export const DEFAULT_SEO_TITLE = "StudySpark - Cameroon GCE revision, past quest
 export const DEFAULT_SEO_DESCRIPTION =
   "StudySpark helps Cameroonian Form 3, Form 4, Form 5, Lower Sixth, and Upper Sixth students practise GCE O Level and A Level subjects with protected papers, topic courses, cheatsheets, and progress tracking.";
 
+export const FRENCH_SEO_TITLE =
+  "StudySpark - Révision BEPC, Probatoire et Baccalauréat au Cameroun";
+
+export const FRENCH_SEO_DESCRIPTION =
+  "StudySpark aide les élèves du Cameroun à préparer le BEPC, le Probatoire et le Baccalauréat avec des sujets protégés, des cours par thème, des fiches de révision et un suivi de progression.";
+
 export function canonicalUrl(path = "/") {
   return `${SITE_URL}${path === "/" ? "" : path}`;
+}
+
+export function alternateLinks(path = "/", frenchPath = "/fr") {
+  return [
+    { rel: "alternate", hrefLang: "en-CM", href: canonicalUrl(path) },
+    { rel: "alternate", hrefLang: "fr-CM", href: canonicalUrl(frenchPath) },
+    { rel: "alternate", hrefLang: "x-default", href: canonicalUrl(path) },
+  ];
 }
 
 export function educationalAppSchema() {
@@ -33,6 +47,12 @@ export function educationalAppSchema() {
       "Form 5",
       "Lower Sixth",
       "Upper Sixth",
+      "Troisième",
+      "Première",
+      "Terminale",
+      "BEPC",
+      "Probatoire",
+      "Baccalauréat",
       "GCE Ordinary Level",
       "GCE Advanced Level",
     ],
@@ -66,6 +86,30 @@ export function educationalAppSchema() {
           billingDuration: "P1M",
         },
       },
+    ],
+  };
+}
+
+export function frenchEducationalAppSchema() {
+  return {
+    ...educationalAppSchema(),
+    name: "StudySpark Cameroun",
+    url: canonicalUrl("/fr"),
+    description: FRENCH_SEO_DESCRIPTION,
+    inLanguage: "fr-CM",
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "student",
+      audienceType: "Élèves francophones du secondaire au Cameroun",
+    },
+    learningResourceType: [
+      "Sujets d'examen",
+      "Préparation BEPC",
+      "Préparation Probatoire",
+      "Préparation Baccalauréat",
+      "Cours par thème",
+      "Fiches de révision",
+      "Suivi de progression",
     ],
   };
 }
@@ -104,6 +148,36 @@ export function pricingSchema() {
           priceCurrency: "XAF",
           availability: "https://schema.org/InStock",
           url: canonicalUrl("/pricing"),
+        },
+      ],
+    },
+  };
+}
+
+export function frenchPricingSchema() {
+  return {
+    ...pricingSchema(),
+    name: "StudySpark Premium Cameroun",
+    description:
+      "Accès premium pour la révision BEPC, Probatoire et Baccalauréat au Cameroun avec sujets protégés, cours par thème, fiches de révision et parcours guidé.",
+    offers: {
+      ...pricingSchema().offers,
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Aperçu gratuit",
+          price: "0",
+          priceCurrency: "XAF",
+          availability: "https://schema.org/InStock",
+          url: canonicalUrl("/fr/tarifs"),
+        },
+        {
+          "@type": "Offer",
+          name: "Premium mensuel",
+          price: "1500",
+          priceCurrency: "XAF",
+          availability: "https://schema.org/InStock",
+          url: canonicalUrl("/fr/tarifs"),
         },
       ],
     },
