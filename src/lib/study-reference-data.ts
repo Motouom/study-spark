@@ -42,7 +42,7 @@ export type Subject =
   | "Logic"
   | "Agricultural Science";
 
-export type ContentStatus = "draft" | "review" | "published" | "archived";
+export type ContentStatus = "draft" | "review" | "published" | "unpublished" | "archived";
 
 export interface StudentProfile {
   name: string;

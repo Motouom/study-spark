@@ -2,8 +2,21 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Archive, Brain, FileText, RefreshCw, Save, ShieldCheck, Upload } from "lucide-react";
-import { useMemo, useState, type ReactNode } from "react";
+import {
+  Archive,
+  AlertTriangle,
+  Brain,
+  CheckCircle2,
+  Eye,
+  FileText,
+  RefreshCw,
+  Save,
+  Send,
+  ShieldCheck,
+  Undo2,
+  Upload,
+} from "lucide-react";
+import { lazy, Suspense, useMemo, useState, type ReactNode } from "react";
 import {
   CLASS_LEVELS,
   LANGUAGES,
@@ -19,10 +32,18 @@ import {
 import {
   useAdminData,
   type AdminCourseDocument,
+  type ContentIssueReport,
   type CourseContentKind,
   type CourseDocumentDraft,
+  type CurriculumPath,
+  type PermissionStatus,
+  type ReviewStatus,
+  type SourceType,
 } from "@/hooks/use-admin-data";
 import { useAiActions } from "@/hooks/use-ai-actions";
+import type { ContentStatus } from "@/lib/study-reference-data";
+
+const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
 
 const ALL_CLASS_LEVELS = CLASS_LEVELS.map((item) => item.id) as ClassLevel[];
 const ALL_SERIES = SERIES_OPTIONS.map((item) => item.id) as Series[];
@@ -104,16 +125,20 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
   const {
     topics,
     documents,
+    issueReports,
     error,
     reload,
     saveCourseDocument,
+    unpublishCourseDocument,
     archiveCourseDocument,
     deleteCourseDocument,
+    resolveContentIssueReport,
   } = useAdminData();
   const [mode, setMode] = useState<"list" | "document">("list");
   const [documentDraft, setDocumentDraft] = useState<CourseDocumentDraft>(
     emptyDocument(config.contentKind),
   );
+  const [previewed, setPreviewed] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const ai = useAiActions();
@@ -132,11 +157,36 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
     return topics.find((topic) => topic.subject === subject);
   }
 
-  async function submitDocument(event: React.FormEvent) {
-    event.preventDefault();
+  function updateDraft(patch: Partial<CourseDocumentDraft>) {
+    setPreviewed(false);
+    setDocumentDraft((current) => ({ ...current, ...patch }));
+  }
+
+  function validateDraft(status: ContentStatus) {
+    if (documentTopics.length === 0) return `No course section exists yet for ${documentDraft.subject}.`;
+    if (documentDraft.markdownContent.trim().length < 20) return "Markdown content is too short.";
+    if (documentDraft.classLevels.length === 0) return "Select at least one class level.";
+    if (documentDraft.series.length === 0) return "Select at least one series.";
+    if (status !== "published") return null;
+    if (!previewed) return "Preview the learner view before publishing.";
+    if (!documentDraft.exam.trim()) return "Published content requires an exam.";
+    if (!documentDraft.contentYear.trim()) return "Published content requires a year or syllabus version.";
+    if (!documentDraft.sourceReference.trim()) return "Published content requires a source reference.";
+    if (documentDraft.reviewStatus !== "approved") {
+      return "Published content must be approved by review.";
+    }
+    if (!["approved", "licensed", "public_domain"].includes(documentDraft.permissionStatus)) {
+      return "Published content needs approved, licensed, or public domain permission status.";
+    }
+    return null;
+  }
+
+  async function saveDocument(status: ContentStatus) {
     setSaving(true);
     setMessage(null);
     try {
+      const validation = validateDraft(status);
+      if (validation) throw new Error(validation);
       const topic = documentDraft.topicId
         ? topics.find((item) => item.id === documentDraft.topicId)
         : firstTopicForSubject(documentDraft.subject);
@@ -144,14 +194,15 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
       await saveCourseDocument({
         ...documentDraft,
         topicId: topic.id,
-        status: "published",
+        status,
         contentKind: config.contentKind,
         title: uppercaseTitle(documentDraft.title.trim().replace(/\s+/g, " ")),
         markdownContent: removeEmojis(documentDraft.markdownContent),
       });
       setDocumentDraft(emptyDocument(config.contentKind));
+      setPreviewed(false);
       setMode("list");
-      setMessage(`Markdown ${config.noun} published without emojis.`);
+      setMessage(`Markdown ${config.noun} saved as ${status}.`);
     } catch (err) {
       setMessage(
         err instanceof Error ? err.message : `Markdown ${config.noun} could not be saved.`,
@@ -171,6 +222,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
         .find((line) => line.trim().startsWith("#"))
         ?.replace(/^#+\s*/, "")
         .trim() || file.name.replace(/\.md$/i, "");
+    setPreviewed(false);
     setDocumentDraft((current) => ({
       ...current,
       title: uppercaseTitle(title),
@@ -186,6 +238,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
         subject: documentDraft.subject,
         markdown: documentDraft.markdownContent,
       });
+      setPreviewed(false);
       setDocumentDraft((current) => ({
         ...current,
         markdownContent: result.markdown,
@@ -252,7 +305,10 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
 
       {mode === "document" && (
         <form
-          onSubmit={submitDocument}
+          onSubmit={(event) => {
+            event.preventDefault();
+            void saveDocument("draft");
+          }}
           className="mb-6 rounded-xl border border-border bg-card p-5"
         >
           <div className="flex items-center justify-between">
@@ -270,10 +326,10 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                 required
                 value={documentDraft.title}
                 onChange={(e) =>
-                  setDocumentDraft({ ...documentDraft, title: uppercaseTitle(e.target.value) })
+                  updateDraft({ title: uppercaseTitle(e.target.value) })
                 }
                 onBlur={(e) =>
-                  setDocumentDraft({ ...documentDraft, title: uppercaseTitle(e.target.value) })
+                  updateDraft({ title: uppercaseTitle(e.target.value) })
                 }
                 className="uppercase"
                 placeholder={
@@ -290,8 +346,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                 onChange={(value) => {
                   const subject = value as Subject;
                   const topic = topics.find((item) => item.subject === subject);
-                  setDocumentDraft({
-                    ...documentDraft,
+                  updateDraft({
                     subject,
                     topicId: topic?.id ?? "",
                   });
@@ -303,8 +358,15 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                 value={documentDraft.language}
                 options={LANGUAGES.map((item) => item.id)}
                 onChange={(value) =>
-                  setDocumentDraft({ ...documentDraft, language: value as Language })
+                  updateDraft({ language: value as Language })
                 }
+              />
+            </Field>
+            <Field label="Status">
+              <Select
+                value={documentDraft.status}
+                options={["draft", "review", "published", "unpublished", "archived"]}
+                onChange={(value) => updateDraft({ status: value as ContentStatus })}
               />
             </Field>
             <Field label="Markdown file">
@@ -320,8 +382,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                 options={CLASS_LEVELS.map((item) => item.id)}
                 label={classLabel}
                 onChange={(classLevels) =>
-                  setDocumentDraft({
-                    ...documentDraft,
+                  updateDraft({
                     classLevels: classLevels as ClassLevel[],
                   })
                 }
@@ -333,19 +394,107 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
                 options={SERIES_OPTIONS.map((item) => item.id)}
                 label={seriesLabel}
                 onChange={(series) =>
-                  setDocumentDraft({ ...documentDraft, series: series as Series[] })
+                  updateDraft({ series: series as Series[] })
                 }
               />
             </Field>
+            <Field label="Curriculum path">
+              <Select
+                value={documentDraft.curriculumPath}
+                options={["gce", "francophone", "other"]}
+                onChange={(value) => updateDraft({ curriculumPath: value as CurriculumPath })}
+              />
+            </Field>
+            <Field label="Exam / programme">
+              <Input
+                value={documentDraft.exam}
+                onChange={(event) => updateDraft({ exam: event.target.value })}
+                placeholder="GCE A Level, GCE O Level, Probatoire, Baccalauréat"
+              />
+            </Field>
+            <Field label="Year or syllabus version">
+              <Input
+                value={documentDraft.contentYear}
+                onChange={(event) => updateDraft({ contentYear: event.target.value })}
+                placeholder="2026 or 2024 syllabus"
+              />
+            </Field>
+            <Field label="Source type">
+              <Select
+                value={documentDraft.sourceType}
+                options={[
+                  "official_exam",
+                  "licensed_partner",
+                  "teacher_authored",
+                  "internal",
+                  "user_reported",
+                  "other",
+                ]}
+                onChange={(value) => updateDraft({ sourceType: value as SourceType })}
+              />
+            </Field>
+            <Field label="Permission status">
+              <Select
+                value={documentDraft.permissionStatus}
+                options={[
+                  "needs_review",
+                  "approved",
+                  "licensed",
+                  "public_domain",
+                  "restricted",
+                  "rejected",
+                ]}
+                onChange={(value) =>
+                  updateDraft({ permissionStatus: value as PermissionStatus })
+                }
+              />
+            </Field>
+            <Field label="Review status">
+              <Select
+                value={documentDraft.reviewStatus}
+                options={[
+                  "not_reviewed",
+                  "metadata_reviewed",
+                  "content_reviewed",
+                  "approved",
+                  "changes_requested",
+                ]}
+                onChange={(value) => updateDraft({ reviewStatus: value as ReviewStatus })}
+              />
+            </Field>
+            <Field label="Content version">
+              <Input
+                value={documentDraft.contentVersion}
+                onChange={(event) => updateDraft({ contentVersion: event.target.value })}
+                placeholder="1.0.0"
+              />
+            </Field>
           </div>
+
+          <Field label="Source reference">
+            <Textarea
+              value={documentDraft.sourceReference}
+              onChange={(event) => updateDraft({ sourceReference: event.target.value })}
+              className="min-h-20"
+              placeholder="Official paper source, teacher author, license note, reviewer evidence, or internal source record."
+            />
+          </Field>
+
+          <Field label="Change note">
+            <Textarea
+              value={documentDraft.changeNote}
+              onChange={(event) => updateDraft({ changeNote: event.target.value })}
+              className="min-h-20"
+              placeholder="What changed and why this version is safe to publish."
+            />
+          </Field>
 
           <Field label="Markdown content">
             <Textarea
               required
               value={documentDraft.markdownContent}
               onChange={(e) =>
-                setDocumentDraft({
-                  ...documentDraft,
+                updateDraft({
                   markdownContent: removeEmojisForTyping(e.target.value),
                 })
               }
@@ -377,17 +526,71 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
               Cancel
             </Button>
             <Button
-              type="submit"
+              type="button"
+              variant="outline"
+              disabled={documentDraft.markdownContent.length < 20}
+              onClick={() => setPreviewed(true)}
+            >
+              <Eye className="mr-1.5 h-3.5 w-3.5" />
+              Preview learner view
+            </Button>
+            <Button type="button" variant="outline" disabled={saving} onClick={() => void saveDocument("review")}>
+              <Send className="mr-1.5 h-3.5 w-3.5" />
+              Send to review
+            </Button>
+            <Button
+              type="button"
               disabled={
                 saving || documentTopics.length === 0 || documentDraft.markdownContent.length < 20
               }
+              onClick={() => void saveDocument("published")}
             >
               <Save className="mr-1.5 h-3.5 w-3.5" />
-              {saving ? "Publishing..." : `Publish markdown ${config.noun}`}
+              {saving ? "Saving..." : `Publish ${config.noun}`}
             </Button>
           </div>
+
+          {previewed && (
+            <div className="mt-5 rounded-xl border border-border bg-background p-4">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-medium">Learner preview</h3>
+                  <p className="text-xs text-muted-foreground">
+                    This uses the same protected renderer students see.
+                  </p>
+                </div>
+                <Badge variant="outline">Previewed</Badge>
+              </div>
+              <Suspense fallback={<div className="text-sm text-muted-foreground">Preparing preview...</div>}>
+                <ProtectedMarkdown
+                  document={{
+                    id: documentDraft.id ?? "00000000-0000-0000-0000-000000000000",
+                    topicId: documentDraft.topicId || "preview",
+                    subject: documentDraft.subject,
+                    title: documentDraft.title || `Untitled ${config.noun}`,
+                    language: documentDraft.language,
+                    level: documentDraft.level,
+                    classLevels: documentDraft.classLevels,
+                    series: documentDraft.series,
+                    markdownContent: documentDraft.markdownContent,
+                    updatedAt: new Date().toISOString(),
+                    accessStatus: "premium",
+                    contentKind: documentDraft.contentKind,
+                    isLocked: false,
+                  }}
+                  owner="StudySpark admin preview"
+                  userId="admin-preview"
+                />
+              </Suspense>
+            </div>
+          )}
         </form>
       )}
+
+      <ContentIssueReports
+        reports={issueReports.filter((report) => report.contentKind === config.contentKind)}
+        onResolve={resolveContentIssueReport}
+      />
 
       <DocumentList
         documents={kindDocuments}
@@ -396,6 +599,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
           setDocumentDraft(document);
           setMode("document");
         }}
+        onUnpublish={unpublishCourseDocument}
         onArchive={archiveCourseDocument}
         onDelete={deleteCourseDocument}
       />
@@ -415,6 +619,15 @@ function emptyDocument(contentKind: CourseContentKind): CourseDocumentDraft {
     status: "published",
     contentKind,
     markdownContent: "",
+    curriculumPath: "gce",
+    exam: "",
+    contentYear: "",
+    sourceType: "internal",
+    sourceReference: "",
+    permissionStatus: "needs_review",
+    reviewStatus: "not_reviewed",
+    contentVersion: "1.0.0",
+    changeNote: "",
   };
 }
 
@@ -422,12 +635,14 @@ function DocumentList({
   documents,
   noun,
   onEdit,
+  onUnpublish,
   onArchive,
   onDelete,
 }: {
   documents: AdminCourseDocument[];
   noun: string;
   onEdit: (document: AdminCourseDocument) => void;
+  onUnpublish: (documentId: string) => void;
   onArchive: (documentId: string) => void;
   onDelete: (documentId: string) => void;
 }) {
@@ -452,10 +667,24 @@ function DocumentList({
                 <div className="truncate text-sm font-medium">{document.title}</div>
                 <div className="mt-0.5 text-xs text-muted-foreground">
                   {document.subject} · {document.markdownContent.length} chars
+                  {" · "}
+                  {document.status}
+                  {document.reviewStatus ? ` · ${document.reviewStatus}` : ""}
                   {document.contentKind === "textbook" ? " · textbook" : ""}
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-1">
+                {document.status === "published" && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7"
+                    title={`Unpublish ${noun}`}
+                    onClick={() => onUnpublish(document.id)}
+                  >
+                    <Undo2 className="h-3.5 w-3.5" />
+                  </Button>
+                )}
                 <Button
                   variant="ghost"
                   size="icon"
@@ -491,6 +720,80 @@ function DocumentList({
           ))}
         </div>
       )}
+    </section>
+  );
+}
+
+function ContentIssueReports({
+  reports,
+  onResolve,
+}: {
+  reports: ContentIssueReport[];
+  onResolve: (
+    reportId: string,
+    status: ContentIssueReport["status"],
+    notes: string,
+  ) => Promise<void>;
+}) {
+  const openReports = reports.filter((report) => report.status === "open" || report.status === "reviewing");
+  const [notes, setNotes] = useState<Record<string, string>>({});
+
+  if (reports.length === 0) return null;
+
+  return (
+    <section className="mb-6 rounded-xl border border-border bg-card">
+      <div className="flex items-center justify-between border-b border-border px-4 py-3">
+        <div>
+          <h2 className="text-sm font-medium">Learner-reported content issues</h2>
+          <p className="text-xs text-muted-foreground">
+            Reports from the learner document view, grouped with this content type.
+          </p>
+        </div>
+        <Badge variant={openReports.length > 0 ? "default" : "secondary"}>{openReports.length} open</Badge>
+      </div>
+      <div className="divide-y divide-border">
+        {reports.slice(0, 8).map((report) => (
+          <div key={report.id} className="grid gap-3 px-4 py-3 lg:grid-cols-[1fr_auto]">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="outline">{report.status}</Badge>
+                <Badge variant="secondary">{report.issueType.replace(/_/g, " ")}</Badge>
+                {report.questionNumber && <Badge variant="outline">Q{report.questionNumber}</Badge>}
+              </div>
+              <div className="mt-2 text-sm font-medium">{report.documentTitle}</div>
+              <p className="mt-1 text-sm text-muted-foreground">{report.body}</p>
+              {report.topicTitle && (
+                <p className="mt-1 text-xs text-muted-foreground">Topic: {report.topicTitle}</p>
+              )}
+              <Input
+                className="mt-3"
+                value={notes[report.id] ?? report.adminNotes}
+                onChange={(event) =>
+                  setNotes((current) => ({ ...current, [report.id]: event.target.value }))
+                }
+                placeholder="Admin note for this report"
+              />
+            </div>
+            <div className="flex flex-wrap items-start gap-2 lg:justify-end">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => void onResolve(report.id, "reviewing", notes[report.id] ?? report.adminNotes)}
+              >
+                <AlertTriangle className="mr-1.5 h-3.5 w-3.5" />
+                Review
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => void onResolve(report.id, "resolved", notes[report.id] ?? report.adminNotes)}
+              >
+                <CheckCircle2 className="mr-1.5 h-3.5 w-3.5" />
+                Resolve
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

@@ -22,6 +22,27 @@ export type AdminTopic = {
 };
 
 export type CourseContentKind = "course" | "textbook" | "paper" | "cheatsheet";
+export type CurriculumPath = "gce" | "francophone" | "other";
+export type SourceType =
+  | "official_exam"
+  | "licensed_partner"
+  | "teacher_authored"
+  | "internal"
+  | "user_reported"
+  | "other";
+export type PermissionStatus =
+  | "needs_review"
+  | "approved"
+  | "licensed"
+  | "public_domain"
+  | "restricted"
+  | "rejected";
+export type ReviewStatus =
+  | "not_reviewed"
+  | "metadata_reviewed"
+  | "content_reviewed"
+  | "approved"
+  | "changes_requested";
 
 export type AdminCourseDocument = {
   id: string;
@@ -35,6 +56,32 @@ export type AdminCourseDocument = {
   status: ContentStatus;
   contentKind: CourseContentKind;
   markdownContent: string;
+  curriculumPath: CurriculumPath;
+  exam: string;
+  contentYear: string;
+  sourceType: SourceType;
+  sourceReference: string;
+  permissionStatus: PermissionStatus;
+  reviewStatus: ReviewStatus;
+  contentVersion: string;
+  changeNote: string;
+  updatedAt: string;
+};
+
+export type ContentIssueReport = {
+  id: string;
+  userId: string;
+  documentId: string;
+  documentTitle: string;
+  contentKind: CourseContentKind;
+  subject: Subject;
+  questionNumber: number | null;
+  topicTitle: string;
+  issueType: string;
+  body: string;
+  status: "open" | "reviewing" | "resolved" | "rejected" | "archived";
+  adminNotes: string;
+  createdAt: string;
   updatedAt: string;
 };
 
@@ -90,6 +137,7 @@ type AdminDataState = {
   learners: AdminLearner[];
   logs: AdminAuditLog[];
   protectedEvents: ProtectedContentEvent[];
+  issueReports: ContentIssueReport[];
   loading: boolean;
   error: string | null;
 };
@@ -100,6 +148,7 @@ const emptyState: AdminDataState = {
   learners: [],
   logs: [],
   protectedEvents: [],
+  issueReports: [],
   loading: false,
   error: null,
 };
@@ -136,6 +185,45 @@ function mapCourseDocument(row: Record<string, unknown>): AdminCourseDocument {
         ? row.content_kind
         : "course",
     markdownContent: String(row.markdown_content ?? ""),
+    curriculumPath: (row.curriculum_path ?? "gce") as CurriculumPath,
+    exam: String(row.exam ?? ""),
+    contentYear: String(row.content_year ?? ""),
+    sourceType: (row.source_type ?? "internal") as SourceType,
+    sourceReference: String(row.source_reference ?? ""),
+    permissionStatus: (row.permission_status ?? "needs_review") as PermissionStatus,
+    reviewStatus: (row.review_status ?? "not_reviewed") as ReviewStatus,
+    contentVersion: String(row.content_version ?? "1.0.0"),
+    changeNote: String(row.change_note ?? ""),
+    updatedAt: String(row.updated_at ?? ""),
+  };
+}
+
+function mapIssueReport(row: Record<string, unknown>): ContentIssueReport {
+  return {
+    id: String(row.id),
+    userId: String(row.user_id ?? ""),
+    documentId: String(row.document_id ?? ""),
+    documentTitle: String(row.document_title ?? "Untitled content"),
+    contentKind:
+      row.content_kind === "textbook" ||
+      row.content_kind === "paper" ||
+      row.content_kind === "cheatsheet"
+        ? row.content_kind
+        : "course",
+    subject: row.subject as Subject,
+    questionNumber: row.question_number == null ? null : Number(row.question_number),
+    topicTitle: String(row.topic_title ?? ""),
+    issueType: String(row.issue_type ?? "content_error"),
+    body: String(row.body ?? ""),
+    status:
+      row.status === "reviewing" ||
+      row.status === "resolved" ||
+      row.status === "rejected" ||
+      row.status === "archived"
+        ? row.status
+        : "open",
+    adminNotes: String(row.admin_notes ?? ""),
+    createdAt: String(row.created_at ?? ""),
     updatedAt: String(row.updated_at ?? ""),
   };
 }
@@ -207,11 +295,12 @@ export function useAdminData() {
 
     setState((current) => ({ ...current, loading: true, error: null }));
     try {
-      const [topics, documents, learners, logs] = await Promise.all([
+      const [topics, documents, learners, logs, issueReports] = await Promise.all([
         rpc<Record<string, unknown>[]>("admin_list_topics"),
         rpc<Record<string, unknown>[]>("admin_list_course_documents"),
         rpc<Record<string, unknown>[]>("admin_list_learners"),
         rpc<Record<string, unknown>[]>("admin_list_audit_logs", { limit_count: 100 }),
+        rpc<Record<string, unknown>[]>("admin_list_content_issue_reports"),
       ]);
       const protectedEvents = await supabase
         .from("protected_content_events")
@@ -224,6 +313,7 @@ export function useAdminData() {
         documents: documents.map(mapCourseDocument),
         learners: learners.map(mapLearner),
         logs: logs.map(mapLog),
+        issueReports: issueReports.map(mapIssueReport),
         protectedEvents: protectedEvents.error
           ? []
           : ((protectedEvents.data ?? []) as Record<string, unknown>[]).map(mapProtectedEvent),
@@ -274,7 +364,24 @@ export function useAdminData() {
         document_status: document.status,
         document_markdown_content: document.markdownContent,
         document_content_kind: document.contentKind,
+        document_curriculum_path: document.curriculumPath,
+        document_exam: document.exam,
+        document_content_year: document.contentYear,
+        document_source_type: document.sourceType,
+        document_source_reference: document.sourceReference,
+        document_permission_status: document.permissionStatus,
+        document_review_status: document.reviewStatus,
+        document_content_version: document.contentVersion,
+        document_change_note: document.changeNote,
       });
+      await load();
+    },
+    [load],
+  );
+
+  const unpublishCourseDocument = useCallback(
+    async (documentId: string) => {
+      await rpc("admin_unpublish_course_document", { document_id: documentId });
       await load();
     },
     [load],
@@ -291,6 +398,22 @@ export function useAdminData() {
   const deleteCourseDocument = useCallback(
     async (documentId: string) => {
       await rpc("admin_delete_course_document", { document_id: documentId });
+      await load();
+    },
+    [load],
+  );
+
+  const resolveContentIssueReport = useCallback(
+    async (
+      reportId: string,
+      status: ContentIssueReport["status"],
+      notes: string,
+    ) => {
+      await rpc("admin_resolve_content_issue_report", {
+        report_id: reportId,
+        next_status: status,
+        notes,
+      });
       await load();
     },
     [load],
@@ -313,8 +436,10 @@ export function useAdminData() {
       reload: load,
       saveTopic,
       saveCourseDocument,
+      unpublishCourseDocument,
       archiveCourseDocument,
       deleteCourseDocument,
+      resolveContentIssueReport,
       setLearnerPlan,
     }),
     [
@@ -324,7 +449,9 @@ export function useAdminData() {
       saveCourseDocument,
       saveTopic,
       setLearnerPlan,
+      resolveContentIssueReport,
       state,
+      unpublishCourseDocument,
     ],
   );
 }
