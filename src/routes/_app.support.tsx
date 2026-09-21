@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_app/support")({
   component: SupportPage,
 });
 
-const SUPPORT_EMAIL = "support@studyspark.cm";
+const SUPPORT_EMAIL = "motouomvictor@gmail.com";
 
 function SupportPage() {
   const { profile } = useStudyProfile();
@@ -91,6 +91,16 @@ function SupportPage() {
                 hours.
               </p>
             )}
+            <p className="text-xs text-muted-foreground">
+              No email app? Write to us directly at{" "}
+              <a
+                href={`mailto:${SUPPORT_EMAIL}`}
+                className="font-medium text-accent underline underline-offset-2"
+              >
+                {SUPPORT_EMAIL}
+              </a>
+              .
+            </p>
             <p className="text-xs text-muted-foreground">
               Your plan, level, and subjects are attached automatically so we can help faster.
             </p>

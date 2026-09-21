@@ -44,12 +44,12 @@ export function clearStudySparkLocalData() {
   }
 }
 
-function shouldRefreshSubscription() {
+export function shouldRefreshSubscription() {
   const lastRefresh = Number(sessionStorage.getItem(SUBSCRIPTION_REFRESH_KEY) ?? "0");
   return !lastRefresh || Date.now() - lastRefresh > SUBSCRIPTION_REFRESH_INTERVAL_MS;
 }
 
-function markSubscriptionRefreshed() {
+export function markSubscriptionRefreshed() {
   sessionStorage.setItem(SUBSCRIPTION_REFRESH_KEY, String(Date.now()));
 }
 
@@ -119,6 +119,7 @@ export function useStudyProfile() {
   const { user, loaded: userLoaded } = useSupabaseUser();
   const [profile, setProfileState] = useState<StudentProfile | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!userLoaded) return;
@@ -126,24 +127,26 @@ export function useStudyProfile() {
     if (!user) {
       setProfileState(null);
       setLoaded(true);
+      setError(null);
       return;
     }
 
     if (supabaseConfigured() && supabase) {
       setLoaded(false);
       const client = supabase;
+      let active = true;
 
       void (async () => {
         if (shouldRefreshSubscription()) {
           try {
             await client.rpc("refresh_my_subscription_status");
             markSubscriptionRefreshed();
-          } catch (error) {
-            console.warn("Could not refresh subscription status", error);
+          } catch (rpcError) {
+            console.warn("Could not refresh subscription status", rpcError);
           }
         }
 
-        const { data, error } = await client
+        const { data, error: fetchError } = await client
           .from("student_profiles")
           .select(
             "name, language, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
@@ -151,9 +154,15 @@ export function useStudyProfile() {
           .eq("user_id", user.id)
           .maybeSingle();
 
-        if (error) {
-          console.error("Could not load study profile", error);
-          setProfileState(null);
+        if (!active) return;
+
+        if (fetchError) {
+          console.error("Could not load study profile", fetchError);
+          // Keep any cached profile and surface the error so callers can
+          // distinguish "no profile yet" from "profile fetch failed" — a
+          // transient network error must not funnel a signed-in user into
+          // onboarding.
+          setError(fetchError.message);
           setLoaded(true);
           return;
         }
@@ -167,9 +176,12 @@ export function useStudyProfile() {
         }
 
         setProfileState(remoteProfile);
+        setError(null);
         setLoaded(true);
       })();
-      return;
+      return () => {
+        active = false;
+      };
     }
 
     setProfileState(readLocalProfile(user.id));
@@ -243,5 +255,12 @@ export function useStudyProfile() {
     [profile, user],
   );
 
-  return { user, loaded: userLoaded && loaded, profile, saveProfile, displayName };
+  return {
+    user,
+    loaded: userLoaded && loaded,
+    profile,
+    profileError: error,
+    saveProfile,
+    displayName,
+  };
 }

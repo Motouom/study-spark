@@ -21,31 +21,28 @@ function AuthCallback() {
 
       const url = new URL(window.location.href);
       const authErrorDescription = url.searchParams.get("error_description");
-      const code = url.searchParams.get("code");
 
       if (authErrorDescription) {
         setError(decodeURIComponent(authErrorDescription.replace(/\+/g, " ")));
         return;
       }
 
-      const { data: existingSession } = await supabase.auth.getSession();
-      if (existingSession.session) {
-        await navigate({ to: "/dashboard" });
-        return;
+      // The Supabase client is created with detectSessionInUrl: true, so it
+      // exchanges the PKCE code itself on load. Manually calling
+      // exchangeCodeForSession here as well races it for the same
+      // one-time code. Instead, wait for the session to appear.
+      const deadline = Date.now() + 10_000;
+      while (Date.now() < deadline) {
+        const { data } = await supabase.auth.getSession();
+        if (data.session) {
+          window.history.replaceState(null, "", window.location.pathname);
+          await navigate({ to: "/dashboard" });
+          return;
+        }
+        await new Promise((resolve) => window.setTimeout(resolve, 300));
       }
 
-      if (!code) {
-        setError("The sign-in callback did not include an authorization code or saved session.");
-        return;
-      }
-
-      const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-      if (exchangeError) {
-        setError(exchangeError.message);
-        return;
-      }
-
-      await navigate({ to: "/dashboard" });
+      setError("Sign-in took too long. Please try signing in again.");
     }
 
     void finishSignIn();

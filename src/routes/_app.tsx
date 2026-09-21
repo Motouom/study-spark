@@ -17,7 +17,7 @@ import {
   ShieldCheck,
   Brain,
   PlayCircle,
-  BookOpenText,
+  BookMarked,
   LifeBuoy,
 } from "lucide-react";
 import type { ReactNode } from "react";
@@ -40,20 +40,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { classLabel, seriesLabel, type StudentProfile } from "@/lib/study-reference-data";
-import { getStudentShell } from "@/lib/server-api";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
-import { useStructuralProgress } from "@/hooks/use-structural-progress";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
 import { signOut } from "@/lib/auth";
 import { isPremiumActive } from "@/lib/premium";
 
 export const Route = createFileRoute("/_app")({
-  loader: async () => {
-    return getStudentShell();
-  },
   component: AppLayout,
 });
 
@@ -63,7 +59,7 @@ const NAV = [
   { to: "/progress", label: "Progress", icon: TrendingUp },
   { to: "/learning-path", label: "Learning path", icon: Brain },
   { to: "/courses", label: "Courses", icon: PlayCircle },
-  { to: "/textbooks", label: "Textbooks", icon: BookOpenText },
+  { to: "/cheatsheets", label: "Cheatsheets", icon: BookMarked },
   { to: "/achievements", label: "Achievements", icon: Trophy },
   { to: "/leaderboard", label: "Leaderboard", icon: Users },
 ] as const;
@@ -112,7 +108,7 @@ function SidebarContent({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { summary } = useStructuralProgress();
+  const { currentStreak } = useUnifiedStreak();
   const shownName = displayName ?? profile?.name ?? "Student";
   const initials = shownName.slice(0, 1).toUpperCase();
   const premium = isPremiumActive(profile);
@@ -197,14 +193,14 @@ function SidebarContent({
         <div className="flex items-center gap-2">
           <Flame className="h-4 w-4 text-accent" />
           <span className="text-sm font-medium">
-            {premium ? `${summary.currentStreak} day streak` : "Premium streaks"}
+            {premium ? `${currentStreak} day streak` : "Premium streaks"}
           </span>
         </div>
         <p className="mt-1.5 text-xs text-muted-foreground">
           {premium
-            ? summary.currentStreak > 0
-              ? "Mark another structural question today to keep it going."
-              : "Mark your first structural question to start building momentum."
+            ? currentStreak > 0
+              ? "Mark a question or read a paper today to keep it going."
+              : "Mark a question or read a paper to start building momentum."
             : "Upgrade to unlock daily streaks and weekly streak freezes."}
         </p>
       </Link>
@@ -228,7 +224,7 @@ function SidebarContent({
             className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-medium"
           >
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            {profile?.plan === "premium" ? "Premium" : "Free"}
+            {isPremiumActive(profile) ? "Premium" : "Free"}
           </Link>
         </div>
         {/* Theme toggle row — full width pill */}
@@ -260,14 +256,9 @@ function CommandMenu({
   isAdmin: boolean;
 }) {
   const navigate = useNavigate();
-  const { topics } = Route.useLoaderData();
   const { profile } = useStudyProfile();
   const content = useStudyContent(profile);
-  const searchTopics = supabaseConfigured()
-    ? content.topics
-    : content.enabled
-      ? content.topics
-      : topics;
+  const searchTopics = content.topics;
   const go = (path: string) => {
     setOpen(false);
     // Small timeout so dialog close animation doesn't fight navigation
@@ -302,8 +293,8 @@ function CommandMenu({
           <CommandItem onSelect={() => go("/courses")}>
             <PlayCircle className="mr-2 h-4 w-4" /> Courses
           </CommandItem>
-          <CommandItem onSelect={() => go("/textbooks")}>
-            <BookOpenText className="mr-2 h-4 w-4" /> Textbooks
+          <CommandItem onSelect={() => go("/cheatsheets")}>
+            <BookMarked className="mr-2 h-4 w-4" /> Cheatsheets
           </CommandItem>
           <CommandItem onSelect={() => go("/search")}>
             <Search className="mr-2 h-4 w-4" /> Advanced search
@@ -337,9 +328,8 @@ function CommandMenu({
 }
 
 function AppLayout() {
-  const { session } = Route.useLoaderData();
-  const { user, loaded, profile: savedProfile, displayName } = useStudyProfile();
-  const profile = supabaseConfigured() ? savedProfile : (savedProfile ?? session.profile);
+  const { user, loaded, profile: savedProfile, profileError, displayName } = useStudyProfile();
+  const profile = savedProfile;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
@@ -366,11 +356,12 @@ function AppLayout() {
       loaded &&
       user &&
       !savedProfile &&
+      !profileError &&
       location.pathname !== "/onboarding"
     ) {
       void navigate({ to: "/onboarding" });
     }
-  }, [loaded, location.pathname, navigate, savedProfile, user]);
+  }, [loaded, location.pathname, navigate, profileError, savedProfile, user]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -407,6 +398,7 @@ function AppLayout() {
     loaded &&
     user &&
     !savedProfile &&
+    !profileError &&
     location.pathname !== "/onboarding"
   ) {
     return (
@@ -470,7 +462,10 @@ function AppLayout() {
         </div>
       </div>
 
-      <main className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-20 md:pt-0 md:pb-0" style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' } as React.CSSProperties}>
+      <main
+        className="h-dvh min-w-0 overflow-y-auto overflow-x-hidden pt-14 pb-20 md:pt-0 md:pb-0"
+        style={{ paddingBottom: "calc(4rem + env(safe-area-inset-bottom))" } as React.CSSProperties}
+      >
         {/* Desktop top utility bar */}
         <div className="hidden h-12 items-center justify-end gap-2 border-b border-border px-6 md:flex md:px-10">
           {showAdminLink && (
@@ -514,7 +509,20 @@ function AppLayout() {
                     <button
                       key={item.id}
                       type="button"
-                      onClick={() => markAsRead(item.id)}
+                      onClick={() => {
+                        markAsRead(item.id);
+                        setCmdOpen(false);
+                        void navigate({
+                          to:
+                            item.kind === "content"
+                              ? "/library"
+                              : item.kind === "progress"
+                                ? "/progress"
+                                : item.kind === "streak"
+                                  ? "/streak"
+                                  : "/pricing",
+                        });
+                      }}
                       className={`block w-full border-b border-border px-4 py-3 text-left text-sm transition-colors hover:bg-secondary/70 ${
                         item.read ? "bg-background" : "bg-accent/5"
                       }`}
@@ -547,9 +555,10 @@ function AppLayout() {
         {showExpiryBanner && (
           <div className="flex flex-col gap-2 border-b border-warning/30 bg-warning/10 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 md:px-10">
             <span className="text-warning-foreground">
-              Your Premium access ends in{" "}
-              {premiumExpiringDays === 1 ? "1 day" : `${premiumExpiringDays} days`}. Renew early to
-              keep uninterrupted access.
+              {premiumExpiringDays === 0
+                ? "Your Premium access ends today."
+                : `Your Premium access ends in ${premiumExpiringDays === 1 ? "1 day" : `${premiumExpiringDays} days`}.`}{" "}
+              Renew early to keep uninterrupted access.
             </span>
             <Button asChild size="sm" variant="outline" className="shrink-0">
               <Link to="/pricing">Renew Premium</Link>
@@ -561,13 +570,20 @@ function AppLayout() {
       </main>
 
       {/* Mobile bottom tab bar */}
-      <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border bg-background/95 backdrop-blur md:hidden" style={{ height: 'calc(4rem + env(safe-area-inset-bottom))', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      <nav
+        className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border bg-background/95 backdrop-blur md:hidden"
+        style={{
+          height: "calc(4rem + env(safe-area-inset-bottom))",
+          paddingBottom: "env(safe-area-inset-bottom)",
+        }}
+      >
         {mobileNav.map((n) => {
           const active = location.pathname.startsWith(n.to);
           return (
             <Link
               key={n.to}
               to={n.to}
+              aria-current={active ? "page" : undefined}
               className={`flex flex-1 flex-col items-center gap-1 py-2 text-[10px] ${
                 active ? "text-foreground" : "text-muted-foreground"
               }`}

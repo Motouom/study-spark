@@ -65,7 +65,9 @@ function AdvancedSearchPage() {
                     <p className="truncate text-xs text-muted-foreground">{document.subject}</p>
                   </div>
                 </div>
-                <Badge variant="secondary" className="shrink-0">{document.level}</Badge>
+                <Badge variant="secondary" className="shrink-0">
+                  {document.level}
+                </Badge>
               </Link>
             ))}
           </div>

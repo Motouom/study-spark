@@ -23,7 +23,14 @@ export function useSupabaseUser() {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      const nextUser = session?.user ?? null;
+      // Ignore token-refresh events that supply an equivalent user object:
+      // updating state on every event would re-trigger every consumer's
+      // fetch effects (and re-insert study sessions mid-read).
+      setUser((previous) => {
+        if (previous && nextUser && previous.id === nextUser.id) return previous;
+        return nextUser;
+      });
       setLoaded(true);
     });
 

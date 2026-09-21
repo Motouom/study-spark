@@ -40,16 +40,31 @@ function LearningPathPage() {
     ),
   ]
     .slice(0, 4)
-    .map((subject) => ({
-      subject,
-      reviewCount: progress.checkpoints.filter(
-        (item) =>
-          item.checkpointType === "review" &&
-          content.documents.some(
-            (document) => document.id === item.documentId && document.subject === subject,
-          ),
-      ).length,
-    }));
+    .map((subject) => {
+      const subjectDocuments = content.documents.filter((document) => document.subject === subject);
+      const subjectReflections = progress.reflections.filter((reflection) =>
+        subjectDocuments.some((document) => document.id === reflection.documentId),
+      );
+      const avgConfidence =
+        subjectReflections.length > 0
+          ? Math.round(
+              (subjectReflections.reduce((sum, item) => sum + item.confidence, 0) /
+                subjectReflections.length) *
+                10,
+            ) / 10
+          : null;
+      return {
+        subject,
+        reviewCount: progress.checkpoints.filter(
+          (item) =>
+            item.checkpointType === "review" &&
+            content.documents.some(
+              (document) => document.id === item.documentId && document.subject === subject,
+            ),
+        ).length,
+        avgConfidence,
+      };
+    });
   const unfinishedStarted = content.documents
     .filter((document) => startedIds.has(document.id))
     .map((document) => {
@@ -59,11 +74,28 @@ function LearningPathPage() {
       const reviewCount = progress.checkpoints.filter(
         (item) => item.documentId === document.id && item.checkpointType === "review",
       ).length;
+      const reflections = progress.reflections.filter((item) => item.documentId === document.id);
+      const avgConfidence =
+        reflections.length > 0
+          ? Math.round(
+              (reflections.reduce((sum, item) => sum + item.confidence, 0) / reflections.length) *
+                10,
+            ) / 10
+          : null;
+      const difficultParts = [
+        ...new Set(
+          reflections
+            .map((item) => item.difficultParts?.trim())
+            .filter((part): part is string => Boolean(part)),
+        ),
+      ].slice(0, 2);
       return {
         document,
         bestDepth,
         totalTime,
         reviewCount,
+        avgConfidence,
+        difficultParts,
         completion: bestDepth,
       };
     })
@@ -136,6 +168,10 @@ function LearningPathPage() {
                       </div>
                       <Badge variant="secondary">7 days</Badge>
                     </div>
+                    <p className="mb-3 text-xs text-muted-foreground">
+                      Prioritized hardest-first from your review marks, reading depth, and
+                      self-reported confidence.
+                    </p>
                     <div className="grid gap-3 md:grid-cols-2">
                       {aiPath.days.map((day) => (
                         <div key={day.day} className="rounded-lg border border-border bg-card p-4">
@@ -167,29 +203,33 @@ function LearningPathPage() {
                 )}
               </div>
 
-              <div className="grid grid-cols-3 gap-3 md:gap-3">
-                <div className="rounded-xl border border-border bg-card p-4">
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                <div className="rounded-xl border border-border bg-card p-3 md:p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Target className="h-4 w-4" /> Weekly target
                   </div>
                   <div className="mt-2 font-display text-3xl">{weeklyPercent}%</div>
-                  <p className="mt-1 text-xs text-muted-foreground">
+                  <p className="mt-1 text-[11px] text-muted-foreground md:text-xs">
                     {markedThisWeek} of {weeklyTarget} study sessions
                   </p>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4">
+                <div className="rounded-xl border border-border bg-card p-3 md:p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <FileText className="h-4 w-4" /> Active papers
                   </div>
                   <div className="mt-2 font-display text-3xl">{unfinishedStarted.length}</div>
-                  <p className="mt-1 text-xs text-muted-foreground">papers to finish or review</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground md:text-xs">
+                    papers to finish or review
+                  </p>
                 </div>
-                <div className="rounded-xl border border-border bg-card p-4">
+                <div className="rounded-xl border border-border bg-card p-3 md:p-4">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <TrendingUp className="h-4 w-4" /> Focus subjects
                   </div>
                   <div className="mt-2 font-display text-3xl">{weakest.length}</div>
-                  <p className="mt-1 text-xs text-muted-foreground">ranked by mastery</p>
+                  <p className="mt-1 text-[11px] text-muted-foreground md:text-xs">
+                    ranked by mastery
+                  </p>
                 </div>
               </div>
 
@@ -213,7 +253,14 @@ function LearningPathPage() {
                             <p className="mt-1 text-xs text-muted-foreground">
                               {item.bestDepth}% read · {formatDuration(item.totalTime)} ·{" "}
                               {item.reviewCount} review marks
+                              {item.avgConfidence !== null &&
+                                ` · confidence ${item.avgConfidence}/5`}
                             </p>
+                            {item.difficultParts.length > 0 && (
+                              <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">
+                                Difficult: {item.difficultParts.join("; ")}
+                              </p>
+                            )}
                           </div>
                           <Badge variant="secondary">{item.completion}% done</Badge>
                         </div>
@@ -268,7 +315,9 @@ function LearningPathPage() {
                       <span>{item.reviewCount} to review</span>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Marked for review from reading checkpoints.
+                      {item.avgConfidence !== null
+                        ? `Average confidence ${item.avgConfidence}/5 from your reflections.`
+                        : "Marked for review from reading checkpoints."}
                     </p>
                   </div>
                 ))}

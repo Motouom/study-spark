@@ -294,7 +294,10 @@ export function useLearnerNotifications() {
           id: `membership-expiring-${profile.premiumUntil.slice(0, 10)}`,
           kind: "membership",
           title: "Premium ends soon",
-          body: `Your Premium access ends in ${daysRemaining} day${daysRemaining === 1 ? "" : "s"}. Renew early if you want uninterrupted access.`,
+          body:
+            daysRemaining === 0
+              ? "Your Premium access ends today. Renew early if you want uninterrupted access."
+              : `Your Premium access ends in ${daysRemaining} day${daysRemaining === 1 ? "" : "s"}. Renew early if you want uninterrupted access.`,
           createdAt: profile.premiumUntil,
         });
       }

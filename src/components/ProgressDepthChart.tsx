@@ -10,9 +10,19 @@ import {
   YAxis,
 } from "recharts";
 
-type DayPoint = { day: string; depth: number };
+type DataPoint = Record<string, string | number>;
 
-export default function ProgressDepthChart({ data }: { data: DayPoint[] }) {
+interface ProgressDepthChartProps {
+  data: DataPoint[];
+  dataKey?: string;
+  yLabel?: string;
+}
+
+export default function ProgressDepthChart({
+  data,
+  dataKey = "depth",
+  yLabel,
+}: ProgressDepthChartProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -16 }}>
@@ -32,10 +42,13 @@ export default function ProgressDepthChart({ data }: { data: DayPoint[] }) {
             borderRadius: 8,
             fontSize: 12,
           }}
+          formatter={
+            yLabel ? (value) => [`${value} ${yLabel}`, "Study time"] : undefined
+          }
         />
         <Area
           type="monotone"
-          dataKey="depth"
+          dataKey={dataKey}
           stroke="var(--foreground)"
           strokeWidth={2.5}
           fill="url(#readingDepth)"

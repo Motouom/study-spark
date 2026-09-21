@@ -1,5 +1,4 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
@@ -33,6 +32,36 @@ function NotFoundComponent() {
   );
 }
 
+function ErrorComponent({ error }: { error: unknown }) {
+  const message = error instanceof Error ? error.message : "Please try again.";
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <p className="text-xs uppercase tracking-widest text-muted-foreground">Something broke</p>
+        <h1 className="mt-3 font-display text-4xl text-foreground md:text-5xl">
+          An unexpected <span className="italic text-muted-foreground">error</span> occurred
+        </h1>
+        <p className="mt-3 text-sm text-muted-foreground">{message}</p>
+        <div className="mt-8 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+            className="inline-flex items-center justify-center rounded-md border border-border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary"
+          >
+            Reload page
+          </button>
+          <Link
+            to="/dashboard"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Go to dashboard
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -50,6 +79,7 @@ export const Route = createRootRoute({
       { name: "author", content: "StudySpark" },
       { name: "application-name", content: "StudySpark" },
       { name: "apple-mobile-web-app-title", content: "StudySpark" },
+      { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       { name: "theme-color", media: "(prefers-color-scheme: light)", content: "#fdf8f0" },
@@ -81,6 +111,7 @@ export const Route = createRootRoute({
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
@@ -119,7 +150,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <script src="/chunk-reload.js" defer />
         <script src="/pwa-register.js" defer />
         <script src="/pwa-install-prompt.js" defer />
-        <SpeedInsights />
         <Analytics />
         <Scripts />
       </body>

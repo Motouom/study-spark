@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { localDateKey } from "@/lib/streak";
 
 export type StreakFreeze = {
   id: string;
@@ -29,7 +30,51 @@ function weekStartKey(date: Date) {
   const copy = new Date(date);
   const day = (copy.getDay() + 6) % 7;
   copy.setDate(copy.getDate() - day);
-  return copy.toISOString().slice(0, 10);
+  return localDateKey(copy);
+}
+
+// Module-level cache shared by every instance of the freeze hooks so the
+// freeze list is fetched once per user instead of once per mounting component.
+type FreezeCache = { userId: string; rows: StreakFreezeRow[] };
+
+let freezeCache: FreezeCache | null = null;
+
+export function useStreakFreezeDays() {
+  const { user, loaded: userLoaded } = useSupabaseUser();
+  const [freezeDays, setFreezeDays] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!userLoaded) return;
+    if (!user || !supabaseConfigured() || !supabase) {
+      setFreezeDays(new Set());
+      setLoading(false);
+      return;
+    }
+
+    if (freezeCache && freezeCache.userId === user.id) {
+      setFreezeDays(new Set(freezeCache.rows.map((row) => row.freeze_date)));
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    setLoading(true);
+    supabase.rpc("list_my_streak_freezes").then(({ data, error }) => {
+      if (cancelled) return;
+      if (!error) {
+        freezeCache = { userId: user.id, rows: (data ?? []) as StreakFreezeRow[] };
+        setFreezeDays(new Set(freezeCache.rows.map((row) => row.freeze_date)));
+      }
+      setLoading(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user, userLoaded]);
+
+  return { freezeDays, loading };
 }
 
 export function useStreakFreezes() {
@@ -47,6 +92,11 @@ export function useStreakFreezes() {
       return;
     }
 
+    if (freezeCache && freezeCache.userId === user.id) {
+      setFreezes(freezeCache.rows.map(mapFreeze));
+      return;
+    }
+
     setLoading(true);
     setError(null);
     const { data, error } = await supabase.rpc("list_my_streak_freezes");
@@ -54,7 +104,8 @@ export function useStreakFreezes() {
       setFreezes([]);
       setError(error.message);
     } else {
-      setFreezes(((data ?? []) as StreakFreezeRow[]).map(mapFreeze));
+      freezeCache = { userId: user.id, rows: (data ?? []) as StreakFreezeRow[] };
+      setFreezes(freezeCache.rows.map(mapFreeze));
     }
     setLoading(false);
   }, [user, userLoading]);
@@ -76,7 +127,7 @@ export function useStreakFreezes() {
     setSaving(true);
     setError(null);
     const { error } = await supabase.rpc("use_streak_freeze", {
-      target_date: new Date().toISOString().slice(0, 10),
+      target_date: localDateKey(new Date()),
     });
     setSaving(false);
 
@@ -85,6 +136,7 @@ export function useStreakFreezes() {
       throw error;
     }
 
+    freezeCache = null;
     await load();
   }, [load, user]);
 

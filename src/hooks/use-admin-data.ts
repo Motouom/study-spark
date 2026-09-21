@@ -21,6 +21,8 @@ export type AdminTopic = {
   estimatedMinutes: number;
 };
 
+export type CourseContentKind = "course" | "textbook" | "paper" | "cheatsheet";
+
 export type AdminCourseDocument = {
   id: string;
   topicId: string;
@@ -31,6 +33,7 @@ export type AdminCourseDocument = {
   classLevels: ClassLevel[];
   series: Series[];
   status: ContentStatus;
+  contentKind: CourseContentKind;
   markdownContent: string;
   updatedAt: string;
 };
@@ -126,6 +129,12 @@ function mapCourseDocument(row: Record<string, unknown>): AdminCourseDocument {
     classLevels: (row.class_levels ?? []) as ClassLevel[],
     series: (row.series ?? []) as Series[],
     status: row.status as ContentStatus,
+    contentKind:
+      row.content_kind === "textbook" ||
+      row.content_kind === "paper" ||
+      row.content_kind === "cheatsheet"
+        ? row.content_kind
+        : "course",
     markdownContent: String(row.markdown_content ?? ""),
     updatedAt: String(row.updated_at ?? ""),
   };
@@ -264,6 +273,7 @@ export function useAdminData() {
         document_series: document.series,
         document_status: document.status,
         document_markdown_content: document.markdownContent,
+        document_content_kind: document.contentKind,
       });
       await load();
     },

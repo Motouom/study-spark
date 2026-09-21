@@ -9,7 +9,9 @@ import {
   emailAuthConfigured,
   googleAuthConfigured,
   requestEmailMagicLink,
+  signInWithEmailPassword,
   signInWithGoogle,
+  signUpWithEmailPassword,
 } from "@/lib/auth";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 
@@ -30,7 +32,9 @@ function SignIn() {
   const navigate = useNavigate();
   const { user, profile, loaded } = useStudyProfile();
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState<null | "google" | "email">(null);
+  const [password, setPassword] = useState("");
+  const [passwordMode, setPasswordMode] = useState<"signin" | "signup">("signin");
+  const [loading, setLoading] = useState<null | "google" | "email" | "password">(null);
   const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
@@ -77,7 +81,36 @@ function SignIn() {
       await requestEmailMagicLink(email);
       setNotice("Check your inbox for the sign-in link.");
     } catch (error) {
-      setNotice(error instanceof Error ? error.message : "Email sign-in failed.");
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : "Email sign-in failed. If magic links are disabled in your Supabase project, use the password option below.",
+      );
+    } finally {
+      setLoading(null);
+    }
+  }
+
+  async function continueWithPassword() {
+    setNotice(null);
+    setLoading("password");
+    try {
+      if (passwordMode === "signup") {
+        await signUpWithEmailPassword(email, password);
+        setNotice(
+          "Account created. If email confirmation is required, check your inbox — otherwise you are signed in.",
+        );
+      } else {
+        await signInWithEmailPassword(email, password);
+        setNotice("Signed in. Opening your dashboard...");
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "";
+      setNotice(
+        message.includes("not confirmed")
+          ? "Please confirm your email first — check your inbox for the confirmation link, then sign in again."
+          : message || "Password sign-in failed.",
+      );
     } finally {
       setLoading(null);
     }
@@ -146,6 +179,50 @@ function SignIn() {
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </form>
+
+            <details className="rounded-lg border border-border bg-card p-3">
+              <summary className="cursor-pointer text-xs font-medium text-muted-foreground">
+                Or sign in with email and password
+              </summary>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (email && password) void continueWithPassword();
+                }}
+                className="mt-3 space-y-2"
+              >
+                <Input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password (min. 6 characters)"
+                  className="h-11"
+                />
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="h-11 w-full"
+                  disabled={loading !== null || !email || !password || !emailAuthConfigured()}
+                >
+                  {loading === "password"
+                    ? "Working..."
+                    : passwordMode === "signup"
+                      ? "Create account with password"
+                      : "Sign in with password"}
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => setPasswordMode(passwordMode === "signin" ? "signup" : "signin")}
+                  className="text-xs text-muted-foreground underline-offset-4 hover:underline"
+                >
+                  {passwordMode === "signin"
+                    ? "No account yet? Create one"
+                    : "Already have an account? Sign in"}
+                </button>
+              </form>
+            </details>
           </div>
 
           {notice && (

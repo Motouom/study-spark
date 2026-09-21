@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
-import { Award, Clock, Flame, Lock, Medal, Target } from "lucide-react";
+import { Award, BookOpen, Bookmark, Check, Clock, Flame, Lock, Medal, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
 import { useStructuralProgress } from "@/hooks/use-structural-progress";
+import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { PremiumGate } from "@/components/PremiumGate";
 
 export const Route = createFileRoute("/_app/achievements")({
@@ -11,56 +14,95 @@ export const Route = createFileRoute("/_app/achievements")({
   component: AchievementsPage,
 });
 
+type Milestone = {
+  title: string;
+  description: string;
+  icon: typeof Award;
+  current: number;
+  target: number;
+};
+
 function AchievementsPage() {
   const { progress, summary, error } = useStructuralProgress();
-  const milestones = [
+  const readingProgress = usePaperStudyOverview();
+  const streak = useUnifiedStreak();
+
+  const milestones: Milestone[] = [
     {
       title: "Mark your first structural question",
       description: "Start tracking real paper practice.",
-      complete: summary.totalStarted >= 1,
-      progress: summary.totalStarted >= 1 ? 100 : 0,
       icon: Award,
+      current: summary.totalStarted,
+      target: 1,
     },
     {
       title: "Practice three study days",
       description: "Build consistency across separate days.",
-      complete: summary.totalStudyDays >= 3,
-      progress: Math.min(100, Math.round((summary.totalStudyDays / 3) * 100)),
       icon: Flame,
+      current: summary.totalStudyDays,
+      target: 3,
     },
     {
       title: "Reach 80% structural mastery",
       description: "Pass most of the questions you attempt.",
-      complete: summary.completionRate >= 80,
-      progress: summary.completionRate,
       icon: Target,
+      current: summary.completionRate,
+      target: 80,
     },
     {
       title: "Pass 20 structural questions",
       description: "Show real command over full-paper questions.",
-      complete: summary.passed >= 20,
-      progress: Math.min(100, Math.round((summary.passed / 20) * 100)),
       icon: Medal,
+      current: summary.passed,
+      target: 20,
     },
     {
       title: "Study for one focused hour",
       description: "Accumulate measured solving time.",
-      complete: summary.totalDurationSeconds >= 3600,
-      progress: Math.min(100, Math.round((summary.totalDurationSeconds / 3600) * 100)),
       icon: Clock,
+      current: summary.totalDurationSeconds,
+      target: 3600,
     },
     {
       title: "Recover from failed work",
       description: "Turn weak questions into revision targets.",
-      complete: summary.failed >= 5 && summary.passed >= 5,
-      progress: Math.min(100, Math.round(((summary.failed + summary.passed) / 10) * 100)),
       icon: Target,
+      current: Math.min(summary.failed, summary.passed),
+      target: 5,
+    },
+    {
+      title: "Read five papers",
+      description: "Open five protected papers and start reading.",
+      icon: BookOpen,
+      current: readingProgress.summary.papersRead,
+      target: 5,
+    },
+    {
+      title: "Mark 10 review points",
+      description: "Flag confusing parts while you read.",
+      icon: Bookmark,
+      current: readingProgress.summary.reviewCount,
+      target: 10,
+    },
+    {
+      title: "Reach a 7-day streak",
+      description: "Study on seven consecutive days.",
+      icon: Flame,
+      current: streak.currentStreak,
+      target: 7,
     },
   ];
-  const earned = milestones.filter((milestone) => milestone.complete).length;
-  const xp = progress.length * 25 + summary.passed * 15 + earned * 100;
+
+  const earned = milestones.filter((milestone) => milestone.current >= milestone.target).length;
+  const xp =
+    progress.length * 25 +
+    summary.passed * 15 +
+    readingProgress.summary.sessionsStarted * 10 +
+    readingProgress.summary.reviewCount * 5 +
+    earned * 100;
   const level = Math.max(1, Math.floor(xp / 300) + 1);
   const levelProgress = Math.min(100, Math.round(((xp % 300) / 300) * 100));
+  const xpToNext = 300 - (xp % 300);
 
   return (
     <>
@@ -86,8 +128,13 @@ function AchievementsPage() {
                   <span className="text-sm text-muted-foreground">{xp} XP</span>
                 </div>
               </div>
-              <div className="text-sm text-muted-foreground">
-                <span className="font-medium text-foreground">{earned}</span> earned
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary">
+                  {earned} of {milestones.length} earned
+                </Badge>
+                <span className="text-sm text-muted-foreground">
+                  {xpToNext} XP to level {level + 1}
+                </span>
               </div>
             </div>
             <div className="mt-5">
@@ -100,31 +147,49 @@ function AchievementsPage() {
           </div>
 
           <section>
-            <h2 className="mb-3 text-sm font-medium text-muted-foreground">Next milestones</h2>
+            <h2 className="mb-3 text-sm font-medium text-muted-foreground">Milestones</h2>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {milestones.map((milestone) => {
-                const Icon = milestone.complete ? milestone.icon : Lock;
+                const complete = milestone.current >= milestone.target;
+                const percent = Math.min(
+                  100,
+                  Math.round((milestone.current / milestone.target) * 100),
+                );
+                const Icon = complete ? milestone.icon : Lock;
                 return (
                   <div
                     key={milestone.title}
-                    className={`rounded-xl border bg-card p-5 ${
-                      milestone.complete ? "border-border" : "border-dashed border-border"
+                    className={`flex flex-col rounded-xl border bg-card p-5 ${
+                      complete ? "border-accent/40" : "border-dashed border-border"
                     }`}
                   >
-                    <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-                        milestone.complete
-                          ? "bg-accent/15 text-accent"
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" />
+                    <div className="flex items-start justify-between gap-3">
+                      <div
+                        className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                          complete ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      {complete ? (
+                        <Badge className="gap-1">
+                          <Check className="h-3 w-3" /> Completed
+                        </Badge>
+                      ) : (
+                        <span className="text-xs text-muted-foreground">
+                          {milestone.current}/{milestone.target}
+                        </span>
+                      )}
                     </div>
                     <h3 className="mt-4 text-base font-medium">{milestone.title}</h3>
                     <p className="mt-1 text-xs text-muted-foreground">{milestone.description}</p>
-                    <p className="mt-3 text-xs text-muted-foreground">
-                      {milestone.progress}% complete
-                    </p>
+                    <div className="mt-auto pt-4">
+                      <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                        <span>{percent}% complete</span>
+                        {complete && <span className="font-medium text-accent">Done</span>}
+                      </div>
+                      <Progress value={percent} className="mt-1 h-1.5" />
+                    </div>
                   </div>
                 );
               })}
@@ -136,7 +201,7 @@ function AchievementsPage() {
               <Award className="mx-auto h-10 w-10 text-muted-foreground" />
               <h3 className="mt-4 text-base font-medium">No achievements yet</h3>
               <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-                Mark structural paper questions to earn badges from real progress.
+                Mark structural paper questions or read papers to earn badges from real progress.
               </p>
               <Button asChild className="mt-5">
                 <Link to="/library">Open papers</Link>

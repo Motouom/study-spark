@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { useStreakFreezeDays } from "@/hooks/use-streak-freezes";
+import { computeCurrentStreak, dayKey, sortedStudyDays } from "@/lib/streak";
 import { getScrollPercent, onContainerScroll } from "@/lib/scroll-progress";
 
 export type PaperCheckpointType = "understood" | "review" | "bookmark";
@@ -123,26 +125,24 @@ export function usePaperStudyProgress(documentId?: string | null) {
     let cancelled = false;
     setLoading(true);
     setError(null);
+    const client = supabase;
 
     Promise.all([
-      // Use upsert-style: resume the most recent open session for this doc
-      // rather than creating a new one on every mount (prevents orphan sessions
-      // after screen wake / tab focus return).
-      supabase
+      // Resume the still-open session for this paper instead of inserting a
+      // new row on every visit/refresh.
+      client
         .from("paper_study_sessions")
         .select(
           "id, document_id, started_at, ended_at, duration_seconds, max_scroll_percent, completed, updated_at",
         )
-        .eq("user_id", user.id)
         .eq("document_id", documentId)
         .is("ended_at", null)
         .order("started_at", { ascending: false })
         .limit(1)
         .maybeSingle()
-        .then(async ({ data: existing }) => {
-          if (existing) return { data: existing, error: null };
-          // No open session — create one
-          return supabase
+        .then(async ({ data: openSession }) => {
+          if (openSession) return { data: openSession, error: null };
+          return client
             .from("paper_study_sessions")
             .insert({ user_id: user.id, document_id: documentId })
             .select(
@@ -204,7 +204,7 @@ export function usePaperStudyProgress(documentId?: string | null) {
     } = {
       duration_seconds: secondsRef.current,
       max_scroll_percent: maxScrollPercent,
-      completed: maxScrollPercent >= 85,
+      completed: false,
     };
 
     if (ended) patch.ended_at = new Date().toISOString();
@@ -351,44 +351,23 @@ export function usePaperStudyProgress(documentId?: string | null) {
   };
 }
 
-function sameLocalDay(a: Date, b: Date) {
-  return (
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate()
-  );
-}
-
-function dayKey(date: Date) {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-}
-
 function summarizeReadingProgress(
   sessions: PaperStudySession[],
   checkpoints: PaperStudyCheckpoint[],
   reflections: PaperStudyReflection[],
+  freezeDays: Set<string> = new Set(),
 ) {
   const studyDays = new Set(sessions.map((item) => dayKey(new Date(item.startedAt))));
-  const sortedDays = [...studyDays]
-    .map((key) => {
-      const [year, month, day] = key.split("-").map(Number);
-      return new Date(year, month - 1, day);
-    })
-    .sort((a, b) => b.getTime() - a.getTime());
-  let currentStreak = 0;
-  const cursor = new Date();
-  if (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-    while (sortedDays.some((day) => sameLocalDay(day, cursor))) {
-      currentStreak += 1;
-      cursor.setDate(cursor.getDate() - 1);
-    }
-  }
+  const sortedDays = sortedStudyDays(studyDays);
+  const currentStreak = computeCurrentStreak(sortedDays, freezeDays);
 
   return {
     sessionsStarted: sessions.length,
     papersRead: new Set(sessions.map((item) => item.documentId)).size,
     completedPapers: new Set(
-      sessions.filter((item) => item.completed).map((item) => item.documentId),
+      checkpoints
+        .filter((item) => item.checkpointType === "understood")
+        .map((item) => item.documentId),
     ).size,
     totalDurationSeconds: sessions.reduce((sum, item) => sum + item.durationSeconds, 0),
     averageScrollPercent:
@@ -415,6 +394,7 @@ function summarizeReadingProgress(
 
 export function usePaperStudyOverview() {
   const { user, loaded: userLoaded } = useSupabaseUser();
+  const { freezeDays } = useStreakFreezeDays();
   const [sessions, setSessions] = useState<PaperStudySession[]>([]);
   const [checkpoints, setCheckpoints] = useState<PaperStudyCheckpoint[]>([]);
   const [reflections, setReflections] = useState<PaperStudyReflection[]>([]);
@@ -487,8 +467,8 @@ export function usePaperStudyOverview() {
     error,
     reload: load,
     summary: useMemo(
-      () => summarizeReadingProgress(sessions, checkpoints, reflections),
-      [checkpoints, reflections, sessions],
+      () => summarizeReadingProgress(sessions, checkpoints, reflections, freezeDays),
+      [checkpoints, freezeDays, reflections, sessions],
     ),
   };
 }

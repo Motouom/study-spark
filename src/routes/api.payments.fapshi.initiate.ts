@@ -6,6 +6,7 @@ import {
   type BillingInterval,
 } from "@/lib/fapshi";
 import { getAuthenticatedUser, getServiceSupabase } from "@/lib/server-supabase";
+import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const Route = createFileRoute("/api/payments/fapshi/initiate")({
   server: {
@@ -13,12 +14,40 @@ export const Route = createFileRoute("/api/payments/fapshi/initiate")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
+          const limiter = rateLimit(`payments:initiate:${user.id}`, 5, 60 * 60 * 1000);
+          if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const body = (await request.json().catch(() => ({}))) as { interval?: string };
           const interval: BillingInterval = body.interval === "yearly" ? "yearly" : "monthly";
           const amount = PREMIUM_PRICES_XAF[interval];
           const externalId = createExternalPaymentId(interval);
           const origin = new URL(request.url).origin;
           const supabase = getServiceSupabase();
+
+          // Idempotency: reuse an in-flight checkout for the same user +
+          // interval instead of creating duplicate subscription/transaction
+          // rows on double-clicks or retries.
+          const { data: existing } = await supabase
+            .from("payment_transactions")
+            .select("id, provider_transaction_id, checkout_url, external_id, created_at")
+            .eq("user_id", user.id)
+            .eq("billing_interval", interval)
+            .in("status", ["created", "pending"])
+            .not("provider_transaction_id", "is", null)
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+          if (
+            existing?.provider_transaction_id &&
+            existing.created_at &&
+            Date.now() - new Date(existing.created_at).getTime() < 30 * 60 * 1000
+          ) {
+            return Response.json({
+              checkoutUrl: existing.checkout_url,
+              transactionId: existing.provider_transaction_id,
+              externalId: existing.external_id,
+              reused: true,
+            });
+          }
 
           const { data: subscription, error: subscriptionError } = await supabase
             .from("subscriptions")
@@ -46,16 +75,31 @@ export const Route = createFileRoute("/api/payments/fapshi/initiate")({
             .single();
           if (transactionError) throw transactionError;
 
-          const payment = await initiateFapshiPayment({
-            amount,
-            email: user.email ?? "",
-            externalId,
-            interval,
-            origin,
-            userId: user.id,
-          });
+          let payment;
+          try {
+            payment = await initiateFapshiPayment({
+              amount,
+              email: user.email ?? "",
+              externalId,
+              interval,
+              origin,
+              userId: user.id,
+            });
+          } catch (providerError) {
+            // Roll back the local rows so no orphan pending subscription or
+            // unverifiable transaction is left behind.
+            await supabase
+              .from("payment_transactions")
+              .update({ status: "failed" })
+              .eq("id", transaction.id);
+            await supabase
+              .from("subscriptions")
+              .update({ status: "past_due" })
+              .eq("id", subscription.id);
+            throw providerError;
+          }
 
-          await supabase
+          const { error: updateError } = await supabase
             .from("payment_transactions")
             .update({
               provider_transaction_id: payment.transId,
@@ -63,6 +107,14 @@ export const Route = createFileRoute("/api/payments/fapshi/initiate")({
               provider_payload: payment,
             })
             .eq("id", transaction.id);
+          if (updateError) {
+            // The checkout link exists and is returned to the user, but log
+            // loudly: without provider_transaction_id the webhook cannot match.
+            console.error(
+              `Fapshi initiate: failed to store provider_transaction_id for transaction ${transaction.id}`,
+              updateError,
+            );
+          }
 
           return Response.json({
             checkoutUrl: payment.link,

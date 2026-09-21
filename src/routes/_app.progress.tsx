@@ -1,13 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { formatDuration } from "@/hooks/use-structural-progress";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { PremiumGate } from "@/components/PremiumGate";
 import { Badge } from "@/components/ui/badge";
-import { Bookmark, BookOpen, CheckCircle2, Clock, TrendingUp } from "lucide-react";
+import { Bookmark, BookOpen, CheckCircle2, Clock, Flame, TrendingUp } from "lucide-react";
 import { lazy, Suspense, useMemo } from "react";
+import { supabaseConfigured } from "@/lib/supabase";
 
 // Recharts is 342KB — lazy-load so it doesn't block the initial progress page paint
 const ProgressDepthChart = lazy(() => import("@/components/ProgressDepthChart"));
@@ -18,13 +20,35 @@ export const Route = createFileRoute("/_app/progress")({
 });
 
 function ProgressPage() {
-  const { profile } = useStudyProfile();
+  const { profile, loaded: profileLoaded } = useStudyProfile();
   const content = useStudyContent(profile);
   const progress = usePaperStudyOverview();
+  const { currentStreak } = useUnifiedStreak();
+  const useRemoteOnly = supabaseConfigured();
+  const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
   const documentsById = useMemo(
     () => new Map(content.documents.map((document) => [document.id, document])),
     [content.documents],
   );
+
+  // Best depth per paper across sessions (each visit creates a new session
+  // row, so the latest row alone would read 0%).
+  const bestByDoc = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const session of progress.sessions) {
+      map.set(
+        session.documentId,
+        Math.max(map.get(session.documentId) ?? 0, session.maxScrollPercent),
+      );
+    }
+    return map;
+  }, [progress.sessions]);
+
+  const averageDepth =
+    bestByDoc.size > 0
+      ? Math.round([...bestByDoc.values()].reduce((sum, value) => sum + value, 0) / bestByDoc.size)
+      : 0;
+
   const weeklyData = useMemo(() => {
     const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const today = new Date();
@@ -41,16 +65,25 @@ function ProgressPage() {
       });
       return {
         day: labels[date.getDay()],
-        depth:
-          sessions.length > 0
-            ? Math.round(
-                sessions.reduce((sum, item) => sum + item.maxScrollPercent, 0) / sessions.length,
-              )
-            : 0,
+        minutes: Math.round(sessions.reduce((sum, item) => sum + item.durationSeconds, 0) / 60),
       };
     });
   }, [progress.sessions]);
-  const recentCheckpoints = progress.checkpoints.slice(0, 8);
+
+  const recentCheckpoints = useMemo(
+    () =>
+      progress.checkpoints
+        .filter((item) => {
+          const document = documentsById.get(item.documentId);
+          return document && document.contentKind === "paper";
+        })
+        .slice(0, 8),
+    [documentsById, progress.checkpoints],
+  );
+
+  if (pageLoading) {
+    return <ProgressSkeleton />;
+  }
 
   return (
     <>
@@ -85,22 +118,22 @@ function ProgressPage() {
             <ProgressStat
               icon={TrendingUp}
               label="Avg. depth"
-              value={`${progress.summary.averageScrollPercent}%`}
+              value={`${averageDepth}%`}
               hint={`${progress.summary.sessionsStarted} sessions`}
             />
             <ProgressStat
-              icon={CheckCircle2}
-              label="Understood"
-              value={String(progress.summary.understoodCount)}
-              hint={`${progress.summary.reviewCount} review marks`}
+              icon={Flame}
+              label="Current streak"
+              value={String(currentStreak)}
+              hint={currentStreak > 0 ? "study days" : "start today"}
             />
           </section>
 
           <section className="grid gap-4 lg:grid-cols-[1fr_22rem]">
             <div className="min-w-0 overflow-hidden rounded-xl border border-border bg-card p-5">
-              <h2 className="text-base font-medium">Reading depth this week</h2>
+              <h2 className="text-base font-medium">Study time this week</h2>
               <p className="text-xs text-muted-foreground">
-                Average paper scroll depth for each study day.
+                Minutes studied for each day of the week.
               </p>
               <div className="mt-4 h-72">
                 <Suspense
@@ -108,7 +141,13 @@ function ProgressPage() {
                     <div className="h-full w-full animate-pulse rounded-lg bg-secondary/40" />
                   }
                 >
-                  <ProgressDepthChart data={weeklyData} />
+                  {weeklyData.some((point) => point.minutes > 0) ? (
+                    <ProgressDepthChart data={weeklyData} dataKey="minutes" yLabel="min" />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                      Study for a few minutes to see your weekly trend.
+                    </div>
+                  )}
                 </Suspense>
               </div>
             </div>
@@ -119,6 +158,7 @@ function ProgressPage() {
                 <Signal label="Understood" value={progress.summary.understoodCount} />
                 <Signal label="Needs review" value={progress.summary.reviewCount} />
                 <Signal label="Bookmarks" value={progress.summary.bookmarkCount} />
+                <Signal label="Revision" value={progress.summary.revisionCount} />
               </div>
             </div>
           </section>
@@ -135,14 +175,29 @@ function ProgressPage() {
                     const paper = documentsById.get(item.documentId);
                     return (
                       <div key={item.id} className="flex items-center justify-between gap-3 py-3">
-                        <div>
-                          <div className="text-sm font-medium">{paper?.title ?? "Paper"}</div>
-                          <p className="text-xs text-muted-foreground">
+                        <div className="min-w-0">
+                          {paper ? (
+                            <Link
+                              to="/course/$documentId"
+                              params={{ documentId: paper.id }}
+                              className="text-sm font-medium hover:text-accent"
+                            >
+                              {paper.title}
+                            </Link>
+                          ) : (
+                            <div className="text-sm font-medium">Paper</div>
+                          )}
+                          {item.note && (
+                            <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
+                              “{item.note}”
+                            </p>
+                          )}
+                          <p className="mt-0.5 text-xs text-muted-foreground">
                             {item.scrollPercent}% read ·{" "}
                             {new Date(item.createdAt).toLocaleDateString()}
                           </p>
                         </div>
-                        <Badge variant="secondary">{checkpointLabel(item.checkpointType)}</Badge>
+                        <CheckpointBadge type={item.checkpointType} />
                       </div>
                     );
                   })
@@ -160,10 +215,26 @@ function ProgressPage() {
   );
 }
 
-function checkpointLabel(type: string) {
-  if (type === "understood") return "Understood";
-  if (type === "review") return "Review";
-  return "Bookmark";
+function CheckpointBadge({ type }: { type: string }) {
+  if (type === "understood") {
+    return (
+      <Badge variant="success">
+        <CheckCircle2 className="mr-1 h-3 w-3" /> Understood
+      </Badge>
+    );
+  }
+  if (type === "review") {
+    return (
+      <Badge variant="destructive">
+        <TrendingUp className="mr-1 h-3 w-3" /> Review
+      </Badge>
+    );
+  }
+  return (
+    <Badge variant="secondary">
+      <Bookmark className="mr-1 h-3 w-3" /> Bookmark
+    </Badge>
+  );
 }
 
 function ProgressStat({
@@ -194,6 +265,24 @@ function Signal({ label, value }: { label: string; value: number }) {
     <div className="flex items-center justify-between rounded-lg bg-secondary/50 px-3 py-2 text-sm">
       <span className="text-muted-foreground">{label}</span>
       <span className="font-medium">{value}</span>
+    </div>
+  );
+}
+
+function ProgressSkeleton() {
+  return (
+    <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
+      <div className="h-9 w-40 animate-pulse rounded bg-secondary" />
+      <div className="h-4 w-full max-w-sm animate-pulse rounded bg-secondary" />
+      <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div key={index} className="h-28 animate-pulse rounded-xl border border-border bg-card" />
+        ))}
+      </section>
+      <section className="grid gap-4 lg:grid-cols-[1fr_22rem]">
+        <div className="h-96 animate-pulse rounded-xl border border-border bg-card" />
+        <div className="h-96 animate-pulse rounded-xl border border-border bg-card" />
+      </section>
     </div>
   );
 }

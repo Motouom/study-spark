@@ -15,6 +15,7 @@ export type CourseDocument = {
   markdownContent: string;
   updatedAt: string;
   accessStatus: "free_preview" | "premium" | "premium_locked";
+  contentKind: "course" | "textbook" | "paper" | "cheatsheet";
   isLocked: boolean;
 };
 
@@ -35,13 +36,32 @@ function matchesProfile(profile: StudentProfile, topic: Topic) {
   );
 }
 
+// Module-level cache: the layout (command menu, notifications) and every page
+// mount this hook independently. Without a shared cache each instance refetches
+// the entire topics + documents corpus (including full markdown) per navigation.
+type ContentCache = {
+  signature: string;
+  state: ContentState;
+};
+
+let contentCache: ContentCache | null = null;
+
+function profileSignature(profile: StudentProfile) {
+  return [
+    profile.level,
+    profile.classLevel,
+    profile.series,
+    [...profile.subjects].sort().join(","),
+  ].join("|");
+}
+
 export function useStudyContent(profile: StudentProfile | null) {
-  const [state, setState] = useState<ContentState>({
-    topics: [],
-    documents: [],
-    loading: false,
-    loaded: false,
-    error: null,
+  const signature = profile ? profileSignature(profile) : "";
+  const [state, setState] = useState<ContentState>(() => {
+    if (profile && contentCache && contentCache.signature === signature) {
+      return contentCache.state;
+    }
+    return { topics: [], documents: [], loading: false, loaded: false, error: null };
   });
 
   // Stable key so the effect only re-runs when profile values actually change,
@@ -53,6 +73,11 @@ export function useStudyContent(profile: StudentProfile | null) {
   useEffect(() => {
     if (!profile || !supabaseConfigured() || !supabase) {
       setState({ topics: [], documents: [], loading: false, loaded: true, error: null });
+      return;
+    }
+
+    if (contentCache && contentCache.signature === signature) {
+      setState(contentCache.state);
       return;
     }
 
@@ -76,13 +101,15 @@ export function useStudyContent(profile: StudentProfile | null) {
       if (topicsResult.error) {
         const error = topicsResult.error;
         console.error("Could not load study content", error);
-        setState({
+        const errorState: ContentState = {
           topics: [],
           documents: [],
           loading: false,
           loaded: true,
           error: error?.message ?? "Study content could not be loaded.",
-        });
+        };
+        contentCache = { signature, state: errorState };
+        setState(errorState);
         return;
       }
 
@@ -109,17 +136,30 @@ export function useStudyContent(profile: StudentProfile | null) {
           row.access_status === "premium" || row.access_status === "premium_locked"
             ? row.access_status
             : "free_preview",
+        contentKind:
+          row.content_kind === "textbook" ||
+          row.content_kind === "paper" ||
+          row.content_kind === "cheatsheet"
+            ? row.content_kind
+            : "course",
         isLocked: Boolean(row.is_locked),
       }));
 
-      setState({ topics, documents, loading: false, loaded: true, error: null });
+      const nextState: ContentState = {
+        topics,
+        documents,
+        loading: false,
+        loaded: true,
+        error: null,
+      };
+      contentCache = { signature, state: nextState };
+      setState(nextState);
     });
 
     return () => {
       active = false;
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profileKey]);
+  }, [profile, signature]);
 
   const subjects = useMemo(
     () =>

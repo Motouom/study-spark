@@ -157,15 +157,32 @@ export async function applyVerifiedFapshiStatus(
     };
   }
 
-  await supabase
+  const finalStatus: PaymentStatus = status === "successful" && !amountMatches ? "failed" : status;
+
+  // Atomically claim the transition: only the caller whose update matches a
+  // row that is not already "successful" proceeds to grant premium. This
+  // prevents the webhook and the verify endpoint from double-granting when
+  // they race on the same transaction.
+  const claim = await supabase
     .from("payment_transactions")
     .update({
-      status: status === "successful" && !amountMatches ? "failed" : status,
+      status: finalStatus,
       provider_financial_transaction_id: providerPayload.financialTransId ?? null,
       provider_payload: providerPayload,
       verified_at: verifiedAt,
     })
-    .eq("id", transaction.id);
+    .eq("id", transaction.id)
+    .neq("status", "successful")
+    .select("id");
+
+  if (claim.error) throw claim.error;
+  if (!claim.data || claim.data.length === 0) {
+    return {
+      status: "successful" as PaymentStatus,
+      premiumUntil,
+      alreadyProcessed: true,
+    };
+  }
 
   if (status === "successful" && amountMatches) {
     const periodStart = new Date();
@@ -198,7 +215,7 @@ export async function applyVerifiedFapshiStatus(
   }
 
   return {
-    status: status === "successful" && !amountMatches ? "failed" : status,
+    status: finalStatus,
     premiumUntil,
   };
 }

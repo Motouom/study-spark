@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { markSubscriptionRefreshed, shouldRefreshSubscription } from "@/hooks/use-study-profile";
 
 export type SubscriptionSummary = {
   plan: "free" | "premium";
@@ -41,11 +42,18 @@ export function useSubscription() {
 
     setLoaded(false);
     const client = supabase;
+    let active = true;
     void (async () => {
       try {
-        await client.rpc("refresh_my_subscription_status");
+        // Share the same 5-minute throttle as the profile hook so the RPC
+        // runs once per session window, not once per mounting hook.
+        if (shouldRefreshSubscription()) {
+          await client.rpc("refresh_my_subscription_status");
+          markSubscriptionRefreshed();
+        }
         const { data, error } = await client.rpc("list_my_subscription").maybeSingle();
 
+        if (!active) return;
         if (error) {
           console.error("Could not load subscription", error);
           setSubscription(null);
@@ -68,13 +76,16 @@ export function useSubscription() {
               }
             : null,
         );
-      } catch (error) {
-        console.error("Could not load subscription", error);
-        setSubscription(null);
+      } catch (fetchError) {
+        console.error("Could not load subscription", fetchError);
+        if (active) setSubscription(null);
       } finally {
-        setLoaded(true);
+        if (active) setLoaded(true);
       }
     })();
+    return () => {
+      active = false;
+    };
   }, [user, userLoaded]);
 
   return { subscription, loaded };
