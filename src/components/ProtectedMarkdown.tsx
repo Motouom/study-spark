@@ -61,10 +61,14 @@ function formatStudyInline(children: ReactNode): ReactNode {
   });
 }
 
-function plainText(children: ReactNode): string {
+function plainText(children: ReactNode, seen = new WeakSet<object>()): string {
   if (typeof children === "string" || typeof children === "number") return String(children);
-  if (Array.isArray(children)) return children.map(plainText).join("");
-  if (isValidElement<{ children?: ReactNode }>(children)) return plainText(children.props.children);
+  if (Array.isArray(children)) return children.map((child) => plainText(child, seen)).join("");
+  if (isValidElement<{ children?: ReactNode }>(children)) {
+    if (seen.has(children)) return "";
+    seen.add(children);
+    return plainText(children.props.children, seen);
+  }
   return "";
 }
 
@@ -89,6 +93,8 @@ function splitSimpleQuestionLabel(children: ReactNode) {
   ) {
     return splitText(children.props.children);
   }
+
+  if (!Array.isArray(children)) return null;
 
   const items = Children.toArray(children);
   if (items.length === 0) return null;
