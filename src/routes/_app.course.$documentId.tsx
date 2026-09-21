@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   ArrowLeft,
   BookOpen,
@@ -19,7 +21,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useContentProtection } from "@/hooks/use-content-protection";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
-import { supabaseConfigured } from "@/lib/supabase";
+import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
 import {
   formatDuration,
@@ -225,6 +227,10 @@ function CourseDocumentPage() {
                 />
               )}
               {isCourse && <CourseContents markdown={document.markdownContent} />}
+              <ReportContentIssue
+                documentId={document.id}
+                isPaper={document.contentKind === "paper"}
+              />
               <Suspense
                 fallback={
                   <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
@@ -271,6 +277,134 @@ function CourseDocumentPage() {
           ))}
       </div>
     </>
+  );
+}
+
+function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPaper: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [issueType, setIssueType] = useState("content_error");
+  const [questionNumber, setQuestionNumber] = useState("");
+  const [topicTitle, setTopicTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  async function submitReport(event: React.FormEvent) {
+    event.preventDefault();
+    if (!supabaseConfigured() || !supabase) {
+      setMessage("Content reporting is not configured yet.");
+      return;
+    }
+    setSaving(true);
+    setMessage(null);
+    try {
+      const parsedQuestion = questionNumber.trim() ? Number(questionNumber) : null;
+      const { error } = await supabase.rpc("report_content_issue", {
+        document_id: documentId,
+        question_number: Number.isFinite(parsedQuestion) ? parsedQuestion : null,
+        topic_title: topicTitle.trim() || null,
+        issue_type: issueType,
+        issue_body: body.trim(),
+      });
+      if (error) throw error;
+      setBody("");
+      setQuestionNumber("");
+      setTopicTitle("");
+      setOpen(false);
+      setMessage("Thanks. StudySpark admins will review this content issue.");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "Could not send this report.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-sm font-medium">Report a content issue</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Tell admins about wrong answers, broken formatting, metadata mistakes, or missing
+            solutions.
+          </p>
+        </div>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? "Close report" : "Report issue"}
+        </Button>
+      </div>
+
+      {message && (
+        <div className="mt-3 rounded-lg border border-border bg-secondary/40 p-3 text-sm">
+          {message}
+        </div>
+      )}
+
+      {open && (
+        <form onSubmit={submitReport} className="mt-4 grid gap-3">
+          <div className="grid gap-3 sm:grid-cols-3">
+            <label className="text-sm">
+              <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                Issue type
+              </span>
+              <select
+                value={issueType}
+                onChange={(event) => setIssueType(event.target.value)}
+                className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm"
+              >
+                <option value="content_error">Content error</option>
+                <option value="formatting">Formatting</option>
+                <option value="wrong_metadata">Wrong metadata</option>
+                <option value="missing_solution">Missing solution</option>
+                <option value="copyright">Copyright concern</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            {isPaper && (
+              <label className="text-sm">
+                <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                  Question
+                </span>
+                <Input
+                  inputMode="numeric"
+                  value={questionNumber}
+                  onChange={(event) => setQuestionNumber(event.target.value.replace(/\D/g, ""))}
+                  placeholder="Example: 4"
+                />
+              </label>
+            )}
+            <label className="text-sm">
+              <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
+                Topic or section
+              </span>
+              <Input
+                value={topicTitle}
+                onChange={(event) => setTopicTitle(event.target.value)}
+                placeholder="Optional"
+              />
+            </label>
+          </div>
+          <Textarea
+            required
+            minLength={8}
+            value={body}
+            onChange={(event) => setBody(event.target.value)}
+            className="min-h-24"
+            placeholder="Describe what is wrong so an admin can fix it."
+          />
+          <div className="flex justify-end">
+            <Button type="submit" disabled={saving || body.trim().length < 8}>
+              {saving ? "Sending..." : "Send report"}
+            </Button>
+          </div>
+        </form>
+      )}
+    </section>
   );
 }
 
