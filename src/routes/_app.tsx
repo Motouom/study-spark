@@ -43,6 +43,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { signOut } from "@/lib/auth";
 import { isPremiumActive } from "@/lib/premium";
 import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
