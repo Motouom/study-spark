@@ -6,7 +6,7 @@ import { Check, Sparkles, X, ArrowLeft, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { supabase } from "@/lib/supabase";
-import { canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
+import { alternateLinks, canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
 import { useI18n, useSyncLocaleFromProfile, type TranslationKey } from "@/lib/i18n";
 
 export const Route = createFileRoute("/pricing")({
@@ -43,7 +43,10 @@ export const Route = createFileRoute("/pricing")({
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: canonicalUrl("/pricing") }],
+    links: [
+      { rel: "canonical", href: canonicalUrl("/pricing") },
+      ...alternateLinks("/pricing", "/fr/tarifs"),
+    ],
   }),
   component: PricingPage,
 });

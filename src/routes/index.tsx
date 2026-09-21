@@ -15,7 +15,7 @@ import {
   Lock,
 } from "lucide-react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import { canonicalUrl, educationalAppSchema, OG_IMAGE_URL } from "@/lib/seo";
+import { alternateLinks, canonicalUrl, educationalAppSchema, OG_IMAGE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/")({
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: canonicalUrl("/") }],
+    links: [{ rel: "canonical", href: canonicalUrl("/") }, ...alternateLinks("/", "/fr")],
   }),
   component: Landing,
 });
