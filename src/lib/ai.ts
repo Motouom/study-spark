@@ -48,6 +48,9 @@ export function fallbackLearningPath(input: {
     subject: string;
     bestDepth: number;
     reviewCount: number;
+    failedQuestions?: number[];
+    slowQuestions?: { questionNumber: number; durationSeconds: number; status: string }[];
+    averageQuestionSeconds?: number;
     avgConfidence: number | null;
     difficultParts: string[];
     addToRevision: boolean;
@@ -63,23 +66,40 @@ export function fallbackLearningPath(input: {
 
   const hardestFocus = hardest?.difficultParts?.length
     ? `Focus on: ${hardest.difficultParts.join("; ")}`
-    : "Identify the exact step where your working breaks down.";
+    : hardest?.failedQuestions?.length
+      ? `Rework failed questions: Q${hardest.failedQuestions.slice(0, 6).join(", Q")}.`
+      : hardest?.slowQuestions?.length
+        ? `Speed up slow questions: Q${hardest.slowQuestions
+            .map((item) => item.questionNumber)
+            .slice(0, 5)
+            .join(", Q")}.`
+        : "Identify the exact step where your working breaks down.";
 
   return [
     {
       day: 1,
       title: `Attack your hardest paper: ${focus}`,
       paper: hardest?.title ?? "Current weakest paper",
-      target: `Rework the ${hardest?.reviewCount ?? 5} questions you marked for review`,
+      target:
+        hardest?.failedQuestions?.length
+          ? `Redo failed questions Q${hardest.failedQuestions.slice(0, 6).join(", Q")} and mark them again`
+          : `Rework the ${hardest?.reviewCount ?? 5} questions you marked for review`,
       focus: hardestFocus,
     },
     {
       day: 2,
       title: second ? "Finish the second-hardest paper" : "Continue active paper",
       paper: second?.title ?? hardest?.title ?? "Next available paper",
-      target: "Mark at least 6 structural questions",
+      target: second?.failedQuestions?.length
+        ? `Correct failed questions Q${second.failedQuestions.slice(0, 6).join(", Q")}`
+        : "Mark at least 6 structural questions",
       focus: second?.difficultParts?.length
         ? `Focus on: ${second.difficultParts.join("; ")}`
+        : second?.slowQuestions?.length
+          ? `Reduce time on Q${second.slowQuestions
+              .map((item) => item.questionNumber)
+              .slice(0, 5)
+              .join(", Q")}.`
         : "Keep full working and mark each question honestly.",
     },
     {
@@ -88,9 +108,11 @@ export function fallbackLearningPath(input: {
       paper: third?.title ?? freshPaper ?? "Lowest-mastery paper",
       target: "Complete 4 timed questions",
       focus:
-        third?.avgConfidence !== null && third?.avgConfidence !== undefined
-          ? `Your confidence here was ${third.avgConfidence}/5 — rebuild it with timed practice.`
-          : "Improve accuracy before increasing speed.",
+        third?.failedQuestions?.length
+          ? `Start with failed questions Q${third.failedQuestions.slice(0, 4).join(", Q")}.`
+          : third?.avgConfidence !== null && third?.avgConfidence !== undefined
+            ? `Your confidence here was ${third.avgConfidence}/5 — rebuild it with timed practice.`
+            : "Improve accuracy before increasing speed.",
     },
     {
       day: 4,
