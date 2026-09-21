@@ -91,6 +91,19 @@ npm run lint
 | `AI_BASE_URL`                   | AI             | Defaults to `https://openrouter.ai/api/v1`.         |
 | `APP_PUBLIC_URL`                | AI/payments    | Public app origin used in redirects and AI headers. |
 
+## Production Deployment
+
+Canonical production deployment:
+
+```text
+Vercel project: study-spark
+Production URL: https://study-spark-237.vercel.app
+Git repository: Motouom/study-spark
+Production branch: main
+```
+
+Do not connect duplicate Vercel projects such as `study-spark-uruh` or `study-spark-s329` to the same repository and branch. One push to `main` should create exactly one production deployment.
+
 ## Database Setup
 
 Supabase schema is managed through SQL files in `database/supabase/`. Apply migrations in numeric order for a fresh project.
@@ -122,7 +135,7 @@ Premium payments are handled through Fapshi:
 The production webhook URL should be:
 
 ```text
-https://YOUR_PUBLIC_DOMAIN/api/payments/fapshi/webhook
+https://study-spark-237.vercel.app/api/payments/fapshi/webhook
 ```
 
 ## SEO And Public Visibility
@@ -134,7 +147,7 @@ The public landing page and pricing page define route metadata for titles, descr
 - `site.webmanifest`
 - `favicon.ico`
 
-Before a public launch, update canonical production URLs in `robots.txt`, `sitemap.xml`, `APP_PUBLIC_URL`, and any external OAuth or payment settings to match the final custom domain.
+Canonical production URLs currently use `https://study-spark-237.vercel.app`. Keep `robots.txt`, `sitemap.xml`, `APP_PUBLIC_URL`, Supabase Auth URLs, Google OAuth, and Fapshi webhook settings aligned with that production origin unless a future custom domain replaces it.
 
 ## Security Notes
 

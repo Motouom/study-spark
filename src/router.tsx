@@ -1,9 +1,16 @@
 import { createRouter, useRouter, type ErrorComponentProps } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { isStaleAssetError, requestStaleAssetRecovery } from "@/lib/stale-asset-recovery";
 import { routeTree } from "./routeTree.gen";
 
 function DefaultErrorComponent({ error, reset }: ErrorComponentProps) {
   const router = useRouter();
   const message = error instanceof Error ? error.message : String(error);
+  const staleAsset = isStaleAssetError(error);
+
+  useEffect(() => {
+    requestStaleAssetRecovery(error);
+  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -24,11 +31,15 @@ function DefaultErrorComponent({ error, reset }: ErrorComponentProps) {
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">Something went wrong</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">
+          {staleAsset ? "StudySpark is updating" : "Something went wrong"}
+        </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          An unexpected error occurred. Please try again.
+          {staleAsset
+            ? "A new version was deployed while this page was open. We are refreshing once to load the newest files."
+            : "An unexpected error occurred. Please try again."}
         </p>
-        {import.meta.env.DEV && message && (
+        {import.meta.env.DEV && message && !staleAsset && (
           <pre className="mt-4 max-h-40 overflow-auto rounded-md bg-muted p-3 text-left font-mono text-xs text-destructive">
             {message}
           </pre>
