@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 
-const siteUrl = "https://study-spark-uruh.vercel.app";
+const siteUrl = "https://study-spark-237.vercel.app";
 const siteTitle = "StudySpark - Cameroon GCE practice and progress";
 const siteDescription =
   "StudySpark helps Cameroon students practise protected GCE structural papers by class, series, subject, and topic with progress tracking and AI-guided revision.";

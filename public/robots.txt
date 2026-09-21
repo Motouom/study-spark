@@ -14,4 +14,4 @@ Disallow: /leaderboard
 Disallow: /settings
 Disallow: /notifications
 
-Sitemap: https://study-spark-uruh.vercel.app/sitemap.xml
+Sitemap: https://study-spark-237.vercel.app/sitemap.xml

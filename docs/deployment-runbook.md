@@ -87,7 +87,7 @@ After deployment:
 - Request AI progress analysis and confirm either AI or fallback content appears.
 - Start a sandbox Fapshi payment and verify the payment return path.
 - Confirm private pages are not listed in `public/sitemap.xml`.
-- In Android Chrome, install the app and confirm it opens within the `study-spark-uruh.vercel.app` scope.
+- In Android Chrome, install the app and confirm it opens within the `study-spark-237.vercel.app` scope.
 - Turn network offline and confirm navigation shows the StudySpark offline message instead of a blank page.
 
 ## 7. PWA Behavior
