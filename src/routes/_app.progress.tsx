@@ -8,17 +8,11 @@ import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { PremiumGate } from "@/components/PremiumGate";
 import { Badge } from "@/components/ui/badge";
 import { Bookmark, BookOpen, CheckCircle2, Clock, Flame, TrendingUp } from "lucide-react";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { useMemo } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { supabaseConfigured } from "@/lib/supabase";
+
+// Recharts is 342KB — lazy-load so it doesn't block the initial progress page paint
+const ProgressDepthChart = lazy(() => import("@/components/ProgressDepthChart"));
 
 export const Route = createFileRoute("/_app/progress")({
   head: () => ({ meta: [{ title: "Progress — StudySpark" }] }),
@@ -69,7 +63,6 @@ function ProgressPage() {
           started.getDate() === date.getDate()
         );
       });
-
       return {
         day: labels[date.getDay()],
         minutes: Math.round(sessions.reduce((sum, item) => sum + item.durationSeconds, 0) / 60),
@@ -143,44 +136,19 @@ function ProgressPage() {
                 Minutes studied for each day of the week.
               </p>
               <div className="mt-4 h-72">
-                {weeklyData.some((point) => point.minutes > 0) ? (
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                      data={weeklyData}
-                      margin={{ top: 8, right: 8, bottom: 0, left: -16 }}
-                    >
-                      <defs>
-                        <linearGradient id="readingDepth" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="var(--foreground)" stopOpacity={0.25} />
-                          <stop offset="100%" stopColor="var(--foreground)" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid stroke="oklch(0 0 0 / 0.06)" vertical={false} />
-                      <XAxis dataKey="day" stroke="var(--muted-foreground)" fontSize={12} />
-                      <YAxis stroke="var(--muted-foreground)" fontSize={12} />
-                      <Tooltip
-                        contentStyle={{
-                          background: "var(--card)",
-                          border: "1px solid var(--border)",
-                          borderRadius: 8,
-                          fontSize: 12,
-                        }}
-                        formatter={(value) => [`${value} min`, "Study time"]}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="minutes"
-                        stroke="var(--foreground)"
-                        strokeWidth={2.5}
-                        fill="url(#readingDepth)"
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                ) : (
-                  <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                    Study for a few minutes to see your weekly trend.
-                  </div>
-                )}
+                <Suspense
+                  fallback={
+                    <div className="h-full w-full animate-pulse rounded-lg bg-secondary/40" />
+                  }
+                >
+                  {weeklyData.some((point) => point.minutes > 0) ? (
+                    <ProgressDepthChart data={weeklyData} dataKey="minutes" yLabel="min" />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                      Study for a few minutes to see your weekly trend.
+                    </div>
+                  )}
+                </Suspense>
               </div>
             </div>
 
@@ -235,7 +203,7 @@ function ProgressPage() {
                   })
                 ) : (
                   <p className="py-4 text-sm text-muted-foreground">
-                    Use “I understand this”, “Need review”, or “Bookmark” while reading.
+                    Use "I understand this", "Need review", or "Bookmark" while reading.
                   </p>
                 )}
               </div>
