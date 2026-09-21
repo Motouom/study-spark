@@ -4,7 +4,6 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   LayoutDashboard,
   Library,
-  TrendingUp,
   Settings,
   Flame,
   Users,
@@ -55,7 +54,6 @@ export const Route = createFileRoute("/_app")({
 const NAV = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/library", label: "Papers", icon: Library },
-  { to: "/progress", label: "Progress", icon: TrendingUp },
   { to: "/learning-path", label: "Learning path", icon: Brain },
   { to: "/courses", label: "Courses", icon: PlayCircle },
   { to: "/cheatsheets", label: "Cheatsheets", icon: BookMarked },
@@ -515,7 +513,7 @@ function AppLayout() {
                             item.kind === "content"
                               ? "/library"
                               : item.kind === "progress"
-                                ? "/progress"
+                                ? "/dashboard"
                                 : item.kind === "streak"
                                   ? "/streak"
                                   : "/pricing",

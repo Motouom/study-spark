@@ -10,6 +10,8 @@ import {
   FileText,
   Lock,
   PlayCircle,
+  CheckCircle2,
+  Bookmark,
 } from "lucide-react";
 import { lazy, Suspense, useMemo } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
@@ -116,7 +118,6 @@ function Dashboard() {
   const useRemoteOnly = supabaseConfigured();
   const effectiveProfile = savedProfile;
   const content = useStudyContent(savedProfile);
-  const effectiveTopics = content.topics;
   const availablePapers = content.documents;
   const documentsById = useMemo(
     () => new Map(availablePapers.map((document) => [document.id, document])),
@@ -372,46 +373,94 @@ function Dashboard() {
       )}
 
       {premium && (
-        <section className="rounded-xl border border-border bg-card p-4 sm:p-6">
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-base font-medium">Recent structural progress</h2>
-              <p className="text-xs text-muted-foreground">Latest paper question marks</p>
+        <section className="grid gap-4 lg:grid-cols-[1fr_20rem]">
+          <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
+            <div className="mb-4">
+              <h2 className="text-base font-medium">Recent paper activity</h2>
+              <p className="text-xs text-muted-foreground">
+                Your latest paper reading sessions. Read depth is context; passed and review marks
+                remain the stronger progress signal.
+              </p>
             </div>
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/progress">View progress</Link>
-            </Button>
-          </div>
-          {recentSessions.length > 0 ? (
-            <ul className="divide-y divide-border">
-              {recentSessions.map((item) => {
-                const paper = documentsById.get(item.documentId);
-                return (
-                  <li
-                    key={item.id}
-                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div>
-                      <div className="text-sm font-medium">{paper?.title ?? "Paper session"}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {formatDuration(item.durationSeconds)} · {item.maxScrollPercent}% read ·{" "}
-                        {new Date(item.updatedAt).toLocaleDateString()}
+            {recentSessions.length > 0 ? (
+              <ul className="divide-y divide-border">
+                {recentSessions.map((item) => {
+                  const paper = documentsById.get(item.documentId);
+                  return (
+                    <li
+                      key={item.id}
+                      className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <div>
+                        <div className="text-sm font-medium">{paper?.title ?? "Paper session"}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {formatDuration(item.durationSeconds)} · {item.maxScrollPercent}% read ·{" "}
+                          {new Date(item.updatedAt).toLocaleDateString()}
+                        </div>
                       </div>
-                    </div>
-                    <Badge variant={item.completed ? "default" : "secondary"}>
-                      {item.completed ? "read through" : "in progress"}
-                    </Badge>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p className="py-6 text-sm text-muted-foreground">
-              Open a paper, read, bookmark, and mark review points to build your progress.
-            </p>
-          )}
+                      <Badge variant={item.completed ? "default" : "secondary"}>
+                        {item.completed ? "read through" : "in progress"}
+                      </Badge>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="py-6 text-sm text-muted-foreground">
+                Open a paper, mark questions, bookmark, and add review points to build your
+                progress.
+              </p>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
+            <h2 className="text-base font-medium">Study signals</h2>
+            <p className="text-xs text-muted-foreground">Useful marks you add while studying.</p>
+            <div className="mt-4 space-y-3">
+              <Signal
+                icon={CheckCircle2}
+                label="Understood"
+                value={readingProgress.summary.understoodCount}
+              />
+              <Signal
+                icon={TrendingUp}
+                label="Needs review"
+                value={readingProgress.summary.reviewCount}
+              />
+              <Signal
+                icon={Bookmark}
+                label="Bookmarks"
+                value={readingProgress.summary.bookmarkCount}
+              />
+              <Signal
+                icon={Target}
+                label="Revision"
+                value={readingProgress.summary.revisionCount}
+              />
+            </div>
+          </div>
         </section>
       )}
+    </div>
+  );
+}
+
+function Signal({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof Bookmark;
+  label: string;
+  value: number;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-lg bg-secondary/50 px-3 py-2 text-sm">
+      <span className="flex items-center gap-2 text-muted-foreground">
+        <Icon className="h-4 w-4" />
+        {label}
+      </span>
+      <span className="font-medium">{value}</span>
     </div>
   );
 }
