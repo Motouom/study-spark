@@ -42,6 +42,7 @@ import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-pane
 import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
 import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
+import { Route as ApiAiHealthRouteImport } from './routes/api.ai.health'
 import { Route as ApiAiLearningPathRouteImport } from './routes/api.ai.learning-path'
 import { Route as ApiAiProgressInsightRouteImport } from './routes/api.ai.progress-insight'
 import { Route as ApiPaymentsHistoryRouteImport } from './routes/api.payments.history'
@@ -217,6 +218,11 @@ const ApiAiFormatPaperRoute = ApiAiFormatPaperRouteImport.update({
   path: '/api/ai/format-paper',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAiHealthRoute = ApiAiHealthRouteImport.update({
+  id: '/api/ai/health',
+  path: '/api/ai/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAiLearningPathRoute = ApiAiLearningPathRouteImport.update({
   id: '/api/ai/learning-path',
   path: '/api/ai/learning-path',
@@ -283,6 +289,7 @@ export interface FileRoutesByFullPath {
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
+  '/api/ai/health': typeof ApiAiHealthRoute
   '/api/ai/learning-path': typeof ApiAiLearningPathRoute
   '/api/ai/progress-insight': typeof ApiAiProgressInsightRoute
   '/api/payments/history': typeof ApiPaymentsHistoryRoute
@@ -322,6 +329,7 @@ export interface FileRoutesByTo {
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
+  '/api/ai/health': typeof ApiAiHealthRoute
   '/api/ai/learning-path': typeof ApiAiLearningPathRoute
   '/api/ai/progress-insight': typeof ApiAiProgressInsightRoute
   '/api/payments/history': typeof ApiPaymentsHistoryRoute
@@ -364,6 +372,7 @@ export interface FileRoutesById {
   '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
   '/_app/quiz/setup': typeof AppQuizSetupRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
+  '/api/ai/health': typeof ApiAiHealthRoute
   '/api/ai/learning-path': typeof ApiAiLearningPathRoute
   '/api/ai/progress-insight': typeof ApiAiProgressInsightRoute
   '/api/payments/history': typeof ApiPaymentsHistoryRoute
@@ -406,6 +415,7 @@ export interface FileRouteTypes {
     | '/course/$documentId'
     | '/quiz/setup'
     | '/api/ai/format-paper'
+    | '/api/ai/health'
     | '/api/ai/learning-path'
     | '/api/ai/progress-insight'
     | '/api/payments/history'
@@ -445,6 +455,7 @@ export interface FileRouteTypes {
     | '/course/$documentId'
     | '/quiz/setup'
     | '/api/ai/format-paper'
+    | '/api/ai/health'
     | '/api/ai/learning-path'
     | '/api/ai/progress-insight'
     | '/api/payments/history'
@@ -486,6 +497,7 @@ export interface FileRouteTypes {
     | '/_app/course/$documentId'
     | '/_app/quiz/setup'
     | '/api/ai/format-paper'
+    | '/api/ai/health'
     | '/api/ai/learning-path'
     | '/api/ai/progress-insight'
     | '/api/payments/history'
@@ -503,6 +515,7 @@ export interface RootRouteChildren {
   ApiSupportRoute: typeof ApiSupportRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   ApiAiFormatPaperRoute: typeof ApiAiFormatPaperRoute
+  ApiAiHealthRoute: typeof ApiAiHealthRoute
   ApiAiLearningPathRoute: typeof ApiAiLearningPathRoute
   ApiAiProgressInsightRoute: typeof ApiAiProgressInsightRoute
   ApiPaymentsHistoryRoute: typeof ApiPaymentsHistoryRoute
@@ -744,6 +757,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAiFormatPaperRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ai/health': {
+      id: '/api/ai/health'
+      path: '/api/ai/health'
+      fullPath: '/api/ai/health'
+      preLoaderRoute: typeof ApiAiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ai/learning-path': {
       id: '/api/ai/learning-path'
       path: '/api/ai/learning-path'
@@ -874,6 +894,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSupportRoute: ApiSupportRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   ApiAiFormatPaperRoute: ApiAiFormatPaperRoute,
+  ApiAiHealthRoute: ApiAiHealthRoute,
   ApiAiLearningPathRoute: ApiAiLearningPathRoute,
   ApiAiProgressInsightRoute: ApiAiProgressInsightRoute,
   ApiPaymentsHistoryRoute: ApiPaymentsHistoryRoute,

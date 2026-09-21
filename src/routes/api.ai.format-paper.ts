@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { aiConfigured, generateAiText } from "@/lib/ai";
+import { aiConfigured, generateAiText, logAiFailure } from "@/lib/ai";
 import { getAuthenticatedUser } from "@/lib/server-supabase";
 import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
@@ -57,28 +57,45 @@ export const Route = createFileRoute("/api/ai/format-paper")({
 
           const fallback = formatLocally(markdown);
           if (!aiConfigured()) {
-            return Response.json({ markdown: fallback, source: "fallback" });
+            logAiFailure("ai.format_paper.fallback", new Error("AI is not configured."), {
+              userId: user.id,
+            });
+            return Response.json({
+              markdown: fallback,
+              source: "fallback",
+              message: "StudySpark applied local formatting because AI is not configured.",
+            });
           }
 
-          const formatted = await generateAiText({
-            system:
-              "You format Cameroon GCE structural question papers as clean Markdown. Preserve every question, mark, equation, and instruction. Remove emojis. Do not add answers, hints, checks, comments, or solutions. Use black-and-white diagram placeholders only when the source clearly requires a diagram.",
-            prompt: JSON.stringify({
-              title: String(body.title ?? ""),
-              subject: String(body.subject ?? ""),
-              markdown,
-              instruction:
-                "Return only the corrected Markdown. Keep LaTeX intact. Do not wrap in code fences. Do not add explanatory text.",
-            }),
-            maxTokens: 3600,
-          });
+          try {
+            const formatted = await generateAiText({
+              system:
+                "You format Cameroon GCE structural question papers as clean Markdown. Preserve every question, mark, equation, and instruction. Remove emojis. Do not add answers, hints, checks, comments, or solutions. Use black-and-white diagram placeholders only when the source clearly requires a diagram.",
+              prompt: JSON.stringify({
+                title: String(body.title ?? ""),
+                subject: String(body.subject ?? ""),
+                markdown,
+                instruction:
+                  "Return only the corrected Markdown. Keep LaTeX intact. Do not wrap in code fences. Do not add explanatory text.",
+              }),
+              maxTokens: 3600,
+            });
 
-          return Response.json({ markdown: removeEmojis(formatted), source: "ai" });
+            return Response.json({ markdown: removeEmojis(formatted), source: "ai" });
+          } catch (aiError) {
+            logAiFailure("ai.format_paper.provider_failed", aiError, { userId: user.id });
+            return Response.json({
+              markdown: fallback,
+              source: "fallback",
+              message:
+                "AI formatting is unavailable right now, so StudySpark applied safe local cleanup instead.",
+            });
+          }
         } catch (error) {
           if (error instanceof Response) return error;
           console.error("AI paper formatter failed", error);
           return Response.json(
-            { error: error instanceof Error ? error.message : "Paper formatting failed." },
+            { error: "Paper formatting could not be completed right now. Please try again." },
             { status: 500 },
           );
         }

@@ -14,12 +14,87 @@ type AiChatResponse = {
   };
 };
 
+export type AiFailureKind =
+  | "missing_config"
+  | "invalid_config"
+  | "provider_http"
+  | "timeout"
+  | "parse_failure"
+  | "empty_response"
+  | "network";
+
+export class AiProviderError extends Error {
+  kind: AiFailureKind;
+  status?: number;
+  retryable: boolean;
+
+  constructor(
+    kind: AiFailureKind,
+    message: string,
+    options?: { status?: number; retryable?: boolean },
+  ) {
+    super(message);
+    this.name = "AiProviderError";
+    this.kind = kind;
+    this.status = options?.status;
+    this.retryable = options?.retryable ?? false;
+  }
+}
+
 function readEnv(name: string) {
   return import.meta.env[name] ?? process.env[name];
 }
 
 export function aiConfigured() {
   return Boolean(readEnv("OPENROUTER_API_KEY") || readEnv("AI_API_KEY"));
+}
+
+export function getAiConfigStatus() {
+  const apiKey = readEnv("OPENROUTER_API_KEY") ?? readEnv("AI_API_KEY");
+  const model = readEnv("AI_MODEL") ?? "openrouter/free";
+  const baseUrl = readEnv("AI_BASE_URL") ?? "https://openrouter.ai/api/v1";
+  const timeoutMs = Number(readEnv("AI_TIMEOUT_MS") ?? 25000);
+  const issues: string[] = [];
+
+  if (!apiKey) issues.push("missing_api_key");
+  if (!model.trim()) issues.push("missing_model");
+  try {
+    new URL(baseUrl);
+  } catch {
+    issues.push("invalid_base_url");
+  }
+  if (!Number.isFinite(timeoutMs) || timeoutMs < 1000) issues.push("invalid_timeout");
+
+  return {
+    configured: issues.length === 0,
+    issues,
+    model,
+    baseUrl,
+    timeoutMs: Number.isFinite(timeoutMs) && timeoutMs >= 1000 ? timeoutMs : 25000,
+    hasApiKey: Boolean(apiKey),
+  };
+}
+
+export function logAiFailure(event: string, error: unknown, context: Record<string, unknown> = {}) {
+  const message = error instanceof Error ? error.message : "Unknown AI error";
+  const providerError =
+    error instanceof AiProviderError
+      ? error
+      : new AiProviderError(
+          /not configured|api key/i.test(message) ? "missing_config" : "network",
+          message,
+        );
+
+  console.warn(
+    JSON.stringify({
+      event,
+      aiFailureKind: providerError.kind,
+      status: providerError.status ?? null,
+      retryable: providerError.retryable,
+      message: providerError.message,
+      ...context,
+    }),
+  );
 }
 
 export function fallbackInsight(input: {
@@ -157,13 +232,23 @@ export function parseAiLearningPath(value: string): AiLearningPathDay[] {
     .replace(/^```(?:json)?/i, "")
     .replace(/```$/i, "")
     .trim();
-  const parsed = JSON.parse(cleaned) as unknown;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(cleaned) as unknown;
+  } catch (error) {
+    throw new AiProviderError(
+      "parse_failure",
+      error instanceof Error ? error.message : "AI returned invalid JSON.",
+    );
+  }
   const days = Array.isArray(parsed)
     ? parsed
     : typeof parsed === "object" && parsed && "days" in parsed
       ? (parsed as { days?: unknown }).days
       : null;
-  if (!Array.isArray(days)) throw new Error("AI returned an invalid learning path.");
+  if (!Array.isArray(days)) {
+    throw new AiProviderError("parse_failure", "AI returned an invalid learning path shape.");
+  }
 
   return days.slice(0, 7).map((item, index) => {
     const row = item as Partial<Record<keyof AiLearningPathDay, unknown>>;
@@ -183,37 +268,87 @@ export async function generateAiText(input: {
   maxTokens?: number;
 }) {
   const apiKey = readEnv("OPENROUTER_API_KEY") ?? readEnv("AI_API_KEY");
-  if (!apiKey) throw new Error("AI is not configured.");
+  const config = getAiConfigStatus();
+  if (!apiKey) {
+    throw new AiProviderError("missing_config", "AI API key is missing.", { retryable: false });
+  }
+  if (config.issues.includes("missing_model") || config.issues.includes("invalid_base_url")) {
+    throw new AiProviderError(
+      "invalid_config",
+      `Invalid AI configuration: ${config.issues.join(", ")}`,
+    );
+  }
 
-  const model = readEnv("AI_MODEL") ?? "openrouter/free";
-  const baseUrl = readEnv("AI_BASE_URL") ?? "https://openrouter.ai/api/v1";
+  const model = config.model;
+  const baseUrl = config.baseUrl;
   const messages: AiMessage[] = [
     { role: "system", content: input.system },
     { role: "user", content: input.prompt },
   ];
 
-  const response = await fetch(`${baseUrl.replace(/\/$/, "")}/chat/completions`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "HTTP-Referer": readEnv("APP_PUBLIC_URL") ?? "http://127.0.0.1:8082",
-      "X-Title": "StudySpark",
-    },
-    body: JSON.stringify({
-      model,
-      messages,
-      temperature: 0.25,
-      max_tokens: input.maxTokens ?? 700,
-    }),
-  });
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), config.timeoutMs);
+    try {
+      const response = await fetch(`${baseUrl.replace(/\/$/, "")}/chat/completions`, {
+        method: "POST",
+        signal: controller.signal,
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": readEnv("APP_PUBLIC_URL") ?? "http://127.0.0.1:8082",
+          "X-Title": "StudySpark",
+        },
+        body: JSON.stringify({
+          model,
+          messages,
+          temperature: 0.25,
+          max_tokens: input.maxTokens ?? 700,
+        }),
+      });
 
-  const payload = (await response.json().catch(() => null)) as AiChatResponse | null;
-  if (!response.ok) {
-    throw new Error(payload?.error?.message ?? "AI request failed.");
+      const payload = (await response.json().catch(() => null)) as AiChatResponse | null;
+      if (!response.ok) {
+        throw new AiProviderError(
+          "provider_http",
+          payload?.error?.message ?? `AI provider returned HTTP ${response.status}.`,
+          {
+            status: response.status,
+            retryable: response.status === 429 || response.status >= 500,
+          },
+        );
+      }
+
+      const content = payload?.choices?.[0]?.message?.content?.trim();
+      if (!content) {
+        lastError = new AiProviderError(
+          "empty_response",
+          "AI provider returned an empty response.",
+          {
+            retryable: attempt === 1,
+          },
+        );
+        if (attempt === 1) continue;
+        throw lastError;
+      }
+      return content;
+    } catch (error) {
+      if (error instanceof AiProviderError) throw error;
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new AiProviderError("timeout", "AI provider request timed out.", { retryable: true });
+      }
+      throw new AiProviderError(
+        "network",
+        error instanceof Error ? error.message : "AI provider request failed.",
+        { retryable: true },
+      );
+    } finally {
+      clearTimeout(timeout);
+    }
   }
 
-  const content = payload?.choices?.[0]?.message?.content?.trim();
-  if (!content) throw new Error("AI returned an empty response.");
-  return content;
+  throw lastError instanceof Error
+    ? lastError
+    : new AiProviderError("empty_response", "AI provider returned an empty response.");
 }
