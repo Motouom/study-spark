@@ -206,7 +206,9 @@ function Onboarding() {
                   {LANGUAGES.map((item) => {
                     const sel = language === item.id;
                     const sysLabel =
-                      item.id === "english" ? "English interface" : "Interface en français";
+                      item.id === "english"
+                        ? t("onboarding.englishInterface")
+                        : t("onboarding.frenchInterface");
                     return (
                       <button
                         key={item.id}

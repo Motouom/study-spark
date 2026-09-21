@@ -230,6 +230,8 @@ const en = {
   "onboarding.languageTitle": "Choose your study language",
   "onboarding.languageDescription":
     "Choose your interface language and the Cameroon curriculum you follow.",
+  "onboarding.englishInterface": "English interface",
+  "onboarding.frenchInterface": "French interface",
   "onboarding.curriculumPath": "Curriculum path",
   "onboarding.gceHint": "Forms, O-Level, Lower Sixth, Upper Sixth",
   "onboarding.frHint": "Sixième to Terminale, BEPC, Probatoire, Bac",
@@ -490,6 +492,8 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "onboarding.languageTitle": "Choisis ta langue d'étude",
   "onboarding.languageDescription":
     "Choisis la langue de l'interface et le parcours scolaire camerounais que tu suis.",
+  "onboarding.englishInterface": "Interface en anglais",
+  "onboarding.frenchInterface": "Interface en français",
   "onboarding.curriculumPath": "Parcours scolaire",
   "onboarding.gceHint": "Forms, O-Level, Lower Sixth, Upper Sixth",
   "onboarding.frHint": "Sixième à Terminale, BEPC, Probatoire, Bac",

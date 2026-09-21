@@ -69,10 +69,13 @@ function readLocalProfile(userId: string) {
 
 function normalizeProfile(profile: Partial<StudentProfile>): StudentProfile {
   const language = profile.language ?? "english";
+  const educationSystem = profile.educationSystem ?? educationSystemForLanguage(language);
+  const defaultClassLevel = educationSystem === "francophone" ? "troisieme" : "form_5";
+  const defaultSeries = educationSystem === "francophone" ? "tronc_commun" : "science";
   return {
     name: profile.name ?? "",
     language,
-    educationSystem: profile.educationSystem ?? educationSystemForLanguage(language),
+    educationSystem,
     country: profile.country ?? "Cameroon",
     region: profile.region ?? "Not set",
     city: profile.city ?? "",
@@ -81,8 +84,8 @@ function normalizeProfile(profile: Partial<StudentProfile>): StudentProfile {
     locationLongitude: profile.locationLongitude ?? null,
     locationVerifiedAt: profile.locationVerifiedAt ?? null,
     level: profile.level ?? "ordinary",
-    classLevel: profile.classLevel ?? "form_5",
-    series: profile.series ?? "science",
+    classLevel: profile.classLevel ?? defaultClassLevel,
+    series: profile.series ?? defaultSeries,
     subjects: profile.subjects ?? [],
     plan: profile.plan ?? "free",
     premiumUntil: profile.premiumUntil ?? null,
