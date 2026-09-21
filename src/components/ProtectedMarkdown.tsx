@@ -133,11 +133,13 @@ export default function ProtectedMarkdown({
   owner,
   userId,
   renderQuestionControls,
+  renderTopicControls,
 }: {
   document: CourseDocument;
   owner: string;
   userId: string;
   renderQuestionControls?: (questionNumber: number) => ReactNode;
+  renderTopicControls?: (topicTitle: string) => ReactNode;
 }) {
   const trace = `${owner} · ${userId.slice(0, 8)} · ${document.id.slice(0, 8)} · ${new Date().toLocaleDateString()}`;
   const isCourse = document.contentKind === "course";
@@ -199,22 +201,29 @@ export default function ProtectedMarkdown({
             ),
             h2: ({ children }) => {
               const questionNumber = questionNumberFromChildren(children);
+              const topicTitle = plainText(children).trim();
+              const topicControls =
+                !questionNumber && topicTitle ? renderTopicControls?.(topicTitle) : null;
               return (
                 <h2
                   id={slugifyHeading(String(children ?? ""))}
                   className={
                     isCourse
-                      ? "course-unit-heading mb-5 mt-10 flex scroll-mt-24 items-center gap-3 rounded-xl border border-border bg-card/85 px-4 py-3 font-display text-xl font-semibold leading-tight shadow-sm sm:text-2xl"
-                      : "mb-3 mt-8 scroll-mt-24 font-display text-xl font-semibold leading-tight sm:text-2xl"
+                      ? "course-unit-heading mb-5 mt-10 flex scroll-mt-24 flex-col gap-3 rounded-xl border border-border bg-card/85 px-4 py-3 font-display text-xl font-semibold leading-tight shadow-sm sm:flex-row sm:items-center sm:justify-between sm:text-2xl"
+                      : "mb-3 mt-8 flex scroll-mt-24 flex-col gap-2 font-display text-xl font-semibold leading-tight sm:flex-row sm:items-center sm:justify-between sm:text-2xl"
                   }
                 >
-                  {isCourse && (
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                      <BookOpenCheck className="h-4 w-4" />
+                  <span className="flex min-w-0 items-center gap-3">
+                    {isCourse && (
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                        <BookOpenCheck className="h-4 w-4" />
+                      </span>
+                    )}
+                    <span className="min-w-0">
+                      {questionNumber ? `Q${questionNumber}` : formatStudyInline(children)}
                     </span>
-                  )}
-                  {questionNumber ? `Q${questionNumber}` : formatStudyInline(children)}
-                  {questionNumber ? renderQuestionControls?.(questionNumber) : null}
+                  </span>
+                  {questionNumber ? renderQuestionControls?.(questionNumber) : topicControls}
                 </h2>
               );
             },
@@ -302,9 +311,7 @@ export default function ProtectedMarkdown({
             ul: ({ children }) => (
               <ul
                 className={
-                  isCourse
-                    ? "course-list my-5 grid gap-2 pl-0"
-                    : "my-4 list-disc space-y-2 pl-6"
+                  isCourse ? "course-list my-5 grid gap-2 pl-0" : "my-4 list-disc space-y-2 pl-6"
                 }
               >
                 {children}

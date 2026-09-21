@@ -27,7 +27,10 @@ import {
   useStructuralProgress,
   type StructuralQuestionStatus,
 } from "@/hooks/use-structural-progress";
-import { useTopicUnderstandingProgress } from "@/hooks/use-topic-understanding-progress";
+import {
+  useTopicUnderstandingProgress,
+  type TopicUnderstandingStatus,
+} from "@/hooks/use-topic-understanding-progress";
 import { getScrollPercent, onContainerScroll, scrollToPercent } from "@/lib/scroll-progress";
 import { slugifyHeading } from "@/components/ProtectedMarkdown";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
@@ -79,12 +82,28 @@ function CourseDocumentPage() {
     : isTextbook
       ? "textbook"
       : isCheatsheet
-      ? "cheatsheet"
-      : "paper";
+        ? "cheatsheet"
+        : "paper";
   const [questionLocalError, setQuestionLocalError] = useState<string | null>(null);
+  const [topicLocalError, setTopicLocalError] = useState<string | null>(null);
   const questionByNumber = useMemo(
     () => new Map(questionProgress.progress.map((item) => [item.questionNumber, item])),
     [questionProgress.progress],
+  );
+  const topics = useMemo(
+    () =>
+      document && (document.contentKind === "course" || document.contentKind === "cheatsheet")
+        ? trackableTopics(
+            document.markdownContent,
+            document.title,
+            document.contentKind === "cheatsheet",
+          )
+        : [],
+    [document],
+  );
+  const topicByTitle = useMemo(
+    () => new Map(topics.map((topic) => [topic.title, topic])),
+    [topics],
   );
 
   async function markQuestion(questionNumber: number, status: StructuralQuestionStatus) {
@@ -100,6 +119,19 @@ function CourseDocumentPage() {
       setQuestionLocalError(
         error instanceof Error ? error.message : "Could not save question progress.",
       );
+    }
+  }
+
+  async function markTopic(topic: TrackableTopic, status: TopicUnderstandingStatus) {
+    setTopicLocalError(null);
+    try {
+      await topicProgress.markTopic({
+        topicKey: topic.key,
+        topicTitle: topic.title,
+        status,
+      });
+    } catch (error) {
+      setTopicLocalError(error instanceof Error ? error.message : "Could not save topic progress.");
     }
   }
 
@@ -187,10 +219,10 @@ function CourseDocumentPage() {
               )}
               {(isCourse || isCheatsheet) && (
                 <TopicUnderstandingPanel
-                  markdown={document.markdownContent}
-                  documentTitle={document.title}
                   isCheatsheet={isCheatsheet}
                   progress={topicProgress}
+                  topicCount={topics.length}
+                  localError={topicLocalError}
                 />
               )}
               {isCourse && <CourseContents markdown={document.markdownContent} />}
@@ -209,13 +241,29 @@ function CourseDocumentPage() {
                     document.contentKind === "paper"
                       ? (questionNumber) => (
                           <InlineQuestionOutcome
-                            status={
-                              questionByNumber.get(questionNumber)?.status ?? "not_started"
+                            status={questionByNumber.get(questionNumber)?.status ?? "not_started"}
+                            saving={
+                              questionProgress.savingKey === `${document.id}:${questionNumber}`
                             }
-                            saving={questionProgress.savingKey === `${document.id}:${questionNumber}`}
                             onMark={(status) => markQuestion(questionNumber, status)}
                           />
                         )
+                      : undefined
+                  }
+                  renderTopicControls={
+                    document.contentKind === "course" || document.contentKind === "cheatsheet"
+                      ? (topicTitle) => {
+                          const topic = topicByTitle.get(topicTitle);
+                          if (!topic) return null;
+                          const item = topicProgress.byTopic.get(topic.key);
+                          return (
+                            <InlineTopicUnderstanding
+                              status={item?.status ?? "not_started"}
+                              saving={topicProgress.savingKey === topic.key}
+                              onMark={(status) => markTopic(topic, status)}
+                            />
+                          );
+                        }
                       : undefined
                   }
                 />
@@ -323,7 +371,7 @@ function trackableTopics(markdown: string, documentTitle: string, isCheatsheet: 
   return titles.map((title, index): TrackableTopic => {
     const slug = slugifyHeading(title) || `topic-${index + 1}`;
     return {
-      key: `${index + 1}-${slug}`,
+      key: slug,
       title,
       href: headings.length > 0 || !isCheatsheet ? `#${slug}` : "#top",
     };
@@ -442,36 +490,17 @@ function InlineQuestionOutcome({
 }
 
 function TopicUnderstandingPanel({
-  markdown,
-  documentTitle,
   isCheatsheet,
   progress,
+  topicCount,
+  localError,
 }: {
-  markdown: string;
-  documentTitle: string;
   isCheatsheet: boolean;
   progress: ReturnType<typeof useTopicUnderstandingProgress>;
+  topicCount: number;
+  localError: string | null;
 }) {
-  const [localError, setLocalError] = useState<string | null>(null);
-  const topics = useMemo(
-    () => trackableTopics(markdown, documentTitle, isCheatsheet),
-    [documentTitle, isCheatsheet, markdown],
-  );
-
-  async function mark(topic: TrackableTopic, status: "understood" | "review") {
-    setLocalError(null);
-    try {
-      await progress.markTopic({
-        topicKey: topic.key,
-        topicTitle: topic.title,
-        status,
-      });
-    } catch (error) {
-      setLocalError(error instanceof Error ? error.message : "Could not save topic progress.");
-    }
-  }
-
-  if (topics.length === 0) return null;
+  if (topicCount === 0) return null;
 
   return (
     <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
@@ -479,15 +508,21 @@ function TopicUnderstandingPanel({
         <div>
           <Badge variant="secondary">Topic understanding</Badge>
           <h2 className="mt-3 text-base font-medium">
-            Mark each {isCheatsheet ? "cheatsheet topic" : "course topic"}
+            Mark each {isCheatsheet ? "cheatsheet topic" : "course topic"} beside its heading
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Use this to separate topics you understand from topics that need revision.
+            Understood and review marks now sit directly inside the content where you study.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-2 text-xs sm:min-w-44">
+        <div className="grid grid-cols-3 gap-2 text-xs sm:min-w-64">
           <MiniMetric label="Understood" value={String(progress.summary.understood)} />
           <MiniMetric label="Review" value={String(progress.summary.review)} />
+          <MiniMetric
+            label="Unmarked"
+            value={String(
+              Math.max(0, topicCount - progress.summary.understood - progress.summary.review),
+            )}
+          />
         </div>
       </div>
 
@@ -496,39 +531,40 @@ function TopicUnderstandingPanel({
           {localError ?? progress.error}
         </div>
       )}
-
-      <div className="mt-4 grid gap-3 md:grid-cols-2">
-        {topics.map((topic) => {
-          const item = progress.byTopic.get(topic.key);
-          const saving = progress.savingKey === topic.key;
-          return (
-            <div key={topic.key} className="rounded-lg border border-border bg-background p-3">
-              <div className="flex items-start justify-between gap-3">
-                <a href={topic.href} className="min-w-0 text-sm font-medium hover:text-accent">
-                  {topic.title}
-                </a>
-                {item && <StatusBadge status={item.status} />}
-              </div>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <OutcomeButton
-                  label="Understood"
-                  active={item?.status === "understood"}
-                  disabled={saving}
-                  onClick={() => mark(topic, "understood")}
-                />
-                <OutcomeButton
-                  label="Need review"
-                  active={item?.status === "review"}
-                  destructive
-                  disabled={saving}
-                  onClick={() => mark(topic, "review")}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </section>
+  );
+}
+
+function InlineTopicUnderstanding({
+  status,
+  saving,
+  onMark,
+}: {
+  status: TopicUnderstandingStatus | "not_started";
+  saving: boolean;
+  onMark: (status: TopicUnderstandingStatus) => Promise<void>;
+}) {
+  return (
+    <div className="flex w-full flex-col gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
+      <StatusBadge status={status} />
+      <div className="grid grid-cols-2 gap-1.5 sm:flex">
+        <OutcomeButton
+          label="Understood"
+          active={status === "understood"}
+          compact
+          disabled={saving}
+          onClick={() => onMark("understood")}
+        />
+        <OutcomeButton
+          label="Need review"
+          active={status === "review"}
+          compact
+          destructive
+          disabled={saving}
+          onClick={() => onMark("review")}
+        />
+      </div>
+    </div>
   );
 }
 
