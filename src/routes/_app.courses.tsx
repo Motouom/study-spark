@@ -2,8 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { PremiumGate } from "@/components/PremiumGate";
 import { useStudyContent } from "@/hooks/use-study-content";
+import type { CourseDocument } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import {
   calculateStructuralMastery,
@@ -11,8 +13,19 @@ import {
   useStructuralProgress,
 } from "@/hooks/use-structural-progress";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
-import { BookOpen, Clock, GraduationCap, ListChecks, PlayCircle, Sparkles } from "lucide-react";
-import { useMemo } from "react";
+import { slugifyHeading } from "@/components/ProtectedMarkdown";
+import {
+  ArrowLeft,
+  BookOpen,
+  Clock,
+  GraduationCap,
+  ListChecks,
+  PlayCircle,
+  Search,
+  Sparkles,
+  X,
+} from "lucide-react";
+import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/_app/courses")({
   head: () => ({ meta: [{ title: "Courses — StudySpark" }] }),
@@ -24,6 +37,8 @@ function CoursesPage() {
   const { documents, loaded, error } = useStudyContent(profile);
   const { progress } = useStructuralProgress();
   const readingProgress = usePaperStudyOverview();
+  const [subject, setSubject] = useState<string | null>(null);
+  const [q, setQ] = useState("");
 
   const bestDepthByDoc = useMemo(() => {
     const map = new Map<string, number>();
@@ -94,11 +109,79 @@ function CoursesPage() {
     [courses, courseStats],
   );
 
+  const topics = useMemo(
+    () =>
+      courses.flatMap((course) =>
+        unitsOf(course).map((topic, index) => ({
+          id: `${course.id}:${slugifyHeading(topic)}`,
+          title: topic,
+          index,
+          course,
+          stats: courseStats.get(course.id)!,
+          href: `/course/${course.id}#${slugifyHeading(topic)}`,
+        })),
+      ),
+    [courses, courseStats],
+  );
+
+  const subjectCards = useMemo(
+    () =>
+      [...new Set(courses.map((course) => course.subject))]
+        .map((name) => {
+          const subjectCourses = courses.filter((course) => course.subject === name);
+          const subjectTopics = topics.filter((topic) => topic.course.subject === name);
+          const bestDepth = Math.max(
+            0,
+            ...subjectCourses.map((course) => courseStats.get(course.id)?.bestDepth ?? 0),
+          );
+          const subjectMastery = mastery.find((item) => item.subject === name)?.mastery ?? 0;
+          return {
+            name,
+            courses: subjectCourses.length,
+            topics: subjectTopics.length,
+            bestDepth,
+            subjectMastery,
+          };
+        })
+        .sort((a, b) => b.topics - a.topics || a.name.localeCompare(b.name)),
+    [courseStats, courses, mastery, topics],
+  );
+
+  const needle = q.trim().toLowerCase();
+  const searchActive = needle.length > 0;
+  const filteredTopics = useMemo(
+    () =>
+      topics
+        .filter((topic) => {
+          if (!searchActive && subject && topic.course.subject !== subject) return false;
+          if (!needle) return true;
+          return [
+            topic.title,
+            topic.course.title,
+            topic.course.subject,
+            topic.course.language,
+            ...topic.course.series,
+          ]
+            .join(" ")
+            .toLowerCase()
+            .includes(needle);
+        })
+        .sort(
+          (a, b) =>
+            a.course.subject.localeCompare(b.course.subject) ||
+            a.course.title.localeCompare(b.course.title) ||
+            a.index - b.index,
+        ),
+    [needle, searchActive, subject, topics],
+  );
+
+  const clearSearch = () => setQ("");
+
   return (
     <>
       <PageHeader
         title="Courses"
-        description="Complete subject courses with lessons, worked examples, and exam technique — built for your class and series."
+        description="Topic-by-topic GCE lessons with worked examples and exam technique — built for your class and series."
       />
       <div className="px-4 py-6 md:px-10 md:py-8">
         {error && (
@@ -111,7 +194,7 @@ function CoursesPage() {
           title="Premium courses"
           description="Upgrade to access full subject courses, lesson sequences, and guided revision."
         >
-          {loaded && courses.length === 0 ? (
+          {loaded && topics.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
               <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground" />
               <h2 className="mt-4 text-base font-medium">No courses for your profile yet</h2>
@@ -157,105 +240,205 @@ function CoursesPage() {
                 </section>
               )}
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {courses.map((course) => {
-                  const stats = courseStats.get(course.id)!;
-                  const subjectMastery =
-                    mastery.find((item) => item.subject === course.subject)?.mastery ?? 0;
+              <SearchBox
+                value={q}
+                onChange={setQ}
+                onClear={clearSearch}
+                placeholder="Search course topics, subject, or lesson..."
+                label="Search course topics"
+              />
 
-                  return (
-                    <article
-                      key={course.id}
-                      className="flex flex-col rounded-xl border border-border bg-card p-5"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                          <BookOpen className="h-5 w-5" />
-                        </div>
-                        <Badge variant="secondary">{subjectMastery}% mastery</Badge>
-                      </div>
-                      <h2 className="mt-4 text-base font-medium leading-snug">{course.title}</h2>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {course.subject} · {classLevelText(course.classLevels)} ·{" "}
-                        {course.language === "french" ? "Français" : "English"}
-                      </p>
-
-                      {stats.units > 0 && (
-                        <div className="mt-3 space-y-1">
-                          {unitsOf(course)
-                            .slice(0, 3)
-                            .map((unit) => (
-                              <div
-                                key={unit}
-                                className="flex items-center gap-2 text-xs text-muted-foreground"
-                              >
-                                <ListChecks className="h-3 w-3 shrink-0" />
-                                <span className="truncate">{unit}</span>
-                              </div>
-                            ))}
-                          {stats.units > 3 && (
-                            <p className="text-xs text-muted-foreground">
-                              +{stats.units - 3} more units
-                            </p>
-                          )}
-                        </div>
-                      )}
-
-                      <div className="mt-4 grid grid-cols-3 gap-2 text-xs">
-                        <CourseMetric
-                          icon={ListChecks}
-                          label="Lessons"
-                          value={String(stats.lessons)}
-                        />
-                        <CourseMetric
-                          icon={Clock}
-                          label="Read time"
-                          value={`${stats.readingMinutes} min`}
-                        />
-                        <CourseMetric
-                          icon={BookOpen}
-                          label="Studied"
-                          value={formatDuration(stats.totalTime)}
-                        />
-                      </div>
-
-                      {stats.bestDepth > 0 && (
-                        <div className="mt-3">
-                          <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-                            <span>Course progress</span>
-                            <span>{stats.bestDepth}%</span>
+              {searchActive ? (
+                <TopicResults topics={filteredTopics} query={q} onClear={clearSearch} />
+              ) : !subject ? (
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-sm font-medium">Subjects</h2>
+                    <Badge variant="secondary">{subjectCards.length}</Badge>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                    {subjectCards.map((item) => (
+                      <button
+                        key={item.name}
+                        type="button"
+                        onClick={() => setSubject(item.name)}
+                        className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
+                            <BookOpen className="h-5 w-5" />
                           </div>
-                          <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-secondary">
+                          <Badge variant="secondary">{item.subjectMastery}% mastery</Badge>
+                        </div>
+                        <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
+                        <p className="mt-2 text-xs text-muted-foreground">
+                          {item.topics} topics · {item.courses} course
+                          {item.courses === 1 ? "" : "s"}
+                        </p>
+                        {item.bestDepth > 0 && (
+                          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
                             <div
                               className="h-full rounded-full bg-accent transition-[width] duration-500"
-                              style={{ width: `${Math.min(100, stats.bestDepth)}%` }}
+                              style={{ width: `${Math.min(100, item.bestDepth)}%` }}
                             />
                           </div>
-                        </div>
-                      )}
-
-                      <div className="mt-auto pt-4">
-                        <Button asChild className="w-full" size="sm">
-                          <Link to="/course/$documentId" params={{ documentId: course.id }}>
-                            {stats.bestDepth > 0 ? "Continue course" : "Start course"}
-                          </Link>
-                        </Button>
-                        {stats.passed > 0 && (
-                          <p className="mt-2 text-center text-xs text-muted-foreground">
-                            {stats.passed} question{stats.passed === 1 ? "" : "s"} passed in this
-                            course
-                          </p>
                         )}
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              ) : filteredTopics.length > 0 ? (
+                <section className="space-y-3">
+                  <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setSubject(null)}
+                      >
+                        <ArrowLeft className="mr-1.5 h-4 w-4" />
+                        Subjects
+                      </Button>
+                      <Badge variant="secondary">{filteredTopics.length} topics</Badge>
+                    </div>
+                    <h2 className="text-lg font-medium">{subject}</h2>
+                  </div>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {filteredTopics.map((topic) => (
+                      <TopicCard key={topic.id} topic={topic} />
+                    ))}
+                  </div>
+                </section>
+              ) : (
+                <EmptyFiltered onClear={() => setSubject(null)} label="No topics match this subject." />
+              )}
             </div>
           )}
         </PremiumGate>
       </div>
     </>
+  );
+}
+
+type CourseTopic = {
+  id: string;
+  title: string;
+  index: number;
+  href: string;
+  course: CourseDocument;
+  stats: {
+    lessons: number;
+    units: number;
+    readingMinutes: number;
+    passed: number;
+    totalTime: number;
+    bestDepth: number;
+  };
+};
+
+function SearchBox({
+  value,
+  onChange,
+  onClear,
+  placeholder,
+  label,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  onClear: () => void;
+  placeholder: string;
+  label: string;
+}) {
+  const active = value.trim().length > 0;
+  return (
+    <div className="relative">
+      <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        className="h-11 pl-9 pr-10"
+        aria-label={label}
+      />
+      {active && (
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label="Clear search"
+          className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      )}
+    </div>
+  );
+}
+
+function TopicResults({
+  topics,
+  query,
+  onClear,
+}: {
+  topics: CourseTopic[];
+  query: string;
+  onClear: () => void;
+}) {
+  if (topics.length === 0) {
+    return <EmptyFiltered onClear={onClear} label={`No course topics match “${query}”.`} />;
+  }
+  return (
+    <section className="space-y-3">
+      <div className="flex items-center justify-between">
+        <h2 className="text-sm font-medium">Search results</h2>
+        <Badge variant="secondary">{topics.length}</Badge>
+      </div>
+      <div className="grid gap-3 md:grid-cols-2">
+        {topics.map((topic) => (
+          <TopicCard key={topic.id} topic={topic} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TopicCard({ topic }: { topic: CourseTopic }) {
+  return (
+    <a
+      href={topic.href}
+      className="group rounded-xl border border-border bg-card p-4 transition-shadow hover:shadow-card"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
+          <ListChecks className="h-5 w-5" />
+        </div>
+        <Badge variant={topic.stats.bestDepth > 0 ? "default" : "secondary"}>
+          {topic.stats.bestDepth > 0 ? `${topic.stats.bestDepth}% read` : "Topic"}
+        </Badge>
+      </div>
+      <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
+        {topic.title}
+      </h3>
+      <p className="mt-2 text-xs text-muted-foreground">
+        {topic.course.subject} · {classLevelText(topic.course.classLevels)} ·{" "}
+        {topic.course.language === "french" ? "Français" : "English"}
+      </p>
+      <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
+        <CourseMetric icon={Clock} label="Course time" value={`${topic.stats.readingMinutes} min`} />
+        <CourseMetric icon={BookOpen} label="Studied" value={formatDuration(topic.stats.totalTime)} />
+      </div>
+    </a>
+  );
+}
+
+function EmptyFiltered({ label, onClear }: { label: string; onClear: () => void }) {
+  return (
+    <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+      <p className="text-sm text-muted-foreground">{label}</p>
+      <Button variant="outline" size="sm" className="mt-4" onClick={onClear}>
+        Clear filters
+      </Button>
+    </div>
   );
 }
 
