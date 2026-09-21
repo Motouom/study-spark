@@ -41,12 +41,14 @@ In Supabase Dashboard > Authentication > URL Configuration:
 
 - Set the local site URL to `http://127.0.0.1:8082` while developing on the current Vite server.
 - Add `http://127.0.0.1:8082/auth/callback` to redirect URLs.
-- Add the production site URL and production `/auth/callback` redirect before launch.
+- Set the production site URL to `https://study-spark-237.vercel.app`.
+- Add `https://study-spark-237.vercel.app/auth/callback` to redirect URLs.
 
 Supabase should receive the app callback URL:
 
 ```text
 http://127.0.0.1:8082/auth/callback
+https://study-spark-237.vercel.app/auth/callback
 ```
 
 ## Important note

@@ -22,7 +22,6 @@ import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { supabaseConfigured } from "@/lib/supabase";
 import { usePaperStudyProgress, type PaperCheckpointType } from "@/hooks/use-paper-study-progress";
 import {
-  countStructuralQuestions,
   formatDuration,
   useStructuralProgress,
   type StructuralQuestionStatus,
@@ -111,8 +110,9 @@ function CourseDocumentPage() {
     setQuestionLocalError(null);
     try {
       const existing = questionByNumber.get(questionNumber);
-      if (status !== "started" && !existing) {
-        await questionProgress.markQuestion(document.id, questionNumber, "started");
+      if (status !== "started" && (!existing || existing.status === "not_started")) {
+        setQuestionLocalError("Start this question first, then mark it passed or failed.");
+        return;
       }
       await questionProgress.markQuestion(document.id, questionNumber, status);
     } catch (error) {
@@ -210,13 +210,12 @@ function CourseDocumentPage() {
                 documentTitle={document.title}
                 kindLabel={progressKindLabel}
               />
-              {document.contentKind === "paper" && (
-                <QuestionOutcomeSummary
-                  markdown={document.markdownContent}
-                  progress={questionProgress}
-                  localError={questionLocalError}
-                />
-              )}
+              {document.contentKind === "paper" &&
+                (questionProgress.error || questionLocalError) && (
+                  <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                    {questionLocalError ?? questionProgress.error}
+                  </div>
+                )}
               {(isCourse || isCheatsheet) && (
                 <TopicUnderstandingPanel
                   isCheatsheet={isCheatsheet}
@@ -412,50 +411,6 @@ function ReadingProgressBar() {
   );
 }
 
-function QuestionOutcomeSummary({
-  markdown,
-  progress,
-  localError,
-}: {
-  markdown: string;
-  progress: ReturnType<typeof useStructuralProgress>;
-  localError: string | null;
-}) {
-  const questionCount = countStructuralQuestions(markdown);
-  const unmarked = Math.max(0, questionCount - progress.summary.passed - progress.summary.failed);
-
-  if (questionCount === 0) return null;
-
-  return (
-    <section className="rounded-xl border border-border bg-card p-3 sm:p-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="secondary">Question outcomes</Badge>
-            <span className="text-sm text-muted-foreground">
-              Mark each question beside its own Q number.
-            </span>
-          </div>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Passed and failed marks drive your progress and AI learning path.
-          </p>
-        </div>
-        <div className="grid grid-cols-3 gap-2 text-xs sm:min-w-72">
-          <MiniMetric label="Passed" value={String(progress.summary.passed)} />
-          <MiniMetric label="Failed" value={String(progress.summary.failed)} />
-          <MiniMetric label="Unmarked" value={String(unmarked)} />
-        </div>
-      </div>
-
-      {(progress.error || localError) && (
-        <div className="mt-4 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-          {localError ?? progress.error}
-        </div>
-      )}
-    </section>
-  );
-}
-
 function InlineQuestionOutcome({
   status,
   saving,
@@ -465,15 +420,24 @@ function InlineQuestionOutcome({
   saving: boolean;
   onMark: (status: StructuralQuestionStatus) => Promise<void>;
 }) {
+  const isStarted = status !== "not_started";
+
   return (
     <div className="flex w-full flex-col gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
       <StatusBadge status={status} />
-      <div className="grid grid-cols-2 gap-1.5 sm:flex">
+      <div className="grid grid-cols-3 gap-1.5 sm:flex">
+        <OutcomeButton
+          label={isStarted ? "Started" : "Start"}
+          active={status === "started"}
+          compact
+          disabled={saving || isStarted}
+          onClick={() => onMark("started")}
+        />
         <OutcomeButton
           label="Passed"
           active={status === "passed"}
           compact
-          disabled={saving}
+          disabled={saving || !isStarted}
           onClick={() => onMark("passed")}
         />
         <OutcomeButton
@@ -481,7 +445,7 @@ function InlineQuestionOutcome({
           active={status === "failed"}
           compact
           destructive
-          disabled={saving}
+          disabled={saving || !isStarted}
           onClick={() => onMark("failed")}
         />
       </div>
