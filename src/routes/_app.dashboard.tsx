@@ -340,8 +340,8 @@ function Dashboard() {
               <div>
                 <h2 className="text-base font-medium">Premium progress analytics</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Upgrade to unlock streaks, pass rate, timing, mastery, achievements, and your
-                  personalized learning path.
+                  Upgrade to unlock streaks, pass rate, timing, mastery, and your personalized
+                  learning path.
                 </p>
               </div>
             </div>

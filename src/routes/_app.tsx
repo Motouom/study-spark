@@ -7,7 +7,6 @@ import {
   TrendingUp,
   Settings,
   Flame,
-  Trophy,
   Users,
   Bell,
   Search,
@@ -60,7 +59,6 @@ const NAV = [
   { to: "/learning-path", label: "Learning path", icon: Brain },
   { to: "/courses", label: "Courses", icon: PlayCircle },
   { to: "/cheatsheets", label: "Cheatsheets", icon: BookMarked },
-  { to: "/achievements", label: "Achievements", icon: Trophy },
   { to: "/leaderboard", label: "Leaderboard", icon: Users },
 ] as const;
 
