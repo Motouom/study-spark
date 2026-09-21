@@ -371,7 +371,7 @@ function trackableTopics(markdown: string, documentTitle: string, isCheatsheet: 
   return titles.map((title, index): TrackableTopic => {
     const slug = slugifyHeading(title) || `topic-${index + 1}`;
     return {
-      key: slug,
+      key: `${index + 1}-${slug}`,
       title,
       href: headings.length > 0 || !isCheatsheet ? `#${slug}` : "#top",
     };
