@@ -29,7 +29,6 @@ import { Route as AppSearchRouteImport } from './routes/_app.search'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppStreakRouteImport } from './routes/_app.streak'
 import { Route as AppSupportRouteImport } from './routes/_app.support'
-import { Route as ApiSupportRouteImport } from './routes/api.support'
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
 import { Route as ControlPanel9k3xCheatsheetsRouteImport } from './routes/control-panel-9k3x.cheatsheets'
@@ -148,11 +147,6 @@ const AppSupportRoute = AppSupportRouteImport.update({
   id: '/support',
   path: '/support',
   getParentRoute: () => AppRoute,
-} as any)
-const ApiSupportRoute = ApiSupportRouteImport.update({
-  id: '/api/support',
-  path: '/api/support',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
   id: '/auth/callback',
@@ -276,7 +270,6 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
   '/support': typeof AppSupportRoute
-  '/api/support': typeof ApiSupportRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
@@ -316,7 +309,6 @@ export interface FileRoutesByTo {
   '/settings': typeof AppSettingsRoute
   '/streak': typeof AppStreakRoute
   '/support': typeof AppSupportRoute
-  '/api/support': typeof ApiSupportRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
@@ -359,7 +351,6 @@ export interface FileRoutesById {
   '/_app/settings': typeof AppSettingsRoute
   '/_app/streak': typeof AppStreakRoute
   '/_app/support': typeof AppSupportRoute
-  '/api/support': typeof ApiSupportRoute
   '/auth/callback': typeof AuthCallbackRoute
   '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
@@ -402,7 +393,6 @@ export interface FileRouteTypes {
     | '/settings'
     | '/streak'
     | '/support'
-    | '/api/support'
     | '/auth/callback'
     | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
@@ -442,7 +432,6 @@ export interface FileRouteTypes {
     | '/settings'
     | '/streak'
     | '/support'
-    | '/api/support'
     | '/auth/callback'
     | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
@@ -484,7 +473,6 @@ export interface FileRouteTypes {
     | '/_app/settings'
     | '/_app/streak'
     | '/_app/support'
-    | '/api/support'
     | '/auth/callback'
     | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
@@ -512,7 +500,6 @@ export interface RootRouteChildren {
   ControlPanel9k3xRoute: typeof ControlPanel9k3xRouteWithChildren
   PricingRoute: typeof PricingRoute
   SigninRoute: typeof SigninRoute
-  ApiSupportRoute: typeof ApiSupportRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   ApiAiFormatPaperRoute: typeof ApiAiFormatPaperRoute
   ApiAiHealthRoute: typeof ApiAiHealthRoute
@@ -665,13 +652,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/support'
       preLoaderRoute: typeof AppSupportRouteImport
       parentRoute: typeof AppRoute
-    }
-    '/api/support': {
-      id: '/api/support'
-      path: '/api/support'
-      fullPath: '/api/support'
-      preLoaderRoute: typeof ApiSupportRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/auth/callback': {
       id: '/auth/callback'
@@ -891,7 +871,6 @@ const rootRouteChildren: RootRouteChildren = {
   ControlPanel9k3xRoute: ControlPanel9k3xRouteWithChildren,
   PricingRoute: PricingRoute,
   SigninRoute: SigninRoute,
-  ApiSupportRoute: ApiSupportRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   ApiAiFormatPaperRoute: ApiAiFormatPaperRoute,
   ApiAiHealthRoute: ApiAiHealthRoute,

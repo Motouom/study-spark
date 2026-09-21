@@ -7,8 +7,7 @@ import { isPremiumActive } from "@/lib/premium";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { classLabel, seriesLabel } from "@/lib/study-reference-data";
-import { AlertCircle, CheckCircle2, LifeBuoy, Mail } from "lucide-react";
-import type { FormEvent } from "react";
+import { CheckCircle2, LifeBuoy, Mail } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/_app/support")({
@@ -16,55 +15,36 @@ export const Route = createFileRoute("/_app/support")({
   component: SupportPage,
 });
 
+const SUPPORT_EMAIL = "motouomvictor@gmail.com";
+
 function SupportPage() {
   const { profile } = useStudyProfile();
   const { user } = useSupabaseUser();
   const premium = isPremiumActive(profile);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [opened, setOpened] = useState(false);
+
+  const mailtoHref = (() => {
+    const details = [
+      `Plan: ${premium ? "Premium" : "Free"}`,
+      profile
+        ? `Level: ${classLabel(profile.classLevel)} · Series: ${seriesLabel(profile.series)}`
+        : null,
+      profile ? `Subjects: ${profile.subjects.join(", ")}` : null,
+      user?.email ? `Account: ${user.email}` : null,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const body = `${message.trim()}\n\n---\n${details}`;
+    const params = new URLSearchParams({
+      subject: subject.trim() || "StudySpark support request",
+      body,
+    });
+    return `mailto:${SUPPORT_EMAIL}?${params.toString()}`;
+  })();
 
   const canSend = subject.trim().length > 0 && message.trim().length > 0;
-
-  async function sendSupportRequest(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!canSend || status === "sending") return;
-
-    setStatus("sending");
-    setErrorMessage("");
-
-    try {
-      const response = await fetch("/api/support", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          subject: subject.trim(),
-          message: message.trim(),
-          metadata: {
-            classLevel: profile ? classLabel(profile.classLevel) : undefined,
-            plan: premium ? "Premium" : "Free",
-            series: profile ? seriesLabel(profile.series) : undefined,
-            subjects: profile?.subjects ?? [],
-          },
-        }),
-      });
-
-      const body = (await response.json().catch(() => ({}))) as { error?: string };
-      if (!response.ok) {
-        throw new Error(body.error ?? "Support request could not be sent. Please try again.");
-      }
-
-      setSubject("");
-      setMessage("");
-      setStatus("sent");
-    } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "Support request could not be sent.",
-      );
-      setStatus("error");
-    }
-  }
 
   return (
     <>
@@ -81,44 +61,50 @@ function SupportPage() {
             </div>
             {premium ? <PremiumBadge /> : null}
           </div>
-          <form className="mt-5 grid gap-3" onSubmit={sendSupportRequest}>
+          <div className="mt-5 grid gap-3">
             <Input
               placeholder="Subject"
               value={subject}
-              onChange={(event) => {
-                setSubject(event.target.value);
-                if (status !== "sending") setStatus("idle");
-              }}
+              onChange={(event) => setSubject(event.target.value)}
             />
             <textarea
               placeholder="Describe the issue..."
               value={message}
-              onChange={(event) => {
-                setMessage(event.target.value);
-                if (status !== "sending") setStatus("idle");
-              }}
+              onChange={(event) => setMessage(event.target.value)}
               className="min-h-40 rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
-            <Button className="w-fit" disabled={!canSend || status === "sending"} type="submit">
+            <Button
+              className="w-fit"
+              disabled={!canSend}
+              onClick={() => {
+                window.location.href = mailtoHref;
+                setOpened(true);
+              }}
+            >
               <Mail className="mr-1.5 h-4 w-4" />
-              {status === "sending" ? "Sending..." : "Send request"}
+              Send request
             </Button>
-            {status === "sent" && (
+            {opened && (
               <p className="flex items-center gap-1.5 text-xs text-success">
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                Your request was sent. We reply within 24 hours.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="flex items-center gap-1.5 text-xs text-destructive">
-                <AlertCircle className="h-3.5 w-3.5" />
-                {errorMessage}
+                Your email app should have opened with the request pre-filled. We reply within 24
+                hours.
               </p>
             )}
             <p className="text-xs text-muted-foreground">
+              No email app? Write to us directly at{" "}
+              <a
+                href={`mailto:${SUPPORT_EMAIL}`}
+                className="font-medium text-accent underline underline-offset-2"
+              >
+                {SUPPORT_EMAIL}
+              </a>
+              .
+            </p>
+            <p className="text-xs text-muted-foreground">
               Your plan, level, and subjects are attached automatically so we can help faster.
             </p>
-          </form>
+          </div>
         </section>
       </div>
     </>
