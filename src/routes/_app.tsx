@@ -571,12 +571,12 @@ function AppLayout() {
               key={n.to}
               to={n.to}
               aria-current={active ? "page" : undefined}
-              className={`flex flex-1 flex-col items-center gap-1 py-2 text-[10px] ${
+              className={`flex min-w-0 flex-1 flex-col items-center gap-1 px-1 py-2 text-[10px] ${
                 active ? "text-foreground" : "text-muted-foreground"
               }`}
             >
               <n.icon className="h-5 w-5" />
-              {t(n.labelKey)}
+              <span className="max-w-full truncate text-center leading-tight">{t(n.labelKey)}</span>
             </Link>
           );
         })}
