@@ -1,7 +1,9 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Analytics } from "@vercel/analytics/react";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
+import { isStaleAssetError, requestStaleAssetRecovery } from "@/lib/stale-asset-recovery";
 
 const siteUrl = "https://study-spark-237.vercel.app";
 const siteTitle = "StudySpark - Cameroon GCE practice and progress";
@@ -33,13 +35,33 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error }: { error: unknown }) {
-  const message = error instanceof Error ? error.message : "Please try again.";
+  const staleAsset = isStaleAssetError(error);
+  const message = staleAsset
+    ? "StudySpark was updated while this page was open. We are refreshing the app so it can load the newest files."
+    : error instanceof Error
+      ? error.message
+      : "Please try again.";
+
+  useEffect(() => {
+    requestStaleAssetRecovery(error);
+  }, [error]);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <p className="text-xs uppercase tracking-widest text-muted-foreground">Something broke</p>
+        <p className="text-xs uppercase tracking-widest text-muted-foreground">
+          {staleAsset ? "StudySpark updated" : "Something broke"}
+        </p>
         <h1 className="mt-3 font-display text-4xl text-foreground md:text-5xl">
-          An unexpected <span className="italic text-muted-foreground">error</span> occurred
+          {staleAsset ? (
+            <>
+              Refreshing the <span className="italic text-muted-foreground">new version</span>
+            </>
+          ) : (
+            <>
+              An unexpected <span className="italic text-muted-foreground">error</span> occurred
+            </>
+          )}
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">{message}</p>
         <div className="mt-8 flex items-center justify-center gap-3">
