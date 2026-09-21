@@ -10,6 +10,7 @@ This folder contains the working documentation for StudySpark.
 - [Supabase auth setup](supabase-auth-setup.md): Google OAuth and Supabase redirect configuration.
 - [Content and database plan](content-and-database-plan.md): content model and protected delivery direction.
 - [Francophone curriculum model](francophone-curriculum.md): Cameroon francophone classes, exams, series, subjects, and migration notes.
+- [French content workflow](french-content-workflow.md): how to add, organize, protect, and test French papers and study content.
 
 ## Documentation Rules
 

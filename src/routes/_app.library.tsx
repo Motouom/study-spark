@@ -5,6 +5,7 @@ import {
   type Series,
   type Subject,
   classLabel,
+  examLabelForClassLevel,
   seriesLabel,
 } from "@/lib/study-reference-data";
 import { Input } from "@/components/ui/input";
@@ -106,7 +107,13 @@ function LibraryPage() {
       .filter((document) => {
         if (!searchActive && subject && document.subject !== subject) return false;
         if (!needle) return true;
-        return [document.title, document.subject, ...(document.series ?? [])]
+        return [
+          document.title,
+          document.subject,
+          document.language,
+          ...document.classLevels,
+          ...document.series,
+        ]
           .join(" ")
           .toLowerCase()
           .includes(needle);
@@ -255,7 +262,9 @@ function SearchResults({
   if (documents.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
-        <p className="text-sm text-muted-foreground">No papers match “{query}”.</p>
+        <p className="text-sm text-muted-foreground">
+          {t("library.noSearchResults").replace("{query}", query)}
+        </p>
         <Button variant="outline" size="sm" className="mt-4" onClick={onClear}>
           {t("common.clearSearch")}
         </Button>
@@ -283,6 +292,12 @@ function SearchResults({
 
 function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPercent: number }) {
   const series = document.series.map((id) => seriesLabel(id as Series)).join(", ");
+  const classes = document.classLevels.map((id) => classLabel(id)).join(", ");
+  const exams = Array.from(
+    new Set(document.classLevels.map((id) => examLabelForClassLevel(id))),
+  ).join(", ");
+  const language = document.language === "french" ? "Français" : "English";
+  const metadata = [language, classes, exams, series].filter(Boolean).join(" · ");
   if (document.isLocked) {
     return (
       <article className="rounded-xl border border-border bg-card p-4 opacity-90">
@@ -293,8 +308,8 @@ function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPe
           <Badge variant="outline">Premium</Badge>
         </div>
         <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug">{document.title}</h3>
-        <p className="mt-2 text-xs text-muted-foreground">
-          {series ? `${series} · ` : ""}This paper matches your profile and unlocks with Premium.
+        <p className="mt-2 line-clamp-3 break-words text-xs text-muted-foreground">
+          {metadata} · This paper matches your profile and unlocks with Premium.
         </p>
         <Button asChild size="sm" className="mt-4">
           <Link to="/pricing">
@@ -331,8 +346,8 @@ function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPe
       <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
         {document.title}
       </h3>
-      <p className="mt-2 text-xs text-muted-foreground">
-        {series ? `${series} · ` : ""}Protected structural paper
+      <p className="mt-2 line-clamp-3 break-words text-xs text-muted-foreground">
+        {metadata} · Protected structural paper
       </p>
       {bestPercent > 0 && (
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
