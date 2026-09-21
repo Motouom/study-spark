@@ -4,6 +4,7 @@ import { useStudyContent } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useSubscription } from "@/hooks/use-subscription";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { useI18n } from "@/lib/i18n";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 
 const READ_PREFIX = "studyspark.notifications.read.";
@@ -182,6 +183,7 @@ export function useLearnerNotificationPreferences() {
 }
 
 export function useLearnerNotifications() {
+  const { t } = useI18n();
   const { user, profile } = useStudyProfile();
   const content = useStudyContent(profile);
   const { progress, summary } = useStructuralProgress();
@@ -243,8 +245,10 @@ export function useLearnerNotifications() {
       items.push({
         id: `content-${document.id}`,
         kind: "content",
-        title: "New paper ready",
-        body: `${document.title} is available for ${document.subject}.`,
+        title: t("notifications.generated.newPaper.title"),
+        body: t("notifications.generated.newPaper.body")
+          .replace("{title}", document.title)
+          .replace("{subject}", document.subject),
         createdAt: document.updatedAt,
       });
     }
@@ -269,8 +273,10 @@ export function useLearnerNotifications() {
       items.push({
         id: `progress-${weakSubject.subject}`,
         kind: "progress",
-        title: "Weak subject reminder",
-        body: `${weakSubject.subject} is at ${weakSubject.score}% mastery. Revisit failed structural questions.`,
+        title: t("notifications.generated.weakSubject.title"),
+        body: t("notifications.generated.weakSubject.body")
+          .replace("{subject}", weakSubject.subject)
+          .replace("{score}", String(weakSubject.score)),
         createdAt: progress[0]?.updatedAt ?? new Date().toISOString(),
       });
     }
@@ -279,8 +285,8 @@ export function useLearnerNotifications() {
       items.push({
         id: "streak-restart",
         kind: "streak",
-        title: "Restart your streak",
-        body: "Mark one structural question today to start a new streak.",
+        title: t("notifications.generated.streak.title"),
+        body: t("notifications.generated.streak.body"),
         createdAt: progress[0]?.updatedAt ?? new Date().toISOString(),
       });
     }
@@ -293,11 +299,14 @@ export function useLearnerNotifications() {
         items.push({
           id: `membership-expiring-${profile.premiumUntil.slice(0, 10)}`,
           kind: "membership",
-          title: "Premium ends soon",
+          title: t("notifications.generated.premiumEnds.title"),
           body:
             daysRemaining === 0
-              ? "Your Premium access ends today. Renew early if you want uninterrupted access."
-              : `Your Premium access ends in ${daysRemaining} day${daysRemaining === 1 ? "" : "s"}. Renew early if you want uninterrupted access.`,
+              ? t("notifications.generated.premiumEndsToday.body")
+              : t("notifications.generated.premiumEnds.body").replace(
+                  "{days}",
+                  String(daysRemaining),
+                ),
           createdAt: profile.premiumUntil,
         });
       }
@@ -307,8 +316,8 @@ export function useLearnerNotifications() {
       items.push({
         id: `membership-payment-failed-${subscription.lastPaymentCreatedAt ?? "latest"}`,
         kind: "membership",
-        title: "Payment needs attention",
-        body: "Your last Premium payment did not complete. You can retry from the pricing page.",
+        title: t("notifications.generated.paymentFailed.title"),
+        body: t("notifications.generated.paymentFailed.body"),
         createdAt: subscription.lastPaymentCreatedAt ?? new Date().toISOString(),
       });
     }
@@ -326,6 +335,7 @@ export function useLearnerNotifications() {
     subscription?.lastPaymentCreatedAt,
     subscription?.lastPaymentStatus,
     summary.currentStreak,
+    t,
   ]);
 
   const markAsRead = useCallback(

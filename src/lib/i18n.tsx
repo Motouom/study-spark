@@ -42,6 +42,7 @@ const en = {
   "common.subjects": "Subjects",
   "common.support": "Support",
   "common.viewPremium": "View Premium",
+  "common.back": "Back",
   "dashboard.analyticsTitle": "Premium progress analytics",
   "dashboard.analyticsDescription":
     "Upgrade to unlock streaks, pass rate, timing, mastery, and your personalized learning path.",
@@ -104,6 +105,88 @@ const en = {
   "cheatsheets.premiumTitle": "Premium cheatsheets",
   "cheatsheets.searchPlaceholder": "Search cheatsheet topics, formulas, or subject...",
   "cheatsheets.title": "Cheatsheets",
+  "pricing.badge": "Free where it matters",
+  "pricing.title": "Simple GCE revision pricing. Fair.",
+  "pricing.description":
+    "Free learners can preview selected Cameroon GCE papers. Premium unlocks protected O Level and A Level papers, topic courses, exam cheatsheets, AI-guided revision, tutoring, and deeper analytics.",
+  "pricing.monthly": "Monthly",
+  "pricing.yearly": "Yearly",
+  "pricing.forever": "forever",
+  "pricing.month": "month",
+  "pricing.freePlanDescription": "Preview the platform before upgrading. No card needed.",
+  "pricing.getStarted": "Get started",
+  "pricing.recommended": "Recommended",
+  "pricing.billedMonthly": "Billed monthly",
+  "pricing.billedYearly": "Billed yearly",
+  "pricing.payWithFapshi": "Pay with Fapshi",
+  "pricing.paymentConfirmed": "Payment confirmed. Premium is now active on your account.",
+  "pricing.paymentPending":
+    "Payment is still pending. We will unlock Premium as soon as Fapshi confirms it.",
+  "pricing.paymentNotConfirmed":
+    "Payment has not been confirmed yet. If you paid, wait a moment and refresh.",
+  "pricing.paymentCheckFailed": "Payment could not be checked right now. Please try again.",
+  "pricing.paymentStartFailed":
+    "Checkout could not be started right now. Please try again in a moment.",
+  "pricing.feature": "Feature",
+  "pricing.commonQuestions": "Common questions",
+  "pricing.footer": "Made for Cameroon students.",
+  "pricing.feature.previewPapers": "1-2 free preview papers",
+  "pricing.feature.unlimitedPapers": "Unlimited protected papers",
+  "pricing.feature.protectedPapers": "Protected in-app papers",
+  "pricing.feature.answers": "Free answers & explanations",
+  "pricing.feature.practiceMode": "Practice mode",
+  "pricing.feature.accessControl": "Class and series access control",
+  "pricing.feature.streaks": "Daily streaks & basic stats",
+  "pricing.feature.aiPaths": "AI-personalized learning paths",
+  "pricing.feature.courses": "Full courses & video lessons",
+  "pricing.feature.cheatsheets": "Exam cheatsheets",
+  "pricing.feature.search": "Advanced full-text search",
+  "pricing.feature.freezes": "Streak freezes (1/week)",
+  "pricing.feature.support": "Priority support",
+  "pricing.faq.free.q": "Can students use the basics free?",
+  "pricing.faq.free.a":
+    "Yes. Free learners can open one or two preview papers before upgrading. The full protected GCE learner experience is Premium.",
+  "pricing.faq.cancel.q": "Can I cancel anytime?",
+  "pricing.faq.cancel.a": "Of course. Cancel from settings — no calls, no friction.",
+  "pricing.faq.mobileMoney.q": "Do you support mobile money?",
+  "pricing.faq.mobileMoney.a":
+    "Payments are built around Cameroon-friendly FCFA checkout through Fapshi, with mobile money support depending on the available Fapshi channels.",
+  "pricing.faq.discount.q": "Is there a student discount?",
+  "pricing.faq.discount.a":
+    "Premium is already priced for students in Cameroon. Schools and study groups can request bulk pricing.",
+  "notifications.description": "Account reminders and paper progress updates will appear here.",
+  "notifications.markAllRead": "Mark all read",
+  "notifications.loadError": "Notifications could not be loaded.",
+  "notifications.loading": "Checking your latest learner updates...",
+  "notifications.all": "All",
+  "notifications.content": "Papers",
+  "notifications.progress": "Progress",
+  "notifications.streak": "Streaks",
+  "notifications.membership": "Account",
+  "notifications.new": "New",
+  "notifications.markRead": "Mark read",
+  "notifications.emptyGroupTitle": "No notifications in this group",
+  "notifications.emptyGroupDescription":
+    "Try another category or check back after your next study activity.",
+  "notifications.emptyTitle": "No notifications yet",
+  "notifications.emptyDescription":
+    "You will only see real profile, paper, and account updates here.",
+  "notifications.generated.newPaper.title": "New paper ready",
+  "notifications.generated.newPaper.body": "{title} is available for {subject}.",
+  "notifications.generated.weakSubject.title": "Weak subject reminder",
+  "notifications.generated.weakSubject.body":
+    "{subject} is at {score}% mastery. Revisit failed structural questions.",
+  "notifications.generated.streak.title": "Restart your streak",
+  "notifications.generated.streak.body":
+    "Mark one structural question today to start a new streak.",
+  "notifications.generated.premiumEnds.title": "Premium ends soon",
+  "notifications.generated.premiumEndsToday.body":
+    "Your Premium access ends today. Renew early if you want uninterrupted access.",
+  "notifications.generated.premiumEnds.body":
+    "Your Premium access ends in {days} day(s). Renew early if you want uninterrupted access.",
+  "notifications.generated.paymentFailed.title": "Payment needs attention",
+  "notifications.generated.paymentFailed.body":
+    "Your last Premium payment did not complete. You can retry from the pricing page.",
   "settings.accountDeletion": "Account deletion",
   "settings.appearance": "Appearance",
   "settings.curriculumPath": "Curriculum path",
@@ -130,6 +213,15 @@ const en = {
   "signin.or": "or",
   "support.title": "Support",
   "support.description": "Priority support is available to every signed-in learner.",
+  "support.contactTitle": "Contact support",
+  "support.subjectPlaceholder": "Subject",
+  "support.messagePlaceholder": "Describe the issue...",
+  "support.sendRequest": "Send request",
+  "support.emailOpened":
+    "Your email app should have opened with the request pre-filled. We reply within 24 hours.",
+  "support.noEmailApp": "No email app? Write to us directly at",
+  "support.autoDetails":
+    "Your plan, level, and subjects are attached automatically so we can help faster.",
 } as const;
 
 const fr: Partial<Record<TranslationKey, string>> = {
@@ -160,6 +252,7 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "common.subjects": "Matières",
   "common.support": "Assistance",
   "common.viewPremium": "Voir Premium",
+  "common.back": "Retour",
   "dashboard.analyticsTitle": "Analyses Premium de progression",
   "dashboard.analyticsDescription":
     "Passe à Premium pour débloquer les séries, le taux de réussite, le temps d'étude, la maîtrise et ton parcours personnalisé.",
@@ -223,6 +316,90 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "cheatsheets.premiumTitle": "Fiches Premium",
   "cheatsheets.searchPlaceholder": "Rechercher des fiches, formules ou matières...",
   "cheatsheets.title": "Fiches de révision",
+  "pricing.badge": "Gratuit pour commencer",
+  "pricing.title": "Un tarif simple pour réviser les examens. Clair.",
+  "pricing.description":
+    "Les élèves gratuits peuvent prévisualiser des épreuves sélectionnées. Premium débloque les épreuves protégées, les cours par thème, les fiches, le parcours IA, le tutorat et les analyses avancées.",
+  "pricing.monthly": "Mensuel",
+  "pricing.yearly": "Annuel",
+  "pricing.forever": "à vie",
+  "pricing.month": "mois",
+  "pricing.freePlanDescription":
+    "Découvre la plateforme avant de passer à Premium. Aucune carte requise.",
+  "pricing.getStarted": "Commencer",
+  "pricing.recommended": "Recommandé",
+  "pricing.billedMonthly": "Facturé chaque mois",
+  "pricing.billedYearly": "Facturé chaque année",
+  "pricing.payWithFapshi": "Payer avec Fapshi",
+  "pricing.paymentConfirmed": "Paiement confirmé. Premium est maintenant actif sur ton compte.",
+  "pricing.paymentPending":
+    "Le paiement est encore en attente. Premium sera activé dès que Fapshi confirme.",
+  "pricing.paymentNotConfirmed":
+    "Le paiement n'est pas encore confirmé. Si tu as payé, attends un moment puis actualise.",
+  "pricing.paymentCheckFailed":
+    "Nous ne pouvons pas vérifier le paiement maintenant. Réessaie dans un instant.",
+  "pricing.paymentStartFailed":
+    "Le paiement ne peut pas démarrer maintenant. Réessaie dans un instant.",
+  "pricing.feature": "Fonctionnalité",
+  "pricing.commonQuestions": "Questions fréquentes",
+  "pricing.footer": "Créé pour les élèves du Cameroun.",
+  "pricing.feature.previewPapers": "1 à 2 épreuves en aperçu gratuit",
+  "pricing.feature.unlimitedPapers": "Épreuves protégées illimitées",
+  "pricing.feature.protectedPapers": "Épreuves protégées dans l'application",
+  "pricing.feature.answers": "Réponses et explications gratuites",
+  "pricing.feature.practiceMode": "Mode entraînement",
+  "pricing.feature.accessControl": "Accès selon la classe et la série",
+  "pricing.feature.streaks": "Séries quotidiennes et statistiques de base",
+  "pricing.feature.aiPaths": "Parcours d'apprentissage personnalisé par IA",
+  "pricing.feature.courses": "Cours complets et leçons vidéo",
+  "pricing.feature.cheatsheets": "Fiches de révision d'examen",
+  "pricing.feature.search": "Recherche avancée dans tout le contenu",
+  "pricing.feature.freezes": "Gel de série (1/semaine)",
+  "pricing.feature.support": "Assistance prioritaire",
+  "pricing.faq.free.q": "Les élèves peuvent-ils commencer gratuitement ?",
+  "pricing.faq.free.a":
+    "Oui. Les élèves gratuits peuvent ouvrir une ou deux épreuves d'aperçu avant de passer à Premium. L'expérience complète protégée reste Premium.",
+  "pricing.faq.cancel.q": "Puis-je annuler à tout moment ?",
+  "pricing.faq.cancel.a": "Oui. Tu peux annuler depuis les paramètres, simplement et sans appel.",
+  "pricing.faq.mobileMoney.q": "Acceptez-vous Mobile Money ?",
+  "pricing.faq.mobileMoney.a":
+    "Les paiements utilisent une caisse FCFA adaptée au Cameroun via Fapshi, avec Mobile Money selon les canaux disponibles chez Fapshi.",
+  "pricing.faq.discount.q": "Y a-t-il une réduction élève ?",
+  "pricing.faq.discount.a":
+    "Premium est déjà fixé pour les élèves au Cameroun. Les écoles et groupes d'étude peuvent demander un tarif groupé.",
+  "notifications.description": "Tes rappels de compte et de progression apparaîtront ici.",
+  "notifications.markAllRead": "Tout marquer comme lu",
+  "notifications.loadError": "Les notifications n'ont pas pu être chargées.",
+  "notifications.loading": "Vérification de tes dernières mises à jour...",
+  "notifications.all": "Tout",
+  "notifications.content": "Épreuves",
+  "notifications.progress": "Progression",
+  "notifications.streak": "Séries",
+  "notifications.membership": "Compte",
+  "notifications.new": "Nouveau",
+  "notifications.markRead": "Marquer comme lu",
+  "notifications.emptyGroupTitle": "Aucune notification dans cette catégorie",
+  "notifications.emptyGroupDescription":
+    "Essaie une autre catégorie ou reviens après ta prochaine activité.",
+  "notifications.emptyTitle": "Aucune notification pour le moment",
+  "notifications.emptyDescription":
+    "Tu verras seulement les vraies mises à jour de profil, d'épreuves et de compte ici.",
+  "notifications.generated.newPaper.title": "Nouvelle épreuve disponible",
+  "notifications.generated.newPaper.body": "{title} est disponible en {subject}.",
+  "notifications.generated.weakSubject.title": "Matière à renforcer",
+  "notifications.generated.weakSubject.body":
+    "{subject} est à {score}% de maîtrise. Reprends les questions échouées.",
+  "notifications.generated.streak.title": "Relance ta série",
+  "notifications.generated.streak.body":
+    "Marque une question structurale aujourd'hui pour commencer une nouvelle série.",
+  "notifications.generated.premiumEnds.title": "Premium se termine bientôt",
+  "notifications.generated.premiumEndsToday.body":
+    "Ton accès Premium se termine aujourd'hui. Renouvelle tôt pour éviter une coupure.",
+  "notifications.generated.premiumEnds.body":
+    "Ton accès Premium se termine dans {days} jour(s). Renouvelle tôt pour éviter une coupure.",
+  "notifications.generated.paymentFailed.title": "Paiement à vérifier",
+  "notifications.generated.paymentFailed.body":
+    "Ton dernier paiement Premium n'a pas abouti. Tu peux réessayer depuis la page des tarifs.",
   "settings.accountDeletion": "Suppression du compte",
   "settings.appearance": "Apparence",
   "settings.curriculumPath": "Parcours scolaire",
@@ -250,6 +427,15 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "signin.or": "ou",
   "support.title": "Assistance",
   "support.description": "Une assistance prioritaire est disponible pour chaque élève connecté.",
+  "support.contactTitle": "Contacter l'assistance",
+  "support.subjectPlaceholder": "Sujet",
+  "support.messagePlaceholder": "Décris le problème...",
+  "support.sendRequest": "Envoyer la demande",
+  "support.emailOpened":
+    "Ton application e-mail devrait s'ouvrir avec la demande préremplie. Nous répondons sous 24 heures.",
+  "support.noEmailApp": "Pas d'application e-mail ? Écris-nous directement à",
+  "support.autoDetails":
+    "Ton plan, ta classe et tes matières sont ajoutés automatiquement pour accélérer l'aide.",
 };
 
 const dictionaries = { en, fr };
