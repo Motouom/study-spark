@@ -21,6 +21,7 @@ import { supabaseConfigured } from "@/lib/supabase";
 import { isPremiumActive } from "@/lib/premium";
 import { usePaperStudyOverview, type PaperStudySession } from "@/hooks/use-paper-study-progress";
 import { useUnifiedStreak } from "@/hooks/use-unified-streak";
+import { useI18n } from "@/lib/i18n";
 
 const PremiumDashboardCharts = lazy(() => import("@/components/PremiumDashboardCharts"));
 
@@ -33,6 +34,7 @@ function sameLocalDay(a: Date, b: Date) {
 }
 
 function DailyGoalRing({ percent }: { percent: number }) {
+  const { t } = useI18n();
   const radius = 26;
   const circumference = 2 * Math.PI * radius;
   const dash = (percent / 100) * circumference;
@@ -44,7 +46,7 @@ function DailyGoalRing({ percent }: { percent: number }) {
         viewBox="0 0 64 64"
         className="-rotate-90"
         role="img"
-        aria-label={`${percent}% of today's 15 minute study goal`}
+        aria-label={`${percent}% ${t("dashboard.dailyGoal")}`}
       >
         <circle
           cx="32"
@@ -67,9 +69,9 @@ function DailyGoalRing({ percent }: { percent: number }) {
         />
       </svg>
       <div>
-        <div className="text-xs text-muted-foreground">Today's goal</div>
+        <div className="text-xs text-muted-foreground">{t("dashboard.dailyGoal")}</div>
         <div className="font-display text-lg text-foreground">{percent}%</div>
-        <div className="text-[11px] text-muted-foreground">15 min of study</div>
+        <div className="text-[11px] text-muted-foreground">{t("dashboard.dailyGoalHint")}</div>
       </div>
     </div>
   );
@@ -112,6 +114,7 @@ function Stat({
 }
 
 function Dashboard() {
+  const { t } = useI18n();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const readingProgress = usePaperStudyOverview();
   const { currentStreak } = useUnifiedStreak();
@@ -268,8 +271,8 @@ function Dashboard() {
             <div className="flex items-center gap-2 text-xs text-accent">
               <Sparkles className="h-3.5 w-3.5" />
               {continuePaper.resumePercent > 0
-                ? "Continue where you left off"
-                : "Recommended paper"}
+                ? t("dashboard.whereLeftOff")
+                : t("dashboard.recommendedPaper")}
             </div>
             <h2 className="mt-2 break-words font-display text-2xl text-foreground md:text-3xl">
               {featuredPaper ? featuredPaper.title : "Open your paper library"}
@@ -279,7 +282,7 @@ function Dashboard() {
                 ? continuePaper.resumePercent > 0
                   ? `You're ${continuePaper.resumePercent}% through this ${featuredPaper.subject} paper — pick up right there.`
                   : `Protected structural paper for ${featuredPaper.subject}.`
-                : "No published paper is available for your profile yet."}
+                : t("dashboard.noPaper")}
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-start gap-4 sm:flex-row sm:items-center">
@@ -288,13 +291,15 @@ function Dashboard() {
               <Button asChild size="lg">
                 <Link to="/course/$documentId" params={{ documentId: featuredPaper.id }}>
                   <PlayCircle className="mr-1.5 h-4 w-4" />
-                  {continuePaper.resumePercent > 0 ? "Continue reading" : "Start reading"}
+                  {continuePaper.resumePercent > 0
+                    ? t("dashboard.continueReading")
+                    : t("dashboard.startReading")}
                 </Link>
               </Button>
             ) : (
               <Button asChild size="lg">
                 <Link to="/library">
-                  <FileText className="mr-1.5 h-4 w-4" /> Open paper library
+                  <FileText className="mr-1.5 h-4 w-4" /> {t("dashboard.openLibrary")}
                 </Link>
               </Button>
             )}
@@ -306,29 +311,29 @@ function Dashboard() {
         <section className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           <Stat
             icon={Flame}
-            label="Current streak"
+            label={t("dashboard.currentStreak")}
             value={String(currentStreak)}
-            hint={currentStreak > 0 ? "study days" : "start today"}
+            hint={currentStreak > 0 ? "study days" : t("dashboard.startToday")}
             tone="accent"
           />
           <Stat
             icon={BookOpen}
-            label="Papers opened"
+            label={t("dashboard.papersOpened")}
             value={String(readingProgress.summary.papersRead)}
-            hint={`${readingProgress.summary.completedPapers} read through`}
+            hint={`${readingProgress.summary.completedPapers} ${t("dashboard.readThrough")}`}
           />
           <Stat
             icon={Target}
-            label="Avg. read depth"
+            label={t("dashboard.avgReadDepth")}
             value={`${averageReadDepth}%`}
-            hint={`${readingProgress.summary.reviewCount} review marks`}
+            hint={`${readingProgress.summary.reviewCount} ${t("dashboard.reviewMarks")}`}
             tone="success"
           />
           <Stat
             icon={TrendingUp}
-            label="Study time"
+            label={t("dashboard.studyTime")}
             value={formatDuration(readingProgress.summary.totalDurationSeconds)}
-            hint={`${readingProgress.summary.bookmarkCount} bookmarks`}
+            hint={`${readingProgress.summary.bookmarkCount} ${t("dashboard.bookmarksHint")}`}
           />
         </section>
       ) : (
@@ -339,17 +344,16 @@ function Dashboard() {
                 <Lock className="h-5 w-5" />
               </div>
               <div>
-                <h2 className="text-base font-medium">Premium progress analytics</h2>
+                <h2 className="text-base font-medium">{t("dashboard.analyticsTitle")}</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Upgrade to unlock streaks, pass rate, timing, mastery, and your personalized
-                  learning path.
+                  {t("dashboard.analyticsDescription")}
                 </p>
               </div>
             </div>
             <Button asChild>
               <Link to="/pricing">
                 <Sparkles className="mr-1.5 h-4 w-4" />
-                View Premium
+                {t("common.viewPremium")}
               </Link>
             </Button>
           </div>
@@ -376,10 +380,9 @@ function Dashboard() {
         <section className="grid gap-4 lg:grid-cols-[1fr_20rem]">
           <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
             <div className="mb-4">
-              <h2 className="text-base font-medium">Recent paper activity</h2>
+              <h2 className="text-base font-medium">{t("dashboard.paperActivity")}</h2>
               <p className="text-xs text-muted-foreground">
-                Your latest paper reading sessions. Read depth is context; passed and review marks
-                remain the stronger progress signal.
+                {t("dashboard.paperActivityDescription")}
               </p>
             </div>
             {recentSessions.length > 0 ? (
@@ -414,8 +417,10 @@ function Dashboard() {
           </div>
 
           <div className="rounded-xl border border-border bg-card p-4 sm:p-6">
-            <h2 className="text-base font-medium">Study signals</h2>
-            <p className="text-xs text-muted-foreground">Useful marks you add while studying.</p>
+            <h2 className="text-base font-medium">{t("dashboard.studySignals")}</h2>
+            <p className="text-xs text-muted-foreground">
+              {t("dashboard.studySignalsDescription")}
+            </p>
             <div className="mt-4 space-y-3">
               <Signal
                 icon={CheckCircle2}

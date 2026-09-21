@@ -25,6 +25,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent, type CourseDocument } from "@/hooks/use-study-content";
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { supabaseConfigured } from "@/lib/supabase";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/library")({
   head: () => ({ meta: [{ title: "Papers — StudySpark" }] }),
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/_app/library")({
 });
 
 function LibraryPage() {
+  const { t } = useI18n();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const content = useStudyContent(savedProfile);
   const courseDocuments = content.documents.filter((document) => document.contentKind === "paper");
@@ -121,11 +123,11 @@ function LibraryPage() {
   return (
     <>
       <PageHeader
-        title="Papers"
+        title={t("library.title")}
         description={
           savedProfile
             ? `${classLabel(savedProfile.classLevel)} · ${seriesLabel(savedProfile.series)} · ${savedProfile.language}`
-            : "Your class and series"
+            : t("library.descriptionFallback")
         }
       />
 
@@ -137,8 +139,7 @@ function LibraryPage() {
         )}
         <div className="flex min-w-0 items-center gap-2 rounded-lg border border-success/30 bg-success/10 p-3 text-sm text-success">
           <ShieldCheck className="h-4 w-4" />
-          Questions are opened inside the app only. Copying, downloads, and bulk viewing are
-          disabled in the student flow.
+          {t("library.protectedNotice")}
         </div>
 
         <div className="relative">
@@ -146,9 +147,9 @@ function LibraryPage() {
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search all papers by title, subject, or series..."
+            placeholder={t("library.searchPlaceholder")}
             className="h-11 pl-9 pr-10"
-            aria-label="Search papers"
+            aria-label={t("library.searchPlaceholder")}
           />
           {searchActive && (
             <button
@@ -172,7 +173,7 @@ function LibraryPage() {
         ) : !subject ? (
           <section className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-medium">Subjects</h2>
+              <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
               <Badge variant="secondary">{subjectCards.length}</Badge>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -203,7 +204,7 @@ function LibraryPage() {
               <div className="flex items-center justify-between gap-3">
                 <Button type="button" variant="ghost" size="sm" onClick={() => setSubject(null)}>
                   <ArrowLeft className="mr-1.5 h-4 w-4" />
-                  Subjects
+                  {t("common.subjects")}
                 </Button>
                 <Badge variant="secondary">{filteredDocuments.length}</Badge>
               </div>
@@ -220,7 +221,7 @@ function LibraryPage() {
           </section>
         ) : (
           <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
-            <p className="text-sm text-muted-foreground">No papers match your filters.</p>
+            <p className="text-sm text-muted-foreground">{t("library.empty")}</p>
             <Button
               variant="outline"
               size="sm"
@@ -230,7 +231,7 @@ function LibraryPage() {
                 setSubject(null);
               }}
             >
-              Clear filters
+              {t("common.clearFilters")}
             </Button>
           </div>
         )}
@@ -250,12 +251,13 @@ function SearchResults({
   query: string;
   onClear: () => void;
 }) {
+  const { t } = useI18n();
   if (documents.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
         <p className="text-sm text-muted-foreground">No papers match “{query}”.</p>
         <Button variant="outline" size="sm" className="mt-4" onClick={onClear}>
-          Clear search
+          {t("common.clearSearch")}
         </Button>
       </div>
     );
@@ -263,7 +265,7 @@ function SearchResults({
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-medium">Search results</h2>
+        <h2 className="text-sm font-medium">{t("library.searchResults")}</h2>
         <Badge variant="secondary">{documents.length}</Badge>
       </div>
       <div className="grid gap-3 md:grid-cols-2">

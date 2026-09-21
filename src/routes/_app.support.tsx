@@ -10,6 +10,7 @@ import { classLabel, seriesLabel } from "@/lib/study-reference-data";
 import { AlertCircle, CheckCircle2, LifeBuoy, Mail } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/support")({
   head: () => ({ meta: [{ title: "Support — StudySpark" }] }),
@@ -17,6 +18,7 @@ export const Route = createFileRoute("/_app/support")({
 });
 
 function SupportPage() {
+  const { t } = useI18n();
   const { profile } = useStudyProfile();
   const { user } = useSupabaseUser();
   const premium = isPremiumActive(profile);
@@ -68,10 +70,7 @@ function SupportPage() {
 
   return (
     <>
-      <PageHeader
-        title="Support"
-        description="Priority support is available to every signed-in learner."
-      />
+      <PageHeader title={t("support.title")} description={t("support.description")} />
       <div className="px-6 py-6 md:px-10 md:py-8">
         <section className="max-w-2xl rounded-xl border border-border bg-card p-5">
           <div className="flex items-center justify-between gap-3">
