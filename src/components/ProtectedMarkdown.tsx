@@ -164,9 +164,13 @@ export default function ProtectedMarkdown({
       onCut={(event) => event.preventDefault()}
       onContextMenu={(event) => event.preventDefault()}
     >
-      <div className="pointer-events-none absolute inset-0 grid rotate-[-18deg] select-none place-items-center overflow-hidden opacity-[0.045]">
+      <div
+        aria-hidden="true"
+        data-trace={trace}
+        className="pointer-events-none absolute inset-0 grid rotate-[-18deg] select-none place-items-center overflow-hidden opacity-[0.045]"
+      >
         <span className="whitespace-nowrap text-xl font-semibold text-foreground sm:text-3xl">
-          {trace} · StudySpark protected material
+          StudySpark
         </span>
       </div>
       <div className="relative mb-6 flex flex-wrap items-center gap-2">
