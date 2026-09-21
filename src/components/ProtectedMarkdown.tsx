@@ -233,6 +233,20 @@ export default function ProtectedMarkdown({
                   </section>
                 );
               }
+              const questionNumber = questionNumberFromChildren(children);
+              if (questionNumber && renderQuestionControls) {
+                return (
+                  <section className="my-5 rounded-lg border border-border bg-background/45 p-3 sm:p-4">
+                    <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <h3 className="font-sans text-base font-semibold leading-tight">
+                        Q{questionNumber}
+                      </h3>
+                      {renderQuestionControls(questionNumber)}
+                    </div>
+                    <p className="my-0 leading-8">{formatStudyInline(children)}</p>
+                  </section>
+                );
+              }
 
               return (
                 <p
