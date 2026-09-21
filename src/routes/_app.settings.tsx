@@ -18,7 +18,10 @@ import {
   COUNTRIES,
   LANGUAGES,
   classLevelsForSystem,
+  classCycleLabel,
   educationSystemForLanguage,
+  examLabelForClassLevel,
+  levelLabelForSystem,
   seriesOptionsForSystem,
   subjectsForSeries,
   DEFAULT_PROFILE,
@@ -504,11 +507,15 @@ function SettingsPage() {
                   <SelectContent>
                     {systemClassLevels.map((item) => (
                       <SelectItem key={item.id} value={item.id}>
-                        {item.label}
+                        {item.label} · {examLabelForClassLevel(item.id)}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {levelLabelForSystem(selectedLevel, educationSystem)} ·{" "}
+                  {classCycleLabel(classLevel)} · {examLabelForClassLevel(classLevel)}
+                </p>
               </Row>
               <Row label="Series">
                 <Select
