@@ -47,6 +47,7 @@ import { signOut } from "@/lib/auth";
 import { isPremiumActive } from "@/lib/premium";
 import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
