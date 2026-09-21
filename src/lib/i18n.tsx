@@ -214,6 +214,29 @@ const en = {
   "signin.continueEmail": "Continue with email",
   "signin.continueGoogle": "Continue with Google",
   "signin.emailAddress": "Email address",
+  "signin.emailPlaceholder": "you@school.edu",
+  "signin.magicLinkSending": "Sending magic link...",
+  "signin.magicLinkSent": "Check your inbox for the sign-in link.",
+  "signin.emailFailed":
+    "Email sign-in failed. If magic links are disabled in your Supabase project, use the password option below.",
+  "signin.passwordPlaceholder": "Password (min. 6 characters)",
+  "signin.passwordWorking": "Working...",
+  "signin.createPasswordAccount": "Create account with password",
+  "signin.signInPassword": "Sign in with password",
+  "signin.noAccount": "No account yet? Create one",
+  "signin.hasAccount": "Already have an account? Sign in",
+  "signin.accountCreated":
+    "Account created. If email confirmation is required, check your inbox — otherwise you are signed in.",
+  "signin.signedIn": "Signed in. Opening your dashboard...",
+  "signin.confirmEmail":
+    "Please confirm your email first — check your inbox for the confirmation link, then sign in again.",
+  "signin.passwordFailed": "Password sign-in failed.",
+  "signin.googleFailed": "Google sign-in failed.",
+  "signin.notConfigured": "Supabase is not configured in this environment.",
+  "signin.newHere": "New here?",
+  "signin.brandBadge": "Synced & secure",
+  "signin.brandText":
+    "Sign in, create your study profile, and unlock only the structural papers that match your class, series, and subjects.",
   "signin.openingDashboard": "Opening your dashboard...",
   "signin.openingGoogle": "Opening Google...",
   "signin.openingProfile": "Opening profile setup...",
@@ -476,6 +499,29 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "signin.continueEmail": "Continuer avec e-mail",
   "signin.continueGoogle": "Continuer avec Google",
   "signin.emailAddress": "Adresse e-mail",
+  "signin.emailPlaceholder": "toi@ecole.cm",
+  "signin.magicLinkSending": "Envoi du lien magique...",
+  "signin.magicLinkSent": "Vérifie ta boîte e-mail pour le lien de connexion.",
+  "signin.emailFailed":
+    "La connexion par e-mail a échoué. Si les liens magiques sont désactivés dans Supabase, utilise l'option mot de passe ci-dessous.",
+  "signin.passwordPlaceholder": "Mot de passe (min. 6 caractères)",
+  "signin.passwordWorking": "Traitement...",
+  "signin.createPasswordAccount": "Créer un compte avec mot de passe",
+  "signin.signInPassword": "Se connecter avec mot de passe",
+  "signin.noAccount": "Pas encore de compte ? Crée-en un",
+  "signin.hasAccount": "Tu as déjà un compte ? Connecte-toi",
+  "signin.accountCreated":
+    "Compte créé. Si la confirmation e-mail est requise, vérifie ta boîte — sinon tu es connecté.",
+  "signin.signedIn": "Connecté. Ouverture du tableau de bord...",
+  "signin.confirmEmail":
+    "Confirme d'abord ton e-mail — vérifie ta boîte pour le lien de confirmation, puis reconnecte-toi.",
+  "signin.passwordFailed": "La connexion par mot de passe a échoué.",
+  "signin.googleFailed": "La connexion Google a échoué.",
+  "signin.notConfigured": "Supabase n'est pas configuré dans cet environnement.",
+  "signin.newHere": "Nouveau ici ?",
+  "signin.brandBadge": "Synchronisé et sécurisé",
+  "signin.brandText":
+    "Connecte-toi, crée ton profil d'étude et débloque seulement les épreuves qui correspondent à ta classe, ta série et tes matières.",
   "signin.openingDashboard": "Ouverture du tableau de bord...",
   "signin.openingGoogle": "Ouverture de Google...",
   "signin.openingProfile": "Ouverture de la configuration du profil...",
@@ -591,6 +637,7 @@ export function useSyncLocaleFromProfile(language?: Language | null) {
   const { locale, setLocale } = useI18n();
   useEffect(() => {
     if (!language) return;
+    if (typeof window !== "undefined" && window.localStorage.getItem(STORAGE_KEY)) return;
     const profileLocale = languageToLocale(language);
     if (profileLocale !== locale) setLocale(profileLocale);
   }, [language, locale, setLocale]);

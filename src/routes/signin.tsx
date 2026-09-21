@@ -72,7 +72,7 @@ function SignIn() {
     try {
       await signInWithGoogle();
     } catch (error) {
-      setNotice(error instanceof Error ? error.message : "Google sign-in failed.");
+      setNotice(error instanceof Error ? error.message : t("signin.googleFailed"));
       setLoading(null);
     }
   }
@@ -82,13 +82,9 @@ function SignIn() {
     setLoading("email");
     try {
       await requestEmailMagicLink(email);
-      setNotice("Check your inbox for the sign-in link.");
+      setNotice(t("signin.magicLinkSent"));
     } catch (error) {
-      setNotice(
-        error instanceof Error
-          ? error.message
-          : "Email sign-in failed. If magic links are disabled in your Supabase project, use the password option below.",
-      );
+      setNotice(error instanceof Error ? error.message : t("signin.emailFailed"));
     } finally {
       setLoading(null);
     }
@@ -100,19 +96,17 @@ function SignIn() {
     try {
       if (passwordMode === "signup") {
         await signUpWithEmailPassword(email, password);
-        setNotice(
-          "Account created. If email confirmation is required, check your inbox — otherwise you are signed in.",
-        );
+        setNotice(t("signin.accountCreated"));
       } else {
         await signInWithEmailPassword(email, password);
-        setNotice("Signed in. Opening your dashboard...");
+        setNotice(t("signin.signedIn"));
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "";
       setNotice(
         message.includes("not confirmed")
-          ? "Please confirm your email first — check your inbox for the confirmation link, then sign in again."
-          : message || "Password sign-in failed.",
+          ? t("signin.confirmEmail")
+          : message || t("signin.passwordFailed"),
       );
     } finally {
       setLoading(null);
@@ -171,7 +165,7 @@ function SignIn() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@school.edu"
+                  placeholder={t("signin.emailPlaceholder")}
                   className="h-12 pl-9"
                 />
               </div>
@@ -180,7 +174,7 @@ function SignIn() {
                 className="h-12 w-full"
                 disabled={loading !== null || !email || !emailAuthConfigured()}
               >
-                {loading === "email" ? "Sending magic link..." : t("signin.continueEmail")}{" "}
+                {loading === "email" ? t("signin.magicLinkSending") : t("signin.continueEmail")}{" "}
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </form>
@@ -202,7 +196,7 @@ function SignIn() {
                   minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password (min. 6 characters)"
+                  placeholder={t("signin.passwordPlaceholder")}
                   className="h-11"
                 />
                 <Button
@@ -212,19 +206,17 @@ function SignIn() {
                   disabled={loading !== null || !email || !password || !emailAuthConfigured()}
                 >
                   {loading === "password"
-                    ? "Working..."
+                    ? t("signin.passwordWorking")
                     : passwordMode === "signup"
-                      ? "Create account with password"
-                      : "Sign in with password"}
+                      ? t("signin.createPasswordAccount")
+                      : t("signin.signInPassword")}
                 </Button>
                 <button
                   type="button"
                   onClick={() => setPasswordMode(passwordMode === "signin" ? "signup" : "signin")}
                   className="text-xs text-muted-foreground underline-offset-4 hover:underline"
                 >
-                  {passwordMode === "signin"
-                    ? "No account yet? Create one"
-                    : "Already have an account? Sign in"}
+                  {passwordMode === "signin" ? t("signin.noAccount") : t("signin.hasAccount")}
                 </button>
               </form>
             </details>
@@ -238,14 +230,14 @@ function SignIn() {
 
           {!googleAuthConfigured() && !emailAuthConfigured() && (
             <p className="mt-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-xs text-warning-foreground">
-              Supabase is not configured in this environment.
+              {t("signin.notConfigured")}
             </p>
           )}
 
           <p className="mt-8 text-center text-xs text-muted-foreground">
             {t("signin.agreement")}
             <br />
-            New here?{" "}
+            {t("signin.newHere")}{" "}
             <Link
               to="/onboarding"
               className="font-medium text-foreground underline-offset-4 hover:underline"
@@ -262,11 +254,11 @@ function SignIn() {
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-accent/15 to-transparent" />
         <div className="relative flex h-full flex-col justify-between p-12">
           <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" /> Synced & secure
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" />{" "}
+            {t("signin.brandBadge")}
           </div>
           <p className="font-display text-3xl leading-snug text-foreground md:text-4xl">
-            Sign in, create your study profile, and unlock only the structural papers that match
-            your class, series, and subjects.
+            {t("signin.brandText")}
           </p>
         </div>
       </div>
