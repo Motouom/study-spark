@@ -93,23 +93,72 @@ APP_PUBLIC_URL=https://study-spark-237.vercel.app
 
 ## 4. Supabase Setup
 
-1. Open Supabase Dashboard.
-2. Apply SQL files in `database/supabase/` in numeric order for new environments.
-3. Configure Auth providers.
-4. Configure allowed redirect URLs:
+StudySpark database work must follow [StudySpark Supabase Migration Discipline](./supabase-migrations.md). Do not apply SQL from memory or paste several unrelated files into the SQL editor without recording exactly what ran.
+
+1. Link the intended project:
+
+```bash
+supabase link --project-ref ekqlqsyirsakdxonxmis
+```
+
+2. Confirm current migration history:
+
+```bash
+supabase migration list --linked
+```
+
+3. For fresh non-production environments, apply the legacy SQL files in lexical order, skipping alternative one-shot bundles as documented in `docs/supabase-migrations.md`.
+4. For production, apply only reviewed pending SQL files one at a time.
+5. Run the verification SQL from `docs/supabase-migrations.md`.
+6. Configure Auth providers.
+7. Configure allowed redirect URLs:
 
 ```text
 https://study-spark-237.vercel.app/auth/callback
 http://127.0.0.1:8082/auth/callback
 ```
 
-5. Set the production site URL:
+8. Set the production site URL:
 
 ```text
 https://study-spark-237.vercel.app
 ```
 
-6. Confirm RLS policies are enabled for learner-owned data.
+9. Confirm RLS policies are enabled for learner-owned data.
+
+### Production Database Pre-Checks
+
+Before applying production SQL:
+
+- Confirm the branch/commit that contains the SQL has been reviewed.
+- Confirm the target Supabase project reference is `ekqlqsyirsakdxonxmis`.
+- Confirm a recent Supabase backup exists for high-risk schema/content changes.
+- Read the SQL file end to end and classify it as schema, seed, hardening, repair, one-shot, or content refresh.
+- Confirm the SQL does not include destructive operations such as `drop table`, `truncate`, or broad `delete` unless explicitly approved.
+- Confirm whether app code must deploy immediately after the SQL.
+
+### Production Database Apply
+
+Apply one reviewed file at a time:
+
+```bash
+supabase db query --linked --file database/supabase/<file>.sql
+```
+
+For future CLI-managed timestamp migrations, prefer:
+
+```bash
+supabase db push --linked
+```
+
+### Production Database Verification
+
+After applying SQL:
+
+- Run `supabase migration list --linked`.
+- Run the object/function/RLS verification queries in `docs/supabase-migrations.md`.
+- Smoke test profile save, paper open, question progress, course topic understanding, cheatsheet topic understanding, premium access, Fapshi payment status, and notifications where relevant.
+- Check Vercel and Supabase logs for repeated 400/500 responses.
 
 ## 5. Fapshi Setup
 
@@ -255,4 +304,4 @@ Check:
 
 ## 10. Rollback
 
-Use Vercel's rollback feature from the project dashboard if a production deployment breaks. If the database schema changed, confirm whether rollback also needs a forward-compatible SQL patch. Avoid destructive database rollback during active user traffic.
+Use Vercel's rollback feature from the project dashboard if a production deployment breaks. If the database schema changed, prefer a forward-compatible SQL patch instead of destructive rollback during active user traffic. Follow the forward-fix guidance in `docs/supabase-migrations.md`.
