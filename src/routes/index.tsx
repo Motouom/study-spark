@@ -21,8 +21,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title:
-          "StudySpark - Cameroon GCE, BEPC, Probatoire, and Baccalaureat revision",
+        title: "StudySpark - Cameroon GCE, BEPC, Probatoire, and Baccalaureat revision",
       },
       {
         name: "description",

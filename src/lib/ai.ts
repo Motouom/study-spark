@@ -80,10 +80,9 @@ export function fallbackLearningPath(input: {
       day: 1,
       title: `Attack your hardest paper: ${focus}`,
       paper: hardest?.title ?? "Current weakest paper",
-      target:
-        hardest?.failedQuestions?.length
-          ? `Redo failed questions Q${hardest.failedQuestions.slice(0, 6).join(", Q")} and mark them again`
-          : `Rework the ${hardest?.reviewCount ?? 5} questions you marked for review`,
+      target: hardest?.failedQuestions?.length
+        ? `Redo failed questions Q${hardest.failedQuestions.slice(0, 6).join(", Q")} and mark them again`
+        : `Rework the ${hardest?.reviewCount ?? 5} questions you marked for review`,
       focus: hardestFocus,
     },
     {
@@ -100,19 +99,18 @@ export function fallbackLearningPath(input: {
               .map((item) => item.questionNumber)
               .slice(0, 5)
               .join(", Q")}.`
-        : "Keep full working and mark each question honestly.",
+          : "Keep full working and mark each question honestly.",
     },
     {
       day: 3,
       title: third ? "Revisit a low-confidence paper" : "Open a fresh paper",
       paper: third?.title ?? freshPaper ?? "Lowest-mastery paper",
       target: "Complete 4 timed questions",
-      focus:
-        third?.failedQuestions?.length
-          ? `Start with failed questions Q${third.failedQuestions.slice(0, 4).join(", Q")}.`
-          : third?.avgConfidence !== null && third?.avgConfidence !== undefined
-            ? `Your confidence here was ${third.avgConfidence}/5 — rebuild it with timed practice.`
-            : "Improve accuracy before increasing speed.",
+      focus: third?.failedQuestions?.length
+        ? `Start with failed questions Q${third.failedQuestions.slice(0, 4).join(", Q")}.`
+        : third?.avgConfidence !== null && third?.avgConfidence !== undefined
+          ? `Your confidence here was ${third.avgConfidence}/5 — rebuild it with timed practice.`
+          : "Improve accuracy before increasing speed.",
     },
     {
       day: 4,

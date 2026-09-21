@@ -49,9 +49,7 @@ function buildDifficultyRanking(
   const entries = documents.map((document) => {
     const docSessions = sessions.filter((session) => session.document_id === document.id);
     const docQuestions = questionProgress.filter((item) => item.document_id === document.id);
-    const timedQuestions = docQuestions.filter(
-      (item) => Number(item.duration_seconds ?? 0) > 0,
-    );
+    const timedQuestions = docQuestions.filter((item) => Number(item.duration_seconds ?? 0) > 0);
     const averageQuestionSeconds =
       timedQuestions.length > 0
         ? Math.round(
@@ -109,7 +107,8 @@ function buildDifficultyRanking(
     let score = 0;
     score += failedQuestions.length * 5;
     score += slowQuestions.length * 2;
-    score += passedQuestions.length > 0 ? Math.max(0, failedQuestions.length / passedQuestions.length) : 0;
+    score +=
+      passedQuestions.length > 0 ? Math.max(0, failedQuestions.length / passedQuestions.length) : 0;
     score += reviewCount * 3;
     score += (100 - bestDepth) / 20;
     if (avgConfidence !== null) score += (5 - avgConfidence) * 2;

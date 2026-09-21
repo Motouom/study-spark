@@ -248,7 +248,18 @@ function SettingsPage() {
       subjects.length !== savedProfile.subjects.length ||
       subjects.some((subject) => !savedProfile.subjects.includes(subject as Subject))
     );
-  }, [city, classLevel, country, educationSystem, language, name, region, savedProfile, series, subjects]);
+  }, [
+    city,
+    classLevel,
+    country,
+    educationSystem,
+    language,
+    name,
+    region,
+    savedProfile,
+    series,
+    subjects,
+  ]);
 
   const resetForm = () => {
     if (!savedProfile) return;
@@ -381,7 +392,10 @@ function SettingsPage() {
                   </SelectContent>
                 </Select>
               </Row>
-              <Row label="Curriculum path" hint="Controls class, series, subjects, and content access">
+              <Row
+                label="Curriculum path"
+                hint="Controls class, series, subjects, and content access"
+              >
                 <Select
                   value={educationSystem}
                   onValueChange={(value) => resetCurriculumPath(value as EducationSystem)}

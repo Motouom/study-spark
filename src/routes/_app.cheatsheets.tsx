@@ -146,7 +146,10 @@ function CheatsheetsPage() {
                   </div>
                 </section>
               ) : (
-                <EmptyFiltered onClear={() => setSubject(null)} label="No cheatsheets match this subject." />
+                <EmptyFiltered
+                  onClear={() => setSubject(null)}
+                  label="No cheatsheets match this subject."
+                />
               )}
             </div>
           )}
