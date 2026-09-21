@@ -311,7 +311,10 @@ function CoursesPage() {
                   </div>
                 </section>
               ) : (
-                <EmptyFiltered onClear={() => setSubject(null)} label="No topics match this subject." />
+                <EmptyFiltered
+                  onClear={() => setSubject(null)}
+                  label="No topics match this subject."
+                />
               )}
             </div>
           )}
@@ -424,8 +427,16 @@ function TopicCard({ topic }: { topic: CourseTopic }) {
         {topic.course.language === "french" ? "Français" : "English"}
       </p>
       <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-        <CourseMetric icon={Clock} label="Course time" value={`${topic.stats.readingMinutes} min`} />
-        <CourseMetric icon={BookOpen} label="Studied" value={formatDuration(topic.stats.totalTime)} />
+        <CourseMetric
+          icon={Clock}
+          label="Course time"
+          value={`${topic.stats.readingMinutes} min`}
+        />
+        <CourseMetric
+          icon={BookOpen}
+          label="Studied"
+          value={formatDuration(topic.stats.totalTime)}
+        />
       </div>
     </a>
   );

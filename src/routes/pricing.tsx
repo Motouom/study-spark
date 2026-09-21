@@ -11,17 +11,25 @@ import { canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "StudySpark Pricing - Cameroon GCE premium revision" },
+      { title: "StudySpark Pricing - Cameroon GCE and Francophone revision" },
       {
         name: "description",
         content:
-          "StudySpark pricing for Cameroonian learners: preview selected GCE papers free, then upgrade for protected O Level and A Level papers, topic courses, cheatsheets, AI learning paths, and progress analytics.",
+          "StudySpark pricing for Cameroon students in the GCE Anglophone and francophone exam paths. Preview selected papers free, then upgrade for protected papers, AI learning paths, courses, cheatsheets, and progress analytics.",
       },
-      { property: "og:title", content: "StudySpark pricing for Cameroon GCE students" },
+      {
+        property: "og:title",
+        content: "StudySpark pricing for Cameroon GCE and francophone students",
+      },
       {
         property: "og:description",
         content:
-          "Start free and upgrade for unlimited protected GCE papers, topic courses, exam cheatsheets, and guided revision.",
+          "Start free and upgrade when you need unlimited protected GCE, BEPC, Probatoire, and Baccalaureat papers with guided revision.",
+      },
+      {
+        name: "keywords",
+        content:
+          "StudySpark pricing Cameroon, GCE revision Cameroon, Baccalaureat revision Cameroun, BEPC Cameroun, Probatoire Cameroun, Terminale revision, Premiere revision, sujets proteges Cameroun",
       },
       { property: "og:url", content: canonicalUrl("/pricing") },
       { property: "og:image", content: OG_IMAGE_URL },

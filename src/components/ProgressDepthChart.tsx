@@ -42,9 +42,7 @@ export default function ProgressDepthChart({
             borderRadius: 8,
             fontSize: 12,
           }}
-          formatter={
-            yLabel ? (value) => [`${value} ${yLabel}`, "Study time"] : undefined
-          }
+          formatter={yLabel ? (value) => [`${value} ${yLabel}`, "Study time"] : undefined}
         />
         <Area
           type="monotone"

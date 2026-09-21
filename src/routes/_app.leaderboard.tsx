@@ -1,15 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
-import { BadgeCheck, BookOpen, CheckCircle2, Flame, Medal, RefreshCw, Star, Trophy } from "lucide-react";
+import {
+  BadgeCheck,
+  BookOpen,
+  CheckCircle2,
+  Flame,
+  Medal,
+  RefreshCw,
+  Star,
+  Trophy,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import {
   classLabel,
   seriesLabel,
-  SERIES_OPTIONS,
-  CLASS_LEVELS,
+  classLevelsForSystem,
+  seriesOptionsForSystem,
+  levelLabelForSystem,
   type ClassLevel,
+  type EducationSystem,
   type Level,
   type Series,
 } from "@/lib/study-reference-data";
@@ -47,8 +58,25 @@ type LeaderboardRow = {
 
 const DISPLAY_LIMIT = 50;
 
-function levelLabel(level: Level) {
-  return level === "advanced" ? "Advanced Level" : "Ordinary Level";
+function isFrancophoneClassLevel(classLevel: ClassLevel): boolean {
+  return [
+    "sixieme",
+    "cinquieme",
+    "quatrieme",
+    "troisieme",
+    "seconde",
+    "premiere",
+    "terminale",
+  ].includes(classLevel);
+}
+
+function educationSystemFromClassLevel(classLevel: ClassLevel): EducationSystem {
+  return isFrancophoneClassLevel(classLevel) ? "francophone" : "gce";
+}
+
+function levelLabel(level: Level, classLevel?: ClassLevel) {
+  const system = classLevel ? educationSystemFromClassLevel(classLevel) : "gce";
+  return levelLabelForSystem(level, system);
 }
 
 function locationLabel(row: LeaderboardRow) {
@@ -190,11 +218,17 @@ function LeaderboardPage() {
   const isOutsideTop = myRank > DISPLAY_LIMIT;
   const isMe = (row: LeaderboardRow) => row.user_id === user?.id;
 
+  const allClassLevels = [...classLevelsForSystem("gce"), ...classLevelsForSystem("francophone")];
+  const allSeriesOptions = [
+    ...seriesOptionsForSystem("gce"),
+    ...seriesOptionsForSystem("francophone"),
+  ];
+
   // Available series options for the current level filter
-  const availableSeriesForLevel = SERIES_OPTIONS.filter(
+  const availableSeriesForLevel = allSeriesOptions.filter(
     (s) => levelFilter === "all" || s.level === levelFilter,
   );
-  const availableClassesForLevel = CLASS_LEVELS.filter(
+  const availableClassesForLevel = allClassLevels.filter(
     (c) => levelFilter === "all" || c.level === levelFilter,
   );
 
@@ -416,8 +450,7 @@ function LeaderboardPage() {
                         }`}
                       >
                         <span className="flex items-center gap-1 font-medium">
-                          {rank <= 3 && <Medal className="h-4 w-4 text-accent" />}
-                          #{rank}
+                          {rank <= 3 && <Medal className="h-4 w-4 text-accent" />}#{rank}
                         </span>
                         <span className="min-w-0">
                           <span className="flex items-center gap-1.5 truncate font-medium">
@@ -435,7 +468,7 @@ function LeaderboardPage() {
                         </span>
                         <span className="min-w-0 text-muted-foreground">
                           <span className="line-clamp-2 text-xs">
-                            {levelLabel(row.level)} · {classLabel(row.class_level)}
+                            {levelLabel(row.level, row.class_level)} · {classLabel(row.class_level)}
                           </span>
                         </span>
                         <span className="min-w-0 truncate text-xs text-muted-foreground">

@@ -15,12 +15,16 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import {
   CAMEROON_REGIONS,
-  CLASS_LEVELS,
   COUNTRIES,
-  SERIES_OPTIONS,
+  LANGUAGES,
+  classLevelsForSystem,
+  educationSystemForLanguage,
+  seriesOptionsForSystem,
   subjectsForSeries,
   DEFAULT_PROFILE,
   type ClassLevel,
+  type EducationSystem,
+  type Language,
   type Series,
   type Subject,
 } from "@/lib/study-reference-data";
@@ -129,6 +133,10 @@ function SettingsPage() {
   const premiumActive = isPremiumActive(profile);
   const fallbackProfile = profile ?? DEFAULT_PROFILE;
   const [name, setName] = useState(fallbackProfile.name);
+  const [language, setLanguage] = useState<Language>(fallbackProfile.language);
+  const [educationSystem, setEducationSystem] = useState<EducationSystem>(
+    fallbackProfile.educationSystem ?? educationSystemForLanguage(fallbackProfile.language),
+  );
   const [country, setCountry] = useState(fallbackProfile.country);
   const [region, setRegion] = useState(fallbackProfile.region);
   const [city, setCity] = useState(fallbackProfile.city);
@@ -146,6 +154,18 @@ function SettingsPage() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
   const browserLocation = useBrowserLocation();
+
+  const resetCurriculumPath = (nextSystem: EducationSystem) => {
+    const nextClassLevels = classLevelsForSystem(nextSystem);
+    const nextSeriesOptions = seriesOptionsForSystem(nextSystem);
+    const nextClassLevel = nextClassLevels.find((item) => item.level === selectedLevel)?.id;
+    const nextSeries = nextSeriesOptions.find((item) => item.level === selectedLevel)?.id;
+
+    setEducationSystem(nextSystem);
+    setClassLevel(nextClassLevel ?? nextClassLevels[0]?.id ?? classLevel);
+    setSeries(nextSeries ?? nextSeriesOptions[0]?.id ?? series);
+    setSubjects([]);
+  };
 
   async function retryPayment(record: PaymentRecord) {
     setRetryingId(record.id);
@@ -170,11 +190,13 @@ function SettingsPage() {
     }
   }
 
+  const systemClassLevels = classLevelsForSystem(educationSystem);
+  const systemSeriesOptions = seriesOptionsForSystem(educationSystem);
   const selectedLevel =
-    CLASS_LEVELS.find((item) => item.id === classLevel)?.level ?? fallbackProfile.level;
+    systemClassLevels.find((item) => item.id === classLevel)?.level ?? fallbackProfile.level;
   const availableSeries = useMemo(
-    () => SERIES_OPTIONS.filter((item) => item.level === selectedLevel),
-    [selectedLevel],
+    () => systemSeriesOptions.filter((item) => item.level === selectedLevel),
+    [selectedLevel, systemSeriesOptions],
   );
   const availableSubjects = useMemo(() => subjectsForSeries(series), [series]);
 
@@ -186,6 +208,10 @@ function SettingsPage() {
     if (!savedProfile && displayName) setName(displayName);
     if (savedProfile) {
       setName(savedProfile.name);
+      setLanguage(savedProfile.language);
+      setEducationSystem(
+        savedProfile.educationSystem ?? educationSystemForLanguage(savedProfile.language),
+      );
       setCountry(savedProfile.country);
       setRegion(savedProfile.region);
       setCity(savedProfile.city);
@@ -211,6 +237,9 @@ function SettingsPage() {
     if (!savedProfile) return false;
     return (
       name.trim() !== savedProfile.name ||
+      language !== savedProfile.language ||
+      educationSystem !==
+        (savedProfile.educationSystem ?? educationSystemForLanguage(savedProfile.language)) ||
       country !== savedProfile.country ||
       region !== savedProfile.region ||
       city.trim() !== savedProfile.city ||
@@ -219,11 +248,26 @@ function SettingsPage() {
       subjects.length !== savedProfile.subjects.length ||
       subjects.some((subject) => !savedProfile.subjects.includes(subject as Subject))
     );
-  }, [city, classLevel, country, name, region, savedProfile, series, subjects]);
+  }, [
+    city,
+    classLevel,
+    country,
+    educationSystem,
+    language,
+    name,
+    region,
+    savedProfile,
+    series,
+    subjects,
+  ]);
 
   const resetForm = () => {
     if (!savedProfile) return;
     setName(savedProfile.name);
+    setLanguage(savedProfile.language);
+    setEducationSystem(
+      savedProfile.educationSystem ?? educationSystemForLanguage(savedProfile.language),
+    );
     setCountry(savedProfile.country);
     setRegion(savedProfile.region);
     setCity(savedProfile.city);
@@ -250,7 +294,8 @@ function SettingsPage() {
     try {
       await saveProfile({
         ...profile,
-        language: profile?.language ?? "english",
+        language,
+        educationSystem,
         name: name.trim(),
         country,
         region,
@@ -333,6 +378,37 @@ function SettingsPage() {
               <Row label="Email" hint="Managed by your sign-in provider">
                 <Input value={user?.email ?? ""} disabled type="email" className="max-w-md" />
               </Row>
+              <Row label="Language" hint="Controls interface and support messaging language">
+                <Select value={language} onValueChange={(value) => setLanguage(value as Language)}>
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {LANGUAGES.map((item) => (
+                      <SelectItem key={item.id} value={item.id}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Row>
+              <Row
+                label="Curriculum path"
+                hint="Controls class, series, subjects, and content access"
+              >
+                <Select
+                  value={educationSystem}
+                  onValueChange={(value) => resetCurriculumPath(value as EducationSystem)}
+                >
+                  <SelectTrigger className="max-w-md">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="gce">GCE Anglophone</SelectItem>
+                    <SelectItem value="francophone">Francophone BEPC, Probatoire, Bac</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Row>
               <Row label="Country" hint="Used for national rankings">
                 <Select value={country} onValueChange={setCountry}>
                   <SelectTrigger className="max-w-md">
@@ -410,9 +486,9 @@ function SettingsPage() {
                   onValueChange={(value) => {
                     const nextClassLevel = value as ClassLevel;
                     const nextLevel =
-                      CLASS_LEVELS.find((item) => item.id === nextClassLevel)?.level ??
+                      systemClassLevels.find((item) => item.id === nextClassLevel)?.level ??
                       selectedLevel;
-                    const nextSeriesOptions = SERIES_OPTIONS.filter(
+                    const nextSeriesOptions = systemSeriesOptions.filter(
                       (item) => item.level === nextLevel,
                     );
 
@@ -426,7 +502,7 @@ function SettingsPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {CLASS_LEVELS.map((item) => (
+                    {systemClassLevels.map((item) => (
                       <SelectItem key={item.id} value={item.id}>
                         {item.label}
                       </SelectItem>

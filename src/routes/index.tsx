@@ -20,20 +20,27 @@ import { canonicalUrl, educationalAppSchema, OG_IMAGE_URL } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "StudySpark - Cameroon GCE revision, past questions, and progress" },
+      {
+        title: "StudySpark - Cameroon GCE, BEPC, Probatoire, and Baccalaureat revision",
+      },
       {
         name: "description",
         content:
-          "Prepare for Cameroon GCE O Level and A Level with protected structural papers, Form 3 to Upper Sixth subjects, topic courses, cheatsheets, and progress tracking.",
+          "Prepare for Cameroon GCE O Level, A Level, BEPC, Probatoire, and Baccalaureat with protected structural papers, topic courses, cheatsheets, and progress tracking.",
       },
       {
         property: "og:title",
-        content: "StudySpark - Cameroon GCE revision for O Level and A Level",
+        content: "StudySpark - Cameroon GCE and Francophone exam revision",
       },
       {
         property: "og:description",
         content:
-          "Protected Cameroon GCE papers, topic revision, cheatsheets, AI-guided learning paths, and progress tracking for Cameroonian students.",
+          "Protected GCE, BEPC, Probatoire, and Baccalaureat papers, topic revision, cheatsheets, AI-guided learning paths, and progress tracking for Cameroonian students.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Cameroon GCE, BEPC, Probatoire, Baccalaureat, O-Level, A-Level, Serie C, Serie D, Serie A, Terminale, Premiere, revision Cameroun, sujets Cameroun, examen Cameroun",
       },
       { property: "og:url", content: canonicalUrl("/") },
       { property: "og:image", content: OG_IMAGE_URL },
