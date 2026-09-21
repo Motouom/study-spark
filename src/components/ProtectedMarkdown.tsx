@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import type { CourseDocument } from "@/hooks/use-study-content";
-import { ShieldCheck } from "lucide-react";
+import { BookOpenCheck, FlaskConical, GraduationCap, ListChecks, ShieldCheck } from "lucide-react";
 import type { ReactNode } from "react";
 import { Children, isValidElement } from "react";
 import ReactMarkdown from "react-markdown";
@@ -70,10 +70,21 @@ export default function ProtectedMarkdown({
   userId: string;
 }) {
   const trace = `${owner} · ${userId.slice(0, 8)} · ${document.id.slice(0, 8)} · ${new Date().toLocaleDateString()}`;
+  const isCourse = document.contentKind === "course";
+  const isCheatsheet = document.contentKind === "cheatsheet";
+  const markdownClass = isCourse
+    ? "protected-markdown course-markdown relative font-sans text-[0.95rem] leading-7 sm:text-base"
+    : isCheatsheet
+      ? "protected-markdown cheatsheet-markdown relative font-sans text-[0.95rem] leading-7 sm:text-base"
+      : "protected-markdown relative font-serif text-[0.95rem] leading-7 sm:text-base";
 
   return (
     <article
-      className="protected-content relative min-w-0 select-none overflow-hidden rounded-xl border border-border bg-card p-4 sm:p-5 md:p-8"
+      className={`protected-content relative min-w-0 select-none overflow-hidden rounded-xl border border-border bg-card p-4 sm:p-5 md:p-8 ${
+        isCourse
+          ? "bg-[linear-gradient(180deg,color-mix(in_oklch,var(--color-secondary)_32%,transparent),var(--color-card)_16rem)]"
+          : ""
+      }`}
       onCopy={(event) => event.preventDefault()}
       onCut={(event) => event.preventDefault()}
       onContextMenu={(event) => event.preventDefault()}
@@ -86,58 +97,136 @@ export default function ProtectedMarkdown({
       <div className="relative mb-6 flex flex-wrap items-center gap-2">
         <Badge variant="secondary">{document.subject}</Badge>
         <Badge variant="outline">{document.language}</Badge>
+        {isCourse && (
+          <Badge variant="outline" className="gap-1">
+            <GraduationCap className="h-3.5 w-3.5" />
+            Guided course
+          </Badge>
+        )}
         <span className="inline-flex items-center gap-1 text-xs text-success">
           <ShieldCheck className="h-3.5 w-3.5" />
           Protected view
         </span>
       </div>
-      <div className="protected-markdown relative font-serif text-[0.95rem] leading-7 sm:text-base">
+      <div className={markdownClass}>
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}
           rehypePlugins={[rehypeKatex]}
           components={{
             h1: ({ children }) => (
-              <h1 className="mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl">
+              <h1
+                className={
+                  isCourse
+                    ? "mb-5 max-w-4xl font-display text-3xl font-semibold leading-tight tracking-normal sm:text-4xl"
+                    : "mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl"
+                }
+              >
                 {formatStudyInline(children)}
               </h1>
             ),
             h2: ({ children }) => (
               <h2
                 id={slugifyHeading(String(children ?? ""))}
-                className="mb-3 mt-8 scroll-mt-24 font-display text-xl font-semibold leading-tight sm:text-2xl"
+                className={
+                  isCourse
+                    ? "course-unit-heading mb-5 mt-10 flex scroll-mt-24 items-center gap-3 rounded-xl border border-border bg-card/85 px-4 py-3 font-display text-xl font-semibold leading-tight shadow-sm sm:text-2xl"
+                    : "mb-3 mt-8 scroll-mt-24 font-display text-xl font-semibold leading-tight sm:text-2xl"
+                }
               >
+                {isCourse && (
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                    <BookOpenCheck className="h-4 w-4" />
+                  </span>
+                )}
                 {formatStudyInline(children)}
               </h2>
             ),
             h3: ({ children }) => (
               <h3
                 id={slugifyHeading(String(children ?? ""))}
-                className="mb-3 mt-6 scroll-mt-24 text-lg font-semibold leading-snug"
+                className={
+                  isCourse
+                    ? "course-lesson-heading mb-3 mt-7 flex scroll-mt-24 items-center gap-2 text-lg font-semibold leading-snug"
+                    : "mb-3 mt-6 scroll-mt-24 text-lg font-semibold leading-snug"
+                }
               >
+                {isCourse && <ListChecks className="h-4 w-4 text-accent" />}
                 {formatStudyInline(children)}
               </h3>
             ),
-            p: ({ children }) => <p className="my-4 leading-8">{formatStudyInline(children)}</p>,
+            p: ({ children }) => (
+              <p className={isCourse ? "my-4 max-w-5xl leading-8 text-foreground/90" : "my-4 leading-8"}>
+                {formatStudyInline(children)}
+              </p>
+            ),
             strong: ({ children }) => (
               <strong className="font-semibold">{formatStudyInline(children)}</strong>
             ),
             em: ({ children }) => <em className="italic">{formatStudyInline(children)}</em>,
             blockquote: ({ children }) => (
-              <blockquote className="my-5 border-l-4 border-border pl-5 text-muted-foreground">
+              <blockquote
+                className={
+                  isCourse
+                    ? "my-6 rounded-xl border border-accent/25 bg-accent/10 p-4 text-foreground shadow-sm"
+                    : "my-5 border-l-4 border-border pl-5 text-muted-foreground"
+                }
+              >
+                {isCourse && (
+                  <span className="mb-2 inline-flex items-center gap-2 text-xs font-semibold uppercase text-accent">
+                    <FlaskConical className="h-3.5 w-3.5" />
+                    Exam note
+                  </span>
+                )}
                 {children}
               </blockquote>
             ),
             hr: () => <hr className="my-7 border-border" />,
-            ul: ({ children }) => <ul className="my-4 list-disc space-y-2 pl-6">{children}</ul>,
-            ol: ({ children }) => <ol className="my-4 list-decimal space-y-2 pl-6">{children}</ol>,
-            li: ({ children }) => <li className="leading-8">{formatStudyInline(children)}</li>,
+            ul: ({ children }) => (
+              <ul
+                className={
+                  isCourse
+                    ? "course-list my-5 grid gap-2 pl-0"
+                    : "my-4 list-disc space-y-2 pl-6"
+                }
+              >
+                {children}
+              </ul>
+            ),
+            ol: ({ children }) => (
+              <ol
+                className={
+                  isCourse
+                    ? "course-list course-ordered-list my-5 grid gap-2 pl-0"
+                    : "my-4 list-decimal space-y-2 pl-6"
+                }
+              >
+                {children}
+              </ol>
+            ),
+            li: ({ children }) => (
+              <li
+                className={
+                  isCourse
+                    ? "rounded-lg border border-border bg-background/55 px-3 py-2 leading-7"
+                    : "leading-8"
+                }
+              >
+                {formatStudyInline(children)}
+              </li>
+            ),
             table: ({ children }) => (
-              <div className="my-5 overflow-x-auto rounded-lg border border-border">
+              <div
+                className={
+                  isCourse
+                    ? "my-6 overflow-x-auto rounded-xl border border-border bg-background/70 shadow-sm"
+                    : "my-5 overflow-x-auto rounded-lg border border-border"
+                }
+              >
                 <table className="w-full min-w-[32rem] border-collapse text-sm">{children}</table>
               </div>
             ),
             th: ({ children }) => (
-              <th className="border-b border-border bg-secondary/50 px-3 py-2 text-left font-semibold">
+              <th className="border-b border-border bg-secondary/70 px-3 py-2 text-left font-semibold">
                 {formatStudyInline(children)}
               </th>
             ),

@@ -262,6 +262,93 @@
     max-width: 100%;
   }
 
+  .course-markdown {
+    counter-reset: course-unit course-lesson;
+  }
+
+  .course-markdown .course-unit-heading {
+    counter-increment: course-unit;
+  }
+
+  .course-markdown .course-unit-heading::after {
+    content: "Unit " counter(course-unit);
+    margin-left: auto;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--color-secondary) 80%, transparent);
+    padding: 0.25rem 0.6rem;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--color-muted-foreground);
+    text-transform: uppercase;
+  }
+
+  .course-markdown .course-lesson-heading {
+    counter-increment: course-lesson;
+  }
+
+  .course-markdown .course-lesson-heading::after {
+    content: "Lesson " counter(course-lesson);
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--color-accent) 12%, transparent);
+    padding: 0.15rem 0.5rem;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+
+  .course-markdown .course-list {
+    list-style: none;
+  }
+
+  .course-markdown .course-list > li {
+    position: relative;
+    padding-left: 2.35rem;
+  }
+
+  .course-markdown .course-list > li::before {
+    content: "";
+    position: absolute;
+    left: 0.85rem;
+    top: 1.05rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0.25rem color-mix(in oklch, var(--color-accent) 16%, transparent);
+  }
+
+  .course-markdown .course-ordered-list {
+    counter-reset: course-step;
+  }
+
+  .course-markdown .course-ordered-list > li {
+    counter-increment: course-step;
+  }
+
+  .course-markdown .course-ordered-list > li::before {
+    content: counter(course-step);
+    top: 0.8rem;
+    display: grid;
+    height: 1.35rem;
+    width: 1.35rem;
+    place-items: center;
+    background: var(--color-primary);
+    box-shadow: none;
+    color: var(--color-primary-foreground);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
   body.protected-content-hidden .protected-content {
     filter: blur(18px);
   }
