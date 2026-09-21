@@ -11,6 +11,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { isStaleAssetError, requestStaleAssetRecovery } from "@/lib/stale-asset-recovery";
+import { I18nProvider } from "@/lib/i18n";
 
 const siteTitle = DEFAULT_SEO_TITLE;
 const siteDescription = DEFAULT_SEO_DESCRIPTION;
@@ -189,5 +190,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <I18nProvider>
+      <Outlet />
+    </I18nProvider>
+  );
 }

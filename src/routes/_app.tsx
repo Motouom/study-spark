@@ -45,18 +45,20 @@ import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
 import { signOut } from "@/lib/auth";
 import { isPremiumActive } from "@/lib/premium";
+import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
 });
 
 const NAV = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/library", label: "Papers", icon: Library },
-  { to: "/learning-path", label: "Learning path", icon: Brain },
-  { to: "/courses", label: "Courses", icon: PlayCircle },
-  { to: "/cheatsheets", label: "Cheatsheets", icon: BookMarked },
-  { to: "/leaderboard", label: "Leaderboard", icon: Users },
+  { to: "/dashboard", labelKey: "common.dashboard", icon: LayoutDashboard },
+  { to: "/library", labelKey: "common.papers", icon: Library },
+  { to: "/learning-path", labelKey: "common.learningPath", icon: Brain },
+  { to: "/courses", labelKey: "common.courses", icon: PlayCircle },
+  { to: "/cheatsheets", labelKey: "common.cheatsheets", icon: BookMarked },
+  { to: "/leaderboard", labelKey: "common.leaderboard", icon: Users },
 ] as const;
 
 function NavItem({
@@ -103,6 +105,9 @@ function SidebarContent({
 }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useI18n();
+  const { currentStreak } = useUnifiedStreak();
+
   const shownName = displayName ?? profile?.name ?? "Student";
   const initials = shownName.slice(0, 1).toUpperCase();
   const premium = isPremiumActive(profile);
@@ -124,7 +129,7 @@ function SidebarContent({
             key={n.to}
             to={n.to}
             icon={n.icon}
-            label={n.label}
+            label={t(n.labelKey)}
             active={location.pathname.startsWith(n.to)}
             onClick={onNavigate}
           />
@@ -133,14 +138,18 @@ function SidebarContent({
           <NavItem
             to="/search"
             icon={Search}
-            label="Advanced search"
+            label={t("common.advancedSearch")}
             active={location.pathname.startsWith("/search")}
             onClick={onNavigate}
           />
           <NavItem
             to="/notifications"
             icon={Bell}
-            label={unreadCount > 0 ? `Notifications (${unreadCount})` : "Notifications"}
+            label={
+              unreadCount > 0
+                ? `${t("common.notifications")} (${unreadCount})`
+                : t("common.notifications")
+            }
             active={location.pathname.startsWith("/notifications")}
             onClick={onNavigate}
           />
@@ -156,14 +165,14 @@ function SidebarContent({
           <NavItem
             to="/support"
             icon={LifeBuoy}
-            label="Support"
+            label={t("common.support")}
             active={location.pathname.startsWith("/support")}
             onClick={onNavigate}
           />
           <NavItem
             to="/settings"
             icon={Settings}
-            label="Settings"
+            label={t("common.settings")}
             active={location.pathname.startsWith("/settings")}
             onClick={onNavigate}
           />
@@ -203,6 +212,7 @@ function SidebarContent({
         </div>
         {/* Theme toggle row — full width pill */}
         <div className="mt-2">
+          <LanguageSwitcher className="mb-2 h-9 w-full bg-background" />
           <ThemeToggle />
         </div>
         <Button
@@ -213,7 +223,7 @@ function SidebarContent({
           className="mt-1 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
         >
           <LogOut className="h-4 w-4" />
-          Sign out
+          {t("common.signOut")}
         </Button>
       </div>
     </>
@@ -230,6 +240,7 @@ function CommandMenu({
   isAdmin: boolean;
 }) {
   const navigate = useNavigate();
+  const { t } = useI18n();
   const { profile } = useStudyProfile();
   const content = useStudyContent(profile);
   const searchTopics = content.topics;
@@ -247,17 +258,17 @@ function CommandMenu({
           {NAV.map((n) => (
             <CommandItem key={n.to} onSelect={() => go(n.to)}>
               <n.icon className="mr-2 h-4 w-4" />
-              {n.label}
+              {t(n.labelKey)}
             </CommandItem>
           ))}
           <CommandItem onSelect={() => go("/settings")}>
-            <Settings className="mr-2 h-4 w-4" /> Settings
+            <Settings className="mr-2 h-4 w-4" /> {t("common.settings")}
           </CommandItem>
           <CommandItem onSelect={() => go("/pricing")}>
             <Sparkles className="mr-2 h-4 w-4" /> Upgrade to Premium
           </CommandItem>
           <CommandItem onSelect={() => go("/learning-path")}>
-            <Brain className="mr-2 h-4 w-4" /> Learning path
+            <Brain className="mr-2 h-4 w-4" /> {t("common.learningPath")}
           </CommandItem>
           {isPremiumActive(profile) && (
             <CommandItem onSelect={() => go("/streak")}>
@@ -265,16 +276,16 @@ function CommandMenu({
             </CommandItem>
           )}
           <CommandItem onSelect={() => go("/courses")}>
-            <PlayCircle className="mr-2 h-4 w-4" /> Courses
+            <PlayCircle className="mr-2 h-4 w-4" /> {t("common.courses")}
           </CommandItem>
           <CommandItem onSelect={() => go("/cheatsheets")}>
-            <BookMarked className="mr-2 h-4 w-4" /> Cheatsheets
+            <BookMarked className="mr-2 h-4 w-4" /> {t("common.cheatsheets")}
           </CommandItem>
           <CommandItem onSelect={() => go("/search")}>
-            <Search className="mr-2 h-4 w-4" /> Advanced search
+            <Search className="mr-2 h-4 w-4" /> {t("common.advancedSearch")}
           </CommandItem>
           <CommandItem onSelect={() => go("/support")}>
-            <LifeBuoy className="mr-2 h-4 w-4" /> Support
+            <LifeBuoy className="mr-2 h-4 w-4" /> {t("common.support")}
           </CommandItem>
           {isAdmin && (
             <CommandItem onSelect={() => go("/control-panel-9k3x")}>
@@ -302,8 +313,10 @@ function CommandMenu({
 }
 
 function AppLayout() {
+  const { t } = useI18n();
   const { user, loaded, profile: savedProfile, profileError, displayName } = useStudyProfile();
   const profile = savedProfile;
+  useSyncLocaleFromProfile(profile?.language);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
@@ -563,7 +576,7 @@ function AppLayout() {
               }`}
             >
               <n.icon className="h-5 w-5" />
-              {n.label}
+              {t(n.labelKey)}
             </Link>
           );
         })}

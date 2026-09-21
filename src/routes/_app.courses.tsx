@@ -26,6 +26,7 @@ import {
   X,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/courses")({
   head: () => ({ meta: [{ title: "Courses — StudySpark" }] }),
@@ -33,6 +34,7 @@ export const Route = createFileRoute("/_app/courses")({
 });
 
 function CoursesPage() {
+  const { t } = useI18n();
   const { profile } = useStudyProfile();
   const { documents, loaded, error } = useStudyContent(profile);
   const { progress } = useStructuralProgress();
@@ -179,10 +181,7 @@ function CoursesPage() {
 
   return (
     <>
-      <PageHeader
-        title="Courses"
-        description="Topic-by-topic GCE lessons with worked examples and exam technique — built for your class and series."
-      />
+      <PageHeader title={t("courses.title")} description={t("courses.description")} />
       <div className="px-4 py-6 md:px-10 md:py-8">
         {error && (
           <div className="mb-5 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
@@ -191,20 +190,18 @@ function CoursesPage() {
         )}
 
         <PremiumGate
-          title="Premium courses"
-          description="Upgrade to access full subject courses, lesson sequences, and guided revision."
+          title={t("courses.premiumTitle")}
+          description={t("courses.premiumDescription")}
         >
           {loaded && topics.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
               <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground" />
-              <h2 className="mt-4 text-base font-medium">No courses for your profile yet</h2>
+              <h2 className="mt-4 text-base font-medium">{t("courses.emptyTitle")}</h2>
               <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-                Complete subject courses will appear here once they are published for your class,
-                series, and subjects. Check back soon, or keep practising with papers in the
-                meantime.
+                {t("courses.emptyDescription")}
               </p>
               <Button asChild className="mt-5">
-                <Link to="/library">Open papers</Link>
+                <Link to="/library">{t("dashboard.openLibrary")}</Link>
               </Button>
             </div>
           ) : (
@@ -215,7 +212,7 @@ function CoursesPage() {
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 text-xs text-accent">
                         <PlayCircle className="h-3.5 w-3.5" />
-                        Continue learning
+                        {t("courses.continueLearning")}
                       </div>
                       <h2 className="mt-1.5 break-words text-lg font-medium leading-snug">
                         {inProgress.course.title}
@@ -233,7 +230,7 @@ function CoursesPage() {
                     </div>
                     <Button asChild size="sm" className="shrink-0">
                       <Link to="/course/$documentId" params={{ documentId: inProgress.course.id }}>
-                        Continue course
+                        {t("courses.continueCourse")}
                       </Link>
                     </Button>
                   </div>
@@ -244,7 +241,7 @@ function CoursesPage() {
                 value={q}
                 onChange={setQ}
                 onClear={clearSearch}
-                placeholder="Search course topics, subject, or lesson..."
+                placeholder={t("courses.searchPlaceholder")}
                 label="Search course topics"
               />
 
@@ -253,7 +250,7 @@ function CoursesPage() {
               ) : !subject ? (
                 <section className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium">Subjects</h2>
+                    <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
                     <Badge variant="secondary">{subjectCards.length}</Badge>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">

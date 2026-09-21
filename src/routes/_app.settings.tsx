@@ -47,6 +47,7 @@ import {
   useLearnerNotificationPreferences,
   type LearnerNotificationKind,
 } from "@/hooks/use-learner-notifications";
+import { languageToLocale, useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Settings — StudySpark" }] }),
@@ -120,6 +121,7 @@ const NOTIFICATION_OPTIONS: Array<{
 ];
 
 function SettingsPage() {
+  const { setLocale, t } = useI18n();
   const navigate = useNavigate();
   const { user, loaded, profile: savedProfile, saveProfile } = useStudyProfile();
   const { subscription } = useSubscription();
@@ -351,7 +353,7 @@ function SettingsPage() {
 
   return (
     <>
-      <PageHeader title="Settings" description="Manage your profile, exam prep, and preferences." />
+      <PageHeader title={t("settings.title")} description={t("settings.description")} />
 
       <div className="space-y-6 px-6 py-6 md:px-10 md:py-8">
         {supabaseConfigured() && (!loaded || !profile) ? (
@@ -360,7 +362,7 @@ function SettingsPage() {
           </section>
         ) : (
           <>
-            <Section title="Profile" description="Customize your learner identity and access.">
+            <Section title={t("settings.profile")} description={t("settings.profileDescription")}>
               <Row label="Avatar">
                 <div className="flex items-center gap-4">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground font-display text-xl text-background">
@@ -371,18 +373,25 @@ function SettingsPage() {
                   </p>
                 </div>
               </Row>
-              <Row label="Display name">
+              <Row label={t("settings.displayName")}>
                 <Input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="max-w-md"
                 />
               </Row>
-              <Row label="Email" hint="Managed by your sign-in provider">
+              <Row label={t("common.email")} hint={t("settings.emailHint")}>
                 <Input value={user?.email ?? ""} disabled type="email" className="max-w-md" />
               </Row>
-              <Row label="Language" hint="Controls interface and support messaging language">
-                <Select value={language} onValueChange={(value) => setLanguage(value as Language)}>
+              <Row label={t("common.language")} hint={t("settings.languageHint")}>
+                <Select
+                  value={language}
+                  onValueChange={(value) => {
+                    const nextLanguage = value as Language;
+                    setLanguage(nextLanguage);
+                    setLocale(languageToLocale(nextLanguage));
+                  }}
+                >
                   <SelectTrigger className="max-w-md">
                     <SelectValue />
                   </SelectTrigger>
@@ -396,7 +405,7 @@ function SettingsPage() {
                 </Select>
               </Row>
               <Row
-                label="Curriculum path"
+                label={t("settings.curriculumPath")}
                 hint="Controls class, series, subjects, and content access"
               >
                 <Select
@@ -596,7 +605,7 @@ function SettingsPage() {
                     !hasChanges
                   }
                 >
-                  {saving ? "Saving..." : "Save profile"}
+                  {saving ? "Saving..." : t("settings.saveProfile")}
                 </Button>
               </div>
             </Section>
