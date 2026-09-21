@@ -9,6 +9,7 @@ import { useSupabaseUser } from "@/hooks/use-supabase-user";
 import { classLabel, seriesLabel } from "@/lib/study-reference-data";
 import { CheckCircle2, LifeBuoy, Mail } from "lucide-react";
 import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/support")({
   head: () => ({ meta: [{ title: "Support — StudySpark" }] }),
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/_app/support")({
 const SUPPORT_EMAIL = "motouomvictor@gmail.com";
 
 function SupportPage() {
+  const { t } = useI18n();
   const { profile } = useStudyProfile();
   const { user } = useSupabaseUser();
   const premium = isPremiumActive(profile);
@@ -48,27 +50,24 @@ function SupportPage() {
 
   return (
     <>
-      <PageHeader
-        title="Support"
-        description="Priority support is available to every signed-in learner."
-      />
+      <PageHeader title={t("support.title")} description={t("support.description")} />
       <div className="px-6 py-6 md:px-10 md:py-8">
         <section className="max-w-2xl rounded-xl border border-border bg-card p-5">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <LifeBuoy className="h-5 w-5" />
-              <h2 className="text-base font-medium">Contact support</h2>
+              <h2 className="text-base font-medium">{t("support.contactTitle")}</h2>
             </div>
             {premium ? <PremiumBadge /> : null}
           </div>
           <div className="mt-5 grid gap-3">
             <Input
-              placeholder="Subject"
+              placeholder={t("support.subjectPlaceholder")}
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
             />
             <textarea
-              placeholder="Describe the issue..."
+              placeholder={t("support.messagePlaceholder")}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               className="min-h-40 rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -82,17 +81,16 @@ function SupportPage() {
               }}
             >
               <Mail className="mr-1.5 h-4 w-4" />
-              Send request
+              {t("support.sendRequest")}
             </Button>
             {opened && (
               <p className="flex items-center gap-1.5 text-xs text-success">
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                Your email app should have opened with the request pre-filled. We reply within 24
-                hours.
+                {t("support.emailOpened")}
               </p>
             )}
             <p className="text-xs text-muted-foreground">
-              No email app? Write to us directly at{" "}
+              {t("support.noEmailApp")}{" "}
               <a
                 href={`mailto:${SUPPORT_EMAIL}`}
                 className="font-medium text-accent underline underline-offset-2"
@@ -101,9 +99,7 @@ function SupportPage() {
               </a>
               .
             </p>
-            <p className="text-xs text-muted-foreground">
-              Your plan, level, and subjects are attached automatically so we can help faster.
-            </p>
+            <p className="text-xs text-muted-foreground">{t("support.autoDetails")}</p>
           </div>
         </section>
       </div>

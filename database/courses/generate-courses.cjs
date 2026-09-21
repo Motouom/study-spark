@@ -121,17 +121,9 @@ for (const course of COURSES) {
   );
 }
 
-const sql = [
-  "begin;",
-  ...topicInserts,
-  ...docInserts,
-  "commit;",
-].join("\n\n");
+const sql = ["begin;", ...topicInserts, ...docInserts, "commit;"].join("\n\n");
 
 fs.writeFileSync(path.join(__dirname, "insert_courses.sql"), sql);
-fs.writeFileSync(
-  path.join(BASE, "..", "supabase", "033_expanded_gce_course_catalog.sql"),
-  sql,
-);
+fs.writeFileSync(path.join(BASE, "..", "supabase", "033_expanded_gce_course_catalog.sql"), sql);
 console.log(`Generated ${topicInserts.length} topics and ${docInserts.length} course documents.`);
 console.log("Total SQL size:", (sql.length / 1024).toFixed(0), "KB");

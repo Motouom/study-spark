@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { aiConfigured, fallbackInsight, generateAiText } from "@/lib/ai";
+import { aiConfigured, fallbackInsight, generateAiText, logAiFailure } from "@/lib/ai";
 import { getAuthenticatedSupabase, getAuthenticatedUser } from "@/lib/server-supabase";
 import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
@@ -96,7 +96,16 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
             weakestSubjects,
           });
 
-          if (!aiConfigured()) return Response.json({ insight: fallback, source: "fallback" });
+          if (!aiConfigured()) {
+            logAiFailure("ai.progress_insight.fallback", new Error("AI is not configured."), {
+              userId: user.id,
+            });
+            return Response.json({
+              insight: fallback,
+              source: "fallback",
+              message: "StudySpark used your local progress data because AI is not configured.",
+            });
+          }
 
           try {
             const insight = await generateAiText({
@@ -122,14 +131,22 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
 
             return Response.json({ insight, source: "ai" });
           } catch (aiError) {
-            console.warn("AI progress insight provider failed; using local fallback", aiError);
-            return Response.json({ insight: fallback, source: "fallback" });
+            logAiFailure("ai.progress_insight.provider_failed", aiError, { userId: user.id });
+            return Response.json({
+              insight: fallback,
+              source: "fallback",
+              message:
+                "StudySpark could not reach AI right now, so it used your saved progress to prepare a local insight.",
+            });
           }
         } catch (error) {
           if (error instanceof Response) return error;
           console.error("AI progress insight failed", error);
           return Response.json(
-            { error: error instanceof Error ? error.message : "Progress insight failed." },
+            {
+              error:
+                "Progress insight could not be prepared right now. Please try again after a moment.",
+            },
             { status: 500 },
           );
         }

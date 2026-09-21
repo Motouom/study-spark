@@ -8,6 +8,7 @@ import {
   useLearnerNotifications,
   type LearnerNotificationKind,
 } from "@/hooks/use-learner-notifications";
+import { useI18n } from "@/lib/i18n";
 import { useMemo, useState } from "react";
 
 export const Route = createFileRoute("/_app/notifications")({
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/_app/notifications")({
 });
 
 function NotificationsPage() {
+  const { locale, t } = useI18n();
   const { notifications, loading, error, markAsRead, markAllAsRead, unreadCount } =
     useLearnerNotifications();
   const [filter, setFilter] = useState<"all" | LearnerNotificationKind>("all");
@@ -26,10 +28,7 @@ function NotificationsPage() {
 
   return (
     <>
-      <PageHeader
-        title="Notifications"
-        description="Account reminders and paper progress updates will appear here."
-      >
+      <PageHeader title={t("common.notifications")} description={t("notifications.description")}>
         {notifications.length > 0 && (
           <Button
             type="button"
@@ -40,7 +39,7 @@ function NotificationsPage() {
             className="gap-1.5"
           >
             <CheckCheck className="h-4 w-4" />
-            Mark all read
+            {t("notifications.markAllRead")}
           </Button>
         )}
       </PageHeader>
@@ -48,23 +47,23 @@ function NotificationsPage() {
       <div className="space-y-4 px-4 py-5 sm:px-6 md:px-10 md:py-8">
         {error && (
           <div className="mb-4 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-            Notifications could not be loaded: {error}
+            {t("notifications.loadError")}
           </div>
         )}
         {loading && (
           <div className="mb-4 rounded-lg border border-border bg-card p-3 text-sm text-muted-foreground">
-            Checking your latest learner updates...
+            {t("notifications.loading")}
           </div>
         )}
 
         {notifications.length > 0 && (
           <Tabs value={filter} onValueChange={(value) => setFilter(value as typeof filter)}>
             <TabsList className="h-auto max-w-full flex-wrap justify-start">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="content">Papers</TabsTrigger>
-              <TabsTrigger value="progress">Progress</TabsTrigger>
-              <TabsTrigger value="streak">Streaks</TabsTrigger>
-              <TabsTrigger value="membership">Account</TabsTrigger>
+              <TabsTrigger value="all">{t("notifications.all")}</TabsTrigger>
+              <TabsTrigger value="content">{t("notifications.content")}</TabsTrigger>
+              <TabsTrigger value="progress">{t("notifications.progress")}</TabsTrigger>
+              <TabsTrigger value="streak">{t("notifications.streak")}</TabsTrigger>
+              <TabsTrigger value="membership">{t("notifications.membership")}</TabsTrigger>
             </TabsList>
           </Tabs>
         )}
@@ -96,16 +95,21 @@ function NotificationsPage() {
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-2">
                             <h2 className="break-words text-sm font-medium">{item.title}</h2>
-                            {!item.read && <Badge variant="secondary">New</Badge>}
+                            {!item.read && (
+                              <Badge variant="secondary">{t("notifications.new")}</Badge>
+                            )}
                             <Badge variant="outline" className="capitalize">
-                              {item.kind}
+                              {t(`notifications.${item.kind}`)}
                             </Badge>
                           </div>
                           <p className="mt-1 text-xs text-muted-foreground">
-                            {new Date(item.createdAt).toLocaleString(undefined, {
-                              dateStyle: "medium",
-                              timeStyle: "short",
-                            })}
+                            {new Date(item.createdAt).toLocaleString(
+                              locale === "fr" ? "fr-CM" : "en-CM",
+                              {
+                                dateStyle: "medium",
+                                timeStyle: "short",
+                              },
+                            )}
                           </p>
                         </div>
                         {!item.read && (
@@ -116,7 +120,7 @@ function NotificationsPage() {
                             onClick={() => markAsRead(item.id)}
                             className="w-fit shrink-0"
                           >
-                            Mark read
+                            {t("notifications.markRead")}
                           </Button>
                         )}
                       </div>
@@ -130,17 +134,17 @@ function NotificationsPage() {
         ) : notifications.length > 0 ? (
           <div className="rounded-xl border border-dashed border-border bg-card p-8 text-center">
             <Bell className="mx-auto h-9 w-9 text-muted-foreground" />
-            <h3 className="mt-4 text-base font-medium">No notifications in this group</h3>
+            <h3 className="mt-4 text-base font-medium">{t("notifications.emptyGroupTitle")}</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              Try another category or check back after your next study activity.
+              {t("notifications.emptyGroupDescription")}
             </p>
           </div>
         ) : (
           <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
             <Bell className="mx-auto h-10 w-10 text-muted-foreground" />
-            <h3 className="mt-4 text-base font-medium">No notifications yet</h3>
+            <h3 className="mt-4 text-base font-medium">{t("notifications.emptyTitle")}</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              You will only see real profile, paper, and account updates here.
+              {t("notifications.emptyDescription")}
             </p>
           </div>
         )}

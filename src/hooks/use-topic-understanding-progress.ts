@@ -79,11 +79,7 @@ export function useTopicUnderstandingProgress(documentId?: string | null) {
   }, [load]);
 
   const markTopic = useCallback(
-    async (input: {
-      topicKey: string;
-      topicTitle: string;
-      status: TopicUnderstandingStatus;
-    }) => {
+    async (input: { topicKey: string; topicTitle: string; status: TopicUnderstandingStatus }) => {
       if (!user || !documentId) throw new Error("You must be signed in to update progress.");
       if (!supabaseConfigured() || !supabase) throw new Error("Supabase is not configured.");
 
@@ -100,10 +96,7 @@ export function useTopicUnderstandingProgress(documentId?: string | null) {
           status: input.status,
           updatedAt: now,
         };
-        return [
-          optimistic,
-          ...current.filter((item) => item.topicKey !== input.topicKey),
-        ];
+        return [optimistic, ...current.filter((item) => item.topicKey !== input.topicKey)];
       });
 
       const { data, error } = await supabase
@@ -148,10 +141,7 @@ export function useTopicUnderstandingProgress(documentId?: string | null) {
     savingKey,
     error,
     markTopic,
-    byTopic: useMemo(
-      () => new Map(progress.map((item) => [item.topicKey, item])),
-      [progress],
-    ),
+    byTopic: useMemo(() => new Map(progress.map((item) => [item.topicKey, item])), [progress]),
     summary: useMemo(
       () => ({
         understood: progress.filter((item) => item.status === "understood").length,

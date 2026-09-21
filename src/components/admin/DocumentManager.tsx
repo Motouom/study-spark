@@ -5,16 +5,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Archive, Brain, FileText, RefreshCw, Save, ShieldCheck, Upload } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 import {
-  CLASS_LEVELS,
-  LANGUAGES,
-  SERIES_OPTIONS,
-  SUBJECTS,
   type ClassLevel,
   type Language,
   type Series,
   type Subject,
   classLabel,
+  classLevelsForSystem,
+  educationSystemForLanguage,
+  examLabelForClassLevel,
+  levelLabelForSystem,
+  seriesOptionsForSystem,
   seriesLabel,
+  subjectsForSystem,
 } from "@/lib/study-reference-data";
 import {
   useAdminData,
@@ -24,8 +26,52 @@ import {
 } from "@/hooks/use-admin-data";
 import { useAiActions } from "@/hooks/use-ai-actions";
 
-const ALL_CLASS_LEVELS = CLASS_LEVELS.map((item) => item.id) as ClassLevel[];
-const ALL_SERIES = SERIES_OPTIONS.map((item) => item.id) as Series[];
+function languageLabel(language: Language) {
+  return language === "french" ? "Français" : "English";
+}
+
+function optionsForLanguage(language: Language) {
+  const system = educationSystemForLanguage(language);
+  return {
+    system,
+    classLevels: classLevelsForSystem(system),
+    subjects: subjectsForSystem(system),
+    series: seriesOptionsForSystem(system),
+  };
+}
+
+function normalizeDocumentForLanguage(
+  draft: CourseDocumentDraft,
+  language: Language,
+): CourseDocumentDraft {
+  const options = optionsForLanguage(language);
+  const classLevels = draft.classLevels.filter((id) =>
+    options.classLevels.some((item) => item.id === id),
+  );
+  const normalizedClassLevels =
+    classLevels.length > 0 ? classLevels : options.classLevels.map((item) => item.id);
+  const firstLevel = options.classLevels.find(
+    (item) => item.id === normalizedClassLevels[0],
+  )?.level;
+  const level = firstLevel ?? (language === "french" ? "advanced" : "ordinary");
+  const series = draft.series.filter((id) =>
+    options.series.some((item) => item.id === id && item.level === level),
+  );
+  const fallbackSeries = options.series
+    .filter((item) => item.level === level)
+    .map((item) => item.id);
+  const subject = options.subjects.includes(draft.subject) ? draft.subject : options.subjects[0];
+
+  return {
+    ...draft,
+    language,
+    level,
+    subject,
+    topicId: "",
+    classLevels: normalizedClassLevels,
+    series: series.length > 0 ? series : fallbackSeries,
+  };
+}
 
 export type DocumentManagerConfig = {
   contentKind: CourseContentKind;
@@ -126,6 +172,13 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
   const documentTopics = useMemo(
     () => topics.filter((topic) => topic.subject === documentDraft.subject),
     [documentDraft.subject, topics],
+  );
+  const curriculumOptions = optionsForLanguage(documentDraft.language);
+  const availableSeries = curriculumOptions.series.filter(
+    (item) => item.level === documentDraft.level,
+  );
+  const selectedExams = Array.from(
+    new Set(documentDraft.classLevels.map((classLevel) => examLabelForClassLevel(classLevel))),
   );
 
   function firstTopicForSubject(subject: Subject) {
@@ -286,7 +339,7 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
             <Field label="Subject">
               <Select
                 value={documentDraft.subject}
-                options={SUBJECTS}
+                options={curriculumOptions.subjects}
                 onChange={(value) => {
                   const subject = value as Subject;
                   const topic = topics.find((item) => item.subject === subject);
@@ -301,9 +354,10 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
             <Field label="Language">
               <Select
                 value={documentDraft.language}
-                options={LANGUAGES.map((item) => item.id)}
+                options={["english", "french"]}
+                label={(value) => languageLabel(value as Language)}
                 onChange={(value) =>
-                  setDocumentDraft({ ...documentDraft, language: value as Language })
+                  setDocumentDraft(normalizeDocumentForLanguage(documentDraft, value as Language))
                 }
               />
             </Field>
@@ -317,26 +371,47 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
             <Field label="Class levels">
               <Multi
                 values={documentDraft.classLevels}
-                options={CLASS_LEVELS.map((item) => item.id)}
-                label={classLabel}
+                options={curriculumOptions.classLevels.map((item) => item.id)}
+                label={(value) =>
+                  `${classLabel(value as ClassLevel)} · ${examLabelForClassLevel(value as ClassLevel)}`
+                }
                 onChange={(classLevels) =>
-                  setDocumentDraft({
-                    ...documentDraft,
-                    classLevels: classLevels as ClassLevel[],
-                  })
+                  setDocumentDraft(
+                    normalizeDocumentForLanguage(
+                      {
+                        ...documentDraft,
+                        classLevels: classLevels as ClassLevel[],
+                      },
+                      documentDraft.language,
+                    ),
+                  )
                 }
               />
             </Field>
             <Field label="Series">
               <Multi
                 values={documentDraft.series}
-                options={SERIES_OPTIONS.map((item) => item.id)}
+                options={availableSeries.map((item) => item.id)}
                 label={seriesLabel}
                 onChange={(series) =>
                   setDocumentDraft({ ...documentDraft, series: series as Series[] })
                 }
               />
             </Field>
+          </div>
+
+          <div className="mt-4 rounded-lg border border-border bg-secondary/30 p-3 text-xs text-muted-foreground">
+            <div className="font-medium text-foreground">Curriculum metadata</div>
+            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
+              <span>{languageLabel(documentDraft.language)}</span>
+              <span>{levelLabelForSystem(documentDraft.level, curriculumOptions.system)}</span>
+              <span>{selectedExams.join(", ")}</span>
+              <span>{documentDraft.series.map((id) => seriesLabel(id)).join(", ")}</span>
+            </div>
+            <p className="mt-2">
+              For French papers, use French language, francophone classes, filières, and a title
+              that includes exam and year, for example: BACCALAURÉAT D — MATHÉMATIQUES — 2026.
+            </p>
           </div>
 
           <Field label="Markdown content">
@@ -404,18 +479,27 @@ export function DocumentManager({ kind }: { kind: CourseContentKind }) {
 }
 
 function emptyDocument(contentKind: CourseContentKind): CourseDocumentDraft {
-  return {
-    topicId: "",
-    subject: "Mathematics",
-    title: "",
-    language: "english",
-    level: "advanced",
-    classLevels: ALL_CLASS_LEVELS,
-    series: ALL_SERIES,
-    status: "published",
-    contentKind,
-    markdownContent: "",
-  };
+  const englishOptions = optionsForLanguage("english");
+  const defaultLevel = "advanced";
+  return normalizeDocumentForLanguage(
+    {
+      topicId: "",
+      subject: "Mathematics",
+      title: "",
+      language: "english",
+      level: defaultLevel,
+      classLevels: englishOptions.classLevels
+        .filter((item) => item.level === defaultLevel)
+        .map((item) => item.id),
+      series: englishOptions.series
+        .filter((item) => item.level === defaultLevel)
+        .map((item) => item.id),
+      status: "published",
+      contentKind,
+      markdownContent: "",
+    },
+    "english",
+  );
 }
 
 function DocumentList({
@@ -449,10 +533,16 @@ function DocumentList({
           {documents.map((document) => (
             <div key={document.id} className="flex items-center justify-between gap-4 px-4 py-3">
               <div className="min-w-0">
-                <div className="truncate text-sm font-medium">{document.title}</div>
-                <div className="mt-0.5 text-xs text-muted-foreground">
-                  {document.subject} · {document.markdownContent.length} chars
-                  {document.contentKind === "textbook" ? " · textbook" : ""}
+                <div className="line-clamp-2 break-words text-sm font-medium leading-snug">
+                  {document.title}
+                </div>
+                <div className="mt-1 flex flex-wrap gap-x-2 gap-y-1 text-xs text-muted-foreground">
+                  <span>{document.subject}</span>
+                  <span>{languageLabel(document.language)}</span>
+                  <span>{document.classLevels.map((id) => classLabel(id)).join(", ")}</span>
+                  <span>{document.series.map((id) => seriesLabel(id)).join(", ")}</span>
+                  <span>{document.markdownContent.length} chars</span>
+                  {document.contentKind === "textbook" && <span>textbook</span>}
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-1">
@@ -507,10 +597,12 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
 function Select({
   value,
   options,
+  label,
   onChange,
 }: {
   value: string;
   options: string[];
+  label?: (value: string) => string;
   onChange: (value: string) => void;
 }) {
   return (
@@ -524,7 +616,7 @@ function Select({
       </option>
       {options.map((option) => (
         <option key={option} value={option}>
-          {option}
+          {label ? label(option) : option}
         </option>
       ))}
     </select>

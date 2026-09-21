@@ -25,4 +25,17 @@ export default tseslint.config(
     },
   },
   eslintPluginPrettier,
+  {
+    rules: {
+      "prettier/prettier": [
+        "error",
+        {
+          printWidth: 100,
+          semi: true,
+          singleQuote: false,
+          trailingComma: "all",
+        },
+      ],
+    },
+  },
 );

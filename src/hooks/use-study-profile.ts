@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { StudentProfile } from "@/lib/study-reference-data";
+import type { EducationSystem, StudentProfile } from "@/lib/study-reference-data";
+import { educationSystemForLanguage } from "@/lib/study-reference-data";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { getSupabaseDisplayName, useSupabaseUser } from "@/hooks/use-supabase-user";
 
@@ -17,6 +18,7 @@ type ProfileChangedDetail = {
 type ProfileRow = {
   name: string;
   language: string;
+  education_system?: string | null;
   country: string;
   region: string;
   city: string;
@@ -66,9 +68,11 @@ function readLocalProfile(userId: string) {
 }
 
 function normalizeProfile(profile: Partial<StudentProfile>): StudentProfile {
+  const language = profile.language ?? "english";
   return {
     name: profile.name ?? "",
-    language: profile.language ?? "english",
+    language,
+    educationSystem: profile.educationSystem ?? educationSystemForLanguage(language),
     country: profile.country ?? "Cameroon",
     region: profile.region ?? "Not set",
     city: profile.city ?? "",
@@ -89,6 +93,7 @@ function profileFromRow(row: ProfileRow): StudentProfile {
   return normalizeProfile({
     name: row.name,
     language: row.language as StudentProfile["language"],
+    educationSystem: row.education_system as EducationSystem | undefined,
     country: row.country,
     region: row.region,
     city: row.city,
@@ -149,7 +154,7 @@ export function useStudyProfile() {
         const { data, error: fetchError } = await client
           .from("student_profiles")
           .select(
-            "name, language, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
+            "name, language, education_system, country, region, city, location_verified, location_latitude, location_longitude, location_verified_at, level, class_level, series, subjects, plan, premium_until",
           )
           .eq("user_id", user.id)
           .maybeSingle();
@@ -212,6 +217,7 @@ export function useStudyProfile() {
             supabase.rpc("update_student_profile", {
               profile_name: nextProfile.name,
               profile_language: nextProfile.language,
+              profile_education_system: nextProfile.educationSystem,
               profile_country: nextProfile.country,
               profile_region: nextProfile.region,
               profile_city: nextProfile.city,

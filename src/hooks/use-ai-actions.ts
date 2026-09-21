@@ -31,6 +31,15 @@ async function postAi<T>(url: string, body?: Record<string, unknown>) {
   return payload as T;
 }
 
+function friendlyAiError(message: string) {
+  if (/premium/i.test(message)) return message;
+  if (/admin access/i.test(message)) return message;
+  if (/rate limit|too many/i.test(message)) {
+    return "StudySpark is receiving many AI requests right now. Please wait a moment and try again.";
+  }
+  return "StudySpark could not finish that AI action right now. Please try again in a moment.";
+}
+
 export function useAiActions() {
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +51,7 @@ export function useAiActions() {
       return await action();
     } catch (err) {
       const message = err instanceof Error ? err.message : "AI request failed.";
-      setError(message);
+      setError(friendlyAiError(message));
       throw err;
     } finally {
       setLoading(null);
@@ -52,7 +61,7 @@ export function useAiActions() {
   const generateProgressInsight = useCallback(
     () =>
       run("progress", () =>
-        postAi<{ insight: string; source: AiSource }>("/api/ai/progress-insight"),
+        postAi<{ insight: string; source: AiSource; message?: string }>("/api/ai/progress-insight"),
       ),
     [run],
   );
@@ -60,7 +69,9 @@ export function useAiActions() {
   const generateLearningPath = useCallback(
     () =>
       run("learning-path", () =>
-        postAi<{ days: AiLearningPathDay[]; source: AiSource }>("/api/ai/learning-path"),
+        postAi<{ days: AiLearningPathDay[]; source: AiSource; message?: string }>(
+          "/api/ai/learning-path",
+        ),
       ),
     [run],
   );
@@ -68,7 +79,10 @@ export function useAiActions() {
   const formatPaper = useCallback(
     (input: { title: string; subject: string; markdown: string }) =>
       run("format-paper", () =>
-        postAi<{ markdown: string; source: AiSource }>("/api/ai/format-paper", input),
+        postAi<{ markdown: string; source: AiSource; message?: string }>(
+          "/api/ai/format-paper",
+          input,
+        ),
       ),
     [run],
   );
