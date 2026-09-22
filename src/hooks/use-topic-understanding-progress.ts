@@ -151,3 +151,65 @@ export function useTopicUnderstandingProgress(documentId?: string | null) {
     ),
   };
 }
+
+export function useTopicUnderstandingOverview() {
+  const { user, loaded: userLoaded } = useSupabaseUser();
+  const [progress, setProgress] = useState<TopicUnderstandingProgress[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const load = useCallback(() => {
+    if (!userLoaded || !user || !supabaseConfigured() || !supabase) {
+      setProgress([]);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    supabase
+      .from("topic_understanding_progress")
+      .select("document_id, topic_key, topic_title, status, updated_at")
+      .order("updated_at", { ascending: false })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Could not load topic understanding overview", error);
+          setProgress([]);
+          setLoading(false);
+          setError(error.message);
+          return;
+        }
+
+        setProgress(((data ?? []) as TopicUnderstandingRow[]).map(progressFromRow));
+        setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user, userLoaded]);
+
+  useEffect(() => {
+    return load();
+  }, [load]);
+
+  return {
+    progress,
+    loading,
+    error,
+    reload: load,
+    summary: useMemo(
+      () => ({
+        understood: progress.filter((item) => item.status === "understood").length,
+        review: progress.filter((item) => item.status === "review").length,
+        marked: progress.length,
+      }),
+      [progress],
+    ),
+  };
+}
