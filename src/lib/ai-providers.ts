@@ -10,8 +10,8 @@ function readEnv(name: string) {
 //  Provider configuration
 /* ────────────────────────────────────────────────────────────────────────── */
 
-const GEMINI_MODEL = "gemini-1.5-flash";
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GEMINI_MODEL = "gemini-2.5-flash";
+const GROQ_MODEL = "openai/gpt-oss-120b";
 const CEREBRAS_MODEL = "qwen-3.8-27b";
 
 const PROVIDER_ORDER: string[] = ["gemini", "groq", "cerebras", "openrouter"];
