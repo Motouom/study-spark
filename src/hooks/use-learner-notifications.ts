@@ -9,6 +9,7 @@ import { supabase, supabaseConfigured } from "@/lib/supabase";
 
 const READ_PREFIX = "studyspark.notifications.read.";
 const PREFERENCES_PREFIX = "studyspark.notifications.preferences.";
+const READ_EVENT = "studyspark:notifications-read";
 
 export type LearnerNotificationKind = "content" | "progress" | "streak" | "membership";
 
@@ -37,6 +38,11 @@ type NotificationPreferenceRow = {
 
 type NotificationReadRow = {
   notification_id: string;
+};
+
+type NotificationReadEventDetail = {
+  userId: string;
+  ids: string[];
 };
 
 function getReadKey(userId: string) {
@@ -88,6 +94,19 @@ function readNotificationIds(userId: string) {
 
 function saveNotificationIds(userId: string, ids: Set<string>) {
   window.localStorage.setItem(getReadKey(userId), JSON.stringify([...ids]));
+}
+
+function publishNotificationReadEvent(userId: string, ids: Iterable<string>) {
+  if (typeof window === "undefined") return;
+
+  window.dispatchEvent(
+    new CustomEvent<NotificationReadEventDetail>(READ_EVENT, {
+      detail: {
+        userId,
+        ids: [...ids],
+      },
+    }),
+  );
 }
 
 function savePreferences(userId: string, preferences: LearnerNotificationPreferences) {
@@ -221,14 +240,36 @@ export function useLearnerNotifications() {
         const remoteReadIds = new Set(
           ((data ?? []) as NotificationReadRow[]).map((item) => item.notification_id),
         );
-        setReadIds(remoteReadIds);
-        saveNotificationIds(user.id, remoteReadIds);
+        setReadIds((current) => {
+          const merged = new Set([...current, ...localReadIds, ...remoteReadIds]);
+          saveNotificationIds(user.id, merged);
+          return merged;
+        });
       });
 
     return () => {
       active = false;
     };
   }, [remoteReadsAvailable, user]);
+
+  useEffect(() => {
+    if (!user || typeof window === "undefined") return;
+
+    const handleReadEvent = (event: Event) => {
+      const detail = (event as CustomEvent<NotificationReadEventDetail>).detail;
+      if (!detail || detail.userId !== user.id) return;
+
+      setReadIds((current) => {
+        const next = new Set(current);
+        for (const id of detail.ids) next.add(id);
+        saveNotificationIds(user.id, next);
+        return next;
+      });
+    };
+
+    window.addEventListener(READ_EVENT, handleReadEvent);
+    return () => window.removeEventListener(READ_EVENT, handleReadEvent);
+  }, [user]);
 
   const notifications = useMemo<LearnerNotification[]>(() => {
     const items: Omit<LearnerNotification, "read">[] = [];
@@ -347,6 +388,7 @@ export function useLearnerNotifications() {
         saveNotificationIds(user.id, next);
         return next;
       });
+      publishNotificationReadEvent(user.id, [id]);
 
       if (supabaseConfigured() && supabase && remoteReadsAvailable) {
         supabase
@@ -378,6 +420,10 @@ export function useLearnerNotifications() {
       saveNotificationIds(user.id, next);
       return next;
     });
+    publishNotificationReadEvent(
+      user.id,
+      notifications.map((item) => item.id),
+    );
 
     if (notifications.length > 0 && supabaseConfigured() && supabase && remoteReadsAvailable) {
       const readAt = new Date().toISOString();

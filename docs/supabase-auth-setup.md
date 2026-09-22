@@ -29,11 +29,38 @@ https://ekqlqsyirsakdxonxmis.supabase.co/auth/v1/callback
 
 Copy the Google client ID and client secret into Supabase Dashboard > Authentication > Providers > Google, then enable the provider.
 
-Google Cloud should only receive the Supabase callback URL:
+Google Cloud should receive the Supabase callback URL:
 
 ```text
 https://ekqlqsyirsakdxonxmis.supabase.co/auth/v1/callback
 ```
+
+## Google sign-in branding
+
+If the Google account chooser says `to continue to ekqlqsyirsakdxonxmis.supabase.co`, the React
+app cannot change that text after redirecting to Google. Google is showing the OAuth/Auth domain
+that starts the provider flow.
+
+For production, configure one of these before launch:
+
+1. Preferred: set a Supabase custom domain for the project, such as
+   `https://auth.study-spark.cm` or another verified StudySpark-owned domain, then update the Google
+   OAuth authorized redirect URI to:
+
+   ```text
+   https://auth.study-spark.cm/auth/v1/callback
+   ```
+
+   Also update `VITE_SUPABASE_URL` in Vercel to the custom Supabase domain if it is configured as
+   the project API/Auth domain.
+
+2. If no custom domain is available yet, finish Google OAuth consent branding and verification:
+   app name `StudySpark`, app logo, support email, developer contact email, application home page
+   `https://study-spark-237.vercel.app`, privacy policy URL, and terms URL. Google may still show
+   the Supabase callback domain until the OAuth app/domain is verified.
+
+Do not try to hide this with client code. The account chooser is served by Google and must be fixed
+through Google OAuth branding/verification or a Supabase custom domain.
 
 ## Supabase redirect URLs
 

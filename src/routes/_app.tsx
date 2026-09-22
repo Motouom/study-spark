@@ -37,7 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { classLabel, seriesLabel, type StudentProfile } from "@/lib/study-reference-data";
+import type { StudentProfile } from "@/lib/study-reference-data";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
@@ -196,11 +196,6 @@ function SidebarContent({
           </div>
           <div className="min-w-0 flex-1">
             <div className="truncate text-sm font-medium">{shownName}</div>
-            <div className="truncate text-xs text-muted-foreground">
-              {profile
-                ? `${classLabel(profile.classLevel)} · ${seriesLabel(profile.series)}`
-                : "profile required"}
-            </div>
           </div>
           <Link
             to="/pricing"
