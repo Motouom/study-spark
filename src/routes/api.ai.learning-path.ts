@@ -287,19 +287,27 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             });
           }
 
+          // Build the set of real document titles the AI is allowed to use
+          const allRealTitles = new Set([
+            ...difficultyRanking.map((e) => e.title),
+            ...nextPapers,
+            "Progress dashboard",
+          ]);
+
           try {
             console.log(`[AI LearningPath] user=${user.id} — invoking generateAiText...`);
             const planText = await generateAiText({
               system:
-                "You are StudySpark's learning path planner for Cameroon GCE learners. Build the path from the learner's ACTUAL difficulties. Return ONLY raw JSON — no markdown, no code blocks, no explanations before or after. The response must be valid JSON that can be parsed with JSON.parse().",
+                "You are StudySpark's learning path planner. You MUST use ONLY the exact document titles provided in the 'validPapers' list. Do NOT invent subjects, topics, or generic course names. Every day.paper MUST be one of the titles in validPapers. Day 1 must target the highest-difficulty paper with the most failed questions. Targets and focus should reference specific failed question numbers when available. Return ONLY raw JSON — no markdown, no code blocks.",
               prompt: JSON.stringify({
                 learner: profile,
                 weakestSubjects,
-                difficultyRanking: difficultyRanking.map((entry) => ({
+                validPapers: [...allRealTitles],
+                difficultyRanking: difficultyRanking.slice(0, 6).map((entry) => ({
                   title: entry.title,
                   subject: entry.subject,
                   failedQuestions: entry.failedQuestions,
-                  slowQuestions: entry.slowQuestions,
+                  slowQuestions: entry.slowQuestions.slice(0, 3),
                   averageQuestionSeconds: entry.averageQuestionSeconds,
                   bestDepth: entry.bestDepth,
                   reviewCount: entry.reviewCount,
@@ -308,14 +316,27 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                   addToRevision: entry.addToRevision,
                   difficultyScore: entry.difficultyScore,
                 })),
-                nextPapers,
                 instruction:
-                  'Return ONLY this exact JSON shape with no other text: {"days":[{"day":1,"title":"...","paper":"...","target":"...","focus":"..."}]} Create exactly 7 days. Do not wrap in markdown code blocks. Do not add any text before or after the JSON.',
+                  'Return ONLY JSON in this exact shape: {"days":[{"day":1,"title":"short action title","paper":"MUST be one of the validPapers titles","target":"specific target citing actual failed question numbers (e.g. Q3, Q7) or review marks","focus":"specific focus citing exact questions or concepts from the paper"}]}',
               }),
-              maxTokens: 1200,
+              maxTokens: 1400,
             });
             console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
-            const days = parseAiLearningPath(planText);
+            let days = parseAiLearningPath(planText);
+
+            // Post-process: replace any hallucinated paper titles with real ones
+            const rankedTitles = difficultyRanking.map((e) => e.title);
+            days = days.map((day, index) => {
+              if (!allRealTitles.has(day.paper)) {
+                // AI hallucinated a title — replace with actual weakest paper
+                const replacement = rankedTitles[index] ?? rankedTitles[0] ?? "Progress dashboard";
+                console.log(
+                  `[AI LearningPath] Replaced hallucinated title "${day.paper}" with "${replacement}"`,
+                );
+                return { ...day, paper: replacement };
+              }
+              return day;
+            });
 
             return Response.json({ days, source: "ai" });
           } catch (aiError) {

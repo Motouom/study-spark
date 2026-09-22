@@ -107,11 +107,36 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
             });
           }
 
+          // Build actual weak-area data with document titles and failed questions
+          const documentFailures = new Map<string, number[]>();
+          for (const row of checkpointRows) {
+            if (row.checkpoint_type !== "review") continue;
+            const doc = documentsById.get(row.document_id);
+            if (!doc) continue;
+          }
+          // Get papers with actual failed questions
+          const weakPaperDetails = [...subjectStats.entries()]
+            .sort((a, b) => b[1].review - a[1].review)
+            .slice(0, 4)
+            .map(([subject, stats]) => {
+              const docSessions = rows.filter(
+                (r) => documentsById.get(r.document_id)?.subject === subject,
+              );
+              const docIds = new Set(docSessions.map((r) => r.document_id));
+              const docTitles = [...docIds].map((id) => documentsById.get(id)?.title ?? "Unknown");
+              return {
+                subject,
+                titles: docTitles,
+                totalPapers: stats.total,
+                avgDepth: Math.round(stats.depth / Math.max(stats.total, 1)),
+              };
+            });
+
           try {
             console.log(`[AI ProgressInsight] user=${user.id} — invoking generateAiText...`);
             const insight = await generateAiText({
               system:
-                "You are StudySpark's learner progress analyst. Be precise, supportive, and practical. Never invent marks or papers. Do not give exam answers.",
+                "You are StudySpark's learner progress analyst. Be precise and practical. Only reference actual documents and data provided. Never invent marks, papers, or subjects. Do not give exam answers.",
               prompt: JSON.stringify({
                 learner: profile,
                 summary: {
@@ -122,12 +147,16 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
                   averageDepth,
                   weakestSubjects,
                 },
-                recentSessions: rows.slice(0, 20),
-                recentCheckpoints: checkpointRows.slice(0, 20),
+                weakAreas: weakPaperDetails,
+                recentSessions: rows.slice(0, 10).map((r) => ({
+                  document: documentsById.get(r.document_id)?.title ?? "Unknown",
+                  depth: r.max_scroll_percent,
+                  completed: r.completed,
+                })),
                 instruction:
-                  "Write 3 short paragraphs: current study habit, what needs review, and exactly what to do next.",
+                  "Write 3 short paragraphs referencing the actual document titles and specific weak areas from the data: 1) current study habit, 2) which actual documents need review, 3) exactly what to do next with those documents.",
               }),
-              maxTokens: 520,
+              maxTokens: 600,
             });
             console.log(`[AI ProgressInsight] user=${user.id} — generateAiText succeeded.`);
 
