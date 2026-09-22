@@ -199,6 +199,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               .eq("status", "published"),
           ]);
 
+          const documentsById = new Map((documents ?? []).map((item) => [item.id, item]));
           const profileSubjects = new Set((profile?.subjects ?? []) as string[]);
 
           // Learning paths are a Premium feature — enforce server-side, not
@@ -290,9 +291,17 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             let rankIdx = 0;
             let freshIdx = 0;
 
+            // Fallback: if difficultyRanking is empty, use user's recent sessions as papers
+            const sessionPaperTitles = sessionRows
+              .map((s) => documentsById.get(s.document_id)?.title)
+              .filter((t): t is string => Boolean(t));
+            const sessionPapers = [...new Set(sessionPaperTitles)]; // dedupe while preserving order
+            let sessionIdx = 0;
+
             const getPaper = (): string => {
               if (rankIdx < ranked.length) return ranked[rankIdx++].title;
               if (freshIdx < fresh.length) return fresh[freshIdx++];
+              if (sessionIdx < sessionPapers.length) return sessionPapers[sessionIdx++];
               return "Progress dashboard";
             };
 
