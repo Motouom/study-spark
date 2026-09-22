@@ -48,9 +48,13 @@ let contentCache: ContentCache | null = null;
 
 function profileSignature(profile: StudentProfile) {
   return [
+    profile.language,
+    profile.educationSystem,
     profile.level,
     profile.classLevel,
     profile.series,
+    profile.plan ?? "free",
+    profile.premiumUntil ?? "",
     [...profile.subjects].sort().join(","),
   ].join("|");
 }
@@ -63,12 +67,6 @@ export function useStudyContent(profile: StudentProfile | null) {
     }
     return { topics: [], documents: [], loading: false, loaded: false, error: null };
   });
-
-  // Stable key so the effect only re-runs when profile values actually change,
-  // not when the parent re-renders and passes a new object reference.
-  const profileKey = profile
-    ? `${profile.level}|${profile.classLevel}|${profile.series}|${profile.subjects.join(",")}|${profile.plan}|${profile.premiumUntil ?? ""}`
-    : null;
 
   useEffect(() => {
     if (!profile || !supabaseConfigured() || !supabase) {

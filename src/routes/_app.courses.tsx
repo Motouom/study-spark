@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { classLabel, type ClassLevel } from "@/lib/study-reference-data";
 
 export const Route = createFileRoute("/_app/courses")({
   head: () => ({ meta: [{ title: "Courses — StudySpark" }] }),
@@ -242,7 +243,7 @@ function CoursesPage() {
                 onChange={setQ}
                 onClear={clearSearch}
                 placeholder={t("courses.searchPlaceholder")}
-                label="Search course topics"
+                label={t("courses.searchPlaceholder")}
               />
 
               {searchActive ? (
@@ -261,13 +262,17 @@ function CoursesPage() {
                         onClick={() => setSubject(item.name)}
                         className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                       >
-                        <div className="flex items-start justify-between gap-3">
+                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
                           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
                             <BookOpen className="h-5 w-5" />
                           </div>
-                          <Badge variant="secondary">{item.subjectMastery}% mastery</Badge>
+                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                            {item.subjectMastery}% mastery
+                          </Badge>
                         </div>
-                        <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
+                        <h3 className="mt-4 break-words text-base font-medium leading-snug">
+                          {item.name}
+                        </h3>
                         <p className="mt-2 text-xs text-muted-foreground">
                           {item.topics} topics · {item.courses} course
                           {item.courses === 1 ? "" : "s"}
@@ -308,10 +313,7 @@ function CoursesPage() {
                   </div>
                 </section>
               ) : (
-                <EmptyFiltered
-                  onClear={() => setSubject(null)}
-                  label="No topics match this subject."
-                />
+                <EmptyFiltered onClear={() => setSubject(null)} label={t("courses.emptyTitle")} />
               )}
             </div>
           )}
@@ -384,13 +386,19 @@ function TopicResults({
   query: string;
   onClear: () => void;
 }) {
+  const { t } = useI18n();
   if (topics.length === 0) {
-    return <EmptyFiltered onClear={onClear} label={`No course topics match “${query}”.`} />;
+    return (
+      <EmptyFiltered
+        onClear={onClear}
+        label={t("courses.noSearchResults").replace("{query}", query)}
+      />
+    );
   }
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-medium">Search results</h2>
+        <h2 className="text-sm font-medium">{t("common.searchResults")}</h2>
         <Badge variant="secondary">{topics.length}</Badge>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
@@ -403,6 +411,7 @@ function TopicResults({
 }
 
 function TopicCard({ topic }: { topic: CourseTopic }) {
+  const { t } = useI18n();
   return (
     <a
       href={topic.href}
@@ -412,8 +421,13 @@ function TopicCard({ topic }: { topic: CourseTopic }) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
           <ListChecks className="h-5 w-5" />
         </div>
-        <Badge variant={topic.stats.bestDepth > 0 ? "default" : "secondary"}>
-          {topic.stats.bestDepth > 0 ? `${topic.stats.bestDepth}% read` : "Topic"}
+        <Badge
+          variant={topic.stats.bestDepth > 0 ? "default" : "secondary"}
+          className="shrink-0 whitespace-nowrap"
+        >
+          {topic.stats.bestDepth > 0
+            ? `${topic.stats.bestDepth}% ${t("common.read")}`
+            : t("common.topic")}
         </Badge>
       </div>
       <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
@@ -426,12 +440,12 @@ function TopicCard({ topic }: { topic: CourseTopic }) {
       <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
         <CourseMetric
           icon={Clock}
-          label="Course time"
+          label={t("common.courseTime")}
           value={`${topic.stats.readingMinutes} min`}
         />
         <CourseMetric
           icon={BookOpen}
-          label="Studied"
+          label={t("common.studied")}
           value={formatDuration(topic.stats.totalTime)}
         />
       </div>
@@ -440,11 +454,12 @@ function TopicCard({ topic }: { topic: CourseTopic }) {
 }
 
 function EmptyFiltered({ label, onClear }: { label: string; onClear: () => void }) {
+  const { t } = useI18n();
   return (
     <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
       <p className="text-sm text-muted-foreground">{label}</p>
       <Button variant="outline" size="sm" className="mt-4" onClick={onClear}>
-        Clear filters
+        {t("common.clearFilters")}
       </Button>
     </div>
   );
@@ -457,14 +472,7 @@ function unitsOf(course: { markdownContent: string }) {
 }
 
 function classLevelText(classLevels: string[]) {
-  const labels: Record<string, string> = {
-    form_3: "Form 3",
-    form_4: "Form 4",
-    form_5: "Form 5",
-    lower_sixth: "Lower Sixth",
-    upper_sixth: "Upper Sixth",
-  };
-  return classLevels.map((level) => labels[level] ?? level).join(", ");
+  return classLevels.map((level) => classLabel(level as ClassLevel)).join(", ");
 }
 
 function CourseMetric({

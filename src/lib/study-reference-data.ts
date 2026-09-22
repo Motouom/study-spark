@@ -116,7 +116,7 @@ export type Subject =
   | "Travaux Pratiques de Physique"
   | "Travaux Pratiques de Chimie";
 
-export type ContentStatus = "draft" | "review" | "published" | "archived";
+export type ContentStatus = "draft" | "review" | "published" | "unpublished" | "archived";
 
 export interface StudentProfile {
   name: string;

@@ -4,10 +4,12 @@ import { useStudyContent } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useSubscription } from "@/hooks/use-subscription";
 import { useSupabaseUser } from "@/hooks/use-supabase-user";
+import { useI18n } from "@/lib/i18n";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 
 const READ_PREFIX = "studyspark.notifications.read.";
 const PREFERENCES_PREFIX = "studyspark.notifications.preferences.";
+const READ_EVENT = "studyspark:notifications-read";
 
 export type LearnerNotificationKind = "content" | "progress" | "streak" | "membership";
 
@@ -36,6 +38,11 @@ type NotificationPreferenceRow = {
 
 type NotificationReadRow = {
   notification_id: string;
+};
+
+type NotificationReadEventDetail = {
+  userId: string;
+  ids: string[];
 };
 
 function getReadKey(userId: string) {
@@ -87,6 +94,19 @@ function readNotificationIds(userId: string) {
 
 function saveNotificationIds(userId: string, ids: Set<string>) {
   window.localStorage.setItem(getReadKey(userId), JSON.stringify([...ids]));
+}
+
+function publishNotificationReadEvent(userId: string, ids: Iterable<string>) {
+  if (typeof window === "undefined") return;
+
+  window.dispatchEvent(
+    new CustomEvent<NotificationReadEventDetail>(READ_EVENT, {
+      detail: {
+        userId,
+        ids: [...ids],
+      },
+    }),
+  );
 }
 
 function savePreferences(userId: string, preferences: LearnerNotificationPreferences) {
@@ -182,6 +202,7 @@ export function useLearnerNotificationPreferences() {
 }
 
 export function useLearnerNotifications() {
+  const { t } = useI18n();
   const { user, profile } = useStudyProfile();
   const content = useStudyContent(profile);
   const { progress, summary } = useStructuralProgress();
@@ -219,14 +240,36 @@ export function useLearnerNotifications() {
         const remoteReadIds = new Set(
           ((data ?? []) as NotificationReadRow[]).map((item) => item.notification_id),
         );
-        setReadIds(remoteReadIds);
-        saveNotificationIds(user.id, remoteReadIds);
+        setReadIds((current) => {
+          const merged = new Set([...current, ...localReadIds, ...remoteReadIds]);
+          saveNotificationIds(user.id, merged);
+          return merged;
+        });
       });
 
     return () => {
       active = false;
     };
   }, [remoteReadsAvailable, user]);
+
+  useEffect(() => {
+    if (!user || typeof window === "undefined") return;
+
+    const handleReadEvent = (event: Event) => {
+      const detail = (event as CustomEvent<NotificationReadEventDetail>).detail;
+      if (!detail || detail.userId !== user.id) return;
+
+      setReadIds((current) => {
+        const next = new Set(current);
+        for (const id of detail.ids) next.add(id);
+        saveNotificationIds(user.id, next);
+        return next;
+      });
+    };
+
+    window.addEventListener(READ_EVENT, handleReadEvent);
+    return () => window.removeEventListener(READ_EVENT, handleReadEvent);
+  }, [user]);
 
   const notifications = useMemo<LearnerNotification[]>(() => {
     const items: Omit<LearnerNotification, "read">[] = [];
@@ -243,8 +286,10 @@ export function useLearnerNotifications() {
       items.push({
         id: `content-${document.id}`,
         kind: "content",
-        title: "New paper ready",
-        body: `${document.title} is available for ${document.subject}.`,
+        title: t("notifications.generated.newPaper.title"),
+        body: t("notifications.generated.newPaper.body")
+          .replace("{title}", document.title)
+          .replace("{subject}", document.subject),
         createdAt: document.updatedAt,
       });
     }
@@ -269,8 +314,10 @@ export function useLearnerNotifications() {
       items.push({
         id: `progress-${weakSubject.subject}`,
         kind: "progress",
-        title: "Weak subject reminder",
-        body: `${weakSubject.subject} is at ${weakSubject.score}% mastery. Revisit failed structural questions.`,
+        title: t("notifications.generated.weakSubject.title"),
+        body: t("notifications.generated.weakSubject.body")
+          .replace("{subject}", weakSubject.subject)
+          .replace("{score}", String(weakSubject.score)),
         createdAt: progress[0]?.updatedAt ?? new Date().toISOString(),
       });
     }
@@ -279,8 +326,8 @@ export function useLearnerNotifications() {
       items.push({
         id: "streak-restart",
         kind: "streak",
-        title: "Restart your streak",
-        body: "Mark one structural question today to start a new streak.",
+        title: t("notifications.generated.streak.title"),
+        body: t("notifications.generated.streak.body"),
         createdAt: progress[0]?.updatedAt ?? new Date().toISOString(),
       });
     }
@@ -293,11 +340,14 @@ export function useLearnerNotifications() {
         items.push({
           id: `membership-expiring-${profile.premiumUntil.slice(0, 10)}`,
           kind: "membership",
-          title: "Premium ends soon",
+          title: t("notifications.generated.premiumEnds.title"),
           body:
             daysRemaining === 0
-              ? "Your Premium access ends today. Renew early if you want uninterrupted access."
-              : `Your Premium access ends in ${daysRemaining} day${daysRemaining === 1 ? "" : "s"}. Renew early if you want uninterrupted access.`,
+              ? t("notifications.generated.premiumEndsToday.body")
+              : t("notifications.generated.premiumEnds.body").replace(
+                  "{days}",
+                  String(daysRemaining),
+                ),
           createdAt: profile.premiumUntil,
         });
       }
@@ -307,8 +357,8 @@ export function useLearnerNotifications() {
       items.push({
         id: `membership-payment-failed-${subscription.lastPaymentCreatedAt ?? "latest"}`,
         kind: "membership",
-        title: "Payment needs attention",
-        body: "Your last Premium payment did not complete. You can retry from the pricing page.",
+        title: t("notifications.generated.paymentFailed.title"),
+        body: t("notifications.generated.paymentFailed.body"),
         createdAt: subscription.lastPaymentCreatedAt ?? new Date().toISOString(),
       });
     }
@@ -326,6 +376,7 @@ export function useLearnerNotifications() {
     subscription?.lastPaymentCreatedAt,
     subscription?.lastPaymentStatus,
     summary.currentStreak,
+    t,
   ]);
 
   const markAsRead = useCallback(
@@ -337,6 +388,7 @@ export function useLearnerNotifications() {
         saveNotificationIds(user.id, next);
         return next;
       });
+      publishNotificationReadEvent(user.id, [id]);
 
       if (supabaseConfigured() && supabase && remoteReadsAvailable) {
         supabase
@@ -368,6 +420,10 @@ export function useLearnerNotifications() {
       saveNotificationIds(user.id, next);
       return next;
     });
+    publishNotificationReadEvent(
+      user.id,
+      notifications.map((item) => item.id),
+    );
 
     if (notifications.length > 0 && supabaseConfigured() && supabase && remoteReadsAvailable) {
       const readAt = new Date().toISOString();

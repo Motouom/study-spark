@@ -4,13 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { isPremiumActive } from "@/lib/premium";
+import { useI18n } from "@/lib/i18n";
 import type { ReactNode } from "react";
 
 export function PremiumBadge() {
+  const { t } = useI18n();
   return (
     <Badge variant="secondary" className="gap-1.5">
       <Sparkles className="h-3 w-3" />
-      Premium
+      {t("common.premium")}
     </Badge>
   );
 }
@@ -24,6 +26,7 @@ export function PremiumGate({
   description: string;
   children: ReactNode;
 }) {
+  const { t } = useI18n();
   const { profile, loaded } = useStudyProfile();
   if (!loaded) return <PremiumGateSkeleton />;
   if (isPremiumActive(profile)) return <>{children}</>;
@@ -41,7 +44,7 @@ export function PremiumGate({
       <Button asChild className="mt-5">
         <Link to="/pricing">
           <Sparkles className="mr-1.5 h-4 w-4" />
-          Upgrade to Premium
+          {t("common.viewPremium")}
         </Link>
       </Button>
     </div>

@@ -27,6 +27,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { getSupabaseDisplayName } from "@/hooks/use-supabase-user";
 import { supabase } from "@/lib/supabase";
 import { useBrowserLocation } from "@/hooks/use-browser-location";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/_app/onboarding")({
   head: () => ({ meta: [{ title: "Welcome — StudySpark" }] }),
@@ -35,6 +36,7 @@ export const Route = createFileRoute("/_app/onboarding")({
 
 function Onboarding() {
   const navigate = useNavigate();
+  const { t } = useI18n();
   const { user, profile, saveProfile } = useStudyProfile();
   const [step, setStep] = useState(0);
   const [name, setName] = useState("");
@@ -167,17 +169,19 @@ function Onboarding() {
             {step === 0 && (
               <div>
                 <h1 className="font-display text-3xl text-foreground md:text-4xl">
-                  Welcome to StudySpark
+                  {t("onboarding.welcomeTitle")}
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Let's set up your study space. Takes 30 seconds.
+                  {t("onboarding.welcomeDescription")}
                 </p>
-                <label className="mt-6 block text-sm font-medium">What should we call you?</label>
+                <label className="mt-6 block text-sm font-medium">
+                  {t("onboarding.nameLabel")}
+                </label>
                 <Input
                   autoFocus
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Your first name"
+                  placeholder={t("onboarding.namePlaceholder")}
                   className="mt-2 h-11"
                 />
               </div>
@@ -189,10 +193,10 @@ function Onboarding() {
                   <Languages className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  Choose your study language
+                  {t("onboarding.languageTitle")}
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Choose your interface language and the Cameroon curriculum you follow.
+                  {t("onboarding.languageDescription")}
                 </p>
                 <div
                   className="mt-5 grid grid-cols-2 gap-2"
@@ -202,7 +206,9 @@ function Onboarding() {
                   {LANGUAGES.map((item) => {
                     const sel = language === item.id;
                     const sysLabel =
-                      item.id === "english" ? "English interface" : "Interface en français";
+                      item.id === "english"
+                        ? t("onboarding.englishInterface")
+                        : t("onboarding.frenchInterface");
                     return (
                       <button
                         key={item.id}
@@ -225,7 +231,7 @@ function Onboarding() {
                     );
                   })}
                 </div>
-                <p className="mt-6 text-sm font-medium">Curriculum path</p>
+                <p className="mt-6 text-sm font-medium">{t("onboarding.curriculumPath")}</p>
                 <div
                   className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2"
                   role="radiogroup"
@@ -235,12 +241,12 @@ function Onboarding() {
                     {
                       id: "gce" as EducationSystem,
                       title: "GCE Anglophone",
-                      hint: "Forms, O-Level, Lower Sixth, Upper Sixth",
+                      hint: t("onboarding.gceHint"),
                     },
                     {
                       id: "francophone" as EducationSystem,
                       title: "Francophone",
-                      hint: "Sixième to Terminale, BEPC, Probatoire, Bac",
+                      hint: t("onboarding.frHint"),
                     },
                   ].map((item) => {
                     const sel = educationSystem === item.id;
@@ -272,12 +278,12 @@ function Onboarding() {
                   <MapPin className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  Add your location
+                  {t("onboarding.locationTitle")}
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  This places you in the right country, regional, and local leaderboard.
+                  {t("onboarding.locationDescription")}
                 </p>
-                <label className="mt-6 block text-sm font-medium">Country</label>
+                <label className="mt-6 block text-sm font-medium">{t("onboarding.country")}</label>
                 <div className="mt-2 grid grid-cols-1 gap-2">
                   {COUNTRIES.map((item) => (
                     <button
@@ -295,7 +301,7 @@ function Onboarding() {
                     </button>
                   ))}
                 </div>
-                <label className="mt-5 block text-sm font-medium">Region</label>
+                <label className="mt-5 block text-sm font-medium">{t("onboarding.region")}</label>
                 <div className="mt-2 grid grid-cols-2 gap-2">
                   {CAMEROON_REGIONS.map((item) => (
                     <button
@@ -312,11 +318,11 @@ function Onboarding() {
                     </button>
                   ))}
                 </div>
-                <label className="mt-5 block text-sm font-medium">Town or city</label>
+                <label className="mt-5 block text-sm font-medium">{t("onboarding.city")}</label>
                 <Input
                   value={city}
                   onChange={(event) => setCity(event.target.value)}
-                  placeholder="Example: Douala, Yaounde, Buea"
+                  placeholder={t("onboarding.cityPlaceholder")}
                   className="mt-2 h-11"
                 />
                 <Button
@@ -337,15 +343,15 @@ function Onboarding() {
                   }}
                 >
                   {browserLocation.verifying
-                    ? "Verifying location..."
+                    ? t("onboarding.verifyingLocation")
                     : locationVerified
-                      ? "Location verified"
-                      : "Verify with browser location"}
+                      ? t("onboarding.locationVerified")
+                      : t("onboarding.verifyLocation")}
                 </Button>
                 {(browserLocation.error || locationVerified) && (
                   <p className="mt-2 text-xs text-muted-foreground">
                     {locationVerified
-                      ? "Your device location was captured for leaderboard verification."
+                      ? t("onboarding.locationVerifiedHint")
                       : browserLocation.error}
                   </p>
                 )}
@@ -358,12 +364,12 @@ function Onboarding() {
                   <GraduationCap className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  Choose your class
+                  {t("onboarding.classTitle")}
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {educationSystem === "francophone"
-                    ? "Select your cycle (Collège or Lycée), then your class."
-                    : "Select Ordinary or Advanced Level, then your class."}
+                    ? t("onboarding.classDescriptionFr")
+                    : t("onboarding.classDescriptionGce")}
                 </p>
                 <div className="mt-5 grid grid-cols-2 gap-2" role="radiogroup" aria-label="Level">
                   {levelOptions.map((item) => (
@@ -431,12 +437,14 @@ function Onboarding() {
                   <BookOpen className="h-5 w-5" />
                 </div>
                 <h1 className="mt-5 font-display text-3xl text-foreground md:text-4xl">
-                  {educationSystem === "francophone" ? "Choisis ta filière" : "Pick your subjects"}
+                  {educationSystem === "francophone"
+                    ? t("onboarding.subjectTitleFr")
+                    : t("onboarding.subjectTitleGce")}
                 </h1>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {educationSystem === "francophone"
-                    ? "Choisis ta série et les matières pour ton tableau de bord."
-                    : "Choose your series and the subjects you want on your dashboard."}
+                    ? t("onboarding.subjectDescriptionFr")
+                    : t("onboarding.subjectDescriptionGce")}
                 </p>
                 <div
                   className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2"
@@ -494,7 +502,7 @@ function Onboarding() {
                 </div>
                 {subjects.length > 0 && (
                   <Badge variant="secondary" className="mt-5">
-                    {subjects.length} selected
+                    {subjects.length} {t("onboarding.selected")}
                   </Badge>
                 )}
               </div>
@@ -510,15 +518,16 @@ function Onboarding() {
 
         <div className="mt-5 flex items-center justify-between">
           <Button variant="ghost" onClick={() => void handleUseAnotherAccount()}>
-            Use another account
+            {t("onboarding.useAnotherAccount")}
           </Button>
           {step < 4 ? (
             <Button onClick={next} disabled={!stepValid}>
-              Continue <ArrowRight className="ml-1 h-4 w-4" />
+              {t("common.continue")} <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           ) : (
             <Button onClick={finish} disabled={!stepValid || saving}>
-              {saving ? "Saving..." : "Get started"} <ArrowRight className="ml-1 h-4 w-4" />
+              {saving ? t("onboarding.saving") : t("onboarding.getStarted")}{" "}
+              <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
           )}
         </div>

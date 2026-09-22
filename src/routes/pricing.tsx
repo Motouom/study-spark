@@ -6,7 +6,8 @@ import { Check, Sparkles, X, ArrowLeft, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { supabase } from "@/lib/supabase";
-import { canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
+import { alternateLinks, canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
+import { useI18n, useSyncLocaleFromProfile, type TranslationKey } from "@/lib/i18n";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -42,37 +43,53 @@ export const Route = createFileRoute("/pricing")({
       },
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
-    links: [{ rel: "canonical", href: canonicalUrl("/pricing") }],
+    links: [
+      { rel: "canonical", href: canonicalUrl("/pricing") },
+      ...alternateLinks("/pricing", "/fr/tarifs"),
+    ],
   }),
   component: PricingPage,
 });
 
 const features = [
-  { name: "1-2 free preview papers", free: true, premium: false },
-  { name: "Unlimited protected papers", free: false, premium: true },
-  { name: "Protected in-app papers", free: false, premium: true },
-  { name: "Free answers & explanations", free: false, premium: true },
-  { name: "Practice mode", free: false, premium: true },
-  { name: "Class and series access control", free: true, premium: true },
-  { name: "Daily streaks & basic stats", free: false, premium: true },
-  { name: "AI-personalized learning paths", free: false, premium: true },
-  { name: "Full courses & video lessons", free: false, premium: true },
-  { name: "Exam cheatsheets", free: false, premium: true },
-  { name: "Advanced full-text search", free: false, premium: true },
-  { name: "Streak freezes (1/week)", free: false, premium: true },
-  { name: "Priority support", free: true, premium: true },
-] as { name: string; free: boolean; premium: boolean }[];
+  { key: "pricing.feature.previewPapers", free: true, premium: false },
+  { key: "pricing.feature.unlimitedPapers", free: false, premium: true },
+  { key: "pricing.feature.protectedPapers", free: false, premium: true },
+  { key: "pricing.feature.answers", free: false, premium: true },
+  { key: "pricing.feature.practiceMode", free: false, premium: true },
+  { key: "pricing.feature.accessControl", free: true, premium: true },
+  { key: "pricing.feature.streaks", free: false, premium: true },
+  { key: "pricing.feature.aiPaths", free: false, premium: true },
+  { key: "pricing.feature.courses", free: false, premium: true },
+  { key: "pricing.feature.cheatsheets", free: false, premium: true },
+  { key: "pricing.feature.search", free: false, premium: true },
+  { key: "pricing.feature.freezes", free: false, premium: true },
+  { key: "pricing.feature.support", free: true, premium: true },
+] as { key: TranslationKey; free: boolean; premium: boolean }[];
+
+const pricingFaqs = [
+  { question: "pricing.faq.free.q", answer: "pricing.faq.free.a" },
+  { question: "pricing.faq.cancel.q", answer: "pricing.faq.cancel.a" },
+  { question: "pricing.faq.mobileMoney.q", answer: "pricing.faq.mobileMoney.a" },
+  { question: "pricing.faq.discount.q", answer: "pricing.faq.discount.a" },
+] as { question: TranslationKey; answer: TranslationKey }[];
 
 function PricingPage() {
+  const { locale, t } = useI18n();
   const [yearly, setYearly] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkingPayment, setCheckingPayment] = useState(false);
   const [paymentMessage, setPaymentMessage] = useState<string | null>(null);
   const { user, profile } = useStudyProfile();
+  useSyncLocaleFromProfile(profile?.language);
   const userId = user?.id;
   const returnPath = user && profile ? "/dashboard" : "/";
   const monthly = 1500;
   const yearlyPrice = 12000;
+  const formatFcfa = (amount: number) =>
+    locale === "fr"
+      ? `${amount.toLocaleString("fr-CM")} FCFA`
+      : `FCFA ${amount.toLocaleString("en-CM")}`;
 
   useEffect(() => {
     if (!userId || !supabase) return;
@@ -115,7 +132,7 @@ function PricingPage() {
           const { ok, payload } = await verifyOnce();
           if (ok && payload.status === "successful") {
             sessionStorage.removeItem("studyspark.checkout.transactionId");
-            setPaymentMessage("Payment confirmed. Premium is now active on your account.");
+            setPaymentMessage(t("pricing.paymentConfirmed"));
             window.setTimeout(() => window.location.assign("/dashboard"), 1200);
             return;
           }
@@ -129,13 +146,13 @@ function PricingPage() {
           }
           setPaymentMessage(
             payload.status === "pending" || payload.status === "created"
-              ? "Payment is still pending. We will unlock Premium as soon as Fapshi confirms it."
-              : "Payment has not been confirmed yet. If you paid, wait a moment and refresh.",
+              ? t("pricing.paymentPending")
+              : t("pricing.paymentNotConfirmed"),
           );
           return;
         } catch {
           if (attempt === maxAttempts) {
-            setPaymentMessage("Payment could not be checked right now. Please try again.");
+            setPaymentMessage(t("pricing.paymentCheckFailed"));
             return;
           }
           await new Promise((resolve) => window.setTimeout(resolve, 4000));
@@ -144,7 +161,7 @@ function PricingPage() {
     };
 
     void poll().finally(() => setCheckingPayment(false));
-  }, [userId]);
+  }, [t, userId]);
 
   async function startCheckout() {
     if (!user || !supabase) {
@@ -166,15 +183,15 @@ function PricingPage() {
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || !payload.checkoutUrl) {
-        throw new Error(payload.error ?? "Payment could not be started.");
+        throw new Error("payment-start-failed");
       }
       sessionStorage.setItem(
         "studyspark.checkout.transactionId",
         String(payload.transactionId ?? ""),
       );
       window.location.assign(payload.checkoutUrl);
-    } catch (error) {
-      setPaymentMessage(error instanceof Error ? error.message : "Payment could not be started.");
+    } catch {
+      setPaymentMessage(t("pricing.paymentStartFailed"));
       setCheckoutLoading(false);
     }
   }
@@ -190,7 +207,7 @@ function PricingPage() {
           <Logo to={returnPath} />
           <Button asChild variant="ghost" size="sm">
             <Link to={returnPath}>
-              <ArrowLeft className="mr-1 h-4 w-4" /> Back
+              <ArrowLeft className="mr-1 h-4 w-4" /> {t("common.back")}
             </Link>
           </Button>
         </div>
@@ -199,29 +216,25 @@ function PricingPage() {
       <main>
         <section className="px-6 py-20 text-center md:py-24">
           <Badge variant="secondary" className="mb-5 gap-1.5">
-            <Sparkles className="h-3 w-3 text-accent" /> Free where it matters
+            <Sparkles className="h-3 w-3 text-accent" /> {t("pricing.badge")}
           </Badge>
           <h1 className="font-display text-5xl text-foreground md:text-7xl">
-            Simple GCE revision pricing. <span className="italic text-muted-foreground">Fair.</span>
+            {t("pricing.title")}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            Free learners can preview selected Cameroon GCE papers. Premium unlocks protected O
-            Level and A Level papers, topic courses, exam cheatsheets, AI-guided revision, tutoring,
-            and deeper analytics.
-          </p>
+          <p className="mx-auto mt-5 max-w-xl text-muted-foreground">{t("pricing.description")}</p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card p-1">
             <button
               onClick={() => setYearly(false)}
               className={`rounded-full px-4 py-1.5 text-sm transition-colors ${!yearly ? "bg-foreground text-background" : "text-muted-foreground"}`}
             >
-              Monthly
+              {t("pricing.monthly")}
             </button>
             <button
               onClick={() => setYearly(true)}
               className={`rounded-full px-4 py-1.5 text-sm transition-colors ${yearly ? "bg-foreground text-background" : "text-muted-foreground"}`}
             >
-              Yearly <span className="ml-1 text-xs text-accent">−33%</span>
+              {t("pricing.yearly")} <span className="ml-1 text-xs text-accent">−33%</span>
             </button>
           </div>
         </section>
@@ -230,25 +243,25 @@ function PricingPage() {
           <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-8">
               <h3 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                Free
+                {t("common.free")}
               </h3>
               <div className="mt-3 flex items-baseline gap-1">
-                <span className="font-display text-5xl">FCFA 0</span>
-                <span className="text-muted-foreground">/forever</span>
+                <span className="font-display text-5xl">{formatFcfa(0)}</span>
+                <span className="text-muted-foreground">/{t("pricing.forever")}</span>
               </div>
               <p className="mt-2 text-sm text-muted-foreground">
-                Preview the platform before upgrading. No card needed.
+                {t("pricing.freePlanDescription")}
               </p>
               <Button asChild variant="outline" className="mt-6 w-full">
-                <Link to="/dashboard">Get started</Link>
+                <Link to="/dashboard">{t("pricing.getStarted")}</Link>
               </Button>
               <ul className="mt-6 space-y-3 text-sm">
                 {features
                   .filter((f) => f.free)
                   .map((f) => (
-                    <li key={f.name} className="flex items-start gap-2.5">
+                    <li key={f.key} className="flex items-start gap-2.5">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" />
-                      <span>{f.name}</span>
+                      <span>{t(f.key)}</span>
                     </li>
                   ))}
               </ul>
@@ -256,22 +269,21 @@ function PricingPage() {
 
             <div className="relative rounded-2xl border border-foreground bg-foreground p-8 text-background">
               <Badge className="absolute -top-3 right-6 bg-accent text-accent-foreground">
-                Recommended
+                {t("pricing.recommended")}
               </Badge>
               <h3 className="text-sm font-medium uppercase tracking-wider text-background/60">
-                Premium
+                {t("common.premium")}
               </h3>
               <div className="mt-3 flex items-baseline gap-1">
                 <span className="font-display text-5xl">
-                  FCFA{" "}
-                  {yearly
-                    ? Math.round(yearlyPrice / 12).toLocaleString()
-                    : monthly.toLocaleString()}
+                  {formatFcfa(yearly ? Math.round(yearlyPrice / 12) : monthly)}
                 </span>
-                <span className="text-background/60">/month</span>
+                <span className="text-background/60">/{t("pricing.month")}</span>
               </div>
               <p className="mt-2 text-sm text-background/60">
-                {yearly ? `Billed yearly · FCFA ${yearlyPrice.toLocaleString()}` : "Billed monthly"}
+                {yearly
+                  ? `${t("pricing.billedYearly")} · ${formatFcfa(yearlyPrice)}`
+                  : t("pricing.billedMonthly")}
               </p>
               <Button
                 className="mt-6 w-full bg-background text-foreground hover:bg-background/90"
@@ -283,7 +295,7 @@ function PricingPage() {
                 ) : (
                   <Sparkles className="mr-1.5 h-4 w-4" />
                 )}
-                Pay with Fapshi
+                {t("pricing.payWithFapshi")}
               </Button>
               {paymentMessage ? (
                 <div className="mt-3 rounded-lg bg-background/10 px-3 py-2 text-sm text-background/80">
@@ -298,14 +310,14 @@ function PricingPage() {
               ) : null}
               <ul className="mt-6 space-y-3 text-sm">
                 {features.map((f) => (
-                  <li key={f.name} className="flex items-start gap-2.5">
+                  <li key={f.key} className="flex items-start gap-2.5">
                     {f.premium ? (
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                     ) : (
                       <X className="mt-0.5 h-4 w-4 shrink-0 text-background/30" />
                     )}
                     <span className={f.premium ? "" : "text-background/40 line-through"}>
-                      {f.name}
+                      {t(f.key)}
                     </span>
                   </li>
                 ))}
@@ -317,16 +329,16 @@ function PricingPage() {
           <div className="mt-14 overflow-x-auto rounded-2xl border border-border bg-card">
             <div className="min-w-[560px]">
               <div className="grid grid-cols-3 border-b border-border px-6 py-4 text-sm font-medium">
-                <span>Feature</span>
-                <span className="text-center text-muted-foreground">Free</span>
-                <span className="text-center">Premium</span>
+                <span>{t("pricing.feature")}</span>
+                <span className="text-center text-muted-foreground">{t("common.free")}</span>
+                <span className="text-center">{t("common.premium")}</span>
               </div>
               {features.map((f) => (
                 <div
-                  key={f.name}
+                  key={f.key}
                   className="grid grid-cols-3 border-b border-border px-6 py-3.5 text-sm last:border-0"
                 >
-                  <span className="pr-4">{f.name}</span>
+                  <span className="pr-4">{t(f.key)}</span>
                   <span className="flex justify-center">
                     {f.free ? (
                       <Check className="h-4 w-4 text-success" />
@@ -348,29 +360,12 @@ function PricingPage() {
 
           {/* FAQ */}
           <div className="mt-16">
-            <h2 className="font-display text-3xl">Common questions</h2>
+            <h2 className="font-display text-3xl">{t("pricing.commonQuestions")}</h2>
             <div className="mt-6 space-y-4">
-              {[
-                {
-                  q: "Can students use the basics free?",
-                  a: "Yes. Free learners can open one or two preview papers before upgrading. The full protected GCE learner experience is Premium.",
-                },
-                {
-                  q: "Can I cancel anytime?",
-                  a: "Of course. Cancel from settings — no calls, no friction.",
-                },
-                {
-                  q: "Do you support mobile money?",
-                  a: "Payments are built around Cameroon-friendly FCFA checkout through Fapshi, with mobile money support depending on the available Fapshi channels.",
-                },
-                {
-                  q: "Is there a student discount?",
-                  a: "Premium is already priced for students in Cameroon. Schools and study groups can request bulk pricing.",
-                },
-              ].map((f) => (
-                <div key={f.q} className="rounded-xl border border-border bg-card p-5">
-                  <h3 className="text-base font-medium">{f.q}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{f.a}</p>
+              {pricingFaqs.map((f) => (
+                <div key={f.question} className="rounded-xl border border-border bg-card p-5">
+                  <h3 className="text-base font-medium">{t(f.question)}</h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground">{t(f.answer)}</p>
                 </div>
               ))}
             </div>
@@ -381,7 +376,9 @@ function PricingPage() {
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
           <Logo />
-          <p>© {new Date().getFullYear()} StudySpark. Made for Cameroon students.</p>
+          <p>
+            © {new Date().getFullYear()} StudySpark. {t("pricing.footer")}
+          </p>
         </div>
       </footer>
     </div>

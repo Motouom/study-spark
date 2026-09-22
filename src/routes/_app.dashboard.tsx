@@ -16,10 +16,11 @@ import {
 import { lazy, Suspense, useMemo } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
-import { formatDuration } from "@/hooks/use-structural-progress";
+import { countStructuralQuestions, useStructuralProgress } from "@/hooks/use-structural-progress";
+import { useTopicUnderstandingOverview } from "@/hooks/use-topic-understanding-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 import { isPremiumActive } from "@/lib/premium";
-import { usePaperStudyOverview, type PaperStudySession } from "@/hooks/use-paper-study-progress";
+import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { useI18n } from "@/lib/i18n";
 
@@ -31,6 +32,14 @@ function sameLocalDay(a: Date, b: Date) {
     a.getMonth() === b.getMonth() &&
     a.getDate() === b.getDate()
   );
+}
+
+function countTrackableTopics(markdown: string | null | undefined) {
+  if (!markdown) return 0;
+  const headings = [...markdown.matchAll(/^## (.+)$/gm)]
+    .map((match) => match[1].trim())
+    .filter((title) => !/^(how to use this course|practice questions?|answers?)$/i.test(title));
+  return Math.max(1, headings.length);
 }
 
 function DailyGoalRing({ percent }: { percent: number }) {
@@ -117,6 +126,8 @@ function Dashboard() {
   const { t } = useI18n();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
   const readingProgress = usePaperStudyOverview();
+  const structuralProgress = useStructuralProgress();
+  const topicProgress = useTopicUnderstandingOverview();
   const { currentStreak } = useUnifiedStreak();
   const useRemoteOnly = supabaseConfigured();
   const effectiveProfile = savedProfile;
@@ -168,23 +179,117 @@ function Dashboard() {
   }, [bestPercentByDoc, documentsById, papers, readingProgress.sessions]);
   const featuredPaper = continuePaper.document;
 
-  const DAILY_GOAL_SECONDS = 15 * 60;
-  const todaySeconds = useMemo(() => {
+  const DAILY_GOAL_MARKS = 5;
+  const todayMarkedActions = useMemo(() => {
     const today = new Date();
-    return readingProgress.sessions
-      .filter((session) => sameLocalDay(new Date(session.startedAt), today))
-      .reduce((sum, session) => sum + session.durationSeconds, 0);
-  }, [readingProgress.sessions]);
-  const dailyGoalPercent = Math.min(100, Math.round((todaySeconds / DAILY_GOAL_SECONDS) * 100));
-  const averageReadDepth =
-    bestPercentByDoc.size > 0
-      ? Math.round(
-          [...bestPercentByDoc.values()].reduce((sum, value) => sum + value, 0) /
-            bestPercentByDoc.size,
-        )
-      : 0;
+    const answeredQuestions = structuralProgress.progress.filter(
+      (item) =>
+        (item.status === "passed" || item.status === "failed") &&
+        sameLocalDay(new Date(item.completedAt ?? item.updatedAt), today),
+    ).length;
+    const markedTopics = topicProgress.progress.filter((item) =>
+      sameLocalDay(new Date(item.updatedAt), today),
+    ).length;
+    return answeredQuestions + markedTopics;
+  }, [structuralProgress.progress, topicProgress.progress]);
+  const dailyGoalPercent = Math.min(100, Math.round((todayMarkedActions / DAILY_GOAL_MARKS) * 100));
+
+  const learningCoverage = useMemo(() => {
+    const questionDocuments = papers;
+    const topicDocuments = availablePapers.filter(
+      (document) => document.contentKind === "course" || document.contentKind === "cheatsheet",
+    );
+    const detectedQuestions = questionDocuments.reduce(
+      (sum, document) => sum + countStructuralQuestions(document.markdownContent),
+      0,
+    );
+    const markedQuestions = structuralProgress.progress.filter(
+      (item) => item.status === "passed" || item.status === "failed",
+    ).length;
+    const detectedTopics = topicDocuments.reduce(
+      (sum, document) => sum + countTrackableTopics(document.markdownContent),
+      0,
+    );
+    const markedTopics = topicProgress.progress.length;
+    const total = detectedQuestions + detectedTopics;
+    const marked = markedQuestions + markedTopics;
+    return {
+      percent: total > 0 ? Math.min(100, Math.round((marked / total) * 100)) : 0,
+      markedQuestions,
+      markedTopics,
+      marked,
+      total,
+    };
+  }, [availablePapers, papers, structuralProgress.progress, topicProgress.progress]);
 
   const subjectBreakdown = useMemo(() => {
+    const subjects = new Map<string, { score: number; count: number }>();
+    for (const document of availablePapers) {
+      const subject = document.subject;
+      const current = subjects.get(subject) ?? { score: 0, count: 0 };
+      if (document.contentKind === "paper") {
+        const totalQuestions = countStructuralQuestions(document.markdownContent);
+        const documentMarks = structuralProgress.progress.filter(
+          (item) => item.documentId === document.id,
+        );
+        const answered = documentMarks.filter(
+          (item) => item.status === "passed" || item.status === "failed",
+        ).length;
+        const passed = documentMarks.filter((item) => item.status === "passed").length;
+        const coverage = totalQuestions > 0 ? answered / totalQuestions : 0;
+        const passRate = answered > 0 ? passed / answered : 0;
+        current.score += Math.round(coverage * 55 + passRate * 45);
+        current.count += 1;
+      } else if (document.contentKind === "course" || document.contentKind === "cheatsheet") {
+        const totalTopics = countTrackableTopics(document.markdownContent);
+        const documentTopics = topicProgress.progress.filter(
+          (item) => item.documentId === document.id,
+        );
+        const understood = documentTopics.filter((item) => item.status === "understood").length;
+        const coverage = totalTopics > 0 ? documentTopics.length / totalTopics : 0;
+        const understoodRate = documentTopics.length > 0 ? understood / documentTopics.length : 0;
+        current.score += Math.round(coverage * 55 + understoodRate * 45);
+        current.count += 1;
+      } else {
+        continue;
+      }
+      subjects.set(subject, current);
+    }
+    return [...subjects.entries()]
+      .map(([subject, value]) => ({
+        subject,
+        mastery: value.count > 0 ? Math.round(value.score / value.count) : 0,
+      }))
+      .filter((item) => item.mastery > 0)
+      .sort((a, b) => b.mastery - a.mastery);
+  }, [availablePapers, structuralProgress.progress, topicProgress.progress]);
+
+  const recentMarkedDocuments = useMemo(() => {
+    const bestByDoc = new Map<string, { documentId: string; updatedAt: string; status: string }>();
+    for (const item of structuralProgress.progress) {
+      if (item.status !== "passed" && item.status !== "failed") continue;
+      bestByDoc.set(item.documentId, {
+        documentId: item.documentId,
+        updatedAt: item.completedAt ?? item.updatedAt,
+        status: item.status,
+      });
+    }
+    for (const item of topicProgress.progress) {
+      const current = bestByDoc.get(item.documentId);
+      if (!current || new Date(item.updatedAt) > new Date(current.updatedAt)) {
+        bestByDoc.set(item.documentId, {
+          documentId: item.documentId,
+          updatedAt: item.updatedAt,
+          status: item.status,
+        });
+      }
+    }
+    return [...bestByDoc.values()]
+      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+      .slice(0, 5);
+  }, [structuralProgress.progress, topicProgress.progress]);
+
+  const legacySubjectBreakdown = useMemo(() => {
     const subjects = new Map<string, { score: number; count: number }>();
     for (const [documentId, bestPercent] of bestPercentByDoc) {
       const document = documentsById.get(documentId);
@@ -225,26 +330,6 @@ function Dashboard() {
       };
     });
   }, [readingProgress.sessions]);
-  // One row per paper: the session with the best depth for that paper.
-  const recentSessions = useMemo(() => {
-    const bestByDoc = new Map<string, PaperStudySession>();
-    for (const session of readingProgress.sessions) {
-      const document = documentsById.get(session.documentId);
-      if (!document || document.contentKind !== "paper") continue;
-      const current = bestByDoc.get(session.documentId);
-      if (
-        !current ||
-        session.maxScrollPercent > current.maxScrollPercent ||
-        (session.maxScrollPercent === current.maxScrollPercent &&
-          new Date(session.updatedAt) > new Date(current.updatedAt))
-      ) {
-        bestByDoc.set(session.documentId, session);
-      }
-    }
-    return [...bestByDoc.values()]
-      .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
-      .slice(0, 5);
-  }, [documentsById, readingProgress.sessions]);
   const premium = isPremiumActive(effectiveProfile);
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
 
@@ -319,21 +404,21 @@ function Dashboard() {
           <Stat
             icon={BookOpen}
             label={t("dashboard.papersOpened")}
-            value={String(readingProgress.summary.papersRead)}
-            hint={`${readingProgress.summary.completedPapers} ${t("dashboard.readThrough")}`}
+            value={String(learningCoverage.markedQuestions)}
+            hint={t("dashboard.questionsMarkedHint")}
           />
           <Stat
             icon={Target}
             label={t("dashboard.avgReadDepth")}
-            value={`${averageReadDepth}%`}
-            hint={`${readingProgress.summary.reviewCount} ${t("dashboard.reviewMarks")}`}
+            value={`${learningCoverage.percent}%`}
+            hint={`${learningCoverage.marked}/${learningCoverage.total} ${t("dashboard.learningActionsHint")}`}
             tone="success"
           />
           <Stat
             icon={TrendingUp}
-            label={t("dashboard.studyTime")}
-            value={formatDuration(readingProgress.summary.totalDurationSeconds)}
-            hint={`${readingProgress.summary.bookmarkCount} ${t("dashboard.bookmarksHint")}`}
+            label={t("dashboard.topicsMarked")}
+            value={String(learningCoverage.markedTopics)}
+            hint={t("dashboard.topicsMarkedHint")}
           />
         </section>
       ) : (
@@ -370,8 +455,10 @@ function Dashboard() {
         >
           <PremiumDashboardCharts
             progressData={progressData}
-            subjectBreakdown={subjectBreakdown}
-            totalStarted={readingProgress.summary.sessionsStarted}
+            subjectBreakdown={
+              subjectBreakdown.length > 0 ? subjectBreakdown : legacySubjectBreakdown
+            }
+            totalStarted={learningCoverage.marked}
           />
         </Suspense>
       )}
@@ -385,24 +472,38 @@ function Dashboard() {
                 {t("dashboard.paperActivityDescription")}
               </p>
             </div>
-            {recentSessions.length > 0 ? (
+            {recentMarkedDocuments.length > 0 ? (
               <ul className="divide-y divide-border">
-                {recentSessions.map((item) => {
-                  const paper = documentsById.get(item.documentId);
+                {recentMarkedDocuments.map((item) => {
+                  const document = documentsById.get(item.documentId);
                   return (
                     <li
-                      key={item.id}
+                      key={item.documentId}
                       className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
                     >
                       <div>
-                        <div className="text-sm font-medium">{paper?.title ?? "Paper session"}</div>
+                        <div className="text-sm font-medium">
+                          {document?.title ?? "Learning activity"}
+                        </div>
                         <div className="text-xs text-muted-foreground">
-                          {formatDuration(item.durationSeconds)} · {item.maxScrollPercent}% read ·{" "}
+                          {document?.subject ?? "Study"} ·{" "}
                           {new Date(item.updatedAt).toLocaleDateString()}
                         </div>
                       </div>
-                      <Badge variant={item.completed ? "default" : "secondary"}>
-                        {item.completed ? "read through" : "in progress"}
+                      <Badge
+                        variant={
+                          item.status === "passed" || item.status === "understood"
+                            ? "default"
+                            : "secondary"
+                        }
+                      >
+                        {item.status === "passed"
+                          ? "passed"
+                          : item.status === "failed"
+                            ? "failed"
+                            : item.status === "understood"
+                              ? "understood"
+                              : "needs review"}
                       </Badge>
                     </li>
                   );
@@ -424,23 +525,23 @@ function Dashboard() {
             <div className="mt-4 space-y-3">
               <Signal
                 icon={CheckCircle2}
-                label="Understood"
-                value={readingProgress.summary.understoodCount}
+                label="Passed questions"
+                value={structuralProgress.summary.passed}
               />
               <Signal
                 icon={TrendingUp}
-                label="Needs review"
-                value={readingProgress.summary.reviewCount}
+                label="Failed questions"
+                value={structuralProgress.summary.failed}
               />
               <Signal
                 icon={Bookmark}
-                label="Bookmarks"
-                value={readingProgress.summary.bookmarkCount}
+                label="Topics understood"
+                value={topicProgress.summary.understood}
               />
               <Signal
                 icon={Target}
-                label="Revision"
-                value={readingProgress.summary.revisionCount}
+                label="Topics need review"
+                value={topicProgress.summary.review}
               />
             </div>
           </div>

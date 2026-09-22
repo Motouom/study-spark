@@ -37,17 +37,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { classLabel, seriesLabel, type StudentProfile } from "@/lib/study-reference-data";
+import type { StudentProfile } from "@/lib/study-reference-data";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
+import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 import { signOut } from "@/lib/auth";
 import { isPremiumActive } from "@/lib/premium";
 import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
@@ -196,11 +196,6 @@ function SidebarContent({
           </div>
           <div className="min-w-0 flex-1">
             <div className="truncate text-sm font-medium">{shownName}</div>
-            <div className="truncate text-xs text-muted-foreground">
-              {profile
-                ? `${classLabel(profile.classLevel)} · ${seriesLabel(profile.series)}`
-                : "profile required"}
-            </div>
           </div>
           <Link
             to="/pricing"
@@ -243,7 +238,7 @@ function CommandMenu({
   const navigate = useNavigate();
   const { t } = useI18n();
   const { profile } = useStudyProfile();
-  const content = useStudyContent(profile);
+  const content = useStudyContent(open ? profile : null);
   const searchTopics = content.topics;
   const go = (path: string) => {
     setOpen(false);
@@ -572,12 +567,12 @@ function AppLayout() {
               key={n.to}
               to={n.to}
               aria-current={active ? "page" : undefined}
-              className={`flex flex-1 flex-col items-center gap-1 py-2 text-[10px] ${
+              className={`flex min-w-0 flex-1 flex-col items-center gap-1 px-1 py-2 text-[10px] ${
                 active ? "text-foreground" : "text-muted-foreground"
               }`}
             >
               <n.icon className="h-5 w-5" />
-              {t(n.labelKey)}
+              <span className="max-w-full truncate text-center leading-tight">{t(n.labelKey)}</span>
             </Link>
           );
         })}

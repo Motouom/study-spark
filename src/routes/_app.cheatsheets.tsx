@@ -104,17 +104,20 @@ function CheatsheetsPage() {
                         onClick={() => setSubject(item.name)}
                         className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                       >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
                             <BookMarked className="h-5 w-5" />
                           </div>
-                          <Badge variant="secondary">{item.total} topics</Badge>
+                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                            {item.total} {t("common.topic")}
+                          </Badge>
                         </div>
-                        <h3 className="mt-4 min-w-0 truncate text-base font-medium">
-                          {item.name} cheatsheets
+                        <h3 className="mt-4 min-w-0 break-words text-base font-medium leading-snug">
+                          {item.name} {t("common.cheatsheets")}
                         </h3>
                         <p className="mt-2 text-xs text-muted-foreground">
-                          {item.free} available now · {item.total - item.free} premium
+                          {item.free} {t("common.availableNow")} · {item.total - item.free}{" "}
+                          {t("common.premium")}
                         </p>
                       </button>
                     ))}
@@ -131,9 +134,11 @@ function CheatsheetsPage() {
                         onClick={() => setSubject(null)}
                       >
                         <ArrowLeft className="mr-1.5 h-4 w-4" />
-                        Subjects
+                        {t("common.subjects")}
                       </Button>
-                      <Badge variant="secondary">{filteredSheets.length} topics</Badge>
+                      <Badge variant="secondary">
+                        {filteredSheets.length} {t("common.topic")}
+                      </Badge>
                     </div>
                     <h2 className="text-lg font-medium">{subject}</h2>
                   </div>
@@ -146,7 +151,7 @@ function CheatsheetsPage() {
               ) : (
                 <EmptyFiltered
                   onClear={() => setSubject(null)}
-                  label="No cheatsheets match this subject."
+                  label={t("cheatsheets.emptyTitle")}
                 />
               )}
             </div>
@@ -168,6 +173,7 @@ function SearchBox({
   onClear: () => void;
   placeholder: string;
 }) {
+  const { t } = useI18n();
   const active = value.trim().length > 0;
   return (
     <div className="relative">
@@ -177,7 +183,7 @@ function SearchBox({
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         className="h-11 pl-9 pr-10"
-        aria-label="Search cheatsheet topics"
+        aria-label={t("cheatsheets.searchPlaceholder")}
       />
       {active && (
         <button
@@ -202,13 +208,19 @@ function CheatsheetResults({
   query: string;
   onClear: () => void;
 }) {
+  const { t } = useI18n();
   if (sheets.length === 0) {
-    return <EmptyFiltered onClear={onClear} label={`No cheatsheets match “${query}”.`} />;
+    return (
+      <EmptyFiltered
+        onClear={onClear}
+        label={t("cheatsheets.noSearchResults").replace("{query}", query)}
+      />
+    );
   }
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-medium">Search results</h2>
+        <h2 className="text-sm font-medium">{t("common.searchResults")}</h2>
         <Badge variant="secondary">{sheets.length}</Badge>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
@@ -221,6 +233,7 @@ function CheatsheetResults({
 }
 
 function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
+  const { t } = useI18n();
   return (
     <Link
       to="/course/$documentId"
@@ -231,28 +244,32 @@ function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
           <FileText className="h-5 w-5" />
         </div>
-        <Badge variant={sheet.isLocked ? "outline" : "secondary"}>
-          {sheet.isLocked ? "Premium" : "Topic"}
+        <Badge
+          variant={sheet.isLocked ? "outline" : "secondary"}
+          className="shrink-0 whitespace-nowrap"
+        >
+          {sheet.isLocked ? t("common.premium") : t("common.topic")}
         </Badge>
       </div>
       <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
         {sheet.title}
       </h3>
       <p className="mt-2 text-xs text-muted-foreground">
-        {sheet.subject} · {sheet.language === "french" ? "Français" : "English"} · Quick revision
+        {sheet.subject} · {sheet.language === "french" ? "Français" : "English"} ·{" "}
+        {t("common.quickRevision")}
       </p>
       <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
         <div className="rounded-lg bg-secondary/40 p-3">
           <div className="flex items-center gap-1.5 text-muted-foreground">
-            <FileText className="h-3.5 w-3.5" /> Sheet
+            <FileText className="h-3.5 w-3.5" /> {t("common.sheet")}
           </div>
-          <div className="mt-1 font-medium">Cheatsheet</div>
+          <div className="mt-1 font-medium">{t("common.cheatsheet")}</div>
         </div>
         <div className="rounded-lg bg-secondary/40 p-3">
           <div className="flex items-center gap-1.5 text-muted-foreground">
-            <ListChecks className="h-3.5 w-3.5" /> Focus
+            <ListChecks className="h-3.5 w-3.5" /> {t("common.focus")}
           </div>
-          <div className="mt-1 font-medium">Topic</div>
+          <div className="mt-1 font-medium">{t("common.topic")}</div>
         </div>
       </div>
     </Link>
@@ -260,11 +277,12 @@ function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
 }
 
 function EmptyFiltered({ label, onClear }: { label: string; onClear: () => void }) {
+  const { t } = useI18n();
   return (
     <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
       <p className="text-sm text-muted-foreground">{label}</p>
       <Button variant="outline" size="sm" className="mt-4" onClick={onClear}>
-        Clear filters
+        {t("common.clearFilters")}
       </Button>
     </div>
   );
