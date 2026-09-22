@@ -61,7 +61,7 @@ function SupportPage() {
 
   const categories = locale === "fr" ? CATEGORIES_FR : CATEGORIES_EN;
 
-  // Safe context — no keys, tokens, or secrets
+  // Safe context — no keys, tokens, secrets, or internal IDs
   const safeContext = [
     category ? `Category: ${category}` : null,
     `Plan: ${premium ? "Premium" : "Free"}`,
@@ -70,7 +70,6 @@ function SupportPage() {
       : null,
     profile ? `Subjects: ${profile.subjects.join(", ")}` : null,
     user?.email ? `Account: ${user.email}` : null,
-    user?.id ? `User ID: ${user.id}` : null,
   ]
     .filter(Boolean)
     .join("\n");
