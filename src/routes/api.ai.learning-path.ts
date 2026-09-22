@@ -288,6 +288,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           }
 
           try {
+            console.log(`[AI LearningPath] user=${user.id} — invoking generateAiText...`);
             const planText = await generateAiText({
               system:
                 "You are StudySpark's learning path planner for Cameroon GCE learners. Build the path from the learner's ACTUAL difficulties: review marks, low reading depth, low confidence, and difficult parts they reported. Order the 7 days hardest-first so the learner attacks their weakest papers early. Every day.paper must be one of the supplied titles (or 'Progress dashboard'). Do not invent papers, classes, subjects, or progress. Do not solve questions. Return valid JSON only.",
@@ -313,10 +314,12 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               }),
               maxTokens: 900,
             });
+            console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
             const days = parseAiLearningPath(planText);
 
             return Response.json({ days, source: "ai" });
           } catch (aiError) {
+            console.error(`[AI LearningPath] user=${user.id} — generateAiText FAILED:`, aiError);
             logAiFailure("ai.learning_path.provider_failed", aiError, { userId: user.id });
             return Response.json({
               days: fallback,

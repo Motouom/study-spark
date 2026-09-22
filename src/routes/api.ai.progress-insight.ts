@@ -108,6 +108,7 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
           }
 
           try {
+            console.log(`[AI ProgressInsight] user=${user.id} — invoking generateAiText...`);
             const insight = await generateAiText({
               system:
                 "You are StudySpark's learner progress analyst. Be precise, supportive, and practical. Never invent marks or papers. Do not give exam answers.",
@@ -128,9 +129,11 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
               }),
               maxTokens: 520,
             });
+            console.log(`[AI ProgressInsight] user=${user.id} — generateAiText succeeded.`);
 
             return Response.json({ insight, source: "ai" });
           } catch (aiError) {
+            console.error(`[AI ProgressInsight] user=${user.id} — generateAiText FAILED:`, aiError);
             logAiFailure("ai.progress_insight.provider_failed", aiError, { userId: user.id });
             return Response.json({
               insight: fallback,

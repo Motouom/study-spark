@@ -352,24 +352,46 @@ export async function askAI(input: {
   maxTokens?: number;
 }): Promise<{ content: string; provider: string }> {
   const supabase = getServiceSupabase();
+  const errors: { provider: string; kind: string; status?: number; message: string }[] = [];
+
+  console.log("[AI] askAI called. Checking providers in order:", PROVIDER_ORDER);
 
   for (const providerName of PROVIDER_ORDER) {
     const config = getProviderConfig(providerName);
+    const hasKey = Boolean(config?.apiKey);
+    console.log(`[AI] ${providerName}: keyPresent=${hasKey}`);
+
     if (!config || !config.apiKey) {
-      console.log(`[AI] Skipping ${providerName}: not configured.`);
+      errors.push({
+        provider: providerName,
+        kind: "missing_config",
+        message: "API key not configured.",
+      });
       continue;
     }
 
     // Pre-flight quota check
-    const usage = await getUsage(supabase, providerName);
+    let usage = 0;
+    try {
+      usage = await getUsage(supabase, providerName);
+    } catch (e) {
+      console.warn(`[AI] ${providerName}: failed to read usage from DB:`, e);
+    }
+
     if (usage >= config.dailyCap) {
       console.log(
         `[AI] Skipping ${providerName}: daily cap reached (${usage}/${config.dailyCap}).`,
       );
+      errors.push({
+        provider: providerName,
+        kind: "quota_exhausted",
+        message: `Daily cap reached (${usage}/${config.dailyCap}).`,
+      });
       continue;
     }
 
     try {
+      console.log(`[AI] Trying ${providerName}...`);
       const result = await tryProvider(providerName, input);
       await incrementUsage(supabase, providerName);
       console.log(
@@ -385,6 +407,17 @@ export async function askAI(input: {
               error instanceof Error ? error.message : "Unknown error",
             );
 
+      errors.push({
+        provider: providerName,
+        kind: aiError.kind,
+        status: aiError.status,
+        message: aiError.message,
+      });
+
+      console.warn(
+        `[AI] ${providerName} FAILED — kind=${aiError.kind}, status=${aiError.status}, retryable=${aiError.retryable}, msg=${aiError.message}`,
+      );
+
       // Only fall back on quota / rate-limit / transient errors.
       // Missing-config, invalid-key, bad-request => stop immediately.
       const shouldFallback =
@@ -394,19 +427,22 @@ export async function askAI(input: {
         (aiError.kind === "provider_http" && aiError.retryable);
 
       if (!shouldFallback) {
-        throw aiError;
+        console.error(`[AI] ${providerName} failed with non-retryable error. Stopping chain.`);
+        throw new AiProviderError(
+          "provider_http",
+          `AI failed after trying ${errors.length} provider(s). Last error from ${providerName}: ${aiError.message}. Errors: ${JSON.stringify(errors)}`,
+          { status: aiError.status, retryable: false },
+        );
       }
 
-      console.warn(
-        `[AI] ${providerName} failed (kind=${aiError.kind}, status=${aiError.status}, retryable=${aiError.retryable}). Falling back...`,
-      );
       // Continue to next provider
     }
   }
 
+  console.error(`[AI] All providers exhausted. Error trail:`, JSON.stringify(errors));
   throw new AiProviderError(
     "quota_exhausted",
-    "AI tutor is at capacity right now. Try again in a few minutes.",
+    `AI tutor is at capacity right now. Tried: ${errors.map((e) => `${e.provider}(${e.kind})`).join(", ")}. Try again in a few minutes.`,
     { retryable: true },
   );
 }
