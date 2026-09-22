@@ -114,154 +114,137 @@ function SignIn() {
   }
 
   return (
-    <div className="grid min-h-dvh md:grid-cols-2">
-      {/* Form side */}
-      <div className="flex flex-col px-6 py-10 md:px-12">
+    <div className="flex min-h-dvh flex-col bg-background px-6 py-8">
+      <div className="mx-auto flex w-full max-w-sm items-center justify-between">
+        <Logo />
+        <LanguageSwitcher className="h-9 w-36" />
+      </div>
+
+      <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-10">
         <div>
-          <Logo />
-        </div>
-        <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center">
-          <div className="mb-4 flex justify-end">
-            <LanguageSwitcher className="h-9 w-36" />
-          </div>
           <h1 className="font-display text-4xl text-foreground">{t("signin.title")}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{t("signin.subtitle")}</p>
+        </div>
 
-          <div className="mt-8 space-y-3">
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 w-full justify-center gap-3 text-base"
-              onClick={() => void continueWithGoogle()}
-              disabled={loading !== null}
-            >
-              <GoogleIcon />
-              {loading === "google" ? t("signin.openingGoogle") : t("signin.continueGoogle")}
-            </Button>
+        <div className="mt-8 space-y-3">
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-12 w-full justify-center gap-3 text-base"
+            onClick={() => void continueWithGoogle()}
+            disabled={loading !== null}
+          >
+            <GoogleIcon />
+            {loading === "google" ? t("signin.openingGoogle") : t("signin.continueGoogle")}
+          </Button>
 
-            <div className="flex items-center gap-3 py-2">
-              <Separator className="flex-1" />
-              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
-                {t("signin.or")}
-              </span>
-              <Separator className="flex-1" />
+          <div className="flex items-center gap-3 py-2">
+            <Separator className="flex-1" />
+            <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
+              {t("signin.or")}
+            </span>
+            <Separator className="flex-1" />
+          </div>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (email) void continueWithEmail();
+            }}
+            className="space-y-2"
+          >
+            <label className="text-xs font-medium text-muted-foreground" htmlFor="email">
+              {t("signin.emailAddress")}
+            </label>
+            <div className="relative">
+              <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t("signin.emailPlaceholder")}
+                className="h-12 pl-9"
+              />
             </div>
+            <Button
+              type="submit"
+              className="h-12 w-full"
+              disabled={loading !== null || !email || !emailAuthConfigured()}
+            >
+              {loading === "email" ? t("signin.magicLinkSending") : t("signin.continueEmail")}{" "}
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </form>
 
+          <details className="rounded-lg border border-border bg-card p-3">
+            <summary className="cursor-pointer text-xs font-medium text-muted-foreground">
+              {t("signin.passwordSummary")}
+            </summary>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                if (email) void continueWithEmail();
+                if (email && password) void continueWithPassword();
               }}
-              className="space-y-2"
+              className="mt-3 space-y-2"
             >
-              <label className="text-xs font-medium text-muted-foreground" htmlFor="email">
-                {t("signin.emailAddress")}
-              </label>
-              <div className="relative">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t("signin.emailPlaceholder")}
-                  className="h-12 pl-9"
-                />
-              </div>
+              <Input
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={t("signin.passwordPlaceholder")}
+                className="h-11"
+              />
               <Button
                 type="submit"
-                className="h-12 w-full"
-                disabled={loading !== null || !email || !emailAuthConfigured()}
+                variant="outline"
+                className="h-11 w-full"
+                disabled={loading !== null || !email || !password || !emailAuthConfigured()}
               >
-                {loading === "email" ? t("signin.magicLinkSending") : t("signin.continueEmail")}{" "}
-                <ArrowRight className="ml-1 h-4 w-4" />
+                {loading === "password"
+                  ? t("signin.passwordWorking")
+                  : passwordMode === "signup"
+                    ? t("signin.createPasswordAccount")
+                    : t("signin.signInPassword")}
               </Button>
-            </form>
-
-            <details className="rounded-lg border border-border bg-card p-3">
-              <summary className="cursor-pointer text-xs font-medium text-muted-foreground">
-                {t("signin.passwordSummary")}
-              </summary>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (email && password) void continueWithPassword();
-                }}
-                className="mt-3 space-y-2"
+              <button
+                type="button"
+                onClick={() => setPasswordMode(passwordMode === "signin" ? "signup" : "signin")}
+                className="text-xs text-muted-foreground underline-offset-4 hover:underline"
               >
-                <Input
-                  type="password"
-                  required
-                  minLength={6}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder={t("signin.passwordPlaceholder")}
-                  className="h-11"
-                />
-                <Button
-                  type="submit"
-                  variant="outline"
-                  className="h-11 w-full"
-                  disabled={loading !== null || !email || !password || !emailAuthConfigured()}
-                >
-                  {loading === "password"
-                    ? t("signin.passwordWorking")
-                    : passwordMode === "signup"
-                      ? t("signin.createPasswordAccount")
-                      : t("signin.signInPassword")}
-                </Button>
-                <button
-                  type="button"
-                  onClick={() => setPasswordMode(passwordMode === "signin" ? "signup" : "signin")}
-                  className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-                >
-                  {passwordMode === "signin" ? t("signin.noAccount") : t("signin.hasAccount")}
-                </button>
-              </form>
-            </details>
-          </div>
-
-          {notice && (
-            <p className="mt-4 rounded-lg border border-border bg-surface p-3 text-xs text-muted-foreground">
-              {notice}
-            </p>
-          )}
-
-          {!googleAuthConfigured() && !emailAuthConfigured() && (
-            <p className="mt-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-xs text-warning-foreground">
-              {t("signin.notConfigured")}
-            </p>
-          )}
-
-          <p className="mt-8 text-center text-xs text-muted-foreground">
-            {t("signin.agreement")}
-            <br />
-            {t("signin.newHere")}{" "}
-            <Link
-              to="/onboarding"
-              className="font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              {t("signin.setupProfile")} →
-            </Link>
-          </p>
+                {passwordMode === "signin" ? t("signin.noAccount") : t("signin.hasAccount")}
+              </button>
+            </form>
+          </details>
         </div>
-      </div>
 
-      {/* Brand side */}
-      <div className="relative hidden overflow-hidden border-l border-border bg-surface md:block">
-        <div className="absolute inset-0 dot-bg opacity-50" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-accent/15 to-transparent" />
-        <div className="relative flex h-full flex-col justify-between p-12">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" />{" "}
-            {t("signin.brandBadge")}
-          </div>
-          <p className="font-display text-3xl leading-snug text-foreground md:text-4xl">
-            {t("signin.brandText")}
+        {notice && (
+          <p className="mt-4 rounded-lg border border-border bg-surface p-3 text-xs text-muted-foreground">
+            {notice}
           </p>
-        </div>
-      </div>
+        )}
+
+        {!googleAuthConfigured() && !emailAuthConfigured() && (
+          <p className="mt-4 rounded-lg border border-warning/40 bg-warning/10 p-3 text-xs text-warning-foreground">
+            {t("signin.notConfigured")}
+          </p>
+        )}
+
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          {t("signin.agreement")}
+          <br />
+          {t("signin.newHere")}{" "}
+          <Link
+            to="/onboarding"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            {t("signin.setupProfile")} →
+          </Link>
+        </p>
+      </main>
     </div>
   );
 }
