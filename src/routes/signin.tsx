@@ -16,6 +16,7 @@ import {
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { track } from "@/lib/analytics";
 
 export const Route = createFileRoute("/signin")({
   head: () => ({
@@ -69,9 +70,12 @@ function SignIn() {
   async function continueWithGoogle() {
     setNotice(null);
     setLoading("google");
+    track({ name: "signup_start", props: { method: "google" } });
     try {
       await signInWithGoogle();
+      track({ name: "signup_complete", props: { method: "google" } });
     } catch (error) {
+      track({ name: "signin_error", props: { reason: "google_failed" } });
       setNotice(error instanceof Error ? error.message : t("signin.googleFailed"));
       setLoading(null);
     }
@@ -80,10 +84,12 @@ function SignIn() {
   async function continueWithEmail() {
     setNotice(null);
     setLoading("email");
+    track({ name: "signup_start", props: { method: "email" } });
     try {
       await requestEmailMagicLink(email);
       setNotice(t("signin.magicLinkSent"));
     } catch (error) {
+      track({ name: "signin_error", props: { reason: "magic_link_failed" } });
       setNotice(error instanceof Error ? error.message : t("signin.emailFailed"));
     } finally {
       setLoading(null);
@@ -93,16 +99,20 @@ function SignIn() {
   async function continueWithPassword() {
     setNotice(null);
     setLoading("password");
+    track({ name: "signup_start", props: { method: "password" } });
     try {
       if (passwordMode === "signup") {
         await signUpWithEmailPassword(email, password);
+        track({ name: "signup_complete", props: { method: "password" } });
         setNotice(t("signin.accountCreated"));
       } else {
         await signInWithEmailPassword(email, password);
+        track({ name: "signup_complete", props: { method: "password" } });
         setNotice(t("signin.signedIn"));
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "";
+      track({ name: "signin_error", props: { reason: "password_failed" } });
       setNotice(
         message.includes("not confirmed")
           ? t("signin.confirmEmail")

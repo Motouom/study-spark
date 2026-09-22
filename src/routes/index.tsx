@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { track } from "@/lib/analytics";
 import {
   ArrowRight,
   BookOpen,
@@ -451,6 +452,11 @@ function Landing() {
     if (!loaded || !user) return;
     void navigate({ to: profile ? "/dashboard" : "/onboarding", replace: true });
   }, [loaded, navigate, profile, user]);
+
+  // Fire once on mount — not on re-renders or focus return
+  useEffect(() => {
+    track({ name: "landing_view" });
+  }, []);
 
   if (loaded && user) {
     return (
