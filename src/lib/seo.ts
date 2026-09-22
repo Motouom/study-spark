@@ -77,11 +77,11 @@ export function educationalAppSchema() {
       {
         "@type": "Offer",
         name: "StudySpark Premium",
-        price: "1500",
+        price: "500",
         priceCurrency: "XAF",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: "1500",
+          price: "500",
           priceCurrency: "XAF",
           billingDuration: "P1M",
         },
@@ -130,7 +130,7 @@ export function pricingSchema() {
       "@type": "AggregateOffer",
       priceCurrency: "XAF",
       lowPrice: "0",
-      highPrice: "12000",
+      highPrice: "5000",
       offerCount: 2,
       offers: [
         {
@@ -144,7 +144,7 @@ export function pricingSchema() {
         {
           "@type": "Offer",
           name: "Premium monthly",
-          price: "1500",
+          price: "500",
           priceCurrency: "XAF",
           availability: "https://schema.org/InStock",
           url: canonicalUrl("/pricing"),
@@ -174,7 +174,7 @@ export function frenchPricingSchema() {
         {
           "@type": "Offer",
           name: "Premium mensuel",
-          price: "1500",
+          price: "500",
           priceCurrency: "XAF",
           availability: "https://schema.org/InStock",
           url: canonicalUrl("/fr/tarifs"),

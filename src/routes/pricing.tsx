@@ -84,8 +84,8 @@ function PricingPage() {
   useSyncLocaleFromProfile(profile?.language);
   const userId = user?.id;
   const returnPath = user && profile ? "/dashboard" : "/";
-  const monthly = 1500;
-  const yearlyPrice = 12000;
+  const monthly = 500;
+  const yearlyPrice = 5000;
   const formatFcfa = (amount: number) =>
     locale === "fr"
       ? `${amount.toLocaleString("fr-CM")} FCFA`
