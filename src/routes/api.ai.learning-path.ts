@@ -270,6 +270,126 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             .slice(0, 3)
             .map(([subject]) => subject);
 
+          // Build deterministic 7-day plan from actual data (hardest-first)
+          function buildDeterministicDays(): {
+            day: number;
+            title: string;
+            paper: string;
+            target: string;
+            focus: string;
+          }[] {
+            const days: {
+              day: number;
+              title: string;
+              paper: string;
+              target: string;
+              focus: string;
+            }[] = [];
+            const ranked = difficultyRanking;
+            const fresh = nextPapers;
+            let rankIdx = 0;
+            let freshIdx = 0;
+
+            const getPaper = (): string => {
+              if (rankIdx < ranked.length) return ranked[rankIdx++].title;
+              if (freshIdx < fresh.length) return fresh[freshIdx++];
+              return "Progress dashboard";
+            };
+
+            const getFailedText = (entry: DifficultyEntry): string => {
+              if (entry.failedQuestions.length > 0) {
+                return `Redo failed questions Q${entry.failedQuestions.slice(0, 6).join(", Q")}`;
+              }
+              if (entry.slowQuestions.length > 0) {
+                return `Speed up slow questions Q${entry.slowQuestions
+                  .map((s) => s.questionNumber)
+                  .slice(0, 5)
+                  .join(", Q")}`;
+              }
+              if (entry.reviewCount > 0) {
+                return `Review ${entry.reviewCount} marked question${entry.reviewCount > 1 ? "s" : ""}`;
+              }
+              return `Complete the paper — currently at ${entry.bestDepth}% depth`;
+            };
+
+            const getFocusText = (entry: DifficultyEntry): string => {
+              if (entry.difficultParts.length > 0)
+                return `Focus on: ${entry.difficultParts.join("; ")}`;
+              if (entry.failedQuestions.length > 0) {
+                return `Correct working for Q${entry.failedQuestions.slice(0, 4).join(", Q")}`;
+              }
+              if (entry.avgConfidence !== null && entry.avgConfidence < 3) {
+                return `Confidence was ${entry.avgConfidence}/5 — rebuild with timed practice`;
+              }
+              return `Read carefully and mark every confusing part for review`;
+            };
+
+            // Day 1-3: attack weakest papers (hardest first)
+            for (let d = 1; d <= 3; d++) {
+              const paper = getPaper();
+              const entry = ranked.find((e) => e.title === paper);
+              days.push({
+                day: d,
+                title: entry ? `Attack your weakest paper: ${entry.subject}` : "Open a fresh paper",
+                paper,
+                target: entry
+                  ? getFailedText(entry)
+                  : "Study the full paper and mark confusing parts",
+                focus: entry ? getFocusText(entry) : "Build understanding before speed",
+              });
+            }
+
+            // Day 4: error-log revision (revisit the absolute weakest)
+            const weakest = ranked[0];
+            days.push({
+              day: 4,
+              title: weakest ? `Error-log revision: ${weakest.subject}` : "Review your mistakes",
+              paper: weakest?.title ?? getPaper(),
+              target: weakest
+                ? `Correct every failed question from ${weakest.title.slice(0, 40)}`
+                : "Review marked questions from the week",
+              focus:
+                weakest && weakest.failedQuestions.length > 0
+                  ? `Write corrected method beside Q${weakest.failedQuestions.slice(0, 4).join(", Q")}`
+                  : "Compare your answers with worked examples",
+            });
+
+            // Day 5: next weakest or fresh paper
+            const paper5 = getPaper();
+            const entry5 = ranked.find((e) => e.title === paper5);
+            days.push({
+              day: 5,
+              title: entry5 ? `Continue: ${entry5.subject}` : "Open a new paper",
+              paper: paper5,
+              target: entry5
+                ? getFailedText(entry5)
+                : "Study the full paper and mark confusing parts",
+              focus: entry5 ? getFocusText(entry5) : "Build understanding before speed",
+            });
+
+            // Day 6: mixed review across all weak areas
+            days.push({
+              day: 6,
+              title: "Mixed review",
+              paper: weakest?.title ?? getPaper(),
+              target: "Review 8 marked questions from your weakest papers",
+              focus: "Compare passed and failed work to spot repeated patterns",
+            });
+
+            // Day 7: weekly checkpoint
+            days.push({
+              day: 7,
+              title: "Weekly checkpoint",
+              paper: "Progress dashboard",
+              target: "Review pass rate, total time, and weak subjects",
+              focus: "Choose next week's first paper from the weakest subject",
+            });
+
+            return days;
+          }
+
+          const deterministicDays = buildDeterministicDays();
+
           const fallback = fallbackLearningPath({
             weakestSubjects,
             difficultyRanking,
@@ -280,60 +400,51 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               userId: user.id,
             });
             return Response.json({
-              days: fallback,
+              days: deterministicDays,
               source: "fallback",
               message:
                 "StudySpark used your question outcomes and study history to build a local learning path.",
             });
           }
 
-          // Build the set of real document titles the AI is allowed to use
-          const allRealTitles = new Set([
-            ...difficultyRanking.map((e) => e.title),
-            ...nextPapers,
-            "Progress dashboard",
-          ]);
-
+          // Use AI ONLY to enrich the text — paper assignments are fixed
           try {
-            console.log(`[AI LearningPath] user=${user.id} — invoking generateAiText...`);
+            console.log(
+              `[AI LearningPath] user=${user.id} — invoking generateAiText for enrichment...`,
+            );
             const planText = await generateAiText({
               system:
-                "You are StudySpark's learning path planner. You MUST use ONLY the exact document titles provided in the 'validPapers' list. Do NOT invent subjects, topics, or generic course names. Every day.paper MUST be one of the titles in validPapers. Day 1 must target the highest-difficulty paper with the most failed questions. Targets and focus should reference specific failed question numbers when available. Return ONLY raw JSON — no markdown, no code blocks.",
+                "You are StudySpark's learning path planner. You MUST keep every day.paper exactly as provided in the 'fixedDays' array. DO NOT change the paper titles. Your job is ONLY to rewrite the title, target, and focus to be more compelling and specific, while keeping the same meaning. Reference actual failed question numbers when they exist. Return ONLY raw JSON — no markdown, no code blocks.",
               prompt: JSON.stringify({
                 learner: profile,
-                weakestSubjects,
-                validPapers: [...allRealTitles],
-                difficultyRanking: difficultyRanking.slice(0, 6).map((entry) => ({
-                  title: entry.title,
-                  subject: entry.subject,
-                  failedQuestions: entry.failedQuestions,
-                  slowQuestions: entry.slowQuestions.slice(0, 3),
-                  averageQuestionSeconds: entry.averageQuestionSeconds,
-                  bestDepth: entry.bestDepth,
-                  reviewCount: entry.reviewCount,
-                  avgConfidence: entry.avgConfidence,
-                  difficultParts: entry.difficultParts,
-                  addToRevision: entry.addToRevision,
-                  difficultyScore: entry.difficultyScore,
+                fixedDays: deterministicDays.map((d) => ({
+                  day: d.day,
+                  paper: d.paper,
+                  failedQuestions:
+                    difficultyRanking.find((e) => e.title === d.paper)?.failedQuestions ?? [],
+                  slowQuestions:
+                    difficultyRanking.find((e) => e.title === d.paper)?.slowQuestions.slice(0, 3) ??
+                    [],
+                  reviewCount: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
+                  avgConfidence:
+                    difficultyRanking.find((e) => e.title === d.paper)?.avgConfidence ?? null,
                 })),
                 instruction:
-                  'Return ONLY JSON in this exact shape: {"days":[{"day":1,"title":"short action title","paper":"MUST be one of the validPapers titles","target":"specific target citing actual failed question numbers (e.g. Q3, Q7) or review marks","focus":"specific focus citing exact questions or concepts from the paper"}]}',
+                  'Return ONLY JSON: {"days":[{"day":1,"title":"...","paper":"KEEP EXACTLY AS PROVIDED","target":"...","focus":"..."}]}. Keep each paper identical to fixedDays. Make targets reference actual failed question numbers.',
               }),
               maxTokens: 1400,
             });
             console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
             let days = parseAiLearningPath(planText);
 
-            // Post-process: replace any hallucinated paper titles with real ones
-            const rankedTitles = difficultyRanking.map((e) => e.title);
+            // Force-fix: ensure AI didn't change any paper titles
             days = days.map((day, index) => {
-              if (!allRealTitles.has(day.paper)) {
-                // AI hallucinated a title — replace with actual weakest paper
-                const replacement = rankedTitles[index] ?? rankedTitles[0] ?? "Progress dashboard";
+              const expectedPaper = deterministicDays[index]?.paper ?? day.paper;
+              if (day.paper !== expectedPaper) {
                 console.log(
-                  `[AI LearningPath] Replaced hallucinated title "${day.paper}" with "${replacement}"`,
+                  `[AI LearningPath] Forced paper back from "${day.paper}" to "${expectedPaper}"`,
                 );
-                return { ...day, paper: replacement };
+                return { ...day, paper: expectedPaper };
               }
               return day;
             });
@@ -343,7 +454,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             console.error(`[AI LearningPath] user=${user.id} — generateAiText FAILED:`, aiError);
             logAiFailure("ai.learning_path.provider_failed", aiError, { userId: user.id });
             return Response.json({
-              days: fallback,
+              days: deterministicDays,
               source: "fallback",
               message:
                 "AI was unavailable, so StudySpark built a safe plan from your failed questions, slow questions, and review marks.",
