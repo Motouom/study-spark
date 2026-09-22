@@ -298,9 +298,15 @@ function PricingPage() {
                 {t("pricing.payWithFapshi")}
               </Button>
               {paymentMessage ? (
-                <p className="mt-3 rounded-lg bg-background/10 px-3 py-2 text-sm text-background/80">
-                  {paymentMessage}
-                </p>
+                <div className="mt-3 rounded-lg bg-background/10 px-3 py-2 text-sm text-background/80">
+                  <p>{paymentMessage}</p>
+                  <a
+                    href="/support"
+                    className="mt-1.5 inline-block text-xs underline underline-offset-2 opacity-70 hover:opacity-100"
+                  >
+                    Contact support →
+                  </a>
+                </div>
               ) : null}
               <ul className="mt-6 space-y-3 text-sm">
                 {features.map((f) => (
