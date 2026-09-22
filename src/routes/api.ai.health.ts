@@ -17,7 +17,7 @@ export const Route = createFileRoute("/api/ai/health")({
           return Response.json({
             ok: status.configured,
             providers: status.providers,
-            priorityOrder: ["gemini", "groq", "cerebras"],
+            priorityOrder: ["gemini", "groq", "cerebras", "openrouter"],
           });
         } catch (error) {
           if (error instanceof Response) return error;

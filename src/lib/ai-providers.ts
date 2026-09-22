@@ -14,7 +14,7 @@ const GEMINI_MODEL = "gemini-1.5-flash-latest";
 const GROQ_MODEL = "llama-3.3-70b-versatile";
 const CEREBRAS_MODEL = "qwen-3.8-27b";
 
-const PROVIDER_ORDER: string[] = ["gemini", "groq", "cerebras"];
+const PROVIDER_ORDER: string[] = ["gemini", "groq", "cerebras", "openrouter"];
 
 function getProviderConfig(name: string) {
   switch (name) {
@@ -42,6 +42,16 @@ function getProviderConfig(name: string) {
         baseUrl: "https://api.cerebras.ai/v1",
         model: CEREBRAS_MODEL,
       };
+    case "openrouter": {
+      const openRouterKey = readEnv("OPENROUTER_API_KEY") ?? readEnv("AI_API_KEY");
+      return {
+        name: "openrouter",
+        apiKey: openRouterKey,
+        dailyCap: Number(readEnv("OPENROUTER_DAILY_CAP") ?? 200),
+        baseUrl: readEnv("AI_BASE_URL") ?? "https://openrouter.ai/api/v1",
+        model: readEnv("AI_MODEL") ?? "openrouter/free",
+      };
+    }
     default:
       return null;
   }
@@ -245,6 +255,7 @@ async function callOpenAiCompatible(
         ...(config.name === "groq"
           ? {}
           : { "HTTP-Referer": readEnv("APP_PUBLIC_URL") ?? "http://127.0.0.1:8082" }),
+        ...(config.name === "openrouter" ? { "X-Title": "StudySpark" } : {}),
       },
       body: JSON.stringify({
         model: config.model,
@@ -408,9 +419,10 @@ export function getMultiAiConfigStatus() {
   const geminiKey = Boolean(readEnv("GEMINI_API_KEY"));
   const groqKey = Boolean(readEnv("GROQ_API_KEY"));
   const cerebrasKey = Boolean(readEnv("CEREBRAS_API_KEY"));
+  const openRouterKey = Boolean(readEnv("OPENROUTER_API_KEY") || readEnv("AI_API_KEY"));
 
   return {
-    configured: geminiKey || groqKey || cerebrasKey,
+    configured: geminiKey || groqKey || cerebrasKey || openRouterKey,
     providers: {
       gemini: {
         configured: geminiKey,
@@ -426,6 +438,11 @@ export function getMultiAiConfigStatus() {
         configured: cerebrasKey,
         dailyCap: Number(readEnv("CEREBRAS_DAILY_CAP") ?? 5000),
         model: CEREBRAS_MODEL,
+      },
+      openrouter: {
+        configured: openRouterKey,
+        dailyCap: Number(readEnv("OPENROUTER_DAILY_CAP") ?? 200),
+        model: readEnv("AI_MODEL") ?? "openrouter/free",
       },
     },
   };
