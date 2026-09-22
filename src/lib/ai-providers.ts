@@ -10,7 +10,7 @@ function readEnv(name: string) {
 //  Provider configuration
 /* ────────────────────────────────────────────────────────────────────────── */
 
-const GEMINI_MODEL = "gemini-1.5-flash-latest";
+const GEMINI_MODEL = "gemini-1.5-flash";
 const GROQ_MODEL = "llama-3.3-70b-versatile";
 const CEREBRAS_MODEL = "qwen-3.8-27b";
 
@@ -418,13 +418,19 @@ export async function askAI(input: {
         `[AI] ${providerName} FAILED — kind=${aiError.kind}, status=${aiError.status}, retryable=${aiError.retryable}, msg=${aiError.message}`,
       );
 
-      // Only fall back on quota / rate-limit / transient errors.
-      // Missing-config, invalid-key, bad-request => stop immediately.
+      // Fall back on: rate-limit (429), transient network errors, timeouts,
+      // and provider-specific 404s (bad model name) / 400s (bad request).
+      // Don't fall back on: auth failures (401) — those are config issues
+      // that will fail on every provider.
+      const isAuthError = aiError.status === 401 || aiError.status === 403;
       const shouldFallback =
-        aiError.status === 429 ||
-        aiError.kind === "timeout" ||
-        aiError.kind === "network" ||
-        (aiError.kind === "provider_http" && aiError.retryable);
+        !isAuthError &&
+        (aiError.status === 429 ||
+          aiError.status === 404 ||
+          aiError.status === 400 ||
+          aiError.kind === "timeout" ||
+          aiError.kind === "network" ||
+          (aiError.kind === "provider_http" && aiError.retryable));
 
       if (!shouldFallback) {
         console.error(`[AI] ${providerName} failed with non-retryable error. Stopping chain.`);

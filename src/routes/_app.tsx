@@ -11,7 +11,6 @@ import {
   Search,
   Menu,
   Sparkles,
-  LogOut,
   ShieldCheck,
   Brain,
   PlayCircle,
@@ -44,7 +43,7 @@ import { useStudyContent } from "@/hooks/use-study-content";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
 import { useUnifiedStreak } from "@/hooks/use-unified-streak";
-import { signOut } from "@/lib/auth";
+
 import { isPremiumActive } from "@/lib/premium";
 import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -112,12 +111,6 @@ function SidebarContent({
   const shownName = displayName ?? profile?.name ?? "Student";
   const initials = shownName.slice(0, 1).toUpperCase();
   const premium = isPremiumActive(profile);
-
-  async function handleSignOut() {
-    await signOut();
-    onNavigate?.();
-    await navigate({ to: "/signin", replace: true });
-  }
 
   return (
     <>
@@ -211,16 +204,6 @@ function SidebarContent({
           <LanguageSwitcher className="mb-2 h-9 w-full bg-background" />
           <ThemeToggle />
         </div>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          onClick={() => void handleSignOut()}
-          className="mt-1 w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
-        >
-          <LogOut className="h-4 w-4" />
-          {t("common.signOut")}
-        </Button>
       </div>
     </>
   );
