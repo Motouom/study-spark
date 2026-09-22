@@ -49,7 +49,7 @@ begin
           and (profile.premium_until is null or profile.premium_until > now())
         ) as premium_active,
         row_number() over (
-          partition by coalesce(document.content_kind, 'course')
+          partition by coalesce(document.content_kind, 'course'), document.subject
           order by document.title asc, document.id asc
         ) as access_position
       from public.course_documents document
