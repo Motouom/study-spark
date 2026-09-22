@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getAiConfigStatus } from "@/lib/ai";
+import { getMultiAiConfigStatus } from "@/lib/ai-providers";
 import { getAuthenticatedUser } from "@/lib/server-supabase";
 
 export const Route = createFileRoute("/api/ai/health")({
@@ -13,14 +13,11 @@ export const Route = createFileRoute("/api/ai/health")({
             return Response.json({ error: "Admin access required." }, { status: 403 });
           }
 
-          const status = getAiConfigStatus();
+          const status = getMultiAiConfigStatus();
           return Response.json({
             ok: status.configured,
-            issues: status.issues,
-            model: status.model,
-            baseUrl: status.baseUrl,
-            timeoutMs: status.timeoutMs,
-            hasApiKey: status.hasApiKey,
+            providers: status.providers,
+            priorityOrder: ["gemini", "groq", "cerebras"],
           });
         } catch (error) {
           if (error instanceof Response) return error;

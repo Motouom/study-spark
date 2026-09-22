@@ -1,18 +1,4 @@
-type AiMessage = {
-  role: "system" | "user";
-  content: string;
-};
-
-type AiChatResponse = {
-  choices?: Array<{
-    message?: {
-      content?: string;
-    };
-  }>;
-  error?: {
-    message?: string;
-  };
-};
+import { askAI, multiAiConfigured, getMultiAiConfigStatus } from "@/lib/ai-providers";
 
 export type AiFailureKind =
   | "missing_config"
@@ -21,7 +7,8 @@ export type AiFailureKind =
   | "timeout"
   | "parse_failure"
   | "empty_response"
-  | "network";
+  | "network"
+  | "quota_exhausted";
 
 export class AiProviderError extends Error {
   kind: AiFailureKind;
@@ -46,32 +33,25 @@ function readEnv(name: string) {
 }
 
 export function aiConfigured() {
-  return Boolean(readEnv("OPENROUTER_API_KEY") || readEnv("AI_API_KEY"));
+  return multiAiConfigured() || Boolean(readEnv("OPENROUTER_API_KEY") || readEnv("AI_API_KEY"));
 }
 
 export function getAiConfigStatus() {
-  const apiKey = readEnv("OPENROUTER_API_KEY") ?? readEnv("AI_API_KEY");
-  const model = readEnv("AI_MODEL") ?? "openrouter/free";
-  const baseUrl = readEnv("AI_BASE_URL") ?? "https://openrouter.ai/api/v1";
+  const multiStatus = getMultiAiConfigStatus();
+  const legacyKey = Boolean(readEnv("OPENROUTER_API_KEY") || readEnv("AI_API_KEY"));
   const timeoutMs = Number(readEnv("AI_TIMEOUT_MS") ?? 25000);
   const issues: string[] = [];
 
-  if (!apiKey) issues.push("missing_api_key");
-  if (!model.trim()) issues.push("missing_model");
-  try {
-    new URL(baseUrl);
-  } catch {
-    issues.push("invalid_base_url");
-  }
+  if (!multiStatus.configured && !legacyKey) issues.push("missing_api_key");
   if (!Number.isFinite(timeoutMs) || timeoutMs < 1000) issues.push("invalid_timeout");
 
   return {
-    configured: issues.length === 0,
+    configured: multiStatus.configured || legacyKey,
     issues,
-    model,
-    baseUrl,
+    multiProvider: multiStatus,
+    legacyProvider: { configured: legacyKey, hasApiKey: legacyKey },
     timeoutMs: Number.isFinite(timeoutMs) && timeoutMs >= 1000 ? timeoutMs : 25000,
-    hasApiKey: Boolean(apiKey),
+    hasApiKey: multiStatus.configured || legacyKey,
   };
 }
 
@@ -95,6 +75,15 @@ export function logAiFailure(event: string, error: unknown, context: Record<stri
       ...context,
     }),
   );
+}
+
+export async function generateAiText(input: {
+  system: string;
+  prompt: string;
+  maxTokens?: number;
+}) {
+  const result = await askAI(input);
+  return result.content;
 }
 
 export function fallbackInsight(input: {
@@ -260,95 +249,4 @@ export function parseAiLearningPath(value: string): AiLearningPathDay[] {
       focus: String(row.focus ?? "Review weak areas carefully."),
     };
   });
-}
-
-export async function generateAiText(input: {
-  system: string;
-  prompt: string;
-  maxTokens?: number;
-}) {
-  const apiKey = readEnv("OPENROUTER_API_KEY") ?? readEnv("AI_API_KEY");
-  const config = getAiConfigStatus();
-  if (!apiKey) {
-    throw new AiProviderError("missing_config", "AI API key is missing.", { retryable: false });
-  }
-  if (config.issues.includes("missing_model") || config.issues.includes("invalid_base_url")) {
-    throw new AiProviderError(
-      "invalid_config",
-      `Invalid AI configuration: ${config.issues.join(", ")}`,
-    );
-  }
-
-  const model = config.model;
-  const baseUrl = config.baseUrl;
-  const messages: AiMessage[] = [
-    { role: "system", content: input.system },
-    { role: "user", content: input.prompt },
-  ];
-
-  let lastError: unknown;
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), config.timeoutMs);
-    try {
-      const response = await fetch(`${baseUrl.replace(/\/$/, "")}/chat/completions`, {
-        method: "POST",
-        signal: controller.signal,
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": readEnv("APP_PUBLIC_URL") ?? "http://127.0.0.1:8082",
-          "X-Title": "StudySpark",
-        },
-        body: JSON.stringify({
-          model,
-          messages,
-          temperature: 0.25,
-          max_tokens: input.maxTokens ?? 700,
-        }),
-      });
-
-      const payload = (await response.json().catch(() => null)) as AiChatResponse | null;
-      if (!response.ok) {
-        throw new AiProviderError(
-          "provider_http",
-          payload?.error?.message ?? `AI provider returned HTTP ${response.status}.`,
-          {
-            status: response.status,
-            retryable: response.status === 429 || response.status >= 500,
-          },
-        );
-      }
-
-      const content = payload?.choices?.[0]?.message?.content?.trim();
-      if (!content) {
-        lastError = new AiProviderError(
-          "empty_response",
-          "AI provider returned an empty response.",
-          {
-            retryable: attempt === 1,
-          },
-        );
-        if (attempt === 1) continue;
-        throw lastError;
-      }
-      return content;
-    } catch (error) {
-      if (error instanceof AiProviderError) throw error;
-      if (error instanceof Error && error.name === "AbortError") {
-        throw new AiProviderError("timeout", "AI provider request timed out.", { retryable: true });
-      }
-      throw new AiProviderError(
-        "network",
-        error instanceof Error ? error.message : "AI provider request failed.",
-        { retryable: true },
-      );
-    } finally {
-      clearTimeout(timeout);
-    }
-  }
-
-  throw lastError instanceof Error
-    ? lastError
-    : new AiProviderError("empty_response", "AI provider returned an empty response.");
 }
