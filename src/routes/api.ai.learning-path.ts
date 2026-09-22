@@ -291,7 +291,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             console.log(`[AI LearningPath] user=${user.id} — invoking generateAiText...`);
             const planText = await generateAiText({
               system:
-                "You are StudySpark's learning path planner for Cameroon GCE learners. Build the path from the learner's ACTUAL difficulties: review marks, low reading depth, low confidence, and difficult parts they reported. Order the 7 days hardest-first so the learner attacks their weakest papers early. Every day.paper must be one of the supplied titles (or 'Progress dashboard'). Do not invent papers, classes, subjects, or progress. Do not solve questions. Return valid JSON only.",
+                "You are StudySpark's learning path planner for Cameroon GCE learners. Build the path from the learner's ACTUAL difficulties. Return ONLY raw JSON — no markdown, no code blocks, no explanations before or after. The response must be valid JSON that can be parsed with JSON.parse().",
               prompt: JSON.stringify({
                 learner: profile,
                 weakestSubjects,
@@ -310,9 +310,9 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                 })),
                 nextPapers,
                 instruction:
-                  'Return JSON in this exact shape: {"days":[{"day":1,"title":"short action title","paper":"one supplied paper title or Progress dashboard","target":"specific measurable target based on failedQuestions, slowQuestions, pass/fail work, or review marks","focus":"specific revision focus that cites question numbers when provided"}]}. Create exactly 7 days. Day 1 must target the highest-difficulty paper. Use supplied failed question numbers and slow question numbers before using scroll depth. Do not use Markdown tables.',
+                  'Return ONLY this exact JSON shape with no other text: {"days":[{"day":1,"title":"...","paper":"...","target":"...","focus":"..."}]} Create exactly 7 days. Do not wrap in markdown code blocks. Do not add any text before or after the JSON.',
               }),
-              maxTokens: 900,
+              maxTokens: 1200,
             });
             console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
             const days = parseAiLearningPath(planText);

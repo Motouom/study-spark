@@ -419,8 +419,8 @@ export async function askAI(input: {
       );
 
       // Fall back on: rate-limit (429), transient network errors, timeouts,
-      // and provider-specific 404s (bad model name) / 400s (bad request).
-      // Don't fall back on: auth failures (401) — those are config issues
+      // parse failures (bad JSON), and provider-specific 404s/400s.
+      // Don't fall back on: auth failures (401/403) — those are config issues
       // that will fail on every provider.
       const isAuthError = aiError.status === 401 || aiError.status === 403;
       const shouldFallback =
@@ -430,6 +430,7 @@ export async function askAI(input: {
           aiError.status === 400 ||
           aiError.kind === "timeout" ||
           aiError.kind === "network" ||
+          aiError.kind === "parse_failure" ||
           (aiError.kind === "provider_http" && aiError.retryable));
 
       if (!shouldFallback) {

@@ -216,27 +216,44 @@ export type AiLearningPathDay = {
 };
 
 export function parseAiLearningPath(value: string): AiLearningPathDay[] {
-  const cleaned = value
-    .trim()
-    .replace(/^```(?:json)?/i, "")
-    .replace(/```$/i, "")
+  // Aggressively extract JSON: remove markdown fences, find first '{' to last '}'
+  let cleaned = value.trim();
+
+  // Remove markdown code blocks
+  cleaned = cleaned
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/i, "")
     .trim();
+
+  // If there's explanatory text before/after JSON, extract just the JSON object
+  const firstBrace = cleaned.indexOf("{");
+  const lastBrace = cleaned.lastIndexOf("}");
+  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+    cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  }
+
   let parsed: unknown;
   try {
     parsed = JSON.parse(cleaned) as unknown;
   } catch (error) {
+    // Retryable: another provider might return valid JSON
     throw new AiProviderError(
       "parse_failure",
       error instanceof Error ? error.message : "AI returned invalid JSON.",
+      { retryable: true },
     );
   }
+
   const days = Array.isArray(parsed)
     ? parsed
     : typeof parsed === "object" && parsed && "days" in parsed
       ? (parsed as { days?: unknown }).days
       : null;
+
   if (!Array.isArray(days)) {
-    throw new AiProviderError("parse_failure", "AI returned an invalid learning path shape.");
+    throw new AiProviderError("parse_failure", "AI returned an invalid learning path shape.", {
+      retryable: true,
+    });
   }
 
   return days.slice(0, 7).map((item, index) => {
