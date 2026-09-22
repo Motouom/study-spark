@@ -360,7 +360,7 @@ function Pricing() {
               Premium
             </h3>
             <div className="mt-3 flex items-baseline gap-1">
-              <span className="font-display text-5xl">FCFA 500</span>
+              <span className="font-display text-5xl">FCFA 1,500</span>
               <span className="text-background/60">/month</span>
             </div>
             <ul className="mt-6 space-y-2.5 text-sm">

@@ -111,7 +111,7 @@ function FrenchPricingPage() {
             <PlanCard
               dark
               title="Premium"
-              price="FCFA 500"
+              price="FCFA 1,500"
               suffix="/mois"
               subtitle="Pour débloquer les contenus protégés et le suivi complet."
               cta="Passer à Premium"

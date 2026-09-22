@@ -4,8 +4,8 @@ export type BillingInterval = "monthly" | "yearly";
 export type PaymentStatus = "created" | "pending" | "successful" | "failed" | "expired";
 
 export const PREMIUM_PRICES_XAF: Record<BillingInterval, number> = {
-  monthly: 500,
-  yearly: 5000,
+  monthly: 1500,
+  yearly: 12000,
 };
 
 type FapshiInitiateResponse = {
