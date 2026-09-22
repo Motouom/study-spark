@@ -46,7 +46,6 @@ import { useUnifiedStreak } from "@/hooks/use-unified-streak";
 
 import { isPremiumActive } from "@/lib/premium";
 import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
@@ -199,9 +198,8 @@ function SidebarContent({
             {isPremiumActive(profile) ? "Premium" : "Free"}
           </Link>
         </div>
-        {/* Theme toggle row — full width pill */}
+        {/* Theme toggle */}
         <div className="mt-2">
-          <LanguageSwitcher className="mb-2 h-9 w-full bg-background" />
           <ThemeToggle />
         </div>
       </div>
