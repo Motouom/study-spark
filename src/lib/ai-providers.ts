@@ -12,7 +12,7 @@ function readEnv(name: string) {
 
 const GEMINI_MODEL = "gemini-1.5-flash-latest";
 const GROQ_MODEL = "llama-3.3-70b-versatile";
-const CEREBRAS_MODEL = "llama-3.3-70b";
+const CEREBRAS_MODEL = "qwen-3.8-27b";
 
 const PROVIDER_ORDER: string[] = ["gemini", "groq", "cerebras"];
 
