@@ -41,6 +41,7 @@ type LeaderboardRow = {
   region: string;
   city: string;
   location_verified: boolean;
+  education_system: EducationSystem;
   level: Level;
   class_level: ClassLevel;
   series: Series;
@@ -151,7 +152,10 @@ function LeaderboardPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Filters — default to learner's own level + series so the first view is relevant
+  // Filters — default to learner's own education system + level + series
+  const [educationSystemFilter, setEducationSystemFilter] = useState<EducationSystem | "all">(
+    "all",
+  );
   const [levelFilter, setLevelFilter] = useState<Level | "all">("all");
   const [classFilter, setClassFilter] = useState<ClassLevel | "all">("all");
   const [seriesFilter, setSeriesFilter] = useState<Series | "all">("all");
@@ -159,6 +163,7 @@ function LeaderboardPage() {
   // Seed filters from profile once loaded
   useEffect(() => {
     if (!profile) return;
+    setEducationSystemFilter(profile.educationSystem ?? "gce");
     setLevelFilter(profile.level);
     setClassFilter(profile.classLevel);
     setSeriesFilter(profile.series);
@@ -205,12 +210,14 @@ function LeaderboardPage() {
   // Client-side filtering (all data already fetched)
   const filteredRows = useMemo(() => {
     return rows.filter((row) => {
+      if (educationSystemFilter !== "all" && row.education_system !== educationSystemFilter)
+        return false;
       if (levelFilter !== "all" && row.level !== levelFilter) return false;
       if (classFilter !== "all" && row.class_level !== classFilter) return false;
       if (seriesFilter !== "all" && row.series !== seriesFilter) return false;
       return true;
     });
-  }, [rows, levelFilter, classFilter, seriesFilter]);
+  }, [rows, educationSystemFilter, levelFilter, classFilter, seriesFilter]);
 
   const leaderboardRows = useMemo(() => filteredRows.slice(0, DISPLAY_LIMIT), [filteredRows]);
   const myRank = user ? filteredRows.findIndex((row) => row.user_id === user.id) + 1 : 0;
@@ -218,11 +225,11 @@ function LeaderboardPage() {
   const isOutsideTop = myRank > DISPLAY_LIMIT;
   const isMe = (row: LeaderboardRow) => row.user_id === user?.id;
 
-  const allClassLevels = [...classLevelsForSystem("gce"), ...classLevelsForSystem("francophone")];
-  const allSeriesOptions = [
-    ...seriesOptionsForSystem("gce"),
-    ...seriesOptionsForSystem("francophone"),
-  ];
+  // Only show classes/series for the selected education system
+  const activeSystem: EducationSystem =
+    educationSystemFilter !== "all" ? educationSystemFilter : "gce";
+  const allClassLevels = classLevelsForSystem(activeSystem);
+  const allSeriesOptions = seriesOptionsForSystem(activeSystem);
 
   // Available series options for the current level filter
   const availableSeriesForLevel = allSeriesOptions.filter(
@@ -343,6 +350,40 @@ function LeaderboardPage() {
 
             {/* Filters */}
             <div className="mt-4 space-y-2.5">
+              {/* Education system filter */}
+              <div className="flex flex-wrap gap-2">
+                <FilterPill
+                  label="All systems"
+                  active={educationSystemFilter === "all"}
+                  onClick={() => {
+                    setEducationSystemFilter("all");
+                    setLevelFilter("all");
+                    setClassFilter("all");
+                    setSeriesFilter("all");
+                  }}
+                />
+                <FilterPill
+                  label="GCE (Anglophone)"
+                  active={educationSystemFilter === "gce"}
+                  onClick={() => {
+                    setEducationSystemFilter("gce");
+                    setLevelFilter("all");
+                    setClassFilter("all");
+                    setSeriesFilter("all");
+                  }}
+                />
+                <FilterPill
+                  label="OBC (Francophone)"
+                  active={educationSystemFilter === "francophone"}
+                  onClick={() => {
+                    setEducationSystemFilter("francophone");
+                    setLevelFilter("all");
+                    setClassFilter("all");
+                    setSeriesFilter("all");
+                  }}
+                />
+              </div>
+
               {/* Level filter */}
               <div className="flex flex-wrap gap-2">
                 <FilterPill
@@ -355,7 +396,7 @@ function LeaderboardPage() {
                   }}
                 />
                 <FilterPill
-                  label="Ordinary Level"
+                  label={educationSystemFilter === "francophone" ? "Collège" : "Ordinary Level"}
                   active={levelFilter === "ordinary"}
                   onClick={() => {
                     setLevelFilter("ordinary");
@@ -364,7 +405,7 @@ function LeaderboardPage() {
                   }}
                 />
                 <FilterPill
-                  label="Advanced Level"
+                  label={educationSystemFilter === "francophone" ? "Lycée" : "Advanced Level"}
                   active={levelFilter === "advanced"}
                   onClick={() => {
                     setLevelFilter("advanced");
@@ -543,6 +584,7 @@ function LeaderboardPage() {
                 size="sm"
                 className="mt-4"
                 onClick={() => {
+                  setEducationSystemFilter("all");
                   setLevelFilter("all");
                   setClassFilter("all");
                   setSeriesFilter("all");
