@@ -8,6 +8,7 @@ import { useStudyProfile } from "@/hooks/use-study-profile";
 import { supabase } from "@/lib/supabase";
 import { alternateLinks, canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
 import { useI18n, useSyncLocaleFromProfile, type TranslationKey } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -91,6 +92,11 @@ function PricingPage() {
       ? `${amount.toLocaleString("fr-CM")} FCFA`
       : `FCFA ${amount.toLocaleString("en-CM")}`;
 
+  // Track pricing page view once on mount
+  useEffect(() => {
+    track({ name: "premium_view" });
+  }, []);
+
   useEffect(() => {
     if (!userId || !supabase) return;
     const params = new URLSearchParams(window.location.search);
@@ -132,6 +138,7 @@ function PricingPage() {
           const { ok, payload } = await verifyOnce();
           if (ok && payload.status === "successful") {
             sessionStorage.removeItem("studyspark.checkout.transactionId");
+            track({ name: "payment_success" });
             setPaymentMessage(t("pricing.paymentConfirmed"));
             window.setTimeout(() => window.location.assign("/dashboard"), 1200);
             return;
@@ -144,14 +151,19 @@ function PricingPage() {
             await new Promise((resolve) => window.setTimeout(resolve, 4000));
             continue;
           }
+          const isPending = payload.status === "pending" || payload.status === "created";
+          if (isPending) {
+            track({ name: "payment_pending" });
+          } else {
+            track({ name: "payment_failure", props: { reason: payload.status ?? "unconfirmed" } });
+          }
           setPaymentMessage(
-            payload.status === "pending" || payload.status === "created"
-              ? t("pricing.paymentPending")
-              : t("pricing.paymentNotConfirmed"),
+            isPending ? t("pricing.paymentPending") : t("pricing.paymentNotConfirmed"),
           );
           return;
         } catch {
           if (attempt === maxAttempts) {
+            track({ name: "payment_failure", props: { reason: "check_failed" } });
             setPaymentMessage(t("pricing.paymentCheckFailed"));
             return;
           }
@@ -171,6 +183,7 @@ function PricingPage() {
 
     setCheckoutLoading(true);
     setPaymentMessage(null);
+    track({ name: "checkout_started", props: { interval: yearly ? "yearly" : "monthly" } });
     try {
       const { data } = await supabase.auth.getSession();
       const response = await fetch("/api/payments/fapshi/initiate", {

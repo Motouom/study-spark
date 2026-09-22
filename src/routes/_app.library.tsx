@@ -27,6 +27,7 @@ import { useStudyContent, type CourseDocument } from "@/hooks/use-study-content"
 import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useI18n } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 
 export const Route = createFileRoute("/_app/library")({
   head: () => ({ meta: [{ title: "Papers — StudySpark" }] }),
@@ -188,7 +189,10 @@ function LibraryPage() {
                 <button
                   key={item.name}
                   type="button"
-                  onClick={() => setSubject(item.name)}
+                  onClick={() => {
+                    setSubject(item.name);
+                    track({ name: "subject_selected", props: { subject: item.name } });
+                  }}
                   className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
                 >
                   <div className="flex items-start justify-between gap-3">

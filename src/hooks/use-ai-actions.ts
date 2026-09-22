@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { track } from "@/lib/analytics";
 
 type AiSource = "ai" | "fallback";
 
@@ -60,30 +61,28 @@ export function useAiActions() {
 
   const generateProgressInsight = useCallback(
     () =>
-      run("progress", () =>
-        postAi<{ insight: string; source: AiSource; message?: string }>("/api/ai/progress-insight"),
-      ),
+      run("progress", () => {
+        track({ name: "ai_action_used", props: { action: "progress_insight" } });
+        return postAi<{ insight: string; source: AiSource; message?: string }>("/api/ai/progress-insight");
+      }),
     [run],
   );
 
   const generateLearningPath = useCallback(
     () =>
-      run("learning-path", () =>
-        postAi<{ days: AiLearningPathDay[]; source: AiSource; message?: string }>(
-          "/api/ai/learning-path",
-        ),
-      ),
+      run("learning-path", () => {
+        track({ name: "ai_action_used", props: { action: "learning_path" } });
+        return postAi<{ days: AiLearningPathDay[]; source: AiSource; message?: string }>("/api/ai/learning-path");
+      }),
     [run],
   );
 
   const formatPaper = useCallback(
     (input: { title: string; subject: string; markdown: string }) =>
-      run("format-paper", () =>
-        postAi<{ markdown: string; source: AiSource; message?: string }>(
-          "/api/ai/format-paper",
-          input,
-        ),
-      ),
+      run("format-paper", () => {
+        track({ name: "ai_action_used", props: { action: "format_paper" } });
+        return postAi<{ markdown: string; source: AiSource; message?: string }>("/api/ai/format-paper", input);
+      }),
     [run],
   );
 

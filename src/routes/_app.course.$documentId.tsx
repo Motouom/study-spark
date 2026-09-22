@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { track } from "@/lib/analytics";
 import {
   ArrowLeft,
   BookOpen,
@@ -49,6 +50,20 @@ function CourseDocumentPage() {
   const { user } = useSupabaseUser();
   const content = useStudyContent(profile);
   const document = content.documents.find((item) => item.id === documentId);
+
+  // Track once when the document is identified — not on every render
+  useEffect(() => {
+    if (!document) return;
+    track({
+      name: "paper_opened",
+      props: {
+        subject: document.subject,
+        level: document.level,
+        isLocked: document.isLocked,
+      },
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [document?.id]);
   const studyProgress = usePaperStudyProgress(document?.id);
   const questionProgress = useStructuralProgress(document?.id);
   const topicProgress = useTopicUnderstandingProgress(document?.id);

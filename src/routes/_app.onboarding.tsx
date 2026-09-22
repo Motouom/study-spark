@@ -25,7 +25,7 @@ import { ArrowRight, Check, GraduationCap, Languages, BookOpen, MapPin } from "l
 import { motion, AnimatePresence } from "framer-motion";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { getSupabaseDisplayName } from "@/hooks/use-supabase-user";
-import { supabase } from "@/lib/supabase";
+import { track } from "@/lib/analytics";
 import { useBrowserLocation } from "@/hooks/use-browser-location";
 import { useI18n } from "@/lib/i18n";
 
@@ -98,6 +98,7 @@ function Onboarding() {
 
     try {
       await saveProfile(nextProfile);
+      track({ name: "onboarding_complete", props: { level: String(level), language: String(language) } });
       await navigate({ to: "/dashboard" });
     } catch (err) {
       const message =
