@@ -414,23 +414,19 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             );
             const planText = await generateAiText({
               system:
-                "You are StudySpark's learning path planner. You MUST keep every day.paper exactly as provided in the 'fixedDays' array. DO NOT change the paper titles. Your job is ONLY to rewrite the title, target, and focus to be more compelling and specific, while keeping the same meaning. Reference actual failed question numbers when they exist. Return ONLY raw JSON — no markdown, no code blocks.",
+                "Rewrite learning path descriptions. Keep every paper title identical to fixedDays. Return compact JSON only.",
               prompt: JSON.stringify({
-                learner: profile,
                 fixedDays: deterministicDays.map((d) => ({
                   day: d.day,
                   paper: d.paper,
-                  failedQuestions:
-                    difficultyRanking.find((e) => e.title === d.paper)?.failedQuestions ?? [],
-                  slowQuestions:
-                    difficultyRanking.find((e) => e.title === d.paper)?.slowQuestions.slice(0, 3) ??
-                    [],
-                  reviewCount: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
-                  avgConfidence:
-                    difficultyRanking.find((e) => e.title === d.paper)?.avgConfidence ?? null,
+                  failedQ:
+                    difficultyRanking
+                      .find((e) => e.title === d.paper)
+                      ?.failedQuestions.slice(0, 3) ?? [],
+                  reviews: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
                 })),
                 instruction:
-                  'Return ONLY JSON: {"days":[{"day":1,"title":"...","paper":"KEEP EXACTLY AS PROVIDED","target":"...","focus":"..."}]}. Keep each paper identical to fixedDays. Make targets reference actual failed question numbers.',
+                  'Return compact JSON: [{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]. Paper must match EXACT_PAPER_NAME exactly.',
               }),
               maxTokens: 1400,
             });
@@ -453,11 +449,12 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           } catch (aiError) {
             console.error(`[AI LearningPath] user=${user.id} — generateAiText FAILED:`, aiError);
             logAiFailure("ai.learning_path.provider_failed", aiError, { userId: user.id });
+            // Always return the deterministic plan (never the old generic fallback)
             return Response.json({
               days: deterministicDays,
               source: "fallback",
               message:
-                "AI was unavailable, so StudySpark built a safe plan from your failed questions, slow questions, and review marks.",
+                "AI enrichment failed, so StudySpark used your actual study data to build a focused plan.",
             });
           }
         } catch (error) {

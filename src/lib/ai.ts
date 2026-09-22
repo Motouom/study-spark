@@ -235,13 +235,21 @@ export function parseAiLearningPath(value: string): AiLearningPathDay[] {
   let parsed: unknown;
   try {
     parsed = JSON.parse(cleaned) as unknown;
-  } catch (error) {
-    // Retryable: another provider might return valid JSON
-    throw new AiProviderError(
-      "parse_failure",
-      error instanceof Error ? error.message : "AI returned invalid JSON.",
-      { retryable: true },
-    );
+  } catch {
+    // Try to fix common AI JSON errors: trailing commas, single quotes, unclosed strings
+    const fixed = cleaned
+      .replace(/,(\s*[}\]])/g, "$1") // remove trailing commas
+      .replace(/'/g, '"') // replace single quotes with double quotes
+      .replace(/\n/g, " "); // remove newlines inside strings
+    try {
+      parsed = JSON.parse(fixed) as unknown;
+    } catch (error2) {
+      throw new AiProviderError(
+        "parse_failure",
+        error2 instanceof Error ? error2.message : "AI returned invalid JSON.",
+        { retryable: true },
+      );
+    }
   }
 
   const days = Array.isArray(parsed)

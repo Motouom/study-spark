@@ -10,7 +10,7 @@ function readEnv(name: string) {
 //  Provider configuration
 /* ────────────────────────────────────────────────────────────────────────── */
 
-const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_MODEL = "gemini-3.6-flash";
 const GROQ_MODEL = "openai/gpt-oss-120b";
 const CEREBRAS_MODEL = "qwen-3.8-27b";
 
