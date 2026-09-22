@@ -119,8 +119,54 @@ function FrenchPricingPage() {
               features={features.map((feature) => feature.name)}
             />
           </div>
+          <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
+            Paiement FCFA sécurisé via{" "}
+            <a
+              href="https://www.fapshi.com"
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-2"
+            >
+              Fapshi
+            </a>{" "}
+            — Mobile Money MTN, Orange et autres canaux Fapshi selon disponibilité. En payant vous
+            acceptez nos{" "}
+            <Link to="/fr/refund" className="underline underline-offset-2">
+              conditions de remboursement
+            </Link>
+            ,{" "}
+            <Link to="/fr/terms" className="underline underline-offset-2">
+              conditions
+            </Link>{" "}
+            et{" "}
+            <Link to="/fr/privacy" className="underline underline-offset-2">
+              confidentialité
+            </Link>
+            .
+          </p>
         </section>
       </main>
+
+      <footer className="border-t border-border bg-surface">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
+          <Logo />
+          <nav className="flex flex-wrap items-center gap-4">
+            <Link to="/fr/terms" className="underline underline-offset-2 hover:text-foreground">
+              Conditions
+            </Link>
+            <Link to="/fr/privacy" className="underline underline-offset-2 hover:text-foreground">
+              Confidentialité
+            </Link>
+            <Link to="/fr/refund" className="underline underline-offset-2 hover:text-foreground">
+              Remboursement
+            </Link>
+            <Link to="/support" className="underline underline-offset-2 hover:text-foreground">
+              Assistance
+            </Link>
+          </nav>
+          <p>© {new Date().getFullYear()} StudySpark. Fait pour les élèves du Cameroun.</p>
+        </div>
+      </footer>
     </div>
   );
 }

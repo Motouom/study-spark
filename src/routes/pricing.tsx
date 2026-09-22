@@ -310,6 +310,31 @@ function PricingPage() {
                 )}
                 {t("pricing.payWithFapshi")}
               </Button>
+              <p className="mt-3 text-xs leading-relaxed text-background/70">
+                Secure FCFA checkout via{" "}
+                <a
+                  href="https://www.fapshi.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Fapshi
+                </a>{" "}
+                — MTN Mobile Money, Orange Money, and other Fapshi channels where available. By
+                paying you agree to our{" "}
+                <Link to="/refund" className="underline underline-offset-2">
+                  Refund & Cancellation
+                </Link>
+                ,{" "}
+                <Link to="/terms" className="underline underline-offset-2">
+                  Terms
+                </Link>{" "}
+                and{" "}
+                <Link to="/privacy" className="underline underline-offset-2">
+                  Privacy
+                </Link>
+                .
+              </p>
               {paymentMessage ? (
                 <div className="mt-3 rounded-lg bg-background/10 px-3 py-2 text-sm text-background/80">
                   <p>{paymentMessage}</p>
@@ -389,6 +414,20 @@ function PricingPage() {
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
           <Logo />
+          <nav className="flex flex-wrap items-center gap-4">
+            <Link to="/terms" className="underline underline-offset-2 hover:text-foreground">
+              Terms
+            </Link>
+            <Link to="/privacy" className="underline underline-offset-2 hover:text-foreground">
+              Privacy
+            </Link>
+            <Link to="/refund" className="underline underline-offset-2 hover:text-foreground">
+              Refund
+            </Link>
+            <Link to="/support" className="underline underline-offset-2 hover:text-foreground">
+              Support
+            </Link>
+          </nav>
           <p>
             © {new Date().getFullYear()} StudySpark. {t("pricing.footer")}
           </p>

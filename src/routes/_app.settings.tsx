@@ -761,6 +761,34 @@ function SettingsPage() {
               )}
             </Section>
 
+            <Section title="Legal" description="Review policies that apply to your account and Premium payments.">
+              <div className="flex flex-wrap gap-3 text-sm">
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/terms">Terms of Service</Link>
+                </Button>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/privacy">Privacy Policy</Link>
+                </Button>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/refund">Refund & Cancellation</Link>
+                </Button>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/pricing">Pricing</Link>
+                </Button>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/support">Support</Link>
+                </Button>
+              </div>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Premium payments are processed only via{" "}
+                <a href="https://www.fapshi.com" target="_blank" rel="noreferrer" className="underline">
+                  Fapshi
+                </a>{" "}
+                in FCFA (MTN Mobile Money, Orange Money, and other Fapshi channels where available).
+                See refund terms before paying. For help, contact support@studyspark.cm.
+              </p>
+            </Section>
+
             <Section
               title="Session"
               description="Leave this device and sign in with another account."

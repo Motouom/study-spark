@@ -14,7 +14,10 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3x'
 import { Route as FrRouteImport } from './routes/fr'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RefundRouteImport } from './routes/refund'
 import { Route as SigninRouteImport } from './routes/signin'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
 import { Route as AppCheatsheetsRouteImport } from './routes/_app.cheatsheets'
 import { Route as AppCoursesRouteImport } from './routes/_app.courses'
@@ -39,7 +42,10 @@ import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel
 import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
 import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
 import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
+import { Route as FrPrivacyRouteImport } from './routes/fr.privacy'
+import { Route as FrRefundRouteImport } from './routes/fr.refund'
 import { Route as FrTarifsRouteImport } from './routes/fr.tarifs'
+import { Route as FrTermsRouteImport } from './routes/fr.terms'
 import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
 import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
@@ -75,9 +81,24 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundRoute = RefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SigninRoute = SigninRouteImport.update({
   id: '/signin',
   path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppAchievementsRoute = AppAchievementsRouteImport.update({
@@ -204,9 +225,24 @@ const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
+const FrPrivacyRoute = FrPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => FrRoute,
+} as any)
+const FrRefundRoute = FrRefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => FrRoute,
+} as any)
 const FrTarifsRoute = FrTarifsRouteImport.update({
   id: '/tarifs',
   path: '/tarifs',
+  getParentRoute: () => FrRoute,
+} as any)
+const FrTermsRoute = FrTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => FrRoute,
 } as any)
 const AppCourseDocumentIdRoute = AppCourseDocumentIdRouteImport.update({
@@ -267,7 +303,10 @@ export interface FileRoutesByFullPath {
   '/control-panel-9k3x': typeof ControlPanel9k3xRouteWithChildren
   '/fr': typeof FrRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
   '/signin': typeof SigninRoute
+  '/terms': typeof TermsRoute
   '/achievements': typeof AppAchievementsRoute
   '/cheatsheets': typeof AppCheatsheetsRoute
   '/courses': typeof AppCoursesRoute
@@ -291,7 +330,10 @@ export interface FileRoutesByFullPath {
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
+  '/fr/privacy': typeof FrPrivacyRoute
+  '/fr/refund': typeof FrRefundRoute
   '/fr/tarifs': typeof FrTarifsRoute
+  '/fr/terms': typeof FrTermsRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
@@ -308,7 +350,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/fr': typeof FrRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
   '/signin': typeof SigninRoute
+  '/terms': typeof TermsRoute
   '/achievements': typeof AppAchievementsRoute
   '/cheatsheets': typeof AppCheatsheetsRoute
   '/courses': typeof AppCoursesRoute
@@ -332,7 +377,10 @@ export interface FileRoutesByTo {
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
+  '/fr/privacy': typeof FrPrivacyRoute
+  '/fr/refund': typeof FrRefundRoute
   '/fr/tarifs': typeof FrTarifsRoute
+  '/fr/terms': typeof FrTermsRoute
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
@@ -352,7 +400,10 @@ export interface FileRoutesById {
   '/control-panel-9k3x': typeof ControlPanel9k3xRouteWithChildren
   '/fr': typeof FrRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
   '/signin': typeof SigninRoute
+  '/terms': typeof TermsRoute
   '/_app/achievements': typeof AppAchievementsRoute
   '/_app/cheatsheets': typeof AppCheatsheetsRoute
   '/_app/courses': typeof AppCoursesRoute
@@ -376,7 +427,10 @@ export interface FileRoutesById {
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
+  '/fr/privacy': typeof FrPrivacyRoute
+  '/fr/refund': typeof FrRefundRoute
   '/fr/tarifs': typeof FrTarifsRoute
+  '/fr/terms': typeof FrTermsRoute
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
   '/_app/quiz/setup': typeof AppQuizSetupRoute
@@ -396,7 +450,10 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x'
     | '/fr'
     | '/pricing'
+    | '/privacy'
+    | '/refund'
     | '/signin'
+    | '/terms'
     | '/achievements'
     | '/cheatsheets'
     | '/courses'
@@ -420,7 +477,10 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
+    | '/fr/privacy'
+    | '/fr/refund'
     | '/fr/tarifs'
+    | '/fr/terms'
     | '/control-panel-9k3x/'
     | '/course/$documentId'
     | '/quiz/setup'
@@ -437,7 +497,10 @@ export interface FileRouteTypes {
     | '/'
     | '/fr'
     | '/pricing'
+    | '/privacy'
+    | '/refund'
     | '/signin'
+    | '/terms'
     | '/achievements'
     | '/cheatsheets'
     | '/courses'
@@ -461,7 +524,10 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
+    | '/fr/privacy'
+    | '/fr/refund'
     | '/fr/tarifs'
+    | '/fr/terms'
     | '/control-panel-9k3x'
     | '/course/$documentId'
     | '/quiz/setup'
@@ -480,7 +546,10 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x'
     | '/fr'
     | '/pricing'
+    | '/privacy'
+    | '/refund'
     | '/signin'
+    | '/terms'
     | '/_app/achievements'
     | '/_app/cheatsheets'
     | '/_app/courses'
@@ -504,7 +573,10 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/questions'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
+    | '/fr/privacy'
+    | '/fr/refund'
     | '/fr/tarifs'
+    | '/fr/terms'
     | '/control-panel-9k3x/'
     | '/_app/course/$documentId'
     | '/_app/quiz/setup'
@@ -524,7 +596,10 @@ export interface RootRouteChildren {
   ControlPanel9k3xRoute: typeof ControlPanel9k3xRouteWithChildren
   FrRoute: typeof FrRouteWithChildren
   PricingRoute: typeof PricingRoute
+  PrivacyRoute: typeof PrivacyRoute
+  RefundRoute: typeof RefundRoute
   SigninRoute: typeof SigninRoute
+  TermsRoute: typeof TermsRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
   ApiAiFormatPaperRoute: typeof ApiAiFormatPaperRoute
   ApiAiHealthRoute: typeof ApiAiHealthRoute
@@ -573,11 +648,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund': {
+      id: '/refund'
+      path: '/refund'
+      fullPath: '/refund'
+      preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/signin': {
       id: '/signin'
       path: '/signin'
       fullPath: '/signin'
       preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app/achievements': {
@@ -748,11 +844,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControlPanel9k3xUsersRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
+    '/fr/privacy': {
+      id: '/fr/privacy'
+      path: '/privacy'
+      fullPath: '/fr/privacy'
+      preLoaderRoute: typeof FrPrivacyRouteImport
+      parentRoute: typeof FrRoute
+    }
+    '/fr/refund': {
+      id: '/fr/refund'
+      path: '/refund'
+      fullPath: '/fr/refund'
+      preLoaderRoute: typeof FrRefundRouteImport
+      parentRoute: typeof FrRoute
+    }
     '/fr/tarifs': {
       id: '/fr/tarifs'
       path: '/tarifs'
       fullPath: '/fr/tarifs'
       preLoaderRoute: typeof FrTarifsRouteImport
+      parentRoute: typeof FrRoute
+    }
+    '/fr/terms': {
+      id: '/fr/terms'
+      path: '/terms'
+      fullPath: '/fr/terms'
+      preLoaderRoute: typeof FrTermsRouteImport
       parentRoute: typeof FrRoute
     }
     '/_app/course/$documentId': {
@@ -905,11 +1022,17 @@ const ControlPanel9k3xRouteWithChildren =
   ControlPanel9k3xRoute._addFileChildren(ControlPanel9k3xRouteChildren)
 
 interface FrRouteChildren {
+  FrPrivacyRoute: typeof FrPrivacyRoute
+  FrRefundRoute: typeof FrRefundRoute
   FrTarifsRoute: typeof FrTarifsRoute
+  FrTermsRoute: typeof FrTermsRoute
 }
 
 const FrRouteChildren: FrRouteChildren = {
+  FrPrivacyRoute: FrPrivacyRoute,
+  FrRefundRoute: FrRefundRoute,
   FrTarifsRoute: FrTarifsRoute,
+  FrTermsRoute: FrTermsRoute,
 }
 
 const FrRouteWithChildren = FrRoute._addFileChildren(FrRouteChildren)
@@ -920,7 +1043,10 @@ const rootRouteChildren: RootRouteChildren = {
   ControlPanel9k3xRoute: ControlPanel9k3xRouteWithChildren,
   FrRoute: FrRouteWithChildren,
   PricingRoute: PricingRoute,
+  PrivacyRoute: PrivacyRoute,
+  RefundRoute: RefundRoute,
   SigninRoute: SigninRoute,
+  TermsRoute: TermsRoute,
   AuthCallbackRoute: AuthCallbackRoute,
   ApiAiFormatPaperRoute: ApiAiFormatPaperRoute,
   ApiAiHealthRoute: ApiAiHealthRoute,
