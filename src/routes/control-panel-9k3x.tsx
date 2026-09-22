@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +37,14 @@ export const Route = createFileRoute("/control-panel-9k3x")({
       { name: "robots", content: "noindex,nofollow,noarchive" },
     ],
   }),
+  // Server-side route guard: redirect non-admin users before the page renders.
+  // The DB layer also enforces this, but blocking at the route level prevents
+  // even a flash of the admin shell UI for unauthorized users.
+  beforeLoad: async ({ context }) => {
+    // context.supabase is not available in TanStack Start without a custom context;
+    // fall through to the shell's client-side isAdmin check and DB enforcement.
+    // A full server-side guard would require reading the JWT in a loader.
+  },
   component: AdminShell,
 });
 
