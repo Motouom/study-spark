@@ -227,28 +227,52 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           const questionRows = questionProgress ?? [];
           const startedDocumentIds = new Set(sessionRows.map((item) => item.document_id));
 
+          console.log(
+            `[AI LearningPath] user=${user.id} Data: sessions=${sessionRows.length}, checkpoints=${checkpointRows.length}, reflections=${reflectionRows.length}, questions=${questionRows.length}, docs=${matchingDocuments.length}`,
+          );
+          console.log(`[AI LearningPath] user=${user.id} Profile subjects:`, [...profileSubjects]);
+          console.log(`[AI LearningPath] user=${user.id} Doc subjects:`, [
+            ...new Set(matchingDocuments.map((d) => d.subject)),
+          ]);
+
+          // If subject filter yields nothing, fall back to all documents so the path still works
+          const docsForRanking =
+            matchingDocuments.length > 0 ? matchingDocuments : (documents ?? []);
+
           const difficultyRanking = buildDifficultyRanking(
-            matchingDocuments,
+            docsForRanking,
             sessionRows,
             questionRows,
             checkpointRows,
             reflectionRows,
           );
 
+          console.log(
+            `[AI LearningPath] user=${user.id} difficultyRanking length: ${difficultyRanking.length}`,
+          );
+          if (difficultyRanking.length > 0) {
+            console.log(
+              `[AI LearningPath] user=${user.id} Top papers:`,
+              difficultyRanking
+                .slice(0, 3)
+                .map((e) => ({ title: e.title, score: e.difficultyScore, depth: e.bestDepth })),
+            );
+          }
+
           const unfinishedPapers = difficultyRanking
             .filter((entry) => entry.bestDepth < 85)
             .slice(0, 4)
             .map((entry) => entry.title);
-          const nextPapers = matchingDocuments
+          const docsForPapers =
+            matchingDocuments.length > 0 ? matchingDocuments : (documents ?? []);
+          const nextPapers = docsForPapers
             .filter((document) => !startedDocumentIds.has(document.id))
             .slice(0, 5)
             .map((document) => String(document.title));
           const subjectReviewSignals = new Map<string, number>();
           for (const item of checkpointRows) {
             if (item.checkpoint_type !== "review") continue;
-            const document = matchingDocuments.find(
-              (candidate) => candidate.id === item.document_id,
-            );
+            const document = docsForPapers.find((candidate) => candidate.id === item.document_id);
             if (!document) continue;
             subjectReviewSignals.set(
               String(document.subject),
@@ -257,9 +281,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
           }
           for (const item of questionRows) {
             if (item.status !== "failed") continue;
-            const document = matchingDocuments.find(
-              (candidate) => candidate.id === item.document_id,
-            );
+            const document = docsForPapers.find((candidate) => candidate.id === item.document_id);
             if (!document) continue;
             subjectReviewSignals.set(
               String(document.subject),
@@ -297,6 +319,13 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               .filter((t): t is string => Boolean(t));
             const sessionPapers = [...new Set(sessionPaperTitles)]; // dedupe while preserving order
             let sessionIdx = 0;
+
+            console.log(
+              `[AI LearningPath] buildDeterministicDays: ranked=${ranked.length}, fresh=${fresh.length}, sessionPapers=${sessionPapers.length}`,
+            );
+            if (sessionPapers.length > 0) {
+              console.log(`[AI LearningPath] sessionPapers:`, sessionPapers.slice(0, 5));
+            }
 
             const getPaper = (): string => {
               if (rankIdx < ranked.length) return ranked[rankIdx++].title;
