@@ -252,7 +252,11 @@ function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
           variant={sheet.isLocked ? "outline" : "secondary"}
           className="shrink-0 whitespace-nowrap"
         >
-          {sheet.isLocked ? t("common.premium") : t("common.topic")}
+          {sheet.isLocked
+            ? t("common.premium")
+            : sheet.accessStatus === "free_preview"
+              ? t("common.free")
+              : t("common.topic")}
         </Badge>
       </div>
       <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
