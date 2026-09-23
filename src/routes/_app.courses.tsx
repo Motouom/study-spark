@@ -3,7 +3,6 @@ import { PageHeader } from "./_app";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PremiumGate } from "@/components/PremiumGate";
 import { useStudyContent } from "@/hooks/use-study-content";
 import type { CourseDocument } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
@@ -20,6 +19,7 @@ import {
   Clock,
   GraduationCap,
   ListChecks,
+  Lock,
   PlayCircle,
   Search,
   Sparkles,
@@ -114,16 +114,20 @@ function CoursesPage() {
 
   const topics = useMemo(
     () =>
-      courses.flatMap((course) =>
-        unitsOf(course).map((topic, index) => ({
+      courses.flatMap((course) => {
+        const units = unitsOf(course);
+        const visibleUnits = units.length > 0 ? units : [course.title];
+        return visibleUnits.map((topic, index) => ({
           id: `${course.id}:${slugifyHeading(topic)}`,
           title: topic,
           index,
           course,
           stats: courseStats.get(course.id)!,
-          href: `/course/${course.id}#${slugifyHeading(topic)}`,
-        })),
-      ),
+          href: course.isLocked
+            ? `/pricing`
+            : `/course/${course.id}#${slugifyHeading(topic)}`,
+        }));
+      }),
     [courses, courseStats],
   );
 
@@ -190,11 +194,7 @@ function CoursesPage() {
           </div>
         )}
 
-        <PremiumGate
-          title={t("courses.premiumTitle")}
-          description={t("courses.premiumDescription")}
-        >
-          {loaded && topics.length === 0 ? (
+        {loaded && topics.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
               <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground" />
               <h2 className="mt-4 text-base font-medium">{t("courses.emptyTitle")}</h2>
@@ -317,7 +317,6 @@ function CoursesPage() {
               )}
             </div>
           )}
-        </PremiumGate>
       </div>
     </>
   );
@@ -412,6 +411,30 @@ function TopicResults({
 
 function TopicCard({ topic }: { topic: CourseTopic }) {
   const { t } = useI18n();
+  if (topic.course.isLocked) {
+    return (
+      <article className="rounded-xl border border-border bg-card p-4 opacity-90">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
+            <Lock className="h-5 w-5" />
+          </div>
+          <Badge variant="outline">{t("common.premium")}</Badge>
+        </div>
+        <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug">{topic.title}</h3>
+        <p className="mt-2 text-xs text-muted-foreground">
+          {topic.course.subject} · {classLevelText(topic.course.classLevels)} ·{" "}
+          {topic.course.language === "french" ? "Français" : "English"}
+        </p>
+        <Button asChild size="sm" className="mt-4">
+          <Link to="/pricing">
+            <Sparkles className="mr-1.5 h-4 w-4" />
+            {t("common.viewPremium")}
+          </Link>
+        </Button>
+      </article>
+    );
+  }
+
   return (
     <a
       href={topic.href}
@@ -427,7 +450,9 @@ function TopicCard({ topic }: { topic: CourseTopic }) {
         >
           {topic.stats.bestDepth > 0
             ? `${topic.stats.bestDepth}% ${t("common.read")}`
-            : t("common.topic")}
+            : topic.course.accessStatus === "free_preview"
+              ? t("common.free")
+              : t("common.topic")}
         </Badge>
       </div>
       <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
