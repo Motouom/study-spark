@@ -1,5 +1,4 @@
 import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tanstack/react-router";
-import { motion } from "framer-motion";
 import { useEffect } from "react";
 import {
   ArrowRight,
@@ -135,12 +134,7 @@ function FrenchLanding() {
           <div className="absolute inset-0 -z-10 dot-bg opacity-60" />
           <div className="absolute inset-x-0 top-0 -z-10 h-[420px] bg-gradient-to-b from-accent/10 to-transparent" />
           <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28 md:pb-32">
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mx-auto max-w-3xl text-center"
-            >
+            <div className="animate-fade-up mx-auto max-w-3xl text-center">
               <Badge
                 variant="secondary"
                 className="mb-6 gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs"
@@ -167,7 +161,7 @@ function FrenchLanding() {
                   <Link to="/fr/tarifs">Voir les tarifs</Link>
                 </Button>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 

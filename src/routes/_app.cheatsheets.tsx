@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_app/cheatsheets")({
 function CheatsheetsPage() {
   const { t } = useI18n();
   const { profile } = useStudyProfile();
-  const { documents } = useStudyContent(profile);
+  const { documents } = useStudyContent(profile, { includeContent: false });
   const [subject, setSubject] = useState<string | null>(null);
   const [q, setQ] = useState("");
 

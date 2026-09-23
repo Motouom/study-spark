@@ -37,7 +37,7 @@ export const Route = createFileRoute("/_app/library")({
 function LibraryPage() {
   const { t } = useI18n();
   const { profile: savedProfile, loaded: profileLoaded } = useStudyProfile();
-  const content = useStudyContent(savedProfile);
+  const content = useStudyContent(savedProfile, { includeContent: false });
   const courseDocuments = content.documents.filter((document) => document.contentKind === "paper");
   const useRemoteOnly = supabaseConfigured();
   const pageLoading = useRemoteOnly && (!profileLoaded || !content.loaded || content.loading);
@@ -295,6 +295,7 @@ function SearchResults({
 }
 
 function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPercent: number }) {
+  const { t } = useI18n();
   const series = document.series.map((id) => seriesLabel(id as Series)).join(", ");
   const classes = document.classLevels.map((id) => classLabel(id)).join(", ");
   const exams = Array.from(
@@ -309,16 +310,16 @@ function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPe
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-foreground">
             <Lock className="h-5 w-5" />
           </div>
-          <Badge variant="outline">Premium</Badge>
+          <Badge variant="outline">{t("common.premium")}</Badge>
         </div>
         <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug">{document.title}</h3>
         <p className="mt-2 line-clamp-3 break-words text-xs text-muted-foreground">
-          {metadata} · This paper matches your profile and unlocks with Premium.
+          {metadata} · {t("library.premiumBlurb")}
         </p>
         <Button asChild size="sm" className="mt-4">
           <Link to="/pricing">
             <Sparkles className="mr-1.5 h-4 w-4" />
-            Unlock
+            {t("library.unlock")}
           </Link>
         </Button>
       </article>
@@ -339,19 +340,19 @@ function PaperCard({ document, bestPercent }: { document: CourseDocument; bestPe
         </div>
         <Badge variant={inProgress ? "default" : readThrough ? "success" : "secondary"}>
           {inProgress
-            ? `${bestPercent}% read`
+            ? t("library.percentRead").replace("{percent}", String(bestPercent))
             : readThrough
-              ? "Read through"
+              ? t("library.readThrough")
               : document.accessStatus === "free_preview"
-                ? "Free"
-                : "Ready"}
+                ? t("common.free")
+                : t("library.ready")}
         </Badge>
       </div>
       <h3 className="mt-4 line-clamp-2 text-sm font-medium leading-snug group-hover:text-accent">
         {document.title}
       </h3>
       <p className="mt-2 line-clamp-3 break-words text-xs text-muted-foreground">
-        {metadata} · Protected structural paper
+        {metadata} · {t("library.protectedPaper")}
       </p>
       {bestPercent > 0 && (
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">

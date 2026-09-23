@@ -35,6 +35,7 @@ import {
 } from "@/hooks/use-topic-understanding-progress";
 import { getScrollPercent, onContainerScroll, scrollToPercent } from "@/lib/scroll-progress";
 import { slugifyHeading } from "@/components/ProtectedMarkdown";
+import { useI18n } from "@/lib/i18n";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 
 const ProtectedMarkdown = lazy(() => import("@/components/ProtectedMarkdown"));
@@ -46,6 +47,7 @@ export const Route = createFileRoute("/_app/course/$documentId")({
 
 function CourseDocumentPage() {
   const { documentId } = Route.useParams();
+  const { t } = useI18n();
   const { profile, loaded: profileLoaded } = useStudyProfile();
   const { user } = useSupabaseUser();
   const content = useStudyContent(profile);
@@ -80,19 +82,19 @@ function CourseDocumentPage() {
         ? "/cheatsheets"
         : "/library";
   const backLabel = isCourse
-    ? "My courses"
+    ? t("document.backCourses")
     : isTextbook
-      ? "My topics"
+      ? t("document.backTopics")
       : isCheatsheet
-        ? "My cheatsheets"
-        : "My topics";
+        ? t("document.backCheatsheets")
+        : t("document.backTopics");
   const kindLabel = isCourse
-    ? "Course lesson"
+    ? t("document.kindCourse")
     : isTextbook
-      ? "Textbook chapter"
+      ? t("document.kindTextbook")
       : isCheatsheet
-        ? "Revision cheatsheet"
-        : "Protected paper";
+        ? t("document.kindCheatsheet")
+        : t("document.kindPaper");
   const progressKindLabel = isCourse
     ? "course"
     : isTextbook
@@ -128,13 +130,13 @@ function CourseDocumentPage() {
     try {
       const existing = questionByNumber.get(questionNumber);
       if (status !== "started" && !existing) {
-        setQuestionLocalError("Start this question first, then mark it passed or failed.");
+        setQuestionLocalError(t("document.startQuestionFirst"));
         return;
       }
       await questionProgress.markQuestion(document.id, questionNumber, status);
     } catch (error) {
       setQuestionLocalError(
-        error instanceof Error ? error.message : "Could not save question progress.",
+        error instanceof Error ? error.message : t("document.saveQuestionError"),
       );
     }
   }
@@ -148,7 +150,7 @@ function CourseDocumentPage() {
         status,
       });
     } catch (error) {
-      setTopicLocalError(error instanceof Error ? error.message : "Could not save topic progress.");
+      setTopicLocalError(error instanceof Error ? error.message : t("document.saveTopicError"));
     }
   }
 
@@ -160,7 +162,7 @@ function CourseDocumentPage() {
 
   return (
     <>
-      <PageHeader title={document?.title ?? "Course document"} description={kindLabel}>
+      <PageHeader title={document?.title ?? t("document.fallbackTitle")} description={kindLabel}>
         <Button asChild variant="outline" size="sm">
           <Link to={backTo}>
             <ArrowLeft className="mr-1.5 h-4 w-4" />
@@ -172,23 +174,22 @@ function CourseDocumentPage() {
       <div className="px-4 py-5 sm:px-6 md:px-10 md:py-8">
         {content.error && (
           <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-            Document could not be loaded: {content.error}
+            {t("document.loadError").replace("{error}", content.error)}
           </div>
         )}
 
         {content.loading && (
           <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
-            Loading protected document...
+            {t("document.loading")}
           </div>
         )}
 
         {!content.loading && !document && (
           <div className="rounded-xl border border-border bg-card p-8 text-center">
             <BookOpen className="mx-auto h-8 w-8 text-muted-foreground" />
-            <h2 className="mt-4 text-base font-medium">Document unavailable</h2>
+            <h2 className="mt-4 text-base font-medium">{t("document.unavailable")}</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              This document is not published or does not match your current class, series, language,
-              and subjects.
+              {t("document.unavailableDescription")}
             </p>
           </div>
         )}
@@ -200,22 +201,29 @@ function CourseDocumentPage() {
                 <Lock className="h-5 w-5" />
               </div>
               <h2 className="mt-4 font-display text-2xl">
-                {isCourse ? "Premium course" : isTextbook ? "Premium textbook" : "Premium paper"}
+                {isCourse
+                  ? t("document.premiumCourse")
+                  : isTextbook
+                    ? t("document.premiumTextbook")
+                    : t("document.premiumPaper")}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                This {isCourse ? "course" : isTextbook ? "textbook" : "paper"} matches your class,
-                series, and subjects, but it is locked on the Free plan. Free learners can open only
-                the first preview papers.
+                {t("document.lockedDescription").replace(
+                  "{kind}",
+                  isCourse ? "course" : isTextbook ? "textbook" : "paper",
+                )}
               </p>
               <div className="mt-5 flex justify-center gap-2">
                 <Button asChild>
                   <Link to="/pricing">
                     <Sparkles className="mr-1.5 h-4 w-4" />
-                    Upgrade to Premium
+                    {t("app.upgradeToPremium")}
                   </Link>
                 </Button>
                 <Button asChild variant="outline">
-                  <Link to={backTo}>Back to {backLabel.toLowerCase()}</Link>
+                  <Link to={backTo}>
+                    {t("document.backTo").replace("{label}", backLabel.toLowerCase())}
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -249,7 +257,7 @@ function CourseDocumentPage() {
               <Suspense
                 fallback={
                   <div className="rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
-                    Preparing protected {kindLabel}...
+                    {t("document.preparing").replace("{kind}", kindLabel)}
                   </div>
                 }
               >
@@ -296,6 +304,7 @@ function CourseDocumentPage() {
 }
 
 function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPaper: boolean }) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [issueType, setIssueType] = useState("content_error");
   const [questionNumber, setQuestionNumber] = useState("");
@@ -307,7 +316,7 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
   async function submitReport(event: React.FormEvent) {
     event.preventDefault();
     if (!supabaseConfigured() || !supabase) {
-      setMessage("Content reporting is not configured yet.");
+      setMessage(t("document.reportNotConfigured"));
       return;
     }
     setSaving(true);
@@ -326,9 +335,9 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
       setQuestionNumber("");
       setTopicTitle("");
       setOpen(false);
-      setMessage("Thanks. StudySpark admins will review this content issue.");
+      setMessage(t("document.reportThanks"));
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Could not send this report.");
+      setMessage(error instanceof Error ? error.message : t("document.reportSendError"));
     } finally {
       setSaving(false);
     }
@@ -338,11 +347,8 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
     <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-sm font-medium">Report a content issue</h2>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Tell admins about wrong answers, broken formatting, metadata mistakes, or missing
-            solutions.
-          </p>
+          <h2 className="text-sm font-medium">{t("document.reportTitle")}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{t("document.reportDescription")}</p>
         </div>
         <Button
           type="button"
@@ -350,7 +356,7 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
           size="sm"
           onClick={() => setOpen((value) => !value)}
         >
-          {open ? "Close report" : "Report issue"}
+          {open ? t("document.closeReport") : t("document.reportIssue")}
         </Button>
       </div>
 
@@ -365,42 +371,42 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
           <div className="grid gap-3 sm:grid-cols-3">
             <label className="text-sm">
               <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                Issue type
+                {t("document.issueType")}
               </span>
               <select
                 value={issueType}
                 onChange={(event) => setIssueType(event.target.value)}
                 className="h-10 w-full rounded-md border border-border bg-background px-3 text-sm"
               >
-                <option value="content_error">Content error</option>
-                <option value="formatting">Formatting</option>
-                <option value="wrong_metadata">Wrong metadata</option>
-                <option value="missing_solution">Missing solution</option>
-                <option value="copyright">Copyright concern</option>
-                <option value="other">Other</option>
+                <option value="content_error">{t("document.issueContentError")}</option>
+                <option value="formatting">{t("document.issueFormatting")}</option>
+                <option value="wrong_metadata">{t("document.issueWrongMetadata")}</option>
+                <option value="missing_solution">{t("document.issueMissingSolution")}</option>
+                <option value="copyright">{t("document.issueCopyright")}</option>
+                <option value="other">{t("document.issueOther")}</option>
               </select>
             </label>
             {isPaper && (
               <label className="text-sm">
                 <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                  Question
+                  {t("document.questionLabel")}
                 </span>
                 <Input
                   inputMode="numeric"
                   value={questionNumber}
                   onChange={(event) => setQuestionNumber(event.target.value.replace(/\D/g, ""))}
-                  placeholder="Example: 4"
+                  placeholder={t("document.questionPlaceholder")}
                 />
               </label>
             )}
             <label className="text-sm">
               <span className="mb-1.5 block text-xs font-medium text-muted-foreground">
-                Topic or section
+                {t("document.topicSection")}
               </span>
               <Input
                 value={topicTitle}
                 onChange={(event) => setTopicTitle(event.target.value)}
-                placeholder="Optional"
+                placeholder={t("document.optional")}
               />
             </label>
           </div>
@@ -410,11 +416,11 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
             value={body}
             onChange={(event) => setBody(event.target.value)}
             className="min-h-24"
-            placeholder="Describe what is wrong so an admin can fix it."
+            placeholder={t("document.reportBodyPlaceholder")}
           />
           <div className="flex justify-end">
             <Button type="submit" disabled={saving || body.trim().length < 8}>
-              {saving ? "Sending..." : "Send report"}
+              {saving ? t("document.sending") : t("document.sendReport")}
             </Button>
           </div>
         </form>
@@ -424,6 +430,7 @@ function ReportContentIssue({ documentId, isPaper }: { documentId: string; isPap
 }
 
 function CourseContents({ markdown }: { markdown: string }) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
 
   const units = useMemo(() => {
@@ -458,8 +465,10 @@ function CourseContents({ markdown }: { markdown: string }) {
       >
         <div className="flex items-center gap-2">
           <ListChecks className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium">Course contents</span>
-          <Badge variant="secondary">{units.length} units</Badge>
+          <span className="text-sm font-medium">{t("document.courseContents")}</span>
+          <Badge variant="secondary">
+            {t("document.units").replace("{count}", String(units.length))}
+          </Badge>
         </div>
         <ChevronDown
           className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
@@ -527,6 +536,7 @@ function trackableTopics(markdown: string, documentTitle: string, isCheatsheet: 
 }
 
 function ReadingProgressBar() {
+  const { t } = useI18n();
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
@@ -547,7 +557,7 @@ function ReadingProgressBar() {
     <div
       className="sticky top-0 z-20 -mx-1 h-1.5 overflow-hidden rounded-full bg-secondary"
       role="progressbar"
-      aria-label="Reading progress"
+      aria-label={t("document.readingProgress")}
       aria-valuenow={percent}
       aria-valuemin={0}
       aria-valuemax={100}
@@ -569,6 +579,7 @@ function InlineQuestionOutcome({
   saving: boolean;
   onMark: (status: StructuralQuestionStatus) => Promise<void>;
 }) {
+  const { t } = useI18n();
   const isStarted = status !== "not_started";
 
   return (
@@ -576,21 +587,21 @@ function InlineQuestionOutcome({
       <StatusBadge status={status} />
       <div className="grid grid-cols-3 gap-1.5 sm:flex">
         <OutcomeButton
-          label={isStarted ? "Started" : "Start"}
+          label={isStarted ? t("document.started") : t("document.start")}
           active={status === "started"}
           compact
           disabled={saving || isStarted}
           onClick={() => onMark("started")}
         />
         <OutcomeButton
-          label="Passed"
+          label={t("document.passed")}
           active={status === "passed"}
           compact
           disabled={saving || !isStarted}
           onClick={() => onMark("passed")}
         />
         <OutcomeButton
-          label="Failed"
+          label={t("document.failed")}
           active={status === "failed"}
           compact
           destructive
@@ -613,25 +624,32 @@ function TopicUnderstandingPanel({
   topicCount: number;
   localError: string | null;
 }) {
+  const { t } = useI18n();
   if (topicCount === 0) return null;
 
   return (
     <section className="rounded-xl border border-border bg-card p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <Badge variant="secondary">Topic understanding</Badge>
+          <Badge variant="secondary">{t("document.topicUnderstanding")}</Badge>
           <h2 className="mt-3 text-base font-medium">
-            Mark each {isCheatsheet ? "cheatsheet topic" : "course topic"} beside its heading
+            {t("document.markEachTopic").replace(
+              "{kind}",
+              isCheatsheet ? "cheatsheet topic" : "course topic",
+            )}
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Understood and review marks now sit directly inside the content where you study.
+            {t("document.topicUnderstandingDescription")}
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2 text-xs sm:min-w-64">
-          <MiniMetric label="Understood" value={String(progress.summary.understood)} />
-          <MiniMetric label="Review" value={String(progress.summary.review)} />
           <MiniMetric
-            label="Unmarked"
+            label={t("document.understood")}
+            value={String(progress.summary.understood)}
+          />
+          <MiniMetric label={t("document.review")} value={String(progress.summary.review)} />
+          <MiniMetric
+            label={t("document.unmarked")}
             value={String(
               Math.max(0, topicCount - progress.summary.understood - progress.summary.review),
             )}
@@ -657,19 +675,20 @@ function InlineTopicUnderstanding({
   saving: boolean;
   onMark: (status: TopicUnderstandingStatus) => Promise<void>;
 }) {
+  const { t } = useI18n();
   return (
     <div className="flex w-full flex-col gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
       <StatusBadge status={status} />
       <div className="grid grid-cols-2 gap-1.5 sm:flex">
         <OutcomeButton
-          label="Understood"
+          label={t("document.understood")}
           active={status === "understood"}
           compact
           disabled={saving}
           onClick={() => onMark("understood")}
         />
         <OutcomeButton
-          label="Need review"
+          label={t("document.needReview")}
           active={status === "review"}
           compact
           destructive
@@ -690,6 +709,7 @@ function StudyProgressPanel({
   documentTitle: string;
   kindLabel: string;
 }) {
+  const { t } = useI18n();
   const [saved, setSaved] = useState(false);
   const [checkpointError, setCheckpointError] = useState<string | null>(null);
 
@@ -702,7 +722,7 @@ function StudyProgressPanel({
       window.setTimeout(() => setSaved(false), 4000);
     } catch (error) {
       setCheckpointError(
-        error instanceof Error ? error.message : "Could not save this checkpoint.",
+        error instanceof Error ? error.message : t("document.saveCheckpointError"),
       );
     }
   }
@@ -712,25 +732,29 @@ function StudyProgressPanel({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="secondary">Study session</Badge>
+            <Badge variant="secondary">{t("document.studySession")}</Badge>
             {progress.summary.completed && (
               <Badge variant="outline" className="gap-1 text-success">
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                Read through
+                {t("library.readThrough")}
               </Badge>
             )}
           </div>
-          <h2 className="mt-3 text-base font-medium">Track this {kindLabel} quietly</h2>
+          <h2 className="mt-3 text-base font-medium">
+            {t("document.trackQuietly").replace("{kind}", kindLabel)}
+          </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            StudySpark tracks reading time, scroll depth, and useful checkpoints for {documentTitle}
-            .
+            {t("document.trackDescription").replace("{title}", documentTitle)}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4 lg:max-w-sm lg:shrink-0">
-          <MiniMetric label="Time" value={formatDuration(progress.summary.durationSeconds)} />
-          <MiniMetric label="Read" value={`${progress.summary.maxScrollPercent}%`} />
-          <MiniMetric label="Review" value={String(progress.summary.reviewCount)} />
-          <MiniMetric label="Saved" value={String(progress.summary.bookmarkCount)} />
+          <MiniMetric
+            label={t("document.time")}
+            value={formatDuration(progress.summary.durationSeconds)}
+          />
+          <MiniMetric label={t("document.read")} value={`${progress.summary.maxScrollPercent}%`} />
+          <MiniMetric label={t("document.review")} value={String(progress.summary.reviewCount)} />
+          <MiniMetric label={t("document.saved")} value={String(progress.summary.bookmarkCount)} />
         </div>
       </div>
 
@@ -743,19 +767,19 @@ function StudyProgressPanel({
       <div className="mt-4 grid gap-2 sm:grid-cols-3">
         <CheckpointButton
           icon={CheckCircle2}
-          label="I understand this"
+          label={t("document.iUnderstandThis")}
           disabled={progress.saving}
           onClick={() => checkpoint("understood")}
         />
         <CheckpointButton
           icon={Clock}
-          label="Need review"
+          label={t("document.needReview")}
           disabled={progress.saving}
           onClick={() => checkpoint("review")}
         />
         <CheckpointButton
           icon={Bookmark}
-          label="Bookmark"
+          label={t("document.bookmark")}
           disabled={progress.saving}
           onClick={() => checkpoint("bookmark")}
         />
@@ -768,14 +792,14 @@ function StudyProgressPanel({
           className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:underline"
         >
           <PlayCircle className="h-3.5 w-3.5" />
-          Resume at {progress.summary.maxScrollPercent}%
+          {t("document.resumeAt").replace("{percent}", String(progress.summary.maxScrollPercent))}
         </button>
       )}
 
       {checkpointError && <p className="mt-3 text-xs text-destructive">{checkpointError}</p>}
       {saved && (
         <p className="mt-3 text-xs text-success">
-          Saved. This {kindLabel} now counts toward progress.
+          {t("document.savedConfirmation").replace("{kind}", kindLabel)}
         </p>
       )}
     </section>
@@ -862,13 +886,14 @@ function StatusBadge({
 }: {
   status: "not_started" | "started" | "passed" | "failed" | "understood" | "review";
 }) {
+  const { t } = useI18n();
   const labelByStatus = {
-    not_started: "Not marked",
-    started: "Started",
-    passed: "Passed",
-    failed: "Failed",
-    understood: "Understood",
-    review: "Need review",
+    not_started: t("document.notMarked"),
+    started: t("document.started"),
+    passed: t("document.passed"),
+    failed: t("document.failed"),
+    understood: t("document.understood"),
+    review: t("document.needReview"),
   };
   const className =
     status === "passed" || status === "understood"

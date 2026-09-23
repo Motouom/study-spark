@@ -46,7 +46,7 @@ type ContentCache = {
 
 let contentCache: ContentCache | null = null;
 
-function profileSignature(profile: StudentProfile) {
+function profileSignature(profile: StudentProfile, includeContent: boolean) {
   return [
     profile.language,
     profile.educationSystem,
@@ -56,11 +56,16 @@ function profileSignature(profile: StudentProfile) {
     profile.plan ?? "free",
     profile.premiumUntil ?? "",
     [...profile.subjects].sort().join(","),
+    includeContent ? "full" : "meta",
   ].join("|");
 }
 
-export function useStudyContent(profile: StudentProfile | null) {
-  const signature = profile ? profileSignature(profile) : "";
+export function useStudyContent(
+  profile: StudentProfile | null,
+  options?: { includeContent?: boolean },
+) {
+  const includeContent = options?.includeContent ?? true;
+  const signature = profile ? profileSignature(profile, includeContent) : "";
   const [state, setState] = useState<ContentState>(() => {
     if (profile && contentCache && contentCache.signature === signature) {
       return contentCache.state;
@@ -82,8 +87,15 @@ export function useStudyContent(profile: StudentProfile | null) {
     let active = true;
     setState((current) => ({ ...current, loading: true, loaded: false, error: null }));
 
+    const client = supabase;
+    const documentsRequest = includeContent
+      ? client.rpc("list_allowed_course_documents")
+      : client
+          .rpc("list_allowed_course_documents_meta")
+          .then((result) => (result.error ? client.rpc("list_allowed_course_documents") : result));
+
     Promise.all([
-      supabase
+      client
         .from("topics")
         .select(
           "id, subject, title, description, level, class_levels, series, question_count, estimated_minutes",
@@ -92,7 +104,7 @@ export function useStudyContent(profile: StudentProfile | null) {
         .contains("class_levels", [profile.classLevel])
         .contains("series", [profile.series])
         .in("subject", profile.subjects),
-      supabase.rpc("list_allowed_course_documents"),
+      documentsRequest,
     ]).then(([topicsResult, documentsResult]) => {
       if (!active) return;
 
@@ -157,7 +169,7 @@ export function useStudyContent(profile: StudentProfile | null) {
     return () => {
       active = false;
     };
-  }, [profile, signature]);
+  }, [includeContent, profile, signature]);
 
   const subjects = useMemo(
     () =>

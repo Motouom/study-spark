@@ -483,10 +483,10 @@ function Dashboard() {
                     >
                       <div>
                         <div className="text-sm font-medium">
-                          {document?.title ?? "Learning activity"}
+                          {document?.title ?? t("dashboard.learningActivity")}
                         </div>
                         <div className="text-xs text-muted-foreground">
-                          {document?.subject ?? "Study"} ·{" "}
+                          {document?.subject ?? t("dashboard.study")} ·{" "}
                           {new Date(item.updatedAt).toLocaleDateString()}
                         </div>
                       </div>
@@ -498,22 +498,19 @@ function Dashboard() {
                         }
                       >
                         {item.status === "passed"
-                          ? "passed"
+                          ? t("dashboard.passed")
                           : item.status === "failed"
-                            ? "failed"
+                            ? t("dashboard.failed")
                             : item.status === "understood"
-                              ? "understood"
-                              : "needs review"}
+                              ? t("dashboard.understood")
+                              : t("dashboard.needsReview")}
                       </Badge>
                     </li>
                   );
                 })}
               </ul>
             ) : (
-              <p className="py-6 text-sm text-muted-foreground">
-                Open a paper, mark questions, bookmark, and add review points to build your
-                progress.
-              </p>
+              <p className="py-6 text-sm text-muted-foreground">{t("dashboard.buildProgress")}</p>
             )}
           </div>
 
@@ -525,22 +522,22 @@ function Dashboard() {
             <div className="mt-4 space-y-3">
               <Signal
                 icon={CheckCircle2}
-                label="Passed questions"
+                label={t("dashboard.passedQuestions")}
                 value={structuralProgress.summary.passed}
               />
               <Signal
                 icon={TrendingUp}
-                label="Failed questions"
+                label={t("dashboard.failedQuestions")}
                 value={structuralProgress.summary.failed}
               />
               <Signal
                 icon={Bookmark}
-                label="Topics understood"
+                label={t("dashboard.topicsUnderstood")}
                 value={topicProgress.summary.understood}
               />
               <Signal
                 icon={Target}
-                label="Topics need review"
+                label={t("dashboard.topicsNeedReview")}
                 value={topicProgress.summary.review}
               />
             </div>

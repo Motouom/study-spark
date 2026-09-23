@@ -1,6 +1,6 @@
-const CACHE_VERSION = "studyspark-pwa-v1";
+const CACHE_VERSION = "studyspark-pwa-v2";
 const OFFLINE_URL = "/offline.html";
-const SAFE_CACHE_URLS = [
+const PRECACHE_URLS = [
   OFFLINE_URL,
   "/site.webmanifest",
   "/favicon.ico",
@@ -14,7 +14,7 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_VERSION)
-      .then((cache) => cache.addAll(SAFE_CACHE_URLS))
+      .then((cache) => cache.addAll(PRECACHE_URLS))
       .then(() => self.skipWaiting()),
   );
 });
@@ -36,12 +36,46 @@ self.addEventListener("fetch", (event) => {
 
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
 
+  // App shell (HTML navigations): serve the cached copy instantly, then refresh
+  // it in the background so repeat visits are instant and always converge on the
+  // latest deploy. Falls back to the offline page when the network is down.
   if (request.mode === "navigate") {
-    event.respondWith(fetch(request).catch(() => caches.match(OFFLINE_URL)));
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        const network = fetch(request)
+          .then((response) => {
+            if (response && response.ok) {
+              const copy = response.clone();
+              caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+            }
+            return response;
+          })
+          .catch(() => cached || caches.match(OFFLINE_URL));
+        return cached || network;
+      }),
+    );
     return;
   }
 
-  if (SAFE_CACHE_URLS.includes(url.pathname)) {
+  // Hashed build assets are immutable: cache-first, populate on first visit.
+  if (url.pathname.startsWith("/assets/")) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) return cached;
+        return fetch(request).then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        });
+      }),
+    );
+    return;
+  }
+
+  // Pre-cached static files: cache-first.
+  if (PRECACHE_URLS.includes(url.pathname)) {
     event.respondWith(caches.match(request).then((cached) => cached || fetch(request)));
   }
 });

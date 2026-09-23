@@ -1,5 +1,4 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
@@ -111,12 +110,7 @@ function Hero() {
       <div className="absolute inset-0 -z-10 dot-bg opacity-60" />
       <div className="absolute inset-x-0 top-0 -z-10 h-[420px] bg-gradient-to-b from-accent/10 to-transparent" />
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28 md:pb-32">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
+        <div className="animate-fade-up mx-auto max-w-3xl text-center">
           <Badge
             variant="secondary"
             className="mb-6 gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs"
@@ -145,13 +139,11 @@ function Hero() {
           <p className="mt-5 text-xs text-muted-foreground">
             Questions stay inside the app · Premium features can come later
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mx-auto mt-16 max-w-5xl"
+        <div
+          className="animate-fade-up mx-auto mt-16 max-w-5xl"
+          style={{ animationDelay: "200ms" }}
         >
           <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-elevated">
             <div className="flex items-center gap-1.5 border-b border-border bg-surface px-4 py-3">
@@ -193,7 +185,7 @@ function Hero() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

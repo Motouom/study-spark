@@ -204,7 +204,7 @@ export function useLearnerNotificationPreferences() {
 export function useLearnerNotifications() {
   const { t } = useI18n();
   const { user, profile } = useStudyProfile();
-  const content = useStudyContent(profile);
+  const content = useStudyContent(profile, { includeContent: false });
   const { progress, summary } = useStructuralProgress();
   const { subscription } = useSubscription();
   const { preferences } = useLearnerNotificationPreferences();

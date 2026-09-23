@@ -18,18 +18,9 @@ import {
   LifeBuoy,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,10 +30,10 @@ import { Badge } from "@/components/ui/badge";
 import type { StudentProfile } from "@/lib/study-reference-data";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import { useStudyContent } from "@/hooks/use-study-content";
 import { useLearnerNotifications } from "@/hooks/use-learner-notifications";
 import { useAdminSession } from "@/hooks/use-admin-session";
 import { useUnifiedStreak } from "@/hooks/use-unified-streak";
+import { NAV } from "@/lib/app-nav";
 
 import { isPremiumActive } from "@/lib/premium";
 import { useI18n, useSyncLocaleFromProfile } from "@/lib/i18n";
@@ -51,14 +42,7 @@ export const Route = createFileRoute("/_app")({
   component: AppLayout,
 });
 
-const NAV = [
-  { to: "/dashboard", labelKey: "common.dashboard", icon: LayoutDashboard },
-  { to: "/library", labelKey: "common.papers", icon: Library },
-  { to: "/learning-path", labelKey: "common.learningPath", icon: Brain },
-  { to: "/courses", labelKey: "common.courses", icon: PlayCircle },
-  { to: "/cheatsheets", labelKey: "common.cheatsheets", icon: BookMarked },
-  { to: "/leaderboard", labelKey: "common.leaderboard", icon: Users },
-] as const;
+const CommandMenu = lazy(() => import("@/components/CommandMenu"));
 
 function NavItem({
   to,
@@ -150,7 +134,7 @@ function SidebarContent({
             <NavItem
               to="/streak"
               icon={Flame}
-              label="Streak"
+              label={t("app.streak")}
               active={location.pathname.startsWith("/streak")}
               onClick={onNavigate}
             />
@@ -173,7 +157,7 @@ function SidebarContent({
             <NavItem
               to="/control-panel-9k3x"
               icon={ShieldCheck}
-              label="Admin panel"
+              label={t("app.adminPanel")}
               active={location.pathname.startsWith("/control-panel-9k3x")}
               onClick={onNavigate}
             />
@@ -204,88 +188,6 @@ function SidebarContent({
         </div>
       </div>
     </>
-  );
-}
-
-function CommandMenu({
-  open,
-  setOpen,
-  isAdmin,
-}: {
-  open: boolean;
-  setOpen: (v: boolean) => void;
-  isAdmin: boolean;
-}) {
-  const navigate = useNavigate();
-  const { t } = useI18n();
-  const { profile } = useStudyProfile();
-  const content = useStudyContent(open ? profile : null);
-  const searchTopics = content.topics;
-  const go = (path: string) => {
-    setOpen(false);
-    // Small timeout so dialog close animation doesn't fight navigation
-    setTimeout(() => navigate({ to: path }), 0);
-  };
-  return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Search topics, subjects, or pages..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Pages">
-          {NAV.map((n) => (
-            <CommandItem key={n.to} onSelect={() => go(n.to)}>
-              <n.icon className="mr-2 h-4 w-4" />
-              {t(n.labelKey)}
-            </CommandItem>
-          ))}
-          <CommandItem onSelect={() => go("/settings")}>
-            <Settings className="mr-2 h-4 w-4" /> {t("common.settings")}
-          </CommandItem>
-          <CommandItem onSelect={() => go("/pricing")}>
-            <Sparkles className="mr-2 h-4 w-4" /> Upgrade to Premium
-          </CommandItem>
-          <CommandItem onSelect={() => go("/learning-path")}>
-            <Brain className="mr-2 h-4 w-4" /> {t("common.learningPath")}
-          </CommandItem>
-          {isPremiumActive(profile) && (
-            <CommandItem onSelect={() => go("/streak")}>
-              <Flame className="mr-2 h-4 w-4" /> Streak
-            </CommandItem>
-          )}
-          <CommandItem onSelect={() => go("/courses")}>
-            <PlayCircle className="mr-2 h-4 w-4" /> {t("common.courses")}
-          </CommandItem>
-          <CommandItem onSelect={() => go("/cheatsheets")}>
-            <BookMarked className="mr-2 h-4 w-4" /> {t("common.cheatsheets")}
-          </CommandItem>
-          <CommandItem onSelect={() => go("/search")}>
-            <Search className="mr-2 h-4 w-4" /> {t("common.advancedSearch")}
-          </CommandItem>
-          <CommandItem onSelect={() => go("/support")}>
-            <LifeBuoy className="mr-2 h-4 w-4" /> {t("common.support")}
-          </CommandItem>
-          {isAdmin && (
-            <CommandItem onSelect={() => go("/control-panel-9k3x")}>
-              <ShieldCheck className="mr-2 h-4 w-4" /> Admin panel
-            </CommandItem>
-          )}
-        </CommandGroup>
-        <CommandSeparator />
-        <CommandGroup heading="Topics">
-          {searchTopics.slice(0, 8).map((topic) => (
-            <CommandItem
-              key={topic.id}
-              onSelect={() => go("/library")}
-              value={`${topic.title} ${topic.subject}`}
-            >
-              <Library className="mr-2 h-4 w-4" />
-              <span className="flex-1">{topic.title}</span>
-              <span className="text-xs text-muted-foreground">{topic.subject}</span>
-            </CommandItem>
-          ))}
-        </CommandGroup>
-      </CommandList>
-    </CommandDialog>
   );
 }
 
@@ -343,7 +245,7 @@ function AppLayout() {
       <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
         <div>
           <Logo to="/dashboard" />
-          <p className="mt-4 text-sm text-muted-foreground">Checking your study profile...</p>
+          <p className="mt-4 text-sm text-muted-foreground">{t("app.checkingProfile")}</p>
         </div>
       </div>
     );
@@ -352,7 +254,7 @@ function AppLayout() {
   if (supabaseConfigured() && loaded && !user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
-        <p className="text-sm text-muted-foreground">Opening sign in...</p>
+        <p className="text-sm text-muted-foreground">{t("app.openingSignIn")}</p>
       </div>
     );
   }
@@ -367,7 +269,7 @@ function AppLayout() {
   ) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
-        <p className="text-sm text-muted-foreground">Opening profile setup...</p>
+        <p className="text-sm text-muted-foreground">{t("app.openingProfileSetup")}</p>
       </div>
     );
   }
@@ -397,7 +299,7 @@ function AppLayout() {
           </SheetTrigger>
           <SheetContent side="left" className="flex h-full w-[min(18rem,85vw)] flex-col p-0">
             <SheetHeader className="sr-only">
-              <SheetTitle>Navigation</SheetTitle>
+              <SheetTitle>{t("app.navigation")}</SheetTitle>
             </SheetHeader>
             <SidebarContent
               profile={profile}
@@ -445,7 +347,7 @@ function AppLayout() {
             className="flex h-9 items-center gap-2 rounded-md border border-border bg-card px-3 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <Search className="h-3.5 w-3.5" />
-            Search...
+            {t("app.searchPlaceholder")}
             <kbd className="ml-3 rounded border border-border bg-secondary px-1.5 py-0.5 font-mono text-[10px]">
               ⌘K
             </kbd>
@@ -464,8 +366,12 @@ function AppLayout() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-80 p-0">
               <div className="flex items-center justify-between border-b border-border px-4 py-3">
-                <span className="text-sm font-medium">Notifications</span>
-                {unreadCount > 0 && <Badge variant="secondary">{unreadCount} new</Badge>}
+                <span className="text-sm font-medium">{t("common.notifications")}</span>
+                {unreadCount > 0 && (
+                  <Badge variant="secondary">
+                    {t("app.notificationsNew").replace("{count}", String(unreadCount))}
+                  </Badge>
+                )}
               </div>
               <div className="max-h-80 overflow-y-auto">
                 {notifications.length > 0 ? (
@@ -502,7 +408,7 @@ function AppLayout() {
                   ))
                 ) : (
                   <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-                    No notifications yet.
+                    {t("notifications.emptyTitle")}
                   </div>
                 )}
               </div>
@@ -510,7 +416,7 @@ function AppLayout() {
                 to="/notifications"
                 className="block border-t border-border px-4 py-2.5 text-center text-xs text-muted-foreground hover:text-foreground"
               >
-                View all notifications
+                {t("app.viewAllNotifications")}
               </Link>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -520,12 +426,14 @@ function AppLayout() {
           <div className="flex flex-col gap-2 border-b border-warning/30 bg-warning/10 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 md:px-10">
             <span className="text-warning-foreground">
               {premiumExpiringDays === 0
-                ? "Your Premium access ends today."
-                : `Your Premium access ends in ${premiumExpiringDays === 1 ? "1 day" : `${premiumExpiringDays} days`}.`}{" "}
-              Renew early to keep uninterrupted access.
+                ? t("notifications.generated.premiumEndsToday.body")
+                : t("notifications.generated.premiumEnds.body").replace(
+                    "{days}",
+                    String(premiumExpiringDays),
+                  )}
             </span>
             <Button asChild size="sm" variant="outline" className="shrink-0">
-              <Link to="/pricing">Renew Premium</Link>
+              <Link to="/pricing">{t("app.renewPremium")}</Link>
             </Button>
           </div>
         )}
@@ -559,7 +467,11 @@ function AppLayout() {
         })}
       </nav>
 
-      <CommandMenu open={cmdOpen} setOpen={setCmdOpen} isAdmin={showAdminLink} />
+      {cmdOpen && (
+        <Suspense fallback={null}>
+          <CommandMenu open={cmdOpen} setOpen={setCmdOpen} isAdmin={showAdminLink} />
+        </Suspense>
+      )}
     </div>
   );
 }
