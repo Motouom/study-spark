@@ -1096,7 +1096,7 @@ insert into public.topics (
   id, subject, title, description, level, class_levels, series, question_count, estimated_minutes
 )
 values
-  ('fr-lycee-economie-entreprise-marche', 'Économie', 'Markets, enterprise and national economy — STT/SES',
+  ('fr-lycee-economie-entreprise-marche', 'Économie d''Entreprise', 'Markets, enterprise and national economy — STT/SES',
    'Supply, demand, enterprise, money, inflation, growth, unemployment, public finance and basic economic reasoning.',
    'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 28, 125),
   ('fr-lycee-francais-methodes-bac', 'Français', 'French literature methods — Probatoire/Bac',
@@ -1352,7 +1352,7 @@ $md$,
 (
   '2b47cf2a-b1ec-4527-a8fe-4a64fca52123',
   'fr-lycee-economie-entreprise-marche',
-  'Économie',
+  'Économie d''Entreprise',
   'Probatoire/Bac STT — Économie — Marchés, entreprise et croissance',
   'french',
   'advanced',
@@ -1406,7 +1406,7 @@ $md$,
 (
   '2b47cf2a-b1ec-4527-a8fe-4a64fca52124',
   'fr-lycee-economie-entreprise-marche',
-  'Économie',
+  'Économie d''Entreprise',
   'Fiche — Probatoire/Bac STT — Économie',
   'french',
   'advanced',
@@ -1510,7 +1510,7 @@ $md$,
 (
   '2b47cf2a-b1ec-4527-a8fe-4a64fca52126',
   'fr-lycee-economie-entreprise-marche',
-  'Économie',
+  'Économie d''Entreprise',
   'Baccalauréat STT — Sujet d’entraînement — Économie et Comptabilité',
   'french',
   'advanced',
