@@ -1,5 +1,5 @@
 -- Premium paper access gate.
--- Free learners can see all matching paper titles, but can open only the first two.
+-- Free learners can see matching paper titles, but can open only the first paper per subject.
 -- Premium learners can open every matching published paper.
 
 alter table public.student_profiles
@@ -35,7 +35,7 @@ using (
           profile.plan = 'premium'
           and (profile.premium_until is null or profile.premium_until > now())
         ) as premium_active,
-        row_number() over (order by document.title asc, document.id asc) as access_position
+        row_number() over (partition by document.subject order by document.title asc, document.id asc) as access_position
       from public.course_documents document
       join public.student_profiles profile on profile.user_id = (select auth.uid())
       where document.status = 'published'
@@ -45,7 +45,7 @@ using (
         and document.subject = any(profile.subjects)
     ) ranked
     where ranked.id = course_documents.id
-      and (ranked.premium_active or ranked.access_position <= 2)
+      and (ranked.premium_active or ranked.access_position <= 1)
   )
 );
 
@@ -88,11 +88,12 @@ begin
         document.series,
         document.markdown_content,
         document.updated_at,
+        document.content_kind,
         (
           profile.plan = 'premium'
           and (profile.premium_until is null or profile.premium_until > now())
         ) as premium_active,
-        row_number() over (order by document.title asc, document.id asc) as access_position
+        row_number() over (partition by document.content_kind, document.subject order by document.title asc, document.id asc) as access_position
       from public.course_documents document
       join public.student_profiles profile on profile.user_id = auth.uid()
       where document.status = 'published'
@@ -111,19 +112,23 @@ begin
       document.class_levels,
       document.series,
       case
-        when document.premium_active or document.access_position <= 2
+        when document.content_kind = 'paper' and (document.premium_active or document.access_position <= 1)
+          or (document.content_kind != 'paper' and document.premium_active or document.access_position <= 2)
           then document.markdown_content
         else null::text
       end as markdown_content,
       document.updated_at,
       case
         when document.premium_active then 'premium'
+        when document.content_kind = 'paper' and document.access_position <= 1 then 'free_preview'
         when document.access_position <= 2 then 'free_preview'
         else 'premium_locked'
       end as access_status,
-      not (document.premium_active or document.access_position <= 2) as is_locked
+      not (document.premium_active
+        or (document.content_kind = 'paper' and document.access_position > 1)
+        or (document.content_kind != 'paper' and document.access_position > 2)) as is_locked
     from matching_documents document
-    order by document.access_position asc, document.title asc;
+    order by document.subject, document.access_position asc, document.title asc;
 end;
 $$;
 
