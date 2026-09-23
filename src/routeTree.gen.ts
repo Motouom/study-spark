@@ -9,86 +9,57 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AppRouteImport } from './routes/_app'
-import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3x'
-import { Route as FrRouteImport } from './routes/fr'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as RefundRouteImport } from './routes/refund'
-import { Route as SigninRouteImport } from './routes/signin'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
-import { Route as AppCheatsheetsRouteImport } from './routes/_app.cheatsheets'
-import { Route as AppCoursesRouteImport } from './routes/_app.courses'
-import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
-import { Route as AppLeaderboardRouteImport } from './routes/_app.leaderboard'
-import { Route as AppLearningPathRouteImport } from './routes/_app.learning-path'
-import { Route as AppLibraryRouteImport } from './routes/_app.library'
-import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
-import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
-import { Route as AppProgressRouteImport } from './routes/_app.progress'
-import { Route as AppQuizRouteImport } from './routes/_app.quiz'
-import { Route as AppSearchRouteImport } from './routes/_app.search'
-import { Route as AppSettingsRouteImport } from './routes/_app.settings'
-import { Route as AppStreakRouteImport } from './routes/_app.streak'
-import { Route as AppSupportRouteImport } from './routes/_app.support'
-import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as SigninRouteImport } from './routes/signin'
+import { Route as RefundRouteImport } from './routes/refund'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as FrRouteImport } from './routes/fr'
+import { Route as ControlPanel9k3xRouteImport } from './routes/control-panel-9k3x'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
-import { Route as ControlPanel9k3xCheatsheetsRouteImport } from './routes/control-panel-9k3x.cheatsheets'
-import { Route as ControlPanel9k3xCoursesRouteImport } from './routes/control-panel-9k3x.courses'
-import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
-import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
-import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
-import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
-import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
-import { Route as FrPrivacyRouteImport } from './routes/fr.privacy'
-import { Route as FrRefundRouteImport } from './routes/fr.refund'
-import { Route as FrTarifsRouteImport } from './routes/fr.tarifs'
 import { Route as FrTermsRouteImport } from './routes/fr.terms'
-import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
-import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
-import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
-import { Route as ApiAiHealthRouteImport } from './routes/api.ai.health'
-import { Route as ApiAiLearningPathRouteImport } from './routes/api.ai.learning-path'
-import { Route as ApiAiProgressInsightRouteImport } from './routes/api.ai.progress-insight'
+import { Route as FrTarifsRouteImport } from './routes/fr.tarifs'
+import { Route as FrRefundRouteImport } from './routes/fr.refund'
+import { Route as FrPrivacyRouteImport } from './routes/fr.privacy'
+import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
+import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
+import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
+import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
+import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
+import { Route as ControlPanel9k3xCoursesRouteImport } from './routes/control-panel-9k3x.courses'
+import { Route as ControlPanel9k3xCheatsheetsRouteImport } from './routes/control-panel-9k3x.cheatsheets'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as AppSupportRouteImport } from './routes/_app.support'
+import { Route as AppStreakRouteImport } from './routes/_app.streak'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppSearchRouteImport } from './routes/_app.search'
+import { Route as AppQuizRouteImport } from './routes/_app.quiz'
+import { Route as AppProgressRouteImport } from './routes/_app.progress'
+import { Route as AppOnboardingRouteImport } from './routes/_app.onboarding'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
+import { Route as AppLibraryRouteImport } from './routes/_app.library'
+import { Route as AppLearningPathRouteImport } from './routes/_app.learning-path'
+import { Route as AppLeaderboardRouteImport } from './routes/_app.leaderboard'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppCoursesRouteImport } from './routes/_app.courses'
+import { Route as AppCheatsheetsRouteImport } from './routes/_app.cheatsheets'
+import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
 import { Route as ApiPaymentsHistoryRouteImport } from './routes/api.payments.history'
-import { Route as ApiPaymentsFapshiInitiateRouteImport } from './routes/api.payments.fapshi.initiate'
-import { Route as ApiPaymentsFapshiVerifyRouteImport } from './routes/api.payments.fapshi.verify'
+import { Route as ApiAiProgressInsightRouteImport } from './routes/api.ai.progress-insight'
+import { Route as ApiAiLearningPathRouteImport } from './routes/api.ai.learning-path'
+import { Route as ApiAiHealthRouteImport } from './routes/api.ai.health'
+import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
+import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
+import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as ApiPaymentsFapshiWebhookRouteImport } from './routes/api.payments.fapshi.webhook'
+import { Route as ApiPaymentsFapshiVerifyRouteImport } from './routes/api.payments.fapshi.verify'
+import { Route as ApiPaymentsFapshiInitiateRouteImport } from './routes/api.payments.fapshi.initiate'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppRoute = AppRouteImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ControlPanel9k3xRoute = ControlPanel9k3xRouteImport.update({
-  id: '/control-panel-9k3x',
-  path: '/control-panel-9k3x',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FrRoute = FrRouteImport.update({
-  id: '/fr',
-  path: '/fr',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RefundRoute = RefundRouteImport.update({
-  id: '/refund',
-  path: '/refund',
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SigninRoute = SigninRouteImport.update({
@@ -96,89 +67,38 @@ const SigninRoute = SigninRouteImport.update({
   path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const RefundRoute = RefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppAchievementsRoute = AppAchievementsRouteImport.update({
-  id: '/achievements',
-  path: '/achievements',
-  getParentRoute: () => AppRoute,
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppCheatsheetsRoute = AppCheatsheetsRouteImport.update({
-  id: '/cheatsheets',
-  path: '/cheatsheets',
-  getParentRoute: () => AppRoute,
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppCoursesRoute = AppCoursesRouteImport.update({
-  id: '/courses',
-  path: '/courses',
-  getParentRoute: () => AppRoute,
+const FrRoute = FrRouteImport.update({
+  id: '/fr',
+  path: '/fr',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppDashboardRoute = AppDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AppRoute,
+const ControlPanel9k3xRoute = ControlPanel9k3xRouteImport.update({
+  id: '/control-panel-9k3x',
+  path: '/control-panel-9k3x',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
-  id: '/leaderboard',
-  path: '/leaderboard',
-  getParentRoute: () => AppRoute,
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AppLearningPathRoute = AppLearningPathRouteImport.update({
-  id: '/learning-path',
-  path: '/learning-path',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppLibraryRoute = AppLibraryRouteImport.update({
-  id: '/library',
-  path: '/library',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppNotificationsRoute = AppNotificationsRouteImport.update({
-  id: '/notifications',
-  path: '/notifications',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppOnboardingRoute = AppOnboardingRouteImport.update({
-  id: '/onboarding',
-  path: '/onboarding',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppProgressRoute = AppProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppQuizRoute = AppQuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppSearchRoute = AppSearchRouteImport.update({
-  id: '/search',
-  path: '/search',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppSettingsRoute = AppSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppStreakRoute = AppStreakRouteImport.update({
-  id: '/streak',
-  path: '/streak',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppSupportRoute = AppSupportRouteImport.update({
-  id: '/support',
-  path: '/support',
-  getParentRoute: () => AppRoute,
-} as any)
-const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/auth/callback',
-  path: '/auth/callback',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
@@ -186,15 +106,46 @@ const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
-const ControlPanel9k3xCheatsheetsRoute =
-  ControlPanel9k3xCheatsheetsRouteImport.update({
-    id: '/cheatsheets',
-    path: '/cheatsheets',
+const FrTermsRoute = FrTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => FrRoute,
+} as any)
+const FrTarifsRoute = FrTarifsRouteImport.update({
+  id: '/tarifs',
+  path: '/tarifs',
+  getParentRoute: () => FrRoute,
+} as any)
+const FrRefundRoute = FrRefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => FrRoute,
+} as any)
+const FrPrivacyRoute = FrPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => FrRoute,
+} as any)
+const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => ControlPanel9k3xRoute,
+} as any)
+const ControlPanel9k3xSettingsRoute =
+  ControlPanel9k3xSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
-const ControlPanel9k3xCoursesRoute = ControlPanel9k3xCoursesRouteImport.update({
-  id: '/courses',
-  path: '/courses',
+const ControlPanel9k3xQuestionsRoute =
+  ControlPanel9k3xQuestionsRouteImport.update({
+    id: '/questions',
+    path: '/questions',
+    getParentRoute: () => ControlPanel9k3xRoute,
+  } as any)
+const ControlPanel9k3xLogsRoute = ControlPanel9k3xLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
 const ControlPanel9k3xIntegrationsRoute =
@@ -203,71 +154,100 @@ const ControlPanel9k3xIntegrationsRoute =
     path: '/integrations',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
-const ControlPanel9k3xLogsRoute = ControlPanel9k3xLogsRouteImport.update({
-  id: '/logs',
-  path: '/logs',
+const ControlPanel9k3xCoursesRoute = ControlPanel9k3xCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
-const ControlPanel9k3xQuestionsRoute =
-  ControlPanel9k3xQuestionsRouteImport.update({
-    id: '/questions',
-    path: '/questions',
+const ControlPanel9k3xCheatsheetsRoute =
+  ControlPanel9k3xCheatsheetsRouteImport.update({
+    id: '/cheatsheets',
+    path: '/cheatsheets',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
-const ControlPanel9k3xSettingsRoute =
-  ControlPanel9k3xSettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => ControlPanel9k3xRoute,
-  } as any)
-const ControlPanel9k3xUsersRoute = ControlPanel9k3xUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => ControlPanel9k3xRoute,
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const FrPrivacyRoute = FrPrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => FrRoute,
-} as any)
-const FrRefundRoute = FrRefundRouteImport.update({
-  id: '/refund',
-  path: '/refund',
-  getParentRoute: () => FrRoute,
-} as any)
-const FrTarifsRoute = FrTarifsRouteImport.update({
-  id: '/tarifs',
-  path: '/tarifs',
-  getParentRoute: () => FrRoute,
-} as any)
-const FrTermsRoute = FrTermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
-  getParentRoute: () => FrRoute,
-} as any)
-const AppCourseDocumentIdRoute = AppCourseDocumentIdRouteImport.update({
-  id: '/course/$documentId',
-  path: '/course/$documentId',
+const AppSupportRoute = AppSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => AppRoute,
 } as any)
-const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
-  id: '/setup',
-  path: '/setup',
-  getParentRoute: () => AppQuizRoute,
+const AppStreakRoute = AppStreakRouteImport.update({
+  id: '/streak',
+  path: '/streak',
+  getParentRoute: () => AppRoute,
 } as any)
-const ApiAiFormatPaperRoute = ApiAiFormatPaperRouteImport.update({
-  id: '/api/ai/format-paper',
-  path: '/api/ai/format-paper',
-  getParentRoute: () => rootRouteImport,
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
 } as any)
-const ApiAiHealthRoute = ApiAiHealthRouteImport.update({
-  id: '/api/ai/health',
-  path: '/api/ai/health',
-  getParentRoute: () => rootRouteImport,
+const AppSearchRoute = AppSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => AppRoute,
 } as any)
-const ApiAiLearningPathRoute = ApiAiLearningPathRouteImport.update({
-  id: '/api/ai/learning-path',
-  path: '/api/ai/learning-path',
+const AppQuizRoute = AppQuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProgressRoute = AppProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOnboardingRoute = AppOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLibraryRoute = AppLibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearningPathRoute = AppLearningPathRouteImport.update({
+  id: '/learning-path',
+  path: '/learning-path',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLeaderboardRoute = AppLeaderboardRouteImport.update({
+  id: '/leaderboard',
+  path: '/leaderboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoursesRoute = AppCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCheatsheetsRoute = AppCheatsheetsRouteImport.update({
+  id: '/cheatsheets',
+  path: '/cheatsheets',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAchievementsRoute = AppAchievementsRouteImport.update({
+  id: '/achievements',
+  path: '/achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const ApiPaymentsHistoryRoute = ApiPaymentsHistoryRouteImport.update({
+  id: '/api/payments/history',
+  path: '/api/payments/history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAiProgressInsightRoute = ApiAiProgressInsightRouteImport.update({
@@ -275,15 +255,35 @@ const ApiAiProgressInsightRoute = ApiAiProgressInsightRouteImport.update({
   path: '/api/ai/progress-insight',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPaymentsHistoryRoute = ApiPaymentsHistoryRouteImport.update({
-  id: '/api/payments/history',
-  path: '/api/payments/history',
+const ApiAiLearningPathRoute = ApiAiLearningPathRouteImport.update({
+  id: '/api/ai/learning-path',
+  path: '/api/ai/learning-path',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPaymentsFapshiInitiateRoute =
-  ApiPaymentsFapshiInitiateRouteImport.update({
-    id: '/api/payments/fapshi/initiate',
-    path: '/api/payments/fapshi/initiate',
+const ApiAiHealthRoute = ApiAiHealthRouteImport.update({
+  id: '/api/ai/health',
+  path: '/api/ai/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiFormatPaperRoute = ApiAiFormatPaperRouteImport.update({
+  id: '/api/ai/format-paper',
+  path: '/api/ai/format-paper',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => AppQuizRoute,
+} as any)
+const AppCourseDocumentIdRoute = AppCourseDocumentIdRouteImport.update({
+  id: '/course/$documentId',
+  path: '/course/$documentId',
+  getParentRoute: () => AppRoute,
+} as any)
+const ApiPaymentsFapshiWebhookRoute =
+  ApiPaymentsFapshiWebhookRouteImport.update({
+    id: '/api/payments/fapshi/webhook',
+    path: '/api/payments/fapshi/webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPaymentsFapshiVerifyRoute = ApiPaymentsFapshiVerifyRouteImport.update({
@@ -291,10 +291,10 @@ const ApiPaymentsFapshiVerifyRoute = ApiPaymentsFapshiVerifyRouteImport.update({
   path: '/api/payments/fapshi/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPaymentsFapshiWebhookRoute =
-  ApiPaymentsFapshiWebhookRouteImport.update({
-    id: '/api/payments/fapshi/webhook',
-    path: '/api/payments/fapshi/webhook',
+const ApiPaymentsFapshiInitiateRoute =
+  ApiPaymentsFapshiInitiateRouteImport.update({
+    id: '/api/payments/fapshi/initiate',
+    path: '/api/payments/fapshi/initiate',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -613,53 +613,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/control-panel-9k3x': {
-      id: '/control-panel-9k3x'
-      path: '/control-panel-9k3x'
-      fullPath: '/control-panel-9k3x'
-      preLoaderRoute: typeof ControlPanel9k3xRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fr': {
-      id: '/fr'
-      path: '/fr'
-      fullPath: '/fr'
-      preLoaderRoute: typeof FrRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/refund': {
-      id: '/refund'
-      path: '/refund'
-      fullPath: '/refund'
-      preLoaderRoute: typeof RefundRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signin': {
@@ -669,123 +627,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
+    '/refund': {
+      id: '/refund'
+      path: '/refund'
+      fullPath: '/refund'
+      preLoaderRoute: typeof RefundRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_app/achievements': {
-      id: '/_app/achievements'
-      path: '/achievements'
-      fullPath: '/achievements'
-      preLoaderRoute: typeof AppAchievementsRouteImport
-      parentRoute: typeof AppRoute
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_app/cheatsheets': {
-      id: '/_app/cheatsheets'
-      path: '/cheatsheets'
-      fullPath: '/cheatsheets'
-      preLoaderRoute: typeof AppCheatsheetsRouteImport
-      parentRoute: typeof AppRoute
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_app/courses': {
-      id: '/_app/courses'
-      path: '/courses'
-      fullPath: '/courses'
-      preLoaderRoute: typeof AppCoursesRouteImport
-      parentRoute: typeof AppRoute
+    '/fr': {
+      id: '/fr'
+      path: '/fr'
+      fullPath: '/fr'
+      preLoaderRoute: typeof FrRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_app/dashboard': {
-      id: '/_app/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AppDashboardRouteImport
-      parentRoute: typeof AppRoute
+    '/control-panel-9k3x': {
+      id: '/control-panel-9k3x'
+      path: '/control-panel-9k3x'
+      fullPath: '/control-panel-9k3x'
+      preLoaderRoute: typeof ControlPanel9k3xRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_app/leaderboard': {
-      id: '/_app/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof AppLeaderboardRouteImport
-      parentRoute: typeof AppRoute
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_app/learning-path': {
-      id: '/_app/learning-path'
-      path: '/learning-path'
-      fullPath: '/learning-path'
-      preLoaderRoute: typeof AppLearningPathRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/library': {
-      id: '/_app/library'
-      path: '/library'
-      fullPath: '/library'
-      preLoaderRoute: typeof AppLibraryRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/notifications': {
-      id: '/_app/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof AppNotificationsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/onboarding': {
-      id: '/_app/onboarding'
-      path: '/onboarding'
-      fullPath: '/onboarding'
-      preLoaderRoute: typeof AppOnboardingRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/progress': {
-      id: '/_app/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof AppProgressRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/quiz': {
-      id: '/_app/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof AppQuizRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/search': {
-      id: '/_app/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof AppSearchRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/settings': {
-      id: '/_app/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AppSettingsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/streak': {
-      id: '/_app/streak'
-      path: '/streak'
-      fullPath: '/streak'
-      preLoaderRoute: typeof AppStreakRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/support': {
-      id: '/_app/support'
-      path: '/support'
-      fullPath: '/support'
-      preLoaderRoute: typeof AppSupportRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/auth/callback': {
-      id: '/auth/callback'
-      path: '/auth/callback'
-      fullPath: '/auth/callback'
-      preLoaderRoute: typeof AuthCallbackRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/control-panel-9k3x/': {
@@ -795,67 +683,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
-    '/control-panel-9k3x/cheatsheets': {
-      id: '/control-panel-9k3x/cheatsheets'
-      path: '/cheatsheets'
-      fullPath: '/control-panel-9k3x/cheatsheets'
-      preLoaderRoute: typeof ControlPanel9k3xCheatsheetsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/courses': {
-      id: '/control-panel-9k3x/courses'
-      path: '/courses'
-      fullPath: '/control-panel-9k3x/courses'
-      preLoaderRoute: typeof ControlPanel9k3xCoursesRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/integrations': {
-      id: '/control-panel-9k3x/integrations'
-      path: '/integrations'
-      fullPath: '/control-panel-9k3x/integrations'
-      preLoaderRoute: typeof ControlPanel9k3xIntegrationsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/logs': {
-      id: '/control-panel-9k3x/logs'
-      path: '/logs'
-      fullPath: '/control-panel-9k3x/logs'
-      preLoaderRoute: typeof ControlPanel9k3xLogsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/questions': {
-      id: '/control-panel-9k3x/questions'
-      path: '/questions'
-      fullPath: '/control-panel-9k3x/questions'
-      preLoaderRoute: typeof ControlPanel9k3xQuestionsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/settings': {
-      id: '/control-panel-9k3x/settings'
-      path: '/settings'
-      fullPath: '/control-panel-9k3x/settings'
-      preLoaderRoute: typeof ControlPanel9k3xSettingsRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/control-panel-9k3x/users': {
-      id: '/control-panel-9k3x/users'
-      path: '/users'
-      fullPath: '/control-panel-9k3x/users'
-      preLoaderRoute: typeof ControlPanel9k3xUsersRouteImport
-      parentRoute: typeof ControlPanel9k3xRoute
-    }
-    '/fr/privacy': {
-      id: '/fr/privacy'
-      path: '/privacy'
-      fullPath: '/fr/privacy'
-      preLoaderRoute: typeof FrPrivacyRouteImport
-      parentRoute: typeof FrRoute
-    }
-    '/fr/refund': {
-      id: '/fr/refund'
-      path: '/refund'
-      fullPath: '/fr/refund'
-      preLoaderRoute: typeof FrRefundRouteImport
+    '/fr/terms': {
+      id: '/fr/terms'
+      path: '/terms'
+      fullPath: '/fr/terms'
+      preLoaderRoute: typeof FrTermsRouteImport
       parentRoute: typeof FrRoute
     }
     '/fr/tarifs': {
@@ -865,46 +697,186 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrTarifsRouteImport
       parentRoute: typeof FrRoute
     }
-    '/fr/terms': {
-      id: '/fr/terms'
-      path: '/terms'
-      fullPath: '/fr/terms'
-      preLoaderRoute: typeof FrTermsRouteImport
+    '/fr/refund': {
+      id: '/fr/refund'
+      path: '/refund'
+      fullPath: '/fr/refund'
+      preLoaderRoute: typeof FrRefundRouteImport
       parentRoute: typeof FrRoute
     }
-    '/_app/course/$documentId': {
-      id: '/_app/course/$documentId'
-      path: '/course/$documentId'
-      fullPath: '/course/$documentId'
-      preLoaderRoute: typeof AppCourseDocumentIdRouteImport
+    '/fr/privacy': {
+      id: '/fr/privacy'
+      path: '/privacy'
+      fullPath: '/fr/privacy'
+      preLoaderRoute: typeof FrPrivacyRouteImport
+      parentRoute: typeof FrRoute
+    }
+    '/control-panel-9k3x/users': {
+      id: '/control-panel-9k3x/users'
+      path: '/users'
+      fullPath: '/control-panel-9k3x/users'
+      preLoaderRoute: typeof ControlPanel9k3xUsersRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/settings': {
+      id: '/control-panel-9k3x/settings'
+      path: '/settings'
+      fullPath: '/control-panel-9k3x/settings'
+      preLoaderRoute: typeof ControlPanel9k3xSettingsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/questions': {
+      id: '/control-panel-9k3x/questions'
+      path: '/questions'
+      fullPath: '/control-panel-9k3x/questions'
+      preLoaderRoute: typeof ControlPanel9k3xQuestionsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/logs': {
+      id: '/control-panel-9k3x/logs'
+      path: '/logs'
+      fullPath: '/control-panel-9k3x/logs'
+      preLoaderRoute: typeof ControlPanel9k3xLogsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/integrations': {
+      id: '/control-panel-9k3x/integrations'
+      path: '/integrations'
+      fullPath: '/control-panel-9k3x/integrations'
+      preLoaderRoute: typeof ControlPanel9k3xIntegrationsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/courses': {
+      id: '/control-panel-9k3x/courses'
+      path: '/courses'
+      fullPath: '/control-panel-9k3x/courses'
+      preLoaderRoute: typeof ControlPanel9k3xCoursesRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/cheatsheets': {
+      id: '/control-panel-9k3x/cheatsheets'
+      path: '/cheatsheets'
+      fullPath: '/control-panel-9k3x/cheatsheets'
+      preLoaderRoute: typeof ControlPanel9k3xCheatsheetsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/support': {
+      id: '/_app/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof AppSupportRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/quiz/setup': {
-      id: '/_app/quiz/setup'
-      path: '/setup'
-      fullPath: '/quiz/setup'
-      preLoaderRoute: typeof AppQuizSetupRouteImport
-      parentRoute: typeof AppQuizRoute
+    '/_app/streak': {
+      id: '/_app/streak'
+      path: '/streak'
+      fullPath: '/streak'
+      preLoaderRoute: typeof AppStreakRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/api/ai/format-paper': {
-      id: '/api/ai/format-paper'
-      path: '/api/ai/format-paper'
-      fullPath: '/api/ai/format-paper'
-      preLoaderRoute: typeof ApiAiFormatPaperRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/api/ai/health': {
-      id: '/api/ai/health'
-      path: '/api/ai/health'
-      fullPath: '/api/ai/health'
-      preLoaderRoute: typeof ApiAiHealthRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_app/search': {
+      id: '/_app/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof AppSearchRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/api/ai/learning-path': {
-      id: '/api/ai/learning-path'
-      path: '/api/ai/learning-path'
-      fullPath: '/api/ai/learning-path'
-      preLoaderRoute: typeof ApiAiLearningPathRouteImport
+    '/_app/quiz': {
+      id: '/_app/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof AppQuizRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/progress': {
+      id: '/_app/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof AppProgressRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/onboarding': {
+      id: '/_app/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AppOnboardingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/library': {
+      id: '/_app/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof AppLibraryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/learning-path': {
+      id: '/_app/learning-path'
+      path: '/learning-path'
+      fullPath: '/learning-path'
+      preLoaderRoute: typeof AppLearningPathRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/leaderboard': {
+      id: '/_app/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof AppLeaderboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/courses': {
+      id: '/_app/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof AppCoursesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/cheatsheets': {
+      id: '/_app/cheatsheets'
+      path: '/cheatsheets'
+      fullPath: '/cheatsheets'
+      preLoaderRoute: typeof AppCheatsheetsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/achievements': {
+      id: '/_app/achievements'
+      path: '/achievements'
+      fullPath: '/achievements'
+      preLoaderRoute: typeof AppAchievementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/api/payments/history': {
+      id: '/api/payments/history'
+      path: '/api/payments/history'
+      fullPath: '/api/payments/history'
+      preLoaderRoute: typeof ApiPaymentsHistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/ai/progress-insight': {
@@ -914,18 +886,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAiProgressInsightRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/payments/history': {
-      id: '/api/payments/history'
-      path: '/api/payments/history'
-      fullPath: '/api/payments/history'
-      preLoaderRoute: typeof ApiPaymentsHistoryRouteImport
+    '/api/ai/learning-path': {
+      id: '/api/ai/learning-path'
+      path: '/api/ai/learning-path'
+      fullPath: '/api/ai/learning-path'
+      preLoaderRoute: typeof ApiAiLearningPathRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/payments/fapshi/initiate': {
-      id: '/api/payments/fapshi/initiate'
-      path: '/api/payments/fapshi/initiate'
-      fullPath: '/api/payments/fapshi/initiate'
-      preLoaderRoute: typeof ApiPaymentsFapshiInitiateRouteImport
+    '/api/ai/health': {
+      id: '/api/ai/health'
+      path: '/api/ai/health'
+      fullPath: '/api/ai/health'
+      preLoaderRoute: typeof ApiAiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/format-paper': {
+      id: '/api/ai/format-paper'
+      path: '/api/ai/format-paper'
+      fullPath: '/api/ai/format-paper'
+      preLoaderRoute: typeof ApiAiFormatPaperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/quiz/setup': {
+      id: '/_app/quiz/setup'
+      path: '/setup'
+      fullPath: '/quiz/setup'
+      preLoaderRoute: typeof AppQuizSetupRouteImport
+      parentRoute: typeof AppQuizRoute
+    }
+    '/_app/course/$documentId': {
+      id: '/_app/course/$documentId'
+      path: '/course/$documentId'
+      fullPath: '/course/$documentId'
+      preLoaderRoute: typeof AppCourseDocumentIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/api/payments/fapshi/webhook': {
+      id: '/api/payments/fapshi/webhook'
+      path: '/api/payments/fapshi/webhook'
+      fullPath: '/api/payments/fapshi/webhook'
+      preLoaderRoute: typeof ApiPaymentsFapshiWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/payments/fapshi/verify': {
@@ -935,11 +935,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPaymentsFapshiVerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/payments/fapshi/webhook': {
-      id: '/api/payments/fapshi/webhook'
-      path: '/api/payments/fapshi/webhook'
-      fullPath: '/api/payments/fapshi/webhook'
-      preLoaderRoute: typeof ApiPaymentsFapshiWebhookRouteImport
+    '/api/payments/fapshi/initiate': {
+      id: '/api/payments/fapshi/initiate'
+      path: '/api/payments/fapshi/initiate'
+      fullPath: '/api/payments/fapshi/initiate'
+      preLoaderRoute: typeof ApiPaymentsFapshiInitiateRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
