@@ -18,6 +18,7 @@ import {
   alternateLinks,
   canonicalUrl,
   frenchEducationalAppSchema,
+  jsonLdScript,
   FRENCH_SEO_DESCRIPTION,
   FRENCH_SEO_TITLE,
   OG_IMAGE_URL,
@@ -88,7 +89,7 @@ function FrenchLanding() {
     <div className="min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(frenchEducationalAppSchema()) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(frenchEducationalAppSchema()) }}
       />
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">

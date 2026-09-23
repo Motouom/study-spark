@@ -14,7 +14,7 @@ export const Route = createFileRoute("/api/payments/fapshi/initiate")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
-          const limiter = rateLimit(`payments:initiate:${user.id}`, 5, 60 * 60 * 1000);
+          const limiter = await rateLimit(`payments:initiate:${user.id}`, 5, 60 * 60 * 1000);
           if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const body = (await request.json().catch(() => ({}))) as { interval?: string };
           const interval: BillingInterval = body.interval === "yearly" ? "yearly" : "monthly";

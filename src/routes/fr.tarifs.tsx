@@ -3,7 +3,13 @@ import { ArrowLeft, Check, Sparkles, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { alternateLinks, canonicalUrl, frenchPricingSchema, OG_IMAGE_URL } from "@/lib/seo";
+import {
+  alternateLinks,
+  canonicalUrl,
+  frenchPricingSchema,
+  jsonLdScript,
+  OG_IMAGE_URL,
+} from "@/lib/seo";
 import { useI18n } from "@/lib/i18n";
 import { useEffect } from "react";
 
@@ -69,7 +75,7 @@ function FrenchPricingPage() {
     <div className="min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(frenchPricingSchema()) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(frenchPricingSchema()) }}
       />
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">

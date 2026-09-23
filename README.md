@@ -76,20 +76,26 @@ npm run lint
 
 ## Required Environment Variables
 
-| Variable                        | Used By        | Notes                                               |
-| ------------------------------- | -------------- | --------------------------------------------------- |
-| `VITE_SUPABASE_URL`             | Browser client | Supabase project URL.                               |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser client | Browser-safe publishable or anon key.               |
-| `VITE_ADMIN_AUTH_ENDPOINT`      | Admin access   | Optional admin auth endpoint value.                 |
-| `SUPABASE_SERVICE_ROLE_KEY`     | Server routes  | Server-only key. Never expose in browser code.      |
-| `FAPSHI_ENVIRONMENT`            | Payments       | `sandbox` or `live`.                                |
-| `FAPSHI_API_USER`               | Payments       | Fapshi service API user.                            |
-| `FAPSHI_API_KEY`                | Payments       | Fapshi service API key.                             |
-| `FAPSHI_WEBHOOK_SECRET`         | Payments       | Shared webhook secret sent as `x-wh-secret`.        |
-| `OPENROUTER_API_KEY`            | AI             | Preferred AI provider key.                          |
-| `AI_MODEL`                      | AI             | Defaults to `openrouter/free` when not set.         |
-| `AI_BASE_URL`                   | AI             | Defaults to `https://openrouter.ai/api/v1`.         |
-| `APP_PUBLIC_URL`                | AI/payments    | Public app origin used in redirects and AI headers. |
+| Variable                        | Used By        | Notes                                                |
+| ------------------------------- | -------------- | ---------------------------------------------------- |
+| `VITE_SUPABASE_URL`             | Browser client | Supabase project URL.                                |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser client | Browser-safe publishable or anon key.                |
+| `VITE_ADMIN_AUTH_ENDPOINT`      | Admin access   | Optional admin auth endpoint value.                  |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Server routes  | Server-only key. Never expose in browser code.       |
+| `FAPSHI_ENVIRONMENT`            | Payments       | `sandbox` or `live`.                                 |
+| `FAPSHI_API_USER`               | Payments       | Fapshi service API user.                             |
+| `FAPSHI_API_KEY`                | Payments       | Fapshi service API key.                              |
+| `FAPSHI_WEBHOOK_SECRET`         | Payments       | Shared webhook secret sent as `x-wh-secret`.         |
+| `GEMINI_API_KEY`                | AI             | Primary AI provider (Gemini).                        |
+| `GROQ_API_KEY`                  | AI             | Fallback AI provider (Groq).                         |
+| `CEREBRAS_API_KEY`              | AI             | Fallback AI provider (Cerebras).                     |
+| `GEMINI_DAILY_CAP`              | AI             | Optional daily request cap (default `1500`).         |
+| `GROQ_DAILY_CAP`                | AI             | Optional daily request cap (default `1000`).         |
+| `CEREBRAS_DAILY_CAP`            | AI             | Optional daily request cap (default `5000`).         |
+| `OPENROUTER_API_KEY`            | AI             | Legacy single-provider key (kept for compatibility). |
+| `AI_MODEL`                      | AI             | Legacy; defaults to `openrouter/free` when set.      |
+| `AI_BASE_URL`                   | AI             | Legacy; defaults to `https://openrouter.ai/api/v1`.  |
+| `APP_PUBLIC_URL`                | AI/payments    | Public app origin used in redirects and AI headers.  |
 
 ## Production Deployment
 

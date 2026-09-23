@@ -761,7 +761,10 @@ function SettingsPage() {
               )}
             </Section>
 
-            <Section title="Legal" description="Review policies that apply to your account and Premium payments.">
+            <Section
+              title="Legal"
+              description="Review policies that apply to your account and Premium payments."
+            >
               <div className="flex flex-wrap gap-3 text-sm">
                 <Button asChild variant="outline" size="sm">
                   <Link to="/terms">Terms of Service</Link>
@@ -781,7 +784,12 @@ function SettingsPage() {
               </div>
               <p className="text-xs leading-relaxed text-muted-foreground">
                 Premium payments are processed only via{" "}
-                <a href="https://www.fapshi.com" target="_blank" rel="noreferrer" className="underline">
+                <a
+                  href="https://www.fapshi.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline"
+                >
                   Fapshi
                 </a>{" "}
                 in FCFA (MTN Mobile Money, Orange Money, and other Fapshi channels where available).

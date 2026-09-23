@@ -156,7 +156,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
-          const limiter = rateLimit(`ai:learning-path:${user.id}`, 10, 60 * 60 * 1000);
+          const limiter = await rateLimit(`ai:learning-path:${user.id}`, 10, 60 * 60 * 1000);
           if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const supabase = getAuthenticatedSupabase(request);
 

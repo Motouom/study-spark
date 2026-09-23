@@ -40,7 +40,10 @@ export type AnalyticsEvent =
   | { name: "paper_opened"; props?: { subject: string; level: string; isLocked: boolean } }
   | { name: "subject_selected"; props?: { subject: string } }
   | { name: "checkpoint_marked"; props?: { type: "understood" | "review" | "bookmark" } }
-  | { name: "ai_action_used"; props?: { action: "progress_insight" | "learning_path" | "format_paper" } }
+  | {
+      name: "ai_action_used";
+      props?: { action: "progress_insight" | "learning_path" | "format_paper" };
+    }
   | { name: "search_used"; props?: { hasQuery: boolean } }
   // Premium conversion
   | { name: "premium_view" }

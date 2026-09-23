@@ -17,6 +17,10 @@ export function canonicalUrl(path = "/") {
   return `${SITE_URL}${path === "/" ? "" : path}`;
 }
 
+export function jsonLdScript(schema: unknown) {
+  return JSON.stringify(schema).replace(/</g, "\\u003c");
+}
+
 export function alternateLinks(path = "/", frenchPath = "/fr") {
   return [
     { rel: "alternate", hrefLang: "en-CM", href: canonicalUrl(path) },

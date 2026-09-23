@@ -16,7 +16,8 @@ export const Route = createFileRoute("/fr/terms")({
       { property: "og:title", content: "StudySpark Conditions d'utilisation" },
       {
         property: "og:description",
-        content: "Conditions d'utilisation pour la révision GCE, BEPC, Probatoire et Baccalauréat au Cameroun.",
+        content:
+          "Conditions d'utilisation pour la révision GCE, BEPC, Probatoire et Baccalauréat au Cameroun.",
       },
       { property: "og:url", content: canonicalUrl("/fr/terms") },
       { property: "og:locale", content: "fr_CM" },

@@ -32,7 +32,7 @@ export const Route = createFileRoute("/api/ai/format-paper")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
-          const limiter = rateLimit(`ai:format-paper:${user.id}`, 20, 60 * 60 * 1000);
+          const limiter = await rateLimit(`ai:format-paper:${user.id}`, 20, 60 * 60 * 1000);
           if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const role = user.app_metadata?.role;
           if (role !== "admin" && role !== "reviewer" && role !== "super_admin") {

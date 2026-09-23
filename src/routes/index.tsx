@@ -16,7 +16,13 @@ import {
   Lock,
 } from "lucide-react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
-import { alternateLinks, canonicalUrl, educationalAppSchema, OG_IMAGE_URL } from "@/lib/seo";
+import {
+  alternateLinks,
+  canonicalUrl,
+  educationalAppSchema,
+  jsonLdScript,
+  OG_IMAGE_URL,
+} from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -492,7 +498,7 @@ function Landing() {
     <div className="min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(educationalAppSchema()) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(educationalAppSchema()) }}
       />
       <Nav />
       <main>

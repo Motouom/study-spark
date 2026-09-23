@@ -257,15 +257,24 @@ function SignIn() {
           {locale === "fr" ? (
             <>
               En continuant, vous acceptez nos{" "}
-              <Link to="/fr/terms" className="font-medium text-foreground underline underline-offset-2">
+              <Link
+                to="/fr/terms"
+                className="font-medium text-foreground underline underline-offset-2"
+              >
                 Conditions
               </Link>{" "}
               et notre{" "}
-              <Link to="/fr/privacy" className="font-medium text-foreground underline underline-offset-2">
+              <Link
+                to="/fr/privacy"
+                className="font-medium text-foreground underline underline-offset-2"
+              >
                 Politique de confidentialité
               </Link>{" "}
               — voir aussi{" "}
-              <Link to="/fr/refund" className="font-medium text-foreground underline underline-offset-2">
+              <Link
+                to="/fr/refund"
+                className="font-medium text-foreground underline underline-offset-2"
+              >
                 Remboursement
               </Link>
               .
@@ -273,15 +282,24 @@ function SignIn() {
           ) : (
             <>
               By continuing you agree to our{" "}
-              <Link to="/terms" className="font-medium text-foreground underline underline-offset-2">
+              <Link
+                to="/terms"
+                className="font-medium text-foreground underline underline-offset-2"
+              >
                 Terms
               </Link>{" "}
               and{" "}
-              <Link to="/privacy" className="font-medium text-foreground underline underline-offset-2">
+              <Link
+                to="/privacy"
+                className="font-medium text-foreground underline underline-offset-2"
+              >
                 Privacy Policy
               </Link>{" "}
               — see also{" "}
-              <Link to="/refund" className="font-medium text-foreground underline underline-offset-2">
+              <Link
+                to="/refund"
+                className="font-medium text-foreground underline underline-offset-2"
+              >
                 Refund Policy
               </Link>
               .

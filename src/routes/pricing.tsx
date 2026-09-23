@@ -6,7 +6,7 @@ import { Check, Sparkles, X, ArrowLeft, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { supabase } from "@/lib/supabase";
-import { alternateLinks, canonicalUrl, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
+import { alternateLinks, canonicalUrl, jsonLdScript, OG_IMAGE_URL, pricingSchema } from "@/lib/seo";
 import { useI18n, useSyncLocaleFromProfile, type TranslationKey } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
 
@@ -213,7 +213,7 @@ function PricingPage() {
     <div className="min-h-screen bg-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingSchema()) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(pricingSchema()) }}
       />
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">

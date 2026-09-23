@@ -63,7 +63,9 @@ export function useAiActions() {
     () =>
       run("progress", () => {
         track({ name: "ai_action_used", props: { action: "progress_insight" } });
-        return postAi<{ insight: string; source: AiSource; message?: string }>("/api/ai/progress-insight");
+        return postAi<{ insight: string; source: AiSource; message?: string }>(
+          "/api/ai/progress-insight",
+        );
       }),
     [run],
   );
@@ -72,7 +74,9 @@ export function useAiActions() {
     () =>
       run("learning-path", () => {
         track({ name: "ai_action_used", props: { action: "learning_path" } });
-        return postAi<{ days: AiLearningPathDay[]; source: AiSource; message?: string }>("/api/ai/learning-path");
+        return postAi<{ days: AiLearningPathDay[]; source: AiSource; message?: string }>(
+          "/api/ai/learning-path",
+        );
       }),
     [run],
   );
@@ -81,7 +85,10 @@ export function useAiActions() {
     (input: { title: string; subject: string; markdown: string }) =>
       run("format-paper", () => {
         track({ name: "ai_action_used", props: { action: "format_paper" } });
-        return postAi<{ markdown: string; source: AiSource; message?: string }>("/api/ai/format-paper", input);
+        return postAi<{ markdown: string; source: AiSource; message?: string }>(
+          "/api/ai/format-paper",
+          input,
+        );
       }),
     [run],
   );

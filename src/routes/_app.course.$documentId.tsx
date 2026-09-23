@@ -62,7 +62,7 @@ function CourseDocumentPage() {
         isLocked: document.isLocked,
       },
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [document?.id]);
   const studyProgress = usePaperStudyProgress(document?.id);
   const questionProgress = useStructuralProgress(document?.id);

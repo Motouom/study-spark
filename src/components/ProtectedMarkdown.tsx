@@ -2,12 +2,18 @@ import { Badge } from "@/components/ui/badge";
 import type { CourseDocument } from "@/hooks/use-study-content";
 import { BookOpenCheck, FlaskConical, GraduationCap, ListChecks, ShieldCheck } from "lucide-react";
 import type { ReactNode } from "react";
-import { Children, isValidElement } from "react";
+import { Children, isValidElement, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import "katex/dist/katex.min.css";
+import type { PluggableList } from "unified";
+
+const MATH_PATTERN =
+  /\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\\begin\{[a-zA-Z]+\*?\}/;
+
+export function hasMath(markdown: string) {
+  return MATH_PATTERN.test(markdown);
+}
 
 export function slugifyHeading(value: string) {
   return value
@@ -28,7 +34,7 @@ type QuestionLabelSplit = {
   rest: string;
 };
 
-function normalizeQuestionHeadings(markdown: string) {
+export function normalizeQuestionHeadings(markdown: string) {
   return markdown
     .split("\n")
     .map((line) => {
@@ -93,7 +99,7 @@ function plainText(children: ReactNode, seen: WeakSet<object> = new WeakSet<obje
   return "";
 }
 
-function splitSimpleQuestionLabel(children: ReactNode): QuestionLabelSplit | null {
+export function splitSimpleQuestionLabel(children: ReactNode): QuestionLabelSplit | null {
   const splitText = (value: string): QuestionLabelSplit | null => {
     const match = value.match(QUESTION_LABEL_PATTERN);
     if (!match) return null;
@@ -149,6 +155,20 @@ export default function ProtectedMarkdown({
   const trace = `${owner} · ${userId.slice(0, 8)} · ${document.id.slice(0, 8)} · ${new Date().toLocaleDateString()}`;
   const isCourse = document.contentKind === "course";
   const isCheatsheet = document.contentKind === "cheatsheet";
+  const [katexPlugins, setKatexPlugins] = useState<PluggableList>([]);
+
+  useEffect(() => {
+    if (!hasMath(document.markdownContent)) return;
+    let cancelled = false;
+    void import("rehype-katex").then((module) => {
+      if (!cancelled) setKatexPlugins([module.default]);
+    });
+    void import("katex/dist/katex.min.css");
+    return () => {
+      cancelled = true;
+    };
+  }, [document.markdownContent]);
+
   const markdownContent = renderQuestionControls
     ? normalizeQuestionHeadings(document.markdownContent)
     : document.markdownContent;
@@ -200,7 +220,7 @@ export default function ProtectedMarkdown({
       <div className={markdownClass}>
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
+          rehypePlugins={katexPlugins}
           components={{
             h1: ({ children }) => (
               <h1

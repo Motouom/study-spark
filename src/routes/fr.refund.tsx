@@ -16,7 +16,8 @@ export const Route = createFileRoute("/fr/refund")({
       { property: "og:title", content: "StudySpark Remboursement et annulation" },
       {
         property: "og:description",
-        content: "Remboursement Premium StudySpark via Fapshi au Cameroun : FCFA, 7 jours, assistance.",
+        content:
+          "Remboursement Premium StudySpark via Fapshi au Cameroun : FCFA, 7 jours, assistance.",
       },
       { property: "og:url", content: canonicalUrl("/fr/refund") },
       { property: "og:locale", content: "fr_CM" },
@@ -91,11 +92,23 @@ function FrenchRefundPage() {
           <div className="mt-12 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm dark:border-amber-900 dark:bg-amber-950/30">
             <p className="font-medium text-foreground">Besoin d'aide pour un paiement ?</p>
             <p className="mt-1 text-muted-foreground">
-              Visitez <Link to="/support" className="underline hover:text-foreground">Assistance</Link> ou
-              écrivez à <a href="mailto:support@studyspark.cm" className="underline">support@studyspark.cm</a>.
-              Joignez votre référence visible dans{" "}
-              <Link to="/settings" className="underline">Paramètres → Historique</Link> ou{" "}
-              <Link to="/fr/tarifs" className="underline">Tarifs</Link>.
+              Visitez{" "}
+              <Link to="/support" className="underline hover:text-foreground">
+                Assistance
+              </Link>{" "}
+              ou écrivez à{" "}
+              <a href="mailto:support@studyspark.cm" className="underline">
+                support@studyspark.cm
+              </a>
+              . Joignez votre référence visible dans{" "}
+              <Link to="/settings" className="underline">
+                Paramètres → Historique
+              </Link>{" "}
+              ou{" "}
+              <Link to="/fr/tarifs" className="underline">
+                Tarifs
+              </Link>
+              .
             </p>
           </div>
           <div className="mt-8 rounded-xl border border-border bg-card p-5 text-sm">

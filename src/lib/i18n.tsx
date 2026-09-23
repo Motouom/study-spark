@@ -147,56 +147,81 @@ const en = {
   "pricing.commonQuestions": "Common questions",
   "pricing.footer": "Made for Cameroon students.",
   "terms.title": "Terms of Service",
-  "terms.introduction": "These Terms of Service govern your use of StudySpark, a platform for Cameroon GCE, BEPC, Probatoire, and Baccalaureat revision. By accessing or using the service, you agree to these terms. Effective date: 22 September 2025. Contact: support@studyspark.cm.",
-  "terms.effective": "Effective 22 September 2025 · For Cameroon learners · Contact support@studyspark.cm",
+  "terms.introduction":
+    "These Terms of Service govern your use of StudySpark, a platform for Cameroon GCE, BEPC, Probatoire, and Baccalaureat revision. By accessing or using the service, you agree to these terms. Effective date: 22 September 2025. Contact: support@studyspark.cm.",
+  "terms.effective":
+    "Effective 22 September 2025 · For Cameroon learners · Contact support@studyspark.cm",
   "terms.sections.1": "1. Acceptance and who can use StudySpark",
-  "terms.sections.1.desc": "You must be at least 13 years old or have parent/guardian consent. StudySpark is built for learners in Cameroon preparing for GCE O Level, A Level, BEPC, Probatoire, Baccalauréat, and related series (C, D, A, TI, etc.). By creating an account or signing in with Google, email magic link, or password, you agree to these Terms and to our Privacy and Refund policies.",
+  "terms.sections.1.desc":
+    "You must be at least 13 years old or have parent/guardian consent. StudySpark is built for learners in Cameroon preparing for GCE O Level, A Level, BEPC, Probatoire, Baccalauréat, and related series (C, D, A, TI, etc.). By creating an account or signing in with Google, email magic link, or password, you agree to these Terms and to our Privacy and Refund policies.",
   "terms.sections.2": "2. Accounts and security",
-  "terms.sections.2.desc": "You are responsible for keeping your sign-in method confidential and for all activity under your account. Use a strong password, do not share codes, and notify us via the Support page if you suspect unauthorized access. We may ask you to verify email or re-authenticate before sensitive changes.",
+  "terms.sections.2.desc":
+    "You are responsible for keeping your sign-in method confidential and for all activity under your account. Use a strong password, do not share codes, and notify us via the Support page if you suspect unauthorized access. We may ask you to verify email or re-authenticate before sensitive changes.",
   "terms.sections.3": "3. Acceptable use and protected content",
-  "terms.sections.3.desc": "All papers, courses, cheatsheets, and AI-generated guidance are delivered in-app only. Copying, bulk scraping, downloading, PDF export, screen-recording for redistribution, or bypassing access controls is prohibited. Free accounts may preview 1–2 selected papers; unlimited protected papers, courses, cheatsheets, AI learning paths, and advanced search require Premium. We may rate-limit or suspend accounts that attempt to extract protected content.",
+  "terms.sections.3.desc":
+    "All papers, courses, cheatsheets, and AI-generated guidance are delivered in-app only. Copying, bulk scraping, downloading, PDF export, screen-recording for redistribution, or bypassing access controls is prohibited. Free accounts may preview 1–2 selected papers; unlimited protected papers, courses, cheatsheets, AI learning paths, and advanced search require Premium. We may rate-limit or suspend accounts that attempt to extract protected content.",
   "terms.sections.4": "4. Premium, pricing, and Fapshi payments",
-  "terms.sections.4.desc": "Premium is FCFA 1,500 per month or FCFA 12,000 per year (billed as FCFA 1,500 × 12, showing ~33% saving). The only supported payment method is Fapshi at checkout (https://www.fapshi.com). Depending on Fapshi availability, you may pay with MTN Mobile Money, Orange Money, or other Fapshi-supported channels in Cameroon. No card is required. After you are redirected to Fapshi and pay, StudySpark confirms the transaction via Fapshi verification API and webhook. Premium activates only when Fapshi reports successful with the matching amount and transaction ID, and remains active until premiumUntil. Renewal is manual — we do not auto-charge; you start a new Fapshi checkout when you want to renew. Prices are shown in FCFA and may be updated with notice before renewal.",
+  "terms.sections.4.desc":
+    "Premium is FCFA 1,500 per month or FCFA 12,000 per year (billed as FCFA 1,500 × 12, showing ~33% saving). The only supported payment method is Fapshi at checkout (https://www.fapshi.com). Depending on Fapshi availability, you may pay with MTN Mobile Money, Orange Money, or other Fapshi-supported channels in Cameroon. No card is required. After you are redirected to Fapshi and pay, StudySpark confirms the transaction via Fapshi verification API and webhook. Premium activates only when Fapshi reports successful with the matching amount and transaction ID, and remains active until premiumUntil. Renewal is manual — we do not auto-charge; you start a new Fapshi checkout when you want to renew. Prices are shown in FCFA and may be updated with notice before renewal.",
   "terms.sections.5": "5. Intellectual property",
-  "terms.sections.5.desc": "StudySpark content, including structured papers, topic courses, and cheatsheets, is protected by copyright and belongs to StudySpark or its licensors. You receive a personal, non-transferable licence to view content in-app for study purposes. You may not reproduce, distribute, sell, or create derivative works without explicit permission.",
+  "terms.sections.5.desc":
+    "StudySpark content, including structured papers, topic courses, and cheatsheets, is protected by copyright and belongs to StudySpark or its licensors. You receive a personal, non-transferable licence to view content in-app for study purposes. You may not reproduce, distribute, sell, or create derivative works without explicit permission.",
   "terms.sections.6": "6. AI and analytics disclaimer",
-  "terms.sections.6.desc": "AI features (personalized learning path, progress insight, paper formatting) use aggregated study signals — e.g., weakest subjects, counts of passed/failed/understood/review marks, and difficulty ranking — sent to our AI provider (OpenRouter/Gemini-compatible). We do not send full paper text or your email/name to the AI provider. AI output is assistive and may be inaccurate; always verify with your syllabus and teacher. If AI is unavailable, StudySpark falls back to a deterministic plan. Usage analytics via Vercel Analytics is anonymized: we track aggregate events (landing_view, paper_opened, checkpoint_marked, ai_action_used, checkout_started, etc.) without paper content, email, or user ID, debounced to avoid double counting.",
+  "terms.sections.6.desc":
+    "AI features (personalized learning path, progress insight, paper formatting) use aggregated study signals — e.g., weakest subjects, counts of passed/failed/understood/review marks, and difficulty ranking — sent to our AI provider (OpenRouter/Gemini-compatible). We do not send full paper text or your email/name to the AI provider. AI output is assistive and may be inaccurate; always verify with your syllabus and teacher. If AI is unavailable, StudySpark falls back to a deterministic plan. Usage analytics via Vercel Analytics is anonymized: we track aggregate events (landing_view, paper_opened, checkpoint_marked, ai_action_used, checkout_started, etc.) without paper content, email, or user ID, debounced to avoid double counting.",
   "terms.sections.7": "7. Termination and liability",
-  "terms.sections.7.desc": "We may suspend or terminate accounts for violation of these Terms, abuse of protected content, or fraud. StudySpark is provided on an as is basis without warranties. To the extent permitted by Cameroonian law, we exclude implied warranties of merchantability and fitness. Our liability is limited to the amount you paid for Premium in the last 3 months. We are not liable for exam outcomes, network interruptions, or Fapshi service delays.",
+  "terms.sections.7.desc":
+    "We may suspend or terminate accounts for violation of these Terms, abuse of protected content, or fraud. StudySpark is provided on an as is basis without warranties. To the extent permitted by Cameroonian law, we exclude implied warranties of merchantability and fitness. Our liability is limited to the amount you paid for Premium in the last 3 months. We are not liable for exam outcomes, network interruptions, or Fapshi service delays.",
   "terms.sections.8": "8. Governing law and changes",
-  "terms.sections.8.desc": "These Terms are governed by the laws of Cameroon. Disputes are subject to the courts of Yaoundé, Cameroon. We may update these Terms and will post the new effective date on this page; continued use after changes means acceptance. For questions, contact support@studyspark.cm or use the Support page.",
+  "terms.sections.8.desc":
+    "These Terms are governed by the laws of Cameroon. Disputes are subject to the courts of Yaoundé, Cameroon. We may update these Terms and will post the new effective date on this page; continued use after changes means acceptance. For questions, contact support@studyspark.cm or use the Support page.",
   "privacy.title": "Privacy Policy",
-  "privacy.introduction": "This Privacy Policy explains how StudySpark collects, uses, shares, and protects your information. It covers account data, learning progress, analytics, and AI usage. Effective date: 22 September 2025. Contact: support@studyspark.cm.",
+  "privacy.introduction":
+    "This Privacy Policy explains how StudySpark collects, uses, shares, and protects your information. It covers account data, learning progress, analytics, and AI usage. Effective date: 22 September 2025. Contact: support@studyspark.cm.",
   "privacy.effective": "Effective 22 September 2025 · For Cameroon learners",
   "privacy.sections.1": "1. Information we collect",
-  "privacy.sections.1.desc": "Account: email, display name, auth provider (Google/magic link/password), and Supabase user ID. Profile: language (English/French), education system (GCE/Francophone), class level, series, subjects, country/region/city, and optional browser location verification (latitude/longitude/timestamp) for leaderboards if you allow it. Learning progress: papers opened, scroll-depth context, structural questions marked as passed/failed, topic marks as understood/review/bookmark, streaks and freezes, study sessions and minutes, and paper completion signals. Preferences: theme and locale stored in localStorage. Payment metadata: billing interval, amount in FCFA, status, provider transaction ID, and timestamps — we do not store Mobile Money numbers, cards, or bank details; those are handled by Fapshi.",
+  "privacy.sections.1.desc":
+    "Account: email, display name, auth provider (Google/magic link/password), and Supabase user ID. Profile: language (English/French), education system (GCE/Francophone), class level, series, subjects, country/region/city, and optional browser location verification (latitude/longitude/timestamp) for leaderboards if you allow it. Learning progress: papers opened, scroll-depth context, structural questions marked as passed/failed, topic marks as understood/review/bookmark, streaks and freezes, study sessions and minutes, and paper completion signals. Preferences: theme and locale stored in localStorage. Payment metadata: billing interval, amount in FCFA, status, provider transaction ID, and timestamps — we do not store Mobile Money numbers, cards, or bank details; those are handled by Fapshi.",
   "privacy.sections.2": "2. How we use your information",
-  "privacy.sections.2.desc": "We use your profile to filter papers, courses, and cheatsheets to your class/series/subjects and language. Learning progress powers your dashboard (streak, pass rate, mastery by subject, weekly performance), learning path, search ranking, and Premium gating. We may use anonymized, aggregated data to improve content coverage and reliability. We never sell your personal data.",
+  "privacy.sections.2.desc":
+    "We use your profile to filter papers, courses, and cheatsheets to your class/series/subjects and language. Learning progress powers your dashboard (streak, pass rate, mastery by subject, weekly performance), learning path, search ranking, and Premium gating. We may use anonymized, aggregated data to improve content coverage and reliability. We never sell your personal data.",
   "privacy.sections.3": "3. AI usage",
-  "privacy.sections.3.desc": "When you request a learning path or progress insight, we send aggregated, non-identifying study signals to our AI provider (OpenRouter/Gemini-compatible via server-side keys): e.g., weakest subjects, difficulty ranking with counts of failed/slow questions, and next recommended papers. We do not send full paper content, emails, or names. The AI returns a 7-day plan or insight; if the provider times out or returns invalid JSON, we show a deterministic fallback built from your real signals. AI output may contain errors — treat it as study guidance, not guaranteed exam advice.",
+  "privacy.sections.3.desc":
+    "When you request a learning path or progress insight, we send aggregated, non-identifying study signals to our AI provider (OpenRouter/Gemini-compatible via server-side keys): e.g., weakest subjects, difficulty ranking with counts of failed/slow questions, and next recommended papers. We do not send full paper content, emails, or names. The AI returns a 7-day plan or insight; if the provider times out or returns invalid JSON, we show a deterministic fallback built from your real signals. AI output may contain errors — treat it as study guidance, not guaranteed exam advice.",
   "privacy.sections.4": "4. Analytics",
-  "privacy.sections.4.desc": "We use Vercel Analytics custom events, anonymized and debounced (1200 ms): landing_view, signup_start/complete, paper_opened (subject/level/locked only), checkpoint_marked, ai_action_used, search_used, premium_view, checkout_started, payment_success/failure/pending, and signin_error. No paper markdown, question text, document IDs, email, name, user ID, auth tokens, or payment secrets are sent. Analytics never blocks the app and is used only in aggregate to measure funnel and reliability.",
+  "privacy.sections.4.desc":
+    "We use Vercel Analytics custom events, anonymized and debounced (1200 ms): landing_view, signup_start/complete, paper_opened (subject/level/locked only), checkpoint_marked, ai_action_used, search_used, premium_view, checkout_started, payment_success/failure/pending, and signin_error. No paper markdown, question text, document IDs, email, name, user ID, auth tokens, or payment secrets are sent. Analytics never blocks the app and is used only in aggregate to measure funnel and reliability.",
   "privacy.sections.5": "5. Third-party services",
-  "privacy.sections.5.desc": "Fapshi (https://www.fapshi.com) processes all Premium payments; when you pay, Fapshi receives your phone/channel and transaction data under its own privacy policy and confirms via API/webhook with a secret. Supabase provides authentication and database storage (profile, progress, payments) under its privacy/security commitments. Vercel hosts the app and analytics. Our AI provider (OpenRouter/Gemini-compatible) processes only aggregated study prompts server-side.",
+  "privacy.sections.5.desc":
+    "Fapshi (https://www.fapshi.com) processes all Premium payments; when you pay, Fapshi receives your phone/channel and transaction data under its own privacy policy and confirms via API/webhook with a secret. Supabase provides authentication and database storage (profile, progress, payments) under its privacy/security commitments. Vercel hosts the app and analytics. Our AI provider (OpenRouter/Gemini-compatible) processes only aggregated study prompts server-side.",
   "privacy.sections.6": "6. Retention, rights, and deletion",
-  "privacy.sections.6.desc": "We retain your data while your account is active. You may request access, correction, or deletion at support@studyspark.cm or via the Support page. Deleting your account in Settings (type delete to confirm) removes your Supabase auth user and cascades to profile/progress via database rules. Payment transaction records may be retained for legal/accounting purposes. We handle requests within 30 days, and aim to reply to payment/refund queries within 48 hours. Storage follows Cameroonian data protection guidance and Supabase retention policies.",
+  "privacy.sections.6.desc":
+    "We retain your data while your account is active. You may request access, correction, or deletion at support@studyspark.cm or via the Support page. Deleting your account in Settings (type delete to confirm) removes your Supabase auth user and cascades to profile/progress via database rules. Payment transaction records may be retained for legal/accounting purposes. We handle requests within 30 days, and aim to reply to payment/refund queries within 48 hours. Storage follows Cameroonian data protection guidance and Supabase retention policies.",
   "privacy.sections.7": "7. Cookies, local storage, security, and children",
-  "privacy.sections.7.desc": "We use browser localStorage for locale (studyspark.locale) and theme, plus Supabase auth cookies/tokens for sign-in. We do not use third-party advertising cookies. All Fapshi and Supabase secrets are server-side; client calls are authenticated with your Supabase access token. Transport is HTTPS. StudySpark is for ages 13+; we do not knowingly collect data from children under 13 without verifiable parental consent. If you believe a child provided data, contact us to remove it.",
+  "privacy.sections.7.desc":
+    "We use browser localStorage for locale (studyspark.locale) and theme, plus Supabase auth cookies/tokens for sign-in. We do not use third-party advertising cookies. All Fapshi and Supabase secrets are server-side; client calls are authenticated with your Supabase access token. Transport is HTTPS. StudySpark is for ages 13+; we do not knowingly collect data from children under 13 without verifiable parental consent. If you believe a child provided data, contact us to remove it.",
   "refund.title": "Refund & Cancellation Policy",
-  "refund.introduction": "This policy explains pricing, the sole payment method (Fapshi), cancellation, and refunds for StudySpark Premium. Effective date: 22 September 2025. Contact: support@studyspark.cm.",
+  "refund.introduction":
+    "This policy explains pricing, the sole payment method (Fapshi), cancellation, and refunds for StudySpark Premium. Effective date: 22 September 2025. Contact: support@studyspark.cm.",
   "refund.effective": "Effective 22 September 2025 · Premium via Fapshi · FCFA",
   "refund.sections.1": "1. Pricing and supported payment method",
-  "refund.sections.1.desc": "Premium is FCFA 1,500/month (billed monthly) or FCFA 12,000/year (billed yearly — ~FCFA 1,000/month equivalent). The only supported payment method is Fapshi checkout. At checkout you are redirected to Fapshi; depending on what Fapshi offers in Cameroon you may see MTN Mobile Money, Orange Money, or other local channels. Prices are in FCFA. We verify every payment server-side via Fapshi status API and webhook (secret-verified) and only activate Premium when Fapshi reports successful for the matching amount and transaction ID. If Fapshi is pending, we poll briefly and show payment_pending; you can retry from Pricing or Support.",
+  "refund.sections.1.desc":
+    "Premium is FCFA 1,500/month (billed monthly) or FCFA 12,000/year (billed yearly — ~FCFA 1,000/month equivalent). The only supported payment method is Fapshi checkout. At checkout you are redirected to Fapshi; depending on what Fapshi offers in Cameroon you may see MTN Mobile Money, Orange Money, or other local channels. Prices are in FCFA. We verify every payment server-side via Fapshi status API and webhook (secret-verified) and only activate Premium when Fapshi reports successful for the matching amount and transaction ID. If Fapshi is pending, we poll briefly and show payment_pending; you can retry from Pricing or Support.",
   "refund.sections.2": "2. Cancellation",
-  "refund.sections.2.desc": "Premium is not auto-renewed by us — you start a new Fapshi checkout when you want to extend. If you do not renew, your plan stays Premium until premiumUntil then returns to Free. To stop any future renewal attempt, simply do not start a new checkout. For help or to request deactivation before expiry, contact Support via the Support page or support@studyspark.cm with your transaction reference; we handle deactivation requests within 48 hours. No partial refunds for unused days after activation.",
+  "refund.sections.2.desc":
+    "Premium is not auto-renewed by us — you start a new Fapshi checkout when you want to extend. If you do not renew, your plan stays Premium until premiumUntil then returns to Free. To stop any future renewal attempt, simply do not start a new checkout. For help or to request deactivation before expiry, contact Support via the Support page or support@studyspark.cm with your transaction reference; we handle deactivation requests within 48 hours. No partial refunds for unused days after activation.",
   "refund.sections.3": "3. 7-day refund window",
-  "refund.sections.3.desc": "If Premium does not meet your expectations, you may request a refund within 7 days of the initial purchase or of a renewal payment. Submit via the Support page with your email, transaction ID (shown in Settings → Payment history), and reason. We forward the request to Fapshi; eligibility, deductions, and timing are determined by Fapshi and the underlying Mobile Money provider. Refunds, when approved, go back via the original Fapshi channel.",
+  "refund.sections.3.desc":
+    "If Premium does not meet your expectations, you may request a refund within 7 days of the initial purchase or of a renewal payment. Submit via the Support page with your email, transaction ID (shown in Settings → Payment history), and reason. We forward the request to Fapshi; eligibility, deductions, and timing are determined by Fapshi and the underlying Mobile Money provider. Refunds, when approved, go back via the original Fapshi channel.",
   "refund.sections.4": "4. Fapshi role and verification",
-  "refund.sections.4.desc": "Fapshi is the payment processor operating in Cameroon (https://www.fapshi.com). StudySpark does not store your Mobile Money number, card, or bank details. Fapshi handles collection, confirmation, and refunds under its policies. We verify each transaction server-side with the provider transaction ID and amount check before extending premiumUntil. Webhooks are verified with FAPSHI_WEBHOOK_SECRET.",
+  "refund.sections.4.desc":
+    "Fapshi is the payment processor operating in Cameroon (https://www.fapshi.com). StudySpark does not store your Mobile Money number, card, or bank details. Fapshi handles collection, confirmation, and refunds under its policies. We verify each transaction server-side with the provider transaction ID and amount check before extending premiumUntil. Webhooks are verified with FAPSHI_WEBHOOK_SECRET.",
   "refund.sections.5": "5. No refunds for",
-  "refund.sections.5.desc": "No refunds after the 7-day window; for protected papers/courses/cheatsheets already accessed in the current period when the service was delivered as described; for voluntary downgrade from Premium to Free without a qualifying refund request; or for failed payments due to insufficient funds, wrong phone, or provider decline (failed/expired payments can be retried from Pricing or Settings → Payment history).",
+  "refund.sections.5.desc":
+    "No refunds after the 7-day window; for protected papers/courses/cheatsheets already accessed in the current period when the service was delivered as described; for voluntary downgrade from Premium to Free without a qualifying refund request; or for failed payments due to insufficient funds, wrong phone, or provider decline (failed/expired payments can be retried from Pricing or Settings → Payment history).",
   "refund.sections.6": "6. Contact and timelines",
-  "refund.sections.6.desc": "For any payment, cancellation, or refund question, use the Support page or email support@studyspark.cm. Include your transaction reference if available — we attach your plan/level/subjects automatically in the Support form to help faster. We aim to reply to refund/cancellation requests within 48 hours and to resolve payment verifications within 1–2 business days, subject to Fapshi/provider processing times.",
+  "refund.sections.6.desc":
+    "For any payment, cancellation, or refund question, use the Support page or email support@studyspark.cm. Include your transaction reference if available — we attach your plan/level/subjects automatically in the Support form to help faster. We aim to reply to refund/cancellation requests within 48 hours and to resolve payment verifications within 1–2 business days, subject to Fapshi/provider processing times.",
   "pricing.feature.previewPapers": "1-2 free preview papers",
   "pricing.feature.unlimitedPapers": "Unlimited protected papers",
   "pricing.feature.protectedPapers": "Protected in-app papers",
@@ -343,14 +368,17 @@ const en = {
   "support.categoryLabel": "What is your issue about?",
   "support.messageLabel": "Describe the problem",
   "support.messagePlaceholder": "Tell us what happened, what you expected, and what you tried...",
-  "support.contextNote": "This information will be attached to help us respond faster. No private keys or tokens are included.",
+  "support.contextNote":
+    "This information will be attached to help us respond faster. No private keys or tokens are included.",
   "support.sendEmail": "Send via email",
   "support.sendWhatsApp": "Send via WhatsApp",
-  "support.sentNote": "Your message app should have opened with the request pre-filled. We reply within 24 hours.",
+  "support.sentNote":
+    "Your message app should have opened with the request pre-filled. We reply within 24 hours.",
   "support.directEmail": "No app? Write directly to",
   "support.expectTitle": "What to expect",
   "support.expect1": "Login and Premium access issues: we aim to respond within 24 hours.",
-  "support.expect2": "Payment problems: include your transaction reference if you have one — we resolve most within 48 hours.",
+  "support.expect2":
+    "Payment problems: include your transaction reference if you have one — we resolve most within 48 hours.",
   "support.expect3": "Content issues (wrong paper, missing subject): reviewed within 3–5 days.",
   "support.quickLinksTitle": "Common help topics",
   "support.linkPayment": "Payment and Premium upgrade",
@@ -359,9 +387,11 @@ const en = {
   "support.linkSignIn": "Sign-in help",
   "support.subjectPlaceholder": "Subject",
   "support.sendRequest": "Send request",
-  "support.emailOpened": "Your email app should have opened with the request pre-filled. We reply within 24 hours.",
+  "support.emailOpened":
+    "Your email app should have opened with the request pre-filled. We reply within 24 hours.",
   "support.noEmailApp": "No email app? Write to us directly at",
-  "support.autoDetails": "Your plan, level, and subjects are attached automatically so we can help faster.",
+  "support.autoDetails":
+    "Your plan, level, and subjects are attached automatically so we can help faster.",
 } as const;
 
 const fr: Partial<Record<TranslationKey, string>> = {
@@ -500,56 +530,81 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "pricing.commonQuestions": "Questions fréquentes",
   "pricing.footer": "Créé pour les élèves du Cameroun.",
   "terms.title": "Conditions d'utilisation",
-  "terms.introduction": "Les présentes conditions régissent votre utilisation de StudySpark, plateforme de révision GCE, BEPC, Probatoire et Baccalauréat au Cameroun. En créant un compte ou en vous connectant, vous acceptez ces conditions ainsi que les politiques de confidentialité et de remboursement. Entrée en vigueur : 22 septembre 2025. Contact : support@studyspark.cm.",
-  "terms.effective": "En vigueur le 22 septembre 2025 · Pour les élèves du Cameroun · support@studyspark.cm",
+  "terms.introduction":
+    "Les présentes conditions régissent votre utilisation de StudySpark, plateforme de révision GCE, BEPC, Probatoire et Baccalauréat au Cameroun. En créant un compte ou en vous connectant, vous acceptez ces conditions ainsi que les politiques de confidentialité et de remboursement. Entrée en vigueur : 22 septembre 2025. Contact : support@studyspark.cm.",
+  "terms.effective":
+    "En vigueur le 22 septembre 2025 · Pour les élèves du Cameroun · support@studyspark.cm",
   "terms.sections.1": "1. Acceptation et qui peut utiliser StudySpark",
-  "terms.sections.1.desc": "Vous devez avoir au moins 13 ans ou le consentement d'un parent/tuteur. StudySpark est destiné aux élèves du Cameroun préparant le GCE O/A Level, BEPC, Probatoire, Baccalauréat et séries associées (C, D, A, TI...). En vous inscrivant via Google, lien magique ou mot de passe, vous acceptez ces Conditions.",
+  "terms.sections.1.desc":
+    "Vous devez avoir au moins 13 ans ou le consentement d'un parent/tuteur. StudySpark est destiné aux élèves du Cameroun préparant le GCE O/A Level, BEPC, Probatoire, Baccalauréat et séries associées (C, D, A, TI...). En vous inscrivant via Google, lien magique ou mot de passe, vous acceptez ces Conditions.",
   "terms.sections.2": "2. Comptes et sécurité",
-  "terms.sections.2.desc": "Vous gardes vos identifiants confidentiels et restez responsable de toute activité sous votre compte. Utilisez un mot de passe robuste, ne partagez pas vos codes et signalez tout accès suspect via la page Assistance. Nous pouvons demander une vérification d'e-mail avant les modifications sensibles.",
+  "terms.sections.2.desc":
+    "Vous gardes vos identifiants confidentiels et restez responsable de toute activité sous votre compte. Utilisez un mot de passe robuste, ne partagez pas vos codes et signalez tout accès suspect via la page Assistance. Nous pouvons demander une vérification d'e-mail avant les modifications sensibles.",
   "terms.sections.3": "3. Usage autorisé et contenu protégé",
-  "terms.sections.3.desc": "Les sujets, cours, fiches et guidages IA s'ouvrent uniquement dans l'application. Copie, extraction massive, téléchargement, export PDF, enregistrement pour redistribution ou contournement des contrôles d'accès sont interdits. Les comptes gratuits prévisualisent 1–2 sujets sélectionnés ; l'accès illimité, les cours, fiches, parcours IA et recherche avancée nécessitent Premium. Nous pouvons limiter ou suspendre les comptes qui tentent d'extraire du contenu protégé.",
+  "terms.sections.3.desc":
+    "Les sujets, cours, fiches et guidages IA s'ouvrent uniquement dans l'application. Copie, extraction massive, téléchargement, export PDF, enregistrement pour redistribution ou contournement des contrôles d'accès sont interdits. Les comptes gratuits prévisualisent 1–2 sujets sélectionnés ; l'accès illimité, les cours, fiches, parcours IA et recherche avancée nécessitent Premium. Nous pouvons limiter ou suspendre les comptes qui tentent d'extraire du contenu protégé.",
   "terms.sections.4": "4. Premium, tarifs et paiements Fapshi",
-  "terms.sections.4.desc": "Premium coûte 1 500 FCFA par mois ou 12 000 FCFA par an (facturé 1 500 × 12, ~33% d'économie). Le seul moyen de paiement est Fapshi à la caisse (https://www.fapshi.com). Selon la disponibilité Fapshi, vous pouvez payer via MTN Mobile Money, Orange Money ou autres canaux Fapshi au Cameroun. Aucune carte n'est requise. Après redirection vers Fapshi, StudySpark confirme via l'API et le webhook Fapshi ; Premium s'active uniquement quand Fapshi confirme successful avec le bon montant et l'ID de transaction et reste actif jusqu'à premiumUntil. Le renouvellement est manuel — nous ne prélevons pas automatiquement ; vous relancez un paiement Fapshi quand vous voulez prolonger. Les prix sont en FCFA et peuvent évoluer avec préavis avant renouvellement.",
+  "terms.sections.4.desc":
+    "Premium coûte 1 500 FCFA par mois ou 12 000 FCFA par an (facturé 1 500 × 12, ~33% d'économie). Le seul moyen de paiement est Fapshi à la caisse (https://www.fapshi.com). Selon la disponibilité Fapshi, vous pouvez payer via MTN Mobile Money, Orange Money ou autres canaux Fapshi au Cameroun. Aucune carte n'est requise. Après redirection vers Fapshi, StudySpark confirme via l'API et le webhook Fapshi ; Premium s'active uniquement quand Fapshi confirme successful avec le bon montant et l'ID de transaction et reste actif jusqu'à premiumUntil. Le renouvellement est manuel — nous ne prélevons pas automatiquement ; vous relancez un paiement Fapshi quand vous voulez prolonger. Les prix sont en FCFA et peuvent évoluer avec préavis avant renouvellement.",
   "terms.sections.5": "5. Propriété intellectuelle",
-  "terms.sections.5.desc": "Les contenus StudySpark (sujets structurés, cours, fiches) sont protégés par le droit d'auteur et appartiennent à StudySpark ou ses concédants. Vous recevez une licence personnelle non transférable pour consulter le contenu dans l'application à des fins d'étude uniquement. Reproduction, diffusion, vente ou œuvres dérivées interdites sans autorisation.",
+  "terms.sections.5.desc":
+    "Les contenus StudySpark (sujets structurés, cours, fiches) sont protégés par le droit d'auteur et appartiennent à StudySpark ou ses concédants. Vous recevez une licence personnelle non transférable pour consulter le contenu dans l'application à des fins d'étude uniquement. Reproduction, diffusion, vente ou œuvres dérivées interdites sans autorisation.",
   "terms.sections.6": "6. IA et analyses — avertissement",
-  "terms.sections.6.desc": "Les fonctions IA (parcours personnalisé, insight de progression, mise en forme de sujet) envoient des signaux agrégés — matières faibles, nombre de questions réussies/échouées/comprises/à revoir, classement de difficulté — à notre fournisseur IA (compatible OpenRouter/Gemini) côté serveur. Nous n'envoyons pas le texte complet des sujets ni votre e-mail/nom. Les sorties IA sont indicatives et peuvent contenir des erreurs ; vérifiez avec votre programme et vos enseignants. En cas d'indisponibilité IA, un parcours déterministe basé sur vos vrais signaux est affiché. Les analyses Vercel Analytics sont anonymisées et limitées aux événements agrégés (landing_view, paper_opened, checkpoint_marked, ai_action_used, checkout_started, etc.) sans contenu ni identifiant.",
+  "terms.sections.6.desc":
+    "Les fonctions IA (parcours personnalisé, insight de progression, mise en forme de sujet) envoient des signaux agrégés — matières faibles, nombre de questions réussies/échouées/comprises/à revoir, classement de difficulté — à notre fournisseur IA (compatible OpenRouter/Gemini) côté serveur. Nous n'envoyons pas le texte complet des sujets ni votre e-mail/nom. Les sorties IA sont indicatives et peuvent contenir des erreurs ; vérifiez avec votre programme et vos enseignants. En cas d'indisponibilité IA, un parcours déterministe basé sur vos vrais signaux est affiché. Les analyses Vercel Analytics sont anonymisées et limitées aux événements agrégés (landing_view, paper_opened, checkpoint_marked, ai_action_used, checkout_started, etc.) sans contenu ni identifiant.",
   "terms.sections.7": "7. Résiliation et responsabilité",
-  "terms.sections.7.desc": "Nous pouvons suspendre ou résilier un compte en cas de violation des Conditions, d'abus de contenu protégé ou de fraude. StudySpark est fourni tel quel sans garanties. Dans la limite du droit camerounais, nous excluons les garanties implicites de commercialisation et d'adéquation. Notre responsabilité est limitée au montant payé pour Premium sur les 3 derniers mois. Nous ne sommes pas responsables des résultats d'examen, des coupures réseau ou des délais Fapshi.",
+  "terms.sections.7.desc":
+    "Nous pouvons suspendre ou résilier un compte en cas de violation des Conditions, d'abus de contenu protégé ou de fraude. StudySpark est fourni tel quel sans garanties. Dans la limite du droit camerounais, nous excluons les garanties implicites de commercialisation et d'adéquation. Notre responsabilité est limitée au montant payé pour Premium sur les 3 derniers mois. Nous ne sommes pas responsables des résultats d'examen, des coupures réseau ou des délais Fapshi.",
   "terms.sections.8": "8. Droit applicable et modifications",
-  "terms.sections.8.desc": "Ces Conditions sont régies par les lois du Cameroun. Les litiges relèvent des tribunaux de Yaoundé. Nous pouvons mettre à jour ces Conditions et afficherons la nouvelle date d'effet sur cette page ; continuer à utiliser le service vaut acceptation. Contact : support@studyspark.cm ou page Assistance.",
+  "terms.sections.8.desc":
+    "Ces Conditions sont régies par les lois du Cameroun. Les litiges relèvent des tribunaux de Yaoundé. Nous pouvons mettre à jour ces Conditions et afficherons la nouvelle date d'effet sur cette page ; continuer à utiliser le service vaut acceptation. Contact : support@studyspark.cm ou page Assistance.",
   "privacy.title": "Politique de confidentialité",
-  "privacy.introduction": "Cette politique explique comment StudySpark collecte, utilise, partage et protège vos informations : données de compte, progression, analyses et usage IA. Entrée en vigueur : 22 septembre 2025. Contact : support@studyspark.cm.",
+  "privacy.introduction":
+    "Cette politique explique comment StudySpark collecte, utilise, partage et protège vos informations : données de compte, progression, analyses et usage IA. Entrée en vigueur : 22 septembre 2025. Contact : support@studyspark.cm.",
   "privacy.effective": "En vigueur le 22 septembre 2025 · Pour les élèves du Cameroun",
   "privacy.sections.1": "1. Informations que nous collectons",
-  "privacy.sections.1.desc": "Compte : e-mail, nom affiché, fournisseur d'authentification (Google/lien magique/mot de passe) et ID Supabase. Profil : langue, système éducatif (GCE/Francophone), classe, série, matières, pays/région/ville et vérification optionnelle de localisation navigateur (latitude/longitude/horodatage) pour les classements si vous l'autorisez. Progression : sujets ouverts, contexte de défilement, questions marquées réussies/échouées, sujets compris/à revoir/favoris, séries et gels, sessions et minutes d'étude. Préférences : thème et langue en localStorage. Paiement : intervalle, montant FCFA, statut, ID transaction fournisseur et horodatages — nous ne stockons pas les numéros Mobile Money, cartes ou coordonnées bancaires ; Fapshi les gère.",
+  "privacy.sections.1.desc":
+    "Compte : e-mail, nom affiché, fournisseur d'authentification (Google/lien magique/mot de passe) et ID Supabase. Profil : langue, système éducatif (GCE/Francophone), classe, série, matières, pays/région/ville et vérification optionnelle de localisation navigateur (latitude/longitude/horodatage) pour les classements si vous l'autorisez. Progression : sujets ouverts, contexte de défilement, questions marquées réussies/échouées, sujets compris/à revoir/favoris, séries et gels, sessions et minutes d'étude. Préférences : thème et langue en localStorage. Paiement : intervalle, montant FCFA, statut, ID transaction fournisseur et horodatages — nous ne stockons pas les numéros Mobile Money, cartes ou coordonnées bancaires ; Fapshi les gère.",
   "privacy.sections.2": "2. Utilisation de vos informations",
-  "privacy.sections.2.desc": "Votre profil filtre les sujets, cours et fiches selon votre classe/série/matières et langue. La progression alimente votre tableau de bord (série, taux de réussite, maîtrise par matière, performance hebdo), le parcours, le classement et l'accès Premium. Nous pouvons utiliser des données agrégées anonymisées pour améliorer la couverture et la fiabilité. Nous ne vendons jamais vos données personnelles.",
+  "privacy.sections.2.desc":
+    "Votre profil filtre les sujets, cours et fiches selon votre classe/série/matières et langue. La progression alimente votre tableau de bord (série, taux de réussite, maîtrise par matière, performance hebdo), le parcours, le classement et l'accès Premium. Nous pouvons utiliser des données agrégées anonymisées pour améliorer la couverture et la fiabilité. Nous ne vendons jamais vos données personnelles.",
   "privacy.sections.3": "3. Usage de l'IA",
-  "privacy.sections.3.desc": "Quand vous demandez un parcours ou un insight, nous envoyons des signaux agrégés non identifiants à notre fournisseur IA (compatible OpenRouter/Gemini côté serveur) : matières faibles, classement de difficulté avec comptes d'échecs/lenteurs et prochains sujets recommandés. Nous n'envoyons pas le texte complet des sujets, e-mails ou noms. L'IA renvoie un plan 7 jours ou un insight ; si le fournisseur expire ou renvoie un JSON invalide, un repli déterministe basé sur vos vrais signaux s'affiche. Les sorties IA peuvent être erronées — considérez-les comme guidage, pas comme garantie.",
+  "privacy.sections.3.desc":
+    "Quand vous demandez un parcours ou un insight, nous envoyons des signaux agrégés non identifiants à notre fournisseur IA (compatible OpenRouter/Gemini côté serveur) : matières faibles, classement de difficulté avec comptes d'échecs/lenteurs et prochains sujets recommandés. Nous n'envoyons pas le texte complet des sujets, e-mails ou noms. L'IA renvoie un plan 7 jours ou un insight ; si le fournisseur expire ou renvoie un JSON invalide, un repli déterministe basé sur vos vrais signaux s'affiche. Les sorties IA peuvent être erronées — considérez-les comme guidage, pas comme garantie.",
   "privacy.sections.4": "4. Analyses",
-  "privacy.sections.4.desc": "Nous utilisons les événements personnalisés Vercel Analytics, anonymisés et débouncés (1 200 ms) : landing_view, signup_start/complete, paper_opened (matière/niveau/verrouillé seulement), checkpoint_marked, ai_action_used, search_used, premium_view, checkout_started, payment_success/failure/pending, signin_error. Aucun contenu markdown, texte de question, ID document, e-mail, nom, ID utilisateur, token ou secret de paiement n'est envoyé. Les analyses ne bloquent jamais l'app et servent uniquement en agrégé.",
+  "privacy.sections.4.desc":
+    "Nous utilisons les événements personnalisés Vercel Analytics, anonymisés et débouncés (1 200 ms) : landing_view, signup_start/complete, paper_opened (matière/niveau/verrouillé seulement), checkpoint_marked, ai_action_used, search_used, premium_view, checkout_started, payment_success/failure/pending, signin_error. Aucun contenu markdown, texte de question, ID document, e-mail, nom, ID utilisateur, token ou secret de paiement n'est envoyé. Les analyses ne bloquent jamais l'app et servent uniquement en agrégé.",
   "privacy.sections.5": "5. Services tiers",
-  "privacy.sections.5.desc": "Fapshi (https://www.fapshi.com) traite tous les paiements Premium ; quand vous payez, Fapshi reçoit votre téléphone/canal et données de transaction selon sa politique et confirme via API/webhook avec secret. Supabase fournit l'authentification et la base de données. Vercel héberge l'app et les analyses. Notre fournisseur IA (compatible OpenRouter/Gemini) ne traite que les prompts agrégés côté serveur.",
+  "privacy.sections.5.desc":
+    "Fapshi (https://www.fapshi.com) traite tous les paiements Premium ; quand vous payez, Fapshi reçoit votre téléphone/canal et données de transaction selon sa politique et confirme via API/webhook avec secret. Supabase fournit l'authentification et la base de données. Vercel héberge l'app et les analyses. Notre fournisseur IA (compatible OpenRouter/Gemini) ne traite que les prompts agrégés côté serveur.",
   "privacy.sections.6": "6. Conservation, droits et suppression",
-  "privacy.sections.6.desc": "Nous conservons vos données tant que le compte est actif. Vous pouvez demander accès, correction ou suppression à support@studyspark.cm ou via Assistance. Supprimer votre compte dans Paramètres (tapez delete) supprime votre utilisateur Supabase et cascade le profil/progression. Les enregistrements de transaction peuvent être conservés pour obligations légales. Nous répondons sous 30 jours, et visons 48 h pour les demandes paiement/remboursement. Stockage selon la réglementation camerounaise et les politiques Supabase.",
+  "privacy.sections.6.desc":
+    "Nous conservons vos données tant que le compte est actif. Vous pouvez demander accès, correction ou suppression à support@studyspark.cm ou via Assistance. Supprimer votre compte dans Paramètres (tapez delete) supprime votre utilisateur Supabase et cascade le profil/progression. Les enregistrements de transaction peuvent être conservés pour obligations légales. Nous répondons sous 30 jours, et visons 48 h pour les demandes paiement/remboursement. Stockage selon la réglementation camerounaise et les politiques Supabase.",
   "privacy.sections.7": "7. Cookies, stockage local, sécurité et enfants",
-  "privacy.sections.7.desc": "Nous utilisons le localStorage pour la langue (studyspark.locale) et le thème, plus les cookies/tokens Supabase pour la connexion. Pas de cookies publicitaires tiers. Tous les secrets Fapshi/Supabase sont côté serveur ; les appels clients sont authentifiés avec votre token Supabase. Transport en HTTPS. StudySpark est dès 13 ans ; nous ne collectons pas sciemment de données d'enfants de moins de 13 ans sans consentement parental vérifiable.",
+  "privacy.sections.7.desc":
+    "Nous utilisons le localStorage pour la langue (studyspark.locale) et le thème, plus les cookies/tokens Supabase pour la connexion. Pas de cookies publicitaires tiers. Tous les secrets Fapshi/Supabase sont côté serveur ; les appels clients sont authentifiés avec votre token Supabase. Transport en HTTPS. StudySpark est dès 13 ans ; nous ne collectons pas sciemment de données d'enfants de moins de 13 ans sans consentement parental vérifiable.",
   "refund.title": "Politique de remboursement et d'annulation",
-  "refund.introduction": "Cette politique explique les tarifs, le seul moyen de paiement (Fapshi), l'annulation et les remboursements Premium. Entrée en vigueur : 22 septembre 2025. Contact : support@studyspark.cm.",
+  "refund.introduction":
+    "Cette politique explique les tarifs, le seul moyen de paiement (Fapshi), l'annulation et les remboursements Premium. Entrée en vigueur : 22 septembre 2025. Contact : support@studyspark.cm.",
   "refund.effective": "En vigueur le 22 septembre 2025 · Premium via Fapshi · FCFA",
   "refund.sections.1": "1. Tarifs et moyen de paiement supporté",
-  "refund.sections.1.desc": "Premium coûte 1 500 FCFA/mois (facturé mensuellement) ou 12 000 FCFA/an (facturé annuellement — ~1 000 FCFA/mois équivalent). Le seul paiement supporté est Fapshi. À la caisse vous êtes redirigé vers Fapshi ; selon l'offre Fapshi au Cameroun vous verrez Mobile Money MTN, Orange Money ou autres canaux locaux. Prix en FCFA. Nous vérifions chaque paiement côté serveur via l'API Fapshi et le webhook (secret vérifié) et n'activons Premium que si Fapshi indique successful pour le bon montant et ID. En cas de pending, nous sondons brièvement et affichons payment_pending ; vous pouvez réessayer depuis Tarifs ou Assistance.",
+  "refund.sections.1.desc":
+    "Premium coûte 1 500 FCFA/mois (facturé mensuellement) ou 12 000 FCFA/an (facturé annuellement — ~1 000 FCFA/mois équivalent). Le seul paiement supporté est Fapshi. À la caisse vous êtes redirigé vers Fapshi ; selon l'offre Fapshi au Cameroun vous verrez Mobile Money MTN, Orange Money ou autres canaux locaux. Prix en FCFA. Nous vérifions chaque paiement côté serveur via l'API Fapshi et le webhook (secret vérifié) et n'activons Premium que si Fapshi indique successful pour le bon montant et ID. En cas de pending, nous sondons brièvement et affichons payment_pending ; vous pouvez réessayer depuis Tarifs ou Assistance.",
   "refund.sections.2": "2. Annulation",
-  "refund.sections.2.desc": "Premium n'est pas renouvelé automatiquement — vous relancez un paiement Fapshi quand vous voulez prolonger. Si vous ne renouvelez pas, Premium reste actif jusqu'à premiumUntil puis repasse Gratuit. Pour arrêter tout renouvellement, ne relancez pas de paiement. Pour une désactivation anticipée ou une aide, contactez l'Assistance via la page Assistance ou support@studyspark.cm avec votre référence ; traitement sous 48 h. Pas de remboursement partiel pour jours non utilisés après activation.",
+  "refund.sections.2.desc":
+    "Premium n'est pas renouvelé automatiquement — vous relancez un paiement Fapshi quand vous voulez prolonger. Si vous ne renouvelez pas, Premium reste actif jusqu'à premiumUntil puis repasse Gratuit. Pour arrêter tout renouvellement, ne relancez pas de paiement. Pour une désactivation anticipée ou une aide, contactez l'Assistance via la page Assistance ou support@studyspark.cm avec votre référence ; traitement sous 48 h. Pas de remboursement partiel pour jours non utilisés après activation.",
   "refund.sections.3": "3. Fenêtre de remboursement 7 jours",
-  "refund.sections.3.desc": "Si Premium ne vous convient pas, vous pouvez demander un remboursement sous 7 jours après l'achat initial ou un renouvellement. Envoyez via Assistance avec votre e-mail, ID transaction (visible dans Paramètres → Historique paiements) et motif. Nous transmettons à Fapshi ; éligibilité, retenues et délais dépendent de Fapshi et de l'opérateur Mobile Money. Les remboursements approuvés repartent via le canal Fapshi d'origine.",
+  "refund.sections.3.desc":
+    "Si Premium ne vous convient pas, vous pouvez demander un remboursement sous 7 jours après l'achat initial ou un renouvellement. Envoyez via Assistance avec votre e-mail, ID transaction (visible dans Paramètres → Historique paiements) et motif. Nous transmettons à Fapshi ; éligibilité, retenues et délais dépendent de Fapshi et de l'opérateur Mobile Money. Les remboursements approuvés repartent via le canal Fapshi d'origine.",
   "refund.sections.4": "4. Rôle de Fapshi et vérification",
-  "refund.sections.4.desc": "Fapshi est le processeur opérant au Cameroun (https://www.fapshi.com). StudySpark ne stocke pas votre numéro Mobile Money, carte ou banque. Fapshi gère l'encaissement, la confirmation et les remboursements selon ses politiques. Nous vérifions chaque transaction côté serveur avec l'ID fournisseur et le montant avant de prolonger premiumUntil. Les webhooks sont vérifiés avec FAPSHI_WEBHOOK_SECRET.",
+  "refund.sections.4.desc":
+    "Fapshi est le processeur opérant au Cameroun (https://www.fapshi.com). StudySpark ne stocke pas votre numéro Mobile Money, carte ou banque. Fapshi gère l'encaissement, la confirmation et les remboursements selon ses politiques. Nous vérifions chaque transaction côté serveur avec l'ID fournisseur et le montant avant de prolonger premiumUntil. Les webhooks sont vérifiés avec FAPSHI_WEBHOOK_SECRET.",
   "refund.sections.5": "5. Non remboursable",
-  "refund.sections.5.desc": "Pas de remboursement après 7 jours ; pour contenus protégés déjà consommés pendant la période quand le service a été fourni comme décrit ; pour rétrogradation volontaire Premium → Gratuit sans demande éligible ; ou pour paiements échoués faute de solde, mauvais numéro ou refus opérateur (échecs/expirés réessayables depuis Tarifs ou Paramètres → Historique).",
+  "refund.sections.5.desc":
+    "Pas de remboursement après 7 jours ; pour contenus protégés déjà consommés pendant la période quand le service a été fourni comme décrit ; pour rétrogradation volontaire Premium → Gratuit sans demande éligible ; ou pour paiements échoués faute de solde, mauvais numéro ou refus opérateur (échecs/expirés réessayables depuis Tarifs ou Paramètres → Historique).",
   "refund.sections.6": "6. Contact et délais",
-  "refund.sections.6.desc": "Pour toute question paiement, annulation ou remboursement, passez par Assistance ou support@studyspark.cm. Joignez votre référence si possible — le formulaire joint automatiquement votre plan/classe/matières pour aider plus vite. Nous visons une réponse sous 48 h pour annulations/remboursements et 1–2 jours ouvrés pour vérifications, selon les délais Fapshi/opérateur.",
+  "refund.sections.6.desc":
+    "Pour toute question paiement, annulation ou remboursement, passez par Assistance ou support@studyspark.cm. Joignez votre référence si possible — le formulaire joint automatiquement votre plan/classe/matières pour aider plus vite. Nous visons une réponse sous 48 h pour annulations/remboursements et 1–2 jours ouvrés pour vérifications, selon les délais Fapshi/opérateur.",
   "pricing.feature.previewPapers": "1 à 2 épreuves en aperçu gratuit",
   "pricing.feature.unlimitedPapers": "Épreuves protégées illimitées",
   "pricing.feature.protectedPapers": "Épreuves protégées dans l'application",
@@ -696,16 +751,22 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "support.contactTitle": "Contacter l'assistance",
   "support.categoryLabel": "Quel est ton problème ?",
   "support.messageLabel": "Décris le problème",
-  "support.messagePlaceholder": "Explique ce qui s'est passé, ce que tu attendais et ce que tu as essayé...",
-  "support.contextNote": "Ces informations seront jointes pour nous aider à répondre plus vite. Aucune clé privée ni token n'est inclus.",
+  "support.messagePlaceholder":
+    "Explique ce qui s'est passé, ce que tu attendais et ce que tu as essayé...",
+  "support.contextNote":
+    "Ces informations seront jointes pour nous aider à répondre plus vite. Aucune clé privée ni token n'est inclus.",
   "support.sendEmail": "Envoyer par e-mail",
   "support.sendWhatsApp": "Envoyer par WhatsApp",
-  "support.sentNote": "Ton application de messagerie devrait s'être ouverte avec la demande pré-remplie. Nous répondons sous 24 heures.",
+  "support.sentNote":
+    "Ton application de messagerie devrait s'être ouverte avec la demande pré-remplie. Nous répondons sous 24 heures.",
   "support.directEmail": "Pas d'application ? Écris-nous directement à",
   "support.expectTitle": "Ce à quoi s'attendre",
-  "support.expect1": "Problèmes de connexion et d'accès Premium : nous visons une réponse sous 24 heures.",
-  "support.expect2": "Problèmes de paiement : inclure ta référence de transaction si tu l'as — la plupart des cas sont résolus sous 48 heures.",
-  "support.expect3": "Problèmes de contenu (mauvaise épreuve, matière manquante) : traités sous 3 à 5 jours.",
+  "support.expect1":
+    "Problèmes de connexion et d'accès Premium : nous visons une réponse sous 24 heures.",
+  "support.expect2":
+    "Problèmes de paiement : inclure ta référence de transaction si tu l'as — la plupart des cas sont résolus sous 48 heures.",
+  "support.expect3":
+    "Problèmes de contenu (mauvaise épreuve, matière manquante) : traités sous 3 à 5 jours.",
   "support.quickLinksTitle": "Sujets d'aide fréquents",
   "support.linkPayment": "Paiement et mise à niveau Premium",
   "support.linkAccount": "Compte et paramètres du profil",
@@ -713,9 +774,11 @@ const fr: Partial<Record<TranslationKey, string>> = {
   "support.linkSignIn": "Aide à la connexion",
   "support.subjectPlaceholder": "Sujet",
   "support.sendRequest": "Envoyer la demande",
-  "support.emailOpened": "Ton application e-mail devrait s'ouvrir avec la demande préremplie. Nous répondons sous 24 heures.",
+  "support.emailOpened":
+    "Ton application e-mail devrait s'ouvrir avec la demande préremplie. Nous répondons sous 24 heures.",
   "support.noEmailApp": "Pas d'application e-mail ? Écris-nous directement à",
-  "support.autoDetails": "Ton plan, ta classe et tes matières sont ajoutés automatiquement pour accélérer l'aide.",
+  "support.autoDetails":
+    "Ton plan, ta classe et tes matières sont ajoutés automatiquement pour accélérer l'aide.",
 };
 
 const dictionaries = { en, fr };

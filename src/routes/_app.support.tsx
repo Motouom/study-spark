@@ -75,9 +75,7 @@ function SupportPage() {
     .join("\n");
 
   const categoryLabel = categories.find((c) => c.value === category)?.label ?? "";
-  const subject = category
-    ? `[StudySpark] ${categoryLabel}`
-    : "StudySpark support request";
+  const subject = category ? `[StudySpark] ${categoryLabel}` : "StudySpark support request";
 
   const mailtoHref = (() => {
     const body = `${message.trim()}\n\n---\n${safeContext}`;
@@ -104,7 +102,6 @@ function SupportPage() {
     <>
       <PageHeader title={t("support.title")} description={t("support.description")} />
       <div className="space-y-6 px-4 py-6 md:px-10 md:py-8">
-
         {/* Main form */}
         <section className="max-w-2xl rounded-xl border border-border bg-card p-5">
           <div className="flex items-center gap-2">

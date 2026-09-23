@@ -91,13 +91,23 @@ function RefundPage() {
           <div className="mt-12 rounded-xl border border-amber-200 bg-amber-50 p-5 text-sm dark:border-amber-900 dark:bg-amber-950/30">
             <p className="font-medium text-foreground">Need help with a payment?</p>
             <p className="mt-1 text-muted-foreground">
-              Visit <Link to="/support" className="underline hover:text-foreground">Support</Link> or
-              email <a href="mailto:support@studyspark.cm" className="underline">support@studyspark.cm</a>.
-              Include your transaction reference from{" "}
+              Visit{" "}
+              <Link to="/support" className="underline hover:text-foreground">
+                Support
+              </Link>{" "}
+              or email{" "}
+              <a href="mailto:support@studyspark.cm" className="underline">
+                support@studyspark.cm
+              </a>
+              . Include your transaction reference from{" "}
               <Link to="/settings" className="underline">
                 Settings → Payment history
               </Link>{" "}
-              or <Link to="/pricing" className="underline">Pricing</Link>.
+              or{" "}
+              <Link to="/pricing" className="underline">
+                Pricing
+              </Link>
+              .
             </p>
           </div>
 

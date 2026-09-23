@@ -9,7 +9,7 @@ export const Route = createFileRoute("/api/ai/progress-insight")({
       POST: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
-          const limiter = rateLimit(`ai:progress-insight:${user.id}`, 10, 60 * 60 * 1000);
+          const limiter = await rateLimit(`ai:progress-insight:${user.id}`, 10, 60 * 60 * 1000);
           if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
           const supabase = getAuthenticatedSupabase(request);
 
