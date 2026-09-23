@@ -10,9 +10,27 @@ export const Route = createFileRoute("/control-panel-9k3x/settings")({
 });
 
 const ROLE_MATRIX = [
-  { role: "reviewer", canRead: true, canWriteContent: false, canManagePlans: false, canManageSettings: false },
-  { role: "admin", canRead: true, canWriteContent: true, canManagePlans: false, canManageSettings: false },
-  { role: "super_admin", canRead: true, canWriteContent: true, canManagePlans: true, canManageSettings: true },
+  {
+    role: "reviewer",
+    canRead: true,
+    canWriteContent: false,
+    canManagePlans: false,
+    canManageSettings: false,
+  },
+  {
+    role: "admin",
+    canRead: true,
+    canWriteContent: true,
+    canManagePlans: false,
+    canManageSettings: false,
+  },
+  {
+    role: "super_admin",
+    canRead: true,
+    canWriteContent: true,
+    canManagePlans: true,
+    canManageSettings: true,
+  },
 ] as const;
 
 function AdminSettings() {
@@ -36,7 +54,7 @@ function AdminSettings() {
         <Card title="Current admin session" icon={UserCog}>
           <Row label="Email" value={user?.email ?? "Unknown"} />
           <Row label="Role" value={role ?? "Not authorized"} />
-          <Row label="User ID" value={user?.id?.slice(0, 16) + "…" ?? "Unknown"} />
+          <Row label="User ID" value={user?.id ? `${user.id.slice(0, 16)}…` : "Unknown"} />
           <Status ok={Boolean(role)} text="Role is read from Supabase app metadata." />
         </Card>
 
@@ -71,10 +89,17 @@ function AdminSettings() {
               </thead>
               <tbody>
                 {ROLE_MATRIX.map((r) => (
-                  <tr key={r.role} className={`border-b border-border ${role === r.role ? "bg-accent/5" : ""}`}>
+                  <tr
+                    key={r.role}
+                    className={`border-b border-border ${role === r.role ? "bg-accent/5" : ""}`}
+                  >
                     <td className="py-2.5 pr-6 font-mono text-xs font-medium">
                       {r.role}
-                      {role === r.role && <Badge variant="secondary" className="ml-2">You</Badge>}
+                      {role === r.role && (
+                        <Badge variant="secondary" className="ml-2">
+                          You
+                        </Badge>
+                      )}
                     </td>
                     <td className="py-2.5 pr-6">{r.canRead ? "✅" : "—"}</td>
                     <td className="py-2.5 pr-6">{r.canWriteContent ? "✅" : "❌"}</td>
@@ -86,8 +111,10 @@ function AdminSettings() {
             </table>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
-            Enforced at the database layer via <code className="rounded bg-secondary px-1">assert_content_writer()</code> and{" "}
-            <code className="rounded bg-secondary px-1">assert_super_admin()</code> in migration 044.
+            Enforced at the database layer via{" "}
+            <code className="rounded bg-secondary px-1">assert_content_writer()</code> and{" "}
+            <code className="rounded bg-secondary px-1">assert_super_admin()</code> in migration
+            044.
           </p>
         </section>
 
@@ -96,13 +123,28 @@ function AdminSettings() {
           <h2 className="mb-3 text-sm font-medium">Role assignment and recovery process</h2>
           <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
             <li>Sign in to the Supabase dashboard as a project owner.</li>
-            <li>Open <strong>Authentication → Users</strong> and find the target account.</li>
-            <li>Click the user → Edit → under <strong>App Metadata</strong>, set <code className="rounded bg-secondary px-1">{`{"role": "admin"}`}</code> (or <code className="rounded bg-secondary px-1">reviewer</code> / <code className="rounded bg-secondary px-1">super_admin</code>).</li>
-            <li>Save. The change takes effect on the next JWT refresh (up to 1 hour) or immediately after sign-out and sign-in.</li>
-            <li>To revoke: set <code className="rounded bg-secondary px-1">{`{"role": null}`}</code> or remove the key entirely.</li>
+            <li>
+              Open <strong>Authentication → Users</strong> and find the target account.
+            </li>
+            <li>
+              Click the user → Edit → under <strong>App Metadata</strong>, set{" "}
+              <code className="rounded bg-secondary px-1">{`{"role": "admin"}`}</code> (or{" "}
+              <code className="rounded bg-secondary px-1">reviewer</code> /{" "}
+              <code className="rounded bg-secondary px-1">super_admin</code>).
+            </li>
+            <li>
+              Save. The change takes effect on the next JWT refresh (up to 1 hour) or immediately
+              after sign-out and sign-in.
+            </li>
+            <li>
+              To revoke: set <code className="rounded bg-secondary px-1">{`{"role": null}`}</code>{" "}
+              or remove the key entirely.
+            </li>
           </ol>
           <div className="mt-4 rounded-lg border border-warning/30 bg-warning/10 p-3 text-xs text-warning-foreground">
-            <strong>Emergency owner recovery:</strong> If all super_admin accounts are locked out, a Supabase project owner can restore access directly from the Supabase dashboard using the steps above without requiring a code change or deployment.
+            <strong>Emergency owner recovery:</strong> If all super_admin accounts are locked out, a
+            Supabase project owner can restore access directly from the Supabase dashboard using the
+            steps above without requiring a code change or deployment.
           </div>
         </section>
 
