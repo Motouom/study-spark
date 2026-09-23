@@ -74,6 +74,15 @@ function Nav() {
           <Link to="/pricing" className="hover:text-foreground">
             Pricing
           </Link>
+          <Link to="/terms" className="hover:text-foreground">
+            Terms
+          </Link>
+          <Link to="/privacy" className="hover:text-foreground">
+            Privacy
+          </Link>
+          <Link to="/refund" className="hover:text-foreground">
+            Refund
+          </Link>
         </nav>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm">
@@ -438,6 +447,17 @@ function Footer() {
     <footer className="border-t border-border bg-surface">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
         <Logo />
+        <nav className="flex gap-6">
+          <Link to="/terms" className="hover:text-foreground">
+            Terms
+          </Link>
+          <Link to="/privacy" className="hover:text-foreground">
+            Privacy Policy
+          </Link>
+          <Link to="/refund" className="hover:text-foreground">
+            Refund Policy
+          </Link>
+        </nav>
         <p>© {new Date().getFullYear()} StudySpark. Made for Cameroon students.</p>
       </div>
     </footer>

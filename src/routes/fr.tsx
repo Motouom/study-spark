@@ -103,6 +103,15 @@ function FrenchLanding() {
             <Link to="/fr/tarifs" className="hover:text-foreground">
               Tarifs
             </Link>
+            <Link to="/fr/terms" className="hover:text-foreground">
+              Conditions
+            </Link>
+            <Link to="/fr/privacy" className="hover:text-foreground">
+              Confidentialité
+            </Link>
+            <Link to="/fr/refund" className="hover:text-foreground">
+              Remboursement
+            </Link>
             <Link to="/" className="hover:text-foreground">
               English
             </Link>
@@ -265,6 +274,23 @@ function FrenchLanding() {
       <footer className="border-t border-border bg-surface">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground md:flex-row">
           <Logo />
+          <nav className="flex flex-wrap gap-4">
+            <Link to="/fr/terms" className="hover:text-foreground">
+              Conditions
+            </Link>
+            <Link to="/fr/privacy" className="hover:text-foreground">
+              Confidentialité
+            </Link>
+            <Link to="/fr/refund" className="hover:text-foreground">
+              Remboursement
+            </Link>
+            <Link to="/fr/tarifs" className="hover:text-foreground">
+              Tarifs
+            </Link>
+            <Link to="/support" className="hover:text-foreground">
+              Assistance
+            </Link>
+          </nav>
           <p>StudySpark. Révision faite pour les élèves du Cameroun.</p>
         </div>
       </footer>
