@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "./_app";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PremiumGate } from "@/components/PremiumGate";
 import { useStudyContent } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { Badge } from "@/components/ui/badge";
@@ -77,11 +76,7 @@ function CheatsheetsPage() {
     <>
       <PageHeader title={t("cheatsheets.title")} description={t("cheatsheets.description")} />
       <div className="px-4 py-6 md:px-10 md:py-8">
-        <PremiumGate
-          title={t("cheatsheets.premiumTitle")}
-          description={t("cheatsheets.premiumDescription")}
-        >
-          {cheatsheets.length === 0 ? (
+        {cheatsheets.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
               <BookMarked className="mx-auto h-10 w-10 text-muted-foreground" />
               <h2 className="mt-4 text-base font-medium">{t("cheatsheets.emptyTitle")}</h2>
@@ -166,7 +161,6 @@ function CheatsheetsPage() {
               )}
             </div>
           )}
-        </PremiumGate>
       </div>
     </>
   );

@@ -3,7 +3,6 @@ import { PageHeader } from "./_app";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PremiumGate } from "@/components/PremiumGate";
 import { useStudyContent } from "@/hooks/use-study-content";
 import type { CourseDocument } from "@/hooks/use-study-content";
 import { useStudyProfile } from "@/hooks/use-study-profile";
@@ -190,11 +189,7 @@ function CoursesPage() {
           </div>
         )}
 
-        <PremiumGate
-          title={t("courses.premiumTitle")}
-          description={t("courses.premiumDescription")}
-        >
-          {loaded && topics.length === 0 ? (
+        {loaded && topics.length === 0 ? (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
               <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground" />
               <h2 className="mt-4 text-base font-medium">{t("courses.emptyTitle")}</h2>
@@ -317,7 +312,6 @@ function CoursesPage() {
               )}
             </div>
           )}
-        </PremiumGate>
       </div>
     </>
   );
