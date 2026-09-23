@@ -128,7 +128,6 @@ function CoursesPage() {
             : `/course/${course.id}#${slugifyHeading(topic)}`,
         }));
       }),
-      ),
     [courses, courseStats],
   );
 
