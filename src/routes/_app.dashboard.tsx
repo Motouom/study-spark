@@ -138,18 +138,19 @@ function Dashboard() {
     [availablePapers],
   );
 
-  // Best scroll depth reached per paper across all sessions (a paper gets a
-  // new session row on every visit, so the latest row alone would read 0%).
+  // Best question-passage percentage per paper (only passed questions count;
+  // failed/started questions do not contribute to progress).
   const bestPercentByDoc = useMemo(() => {
     const map = new Map<string, number>();
-    for (const session of readingProgress.sessions) {
-      map.set(
-        session.documentId,
-        Math.max(map.get(session.documentId) ?? 0, session.maxScrollPercent),
-      );
+    for (const document of availablePapers) {
+      const totalQuestions = countStructuralQuestions(document.markdownContent);
+      const passed = structuralProgress.progress.filter(
+        (item) => item.documentId === document.id && item.status === "passed",
+      ).length;
+      map.set(document.id, totalQuestions > 0 ? Math.round((passed / totalQuestions) * 100) : 0);
     }
     return map;
-  }, [readingProgress.sessions]);
+  }, [availablePapers, structuralProgress.progress]);
 
   // "Continue where you left off": the most recently touched unfinished
   // unlocked paper, showing its best depth; otherwise the first unlocked paper.

@@ -16,18 +16,12 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const handleLanguageChange = useCallback(
     async (value: Locale) => {
       setLocale(value);
-      if (profile && saveProfile) {
-        const nextLanguage = localeToLanguage(value);
-        if (nextLanguage !== profile.language) {
-          try {
-            await saveProfile({ ...profile, language: nextLanguage });
-          } catch (error) {
-            console.error("Failed to update profile language", error);
-          }
-        }
+      const nextLanguage = localeToLanguage(value);
+      if (profile && nextLanguage !== profile.language) {
+        // Language change no longer auto-saves - user must click "Save Profile"
       }
     },
-    [locale, profile, saveProfile, setLocale],
+    [locale, profile, setLocale],
   );
 
   return (

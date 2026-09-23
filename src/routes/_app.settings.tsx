@@ -367,9 +367,6 @@ function SettingsPage() {
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground font-display text-xl text-background">
                     {name.charAt(0).toUpperCase()}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Generated from your display name for now.
-                  </p>
                 </div>
               </Row>
               <Row label={t("settings.displayName")}>

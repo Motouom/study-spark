@@ -152,31 +152,31 @@ function CoursesPage() {
 
   const needle = q.trim().toLowerCase();
   const searchActive = needle.length > 0;
-  const filteredTopics = useMemo(
-    () =>
-      topics
-        .filter((topic) => {
-          if (!searchActive && subject && topic.course.subject !== subject) return false;
-          if (!needle) return true;
-          return [
-            topic.title,
-            topic.course.title,
-            topic.course.subject,
-            topic.course.language,
-            ...topic.course.series,
-          ]
-            .join(" ")
-            .toLowerCase()
-            .includes(needle);
-        })
-        .sort(
-          (a, b) =>
-            a.course.subject.localeCompare(b.course.subject) ||
-            a.course.title.localeCompare(b.course.title) ||
-            a.index - b.index,
-        ),
-    [needle, searchActive, subject, topics],
-  );
+  const filteredTopics = useMemo(() => {
+    const subjectTopicSeen = new Set();
+
+    return topics
+      .filter((topic) => {
+        if (!searchActive && subject && topic.course.subject !== subject) return false;
+        if (!needle) return true;
+        return [
+          topic.title,
+          topic.course.title,
+          topic.course.subject,
+          topic.course.language,
+          ...topic.course.series,
+        ]
+          .join(" ")
+          .toLowerCase()
+          .includes(needle);
+      })
+      .filter((topic) => {
+        const s = topic.course.subject;
+        if (subjectTopicSeen.has(s)) return false;
+        subjectTopicSeen.add(s);
+        return subjectTopicSeen.size <= 2;
+      });
+  }, [topics, searchActive, subject, needle]);
 
   const clearSearch = () => setQ("");
 

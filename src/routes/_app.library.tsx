@@ -202,9 +202,7 @@ function LibraryPage() {
                     <SubjectRing percent={item.startedPercent} />
                   </div>
                   <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
-                  <p className="mt-2 text-xs text-muted-foreground">
-                    {item.unlocked} available now · {item.total - item.unlocked} premium
-                  </p>
+                  <p className="mt-2 text-xs text-muted-foreground">ONE PAPER PER SUBJECT</p>
                 </button>
               ))}
             </div>
