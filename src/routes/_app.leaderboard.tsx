@@ -52,9 +52,12 @@ type LeaderboardRow = {
   score: number;
   questions_started: number;
   questions_passed: number;
+  questions_failed: number;
   pass_rate: number;
   total_duration_seconds: number;
   average_duration_seconds: number;
+  topics_understood: number;
+  topics_review: number;
 };
 
 const DISPLAY_LIMIT = 50;
@@ -100,19 +103,19 @@ function ScoreBreakdown({ row }: { row: LeaderboardRow }) {
   return (
     <div className="mt-3 grid grid-cols-3 gap-2 rounded-lg bg-background p-3 text-xs">
       <div className="flex flex-col items-center gap-0.5">
-        <BookOpen className="h-3.5 w-3.5 text-muted-foreground" />
-        <span className="font-medium">{row.papers_completed}</span>
-        <span className="text-muted-foreground">completed</span>
+        <Flame className="h-3.5 w-3.5 text-muted-foreground" />
+        <span className="font-medium">{row.questions_passed}</span>
+        <span className="text-muted-foreground">passed</span>
       </div>
       <div className="flex flex-col items-center gap-0.5">
         <CheckCircle2 className="h-3.5 w-3.5 text-muted-foreground" />
-        <span className="font-medium">{row.useful_checkpoints}</span>
-        <span className="text-muted-foreground">checkpoints</span>
+        <span className="font-medium">{row.topics_understood}</span>
+        <span className="text-muted-foreground">understood</span>
       </div>
       <div className="flex flex-col items-center gap-0.5">
         <Star className="h-3.5 w-3.5 text-muted-foreground" />
-        <span className="font-medium">{row.study_days}</span>
-        <span className="text-muted-foreground">study days</span>
+        <span className="font-medium">{row.questions_started}</span>
+        <span className="text-muted-foreground">started</span>
       </div>
     </div>
   );
@@ -275,7 +278,7 @@ function LeaderboardPage() {
         title="Leaderboard"
         description={
           profile
-            ? "Top 50 learners ranked by papers completed, study days, and review checkpoints."
+            ? "Top 50 learners ranked by questions passed, topics understood, and questions started."
             : "Complete your profile to join the right study cohort."
         }
       />
@@ -283,7 +286,7 @@ function LeaderboardPage() {
       <div className="space-y-5 px-4 py-6 md:px-10 md:py-8">
         <PremiumGate
           title="Premium leaderboard"
-          description="Upgrade to see the platform Top 50 and your own rank from real reading activity."
+          description="Upgrade to see the platform Top 50 and your own rank from questions passed and topics understood."
         >
           {error && (
             <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
@@ -475,8 +478,9 @@ function LeaderboardPage() {
                   <span>Level</span>
                   <span>Location</span>
                   <span className="text-right">Score</span>
-                  <span className="text-right">Done</span>
-                  <span className="text-right">Marks</span>
+                  <span className="text-right">Passed</span>
+                  <span className="text-right">Understood</span>
+                  <span className="text-right">Started</span>
                   <span className="text-right">Days</span>
                 </div>
                 <div className="divide-y divide-border">
@@ -562,7 +566,7 @@ function LeaderboardPage() {
                         <div className="shrink-0 text-right">
                           <p className="text-sm font-semibold">{row.score} pts</p>
                           <p className="text-xs text-muted-foreground">
-                            {row.papers_completed} done · {row.study_days}d
+                            {row.questions_passed} passed · {row.topics_understood} understood
                           </p>
                         </div>
                       </div>
@@ -601,8 +605,8 @@ function LeaderboardPage() {
               <Trophy className="mx-auto h-10 w-10 text-muted-foreground" />
               <h2 className="mt-4 text-base font-medium">No rankings yet</h2>
               <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-                Rankings appear after learners complete reading sessions. Open a paper, read it
-                through, and mark review checkpoints to build your score.
+                Rankings appear after learners complete questions and mark topics as understood.
+                Open a paper, answer questions, and mark review checkpoints to build your score.
               </p>
               <Button asChild className="mt-5">
                 <Link to="/library">Open papers</Link>

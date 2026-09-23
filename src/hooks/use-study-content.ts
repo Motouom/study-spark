@@ -129,7 +129,7 @@ export function useStudyContent(
       if (documentsResult.error) {
         console.warn("Could not load course documents", documentsResult.error);
       }
-      const documents = (
+      let documents = (
         (documentsResult.error ? [] : (documentsResult.data ?? [])) as Record<string, unknown>[]
       ).map((row): CourseDocument => ({
         id: String(row.id),
@@ -154,6 +154,16 @@ export function useStudyContent(
             : "course",
         isLocked: Boolean(row.is_locked),
       }));
+
+      documents = documents.filter((document) => {
+        return (
+          document.level === profile.level &&
+          document.classLevels.includes(profile.classLevel) &&
+          document.series.includes(profile.series) &&
+          profile.subjects.includes(document.subject) &&
+          document.language === profile.language
+        );
+      });
 
       const nextState: ContentState = {
         topics,

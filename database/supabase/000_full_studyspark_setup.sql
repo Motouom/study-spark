@@ -2112,16 +2112,13 @@ begin
   )
   into has_progress;
 
-  if existing_profile.user_id is not null and has_progress and (
+if existing_profile.user_id is not null and has_progress and (
     existing_profile.country is distinct from profile_country or
     existing_profile.region is distinct from profile_region or
-    existing_profile.city is distinct from trim(coalesce(profile_city, '')) or
-    existing_profile.level is distinct from profile_level or
-    existing_profile.class_level is distinct from profile_class_level or
-    existing_profile.series is distinct from profile_series
-  ) then
-    raise exception 'country, region, city, level, class, and series are locked after progress starts';
-  end if;
+    existing_profile.city is distinct from trim(coalesce(profile_city, ''))
+) then
+    raise exception 'country, region, and city are locked after progress starts';
+end if;
 
   insert into public.student_profiles (
     user_id,
