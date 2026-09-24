@@ -6,6 +6,7 @@ This folder contains the working documentation for StudySpark.
 
 - [Architecture documentation](arc42.md): full arc42 architecture reference.
 - [Deployment runbook](deployment-runbook.md): Vercel, Supabase, Fapshi, AI, and smoke-test steps.
+- [Launch readiness checklist](launch-readiness-checklist.md): go/no-go checklist to run against preview then production before public promotion.
 - [Supabase migration discipline](supabase-migrations.md): database migration inventory, production apply process, verification SQL, and forward-fix guidance.
 - [Supabase auth setup](supabase-auth-setup.md): Google OAuth and Supabase redirect configuration.
 - [Content and database plan](content-and-database-plan.md): content model and protected delivery direction.
