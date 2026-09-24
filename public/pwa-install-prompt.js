@@ -127,6 +127,7 @@
     var shell = document.createElement("aside");
     shell.setAttribute("role", "dialog");
     shell.setAttribute("aria-label", "Install StudySpark");
+    var iosSheet = isIOS && !hasNativePrompt;
     shell.style.cssText = [
       "position:fixed",
       "left:max(16px,env(safe-area-inset-left))",
@@ -136,13 +137,24 @@
       "max-width:420px",
       "margin:0 auto",
       "border:1px solid rgba(27,23,20,.12)",
-      "border-radius:16px",
-      "background:#fffdf9",
-      "color:#1b1714",
+      "border-radius:" + (iosSheet ? "22px" : "16px"),
+      "background:" + (iosSheet ? "rgba(28,28,30,.97)" : "#fffdf9"),
+      "color:" + (iosSheet ? "#f5f5f7" : "#1b1714"),
       "box-shadow:0 18px 60px rgba(27,23,20,.18)",
       "font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
-      "overflow:hidden",
+      "overflow:visible",
+      "-webkit-backdrop-filter:blur(20px)",
+      "backdrop-filter:blur(20px)",
+      "animation:sf-pwa-rise .45s cubic-bezier(.2,.9,.25,1) both",
     ].join(";");
+
+    if (iosSheet) {
+      var style = document.createElement("style");
+      style.textContent =
+        "@keyframes sf-pwa-rise{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}" +
+        "@keyframes sf-pwa-bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}";
+      document.head.appendChild(style);
+    }
 
     var actionButtons = hasNativePrompt
       ? '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>' +
