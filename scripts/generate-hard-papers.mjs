@@ -283,6 +283,71 @@ const subjects = {
     structural: structuralChemistry,
     mcq: mcqChemistry,
   },
+  physics: {
+    subject: "Physics",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "science, technical",
+    exam: "GCE",
+    topics: [
+      {
+        id: "physics-mechanics",
+        title: "Mechanics",
+        description: "Motion, forces, work, energy, power, pressure, moments, and machines.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["science", "technical"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "physics-waves-electricity",
+        title: "Waves, electricity, and magnetism",
+        description:
+          "Light, sound, heat, current electricity, circuits, magnetism, and electromagnetism.",
+        level: "ordinary",
+        classLevels: ["form_4", "form_5"],
+        series: ["science", "technical"],
+        questionCount: 45,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralPhysics,
+    mcq: mcqPhysics,
+  },
+  ict: {
+    subject: "ICT",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "science, commercial, technical",
+    exam: "GCE",
+    topics: [
+      {
+        id: "ict-productivity-tools",
+        title: "Productivity tools and digital communication",
+        description:
+          "Word processing, spreadsheets, presentations, internet, email, collaboration, and digital citizenship.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["science", "commercial", "technical"],
+        questionCount: 35,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "ict-data-web",
+        title: "Data, web, and information systems",
+        description:
+          "Databases, web concepts, networks, information systems, security, and practical ICT tasks.",
+        level: "ordinary",
+        classLevels: ["form_4", "form_5"],
+        series: ["science", "commercial", "technical"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralIct,
+    mcq: mcqIct,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -3095,6 +3160,807 @@ function mcqChemistry(topicIndex) {
       {
         stem: "The number of moles in 48 dm³ of oxygen gas at r.t.p. is:",
         options: ["2", "1", "0.5", "4"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Physics — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralPhysics(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Mechanics ----
+    [
+      `**Q1.** (a) Define the terms distance and displacement. *(3 marks)*\n\n(b) A car travels 60 km north then 80 km east. Calculate the total distance travelled and the magnitude of the displacement. *(5 marks)*\n\n(c) State the difference between speed and velocity. *(3 marks)*`,
+      `**Q2.** (a) Define acceleration. *(2 marks)*\n\n(b) A car accelerates uniformly from rest to 20 m/s in 8 s. Calculate its acceleration. *(3 marks)*\n\n(c) Using the equations of motion, calculate the distance travelled by the car in part (b). *(4 marks)*`,
+      `**Q3.** (a) State Newton's three laws of motion. *(6 marks)*\n\n(b) A force of 12 N acts on a mass of 3 kg. Calculate the acceleration produced. *(3 marks)*\n\n(c) Explain why a passenger lurches forward when a bus stops suddenly. *(3 marks)*`,
+      `**Q4.** (a) Define the term "momentum". *(2 marks)*\n\n(b) A ball of mass 0.5 kg moving at 4 m/s hits a wall and rebounds at 3 m/s. Calculate the change in momentum. *(4 marks)*\n\n(c) State the principle of conservation of momentum. *(3 marks)*`,
+      `**Q5.** (a) Define the term "work". *(2 marks)*\n\n(b) A force of 50 N moves an object 4 m in the direction of the force. Calculate the work done. *(3 marks)*\n\n(c) A crane lifts a 200 kg load through 10 m. Calculate the work done. (Take g = 10 m/s²) *(4 marks)*`,
+      `**Q6.** (a) Define the term "power". *(2 marks)*\n\n(b) A machine does 600 J of work in 20 s. Calculate its power. *(3 marks)*\n\n(c) A motor lifts a 500 kg load through 12 m in 30 s. Calculate the power output. (Take g = 10 m/s²) *(5 marks)*`,
+      `**Q7.** (a) Define the terms kinetic energy and potential energy. *(4 marks)*\n\n(b) A car of mass 1000 kg moves at 20 m/s. Calculate its kinetic energy. *(3 marks)*\n\n(c) A ball of mass 2 kg is raised 5 m. Calculate its gravitational potential energy. (Take g = 10 m/s²) *(3 marks)*`,
+      `**Q8.** (a) State the principle of conservation of energy. *(3 marks)*\n\n(b) A ball of mass 0.2 kg is dropped from a height of 20 m. Calculate its speed just before hitting the ground. (Take g = 10 m/s²) *(5 marks)*\n\n(c) Explain what happens to the energy when the ball hits the ground and bounces. *(4 marks)*`,
+      `**Q9.** (a) Define the term "pressure". *(2 marks)*\n\n(b) A force of 100 N acts on an area of 0.5 m². Calculate the pressure. *(3 marks)*\n\n(c) Explain why a sharp knife cuts better than a blunt knife. *(3 marks)*`,
+      `**Q10.** (a) State the principle of moments. *(3 marks)*\n\n(b) A uniform metre rule is balanced at its centre. A 2 N weight is placed at the 20 cm mark. Calculate the force needed at the 80 cm mark to balance it. *(5 marks)*\n\n(c) State two conditions for a body to be in equilibrium. *(3 marks)*`,
+      `**Q11.** (a) Define the term "centre of gravity". *(2 marks)*\n\n(b) Explain why a tall narrow object is more likely to topple than a short wide one. *(4 marks)*\n\n(c) Describe how you would find the centre of gravity of an irregular lamina. *(4 marks)*`,
+      `**Q12.** (a) What is a simple machine? *(2 marks)*\n\n(b) Define the terms mechanical advantage, velocity ratio, and efficiency. *(6 marks)*\n\n(c) A machine has a mechanical advantage of 4 and an efficiency of 80%. Calculate its velocity ratio. *(4 marks)*`,
+      `**Q13.** (a) A lever has a load arm of 0.5 m and an effort arm of 2 m. Calculate the velocity ratio. *(3 marks)*\n\n(b) If the load is 200 N and the effort is 60 N, calculate the mechanical advantage. *(3 marks)*\n\n(c) Calculate the efficiency of the lever. *(4 marks)*`,
+      `**Q14.** (a) Define the term "friction". *(2 marks)*\n\n(b) State two advantages and two disadvantages of friction. *(4 marks)*\n\n(c) Describe two ways of reducing friction. *(4 marks)*`,
+      `**Q15.** (a) Define the term "density". *(2 marks)*\n\n(b) A block of metal has a mass of 270 g and a volume of 100 cm³. Calculate its density in g/cm³ and in kg/m³. *(5 marks)*\n\n(c) Explain why ice floats on water. *(3 marks)*`,
+      `**Q16.** (a) State Archimedes' principle. *(3 marks)*\n\n(b) A stone weighs 5 N in air and 3 N in water. Calculate the upthrust. *(3 marks)*\n\n(c) Calculate the volume of the stone. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*`,
+      `**Q17.** (a) Define the term "relative density". *(2 marks)*\n\n(b) A body has a density of 800 kg/m³. Calculate its relative density. *(3 marks)*\n\n(c) Explain why a ship made of steel floats on water. *(4 marks)*`,
+      `**Q18.** (a) State the law of floatation. *(3 marks)*\n\n(b) A floating object displaces 0.5 m³ of water. Calculate the upthrust on it. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*\n\n(c) Explain how a submarine controls its depth. *(4 marks)*`,
+      `**Q19.** (a) Define the term "velocity ratio" of a pulley system. *(2 marks)*\n\n(b) A pulley system with 4 ropes supports a load of 400 N with an effort of 120 N. Calculate the mechanical advantage and velocity ratio. *(5 marks)*\n\n(c) Calculate the efficiency of the pulley system. *(3 marks)*`,
+      `**Q20.** (a) A car accelerates from 10 m/s to 30 m/s in 5 s. Calculate its acceleration. *(3 marks)*\n\n(b) Calculate the distance travelled during this time. *(3 marks)*\n\n(c) Sketch a velocity-time graph for this motion and state what the gradient represents. *(5 marks)*`,
+    ],
+    // ---- Topic 1: Waves, electricity, and magnetism ----
+    [
+      `**Q1.** (a) Define the term "wave". *(2 marks)*\n\n(b) Distinguish between transverse and longitudinal waves, giving one example of each. *(4 marks)*\n\n(c) A wave has a frequency of 50 Hz and a wavelength of 4 m. Calculate its speed. *(4 marks)*`,
+      `**Q2.** (a) Define the terms frequency, wavelength, and amplitude. *(3 marks)*\n\n(b) A wave travels at 340 m/s with a frequency of 170 Hz. Calculate its wavelength. *(3 marks)*\n\n(c) State the relationship between frequency, wavelength, and wave speed. *(2 marks)*`,
+      `**Q3.** (a) State the laws of reflection. *(4 marks)*\n\n(b) Describe an experiment to verify the laws of reflection. *(5 marks)*\n\n(c) A ray of light strikes a plane mirror at an angle of 30° to the normal. Calculate the angle of reflection. *(3 marks)*`,
+      `**Q4.** (a) Define the terms real image and virtual image. *(4 marks)*\n\n(b) Describe the image formed by a plane mirror. *(4 marks)*\n\n(c) Explain why the image in a plane mirror is laterally inverted. *(3 marks)*`,
+      `**Q5.** (a) State the laws of refraction. *(4 marks)*\n\n(b) Define the term "refractive index". *(2 marks)*\n\n(c) Light travels from air into glass with a refractive index of 1.5. If the angle of incidence is 45°, calculate the angle of refraction. *(5 marks)*`,
+      `**Q6.** (a) Define the term "critical angle". *(3 marks)*\n\n(b) The critical angle for glass is 42°. Calculate the refractive index of the glass. *(4 marks)*\n\n(c) Explain what happens when light strikes the glass-air boundary at an angle greater than the critical angle. *(4 marks)*`,
+      `**Q7.** (a) What is total internal reflection? *(3 marks)*\n\n(b) State two applications of total internal reflection. *(2 marks)*\n\n(c) Explain how an optical fibre transmits light. *(4 marks)*`,
+      `**Q8.** (a) Define the terms focal length and principal focus of a converging lens. *(4 marks)*\n\n(b) A converging lens has a focal length of 10 cm. An object is placed 30 cm from the lens. Using the lens formula, calculate the image distance. *(5 marks)*\n\n(c) State the nature of the image formed. *(3 marks)*`,
+      `**Q9.** (a) Define the term "magnification". *(2 marks)*\n\n(b) An object 2 cm tall is placed 20 cm from a converging lens of focal length 10 cm. Calculate the image distance and the height of the image. *(6 marks)*\n\n(c) State whether the image is real or virtual. *(2 marks)*`,
+      `**Q10.** (a) What is sound? *(2 marks)*\n\n(b) State three properties of sound waves. *(3 marks)*\n\n(c) Explain why sound cannot travel through a vacuum. *(3 marks)*`,
+      `**Q11.** (a) Define the term "echo". *(2 marks)*\n\n(b) A boy shouts near a cliff and hears the echo after 2 s. If the speed of sound is 340 m/s, calculate the distance of the cliff. *(4 marks)*\n\n(c) State two uses of echoes. *(2 marks)*`,
+      `**Q12.** (a) Define the terms pitch and loudness. *(4 marks)*\n\n(b) State the factors that determine the pitch and loudness of a sound. *(4 marks)*\n\n(c) Explain how the human ear detects sound. *(4 marks)*`,
+      `**Q13.** (a) Define the terms heat, temperature, and specific heat capacity. *(4 marks)*\n\n(b) Calculate the heat needed to raise the temperature of 2 kg of water from 20°C to 80°C. (Specific heat capacity of water = 4200 J/kg°C) *(4 marks)*\n\n(c) State the principle of conservation of energy as applied to heat. *(3 marks)*`,
+      `**Q14.** (a) Define the term "latent heat". *(2 marks)*\n\n(b) Calculate the heat needed to melt 0.5 kg of ice at 0°C. (Specific latent heat of fusion of ice = 3.34 × 10⁵ J/kg) *(4 marks)*\n\n(c) Explain why ice at 0°C is more effective at cooling than water at 0°C. *(4 marks)*`,
+      `**Q15.** (a) Define the term "electric current". *(2 marks)*\n\n(b) A current of 2 A flows through a wire for 5 minutes. Calculate the charge that passes. *(4 marks)*\n\n(c) State the unit of charge. *(2 marks)*`,
+      `**Q16.** (a) State Ohm's law. *(3 marks)*\n\n(b) A resistor of 12 Ω has a current of 0.5 A flowing through it. Calculate the potential difference across it. *(3 marks)*\n\n(c) Calculate the resistance of a wire that carries 2 A when 24 V is applied. *(3 marks)*`,
+      `**Q17.** (a) Define the terms resistance and resistivity. *(4 marks)*\n\n(b) Two resistors of 6 Ω and 3 Ω are connected in series. Calculate the total resistance. *(3 marks)*\n\n(c) The same resistors are now connected in parallel. Calculate the total resistance. *(4 marks)*`,
+      `**Q18.** (a) State the formula for electrical power. *(2 marks)*\n\n(b) An electric heater operates at 240 V and draws a current of 5 A. Calculate its power. *(3 marks)*\n\n(c) Calculate the energy used by the heater in 2 hours, in joules and in kWh. *(5 marks)*`,
+      `**Q19.** (a) State the properties of a magnet. *(3 marks)*\n\n(b) Describe how you would magnetise a steel bar using the stroking method. *(4 marks)*\n\n(c) Explain the difference between a magnet and a magnetic material. *(3 marks)*`,
+      `**Q20.** (a) State the factors that affect the strength of an electromagnet. *(3 marks)*\n\n(b) Describe how an electric bell works. *(5 marks)*\n\n(c) State two uses of electromagnets. *(2 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Physics — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqPhysics(topicIndex) {
+  const banks = [
+    // Topic 0: Mechanics
+    [
+      {
+        stem: "The SI unit of force is the:",
+        options: ["newton", "joule", "watt", "pascal"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of work is the:",
+        options: ["joule", "newton", "watt", "pascal"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of power is the:",
+        options: ["watt", "joule", "newton", "pascal"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of pressure is the:",
+        options: ["pascal", "newton", "joule", "watt"],
+        answer: 0,
+      },
+      {
+        stem: "The rate of change of velocity is called:",
+        options: ["acceleration", "speed", "displacement", "momentum"],
+        answer: 0,
+      },
+      {
+        stem: "The distance travelled per unit time is called:",
+        options: ["speed", "velocity", "acceleration", "displacement"],
+        answer: 0,
+      },
+      {
+        stem: "A car accelerates uniformly from rest to 20 m/s in 5 s. Its acceleration is:",
+        options: ["4 m/s²", "5 m/s²", "100 m/s²", "0.25 m/s²"],
+        answer: 0,
+      },
+      {
+        stem: "The product of mass and velocity is called:",
+        options: ["momentum", "force", "work", "power"],
+        answer: 0,
+      },
+      {
+        stem: "The force that opposes motion is called:",
+        options: ["friction", "gravity", "tension", "upthrust"],
+        answer: 0,
+      },
+      {
+        stem: "The energy of a moving object is called:",
+        options: ["kinetic energy", "potential energy", "heat energy", "sound energy"],
+        answer: 0,
+      },
+      {
+        stem: "The energy stored in a raised object is called:",
+        options: ["potential energy", "kinetic energy", "heat energy", "light energy"],
+        answer: 0,
+      },
+      {
+        stem: "The kinetic energy of a 2 kg object moving at 3 m/s is:",
+        options: ["9 J", "6 J", "18 J", "12 J"],
+        answer: 0,
+      },
+      {
+        stem: "The work done when a force of 10 N moves an object 5 m is:",
+        options: ["50 J", "2 J", "15 J", "0.5 J"],
+        answer: 0,
+      },
+      {
+        stem: "The power of a machine that does 300 J of work in 10 s is:",
+        options: ["30 W", "3000 W", "3 W", "0.03 W"],
+        answer: 0,
+      },
+      {
+        stem: "The pressure exerted by a force of 50 N on an area of 2 m² is:",
+        options: ["25 Pa", "100 Pa", "52 Pa", "0.04 Pa"],
+        answer: 0,
+      },
+      {
+        stem: "The principle of moments states that for equilibrium:",
+        options: [
+          "sum of clockwise moments = sum of anticlockwise moments",
+          "sum of forces = 0",
+          "work done = energy",
+          "power = work × time",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The density of a substance is defined as:",
+        options: [
+          "mass per unit volume",
+          "weight per unit volume",
+          "mass per unit area",
+          "volume per unit mass",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A block of mass 270 g and volume 100 cm³ has a density of:",
+        options: ["2.7 g/cm³", "0.37 g/cm³", "27 g/cm³", "27000 g/cm³"],
+        answer: 0,
+      },
+      {
+        stem: "The upthrust on a body in a fluid is equal to:",
+        options: [
+          "weight of fluid displaced",
+          "weight of the body",
+          "mass of the body",
+          "volume of the body",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A machine with a mechanical advantage of 4 and velocity ratio of 5 has an efficiency of:",
+        options: ["80%", "20%", "125%", "9%"],
+        answer: 0,
+      },
+      {
+        stem: "The velocity ratio of a lever with effort arm 2 m and load arm 0.5 m is:",
+        options: ["4", "0.25", "2.5", "1.5"],
+        answer: 0,
+      },
+      {
+        stem: "A body moving with constant velocity has:",
+        options: [
+          "zero acceleration",
+          "increasing acceleration",
+          "decreasing acceleration",
+          "constant acceleration",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of momentum is:",
+        options: ["kg m/s", "kg m/s²", "N m", "J"],
+        answer: 0,
+      },
+      {
+        stem: "The gravitational potential energy of a 2 kg mass raised 5 m (g = 10 m/s²) is:",
+        options: ["100 J", "10 J", "50 J", "20 J"],
+        answer: 0,
+      },
+      {
+        stem: "The speed of a ball dropped from 20 m just before hitting the ground (g = 10 m/s²) is:",
+        options: ["20 m/s", "10 m/s", "40 m/s", "200 m/s"],
+        answer: 0,
+      },
+      {
+        stem: "The centre of gravity of a uniform rod is at its:",
+        options: ["midpoint", "end", "one-quarter point", "centre of mass of the rod"],
+        answer: 0,
+      },
+      {
+        stem: "A body floats when its weight is:",
+        options: [
+          "equal to the upthrust",
+          "greater than the upthrust",
+          "less than the upthrust",
+          "zero",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The relative density of a substance with density 800 kg/m³ (water = 1000 kg/m³) is:",
+        options: ["0.8", "8", "80", "1.25"],
+        answer: 0,
+      },
+      {
+        stem: "The change in momentum of a 0.5 kg ball going from 4 m/s to 3 m/s in the opposite direction is:",
+        options: ["3.5 kg m/s", "0.5 kg m/s", "7 kg m/s", "1 kg m/s"],
+        answer: 0,
+      },
+      {
+        stem: "A car travelling at 20 m/s has a kinetic energy of 200 kJ. Its mass is:",
+        options: ["1000 kg", "2000 kg", "500 kg", "10000 kg"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Waves, electricity, and magnetism
+    [
+      {
+        stem: "The SI unit of frequency is the:",
+        options: ["hertz", "watt", "joule", "newton"],
+        answer: 0,
+      },
+      {
+        stem: "The distance between two successive crests of a wave is the:",
+        options: ["wavelength", "amplitude", "frequency", "period"],
+        answer: 0,
+      },
+      {
+        stem: "The maximum displacement of a wave from its rest position is the:",
+        options: ["amplitude", "wavelength", "frequency", "speed"],
+        answer: 0,
+      },
+      {
+        stem: "Sound waves are:",
+        options: ["longitudinal", "transverse", "electromagnetic", "stationary"],
+        answer: 0,
+      },
+      {
+        stem: "Light waves are:",
+        options: ["transverse", "longitudinal", "mechanical", "sound"],
+        answer: 0,
+      },
+      {
+        stem: "The speed of a wave with frequency 50 Hz and wavelength 4 m is:",
+        options: ["200 m/s", "12.5 m/s", "54 m/s", "46 m/s"],
+        answer: 0,
+      },
+      {
+        stem: "The angle of reflection is equal to the angle of:",
+        options: ["incidence", "refraction", "deviation", "critical angle"],
+        answer: 0,
+      },
+      {
+        stem: "The image formed by a plane mirror is:",
+        options: [
+          "virtual and laterally inverted",
+          "real and inverted",
+          "virtual and upright",
+          "real and upright",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The bending of light as it passes from one medium to another is called:",
+        options: ["refraction", "reflection", "diffraction", "dispersion"],
+        answer: 0,
+      },
+      {
+        stem: "The refractive index of a medium is the ratio of:",
+        options: [
+          "speed of light in vacuum to speed in the medium",
+          "speed in the medium to speed in vacuum",
+          "angle of incidence to angle of refraction",
+          "wavelength to frequency",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "Total internal reflection occurs when light travels from:",
+        options: [
+          "a denser to a rarer medium at an angle greater than the critical angle",
+          "a rarer to a denser medium",
+          "air to glass at any angle",
+          "a denser to a rarer medium at any angle",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The critical angle for glass is about:",
+        options: ["42°", "90°", "30°", "60°"],
+        answer: 0,
+      },
+      {
+        stem: "The lens that converges light rays is a:",
+        options: ["convex lens", "concave lens", "plane mirror", "prism"],
+        answer: 0,
+      },
+      {
+        stem: "The lens formula is:",
+        options: ["1/f = 1/v + 1/u", "f = v + u", "1/f = v + u", "f = uv"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of electric current is the:",
+        options: ["ampere", "volt", "ohm", "watt"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of potential difference is the:",
+        options: ["volt", "ampere", "ohm", "watt"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of resistance is the:",
+        options: ["ohm", "volt", "ampere", "watt"],
+        answer: 0,
+      },
+      {
+        stem: "Ohm's law states that:",
+        options: ["V = IR", "V = I/R", "V = R/I", "I = VR"],
+        answer: 0,
+      },
+      {
+        stem: "The charge that passes when 2 A flows for 10 s is:",
+        options: ["20 C", "5 C", "0.2 C", "12 C"],
+        answer: 0,
+      },
+      {
+        stem: "Two resistors of 6 Ω and 3 Ω in series have a total resistance of:",
+        options: ["9 Ω", "2 Ω", "18 Ω", "0.5 Ω"],
+        answer: 0,
+      },
+      {
+        stem: "Two resistors of 6 Ω and 3 Ω in parallel have a total resistance of:",
+        options: ["2 Ω", "9 Ω", "18 Ω", "0.5 Ω"],
+        answer: 0,
+      },
+      {
+        stem: "The power of a device operating at 240 V drawing 5 A is:",
+        options: ["1200 W", "48 W", "245 W", "235 W"],
+        answer: 0,
+      },
+      {
+        stem: "The energy used by a 1200 W heater in 2 hours is:",
+        options: ["2.4 kWh", "2400 kWh", "600 kWh", "0.5 kWh"],
+        answer: 0,
+      },
+      {
+        stem: "The specific heat capacity of water is:",
+        options: ["4200 J/kg°C", "420 J/kg°C", "42000 J/kg°C", "4.2 J/kg°C"],
+        answer: 0,
+      },
+      {
+        stem: "The heat needed to raise 2 kg of water from 20°C to 80°C is:",
+        options: ["504000 J", "504 J", "5040 J", "168000 J"],
+        answer: 0,
+      },
+      {
+        stem: "The specific latent heat of fusion of ice is:",
+        options: ["3.34 × 10⁵ J/kg", "3.34 J/kg", "334 J/kg", "3.34 × 10³ J/kg"],
+        answer: 0,
+      },
+      {
+        stem: "A magnet has two poles called:",
+        options: ["north and south", "east and west", "positive and negative", "top and bottom"],
+        answer: 0,
+      },
+      {
+        stem: "The strength of an electromagnet increases when:",
+        options: [
+          "the number of turns increases",
+          "the current decreases",
+          "the core is removed",
+          "the wire is thinner",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The pitch of a sound depends on its:",
+        options: ["frequency", "amplitude", "speed", "wavelength"],
+        answer: 0,
+      },
+      {
+        stem: "The loudness of a sound depends on its:",
+        options: ["amplitude", "frequency", "speed", "wavelength"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// ICT — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralIct(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Productivity tools and digital communication ----
+    [
+      `**Q1.** (a) What is a word processor? *(2 marks)*\n\n(b) State four features of a word processor. *(4 marks)*\n\n(c) Explain the difference between saving a document and printing a document. *(4 marks)*`,
+      `**Q2.** (a) Define the terms "cut", "copy", and "paste" as used in word processing. *(3 marks)*\n\n(b) Describe how you would change the font and size of text in a word processor. *(4 marks)*\n\n(c) State two advantages of using a word processor over a typewriter. *(4 marks)*`,
+      `**Q3.** (a) What is a spreadsheet? *(2 marks)*\n\n(b) Define the terms cell, row, column, and range. *(4 marks)*\n\n(c) Explain the difference between a formula and a function in a spreadsheet. *(4 marks)*`,
+      `**Q4.** (a) State the function of the following spreadsheet functions: SUM, AVERAGE, MAX, MIN. *(4 marks)*\n\n(b) Write the formula to add the values in cells A1 to A10. *(3 marks)*\n\n(c) Explain what happens when a formula is copied to another cell. *(4 marks)*`,
+      `**Q5.** (a) What is a presentation? *(2 marks)*\n\n(b) State four features of a presentation program. *(4 marks)*\n\n(c) Explain the importance of using bullet points in a presentation. *(4 marks)*`,
+      `**Q6.** (a) Define the terms slide, transition, and animation. *(3 marks)*\n\n(b) Describe how you would add a transition to a slide. *(4 marks)*\n\n(c) State two guidelines for making an effective presentation. *(4 marks)*`,
+      `**Q7.** (a) What is the internet? *(2 marks)*\n\n(b) State three services provided by the internet. *(3 marks)*\n\n(c) Explain the difference between the internet and the World Wide Web. *(4 marks)*`,
+      `**Q8.** (a) Define the terms URL, browser, and search engine. *(3 marks)*\n\n(b) Describe how you would search for information on the internet. *(4 marks)*\n\n(c) State two ways of evaluating the reliability of a website. *(4 marks)*`,
+      `**Q9.** (a) What is email? *(2 marks)*\n\n(b) State the parts of an email address. *(3 marks)*\n\n(c) Explain the difference between "To", "Cc", and "Bcc" fields in an email. *(4 marks)*`,
+      `**Q10.** (a) Define the terms attachment and spam. *(2 marks)*\n\n(b) Describe how you would attach a file to an email. *(4 marks)*\n\n(c) State two precautions to take when opening email attachments. *(4 marks)*`,
+      `**Q11.** (a) What is a social media platform? *(2 marks)*\n\n(b) State three benefits of social media. *(3 marks)*\n\n(c) Explain two risks of using social media. *(4 marks)*`,
+      `**Q12.** (a) Define the term "digital citizenship". *(2 marks)*\n\n(b) State three responsibilities of a digital citizen. *(3 marks)*\n\n(c) Explain what is meant by "digital footprint". *(4 marks)*`,
+      `**Q13.** (a) What is cyberbullying? *(2 marks)*\n\n(b) State three ways to protect yourself from cyberbullying. *(3 marks)*\n\n(c) Explain what you should do if you are a victim of cyberbullying. *(4 marks)*`,
+      `**Q14.** (a) Define the terms "netiquette" and "copyright". *(4 marks)*\n\n(b) State two examples of good netiquette. *(2 marks)*\n\n(c) Explain why it is important to respect copyright when using online content. *(4 marks)*`,
+      `**Q15.** (a) What is cloud computing? *(2 marks)*\n\n(b) State three advantages of cloud storage. *(3 marks)*\n\n(c) Explain one risk of storing data in the cloud. *(4 marks)*`,
+      `**Q16.** (a) Define the terms "upload" and "download". *(2 marks)*\n\n(b) Describe how you would share a document using a cloud service. *(4 marks)*\n\n(c) State two benefits of collaborating on documents online. *(4 marks)*`,
+      `**Q17.** (a) What is a database? *(2 marks)*\n\n(b) Define the terms table, record, and field. *(3 marks)*\n\n(c) Explain the difference between a primary key and a foreign key. *(4 marks)*`,
+      `**Q18.** (a) State the function of a query in a database. *(2 marks)*\n\n(b) Describe how you would sort records in a database. *(4 marks)*\n\n(c) Explain the difference between a filter and a query. *(4 marks)*`,
+      `**Q19.** (a) What is a computer virus? *(2 marks)*\n\n(b) State three ways a computer can be infected by a virus. *(3 marks)*\n\n(c) Describe two ways of protecting a computer from viruses. *(4 marks)*`,
+      `**Q20.** (a) Define the terms "firewall" and "antivirus software". *(4 marks)*\n\n(b) Explain the difference between a firewall and antivirus software. *(4 marks)*\n\n(c) State two other security measures for protecting data. *(4 marks)*`,
+    ],
+    // ---- Topic 1: Data, web, and information systems ----
+    [
+      `**Q1.** (a) What is data? *(2 marks)*\n\n(b) Distinguish between data and information. *(4 marks)*\n\n(c) Give two examples of raw data and the information that can be derived from them. *(4 marks)*`,
+      `**Q2.** (a) Define the term "information system". *(2 marks)*\n\n(b) State the components of an information system. *(4 marks)*\n\n(c) Explain the role of a database in an information system. *(4 marks)*`,
+      `**Q3.** (a) What is a database management system (DBMS)? *(2 marks)*\n\n(b) State three functions of a DBMS. *(3 marks)*\n\n(c) Give two examples of DBMS software. *(2 marks)*`,
+      `**Q4.** (a) Define the terms "entity" and "attribute" in a database. *(4 marks)*\n\n(b) Give an example of an entity with three attributes. *(3 marks)*\n\n(c) Explain what is meant by a "one-to-many" relationship. *(4 marks)*`,
+      `**Q5.** (a) What is a relational database? *(2 marks)*\n\n(b) State two advantages of a relational database over a flat-file database. *(4 marks)*\n\n(c) Explain the purpose of a primary key. *(4 marks)*`,
+      `**Q6.** (a) Define the term "SQL". *(2 marks)*\n\n(b) Write an SQL statement to select all records from a table called "Students". *(3 marks)*\n\n(c) Write an SQL statement to insert a new record into the "Students" table. *(4 marks)*`,
+      `**Q7.** (a) What is a network? *(2 marks)*\n\n(b) Distinguish between a LAN and a WAN. *(4 marks)*\n\n(c) State two advantages of networking computers. *(4 marks)*`,
+      `**Q8.** (a) Define the terms "client" and "server". *(2 marks)*\n\n(b) Explain the client-server model. *(4 marks)*\n\n(c) State two examples of client-server applications. *(4 marks)*`,
+      `**Q9.** (a) What is the internet? *(2 marks)*\n\n(b) Explain how data is transmitted over the internet using packets. *(5 marks)*\n\n(c) Define the term "IP address". *(3 marks)*`,
+      `**Q10.** (a) Define the terms "domain name" and "DNS". *(4 marks)\n\n(b) Explain the purpose of the Domain Name System. *(4 marks)*\n\n(c) Give an example of a domain name and identify its parts. *(4 marks)*`,
+      `**Q11.** (a) What is a website? *(2 marks)*\n\n(b) State three components of a website. *(3 marks)*\n\n(c) Explain the difference between a static and a dynamic website. *(4 marks)*`,
+      `**Q12.** (a) Define the terms "HTML" and "CSS". *(4 marks)*\n\n(b) State the purpose of each. *(4 marks)*\n\n(c) Write a simple HTML tag to create a heading. *(3 marks)*`,
+      `**Q13.** (a) What is a web browser? *(2 marks)*\n\n(b) State three features of a web browser. *(3 marks)*\n\n(c) Explain the function of a "bookmark" in a browser. *(4 marks)*`,
+      `**Q14.** (a) Define the terms "e-commerce" and "e-learning". *(4 marks)*\n\n(b) State two advantages of e-commerce. *(2 marks)*\n\n(c) Explain one disadvantage of e-commerce. *(4 marks)*`,
+      `**Q15.** (a) What is cybersecurity? *(2 marks)*\n\n(b) State three types of cyber threats. *(3 marks)*\n\n(c) Explain the importance of strong passwords. *(4 marks)*`,
+      `**Q16.** (a) Define the terms "phishing" and "malware". *(4 marks)*\n\n(b) Describe how phishing attacks work. *(4 marks)*\n\n(c) State two ways to avoid phishing attacks. *(4 marks)*`,
+      `**Q17.** (a) What is encryption? *(2 marks)*\n\n(b) Explain how encryption protects data. *(4 marks)*\n\n(c) State two uses of encryption in everyday life. *(4 marks)*`,
+      `**Q18.** (a) Define the term "backup". *(2 marks)*\n\n(b) State three reasons why regular backups are important. *(3 marks)*\n\n(c) Describe two backup strategies. *(4 marks)*`,
+      `**Q19.** (a) What is a computer system? *(2 marks)*\n\n(b) State the hardware components of a computer system. *(4 marks)*\n\n(c) Explain the difference between hardware and software. *(4 marks)*`,
+      `**Q20.** (a) Define the terms "input device" and "output device". *(4 marks)*\n\n(b) Give two examples of each. *(4 marks)*\n\n(c) Explain the function of the CPU. *(4 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// ICT — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqIct(topicIndex) {
+  const banks = [
+    // Topic 0: Productivity tools and digital communication
+    [
+      {
+        stem: "A word processor is used to:",
+        options: [
+          "create and edit text documents",
+          "make calculations",
+          "browse the internet",
+          "play games",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The feature that checks spelling in a word processor is called:",
+        options: ["spell checker", "thesaurus", "autocorrect", "grammar checker"],
+        answer: 0,
+      },
+      {
+        stem: "The shortcut key for copying text is:",
+        options: ["Ctrl + C", "Ctrl + V", "Ctrl + X", "Ctrl + P"],
+        answer: 0,
+      },
+      {
+        stem: "The shortcut key for pasting text is:",
+        options: ["Ctrl + V", "Ctrl + C", "Ctrl + X", "Ctrl + P"],
+        answer: 0,
+      },
+      {
+        stem: "The shortcut key for printing a document is:",
+        options: ["Ctrl + P", "Ctrl + C", "Ctrl + V", "Ctrl + S"],
+        answer: 0,
+      },
+      {
+        stem: "A spreadsheet is used to:",
+        options: ["organise and calculate data", "write letters", "edit photos", "send emails"],
+        answer: 0,
+      },
+      {
+        stem: "In a spreadsheet, the intersection of a row and a column is called a:",
+        options: ["cell", "range", "worksheet", "chart"],
+        answer: 0,
+      },
+      {
+        stem: "The function that adds a range of cells is:",
+        options: ["SUM", "AVERAGE", "MAX", "MIN"],
+        answer: 0,
+      },
+      {
+        stem: "The function that finds the largest value in a range is:",
+        options: ["MAX", "MIN", "SUM", "AVERAGE"],
+        answer: 0,
+      },
+      {
+        stem: "A formula in a spreadsheet always begins with:",
+        options: ["=", "+", "-", "#"],
+        answer: 0,
+      },
+      {
+        stem: "A presentation program is used to:",
+        options: ["create slideshows", "write essays", "calculate budgets", "browse the web"],
+        answer: 0,
+      },
+      {
+        stem: "The effect used when moving from one slide to the next is called a:",
+        options: ["transition", "animation", "hyperlink", "template"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of objects within a slide is called:",
+        options: ["animation", "transition", "hyperlink", "layout"],
+        answer: 0,
+      },
+      {
+        stem: "The internet is:",
+        options: [
+          "a global network of computers",
+          "a single computer",
+          "a type of software",
+          "a web browser",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The software used to access websites is a:",
+        options: ["browser", "search engine", "server", "firewall"],
+        answer: 0,
+      },
+      { stem: "A website address is called a:", options: ["URL", "IP", "DNS", "HTML"], answer: 0 },
+      {
+        stem: "The service used to send and receive messages electronically is:",
+        options: ["email", "spreadsheet", "word processor", "presentation"],
+        answer: 0,
+      },
+      {
+        stem: "The part of an email address after the @ symbol is the:",
+        options: ["domain name", "username", "password", "attachment"],
+        answer: 0,
+      },
+      {
+        stem: "An unwanted email sent in bulk is called:",
+        options: ["spam", "attachment", "newsletter", "draft"],
+        answer: 0,
+      },
+      {
+        stem: "A file sent along with an email is called an:",
+        options: ["attachment", "hyperlink", "signature", "header"],
+        answer: 0,
+      },
+      {
+        stem: "The responsible use of technology is called:",
+        options: ["digital citizenship", "cyberbullying", "hacking", "phishing"],
+        answer: 0,
+      },
+      {
+        stem: "The trace of your online activity is called your:",
+        options: ["digital footprint", "IP address", "password", "username"],
+        answer: 0,
+      },
+      {
+        stem: "Bullying carried out online is called:",
+        options: ["cyberbullying", "spamming", "phishing", "hacking"],
+        answer: 0,
+      },
+      {
+        stem: "The rules of polite behaviour online are called:",
+        options: ["netiquette", "copyright", "licence", "protocol"],
+        answer: 0,
+      },
+      {
+        stem: "Storing data on remote servers accessed via the internet is called:",
+        options: ["cloud computing", "networking", "programming", "printing"],
+        answer: 0,
+      },
+      {
+        stem: "Sending a file from your computer to the internet is called:",
+        options: ["uploading", "downloading", "printing", "scanning"],
+        answer: 0,
+      },
+      {
+        stem: "Receiving a file from the internet to your computer is called:",
+        options: ["downloading", "uploading", "printing", "scanning"],
+        answer: 0,
+      },
+      {
+        stem: "A malicious program that spreads between computers is a:",
+        options: ["virus", "browser", "spreadsheet", "database"],
+        answer: 0,
+      },
+      {
+        stem: "Software that protects a computer from viruses is called:",
+        options: ["antivirus", "firewall", "browser", "word processor"],
+        answer: 0,
+      },
+      {
+        stem: "A security system that monitors incoming and outgoing network traffic is a:",
+        options: ["firewall", "antivirus", "spreadsheet", "database"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Data, web, and information systems
+    [
+      {
+        stem: "Raw facts and figures are called:",
+        options: ["data", "information", "knowledge", "wisdom"],
+        answer: 0,
+      },
+      {
+        stem: "Data that has been processed and given meaning is called:",
+        options: ["information", "raw data", "input", "storage"],
+        answer: 0,
+      },
+      {
+        stem: "A collection of related data organised for easy access is a:",
+        options: ["database", "spreadsheet", "presentation", "document"],
+        answer: 0,
+      },
+      {
+        stem: "In a database table, a row is called a:",
+        options: ["record", "field", "query", "report"],
+        answer: 0,
+      },
+      {
+        stem: "In a database table, a column is called a:",
+        options: ["field", "record", "table", "query"],
+        answer: 0,
+      },
+      {
+        stem: "The field that uniquely identifies each record is the:",
+        options: ["primary key", "foreign key", "index", "query"],
+        answer: 0,
+      },
+      {
+        stem: "Software used to manage a database is called a:",
+        options: ["DBMS", "OS", "browser", "compiler"],
+        answer: 0,
+      },
+      {
+        stem: "The language used to query a relational database is:",
+        options: ["SQL", "HTML", "CSS", "Java"],
+        answer: 0,
+      },
+      {
+        stem: "A network that covers a small area such as a school is a:",
+        options: ["LAN", "WAN", "MAN", "PAN"],
+        answer: 0,
+      },
+      {
+        stem: "A network that covers a large geographical area is a:",
+        options: ["WAN", "LAN", "MAN", "PAN"],
+        answer: 0,
+      },
+      {
+        stem: "In a client-server model, the computer that provides services is the:",
+        options: ["server", "client", "router", "switch"],
+        answer: 0,
+      },
+      {
+        stem: "The unique address of a device on a network is its:",
+        options: ["IP address", "URL", "domain name", "password"],
+        answer: 0,
+      },
+      {
+        stem: "The system that translates domain names into IP addresses is:",
+        options: ["DNS", "HTML", "CSS", "SQL"],
+        answer: 0,
+      },
+      {
+        stem: "The language used to create web pages is:",
+        options: ["HTML", "SQL", "Java", "Python"],
+        answer: 0,
+      },
+      {
+        stem: "The language used to style web pages is:",
+        options: ["CSS", "HTML", "SQL", "Java"],
+        answer: 0,
+      },
+      {
+        stem: "A website that allows users to interact and change content is:",
+        options: ["dynamic", "static", "offline", "cached"],
+        answer: 0,
+      },
+      {
+        stem: "Buying and selling goods online is called:",
+        options: ["e-commerce", "e-learning", "e-banking", "e-mail"],
+        answer: 0,
+      },
+      {
+        stem: "Learning using electronic devices and the internet is called:",
+        options: ["e-learning", "e-commerce", "e-banking", "e-mail"],
+        answer: 0,
+      },
+      {
+        stem: "The practice of protecting systems and data from cyber threats is called:",
+        options: ["cybersecurity", "networking", "programming", "printing"],
+        answer: 0,
+      },
+      {
+        stem: "A fraudulent attempt to obtain sensitive information by pretending to be a trusted source is:",
+        options: ["phishing", "spamming", "hacking", "cracking"],
+        answer: 0,
+      },
+      {
+        stem: "Malicious software such as viruses and worms is called:",
+        options: ["malware", "shareware", "freeware", "firmware"],
+        answer: 0,
+      },
+      {
+        stem: "The process of converting data into a coded form to prevent unauthorised access is:",
+        options: ["encryption", "decryption", "compression", "deletion"],
+        answer: 0,
+      },
+      {
+        stem: "A copy of data kept for recovery purposes is called a:",
+        options: ["backup", "virus", "firewall", "cache"],
+        answer: 0,
+      },
+      {
+        stem: "The physical parts of a computer are called:",
+        options: ["hardware", "software", "firmware", "shareware"],
+        answer: 0,
+      },
+      {
+        stem: "The programs that run on a computer are called:",
+        options: ["software", "hardware", "peripherals", "components"],
+        answer: 0,
+      },
+      {
+        stem: "The part of the computer that processes instructions is the:",
+        options: ["CPU", "monitor", "keyboard", "printer"],
+        answer: 0,
+      },
+      {
+        stem: "A keyboard is an example of an:",
+        options: ["input device", "output device", "storage device", "processing device"],
+        answer: 0,
+      },
+      {
+        stem: "A monitor is an example of an:",
+        options: ["output device", "input device", "storage device", "processing device"],
+        answer: 0,
+      },
+      {
+        stem: "The process of arranging records in a particular order is called:",
+        options: ["sorting", "filtering", "querying", "indexing"],
+        answer: 0,
+      },
+      {
+        stem: "The process of displaying only records that meet a condition is called:",
+        options: ["filtering", "sorting", "indexing", "backing up"],
         answer: 0,
       },
     ],
