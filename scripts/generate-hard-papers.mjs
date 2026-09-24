@@ -414,6 +414,72 @@ const subjects = {
     structural: structuralHistory,
     mcq: mcqHistory,
   },
+  commerce: {
+    subject: "Commerce",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "commercial, technical",
+    exam: "GCE",
+    topics: [
+      {
+        id: "commerce-trade-documents",
+        title: "Trade and business documents",
+        description:
+          "Home trade, foreign trade, retailing, wholesaling, invoices, receipts, and transport.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["commercial", "technical"],
+        questionCount: 35,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "commerce-finance-insurance",
+        title: "Finance, banking, and insurance",
+        description:
+          "Money, banking, credit, insurance, communication, advertising, and consumer protection.",
+        level: "ordinary",
+        classLevels: ["form_4", "form_5"],
+        series: ["commercial", "technical"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralCommerce,
+    mcq: mcqCommerce,
+  },
+  economics: {
+    subject: "Economics",
+    level: "advanced",
+    classLevel: "upper_sixth",
+    series: "a_arts, a_commercial",
+    exam: "GCE",
+    topics: [
+      {
+        id: "econ-microeconomics",
+        title: "Microeconomics",
+        description:
+          "Scarcity, demand, supply, elasticity, production, costs, markets, and price determination.",
+        level: "advanced",
+        classLevels: ["lower_sixth", "upper_sixth"],
+        series: ["a_arts", "a_commercial"],
+        questionCount: 50,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "econ-macroeconomics-development",
+        title: "Macroeconomics and development",
+        description:
+          "National income, money, banking, inflation, trade, public finance, growth, and development.",
+        level: "advanced",
+        classLevels: ["lower_sixth", "upper_sixth"],
+        series: ["a_arts", "a_commercial"],
+        questionCount: 55,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralEconomics,
+    mcq: mcqEconomics,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -4839,6 +4905,806 @@ function mcqHistory(topicIndex) {
       {
         stem: "The leader of the United States during the Cuban Missile Crisis was:",
         options: ["John F. Kennedy", "Franklin Roosevelt", "Harry Truman", "Richard Nixon"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Commerce — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralCommerce(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Trade and business documents ----
+    [
+      `**Q1.** (a) Define the term "commerce". *(2 marks)*\n\n(b) Distinguish between trade and aids to trade. *(4 marks)*\n\n(c) Explain the importance of commerce to the economy of Cameroon. *(4 marks)*`,
+      `**Q2.** (a) What is home trade? *(2 marks)*\n\n(b) Distinguish between wholesale and retail trade. *(4 marks)*\n\n(c) State three functions of a wholesaler. *(3 marks)*`,
+      `**Q3.** (a) Define the term "retailer". *(2 marks)*\n\n(b) State three functions of a retailer. *(3 marks)*\n\n(c) Explain two problems faced by retailers in Cameroon. *(4 marks)*`,
+      `**Q4.** (a) What is foreign trade? *(2 marks)*\n\n(b) Distinguish between imports and exports. *(4 marks)*\n\n(c) Explain the importance of foreign trade to Cameroon. *(4 marks)*`,
+      `**Q5.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*\n\n(b) Explain the difference between a favourable and an unfavourable balance of trade. *(4 marks)*\n\n(c) State three ways of correcting an unfavourable balance of trade. *(3 marks)*`,
+      `**Q6.** (a) What is an invoice? *(2 marks)*\n\n(b) State the information contained in an invoice. *(4 marks)*\n\n(c) Distinguish between a proforma invoice and a commercial invoice. *(4 marks)*`,
+      `**Q7.** (a) Define the terms "receipt" and "credit note". *(4 marks)*\n\n(b) Explain when a credit note is issued. *(3 marks)*\n\n(c) Distinguish between a debit note and a credit note. *(4 marks)*`,
+      `**Q8.** (a) What is a bill of lading? *(2 marks)*\n\n(b) State the functions of a bill of lading. *(4 marks)*\n\n(c) Explain the difference between a bill of lading and an air waybill. *(4 marks)*`,
+      `**Q9.** (a) Define the term "transport". *(2 marks)*\n\n(b) State three modes of transport used in trade. *(3 marks)*\n\n(c) Explain the advantages and disadvantages of road transport. *(5 marks)*`,
+      `**Q10.** (a) What is a warehouse? *(2 marks)*\n\n(b) State three functions of warehousing. *(3 marks)\n\n(c) Explain the importance of warehousing to a wholesaler. *(4 marks)*`,
+      `**Q11.** (a) Define the term "advertising". *(2 marks)*\n\n(b) State three media used for advertising. *(3 marks)*\n\n(c) Explain the importance of advertising to a business. *(4 marks)*`,
+      `**Q12.** (a) What is a market? *(2 marks)*\n\n(b) Distinguish between a consumer market and an industrial market. *(4 marks)*\n\n(c) State three factors that influence the choice of a market. *(3 marks)*`,
+      `**Q13.** (a) Define the term "marketing". *(2 marks)*\n\n(b) State the four Ps of the marketing mix. *(4 marks)*\n\n(c) Explain the importance of the marketing mix to a business. *(4 marks)*`,
+      `**Q14.** (a) What is a sole proprietorship? *(2 marks)*\n\n(b) State three advantages and three disadvantages of a sole proprietorship. *(6 marks)*\n\n(c) Explain why many small businesses in Cameroon are sole proprietorships. *(3 marks)*`,
+      `**Q15.** (a) Define the term "partnership". *(2 marks)*\n\n(b) State three features of a partnership. *(3 marks)*\n\n(c) Explain the difference between a general partner and a limited partner. *(4 marks)*`,
+      `**Q16.** (a) What is a limited liability company? *(2 marks)*\n\n(b) Distinguish between a private limited company and a public limited company. *(4 marks)*\n\n(c) State three advantages of a limited liability company. *(3 marks)*`,
+      `**Q17.** (a) Define the term "cooperative society". *(2 marks)*\n\n(b) State three types of cooperative societies. *(3 marks)*\n\n(c) Explain the importance of cooperative societies to farmers in Cameroon. *(4 marks)*`,
+      `**Q18.** (a) What is a multinational company? *(2 marks)*\n\n(b) State three characteristics of a multinational company. *(3 marks)*\n\n(c) Explain two advantages and two disadvantages of multinational companies to Cameroon. *(5 marks)*`,
+      `**Q19.** (a) Define the term "e-commerce". *(2 marks)*\n\n(b) State three forms of e-commerce. *(3 marks)*\n\n(c) Explain the advantages and disadvantages of e-commerce. *(5 marks)*`,
+      `**Q20.** (a) What is a trade union? *(2 marks)*\n\n(b) State three functions of a trade union. *(3 marks)*\n\n(c) Explain the importance of trade unions to workers. *(4 marks)*`,
+    ],
+    // ---- Topic 1: Finance, banking, and insurance ----
+    [
+      `**Q1.** (a) Define the term "money". *(2 marks)*\n\n(b) State the functions of money. *(4 marks)*\n\n(c) Explain the qualities of good money. *(4 marks)*`,
+      `**Q2.** (a) What is a bank? *(2 marks)*\n\n(b) Distinguish between a commercial bank and a central bank. *(4 marks)*\n\n(c) State three functions of a commercial bank. *(3 marks)*`,
+      `**Q3.** (a) Define the terms "deposit" and "withdrawal". *(4 marks)*\n\n(b) State three types of bank accounts. *(3 marks)*\n\n(c) Explain the difference between a current account and a savings account. *(4 marks)*`,
+      `**Q4.** (a) What is a cheque? *(2 marks)*\n\n(b) State the parties to a cheque. *(3 marks)*\n\n(c) Distinguish between an open cheque and a crossed cheque. *(4 marks)*`,
+      `**Q5.** (a) Define the terms "credit" and "debit". *(4 marks)*\n\n(b) State three forms of credit. *(3 marks)*\n\n(c) Explain the advantages and disadvantages of buying on credit. *(4 marks)*`,
+      `**Q6.** (a) What is a loan? *(2 marks)*\n\n(b) State three types of loans offered by banks. *(3 marks)*\n\n(c) Explain the importance of loans to businesses. *(4 marks)*`,
+      `**Q7.** (a) Define the term "interest". *(2 marks)*\n\n(b) Explain the difference between simple interest and compound interest. *(4 marks)*\n\n(c) Calculate the simple interest on 100,000 FCFA at 5% per annum for 2 years. *(4 marks)*`,
+      `**Q8.** (a) What is insurance? *(2 marks)*\n\n(b) State the principles of insurance. *(4 marks)*\n\n(c) Explain the difference between life insurance and general insurance. *(4 marks)*`,
+      `**Q9.** (a) Define the terms "premium" and "policy". *(4 marks)*\n\n(b) Explain the principle of insurable interest. *(4 marks)*\n\n(c) State three types of insurance policies. *(3 marks)*`,
+      `**Q10.** (a) What is a claim? *(2 marks)*\n\n(b) Describe the procedure for making an insurance claim. *(4 marks)*\n\n(c) Explain the principle of indemnity. *(4 marks)*`,
+      `**Q11.** (a) Define the term "communication". *(2 marks)*\n\n(b) State three means of communication used in business. *(3 marks)*\n\n(c) Explain the importance of communication in business. *(4 marks)*`,
+      `**Q12.** (a) What is a telephone? *(2 marks)*\n\n(b) State three advantages of using the telephone in business. *(3 marks)*\n\n(c) Explain the difference between a landline and a mobile phone. *(4 marks)*`,
+      `**Q13.** (a) Define the term "advertising". *(2 marks)*\n\n(b) State three objectives of advertising. *(3 marks)*\n\n(c) Explain the difference between informative and persuasive advertising. *(4 marks)*`,
+      `**Q14.** (a) What is consumer protection? *(2 marks)*\n\n(b) State three rights of a consumer. *(3 marks)*\n\n(c) Explain the role of the government in protecting consumers. *(4 marks)*`,
+      `**Q15.** (a) Define the term "consumer association". *(2 marks)*\n\n(b) State three functions of a consumer association. *(3 marks)*\n\n(c) Explain how consumers can protect themselves from exploitation. *(4 marks)*`,
+      `**Q16.** (a) What is a savings and loan cooperative? *(2 marks)*\n\n(b) State three functions of savings and loan cooperatives. *(3 marks)*\n\n(c) Explain the importance of microfinance institutions to small businesses. *(4 marks)*`,
+      `**Q17.** (a) Define the term "stock exchange". *(2 marks)*\n\n(b) State three functions of a stock exchange. *(3 marks)*\n\n(c) Explain the importance of the Douala Stock Exchange to Cameroon. *(4 marks)*`,
+      `**Q18.** (a) What is a bond? *(2 marks)*\n\n(b) Distinguish between shares and bonds. *(4 marks)*\n\n(c) State three types of shares. *(3 marks)*`,
+      `**Q19.** (a) Define the term "inflation". *(2 marks)*\n\n(b) State three causes of inflation. *(3 marks)*\n\n(c) Explain the effects of inflation on consumers and businesses. *(5 marks)*`,
+      `**Q20.** (a) What is a budget? *(2 marks)*\n\n(b) State three types of budgets. *(3 marks)*\n\n(c) Explain the importance of budgeting to a business. *(4 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Commerce — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqCommerce(topicIndex) {
+  const banks = [
+    // Topic 0: Trade and business documents
+    [
+      {
+        stem: "The buying and selling of goods and services is called:",
+        options: ["trade", "commerce", "industry", "transport"],
+        answer: 0,
+      },
+      {
+        stem: "The activities that facilitate trade are called:",
+        options: ["aids to trade", "commerce", "industry", "production"],
+        answer: 0,
+      },
+      {
+        stem: "Trade carried out within a country is called:",
+        options: ["home trade", "foreign trade", "international trade", "barter trade"],
+        answer: 0,
+      },
+      {
+        stem: "Trade carried out between countries is called:",
+        options: ["foreign trade", "home trade", "local trade", "retail trade"],
+        answer: 0,
+      },
+      {
+        stem: "The person who buys goods in large quantities from producers is the:",
+        options: ["wholesaler", "retailer", "consumer", "agent"],
+        answer: 0,
+      },
+      {
+        stem: "The person who sells goods in small quantities to consumers is the:",
+        options: ["retailer", "wholesaler", "producer", "manufacturer"],
+        answer: 0,
+      },
+      {
+        stem: "Goods bought from other countries are called:",
+        options: ["imports", "exports", "surplus", "deficit"],
+        answer: 0,
+      },
+      {
+        stem: "Goods sold to other countries are called:",
+        options: ["exports", "imports", "surplus", "deficit"],
+        answer: 0,
+      },
+      {
+        stem: "The document that lists the goods sold and their prices is an:",
+        options: ["invoice", "receipt", "cheque", "order"],
+        answer: 0,
+      },
+      {
+        stem: "The document issued to confirm payment is a:",
+        options: ["receipt", "invoice", "credit note", "debit note"],
+        answer: 0,
+      },
+      {
+        stem: "The document issued when goods are returned by a buyer is a:",
+        options: ["credit note", "debit note", "invoice", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "The document issued when goods are returned by a seller is a:",
+        options: ["debit note", "credit note", "invoice", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "The document used in sea transport of goods is the:",
+        options: ["bill of lading", "air waybill", "invoice", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "The document used in air transport of goods is the:",
+        options: ["air waybill", "bill of lading", "invoice", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "The storage of goods until they are needed is called:",
+        options: ["warehousing", "transport", "advertising", "insurance"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of goods from one place to another is called:",
+        options: ["transport", "warehousing", "advertising", "banking"],
+        answer: 0,
+      },
+      {
+        stem: "The promotion of goods to attract buyers is called:",
+        options: ["advertising", "transport", "warehousing", "insurance"],
+        answer: 0,
+      },
+      {
+        stem: "A business owned by one person is a:",
+        options: ["sole proprietorship", "partnership", "company", "cooperative"],
+        answer: 0,
+      },
+      {
+        stem: "A business owned by two to twenty people is a:",
+        options: ["partnership", "sole proprietorship", "company", "cooperative"],
+        answer: 0,
+      },
+      {
+        stem: "A business with limited liability owned by shareholders is a:",
+        options: ["limited liability company", "sole proprietorship", "partnership", "cooperative"],
+        answer: 0,
+      },
+      {
+        stem: "A business owned and run by its members is a:",
+        options: ["cooperative society", "sole proprietorship", "partnership", "company"],
+        answer: 0,
+      },
+      {
+        stem: "A company whose shares are sold to the public is a:",
+        options: [
+          "public limited company",
+          "private limited company",
+          "sole proprietorship",
+          "partnership",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A company whose shares are not sold to the public is a:",
+        options: [
+          "private limited company",
+          "public limited company",
+          "sole proprietorship",
+          "partnership",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A large company operating in several countries is a:",
+        options: ["multinational company", "sole proprietorship", "partnership", "cooperative"],
+        answer: 0,
+      },
+      {
+        stem: "Buying and selling goods over the internet is called:",
+        options: ["e-commerce", "e-banking", "e-learning", "e-mail"],
+        answer: 0,
+      },
+      {
+        stem: "An organisation that protects the interests of workers is a:",
+        options: ["trade union", "consumer association", "cooperative", "company"],
+        answer: 0,
+      },
+      {
+        stem: "The four Ps of the marketing mix are product, price, place, and:",
+        options: ["promotion", "people", "process", "profit"],
+        answer: 0,
+      },
+      {
+        stem: "The place where buyers and sellers meet to exchange goods is a:",
+        options: ["market", "warehouse", "bank", "factory"],
+        answer: 0,
+      },
+      {
+        stem: "The person who buys goods for personal use is a:",
+        options: ["consumer", "retailer", "wholesaler", "producer"],
+        answer: 0,
+      },
+      {
+        stem: "The person who produces goods is a:",
+        options: ["producer", "consumer", "retailer", "wholesaler"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Finance, banking, and insurance
+    [
+      {
+        stem: "Anything generally accepted as a medium of exchange is:",
+        options: ["money", "goods", "services", "credit"],
+        answer: 0,
+      },
+      {
+        stem: "The bank that issues currency and controls the money supply is the:",
+        options: ["central bank", "commercial bank", "development bank", "merchant bank"],
+        answer: 0,
+      },
+      {
+        stem: "The bank that accepts deposits and gives loans to the public is a:",
+        options: ["commercial bank", "central bank", "development bank", "stock exchange"],
+        answer: 0,
+      },
+      {
+        stem: "The account used for frequent transactions is a:",
+        options: ["current account", "savings account", "fixed deposit account", "loan account"],
+        answer: 0,
+      },
+      {
+        stem: "The account that earns interest and encourages saving is a:",
+        options: ["savings account", "current account", "overdraft account", "loan account"],
+        answer: 0,
+      },
+      {
+        stem: "A written order to a bank to pay a stated sum is a:",
+        options: ["cheque", "receipt", "invoice", "credit note"],
+        answer: 0,
+      },
+      {
+        stem: "A cheque that can only be paid into a bank account is a:",
+        options: ["crossed cheque", "open cheque", "blank cheque", "post-dated cheque"],
+        answer: 0,
+      },
+      {
+        stem: "The person who writes a cheque is the:",
+        options: ["drawer", "drawee", "payee", "endorser"],
+        answer: 0,
+      },
+      {
+        stem: "The bank on which a cheque is drawn is the:",
+        options: ["drawee", "drawer", "payee", "endorser"],
+        answer: 0,
+      },
+      {
+        stem: "The person to whom a cheque is paid is the:",
+        options: ["payee", "drawer", "drawee", "endorser"],
+        answer: 0,
+      },
+      {
+        stem: "The money charged for borrowing money is called:",
+        options: ["interest", "premium", "commission", "dividend"],
+        answer: 0,
+      },
+      {
+        stem: "The simple interest on 100,000 FCFA at 5% for 2 years is:",
+        options: ["10,000 FCFA", "5,000 FCFA", "20,000 FCFA", "2,000 FCFA"],
+        answer: 0,
+      },
+      {
+        stem: "The protection against financial loss is called:",
+        options: ["insurance", "banking", "advertising", "warehousing"],
+        answer: 0,
+      },
+      {
+        stem: "The amount paid for an insurance policy is the:",
+        options: ["premium", "claim", "interest", "dividend"],
+        answer: 0,
+      },
+      {
+        stem: "The document that contains the terms of an insurance contract is the:",
+        options: ["policy", "premium", "claim", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "The payment made by an insurance company for a loss is a:",
+        options: ["claim", "premium", "policy", "dividend"],
+        answer: 0,
+      },
+      {
+        stem: "The principle that the insured must not profit from a loss is:",
+        options: ["indemnity", "insurable interest", "utmost good faith", "contribution"],
+        answer: 0,
+      },
+      {
+        stem: "The principle that the insured must have a financial interest in the subject matter is:",
+        options: ["insurable interest", "indemnity", "utmost good faith", "subrogation"],
+        answer: 0,
+      },
+      {
+        stem: "Insurance against the death of the insured is:",
+        options: ["life insurance", "fire insurance", "marine insurance", "motor insurance"],
+        answer: 0,
+      },
+      {
+        stem: "Insurance against damage to goods in transit by sea is:",
+        options: ["marine insurance", "fire insurance", "life insurance", "motor insurance"],
+        answer: 0,
+      },
+      {
+        stem: "The exchange of information between people is called:",
+        options: ["communication", "transport", "advertising", "banking"],
+        answer: 0,
+      },
+      {
+        stem: "The protection of consumers from unfair practices is called:",
+        options: ["consumer protection", "advertising", "marketing", "insurance"],
+        answer: 0,
+      },
+      {
+        stem: "An organisation that protects the interests of consumers is a:",
+        options: ["consumer association", "trade union", "cooperative", "company"],
+        answer: 0,
+      },
+      {
+        stem: "A financial institution that gives small loans to small businesses is a:",
+        options: [
+          "microfinance institution",
+          "central bank",
+          "stock exchange",
+          "insurance company",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The market where shares are bought and sold is the:",
+        options: ["stock exchange", "commodity market", "money market", "foreign exchange market"],
+        answer: 0,
+      },
+      {
+        stem: "The unit of ownership of a company is a:",
+        options: ["share", "bond", "cheque", "premium"],
+        answer: 0,
+      },
+      {
+        stem: "A loan to a company or government that pays interest is a:",
+        options: ["bond", "share", "cheque", "premium"],
+        answer: 0,
+      },
+      {
+        stem: "A general rise in the price level is called:",
+        options: ["inflation", "deflation", "recession", "depression"],
+        answer: 0,
+      },
+      {
+        stem: "A plan of expected income and expenditure is a:",
+        options: ["budget", "balance sheet", "invoice", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "The stock exchange in Cameroon is located in:",
+        options: ["Douala", "Yaoundé", "Buea", "Garoua"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Economics — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralEconomics(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Microeconomics ----
+    [
+      `**Q1.** (a) Define the term "scarcity". *(2 marks)*\n\n(b) Explain the basic economic problem. *(4 marks)*\n\n(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*`,
+      `**Q2.** (a) What is opportunity cost? *(2 marks)*\n\n(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*\n\n(c) State three factors of production. *(3 marks)*`,
+      `**Q3.** (a) Define the term "demand". *(2 marks)*\n\n(b) State the law of demand. *(3 marks)*\n\n(c) Explain three factors that cause a change in demand. *(5 marks)*`,
+      `**Q4.** (a) Define the term "supply". *(2 marks)*\n\n(b) State the law of supply. *(3 marks)*\n\n(c) Explain three factors that cause a change in supply. *(5 marks)*`,
+      `**Q5.** (a) What is market equilibrium? *(2 marks)*\n\n(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*\n\n(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*`,
+      `**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*\n\n(b) State the formula for price elasticity of demand. *(3 marks)*\n\n(c) Explain the difference between elastic and inelastic demand. *(4 marks)*`,
+      `**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*\n\n(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*`,
+      `**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*\n\n(b) Explain the relationship between income and demand for a normal good. *(4 marks)*\n\n(c) Give one example of each type of good. *(2 marks)*`,
+      `**Q9.** (a) Define the term "production". *(2 marks)*\n\n(b) Distinguish between short-run and long-run production. *(4 marks)*\n\n(c) Explain the law of diminishing returns. *(5 marks)*`,
+      `**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*\n\n(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*\n\n(c) State the relationship between marginal cost and average cost. *(3 marks)*`,
+      `**Q11.** (a) Define the term "economies of scale". *(2 marks)*\n\n(b) State three internal economies of scale. *(3 marks)*\n\n(c) Explain two diseconomies of scale. *(4 marks)*`,
+      `**Q12.** (a) What is a market structure? *(2 marks)*\n\n(b) Describe the characteristics of perfect competition. *(5 marks)*\n\n(c) Explain why firms in perfect competition are price takers. *(4 marks)*`,
+      `**Q13.** (a) Define the term "monopoly". *(2 marks)*\n\n(b) State three characteristics of a monopoly. *(3 marks)*\n\n(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*`,
+      `**Q14.** (a) What is monopolistic competition? *(2 marks)*\n\n(b) Describe the characteristics of monopolistic competition. *(4 marks)*\n\n(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*`,
+      `**Q15.** (a) Define the term "oligopoly". *(2 marks)*\n\n(b) State three characteristics of an oligopoly. *(3 marks)*\n\n(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*`,
+      `**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*\n\n(b) Distinguish between accounting profit and economic profit. *(4 marks)*\n\n(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*`,
+      `**Q17.** (a) What is a price ceiling? *(2 marks)*\n\n(b) Explain the effects of a price ceiling on the market. *(4 marks)*\n\n(c) State two examples of price controls used by governments. *(2 marks)*`,
+      `**Q18.** (a) Define the term "consumer surplus". *(2 marks)*\n\n(b) Explain how consumer surplus is measured. *(4 marks)*\n\n(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*`,
+      `**Q19.** (a) Define the term "producer surplus". *(2 marks)*\n\n(b) Explain how producer surplus is measured. *(4 marks)*\n\n(c) Explain the effect of a price fall on producer surplus. *(4 marks)*`,
+      `**Q20.** (a) What is the division of labour? *(2 marks)*\n\n(b) State three advantages of the division of labour. *(3 marks)*\n\n(c) Explain two disadvantages of the division of labour. *(4 marks)*`,
+    ],
+    // ---- Topic 1: Macroeconomics and development ----
+    [
+      `**Q1.** (a) Define the term "national income". *(2 marks)*\n\n(b) State the three methods of measuring national income. *(3 marks)*\n\n(c) Explain the difficulties in measuring national income in developing countries. *(5 marks)*`,
+      `**Q2.** (a) Define the terms "GDP" and "GNP". *(4 marks)*\n\n(b) Distinguish between GDP at market prices and GDP at factor cost. *(4 marks)*\n\n(c) Explain the difference between nominal GDP and real GDP. *(4 marks)*`,
+      `**Q3.** (a) What is money? *(2 marks)*\n\n(b) State the functions of money. *(4 marks)*\n\n(c) Explain the qualities of good money. *(4 marks)*`,
+      `**Q4.** (a) Define the term "money supply". *(2 marks)*\n\n(b) State three components of the money supply. *(3 marks)*\n\n(c) Explain how the central bank controls the money supply. *(5 marks)*`,
+      `**Q5.** (a) What is a commercial bank? *(2 marks)*\n\n(b) State three functions of a commercial bank. *(3 marks)*\n\n(c) Explain how commercial banks create credit. *(5 marks)*`,
+      `**Q6.** (a) Define the term "inflation". *(2 marks)*\n\n(b) State three causes of inflation. *(3 marks)*\n\n(c) Explain the effects of inflation on the economy. *(5 marks)*`,
+      `**Q7.** (a) Define the terms "demand-pull inflation" and "cost-push inflation". *(4 marks)\n\n(b) Explain the difference between the two types of inflation. *(4 marks)*\n\n(c) State two policies used to control inflation. *(2 marks)*`,
+      `**Q8.** (a) What is unemployment? *(2 marks)*\n\n(b) State three types of unemployment. *(3 marks)*\n\n(c) Explain the causes and effects of unemployment. *(5 marks)*`,
+      `**Q9.** (a) Define the term "international trade". *(2 marks)*\n\n(b) Explain the principle of comparative advantage. *(5 marks)*\n\n(c) State three benefits of international trade. *(3 marks)*`,
+      `**Q10.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*\n\n(b) Explain the causes of a deficit in the balance of payments. *(4 marks)*\n\n(c) State three measures to correct a balance of payments deficit. *(3 marks)*`,
+      `**Q11.** (a) What is a tariff? *(2 marks)*\n\n(b) Distinguish between a tariff and a quota. *(4 marks)*\n\n(c) Explain the arguments for and against protectionism. *(5 marks)*`,
+      `**Q12.** (a) Define the term "public finance". *(2 marks)*\n\n(b) State the sources of government revenue. *(4 marks)*\n\n(c) Explain the difference between direct and indirect taxes. *(4 marks)*`,
+      `**Q13.** (a) What is a budget? *(2 marks)*\n\n(b) Distinguish between a balanced, a surplus, and a deficit budget. *(4 marks)*\n\n(c) Explain the importance of the budget as a tool of economic policy. *(4 marks)*`,
+      `**Q14.** (a) Define the term "economic growth". *(2 marks)*\n\n(b) Distinguish between economic growth and economic development. *(4 marks)*\n\n(c) State three factors that promote economic growth. *(3 marks)*`,
+      `**Q15.** (a) What is economic development? *(2 marks)*\n\n(b) State three indicators of economic development. *(3 marks)*\n\n(c) Explain the difference between the Human Development Index and GDP per capita. *(5 marks)*`,
+      `**Q16.** (a) Define the term "foreign direct investment". *(2 marks)*\n\n(b) State three advantages of foreign direct investment to a developing country. *(3 marks)*\n\n(c) Explain two disadvantages of foreign direct investment. *(4 marks)*`,
+      `**Q17.** (a) What is a developing country? *(2 marks)*\n\n(b) State three characteristics of developing countries. *(3 marks)*\n\n(c) Explain the problems facing developing countries in achieving development. *(5 marks)*`,
+      `**Q18.** (a) Define the term "structural adjustment programme". *(2 marks)*\n\n(b) State three conditions attached to structural adjustment programmes. *(3 marks)*\n\n(c) Explain the effects of structural adjustment programmes on developing countries. *(5 marks)*`,
+      `**Q19.** (a) What is the International Monetary Fund? *(2 marks)*\n\n(b) State three functions of the IMF. *(3 marks)*\n\n(c) Explain the role of the World Bank in financing development. *(4 marks)*`,
+      `**Q20.** (a) Define the term "regional integration". *(2 marks)*\n\n(b) State three objectives of the Economic Community of Central African States (ECCAS). *(3 marks)*\n\n(c) Explain the benefits of regional integration to Cameroon. *(4 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Economics — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqEconomics(topicIndex) {
+  const banks = [
+    // Topic 0: Microeconomics
+    [
+      {
+        stem: "The basic economic problem is:",
+        options: ["scarcity", "inflation", "unemployment", "taxation"],
+        answer: 0,
+      },
+      {
+        stem: "The next best alternative forgone when a choice is made is the:",
+        options: ["opportunity cost", "marginal cost", "sunk cost", "fixed cost"],
+        answer: 0,
+      },
+      {
+        stem: "The factors of production are land, labour, capital, and:",
+        options: ["enterprise", "money", "goods", "services"],
+        answer: 0,
+      },
+      {
+        stem: "The reward for labour is:",
+        options: ["wages", "rent", "interest", "profit"],
+        answer: 0,
+      },
+      {
+        stem: "The reward for capital is:",
+        options: ["interest", "wages", "rent", "profit"],
+        answer: 0,
+      },
+      {
+        stem: "The reward for land is:",
+        options: ["rent", "wages", "interest", "profit"],
+        answer: 0,
+      },
+      {
+        stem: "The reward for enterprise is:",
+        options: ["profit", "wages", "rent", "interest"],
+        answer: 0,
+      },
+      {
+        stem: "The law of demand states that as price rises, quantity demanded:",
+        options: ["falls", "rises", "stays constant", "doubles"],
+        answer: 0,
+      },
+      {
+        stem: "The law of supply states that as price rises, quantity supplied:",
+        options: ["rises", "falls", "stays constant", "halves"],
+        answer: 0,
+      },
+      {
+        stem: "The price at which quantity demanded equals quantity supplied is the:",
+        options: ["equilibrium price", "ceiling price", "floor price", "market price"],
+        answer: 0,
+      },
+      {
+        stem: "If a 10% price rise causes a 20% fall in quantity demanded, demand is:",
+        options: ["elastic", "inelastic", "unit elastic", "perfectly inelastic"],
+        answer: 0,
+      },
+      {
+        stem: "If a 10% price rise causes a 5% fall in quantity demanded, demand is:",
+        options: ["inelastic", "elastic", "unit elastic", "perfectly elastic"],
+        answer: 0,
+      },
+      {
+        stem: "The price elasticity of demand is calculated as:",
+        options: [
+          "% change in quantity demanded ÷ % change in price",
+          "% change in price ÷ % change in quantity demanded",
+          "change in price ÷ change in quantity",
+          "quantity ÷ price",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A good whose demand rises when income rises is a:",
+        options: ["normal good", "inferior good", "substitute good", "complementary good"],
+        answer: 0,
+      },
+      {
+        stem: "A good whose demand falls when income rises is an:",
+        options: ["inferior good", "normal good", "luxury good", "necessity"],
+        answer: 0,
+      },
+      {
+        stem: "The law of diminishing returns applies in the:",
+        options: ["short run", "long run", "very long run", "market period"],
+        answer: 0,
+      },
+      {
+        stem: "Costs that do not change with output are:",
+        options: ["fixed costs", "variable costs", "marginal costs", "total costs"],
+        answer: 0,
+      },
+      {
+        stem: "Costs that change with output are:",
+        options: ["variable costs", "fixed costs", "sunk costs", "overhead costs"],
+        answer: 0,
+      },
+      {
+        stem: "The extra cost of producing one more unit is the:",
+        options: ["marginal cost", "average cost", "fixed cost", "total cost"],
+        answer: 0,
+      },
+      {
+        stem: "A market with many buyers and sellers of identical products is:",
+        options: ["perfect competition", "monopoly", "oligopoly", "monopolistic competition"],
+        answer: 0,
+      },
+      {
+        stem: "A market with a single seller is a:",
+        options: ["monopoly", "perfect competition", "oligopoly", "duopoly"],
+        answer: 0,
+      },
+      {
+        stem: "A market with a few large sellers is an:",
+        options: ["oligopoly", "monopoly", "perfect competition", "monopolistic competition"],
+        answer: 0,
+      },
+      {
+        stem: "A market with many sellers of differentiated products is:",
+        options: ["monopolistic competition", "perfect competition", "monopoly", "oligopoly"],
+        answer: 0,
+      },
+      {
+        stem: "A firm in perfect competition is a:",
+        options: ["price taker", "price maker", "monopolist", "oligopolist"],
+        answer: 0,
+      },
+      {
+        stem: "A monopolist is a:",
+        options: ["price maker", "price taker", "price follower", "price cutter"],
+        answer: 0,
+      },
+      {
+        stem: "The reduction in average cost as output increases is called:",
+        options: [
+          "economies of scale",
+          "diseconomies of scale",
+          "diminishing returns",
+          "increasing returns",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The increase in average cost when a firm becomes too large is called:",
+        options: [
+          "diseconomies of scale",
+          "economies of scale",
+          "diminishing returns",
+          "constant returns",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A maximum price set by the government is a:",
+        options: ["price ceiling", "price floor", "equilibrium price", "market price"],
+        answer: 0,
+      },
+      {
+        stem: "A minimum price set by the government is a:",
+        options: ["price floor", "price ceiling", "equilibrium price", "market price"],
+        answer: 0,
+      },
+      {
+        stem: "The benefit consumers gain when they pay less than they are willing to pay is:",
+        options: ["consumer surplus", "producer surplus", "profit", "revenue"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Macroeconomics and development
+    [
+      {
+        stem: "The total value of goods and services produced in a country in a year is the:",
+        options: ["national income", "national debt", "balance of trade", "money supply"],
+        answer: 0,
+      },
+      {
+        stem: "GDP stands for:",
+        options: [
+          "Gross Domestic Product",
+          "Gross Domestic Profit",
+          "General Domestic Product",
+          "Gross Development Plan",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "GNP stands for:",
+        options: [
+          "Gross National Product",
+          "Gross National Profit",
+          "General National Product",
+          "Gross Net Product",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The three methods of measuring national income are income, output, and:",
+        options: ["expenditure", "savings", "investment", "taxation"],
+        answer: 0,
+      },
+      {
+        stem: "Anything generally accepted as a medium of exchange is:",
+        options: ["money", "goods", "services", "credit"],
+        answer: 0,
+      },
+      {
+        stem: "The total amount of money in circulation is the:",
+        options: ["money supply", "national income", "balance of payments", "public debt"],
+        answer: 0,
+      },
+      {
+        stem: "The bank that controls the money supply is the:",
+        options: ["central bank", "commercial bank", "development bank", "merchant bank"],
+        answer: 0,
+      },
+      {
+        stem: "The bank that accepts deposits and gives loans is a:",
+        options: ["commercial bank", "central bank", "stock exchange", "insurance company"],
+        answer: 0,
+      },
+      {
+        stem: "A general and sustained rise in the price level is:",
+        options: ["inflation", "deflation", "recession", "depression"],
+        answer: 0,
+      },
+      {
+        stem: "Inflation caused by excess demand is called:",
+        options: ["demand-pull inflation", "cost-push inflation", "hyperinflation", "stagflation"],
+        answer: 0,
+      },
+      {
+        stem: "Inflation caused by rising costs of production is called:",
+        options: ["cost-push inflation", "demand-pull inflation", "hyperinflation", "deflation"],
+        answer: 0,
+      },
+      {
+        stem: "The situation where people who are able and willing to work cannot find jobs is:",
+        options: ["unemployment", "inflation", "deflation", "recession"],
+        answer: 0,
+      },
+      {
+        stem: "Trade between countries is called:",
+        options: ["international trade", "home trade", "local trade", "retail trade"],
+        answer: 0,
+      },
+      {
+        stem: "The principle that a country should specialise in producing goods it produces most efficiently is:",
+        options: [
+          "comparative advantage",
+          "absolute advantage",
+          "opportunity cost",
+          "economies of scale",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The difference between the value of exports and imports is the:",
+        options: ["balance of trade", "balance of payments", "national income", "public debt"],
+        answer: 0,
+      },
+      {
+        stem: "A tax on imported goods is a:",
+        options: ["tariff", "quota", "subsidy", "grant"],
+        answer: 0,
+      },
+      {
+        stem: "A limit on the quantity of a good that can be imported is a:",
+        options: ["quota", "tariff", "subsidy", "embargo"],
+        answer: 0,
+      },
+      {
+        stem: "Taxes on income and profits are:",
+        options: ["direct taxes", "indirect taxes", "tariffs", "quotas"],
+        answer: 0,
+      },
+      {
+        stem: "Taxes on goods and services are:",
+        options: ["indirect taxes", "direct taxes", "income taxes", "profit taxes"],
+        answer: 0,
+      },
+      {
+        stem: "A plan of government revenue and expenditure is the:",
+        options: ["budget", "balance sheet", "invoice", "receipt"],
+        answer: 0,
+      },
+      {
+        stem: "A budget where revenue equals expenditure is:",
+        options: ["balanced", "surplus", "deficit", "unbalanced"],
+        answer: 0,
+      },
+      {
+        stem: "A budget where revenue exceeds expenditure is:",
+        options: ["surplus", "deficit", "balanced", "unbalanced"],
+        answer: 0,
+      },
+      {
+        stem: "A budget where expenditure exceeds revenue is:",
+        options: ["deficit", "surplus", "balanced", "unbalanced"],
+        answer: 0,
+      },
+      {
+        stem: "The increase in a country's output of goods and services over time is:",
+        options: ["economic growth", "economic development", "inflation", "recession"],
+        answer: 0,
+      },
+      {
+        stem: "The improvement in the standard of living and welfare of people is:",
+        options: ["economic development", "economic growth", "inflation", "deflation"],
+        answer: 0,
+      },
+      {
+        stem: "The index that measures human welfare is the:",
+        options: ["Human Development Index", "Consumer Price Index", "Stock Index", "Price Index"],
+        answer: 0,
+      },
+      {
+        stem: "Investment by foreign companies in a country is called:",
+        options: [
+          "foreign direct investment",
+          "portfolio investment",
+          "public investment",
+          "domestic investment",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The international organisation that provides loans to countries in balance of payments difficulties is the:",
+        options: ["IMF", "World Bank", "WTO", "UN"],
+        answer: 0,
+      },
+      {
+        stem: "The international organisation that finances development projects is the:",
+        options: ["World Bank", "IMF", "WTO", "UN"],
+        answer: 0,
+      },
+      {
+        stem: "The economic community of Central African states is:",
+        options: ["ECCAS", "ECOWAS", "SADC", "COMESA"],
         answer: 0,
       },
     ],
