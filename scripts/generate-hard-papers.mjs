@@ -348,6 +348,72 @@ const subjects = {
     structural: structuralIct,
     mcq: mcqIct,
   },
+  geography: {
+    subject: "Geography",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "general, arts",
+    exam: "GCE",
+    topics: [
+      {
+        id: "geography-physical",
+        title: "Physical geography",
+        description:
+          "Rocks, weathering, climate, rivers, coasts, soils, vegetation, and natural hazards.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["general", "arts"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "geography-human-cameroon",
+        title: "Human and Cameroon geography",
+        description:
+          "Population, settlement, agriculture, industry, transport, trade, maps, and Cameroon regions.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["general", "arts"],
+        questionCount: 45,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralGeography,
+    mcq: mcqGeography,
+  },
+  history: {
+    subject: "History",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "general, arts",
+    exam: "GCE",
+    topics: [
+      {
+        id: "history-cameroon-africa",
+        title: "Cameroon and African history",
+        description:
+          "Pre-colonial Cameroon, colonial rule, independence movements, and post-independence Cameroon.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["general", "arts"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "history-world",
+        title: "World history",
+        description:
+          "World wars, the Cold War, decolonisation, international organisations, and global developments.",
+        level: "ordinary",
+        classLevels: ["form_4", "form_5"],
+        series: ["general", "arts"],
+        questionCount: 45,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralHistory,
+    mcq: mcqHistory,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -3961,6 +4027,818 @@ function mcqIct(topicIndex) {
       {
         stem: "The process of displaying only records that meet a condition is called:",
         options: ["filtering", "sorting", "indexing", "backing up"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Geography — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralGeography(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Physical geography ----
+    [
+      `**Q1.** (a) Define the term "weathering". *(2 marks)*\n\n(b) Distinguish between physical and chemical weathering. *(4 marks)*\n\n(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*`,
+      `**Q2.** (a) What is a rock? *(2 marks)*\n\n(b) Describe the three main types of rocks and how each is formed. *(6 marks)*\n\n(c) Give one example of each type of rock. *(3 marks)*`,
+      `**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*\n\n(b) Explain how limestone is formed. *(4 marks)*\n\n(c) State two uses of limestone. *(2 marks)*`,
+      `**Q4.** (a) What is the water cycle? *(2 marks)*\n\n(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*\n\n(c) Explain the importance of the water cycle. *(4 marks)*`,
+      `**Q5.** (a) Define the term "climate". *(2 marks)*\n\n(b) Distinguish between climate and weather. *(4 marks)*\n\n(c) State three factors that affect the climate of a place. *(3 marks)*`,
+      `**Q6.** (a) What is a river? *(2 marks)*\n\n(b) Describe the three stages of a river. *(6 marks)*\n\n(c) Explain how a waterfall is formed. *(4 marks)*`,
+      `**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*\n\n(b) Describe three ways a river transports its load. *(6 marks)*\n\n(c) Explain how a delta is formed. *(4 marks)*`,
+      `**Q8.** (a) What is a drainage basin? *(2 marks)*\n\n(b) Describe the features of a drainage basin. *(4 marks)*\n\n(c) Explain the difference between a tributary and a distributary. *(4 marks)*`,
+      `**Q9.** (a) Define the term "coast". *(2 marks)*\n\n(b) Describe two landforms created by coastal erosion. *(4 marks)*\n\n(c) Explain how a beach is formed. *(4 marks)*`,
+      `**Q10.** (a) What is a wave? *(2 marks)*\n\n(b) Distinguish between constructive and destructive waves. *(4 marks)*\n\n(c) Explain how a spit is formed. *(4 marks)*`,
+      `**Q11.** (a) Define the term "soil". *(2 marks)*\n\n(b) Describe the layers of a soil profile. *(4 marks)*\n\n(c) State three factors that affect soil formation. *(3 marks)*`,
+      `**Q12.** (a) What is soil erosion? *(2 marks)*\n\n(b) State three causes of soil erosion. *(3 marks)*\n\n(c) Describe two methods of preventing soil erosion. *(4 marks)*`,
+      `**Q13.** (a) Define the term "vegetation". *(2 marks)*\n\n(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*\n\n(c) Explain how climate affects vegetation. *(4 marks)*`,
+      `**Q14.** (a) What is a natural hazard? *(2 marks)*\n\n(b) State three examples of natural hazards. *(3 marks)*\n\n(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*`,
+      `**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)\n\n(b) Explain how an earthquake occurs. *(4 marks)*\n\n(c) State two effects of earthquakes. *(2 marks)*`,
+      `**Q16.** (a) What is a tropical storm? *(2 marks)*\n\n(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*\n\n(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*`,
+      `**Q17.** (a) Define the term "ecosystem". *(2 marks)*\n\n(b) Describe the components of an ecosystem. *(4 marks)*\n\n(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*`,
+      `**Q18.** (a) What is deforestation? *(2 marks)*\n\n(b) State three causes of deforestation. *(3 marks)*\n\n(c) Explain the effects of deforestation on the environment. *(5 marks)*`,
+      `**Q19.** (a) Define the term "desertification". *(2 marks)*\n\n(b) State three causes of desertification. *(3 marks)*\n\n(c) Describe two ways of reducing desertification. *(4 marks)*`,
+      `**Q20.** (a) What is climate change? *(2 marks)*\n\n(b) State three causes of climate change. *(3 marks)*\n\n(c) Explain two effects of climate change on Cameroon. *(5 marks)*`,
+    ],
+    // ---- Topic 1: Human and Cameroon geography ----
+    [
+      `**Q1.** (a) Define the term "population". *(2 marks)*\n\n(b) State three factors that affect population distribution. *(3 marks)*\n\n(c) Explain the difference between population density and population distribution. *(4 marks)*`,
+      `**Q2.** (a) What is population growth? *(2 marks)*\n\n(b) State three causes of rapid population growth. *(3 marks)*\n\n(c) Explain two effects of rapid population growth on a country. *(5 marks)*`,
+      `**Q3.** (a) Define the terms "birth rate" and "death rate". *(4 marks)*\n\n(b) Explain how birth rate and death rate affect population change. *(4 marks)*\n\n(c) State two ways of controlling population growth. *(2 marks)*`,
+      `**Q4.** (a) What is migration? *(2 marks)*\n\n(b) Distinguish between internal and international migration. *(4 marks)*\n\n(c) State three causes of rural-urban migration. *(3 marks)*`,
+      `**Q5.** (a) Define the term "settlement". *(2 marks)*\n\n(b) Distinguish between rural and urban settlements. *(4 marks)*\n\n(c) State three functions of urban settlements. *(3 marks)*`,
+      `**Q6.** (a) What is urbanisation? *(2 marks)*\n\n(b) State three causes of urbanisation. *(3 marks)*\n\n(c) Explain two problems caused by rapid urbanisation. *(5 marks)*`,
+      `**Q7.** (a) Define the term "agriculture". *(2 marks)*\n\n(b) Distinguish between subsistence and commercial farming. *(4 marks)*\n\n(c) State three factors that affect agriculture. *(3 marks)*`,
+      `**Q8.** (a) What is plantation agriculture? *(2 marks)*\n\n(b) Describe the characteristics of plantation agriculture. *(4 marks)*\n\n(c) State two advantages and two disadvantages of plantation agriculture. *(4 marks)*`,
+      `**Q9.** (a) Define the terms "crop rotation" and "mixed farming". *(4 marks)*\n\n(b) Explain the importance of agriculture to the economy of Cameroon. *(4 marks)*\n\n(c) State two problems facing agriculture in Cameroon. *(2 marks)*`,
+      `**Q10.** (a) What is industry? *(2 marks)*\n\n(b) Distinguish between primary, secondary, and tertiary industries. *(6 marks)*\n\n(c) Give two examples of each type of industry. *(3 marks)*`,
+      `**Q11.** (a) Define the term "manufacturing". *(2 marks)*\n\n(b) State three factors that influence the location of an industry. *(3 marks)*\n\n(c) Explain why industries are often located near ports. *(4 marks)*`,
+      `**Q12.** (a) What is transport? *(2 marks)*\n\n(b) State three modes of transport. *(3 marks)*\n\n(c) Explain the importance of transport to economic development. *(4 marks)*`,
+      `**Q13.** (a) Define the term "trade". *(2 marks)*\n\n(b) Distinguish between internal and international trade. *(4 marks)*\n\n(c) State three reasons why countries trade with each other. *(3 marks)*`,
+      `**Q14.** (a) What is a map? *(2 marks)*\n\n(b) State three features of a good map. *(3 marks)*\n\n(c) Explain how to measure distance on a map using a scale. *(4 marks)*`,
+      `**Q15.** (a) Define the terms "contour line" and "relief". *(4 marks)*\n\n(b) Explain how contour lines show the shape of the land. *(4 marks)*\n\n(c) Describe how you would identify a hill and a valley on a map. *(4 marks)*`,
+      `**Q16.** (a) What is a compass bearing? *(2 marks)*\n\n(b) State the eight points of the compass. *(4 marks)*\n\n(c) Explain how to find the bearing of one place from another on a map. *(4 marks)*`,
+      `**Q17.** (a) Name the ten regions of Cameroon. *(5 marks)*\n\n(b) State the capital city of Cameroon. *(1 mark)*\n\n(c) Describe the main economic activity of two regions of Cameroon. *(4 marks)*`,
+      `**Q18.** (a) What is the relief of Cameroon? *(2 marks)*\n\n(b) Describe the main physical features of Cameroon. *(4 marks)*\n\n(c) Explain how the relief of Cameroon affects agriculture. *(4 marks)*`,
+      `**Q19.** (a) Define the term "tourism". *(2 marks)*\n\n(b) State three tourist attractions in Cameroon. *(3 marks)*\n\n(c) Explain two benefits of tourism to Cameroon. *(4 marks)*`,
+      `**Q20.** (a) What is sustainable development? *(2 marks)*\n\n(b) State three ways Cameroon can achieve sustainable development. *(3 marks)*\n\n(c) Explain the importance of conserving natural resources. *(4 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Geography — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqGeography(topicIndex) {
+  const banks = [
+    // Topic 0: Physical geography
+    [
+      {
+        stem: "The breaking down of rocks in place is called:",
+        options: ["weathering", "erosion", "deposition", "transportation"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of weathered material by rivers is called:",
+        options: ["erosion", "weathering", "deposition", "evaporation"],
+        answer: 0,
+      },
+      {
+        stem: "The laying down of eroded material is called:",
+        options: ["deposition", "erosion", "weathering", "transportation"],
+        answer: 0,
+      },
+      {
+        stem: "The type of rock formed from cooled magma is:",
+        options: ["igneous", "sedimentary", "metamorphic", "organic"],
+        answer: 0,
+      },
+      {
+        stem: "The type of rock formed from compressed layers of sediment is:",
+        options: ["sedimentary", "igneous", "metamorphic", "volcanic"],
+        answer: 0,
+      },
+      {
+        stem: "The type of rock changed by heat and pressure is:",
+        options: ["metamorphic", "igneous", "sedimentary", "organic"],
+        answer: 0,
+      },
+      {
+        stem: "An example of an igneous rock is:",
+        options: ["granite", "limestone", "sandstone", "marble"],
+        answer: 0,
+      },
+      {
+        stem: "An example of a sedimentary rock is:",
+        options: ["limestone", "granite", "basalt", "marble"],
+        answer: 0,
+      },
+      {
+        stem: "An example of a metamorphic rock is:",
+        options: ["marble", "granite", "sandstone", "basalt"],
+        answer: 0,
+      },
+      {
+        stem: "The process by which water changes from liquid to vapour is:",
+        options: ["evaporation", "condensation", "precipitation", "infiltration"],
+        answer: 0,
+      },
+      {
+        stem: "The process by which water vapour changes to liquid is:",
+        options: ["condensation", "evaporation", "precipitation", "transpiration"],
+        answer: 0,
+      },
+      {
+        stem: "Rain, snow, and hail are all forms of:",
+        options: ["precipitation", "condensation", "evaporation", "runoff"],
+        answer: 0,
+      },
+      {
+        stem: "The average weather conditions of a place over a long period is its:",
+        options: ["climate", "weather", "temperature", "season"],
+        answer: 0,
+      },
+      {
+        stem: "The conditions of the atmosphere at a particular time and place is the:",
+        options: ["weather", "climate", "season", "relief"],
+        answer: 0,
+      },
+      {
+        stem: "The upper course of a river is characterised by:",
+        options: [
+          "fast flow and erosion",
+          "slow flow and deposition",
+          "wide floodplain",
+          "meanders",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The lower course of a river is characterised by:",
+        options: [
+          "deposition and a wide floodplain",
+          "fast flow and waterfalls",
+          "steep valleys",
+          "rapids",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A waterfall is formed mainly by:",
+        options: ["differential erosion", "deposition", "weathering", "evaporation"],
+        answer: 0,
+      },
+      {
+        stem: "A delta is formed at the:",
+        options: ["mouth of a river", "source of a river", "middle course", "waterfall"],
+        answer: 0,
+      },
+      {
+        stem: "The wearing away of the coast by waves is called:",
+        options: ["coastal erosion", "coastal deposition", "weathering", "flooding"],
+        answer: 0,
+      },
+      {
+        stem: "A ridge of sand deposited by waves is called a:",
+        options: ["beach", "cliff", "spit", "cave"],
+        answer: 0,
+      },
+      {
+        stem: "The top layer of the soil profile is the:",
+        options: ["humus layer", "subsoil", "bedrock", "parent material"],
+        answer: 0,
+      },
+      {
+        stem: "The removal of topsoil by wind and water is called:",
+        options: ["soil erosion", "soil formation", "weathering", "leaching"],
+        answer: 0,
+      },
+      {
+        stem: "The dense evergreen forest found near the equator is the:",
+        options: ["tropical rainforest", "savanna", "desert", "temperate forest"],
+        answer: 0,
+      },
+      {
+        stem: "A sudden shaking of the ground caused by movements in the earth's crust is an:",
+        options: ["earthquake", "volcano", "tornado", "tsunami"],
+        answer: 0,
+      },
+      {
+        stem: "A mountain formed by the eruption of magma is a:",
+        options: ["volcano", "fold mountain", "block mountain", "plateau"],
+        answer: 0,
+      },
+      {
+        stem: "A violent tropical storm is called a:",
+        options: ["hurricane", "blizzard", "drought", "frost"],
+        answer: 0,
+      },
+      {
+        stem: "The clearing of forests is called:",
+        options: ["deforestation", "afforestation", "reforestation", "conservation"],
+        answer: 0,
+      },
+      {
+        stem: "The spread of desert conditions into semi-arid areas is called:",
+        options: ["desertification", "deforestation", "urbanisation", "migration"],
+        answer: 0,
+      },
+      {
+        stem: "The long-term change in average weather patterns is called:",
+        options: ["climate change", "weather change", "seasonal change", "relief change"],
+        answer: 0,
+      },
+      {
+        stem: "A community of living organisms and their environment is an:",
+        options: ["ecosystem", "ecotone", "biome", "habitat"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Human and Cameroon geography
+    [
+      {
+        stem: "The number of people living in an area is its:",
+        options: ["population", "settlement", "community", "society"],
+        answer: 0,
+      },
+      {
+        stem: "The number of people per unit area is called:",
+        options: [
+          "population density",
+          "population distribution",
+          "population growth",
+          "birth rate",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The number of live births per 1000 people per year is the:",
+        options: ["birth rate", "death rate", "growth rate", "fertility rate"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of people from one place to another is called:",
+        options: ["migration", "urbanisation", "settlement", "trade"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of people from rural areas to towns is called:",
+        options: [
+          "rural-urban migration",
+          "urban-rural migration",
+          "international migration",
+          "seasonal migration",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A permanent human community is called a:",
+        options: ["settlement", "migration", "population", "region"],
+        answer: 0,
+      },
+      {
+        stem: "The growth of towns and cities is called:",
+        options: ["urbanisation", "migration", "industrialisation", "ruralisation"],
+        answer: 0,
+      },
+      {
+        stem: "Farming for the farmer's own family is called:",
+        options: [
+          "subsistence farming",
+          "commercial farming",
+          "plantation farming",
+          "mixed farming",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "Farming for sale in the market is called:",
+        options: [
+          "commercial farming",
+          "subsistence farming",
+          "shifting cultivation",
+          "pastoral farming",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A large farm growing a single cash crop is a:",
+        options: ["plantation", "smallholding", "ranch", "orchard"],
+        answer: 0,
+      },
+      {
+        stem: "The growing of crops and rearing of animals together is called:",
+        options: ["mixed farming", "crop rotation", "monoculture", "shifting cultivation"],
+        answer: 0,
+      },
+      {
+        stem: "The extraction of raw materials is a:",
+        options: [
+          "primary industry",
+          "secondary industry",
+          "tertiary industry",
+          "quaternary industry",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The manufacturing of goods is a:",
+        options: [
+          "secondary industry",
+          "primary industry",
+          "tertiary industry",
+          "quaternary industry",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The provision of services is a:",
+        options: [
+          "tertiary industry",
+          "primary industry",
+          "secondary industry",
+          "quaternary industry",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The movement of goods and people is called:",
+        options: ["transport", "trade", "migration", "communication"],
+        answer: 0,
+      },
+      {
+        stem: "The buying and selling of goods is called:",
+        options: ["trade", "transport", "industry", "agriculture"],
+        answer: 0,
+      },
+      {
+        stem: "Trade between countries is called:",
+        options: ["international trade", "internal trade", "local trade", "barter trade"],
+        answer: 0,
+      },
+      {
+        stem: "The capital city of Cameroon is:",
+        options: ["Yaoundé", "Douala", "Buea", "Bamenda"],
+        answer: 0,
+      },
+      {
+        stem: "The largest city and main port of Cameroon is:",
+        options: ["Douala", "Yaoundé", "Buea", "Garoua"],
+        answer: 0,
+      },
+      { stem: "The number of regions in Cameroon is:", options: ["10", "8", "12", "6"], answer: 0 },
+      {
+        stem: "The line joining points of equal height on a map is a:",
+        options: ["contour line", "grid line", "latitude", "longitude"],
+        answer: 0,
+      },
+      {
+        stem: "The shape of the land surface is called:",
+        options: ["relief", "vegetation", "climate", "drainage"],
+        answer: 0,
+      },
+      {
+        stem: "The direction of one place from another measured in degrees is a:",
+        options: ["bearing", "contour", "scale", "gradient"],
+        answer: 0,
+      },
+      {
+        stem: "The ratio between distance on a map and distance on the ground is the:",
+        options: ["scale", "bearing", "relief", "legend"],
+        answer: 0,
+      },
+      {
+        stem: "The highest mountain in Cameroon is:",
+        options: ["Mount Cameroon", "Mount Fako", "Mount Oku", "Mount Bamboutos"],
+        answer: 0,
+      },
+      {
+        stem: "The main cash crop grown in the highlands of Cameroon is:",
+        options: ["coffee", "rice", "cotton", "banana"],
+        answer: 0,
+      },
+      {
+        stem: "The main cash crop grown in northern Cameroon is:",
+        options: ["cotton", "coffee", "cocoa", "tea"],
+        answer: 0,
+      },
+      {
+        stem: "The main cash crop grown in the south of Cameroon is:",
+        options: ["cocoa", "cotton", "millet", "groundnut"],
+        answer: 0,
+      },
+      {
+        stem: "The industry that serves tourists is called:",
+        options: ["tourism", "manufacturing", "mining", "fishing"],
+        answer: 0,
+      },
+      {
+        stem: "Development that meets present needs without harming future generations is called:",
+        options: [
+          "sustainable development",
+          "economic growth",
+          "industrialisation",
+          "urbanisation",
+        ],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// History — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralHistory(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Cameroon and African history ----
+    [
+      `**Q1.** (a) What is history? *(2 marks)*\n\n(b) State three sources of history. *(3 marks)*\n\n(c) Explain the importance of studying history. *(4 marks)*`,
+      `**Q2.** (a) Define the term "pre-colonial". *(2 marks)*\n\n(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*\n\n(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*`,
+      `**Q3.** (a) What was the slave trade? *(2 marks)*\n\n(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*\n\n(c) Explain why the slave trade was abolished. *(4 marks)*`,
+      `**Q4.** (a) Define the term "colonisation". *(2 marks)*\n\n(b) Explain why European powers colonised Africa. *(4 marks)*\n\n(c) Describe how Germany colonised Cameroon. *(5 marks)*`,
+      `**Q5.** (a) What was the Berlin Conference? *(2 marks)*\n\n(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*\n\n(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*`,
+      `**Q6.** (a) Define the term "mandate". *(2 marks)*\n\n(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*\n\n(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*`,
+      `**Q7.** (a) What is nationalism? *(2 marks)*\n\n(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*\n\n(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*`,
+      `**Q8.** (a) When did Cameroon gain independence? *(2 marks)*\n\n(b) Describe the process by which French Cameroon gained independence. *(4 marks)*\n\n(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*`,
+      `**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*\n\n(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*\n\n(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*`,
+      `**Q10.** (a) Define the term "reunification". *(2 marks)\n\n(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*\n\n(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*`,
+      `**Q11.** (a) What is a federation? *(2 marks)*\n\n(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*\n\n(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*`,
+      `**Q12.** (a) Define the term "unitary state". *(2 marks)*\n\n(b) Describe the political changes in Cameroon after 1972. *(4 marks)*\n\n(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*`,
+      `**Q13.** (a) What is multiparty democracy? *(2 marks)*\n\n(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*\n\n(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*`,
+      `**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*\n\n(b) State three aims of pan-Africanism. *(3 marks)*\n\n(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*`,
+      `**Q15.** (a) What was the Scramble for Africa? *(2 marks)*\n\n(b) Describe the causes of the Scramble for Africa. *(4 marks)*\n\n(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*`,
+      `**Q16.** (a) Define the term "decolonisation". *(2 marks)*\n\n(b) State three factors that led to the decolonisation of Africa. *(3 marks)*\n\n(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*`,
+      `**Q17.** (a) What is apartheid? *(2 marks)*\n\n(b) Describe the system of apartheid in South Africa. *(4 marks)*\n\n(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*`,
+      `**Q18.** (a) Define the term "civil war". *(2 marks)*\n\n(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*\n\n(c) Explain the effects of the civil war on Nigeria. *(4 marks)*`,
+      `**Q19.** (a) What is the African Union? *(2 marks)*\n\n(b) State three objectives of the African Union. *(3 marks)*\n\n(c) Explain the difference between the OAU and the African Union. *(4 marks)*`,
+      `**Q20.** (a) Define the term "economic integration". *(2 marks)*\n\n(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*\n\n(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*`,
+    ],
+    // ---- Topic 1: World history ----
+    [
+      `**Q1.** (a) What was the First World War? *(2 marks)*\n\n(b) State three causes of the First World War. *(3 marks)*\n\n(c) Explain how the assassination of Archduke Franz Ferdinand led to the war. *(4 marks)*`,
+      `**Q2.** (a) Define the term "alliance". *(2 marks)*\n\n(b) Describe the alliance system in Europe before 1914. *(4 marks)*\n\n(c) Explain how the alliance system contributed to the outbreak of the First World War. *(4 marks)*`,
+      `**Q3.** (a) What was the Treaty of Versailles? *(2 marks)*\n\n(b) State three terms of the Treaty of Versailles. *(3 marks)*\n\n(c) Explain the effects of the Treaty of Versailles on Germany. *(5 marks)*`,
+      `**Q4.** (a) Define the term "League of Nations". *(2 marks)*\n\n(b) State three aims of the League of Nations. *(3 marks)*\n\n(c) Explain why the League of Nations failed to prevent the Second World War. *(5 marks)*`,
+      `**Q5.** (a) What was the Second World War? *(2 marks)*\n\n(b) State three causes of the Second World War. *(3 marks)*\n\n(c) Explain the role of Adolf Hitler in causing the Second World War. *(5 marks)*`,
+      `**Q6.** (a) Define the term "totalitarianism". *(2 marks)*\n\n(b) Describe the rise of fascism in Italy and Nazism in Germany. *(5 marks)*\n\n(c) Explain the effects of totalitarian rule on the people of Germany. *(4 marks)*`,
+      `**Q7.** (a) What was the Holocaust? *(2 marks)*\n\n(b) Describe the persecution of Jews under Nazi rule. *(4 marks)*\n\n(c) Explain the consequences of the Holocaust. *(4 marks)*`,
+      `**Q8.** (a) Define the term "Cold War". *(2 marks)*\n\n(b) State three causes of the Cold War. *(3 marks)*\n\n(c) Explain how the Cold War divided the world into two blocs. *(5 marks)*`,
+      `**Q9.** (a) What was the Berlin Wall? *(2 marks)*\n\n(b) Describe the events leading to the construction of the Berlin Wall in 1961. *(4 marks)*\n\n(c) Explain the significance of the fall of the Berlin Wall in 1989. *(4 marks)*`,
+      `**Q10.** (a) Define the term "nuclear arms race". *(2 marks)*\n\n(b) Describe the development of nuclear weapons during the Cold War. *(4 marks)*\n\n(c) Explain the importance of arms control agreements such as SALT. *(4 marks)*`,
+      `**Q11.** (a) What was the United Nations? *(2 marks)*\n\n(b) State three organs of the United Nations. *(3 marks)*\n\n(c) Explain the role of the UN Security Council in maintaining peace. *(5 marks)*`,
+      `**Q12.** (a) Define the term "decolonisation". *(2 marks)*\n\n(b) State three factors that led to decolonisation after 1945. *(3 marks)*\n\n(c) Explain the role of the UN in the decolonisation of Africa. *(4 marks)*`,
+      `**Q13.** (a) What is globalisation? *(2 marks)*\n\n(b) State three features of globalisation. *(3 marks)*\n\n(c) Explain two effects of globalisation on developing countries. *(5 marks)*`,
+      `**Q14.** (a) Define the term "international organisation". *(2 marks)*\n\n(b) Describe the aims of the World Trade Organization. *(4 marks)*\n\n(c) Explain the importance of the International Monetary Fund. *(4 marks)*`,
+      `**Q15.** (a) What was the Cuban Missile Crisis? *(2 marks)*\n\n(b) Describe the events of the Cuban Missile Crisis of 1962. *(5 marks)*\n\n(c) Explain the consequences of the crisis for the Cold War. *(4 marks)*`,
+      `**Q16.** (a) Define the term "proxy war". *(2 marks)*\n\n(b) Describe the Korean War as a proxy war of the Cold War. *(4 marks)*\n\n(c) Explain the effects of the Vietnam War on the United States. *(4 marks)*`,
+      `**Q17.** (a) What was the European Union? *(2 marks)*\n\n(b) Describe the stages of European integration from the EEC to the EU. *(5 marks)*\n\n(c) Explain the benefits of the European Union to its members. *(4 marks)*`,
+      `**Q18.** (a) Define the term "terrorism". *(2 marks)*\n\n(b) State three causes of terrorism. *(3 marks)*\n\n(c) Explain the effects of international terrorism on global security. *(5 marks)*`,
+      `**Q19.** (a) What is the Commonwealth? *(2 marks)*\n\n(b) State three objectives of the Commonwealth. *(3 marks)*\n\n(c) Explain the importance of the Commonwealth to Cameroon. *(4 marks)*`,
+      `**Q20.** (a) Define the term "human rights". *(2 marks)*\n\n(b) State three examples of human rights. *(3 marks)*\n\n(c) Explain the role of the Universal Declaration of Human Rights in protecting people. *(5 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// History — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqHistory(topicIndex) {
+  const banks = [
+    // Topic 0: Cameroon and African history
+    [
+      {
+        stem: "The study of past events is called:",
+        options: ["history", "geography", "economics", "sociology"],
+        answer: 0,
+      },
+      {
+        stem: "Written records of the past are called:",
+        options: ["documents", "artefacts", "monuments", "legends"],
+        answer: 0,
+      },
+      {
+        stem: "Objects made by people in the past are called:",
+        options: ["artefacts", "documents", "archives", "manuscripts"],
+        answer: 0,
+      },
+      {
+        stem: "The traditional ruler of the Bamenda people is the:",
+        options: ["Fon", "Sultan", "Lamido", "Chief"],
+        answer: 0,
+      },
+      {
+        stem: "The traditional ruler of the Bamoun people is the:",
+        options: ["Sultan", "Fon", "Lamido", "Emir"],
+        answer: 0,
+      },
+      {
+        stem: "The forced removal of Africans to the Americas was called the:",
+        options: ["slave trade", "scramble", "partition", "mandate"],
+        answer: 0,
+      },
+      {
+        stem: "The slave trade was abolished in the British Empire in:",
+        options: ["1807", "1884", "1914", "1945"],
+        answer: 0,
+      },
+      {
+        stem: "The conference that divided Africa among European powers was the:",
+        options: [
+          "Berlin Conference",
+          "Paris Conference",
+          "Geneva Conference",
+          "London Conference",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The Berlin Conference took place in:",
+        options: ["1884-1885", "1914-1918", "1939-1945", "1960-1961"],
+        answer: 0,
+      },
+      {
+        stem: "The European power that first colonised Cameroon was:",
+        options: ["Germany", "Britain", "France", "Belgium"],
+        answer: 0,
+      },
+      {
+        stem: "Germany lost Cameroon after the:",
+        options: [
+          "First World War",
+          "Second World War",
+          "Berlin Conference",
+          "Scramble for Africa",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "After the First World War, Cameroon was divided between:",
+        options: [
+          "Britain and France",
+          "Britain and Germany",
+          "France and Belgium",
+          "Germany and Italy",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The system of government used by the British in Cameroon was:",
+        options: ["indirect rule", "direct rule", "assimilation", "apartheid"],
+        answer: 0,
+      },
+      {
+        stem: "The system of government used by the French in Cameroon was:",
+        options: ["assimilation", "indirect rule", "apartheid", "federation"],
+        answer: 0,
+      },
+      {
+        stem: "The desire of a people to govern themselves is called:",
+        options: ["nationalism", "colonialism", "imperialism", "federalism"],
+        answer: 0,
+      },
+      {
+        stem: "The political party that led the struggle for independence in French Cameroon was the:",
+        options: ["UPC", "KNDP", "CPNC", "CNO"],
+        answer: 0,
+      },
+      {
+        stem: "French Cameroon gained independence in:",
+        options: ["1960", "1961", "1945", "1972"],
+        answer: 0,
+      },
+      {
+        stem: "The vote held in British Southern Cameroons in 1961 was called the:",
+        options: ["plebiscite", "referendum", "election", "census"],
+        answer: 0,
+      },
+      {
+        stem: "The reunification of Cameroon took place in:",
+        options: ["1961", "1960", "1972", "1982"],
+        answer: 0,
+      },
+      {
+        stem: "The conference that discussed the reunification of Cameroon was held at:",
+        options: ["Foumban", "Yaoundé", "Douala", "Buea"],
+        answer: 0,
+      },
+      {
+        stem: "Cameroon became a federation in:",
+        options: ["1961", "1960", "1972", "1984"],
+        answer: 0,
+      },
+      {
+        stem: "The federal system in Cameroon was replaced by a unitary system in:",
+        options: ["1972", "1961", "1982", "1990"],
+        answer: 0,
+      },
+      {
+        stem: "The first president of Cameroon was:",
+        options: ["Ahmadou Ahidjo", "Paul Biya", "John Ngu Foncha", "Ruben Um Nyobé"],
+        answer: 0,
+      },
+      {
+        stem: "The current president of Cameroon is:",
+        options: ["Paul Biya", "Ahmadou Ahidjo", "John Ngu Foncha", "Emmanuel Nganou"],
+        answer: 0,
+      },
+      {
+        stem: "Multiparty politics was reintroduced in Cameroon in:",
+        options: ["1990", "1972", "1961", "1982"],
+        answer: 0,
+      },
+      {
+        stem: "The organisation formed in 1963 to unite African states was the:",
+        options: ["OAU", "AU", "UN", "ECOWAS"],
+        answer: 0,
+      },
+      {
+        stem: "The OAU was replaced by the African Union in:",
+        options: ["2002", "1990", "1963", "2010"],
+        answer: 0,
+      },
+      {
+        stem: "The system of racial segregation in South Africa was called:",
+        options: ["apartheid", "assimilation", "indirect rule", "colonialism"],
+        answer: 0,
+      },
+      {
+        stem: "The leader who fought against apartheid in South Africa was:",
+        options: ["Nelson Mandela", "Kwame Nkrumah", "Jomo Kenyatta", "Julius Nyerere"],
+        answer: 0,
+      },
+      {
+        stem: "The first president of independent Ghana was:",
+        options: ["Kwame Nkrumah", "Nelson Mandela", "Jomo Kenyatta", "Julius Nyerere"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: World history
+    [
+      {
+        stem: "The First World War began in:",
+        options: ["1914", "1918", "1939", "1900"],
+        answer: 0,
+      },
+      {
+        stem: "The First World War ended in:",
+        options: ["1918", "1914", "1945", "1920"],
+        answer: 0,
+      },
+      {
+        stem: "The assassination that triggered the First World War was that of:",
+        options: ["Archduke Franz Ferdinand", "Adolf Hitler", "Napoleon", "Kaiser Wilhelm"],
+        answer: 0,
+      },
+      {
+        stem: "The alliance of Germany, Austria-Hungary, and Italy was called the:",
+        options: ["Triple Alliance", "Triple Entente", "Axis", "Allies"],
+        answer: 0,
+      },
+      {
+        stem: "The alliance of Britain, France, and Russia was called the:",
+        options: ["Triple Entente", "Triple Alliance", "Axis", "Central Powers"],
+        answer: 0,
+      },
+      {
+        stem: "The treaty that ended the First World War was the:",
+        options: ["Treaty of Versailles", "Treaty of Paris", "Treaty of Berlin", "Treaty of Rome"],
+        answer: 0,
+      },
+      {
+        stem: "The international organisation formed after the First World War was the:",
+        options: ["League of Nations", "United Nations", "African Union", "European Union"],
+        answer: 0,
+      },
+      {
+        stem: "The Second World War began in:",
+        options: ["1939", "1914", "1945", "1929"],
+        answer: 0,
+      },
+      {
+        stem: "The Second World War ended in:",
+        options: ["1945", "1939", "1918", "1950"],
+        answer: 0,
+      },
+      {
+        stem: "The leader of Nazi Germany was:",
+        options: ["Adolf Hitler", "Benito Mussolini", "Joseph Stalin", "Winston Churchill"],
+        answer: 0,
+      },
+      {
+        stem: "The leader of Fascist Italy was:",
+        options: ["Benito Mussolini", "Adolf Hitler", "Joseph Stalin", "Francisco Franco"],
+        answer: 0,
+      },
+      {
+        stem: "The systematic murder of six million Jews by the Nazis was called the:",
+        options: ["Holocaust", "Genocide", "Pogrom", "Inquisition"],
+        answer: 0,
+      },
+      {
+        stem: "The state of tension between the USA and the USSR after 1945 was called the:",
+        options: ["Cold War", "World War", "Proxy War", "Trade War"],
+        answer: 0,
+      },
+      {
+        stem: "The wall that divided Berlin was built in:",
+        options: ["1961", "1945", "1989", "1950"],
+        answer: 0,
+      },
+      { stem: "The Berlin Wall fell in:", options: ["1989", "1961", "1945", "1991"], answer: 0 },
+      {
+        stem: "The international organisation formed in 1945 to maintain peace was the:",
+        options: ["United Nations", "League of Nations", "African Union", "European Union"],
+        answer: 0,
+      },
+      {
+        stem: "The organ of the UN responsible for maintaining peace is the:",
+        options: ["Security Council", "General Assembly", "Secretariat", "ICJ"],
+        answer: 0,
+      },
+      {
+        stem: "The crisis of 1962 that brought the world close to nuclear war was the:",
+        options: ["Cuban Missile Crisis", "Berlin Crisis", "Suez Crisis", "Korean Crisis"],
+        answer: 0,
+      },
+      {
+        stem: "The war fought between North and South Korea from 1950 to 1953 was a:",
+        options: ["proxy war", "world war", "civil war", "trade war"],
+        answer: 0,
+      },
+      {
+        stem: "The process of granting independence to colonies is called:",
+        options: ["decolonisation", "colonisation", "imperialism", "globalisation"],
+        answer: 0,
+      },
+      {
+        stem: "The economic union of European states is called the:",
+        options: ["European Union", "African Union", "United Nations", "Commonwealth"],
+        answer: 0,
+      },
+      {
+        stem: "The organisation that regulates international trade is the:",
+        options: ["WTO", "IMF", "UN", "AU"],
+        answer: 0,
+      },
+      {
+        stem: "The organisation that provides financial assistance to countries is the:",
+        options: ["IMF", "WTO", "UN", "AU"],
+        answer: 0,
+      },
+      {
+        stem: "The increasing interconnection of the world's economies is called:",
+        options: ["globalisation", "colonisation", "nationalism", "protectionism"],
+        answer: 0,
+      },
+      {
+        stem: "The use of violence for political aims is called:",
+        options: ["terrorism", "nationalism", "imperialism", "diplomacy"],
+        answer: 0,
+      },
+      {
+        stem: "The association of former British colonies is called the:",
+        options: ["Commonwealth", "European Union", "African Union", "United Nations"],
+        answer: 0,
+      },
+      {
+        stem: "The declaration that protects the rights of all people was the:",
+        options: [
+          "Universal Declaration of Human Rights",
+          "Treaty of Versailles",
+          "Berlin Act",
+          "Atlantic Charter",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The Universal Declaration of Human Rights was adopted in:",
+        options: ["1948", "1918", "1939", "1960"],
+        answer: 0,
+      },
+      {
+        stem: "The leader of the Soviet Union during the Cuban Missile Crisis was:",
+        options: ["Nikita Khrushchev", "Joseph Stalin", "Vladimir Lenin", "Mikhail Gorbachev"],
+        answer: 0,
+      },
+      {
+        stem: "The leader of the United States during the Cuban Missile Crisis was:",
+        options: ["John F. Kennedy", "Franklin Roosevelt", "Harry Truman", "Richard Nixon"],
         answer: 0,
       },
     ],
