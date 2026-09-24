@@ -205,17 +205,13 @@
   }
 
   window.addEventListener("beforeinstallprompt", function (event) {
-    event.preventDefault();
+    // Let the browser show its own native install popup (Chrome/Edge/Android).
     promptEvent = event;
     removePrompt();
-    window.setTimeout(createPrompt, 2000);
   });
 
-  if (promptEvent) {
-    window.setTimeout(createPrompt, 2000);
-  }
-
-  window.setTimeout(createPrompt, FALLBACK_DELAY_MS);
+  // Only iOS Safari lacks a native install popup, so show the guide there only.
+  if (isIOS && isSafari()) window.setTimeout(createPrompt, FALLBACK_DELAY_MS);
 
   window.addEventListener("appinstalled", function () {
     storageSet(ACCEPTED_KEY, 1);

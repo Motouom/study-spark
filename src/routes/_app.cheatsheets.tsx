@@ -38,7 +38,7 @@ function CheatsheetsPage() {
           return {
             name,
             total: subjectSheets.length,
-            free: freeSheets.length > 1 ? 1 : freeSheets.length,
+            free: freeSheets.length,
           };
         })
         .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name)),
@@ -56,15 +56,6 @@ function CheatsheetsPage() {
             .join(" ")
             .toLowerCase()
             .includes(needle);
-        })
-        .filter((sheet, index, array) => {
-          const isFree = !sheet.isLocked;
-          const subject = sheet.subject;
-          const freeInArray = array
-            .slice(0, index)
-            .filter((s) => s.subject === subject && !s.isLocked).length;
-          if (isFree && freeInArray >= 1) return false;
-          return true;
         })
         .sort((a, b) => a.subject.localeCompare(b.subject) || a.title.localeCompare(b.title)),
     [cheatsheets, needle, searchActive, subject],
