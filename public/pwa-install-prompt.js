@@ -59,12 +59,7 @@
   function canShowPrompt() {
     if (isStandalone()) return false;
     if (storageNumber(ACCEPTED_KEY)) return false;
-
-    var dismissedAt = storageNumber(DISMISS_KEY);
-    if (dismissedAt && now() - dismissedAt < DISMISS_COOLDOWN_MS) return false;
-
-    var lastShownAt = storageNumber(LAST_SHOWN_KEY);
-    return !lastShownAt || now() - lastShownAt >= SHOW_COOLDOWN_MS;
+    return true;
   }
 
   function removePrompt() {
