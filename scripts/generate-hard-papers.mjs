@@ -207,6 +207,82 @@ const subjects = {
     structural: structuralFrench,
     mcq: mcqFrench,
   },
+  biology: {
+    subject: "Biology",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "general, science",
+    exam: "GCE",
+    topics: [
+      {
+        id: "bio-cell-transport",
+        title: "Cells and transport",
+        description:
+          "Cell structure, microscopy, diffusion, osmosis, active transport, and enzymes.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["general", "science"],
+        questionCount: 35,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "bio-nutrition-respiration",
+        title: "Nutrition, respiration, and excretion",
+        description:
+          "Photosynthesis, food tests, digestion, gas exchange, respiration, kidneys, and homeostasis.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["general", "science"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "bio-reproduction-ecology",
+        title: "Reproduction, genetics, and ecology",
+        description:
+          "Reproduction, inheritance, variation, evolution, ecosystems, cycles, and conservation.",
+        level: "ordinary",
+        classLevels: ["form_4", "form_5"],
+        series: ["general", "science"],
+        questionCount: 45,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralBiology,
+    mcq: mcqBiology,
+  },
+  chemistry: {
+    subject: "Chemistry",
+    level: "ordinary",
+    classLevel: "form_5",
+    series: "science, technical",
+    exam: "GCE",
+    topics: [
+      {
+        id: "chem-structure-bonding",
+        title: "Atomic structure and bonding",
+        description:
+          "Atoms, periodicity, ionic bonding, covalent bonding, metallic bonding, and structure.",
+        level: "ordinary",
+        classLevels: ["form_3", "form_4", "form_5"],
+        series: ["science", "technical"],
+        questionCount: 40,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "chem-stoichiometry-reactions",
+        title: "Stoichiometry and reactions",
+        description: "Moles, equations, acids, bases, salts, redox, rates, and equilibrium.",
+        level: "ordinary",
+        classLevels: ["form_4", "form_5"],
+        series: ["science", "technical"],
+        questionCount: 45,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralChemistry,
+    mcq: mcqChemistry,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -2200,6 +2276,825 @@ function mcqFrench(topicIndex) {
       {
         stem: "Le texte sur le commerce équitable parle du:",
         options: ["cacao et du café", "pétrole et du gaz", "bois et du fer", "coton et du riz"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Biology — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralBiology(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Cells and transport ----
+    [
+      `**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*\n\n(b) State three differences between a plant cell and an animal cell. *(3 marks)*\n\n(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*`,
+      `**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.\n\n(a) State what would happen to each cylinder. *(4 marks)*\n\n(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*\n\n(c) Name the process involved and state its importance in plants. *(3 marks)*`,
+      `**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*\n\n(b) State three factors that affect the rate of diffusion. *(3 marks)*\n\n(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*`,
+      `**Q4.** (a) What is active transport? *(3 marks)*\n\n(b) Give two differences between active transport and diffusion. *(4 marks)*\n\n(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*`,
+      `**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*\n\n(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*\n\n(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*`,
+      `**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*\n\n(b) State the function of iodine solution in this preparation. *(2 marks)*\n\n(c) Explain why the onion cell appears as a regular shape. *(3 marks)*`,
+      `**Q7.** (a) What are enzymes? *(2 marks)*\n\n(b) State three properties of enzymes. *(3 marks)*\n\n(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*`,
+      `**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*\n\n(b) Explain what happens when an enzyme is boiled. *(3 marks)*\n\n(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*`,
+      `**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*\n\n(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*\n\n(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*`,
+      `**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*\n\n(b) State the function of each labelled part. *(5 marks)*\n\n(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*`,
+      `**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*\n\n(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*\n\n(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*`,
+      `**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*\n\n(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*\n\n(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*`,
+      `**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*\n\n(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*\n\n(c) Explain how selective permeability is important in the kidney. *(5 marks)*`,
+      `**Q14.** (a) Define the term "turgidity". *(2 marks)*\n\n(b) Explain how turgidity supports non-woody plants. *(4 marks)*\n\n(c) Describe what happens to a plant when it wilts. *(4 marks)*`,
+      `**Q15.** (a) State three functions of the nucleus. *(3 marks)*\n\n(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*\n\n(c) Distinguish between a gene and a chromosome. *(3 marks)*`,
+      `**Q16.** (a) What is the function of the mitochondria? *(2 marks)*\n\n(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*\n\n(c) State the equation for aerobic respiration. *(3 marks)*`,
+      `**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*\n\n(b) Explain why amylase cannot digest proteins. *(4 marks)*\n\n(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*`,
+      `**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*\n\n(b) State the results you would expect. *(3 marks)*\n\n(c) Explain the results in terms of osmosis. *(4 marks)*`,
+      `**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*\n\n(b) Give one example of each. *(2 marks)*\n\n(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*`,
+      `**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*\n\n(b) Explain why energy is required for active transport. *(3 marks)*\n\n(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*`,
+    ],
+    // ---- Topic 1: Nutrition, respiration, and excretion ----
+    [
+      `**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*\n\n(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*\n\n(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*`,
+      `**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*\n\n(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*\n\n(c) Describe how you would test a leaf for starch. *(5 marks)*`,
+      `**Q3.** (a) Name the products of photosynthesis. *(2 marks)*\n\n(b) State the uses of glucose in plants. *(4 marks)*\n\n(c) Explain why photosynthesis is important to animals. *(4 marks)*`,
+      `**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*\n\n(b) State the role of the stomach in digestion. *(4 marks)*\n\n(c) Explain how the small intestine is adapted for absorption. *(5 marks)*`,
+      `**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*\n\n(b) State the products of digestion of each. *(3 marks)*\n\n(c) Explain the role of bile in digestion. *(4 marks)*`,
+      `**Q6.** (a) What is a balanced diet? *(2 marks)*\n\n(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*\n\n(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*`,
+      `**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*\n\n(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*\n\n(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*`,
+      `**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*\n\n(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*\n\n(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*`,
+      `**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*\n\n(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*\n\n(c) Explain what is meant by "oxygen debt". *(4 marks)*`,
+      `**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*\n\n(b) State the main excretory product of each organ. *(3 marks)*\n\n(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*`,
+      `**Q11.** (a) Describe the structure of a nephron. *(5 marks)*\n\n(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*\n\n(c) State what happens to glucose in the kidney tubule. *(3 marks)*`,
+      `**Q12.** (a) What is homeostasis? *(2 marks)*\n\n(b) Give two examples of homeostasis in the human body. *(2 marks)*\n\n(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*`,
+      `**Q13.** (a) Define the term "transpiration". *(2 marks)*\n\n(b) State three factors that affect the rate of transpiration. *(3 marks)*\n\n(c) Describe an experiment to demonstrate transpiration. *(5 marks)*`,
+      `**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*\n\n(b) State the role of the xylem and phloem. *(4 marks)*\n\n(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*`,
+      `**Q15.** (a) What is the function of the liver in the body? *(4 marks)*\n\n(b) Name two substances the liver produces or processes. *(2 marks)*\n\n(c) Explain how the liver regulates blood glucose level. *(5 marks)*`,
+      `**Q16.** (a) State the function of the large intestine. *(2 marks)*\n\n(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*\n\n(c) Describe what happens when too much water is absorbed. *(3 marks)*`,
+      `**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*\n\n(b) Explain why breathing rate increases during exercise. *(4 marks)*\n\n(c) State the effect of exercise on the rate of respiration. *(3 marks)*`,
+      `**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*\n\n(b) State the function of the pancreas. *(3 marks)*\n\n(c) Explain how the villi increase the rate of absorption. *(4 marks)*`,
+      `**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*\n\n(b) Name the substances lost through the skin. *(3 marks)*\n\n(c) Explain how sweating helps to cool the body. *(4 marks)*`,
+      `**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*\n\n(b) Explain why plants are described as producers. *(3 marks)*\n\n(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*`,
+    ],
+    // ---- Topic 2: Reproduction, genetics, and ecology ----
+    [
+      `**Q1.** (a) Draw a labelled diagram of a flower. *(5 marks)*\n\n(b) State the function of each labelled part. *(5 marks)*\n\n(c) Distinguish between pollination and fertilisation. *(4 marks)*`,
+      `**Q2.** (a) What is pollination? *(2 marks)*\n\n(b) State three features of insect-pollinated flowers. *(3 marks)*\n\n(c) Describe the process of fertilisation in a flowering plant. *(5 marks)*`,
+      `**Q3.** (a) Describe the process of germination in a bean seed. *(5 marks)*\n\n(b) State the conditions necessary for germination. *(3 marks)*\n\n(c) Explain the role of the cotyledons during germination. *(3 marks)*`,
+      `**Q4.** (a) Name the male and female reproductive organs of a flowering plant. *(2 marks)*\n\n(b) Explain how seeds are dispersed by wind and by animals. *(4 marks)*\n\n(c) State two advantages of seed dispersal. *(4 marks)*`,
+      `**Q5.** (a) Describe the structure of the human male reproductive system. *(5 marks)*\n\n(b) State the function of each part. *(5 marks)*\n\n(c) Explain the role of hormones in the male reproductive system. *(4 marks)*`,
+      `**Q6.** (a) Describe the structure of the human female reproductive system. *(5 marks)*\n\n(b) State the function of each part. *(5 marks)*\n\n(c) Explain what happens during the menstrual cycle. *(5 marks)*`,
+      `**Q7.** (a) What is fertilisation in humans? *(2 marks)*\n\n(b) Describe the development of the embryo in the uterus. *(5 marks)*\n\n(c) Explain the role of the placenta. *(4 marks)*`,
+      `**Q8.** (a) Define the terms gene, allele, and genotype. *(3 marks)*\n\n(b) Explain the difference between genotype and phenotype. *(4 marks)*\n\n(c) State the difference between homozygous and heterozygous. *(3 marks)*`,
+      `**Q9.** (a) In a monohybrid cross between a tall plant (TT) and a short plant (tt), show the genotypes and phenotypes of the F1 and F2 generations. *(6 marks)*\n\n(b) State the phenotypic ratio of the F2 generation. *(2 marks)*\n\n(c) Explain what is meant by a dominant allele. *(3 marks)*`,
+      `**Q10.** (a) What is a sex-linked characteristic? *(3 marks)*\n\n(b) Explain how colour blindness is inherited. *(5 marks)*\n\n(c) State why sex-linked disorders are more common in males. *(4 marks)*`,
+      `**Q11.** (a) Define the term "variation". *(2 marks)*\n\n(b) Distinguish between continuous and discontinuous variation, giving an example of each. *(4 marks)*\n\n(c) Explain the role of variation in natural selection. *(5 marks)*`,
+      `**Q12.** (a) What is natural selection? *(3 marks)*\n\n(b) Explain how antibiotic resistance in bacteria illustrates natural selection. *(5 marks)*\n\n(c) State the role of mutation in evolution. *(4 marks)*`,
+      `**Q13.** (a) Define the term "ecosystem". *(2 marks)*\n\n(b) Name the components of an ecosystem. *(4 marks)*\n\n(c) Explain how energy flows through an ecosystem. *(5 marks)*`,
+      `**Q14.** (a) What is a food chain? *(2 marks)*\n\n(b) Construct a food chain with four organisms found in a Cameroon ecosystem. *(3 marks)*\n\n(c) Explain why the number of organisms decreases along a food chain. *(5 marks)*`,
+      `**Q15.** (a) Define the term "food web". *(2 marks)*\n\n(b) Explain why food webs are more stable than food chains. *(4 marks)*\n\n(c) Describe the effect of removing a top predator from a food web. *(4 marks)*`,
+      `**Q16.** (a) Describe the carbon cycle. *(5 marks)*\n\n(b) Name the processes by which carbon is returned to the atmosphere. *(3 marks)*\n\n(c) Explain the effect of deforestation on the carbon cycle. *(4 marks)*`,
+      `**Q17.** (a) Describe the nitrogen cycle. *(5 marks)*\n\n(b) Name the bacteria involved in the nitrogen cycle. *(3 marks)*\n\n(c) Explain why nitrogen is important to living organisms. *(3 marks)*`,
+      `**Q18.** (a) What is a population? *(2 marks)*\n\n(b) State three factors that affect population size. *(3 marks)*\n\n(c) Explain how a predator-prey relationship affects population sizes. *(5 marks)*`,
+      `**Q19.** (a) Define the term "conservation". *(2 marks)*\n\n(b) State three reasons why conservation is important. *(3 marks)*\n\n(c) Describe two methods of conserving wildlife in Cameroon. *(5 marks)*`,
+      `**Q20.** (a) What is pollution? *(2 marks)*\n\n(b) Name three types of pollution and their causes. *(6 marks)*\n\n(c) Explain the effect of water pollution on aquatic life. *(4 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Biology — MCQ banks (20 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqBiology(topicIndex) {
+  const banks = [
+    // Topic 0: Cells and transport
+    [
+      {
+        stem: "The control centre of the cell is the:",
+        options: ["nucleus", "cytoplasm", "cell wall", "vacuole"],
+        answer: 0,
+      },
+      {
+        stem: "The site of respiration in the cell is the:",
+        options: ["mitochondrion", "ribosome", "nucleus", "chloroplast"],
+        answer: 0,
+      },
+      {
+        stem: "The site of protein synthesis is the:",
+        options: ["ribosome", "mitochondrion", "nucleus", "cell wall"],
+        answer: 0,
+      },
+      {
+        stem: "Which structure is found in plant cells but not animal cells?",
+        options: ["cell wall", "nucleus", "mitochondrion", "ribosome"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:",
+        options: ["osmosis", "diffusion", "active transport", "transpiration"],
+        answer: 0,
+      },
+      {
+        stem: "The movement of molecules from a region of high concentration to low concentration is called:",
+        options: ["diffusion", "osmosis", "active transport", "translocation"],
+        answer: 0,
+      },
+      {
+        stem: "Active transport requires:",
+        options: ["energy", "no energy", "light", "chlorophyll"],
+        answer: 0,
+      },
+      {
+        stem: "The cell wall of a plant is made of:",
+        options: ["cellulose", "protein", "lipid", "starch"],
+        answer: 0,
+      },
+      {
+        stem: "The green pigment found in chloroplasts is:",
+        options: ["chlorophyll", "haemoglobin", "carotene", "melanin"],
+        answer: 0,
+      },
+      {
+        stem: "A red blood cell placed in distilled water will:",
+        options: ["burst", "shrink", "remain unchanged", "divide"],
+        answer: 0,
+      },
+      {
+        stem: "A plant cell placed in a concentrated salt solution will:",
+        options: ["become plasmolysed", "burst", "swell", "remain unchanged"],
+        answer: 0,
+      },
+      {
+        stem: "Enzymes are made of:",
+        options: ["protein", "carbohydrate", "lipid", "mineral salts"],
+        answer: 0,
+      },
+      {
+        stem: "Enzymes work best at an optimum temperature of about:",
+        options: ["37°C", "100°C", "0°C", "60°C"],
+        answer: 0,
+      },
+      {
+        stem: "When an enzyme is boiled, it becomes:",
+        options: ["denatured", "more active", "larger", "green"],
+        answer: 0,
+      },
+      {
+        stem: "The process by which a cell takes in large particles is called:",
+        options: ["phagocytosis", "osmosis", "diffusion", "transpiration"],
+        answer: 0,
+      },
+      {
+        stem: "The jelly-like substance that fills the cell is the:",
+        options: ["cytoplasm", "nucleus", "cell wall", "membrane"],
+        answer: 0,
+      },
+      {
+        stem: "The cell membrane is described as:",
+        options: ["partially permeable", "fully permeable", "impermeable", "rigid"],
+        answer: 0,
+      },
+      {
+        stem: "The cell wall is described as:",
+        options: ["fully permeable", "partially permeable", "impermeable", "selectively permeable"],
+        answer: 0,
+      },
+      {
+        stem: "The organelle that carries out photosynthesis is the:",
+        options: ["chloroplast", "mitochondrion", "ribosome", "nucleus"],
+        answer: 0,
+      },
+      {
+        stem: "A group of similar cells working together forms a:",
+        options: ["tissue", "organ", "system", "organism"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Nutrition, respiration, and excretion
+    [
+      {
+        stem: "The process by which plants make food is called:",
+        options: ["photosynthesis", "respiration", "digestion", "transpiration"],
+        answer: 0,
+      },
+      {
+        stem: "The gas used in photosynthesis is:",
+        options: ["carbon dioxide", "oxygen", "nitrogen", "hydrogen"],
+        answer: 0,
+      },
+      {
+        stem: "The gas released during photosynthesis is:",
+        options: ["oxygen", "carbon dioxide", "nitrogen", "ammonia"],
+        answer: 0,
+      },
+      {
+        stem: "The green pigment needed for photosynthesis is:",
+        options: ["chlorophyll", "haemoglobin", "carotene", "melanin"],
+        answer: 0,
+      },
+      {
+        stem: "The enzyme that digests starch is:",
+        options: ["amylase", "protease", "lipase", "maltase"],
+        answer: 0,
+      },
+      {
+        stem: "The enzyme that digests proteins is:",
+        options: ["protease", "amylase", "lipase", "catalase"],
+        answer: 0,
+      },
+      {
+        stem: "The enzyme that digests fats is:",
+        options: ["lipase", "amylase", "protease", "maltase"],
+        answer: 0,
+      },
+      {
+        stem: "Bile is produced by the:",
+        options: ["liver", "pancreas", "stomach", "gall bladder"],
+        answer: 0,
+      },
+      {
+        stem: "Bile is stored in the:",
+        options: ["gall bladder", "liver", "pancreas", "small intestine"],
+        answer: 0,
+      },
+      {
+        stem: "The part of the gut where most absorption occurs is the:",
+        options: ["small intestine", "stomach", "large intestine", "mouth"],
+        answer: 0,
+      },
+      {
+        stem: "The finger-like projections in the small intestine are called:",
+        options: ["villi", "alveoli", "nephrons", "bronchi"],
+        answer: 0,
+      },
+      {
+        stem: "The site of gaseous exchange in the lungs is the:",
+        options: ["alveoli", "bronchi", "trachea", "diaphragm"],
+        answer: 0,
+      },
+      {
+        stem: "Aerobic respiration uses:",
+        options: ["oxygen", "carbon dioxide", "nitrogen", "chlorophyll"],
+        answer: 0,
+      },
+      {
+        stem: "The product of anaerobic respiration in muscles is:",
+        options: ["lactic acid", "ethanol", "carbon dioxide", "glucose"],
+        answer: 0,
+      },
+      {
+        stem: "The main excretory organ of the body is the:",
+        options: ["kidney", "liver", "heart", "stomach"],
+        answer: 0,
+      },
+      {
+        stem: "The functional unit of the kidney is the:",
+        options: ["nephron", "alveolus", "neuron", "villus"],
+        answer: 0,
+      },
+      {
+        stem: "The process of maintaining a constant internal environment is called:",
+        options: ["homeostasis", "excretion", "respiration", "digestion"],
+        answer: 0,
+      },
+      {
+        stem: "The loss of water vapour from plant leaves is called:",
+        options: ["transpiration", "translocation", "osmosis", "diffusion"],
+        answer: 0,
+      },
+      {
+        stem: "The tissue that transports water in plants is the:",
+        options: ["xylem", "phloem", "epidermis", "cortex"],
+        answer: 0,
+      },
+      {
+        stem: "The tissue that transports food in plants is the:",
+        options: ["phloem", "xylem", "epidermis", "cortex"],
+        answer: 0,
+      },
+    ],
+    // Topic 2: Reproduction, genetics, and ecology
+    [
+      {
+        stem: "The male reproductive organ of a flower is the:",
+        options: ["stamen", "carpel", "petal", "sepal"],
+        answer: 0,
+      },
+      {
+        stem: "The female reproductive organ of a flower is the:",
+        options: ["carpel", "stamen", "petal", "sepal"],
+        answer: 0,
+      },
+      {
+        stem: "The transfer of pollen from anther to stigma is called:",
+        options: ["pollination", "fertilisation", "germination", "transpiration"],
+        answer: 0,
+      },
+      {
+        stem: "The fusion of male and female gametes is called:",
+        options: ["fertilisation", "pollination", "germination", "dispersal"],
+        answer: 0,
+      },
+      {
+        stem: "The male gamete in humans is the:",
+        options: ["sperm", "egg", "ovum", "zygote"],
+        answer: 0,
+      },
+      {
+        stem: "The female gamete in humans is the:",
+        options: ["ovum", "sperm", "zygote", "embryo"],
+        answer: 0,
+      },
+      {
+        stem: "The organ that connects the foetus to the mother is the:",
+        options: ["placenta", "uterus", "ovary", "umbilical cord"],
+        answer: 0,
+      },
+      {
+        stem: "The process of cell division that produces gametes is called:",
+        options: ["meiosis", "mitosis", "osmosis", "diffusion"],
+        answer: 0,
+      },
+      {
+        stem: "The process of cell division that produces body cells is called:",
+        options: ["mitosis", "meiosis", "osmosis", "diffusion"],
+        answer: 0,
+      },
+      {
+        stem: "The basic unit of heredity is the:",
+        options: ["gene", "chromosome", "cell", "tissue"],
+        answer: 0,
+      },
+      {
+        stem: "The genetic make-up of an organism is its:",
+        options: ["genotype", "phenotype", "chromosome", "gene"],
+        answer: 0,
+      },
+      {
+        stem: "The physical appearance of an organism is its:",
+        options: ["phenotype", "genotype", "gene", "allele"],
+        answer: 0,
+      },
+      {
+        stem: "In a monohybrid cross TT × tt, the F1 generation is:",
+        options: ["all Tt", "all TT", "all tt", "half TT, half tt"],
+        answer: 0,
+      },
+      {
+        stem: "The phenotypic ratio of the F2 generation in a monohybrid cross is:",
+        options: ["3:1", "1:1", "1:2:1", "9:3:3:1"],
+        answer: 0,
+      },
+      {
+        stem: "A community of organisms and their environment forms an:",
+        options: ["ecosystem", "population", "organism", "tissue"],
+        answer: 0,
+      },
+      {
+        stem: "A group of organisms of the same species in an area is a:",
+        options: ["population", "community", "ecosystem", "habitat"],
+        answer: 0,
+      },
+      {
+        stem: "The sequence of organisms through which energy flows is a:",
+        options: ["food chain", "food web", "ecosystem", "population"],
+        answer: 0,
+      },
+      {
+        stem: "Organisms that make their own food are called:",
+        options: ["producers", "consumers", "decomposers", "predators"],
+        answer: 0,
+      },
+      {
+        stem: "Organisms that break down dead matter are called:",
+        options: ["decomposers", "producers", "consumers", "predators"],
+        answer: 0,
+      },
+      {
+        stem: "The process by which organisms best adapted to their environment survive is called:",
+        options: ["natural selection", "artificial selection", "pollination", "germination"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Chemistry — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralChemistry(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Atomic structure and bonding ----
+    [
+      `**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*\n\n(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*\n\n(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*`,
+      `**Q2.** (a) What is an isotope? *(2 marks)*\n\n(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*\n\n(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*`,
+      `**Q3.** (a) Define the term "ionic bond". *(2 marks)*\n\n(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*\n\n(c) State two properties of ionic compounds. *(2 marks)*`,
+      `**Q4.** (a) Define the term "covalent bond". *(2 marks)*\n\n(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*\n\n(c) State two properties of covalent compounds. *(2 marks)*`,
+      `**Q5.** (a) What is a metallic bond? *(3 marks)*\n\n(b) Explain why metals are good conductors of electricity. *(4 marks)*\n\n(c) Explain why metals are malleable and ductile. *(4 marks)*`,
+      `**Q6.** (a) Describe the structure of graphite. *(4 marks)*\n\n(b) Explain why graphite conducts electricity. *(3 marks)*\n\n(c) Explain why graphite is used as a lubricant. *(3 marks)*`,
+      `**Q7.** (a) Describe the structure of diamond. *(4 marks)*\n\n(b) Explain why diamond is very hard. *(3 marks)*\n\n(c) Explain why diamond does not conduct electricity. *(3 marks)*`,
+      `**Q8.** (a) What is the periodic table? *(2 marks)*\n\n(b) State the trend in metallic character across a period. *(3 marks)*\n\n(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*`,
+      `**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*\n\n(b) Explain this trend. *(4 marks)*\n\n(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*`,
+      `**Q10.** (a) What is an ion? *(2 marks)*\n\n(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*\n\n(c) Explain why sodium forms a positive ion. *(3 marks)*`,
+      `**Q11.** (a) Define the term "electronegativity". *(3 marks)*\n\n(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*\n\n(c) State the trend in electronegativity across a period. *(3 marks)*`,
+      `**Q12.** (a) What is a molecule? *(2 marks)*\n\n(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*\n\n(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*`,
+      `**Q13.** (a) State the three states of matter. *(2 marks)*\n\n(b) Describe the arrangement of particles in each state. *(6 marks)*\n\n(c) Explain what happens to the particles when a solid melts. *(4 marks)*`,
+      `**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*\n\n(b) Give two examples of substances with giant structures. *(2 marks)*\n\n(c) Explain why giant structures have high melting points. *(4 marks)*`,
+      `**Q15.** (a) Define the term "valency". *(2 marks)*\n\n(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*\n\n(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*`,
+      `**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*\n\n(b) Explain how a cation and an anion are formed. *(4 marks)*\n\n(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*`,
+      `**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*\n\n(b) Explain why simple covalent molecules have low melting points. *(4 marks)*\n\n(c) Give two examples of simple covalent molecules. *(2 marks)*`,
+      `**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*\n\n(b) Give one example of each. *(2 marks)*\n\n(c) State two observations that indicate a chemical change has occurred. *(4 marks)*`,
+      `**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*\n\n(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*\n\n(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*`,
+      `**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*\n\n(b) Give one example of each. *(3 marks)*\n\n(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*`,
+    ],
+    // ---- Topic 1: Stoichiometry and reactions ----
+    [
+      `**Q1.** (a) Define the term "mole". *(2 marks)*\n\n(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*\n\n(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*`,
+      `**Q2.** (a) State Avogadro's constant. *(2 marks)*\n\n(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*\n\n(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*`,
+      `**Q3.** (a) Balance the following equation:\n\n$Mg + O_2 \\rightarrow MgO$ *(3 marks)*\n\n(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*`,
+      `**Q4.** (a) What is a limiting reactant? *(3 marks)*\n\n(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*`,
+      `**Q5.** (a) Define the term "acid". *(2 marks)*\n\n(b) State three properties of acids. *(3 marks)*\n\n(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*`,
+      `**Q6.** (a) Define the term "base". *(2 marks)*\n\n(b) Distinguish between a base and an alkali. *(3 marks)*\n\n(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*`,
+      `**Q7.** (a) What is a salt? *(2 marks)*\n\n(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*\n\n(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*`,
+      `**Q8.** (a) Define the term "pH". *(2 marks)*\n\n(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*\n\n(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*`,
+      `**Q9.** (a) What is a redox reaction? *(3 marks)*\n\n(b) In the reaction $Zn + CuSO_4 \\rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*\n\n(c) Explain your answer using the gain or loss of electrons. *(4 marks)*`,
+      `**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*\n\n(b) Define the term "reduction" in terms of electrons. *(2 marks)*\n\n(c) In the reaction $2Mg + O_2 \\rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*`,
+      `**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*\n\n(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*\n\n(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*`,
+      `**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*\n\n(b) State the results you would expect. *(3 marks)*\n\n(c) Explain the results in terms of collision theory. *(4 marks)*`,
+      `**Q13.** (a) What is a catalyst? *(2 marks)*\n\n(b) State two uses of catalysts in industry. *(2 marks)*\n\n(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*`,
+      `**Q14.** (a) Define the term "equilibrium". *(3 marks)*\n\n(b) State Le Chatelier's principle. *(3 marks)*\n\n(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \\rightleftharpoons 2NH_3$. *(4 marks)*`,
+      `**Q15.** (a) What is a reversible reaction? *(2 marks)*\n\n(b) Give one example of a reversible reaction. *(2 marks)*\n\n(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*`,
+      `**Q16.** (a) Define the term "concentration". *(2 marks)*\n\n(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*\n\n(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*`,
+      `**Q17.** (a) What is a titration? *(2 marks)*\n\n(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*\n\n(c) State the indicator used and the colour change at the end point. *(3 marks)*`,
+      `**Q18.** (a) Define the term "empirical formula". *(2 marks)*\n\n(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*\n\n(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*`,
+      `**Q19.** (a) Define the term "molar volume". *(2 marks)*\n\n(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*\n\n(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*`,
+      `**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*\n\n(b) Give one example of each. *(2 marks)*\n\n(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Chemistry — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqChemistry(topicIndex) {
+  const banks = [
+    // Topic 0: Atomic structure and bonding
+    [
+      {
+        stem: "The number of protons in an atom is called the:",
+        options: ["atomic number", "mass number", "valency", "isotope number"],
+        answer: 0,
+      },
+      {
+        stem: "The total number of protons and neutrons is the:",
+        options: ["mass number", "atomic number", "valency", "atomic mass"],
+        answer: 0,
+      },
+      {
+        stem: "An atom of carbon has 6 protons and 6 neutrons. Its mass number is:",
+        options: ["12", "6", "18", "24"],
+        answer: 0,
+      },
+      {
+        stem: "The electronic configuration of sodium (atomic number 11) is:",
+        options: ["2, 8, 1", "2, 8, 2", "2, 8, 3", "2, 9"],
+        answer: 0,
+      },
+      {
+        stem: "Atoms of the same element with different numbers of neutrons are called:",
+        options: ["isotopes", "ions", "molecules", "compounds"],
+        answer: 0,
+      },
+      {
+        stem: "An ionic bond is formed by:",
+        options: [
+          "transfer of electrons",
+          "sharing of electrons",
+          "sharing of protons",
+          "transfer of neutrons",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "A covalent bond is formed by:",
+        options: [
+          "sharing of electrons",
+          "transfer of electrons",
+          "transfer of protons",
+          "sharing of neutrons",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The bond in sodium chloride is:",
+        options: ["ionic", "covalent", "metallic", "hydrogen"],
+        answer: 0,
+      },
+      {
+        stem: "The bond in water is:",
+        options: ["covalent", "ionic", "metallic", "hydrogen"],
+        answer: 0,
+      },
+      {
+        stem: "The bond in iron is:",
+        options: ["metallic", "ionic", "covalent", "hydrogen"],
+        answer: 0,
+      },
+      {
+        stem: "Ionic compounds conduct electricity when:",
+        options: ["molten or dissolved", "solid", "gaseous", "frozen"],
+        answer: 0,
+      },
+      { stem: "The formula of a sodium ion is:", options: ["Na⁺", "Na⁻", "Na²⁺", "Na"], answer: 0 },
+      {
+        stem: "The formula of a chloride ion is:",
+        options: ["Cl⁻", "Cl⁺", "Cl²⁻", "Cl"],
+        answer: 0,
+      },
+      { stem: "The valency of oxygen is:", options: ["2", "1", "3", "4"], answer: 0 },
+      { stem: "The valency of nitrogen is:", options: ["3", "1", "2", "4"], answer: 0 },
+      { stem: "The formula of water is:", options: ["H₂O", "HO₂", "H₂O₂", "HO"], answer: 0 },
+      {
+        stem: "The formula of carbon dioxide is:",
+        options: ["CO₂", "CO", "C₂O", "CO₃"],
+        answer: 0,
+      },
+      { stem: "The formula of ammonia is:", options: ["NH₃", "NH₄", "N₂H", "NH₂"], answer: 0 },
+      {
+        stem: "Graphite conducts electricity because it has:",
+        options: ["free electrons", "ions", "protons", "neutrons"],
+        answer: 0,
+      },
+      {
+        stem: "Diamond is very hard because:",
+        options: [
+          "each carbon atom is bonded to four others",
+          "it has free electrons",
+          "it is a metal",
+          "it contains water",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The particles in a solid are:",
+        options: [
+          "closely packed and vibrating",
+          "far apart and moving freely",
+          "far apart and stationary",
+          "closely packed and moving freely",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The particles in a gas are:",
+        options: [
+          "far apart and moving freely",
+          "closely packed and vibrating",
+          "closely packed and moving freely",
+          "far apart and stationary",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "Elements in the same group have the same number of:",
+        options: ["outer electrons", "protons", "neutrons", "shells"],
+        answer: 0,
+      },
+      {
+        stem: "The most reactive metal in Group I is:",
+        options: ["caesium", "lithium", "sodium", "potassium"],
+        answer: 0,
+      },
+      {
+        stem: "The most reactive halogen is:",
+        options: ["fluorine", "chlorine", "bromine", "iodine"],
+        answer: 0,
+      },
+      {
+        stem: "A mixture of sand and salt can be separated by:",
+        options: [
+          "dissolving in water and filtering",
+          "distillation only",
+          "chromatography only",
+          "evaporation only",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The relative atomic mass of carbon is:",
+        options: ["12", "6", "24", "1"],
+        answer: 0,
+      },
+      {
+        stem: "The relative atomic mass of oxygen is:",
+        options: ["16", "8", "32", "1"],
+        answer: 0,
+      },
+      {
+        stem: "A substance made of two or more elements chemically combined is a:",
+        options: ["compound", "mixture", "element", "solution"],
+        answer: 0,
+      },
+      {
+        stem: "The number of electrons in a neutral atom equals the number of:",
+        options: ["protons", "neutrons", "protons plus neutrons", "shells"],
+        answer: 0,
+      },
+    ],
+    // Topic 1: Stoichiometry and reactions
+    [
+      {
+        stem: "One mole of a substance contains:",
+        options: [
+          "6.02 × 10²³ particles",
+          "6.02 × 10²² particles",
+          "1.0 × 10²³ particles",
+          "6.02 × 10²⁴ particles",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The number of moles in 8 g of oxygen gas (O₂, Ar = 16) is:",
+        options: ["0.25", "0.5", "1", "2"],
+        answer: 0,
+      },
+      {
+        stem: "The mass of 0.5 moles of CO₂ (Mr = 44) is:",
+        options: ["22 g", "44 g", "11 g", "88 g"],
+        answer: 0,
+      },
+      {
+        stem: "The molar volume of a gas at room temperature and pressure is:",
+        options: ["24 dm³", "22.4 dm³", "6.02 dm³", "100 dm³"],
+        answer: 0,
+      },
+      {
+        stem: "The volume of 0.5 moles of CO₂ at r.t.p. is:",
+        options: ["12 dm³", "24 dm³", "6 dm³", "48 dm³"],
+        answer: 0,
+      },
+      {
+        stem: "An acid turns blue litmus:",
+        options: ["red", "blue", "green", "colourless"],
+        answer: 0,
+      },
+      {
+        stem: "A base turns red litmus:",
+        options: ["blue", "red", "green", "colourless"],
+        answer: 0,
+      },
+      { stem: "The pH of a neutral solution is:", options: ["7", "0", "14", "1"], answer: 0 },
+      { stem: "The pH of a strong acid is:", options: ["1", "7", "14", "10"], answer: 0 },
+      { stem: "The pH of a strong alkali is:", options: ["14", "1", "7", "5"], answer: 0 },
+      {
+        stem: "The reaction between an acid and a base is called:",
+        options: ["neutralisation", "oxidation", "reduction", "combustion"],
+        answer: 0,
+      },
+      {
+        stem: "The products of the reaction between an acid and an alkali are:",
+        options: [
+          "salt and water",
+          "salt and hydrogen",
+          "salt and carbon dioxide",
+          "water and oxygen",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The products of the reaction between an acid and a metal are:",
+        options: [
+          "salt and hydrogen",
+          "salt and water",
+          "salt and carbon dioxide",
+          "water and hydrogen",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The products of the reaction between an acid and a carbonate are:",
+        options: [
+          "salt, water, and carbon dioxide",
+          "salt and hydrogen",
+          "salt and water",
+          "water and oxygen",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "In the reaction Zn + CuSO₄ → ZnSO₄ + Cu, the substance oxidised is:",
+        options: ["zinc", "copper", "sulfate", "oxygen"],
+        answer: 0,
+      },
+      {
+        stem: "Oxidation is the:",
+        options: ["loss of electrons", "gain of electrons", "gain of protons", "loss of neutrons"],
+        answer: 0,
+      },
+      {
+        stem: "Reduction is the:",
+        options: ["gain of electrons", "loss of electrons", "gain of protons", "loss of neutrons"],
+        answer: 0,
+      },
+      {
+        stem: "A substance that speeds up a reaction without being used up is a:",
+        options: ["catalyst", "reactant", "product", "indicator"],
+        answer: 0,
+      },
+      {
+        stem: "Increasing the temperature of a reaction:",
+        options: [
+          "increases the rate",
+          "decreases the rate",
+          "has no effect",
+          "stops the reaction",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "Increasing the surface area of a solid reactant:",
+        options: [
+          "increases the rate",
+          "decreases the rate",
+          "has no effect",
+          "stops the reaction",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The concentration of a solution containing 0.5 moles in 250 cm³ is:",
+        options: ["2 mol/dm³", "0.5 mol/dm³", "1 mol/dm³", "0.25 mol/dm³"],
+        answer: 0,
+      },
+      {
+        stem: "The number of moles in 100 cm³ of a 0.2 mol/dm³ solution is:",
+        options: ["0.02", "0.2", "2", "20"],
+        answer: 0,
+      },
+      {
+        stem: "A reaction that releases heat energy is:",
+        options: ["exothermic", "endothermic", "reversible", "neutral"],
+        answer: 0,
+      },
+      {
+        stem: "A reaction that absorbs heat energy is:",
+        options: ["endothermic", "exothermic", "reversible", "neutral"],
+        answer: 0,
+      },
+      {
+        stem: "The indicator used in a titration between a strong acid and a strong alkali is:",
+        options: [
+          "methyl orange or phenolphthalein",
+          "universal indicator only",
+          "litmus only",
+          "starch",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The empirical formula of a compound with 40% C, 6.7% H, and 53.3% O is:",
+        options: ["CH₂O", "CHO", "C₂H₄O₂", "CH₄O"],
+        answer: 0,
+      },
+      {
+        stem: "In the reaction 2Mg + O₂ → 2MgO, the substance reduced is:",
+        options: ["oxygen", "magnesium", "magnesium oxide", "none"],
+        answer: 0,
+      },
+      {
+        stem: "Le Chatelier's principle states that a system at equilibrium responds to a change by:",
+        options: [
+          "counteracting the change",
+          "increasing the change",
+          "ignoring the change",
+          "stopping the reaction",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "Increasing the pressure on N₂ + 3H₂ ⇌ 2NH₃ favours:",
+        options: [
+          "the forward reaction",
+          "the backward reaction",
+          "neither direction",
+          "no change",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The number of moles in 48 dm³ of oxygen gas at r.t.p. is:",
+        options: ["2", "1", "0.5", "4"],
         answer: 0,
       },
     ],
