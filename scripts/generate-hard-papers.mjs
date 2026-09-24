@@ -480,6 +480,38 @@ const subjects = {
     structural: structuralEconomics,
     mcq: mcqEconomics,
   },
+  "further-mathematics": {
+    subject: "Further Mathematics",
+    level: "advanced",
+    classLevel: "upper_sixth",
+    series: "a_science",
+    exam: "GCE",
+    topics: [
+      {
+        id: "furthermath-pure",
+        title: "Pure mathematics",
+        description: "Complex numbers, matrices, vectors, proof, series, and advanced algebra.",
+        level: "advanced",
+        classLevels: ["lower_sixth", "upper_sixth"],
+        series: ["a_science"],
+        questionCount: 55,
+        estimatedMinutes: 120,
+      },
+      {
+        id: "furthermath-mechanics-statistics",
+        title: "Mechanics and statistics",
+        description:
+          "Forces, motion, moments, probability distributions, and statistical inference.",
+        level: "advanced",
+        classLevels: ["lower_sixth", "upper_sixth"],
+        series: ["a_science"],
+        questionCount: 55,
+        estimatedMinutes: 120,
+      },
+    ],
+    structural: structuralFurtherMath,
+    mcq: mcqFurtherMath,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -5705,6 +5737,372 @@ function mcqEconomics(topicIndex) {
       {
         stem: "The economic community of Central African states is:",
         options: ["ECCAS", "ECOWAS", "SADC", "COMESA"],
+        answer: 0,
+      },
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Further Mathematics — hard topic-wise structural questions
+// ---------------------------------------------------------------------------
+
+function structuralFurtherMath(topicIndex, paperSeed) {
+  const s = paperSeed;
+  const banks = [
+    // ---- Topic 0: Pure mathematics ----
+    [
+      `**Q1.** (a) Express $z = 3 + 4i$ in modulus-argument form. *(4 marks)*\n\n(b) Find the modulus and argument of $z^2$. *(4 marks)*\n\n(c) Solve the equation $z^2 + 2z + 5 = 0$, giving your answers in the form $a + bi$. *(4 marks)*`,
+      `**Q2.** (a) Given $z_1 = 2 + 3i$ and $z_2 = 1 - i$, find $z_1 z_2$ and $\\frac{z_1}{z_2}$. *(6 marks)*\n\n(b) Find the square roots of $-8 + 6i$. *(6 marks)*`,
+      `**Q3.** (a) Express $z = 2(\\cos 60^\\circ + i\\sin 60^\\circ)$ in the form $a + bi$. *(3 marks)*\n\n(b) Use De Moivre's theorem to find $(1 + i)^8$. *(5 marks)*\n\n(c) Solve $z^3 = 8$, giving all three roots. *(5 marks)*`,
+      `**Q4.** (a) State the conditions for two matrices to be multiplied. *(2 marks)*\n\n(b) Given $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $B = \\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$, find $AB$ and $BA$. *(6 marks)*\n\n(c) Show that $AB \\neq BA$. *(2 marks)*`,
+      `**Q5.** (a) Find the determinant and inverse of $A = \\begin{pmatrix} 2 & 3 \\\\ 1 & 4 \\end{pmatrix}$. *(5 marks)*\n\n(b) Use the inverse matrix method to solve the simultaneous equations $2x + 3y = 7$ and $x + 4y = 6$. *(5 marks)*`,
+      `**Q6.** (a) Find the eigenvalues and eigenvectors of $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$. *(6 marks)*\n\n(b) State the trace and determinant of $A$. *(2 marks)*\n\n(c) Verify that the sum of the eigenvalues equals the trace. *(2 marks)*`,
+      `**Q7.** (a) Given $\\mathbf{a} = 2\\mathbf{i} + 3\\mathbf{j} - \\mathbf{k}$ and $\\mathbf{b} = \\mathbf{i} - 2\\mathbf{j} + 4\\mathbf{k}$, find $\\mathbf{a} \\cdot \\mathbf{b}$. *(3 marks)*\n\n(b) Find the angle between $\\mathbf{a}$ and $\\mathbf{b}$. *(4 marks)*\n\n(c) Find $\\mathbf{a} \\times \\mathbf{b}$. *(4 marks)*`,
+      `**Q8.** (a) Find the equation of the plane passing through the points $(1, 2, 3)$, $(2, 0, 1)$, and $(0, 1, 2)$. *(6 marks)*\n\n(b) Find the distance from the point $(1, 1, 1)$ to this plane. *(4 marks)*`,
+      `**Q9.** (a) Prove by induction that $1^2 + 2^2 + 3^2 + \\cdots + n^2 = \\frac{n(n+1)(2n+1)}{6}$. *(6 marks)*\n\n(b) Prove by induction that $3^n > n^2$ for all positive integers $n$. *(5 marks)*`,
+      `**Q10.** (a) Prove by contradiction that $\\sqrt{2}$ is irrational. *(5 marks)*\n\n(b) Prove that the sum of two odd numbers is even. *(3 marks)*\n\n(c) Prove that $n^3 - n$ is divisible by 6 for all positive integers $n$. *(5 marks)*`,
+      `**Q11.** (a) Find the sum of the series $1 + 2 + 3 + \\cdots + n$. *(3 marks)*\n\n(b) Find the sum of the series $1^2 + 3^2 + 5^2 + \\cdots + (2n-1)^2$. *(5 marks)*\n\n(c) Determine whether the series $\\sum_{n=1}^{\\infty} \\frac{1}{n(n+1)}$ converges, and find its sum. *(5 marks)*`,
+      `**Q12.** (a) State the binomial theorem. *(2 marks)*\n\n(b) Expand $(1 + x)^{10}$ up to the term in $x^3$. *(4 marks)*\n\n(c) Find the coefficient of $x^5$ in the expansion of $(2 - 3x)^8$. *(5 marks)*`,
+      `**Q13.** (a) Find the first three terms in the binomial expansion of $\\frac{1}{\\sqrt{1 + x}}$ for $|x| < 1$. *(5 marks)*\n\n(b) Use your expansion to approximate $\\frac{1}{\\sqrt{1.1}}$. *(3 marks)*\n\n(c) State the range of validity of the expansion. *(2 marks)*`,
+      `**Q14.** (a) Find the general solution of the differential equation $\\frac{dy}{dx} = \\frac{y}{x}$. *(4 marks)*\n\n(b) Solve the differential equation $\\frac{dy}{dx} + 2y = e^{-x}$ given that $y = 1$ when $x = 0$. *(6 marks)*`,
+      `**Q15.** (a) Solve the differential equation $\\frac{d^2y}{dx^2} - 3\\frac{dy}{dx} + 2y = 0$. *(5 marks)*\n\n(b) Given that $y = 1$ and $\\frac{dy}{dx} = 0$ when $x = 0$, find the particular solution. *(4 marks)*`,
+      `**Q16.** (a) Express $f(x) = \\frac{3x + 1}{(x-1)(x+2)}$ in partial fractions. *(5 marks)*\n\n(b) Express $\\frac{2x^2 + 3x + 1}{(x+1)(x^2 + 1)}$ in partial fractions. *(6 marks)*`,
+      `**Q17.** (a) Find the roots of the equation $x^3 - 6x^2 + 11x - 6 = 0$. *(5 marks)*\n\n(b) Given that $1 - i$ is a root of $x^3 - 3x^2 + 4x - 2 = 0$, find the other roots. *(5 marks)*`,
+      `**Q18.** (a) State the remainder theorem. *(2 marks)*\n\n(b) Find the remainder when $x^4 - 3x^3 + 2x - 1$ is divided by $x - 2$. *(4 marks)*\n\n(c) Given that $x - 1$ is a factor of $x^3 + ax^2 + bx - 6$, and the remainder is 4 when divided by $x - 2$, find $a$ and $b$. *(6 marks)*`,
+      `**Q19.** (a) Find $\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$. *(3 marks)*\n\n(b) Find $\\lim_{x \\to \\infty} \\frac{3x^2 + 2x}{x^2 - 1}$. *(3 marks)*\n\n(c) Find $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$. *(3 marks)*`,
+      `**Q20.** (a) Find the sum to infinity of the geometric series $1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots$. *(3 marks)*\n\n(b) Find the sum of the first $n$ terms of the arithmetic series $3 + 7 + 11 + \\cdots$. *(4 marks)*\n\n(c) The sum of the first $n$ terms of a series is $n^2 + 3n$. Find the $n$th term. *(4 marks)*`,
+    ],
+    // ---- Topic 1: Mechanics and statistics ----
+    [
+      `**Q1.** (a) State Newton's second law of motion. *(2 marks)*\n\n(b) A force of 10 N acts on a body of mass 2 kg. Calculate the acceleration. *(3 marks)*\n\n(c) A body of mass 5 kg is pulled along a rough horizontal surface by a force of 20 N. If the frictional force is 8 N, calculate the acceleration. *(5 marks)*`,
+      `**Q2.** (a) Define the terms "momentum" and "impulse". *(4 marks)*\n\n(b) A ball of mass 0.2 kg moving at 5 m/s strikes a wall and rebounds at 4 m/s. Calculate the impulse. *(4 marks)*\n\n(c) State the principle of conservation of momentum. *(2 marks)*`,
+      `**Q3.** (a) A projectile is fired at 50 m/s at an angle of $30^\\circ$ to the horizontal. Calculate the time of flight. *(4 marks)*\n\n(b) Calculate the maximum height reached. *(4 marks)*\n\n(c) Calculate the horizontal range. *(4 marks)*`,
+      `**Q4.** (a) A particle moves in a straight line with acceleration $a = 2t$ m/s². Given that its velocity is 3 m/s when $t = 0$, find its velocity at time $t$. *(4 marks)*\n\n(b) Find its displacement at time $t$ given that it starts from the origin. *(4 marks)*\n\n(c) Find the displacement when $t = 3$ s. *(3 marks)*`,
+      `**Q5.** (a) State the principle of moments. *(2 marks)*\n\n(b) A uniform rod AB of length 4 m and weight 40 N is pivoted at its centre. A weight of 20 N is placed at A. Calculate the force needed at B to balance the rod. *(5 marks)*\n\n(c) A uniform ladder of weight 200 N rests against a smooth vertical wall. Find the reactions at the wall and the ground. *(6 marks)*`,
+      `**Q6.** (a) Define the terms "centre of mass" and "centre of gravity". *(4 marks)*\n\n(b) Find the centre of mass of a uniform triangular lamina. *(4 marks)*\n\n(c) A uniform rod of length 6 m and weight 60 N has a 30 N weight attached at one end. Find the position of the centre of mass. *(5 marks)*`,
+      `**Q7.** (a) Define the term "work done". *(2 marks)*\n\n(b) A force of 30 N acts at an angle of $60^\\circ$ to the direction of motion. Calculate the work done in moving the body 10 m. *(4 marks)*\n\n(c) A body of mass 4 kg is raised through 5 m. Calculate the work done against gravity. (Take $g = 10$ m/s²) *(4 marks)*`,
+      `**Q8.** (a) State the work-energy theorem. *(2 marks)*\n\n(b) A body of mass 2 kg moving at 4 m/s is brought to rest by a constant force. Calculate the work done. *(4 marks)*\n\n(c) A car of mass 1000 kg accelerates from 10 m/s to 20 m/s. Calculate the work done. *(5 marks)*`,
+      `**Q9.** (a) Define the terms "kinetic energy" and "potential energy". *(4 marks)*\n\n(b) A body of mass 3 kg is projected vertically upwards with a speed of 20 m/s. Calculate its maximum height. (Take $g = 10$ m/s²) *(5 marks)*\n\n(c) Calculate the kinetic energy of the body when it has risen 10 m. *(5 marks)*`,
+      `**Q10.** (a) Define the term "power". *(2 marks)*\n\n(b) A motor lifts a load of 500 kg through 20 m in 25 s. Calculate the power output. (Take $g = 10$ m/s²) *(5 marks)*\n\n(c) A car of mass 1200 kg moves at a constant speed of 30 m/s against a resistance of 400 N. Calculate the power developed. *(5 marks)*`,
+      `**Q11.** (a) Define the terms "discrete" and "continuous" random variables. *(4 marks)*\n\n(b) A discrete random variable $X$ has the probability distribution $P(X = x) = kx$ for $x = 1, 2, 3, 4$. Find $k$. *(4 marks)*\n\n(c) Find $E(X)$ and $Var(X)$ for this distribution. *(5 marks)*`,
+      `**Q12.** (a) State the conditions for a binomial distribution. *(3 marks)*\n\n(b) A fair coin is tossed 10 times. Find the probability of getting exactly 6 heads. *(4 marks)*\n\n(c) Find the mean and variance of this binomial distribution. *(3 marks)*`,
+      `**Q13.** (a) State the probability density function of a normal distribution. *(2 marks)*\n\n(b) Given that $X \\sim N(50, 16)$, find $P(46 < X < 54)$. *(5 marks)*\n\n(c) Find the value of $x$ such that $P(X < x) = 0.95$. *(5 marks)*`,
+      `**Q14.** (a) Define the term "Poisson distribution". *(2 marks)*\n\n(b) The number of accidents per day at a junction follows a Poisson distribution with mean 2. Find the probability of exactly 3 accidents in a day. *(4 marks)*\n\n(c) Find the probability of at least 1 accident in a day. *(4 marks)*`,
+      `**Q15.** (a) Define the terms "population" and "sample". *(4 marks)*\n\n(b) State three methods of sampling. *(3 marks)*\n\n(c) Explain the difference between a parameter and a statistic. *(4 marks)*`,
+      `**Q16.** (a) Define the term "confidence interval". *(2 marks)*\n\n(b) A sample of 100 students has a mean score of 60 with a standard deviation of 8. Construct a 95% confidence interval for the population mean. *(6 marks)*\n\n(c) State the effect of increasing the sample size on the confidence interval. *(3 marks)*`,
+      `**Q17.** (a) State the null and alternative hypotheses for a two-tailed test of a population mean. *(4 marks)*\n\n(b) A sample of 50 items has a mean of 102 and standard deviation 10. Test at the 5% level whether the population mean differs from 100. *(6 marks)*`,
+      `**Q18.** (a) Define the term "correlation". *(2 marks)*\n\n(b) Calculate the Pearson correlation coefficient for the data: $x = 1, 2, 3, 4, 5$; $y = 2, 4, 5, 4, 5$. *(6 marks)*\n\n(c) Interpret your result. *(3 marks)*`,
+      `**Q19.** (a) Define the term "regression". *(2 marks)*\n\n(b) Find the equation of the least squares regression line of $y$ on $x$ for the data: $x = 1, 2, 3, 4, 5$; $y = 2, 4, 5, 4, 5$. *(6 marks)*\n\n(c) Estimate $y$ when $x = 6$. *(3 marks)*`,
+      `**Q20.** (a) Define the term "probability". *(2 marks)*\n\n(b) Two dice are thrown. Find the probability that the sum is 7. *(4 marks)*\n\n(c) A bag contains 3 red and 5 blue balls. Two balls are drawn without replacement. Find the probability that both are red. *(5 marks)*`,
+    ],
+  ];
+
+  return banks[topicIndex];
+}
+
+// ---------------------------------------------------------------------------
+// Further Mathematics — MCQ banks (30 per topic)
+// ---------------------------------------------------------------------------
+
+function mcqFurtherMath(topicIndex) {
+  const banks = [
+    // Topic 0: Pure mathematics
+    [
+      { stem: "The modulus of $3 + 4i$ is:", options: ["5", "7", "1", "25"], answer: 0 },
+      { stem: "The argument of $1 + i$ is:", options: ["45°", "90°", "135°", "30°"], answer: 0 },
+      {
+        stem: "The complex conjugate of $2 - 3i$ is:",
+        options: ["2 + 3i", "2 - 3i", "-2 + 3i", "-2 - 3i"],
+        answer: 0,
+      },
+      { stem: "The product $(1 + i)(1 - i)$ equals:", options: ["2", "0", "1", "-2"], answer: 0 },
+      { stem: "The roots of $z^2 + 4 = 0$ are:", options: ["±2i", "±2", "±4i", "±4"], answer: 0 },
+      { stem: "The value of $i^2$ is:", options: ["-1", "1", "i", "-i"], answer: 0 },
+      { stem: "The value of $i^4$ is:", options: ["1", "-1", "i", "-i"], answer: 0 },
+      {
+        stem: "The determinant of $\\begin{pmatrix} 2 & 3 \\\\ 1 & 4 \\end{pmatrix}$ is:",
+        options: ["5", "11", "10", "6"],
+        answer: 0,
+      },
+      {
+        stem: "The inverse of $\\begin{pmatrix} 2 & 0 \\\\ 0 & 4 \\end{pmatrix}$ is:",
+        options: [
+          "$\\begin{pmatrix} 1/2 & 0 \\\\ 0 & 1/4 \\end{pmatrix}$",
+          "$\\begin{pmatrix} 2 & 0 \\\\ 0 & 4 \\end{pmatrix}$",
+          "$\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$",
+          "$\\begin{pmatrix} 0 & 2 \\\\ 4 & 0 \\end{pmatrix}$",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The trace of $\\begin{pmatrix} 2 & 3 \\\\ 1 & 4 \\end{pmatrix}$ is:",
+        options: ["6", "5", "11", "10"],
+        answer: 0,
+      },
+      {
+        stem: "The eigenvalues of $\\begin{pmatrix} 2 & 0 \\\\ 0 & 3 \\end{pmatrix}$ are:",
+        options: ["2 and 3", "5 and 6", "1 and 2", "0 and 1"],
+        answer: 0,
+      },
+      {
+        stem: "The dot product of $\\mathbf{i} + 2\\mathbf{j}$ and $2\\mathbf{i} + 3\\mathbf{j}$ is:",
+        options: ["8", "7", "6", "5"],
+        answer: 0,
+      },
+      {
+        stem: "The vectors $\\mathbf{a} = 2\\mathbf{i} + \\mathbf{j}$ and $\\mathbf{b} = \\mathbf{i} - 2\\mathbf{j}$ are:",
+        options: ["perpendicular", "parallel", "equal", "opposite"],
+        answer: 0,
+      },
+      {
+        stem: "The sum $1 + 2 + 3 + \\cdots + n$ equals:",
+        options: [
+          "$\\frac{n(n+1)}{2}$",
+          "$\\frac{n(n-1)}{2}$",
+          "$n^2$",
+          "$\\frac{n(n+1)(2n+1)}{6}$",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The sum $1^2 + 2^2 + \\cdots + n^2$ equals:",
+        options: [
+          "$\\frac{n(n+1)(2n+1)}{6}$",
+          "$\\frac{n(n+1)}{2}$",
+          "$n^3$",
+          "$\\frac{n^2(n+1)}{2}$",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The sum to infinity of $1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots$ is:",
+        options: ["2", "1", "3", "$\\frac{3}{2}$"],
+        answer: 0,
+      },
+      {
+        stem: "The coefficient of $x^2$ in $(1 + x)^4$ is:",
+        options: ["6", "4", "12", "8"],
+        answer: 0,
+      },
+      {
+        stem: "The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:",
+        options: ["0", "1", "2", "-1"],
+        answer: 0,
+      },
+      {
+        stem: "Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:",
+        options: ["$x^2 + x + 1$", "$x^2 - x + 1$", "$x^2 + 1$", "$x^2 - 1$"],
+        answer: 0,
+      },
+      {
+        stem: "The value of $\\lim_{x \\to 0} \\frac{\\sin x}{x}$ is:",
+        options: ["1", "0", "∞", "undefined"],
+        answer: 0,
+      },
+      {
+        stem: "The value of $\\lim_{x \\to \\infty} \\frac{1}{x}$ is:",
+        options: ["0", "1", "∞", "undefined"],
+        answer: 0,
+      },
+      {
+        stem: "The general solution of $\\frac{dy}{dx} = \\frac{y}{x}$ is:",
+        options: ["$y = kx$", "$y = k/x$", "$y = kx^2$", "$y = e^{kx}$"],
+        answer: 0,
+      },
+      {
+        stem: "The roots of $x^2 - 5x + 6 = 0$ are:",
+        options: ["2 and 3", "1 and 6", "-2 and -3", "5 and 6"],
+        answer: 0,
+      },
+      {
+        stem: "The sum of the roots of $x^2 - 5x + 6 = 0$ is:",
+        options: ["5", "6", "-5", "-6"],
+        answer: 0,
+      },
+      {
+        stem: "The product of the roots of $x^2 - 5x + 6 = 0$ is:",
+        options: ["6", "5", "-6", "-5"],
+        answer: 0,
+      },
+      {
+        stem: "The partial fractions of $\\frac{1}{(x-1)(x+1)}$ are:",
+        options: [
+          "$\\frac{1/2}{x-1} - \\frac{1/2}{x+1}$",
+          "$\\frac{1}{x-1} + \\frac{1}{x+1}$",
+          "$\\frac{1/2}{x-1} + \\frac{1/2}{x+1}$",
+          "$\\frac{1}{x-1} - \\frac{1}{x+1}$",
+        ],
+        answer: 0,
+      },
+      { stem: "The value of $(1 + i)^2$ is:", options: ["2i", "2", "-2i", "-2"], answer: 0 },
+      { stem: "The value of $(1 + i)^4$ is:", options: ["-4", "4", "4i", "-4i"], answer: 0 },
+      { stem: "The modulus of $\\frac{1}{i}$ is:", options: ["1", "0", "i", "-1"], answer: 0 },
+      { stem: "The argument of $-1$ is:", options: ["180°", "0°", "90°", "270°"], answer: 0 },
+    ],
+    // Topic 1: Mechanics and statistics
+    [
+      {
+        stem: "The SI unit of force is the:",
+        options: ["newton", "joule", "watt", "pascal"],
+        answer: 0,
+      },
+      {
+        stem: "The SI unit of momentum is:",
+        options: ["kg m/s", "kg m/s²", "N m", "J"],
+        answer: 0,
+      },
+      { stem: "The SI unit of impulse is:", options: ["N s", "N m", "J", "W"], answer: 0 },
+      {
+        stem: "The acceleration of a body of mass 2 kg under a force of 10 N is:",
+        options: ["5 m/s²", "2 m/s²", "20 m/s²", "0.2 m/s²"],
+        answer: 0,
+      },
+      {
+        stem: "The momentum of a 3 kg body moving at 4 m/s is:",
+        options: ["12 kg m/s", "7 kg m/s", "1 kg m/s", "48 kg m/s"],
+        answer: 0,
+      },
+      {
+        stem: "The kinetic energy of a 2 kg body moving at 3 m/s is:",
+        options: ["9 J", "6 J", "18 J", "12 J"],
+        answer: 0,
+      },
+      {
+        stem: "The work done by a force of 10 N moving a body 5 m is:",
+        options: ["50 J", "2 J", "15 J", "0.5 J"],
+        answer: 0,
+      },
+      {
+        stem: "The power of a machine doing 300 J of work in 10 s is:",
+        options: ["30 W", "3000 W", "3 W", "0.03 W"],
+        answer: 0,
+      },
+      {
+        stem: "The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:",
+        options: ["20 m", "10 m", "40 m", "2 m"],
+        answer: 0,
+      },
+      {
+        stem: "The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:",
+        options: ["5 s", "10 s", "2.5 s", "50 s"],
+        answer: 0,
+      },
+      {
+        stem: "The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:",
+        options: ["216.5 m", "125 m", "250 m", "433 m"],
+        answer: 0,
+      },
+      {
+        stem: "A uniform rod is balanced at its centre. The principle of moments states:",
+        options: [
+          "sum of clockwise moments = sum of anticlockwise moments",
+          "sum of forces = 0",
+          "work = force × distance",
+          "power = work ÷ time",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The centre of mass of a uniform rod is at its:",
+        options: ["midpoint", "end", "one-quarter point", "centre of gravity of the rod"],
+        answer: 0,
+      },
+      {
+        stem: "The probability of getting exactly 6 heads in 10 tosses of a fair coin is:",
+        options: ["$\\binom{10}{6}(1/2)^{10}$", "$(1/2)^6$", "$\\binom{10}{6}(1/2)^6$", "$6/10$"],
+        answer: 0,
+      },
+      {
+        stem: "The mean of a binomial distribution with n = 10 and p = 0.5 is:",
+        options: ["5", "2.5", "10", "0.5"],
+        answer: 0,
+      },
+      {
+        stem: "The variance of a binomial distribution with n = 10 and p = 0.5 is:",
+        options: ["2.5", "5", "10", "0.5"],
+        answer: 0,
+      },
+      {
+        stem: "The mean of a Poisson distribution with parameter λ is:",
+        options: ["λ", "λ²", "√λ", "1/λ"],
+        answer: 0,
+      },
+      {
+        stem: "The variance of a Poisson distribution with parameter λ is:",
+        options: ["λ", "λ²", "√λ", "1/λ"],
+        answer: 0,
+      },
+      {
+        stem: "For a standard normal distribution, the mean is:",
+        options: ["0", "1", "50", "100"],
+        answer: 0,
+      },
+      {
+        stem: "For a standard normal distribution, the variance is:",
+        options: ["1", "0", "50", "100"],
+        answer: 0,
+      },
+      {
+        stem: "The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:",
+        options: ["2", "10", "0.5", "1.2"],
+        answer: 0,
+      },
+      {
+        stem: "The 95% confidence interval for a mean uses the z-value:",
+        options: ["1.96", "1.64", "2.58", "0.95"],
+        answer: 0,
+      },
+      {
+        stem: "The 99% confidence interval for a mean uses the z-value:",
+        options: ["2.58", "1.96", "1.64", "0.99"],
+        answer: 0,
+      },
+      {
+        stem: "A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:",
+        options: ["0.8", "8", "0.08", "80"],
+        answer: 0,
+      },
+      {
+        stem: "The Pearson correlation coefficient ranges from:",
+        options: ["-1 to 1", "0 to 1", "-∞ to ∞", "0 to 100"],
+        answer: 0,
+      },
+      {
+        stem: "A correlation coefficient of 0 indicates:",
+        options: [
+          "no linear correlation",
+          "perfect positive correlation",
+          "perfect negative correlation",
+          "strong correlation",
+        ],
+        answer: 0,
+      },
+      {
+        stem: "The probability of getting a sum of 7 when two dice are thrown is:",
+        options: ["6/36", "1/36", "7/36", "1/6"],
+        answer: 0,
+      },
+      {
+        stem: "The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:",
+        options: ["3/8", "5/8", "3/5", "1/8"],
+        answer: 0,
+      },
+      {
+        stem: "Two events are independent if:",
+        options: ["P(A∩B) = P(A)P(B)", "P(A∩B) = P(A) + P(B)", "P(A∪B) = P(A)P(B)", "P(A) = P(B)"],
+        answer: 0,
+      },
+      {
+        stem: "The probability of an impossible event is:",
+        options: ["0", "1", "0.5", "undefined"],
+        answer: 0,
+      },
+      {
+        stem: "The probability of a certain event is:",
+        options: ["1", "0", "0.5", "undefined"],
         answer: 0,
       },
     ],
