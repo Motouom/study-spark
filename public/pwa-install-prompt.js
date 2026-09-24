@@ -59,12 +59,7 @@
   function canShowPrompt() {
     if (isStandalone()) return false;
     if (storageNumber(ACCEPTED_KEY)) return false;
-
-    var dismissedAt = storageNumber(DISMISS_KEY);
-    if (dismissedAt && now() - dismissedAt < DISMISS_COOLDOWN_MS) return false;
-
-    var lastShownAt = storageNumber(LAST_SHOWN_KEY);
-    return !lastShownAt || now() - lastShownAt >= SHOW_COOLDOWN_MS;
+    return true;
   }
 
   function removePrompt() {
@@ -249,6 +244,22 @@
 
   // Only iOS Safari lacks a native install popup, so show the guide there only.
   if (isIOS && isSafari()) window.setTimeout(createPrompt, FALLBACK_DELAY_MS);
+
+  // Show the prompt again whenever the visitor moves to another page in the app.
+  function onAppNavigation() {
+    if (!canShowPrompt()) return;
+    window.setTimeout(createPrompt, 1500);
+  }
+
+  ["pushState", "replaceState"].forEach(function (method) {
+    var original = window.history[method];
+    window.history[method] = function () {
+      var result = original.apply(this, arguments);
+      onAppNavigation();
+      return result;
+    };
+  });
+  window.addEventListener("popstate", onAppNavigation);
 
   window.addEventListener("appinstalled", function () {
     storageSet(ACCEPTED_KEY, 1);
