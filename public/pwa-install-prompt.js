@@ -74,12 +74,17 @@
   }
 
   function stepRow(number, text) {
+    var dark = isIOS;
     return (
       '<div style="display:flex;gap:10px;align-items:flex-start;margin-top:8px">' +
-      '<span style="width:22px;height:22px;border-radius:50%;background:#1b1714;color:#fff7ed;font-size:12px;font-weight:800;display:grid;place-items:center;flex:0 0 auto">' +
+      '<span style="width:22px;height:22px;border-radius:50%;background:' +
+      (dark ? "#0a84ff" : "#1b1714") +
+      ';color:#fff7ed;font-size:12px;font-weight:800;display:grid;place-items:center;flex:0 0 auto">' +
       number +
       "</span>" +
-      '<span style="font-size:13px;line-height:1.5;color:#3a342e">' +
+      '<span style="font-size:13px;line-height:1.5;color:' +
+      (dark ? "#d7d7dc" : "#3a342e") +
+      '">' +
       text +
       "</span>" +
       "</div>"
