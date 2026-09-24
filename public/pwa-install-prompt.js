@@ -94,7 +94,7 @@
         html:
           stepRow(
             1,
-            "Tap the <b>Share</b> button <span style='display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #c9c2ba;border-radius:5px;vertical-align:middle'>&#8593;</span> at the bottom of Safari.",
+            "Tap the <b>Share</b> button <span style='display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #c9c2ba;border-radius:5px;vertical-align:middle;color:#0a84ff'>&#8593;</span> at the bottom of Safari.",
           ) +
           stepRow(2, "Scroll down and tap <b>Add to Home Screen</b>.") +
           stepRow(3, "Tap <b>Add</b> in the top-right corner."),
