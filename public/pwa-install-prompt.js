@@ -74,12 +74,17 @@
   }
 
   function stepRow(number, text) {
+    var dark = isIOS;
     return (
       '<div style="display:flex;gap:10px;align-items:flex-start;margin-top:8px">' +
-      '<span style="width:22px;height:22px;border-radius:50%;background:#1b1714;color:#fff7ed;font-size:12px;font-weight:800;display:grid;place-items:center;flex:0 0 auto">' +
+      '<span style="width:22px;height:22px;border-radius:50%;background:' +
+      (dark ? "#0a84ff" : "#1b1714") +
+      ';color:#fff7ed;font-size:12px;font-weight:800;display:grid;place-items:center;flex:0 0 auto">' +
       number +
       "</span>" +
-      '<span style="font-size:13px;line-height:1.5;color:#3a342e">' +
+      '<span style="font-size:13px;line-height:1.5;color:' +
+      (dark ? "#d7d7dc" : "#3a342e") +
+      '">' +
       text +
       "</span>" +
       "</div>"
@@ -94,7 +99,7 @@
         html:
           stepRow(
             1,
-            "Tap the <b>Share</b> button <span style='display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #c9c2ba;border-radius:5px;vertical-align:middle'>&#8593;</span> at the bottom of Safari.",
+            "Tap the <b>Share</b> button <span style='display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #c9c2ba;border-radius:5px;vertical-align:middle;color:#0a84ff'>&#8593;</span> at the bottom of Safari.",
           ) +
           stepRow(2, "Scroll down and tap <b>Add to Home Screen</b>.") +
           stepRow(3, "Tap <b>Add</b> in the top-right corner."),
@@ -127,6 +132,7 @@
     var shell = document.createElement("aside");
     shell.setAttribute("role", "dialog");
     shell.setAttribute("aria-label", "Install StudySpark");
+    var iosSheet = isIOS && !hasNativePrompt;
     shell.style.cssText = [
       "position:fixed",
       "left:max(16px,env(safe-area-inset-left))",
@@ -136,34 +142,53 @@
       "max-width:420px",
       "margin:0 auto",
       "border:1px solid rgba(27,23,20,.12)",
-      "border-radius:16px",
-      "background:#fffdf9",
-      "color:#1b1714",
+      "border-radius:" + (iosSheet ? "22px" : "16px"),
+      "background:" + (iosSheet ? "rgba(28,28,30,.97)" : "#fffdf9"),
+      "color:" + (iosSheet ? "#f5f5f7" : "#1b1714"),
       "box-shadow:0 18px 60px rgba(27,23,20,.18)",
       "font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
-      "overflow:hidden",
+      "overflow:visible",
+      "-webkit-backdrop-filter:blur(20px)",
+      "backdrop-filter:blur(20px)",
+      "animation:sf-pwa-rise .45s cubic-bezier(.2,.9,.25,1) both",
     ].join(";");
+
+    if (iosSheet) {
+      var style = document.createElement("style");
+      style.textContent =
+        "@keyframes sf-pwa-rise{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}" +
+        "@keyframes sf-pwa-bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}";
+      document.head.appendChild(style);
+    }
 
     var actionButtons = hasNativePrompt
       ? '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>' +
         '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>'
-      : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>' +
-        '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>';
+      : iosSheet
+        ? '<button type="button" data-pwa-later style="min-height:46px;flex:1;border:0;border-radius:12px;background:#0a84ff;color:#ffffff;font-weight:700;font-size:15px;cursor:pointer">Got it</button>'
+        : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>' +
+          '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>';
 
     shell.innerHTML =
       '<div style="display:flex;gap:12px;padding:14px 14px 4px;align-items:flex-start">' +
-      '<div style="width:42px;height:42px;border-radius:12px;background:#1b1714;display:grid;place-items:center;flex:0 0 auto">' +
+      '<div style="width:42px;height:42px;border-radius:12px;background:' +
+      (iosSheet ? "rgba(255,255,255,.12)" : "#1b1714") +
+      ';display:grid;place-items:center;flex:0 0 auto">' +
       '<img src="/icons/icon-192.png" alt="" width="30" height="30" style="display:block;border-radius:8px" />' +
       "</div>" +
       '<div style="min-width:0;flex:1">' +
       '<div style="font-weight:800;font-size:15px;line-height:1.25">' +
       steps.title +
       "</div>" +
-      '<div style="margin-top:3px;color:#716b64;font-size:13px;line-height:1.45">' +
+      '<div style="margin-top:3px;color:' +
+      (iosSheet ? "#9a9aa2" : "#716b64") +
+      ';font-size:13px;line-height:1.45">' +
       steps.body +
       "</div>" +
       "</div>" +
-      '<button type="button" data-pwa-dismiss aria-label="Dismiss install prompt" style="width:34px;height:34px;border:0;border-radius:10px;background:#f4f0ea;color:#1b1714;font-size:20px;line-height:1;cursor:pointer">×</button>' +
+      '<button type="button" data-pwa-dismiss aria-label="Dismiss install prompt" style="width:34px;height:34px;border:0;border-radius:10px;background:' +
+      (iosSheet ? "rgba(255,255,255,.14);color:#f5f5f7" : "#f4f0ea;color:#1b1714") +
+      ';font-size:20px;line-height:1;cursor:pointer">×</button>' +
       "</div>" +
       '<div style="padding:4px 20px 12px">' +
       steps.html +
@@ -171,6 +196,18 @@
       '<div style="display:flex;gap:8px;padding:0 14px 14px">' +
       actionButtons +
       "</div>";
+
+    // On iPhone/iPad, point a bouncing arrow at Safari's Share button.
+    if (iosSheet) {
+      var arrow = document.createElement("div");
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.style.cssText =
+        "position:absolute;left:50%;bottom:-30px;width:0;height:0;" +
+        "border-left:12px solid transparent;border-right:12px solid transparent;" +
+        "border-top:14px solid rgba(28,28,30,.97);" +
+        "animation:sf-pwa-bounce 1.6s ease-in-out infinite";
+      shell.appendChild(arrow);
+    }
 
     shell.querySelector("[data-pwa-dismiss]").addEventListener("click", function () {
       storageSet(DISMISS_KEY, now());
