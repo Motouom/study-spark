@@ -164,23 +164,31 @@
     var actionButtons = hasNativePrompt
       ? '<button type="button" data-pwa-install style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Install app</button>' +
         '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>'
-      : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>' +
-        '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>';
+      : iosSheet
+        ? '<button type="button" data-pwa-later style="min-height:46px;flex:1;border:0;border-radius:12px;background:#0a84ff;color:#ffffff;font-weight:700;font-size:15px;cursor:pointer">Got it</button>'
+        : '<button type="button" data-pwa-later style="min-height:42px;flex:1;border:0;border-radius:10px;background:#1b1714;color:#fff7ed;font-weight:800;cursor:pointer">Got it</button>' +
+          '<button type="button" data-pwa-later style="min-height:42px;border:1px solid #e5e0da;border-radius:10px;background:#fffdf9;color:#1b1714;font-weight:700;padding:0 14px;cursor:pointer">Later</button>';
 
     shell.innerHTML =
       '<div style="display:flex;gap:12px;padding:14px 14px 4px;align-items:flex-start">' +
-      '<div style="width:42px;height:42px;border-radius:12px;background:#1b1714;display:grid;place-items:center;flex:0 0 auto">' +
+      '<div style="width:42px;height:42px;border-radius:12px;background:' +
+      (iosSheet ? "rgba(255,255,255,.12)" : "#1b1714") +
+      ';display:grid;place-items:center;flex:0 0 auto">' +
       '<img src="/icons/icon-192.png" alt="" width="30" height="30" style="display:block;border-radius:8px" />' +
       "</div>" +
       '<div style="min-width:0;flex:1">' +
       '<div style="font-weight:800;font-size:15px;line-height:1.25">' +
       steps.title +
       "</div>" +
-      '<div style="margin-top:3px;color:#716b64;font-size:13px;line-height:1.45">' +
+      '<div style="margin-top:3px;color:' +
+      (iosSheet ? "#9a9aa2" : "#716b64") +
+      ';font-size:13px;line-height:1.45">' +
       steps.body +
       "</div>" +
       "</div>" +
-      '<button type="button" data-pwa-dismiss aria-label="Dismiss install prompt" style="width:34px;height:34px;border:0;border-radius:10px;background:#f4f0ea;color:#1b1714;font-size:20px;line-height:1;cursor:pointer">×</button>' +
+      '<button type="button" data-pwa-dismiss aria-label="Dismiss install prompt" style="width:34px;height:34px;border:0;border-radius:10px;background:' +
+      (iosSheet ? "rgba(255,255,255,.14);color:#f5f5f7" : "#f4f0ea;color:#1b1714") +
+      ';font-size:20px;line-height:1;cursor:pointer">×</button>' +
       "</div>" +
       '<div style="padding:4px 20px 12px">' +
       steps.html +
@@ -188,6 +196,18 @@
       '<div style="display:flex;gap:8px;padding:0 14px 14px">' +
       actionButtons +
       "</div>";
+
+    // On iPhone/iPad, point a bouncing arrow at Safari's Share button.
+    if (iosSheet) {
+      var arrow = document.createElement("div");
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.style.cssText =
+        "position:absolute;left:50%;bottom:-30px;width:0;height:0;" +
+        "border-left:12px solid transparent;border-right:12px solid transparent;" +
+        "border-top:14px solid rgba(28,28,30,.97);" +
+        "animation:sf-pwa-bounce 1.6s ease-in-out infinite";
+      shell.appendChild(arrow);
+    }
 
     shell.querySelector("[data-pwa-dismiss]").addEventListener("click", function () {
       storageSet(DISMISS_KEY, now());
