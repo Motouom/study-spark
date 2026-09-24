@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   hasMath,
+  normalizeLegacyLatex,
   normalizeQuestionHeadings,
   slugifyHeading,
   splitSimpleQuestionLabel,
@@ -19,6 +20,43 @@ describe("ProtectedMarkdown helpers", () => {
     expect(hasMath("\\[\\int_0^1 x\\,dx\\]")).toBe(true);
     expect(hasMath("\\begin{align} x \\end{align}")).toBe(true);
     expect(hasMath("Plain text only, no formulas.")).toBe(false);
+  });
+
+  it("normalizes legacy parenthesized TeX without changing prose", () => {
+    const markdown = [
+      "Derivative: (\\frac{dy}{dx}=nx^{n-1})",
+      "Quotient: (\\frac{u'v-uv'}{v^2})",
+      "Integral: (\\int x^n dx=\\frac{x^{n+1}}{n+1}+C)",
+      "An ordinary explanation (with no TeX).",
+    ].join("\n\n");
+
+    expect(normalizeLegacyLatex(markdown)).toBe(
+      [
+        "Derivative: $\\frac{dy}{dx}=nx^{n-1}$",
+        "Quotient: $\\frac{u'v-uv'}{v^2}$",
+        "Integral: $\\int x^n dx=\\frac{x^{n+1}}{n+1}+C$",
+        "An ordinary explanation (with no TeX).",
+      ].join("\n\n"),
+    );
+  });
+
+  it("preserves existing math, code, URLs, and ordinary parentheses", () => {
+    const markdown = [
+      "$x^2$",
+      "$$E=mc^2$$",
+      "`(\\frac{x}{y})`",
+      "```\\frac{code}{example}```",
+      "https://example.com/(\\frac{x}{y})",
+      "ordinary (parentheses)",
+    ].join("\n\n");
+
+    expect(normalizeLegacyLatex(markdown)).toBe(markdown);
+  });
+
+  it("normalizes multiple formulas in one paragraph", () => {
+    expect(normalizeLegacyLatex("Compare (\\alpha+\\beta) with (\\pi\\cdot r^2).")).toBe(
+      "Compare $\\alpha+\\beta$ with $\\pi\\cdot r^2$.",
+    );
   });
 
   it("normalizes question headings", () => {

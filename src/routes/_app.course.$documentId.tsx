@@ -583,7 +583,7 @@ function InlineQuestionOutcome({
   const isStarted = status !== "not_started";
 
   return (
-    <div className="flex w-full flex-col gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
+    <div className="flex w-fit max-w-full flex-col items-start gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
       <StatusBadge status={status} />
       <div className="grid grid-cols-3 gap-1.5 sm:flex">
         <OutcomeButton
@@ -677,7 +677,7 @@ function InlineTopicUnderstanding({
 }) {
   const { t } = useI18n();
   return (
-    <div className="flex w-full flex-col gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
+    <div className="flex w-fit max-w-full flex-col items-start gap-2 font-sans sm:ml-auto sm:w-auto sm:flex-row sm:items-center">
       <StatusBadge status={status} />
       <div className="grid grid-cols-2 gap-1.5 sm:flex">
         <OutcomeButton

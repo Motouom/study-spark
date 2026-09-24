@@ -240,9 +240,20 @@
 
   .protected-markdown .katex-display {
     max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-bottom: 0.25rem;
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  .protected-markdown .katex-display > .katex {
+    min-width: max-content;
+  }
+
+  @media (max-width: 639px) {
+    .protected-markdown .katex {
+      font-size: 0.98em;
+    }
   }
 
   .protected-markdown .chem-formula {

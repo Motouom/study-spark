@@ -1,18 +1,44 @@
 import { Badge } from "@/components/ui/badge";
 import type { CourseDocument } from "@/hooks/use-study-content";
 import { BookOpenCheck, FlaskConical, GraduationCap, ListChecks, ShieldCheck } from "lucide-react";
+import rehypeKatex from "rehype-katex";
 import type { ReactNode } from "react";
-import { Children, isValidElement, useEffect, useState } from "react";
+import { Children, isValidElement } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import type { PluggableList } from "unified";
+import "katex/dist/katex.min.css";
 
 const MATH_PATTERN =
   /\$\$[\s\S]*?\$\$|\$[^$\n]+\$|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\\begin\{[a-zA-Z]+\*?\}/;
+const TEX_COMMAND_PATTERN =
+  /\\(?:frac|dfrac|tfrac|sqrt|int|sum|prod|lim|sin|cos|tan|log|ln|theta|alpha|beta|gamma|delta|pi|infty|cdot|times|leq|geq|neq|approx|pm|rightarrow|leftarrow|to|infty|partial|infty|left|right|text|begin|end)\b/;
 
 export function hasMath(markdown: string) {
   return MATH_PATTERN.test(markdown);
+}
+
+export function normalizeLegacyLatex(markdown: string) {
+  const protectedSegments: string[] = [];
+  const protectedContent =
+    /```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]*`|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\$\$[\s\S]*?\$\$|\$[^$\n]+\$|<[^>\s]+>|https?:\/\/[^\s)>]+/g;
+  const withoutProtectedSegments = markdown.replace(protectedContent, (segment) => {
+    const index = protectedSegments.push(segment) - 1;
+    return `__STUDYSPARK_LEGACY_MATH_${index}__`;
+  });
+
+  const normalized = withoutProtectedSegments.replace(
+    /\(([^()]*(?:\([^()]*\)[^()]*)*)\)/g,
+    (match, expression: string) => {
+      if (!TEX_COMMAND_PATTERN.test(expression)) return match;
+      return `$${expression}$`;
+    },
+  );
+
+  return normalized.replace(
+    /__STUDYSPARK_LEGACY_MATH_(\d+)__/g,
+    (_, index: string) => protectedSegments[Number(index)],
+  );
 }
 
 export function slugifyHeading(value: string) {
@@ -155,28 +181,17 @@ export default function ProtectedMarkdown({
   const trace = `${owner} · ${userId.slice(0, 8)} · ${document.id.slice(0, 8)} · ${new Date().toLocaleDateString()}`;
   const isCourse = document.contentKind === "course";
   const isCheatsheet = document.contentKind === "cheatsheet";
-  const [katexPlugins, setKatexPlugins] = useState<PluggableList>([]);
 
-  useEffect(() => {
-    if (!hasMath(document.markdownContent)) return;
-    let cancelled = false;
-    void import("rehype-katex").then((module) => {
-      if (!cancelled) setKatexPlugins([module.default]);
-    });
-    void import("katex/dist/katex.min.css");
-    return () => {
-      cancelled = true;
-    };
-  }, [document.markdownContent]);
-
-  const markdownContent = renderQuestionControls
-    ? normalizeQuestionHeadings(document.markdownContent)
-    : document.markdownContent;
+  const markdownContent = normalizeLegacyLatex(
+    renderQuestionControls
+      ? normalizeQuestionHeadings(document.markdownContent)
+      : document.markdownContent,
+  );
   const markdownClass = isCourse
-    ? "protected-markdown course-markdown relative font-sans text-[0.95rem] leading-7 sm:text-base"
+    ? "protected-markdown course-markdown relative font-sans text-[0.95rem] leading-[1.7] sm:text-base"
     : isCheatsheet
-      ? "protected-markdown cheatsheet-markdown relative font-sans text-[0.95rem] leading-7 sm:text-base"
-      : "protected-markdown relative font-serif text-[0.95rem] leading-7 sm:text-base";
+      ? "protected-markdown cheatsheet-markdown relative font-sans text-[0.95rem] leading-[1.7] sm:text-base"
+      : "protected-markdown relative font-serif text-[0.95rem] leading-[1.7] sm:text-base";
 
   return (
     <article
@@ -220,13 +235,13 @@ export default function ProtectedMarkdown({
       <div className={markdownClass}>
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={katexPlugins}
+          rehypePlugins={[rehypeKatex]}
           components={{
             h1: ({ children }) => (
               <h1
                 className={
                   isCourse
-                    ? "mb-5 max-w-4xl font-display text-3xl font-semibold leading-tight tracking-normal sm:text-4xl"
+                    ? "mb-4 max-w-4xl font-display text-2xl font-semibold leading-tight tracking-normal sm:mb-5 sm:text-4xl"
                     : "mb-4 font-display text-2xl font-semibold leading-tight sm:text-3xl"
                 }
               >
@@ -243,8 +258,8 @@ export default function ProtectedMarkdown({
                   id={slugifyHeading(String(children ?? ""))}
                   className={
                     isCourse
-                      ? "course-unit-heading mb-5 mt-10 flex scroll-mt-24 flex-col gap-3 rounded-xl border border-border bg-card/85 px-4 py-3 font-display text-xl font-semibold leading-tight shadow-sm sm:flex-row sm:items-center sm:justify-between sm:text-2xl"
-                      : "mb-3 mt-8 flex scroll-mt-24 flex-col gap-2 font-display text-xl font-semibold leading-tight sm:flex-row sm:items-center sm:justify-between sm:text-2xl"
+                      ? "course-unit-heading mb-4 mt-8 flex scroll-mt-24 flex-col gap-2 rounded-xl border border-border bg-card/85 px-3 py-3 font-display text-lg font-semibold leading-tight shadow-sm sm:mb-5 sm:mt-10 sm:flex-row sm:items-center sm:justify-between sm:px-4 sm:text-2xl"
+                      : "mb-3 mt-6 flex scroll-mt-24 flex-col gap-2 font-display text-lg font-semibold leading-tight sm:flex-row sm:items-center sm:justify-between sm:text-2xl"
                   }
                 >
                   <span className="flex min-w-0 items-center gap-3">
@@ -268,8 +283,8 @@ export default function ProtectedMarkdown({
                   id={slugifyHeading(String(children ?? ""))}
                   className={
                     isCourse
-                      ? "course-lesson-heading mb-3 mt-7 flex scroll-mt-24 items-center gap-2 text-lg font-semibold leading-snug"
-                      : "mb-3 mt-6 flex scroll-mt-24 flex-wrap items-center gap-2 text-lg font-semibold leading-snug"
+                      ? "course-lesson-heading mb-2 mt-5 flex scroll-mt-24 items-center gap-2 text-base font-semibold leading-snug sm:mb-3 sm:mt-7 sm:text-lg"
+                      : "mb-2 mt-5 flex scroll-mt-24 flex-wrap items-center gap-2 text-base font-semibold leading-snug sm:mb-3 sm:mt-6 sm:text-lg"
                   }
                 >
                   {isCourse && <ListChecks className="h-4 w-4 text-accent" />}
@@ -282,7 +297,7 @@ export default function ProtectedMarkdown({
               const questionLead = splitSimpleQuestionLabel(children);
               if (questionLead && renderQuestionControls) {
                 return (
-                  <section className="my-5 rounded-lg border border-border bg-background/45 p-3 sm:p-4">
+                  <section className="my-4 rounded-lg border border-border bg-background/45 p-3 sm:my-5 sm:p-4">
                     <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                       <h3 className="font-sans text-base font-semibold leading-tight">
                         Q{questionLead.questionNumber}
@@ -290,7 +305,7 @@ export default function ProtectedMarkdown({
                       {renderQuestionControls(questionLead.questionNumber)}
                     </div>
                     {questionLead.rest ? (
-                      <p className="my-0 leading-8">{formatStudyInline(questionLead.rest)}</p>
+                      <p className="my-0 leading-[1.7]">{formatStudyInline(questionLead.rest)}</p>
                     ) : null}
                   </section>
                 );
@@ -298,14 +313,14 @@ export default function ProtectedMarkdown({
               const questionNumber = questionNumberFromChildren(children);
               if (questionNumber && renderQuestionControls) {
                 return (
-                  <section className="my-5 rounded-lg border border-border bg-background/45 p-3 sm:p-4">
+                  <section className="my-4 rounded-lg border border-border bg-background/45 p-3 sm:my-5 sm:p-4">
                     <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                       <h3 className="font-sans text-base font-semibold leading-tight">
                         Q{questionNumber}
                       </h3>
                       {renderQuestionControls(questionNumber)}
                     </div>
-                    <p className="my-0 leading-8">{formatStudyInline(children)}</p>
+                    <p className="my-0 leading-[1.7]">{formatStudyInline(children)}</p>
                   </section>
                 );
               }
@@ -313,7 +328,9 @@ export default function ProtectedMarkdown({
               return (
                 <p
                   className={
-                    isCourse ? "my-4 max-w-5xl leading-8 text-foreground/90" : "my-4 leading-8"
+                    isCourse
+                      ? "my-3 max-w-5xl leading-[1.7] text-foreground/90 sm:my-4 sm:leading-8"
+                      : "my-3 leading-[1.7] sm:my-4 sm:leading-8"
                   }
                 >
                   {formatStudyInline(children)}
