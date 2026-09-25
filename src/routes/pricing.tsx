@@ -100,15 +100,26 @@ function PricingPage() {
   useEffect(() => {
     if (!userId || !supabase) return;
     const params = new URLSearchParams(window.location.search);
-    if (!params.has("payment_return")) return;
-
-    // Strip the return flag so refreshes/back-navigation don't re-trigger
-    // verification, and remember which transaction to verify.
-    params.delete("payment_return");
-    const query = params.toString();
-    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
-
+    const hasReturnFlag = params.has("payment_return");
     const transactionId = sessionStorage.getItem("studyspark.checkout.transactionId") ?? undefined;
+
+    // Only verify when returning from checkout: either the explicit return
+    // flag or a stored in-flight transaction id (Fapshi may drop the query
+    // param on redirect, leaving the learner on the pricing page).
+    if (!hasReturnFlag && !transactionId) return;
+
+    if (hasReturnFlag) {
+      // Strip the return flag so refreshes/back-navigation don't re-trigger
+      // verification, and remember which transaction to verify.
+      params.delete("payment_return");
+      const query = params.toString();
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${query ? `?${query}` : ""}`,
+      );
+    }
+
     setCheckingPayment(true);
     const client = supabase;
 
@@ -156,6 +167,7 @@ function PricingPage() {
             track({ name: "payment_pending" });
           } else {
             track({ name: "payment_failure", props: { reason: payload.status ?? "unconfirmed" } });
+            sessionStorage.removeItem("studyspark.checkout.transactionId");
           }
           setPaymentMessage(
             isPending ? t("pricing.paymentPending") : t("pricing.paymentNotConfirmed"),

@@ -19,8 +19,7 @@ export const Route = createFileRoute("/api/payments/fapshi/verify")({
             .select(
               "id, user_id, subscription_id, amount_xaf, billing_interval, provider_transaction_id, status",
             )
-            .eq("user_id", user.id)
-            .in("status", ["created", "pending"]);
+            .eq("user_id", user.id);
 
           if (body.transactionId) {
             query = query.eq("provider_transaction_id", body.transactionId);
@@ -35,6 +34,14 @@ export const Route = createFileRoute("/api/payments/fapshi/verify")({
 
           if (!transaction?.provider_transaction_id) {
             return Response.json({ status: "not_found" }, { status: 404 });
+          }
+
+          // The webhook may have already finalized this transaction before the
+          // learner's browser returned from checkout. Report success so the
+          // client redirects to the dashboard instead of leaving them stranded
+          // on the pricing page.
+          if (transaction.status === "successful") {
+            return Response.json({ status: "successful", alreadyProcessed: true });
           }
 
           const providerStatus = await fetchFapshiPaymentStatus(
