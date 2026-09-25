@@ -21,13 +21,23 @@ export function hasMath(markdown: string) {
 export function normalizeLegacyLatex(markdown: string) {
   const protectedSegments: string[] = [];
   const protectedContent =
-    /```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]*`|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\$\$[\s\S]*?\$\$|\$[^$\n]+\$|<[^>\s]+>|https?:\/\/[^\s)>]+/g;
+    /```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]*`|\$\$[\s\S]*?\$\$|\$[^$\n]+\$|<[^>\s]+>|https?:\/\/[^\s)>]+/g;
   const withoutProtectedSegments = markdown.replace(protectedContent, (segment) => {
     const index = protectedSegments.push(segment) - 1;
     return `__STUDYSPARK_LEGACY_MATH_${index}__`;
   });
 
-  const normalized = withoutProtectedSegments.replace(
+  const converted = withoutProtectedSegments
+    .replace(/\\\[([\s\S]*?)\\\]/g, (_, expression: string) => `$$${expression}$$`)
+    .replace(/\\\(([\s\S]*?)\\\)/g, (_, expression: string) => `$${expression}$`);
+
+  const convertedSegments: string[] = [];
+  const withConvertedProtected = converted.replace(/\$\$[\s\S]*?\$\$|\$[^$\n]+\$/g, (segment) => {
+    const index = convertedSegments.push(segment) - 1;
+    return `__STUDYSPARK_CONVERTED_MATH_${index}__`;
+  });
+
+  const normalized = withConvertedProtected.replace(
     /\(([^()]*(?:\([^()]*\)[^()]*)*)\)/g,
     (match, expression: string) => {
       if (!TEX_COMMAND_PATTERN.test(expression)) return match;
@@ -35,10 +45,15 @@ export function normalizeLegacyLatex(markdown: string) {
     },
   );
 
-  return normalized.replace(
-    /__STUDYSPARK_LEGACY_MATH_(\d+)__/g,
-    (_, index: string) => protectedSegments[Number(index)],
-  );
+  return normalized
+    .replace(
+      /__STUDYSPARK_CONVERTED_MATH_(\d+)__/g,
+      (_, index: string) => convertedSegments[Number(index)],
+    )
+    .replace(
+      /__STUDYSPARK_LEGACY_MATH_(\d+)__/g,
+      (_, index: string) => protectedSegments[Number(index)],
+    );
 }
 
 export function slugifyHeading(value: string) {

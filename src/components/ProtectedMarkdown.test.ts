@@ -59,6 +59,22 @@ describe("ProtectedMarkdown helpers", () => {
     );
   });
 
+  it("converts legacy \\(...\\) and \\[...\\] delimiters to dollar math", () => {
+    const markdown = [
+      "Inline: \\(x^n\\) and \\(\\frac{dy}{dx}\\).",
+      "Quotient: \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+      "Display: \\[\\int_0^1 x^2 \\, dx = \\frac{1}{3}\\]",
+    ].join("\n\n");
+
+    expect(normalizeLegacyLatex(markdown)).toBe(
+      [
+        "Inline: $x^n$ and $\\frac{dy}{dx}$.",
+        "Quotient: $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$.",
+        "Display: $$\\int_0^1 x^2 \\, dx = \\frac{1}{3}$$",
+      ].join("\n\n"),
+    );
+  });
+
   it("normalizes question headings", () => {
     const out = normalizeQuestionHeadings("**Q1.** Solve for x");
     expect(out).toContain("### Q1");
