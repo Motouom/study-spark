@@ -36,23 +36,22 @@ self.addEventListener("fetch", (event) => {
 
   if (request.method !== "GET" || url.origin !== self.location.origin) return;
 
-  // App shell (HTML navigations): serve the cached copy instantly, then refresh
-  // it in the background so repeat visits are instant and always converge on the
-  // latest deploy. Falls back to the offline page when the network is down.
+  // App shell (HTML navigations): network-first so the shell always matches the
+  // latest deploy. Serving a stale cached shell caused "refresh twice" after
+  // deployments: the cached HTML referenced old chunks that 404'd, triggering
+  // the stale-asset reload loop. Falls back to the cached shell (or the offline
+  // page) only when the network is unavailable.
   if (request.mode === "navigate") {
     event.respondWith(
-      caches.match(request).then((cached) => {
-        const network = fetch(request)
-          .then((response) => {
-            if (response && response.ok) {
-              const copy = response.clone();
-              caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
-            }
-            return response;
-          })
-          .catch(() => cached || caches.match(OFFLINE_URL));
-        return cached || network;
-      }),
+      fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match(OFFLINE_URL))),
     );
     return;
   }

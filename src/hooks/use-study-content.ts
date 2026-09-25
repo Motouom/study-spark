@@ -46,6 +46,51 @@ type ContentCache = {
 
 let contentCache: ContentCache | null = null;
 
+// Persist the cache to localStorage so a full page reload (which clears the
+// module cache) can still render content instantly, then refresh in the
+// background. The corpus is up to a few hundred KB per profile, well within
+// the localStorage quota.
+const CONTENT_STORAGE_PREFIX = "studyspark.content.";
+const CONTENT_STORAGE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+
+function storageKey(signature: string) {
+  return `${CONTENT_STORAGE_PREFIX}${encodeURIComponent(signature)}`;
+}
+
+function readStoredState(signature: string): ContentState | null {
+  try {
+    const raw = localStorage.getItem(storageKey(signature));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { at?: number; state?: ContentState };
+    if (
+      !parsed.state ||
+      !Array.isArray(parsed.state.topics) ||
+      !Array.isArray(parsed.state.documents)
+    ) {
+      return null;
+    }
+    if (parsed.at && Date.now() - parsed.at > CONTENT_STORAGE_MAX_AGE_MS) {
+      return null;
+    }
+    return parsed.state;
+  } catch {
+    return null;
+  }
+}
+
+function writeStoredState(signature: string, state: ContentState) {
+  try {
+    localStorage.setItem(storageKey(signature), JSON.stringify({ at: Date.now(), state }));
+  } catch {
+    // Quota exceeded or storage disabled: the in-memory cache still works.
+  }
+}
+
+function cachedStateFor(signature: string): ContentState | null {
+  if (contentCache && contentCache.signature === signature) return contentCache.state;
+  return readStoredState(signature);
+}
+
 function profileSignature(profile: StudentProfile, includeContent: boolean) {
   return [
     profile.language,
@@ -67,8 +112,9 @@ export function useStudyContent(
   const includeContent = options?.includeContent ?? true;
   const signature = profile ? profileSignature(profile, includeContent) : "";
   const [state, setState] = useState<ContentState>(() => {
-    if (profile && contentCache && contentCache.signature === signature) {
-      return contentCache.state;
+    if (profile) {
+      const cached = cachedStateFor(signature);
+      if (cached) return cached;
     }
     return { topics: [], documents: [], loading: false, loaded: false, error: null };
   });
@@ -79,14 +125,14 @@ export function useStudyContent(
       return;
     }
 
-    if (contentCache && contentCache.signature === signature) {
-      setState(contentCache.state);
-      return;
+    const cached = cachedStateFor(signature);
+    if (cached) {
+      setState(cached);
+    } else {
+      setState((current) => ({ ...current, loading: true, loaded: false, error: null }));
     }
 
     let active = true;
-    setState((current) => ({ ...current, loading: true, loaded: false, error: null }));
-
     const client = supabase;
     const documentsRequest = includeContent
       ? client.rpc("list_allowed_course_documents")
@@ -173,6 +219,7 @@ export function useStudyContent(
         error: null,
       };
       contentCache = { signature, state: nextState };
+      writeStoredState(signature, nextState);
       setState(nextState);
     });
 
