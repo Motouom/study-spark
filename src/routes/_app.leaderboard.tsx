@@ -16,8 +16,6 @@ import { supabase, supabaseConfigured } from "@/lib/supabase";
 import {
   classLabel,
   seriesLabel,
-  classLevelsForSystem,
-  seriesOptionsForSystem,
   levelLabelForSystem,
   type ClassLevel,
   type EducationSystem,
@@ -121,56 +119,12 @@ function ScoreBreakdown({ row }: { row: LeaderboardRow }) {
   );
 }
 
-function FilterPill({
-  label,
-  active,
-  onClick,
-  disabled,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-  disabled?: boolean;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
-        active
-          ? "border-foreground bg-foreground text-background"
-          : "border-border bg-background text-muted-foreground hover:border-foreground/40 hover:text-foreground"
-      }`}
-    >
-      {label}
-    </button>
-  );
-}
-
 function LeaderboardPage() {
   const { profile, user, loaded: profileLoaded } = useStudyProfile();
   const { currentStreak } = useUnifiedStreak();
   const [rows, setRows] = useState<LeaderboardRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Filters — default to learner's own education system + level + series
-  const [educationSystemFilter, setEducationSystemFilter] = useState<EducationSystem | "all">(
-    "all",
-  );
-  const [levelFilter, setLevelFilter] = useState<Level | "all">("all");
-  const [classFilter, setClassFilter] = useState<ClassLevel | "all">("all");
-  const [seriesFilter, setSeriesFilter] = useState<Series | "all">("all");
-
-  // Seed filters from profile once loaded
-  useEffect(() => {
-    if (!profile) return;
-    setEducationSystemFilter(profile.educationSystem ?? "gce");
-    setLevelFilter(profile.level);
-    setClassFilter(profile.classLevel);
-    setSeriesFilter(profile.series);
-  }, [profile]);
 
   const premiumActive = isPremiumActive(profile);
 
@@ -210,37 +164,20 @@ function LeaderboardPage() {
     return load();
   }, [load]);
 
-  // Client-side filtering (all data already fetched)
-  const filteredRows = useMemo(() => {
-    return rows.filter((row) => {
-      if (educationSystemFilter !== "all" && row.education_system !== educationSystemFilter)
-        return false;
-      if (levelFilter !== "all" && row.level !== levelFilter) return false;
-      if (classFilter !== "all" && row.class_level !== classFilter) return false;
-      if (seriesFilter !== "all" && row.series !== seriesFilter) return false;
-      return true;
-    });
-  }, [rows, educationSystemFilter, levelFilter, classFilter, seriesFilter]);
+  // The leaderboard is scoped to the learner's own level only — no filters.
+  const leaderboardRows = useMemo(() => {
+    if (!profile) return [];
+    return rows.filter((row) => row.level === profile.level).slice(0, DISPLAY_LIMIT);
+  }, [rows, profile]);
 
-  const leaderboardRows = useMemo(() => filteredRows.slice(0, DISPLAY_LIMIT), [filteredRows]);
-  const myRank = user ? filteredRows.findIndex((row) => row.user_id === user.id) + 1 : 0;
-  const myRow = user ? filteredRows.find((row) => row.user_id === user.id) : null;
+  const allLevelRows = useMemo(
+    () => (profile ? rows.filter((row) => row.level === profile.level) : []),
+    [rows, profile],
+  );
+  const myRank = user ? allLevelRows.findIndex((row) => row.user_id === user.id) + 1 : 0;
+  const myRow = user ? allLevelRows.find((row) => row.user_id === user.id) : null;
   const isOutsideTop = myRank > DISPLAY_LIMIT;
   const isMe = (row: LeaderboardRow) => row.user_id === user?.id;
-
-  // Only show classes/series for the selected education system
-  const activeSystem: EducationSystem =
-    educationSystemFilter !== "all" ? educationSystemFilter : "gce";
-  const allClassLevels = classLevelsForSystem(activeSystem);
-  const allSeriesOptions = seriesOptionsForSystem(activeSystem);
-
-  // Available series options for the current level filter
-  const availableSeriesForLevel = allSeriesOptions.filter(
-    (s) => levelFilter === "all" || s.level === levelFilter,
-  );
-  const availableClassesForLevel = allClassLevels.filter(
-    (c) => levelFilter === "all" || c.level === levelFilter,
-  );
 
   // Unauthenticated / profile not loaded yet
   if (supabaseConfigured() && !profileLoaded) {
@@ -278,7 +215,7 @@ function LeaderboardPage() {
         title="Leaderboard"
         description={
           profile
-            ? "Top 50 learners ranked by questions passed, topics understood, and questions started."
+            ? `Top 50 ${levelLabel(profile.level, profile.classLevel)} learners ranked by questions passed, topics understood, and questions started.`
             : "Complete your profile to join the right study cohort."
         }
       />
@@ -298,7 +235,9 @@ function LeaderboardPage() {
           <div className="rounded-xl border border-border bg-card p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
-                <h2 className="text-base font-medium">Top 50 students</h2>
+                <h2 className="text-base font-medium">
+                  Top 50 {profile ? levelLabel(profile.level, profile.classLevel) : "students"}
+                </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
                   Score = completed papers (×10) + papers started (×3) + useful checkpoints (×2) +
                   study days (×5). Repeated actions on the same paper are capped to keep rankings
@@ -339,7 +278,7 @@ function LeaderboardPage() {
                         )}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {filteredRows.length} ranked learners in this view ·{" "}
+                        {allLevelRows.length} ranked learners at your level ·{" "}
                         {isOutsideTop
                           ? "Complete more papers to enter the Top 50."
                           : "You are visible in the Top 50."}
@@ -350,112 +289,6 @@ function LeaderboardPage() {
                 </div>
               </div>
             )}
-
-            {/* Filters */}
-            <div className="mt-4 space-y-2.5">
-              {/* Education system filter */}
-              <div className="flex flex-wrap gap-2">
-                <FilterPill
-                  label="All systems"
-                  active={educationSystemFilter === "all"}
-                  onClick={() => {
-                    setEducationSystemFilter("all");
-                    setLevelFilter("all");
-                    setClassFilter("all");
-                    setSeriesFilter("all");
-                  }}
-                />
-                <FilterPill
-                  label="GCE (Anglophone)"
-                  active={educationSystemFilter === "gce"}
-                  onClick={() => {
-                    setEducationSystemFilter("gce");
-                    setLevelFilter("all");
-                    setClassFilter("all");
-                    setSeriesFilter("all");
-                  }}
-                />
-                <FilterPill
-                  label="OBC (Francophone)"
-                  active={educationSystemFilter === "francophone"}
-                  onClick={() => {
-                    setEducationSystemFilter("francophone");
-                    setLevelFilter("all");
-                    setClassFilter("all");
-                    setSeriesFilter("all");
-                  }}
-                />
-              </div>
-
-              {/* Level filter */}
-              <div className="flex flex-wrap gap-2">
-                <FilterPill
-                  label="All levels"
-                  active={levelFilter === "all"}
-                  onClick={() => {
-                    setLevelFilter("all");
-                    setClassFilter("all");
-                    setSeriesFilter("all");
-                  }}
-                />
-                <FilterPill
-                  label={educationSystemFilter === "francophone" ? "Collège" : "Ordinary Level"}
-                  active={levelFilter === "ordinary"}
-                  onClick={() => {
-                    setLevelFilter("ordinary");
-                    setClassFilter("all");
-                    setSeriesFilter("all");
-                  }}
-                />
-                <FilterPill
-                  label={educationSystemFilter === "francophone" ? "Lycée" : "Advanced Level"}
-                  active={levelFilter === "advanced"}
-                  onClick={() => {
-                    setLevelFilter("advanced");
-                    setClassFilter("all");
-                    setSeriesFilter("all");
-                  }}
-                />
-              </div>
-
-              {/* Class filter */}
-              {availableClassesForLevel.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  <FilterPill
-                    label="All classes"
-                    active={classFilter === "all"}
-                    onClick={() => setClassFilter("all")}
-                  />
-                  {availableClassesForLevel.map((c) => (
-                    <FilterPill
-                      key={c.id}
-                      label={c.label}
-                      active={classFilter === c.id}
-                      onClick={() => setClassFilter(c.id)}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Series filter */}
-              {availableSeriesForLevel.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  <FilterPill
-                    label="All series"
-                    active={seriesFilter === "all"}
-                    onClick={() => setSeriesFilter("all")}
-                  />
-                  {availableSeriesForLevel.map((s) => (
-                    <FilterPill
-                      key={s.id}
-                      label={s.label}
-                      active={seriesFilter === s.id}
-                      onClick={() => setSeriesFilter(s.id)}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Loading skeleton */}
@@ -577,28 +410,6 @@ function LeaderboardPage() {
             </section>
           )}
 
-          {/* No results for current filter */}
-          {!loading && rows.length > 0 && leaderboardRows.length === 0 && (
-            <div className="rounded-xl border border-dashed border-border bg-card p-8 text-center">
-              <p className="text-sm text-muted-foreground">
-                No learners match the selected filters.
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="mt-4"
-                onClick={() => {
-                  setEducationSystemFilter("all");
-                  setLevelFilter("all");
-                  setClassFilter("all");
-                  setSeriesFilter("all");
-                }}
-              >
-                Clear filters
-              </Button>
-            </div>
-          )}
-
           {/* Empty state — no data at all */}
           {!loading && rows.length === 0 && (
             <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
@@ -607,6 +418,21 @@ function LeaderboardPage() {
               <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
                 Rankings appear after learners complete questions and mark topics as understood.
                 Open a paper, answer questions, and mark review checkpoints to build your score.
+              </p>
+              <Button asChild className="mt-5">
+                <Link to="/library">Open papers</Link>
+              </Button>
+            </div>
+          )}
+
+          {/* Empty state — no learners at your level yet */}
+          {!loading && rows.length > 0 && leaderboardRows.length === 0 && (
+            <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+              <Trophy className="mx-auto h-10 w-10 text-muted-foreground" />
+              <h2 className="mt-4 text-base font-medium">No rankings at your level yet</h2>
+              <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
+                Be the first {profile ? levelLabel(profile.level, profile.classLevel) : ""} learner
+                to build a score. Open a paper, answer questions, and mark review checkpoints.
               </p>
               <Button asChild className="mt-5">
                 <Link to="/library">Open papers</Link>
