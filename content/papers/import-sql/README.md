@@ -1,6 +1,6 @@
 # Import SQL chunks
 
-Generated 87 course document upserts in 9 chunks.
+Generated 191 course document upserts in 20 chunks.
 
 For a one-shot import, run:
 

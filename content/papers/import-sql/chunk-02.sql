@@ -24,7 +24,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 2
@@ -445,7 +445,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 3
@@ -866,7 +866,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1
@@ -1287,7 +1287,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2
@@ -1708,7 +1708,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 3
@@ -2129,7 +2129,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 1
@@ -2604,7 +2604,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 2
@@ -3079,7 +3079,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 3
@@ -3554,7 +3554,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1
@@ -4029,7 +4029,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2

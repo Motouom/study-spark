@@ -1,0 +1,3528 @@
+begin;
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5
+
+## Structural Question Bank — Nutrition, respiration, and excretion
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
+
+**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
+
+(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
+
+(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
+
+---
+
+**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
+
+(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
+
+(c) Describe how you would test a leaf for starch. *(5 marks)*
+
+---
+
+**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
+
+(b) State the uses of glucose in plants. *(4 marks)*
+
+(c) Explain why photosynthesis is important to animals. *(4 marks)*
+
+---
+
+**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
+
+(b) State the role of the stomach in digestion. *(4 marks)*
+
+(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
+
+---
+
+**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
+
+(b) State the products of digestion of each. *(3 marks)*
+
+(c) Explain the role of bile in digestion. *(4 marks)*
+
+---
+
+**Q6.** (a) What is a balanced diet? *(2 marks)*
+
+(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
+
+(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
+
+(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
+
+(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
+
+---
+
+**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
+
+(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
+
+(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
+
+---
+
+**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
+
+(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
+
+(c) Explain what is meant by "oxygen debt". *(4 marks)*
+
+---
+
+**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
+
+(b) State the main excretory product of each organ. *(3 marks)*
+
+(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
+
+---
+
+**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
+
+(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
+
+(c) State what happens to glucose in the kidney tubule. *(3 marks)*
+
+---
+
+**Q12.** (a) What is homeostasis? *(2 marks)*
+
+(b) Give two examples of homeostasis in the human body. *(2 marks)*
+
+(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
+
+---
+
+**Q13.** (a) Define the term "transpiration". *(2 marks)*
+
+(b) State three factors that affect the rate of transpiration. *(3 marks)*
+
+(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
+
+---
+
+**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
+
+(b) State the role of the xylem and phloem. *(4 marks)*
+
+(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
+
+---
+
+**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
+
+(b) Name two substances the liver produces or processes. *(2 marks)*
+
+(c) Explain how the liver regulates blood glucose level. *(5 marks)*
+
+---
+
+**Q16.** (a) State the function of the large intestine. *(2 marks)*
+
+(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
+
+(c) Describe what happens when too much water is absorbed. *(3 marks)*
+
+---
+
+**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
+
+(b) Explain why breathing rate increases during exercise. *(4 marks)*
+
+(c) State the effect of exercise on the rate of respiration. *(3 marks)*
+
+---
+
+**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
+
+(b) State the function of the pancreas. *(3 marks)*
+
+(c) Explain how the villi increase the rate of absorption. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
+
+(b) Name the substances lost through the skin. *(3 marks)*
+
+(c) Explain how sweating helps to cool the body. *(4 marks)*
+
+---
+
+**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
+
+(b) Explain why plants are described as producers. *(3 marks)*
+
+(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6
+
+## Structural Question Bank — Reproduction, genetics, and ecology
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: REPRODUCTION, GENETICS, AND ECOLOGY
+
+**Q1.** (a) Draw a labelled diagram of a flower. *(5 marks)*
+
+(b) State the function of each labelled part. *(5 marks)*
+
+(c) Distinguish between pollination and fertilisation. *(4 marks)*
+
+---
+
+**Q2.** (a) What is pollination? *(2 marks)*
+
+(b) State three features of insect-pollinated flowers. *(3 marks)*
+
+(c) Describe the process of fertilisation in a flowering plant. *(5 marks)*
+
+---
+
+**Q3.** (a) Describe the process of germination in a bean seed. *(5 marks)*
+
+(b) State the conditions necessary for germination. *(3 marks)*
+
+(c) Explain the role of the cotyledons during germination. *(3 marks)*
+
+---
+
+**Q4.** (a) Name the male and female reproductive organs of a flowering plant. *(2 marks)*
+
+(b) Explain how seeds are dispersed by wind and by animals. *(4 marks)*
+
+(c) State two advantages of seed dispersal. *(4 marks)*
+
+---
+
+**Q5.** (a) Describe the structure of the human male reproductive system. *(5 marks)*
+
+(b) State the function of each part. *(5 marks)*
+
+(c) Explain the role of hormones in the male reproductive system. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of the human female reproductive system. *(5 marks)*
+
+(b) State the function of each part. *(5 marks)*
+
+(c) Explain what happens during the menstrual cycle. *(5 marks)*
+
+---
+
+**Q7.** (a) What is fertilisation in humans? *(2 marks)*
+
+(b) Describe the development of the embryo in the uterus. *(5 marks)*
+
+(c) Explain the role of the placenta. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms gene, allele, and genotype. *(3 marks)*
+
+(b) Explain the difference between genotype and phenotype. *(4 marks)*
+
+(c) State the difference between homozygous and heterozygous. *(3 marks)*
+
+---
+
+**Q9.** (a) In a monohybrid cross between a tall plant (TT) and a short plant (tt), show the genotypes and phenotypes of the F1 and F2 generations. *(6 marks)*
+
+(b) State the phenotypic ratio of the F2 generation. *(2 marks)*
+
+(c) Explain what is meant by a dominant allele. *(3 marks)*
+
+---
+
+**Q10.** (a) What is a sex-linked characteristic? *(3 marks)*
+
+(b) Explain how colour blindness is inherited. *(5 marks)*
+
+(c) State why sex-linked disorders are more common in males. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "variation". *(2 marks)*
+
+(b) Distinguish between continuous and discontinuous variation, giving an example of each. *(4 marks)*
+
+(c) Explain the role of variation in natural selection. *(5 marks)*
+
+---
+
+**Q12.** (a) What is natural selection? *(3 marks)*
+
+(b) Explain how antibiotic resistance in bacteria illustrates natural selection. *(5 marks)*
+
+(c) State the role of mutation in evolution. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "ecosystem". *(2 marks)*
+
+(b) Name the components of an ecosystem. *(4 marks)*
+
+(c) Explain how energy flows through an ecosystem. *(5 marks)*
+
+---
+
+**Q14.** (a) What is a food chain? *(2 marks)*
+
+(b) Construct a food chain with four organisms found in a Cameroon ecosystem. *(3 marks)*
+
+(c) Explain why the number of organisms decreases along a food chain. *(5 marks)*
+
+---
+
+**Q15.** (a) Define the term "food web". *(2 marks)*
+
+(b) Explain why food webs are more stable than food chains. *(4 marks)*
+
+(c) Describe the effect of removing a top predator from a food web. *(4 marks)*
+
+---
+
+**Q16.** (a) Describe the carbon cycle. *(5 marks)*
+
+(b) Name the processes by which carbon is returned to the atmosphere. *(3 marks)*
+
+(c) Explain the effect of deforestation on the carbon cycle. *(4 marks)*
+
+---
+
+**Q17.** (a) Describe the nitrogen cycle. *(5 marks)*
+
+(b) Name the bacteria involved in the nitrogen cycle. *(3 marks)*
+
+(c) Explain why nitrogen is important to living organisms. *(3 marks)*
+
+---
+
+**Q18.** (a) What is a population? *(2 marks)*
+
+(b) State three factors that affect population size. *(3 marks)*
+
+(c) Explain how a predator-prey relationship affects population sizes. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "conservation". *(2 marks)*
+
+(b) State three reasons why conservation is important. *(3 marks)*
+
+(c) Describe two methods of conserving wildlife in Cameroon. *(5 marks)*
+
+---
+
+**Q20.** (a) What is pollution? *(2 marks)*
+
+(b) Name three types of pollution and their causes. *(6 marks)*
+
+(c) Explain the effect of water pollution on aquatic life. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7
+
+## Structural Question Bank — Cells and transport
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: CELLS AND TRANSPORT
+
+**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*
+
+(b) State three differences between a plant cell and an animal cell. *(3 marks)*
+
+(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*
+
+---
+
+**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.
+
+(a) State what would happen to each cylinder. *(4 marks)*
+
+(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*
+
+(c) Name the process involved and state its importance in plants. *(3 marks)*
+
+---
+
+**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*
+
+(b) State three factors that affect the rate of diffusion. *(3 marks)*
+
+(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*
+
+---
+
+**Q4.** (a) What is active transport? *(3 marks)*
+
+(b) Give two differences between active transport and diffusion. *(4 marks)*
+
+(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*
+
+---
+
+**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*
+
+(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*
+
+(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*
+
+(b) State the function of iodine solution in this preparation. *(2 marks)*
+
+(c) Explain why the onion cell appears as a regular shape. *(3 marks)*
+
+---
+
+**Q7.** (a) What are enzymes? *(2 marks)*
+
+(b) State three properties of enzymes. *(3 marks)*
+
+(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*
+
+---
+
+**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*
+
+(b) Explain what happens when an enzyme is boiled. *(3 marks)*
+
+(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*
+
+---
+
+**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*
+
+(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*
+
+(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*
+
+---
+
+**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*
+
+(b) State the function of each labelled part. *(5 marks)*
+
+(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*
+
+---
+
+**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*
+
+(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*
+
+(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*
+
+---
+
+**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*
+
+(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*
+
+(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*
+
+(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*
+
+(c) Explain how selective permeability is important in the kidney. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "turgidity". *(2 marks)*
+
+(b) Explain how turgidity supports non-woody plants. *(4 marks)*
+
+(c) Describe what happens to a plant when it wilts. *(4 marks)*
+
+---
+
+**Q15.** (a) State three functions of the nucleus. *(3 marks)*
+
+(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*
+
+(c) Distinguish between a gene and a chromosome. *(3 marks)*
+
+---
+
+**Q16.** (a) What is the function of the mitochondria? *(2 marks)*
+
+(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*
+
+(c) State the equation for aerobic respiration. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*
+
+(b) Explain why amylase cannot digest proteins. *(4 marks)*
+
+(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*
+
+---
+
+**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of osmosis. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*
+
+---
+
+**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*
+
+(b) Explain why energy is required for active transport. *(3 marks)*
+
+(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8
+
+## Structural Question Bank — Nutrition, respiration, and excretion
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
+
+**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
+
+(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
+
+(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
+
+---
+
+**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
+
+(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
+
+(c) Describe how you would test a leaf for starch. *(5 marks)*
+
+---
+
+**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
+
+(b) State the uses of glucose in plants. *(4 marks)*
+
+(c) Explain why photosynthesis is important to animals. *(4 marks)*
+
+---
+
+**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
+
+(b) State the role of the stomach in digestion. *(4 marks)*
+
+(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
+
+---
+
+**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
+
+(b) State the products of digestion of each. *(3 marks)*
+
+(c) Explain the role of bile in digestion. *(4 marks)*
+
+---
+
+**Q6.** (a) What is a balanced diet? *(2 marks)*
+
+(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
+
+(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
+
+(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
+
+(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
+
+---
+
+**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
+
+(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
+
+(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
+
+---
+
+**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
+
+(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
+
+(c) Explain what is meant by "oxygen debt". *(4 marks)*
+
+---
+
+**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
+
+(b) State the main excretory product of each organ. *(3 marks)*
+
+(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
+
+---
+
+**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
+
+(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
+
+(c) State what happens to glucose in the kidney tubule. *(3 marks)*
+
+---
+
+**Q12.** (a) What is homeostasis? *(2 marks)*
+
+(b) Give two examples of homeostasis in the human body. *(2 marks)*
+
+(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
+
+---
+
+**Q13.** (a) Define the term "transpiration". *(2 marks)*
+
+(b) State three factors that affect the rate of transpiration. *(3 marks)*
+
+(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
+
+---
+
+**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
+
+(b) State the role of the xylem and phloem. *(4 marks)*
+
+(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
+
+---
+
+**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
+
+(b) Name two substances the liver produces or processes. *(2 marks)*
+
+(c) Explain how the liver regulates blood glucose level. *(5 marks)*
+
+---
+
+**Q16.** (a) State the function of the large intestine. *(2 marks)*
+
+(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
+
+(c) Describe what happens when too much water is absorbed. *(3 marks)*
+
+---
+
+**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
+
+(b) Explain why breathing rate increases during exercise. *(4 marks)*
+
+(c) State the effect of exercise on the rate of respiration. *(3 marks)*
+
+---
+
+**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
+
+(b) State the function of the pancreas. *(3 marks)*
+
+(c) Explain how the villi increase the rate of absorption. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
+
+(b) Name the substances lost through the skin. *(3 marks)*
+
+(c) Explain how sweating helps to cool the body. *(4 marks)*
+
+---
+
+**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
+
+(b) Explain why plants are described as producers. *(3 marks)*
+
+(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The control centre of the cell is the:
+
+A. nucleus  
+B. cytoplasm  
+C. cell wall  
+D. vacuole  
+
+---
+
+**Q2.** The site of respiration in the cell is the:
+
+A. mitochondrion  
+B. ribosome  
+C. chloroplast  
+D. nucleus  
+
+---
+
+**Q3.** The site of protein synthesis is the:
+
+A. ribosome  
+B. nucleus  
+C. mitochondrion  
+D. cell wall  
+
+---
+
+**Q4.** Which structure is found in plant cells but not animal cells?
+
+A. cell wall  
+B. mitochondrion  
+C. ribosome  
+D. nucleus  
+
+---
+
+**Q5.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+
+A. osmosis  
+B. transpiration  
+C. diffusion  
+D. active transport  
+
+---
+
+**Q6.** The movement of molecules from a region of high concentration to low concentration is called:
+
+A. diffusion  
+B. translocation  
+C. active transport  
+D. osmosis  
+
+---
+
+**Q7.** Active transport requires:
+
+A. no energy  
+B. energy  
+C. light  
+D. chlorophyll  
+
+---
+
+**Q8.** The cell wall of a plant is made of:
+
+A. protein  
+B. cellulose  
+C. starch  
+D. lipid  
+
+---
+
+**Q9.** The green pigment found in chloroplasts is:
+
+A. haemoglobin  
+B. carotene  
+C. chlorophyll  
+D. melanin  
+
+---
+
+**Q10.** A red blood cell placed in distilled water will:
+
+A. shrink  
+B. remain unchanged  
+C. divide  
+D. burst  
+
+---
+
+**Q11.** A plant cell placed in a concentrated salt solution will:
+
+A. burst  
+B. remain unchanged  
+C. become plasmolysed  
+D. swell  
+
+---
+
+**Q12.** Enzymes are made of:
+
+A. carbohydrate  
+B. mineral salts  
+C. lipid  
+D. protein  
+
+---
+
+**Q13.** Enzymes work best at an optimum temperature of about:
+
+A. 0°C  
+B. 37°C  
+C. 100°C  
+D. 60°C  
+
+---
+
+**Q14.** When an enzyme is boiled, it becomes:
+
+A. larger  
+B. denatured  
+C. green  
+D. more active  
+
+---
+
+**Q15.** The process by which a cell takes in large particles is called:
+
+A. diffusion  
+B. osmosis  
+C. phagocytosis  
+D. transpiration  
+
+---
+
+**Q16.** The jelly-like substance that fills the cell is the:
+
+A. cell wall  
+B. nucleus  
+C. membrane  
+D. cytoplasm  
+
+---
+
+**Q17.** The cell membrane is described as:
+
+A. impermeable  
+B. rigid  
+C. partially permeable  
+D. fully permeable  
+
+---
+
+**Q18.** The cell wall is described as:
+
+A. impermeable  
+B. selectively permeable  
+C. partially permeable  
+D. fully permeable  
+
+---
+
+**Q19.** The organelle that carries out photosynthesis is the:
+
+A. nucleus  
+B. chloroplast  
+C. mitochondrion  
+D. ribosome  
+
+---
+
+**Q20.** A group of similar cells working together forms a:
+
+A. organism  
+B. tissue  
+C. system  
+D. organ  
+
+---
+
+**Q21.** The process by which plants make food is called:
+
+A. transpiration  
+B. respiration  
+C. photosynthesis  
+D. digestion  
+
+---
+
+**Q22.** The gas used in photosynthesis is:
+
+A. hydrogen  
+B. oxygen  
+C. nitrogen  
+D. carbon dioxide  
+
+---
+
+**Q23.** The gas released during photosynthesis is:
+
+A. ammonia  
+B. nitrogen  
+C. oxygen  
+D. carbon dioxide  
+
+---
+
+**Q24.** The green pigment needed for photosynthesis is:
+
+A. melanin  
+B. carotene  
+C. haemoglobin  
+D. chlorophyll  
+
+---
+
+**Q25.** The enzyme that digests starch is:
+
+A. amylase  
+B. protease  
+C. lipase  
+D. maltase  
+
+---
+
+**Q26.** The enzyme that digests proteins is:
+
+A. protease  
+B. amylase  
+C. catalase  
+D. lipase  
+
+---
+
+**Q27.** The enzyme that digests fats is:
+
+A. lipase  
+B. protease  
+C. amylase  
+D. maltase  
+
+---
+
+**Q28.** Bile is produced by the:
+
+A. liver  
+B. stomach  
+C. gall bladder  
+D. pancreas  
+
+---
+
+**Q29.** Bile is stored in the:
+
+A. gall bladder  
+B. small intestine  
+C. liver  
+D. pancreas  
+
+---
+
+**Q30.** The part of the gut where most absorption occurs is the:
+
+A. small intestine  
+B. mouth  
+C. large intestine  
+D. stomach  
+
+---
+
+**Q31.** The finger-like projections in the small intestine are called:
+
+A. alveoli  
+B. villi  
+C. nephrons  
+D. bronchi  
+
+---
+
+**Q32.** The site of gaseous exchange in the lungs is the:
+
+A. bronchi  
+B. alveoli  
+C. diaphragm  
+D. trachea  
+
+---
+
+**Q33.** Aerobic respiration uses:
+
+A. carbon dioxide  
+B. nitrogen  
+C. oxygen  
+D. chlorophyll  
+
+---
+
+**Q34.** The product of anaerobic respiration in muscles is:
+
+A. ethanol  
+B. carbon dioxide  
+C. glucose  
+D. lactic acid  
+
+---
+
+**Q35.** The main excretory organ of the body is the:
+
+A. liver  
+B. stomach  
+C. kidney  
+D. heart  
+
+---
+
+**Q36.** The functional unit of the kidney is the:
+
+A. alveolus  
+B. villus  
+C. neuron  
+D. nephron  
+
+---
+
+**Q37.** The process of maintaining a constant internal environment is called:
+
+A. respiration  
+B. homeostasis  
+C. excretion  
+D. digestion  
+
+---
+
+**Q38.** The loss of water vapour from plant leaves is called:
+
+A. osmosis  
+B. transpiration  
+C. diffusion  
+D. translocation  
+
+---
+
+**Q39.** The tissue that transports water in plants is the:
+
+A. epidermis  
+B. phloem  
+C. xylem  
+D. cortex  
+
+---
+
+**Q40.** The tissue that transports food in plants is the:
+
+A. epidermis  
+B. xylem  
+C. cortex  
+D. phloem  
+
+---
+
+**Q41.** The male reproductive organ of a flower is the:
+
+A. petal  
+B. sepal  
+C. stamen  
+D. carpel  
+
+---
+
+**Q42.** The female reproductive organ of a flower is the:
+
+A. petal  
+B. sepal  
+C. stamen  
+D. carpel  
+
+---
+
+**Q43.** The transfer of pollen from anther to stigma is called:
+
+A. transpiration  
+B. pollination  
+C. fertilisation  
+D. germination  
+
+---
+
+**Q44.** The fusion of male and female gametes is called:
+
+A. dispersal  
+B. fertilisation  
+C. germination  
+D. pollination  
+
+---
+
+**Q45.** The male gamete in humans is the:
+
+A. zygote  
+B. egg  
+C. sperm  
+D. ovum  
+
+---
+
+**Q46.** The female gamete in humans is the:
+
+A. embryo  
+B. sperm  
+C. zygote  
+D. ovum  
+
+---
+
+**Q47.** The organ that connects the foetus to the mother is the:
+
+A. umbilical cord  
+B. ovary  
+C. placenta  
+D. uterus  
+
+---
+
+**Q48.** The process of cell division that produces gametes is called:
+
+A. diffusion  
+B. osmosis  
+C. mitosis  
+D. meiosis  
+
+---
+
+**Q49.** The process of cell division that produces body cells is called:
+
+A. mitosis  
+B. meiosis  
+C. osmosis  
+D. diffusion  
+
+---
+
+**Q50.** The basic unit of heredity is the:
+
+A. gene  
+B. chromosome  
+C. tissue  
+D. cell  
+
+---
+
+**Q51.** The genetic make-up of an organism is its:
+
+A. genotype  
+B. chromosome  
+C. phenotype  
+D. gene  
+
+---
+
+**Q52.** The physical appearance of an organism is its:
+
+A. phenotype  
+B. gene  
+C. allele  
+D. genotype  
+
+---
+
+**Q53.** In a monohybrid cross TT × tt, the F1 generation is:
+
+A. all Tt  
+B. half TT, half tt  
+C. all TT  
+D. all tt  
+
+---
+
+**Q54.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+
+A. 3:1  
+B. 9:3:3:1  
+C. 1:2:1  
+D. 1:1  
+
+---
+
+**Q55.** A community of organisms and their environment forms an:
+
+A. population  
+B. ecosystem  
+C. organism  
+D. tissue  
+
+---
+
+**Q56.** A group of organisms of the same species in an area is a:
+
+A. community  
+B. population  
+C. habitat  
+D. ecosystem  
+
+---
+
+**Q57.** The sequence of organisms through which energy flows is a:
+
+A. food web  
+B. ecosystem  
+C. food chain  
+D. population  
+
+---
+
+**Q58.** Organisms that make their own food are called:
+
+A. consumers  
+B. decomposers  
+C. predators  
+D. producers  
+
+---
+
+**Q59.** Organisms that break down dead matter are called:
+
+A. producers  
+B. predators  
+C. decomposers  
+D. consumers  
+
+---
+
+**Q60.** The process by which organisms best adapted to their environment survive is called:
+
+A. artificial selection  
+B. germination  
+C. pollination  
+D. natural selection  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Which structure is found in plant cells but not animal cells?
+
+A. cell wall  
+B. nucleus  
+C. mitochondrion  
+D. ribosome  
+
+---
+
+**Q2.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+
+A. osmosis  
+B. diffusion  
+C. transpiration  
+D. active transport  
+
+---
+
+**Q3.** The movement of molecules from a region of high concentration to low concentration is called:
+
+A. diffusion  
+B. active transport  
+C. osmosis  
+D. translocation  
+
+---
+
+**Q4.** Active transport requires:
+
+A. energy  
+B. light  
+C. chlorophyll  
+D. no energy  
+
+---
+
+**Q5.** The cell wall of a plant is made of:
+
+A. cellulose  
+B. starch  
+C. protein  
+D. lipid  
+
+---
+
+**Q6.** The green pigment found in chloroplasts is:
+
+A. chlorophyll  
+B. melanin  
+C. carotene  
+D. haemoglobin  
+
+---
+
+**Q7.** A red blood cell placed in distilled water will:
+
+A. shrink  
+B. burst  
+C. remain unchanged  
+D. divide  
+
+---
+
+**Q8.** A plant cell placed in a concentrated salt solution will:
+
+A. burst  
+B. become plasmolysed  
+C. remain unchanged  
+D. swell  
+
+---
+
+**Q9.** Enzymes are made of:
+
+A. carbohydrate  
+B. lipid  
+C. protein  
+D. mineral salts  
+
+---
+
+**Q10.** Enzymes work best at an optimum temperature of about:
+
+A. 100°C  
+B. 0°C  
+C. 60°C  
+D. 37°C  
+
+---
+
+**Q11.** When an enzyme is boiled, it becomes:
+
+A. more active  
+B. green  
+C. denatured  
+D. larger  
+
+---
+
+**Q12.** The process by which a cell takes in large particles is called:
+
+A. osmosis  
+B. transpiration  
+C. diffusion  
+D. phagocytosis  
+
+---
+
+**Q13.** The jelly-like substance that fills the cell is the:
+
+A. cell wall  
+B. cytoplasm  
+C. nucleus  
+D. membrane  
+
+---
+
+**Q14.** The cell membrane is described as:
+
+A. impermeable  
+B. partially permeable  
+C. rigid  
+D. fully permeable  
+
+---
+
+**Q15.** The cell wall is described as:
+
+A. impermeable  
+B. partially permeable  
+C. fully permeable  
+D. selectively permeable  
+
+---
+
+**Q16.** The organelle that carries out photosynthesis is the:
+
+A. ribosome  
+B. mitochondrion  
+C. nucleus  
+D. chloroplast  
+
+---
+
+**Q17.** A group of similar cells working together forms a:
+
+A. system  
+B. organism  
+C. tissue  
+D. organ  
+
+---
+
+**Q18.** The control centre of the cell is the:
+
+A. cell wall  
+B. vacuole  
+C. cytoplasm  
+D. nucleus  
+
+---
+
+**Q19.** The site of respiration in the cell is the:
+
+A. chloroplast  
+B. mitochondrion  
+C. ribosome  
+D. nucleus  
+
+---
+
+**Q20.** The site of protein synthesis is the:
+
+A. cell wall  
+B. ribosome  
+C. nucleus  
+D. mitochondrion  
+
+---
+
+**Q21.** The green pigment needed for photosynthesis is:
+
+A. melanin  
+B. haemoglobin  
+C. chlorophyll  
+D. carotene  
+
+---
+
+**Q22.** The enzyme that digests starch is:
+
+A. maltase  
+B. protease  
+C. lipase  
+D. amylase  
+
+---
+
+**Q23.** The enzyme that digests proteins is:
+
+A. catalase  
+B. lipase  
+C. protease  
+D. amylase  
+
+---
+
+**Q24.** The enzyme that digests fats is:
+
+A. maltase  
+B. protease  
+C. amylase  
+D. lipase  
+
+---
+
+**Q25.** Bile is produced by the:
+
+A. liver  
+B. pancreas  
+C. stomach  
+D. gall bladder  
+
+---
+
+**Q26.** Bile is stored in the:
+
+A. gall bladder  
+B. liver  
+C. small intestine  
+D. pancreas  
+
+---
+
+**Q27.** The part of the gut where most absorption occurs is the:
+
+A. small intestine  
+B. large intestine  
+C. stomach  
+D. mouth  
+
+---
+
+**Q28.** The finger-like projections in the small intestine are called:
+
+A. villi  
+B. nephrons  
+C. bronchi  
+D. alveoli  
+
+---
+
+**Q29.** The site of gaseous exchange in the lungs is the:
+
+A. alveoli  
+B. diaphragm  
+C. bronchi  
+D. trachea  
+
+---
+
+**Q30.** Aerobic respiration uses:
+
+A. oxygen  
+B. chlorophyll  
+C. nitrogen  
+D. carbon dioxide  
+
+---
+
+**Q31.** The product of anaerobic respiration in muscles is:
+
+A. ethanol  
+B. lactic acid  
+C. carbon dioxide  
+D. glucose  
+
+---
+
+**Q32.** The main excretory organ of the body is the:
+
+A. liver  
+B. kidney  
+C. stomach  
+D. heart  
+
+---
+
+**Q33.** The functional unit of the kidney is the:
+
+A. alveolus  
+B. neuron  
+C. nephron  
+D. villus  
+
+---
+
+**Q34.** The process of maintaining a constant internal environment is called:
+
+A. excretion  
+B. respiration  
+C. digestion  
+D. homeostasis  
+
+---
+
+**Q35.** The loss of water vapour from plant leaves is called:
+
+A. translocation  
+B. diffusion  
+C. transpiration  
+D. osmosis  
+
+---
+
+**Q36.** The tissue that transports water in plants is the:
+
+A. phloem  
+B. cortex  
+C. epidermis  
+D. xylem  
+
+---
+
+**Q37.** The tissue that transports food in plants is the:
+
+A. epidermis  
+B. phloem  
+C. xylem  
+D. cortex  
+
+---
+
+**Q38.** The process by which plants make food is called:
+
+A. digestion  
+B. photosynthesis  
+C. transpiration  
+D. respiration  
+
+---
+
+**Q39.** The gas used in photosynthesis is:
+
+A. nitrogen  
+B. oxygen  
+C. carbon dioxide  
+D. hydrogen  
+
+---
+
+**Q40.** The gas released during photosynthesis is:
+
+A. nitrogen  
+B. carbon dioxide  
+C. ammonia  
+D. oxygen  
+
+---
+
+**Q41.** The fusion of male and female gametes is called:
+
+A. germination  
+B. dispersal  
+C. fertilisation  
+D. pollination  
+
+---
+
+**Q42.** The male gamete in humans is the:
+
+A. ovum  
+B. zygote  
+C. egg  
+D. sperm  
+
+---
+
+**Q43.** The female gamete in humans is the:
+
+A. embryo  
+B. ovum  
+C. sperm  
+D. zygote  
+
+---
+
+**Q44.** The organ that connects the foetus to the mother is the:
+
+A. umbilical cord  
+B. placenta  
+C. ovary  
+D. uterus  
+
+---
+
+**Q45.** The process of cell division that produces gametes is called:
+
+A. diffusion  
+B. mitosis  
+C. meiosis  
+D. osmosis  
+
+---
+
+**Q46.** The process of cell division that produces body cells is called:
+
+A. diffusion  
+B. meiosis  
+C. osmosis  
+D. mitosis  
+
+---
+
+**Q47.** The basic unit of heredity is the:
+
+A. tissue  
+B. cell  
+C. gene  
+D. chromosome  
+
+---
+
+**Q48.** The genetic make-up of an organism is its:
+
+A. gene  
+B. chromosome  
+C. phenotype  
+D. genotype  
+
+---
+
+**Q49.** The physical appearance of an organism is its:
+
+A. phenotype  
+B. genotype  
+C. gene  
+D. allele  
+
+---
+
+**Q50.** In a monohybrid cross TT × tt, the F1 generation is:
+
+A. all Tt  
+B. all TT  
+C. half TT, half tt  
+D. all tt  
+
+---
+
+**Q51.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+
+A. 3:1  
+B. 1:2:1  
+C. 1:1  
+D. 9:3:3:1  
+
+---
+
+**Q52.** A community of organisms and their environment forms an:
+
+A. ecosystem  
+B. organism  
+C. tissue  
+D. population  
+
+---
+
+**Q53.** A group of organisms of the same species in an area is a:
+
+A. population  
+B. habitat  
+C. community  
+D. ecosystem  
+
+---
+
+**Q54.** The sequence of organisms through which energy flows is a:
+
+A. food chain  
+B. population  
+C. ecosystem  
+D. food web  
+
+---
+
+**Q55.** Organisms that make their own food are called:
+
+A. consumers  
+B. producers  
+C. decomposers  
+D. predators  
+
+---
+
+**Q56.** Organisms that break down dead matter are called:
+
+A. producers  
+B. decomposers  
+C. predators  
+D. consumers  
+
+---
+
+**Q57.** The process by which organisms best adapted to their environment survive is called:
+
+A. artificial selection  
+B. pollination  
+C. natural selection  
+D. germination  
+
+---
+
+**Q58.** The male reproductive organ of a flower is the:
+
+A. carpel  
+B. petal  
+C. sepal  
+D. stamen  
+
+---
+
+**Q59.** The female reproductive organ of a flower is the:
+
+A. stamen  
+B. sepal  
+C. carpel  
+D. petal  
+
+---
+
+**Q60.** The transfer of pollen from anther to stigma is called:
+
+A. fertilisation  
+B. transpiration  
+C. germination  
+D. pollination  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Active transport requires:
+
+A. energy  
+B. no energy  
+C. light  
+D. chlorophyll  
+
+---
+
+**Q2.** The cell wall of a plant is made of:
+
+A. cellulose  
+B. protein  
+C. starch  
+D. lipid  
+
+---
+
+**Q3.** The green pigment found in chloroplasts is:
+
+A. chlorophyll  
+B. carotene  
+C. haemoglobin  
+D. melanin  
+
+---
+
+**Q4.** A red blood cell placed in distilled water will:
+
+A. burst  
+B. remain unchanged  
+C. divide  
+D. shrink  
+
+---
+
+**Q5.** A plant cell placed in a concentrated salt solution will:
+
+A. become plasmolysed  
+B. remain unchanged  
+C. burst  
+D. swell  
+
+---
+
+**Q6.** Enzymes are made of:
+
+A. protein  
+B. mineral salts  
+C. lipid  
+D. carbohydrate  
+
+---
+
+**Q7.** Enzymes work best at an optimum temperature of about:
+
+A. 100°C  
+B. 37°C  
+C. 0°C  
+D. 60°C  
+
+---
+
+**Q8.** When an enzyme is boiled, it becomes:
+
+A. more active  
+B. denatured  
+C. green  
+D. larger  
+
+---
+
+**Q9.** The process by which a cell takes in large particles is called:
+
+A. osmosis  
+B. diffusion  
+C. phagocytosis  
+D. transpiration  
+
+---
+
+**Q10.** The jelly-like substance that fills the cell is the:
+
+A. nucleus  
+B. cell wall  
+C. membrane  
+D. cytoplasm  
+
+---
+
+**Q11.** The cell membrane is described as:
+
+A. fully permeable  
+B. rigid  
+C. partially permeable  
+D. impermeable  
+
+---
+
+**Q12.** The cell wall is described as:
+
+A. partially permeable  
+B. selectively permeable  
+C. impermeable  
+D. fully permeable  
+
+---
+
+**Q13.** The organelle that carries out photosynthesis is the:
+
+A. ribosome  
+B. chloroplast  
+C. mitochondrion  
+D. nucleus  
+
+---
+
+**Q14.** A group of similar cells working together forms a:
+
+A. system  
+B. tissue  
+C. organism  
+D. organ  
+
+---
+
+**Q15.** The control centre of the cell is the:
+
+A. cell wall  
+B. cytoplasm  
+C. nucleus  
+D. vacuole  
+
+---
+
+**Q16.** The site of respiration in the cell is the:
+
+A. nucleus  
+B. ribosome  
+C. chloroplast  
+D. mitochondrion  
+
+---
+
+**Q17.** The site of protein synthesis is the:
+
+A. nucleus  
+B. cell wall  
+C. ribosome  
+D. mitochondrion  
+
+---
+
+**Q18.** Which structure is found in plant cells but not animal cells?
+
+A. mitochondrion  
+B. ribosome  
+C. nucleus  
+D. cell wall  
+
+---
+
+**Q19.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+
+A. transpiration  
+B. osmosis  
+C. diffusion  
+D. active transport  
+
+---
+
+**Q20.** The movement of molecules from a region of high concentration to low concentration is called:
+
+A. translocation  
+B. diffusion  
+C. active transport  
+D. osmosis  
+
+---
+
+**Q21.** The enzyme that digests fats is:
+
+A. maltase  
+B. amylase  
+C. lipase  
+D. protease  
+
+---
+
+**Q22.** Bile is produced by the:
+
+A. gall bladder  
+B. pancreas  
+C. stomach  
+D. liver  
+
+---
+
+**Q23.** Bile is stored in the:
+
+A. small intestine  
+B. pancreas  
+C. gall bladder  
+D. liver  
+
+---
+
+**Q24.** The part of the gut where most absorption occurs is the:
+
+A. mouth  
+B. large intestine  
+C. stomach  
+D. small intestine  
+
+---
+
+**Q25.** The finger-like projections in the small intestine are called:
+
+A. villi  
+B. alveoli  
+C. nephrons  
+D. bronchi  
+
+---
+
+**Q26.** The site of gaseous exchange in the lungs is the:
+
+A. alveoli  
+B. bronchi  
+C. diaphragm  
+D. trachea  
+
+---
+
+**Q27.** Aerobic respiration uses:
+
+A. oxygen  
+B. nitrogen  
+C. carbon dioxide  
+D. chlorophyll  
+
+---
+
+**Q28.** The product of anaerobic respiration in muscles is:
+
+A. lactic acid  
+B. carbon dioxide  
+C. glucose  
+D. ethanol  
+
+---
+
+**Q29.** The main excretory organ of the body is the:
+
+A. kidney  
+B. stomach  
+C. liver  
+D. heart  
+
+---
+
+**Q30.** The functional unit of the kidney is the:
+
+A. nephron  
+B. villus  
+C. neuron  
+D. alveolus  
+
+---
+
+**Q31.** The process of maintaining a constant internal environment is called:
+
+A. excretion  
+B. homeostasis  
+C. respiration  
+D. digestion  
+
+---
+
+**Q32.** The loss of water vapour from plant leaves is called:
+
+A. translocation  
+B. transpiration  
+C. diffusion  
+D. osmosis  
+
+---
+
+**Q33.** The tissue that transports water in plants is the:
+
+A. phloem  
+B. epidermis  
+C. xylem  
+D. cortex  
+
+---
+
+**Q34.** The tissue that transports food in plants is the:
+
+A. xylem  
+B. epidermis  
+C. cortex  
+D. phloem  
+
+---
+
+**Q35.** The process by which plants make food is called:
+
+A. respiration  
+B. transpiration  
+C. photosynthesis  
+D. digestion  
+
+---
+
+**Q36.** The gas used in photosynthesis is:
+
+A. oxygen  
+B. hydrogen  
+C. nitrogen  
+D. carbon dioxide  
+
+---
+
+**Q37.** The gas released during photosynthesis is:
+
+A. nitrogen  
+B. oxygen  
+C. carbon dioxide  
+D. ammonia  
+
+---
+
+**Q38.** The green pigment needed for photosynthesis is:
+
+A. carotene  
+B. chlorophyll  
+C. melanin  
+D. haemoglobin  
+
+---
+
+**Q39.** The enzyme that digests starch is:
+
+A. lipase  
+B. protease  
+C. amylase  
+D. maltase  
+
+---
+
+**Q40.** The enzyme that digests proteins is:
+
+A. lipase  
+B. amylase  
+C. catalase  
+D. protease  
+
+---
+
+**Q41.** The organ that connects the foetus to the mother is the:
+
+A. ovary  
+B. umbilical cord  
+C. placenta  
+D. uterus  
+
+---
+
+**Q42.** The process of cell division that produces gametes is called:
+
+A. osmosis  
+B. diffusion  
+C. mitosis  
+D. meiosis  
+
+---
+
+**Q43.** The process of cell division that produces body cells is called:
+
+A. diffusion  
+B. mitosis  
+C. meiosis  
+D. osmosis  
+
+---
+
+**Q44.** The basic unit of heredity is the:
+
+A. tissue  
+B. gene  
+C. cell  
+D. chromosome  
+
+---
+
+**Q45.** The genetic make-up of an organism is its:
+
+A. gene  
+B. phenotype  
+C. genotype  
+D. chromosome  
+
+---
+
+**Q46.** The physical appearance of an organism is its:
+
+A. allele  
+B. genotype  
+C. gene  
+D. phenotype  
+
+---
+
+**Q47.** In a monohybrid cross TT × tt, the F1 generation is:
+
+A. half TT, half tt  
+B. all tt  
+C. all Tt  
+D. all TT  
+
+---
+
+**Q48.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+
+A. 9:3:3:1  
+B. 1:2:1  
+C. 1:1  
+D. 3:1  
+
+---
+
+**Q49.** A community of organisms and their environment forms an:
+
+A. ecosystem  
+B. population  
+C. organism  
+D. tissue  
+
+---
+
+**Q50.** A group of organisms of the same species in an area is a:
+
+A. population  
+B. community  
+C. habitat  
+D. ecosystem  
+
+---
+
+**Q51.** The sequence of organisms through which energy flows is a:
+
+A. food chain  
+B. ecosystem  
+C. food web  
+D. population  
+
+---
+
+**Q52.** Organisms that make their own food are called:
+
+A. producers  
+B. decomposers  
+C. predators  
+D. consumers  
+
+---
+
+**Q53.** Organisms that break down dead matter are called:
+
+A. decomposers  
+B. predators  
+C. producers  
+D. consumers  
+
+---
+
+**Q54.** The process by which organisms best adapted to their environment survive is called:
+
+A. natural selection  
+B. germination  
+C. pollination  
+D. artificial selection  
+
+---
+
+**Q55.** The male reproductive organ of a flower is the:
+
+A. carpel  
+B. stamen  
+C. petal  
+D. sepal  
+
+---
+
+**Q56.** The female reproductive organ of a flower is the:
+
+A. stamen  
+B. carpel  
+C. sepal  
+D. petal  
+
+---
+
+**Q57.** The transfer of pollen from anther to stigma is called:
+
+A. fertilisation  
+B. germination  
+C. pollination  
+D. transpiration  
+
+---
+
+**Q58.** The fusion of male and female gametes is called:
+
+A. pollination  
+B. germination  
+C. dispersal  
+D. fertilisation  
+
+---
+
+**Q59.** The male gamete in humans is the:
+
+A. egg  
+B. zygote  
+C. sperm  
+D. ovum  
+
+---
+
+**Q60.** The female gamete in humans is the:
+
+A. sperm  
+B. embryo  
+C. zygote  
+D. ovum  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5
+
+## Structural Question Bank — Stoichiometry and reactions
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STOICHIOMETRY AND REACTIONS
+
+**Q1.** (a) Define the term "mole". *(2 marks)*
+
+(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*
+
+(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*
+
+---
+
+**Q2.** (a) State Avogadro''s constant. *(2 marks)*
+
+(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*
+
+(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*
+
+---
+
+**Q3.** (a) Balance the following equation:
+
+$Mg + O_2 \rightarrow MgO$ *(3 marks)*
+
+(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*
+
+---
+
+**Q4.** (a) What is a limiting reactant? *(3 marks)*
+
+(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*
+
+---
+
+**Q5.** (a) Define the term "acid". *(2 marks)*
+
+(b) State three properties of acids. *(3 marks)*
+
+(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*
+
+---
+
+**Q6.** (a) Define the term "base". *(2 marks)*
+
+(b) Distinguish between a base and an alkali. *(3 marks)*
+
+(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a salt? *(2 marks)*
+
+(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*
+
+(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*
+
+---
+
+**Q8.** (a) Define the term "pH". *(2 marks)*
+
+(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*
+
+(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*
+
+---
+
+**Q9.** (a) What is a redox reaction? *(3 marks)*
+
+(b) In the reaction $Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*
+
+(c) Explain your answer using the gain or loss of electrons. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*
+
+(b) Define the term "reduction" in terms of electrons. *(2 marks)*
+
+(c) In the reaction $2Mg + O_2 \rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*
+
+---
+
+**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*
+
+(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*
+
+(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*
+
+---
+
+**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of collision theory. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a catalyst? *(2 marks)*
+
+(b) State two uses of catalysts in industry. *(2 marks)*
+
+(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "equilibrium". *(3 marks)*
+
+(b) State Le Chatelier''s principle. *(3 marks)*
+
+(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \rightleftharpoons 2NH_3$. *(4 marks)*
+
+---
+
+**Q15.** (a) What is a reversible reaction? *(2 marks)*
+
+(b) Give one example of a reversible reaction. *(2 marks)*
+
+(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "concentration". *(2 marks)*
+
+(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*
+
+(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a titration? *(2 marks)*
+
+(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*
+
+(c) State the indicator used and the colour change at the end point. *(3 marks)*
+
+---
+
+**Q18.** (a) Define the term "empirical formula". *(2 marks)*
+
+(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*
+
+(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "molar volume". *(2 marks)*
+
+(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*
+
+(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+commit;

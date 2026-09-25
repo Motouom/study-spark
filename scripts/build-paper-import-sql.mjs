@@ -9,7 +9,10 @@ const schemaMigrationPaths = [
   "023_fapshi_payments.sql",
 ].map((fileName) => join(process.cwd(), "database", "supabase", fileName));
 
-const broadClassLevels = ["form_3", "form_4", "form_5", "lower_sixth", "upper_sixth"];
+const classLevelsByLevel = {
+  ordinary: ["form_3", "form_4", "form_5"],
+  advanced: ["lower_sixth", "upper_sixth"],
+};
 const broadSeries = [
   "general",
   "science",
@@ -49,6 +52,7 @@ function parseManifest() {
 
 function upsertStatement(row) {
   const markdown = readFileSync(join(process.cwd(), row.file), "utf8");
+  const classLevels = classLevelsByLevel[row.level] ?? classLevelsByLevel.ordinary;
 
   return `
 with chosen_topic as (
@@ -75,7 +79,7 @@ values (
   ${sql(row.title)},
   'english',
   ${sql(row.level)},
-  array[${broadClassLevels.map(sql).join(", ")}]::text[],
+  array[${classLevels.map(sql).join(", ")}]::text[],
   array[${broadSeries.map(sql).join(", ")}]::text[],
   'published',
   ${sql(markdown)},

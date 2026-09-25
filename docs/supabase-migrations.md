@@ -189,11 +189,12 @@ Use these categories:
 
 These timestamped files live in `supabase/migrations/` and are recorded in the linked project's `supabase_migrations.schema_migrations` history (via `supabase migration repair --status applied` after direct apply).
 
-| Version                                                 | Purpose                                                                                                                                                                        |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `20260924161116_v2_detailed_cheatsheets_all_levels.sql` | Adds 163 v2 per-topic cheatsheets (109 ordinary + 54 advanced) with level-aware topic IDs.                                                                                     |
-| `20260925084507_fix_paper_class_levels_series.sql`      | Repairs paper `class_levels`/`series` to match `content/papers/manifest.csv` (the one-shot import had seeded the first 3 sets of each subject with broad class levels/series). |
-| `20260925084558_fix_orphaned_advanced_math_papers.sql`  | Scopes the two orphaned advanced "Mathematics" P2 papers (not in the manifest) to `upper_sixth`/`a_science`.                                                                   |
+| Version                                                 | Purpose                                                                                                                                                                                       |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `20260924161116_v2_detailed_cheatsheets_all_levels.sql` | Adds 163 v2 per-topic cheatsheets (109 ordinary + 54 advanced) with level-aware topic IDs.                                                                                                    |
+| `20260925084507_fix_paper_class_levels_series.sql`      | Repairs paper `class_levels`/`series` to match `content/papers/manifest.csv` (the one-shot import had seeded the first 3 sets of each subject with broad class levels/series).                |
+| `20260925084558_fix_orphaned_advanced_math_papers.sql`  | Scopes the two orphaned advanced "Mathematics" P2 papers (not in the manifest) to `upper_sixth`/`a_science`.                                                                                  |
+| `20260925085337_broaden_paper_class_levels.sql`         | Makes English papers visible to all classes in their level (ordinary → `form_3,form_4,form_5`; advanced → `lower_sixth,upper_sixth`), matching cheatsheets/courses. Series scoping preserved. |
 
 ## Domain Map
 

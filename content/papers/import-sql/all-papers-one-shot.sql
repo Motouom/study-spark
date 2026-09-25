@@ -3,7 +3,7 @@
 -- Includes Premium feature migrations and all generated published papers.
 
 -- Premium paper access gate.
--- Free learners can see all matching paper titles, but can open only the first two.
+-- Free learners can see matching paper titles, but can open only the first paper per subject.
 -- Premium learners can open every matching published paper.
 
 alter table public.student_profiles
@@ -39,7 +39,7 @@ using (
           profile.plan = 'premium'
           and (profile.premium_until is null or profile.premium_until > now())
         ) as premium_active,
-        row_number() over (order by document.title asc, document.id asc) as access_position
+        row_number() over (partition by document.subject order by document.title asc, document.id asc) as access_position
       from public.course_documents document
       join public.student_profiles profile on profile.user_id = (select auth.uid())
       where document.status = 'published'
@@ -49,7 +49,7 @@ using (
         and document.subject = any(profile.subjects)
     ) ranked
     where ranked.id = course_documents.id
-      and (ranked.premium_active or ranked.access_position <= 2)
+      and (ranked.premium_active or ranked.access_position <= 1)
   )
 );
 
@@ -92,11 +92,12 @@ begin
         document.series,
         document.markdown_content,
         document.updated_at,
+        document.content_kind,
         (
           profile.plan = 'premium'
           and (profile.premium_until is null or profile.premium_until > now())
         ) as premium_active,
-        row_number() over (order by document.title asc, document.id asc) as access_position
+        row_number() over (partition by document.content_kind, document.subject order by document.title asc, document.id asc) as access_position
       from public.course_documents document
       join public.student_profiles profile on profile.user_id = auth.uid()
       where document.status = 'published'
@@ -115,19 +116,23 @@ begin
       document.class_levels,
       document.series,
       case
-        when document.premium_active or document.access_position <= 2
+        when document.content_kind = 'paper' and (document.premium_active or document.access_position <= 1)
+          or (document.content_kind != 'paper' and document.premium_active or document.access_position <= 2)
           then document.markdown_content
         else null::text
       end as markdown_content,
       document.updated_at,
       case
         when document.premium_active then 'premium'
+        when document.content_kind = 'paper' and document.access_position <= 1 then 'free_preview'
         when document.access_position <= 2 then 'free_preview'
         else 'premium_locked'
       end as access_status,
-      not (document.premium_active or document.access_position <= 2) as is_locked
+      not (document.premium_active
+        or (document.content_kind = 'paper' and document.access_position > 1)
+        or (document.content_kind != 'paper' and document.access_position > 2)) as is_locked
     from matching_documents document
-    order by document.access_position asc, document.title asc;
+    order by document.subject, document.access_position asc, document.title asc;
 end;
 $$;
 
@@ -600,7 +605,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 1
@@ -933,7 +938,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 2
@@ -1266,7 +1271,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 3
@@ -1599,7 +1604,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 1
@@ -2020,7 +2025,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 2
@@ -2441,7 +2446,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 3
@@ -2862,7 +2867,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH MECHANICS P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH MECHANICS P2 SET 1
@@ -3283,7 +3288,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH MECHANICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH MECHANICS P2 SET 2
@@ -3704,7 +3709,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH MECHANICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH MECHANICS P2 SET 3
@@ -4125,7 +4130,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 1
@@ -4546,7 +4551,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 2
@@ -4967,7 +4972,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PURE MATHEMATICS WITH STATISTICS P2 SET 3
@@ -5388,7 +5393,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1
@@ -5809,7 +5814,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2
@@ -6230,7 +6235,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 3
@@ -6651,7 +6656,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 1
@@ -7126,7 +7131,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 2
@@ -7601,7 +7606,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 3
@@ -8076,7 +8081,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1
@@ -8551,7 +8556,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2
@@ -9026,7 +9031,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 3
@@ -9501,7 +9506,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 1
@@ -9976,7 +9981,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 2
@@ -10451,7 +10456,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 3
@@ -10926,7 +10931,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL SPECIAL BILINGUAL EDUCATION FRENCH P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL SPECIAL BILINGUAL EDUCATION FRENCH P2 SET 1
@@ -11401,7 +11406,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL SPECIAL BILINGUAL EDUCATION FRENCH P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL SPECIAL BILINGUAL EDUCATION FRENCH P2 SET 2
@@ -11876,7 +11881,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL SPECIAL BILINGUAL EDUCATION FRENCH P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL SPECIAL BILINGUAL EDUCATION FRENCH P2 SET 3
@@ -12351,7 +12356,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL RELIGIOUS STUDIES P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL RELIGIOUS STUDIES P2 SET 1
@@ -12826,7 +12831,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL RELIGIOUS STUDIES P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL RELIGIOUS STUDIES P2 SET 2
@@ -13301,7 +13306,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL RELIGIOUS STUDIES P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL RELIGIOUS STUDIES P2 SET 3
@@ -13776,7 +13781,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PHILOSOPHY P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PHILOSOPHY P2 SET 1
@@ -14251,7 +14256,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PHILOSOPHY P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PHILOSOPHY P2 SET 2
@@ -14726,7 +14731,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PHILOSOPHY P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PHILOSOPHY P2 SET 3
@@ -15201,7 +15206,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 1
@@ -15676,7 +15681,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 2
@@ -16151,7 +16156,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 3
@@ -16626,7 +16631,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PHYSICS P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PHYSICS P2 SET 1
@@ -17103,7 +17108,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PHYSICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PHYSICS P2 SET 2
@@ -17580,7 +17585,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL PHYSICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL PHYSICS P2 SET 3
@@ -18057,7 +18062,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 1
@@ -18534,7 +18539,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 2
@@ -19011,7 +19016,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3
@@ -19488,7 +19493,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 1
@@ -19965,7 +19970,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 2
@@ -20442,7 +20447,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 3
@@ -20919,7 +20924,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 1
@@ -21396,7 +21401,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 2
@@ -21873,7 +21878,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 3
@@ -22350,7 +22355,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 1
@@ -22827,7 +22832,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 2
@@ -23304,7 +23309,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 3
@@ -23781,7 +23786,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 1
@@ -24258,7 +24263,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 2
@@ -24735,7 +24740,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 3
@@ -25212,7 +25217,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL GEOGRAPHY P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL GEOGRAPHY P2 SET 1
@@ -25689,7 +25694,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL GEOGRAPHY P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL GEOGRAPHY P2 SET 2
@@ -26166,7 +26171,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL GEOGRAPHY P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL GEOGRAPHY P2 SET 3
@@ -26643,7 +26648,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL HISTORY P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL HISTORY P2 SET 1
@@ -27118,7 +27123,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL HISTORY P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL HISTORY P2 SET 2
@@ -27593,7 +27598,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL HISTORY P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL HISTORY P2 SET 3
@@ -28068,7 +28073,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 1
@@ -28545,7 +28550,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 2
@@ -29022,7 +29027,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 3
@@ -29499,7 +29504,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 1
@@ -29974,7 +29979,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 2
@@ -30449,7 +30454,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 3
@@ -30924,7 +30929,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 1
@@ -31401,7 +31406,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 2
@@ -31878,7 +31883,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 3
@@ -32355,7 +32360,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 1
@@ -32832,7 +32837,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 2
@@ -33309,7 +33314,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 3
@@ -33786,7 +33791,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 1
@@ -34263,7 +34268,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 2
@@ -34740,7 +34745,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 3
@@ -35217,7 +35222,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 1
@@ -35694,7 +35699,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 2
@@ -36171,7 +36176,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 3
@@ -36648,7 +36653,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 1
@@ -37125,7 +37130,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 2
@@ -37602,7 +37607,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 3
@@ -38079,7 +38084,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL LOGIC P2 SET 1',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL LOGIC P2 SET 1
@@ -38498,7 +38503,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL LOGIC P2 SET 2',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL LOGIC P2 SET 2
@@ -38917,7 +38922,7 @@ values (
   'CAMEROON GCE ORDINARY LEVEL LOGIC P2 SET 3',
   'english',
   'ordinary',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ORDINARY LEVEL LOGIC P2 SET 3
@@ -39336,7 +39341,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL AGRICULTURAL SCIENCE P2 SET 1',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL AGRICULTURAL SCIENCE P2 SET 1
@@ -39813,7 +39818,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL AGRICULTURAL SCIENCE P2 SET 2',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL AGRICULTURAL SCIENCE P2 SET 2
@@ -40290,7 +40295,7 @@ values (
   'CAMEROON GCE ADVANCED LEVEL AGRICULTURAL SCIENCE P2 SET 3',
   'english',
   'advanced',
-  array['form_3', 'form_4', 'form_5', 'lower_sixth', 'upper_sixth']::text[],
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
   '# CAMEROON GCE ADVANCED LEVEL AGRICULTURAL SCIENCE P2 SET 3
@@ -40728,6 +40733,40185 @@ values (
 (c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
 
 ---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 4
+
+## Structural Question Bank — Number and algebra
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: NUMBER AND ALGEBRA
+
+**Q1.** Solve $\log_2(x+3) + \log_2(x-1) = 5$. Hence state the restriction on $x$. *(8 marks)*
+
+---
+
+**Q2.** Given $8^{2x-1} = 4^{x+3}$, find the exact value of $x$. *(6 marks)*
+
+---
+
+**Q3.** Simplify $\dfrac{\sqrt{50} - \sqrt{18}}{\sqrt{2}}$ leaving your answer in the form $a + b\sqrt{c}$. *(6 marks)*
+
+---
+
+**Q4.** The 3rd term of an arithmetic progression is 12 and the sum of the first 12 terms is 186.
+
+(a) Find the first term and common difference. *(5 marks)*
+
+(b) Find the least value of $n$ for which $T_n > 100$. *(3 marks)*
+
+---
+
+**Q5.** A geometric progression has sum to infinity 96 and common ratio $\dfrac{3}{4}$.
+
+(a) Find the first term. *(3 marks)*
+
+(b) Find the least number of terms for which the sum exceeds 90. *(5 marks)*
+
+---
+
+**Q6.** Prove that for all real $x > 0$, $x + \dfrac{1}{x} \geq 2$. State when equality holds. *(6 marks)*
+
+---
+
+**Q7.** Solve the inequality $\dfrac{2x+5}{x-3} \geq 1$ and represent the solution on a number line. *(7 marks)*
+
+---
+
+**Q8.** When $P(x) = 2x^3 - 5x^2 + ax - 6$ is divided by $(x-2)$ the remainder is 3. Find $a$ and hence factorise $P(x)$ completely. *(8 marks)*
+
+---
+
+**Q9.** Expand $(1 - 2x)^4$ in ascending powers of $x$, and hence find the coefficient of $x^3$. *(5 marks)*
+
+---
+
+**Q10.** Solve simultaneously $y = x^2 - 4x + 3$ and $y = 2x - 6$. *(7 marks)*
+
+---
+
+**Q11.** Express $\dfrac{3x+11}{x^2+x-6}$ in partial fractions. *(6 marks)*
+
+---
+
+**Q12.** Given that $\log_{10} 2 = 0.3010$ and $\log_{10} 3 = 0.4771$, evaluate $\log_{10} 24$ without a table. *(4 marks)*
+
+---
+
+**Q13.** The sum of an infinite geometric series is 45 and the sum of the first two terms is 27. Find the common ratio. *(6 marks)*
+
+---
+
+**Q14.** Make $t$ the subject of $v = u + at$ and $s = ut + \dfrac{1}{2}at^2$, then eliminate $t$ to express $v^2$ in terms of $u$, $a$ and $s$. *(7 marks)*
+
+---
+
+**Q15.** Solve $|3x - 4| \leq 11$ and give the solution in interval form. *(5 marks)*
+
+---
+
+**Q16.** If $\alpha$ and $\beta$ are the roots of $2x^2 - 6x + 3 = 0$, find the value of $\alpha^2 + \beta^2$ and $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(6 marks)*
+
+---
+
+**Q17.** Simplify $\dfrac{a^2 - b^2}{a - b} \div \dfrac{a+b}{a^2+ab+b^2}$ where the expression is defined. *(5 marks)*
+
+---
+
+**Q18.** A contractor prices a job with a fixed cost plus a variable rate. 3 jobs cost 45,000 FCFA and 7 jobs cost 85,000 FCFA.
+
+(a) Find the fixed cost and variable rate. *(5 marks)*
+
+(b) Predict the cost of 10 jobs and comment on the model. *(3 marks)*
+
+---
+
+**Q19.** Find the sum of the first 40 terms of the series $3 + 7 + 11 + \cdots$. *(4 marks)*
+
+---
+
+**Q20.** Prove algebraically that the sum of any three consecutive integers is divisible by 3. *(6 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 5
+
+## Structural Question Bank — Geometry and measurement
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GEOMETRY AND MEASUREMENT
+
+**Q1.** In a circle of radius 7 cm, a chord subtends an angle of $140^\circ$ at the centre.
+
+(a) Find the length of the chord. *(4 marks)*
+
+(b) Find the area of the minor segment. *(4 marks)*
+
+---
+
+**Q2.** The interior angle of a regular polygon is $156^\circ$. Find the number of sides and the name of the polygon. *(5 marks)*
+
+---
+
+**Q3.** A cone has slant height 13 cm and base radius 5 cm.
+
+(a) Find the vertical height. *(3 marks)*
+
+(b) Find the curved surface area. *(4 marks)*
+
+---
+
+**Q4.** Two ships leave a port at the same time. Ship A sails on a bearing of $070^\circ$ for 60 km and ship B on a bearing of $150^\circ$ for 80 km. Find the distance between them. *(6 marks)*
+
+---
+
+**Q5.** A sector of radius 10 cm and angle $72^\circ$ is folded into a cone.
+
+(a) Find the arc length. *(3 marks)*
+
+(b) Find the radius of the cone''s base. *(3 marks)*
+
+(c) Find the volume of the cone. *(4 marks)*
+
+---
+
+**Q6.** In the diagram, $AB$ is a diameter of a circle centre $O$. $C$ is a point on the circumference with $\angle BAC = 35^\circ$. Find $\angle OBC$ and justify your answer using a circle theorem. *(5 marks)*
+
+---
+
+**Q7.** Find the volume of a sphere of radius 9 cm, giving your answer in terms of $\pi$. *(4 marks)*
+
+---
+
+**Q8.** A road of gradient $1$ in $12$ rises over a horizontal distance of 240 m. Find the vertical rise and the length of the road. *(5 marks)*
+
+---
+
+**Q9.** The coordinates of the vertices of a triangle are $A(1,2)$, $B(6,2)$ and $C(4,7)$.
+
+(a) Find the area of the triangle. *(4 marks)*
+
+(b) Find the equation of the altitude from $C$ to $AB$. *(4 marks)*
+
+---
+
+**Q10.** A cylindrical tank of radius 1.4 m and height 3 m is filled with water.
+
+(a) Find the volume of water in the tank. *(3 marks)*
+
+(b) If water leaves at 5 litres per second, how long does it take to empty? *(4 marks)*
+
+---
+
+**Q11.** Describe and construct the locus of points equidistant from two intersecting lines. State the number of points in the locus. *(5 marks)*
+
+---
+
+**Q12.** A pyramid has a square base of side 6 cm and slant height 10 cm. Find its total surface area. *(5 marks)*
+
+---
+
+**Q13.** Two parallel lines are cut by a transversal. One interior angle on the same side is $(3x+15)^\circ$ and the other is $(2x+30)^\circ$. Find $x$ and both angles. *(5 marks)*
+
+---
+
+**Q14.** A sector of a circle of radius 12 cm has area $48\pi$ cm$^2$. Find the angle of the sector in radians. *(5 marks)*
+
+---
+
+**Q15.** An arc of length 20 cm subtends an angle of $1.6$ radians at the centre of a circle. Find the radius and the area of the sector. *(5 marks)*
+
+---
+
+**Q16.** A right prism has a triangular cross-section with sides 5 cm, 12 cm and 13 cm, and length 20 cm. Find its volume and total surface area. *(6 marks)*
+
+---
+
+**Q17.** Using a scale of 1 cm to 5 m, a rectangular field measures 6.4 cm by 3.7 cm on a plan.
+
+(a) Find the actual dimensions. *(3 marks)*
+
+(b) Find the actual area in hectares. *(4 marks)*
+
+---
+
+**Q18.** The angle of elevation of the top of a tower from a point A is $30^\circ$. From a point B, 40 m further away on the same horizontal line, the angle of elevation is $15^\circ$. Find the height of the tower. *(7 marks)*
+
+---
+
+**Q19.** Prove that the angle in a semicircle is a right angle. *(5 marks)*
+
+---
+
+**Q20.** A capsule is formed by a cylinder of radius 2 cm and height 6 cm with a hemisphere at each end. Find the total volume and surface area of the capsule. *(6 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 6
+
+## Structural Question Bank — Trigonometry
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: TRIGONOMETRY
+
+**Q1.** Prove the identity $\dfrac{\sin 2\theta}{1 + \cos 2\theta} = \tan \theta$. *(6 marks)*
+
+---
+
+**Q2.** In triangle $PQR$, $p = 8$ cm, $q = 11$ cm and $\angle R = 47^\circ$. Find $r$. *(6 marks)*
+
+---
+
+**Q3.** Solve $2\sin x \cos x = \cos x$ for $0^\circ \leq x \leq 360^\circ$. *(5 marks)*
+
+---
+
+**Q4.** Find the exact value of $\sin 105^\circ$. *(4 marks)*
+
+---
+
+**Q5.** A ship sails 12 km on a bearing of $040^\circ$ then 9 km on a bearing of $130^\circ$.
+
+(a) Find the direct distance from the start. *(5 marks)*
+
+(b) Find the bearing of the start from the end point. *(4 marks)*
+
+---
+
+**Q6.** Show that $\cos 3\theta \equiv 4\cos^3\theta - 3\cos\theta$. Hence solve $\cos 3\theta = \dfrac{1}{2}$ for $0 \leq \theta < 2\pi$. *(8 marks)*
+
+---
+
+**Q7.** The height of a cliff is measured from two points 80 m apart at the base. Angles of elevation are $42^\circ$ and $61^\circ$. Find the height of the cliff. *(6 marks)*
+
+---
+
+**Q8.** Express $3\sin x + 4\cos x$ in the form $R\sin(x + \alpha)$. Hence find its maximum value. *(6 marks)*
+
+---
+
+**Q9.** In triangle $ABC$, $a = 7$, $b = 8$ and $c = 9$. Find the largest angle correct to 1 decimal place. *(5 marks)*
+
+---
+
+**Q10.** Solve $\tan 2x = \sqrt{3}$ for $0^\circ \leq x \leq 180^\circ$. *(4 marks)*
+
+---
+
+**Q11.** A triangular plot has sides 130 m, 150 m and 180 m. Find the area of the plot. *(6 marks)*
+
+---
+
+**Q12.** Prove that $\sin(A+B)\sin(A-B) \equiv \sin^2 A - \sin^2 B$. *(6 marks)*
+
+---
+
+**Q13.** From the top of a 60 m mast, the angle of depression of a buoy is $28^\circ$. Find the horizontal distance to the buoy. *(4 marks)*
+
+---
+
+**Q14.** Find the general solution of $2\cos^2 x - 3\sin x = 0$ for $0^\circ \leq x \leq 360^\circ$. *(6 marks)*
+
+---
+
+**Q15.** The angles of a triangle are in the ratio $3:4:5$. Find the exact values of the smallest and largest angles'' sines. *(5 marks)*
+
+---
+
+**Q16.** Two towers of heights 40 m and 60 m stand on level ground 100 m apart. Find the angle of elevation from the top of the shorter tower to the top of the taller one. *(5 marks)*
+
+---
+
+**Q17.** Simplify $\dfrac{1 - \cos 2\theta}{\sin 2\theta}$ and hence evaluate it when $\theta = 30^\circ$. *(5 marks)*
+
+---
+
+**Q18.** A plane flies on a bearing of $115^\circ$ for 200 km, then turns to a bearing of $200^\circ$ for 150 km. Find its distance and bearing from the starting point. *(7 marks)*
+
+---
+
+**Q19.** Prove that $\cot\theta - \tan\theta \equiv 2\cot 2\theta$. *(5 marks)*
+
+---
+
+**Q20.** In triangle $ABC$, $\angle A = 58^\circ$, $a = 14$ cm and $b = 16$ cm. Show that there are two possible triangles and find both possible values of $\angle B$. *(7 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 7
+
+## Structural Question Bank — Statistics and probability
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STATISTICS AND PROBABILITY
+
+**Q1.** The marks of 50 students are grouped as: $0-9:3$, $10-19:7$, $20-29:12$, $30-39:15$, $40-49:9$, $50-59:4$.
+
+(a) Estimate the mean mark. *(4 marks)*
+
+(b) Estimate the median and comment on the skewness. *(4 marks)*
+
+---
+
+**Q2.** Two bags contain red and blue counters. Bag 1 has 3 red and 5 blue; bag 2 has 4 red and 1 blue. A bag is chosen at random and a counter drawn. Find the probability the counter is red. *(6 marks)*
+
+---
+
+**Q3.** The mean of 8 numbers is 24. If one number, 31, is removed, find the new mean. *(3 marks)*
+
+---
+
+**Q4.** A die and a coin are thrown together. Find the probability of getting a six and a head. *(3 marks)*
+
+---
+
+**Q5.** The quartiles of a data set are $Q1 = 12$, $Q2 = 18$, $Q3 = 27$.
+
+(a) Find the interquartile range. *(2 marks)*
+
+(b) Show that an observation of 52 is an outlier by the $1.5\times IQR$ rule. *(3 marks)*
+
+---
+
+**Q6.** In a class of 30 students, 18 play football, 14 play basketball and 6 play both.
+
+(a) Draw a Venn diagram. *(3 marks)*
+
+(b) Find the probability that a randomly chosen student plays neither. *(3 marks)*
+
+---
+
+**Q7.** The table gives the frequency of books read per month: 0 books (5 students), 1 book (9), 2 books (12), 3 books (6), 4 books (3). Find the mean and mode. *(5 marks)*
+
+---
+
+**Q8.** A bag contains 5 green, 3 yellow and 2 red sweets. Three sweets are drawn without replacement. Find the probability all three are green. *(6 marks)*
+
+---
+
+**Q9.** The mean and standard deviation of a data set are 50 and 8. Find the coefficient of variation and interpret it. *(4 marks)*
+
+---
+
+**Q10.** Two cards are drawn from a standard pack without replacement. Find the probability both are hearts. *(4 marks)*
+
+---
+
+**Q11.** A cumulative frequency curve gives $Q1 = 22$, median = 31 and $Q3 = 44$. Find the interquartile range and the semi-interquartile range. *(4 marks)*
+
+---
+
+**Q12.** The probability that a student passes a test is 0.7. Four students are chosen. Find the probability exactly two pass. *(6 marks)*
+
+---
+
+**Q13.** A sample of 40 light bulbs has mean life 1200 h and standard deviation 60 h. Construct a 95% confidence interval for the mean. *(5 marks)*
+
+---
+
+**Q14.** The scatter diagram of height (cm) against mass (kg) for 10 children shows a strong positive correlation. Explain what this does and does not imply. *(4 marks)*
+
+---
+
+**Q15.** A spinner has 4 equal sections numbered 1 to 4. It is spun twice. Find the probability the sum is 5. *(4 marks)*
+
+---
+
+**Q16.** The marks below 40 are 12 students and above or equal to 40 are 28 students. Find the probability that a randomly chosen student scored at least 40, and state the complement. *(3 marks)*
+
+---
+
+**Q17.** A factory produces 1 in 20 defective items. Two items are picked at random. Find the probability at least one is defective. *(5 marks)*
+
+---
+
+**Q18.** The table shows the heights (cm) and masses (kg) of 8 students: height $150, 155, 160, 165, 170, 175, 180, 185$; mass $48, 52, 55, 58, 62, 66, 70, 74$.
+
+(a) Plot a scatter diagram of mass against height. *(3 marks)*
+
+(b) Describe the correlation between height and mass. *(2 marks)*
+
+(c) Estimate the mass of a student of height 172 cm using a line of best fit. *(3 marks)*
+
+---
+
+**Q19.** Events $A$ and $B$ are independent with $P(A) = 0.4$ and $P(B) = 0.5$. Find $P(A \cup B)$. *(4 marks)*
+
+---
+
+**Q20.** A survey records the number of siblings of 20 students: mean 2.4, mode 2, median 2. Discuss which measure best represents a typical student and why. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P2 SET 8
+
+## Structural Question Bank — Number and algebra
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: NUMBER AND ALGEBRA
+
+**Q1.** Solve $\log_2(x+3) + \log_2(x-1) = 5$. Hence state the restriction on $x$. *(9 marks)*
+
+---
+
+**Q2.** Given $8^{2x-1} = 4^{x+3}$, find the exact value of $x$. *(7 marks)*
+
+---
+
+**Q3.** Simplify $\dfrac{\sqrt{50} - \sqrt{18}}{\sqrt{2}}$ leaving your answer in the form $a + b\sqrt{c}$. *(7 marks)*
+
+---
+
+**Q4.** The 3rd term of an arithmetic progression is 12 and the sum of the first 12 terms is 186.
+
+(a) Find the first term and common difference. *(6 marks)*
+
+(b) Find the least value of $n$ for which $T_n > 100$. *(4 marks)*
+
+---
+
+**Q5.** A geometric progression has sum to infinity 96 and common ratio $\dfrac{3}{4}$.
+
+(a) Find the first term. *(4 marks)*
+
+(b) Find the least number of terms for which the sum exceeds 90. *(6 marks)*
+
+---
+
+**Q6.** Prove that for all real $x > 0$, $x + \dfrac{1}{x} \geq 2$. State when equality holds. *(7 marks)*
+
+---
+
+**Q7.** Solve the inequality $\dfrac{2x+5}{x-3} \geq 1$ and represent the solution on a number line. *(8 marks)*
+
+---
+
+**Q8.** When $P(x) = 2x^3 - 5x^2 + ax - 6$ is divided by $(x-2)$ the remainder is 3. Find $a$ and hence factorise $P(x)$ completely. *(9 marks)*
+
+---
+
+**Q9.** Expand $(1 - 2x)^4$ in ascending powers of $x$, and hence find the coefficient of $x^3$. *(6 marks)*
+
+---
+
+**Q10.** Solve simultaneously $y = x^2 - 4x + 3$ and $y = 2x - 6$. *(8 marks)*
+
+---
+
+**Q11.** Express $\dfrac{3x+11}{x^2+x-6}$ in partial fractions. *(7 marks)*
+
+---
+
+**Q12.** Given that $\log_{10} 2 = 0.3010$ and $\log_{10} 3 = 0.4771$, evaluate $\log_{10} 24$ without a table. *(5 marks)*
+
+---
+
+**Q13.** The sum of an infinite geometric series is 45 and the sum of the first two terms is 27. Find the common ratio. *(7 marks)*
+
+---
+
+**Q14.** Make $t$ the subject of $v = u + at$ and $s = ut + \dfrac{1}{2}at^2$, then eliminate $t$ to express $v^2$ in terms of $u$, $a$ and $s$. *(8 marks)*
+
+---
+
+**Q15.** Solve $|3x - 4| \leq 11$ and give the solution in interval form. *(6 marks)*
+
+---
+
+**Q16.** If $\alpha$ and $\beta$ are the roots of $2x^2 - 6x + 3 = 0$, find the value of $\alpha^2 + \beta^2$ and $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(7 marks)*
+
+---
+
+**Q17.** Simplify $\dfrac{a^2 - b^2}{a - b} \div \dfrac{a+b}{a^2+ab+b^2}$ where the expression is defined. *(6 marks)*
+
+---
+
+**Q18.** A contractor prices a job with a fixed cost plus a variable rate. 3 jobs cost 45,000 FCFA and 7 jobs cost 85,000 FCFA.
+
+(a) Find the fixed cost and variable rate. *(6 marks)*
+
+(b) Predict the cost of 10 jobs and comment on the model. *(4 marks)*
+
+---
+
+**Q19.** Find the sum of the first 40 terms of the series $3 + 7 + 11 + \cdots$. *(5 marks)*
+
+---
+
+**Q20.** Prove algebraically that the sum of any three consecutive integers is divisible by 3. *(7 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Solve $2^{x} = 32$.
+
+A. 5  
+B. 6  
+C. 4  
+D. 16  
+
+---
+
+**Q2.** Simplify $\sqrt{72}$.
+
+A. $6\sqrt{2}$  
+B. $3\sqrt{8}$  
+C. $2\sqrt{18}$  
+D. $8\sqrt{3}$  
+
+---
+
+**Q3.** Evaluate $\log_{3} 81$.
+
+A. 4  
+B. 2  
+C. 3  
+D. 9  
+
+---
+
+**Q4.** The 4th term of an AP is 14 and the common difference is 3. Find the first term.
+
+A. 5  
+B. 11  
+C. 2  
+D. 8  
+
+---
+
+**Q5.** Find the sum to infinity of a GP with $a = 12$ and $r = \dfrac{1}{3}$.
+
+A. 18  
+B. 36  
+C. 16  
+D. 24  
+
+---
+
+**Q6.** Factorise $x^2 - 9$.
+
+A. $(x-3)(x+3)$  
+B. $(x+9)(x-1)$  
+C. $(x-3)^2$  
+D. $(x-9)(x+1)$  
+
+---
+
+**Q7.** Solve $3x - 7 = 11$.
+
+A. 4  
+B. 6  
+C. 8  
+D. 5  
+
+---
+
+**Q8.** Expand $(x+2)^2$.
+
+A. $x^2 + 2x + 4$  
+B. $x^2 + 4x + 4$  
+C. $x^2 + 4$  
+D. $x^2 + 4x + 2$  
+
+---
+
+**Q9.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 1 and 6  
+B. -2 and -3  
+C. 2 and 3  
+D. 2 and -3  
+
+---
+
+**Q10.** Simplify $\dfrac{x^2 - 4}{x - 2}$ for $x \neq 2$.
+
+A. $x - 2$  
+B. $x^2 + 2$  
+C. $x$  
+D. $x + 2$  
+
+---
+
+**Q11.** Find the value of $\log_{10} 1000$.
+
+A. 2  
+B. 1  
+C. 3  
+D. 10  
+
+---
+
+**Q12.** If $f(x) = 2x + 3$, find $f^{-1}(x)$.
+
+A. $\dfrac{x+3}{2}$  
+B. $\dfrac{x}{2} + 3$  
+C. $2x - 3$  
+D. $\dfrac{x-3}{2}$  
+
+---
+
+**Q13.** The 10th term of the sequence $2, 5, 8, \ldots$ is:
+
+A. 26  
+B. 29  
+C. 32  
+D. 50  
+
+---
+
+**Q14.** Solve the simultaneous equations $x + y = 10$ and $x - y = 4$.
+
+A. $x=5, y=5$  
+B. $x=7, y=3$  
+C. $x=8, y=2$  
+D. $x=6, y=4$  
+
+---
+
+**Q15.** Evaluate $\dfrac{1}{2} + \dfrac{1}{3}$.
+
+A. $\dfrac{1}{6}$  
+B. $\dfrac{2}{5}$  
+C. $\dfrac{5}{6}$  
+D. $\dfrac{3}{5}$  
+
+---
+
+**Q16.** The sum of the interior angles of a hexagon is:
+
+A. 900°  
+B. 540°  
+C. 1080°  
+D. 720°  
+
+---
+
+**Q17.** The area of a circle of radius 7 cm (take $\pi = \dfrac{22}{7}$) is:
+
+A. 156 cm²  
+B. 148 cm²  
+C. 154 cm²  
+D. 144 cm²  
+
+---
+
+**Q18.** The circumference of a circle of diameter 10 cm is:
+
+A. $20\pi$ cm  
+B. $100\pi$ cm  
+C. $5\pi$ cm  
+D. $10\pi$ cm  
+
+---
+
+**Q19.** The volume of a cylinder of radius 3 cm and height 10 cm is:
+
+A. $300\pi$ cm³  
+B. $90\pi$ cm³  
+C. $30\pi$ cm³  
+D. $13\pi$ cm³  
+
+---
+
+**Q20.** The interior angle of a regular octagon is:
+
+A. 144°  
+B. 135°  
+C. 120°  
+D. 140°  
+
+---
+
+**Q21.** The volume of a sphere of radius 3 cm is (in terms of $\pi$):
+
+A. $108\pi$ cm³  
+B. $27\pi$ cm³  
+C. $36\pi$ cm³  
+D. $9\pi$ cm³  
+
+---
+
+**Q22.** The area of a sector of radius 12 cm and angle 60° is:
+
+A. $144\pi$ cm²  
+B. $24\pi$ cm²  
+C. $6\pi$ cm²  
+D. $12\pi$ cm²  
+
+---
+
+**Q23.** A right triangle has legs 6 cm and 8 cm. Its hypotenuse is:
+
+A. 7 cm  
+B. 14 cm  
+C. 10 cm  
+D. 12 cm  
+
+---
+
+**Q24.** The perimeter of a rectangle of length 12 cm and width 5 cm is:
+
+A. 28 cm  
+B. 17 cm  
+C. 60 cm  
+D. 34 cm  
+
+---
+
+**Q25.** The distance between $(1,2)$ and $(4,6)$ is:
+
+A. 5  
+B. 7  
+C. 12  
+D. 25  
+
+---
+
+**Q26.** The gradient of the line through $(0,0)$ and $(3,5)$ is:
+
+A. $\dfrac{5}{3}$  
+B. $\dfrac{3}{5}$  
+C. 3  
+D. 5  
+
+---
+
+**Q27.** The angle in a semicircle is:
+
+A. 90°  
+B. 45°  
+C. 60°  
+D. 180°  
+
+---
+
+**Q28.** The volume of a cone of radius 3 cm and height 9 cm is (in terms of $\pi$):
+
+A. $27\pi$ cm³  
+B. $9\pi$ cm³  
+C. $54\pi$ cm³  
+D. $81\pi$ cm³  
+
+---
+
+**Q29.** The sum of the exterior angles of any convex polygon is:
+
+A. 360°  
+B. 720°  
+C. 180°  
+D. 540°  
+
+---
+
+**Q30.** The area of a triangle with base 10 cm and height 6 cm is:
+
+A. 30 cm²  
+B. 36 cm²  
+C. 16 cm²  
+D. 60 cm²  
+
+---
+
+**Q31.** The exact value of $\sin 30^\circ$ is:
+
+A. $\dfrac{\sqrt{3}}{2}$  
+B. $\dfrac{1}{2}$  
+C. $\dfrac{1}{\sqrt{2}}$  
+D. 1  
+
+---
+
+**Q32.** The exact value of $\cos 60^\circ$ is:
+
+A. $\dfrac{\sqrt{3}}{2}$  
+B. $\dfrac{1}{2}$  
+C. 0  
+D. $\dfrac{1}{\sqrt{2}}$  
+
+---
+
+**Q33.** The exact value of $\tan 45^\circ$ is:
+
+A. $\sqrt{3}$  
+B. $\dfrac{1}{\sqrt{3}}$  
+C. 1  
+D. 0  
+
+---
+
+**Q34.** In a right triangle, $\sin\theta = \dfrac{3}{5}$. Then $\cos\theta$ is:
+
+A. $\dfrac{5}{3}$  
+B. $\dfrac{3}{4}$  
+C. $\dfrac{1}{5}$  
+D. $\dfrac{4}{5}$  
+
+---
+
+**Q35.** The value of $\sin 90^\circ$ is:
+
+A. 0  
+B. -1  
+C. 1  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q36.** The period of $y = \sin x$ is:
+
+A. $\pi$  
+B. $4\pi$  
+C. $\dfrac{\pi}{2}$  
+D. $2\pi$  
+
+---
+
+**Q37.** Which identity is correct?
+
+A. $1 + \tan^2\theta = \cos^2\theta$  
+B. $\sin^2\theta + \cos^2\theta = 1$  
+C. $\sin^2\theta - \cos^2\theta = 1$  
+D. $\sin\theta = \cos\theta$ always  
+
+---
+
+**Q38.** In triangle ABC with sides a=7, b=8, c=9, the largest angle is opposite the longest side. The largest side is:
+
+A. b  
+B. c  
+C. cannot tell  
+D. a  
+
+---
+
+**Q39.** The exact value of $\tan 30^\circ$ is:
+
+A. 1  
+B. $\sqrt{3}$  
+C. $\dfrac{1}{\sqrt{3}}$  
+D. $\dfrac{\sqrt{3}}{2}$  
+
+---
+
+**Q40.** The general solution of $\sin x = 0$ includes:
+
+A. $x = \dfrac{\pi}{2} + n\pi$  
+B. $x = 2n\pi$  
+C. $x = n\pi + \dfrac{\pi}{4}$  
+D. $x = n\pi$  
+
+---
+
+**Q41.** The cosine rule for a triangle is:
+
+A. $c = a + b - \cos C$  
+B. $c^2 = a^2 - b^2 + 2ab\cos C$  
+C. $c^2 = a^2 + b^2 - 2ab\cos C$  
+D. $c^2 = a^2 + b^2$  
+
+---
+
+**Q42.** The sine rule states:
+
+A. $a + b = c$  
+B. $\sin A = \sin B$ always  
+C. $\dfrac{a}{\cos A} = \dfrac{b}{\cos B} = \dfrac{c}{\cos C}$  
+D. $\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C}$  
+
+---
+
+**Q43.** The exact value of $\cos 45^\circ$ is:
+
+A. 1  
+B. $\dfrac{1}{\sqrt{2}}$  
+C. $\dfrac{\sqrt{3}}{2}$  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q44.** The angle of depression from a point equals:
+
+A. half the elevation  
+B. the angle of elevation from the other point  
+C. twice the elevation  
+D. 90° minus the elevation  
+
+---
+
+**Q45.** The exact value of $\sin 45^\circ$ is:
+
+A. 1  
+B. $\dfrac{\sqrt{3}}{2}$  
+C. $\dfrac{1}{\sqrt{2}}$  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q46.** The mean of 4, 8, 10 and 12 is:
+
+A. 7.5  
+B. 8  
+C. 9  
+D. 8.5  
+
+---
+
+**Q47.** The median of 3, 5, 7, 9, 11 is:
+
+A. 6  
+B. 9  
+C. 7  
+D. 5  
+
+---
+
+**Q48.** The mode of 2, 3, 3, 4, 4, 4, 5 is:
+
+A. 2  
+B. 5  
+C. 3  
+D. 4  
+
+---
+
+**Q49.** The range of 12, 18, 7, 20, 5 is:
+
+A. 15  
+B. 13  
+C. 20  
+D. 7  
+
+---
+
+**Q50.** The probability of rolling a 6 on a fair die is:
+
+A. $\dfrac{1}{6}$  
+B. $\dfrac{1}{3}$  
+C. 1  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q51.** The probability of getting a head on a fair coin is:
+
+A. $\dfrac{1}{2}$  
+B. 0  
+C. 1  
+D. $\dfrac{1}{4}$  
+
+---
+
+**Q52.** A bag has 5 red and 3 blue counters. Probability of drawing a blue is:
+
+A. $\dfrac{3}{8}$  
+B. $\dfrac{5}{8}$  
+C. $\dfrac{1}{3}$  
+D. $\dfrac{3}{5}$  
+
+---
+
+**Q53.** The interquartile range equals:
+
+A. Q3 - Q1  
+B. maximum - minimum  
+C. Q3 - Q2  
+D. Q2 - Q1  
+
+---
+
+**Q54.** The sum of all probabilities in a distribution must equal:
+
+A. 1  
+B. the number of outcomes  
+C. 100  
+D. 0  
+
+---
+
+**Q55.** If two events are mutually exclusive, P(A and B) is:
+
+A. 1  
+B. 0  
+C. P(A) + P(B)  
+D. P(A) × P(B)  
+
+---
+
+**Q56.** The mean of the first 5 positive integers is:
+
+A. 2.5  
+B. 3  
+C. 5  
+D. 4  
+
+---
+
+**Q57.** A coin is tossed twice. Probability of two heads is:
+
+A. $\dfrac{1}{2}$  
+B. $\dfrac{1}{3}$  
+C. $\dfrac{1}{4}$  
+D. 1  
+
+---
+
+**Q58.** The standard deviation measures:
+
+A. central tendency  
+B. the middle value  
+C. the most frequent value  
+D. spread about the mean  
+
+---
+
+**Q59.** The median of an even number of observations is:
+
+A. the largest value  
+B. the mode  
+C. the mean of the two middle values  
+D. the smallest value  
+
+---
+
+**Q60.** A survey of 200 students finds 120 prefer tea. The relative frequency is:
+
+A. 0.4  
+B. 1.67  
+C. 80  
+D. 0.6  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. B
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The 4th term of an AP is 14 and the common difference is 3. Find the first term.
+
+A. 5  
+B. 8  
+C. 11  
+D. 2  
+
+---
+
+**Q2.** Find the sum to infinity of a GP with $a = 12$ and $r = \dfrac{1}{3}$.
+
+A. 18  
+B. 16  
+C. 36  
+D. 24  
+
+---
+
+**Q3.** Factorise $x^2 - 9$.
+
+A. $(x-3)(x+3)$  
+B. $(x-3)^2$  
+C. $(x-9)(x+1)$  
+D. $(x+9)(x-1)$  
+
+---
+
+**Q4.** Solve $3x - 7 = 11$.
+
+A. 6  
+B. 8  
+C. 5  
+D. 4  
+
+---
+
+**Q5.** Expand $(x+2)^2$.
+
+A. $x^2 + 4x + 4$  
+B. $x^2 + 4$  
+C. $x^2 + 2x + 4$  
+D. $x^2 + 4x + 2$  
+
+---
+
+**Q6.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 2 and 3  
+B. 2 and -3  
+C. -2 and -3  
+D. 1 and 6  
+
+---
+
+**Q7.** Simplify $\dfrac{x^2 - 4}{x - 2}$ for $x \neq 2$.
+
+A. $x - 2$  
+B. $x + 2$  
+C. $x^2 + 2$  
+D. $x$  
+
+---
+
+**Q8.** Find the value of $\log_{10} 1000$.
+
+A. 2  
+B. 3  
+C. 1  
+D. 10  
+
+---
+
+**Q9.** If $f(x) = 2x + 3$, find $f^{-1}(x)$.
+
+A. $\dfrac{x+3}{2}$  
+B. $2x - 3$  
+C. $\dfrac{x-3}{2}$  
+D. $\dfrac{x}{2} + 3$  
+
+---
+
+**Q10.** The 10th term of the sequence $2, 5, 8, \ldots$ is:
+
+A. 32  
+B. 26  
+C. 50  
+D. 29  
+
+---
+
+**Q11.** Solve the simultaneous equations $x + y = 10$ and $x - y = 4$.
+
+A. $x=6, y=4$  
+B. $x=8, y=2$  
+C. $x=7, y=3$  
+D. $x=5, y=5$  
+
+---
+
+**Q12.** Evaluate $\dfrac{1}{2} + \dfrac{1}{3}$.
+
+A. $\dfrac{2}{5}$  
+B. $\dfrac{3}{5}$  
+C. $\dfrac{1}{6}$  
+D. $\dfrac{5}{6}$  
+
+---
+
+**Q13.** What is the value of $0.25$ as a fraction in lowest terms?
+
+A. $\dfrac{2}{5}$  
+B. $\dfrac{1}{4}$  
+C. $\dfrac{1}{5}$  
+D. $\dfrac{1}{8}$  
+
+---
+
+**Q14.** The discriminant of $x^2 + 4x + 5 = 0$ is:
+
+A. 16  
+B. -4  
+C. 0  
+D. 4  
+
+---
+
+**Q15.** Simplify $a^3 \cdot a^4$.
+
+A. $a^{34}$  
+B. $a^{12}$  
+C. $a^7$  
+D. $2a^7$  
+
+---
+
+**Q16.** The volume of a cylinder of radius 3 cm and height 10 cm is:
+
+A. $13\pi$ cm³  
+B. $30\pi$ cm³  
+C. $300\pi$ cm³  
+D. $90\pi$ cm³  
+
+---
+
+**Q17.** The interior angle of a regular octagon is:
+
+A. 120°  
+B. 144°  
+C. 135°  
+D. 140°  
+
+---
+
+**Q18.** The volume of a sphere of radius 3 cm is (in terms of $\pi$):
+
+A. $9\pi$ cm³  
+B. $108\pi$ cm³  
+C. $27\pi$ cm³  
+D. $36\pi$ cm³  
+
+---
+
+**Q19.** The area of a sector of radius 12 cm and angle 60° is:
+
+A. $144\pi$ cm²  
+B. $12\pi$ cm²  
+C. $24\pi$ cm²  
+D. $6\pi$ cm²  
+
+---
+
+**Q20.** A right triangle has legs 6 cm and 8 cm. Its hypotenuse is:
+
+A. 7 cm  
+B. 10 cm  
+C. 14 cm  
+D. 12 cm  
+
+---
+
+**Q21.** The perimeter of a rectangle of length 12 cm and width 5 cm is:
+
+A. 28 cm  
+B. 60 cm  
+C. 34 cm  
+D. 17 cm  
+
+---
+
+**Q22.** The distance between $(1,2)$ and $(4,6)$ is:
+
+A. 25  
+B. 7  
+C. 12  
+D. 5  
+
+---
+
+**Q23.** The gradient of the line through $(0,0)$ and $(3,5)$ is:
+
+A. 3  
+B. 5  
+C. $\dfrac{5}{3}$  
+D. $\dfrac{3}{5}$  
+
+---
+
+**Q24.** The angle in a semicircle is:
+
+A. 180°  
+B. 45°  
+C. 60°  
+D. 90°  
+
+---
+
+**Q25.** The volume of a cone of radius 3 cm and height 9 cm is (in terms of $\pi$):
+
+A. $27\pi$ cm³  
+B. $81\pi$ cm³  
+C. $9\pi$ cm³  
+D. $54\pi$ cm³  
+
+---
+
+**Q26.** The sum of the exterior angles of any convex polygon is:
+
+A. 360°  
+B. 180°  
+C. 720°  
+D. 540°  
+
+---
+
+**Q27.** The area of a triangle with base 10 cm and height 6 cm is:
+
+A. 30 cm²  
+B. 16 cm²  
+C. 60 cm²  
+D. 36 cm²  
+
+---
+
+**Q28.** The locus of points equidistant from a fixed point is:
+
+A. a circle  
+B. an ellipse  
+C. a square  
+D. a line  
+
+---
+
+**Q29.** The slant height of a cone is 5 cm and radius 3 cm; its vertical height is:
+
+A. 4 cm  
+B. 2 cm  
+C. 6 cm  
+D. 8 cm  
+
+---
+
+**Q30.** The area of a parallelogram of base 8 cm and perpendicular height 5 cm is:
+
+A. 40 cm²  
+B. 20 cm²  
+C. 13 cm²  
+D. 45 cm²  
+
+---
+
+**Q31.** In a right triangle, $\sin\theta = \dfrac{3}{5}$. Then $\cos\theta$ is:
+
+A. $\dfrac{5}{3}$  
+B. $\dfrac{4}{5}$  
+C. $\dfrac{3}{4}$  
+D. $\dfrac{1}{5}$  
+
+---
+
+**Q32.** The value of $\sin 90^\circ$ is:
+
+A. 0  
+B. 1  
+C. -1  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q33.** The period of $y = \sin x$ is:
+
+A. $\pi$  
+B. $\dfrac{\pi}{2}$  
+C. $2\pi$  
+D. $4\pi$  
+
+---
+
+**Q34.** Which identity is correct?
+
+A. $\sin^2\theta - \cos^2\theta = 1$  
+B. $1 + \tan^2\theta = \cos^2\theta$  
+C. $\sin\theta = \cos\theta$ always  
+D. $\sin^2\theta + \cos^2\theta = 1$  
+
+---
+
+**Q35.** In triangle ABC with sides a=7, b=8, c=9, the largest angle is opposite the longest side. The largest side is:
+
+A. a  
+B. cannot tell  
+C. c  
+D. b  
+
+---
+
+**Q36.** The exact value of $\tan 30^\circ$ is:
+
+A. $\sqrt{3}$  
+B. $\dfrac{\sqrt{3}}{2}$  
+C. 1  
+D. $\dfrac{1}{\sqrt{3}}$  
+
+---
+
+**Q37.** The general solution of $\sin x = 0$ includes:
+
+A. $x = \dfrac{\pi}{2} + n\pi$  
+B. $x = n\pi$  
+C. $x = 2n\pi$  
+D. $x = n\pi + \dfrac{\pi}{4}$  
+
+---
+
+**Q38.** The cosine rule for a triangle is:
+
+A. $c = a + b - \cos C$  
+B. $c^2 = a^2 + b^2 - 2ab\cos C$  
+C. $c^2 = a^2 - b^2 + 2ab\cos C$  
+D. $c^2 = a^2 + b^2$  
+
+---
+
+**Q39.** The sine rule states:
+
+A. $a + b = c$  
+B. $\dfrac{a}{\cos A} = \dfrac{b}{\cos B} = \dfrac{c}{\cos C}$  
+C. $\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C}$  
+D. $\sin A = \sin B$ always  
+
+---
+
+**Q40.** The exact value of $\cos 45^\circ$ is:
+
+A. $\dfrac{1}{2}$  
+B. $\dfrac{\sqrt{3}}{2}$  
+C. 1  
+D. $\dfrac{1}{\sqrt{2}}$  
+
+---
+
+**Q41.** The angle of depression from a point equals:
+
+A. twice the elevation  
+B. half the elevation  
+C. the angle of elevation from the other point  
+D. 90° minus the elevation  
+
+---
+
+**Q42.** The exact value of $\sin 45^\circ$ is:
+
+A. $\dfrac{1}{2}$  
+B. 1  
+C. $\dfrac{\sqrt{3}}{2}$  
+D. $\dfrac{1}{\sqrt{2}}$  
+
+---
+
+**Q43.** In a right triangle with angle θ, tan θ = opposite/adjacent. If opposite = 3 and adjacent = 4, tan θ is:
+
+A. $\dfrac{3}{5}$  
+B. $\dfrac{3}{4}$  
+C. $\dfrac{4}{3}$  
+D. $\dfrac{5}{4}$  
+
+---
+
+**Q44.** The value of $\sin 0^\circ$ is:
+
+A. -1  
+B. 0  
+C. $\dfrac{1}{2}$  
+D. 1  
+
+---
+
+**Q45.** The value of $\cos 0^\circ$ is:
+
+A. -1  
+B. 0  
+C. 1  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q46.** The range of 12, 18, 7, 20, 5 is:
+
+A. 7  
+B. 13  
+C. 20  
+D. 15  
+
+---
+
+**Q47.** The probability of rolling a 6 on a fair die is:
+
+A. 1  
+B. $\dfrac{1}{2}$  
+C. $\dfrac{1}{6}$  
+D. $\dfrac{1}{3}$  
+
+---
+
+**Q48.** The probability of getting a head on a fair coin is:
+
+A. $\dfrac{1}{4}$  
+B. 0  
+C. 1  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q49.** A bag has 5 red and 3 blue counters. Probability of drawing a blue is:
+
+A. $\dfrac{3}{8}$  
+B. $\dfrac{3}{5}$  
+C. $\dfrac{5}{8}$  
+D. $\dfrac{1}{3}$  
+
+---
+
+**Q50.** The interquartile range equals:
+
+A. Q3 - Q1  
+B. Q3 - Q2  
+C. maximum - minimum  
+D. Q2 - Q1  
+
+---
+
+**Q51.** The sum of all probabilities in a distribution must equal:
+
+A. 1  
+B. 100  
+C. 0  
+D. the number of outcomes  
+
+---
+
+**Q52.** If two events are mutually exclusive, P(A and B) is:
+
+A. 0  
+B. P(A) + P(B)  
+C. P(A) × P(B)  
+D. 1  
+
+---
+
+**Q53.** The mean of the first 5 positive integers is:
+
+A. 3  
+B. 5  
+C. 2.5  
+D. 4  
+
+---
+
+**Q54.** A coin is tossed twice. Probability of two heads is:
+
+A. $\dfrac{1}{4}$  
+B. 1  
+C. $\dfrac{1}{3}$  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q55.** The standard deviation measures:
+
+A. central tendency  
+B. spread about the mean  
+C. the middle value  
+D. the most frequent value  
+
+---
+
+**Q56.** The median of an even number of observations is:
+
+A. the largest value  
+B. the mean of the two middle values  
+C. the mode  
+D. the smallest value  
+
+---
+
+**Q57.** A survey of 200 students finds 120 prefer tea. The relative frequency is:
+
+A. 0.4  
+B. 80  
+C. 0.6  
+D. 1.67  
+
+---
+
+**Q58.** The mode of a grouped frequency distribution is found using:
+
+A. the median class  
+B. the mean class  
+C. the class boundary  
+D. the modal class  
+
+---
+
+**Q59.** If P(A) = 0.3 and A and B are independent with P(B) = 0.5, P(A and B) is:
+
+A. 0.8  
+B. 0.4  
+C. 0.15  
+D. 0.2  
+
+---
+
+**Q60.** The mean of grouped data is estimated using:
+
+A. class boundaries  
+B. the modal class  
+C. class widths  
+D. class midpoints  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. C
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL MATHEMATICS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, technical
+**Subject:** Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Solve $3x - 7 = 11$.
+
+A. 6  
+B. 4  
+C. 8  
+D. 5  
+
+---
+
+**Q2.** Expand $(x+2)^2$.
+
+A. $x^2 + 4x + 4$  
+B. $x^2 + 2x + 4$  
+C. $x^2 + 4$  
+D. $x^2 + 4x + 2$  
+
+---
+
+**Q3.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 2 and 3  
+B. -2 and -3  
+C. 1 and 6  
+D. 2 and -3  
+
+---
+
+**Q4.** Simplify $\dfrac{x^2 - 4}{x - 2}$ for $x \neq 2$.
+
+A. $x + 2$  
+B. $x^2 + 2$  
+C. $x$  
+D. $x - 2$  
+
+---
+
+**Q5.** Find the value of $\log_{10} 1000$.
+
+A. 3  
+B. 1  
+C. 2  
+D. 10  
+
+---
+
+**Q6.** If $f(x) = 2x + 3$, find $f^{-1}(x)$.
+
+A. $\dfrac{x-3}{2}$  
+B. $\dfrac{x}{2} + 3$  
+C. $2x - 3$  
+D. $\dfrac{x+3}{2}$  
+
+---
+
+**Q7.** The 10th term of the sequence $2, 5, 8, \ldots$ is:
+
+A. 32  
+B. 29  
+C. 26  
+D. 50  
+
+---
+
+**Q8.** Solve the simultaneous equations $x + y = 10$ and $x - y = 4$.
+
+A. $x=6, y=4$  
+B. $x=7, y=3$  
+C. $x=8, y=2$  
+D. $x=5, y=5$  
+
+---
+
+**Q9.** Evaluate $\dfrac{1}{2} + \dfrac{1}{3}$.
+
+A. $\dfrac{2}{5}$  
+B. $\dfrac{1}{6}$  
+C. $\dfrac{5}{6}$  
+D. $\dfrac{3}{5}$  
+
+---
+
+**Q10.** What is the value of $0.25$ as a fraction in lowest terms?
+
+A. $\dfrac{1}{5}$  
+B. $\dfrac{2}{5}$  
+C. $\dfrac{1}{8}$  
+D. $\dfrac{1}{4}$  
+
+---
+
+**Q11.** The discriminant of $x^2 + 4x + 5 = 0$ is:
+
+A. 4  
+B. 0  
+C. -4  
+D. 16  
+
+---
+
+**Q12.** Simplify $a^3 \cdot a^4$.
+
+A. $a^{12}$  
+B. $2a^7$  
+C. $a^{34}$  
+D. $a^7$  
+
+---
+
+**Q13.** Make $x$ the subject of $y = 3x - 5$.
+
+A. $x = 3y - 5$  
+B. $x = \dfrac{y+5}{3}$  
+C. $x = \dfrac{y-5}{3}$  
+D. $x = \dfrac{y}{3} + 5$  
+
+---
+
+**Q14.** Find the coefficient of $x^2$ in $(1 + x)^4$.
+
+A. 1  
+B. 6  
+C. 12  
+D. 4  
+
+---
+
+**Q15.** Solve $2^{x} = 32$.
+
+A. 4  
+B. 6  
+C. 5  
+D. 16  
+
+---
+
+**Q16.** The area of a sector of radius 12 cm and angle 60° is:
+
+A. $6\pi$ cm²  
+B. $24\pi$ cm²  
+C. $144\pi$ cm²  
+D. $12\pi$ cm²  
+
+---
+
+**Q17.** A right triangle has legs 6 cm and 8 cm. Its hypotenuse is:
+
+A. 14 cm  
+B. 7 cm  
+C. 10 cm  
+D. 12 cm  
+
+---
+
+**Q18.** The perimeter of a rectangle of length 12 cm and width 5 cm is:
+
+A. 17 cm  
+B. 28 cm  
+C. 60 cm  
+D. 34 cm  
+
+---
+
+**Q19.** The distance between $(1,2)$ and $(4,6)$ is:
+
+A. 25  
+B. 5  
+C. 7  
+D. 12  
+
+---
+
+**Q20.** The gradient of the line through $(0,0)$ and $(3,5)$ is:
+
+A. 3  
+B. $\dfrac{5}{3}$  
+C. 5  
+D. $\dfrac{3}{5}$  
+
+---
+
+**Q21.** The angle in a semicircle is:
+
+A. 180°  
+B. 60°  
+C. 90°  
+D. 45°  
+
+---
+
+**Q22.** The volume of a cone of radius 3 cm and height 9 cm is (in terms of $\pi$):
+
+A. $54\pi$ cm³  
+B. $81\pi$ cm³  
+C. $9\pi$ cm³  
+D. $27\pi$ cm³  
+
+---
+
+**Q23.** The sum of the exterior angles of any convex polygon is:
+
+A. 720°  
+B. 540°  
+C. 360°  
+D. 180°  
+
+---
+
+**Q24.** The area of a triangle with base 10 cm and height 6 cm is:
+
+A. 36 cm²  
+B. 16 cm²  
+C. 60 cm²  
+D. 30 cm²  
+
+---
+
+**Q25.** The locus of points equidistant from a fixed point is:
+
+A. a circle  
+B. a line  
+C. an ellipse  
+D. a square  
+
+---
+
+**Q26.** The slant height of a cone is 5 cm and radius 3 cm; its vertical height is:
+
+A. 4 cm  
+B. 6 cm  
+C. 2 cm  
+D. 8 cm  
+
+---
+
+**Q27.** The area of a parallelogram of base 8 cm and perpendicular height 5 cm is:
+
+A. 40 cm²  
+B. 13 cm²  
+C. 45 cm²  
+D. 20 cm²  
+
+---
+
+**Q28.** The volume of a rectangular prism 4 cm × 3 cm × 5 cm is:
+
+A. 60 cm³  
+B. 47 cm³  
+C. 120 cm³  
+D. 35 cm³  
+
+---
+
+**Q29.** The complement of an angle of 35° is:
+
+A. 55°  
+B. 125°  
+C. 145°  
+D. 65°  
+
+---
+
+**Q30.** The sum of the interior angles of a hexagon is:
+
+A. 720°  
+B. 1080°  
+C. 900°  
+D. 540°  
+
+---
+
+**Q31.** Which identity is correct?
+
+A. $\sin^2\theta - \cos^2\theta = 1$  
+B. $\sin^2\theta + \cos^2\theta = 1$  
+C. $1 + \tan^2\theta = \cos^2\theta$  
+D. $\sin\theta = \cos\theta$ always  
+
+---
+
+**Q32.** In triangle ABC with sides a=7, b=8, c=9, the largest angle is opposite the longest side. The largest side is:
+
+A. a  
+B. c  
+C. cannot tell  
+D. b  
+
+---
+
+**Q33.** The exact value of $\tan 30^\circ$ is:
+
+A. $\sqrt{3}$  
+B. 1  
+C. $\dfrac{1}{\sqrt{3}}$  
+D. $\dfrac{\sqrt{3}}{2}$  
+
+---
+
+**Q34.** The general solution of $\sin x = 0$ includes:
+
+A. $x = 2n\pi$  
+B. $x = \dfrac{\pi}{2} + n\pi$  
+C. $x = n\pi + \dfrac{\pi}{4}$  
+D. $x = n\pi$  
+
+---
+
+**Q35.** The cosine rule for a triangle is:
+
+A. $c^2 = a^2 + b^2$  
+B. $c^2 = a^2 - b^2 + 2ab\cos C$  
+C. $c^2 = a^2 + b^2 - 2ab\cos C$  
+D. $c = a + b - \cos C$  
+
+---
+
+**Q36.** The sine rule states:
+
+A. $\dfrac{a}{\cos A} = \dfrac{b}{\cos B} = \dfrac{c}{\cos C}$  
+B. $\sin A = \sin B$ always  
+C. $a + b = c$  
+D. $\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C}$  
+
+---
+
+**Q37.** The exact value of $\cos 45^\circ$ is:
+
+A. $\dfrac{1}{2}$  
+B. $\dfrac{1}{\sqrt{2}}$  
+C. $\dfrac{\sqrt{3}}{2}$  
+D. 1  
+
+---
+
+**Q38.** The angle of depression from a point equals:
+
+A. twice the elevation  
+B. the angle of elevation from the other point  
+C. half the elevation  
+D. 90° minus the elevation  
+
+---
+
+**Q39.** The exact value of $\sin 45^\circ$ is:
+
+A. $\dfrac{1}{2}$  
+B. $\dfrac{\sqrt{3}}{2}$  
+C. $\dfrac{1}{\sqrt{2}}$  
+D. 1  
+
+---
+
+**Q40.** In a right triangle with angle θ, tan θ = opposite/adjacent. If opposite = 3 and adjacent = 4, tan θ is:
+
+A. $\dfrac{5}{4}$  
+B. $\dfrac{4}{3}$  
+C. $\dfrac{3}{5}$  
+D. $\dfrac{3}{4}$  
+
+---
+
+**Q41.** The value of $\sin 0^\circ$ is:
+
+A. $\dfrac{1}{2}$  
+B. -1  
+C. 0  
+D. 1  
+
+---
+
+**Q42.** The value of $\cos 0^\circ$ is:
+
+A. $\dfrac{1}{2}$  
+B. -1  
+C. 0  
+D. 1  
+
+---
+
+**Q43.** The supplementary angle of 120° is:
+
+A. 150°  
+B. 60°  
+C. 30°  
+D. 240°  
+
+---
+
+**Q44.** The exact value of $\sin 150^\circ$ is:
+
+A. 1  
+B. $\dfrac{1}{2}$  
+C. -$\dfrac{1}{2}$  
+D. $\dfrac{\sqrt{3}}{2}$  
+
+---
+
+**Q45.** The exact value of $\sin 30^\circ$ is:
+
+A. 1  
+B. $\dfrac{\sqrt{3}}{2}$  
+C. $\dfrac{1}{2}$  
+D. $\dfrac{1}{\sqrt{2}}$  
+
+---
+
+**Q46.** A bag has 5 red and 3 blue counters. Probability of drawing a blue is:
+
+A. $\dfrac{1}{3}$  
+B. $\dfrac{3}{5}$  
+C. $\dfrac{5}{8}$  
+D. $\dfrac{3}{8}$  
+
+---
+
+**Q47.** The interquartile range equals:
+
+A. maximum - minimum  
+B. Q2 - Q1  
+C. Q3 - Q1  
+D. Q3 - Q2  
+
+---
+
+**Q48.** The sum of all probabilities in a distribution must equal:
+
+A. the number of outcomes  
+B. 100  
+C. 0  
+D. 1  
+
+---
+
+**Q49.** If two events are mutually exclusive, P(A and B) is:
+
+A. 0  
+B. 1  
+C. P(A) + P(B)  
+D. P(A) × P(B)  
+
+---
+
+**Q50.** The mean of the first 5 positive integers is:
+
+A. 3  
+B. 2.5  
+C. 5  
+D. 4  
+
+---
+
+**Q51.** A coin is tossed twice. Probability of two heads is:
+
+A. $\dfrac{1}{4}$  
+B. $\dfrac{1}{3}$  
+C. $\dfrac{1}{2}$  
+D. 1  
+
+---
+
+**Q52.** The standard deviation measures:
+
+A. spread about the mean  
+B. the middle value  
+C. the most frequent value  
+D. central tendency  
+
+---
+
+**Q53.** The median of an even number of observations is:
+
+A. the mean of the two middle values  
+B. the mode  
+C. the largest value  
+D. the smallest value  
+
+---
+
+**Q54.** A survey of 200 students finds 120 prefer tea. The relative frequency is:
+
+A. 0.6  
+B. 1.67  
+C. 80  
+D. 0.4  
+
+---
+
+**Q55.** The mode of a grouped frequency distribution is found using:
+
+A. the median class  
+B. the modal class  
+C. the mean class  
+D. the class boundary  
+
+---
+
+**Q56.** If P(A) = 0.3 and A and B are independent with P(B) = 0.5, P(A and B) is:
+
+A. 0.8  
+B. 0.15  
+C. 0.4  
+D. 0.2  
+
+---
+
+**Q57.** The mean of grouped data is estimated using:
+
+A. class boundaries  
+B. class widths  
+C. class midpoints  
+D. the modal class  
+
+---
+
+**Q58.** The complement of an event with probability 0.25 has probability:
+
+A. 0.25  
+B. 1.25  
+C. 0.5  
+D. 0.75  
+
+---
+
+**Q59.** A cumulative frequency graph is used to estimate:
+
+A. the mode  
+B. the range  
+C. the median and quartiles  
+D. the standard deviation  
+
+---
+
+**Q60.** The mean of 4, 8, 10 and 12 is:
+
+A. 8  
+B. 7.5  
+C. 9  
+D. 8.5  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. B
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 4
+
+## Structural Question Bank — Comprehension and summary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION AND SUMMARY
+
+**Q1.** Read the passage below and answer the questions that follow.
+
+*"The village market was more than a place of trade; it was the beating heart of the community. Here, farmers exchanged news with traders, and children learned the value of honest dealing. Yet in recent years, the market has been shrinking as young people migrate to the cities, leaving behind ageing vendors and empty stalls."*
+
+(a) In one sentence, state the main idea of the passage. *(3 marks)*
+
+(b) Give two reasons the writer gives for the market''s decline. *(4 marks)*
+
+(c) Explain what the writer means by "the beating heart of the community". *(4 marks)*
+
+---
+
+**Q2.** Summarise the following passage in not more than 60 words.
+
+*"Rainwater harvesting is an ancient practice that is regaining importance in Cameroon. By collecting runoff from rooftops into storage tanks, households can reduce their dependence on erratic municipal supplies. The water is ideal for gardening, washing, and, after proper treatment, even drinking. Critics argue that the initial cost of tanks and guttering is prohibitive, but supporters point out that the investment pays for itself within a few years through lower water bills and greater self-reliance."*
+
+Your summary must be in continuous prose and must not include direct quotations. *(10 marks)*
+
+---
+
+**Q3.** Read the passage and answer the questions that follow.
+
+*"The examination results were posted at dawn. For Amina, the moment was both terrifying and liberating. She had spent three sleepless nights rehearsing the worst-case scenario, yet when her name appeared on the list of successful candidates, she felt a surge of relief so powerful it left her breathless."*
+
+(a) Identify the dominant emotion in the passage and quote one phrase that supports your answer. *(4 marks)*
+
+(b) What does the phrase "rehearsing the worst-case scenario" reveal about Amina''s character? *(4 marks)*
+
+(c) Suggest a suitable title for the passage. *(2 marks)*
+
+---
+
+**Q4.** Read the passage and answer the questions that follow.
+
+*"Cameroon''s forests are among the most biodiverse on the continent, sheltering elephants, gorillas, and thousands of plant species. However, illegal logging and slash-and-burn farming are destroying these habitats at an alarming rate. Conservationists argue that protecting the forests is not merely an environmental concern but an economic one, since ecotourism and sustainable harvesting can generate lasting income for local communities."*
+
+(a) State two threats to Cameroon''s forests mentioned in the passage. *(4 marks)*
+
+(b) Explain why the writer describes forest protection as "an economic one". *(4 marks)*
+
+(c) Give the meaning of "biodiverse" as used in the passage. *(2 marks)*
+
+---
+
+**Q5.** Summarise the following passage in not more than 70 words.
+
+*"Mobile money has transformed financial life in Cameroon. Before its arrival, many rural families had no access to banks and relied on risky methods of storing and transferring cash. Today, a farmer can sell his cocoa, receive payment on his phone, and pay his children''s school fees without travelling to a town. Mobile money has also created jobs, as agents earn commissions on every transaction. Nevertheless, concerns remain about fraud, network failures, and the exclusion of the elderly who struggle with the technology."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q6.** Read the passage and answer the questions that follow.
+
+*"The old woman refused to be rushed. Each morning she swept her compound with slow, deliberate strokes, as if the dust were an enemy she had known for years. Her neighbours, who hurried past with phones pressed to their ears, did not understand that for her, sweeping was not a chore but a meditation."*
+
+(a) What does the writer suggest about the difference between the old woman and her neighbours? *(4 marks)*
+
+(b) Explain the meaning of "a meditation" in the context of the passage. *(4 marks)*
+
+(c) Identify one figure of speech used in the passage and explain its effect. *(4 marks)*
+
+---
+
+**Q7.** Read the passage and answer the questions that follow.
+
+*"The river had always been generous, giving the village fish, water, and fertile soil. But generosity, the elders warned, must never be taken for granted. When the rains failed and the river shrank to a muddy trickle, the village learned that nature''s gifts come with conditions."*
+
+(a) State the lesson the village learned. *(3 marks)*
+
+(b) Explain how the writer uses personification in the passage. *(4 marks)*
+
+(c) What is the writer''s attitude towards the river? Support your answer with evidence. *(4 marks)*
+
+---
+
+**Q8.** Summarise the following passage in not more than 60 words.
+
+*"School feeding programmes in Cameroon serve a dual purpose. For children, a guaranteed midday meal improves concentration, attendance, and overall health. For farmers, the programmes provide a reliable market for their produce, since schools purchase staples such as maize, beans, and groundnuts from local cooperatives. Critics note that the programmes are expensive to run and vulnerable to corruption, but supporters argue that the long-term benefits to education and agriculture outweigh the costs."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q9.** Read the passage and answer the questions that follow.
+
+*"He had rehearsed the speech a hundred times, yet when he stood before the crowd, the words evaporated. His palms were slick, his throat dry. Then he remembered his father''s advice: ''The audience wants you to succeed.'' He took a breath, and the first sentence came out steady."*
+
+(a) Describe the speaker''s state of mind at the start of the passage. *(3 marks)*
+
+(b) What effect does the father''s advice have on the speaker? *(4 marks)*
+
+(c) Explain the meaning of "the words evaporated". *(3 marks)*
+
+---
+
+**Q10.** Read the passage and answer the questions that follow.
+
+*"Plastic waste is choking Cameroon''s cities. Discarded bottles clog drainage channels, causing floods during the rainy season, while burning the waste releases toxic fumes. Some entrepreneurs have begun collecting plastics and recycling them into paving blocks, creating jobs and cleaning the streets. The challenge, they say, is not a lack of solutions but a lack of will."*
+
+(a) State two problems caused by plastic waste. *(4 marks)*
+
+(b) How have some entrepreneurs responded to the problem? *(3 marks)*
+
+(c) Explain the final sentence: "The challenge... is not a lack of solutions but a lack of will." *(4 marks)*
+
+---
+
+**Q11.** Summarise the following passage in not more than 65 words.
+
+*"Community health workers are the backbone of rural healthcare in Cameroon. Trained to diagnose common illnesses, administer vaccines, and advise on hygiene, they bring medical care to villages that would otherwise travel hours to reach a clinic. Their work has reduced infant mortality and improved maternal health in many regions. Yet these workers are often unpaid volunteers, and many leave the profession once they find better-paying work. Health experts argue that investing in community health workers is one of the most cost-effective ways to strengthen the health system."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q12.** Read the passage and answer the questions that follow.
+
+*"The two brothers inherited the same plot of land. One planted cocoa and prospered; the other planted nothing and waited for the land to feed him. Years later, the first brother built a house, while the second still waited, blaming the soil for his poverty."*
+
+(a) What is the moral of the passage? *(4 marks)*
+
+(b) Contrast the attitudes of the two brothers. *(4 marks)*
+
+(c) Explain the irony in the final sentence. *(4 marks)*
+
+---
+
+**Q13.** Read the passage and answer the questions that follow.
+
+*"Tourism in Cameroon is a sleeping giant. The country boasts beaches, mountains, wildlife parks, and a rich cultural heritage, yet it attracts a fraction of the visitors that smaller neighbours receive. Poor infrastructure, limited marketing, and safety concerns are often cited as reasons. Those who have visited, however, speak of a country that rewards the adventurous traveller."*
+
+(a) What does the writer mean by calling tourism "a sleeping giant"? *(4 marks)*
+
+(b) Give two reasons why Cameroon attracts few tourists. *(4 marks)*
+
+(c) What is the writer''s overall attitude towards Cameroon''s tourism potential? *(3 marks)*
+
+---
+
+**Q14.** Summarise the following passage in not more than 60 words.
+
+*"The traditional African family is often described as an extended family, where uncles, aunts, and grandparents share in raising children. This system provides a safety net: when parents fall ill or travel, relatives step in. It also transmits values, history, and skills across generations. However, urbanisation and economic pressures are weakening these ties, as families become smaller and more mobile. Sociologists warn that the loss of the extended family could leave many children without the support they once enjoyed."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q15.** Read the passage and answer the questions that follow.
+
+*"The teacher wrote a single word on the board: ''Why?'' For a moment the class was silent. Then hands shot up. The question, she explained, was more important than any answer, because it was the beginning of every discovery. From that day, her students stopped memorising and started questioning."*
+
+(a) What change does the teacher bring about in her students? *(4 marks)*
+
+(b) Explain the significance of the word "Why?" in the passage. *(4 marks)*
+
+(c) What does the passage suggest about the difference between memorising and questioning? *(4 marks)*
+
+---
+
+**Q16.** Read the passage and answer the questions that follow.
+
+*"The harvest festival drew people from every village in the district. Drummers led the procession, dancers in bright cloth followed, and elders presided over the ceremony with quiet dignity. For the young, it was a spectacle; for the old, a memory renewed. The festival was not merely entertainment; it was the community''s way of giving thanks and reaffirming its identity."*
+
+(a) State two purposes of the harvest festival. *(4 marks)*
+
+(b) Explain the difference between how the young and the old view the festival. *(4 marks)*
+
+(c) What does the phrase "a memory renewed" suggest? *(3 marks)*
+
+---
+
+**Q17.** Summarise the following passage in not more than 70 words.
+
+*"Reading is a habit that is dying among young people, replaced by short videos and instant messages. Yet reading offers what these distractions cannot: the ability to follow a complex argument, to enter another person''s mind, and to build the vocabulary that examinations reward. Teachers report that students who read widely write better essays and score higher in comprehension. Parents can help by setting aside time for reading at home and by letting children choose books that interest them, rather than forcing classics upon them."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q18.** Read the passage and answer the questions that follow.
+
+*"The bridge collapsed without warning, cutting off the only road to the hospital. For three days, the sick were carried across the river in canoes, and the dead were buried on the wrong side of the water. When the government finally announced plans to rebuild, the villagers did not celebrate; they had heard such promises before."*
+
+(a) What were the consequences of the bridge''s collapse? *(4 marks)*
+
+(b) Why did the villagers not celebrate the government''s announcement? *(4 marks)*
+
+(c) What does the passage reveal about the relationship between the villagers and the government? *(4 marks)*
+
+---
+
+**Q19.** Read the passage and answer the questions that follow.
+
+*"Success, the speaker told the graduates, is not a destination but a journey. It is measured not by the certificates on your wall but by the obstacles you overcome and the people you help along the way. The audience applauded, though some wondered privately whether the speaker, who had inherited his father''s business, truly understood the obstacles they faced."*
+
+(a) State the speaker''s definition of success. *(3 marks)*
+
+(b) Explain the irony in the final sentence. *(4 marks)*
+
+(c) Do you agree with the speaker''s view? Give a reason. *(3 marks)*
+
+---
+
+**Q20.** Read the passage and answer the questions that follow.
+
+*"The baobab tree stood at the centre of the village, older than anyone could remember. Its trunk was a storehouse of water, its bark a source of medicine, its leaves a vegetable for the evening pot. When developers proposed cutting it down to widen the road, the village united in protest. They had lost many things to progress; they would not lose the baobab."*
+
+(a) List three uses of the baobab tree mentioned in the passage. *(3 marks)*
+
+(b) Why did the village protest against the developers? *(4 marks)*
+
+(c) What does the final sentence reveal about the villagers'' attitude towards progress? *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 5
+
+## Structural Question Bank — Grammar and vocabulary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAR AND VOCABULARY
+
+**Q1.** Rewrite the following sentences, correcting the errors:
+
+(a) "Neither of the boys were present at the meeting." *(2 marks)*
+
+(b) "The committee have decided to postpone the event." *(2 marks)*
+
+(c) "Each of the students have submitted their assignment." *(2 marks)*
+
+(d) "The number of accidents are increasing every year." *(2 marks)*
+
+---
+
+**Q2.** Change the following sentences from direct to indirect speech:
+
+(a) "I will visit you tomorrow," she said. *(3 marks)*
+
+(b) "Have you finished the report?" the manager asked. *(3 marks)*
+
+(c) "Do not touch the exhibits," the guard warned. *(3 marks)*
+
+---
+
+**Q3.** Fill in each blank with the correct form of the verb in brackets:
+
+(a) By the time we arrived, the ceremony ____ (already begin). *(2 marks)*
+
+(b) She ____ (live) in Douala for ten years before she moved to Yaoundé. *(2 marks)*
+
+(c) If I ____ (know) the answer, I would have told you. *(2 marks)*
+
+(d) The children ____ (play) in the yard when it started to rain. *(2 marks)*
+
+---
+
+**Q4.** Combine each pair of sentences using the conjunction in brackets:
+
+(a) He was tired. He continued working. (although) *(3 marks)*
+
+(b) The rain stopped. We went out. (as soon as) *(3 marks)*
+
+(c) She studied hard. She failed the examination. (even though) *(3 marks)*
+
+---
+
+**Q5.** Choose the word that is closest in meaning to the word in bold:
+
+(a) The meeting was **adjourned** until the following week. *(2 marks)*
+
+(b) His **arrogant** behaviour offended his colleagues. *(2 marks)*
+
+(c) The evidence was **inconclusive**, so the case was dismissed. *(2 marks)*
+
+(d) She gave a **lucid** explanation of the difficult concept. *(2 marks)*
+
+---
+
+**Q6.** Rewrite the following sentences in the passive voice:
+
+(a) The government built the new bridge last year. *(2 marks)*
+
+(b) Someone has stolen my bicycle. *(2 marks)*
+
+(c) They will announce the results on Friday. *(2 marks)*
+
+(d) The chef is preparing the meal. *(2 marks)*
+
+---
+
+**Q7.** Identify the grammatical function of the underlined words in the following sentences:
+
+(a) The **runner** won the race. *(2 marks)*
+
+(b) She gave **him** a gift. *(2 marks)*
+
+(c) The book on the table is **mine**. *(2 marks)*
+
+(d) **Running** is good exercise. *(2 marks)*
+
+---
+
+**Q8.** Complete each sentence with the correct preposition:
+
+(a) She is good ____ mathematics. *(1 mark)*
+
+(b) He was accused ____ theft. *(1 mark)*
+
+(c) The committee consists ____ ten members. *(1 mark)*
+
+(d) We arrived ____ the station just in time. *(1 mark)*
+
+(e) She is interested ____ learning French. *(1 mark)*
+
+(f) The cat jumped ____ the table. *(1 mark)*
+
+---
+
+**Q9.** Rewrite the following sentences, using the correct form of the word in brackets:
+
+(a) The ____ (decide) was made unanimously. *(2 marks)*
+
+(b) Her ____ (perform) in the examination was outstanding. *(2 marks)*
+
+(c) The ____ (manage) of the company resigned. *(2 marks)*
+
+(d) We were impressed by his ____ (honest). *(2 marks)*
+
+---
+
+**Q10.** Punctuate the following passage correctly:
+
+*"the minister said the government will build a new hospital in bamenda next year the project will create hundreds of jobs and improve healthcare in the region"* *(8 marks)*
+
+---
+
+**Q11.** Choose the correct word to complete each sentence:
+
+(a) The principal gave the students ____ (advice / advise) on how to prepare for the examination. *(2 marks)*
+
+(b) The new policy will ____ (affect / effect) all workers. *(2 marks)*
+
+(c) Please ____ (bring / take) this letter to the post office. *(2 marks)*
+
+(d) The company''s ____ (principal / principle) concern is customer satisfaction. *(2 marks)*
+
+---
+
+**Q12.** Rewrite the following sentences, beginning with the word given:
+
+(a) "It is unlikely that he will pass the examination." → "He is unlikely ____." *(3 marks)*
+
+(b) "She is too young to travel alone." → "She is not ____." *(3 marks)*
+
+(c) "The problem was so difficult that nobody could solve it." → "It was such ____." *(3 marks)*
+
+---
+
+**Q13.** Identify and correct the error in each of the following sentences:
+
+(a) "The two girls are very different from each other." *(2 marks)*
+
+(b) "He is one of the students who has won the prize." *(2 marks)*
+
+(c) "I look forward to hear from you." *(2 marks)*
+
+(d) "The news are good." *(2 marks)*
+
+---
+
+**Q14.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (long) of the river is over 1,000 kilometres. *(2 marks)*
+
+(b) She spoke with great ____ (confident). *(2 marks)*
+
+(c) The ____ (fail) of the plan surprised everyone. *(2 marks)*
+
+(d) His ____ (refuse) to cooperate delayed the project. *(2 marks)*
+
+---
+
+**Q15.** Rewrite the following sentences, replacing the underlined words with a suitable phrasal verb:
+
+(a) He **postponed** the meeting until Monday. *(2 marks)*
+
+(b) She **discovered** the truth by accident. *(2 marks)*
+
+(c) The plane **departed** at noon. *(2 marks)*
+
+(d) They **continued** working despite the noise. *(2 marks)*
+
+---
+
+**Q16.** Change the following sentences from active to passive, or vice versa:
+
+(a) The letter was written by the secretary. *(2 marks)*
+
+(b) The children are being taught by a new teacher. *(2 marks)*
+
+(c) The manager will interview the candidates tomorrow. *(2 marks)*
+
+(d) The bridge was being repaired when we crossed it. *(2 marks)*
+
+---
+
+**Q17.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (arrive) of the delegation was delayed. *(2 marks)*
+
+(b) She has a strong ____ (believe) in hard work. *(2 marks)*
+
+(c) The ____ (compare) between the two products was interesting. *(2 marks)*
+
+(d) His ____ (behave) at the meeting was unacceptable. *(2 marks)*
+
+---
+
+**Q18.** Rewrite the following sentences, using the correct tense:
+
+(a) "I have seen that film yesterday." *(2 marks)*
+
+(b) "She has been working here since five years." *(2 marks)*
+
+(c) "When I arrived, he already left." *(2 marks)*
+
+(d) "I will call you when I will arrive." *(2 marks)*
+
+---
+
+**Q19.** Choose the correct word to complete each sentence:
+
+(a) The ____ (weather / whether) was perfect for the picnic. *(2 marks)*
+
+(b) ____ (Their / There / They''re) going to the market. *(2 marks)*
+
+(c) The dog wagged ____ (its / it''s) tail. *(2 marks)*
+
+(d) ____ (Who''s / Whose) book is this? *(2 marks)*
+
+---
+
+**Q20.** Rewrite the following sentences, correcting the errors:
+
+(a) "The teacher, along with her students, are going on the trip." *(2 marks)*
+
+(b) "He is the tallest of the two brothers." *(2 marks)*
+
+(c) "I have less money than him." *(2 marks)*
+
+(d) "She is more taller than her sister." *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 6
+
+## Structural Question Bank — Composition and essay writing
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPOSITION AND ESSAY WRITING
+
+**Q1.** Write an essay of about 450 words on the following topic:
+
+"Describe a journey you will never forget. Explain why it remains memorable."
+
+Your essay should have a clear introduction, body, and conclusion. *(20 marks)*
+
+---
+
+**Q2.** Write an argumentative essay of about 450 words on the topic:
+
+"Mobile phones should be banned in secondary schools."
+
+Present a clear argument, support it with reasons and examples, and address at least one counter-argument. *(20 marks)*
+
+---
+
+**Q3.** Write a narrative essay of about 450 words beginning with the sentence:
+
+*"It was the last day of the school year, and nothing had gone as planned."*
+
+Use vivid description and a clear sequence of events. *(20 marks)*
+
+---
+
+**Q4.** Write an expository essay of about 450 words on the topic:
+
+"Explain the importance of agriculture to the economy of Cameroon."
+
+Organise your ideas logically and support them with specific examples. *(20 marks)*
+
+---
+
+**Q5.** Write a descriptive essay of about 450 words on the topic:
+
+"Describe your favourite place and explain why it is special to you."
+
+Use sensory details (sight, sound, smell, touch, taste) to bring the place to life. *(20 marks)*
+
+---
+
+**Q6.** Write an argumentative essay of about 450 words on the topic:
+
+"Examinations are not the best way to measure a student''s ability."
+
+Give reasons for your position and consider the opposing view. *(20 marks)*
+
+---
+
+**Q7.** Write a narrative essay of about 450 words ending with the sentence:
+
+*"That was the day I learned that honesty is always the best policy."*
+
+Build your story towards this conclusion. *(20 marks)*
+
+---
+
+**Q8.** Write a formal letter to the mayor of your town, complaining about the poor state of the roads in your area. Your letter should be about 350 words and should include:
+
+(a) Your address and the date. *(2 marks)*
+
+(b) A clear statement of the problem. *(6 marks)*
+
+(c) The effects of the problem on the community. *(6 marks)*
+
+(d) A request for action. *(6 marks)*
+
+---
+
+**Q9.** Write an expository essay of about 450 words on the topic:
+
+"Discuss the causes and effects of drug abuse among young people."
+
+Structure your essay with clear paragraphs. *(20 marks)*
+
+---
+
+**Q10.** Write a narrative essay of about 450 words on the topic:
+
+"Write a story that illustrates the saying: ''A friend in need is a friend indeed.''"
+
+Your story should have a clear plot, characters, and a lesson. *(20 marks)*
+
+---
+
+**Q11.** Write an argumentative essay of about 450 words on the topic:
+
+"Social media does more harm than good to young people."
+
+Support your argument with evidence and address the opposing view. *(20 marks)*
+
+---
+
+**Q12.** Write a descriptive essay of about 450 words on the topic:
+
+"Describe the scene at a busy market in your town."
+
+Use vivid language to convey the sights, sounds, and atmosphere. *(20 marks)*
+
+---
+
+**Q13.** Write a formal letter of application for the post of a sales assistant in a supermarket. Your letter should be about 350 words and should include:
+
+(a) Your address and the date. *(2 marks)*
+
+(b) The post you are applying for and where you saw it advertised. *(4 marks)*
+
+(c) Your qualifications and relevant experience. *(8 marks)*
+
+(d) A request for an interview. *(6 marks)*
+
+---
+
+**Q14.** Write an expository essay of about 450 words on the topic:
+
+"Explain the causes of road accidents in Cameroon and suggest ways to reduce them."
+
+Organise your answer into causes and solutions. *(20 marks)*
+
+---
+
+**Q15.** Write a narrative essay of about 450 words on the topic:
+
+"Write a story about a time when you had to make a difficult decision."
+
+Describe the situation, the options you faced, and the outcome. *(20 marks)*
+
+---
+
+**Q16.** Write an argumentative essay of about 450 words on the topic:
+
+"University education should be free for all students in Cameroon."
+
+Present a clear position with supporting arguments and counter-arguments. *(20 marks)*
+
+---
+
+**Q17.** Write a descriptive essay of about 450 words on the topic:
+
+"Describe a traditional ceremony you have witnessed."
+
+Include details of the setting, the participants, and the significance of the ceremony. *(20 marks)*
+
+---
+
+**Q18.** Write a formal letter to the editor of a national newspaper, expressing your views on the topic:
+
+"The importance of preserving Cameroon''s cultural heritage."
+
+Your letter should be about 350 words and should include a clear introduction, body, and conclusion. *(20 marks)*
+
+---
+
+**Q19.** Write an expository essay of about 450 words on the topic:
+
+"Discuss the benefits of learning a second language."
+
+Support your points with specific examples. *(20 marks)*
+
+---
+
+**Q20.** Write a narrative essay of about 450 words on the topic:
+
+"Write a story that ends with the sentence: ''Sometimes the smallest act of kindness means the most.''"
+
+Build your story towards this ending. *(20 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 7
+
+## Structural Question Bank — Comprehension and summary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION AND SUMMARY
+
+**Q1.** Read the passage below and answer the questions that follow.
+
+*"The village market was more than a place of trade; it was the beating heart of the community. Here, farmers exchanged news with traders, and children learned the value of honest dealing. Yet in recent years, the market has been shrinking as young people migrate to the cities, leaving behind ageing vendors and empty stalls."*
+
+(a) In one sentence, state the main idea of the passage. *(3 marks)*
+
+(b) Give two reasons the writer gives for the market''s decline. *(4 marks)*
+
+(c) Explain what the writer means by "the beating heart of the community". *(4 marks)*
+
+---
+
+**Q2.** Summarise the following passage in not more than 60 words.
+
+*"Rainwater harvesting is an ancient practice that is regaining importance in Cameroon. By collecting runoff from rooftops into storage tanks, households can reduce their dependence on erratic municipal supplies. The water is ideal for gardening, washing, and, after proper treatment, even drinking. Critics argue that the initial cost of tanks and guttering is prohibitive, but supporters point out that the investment pays for itself within a few years through lower water bills and greater self-reliance."*
+
+Your summary must be in continuous prose and must not include direct quotations. *(10 marks)*
+
+---
+
+**Q3.** Read the passage and answer the questions that follow.
+
+*"The examination results were posted at dawn. For Amina, the moment was both terrifying and liberating. She had spent three sleepless nights rehearsing the worst-case scenario, yet when her name appeared on the list of successful candidates, she felt a surge of relief so powerful it left her breathless."*
+
+(a) Identify the dominant emotion in the passage and quote one phrase that supports your answer. *(4 marks)*
+
+(b) What does the phrase "rehearsing the worst-case scenario" reveal about Amina''s character? *(4 marks)*
+
+(c) Suggest a suitable title for the passage. *(2 marks)*
+
+---
+
+**Q4.** Read the passage and answer the questions that follow.
+
+*"Cameroon''s forests are among the most biodiverse on the continent, sheltering elephants, gorillas, and thousands of plant species. However, illegal logging and slash-and-burn farming are destroying these habitats at an alarming rate. Conservationists argue that protecting the forests is not merely an environmental concern but an economic one, since ecotourism and sustainable harvesting can generate lasting income for local communities."*
+
+(a) State two threats to Cameroon''s forests mentioned in the passage. *(4 marks)*
+
+(b) Explain why the writer describes forest protection as "an economic one". *(4 marks)*
+
+(c) Give the meaning of "biodiverse" as used in the passage. *(2 marks)*
+
+---
+
+**Q5.** Summarise the following passage in not more than 70 words.
+
+*"Mobile money has transformed financial life in Cameroon. Before its arrival, many rural families had no access to banks and relied on risky methods of storing and transferring cash. Today, a farmer can sell his cocoa, receive payment on his phone, and pay his children''s school fees without travelling to a town. Mobile money has also created jobs, as agents earn commissions on every transaction. Nevertheless, concerns remain about fraud, network failures, and the exclusion of the elderly who struggle with the technology."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q6.** Read the passage and answer the questions that follow.
+
+*"The old woman refused to be rushed. Each morning she swept her compound with slow, deliberate strokes, as if the dust were an enemy she had known for years. Her neighbours, who hurried past with phones pressed to their ears, did not understand that for her, sweeping was not a chore but a meditation."*
+
+(a) What does the writer suggest about the difference between the old woman and her neighbours? *(4 marks)*
+
+(b) Explain the meaning of "a meditation" in the context of the passage. *(4 marks)*
+
+(c) Identify one figure of speech used in the passage and explain its effect. *(4 marks)*
+
+---
+
+**Q7.** Read the passage and answer the questions that follow.
+
+*"The river had always been generous, giving the village fish, water, and fertile soil. But generosity, the elders warned, must never be taken for granted. When the rains failed and the river shrank to a muddy trickle, the village learned that nature''s gifts come with conditions."*
+
+(a) State the lesson the village learned. *(3 marks)*
+
+(b) Explain how the writer uses personification in the passage. *(4 marks)*
+
+(c) What is the writer''s attitude towards the river? Support your answer with evidence. *(4 marks)*
+
+---
+
+**Q8.** Summarise the following passage in not more than 60 words.
+
+*"School feeding programmes in Cameroon serve a dual purpose. For children, a guaranteed midday meal improves concentration, attendance, and overall health. For farmers, the programmes provide a reliable market for their produce, since schools purchase staples such as maize, beans, and groundnuts from local cooperatives. Critics note that the programmes are expensive to run and vulnerable to corruption, but supporters argue that the long-term benefits to education and agriculture outweigh the costs."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q9.** Read the passage and answer the questions that follow.
+
+*"He had rehearsed the speech a hundred times, yet when he stood before the crowd, the words evaporated. His palms were slick, his throat dry. Then he remembered his father''s advice: ''The audience wants you to succeed.'' He took a breath, and the first sentence came out steady."*
+
+(a) Describe the speaker''s state of mind at the start of the passage. *(3 marks)*
+
+(b) What effect does the father''s advice have on the speaker? *(4 marks)*
+
+(c) Explain the meaning of "the words evaporated". *(3 marks)*
+
+---
+
+**Q10.** Read the passage and answer the questions that follow.
+
+*"Plastic waste is choking Cameroon''s cities. Discarded bottles clog drainage channels, causing floods during the rainy season, while burning the waste releases toxic fumes. Some entrepreneurs have begun collecting plastics and recycling them into paving blocks, creating jobs and cleaning the streets. The challenge, they say, is not a lack of solutions but a lack of will."*
+
+(a) State two problems caused by plastic waste. *(4 marks)*
+
+(b) How have some entrepreneurs responded to the problem? *(3 marks)*
+
+(c) Explain the final sentence: "The challenge... is not a lack of solutions but a lack of will." *(4 marks)*
+
+---
+
+**Q11.** Summarise the following passage in not more than 65 words.
+
+*"Community health workers are the backbone of rural healthcare in Cameroon. Trained to diagnose common illnesses, administer vaccines, and advise on hygiene, they bring medical care to villages that would otherwise travel hours to reach a clinic. Their work has reduced infant mortality and improved maternal health in many regions. Yet these workers are often unpaid volunteers, and many leave the profession once they find better-paying work. Health experts argue that investing in community health workers is one of the most cost-effective ways to strengthen the health system."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q12.** Read the passage and answer the questions that follow.
+
+*"The two brothers inherited the same plot of land. One planted cocoa and prospered; the other planted nothing and waited for the land to feed him. Years later, the first brother built a house, while the second still waited, blaming the soil for his poverty."*
+
+(a) What is the moral of the passage? *(4 marks)*
+
+(b) Contrast the attitudes of the two brothers. *(4 marks)*
+
+(c) Explain the irony in the final sentence. *(4 marks)*
+
+---
+
+**Q13.** Read the passage and answer the questions that follow.
+
+*"Tourism in Cameroon is a sleeping giant. The country boasts beaches, mountains, wildlife parks, and a rich cultural heritage, yet it attracts a fraction of the visitors that smaller neighbours receive. Poor infrastructure, limited marketing, and safety concerns are often cited as reasons. Those who have visited, however, speak of a country that rewards the adventurous traveller."*
+
+(a) What does the writer mean by calling tourism "a sleeping giant"? *(4 marks)*
+
+(b) Give two reasons why Cameroon attracts few tourists. *(4 marks)*
+
+(c) What is the writer''s overall attitude towards Cameroon''s tourism potential? *(3 marks)*
+
+---
+
+**Q14.** Summarise the following passage in not more than 60 words.
+
+*"The traditional African family is often described as an extended family, where uncles, aunts, and grandparents share in raising children. This system provides a safety net: when parents fall ill or travel, relatives step in. It also transmits values, history, and skills across generations. However, urbanisation and economic pressures are weakening these ties, as families become smaller and more mobile. Sociologists warn that the loss of the extended family could leave many children without the support they once enjoyed."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q15.** Read the passage and answer the questions that follow.
+
+*"The teacher wrote a single word on the board: ''Why?'' For a moment the class was silent. Then hands shot up. The question, she explained, was more important than any answer, because it was the beginning of every discovery. From that day, her students stopped memorising and started questioning."*
+
+(a) What change does the teacher bring about in her students? *(4 marks)*
+
+(b) Explain the significance of the word "Why?" in the passage. *(4 marks)*
+
+(c) What does the passage suggest about the difference between memorising and questioning? *(4 marks)*
+
+---
+
+**Q16.** Read the passage and answer the questions that follow.
+
+*"The harvest festival drew people from every village in the district. Drummers led the procession, dancers in bright cloth followed, and elders presided over the ceremony with quiet dignity. For the young, it was a spectacle; for the old, a memory renewed. The festival was not merely entertainment; it was the community''s way of giving thanks and reaffirming its identity."*
+
+(a) State two purposes of the harvest festival. *(4 marks)*
+
+(b) Explain the difference between how the young and the old view the festival. *(4 marks)*
+
+(c) What does the phrase "a memory renewed" suggest? *(3 marks)*
+
+---
+
+**Q17.** Summarise the following passage in not more than 70 words.
+
+*"Reading is a habit that is dying among young people, replaced by short videos and instant messages. Yet reading offers what these distractions cannot: the ability to follow a complex argument, to enter another person''s mind, and to build the vocabulary that examinations reward. Teachers report that students who read widely write better essays and score higher in comprehension. Parents can help by setting aside time for reading at home and by letting children choose books that interest them, rather than forcing classics upon them."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q18.** Read the passage and answer the questions that follow.
+
+*"The bridge collapsed without warning, cutting off the only road to the hospital. For three days, the sick were carried across the river in canoes, and the dead were buried on the wrong side of the water. When the government finally announced plans to rebuild, the villagers did not celebrate; they had heard such promises before."*
+
+(a) What were the consequences of the bridge''s collapse? *(4 marks)*
+
+(b) Why did the villagers not celebrate the government''s announcement? *(4 marks)*
+
+(c) What does the passage reveal about the relationship between the villagers and the government? *(4 marks)*
+
+---
+
+**Q19.** Read the passage and answer the questions that follow.
+
+*"Success, the speaker told the graduates, is not a destination but a journey. It is measured not by the certificates on your wall but by the obstacles you overcome and the people you help along the way. The audience applauded, though some wondered privately whether the speaker, who had inherited his father''s business, truly understood the obstacles they faced."*
+
+(a) State the speaker''s definition of success. *(3 marks)*
+
+(b) Explain the irony in the final sentence. *(4 marks)*
+
+(c) Do you agree with the speaker''s view? Give a reason. *(3 marks)*
+
+---
+
+**Q20.** Read the passage and answer the questions that follow.
+
+*"The baobab tree stood at the centre of the village, older than anyone could remember. Its trunk was a storehouse of water, its bark a source of medicine, its leaves a vegetable for the evening pot. When developers proposed cutting it down to widen the road, the village united in protest. They had lost many things to progress; they would not lose the baobab."*
+
+(a) List three uses of the baobab tree mentioned in the passage. *(3 marks)*
+
+(b) Why did the village protest against the developers? *(4 marks)*
+
+(c) What does the final sentence reveal about the villagers'' attitude towards progress? *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 8
+
+## Structural Question Bank — Grammar and vocabulary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAR AND VOCABULARY
+
+**Q1.** Rewrite the following sentences, correcting the errors:
+
+(a) "Neither of the boys were present at the meeting." *(2 marks)*
+
+(b) "The committee have decided to postpone the event." *(2 marks)*
+
+(c) "Each of the students have submitted their assignment." *(2 marks)*
+
+(d) "The number of accidents are increasing every year." *(2 marks)*
+
+---
+
+**Q2.** Change the following sentences from direct to indirect speech:
+
+(a) "I will visit you tomorrow," she said. *(3 marks)*
+
+(b) "Have you finished the report?" the manager asked. *(3 marks)*
+
+(c) "Do not touch the exhibits," the guard warned. *(3 marks)*
+
+---
+
+**Q3.** Fill in each blank with the correct form of the verb in brackets:
+
+(a) By the time we arrived, the ceremony ____ (already begin). *(2 marks)*
+
+(b) She ____ (live) in Douala for ten years before she moved to Yaoundé. *(2 marks)*
+
+(c) If I ____ (know) the answer, I would have told you. *(2 marks)*
+
+(d) The children ____ (play) in the yard when it started to rain. *(2 marks)*
+
+---
+
+**Q4.** Combine each pair of sentences using the conjunction in brackets:
+
+(a) He was tired. He continued working. (although) *(3 marks)*
+
+(b) The rain stopped. We went out. (as soon as) *(3 marks)*
+
+(c) She studied hard. She failed the examination. (even though) *(3 marks)*
+
+---
+
+**Q5.** Choose the word that is closest in meaning to the word in bold:
+
+(a) The meeting was **adjourned** until the following week. *(2 marks)*
+
+(b) His **arrogant** behaviour offended his colleagues. *(2 marks)*
+
+(c) The evidence was **inconclusive**, so the case was dismissed. *(2 marks)*
+
+(d) She gave a **lucid** explanation of the difficult concept. *(2 marks)*
+
+---
+
+**Q6.** Rewrite the following sentences in the passive voice:
+
+(a) The government built the new bridge last year. *(2 marks)*
+
+(b) Someone has stolen my bicycle. *(2 marks)*
+
+(c) They will announce the results on Friday. *(2 marks)*
+
+(d) The chef is preparing the meal. *(2 marks)*
+
+---
+
+**Q7.** Identify the grammatical function of the underlined words in the following sentences:
+
+(a) The **runner** won the race. *(2 marks)*
+
+(b) She gave **him** a gift. *(2 marks)*
+
+(c) The book on the table is **mine**. *(2 marks)*
+
+(d) **Running** is good exercise. *(2 marks)*
+
+---
+
+**Q8.** Complete each sentence with the correct preposition:
+
+(a) She is good ____ mathematics. *(1 mark)*
+
+(b) He was accused ____ theft. *(1 mark)*
+
+(c) The committee consists ____ ten members. *(1 mark)*
+
+(d) We arrived ____ the station just in time. *(1 mark)*
+
+(e) She is interested ____ learning French. *(1 mark)*
+
+(f) The cat jumped ____ the table. *(1 mark)*
+
+---
+
+**Q9.** Rewrite the following sentences, using the correct form of the word in brackets:
+
+(a) The ____ (decide) was made unanimously. *(2 marks)*
+
+(b) Her ____ (perform) in the examination was outstanding. *(2 marks)*
+
+(c) The ____ (manage) of the company resigned. *(2 marks)*
+
+(d) We were impressed by his ____ (honest). *(2 marks)*
+
+---
+
+**Q10.** Punctuate the following passage correctly:
+
+*"the minister said the government will build a new hospital in bamenda next year the project will create hundreds of jobs and improve healthcare in the region"* *(8 marks)*
+
+---
+
+**Q11.** Choose the correct word to complete each sentence:
+
+(a) The principal gave the students ____ (advice / advise) on how to prepare for the examination. *(2 marks)*
+
+(b) The new policy will ____ (affect / effect) all workers. *(2 marks)*
+
+(c) Please ____ (bring / take) this letter to the post office. *(2 marks)*
+
+(d) The company''s ____ (principal / principle) concern is customer satisfaction. *(2 marks)*
+
+---
+
+**Q12.** Rewrite the following sentences, beginning with the word given:
+
+(a) "It is unlikely that he will pass the examination." → "He is unlikely ____." *(3 marks)*
+
+(b) "She is too young to travel alone." → "She is not ____." *(3 marks)*
+
+(c) "The problem was so difficult that nobody could solve it." → "It was such ____." *(3 marks)*
+
+---
+
+**Q13.** Identify and correct the error in each of the following sentences:
+
+(a) "The two girls are very different from each other." *(2 marks)*
+
+(b) "He is one of the students who has won the prize." *(2 marks)*
+
+(c) "I look forward to hear from you." *(2 marks)*
+
+(d) "The news are good." *(2 marks)*
+
+---
+
+**Q14.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (long) of the river is over 1,000 kilometres. *(2 marks)*
+
+(b) She spoke with great ____ (confident). *(2 marks)*
+
+(c) The ____ (fail) of the plan surprised everyone. *(2 marks)*
+
+(d) His ____ (refuse) to cooperate delayed the project. *(2 marks)*
+
+---
+
+**Q15.** Rewrite the following sentences, replacing the underlined words with a suitable phrasal verb:
+
+(a) He **postponed** the meeting until Monday. *(2 marks)*
+
+(b) She **discovered** the truth by accident. *(2 marks)*
+
+(c) The plane **departed** at noon. *(2 marks)*
+
+(d) They **continued** working despite the noise. *(2 marks)*
+
+---
+
+**Q16.** Change the following sentences from active to passive, or vice versa:
+
+(a) The letter was written by the secretary. *(2 marks)*
+
+(b) The children are being taught by a new teacher. *(2 marks)*
+
+(c) The manager will interview the candidates tomorrow. *(2 marks)*
+
+(d) The bridge was being repaired when we crossed it. *(2 marks)*
+
+---
+
+**Q17.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (arrive) of the delegation was delayed. *(2 marks)*
+
+(b) She has a strong ____ (believe) in hard work. *(2 marks)*
+
+(c) The ____ (compare) between the two products was interesting. *(2 marks)*
+
+(d) His ____ (behave) at the meeting was unacceptable. *(2 marks)*
+
+---
+
+**Q18.** Rewrite the following sentences, using the correct tense:
+
+(a) "I have seen that film yesterday." *(2 marks)*
+
+(b) "She has been working here since five years." *(2 marks)*
+
+(c) "When I arrived, he already left." *(2 marks)*
+
+(d) "I will call you when I will arrive." *(2 marks)*
+
+---
+
+**Q19.** Choose the correct word to complete each sentence:
+
+(a) The ____ (weather / whether) was perfect for the picnic. *(2 marks)*
+
+(b) ____ (Their / There / They''re) going to the market. *(2 marks)*
+
+(c) The dog wagged ____ (its / it''s) tail. *(2 marks)*
+
+(d) ____ (Who''s / Whose) book is this? *(2 marks)*
+
+---
+
+**Q20.** Rewrite the following sentences, correcting the errors:
+
+(a) "The teacher, along with her students, are going on the trip." *(2 marks)*
+
+(b) "He is the tallest of the two brothers." *(2 marks)*
+
+(c) "I have less money than him." *(2 marks)*
+
+(d) "She is more taller than her sister." *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
+
+A. the centre of community life  
+B. a noisy place  
+C. a place of conflict  
+D. a modern building  
+
+---
+
+**Q2.** In summary writing, the first step is to:
+
+A. read the passage carefully to understand the main ideas  
+B. copy the first sentence of each paragraph  
+C. write your own opinions about the topic  
+D. count the words in the passage  
+
+---
+
+**Q3.** A summary should be written:
+
+A. in your own words  
+B. in note form only  
+C. using long quotations from the passage  
+D. as a list of examples  
+
+---
+
+**Q4.** The main idea of a passage is best described as:
+
+A. the central point the writer is making  
+B. the most difficult word in the passage  
+C. the writer''s personal opinion only  
+D. the first sentence of the passage  
+
+---
+
+**Q5.** Read: ''The words evaporated.'' This means the speaker:
+
+A. forgot what he wanted to say  
+B. was interrupted by the crowd  
+C. spoke very quietly  
+D. wrote his speech down  
+
+---
+
+**Q6.** When asked to ''state the main idea in one sentence'', you should:
+
+A. summarise the whole passage briefly  
+B. list all the details  
+C. repeat the title  
+D. quote the longest sentence  
+
+---
+
+**Q7.** An inference is:
+
+A. a fact stated directly in the text  
+B. a conclusion drawn from evidence in the text  
+C. a quotation from the text  
+D. a question about the text  
+
+---
+
+**Q8.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
+
+A. was very wide  
+B. provided many benefits  
+C. was polluted  
+D. flowed very fast  
+
+---
+
+**Q9.** In a summary, you should NOT include:
+
+A. the main points  
+B. the key facts  
+C. your personal opinions  
+D. the essential ideas  
+
+---
+
+**Q10.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
+
+A. very large in size  
+B. completely untouched  
+C. difficult to reach  
+D. containing many different species  
+
+---
+
+**Q11.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
+
+A. leave the stage  
+B. change his topic  
+C. feel calmer and begin speaking  
+D. memorise his speech  
+
+---
+
+**Q12.** When summarising, the word limit means you must:
+
+A. write exactly the same number of words as the passage  
+B. ignore the word limit  
+C. write as many words as possible  
+D. keep your summary within the stated number of words  
+
+---
+
+**Q13.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
+
+A. is declining rapidly  
+B. has great potential that is not yet realised  
+C. is completely absent  
+D. is too expensive for visitors  
+
+---
+
+**Q14.** The purpose of a comprehension passage is usually to:
+
+A. teach grammar rules  
+B. test understanding of the text  
+C. list vocabulary words  
+D. provide entertainment only  
+
+---
+
+**Q15.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
+
+A. had never heard promises before  
+B. were happy with the announcement  
+C. did not trust the government''s promises  
+D. were celebrating quietly  
+
+---
+
+**Q16.** A good summary should be:
+
+A. the same length as the original passage  
+B. longer than the original passage  
+C. a copy of the original passage  
+D. shorter than the original passage  
+
+---
+
+**Q17.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
+
+A. swept very quickly  
+B. hired someone to sweep  
+C. found peace in sweeping  
+D. disliked sweeping  
+
+---
+
+**Q18.** When a question asks you to ''explain in your own words'', you should:
+
+A. write a longer version of the passage  
+B. give your own opinion  
+C. quote the passage directly  
+D. rephrase the idea without copying  
+
+---
+
+**Q19.** Read: ''Success is not a destination but a journey.'' The writer means success is:
+
+A. measured by certificates  
+B. a continuous process  
+C. a final goal  
+D. impossible to achieve  
+
+---
+
+**Q20.** The best title for a passage about plastic waste clogging drainage channels would be:
+
+A. A Day at the Market  
+B. The Problem of Plastic Waste in Our Cities  
+C. The History of Plastic  
+D. How to Build Drainage Channels  
+
+---
+
+**Q21.** Choose the correct sentence:
+
+A. Neither of the boys have been present.  
+B. Neither of the boys were present.  
+C. Neither of the boys was present.  
+D. Neither of the boys are present.  
+
+---
+
+**Q22.** Choose the correct sentence:
+
+A. The committee were deciding to postpone the event.  
+B. The committee have decided to postpone the event.  
+C. The committee are deciding to postpone the event.  
+D. The committee has decided to postpone the event.  
+
+---
+
+**Q23.** Choose the correct sentence:
+
+A. Each of the students were submitting the assignment.  
+B. Each of the students are submitting the assignment.  
+C. Each of the students has submitted the assignment.  
+D. Each of the students have submitted the assignment.  
+
+---
+
+**Q24.** Choose the correct sentence:
+
+A. The number of accidents have been increasing.  
+B. The number of accidents were increasing.  
+C. The number of accidents are increasing.  
+D. The number of accidents is increasing.  
+
+---
+
+**Q25.** Choose the correct sentence:
+
+A. She is good at mathematics.  
+B. She is good in mathematics.  
+C. She is good on mathematics.  
+D. She is good for mathematics.  
+
+---
+
+**Q26.** Choose the correct sentence:
+
+A. He was accused of theft.  
+B. He was accused for theft.  
+C. He was accused on theft.  
+D. He was accused with theft.  
+
+---
+
+**Q27.** Choose the correct sentence:
+
+A. The committee consists of ten members.  
+B. The committee consists with ten members.  
+C. The committee consists in ten members.  
+D. The committee consists on ten members.  
+
+---
+
+**Q28.** Choose the correct sentence:
+
+A. She is interested in learning French.  
+B. She is interested for learning French.  
+C. She is interested at learning French.  
+D. She is interested on learning French.  
+
+---
+
+**Q29.** Choose the correct word: The principal gave the students some useful ____.
+
+A. advice  
+B. advising  
+C. advise  
+D. advices  
+
+---
+
+**Q30.** Choose the correct word: The new policy will ____ all workers.
+
+A. affect  
+B. effects  
+C. affects  
+D. effect  
+
+---
+
+**Q31.** Choose the correct word: Please ____ this letter to the post office.
+
+A. bring  
+B. take  
+C. carry  
+D. fetch  
+
+---
+
+**Q32.** Choose the correct word: The company''s ____ concern is customer satisfaction.
+
+A. principle  
+B. principal  
+C. principles  
+D. principally  
+
+---
+
+**Q33.** Choose the correct sentence:
+
+A. The news are good.  
+B. The news were good.  
+C. The news is good.  
+D. The news have been good.  
+
+---
+
+**Q34.** Choose the correct sentence:
+
+A. I look forward to hear from you.  
+B. I look forward to heard from you.  
+C. I look forward to hears from you.  
+D. I look forward to hearing from you.  
+
+---
+
+**Q35.** Choose the correct sentence:
+
+A. He is the tallest of the two brothers.  
+B. He is most tallest of the two brothers.  
+C. He is the taller of the two brothers.  
+D. He is more taller of the two brothers.  
+
+---
+
+**Q36.** Choose the correct sentence:
+
+A. She is more taller than her sister.  
+B. She is tallest than her sister.  
+C. She is most taller than her sister.  
+D. She is taller than her sister.  
+
+---
+
+**Q37.** Choose the correct word: The dog wagged ____ tail.
+
+A. its''  
+B. its  
+C. it''s  
+D. itses  
+
+---
+
+**Q38.** Choose the correct word: ____ going to the market.
+
+A. There  
+B. They''re  
+C. Theirs  
+D. Their  
+
+---
+
+**Q39.** Choose the correct word: ____ book is this?
+
+A. Whom  
+B. Who''s  
+C. Whose  
+D. Who  
+
+---
+
+**Q40.** Choose the correct sentence:
+
+A. The teacher, along with her students, were going on the trip.  
+B. The teacher, along with her students, are going on the trip.  
+C. The teacher, along with her students, have been going on the trip.  
+D. The teacher, along with her students, is going on the trip.  
+
+---
+
+**Q41.** An essay that tells a story is called:
+
+A. an expository essay  
+B. a descriptive essay  
+C. a narrative essay  
+D. an argumentative essay  
+
+---
+
+**Q42.** An essay that presents reasons for and against a position is called:
+
+A. a descriptive essay  
+B. a letter  
+C. a narrative essay  
+D. an argumentative essay  
+
+---
+
+**Q43.** An essay that explains or informs is called:
+
+A. a poem  
+B. an expository essay  
+C. a narrative essay  
+D. a story  
+
+---
+
+**Q44.** An essay that uses sensory details to paint a picture is called:
+
+A. a summary  
+B. a descriptive essay  
+C. an expository essay  
+D. an argumentative essay  
+
+---
+
+**Q45.** The first paragraph of an essay is called the:
+
+A. title  
+B. conclusion  
+C. introduction  
+D. body  
+
+---
+
+**Q46.** The final paragraph of an essay is called the:
+
+A. heading  
+B. introduction  
+C. body  
+D. conclusion  
+
+---
+
+**Q47.** A formal letter should begin with:
+
+A. a joke  
+B. a greeting like ''Hi''  
+C. the sender''s address and the date  
+D. the recipient''s name only  
+
+---
+
+**Q48.** The main paragraphs of an essay form the:
+
+A. title  
+B. conclusion  
+C. introduction  
+D. body  
+
+---
+
+**Q49.** A letter of application should include:
+
+A. your qualifications and experience  
+B. only your name  
+C. a list of your friends  
+D. your favourite hobbies  
+
+---
+
+**Q50.** When writing an argumentative essay, you should:
+
+A. support your argument with reasons and examples  
+B. avoid giving any reasons  
+C. write without paragraphs  
+D. only state the opposing view  
+
+---
+
+**Q51.** A narrative essay should have:
+
+A. a clear sequence of events  
+B. no setting  
+C. no characters  
+D. only statistics  
+
+---
+
+**Q52.** The purpose of an introduction is to:
+
+A. present the topic and capture the reader''s interest  
+B. list all the details  
+C. repeat the title  
+D. give the conclusion  
+
+---
+
+**Q53.** A descriptive essay about a market should include:
+
+A. sights, sounds, and smells  
+B. mathematical calculations  
+C. only prices  
+D. a list of items  
+
+---
+
+**Q54.** A formal letter to the editor should:
+
+A. express a clear opinion on an issue  
+B. be very short  
+C. have no address  
+D. be written in slang  
+
+---
+
+**Q55.** The best way to organise an expository essay is:
+
+A. random ideas  
+B. logical paragraphs with clear points  
+C. a single long paragraph  
+D. a list without explanation  
+
+---
+
+**Q56.** A story that illustrates a proverb should:
+
+A. state the proverb only  
+B. show the lesson through events  
+C. be about animals only  
+D. avoid any lesson  
+
+---
+
+**Q57.** When writing an essay, you should:
+
+A. start writing without a plan  
+B. copy from a friend  
+C. plan your ideas before writing  
+D. write only one paragraph  
+
+---
+
+**Q58.** The word count of an essay refers to:
+
+A. the number of paragraphs  
+B. the number of pages  
+C. the number of sentences  
+D. the number of words in the essay  
+
+---
+
+**Q59.** A letter of complaint should:
+
+A. only greet the recipient  
+B. be written in verse  
+C. clearly state the problem and request action  
+D. avoid mentioning the problem  
+
+---
+
+**Q60.** To make an essay interesting, a writer should:
+
+A. repeat the same word  
+B. avoid examples  
+C. use only short sentences  
+D. use vivid and varied language  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The main idea of a passage is best described as:
+
+A. the central point the writer is making  
+B. the first sentence of the passage  
+C. the most difficult word in the passage  
+D. the writer''s personal opinion only  
+
+---
+
+**Q2.** Read: ''The words evaporated.'' This means the speaker:
+
+A. forgot what he wanted to say  
+B. spoke very quietly  
+C. was interrupted by the crowd  
+D. wrote his speech down  
+
+---
+
+**Q3.** When asked to ''state the main idea in one sentence'', you should:
+
+A. summarise the whole passage briefly  
+B. repeat the title  
+C. quote the longest sentence  
+D. list all the details  
+
+---
+
+**Q4.** An inference is:
+
+A. a conclusion drawn from evidence in the text  
+B. a quotation from the text  
+C. a question about the text  
+D. a fact stated directly in the text  
+
+---
+
+**Q5.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
+
+A. provided many benefits  
+B. was polluted  
+C. was very wide  
+D. flowed very fast  
+
+---
+
+**Q6.** In a summary, you should NOT include:
+
+A. your personal opinions  
+B. the essential ideas  
+C. the key facts  
+D. the main points  
+
+---
+
+**Q7.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
+
+A. very large in size  
+B. containing many different species  
+C. completely untouched  
+D. difficult to reach  
+
+---
+
+**Q8.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
+
+A. leave the stage  
+B. feel calmer and begin speaking  
+C. change his topic  
+D. memorise his speech  
+
+---
+
+**Q9.** When summarising, the word limit means you must:
+
+A. write exactly the same number of words as the passage  
+B. write as many words as possible  
+C. keep your summary within the stated number of words  
+D. ignore the word limit  
+
+---
+
+**Q10.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
+
+A. is completely absent  
+B. is declining rapidly  
+C. is too expensive for visitors  
+D. has great potential that is not yet realised  
+
+---
+
+**Q11.** The purpose of a comprehension passage is usually to:
+
+A. provide entertainment only  
+B. list vocabulary words  
+C. test understanding of the text  
+D. teach grammar rules  
+
+---
+
+**Q12.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
+
+A. were happy with the announcement  
+B. were celebrating quietly  
+C. had never heard promises before  
+D. did not trust the government''s promises  
+
+---
+
+**Q13.** A good summary should be:
+
+A. the same length as the original passage  
+B. shorter than the original passage  
+C. longer than the original passage  
+D. a copy of the original passage  
+
+---
+
+**Q14.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
+
+A. swept very quickly  
+B. found peace in sweeping  
+C. hired someone to sweep  
+D. disliked sweeping  
+
+---
+
+**Q15.** When a question asks you to ''explain in your own words'', you should:
+
+A. write a longer version of the passage  
+B. quote the passage directly  
+C. rephrase the idea without copying  
+D. give your own opinion  
+
+---
+
+**Q16.** Read: ''Success is not a destination but a journey.'' The writer means success is:
+
+A. impossible to achieve  
+B. a final goal  
+C. measured by certificates  
+D. a continuous process  
+
+---
+
+**Q17.** The best title for a passage about plastic waste clogging drainage channels would be:
+
+A. The History of Plastic  
+B. A Day at the Market  
+C. The Problem of Plastic Waste in Our Cities  
+D. How to Build Drainage Channels  
+
+---
+
+**Q18.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
+
+A. a place of conflict  
+B. a modern building  
+C. a noisy place  
+D. the centre of community life  
+
+---
+
+**Q19.** In summary writing, the first step is to:
+
+A. write your own opinions about the topic  
+B. read the passage carefully to understand the main ideas  
+C. copy the first sentence of each paragraph  
+D. count the words in the passage  
+
+---
+
+**Q20.** A summary should be written:
+
+A. as a list of examples  
+B. in your own words  
+C. in note form only  
+D. using long quotations from the passage  
+
+---
+
+**Q21.** Choose the correct sentence:
+
+A. The number of accidents have been increasing.  
+B. The number of accidents are increasing.  
+C. The number of accidents is increasing.  
+D. The number of accidents were increasing.  
+
+---
+
+**Q22.** Choose the correct sentence:
+
+A. She is good for mathematics.  
+B. She is good in mathematics.  
+C. She is good on mathematics.  
+D. She is good at mathematics.  
+
+---
+
+**Q23.** Choose the correct sentence:
+
+A. He was accused on theft.  
+B. He was accused with theft.  
+C. He was accused of theft.  
+D. He was accused for theft.  
+
+---
+
+**Q24.** Choose the correct sentence:
+
+A. The committee consists on ten members.  
+B. The committee consists with ten members.  
+C. The committee consists in ten members.  
+D. The committee consists of ten members.  
+
+---
+
+**Q25.** Choose the correct sentence:
+
+A. She is interested in learning French.  
+B. She is interested on learning French.  
+C. She is interested for learning French.  
+D. She is interested at learning French.  
+
+---
+
+**Q26.** Choose the correct word: The principal gave the students some useful ____.
+
+A. advice  
+B. advise  
+C. advising  
+D. advices  
+
+---
+
+**Q27.** Choose the correct word: The new policy will ____ all workers.
+
+A. affect  
+B. affects  
+C. effect  
+D. effects  
+
+---
+
+**Q28.** Choose the correct word: Please ____ this letter to the post office.
+
+A. take  
+B. carry  
+C. fetch  
+D. bring  
+
+---
+
+**Q29.** Choose the correct word: The company''s ____ concern is customer satisfaction.
+
+A. principal  
+B. principles  
+C. principle  
+D. principally  
+
+---
+
+**Q30.** Choose the correct sentence:
+
+A. The news is good.  
+B. The news have been good.  
+C. The news were good.  
+D. The news are good.  
+
+---
+
+**Q31.** Choose the correct sentence:
+
+A. I look forward to hear from you.  
+B. I look forward to hearing from you.  
+C. I look forward to heard from you.  
+D. I look forward to hears from you.  
+
+---
+
+**Q32.** Choose the correct sentence:
+
+A. He is the tallest of the two brothers.  
+B. He is the taller of the two brothers.  
+C. He is most tallest of the two brothers.  
+D. He is more taller of the two brothers.  
+
+---
+
+**Q33.** Choose the correct sentence:
+
+A. She is more taller than her sister.  
+B. She is most taller than her sister.  
+C. She is taller than her sister.  
+D. She is tallest than her sister.  
+
+---
+
+**Q34.** Choose the correct word: The dog wagged ____ tail.
+
+A. it''s  
+B. its''  
+C. itses  
+D. its  
+
+---
+
+**Q35.** Choose the correct word: ____ going to the market.
+
+A. Their  
+B. Theirs  
+C. They''re  
+D. There  
+
+---
+
+**Q36.** Choose the correct word: ____ book is this?
+
+A. Who''s  
+B. Who  
+C. Whom  
+D. Whose  
+
+---
+
+**Q37.** Choose the correct sentence:
+
+A. The teacher, along with her students, were going on the trip.  
+B. The teacher, along with her students, is going on the trip.  
+C. The teacher, along with her students, are going on the trip.  
+D. The teacher, along with her students, have been going on the trip.  
+
+---
+
+**Q38.** Choose the correct sentence:
+
+A. Neither of the boys are present.  
+B. Neither of the boys was present.  
+C. Neither of the boys have been present.  
+D. Neither of the boys were present.  
+
+---
+
+**Q39.** Choose the correct sentence:
+
+A. The committee are deciding to postpone the event.  
+B. The committee have decided to postpone the event.  
+C. The committee has decided to postpone the event.  
+D. The committee were deciding to postpone the event.  
+
+---
+
+**Q40.** Choose the correct sentence:
+
+A. Each of the students are submitting the assignment.  
+B. Each of the students have submitted the assignment.  
+C. Each of the students were submitting the assignment.  
+D. Each of the students has submitted the assignment.  
+
+---
+
+**Q41.** An essay that uses sensory details to paint a picture is called:
+
+A. an expository essay  
+B. a summary  
+C. a descriptive essay  
+D. an argumentative essay  
+
+---
+
+**Q42.** The first paragraph of an essay is called the:
+
+A. body  
+B. title  
+C. conclusion  
+D. introduction  
+
+---
+
+**Q43.** The final paragraph of an essay is called the:
+
+A. heading  
+B. conclusion  
+C. introduction  
+D. body  
+
+---
+
+**Q44.** A formal letter should begin with:
+
+A. a joke  
+B. the sender''s address and the date  
+C. a greeting like ''Hi''  
+D. the recipient''s name only  
+
+---
+
+**Q45.** The main paragraphs of an essay form the:
+
+A. title  
+B. introduction  
+C. body  
+D. conclusion  
+
+---
+
+**Q46.** A letter of application should include:
+
+A. your favourite hobbies  
+B. only your name  
+C. a list of your friends  
+D. your qualifications and experience  
+
+---
+
+**Q47.** When writing an argumentative essay, you should:
+
+A. write without paragraphs  
+B. only state the opposing view  
+C. support your argument with reasons and examples  
+D. avoid giving any reasons  
+
+---
+
+**Q48.** A narrative essay should have:
+
+A. only statistics  
+B. no setting  
+C. no characters  
+D. a clear sequence of events  
+
+---
+
+**Q49.** The purpose of an introduction is to:
+
+A. present the topic and capture the reader''s interest  
+B. give the conclusion  
+C. list all the details  
+D. repeat the title  
+
+---
+
+**Q50.** A descriptive essay about a market should include:
+
+A. sights, sounds, and smells  
+B. only prices  
+C. mathematical calculations  
+D. a list of items  
+
+---
+
+**Q51.** A formal letter to the editor should:
+
+A. express a clear opinion on an issue  
+B. have no address  
+C. be written in slang  
+D. be very short  
+
+---
+
+**Q52.** The best way to organise an expository essay is:
+
+A. logical paragraphs with clear points  
+B. a single long paragraph  
+C. a list without explanation  
+D. random ideas  
+
+---
+
+**Q53.** A story that illustrates a proverb should:
+
+A. show the lesson through events  
+B. be about animals only  
+C. state the proverb only  
+D. avoid any lesson  
+
+---
+
+**Q54.** When writing an essay, you should:
+
+A. plan your ideas before writing  
+B. write only one paragraph  
+C. copy from a friend  
+D. start writing without a plan  
+
+---
+
+**Q55.** The word count of an essay refers to:
+
+A. the number of paragraphs  
+B. the number of words in the essay  
+C. the number of pages  
+D. the number of sentences  
+
+---
+
+**Q56.** A letter of complaint should:
+
+A. only greet the recipient  
+B. clearly state the problem and request action  
+C. be written in verse  
+D. avoid mentioning the problem  
+
+---
+
+**Q57.** To make an essay interesting, a writer should:
+
+A. repeat the same word  
+B. use only short sentences  
+C. use vivid and varied language  
+D. avoid examples  
+
+---
+
+**Q58.** An essay that tells a story is called:
+
+A. an argumentative essay  
+B. an expository essay  
+C. a descriptive essay  
+D. a narrative essay  
+
+---
+
+**Q59.** An essay that presents reasons for and against a position is called:
+
+A. a narrative essay  
+B. a letter  
+C. an argumentative essay  
+D. a descriptive essay  
+
+---
+
+**Q60.** An essay that explains or informs is called:
+
+A. a narrative essay  
+B. a poem  
+C. a story  
+D. an expository essay  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** An inference is:
+
+A. a conclusion drawn from evidence in the text  
+B. a fact stated directly in the text  
+C. a quotation from the text  
+D. a question about the text  
+
+---
+
+**Q2.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
+
+A. provided many benefits  
+B. was very wide  
+C. was polluted  
+D. flowed very fast  
+
+---
+
+**Q3.** In a summary, you should NOT include:
+
+A. your personal opinions  
+B. the key facts  
+C. the main points  
+D. the essential ideas  
+
+---
+
+**Q4.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
+
+A. containing many different species  
+B. completely untouched  
+C. difficult to reach  
+D. very large in size  
+
+---
+
+**Q5.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
+
+A. feel calmer and begin speaking  
+B. change his topic  
+C. leave the stage  
+D. memorise his speech  
+
+---
+
+**Q6.** When summarising, the word limit means you must:
+
+A. keep your summary within the stated number of words  
+B. ignore the word limit  
+C. write as many words as possible  
+D. write exactly the same number of words as the passage  
+
+---
+
+**Q7.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
+
+A. is completely absent  
+B. has great potential that is not yet realised  
+C. is declining rapidly  
+D. is too expensive for visitors  
+
+---
+
+**Q8.** The purpose of a comprehension passage is usually to:
+
+A. provide entertainment only  
+B. test understanding of the text  
+C. list vocabulary words  
+D. teach grammar rules  
+
+---
+
+**Q9.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
+
+A. were happy with the announcement  
+B. had never heard promises before  
+C. did not trust the government''s promises  
+D. were celebrating quietly  
+
+---
+
+**Q10.** A good summary should be:
+
+A. longer than the original passage  
+B. the same length as the original passage  
+C. a copy of the original passage  
+D. shorter than the original passage  
+
+---
+
+**Q11.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
+
+A. disliked sweeping  
+B. hired someone to sweep  
+C. found peace in sweeping  
+D. swept very quickly  
+
+---
+
+**Q12.** When a question asks you to ''explain in your own words'', you should:
+
+A. quote the passage directly  
+B. give your own opinion  
+C. write a longer version of the passage  
+D. rephrase the idea without copying  
+
+---
+
+**Q13.** Read: ''Success is not a destination but a journey.'' The writer means success is:
+
+A. impossible to achieve  
+B. a continuous process  
+C. a final goal  
+D. measured by certificates  
+
+---
+
+**Q14.** The best title for a passage about plastic waste clogging drainage channels would be:
+
+A. The History of Plastic  
+B. The Problem of Plastic Waste in Our Cities  
+C. A Day at the Market  
+D. How to Build Drainage Channels  
+
+---
+
+**Q15.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
+
+A. a place of conflict  
+B. a noisy place  
+C. the centre of community life  
+D. a modern building  
+
+---
+
+**Q16.** In summary writing, the first step is to:
+
+A. count the words in the passage  
+B. copy the first sentence of each paragraph  
+C. write your own opinions about the topic  
+D. read the passage carefully to understand the main ideas  
+
+---
+
+**Q17.** A summary should be written:
+
+A. in note form only  
+B. as a list of examples  
+C. in your own words  
+D. using long quotations from the passage  
+
+---
+
+**Q18.** The main idea of a passage is best described as:
+
+A. the most difficult word in the passage  
+B. the writer''s personal opinion only  
+C. the first sentence of the passage  
+D. the central point the writer is making  
+
+---
+
+**Q19.** Read: ''The words evaporated.'' This means the speaker:
+
+A. was interrupted by the crowd  
+B. forgot what he wanted to say  
+C. spoke very quietly  
+D. wrote his speech down  
+
+---
+
+**Q20.** When asked to ''state the main idea in one sentence'', you should:
+
+A. list all the details  
+B. summarise the whole passage briefly  
+C. repeat the title  
+D. quote the longest sentence  
+
+---
+
+**Q21.** Choose the correct sentence:
+
+A. The committee consists on ten members.  
+B. The committee consists in ten members.  
+C. The committee consists of ten members.  
+D. The committee consists with ten members.  
+
+---
+
+**Q22.** Choose the correct sentence:
+
+A. She is interested at learning French.  
+B. She is interested on learning French.  
+C. She is interested for learning French.  
+D. She is interested in learning French.  
+
+---
+
+**Q23.** Choose the correct word: The principal gave the students some useful ____.
+
+A. advising  
+B. advices  
+C. advice  
+D. advise  
+
+---
+
+**Q24.** Choose the correct word: The new policy will ____ all workers.
+
+A. effects  
+B. affects  
+C. effect  
+D. affect  
+
+---
+
+**Q25.** Choose the correct word: Please ____ this letter to the post office.
+
+A. take  
+B. bring  
+C. carry  
+D. fetch  
+
+---
+
+**Q26.** Choose the correct word: The company''s ____ concern is customer satisfaction.
+
+A. principal  
+B. principle  
+C. principles  
+D. principally  
+
+---
+
+**Q27.** Choose the correct sentence:
+
+A. The news is good.  
+B. The news were good.  
+C. The news are good.  
+D. The news have been good.  
+
+---
+
+**Q28.** Choose the correct sentence:
+
+A. I look forward to hearing from you.  
+B. I look forward to heard from you.  
+C. I look forward to hears from you.  
+D. I look forward to hear from you.  
+
+---
+
+**Q29.** Choose the correct sentence:
+
+A. He is the taller of the two brothers.  
+B. He is most tallest of the two brothers.  
+C. He is the tallest of the two brothers.  
+D. He is more taller of the two brothers.  
+
+---
+
+**Q30.** Choose the correct sentence:
+
+A. She is taller than her sister.  
+B. She is tallest than her sister.  
+C. She is most taller than her sister.  
+D. She is more taller than her sister.  
+
+---
+
+**Q31.** Choose the correct word: The dog wagged ____ tail.
+
+A. it''s  
+B. its  
+C. its''  
+D. itses  
+
+---
+
+**Q32.** Choose the correct word: ____ going to the market.
+
+A. Their  
+B. They''re  
+C. Theirs  
+D. There  
+
+---
+
+**Q33.** Choose the correct word: ____ book is this?
+
+A. Who''s  
+B. Whom  
+C. Whose  
+D. Who  
+
+---
+
+**Q34.** Choose the correct sentence:
+
+A. The teacher, along with her students, are going on the trip.  
+B. The teacher, along with her students, were going on the trip.  
+C. The teacher, along with her students, have been going on the trip.  
+D. The teacher, along with her students, is going on the trip.  
+
+---
+
+**Q35.** Choose the correct sentence:
+
+A. Neither of the boys were present.  
+B. Neither of the boys have been present.  
+C. Neither of the boys was present.  
+D. Neither of the boys are present.  
+
+---
+
+**Q36.** Choose the correct sentence:
+
+A. The committee have decided to postpone the event.  
+B. The committee were deciding to postpone the event.  
+C. The committee are deciding to postpone the event.  
+D. The committee has decided to postpone the event.  
+
+---
+
+**Q37.** Choose the correct sentence:
+
+A. Each of the students are submitting the assignment.  
+B. Each of the students has submitted the assignment.  
+C. Each of the students have submitted the assignment.  
+D. Each of the students were submitting the assignment.  
+
+---
+
+**Q38.** Choose the correct sentence:
+
+A. The number of accidents were increasing.  
+B. The number of accidents is increasing.  
+C. The number of accidents have been increasing.  
+D. The number of accidents are increasing.  
+
+---
+
+**Q39.** Choose the correct sentence:
+
+A. She is good on mathematics.  
+B. She is good in mathematics.  
+C. She is good at mathematics.  
+D. She is good for mathematics.  
+
+---
+
+**Q40.** Choose the correct sentence:
+
+A. He was accused with theft.  
+B. He was accused for theft.  
+C. He was accused on theft.  
+D. He was accused of theft.  
+
+---
+
+**Q41.** A formal letter should begin with:
+
+A. a greeting like ''Hi''  
+B. a joke  
+C. the sender''s address and the date  
+D. the recipient''s name only  
+
+---
+
+**Q42.** The main paragraphs of an essay form the:
+
+A. conclusion  
+B. title  
+C. introduction  
+D. body  
+
+---
+
+**Q43.** A letter of application should include:
+
+A. your favourite hobbies  
+B. your qualifications and experience  
+C. only your name  
+D. a list of your friends  
+
+---
+
+**Q44.** When writing an argumentative essay, you should:
+
+A. write without paragraphs  
+B. support your argument with reasons and examples  
+C. only state the opposing view  
+D. avoid giving any reasons  
+
+---
+
+**Q45.** A narrative essay should have:
+
+A. only statistics  
+B. no characters  
+C. a clear sequence of events  
+D. no setting  
+
+---
+
+**Q46.** The purpose of an introduction is to:
+
+A. repeat the title  
+B. give the conclusion  
+C. list all the details  
+D. present the topic and capture the reader''s interest  
+
+---
+
+**Q47.** A descriptive essay about a market should include:
+
+A. mathematical calculations  
+B. a list of items  
+C. sights, sounds, and smells  
+D. only prices  
+
+---
+
+**Q48.** A formal letter to the editor should:
+
+A. be very short  
+B. have no address  
+C. be written in slang  
+D. express a clear opinion on an issue  
+
+---
+
+**Q49.** The best way to organise an expository essay is:
+
+A. logical paragraphs with clear points  
+B. random ideas  
+C. a single long paragraph  
+D. a list without explanation  
+
+---
+
+**Q50.** A story that illustrates a proverb should:
+
+A. show the lesson through events  
+B. state the proverb only  
+C. be about animals only  
+D. avoid any lesson  
+
+---
+
+**Q51.** When writing an essay, you should:
+
+A. plan your ideas before writing  
+B. copy from a friend  
+C. start writing without a plan  
+D. write only one paragraph  
+
+---
+
+**Q52.** The word count of an essay refers to:
+
+A. the number of words in the essay  
+B. the number of pages  
+C. the number of sentences  
+D. the number of paragraphs  
+
+---
+
+**Q53.** A letter of complaint should:
+
+A. clearly state the problem and request action  
+B. be written in verse  
+C. only greet the recipient  
+D. avoid mentioning the problem  
+
+---
+
+**Q54.** To make an essay interesting, a writer should:
+
+A. use vivid and varied language  
+B. avoid examples  
+C. use only short sentences  
+D. repeat the same word  
+
+---
+
+**Q55.** An essay that tells a story is called:
+
+A. an argumentative essay  
+B. a narrative essay  
+C. an expository essay  
+D. a descriptive essay  
+
+---
+
+**Q56.** An essay that presents reasons for and against a position is called:
+
+A. a narrative essay  
+B. an argumentative essay  
+C. a letter  
+D. a descriptive essay  
+
+---
+
+**Q57.** An essay that explains or informs is called:
+
+A. a narrative essay  
+B. a story  
+C. an expository essay  
+D. a poem  
+
+---
+
+**Q58.** An essay that uses sensory details to paint a picture is called:
+
+A. an argumentative essay  
+B. an expository essay  
+C. a summary  
+D. a descriptive essay  
+
+---
+
+**Q59.** The first paragraph of an essay is called the:
+
+A. conclusion  
+B. title  
+C. introduction  
+D. body  
+
+---
+
+**Q60.** The final paragraph of an essay is called the:
+
+A. introduction  
+B. heading  
+C. body  
+D. conclusion  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 4
+
+## Structural Question Bank — Functions and graphs
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FUNCTIONS AND GRAPHS
+
+**Q1.** Given $f(x) = \dfrac{2x+1}{x-3}$, $x \neq 3$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) State the domain and range of $f^{-1}$. *(3 marks)*
+
+(c) Solve $f(x) = f^{-1}(x)$. *(5 marks)*
+
+---
+
+**Q2.** The functions $f$ and $g$ are defined by $f(x) = 3x - 2$ and $g(x) = x^2 + 1$.
+
+(a) Find $fg(x)$ and $gf(x)$. *(4 marks)*
+
+(b) Solve $fg(x) = gf(x)$. *(5 marks)*
+
+(c) Find the value of $x$ for which $f^{-1}(x) = g(2)$. *(4 marks)*
+
+---
+
+**Q3.** A quadratic function has roots $\alpha$ and $\beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+
+(a) Write down the quadratic equation. *(3 marks)*
+
+(b) Find the value of $\alpha^2 + \beta^2$. *(4 marks)*
+
+(c) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(5 marks)*
+
+---
+
+**Q4.** Sketch the graph of $y = 2x^2 - 8x + 5$, showing clearly:
+
+(a) the coordinates of the turning point; *(4 marks)*
+
+(b) the roots of the equation $2x^2 - 8x + 5 = 0$; *(4 marks)*
+
+(c) the $y$-intercept. *(2 marks)*
+
+---
+
+**Q5.** The function $f(x) = x^2 - 4x + 3$ is defined for $x \geq 2$.
+
+(a) Show that $f$ is one-to-one on this domain. *(3 marks)*
+
+(b) Find $f^{-1}(x)$. *(5 marks)*
+
+(c) State the domain of $f^{-1}$. *(2 marks)*
+
+---
+
+**Q6.** Given $f(x) = \dfrac{1}{x}$, $x \neq 0$, and $g(x) = x + 2$:
+
+(a) Find $gf(x)$ and state its domain. *(4 marks)*
+
+(b) Find $fg(x)$ and state its domain. *(4 marks)*
+
+(c) Solve $gf(x) = fg(x)$. *(4 marks)*
+
+---
+
+**Q7.** The graph of $y = x^2$ is transformed to $y = (x-3)^2 + 4$.
+
+(a) Describe the two transformations. *(4 marks)*
+
+(b) State the coordinates of the turning point of the new graph. *(2 marks)*
+
+(c) Sketch both graphs on the same axes. *(4 marks)*
+
+---
+
+**Q8.** Solve the equation $2^{2x} - 5(2^x) + 4 = 0$. *(7 marks)*
+
+---
+
+**Q9.** The functions $f(x) = 2x + 1$ and $g(x) = \dfrac{x-1}{2}$ are given.
+
+(a) Show that $f$ and $g$ are inverse functions. *(4 marks)*
+
+(b) Find $fg(3)$ and $gf(3)$. *(3 marks)*
+
+(c) Sketch the graphs of $f$ and $g$ on the same axes, showing the line $y = x$. *(4 marks)*
+
+---
+
+**Q10.** A curve has equation $y = x^2 - 6x + 10$.
+
+(a) Express $y$ in the form $(x-a)^2 + b$. *(3 marks)*
+
+(b) State the minimum value of $y$ and the value of $x$ at which it occurs. *(3 marks)*
+
+(c) Find the range of $y$ for $0 \leq x \leq 5$. *(4 marks)*
+
+---
+
+**Q11.** Given $f(x) = \sqrt{x+1}$, $x \geq -1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) State the domain and range of $f$ and of $f^{-1}$. *(4 marks)*
+
+(c) Solve $f(x) = f^{-1}(x)$. *(4 marks)*
+
+---
+
+**Q12.** The roots of $x^2 - 3x + 1 = 0$ are $\alpha$ and $\beta$.
+
+(a) Write down the values of $\alpha + \beta$ and $\alpha\beta$. *(2 marks)*
+
+(b) Find the value of $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(4 marks)*
+
+(c) Find a quadratic equation with roots $\alpha + 1$ and $\beta + 1$. *(5 marks)*
+
+---
+
+**Q13.** Sketch the graph of $y = |x - 2|$ for $-1 \leq x \leq 5$, and hence solve $|x - 2| = 3$. *(7 marks)*
+
+---
+
+**Q14.** The function $f(x) = ax^2 + bx + c$ has a maximum value of 9 at $x = 1$, and passes through $(0, 5)$. Find $a$, $b$ and $c$. *(7 marks)*
+
+---
+
+**Q15.** Given $f(x) = \dfrac{2x}{x+1}$, $x \neq -1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) Find $f^2(x) = ff(x)$. *(5 marks)*
+
+(c) Solve $f^2(x) = x$. *(4 marks)*
+
+---
+
+**Q16.** The graph of $y = f(x)$ is reflected in the $y$-axis and then translated 2 units down.
+
+(a) Write down the equation of the resulting graph. *(3 marks)*
+
+(b) If $f(x) = x^2 - 4x$, find the equation of the resulting graph in simplified form. *(5 marks)*
+
+(c) State the turning point of the resulting graph. *(3 marks)*
+
+---
+
+**Q17.** Solve the simultaneous equations $y = x^2 - 2x$ and $y = 2x - 3$. *(6 marks)*
+
+---
+
+**Q18.** Given $f(x) = \dfrac{x+2}{x-1}$, $x \neq 1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) Show that $f^{-1}(x) = f(x)$. *(3 marks)*
+
+(c) Find $f^2(x)$. *(4 marks)*
+
+---
+
+**Q19.** A function $f$ is defined by $f(x) = 2x^2 - 4x + 1$ for $x \geq 1$.
+
+(a) Complete the square. *(3 marks)*
+
+(b) Find the range of $f$. *(3 marks)*
+
+(c) Find $f^{-1}(x)$. *(5 marks)*
+
+---
+
+**Q20.** The graph of $y = x^2$ is stretched parallel to the $y$-axis by factor 3 and translated 1 unit left.
+
+(a) Write down the equation of the resulting graph. *(4 marks)*
+
+(b) State the coordinates of its turning point. *(2 marks)*
+
+(c) Find the value of $y$ when $x = 2$. *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 5
+
+## Structural Question Bank — Introductory calculus
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: INTRODUCTORY CALCULUS
+
+**Q1.** Differentiate from first principles $y = x^2 + 3x$. *(6 marks)*
+
+---
+
+**Q2.** Find the derivative of each of the following:
+
+(a) $y = 3x^4 - 2x^3 + 5x - 7$ *(3 marks)*
+
+(b) $y = \dfrac{2}{x^3}$ *(3 marks)*
+
+(c) $y = \sqrt{x} + \dfrac{1}{\sqrt{x}}$ *(4 marks)*
+
+---
+
+**Q3.** Find the equation of the tangent to the curve $y = x^3 - 2x$ at the point where $x = 1$. *(6 marks)*
+
+---
+
+**Q4.** Find the coordinates of the stationary points of $y = x^3 - 3x^2 - 9x + 5$ and determine their nature. *(8 marks)*
+
+---
+
+**Q5.** Evaluate the following integrals:
+
+(a) $\int (3x^2 + 2x - 1)\,dx$ *(3 marks)*
+
+(b) $\int \dfrac{1}{x^2}\,dx$ *(3 marks)*
+
+(c) $\int \sqrt{x}\,dx$ *(3 marks)*
+
+---
+
+**Q6.** Find the area enclosed by the curve $y = x^2 - 4x + 3$ and the $x$-axis. *(7 marks)*
+
+---
+
+**Q7.** A curve passes through the point $(1, 4)$ and has gradient function $\dfrac{dy}{dx} = 2x + 3$. Find the equation of the curve. *(5 marks)*
+
+---
+
+**Q8.** Find the equation of the normal to the curve $y = x^2 - 4x + 2$ at the point where $x = 3$. *(6 marks)*
+
+---
+
+**Q9.** A rectangular field is to be fenced using 200 m of fencing. Find the maximum area that can be enclosed. *(7 marks)*
+
+---
+
+**Q10.** Differentiate $y = (2x + 1)^5$ using the chain rule. *(4 marks)*
+
+---
+
+**Q11.** Find $\dfrac{dy}{dx}$ for each of the following:
+
+(a) $y = \dfrac{x^2 + 1}{x}$ *(4 marks)*
+
+(b) $y = (x^2 - 1)(x + 2)$ *(4 marks)*
+
+---
+
+**Q12.** Evaluate $\int_0^2 (x^2 + 1)\,dx$. *(5 marks)*
+
+---
+
+**Q13.** The displacement of a particle is given by $s = t^3 - 6t^2 + 9t$.
+
+(a) Find the velocity and acceleration. *(4 marks)*
+
+(b) Find the times when the particle is at rest. *(3 marks)*
+
+(c) Find the displacement when the particle is at rest. *(3 marks)*
+
+---
+
+**Q14.** Find the maximum and minimum values of $y = 2x^3 - 9x^2 + 12x$ on the interval $0 \leq x \leq 3$. *(8 marks)*
+
+---
+
+**Q15.** Find the area between the curves $y = x^2$ and $y = x + 2$. *(8 marks)*
+
+---
+
+**Q16.** Given $y = \dfrac{3}{x} - x^2$, find $\dfrac{dy}{dx}$ and hence find the gradient of the curve at $x = 1$. *(5 marks)*
+
+---
+
+**Q17.** A curve has equation $y = x^3 - 3x$. Find the coordinates of the points where the gradient is 9. *(6 marks)*
+
+---
+
+**Q18.** Find $\int (2x + 1)(x - 3)\,dx$. *(5 marks)*
+
+---
+
+**Q19.** The volume of a sphere is increasing at a rate of $8\pi$ cm³/s. Find the rate of increase of the radius when the radius is 4 cm. *(6 marks)*
+
+---
+
+**Q20.** Find the equation of the tangent to $y = \dfrac{1}{x}$ at the point $(2, \tfrac{1}{2})$. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 6
+
+## Structural Question Bank — Functions and graphs
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FUNCTIONS AND GRAPHS
+
+**Q1.** Given $f(x) = \dfrac{2x+1}{x-3}$, $x \neq 3$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) State the domain and range of $f^{-1}$. *(3 marks)*
+
+(c) Solve $f(x) = f^{-1}(x)$. *(5 marks)*
+
+---
+
+**Q2.** The functions $f$ and $g$ are defined by $f(x) = 3x - 2$ and $g(x) = x^2 + 1$.
+
+(a) Find $fg(x)$ and $gf(x)$. *(4 marks)*
+
+(b) Solve $fg(x) = gf(x)$. *(5 marks)*
+
+(c) Find the value of $x$ for which $f^{-1}(x) = g(2)$. *(4 marks)*
+
+---
+
+**Q3.** A quadratic function has roots $\alpha$ and $\beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+
+(a) Write down the quadratic equation. *(3 marks)*
+
+(b) Find the value of $\alpha^2 + \beta^2$. *(4 marks)*
+
+(c) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(5 marks)*
+
+---
+
+**Q4.** Sketch the graph of $y = 2x^2 - 8x + 5$, showing clearly:
+
+(a) the coordinates of the turning point; *(4 marks)*
+
+(b) the roots of the equation $2x^2 - 8x + 5 = 0$; *(4 marks)*
+
+(c) the $y$-intercept. *(2 marks)*
+
+---
+
+**Q5.** The function $f(x) = x^2 - 4x + 3$ is defined for $x \geq 2$.
+
+(a) Show that $f$ is one-to-one on this domain. *(3 marks)*
+
+(b) Find $f^{-1}(x)$. *(5 marks)*
+
+(c) State the domain of $f^{-1}$. *(2 marks)*
+
+---
+
+**Q6.** Given $f(x) = \dfrac{1}{x}$, $x \neq 0$, and $g(x) = x + 2$:
+
+(a) Find $gf(x)$ and state its domain. *(4 marks)*
+
+(b) Find $fg(x)$ and state its domain. *(4 marks)*
+
+(c) Solve $gf(x) = fg(x)$. *(4 marks)*
+
+---
+
+**Q7.** The graph of $y = x^2$ is transformed to $y = (x-3)^2 + 4$.
+
+(a) Describe the two transformations. *(4 marks)*
+
+(b) State the coordinates of the turning point of the new graph. *(2 marks)*
+
+(c) Sketch both graphs on the same axes. *(4 marks)*
+
+---
+
+**Q8.** Solve the equation $2^{2x} - 5(2^x) + 4 = 0$. *(7 marks)*
+
+---
+
+**Q9.** The functions $f(x) = 2x + 1$ and $g(x) = \dfrac{x-1}{2}$ are given.
+
+(a) Show that $f$ and $g$ are inverse functions. *(4 marks)*
+
+(b) Find $fg(3)$ and $gf(3)$. *(3 marks)*
+
+(c) Sketch the graphs of $f$ and $g$ on the same axes, showing the line $y = x$. *(4 marks)*
+
+---
+
+**Q10.** A curve has equation $y = x^2 - 6x + 10$.
+
+(a) Express $y$ in the form $(x-a)^2 + b$. *(3 marks)*
+
+(b) State the minimum value of $y$ and the value of $x$ at which it occurs. *(3 marks)*
+
+(c) Find the range of $y$ for $0 \leq x \leq 5$. *(4 marks)*
+
+---
+
+**Q11.** Given $f(x) = \sqrt{x+1}$, $x \geq -1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) State the domain and range of $f$ and of $f^{-1}$. *(4 marks)*
+
+(c) Solve $f(x) = f^{-1}(x)$. *(4 marks)*
+
+---
+
+**Q12.** The roots of $x^2 - 3x + 1 = 0$ are $\alpha$ and $\beta$.
+
+(a) Write down the values of $\alpha + \beta$ and $\alpha\beta$. *(2 marks)*
+
+(b) Find the value of $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(4 marks)*
+
+(c) Find a quadratic equation with roots $\alpha + 1$ and $\beta + 1$. *(5 marks)*
+
+---
+
+**Q13.** Sketch the graph of $y = |x - 2|$ for $-1 \leq x \leq 5$, and hence solve $|x - 2| = 3$. *(7 marks)*
+
+---
+
+**Q14.** The function $f(x) = ax^2 + bx + c$ has a maximum value of 9 at $x = 1$, and passes through $(0, 5)$. Find $a$, $b$ and $c$. *(7 marks)*
+
+---
+
+**Q15.** Given $f(x) = \dfrac{2x}{x+1}$, $x \neq -1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) Find $f^2(x) = ff(x)$. *(5 marks)*
+
+(c) Solve $f^2(x) = x$. *(4 marks)*
+
+---
+
+**Q16.** The graph of $y = f(x)$ is reflected in the $y$-axis and then translated 2 units down.
+
+(a) Write down the equation of the resulting graph. *(3 marks)*
+
+(b) If $f(x) = x^2 - 4x$, find the equation of the resulting graph in simplified form. *(5 marks)*
+
+(c) State the turning point of the resulting graph. *(3 marks)*
+
+---
+
+**Q17.** Solve the simultaneous equations $y = x^2 - 2x$ and $y = 2x - 3$. *(6 marks)*
+
+---
+
+**Q18.** Given $f(x) = \dfrac{x+2}{x-1}$, $x \neq 1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) Show that $f^{-1}(x) = f(x)$. *(3 marks)*
+
+(c) Find $f^2(x)$. *(4 marks)*
+
+---
+
+**Q19.** A function $f$ is defined by $f(x) = 2x^2 - 4x + 1$ for $x \geq 1$.
+
+(a) Complete the square. *(3 marks)*
+
+(b) Find the range of $f$. *(3 marks)*
+
+(c) Find $f^{-1}(x)$. *(5 marks)*
+
+---
+
+**Q20.** The graph of $y = x^2$ is stretched parallel to the $y$-axis by factor 3 and translated 1 unit left.
+
+(a) Write down the equation of the resulting graph. *(4 marks)*
+
+(b) State the coordinates of its turning point. *(2 marks)*
+
+(c) Find the value of $y$ when $x = 2$. *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 7
+
+## Structural Question Bank — Introductory calculus
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: INTRODUCTORY CALCULUS
+
+**Q1.** Differentiate from first principles $y = x^2 + 3x$. *(6 marks)*
+
+---
+
+**Q2.** Find the derivative of each of the following:
+
+(a) $y = 3x^4 - 2x^3 + 5x - 7$ *(3 marks)*
+
+(b) $y = \dfrac{2}{x^3}$ *(3 marks)*
+
+(c) $y = \sqrt{x} + \dfrac{1}{\sqrt{x}}$ *(4 marks)*
+
+---
+
+**Q3.** Find the equation of the tangent to the curve $y = x^3 - 2x$ at the point where $x = 1$. *(6 marks)*
+
+---
+
+**Q4.** Find the coordinates of the stationary points of $y = x^3 - 3x^2 - 9x + 5$ and determine their nature. *(8 marks)*
+
+---
+
+**Q5.** Evaluate the following integrals:
+
+(a) $\int (3x^2 + 2x - 1)\,dx$ *(3 marks)*
+
+(b) $\int \dfrac{1}{x^2}\,dx$ *(3 marks)*
+
+(c) $\int \sqrt{x}\,dx$ *(3 marks)*
+
+---
+
+**Q6.** Find the area enclosed by the curve $y = x^2 - 4x + 3$ and the $x$-axis. *(7 marks)*
+
+---
+
+**Q7.** A curve passes through the point $(1, 4)$ and has gradient function $\dfrac{dy}{dx} = 2x + 3$. Find the equation of the curve. *(5 marks)*
+
+---
+
+**Q8.** Find the equation of the normal to the curve $y = x^2 - 4x + 2$ at the point where $x = 3$. *(6 marks)*
+
+---
+
+**Q9.** A rectangular field is to be fenced using 200 m of fencing. Find the maximum area that can be enclosed. *(7 marks)*
+
+---
+
+**Q10.** Differentiate $y = (2x + 1)^5$ using the chain rule. *(4 marks)*
+
+---
+
+**Q11.** Find $\dfrac{dy}{dx}$ for each of the following:
+
+(a) $y = \dfrac{x^2 + 1}{x}$ *(4 marks)*
+
+(b) $y = (x^2 - 1)(x + 2)$ *(4 marks)*
+
+---
+
+**Q12.** Evaluate $\int_0^2 (x^2 + 1)\,dx$. *(5 marks)*
+
+---
+
+**Q13.** The displacement of a particle is given by $s = t^3 - 6t^2 + 9t$.
+
+(a) Find the velocity and acceleration. *(4 marks)*
+
+(b) Find the times when the particle is at rest. *(3 marks)*
+
+(c) Find the displacement when the particle is at rest. *(3 marks)*
+
+---
+
+**Q14.** Find the maximum and minimum values of $y = 2x^3 - 9x^2 + 12x$ on the interval $0 \leq x \leq 3$. *(8 marks)*
+
+---
+
+**Q15.** Find the area between the curves $y = x^2$ and $y = x + 2$. *(8 marks)*
+
+---
+
+**Q16.** Given $y = \dfrac{3}{x} - x^2$, find $\dfrac{dy}{dx}$ and hence find the gradient of the curve at $x = 1$. *(5 marks)*
+
+---
+
+**Q17.** A curve has equation $y = x^3 - 3x$. Find the coordinates of the points where the gradient is 9. *(6 marks)*
+
+---
+
+**Q18.** Find $\int (2x + 1)(x - 3)\,dx$. *(5 marks)*
+
+---
+
+**Q19.** The volume of a sphere is increasing at a rate of $8\pi$ cm³/s. Find the rate of increase of the radius when the radius is 4 cm. *(6 marks)*
+
+---
+
+**Q20.** Find the equation of the tangent to $y = \dfrac{1}{x}$ at the point $(2, \tfrac{1}{2})$. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 8
+
+## Structural Question Bank — Functions and graphs
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FUNCTIONS AND GRAPHS
+
+**Q1.** Given $f(x) = \dfrac{2x+1}{x-3}$, $x \neq 3$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) State the domain and range of $f^{-1}$. *(3 marks)*
+
+(c) Solve $f(x) = f^{-1}(x)$. *(5 marks)*
+
+---
+
+**Q2.** The functions $f$ and $g$ are defined by $f(x) = 3x - 2$ and $g(x) = x^2 + 1$.
+
+(a) Find $fg(x)$ and $gf(x)$. *(4 marks)*
+
+(b) Solve $fg(x) = gf(x)$. *(5 marks)*
+
+(c) Find the value of $x$ for which $f^{-1}(x) = g(2)$. *(4 marks)*
+
+---
+
+**Q3.** A quadratic function has roots $\alpha$ and $\beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+
+(a) Write down the quadratic equation. *(3 marks)*
+
+(b) Find the value of $\alpha^2 + \beta^2$. *(4 marks)*
+
+(c) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(5 marks)*
+
+---
+
+**Q4.** Sketch the graph of $y = 2x^2 - 8x + 5$, showing clearly:
+
+(a) the coordinates of the turning point; *(4 marks)*
+
+(b) the roots of the equation $2x^2 - 8x + 5 = 0$; *(4 marks)*
+
+(c) the $y$-intercept. *(2 marks)*
+
+---
+
+**Q5.** The function $f(x) = x^2 - 4x + 3$ is defined for $x \geq 2$.
+
+(a) Show that $f$ is one-to-one on this domain. *(3 marks)*
+
+(b) Find $f^{-1}(x)$. *(5 marks)*
+
+(c) State the domain of $f^{-1}$. *(2 marks)*
+
+---
+
+**Q6.** Given $f(x) = \dfrac{1}{x}$, $x \neq 0$, and $g(x) = x + 2$:
+
+(a) Find $gf(x)$ and state its domain. *(4 marks)*
+
+(b) Find $fg(x)$ and state its domain. *(4 marks)*
+
+(c) Solve $gf(x) = fg(x)$. *(4 marks)*
+
+---
+
+**Q7.** The graph of $y = x^2$ is transformed to $y = (x-3)^2 + 4$.
+
+(a) Describe the two transformations. *(4 marks)*
+
+(b) State the coordinates of the turning point of the new graph. *(2 marks)*
+
+(c) Sketch both graphs on the same axes. *(4 marks)*
+
+---
+
+**Q8.** Solve the equation $2^{2x} - 5(2^x) + 4 = 0$. *(7 marks)*
+
+---
+
+**Q9.** The functions $f(x) = 2x + 1$ and $g(x) = \dfrac{x-1}{2}$ are given.
+
+(a) Show that $f$ and $g$ are inverse functions. *(4 marks)*
+
+(b) Find $fg(3)$ and $gf(3)$. *(3 marks)*
+
+(c) Sketch the graphs of $f$ and $g$ on the same axes, showing the line $y = x$. *(4 marks)*
+
+---
+
+**Q10.** A curve has equation $y = x^2 - 6x + 10$.
+
+(a) Express $y$ in the form $(x-a)^2 + b$. *(3 marks)*
+
+(b) State the minimum value of $y$ and the value of $x$ at which it occurs. *(3 marks)*
+
+(c) Find the range of $y$ for $0 \leq x \leq 5$. *(4 marks)*
+
+---
+
+**Q11.** Given $f(x) = \sqrt{x+1}$, $x \geq -1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) State the domain and range of $f$ and of $f^{-1}$. *(4 marks)*
+
+(c) Solve $f(x) = f^{-1}(x)$. *(4 marks)*
+
+---
+
+**Q12.** The roots of $x^2 - 3x + 1 = 0$ are $\alpha$ and $\beta$.
+
+(a) Write down the values of $\alpha + \beta$ and $\alpha\beta$. *(2 marks)*
+
+(b) Find the value of $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(4 marks)*
+
+(c) Find a quadratic equation with roots $\alpha + 1$ and $\beta + 1$. *(5 marks)*
+
+---
+
+**Q13.** Sketch the graph of $y = |x - 2|$ for $-1 \leq x \leq 5$, and hence solve $|x - 2| = 3$. *(7 marks)*
+
+---
+
+**Q14.** The function $f(x) = ax^2 + bx + c$ has a maximum value of 9 at $x = 1$, and passes through $(0, 5)$. Find $a$, $b$ and $c$. *(7 marks)*
+
+---
+
+**Q15.** Given $f(x) = \dfrac{2x}{x+1}$, $x \neq -1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) Find $f^2(x) = ff(x)$. *(5 marks)*
+
+(c) Solve $f^2(x) = x$. *(4 marks)*
+
+---
+
+**Q16.** The graph of $y = f(x)$ is reflected in the $y$-axis and then translated 2 units down.
+
+(a) Write down the equation of the resulting graph. *(3 marks)*
+
+(b) If $f(x) = x^2 - 4x$, find the equation of the resulting graph in simplified form. *(5 marks)*
+
+(c) State the turning point of the resulting graph. *(3 marks)*
+
+---
+
+**Q17.** Solve the simultaneous equations $y = x^2 - 2x$ and $y = 2x - 3$. *(6 marks)*
+
+---
+
+**Q18.** Given $f(x) = \dfrac{x+2}{x-1}$, $x \neq 1$:
+
+(a) Find $f^{-1}(x)$. *(4 marks)*
+
+(b) Show that $f^{-1}(x) = f(x)$. *(3 marks)*
+
+(c) Find $f^2(x)$. *(4 marks)*
+
+---
+
+**Q19.** A function $f$ is defined by $f(x) = 2x^2 - 4x + 1$ for $x \geq 1$.
+
+(a) Complete the square. *(3 marks)*
+
+(b) Find the range of $f$. *(3 marks)*
+
+(c) Find $f^{-1}(x)$. *(5 marks)*
+
+---
+
+**Q20.** The graph of $y = x^2$ is stretched parallel to the $y$-axis by factor 3 and translated 1 unit left.
+
+(a) Write down the equation of the resulting graph. *(4 marks)*
+
+(b) State the coordinates of its turning point. *(2 marks)*
+
+(c) Find the value of $y$ when $x = 2$. *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** If $f(x) = 2x + 3$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{x-3}{2}$  
+B. $\dfrac{x+3}{2}$  
+C. $2x - 3$  
+D. $\dfrac{x}{2} + 3$  
+
+---
+
+**Q2.** If $f(x) = x^2$ and $g(x) = x + 1$, then $fg(x)$ is:
+
+A. $(x+1)^2$  
+B. $x^2 + 1$  
+C. $x + 1$  
+D. $x^2 + x$  
+
+---
+
+**Q3.** The turning point of $y = x^2 - 4x + 3$ is:
+
+A. (2, -1)  
+B. (4, 3)  
+C. (-2, 15)  
+D. (2, 3)  
+
+---
+
+**Q4.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 2 and 3  
+B. -2 and -3  
+C. 5 and 6  
+D. 1 and 6  
+
+---
+
+**Q5.** If $f(x) = \dfrac{1}{x}$, $x \neq 0$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{1}{x}$  
+B. $x^2$  
+C. $x$  
+D. $-x$  
+
+---
+
+**Q6.** The graph of $y = x^2$ translated 3 units right becomes:
+
+A. $y = (x-3)^2$  
+B. $y = x^2 - 3$  
+C. $y = x^2 + 3$  
+D. $y = (x+3)^2$  
+
+---
+
+**Q7.** If $f(x) = 3x - 2$ and $g(x) = x^2$, then $gf(2)$ is:
+
+A. 10  
+B. 16  
+C. 22  
+D. 36  
+
+---
+
+**Q8.** The range of $y = x^2$ for $x \geq 0$ is:
+
+A. $y > 0$  
+B. $y \geq 0$  
+C. $y \leq 0$  
+D. all real $y$  
+
+---
+
+**Q9.** The equation $2^{2x} = 16$ has solution:
+
+A. $x = 4$  
+B. $x = 8$  
+C. $x = 2$  
+D. $x = 16$  
+
+---
+
+**Q10.** If $f(x) = x^2 - 1$, the value of $f(-2)$ is:
+
+A. -3  
+B. 5  
+C. -5  
+D. 3  
+
+---
+
+**Q11.** The axis of symmetry of $y = x^2 - 6x + 8$ is:
+
+A. $x = -3$  
+B. $x = 2$  
+C. $x = 3$  
+D. $x = 6$  
+
+---
+
+**Q12.** If $f(x) = 2x$ and $g(x) = x + 1$, then $fg(x)$ is:
+
+A. $2x + 1$  
+B. $2x$  
+C. $x + 2$  
+D. $2x + 2$  
+
+---
+
+**Q13.** The minimum value of $y = x^2 + 2x + 1$ is:
+
+A. 2  
+B. 0  
+C. 1  
+D. -1  
+
+---
+
+**Q14.** For $f(x) = \sqrt{x}$, the domain is:
+
+A. all real $x$  
+B. $x \geq 0$  
+C. $x \leq 0$  
+D. $x > 0$  
+
+---
+
+**Q15.** The graph of $y = -x^2$ is the graph of $y = x^2$:
+
+A. translated up  
+B. translated down  
+C. reflected in the $x$-axis  
+D. stretched  
+
+---
+
+**Q16.** If $f(x) = x^3$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{1}{x^3}$  
+B. $x^3$  
+C. $3x$  
+D. $\sqrt[3]{x}$  
+
+---
+
+**Q17.** The sum of the roots of $2x^2 - 6x + 3 = 0$ is:
+
+A. $\dfrac{3}{2}$  
+B. 6  
+C. 3  
+D. -3  
+
+---
+
+**Q18.** If $f(x) = x + 2$ and $g(x) = 3x$, then $gf(x)$ is:
+
+A. $x + 6$  
+B. $3x$  
+C. $3x + 2$  
+D. $3x + 6$  
+
+---
+
+**Q19.** The graph of $y = |x|$ at $x = 0$ has:
+
+A. a horizontal asymptote  
+B. a sharp corner  
+C. a smooth curve  
+D. a vertical asymptote  
+
+---
+
+**Q20.** If $f(x) = \dfrac{x+1}{x-1}$, $x \neq 1$, then $f(3)$ is:
+
+A. 3  
+B. 2  
+C. $\dfrac{1}{2}$  
+D. 4  
+
+---
+
+**Q21.** The product of the roots of $x^2 - 4x + 7 = 0$ is:
+
+A. -7  
+B. 4  
+C. 7  
+D. -4  
+
+---
+
+**Q22.** The graph of $y = (x+1)^2$ has turning point:
+
+A. (0, -1)  
+B. (1, 0)  
+C. (0, 1)  
+D. (-1, 0)  
+
+---
+
+**Q23.** If $f(x) = 2x - 1$, then $f^{-1}(3)$ is:
+
+A. 4  
+B. 1  
+C. 2  
+D. 5  
+
+---
+
+**Q24.** The equation $x^2 - 2x + 5 = 0$ has:
+
+A. three roots  
+B. one repeated root  
+C. two distinct real roots  
+D. no real roots  
+
+---
+
+**Q25.** If $f(x) = x^2$ and $g(x) = 2x$, then $fg(3)$ is:
+
+A. 36  
+B. 18  
+C. 12  
+D. 9  
+
+---
+
+**Q26.** The range of $f(x) = x^2 + 1$ is:
+
+A. $y \geq 1$  
+B. $y > 1$  
+C. $y \geq 0$  
+D. all real $y$  
+
+---
+
+**Q27.** The graph of $y = x^2$ stretched vertically by factor 2 becomes:
+
+A. $y = 2x^2$  
+B. $y = (2x)^2$  
+C. $y = x^4$  
+D. $y = x^2 + 2$  
+
+---
+
+**Q28.** If $f(x) = \dfrac{2}{x}$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{2}{x}$  
+B. $2x$  
+C. $-\dfrac{2}{x}$  
+D. $\dfrac{x}{2}$  
+
+---
+
+**Q29.** The discriminant of $x^2 - 4x + 4 = 0$ is:
+
+A. 0  
+B. 4  
+C. 16  
+D. -16  
+
+---
+
+**Q30.** If $f(x) = x + 1$ and $g(x) = x - 1$, then $fg(x)$ is:
+
+A. $x$  
+B. $x - 2$  
+C. $x + 2$  
+D. $x^2 - 1$  
+
+---
+
+**Q31.** The derivative of $x^3$ is:
+
+A. $x^2$  
+B. $3x^2$  
+C. $3x$  
+D. $\dfrac{x^4}{4}$  
+
+---
+
+**Q32.** The derivative of $5x^2$ is:
+
+A. $5x$  
+B. $10x$  
+C. $25x$  
+D. $2x$  
+
+---
+
+**Q33.** The derivative of a constant is:
+
+A. 1  
+B. the constant itself  
+C. 0  
+D. undefined  
+
+---
+
+**Q34.** $\int 2x\,dx$ is:
+
+A. $2x^2 + c$  
+B. $x + c$  
+C. $\dfrac{x^2}{2} + c$  
+D. $x^2 + c$  
+
+---
+
+**Q35.** The gradient of $y = x^2$ at $x = 3$ is:
+
+A. 9  
+B. 12  
+C. 6  
+D. 3  
+
+---
+
+**Q36.** The derivative of $\dfrac{1}{x}$ is:
+
+A. $\dfrac{1}{x^2}$  
+B. $\ln x$  
+C. $-x^2$  
+D. $-\dfrac{1}{x^2}$  
+
+---
+
+**Q37.** $\int 3\,dx$ is:
+
+A. $x^3 + c$  
+B. $3x + c$  
+C. $\dfrac{3x^2}{2} + c$  
+D. $3 + c$  
+
+---
+
+**Q38.** A stationary point occurs where:
+
+A. $x = 0$  
+B. $\dfrac{dy}{dx} = 0$  
+C. $\dfrac{dy}{dx} = 1$  
+D. $y = 0$  
+
+---
+
+**Q39.** The derivative of $x^2 + 3x$ is:
+
+A. $x^2 + 3$  
+B. $2x$  
+C. $2x + 3$  
+D. $2x^2 + 3x$  
+
+---
+
+**Q40.** $\int_0^1 x\,dx$ is:
+
+A. 0  
+B. 1  
+C. 2  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q41.** The second derivative of $x^3$ is:
+
+A. $6x^2$  
+B. $3x$  
+C. $6x$  
+D. $3x^2$  
+
+---
+
+**Q42.** The equation of the tangent to $y = x^2$ at $(1, 1)$ is:
+
+A. $y = 2x + 1$  
+B. $y = x - 1$  
+C. $y = x$  
+D. $y = 2x - 1$  
+
+---
+
+**Q43.** If $\dfrac{dy}{dx} = 2x$ and $y = 1$ when $x = 0$, then $y$ is:
+
+A. $x^2 - 1$  
+B. $x^2 + 1$  
+C. $x^2$  
+D. $2x + 1$  
+
+---
+
+**Q44.** The derivative of $\sqrt{x}$ is:
+
+A. $\dfrac{1}{2}x$  
+B. $\dfrac{1}{2\sqrt{x}}$  
+C. $2\sqrt{x}$  
+D. $\dfrac{1}{\sqrt{x}}$  
+
+---
+
+**Q45.** The area under $y = x$ from $x = 0$ to $x = 2$ is:
+
+A. 3  
+B. 4  
+C. 2  
+D. 1  
+
+---
+
+**Q46.** A maximum point has:
+
+A. $\dfrac{d^2y}{dx^2} = 0$  
+B. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} > 0$  
+C. $\dfrac{dy}{dx} > 0$  
+D. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} < 0$  
+
+---
+
+**Q47.** The derivative of $4x^3 - 2x$ is:
+
+A. $12x^3 - 2$  
+B. $4x^2 - 2$  
+C. $12x^2 - 2$  
+D. $12x^2$  
+
+---
+
+**Q48.** $\int (x^2 + 1)\,dx$ is:
+
+A. $2x + c$  
+B. $\dfrac{x^3}{3} + c$  
+C. $x^3 + x + c$  
+D. $\dfrac{x^3}{3} + x + c$  
+
+---
+
+**Q49.** The gradient of $y = 3x - 2$ is:
+
+A. 3  
+B. -2  
+C. 2  
+D. 1  
+
+---
+
+**Q50.** If $s = t^2$, the velocity when $t = 3$ is:
+
+A. 6  
+B. 9  
+C. 12  
+D. 3  
+
+---
+
+**Q51.** The derivative of $x^4$ is:
+
+A. $4x^3$  
+B. $4x$  
+C. $x^3$  
+D. $\dfrac{x^5}{5}$  
+
+---
+
+**Q52.** $\int \dfrac{1}{x^2}\,dx$ is:
+
+A. $-\dfrac{1}{x} + c$  
+B. $\ln x + c$  
+C. $-x + c$  
+D. $\dfrac{1}{x} + c$  
+
+---
+
+**Q53.** The turning point of $y = x^2 - 2x$ is:
+
+A. (1, -1)  
+B. (2, 0)  
+C. (-1, 3)  
+D. (1, 1)  
+
+---
+
+**Q54.** The derivative of $y = (2x+1)^2$ is:
+
+A. $8x + 4$  
+B. $4x$  
+C. $2(2x+1)$  
+D. $4x + 2$  
+
+---
+
+**Q55.** $\int_0^1 2x\,dx$ is:
+
+A. 2  
+B. 1  
+C. 0  
+D. 4  
+
+---
+
+**Q56.** If $\dfrac{dy}{dx} = 3x^2$, then $y$ is:
+
+A. $3x^3 + c$  
+B. $x^3 + c$  
+C. $\dfrac{x^3}{3} + c$  
+D. $6x + c$  
+
+---
+
+**Q57.** The normal to a curve is perpendicular to the:
+
+A. curve itself  
+B. $x$-axis  
+C. tangent  
+D. $y$-axis  
+
+---
+
+**Q58.** The derivative of $2x^3$ is:
+
+A. $2x^2$  
+B. $6x^3$  
+C. $3x^2$  
+D. $6x^2$  
+
+---
+
+**Q59.** $\int (3x^2 - 2)\,dx$ is:
+
+A. $3x^3 - 2x + c$  
+B. $6x - 2 + c$  
+C. $x^3 - 2x + c$  
+D. $x^3 - 2 + c$  
+
+---
+
+**Q60.** The area under $y = x^2$ from $x = 0$ to $x = 1$ is:
+
+A. 1  
+B. 2  
+C. $\dfrac{1}{2}$  
+D. $\dfrac{1}{3}$  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 2 and 3  
+B. 1 and 6  
+C. -2 and -3  
+D. 5 and 6  
+
+---
+
+**Q2.** If $f(x) = \dfrac{1}{x}$, $x \neq 0$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{1}{x}$  
+B. $x$  
+C. $x^2$  
+D. $-x$  
+
+---
+
+**Q3.** The graph of $y = x^2$ translated 3 units right becomes:
+
+A. $y = (x-3)^2$  
+B. $y = x^2 + 3$  
+C. $y = (x+3)^2$  
+D. $y = x^2 - 3$  
+
+---
+
+**Q4.** If $f(x) = 3x - 2$ and $g(x) = x^2$, then $gf(2)$ is:
+
+A. 16  
+B. 22  
+C. 36  
+D. 10  
+
+---
+
+**Q5.** The range of $y = x^2$ for $x \geq 0$ is:
+
+A. $y \geq 0$  
+B. $y \leq 0$  
+C. $y > 0$  
+D. all real $y$  
+
+---
+
+**Q6.** The equation $2^{2x} = 16$ has solution:
+
+A. $x = 2$  
+B. $x = 16$  
+C. $x = 8$  
+D. $x = 4$  
+
+---
+
+**Q7.** If $f(x) = x^2 - 1$, the value of $f(-2)$ is:
+
+A. -3  
+B. 3  
+C. 5  
+D. -5  
+
+---
+
+**Q8.** The axis of symmetry of $y = x^2 - 6x + 8$ is:
+
+A. $x = -3$  
+B. $x = 3$  
+C. $x = 2$  
+D. $x = 6$  
+
+---
+
+**Q9.** If $f(x) = 2x$ and $g(x) = x + 1$, then $fg(x)$ is:
+
+A. $2x + 1$  
+B. $x + 2$  
+C. $2x + 2$  
+D. $2x$  
+
+---
+
+**Q10.** The minimum value of $y = x^2 + 2x + 1$ is:
+
+A. 1  
+B. 2  
+C. -1  
+D. 0  
+
+---
+
+**Q11.** For $f(x) = \sqrt{x}$, the domain is:
+
+A. $x > 0$  
+B. $x \leq 0$  
+C. $x \geq 0$  
+D. all real $x$  
+
+---
+
+**Q12.** The graph of $y = -x^2$ is the graph of $y = x^2$:
+
+A. translated down  
+B. stretched  
+C. translated up  
+D. reflected in the $x$-axis  
+
+---
+
+**Q13.** If $f(x) = x^3$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{1}{x^3}$  
+B. $\sqrt[3]{x}$  
+C. $x^3$  
+D. $3x$  
+
+---
+
+**Q14.** The sum of the roots of $2x^2 - 6x + 3 = 0$ is:
+
+A. $\dfrac{3}{2}$  
+B. 3  
+C. 6  
+D. -3  
+
+---
+
+**Q15.** If $f(x) = x + 2$ and $g(x) = 3x$, then $gf(x)$ is:
+
+A. $x + 6$  
+B. $3x + 2$  
+C. $3x + 6$  
+D. $3x$  
+
+---
+
+**Q16.** The graph of $y = |x|$ at $x = 0$ has:
+
+A. a vertical asymptote  
+B. a smooth curve  
+C. a horizontal asymptote  
+D. a sharp corner  
+
+---
+
+**Q17.** If $f(x) = \dfrac{x+1}{x-1}$, $x \neq 1$, then $f(3)$ is:
+
+A. $\dfrac{1}{2}$  
+B. 3  
+C. 2  
+D. 4  
+
+---
+
+**Q18.** The product of the roots of $x^2 - 4x + 7 = 0$ is:
+
+A. -4  
+B. -7  
+C. 4  
+D. 7  
+
+---
+
+**Q19.** The graph of $y = (x+1)^2$ has turning point:
+
+A. (0, -1)  
+B. (-1, 0)  
+C. (1, 0)  
+D. (0, 1)  
+
+---
+
+**Q20.** If $f(x) = 2x - 1$, then $f^{-1}(3)$ is:
+
+A. 4  
+B. 2  
+C. 1  
+D. 5  
+
+---
+
+**Q21.** The equation $x^2 - 2x + 5 = 0$ has:
+
+A. three roots  
+B. two distinct real roots  
+C. no real roots  
+D. one repeated root  
+
+---
+
+**Q22.** If $f(x) = x^2$ and $g(x) = 2x$, then $fg(3)$ is:
+
+A. 9  
+B. 18  
+C. 12  
+D. 36  
+
+---
+
+**Q23.** The range of $f(x) = x^2 + 1$ is:
+
+A. $y \geq 0$  
+B. all real $y$  
+C. $y \geq 1$  
+D. $y > 1$  
+
+---
+
+**Q24.** The graph of $y = x^2$ stretched vertically by factor 2 becomes:
+
+A. $y = x^2 + 2$  
+B. $y = (2x)^2$  
+C. $y = x^4$  
+D. $y = 2x^2$  
+
+---
+
+**Q25.** If $f(x) = \dfrac{2}{x}$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{2}{x}$  
+B. $\dfrac{x}{2}$  
+C. $2x$  
+D. $-\dfrac{2}{x}$  
+
+---
+
+**Q26.** The discriminant of $x^2 - 4x + 4 = 0$ is:
+
+A. 0  
+B. 16  
+C. 4  
+D. -16  
+
+---
+
+**Q27.** If $f(x) = x + 1$ and $g(x) = x - 1$, then $fg(x)$ is:
+
+A. $x$  
+B. $x + 2$  
+C. $x^2 - 1$  
+D. $x - 2$  
+
+---
+
+**Q28.** If $f(x) = 2x + 3$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{x-3}{2}$  
+B. $2x - 3$  
+C. $\dfrac{x}{2} + 3$  
+D. $\dfrac{x+3}{2}$  
+
+---
+
+**Q29.** If $f(x) = x^2$ and $g(x) = x + 1$, then $fg(x)$ is:
+
+A. $(x+1)^2$  
+B. $x + 1$  
+C. $x^2 + 1$  
+D. $x^2 + x$  
+
+---
+
+**Q30.** The turning point of $y = x^2 - 4x + 3$ is:
+
+A. (2, -1)  
+B. (2, 3)  
+C. (4, 3)  
+D. (-2, 15)  
+
+---
+
+**Q31.** $\int 2x\,dx$ is:
+
+A. $2x^2 + c$  
+B. $x^2 + c$  
+C. $x + c$  
+D. $\dfrac{x^2}{2} + c$  
+
+---
+
+**Q32.** The gradient of $y = x^2$ at $x = 3$ is:
+
+A. 9  
+B. 6  
+C. 12  
+D. 3  
+
+---
+
+**Q33.** The derivative of $\dfrac{1}{x}$ is:
+
+A. $\dfrac{1}{x^2}$  
+B. $-x^2$  
+C. $-\dfrac{1}{x^2}$  
+D. $\ln x$  
+
+---
+
+**Q34.** $\int 3\,dx$ is:
+
+A. $\dfrac{3x^2}{2} + c$  
+B. $x^3 + c$  
+C. $3 + c$  
+D. $3x + c$  
+
+---
+
+**Q35.** A stationary point occurs where:
+
+A. $y = 0$  
+B. $\dfrac{dy}{dx} = 1$  
+C. $\dfrac{dy}{dx} = 0$  
+D. $x = 0$  
+
+---
+
+**Q36.** The derivative of $x^2 + 3x$ is:
+
+A. $2x$  
+B. $2x^2 + 3x$  
+C. $x^2 + 3$  
+D. $2x + 3$  
+
+---
+
+**Q37.** $\int_0^1 x\,dx$ is:
+
+A. 0  
+B. $\dfrac{1}{2}$  
+C. 1  
+D. 2  
+
+---
+
+**Q38.** The second derivative of $x^3$ is:
+
+A. $6x^2$  
+B. $6x$  
+C. $3x$  
+D. $3x^2$  
+
+---
+
+**Q39.** The equation of the tangent to $y = x^2$ at $(1, 1)$ is:
+
+A. $y = 2x + 1$  
+B. $y = x$  
+C. $y = 2x - 1$  
+D. $y = x - 1$  
+
+---
+
+**Q40.** If $\dfrac{dy}{dx} = 2x$ and $y = 1$ when $x = 0$, then $y$ is:
+
+A. $2x + 1$  
+B. $x^2$  
+C. $x^2 - 1$  
+D. $x^2 + 1$  
+
+---
+
+**Q41.** The derivative of $\sqrt{x}$ is:
+
+A. $2\sqrt{x}$  
+B. $\dfrac{1}{2}x$  
+C. $\dfrac{1}{2\sqrt{x}}$  
+D. $\dfrac{1}{\sqrt{x}}$  
+
+---
+
+**Q42.** The area under $y = x$ from $x = 0$ to $x = 2$ is:
+
+A. 1  
+B. 3  
+C. 4  
+D. 2  
+
+---
+
+**Q43.** A maximum point has:
+
+A. $\dfrac{d^2y}{dx^2} = 0$  
+B. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} < 0$  
+C. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} > 0$  
+D. $\dfrac{dy}{dx} > 0$  
+
+---
+
+**Q44.** The derivative of $4x^3 - 2x$ is:
+
+A. $12x^3 - 2$  
+B. $12x^2 - 2$  
+C. $4x^2 - 2$  
+D. $12x^2$  
+
+---
+
+**Q45.** $\int (x^2 + 1)\,dx$ is:
+
+A. $2x + c$  
+B. $x^3 + x + c$  
+C. $\dfrac{x^3}{3} + x + c$  
+D. $\dfrac{x^3}{3} + c$  
+
+---
+
+**Q46.** The gradient of $y = 3x - 2$ is:
+
+A. 1  
+B. -2  
+C. 2  
+D. 3  
+
+---
+
+**Q47.** If $s = t^2$, the velocity when $t = 3$ is:
+
+A. 12  
+B. 3  
+C. 6  
+D. 9  
+
+---
+
+**Q48.** The derivative of $x^4$ is:
+
+A. $\dfrac{x^5}{5}$  
+B. $4x$  
+C. $x^3$  
+D. $4x^3$  
+
+---
+
+**Q49.** $\int \dfrac{1}{x^2}\,dx$ is:
+
+A. $-\dfrac{1}{x} + c$  
+B. $\dfrac{1}{x} + c$  
+C. $\ln x + c$  
+D. $-x + c$  
+
+---
+
+**Q50.** The turning point of $y = x^2 - 2x$ is:
+
+A. (1, -1)  
+B. (-1, 3)  
+C. (2, 0)  
+D. (1, 1)  
+
+---
+
+**Q51.** The derivative of $y = (2x+1)^2$ is:
+
+A. $8x + 4$  
+B. $2(2x+1)$  
+C. $4x + 2$  
+D. $4x$  
+
+---
+
+**Q52.** $\int_0^1 2x\,dx$ is:
+
+A. 1  
+B. 0  
+C. 4  
+D. 2  
+
+---
+
+**Q53.** If $\dfrac{dy}{dx} = 3x^2$, then $y$ is:
+
+A. $x^3 + c$  
+B. $\dfrac{x^3}{3} + c$  
+C. $3x^3 + c$  
+D. $6x + c$  
+
+---
+
+**Q54.** The normal to a curve is perpendicular to the:
+
+A. tangent  
+B. $y$-axis  
+C. $x$-axis  
+D. curve itself  
+
+---
+
+**Q55.** The derivative of $2x^3$ is:
+
+A. $2x^2$  
+B. $6x^2$  
+C. $6x^3$  
+D. $3x^2$  
+
+---
+
+**Q56.** $\int (3x^2 - 2)\,dx$ is:
+
+A. $3x^3 - 2x + c$  
+B. $x^3 - 2x + c$  
+C. $6x - 2 + c$  
+D. $x^3 - 2 + c$  
+
+---
+
+**Q57.** The area under $y = x^2$ from $x = 0$ to $x = 1$ is:
+
+A. 1  
+B. $\dfrac{1}{2}$  
+C. $\dfrac{1}{3}$  
+D. 2  
+
+---
+
+**Q58.** The derivative of $x^3$ is:
+
+A. $x^2$  
+B. $3x$  
+C. $\dfrac{x^4}{4}$  
+D. $3x^2$  
+
+---
+
+**Q59.** The derivative of $5x^2$ is:
+
+A. $5x$  
+B. $25x$  
+C. $10x$  
+D. $2x$  
+
+---
+
+**Q60.** The derivative of a constant is:
+
+A. 1  
+B. undefined  
+C. the constant itself  
+D. 0  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Additional Mathematics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Additional Mathematics',
+  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Additional Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** If $f(x) = 3x - 2$ and $g(x) = x^2$, then $gf(2)$ is:
+
+A. 16  
+B. 10  
+C. 22  
+D. 36  
+
+---
+
+**Q2.** The range of $y = x^2$ for $x \geq 0$ is:
+
+A. $y \geq 0$  
+B. $y > 0$  
+C. $y \leq 0$  
+D. all real $y$  
+
+---
+
+**Q3.** The equation $2^{2x} = 16$ has solution:
+
+A. $x = 2$  
+B. $x = 8$  
+C. $x = 4$  
+D. $x = 16$  
+
+---
+
+**Q4.** If $f(x) = x^2 - 1$, the value of $f(-2)$ is:
+
+A. 3  
+B. 5  
+C. -5  
+D. -3  
+
+---
+
+**Q5.** The axis of symmetry of $y = x^2 - 6x + 8$ is:
+
+A. $x = 3$  
+B. $x = 2$  
+C. $x = -3$  
+D. $x = 6$  
+
+---
+
+**Q6.** If $f(x) = 2x$ and $g(x) = x + 1$, then $fg(x)$ is:
+
+A. $2x + 2$  
+B. $2x$  
+C. $x + 2$  
+D. $2x + 1$  
+
+---
+
+**Q7.** The minimum value of $y = x^2 + 2x + 1$ is:
+
+A. 1  
+B. 0  
+C. 2  
+D. -1  
+
+---
+
+**Q8.** For $f(x) = \sqrt{x}$, the domain is:
+
+A. $x > 0$  
+B. $x \geq 0$  
+C. $x \leq 0$  
+D. all real $x$  
+
+---
+
+**Q9.** The graph of $y = -x^2$ is the graph of $y = x^2$:
+
+A. translated down  
+B. translated up  
+C. reflected in the $x$-axis  
+D. stretched  
+
+---
+
+**Q10.** If $f(x) = x^3$, then $f^{-1}(x)$ is:
+
+A. $x^3$  
+B. $\dfrac{1}{x^3}$  
+C. $3x$  
+D. $\sqrt[3]{x}$  
+
+---
+
+**Q11.** The sum of the roots of $2x^2 - 6x + 3 = 0$ is:
+
+A. -3  
+B. 6  
+C. 3  
+D. $\dfrac{3}{2}$  
+
+---
+
+**Q12.** If $f(x) = x + 2$ and $g(x) = 3x$, then $gf(x)$ is:
+
+A. $3x + 2$  
+B. $3x$  
+C. $x + 6$  
+D. $3x + 6$  
+
+---
+
+**Q13.** The graph of $y = |x|$ at $x = 0$ has:
+
+A. a vertical asymptote  
+B. a sharp corner  
+C. a smooth curve  
+D. a horizontal asymptote  
+
+---
+
+**Q14.** If $f(x) = \dfrac{x+1}{x-1}$, $x \neq 1$, then $f(3)$ is:
+
+A. $\dfrac{1}{2}$  
+B. 2  
+C. 3  
+D. 4  
+
+---
+
+**Q15.** The product of the roots of $x^2 - 4x + 7 = 0$ is:
+
+A. -4  
+B. 4  
+C. 7  
+D. -7  
+
+---
+
+**Q16.** The graph of $y = (x+1)^2$ has turning point:
+
+A. (0, 1)  
+B. (1, 0)  
+C. (0, -1)  
+D. (-1, 0)  
+
+---
+
+**Q17.** If $f(x) = 2x - 1$, then $f^{-1}(3)$ is:
+
+A. 1  
+B. 4  
+C. 2  
+D. 5  
+
+---
+
+**Q18.** The equation $x^2 - 2x + 5 = 0$ has:
+
+A. one repeated root  
+B. three roots  
+C. two distinct real roots  
+D. no real roots  
+
+---
+
+**Q19.** If $f(x) = x^2$ and $g(x) = 2x$, then $fg(3)$ is:
+
+A. 9  
+B. 36  
+C. 18  
+D. 12  
+
+---
+
+**Q20.** The range of $f(x) = x^2 + 1$ is:
+
+A. $y \geq 0$  
+B. $y \geq 1$  
+C. all real $y$  
+D. $y > 1$  
+
+---
+
+**Q21.** The graph of $y = x^2$ stretched vertically by factor 2 becomes:
+
+A. $y = x^2 + 2$  
+B. $y = x^4$  
+C. $y = 2x^2$  
+D. $y = (2x)^2$  
+
+---
+
+**Q22.** If $f(x) = \dfrac{2}{x}$, then $f^{-1}(x)$ is:
+
+A. $-\dfrac{2}{x}$  
+B. $\dfrac{x}{2}$  
+C. $2x$  
+D. $\dfrac{2}{x}$  
+
+---
+
+**Q23.** The discriminant of $x^2 - 4x + 4 = 0$ is:
+
+A. 4  
+B. -16  
+C. 0  
+D. 16  
+
+---
+
+**Q24.** If $f(x) = x + 1$ and $g(x) = x - 1$, then $fg(x)$ is:
+
+A. $x - 2$  
+B. $x + 2$  
+C. $x^2 - 1$  
+D. $x$  
+
+---
+
+**Q25.** If $f(x) = 2x + 3$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{x-3}{2}$  
+B. $\dfrac{x+3}{2}$  
+C. $2x - 3$  
+D. $\dfrac{x}{2} + 3$  
+
+---
+
+**Q26.** If $f(x) = x^2$ and $g(x) = x + 1$, then $fg(x)$ is:
+
+A. $(x+1)^2$  
+B. $x^2 + 1$  
+C. $x + 1$  
+D. $x^2 + x$  
+
+---
+
+**Q27.** The turning point of $y = x^2 - 4x + 3$ is:
+
+A. (2, -1)  
+B. (4, 3)  
+C. (-2, 15)  
+D. (2, 3)  
+
+---
+
+**Q28.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 2 and 3  
+B. -2 and -3  
+C. 5 and 6  
+D. 1 and 6  
+
+---
+
+**Q29.** If $f(x) = \dfrac{1}{x}$, $x \neq 0$, then $f^{-1}(x)$ is:
+
+A. $\dfrac{1}{x}$  
+B. $x^2$  
+C. $x$  
+D. $-x$  
+
+---
+
+**Q30.** The graph of $y = x^2$ translated 3 units right becomes:
+
+A. $y = (x-3)^2$  
+B. $y = x^2 - 3$  
+C. $y = x^2 + 3$  
+D. $y = (x+3)^2$  
+
+---
+
+**Q31.** $\int 3\,dx$ is:
+
+A. $\dfrac{3x^2}{2} + c$  
+B. $3x + c$  
+C. $x^3 + c$  
+D. $3 + c$  
+
+---
+
+**Q32.** A stationary point occurs where:
+
+A. $y = 0$  
+B. $\dfrac{dy}{dx} = 0$  
+C. $\dfrac{dy}{dx} = 1$  
+D. $x = 0$  
+
+---
+
+**Q33.** The derivative of $x^2 + 3x$ is:
+
+A. $2x$  
+B. $x^2 + 3$  
+C. $2x + 3$  
+D. $2x^2 + 3x$  
+
+---
+
+**Q34.** $\int_0^1 x\,dx$ is:
+
+A. 1  
+B. 0  
+C. 2  
+D. $\dfrac{1}{2}$  
+
+---
+
+**Q35.** The second derivative of $x^3$ is:
+
+A. $3x^2$  
+B. $3x$  
+C. $6x$  
+D. $6x^2$  
+
+---
+
+**Q36.** The equation of the tangent to $y = x^2$ at $(1, 1)$ is:
+
+A. $y = x$  
+B. $y = x - 1$  
+C. $y = 2x + 1$  
+D. $y = 2x - 1$  
+
+---
+
+**Q37.** If $\dfrac{dy}{dx} = 2x$ and $y = 1$ when $x = 0$, then $y$ is:
+
+A. $2x + 1$  
+B. $x^2 + 1$  
+C. $x^2$  
+D. $x^2 - 1$  
+
+---
+
+**Q38.** The derivative of $\sqrt{x}$ is:
+
+A. $2\sqrt{x}$  
+B. $\dfrac{1}{2\sqrt{x}}$  
+C. $\dfrac{1}{2}x$  
+D. $\dfrac{1}{\sqrt{x}}$  
+
+---
+
+**Q39.** The area under $y = x$ from $x = 0$ to $x = 2$ is:
+
+A. 1  
+B. 4  
+C. 2  
+D. 3  
+
+---
+
+**Q40.** A maximum point has:
+
+A. $\dfrac{dy}{dx} > 0$  
+B. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} > 0$  
+C. $\dfrac{d^2y}{dx^2} = 0$  
+D. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} < 0$  
+
+---
+
+**Q41.** The derivative of $4x^3 - 2x$ is:
+
+A. $4x^2 - 2$  
+B. $12x^3 - 2$  
+C. $12x^2 - 2$  
+D. $12x^2$  
+
+---
+
+**Q42.** $\int (x^2 + 1)\,dx$ is:
+
+A. $\dfrac{x^3}{3} + c$  
+B. $2x + c$  
+C. $x^3 + x + c$  
+D. $\dfrac{x^3}{3} + x + c$  
+
+---
+
+**Q43.** The gradient of $y = 3x - 2$ is:
+
+A. 1  
+B. 3  
+C. -2  
+D. 2  
+
+---
+
+**Q44.** If $s = t^2$, the velocity when $t = 3$ is:
+
+A. 12  
+B. 6  
+C. 3  
+D. 9  
+
+---
+
+**Q45.** The derivative of $x^4$ is:
+
+A. $\dfrac{x^5}{5}$  
+B. $x^3$  
+C. $4x^3$  
+D. $4x$  
+
+---
+
+**Q46.** $\int \dfrac{1}{x^2}\,dx$ is:
+
+A. $-x + c$  
+B. $\dfrac{1}{x} + c$  
+C. $\ln x + c$  
+D. $-\dfrac{1}{x} + c$  
+
+---
+
+**Q47.** The turning point of $y = x^2 - 2x$ is:
+
+A. (2, 0)  
+B. (1, 1)  
+C. (1, -1)  
+D. (-1, 3)  
+
+---
+
+**Q48.** The derivative of $y = (2x+1)^2$ is:
+
+A. $4x$  
+B. $2(2x+1)$  
+C. $4x + 2$  
+D. $8x + 4$  
+
+---
+
+**Q49.** $\int_0^1 2x\,dx$ is:
+
+A. 1  
+B. 2  
+C. 0  
+D. 4  
+
+---
+
+**Q50.** If $\dfrac{dy}{dx} = 3x^2$, then $y$ is:
+
+A. $x^3 + c$  
+B. $3x^3 + c$  
+C. $\dfrac{x^3}{3} + c$  
+D. $6x + c$  
+
+---
+
+**Q51.** The normal to a curve is perpendicular to the:
+
+A. tangent  
+B. $x$-axis  
+C. curve itself  
+D. $y$-axis  
+
+---
+
+**Q52.** The derivative of $2x^3$ is:
+
+A. $6x^2$  
+B. $6x^3$  
+C. $3x^2$  
+D. $2x^2$  
+
+---
+
+**Q53.** $\int (3x^2 - 2)\,dx$ is:
+
+A. $x^3 - 2x + c$  
+B. $6x - 2 + c$  
+C. $3x^3 - 2x + c$  
+D. $x^3 - 2 + c$  
+
+---
+
+**Q54.** The area under $y = x^2$ from $x = 0$ to $x = 1$ is:
+
+A. $\dfrac{1}{3}$  
+B. 2  
+C. $\dfrac{1}{2}$  
+D. 1  
+
+---
+
+**Q55.** The derivative of $x^3$ is:
+
+A. $x^2$  
+B. $3x^2$  
+C. $3x$  
+D. $\dfrac{x^4}{4}$  
+
+---
+
+**Q56.** The derivative of $5x^2$ is:
+
+A. $5x$  
+B. $10x$  
+C. $25x$  
+D. $2x$  
+
+---
+
+**Q57.** The derivative of a constant is:
+
+A. 1  
+B. the constant itself  
+C. 0  
+D. undefined  
+
+---
+
+**Q58.** $\int 2x\,dx$ is:
+
+A. $2x^2 + c$  
+B. $x + c$  
+C. $\dfrac{x^2}{2} + c$  
+D. $x^2 + c$  
+
+---
+
+**Q59.** The gradient of $y = x^2$ at $x = 3$ is:
+
+A. 9  
+B. 12  
+C. 6  
+D. 3  
+
+---
+
+**Q60.** The derivative of $\dfrac{1}{x}$ is:
+
+A. $\dfrac{1}{x^2}$  
+B. $\ln x$  
+C. $-x^2$  
+D. $-\dfrac{1}{x^2}$  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4
+
+## Structural Question Bank — Grammaire et conjugaison
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAIRE ET CONJUGAISON
+
+**Q1.** Mettez les verbes au temps qui convient:
+
+(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
+
+(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
+
+(c) Demain, nous (aller) ____ au marché. *(2 marks)*
+
+---
+
+**Q2.** Accordez correctement les participes passés:
+
+(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
+
+(b) Elles se sont (laver) ____ les mains. *(3 marks)*
+
+(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
+
+---
+
+**Q3.** Transformez au discours indirect:
+
+(a) Il dit: "Je viendrai demain." *(4 marks)*
+
+(b) Elle demande: "Où est la gare?" *(4 marks)*
+
+(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
+
+---
+
+**Q4.** Remplacez les mots soulignés par un pronom:
+
+(a) Je donne le livre à Marie. *(3 marks)*
+
+(b) Il parle de ses vacances. *(3 marks)*
+
+(c) Nous avons vu les enfants. *(3 marks)*
+
+---
+
+**Q5.** Mettez au pluriel:
+
+(a) Le cheval blanc. *(2 marks)*
+
+(b) Un travail difficile. *(2 marks)
+
+(c) Le journal du matin. *(2 marks)*
+
+(d) Un prix spécial. *(2 marks)*
+
+---
+
+**Q6.** Conjuguez au passé composé:
+
+(a) Elle (partir) ____ tôt. *(3 marks)*
+
+(b) Nous (finir) ____ le travail. *(3 marks)*
+
+(c) Ils (se lever) ____ à six heures. *(3 marks)*
+
+---
+
+**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
+
+(a) ____ eau est importante pour la santé. *(2 marks)*
+
+(b) J''achète ____ pain et ____ beurre. *(4 marks)*
+
+(c) ____ enfants jouent dans la cour. *(2 marks)*
+
+---
+
+**Q8.** Mettez les phrases au négatif:
+
+(a) Il a mangé quelque chose. *(3 marks)*
+
+(b) Nous avons vu quelqu''un. *(3 marks)*
+
+(c) Elle vient souvent. *(3 marks)*
+
+---
+
+**Q9.** Transformez au futur simple:
+
+(a) Je (être) ____ content. *(2 marks)*
+
+(b) Nous (avoir) ____ le temps. *(2 marks)*
+
+(c) Ils (faire) ____ un effort. *(2 marks)*
+
+(d) Tu (aller) ____ à l''école. *(2 marks)*
+
+---
+
+**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
+
+(a) La ville ____ je suis né est belle. *(2 marks)*
+
+(b) Le livre ____ tu parles est intéressant. *(2 marks)*
+
+(c) La femme ____ chante est ma mère. *(2 marks)*
+
+(d) Le film ____ nous avons vu était long. *(2 marks)*
+
+---
+
+**Q11.** Mettez au féminin:
+
+(a) Un acteur célèbre. *(2 marks)*
+
+(b) Le directeur est gentil. *(2 marks)*
+
+(c) Un sportif courageux. *(2 marks)*
+
+(d) Le voisin est patient. *(2 marks)*
+
+---
+
+**Q12.** Conjuguez à l''imparfait:
+
+(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
+
+(b) Il (pleuvoir) ____ souvent. *(3 marks)*
+
+(c) Nous (habiter) ____ à Douala. *(3 marks)*
+
+---
+
+**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
+
+(a) Il va ____ France. *(2 marks)*
+
+(b) Elle habite ____ Douala. *(2 marks)*
+
+(c) Nous partons ____ l''école. *(2 marks)*
+
+(d) Le livre est ____ la table. *(2 marks)*
+
+---
+
+**Q14.** Transformez au plus-que-parfait:
+
+(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
+
+(b) Nous (déjà voir) ____ ce film. *(3 marks)*
+
+(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
+
+---
+
+**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
+
+(a) ____ livre est intéressant. *(2 marks)*
+
+(b) ____ maison est grande. *(2 marks)*
+
+(c) J''aime ____ fleurs. *(2 marks)*
+
+(d) ____ père travaille à l''hôpital. *(2 marks)*
+
+---
+
+**Q16.** Mettez au comparatif ou superlatif:
+
+(a) Paul est ____ (grand) que Pierre. *(3 marks)*
+
+(b) C''est ____ (bon) élève de la classe. *(3 marks)*
+
+(c) Elle parle ____ (lentement) que moi. *(3 marks)*
+
+---
+
+**Q17.** Transformez au conditionnel présent:
+
+(a) Je (aimer) ____ voyager. *(3 marks)*
+
+(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
+
+(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
+
+---
+
+**Q18.** Complétez avec le subjonctif:
+
+(a) Il faut que tu (venir) ____. *(3 marks)*
+
+(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
+
+(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
+
+---
+
+**Q19.** Corrigez les erreurs dans les phrases suivantes:
+
+(a) "Je suis allé au marché hier." *(2 marks)*
+
+(b) "Elle a mangé des pommes." *(2 marks)*
+
+(c) "Nous avons vu un film intéressant." *(2 marks)*
+
+(d) "Ils sont arrivés à temps." *(2 marks)*
+
+---
+
+**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
+
+(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
+
+(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
+
+(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5
+
+## Structural Question Bank — Comprehension et expression ecrite
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION ET EXPRESSION ECRITE
+
+**Q1.** Lisez le texte et répondez aux questions:
+
+*"Le Cameroun est souvent appelé ''l''Afrique en miniature'' à cause de sa diversité. On y trouve des plages, des montagnes, des forêts et des savanes. Cette diversité se reflète aussi dans sa culture, avec plus de 250 groupes ethniques."*
+
+(a) Pourquoi appelle-t-on le Cameroun "l''Afrique en miniature"? *(3 marks)*
+
+(b) Citez deux types de paysages qu''on trouve au Cameroun. *(3 marks)*
+
+(c) Combien de groupes ethniques compte le Cameroun? *(2 marks)*
+
+---
+
+**Q2.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Ma ville natale"
+
+Décrivez les lieux, les gens et les activités. *(10 marks)*
+
+---
+
+**Q3.** Lisez le texte et répondez aux questions:
+
+*"La pluie tombait depuis trois jours. Les rues de la ville étaient transformées en rivières. Les enfants, ravis, jouaient dans les flaques d''eau, tandis que les adultes cherchaient un abri. Soudain, le soleil perça les nuages et tout le monde sortit pour admirer l''arc-en-ciel."*
+
+(a) Depuis combien de temps pleuvait-il? *(2 marks)*
+
+(b) Que faisaient les enfants? *(3 marks)*
+
+(c) Qu''est-ce qui est apparu à la fin? *(2 marks)*
+
+(d) Quel temps fait-il dans ce texte? *(3 marks)*
+
+---
+
+**Q4.** Écrivez une lettre à votre ami(e) pour l''inviter à votre anniversaire. (80 à 100 mots)
+
+Incluez la date, le lieu, l''heure et ce que vous prévoyez. *(10 marks)*
+
+---
+
+**Q5.** Lisez le texte et répondez aux questions:
+
+*"Le marché de Mokolo est l''un des plus grands marchés de Yaoundé. Chaque jour, des milliers de personnes y viennent pour acheter des vêtements, des fruits, des légumes et des articles ménagers. Les vendeurs crient pour attirer les clients, et l''air est rempli d''odeurs variées."*
+
+(a) Où se trouve le marché de Mokolo? *(2 marks)*
+
+(b) Qu''est-ce qu''on peut acheter au marché? *(3 marks)*
+
+(c) Comment les vendeurs attirent-ils les clients? *(3 marks)*
+
+---
+
+**Q6.** Rédigez un dialogue de 80 à 100 mots entre deux amis qui discutent de leurs projets pour les vacances. *(10 marks)*
+
+---
+
+**Q7.** Lisez le texte et répondez aux questions:
+
+*"L''éducation est la clé du développement. Un pays qui investit dans l''éducation de ses enfants investit dans son avenir. Les écoles forment non seulement des travailleurs qualifiés, mais aussi des citoyens responsables capables de prendre de bonnes décisions."*
+
+(a) Pourquoi l''éducation est-elle importante selon le texte? *(3 marks)*
+
+(b) Que forment les écoles? *(3 marks)*
+
+(c) Donnez un titre au texte. *(2 marks)*
+
+---
+
+**Q8.** Traduisez en français:
+
+(a) "I am going to the market." *(3 marks)*
+
+(b) "She has three brothers." *(3 marks)*
+
+(c) "We visited our grandparents last week." *(4 marks)*
+
+---
+
+**Q9.** Lisez le texte et répondez aux questions:
+
+*"La santé est notre bien le plus précieux. Pour rester en bonne santé, il faut manger équilibré, faire du sport et dormir suffisamment. Il faut aussi éviter le tabac et l''alcool. Les médecins conseillent de boire beaucoup d''eau et de consulter régulièrement."*
+
+(a) Citez trois habitudes pour rester en bonne santé. *(3 marks)*
+
+(b) Que faut-il éviter? *(2 marks)*
+
+(c) Que conseillent les médecins? *(3 marks)*
+
+---
+
+**Q10.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Ce que je ferai après mes examens"
+
+Parlez de vos projets et de vos rêves. *(10 marks)*
+
+---
+
+**Q11.** Lisez le texte et répondez aux questions:
+
+*"Le football est le sport le plus populaire au Cameroun. Les Lions Indomptables, l''équipe nationale, ont gagné plusieurs coupes d''Afrique. Dans les rues, les enfants jouent au football avec des ballons improvisés, rêvant de devenir des stars comme Samuel Eto''o."*
+
+(a) Quel est le sport le plus populaire au Cameroun? *(2 marks)*
+
+(b) Comment s''appelle l''équipe nationale? *(2 marks)*
+
+(c) Avec quoi les enfants jouent-ils? *(3 marks)*
+
+(d) De quoi rêvent les enfants? *(3 marks)*
+
+---
+
+**Q12.** Écrivez un texte de 80 à 100 mots décrivant votre journée typique.
+
+Commencez par: "Ma journée commence à..." *(10 marks)*
+
+---
+
+**Q13.** Lisez le texte et répondez aux questions:
+
+*"La technologie a changé notre façon de communiquer. Avec un téléphone portable, on peut appeler, envoyer des messages et même voir ses proches à l''écran. Mais certains pensent que la technologie nous éloigne les uns des autres."*
+
+(a) Qu''est-ce qu''on peut faire avec un téléphone portable? *(3 marks)*
+
+(b) Quel est l''inconvénient de la technologie selon certains? *(3 marks)*
+
+(c) Êtes-vous d''accord? Justifiez votre réponse. *(3 marks)*
+
+---
+
+**Q14.** Traduisez en anglais:
+
+(a) "Je vais au marché avec ma mère." *(3 marks)*
+
+(b) "Nous avons mangé du poisson hier soir." *(3 marks)*
+
+(c) "Elle est plus grande que son frère." *(4 marks)*
+
+---
+
+**Q15.** Lisez le texte et répondez aux questions:
+
+*"Le respect de l''environnement commence à la maison. Il faut trier les déchets, économiser l''eau et l''électricité, et éviter de jeter les ordures dans la nature. Chaque petit geste compte pour protéger notre planète."*
+
+(a) Citez trois gestes pour protéger l''environnement. *(3 marks)*
+
+(b) Où commence le respect de l''environnement? *(2 marks)*
+
+(c) Que signifie "Chaque petit geste compte"? *(3 marks)*
+
+---
+
+**Q16.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Pourquoi j''apprends le français"
+
+Donnez au moins trois raisons. *(10 marks)*
+
+---
+
+**Q17.** Lisez le texte et répondez aux questions:
+
+*"La famille est très importante dans la culture camerounaise. Les enfants respectent leurs parents et leurs aînés. Les grandes occasions comme les mariages et les funérailles rassemblent toute la famille, parfois des centaines de personnes."*
+
+(a) Pourquoi la famille est-elle importante? *(2 marks)*
+
+(b) Comment les enfants traitent-ils leurs aînés? *(3 marks)*
+
+(c) Quelles occasions rassemblent la famille? *(3 marks)*
+
+---
+
+**Q18.** Écrivez un texte de 80 à 100 mots racontant ce que vous avez fait le week-end dernier.
+
+Utilisez le passé composé. *(10 marks)*
+
+---
+
+**Q19.** Lisez le texte et répondez aux questions:
+
+*"Le commerce équitable garantit que les producteurs reçoivent un prix juste pour leur travail. Au Cameroun, le cacao et le café sont les principales cultures d''exportation. En achetant des produits équitables, les consommateurs aident les agriculteurs à améliorer leurs conditions de vie."*
+
+(a) Qu''est-ce que le commerce équitable garantit? *(3 marks)*
+
+(b) Quelles sont les principales cultures d''exportation du Cameroun? *(3 marks)*
+
+(c) Comment les consommateurs peuvent-ils aider les agriculteurs? *(3 marks)*
+
+---
+
+**Q20.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Mon plat préféré"
+
+Décrivez le plat, ses ingrédients et pourquoi vous l''aimez. *(10 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6
+
+## Structural Question Bank — Grammaire et conjugaison
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAIRE ET CONJUGAISON
+
+**Q1.** Mettez les verbes au temps qui convient:
+
+(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
+
+(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
+
+(c) Demain, nous (aller) ____ au marché. *(2 marks)*
+
+---
+
+**Q2.** Accordez correctement les participes passés:
+
+(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
+
+(b) Elles se sont (laver) ____ les mains. *(3 marks)*
+
+(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
+
+---
+
+**Q3.** Transformez au discours indirect:
+
+(a) Il dit: "Je viendrai demain." *(4 marks)*
+
+(b) Elle demande: "Où est la gare?" *(4 marks)*
+
+(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
+
+---
+
+**Q4.** Remplacez les mots soulignés par un pronom:
+
+(a) Je donne le livre à Marie. *(3 marks)*
+
+(b) Il parle de ses vacances. *(3 marks)*
+
+(c) Nous avons vu les enfants. *(3 marks)*
+
+---
+
+**Q5.** Mettez au pluriel:
+
+(a) Le cheval blanc. *(2 marks)*
+
+(b) Un travail difficile. *(2 marks)
+
+(c) Le journal du matin. *(2 marks)*
+
+(d) Un prix spécial. *(2 marks)*
+
+---
+
+**Q6.** Conjuguez au passé composé:
+
+(a) Elle (partir) ____ tôt. *(3 marks)*
+
+(b) Nous (finir) ____ le travail. *(3 marks)*
+
+(c) Ils (se lever) ____ à six heures. *(3 marks)*
+
+---
+
+**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
+
+(a) ____ eau est importante pour la santé. *(2 marks)*
+
+(b) J''achète ____ pain et ____ beurre. *(4 marks)*
+
+(c) ____ enfants jouent dans la cour. *(2 marks)*
+
+---
+
+**Q8.** Mettez les phrases au négatif:
+
+(a) Il a mangé quelque chose. *(3 marks)*
+
+(b) Nous avons vu quelqu''un. *(3 marks)*
+
+(c) Elle vient souvent. *(3 marks)*
+
+---
+
+**Q9.** Transformez au futur simple:
+
+(a) Je (être) ____ content. *(2 marks)*
+
+(b) Nous (avoir) ____ le temps. *(2 marks)*
+
+(c) Ils (faire) ____ un effort. *(2 marks)*
+
+(d) Tu (aller) ____ à l''école. *(2 marks)*
+
+---
+
+**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
+
+(a) La ville ____ je suis né est belle. *(2 marks)*
+
+(b) Le livre ____ tu parles est intéressant. *(2 marks)*
+
+(c) La femme ____ chante est ma mère. *(2 marks)*
+
+(d) Le film ____ nous avons vu était long. *(2 marks)*
+
+---
+
+**Q11.** Mettez au féminin:
+
+(a) Un acteur célèbre. *(2 marks)*
+
+(b) Le directeur est gentil. *(2 marks)*
+
+(c) Un sportif courageux. *(2 marks)*
+
+(d) Le voisin est patient. *(2 marks)*
+
+---
+
+**Q12.** Conjuguez à l''imparfait:
+
+(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
+
+(b) Il (pleuvoir) ____ souvent. *(3 marks)*
+
+(c) Nous (habiter) ____ à Douala. *(3 marks)*
+
+---
+
+**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
+
+(a) Il va ____ France. *(2 marks)*
+
+(b) Elle habite ____ Douala. *(2 marks)*
+
+(c) Nous partons ____ l''école. *(2 marks)*
+
+(d) Le livre est ____ la table. *(2 marks)*
+
+---
+
+**Q14.** Transformez au plus-que-parfait:
+
+(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
+
+(b) Nous (déjà voir) ____ ce film. *(3 marks)*
+
+(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
+
+---
+
+**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
+
+(a) ____ livre est intéressant. *(2 marks)*
+
+(b) ____ maison est grande. *(2 marks)*
+
+(c) J''aime ____ fleurs. *(2 marks)*
+
+(d) ____ père travaille à l''hôpital. *(2 marks)*
+
+---
+
+**Q16.** Mettez au comparatif ou superlatif:
+
+(a) Paul est ____ (grand) que Pierre. *(3 marks)*
+
+(b) C''est ____ (bon) élève de la classe. *(3 marks)*
+
+(c) Elle parle ____ (lentement) que moi. *(3 marks)*
+
+---
+
+**Q17.** Transformez au conditionnel présent:
+
+(a) Je (aimer) ____ voyager. *(3 marks)*
+
+(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
+
+(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
+
+---
+
+**Q18.** Complétez avec le subjonctif:
+
+(a) Il faut que tu (venir) ____. *(3 marks)*
+
+(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
+
+(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
+
+---
+
+**Q19.** Corrigez les erreurs dans les phrases suivantes:
+
+(a) "Je suis allé au marché hier." *(2 marks)*
+
+(b) "Elle a mangé des pommes." *(2 marks)*
+
+(c) "Nous avons vu un film intéressant." *(2 marks)*
+
+(d) "Ils sont arrivés à temps." *(2 marks)*
+
+---
+
+**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
+
+(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
+
+(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
+
+(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7
+
+## Structural Question Bank — Comprehension et expression ecrite
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION ET EXPRESSION ECRITE
+
+**Q1.** Lisez le texte et répondez aux questions:
+
+*"Le Cameroun est souvent appelé ''l''Afrique en miniature'' à cause de sa diversité. On y trouve des plages, des montagnes, des forêts et des savanes. Cette diversité se reflète aussi dans sa culture, avec plus de 250 groupes ethniques."*
+
+(a) Pourquoi appelle-t-on le Cameroun "l''Afrique en miniature"? *(3 marks)*
+
+(b) Citez deux types de paysages qu''on trouve au Cameroun. *(3 marks)*
+
+(c) Combien de groupes ethniques compte le Cameroun? *(2 marks)*
+
+---
+
+**Q2.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Ma ville natale"
+
+Décrivez les lieux, les gens et les activités. *(10 marks)*
+
+---
+
+**Q3.** Lisez le texte et répondez aux questions:
+
+*"La pluie tombait depuis trois jours. Les rues de la ville étaient transformées en rivières. Les enfants, ravis, jouaient dans les flaques d''eau, tandis que les adultes cherchaient un abri. Soudain, le soleil perça les nuages et tout le monde sortit pour admirer l''arc-en-ciel."*
+
+(a) Depuis combien de temps pleuvait-il? *(2 marks)*
+
+(b) Que faisaient les enfants? *(3 marks)*
+
+(c) Qu''est-ce qui est apparu à la fin? *(2 marks)*
+
+(d) Quel temps fait-il dans ce texte? *(3 marks)*
+
+---
+
+**Q4.** Écrivez une lettre à votre ami(e) pour l''inviter à votre anniversaire. (80 à 100 mots)
+
+Incluez la date, le lieu, l''heure et ce que vous prévoyez. *(10 marks)*
+
+---
+
+**Q5.** Lisez le texte et répondez aux questions:
+
+*"Le marché de Mokolo est l''un des plus grands marchés de Yaoundé. Chaque jour, des milliers de personnes y viennent pour acheter des vêtements, des fruits, des légumes et des articles ménagers. Les vendeurs crient pour attirer les clients, et l''air est rempli d''odeurs variées."*
+
+(a) Où se trouve le marché de Mokolo? *(2 marks)*
+
+(b) Qu''est-ce qu''on peut acheter au marché? *(3 marks)*
+
+(c) Comment les vendeurs attirent-ils les clients? *(3 marks)*
+
+---
+
+**Q6.** Rédigez un dialogue de 80 à 100 mots entre deux amis qui discutent de leurs projets pour les vacances. *(10 marks)*
+
+---
+
+**Q7.** Lisez le texte et répondez aux questions:
+
+*"L''éducation est la clé du développement. Un pays qui investit dans l''éducation de ses enfants investit dans son avenir. Les écoles forment non seulement des travailleurs qualifiés, mais aussi des citoyens responsables capables de prendre de bonnes décisions."*
+
+(a) Pourquoi l''éducation est-elle importante selon le texte? *(3 marks)*
+
+(b) Que forment les écoles? *(3 marks)*
+
+(c) Donnez un titre au texte. *(2 marks)*
+
+---
+
+**Q8.** Traduisez en français:
+
+(a) "I am going to the market." *(3 marks)*
+
+(b) "She has three brothers." *(3 marks)*
+
+(c) "We visited our grandparents last week." *(4 marks)*
+
+---
+
+**Q9.** Lisez le texte et répondez aux questions:
+
+*"La santé est notre bien le plus précieux. Pour rester en bonne santé, il faut manger équilibré, faire du sport et dormir suffisamment. Il faut aussi éviter le tabac et l''alcool. Les médecins conseillent de boire beaucoup d''eau et de consulter régulièrement."*
+
+(a) Citez trois habitudes pour rester en bonne santé. *(3 marks)*
+
+(b) Que faut-il éviter? *(2 marks)*
+
+(c) Que conseillent les médecins? *(3 marks)*
+
+---
+
+**Q10.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Ce que je ferai après mes examens"
+
+Parlez de vos projets et de vos rêves. *(10 marks)*
+
+---
+
+**Q11.** Lisez le texte et répondez aux questions:
+
+*"Le football est le sport le plus populaire au Cameroun. Les Lions Indomptables, l''équipe nationale, ont gagné plusieurs coupes d''Afrique. Dans les rues, les enfants jouent au football avec des ballons improvisés, rêvant de devenir des stars comme Samuel Eto''o."*
+
+(a) Quel est le sport le plus populaire au Cameroun? *(2 marks)*
+
+(b) Comment s''appelle l''équipe nationale? *(2 marks)*
+
+(c) Avec quoi les enfants jouent-ils? *(3 marks)*
+
+(d) De quoi rêvent les enfants? *(3 marks)*
+
+---
+
+**Q12.** Écrivez un texte de 80 à 100 mots décrivant votre journée typique.
+
+Commencez par: "Ma journée commence à..." *(10 marks)*
+
+---
+
+**Q13.** Lisez le texte et répondez aux questions:
+
+*"La technologie a changé notre façon de communiquer. Avec un téléphone portable, on peut appeler, envoyer des messages et même voir ses proches à l''écran. Mais certains pensent que la technologie nous éloigne les uns des autres."*
+
+(a) Qu''est-ce qu''on peut faire avec un téléphone portable? *(3 marks)*
+
+(b) Quel est l''inconvénient de la technologie selon certains? *(3 marks)*
+
+(c) Êtes-vous d''accord? Justifiez votre réponse. *(3 marks)*
+
+---
+
+**Q14.** Traduisez en anglais:
+
+(a) "Je vais au marché avec ma mère." *(3 marks)*
+
+(b) "Nous avons mangé du poisson hier soir." *(3 marks)*
+
+(c) "Elle est plus grande que son frère." *(4 marks)*
+
+---
+
+**Q15.** Lisez le texte et répondez aux questions:
+
+*"Le respect de l''environnement commence à la maison. Il faut trier les déchets, économiser l''eau et l''électricité, et éviter de jeter les ordures dans la nature. Chaque petit geste compte pour protéger notre planète."*
+
+(a) Citez trois gestes pour protéger l''environnement. *(3 marks)*
+
+(b) Où commence le respect de l''environnement? *(2 marks)*
+
+(c) Que signifie "Chaque petit geste compte"? *(3 marks)*
+
+---
+
+**Q16.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Pourquoi j''apprends le français"
+
+Donnez au moins trois raisons. *(10 marks)*
+
+---
+
+**Q17.** Lisez le texte et répondez aux questions:
+
+*"La famille est très importante dans la culture camerounaise. Les enfants respectent leurs parents et leurs aînés. Les grandes occasions comme les mariages et les funérailles rassemblent toute la famille, parfois des centaines de personnes."*
+
+(a) Pourquoi la famille est-elle importante? *(2 marks)*
+
+(b) Comment les enfants traitent-ils leurs aînés? *(3 marks)*
+
+(c) Quelles occasions rassemblent la famille? *(3 marks)*
+
+---
+
+**Q18.** Écrivez un texte de 80 à 100 mots racontant ce que vous avez fait le week-end dernier.
+
+Utilisez le passé composé. *(10 marks)*
+
+---
+
+**Q19.** Lisez le texte et répondez aux questions:
+
+*"Le commerce équitable garantit que les producteurs reçoivent un prix juste pour leur travail. Au Cameroun, le cacao et le café sont les principales cultures d''exportation. En achetant des produits équitables, les consommateurs aident les agriculteurs à améliorer leurs conditions de vie."*
+
+(a) Qu''est-ce que le commerce équitable garantit? *(3 marks)*
+
+(b) Quelles sont les principales cultures d''exportation du Cameroun? *(3 marks)*
+
+(c) Comment les consommateurs peuvent-ils aider les agriculteurs? *(3 marks)*
+
+---
+
+**Q20.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Mon plat préféré"
+
+Décrivez le plat, ses ingrédients et pourquoi vous l''aimez. *(10 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8
+
+## Structural Question Bank — Grammaire et conjugaison
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAIRE ET CONJUGAISON
+
+**Q1.** Mettez les verbes au temps qui convient:
+
+(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
+
+(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
+
+(c) Demain, nous (aller) ____ au marché. *(2 marks)*
+
+---
+
+**Q2.** Accordez correctement les participes passés:
+
+(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
+
+(b) Elles se sont (laver) ____ les mains. *(3 marks)*
+
+(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
+
+---
+
+**Q3.** Transformez au discours indirect:
+
+(a) Il dit: "Je viendrai demain." *(4 marks)*
+
+(b) Elle demande: "Où est la gare?" *(4 marks)*
+
+(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
+
+---
+
+**Q4.** Remplacez les mots soulignés par un pronom:
+
+(a) Je donne le livre à Marie. *(3 marks)*
+
+(b) Il parle de ses vacances. *(3 marks)*
+
+(c) Nous avons vu les enfants. *(3 marks)*
+
+---
+
+**Q5.** Mettez au pluriel:
+
+(a) Le cheval blanc. *(2 marks)*
+
+(b) Un travail difficile. *(2 marks)
+
+(c) Le journal du matin. *(2 marks)*
+
+(d) Un prix spécial. *(2 marks)*
+
+---
+
+**Q6.** Conjuguez au passé composé:
+
+(a) Elle (partir) ____ tôt. *(3 marks)*
+
+(b) Nous (finir) ____ le travail. *(3 marks)*
+
+(c) Ils (se lever) ____ à six heures. *(3 marks)*
+
+---
+
+**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
+
+(a) ____ eau est importante pour la santé. *(2 marks)*
+
+(b) J''achète ____ pain et ____ beurre. *(4 marks)*
+
+(c) ____ enfants jouent dans la cour. *(2 marks)*
+
+---
+
+**Q8.** Mettez les phrases au négatif:
+
+(a) Il a mangé quelque chose. *(3 marks)*
+
+(b) Nous avons vu quelqu''un. *(3 marks)*
+
+(c) Elle vient souvent. *(3 marks)*
+
+---
+
+**Q9.** Transformez au futur simple:
+
+(a) Je (être) ____ content. *(2 marks)*
+
+(b) Nous (avoir) ____ le temps. *(2 marks)*
+
+(c) Ils (faire) ____ un effort. *(2 marks)*
+
+(d) Tu (aller) ____ à l''école. *(2 marks)*
+
+---
+
+**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
+
+(a) La ville ____ je suis né est belle. *(2 marks)*
+
+(b) Le livre ____ tu parles est intéressant. *(2 marks)*
+
+(c) La femme ____ chante est ma mère. *(2 marks)*
+
+(d) Le film ____ nous avons vu était long. *(2 marks)*
+
+---
+
+**Q11.** Mettez au féminin:
+
+(a) Un acteur célèbre. *(2 marks)*
+
+(b) Le directeur est gentil. *(2 marks)*
+
+(c) Un sportif courageux. *(2 marks)*
+
+(d) Le voisin est patient. *(2 marks)*
+
+---
+
+**Q12.** Conjuguez à l''imparfait:
+
+(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
+
+(b) Il (pleuvoir) ____ souvent. *(3 marks)*
+
+(c) Nous (habiter) ____ à Douala. *(3 marks)*
+
+---
+
+**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
+
+(a) Il va ____ France. *(2 marks)*
+
+(b) Elle habite ____ Douala. *(2 marks)*
+
+(c) Nous partons ____ l''école. *(2 marks)*
+
+(d) Le livre est ____ la table. *(2 marks)*
+
+---
+
+**Q14.** Transformez au plus-que-parfait:
+
+(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
+
+(b) Nous (déjà voir) ____ ce film. *(3 marks)*
+
+(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
+
+---
+
+**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
+
+(a) ____ livre est intéressant. *(2 marks)*
+
+(b) ____ maison est grande. *(2 marks)*
+
+(c) J''aime ____ fleurs. *(2 marks)*
+
+(d) ____ père travaille à l''hôpital. *(2 marks)*
+
+---
+
+**Q16.** Mettez au comparatif ou superlatif:
+
+(a) Paul est ____ (grand) que Pierre. *(3 marks)*
+
+(b) C''est ____ (bon) élève de la classe. *(3 marks)*
+
+(c) Elle parle ____ (lentement) que moi. *(3 marks)*
+
+---
+
+**Q17.** Transformez au conditionnel présent:
+
+(a) Je (aimer) ____ voyager. *(3 marks)*
+
+(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
+
+(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
+
+---
+
+**Q18.** Complétez avec le subjonctif:
+
+(a) Il faut que tu (venir) ____. *(3 marks)*
+
+(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
+
+(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
+
+---
+
+**Q19.** Corrigez les erreurs dans les phrases suivantes:
+
+(a) "Je suis allé au marché hier." *(2 marks)*
+
+(b) "Elle a mangé des pommes." *(2 marks)*
+
+(c) "Nous avons vu un film intéressant." *(2 marks)*
+
+(d) "Ils sont arrivés à temps." *(2 marks)*
+
+---
+
+**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
+
+(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
+
+(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
+
+(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Complétez: Je ____ au marché.
+
+A. vais  
+B. va  
+C. vont  
+D. allons  
+
+---
+
+**Q2.** Complétez: Nous ____ français.
+
+A. parlons  
+B. parlez  
+C. parle  
+D. parlent  
+
+---
+
+**Q3.** Complétez: Elle ____ une lettre.
+
+A. écrit  
+B. écrivent  
+C. écris  
+D. écrivez  
+
+---
+
+**Q4.** Le passé composé de ''manger'' avec ''je'' est:
+
+A. j''ai mangé  
+B. je mangerai  
+C. je mangeais  
+D. je mange  
+
+---
+
+**Q5.** Complétez: Ils ____ à l''école.
+
+A. vont  
+B. allons  
+C. va  
+D. vais  
+
+---
+
+**Q6.** Le futur de ''être'' avec ''je'' est:
+
+A. je serai  
+B. je fus  
+C. j''étais  
+D. je suis  
+
+---
+
+**Q7.** Complétez: Tu ____ ton livre.
+
+A. a  
+B. as  
+C. avez  
+D. ont  
+
+---
+
+**Q8.** L''imparfait de ''avoir'' avec ''nous'' est:
+
+A. nous avons  
+B. nous avions  
+C. nous eûmes  
+D. nous aurons  
+
+---
+
+**Q9.** Complétez: Le livre ____ je parle est intéressant.
+
+A. qui  
+B. que  
+C. dont  
+D. où  
+
+---
+
+**Q10.** Complétez: La femme ____ chante est ma mère.
+
+A. que  
+B. dont  
+C. où  
+D. qui  
+
+---
+
+**Q11.** Le pluriel de ''le cheval'' est:
+
+A. les chevals  
+B. les chevauxs  
+C. les chevaux  
+D. les chevaus  
+
+---
+
+**Q12.** Complétez: ____ eau est bonne.
+
+A. Le  
+B. Les  
+C. La  
+D. L''  
+
+---
+
+**Q13.** Complétez: J''achète ____ pain.
+
+A. des  
+B. du  
+C. de la  
+D. le  
+
+---
+
+**Q14.** La négation de ''Il a mangé'' est:
+
+A. Il ne mange pas  
+B. Il n''a pas mangé  
+C. Il n''a mangé pas  
+D. Il a pas mangé  
+
+---
+
+**Q15.** Complétez: Elle est ____ grande que sa sœur.
+
+A. aussi  
+B. moins  
+C. plus  
+D. très  
+
+---
+
+**Q16.** Le féminin de ''acteur'' est:
+
+A. acteurse  
+B. acteure  
+C. acteuse  
+D. actrice  
+
+---
+
+**Q17.** Complétez: Il faut que tu ____.
+
+A. viendras  
+B. venais  
+C. viennes  
+D. viens  
+
+---
+
+**Q18.** Complétez: Je ____ voyager.
+
+A. veux  
+B. voulais  
+C. voudrai  
+D. voudrais  
+
+---
+
+**Q19.** Complétez: ____ maison est grande.
+
+A. Cet  
+B. Cette  
+C. Ce  
+D. Ces  
+
+---
+
+**Q20.** Complétez: ____ père travaille à l''hôpital.
+
+A. Ton  
+B. Mon  
+C. Mes  
+D. Ma  
+
+---
+
+**Q21.** Complétez: Nous ____ à Douala.
+
+A. habite  
+B. habitez  
+C. habitons  
+D. habitent  
+
+---
+
+**Q22.** Le passé composé de ''partir'' avec ''elle'' est:
+
+A. elle a partie  
+B. elle a parti  
+C. elle est parti  
+D. elle est partie  
+
+---
+
+**Q23.** Complétez: Il va ____ France.
+
+A. aux  
+B. au  
+C. en  
+D. à  
+
+---
+
+**Q24.** Complétez: Le livre est ____ la table.
+
+A. de  
+B. à  
+C. dans  
+D. sur  
+
+---
+
+**Q25.** Complétez: ____ enfants jouent dans la cour.
+
+A. Les  
+B. Le  
+C. La  
+D. Un  
+
+---
+
+**Q26.** Le pluriel de ''un travail'' est:
+
+A. des travaux  
+B. des travails  
+C. des travail  
+D. des travailes  
+
+---
+
+**Q27.** Complétez: Je ____ content.
+
+A. suis  
+B. est  
+C. es  
+D. sommes  
+
+---
+
+**Q28.** Complétez: Nous ____ le temps.
+
+A. aurons  
+B. avions  
+C. eûmes  
+D. avons  
+
+---
+
+**Q29.** Complétez: Elle ____ souvent.
+
+A. vient  
+B. viens  
+C. viennent  
+D. venez  
+
+---
+
+**Q30.** Complétez: Ils ____ leurs devoirs.
+
+A. font  
+B. faisons  
+C. fais  
+D. fait  
+
+---
+
+**Q31.** Le Cameroun est appelé:
+
+A. le pays des lions  
+B. l''Afrique en miniature  
+C. la perle de l''Afrique  
+D. le grenier de l''Afrique  
+
+---
+
+**Q32.** Combien de groupes ethniques compte le Cameroun?
+
+A. environ 50  
+B. plus de 250  
+C. moins de 100  
+D. plus de 1000  
+
+---
+
+**Q33.** Le marché de Mokolo se trouve à:
+
+A. Douala  
+B. Bafoussam  
+C. Yaoundé  
+D. Garoua  
+
+---
+
+**Q34.** L''équipe nationale de football du Cameroun s''appelle:
+
+A. les Éléphants  
+B. les Aigles  
+C. les Panthères  
+D. les Lions Indomptables  
+
+---
+
+**Q35.** Samuel Eto''o est un célèbre:
+
+A. chanteur  
+B. médecin  
+C. footballeur  
+D. écrivain  
+
+---
+
+**Q36.** Pour rester en bonne santé, il faut:
+
+A. fumer  
+B. ne pas dormir  
+C. boire de l''alcool  
+D. manger équilibré  
+
+---
+
+**Q37.** Le texte sur la pluie se termine par:
+
+A. de la neige  
+B. un arc-en-ciel  
+C. une tempête  
+D. un orage  
+
+---
+
+**Q38.** Dans le texte sur le marché, les vendeurs:
+
+A. dorment  
+B. crient pour attirer les clients  
+C. lisent des livres  
+D. chantent des chansons  
+
+---
+
+**Q39.** L''éducation est importante parce qu''elle:
+
+A. est obligatoire  
+B. coûte cher  
+C. forme des travailleurs qualifiés  
+D. est facile  
+
+---
+
+**Q40.** Les principales cultures d''exportation du Cameroun sont:
+
+A. le coton et le tabac  
+B. le riz et le blé  
+C. les bananes et les oranges  
+D. le cacao et le café  
+
+---
+
+**Q41.** Le commerce équitable garantit:
+
+A. plus de publicité  
+B. des prix plus élevés  
+C. un prix juste pour les producteurs  
+D. des produits gratuits  
+
+---
+
+**Q42.** Dans la culture camerounaise, les enfants:
+
+A. quittent la maison  
+B. ne parlent pas  
+C. ignorent leurs parents  
+D. respectent leurs aînés  
+
+---
+
+**Q43.** Pour protéger l''environnement, il faut:
+
+A. couper les arbres  
+B. trier les déchets  
+C. jeter les ordures dans la nature  
+D. gaspiller l''eau  
+
+---
+
+**Q44.** La technologie permet de:
+
+A. apprendre sans effort  
+B. voir ses proches à l''écran  
+C. cuisiner plus vite  
+D. voyager gratuitement  
+
+---
+
+**Q45.** Le texte sur la santé conseille de:
+
+A. ne pas consulter le médecin  
+B. fumer  
+C. boire beaucoup d''eau  
+D. manger trop  
+
+---
+
+**Q46.** Dans le texte sur la pluie, les enfants:
+
+A. travaillaient  
+B. pleuraient  
+C. dormaient  
+D. jouaient dans les flaques d''eau  
+
+---
+
+**Q47.** Le football est le sport le plus populaire:
+
+A. au Brésil  
+B. en Chine  
+C. au Cameroun  
+D. en France  
+
+---
+
+**Q48.** Les enfants jouent au football avec:
+
+A. des bouteilles  
+B. des pierres  
+C. des ballons officiels  
+D. des ballons improvisés  
+
+---
+
+**Q49.** Une lettre à un ami doit commencer par:
+
+A. Cher/Cher ami  
+B. Monsieur le Président  
+C. À qui de droit  
+D. Bonjour tout le monde  
+
+---
+
+**Q50.** Pour décrire sa journée typique, on utilise:
+
+A. le présent  
+B. le passé composé  
+C. le subjonctif  
+D. le futur  
+
+---
+
+**Q51.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
+
+A. le passé composé  
+B. le futur simple  
+C. le présent  
+D. l''impératif  
+
+---
+
+**Q52.** Un dialogue est un échange entre:
+
+A. deux personnes  
+B. un groupe de spectateurs  
+C. un professeur et un tableau  
+D. une seule personne  
+
+---
+
+**Q53.** Le texte sur la famille dit que les grandes occasions:
+
+A. rassemblent toute la famille  
+B. ne concernent que les enfants  
+C. sont rares  
+D. sont tristes  
+
+---
+
+**Q54.** Pour inviter un ami à son anniversaire, on écrit:
+
+A. une lettre d''invitation  
+B. un poème  
+C. une lettre de démission  
+D. une lettre de réclamation  
+
+---
+
+**Q55.** Le texte sur l''environnement dit que le respect commence:
+
+A. à l''école  
+B. à la maison  
+C. au marché  
+D. à la plage  
+
+---
+
+**Q56.** Dans le texte sur le marché, l''air est rempli:
+
+A. de musique  
+B. d''odeurs variées  
+C. de silence  
+D. de fumée  
+
+---
+
+**Q57.** Le texte sur l''éducation dit que l''éducation est:
+
+A. un luxe  
+B. une perte de temps  
+C. la clé du développement  
+D. réservée aux riches  
+
+---
+
+**Q58.** Pour rester en bonne santé, il faut éviter:
+
+A. l''eau et les fruits  
+B. le sport et le sommeil  
+C. les légumes  
+D. le tabac et l''alcool  
+
+---
+
+**Q59.** Le texte sur la technologie dit que certains pensent qu''elle:
+
+A. nous rapproche toujours  
+B. est trop chère  
+C. nous éloigne les uns des autres  
+D. est inutile  
+
+---
+
+**Q60.** Le texte sur le commerce équitable parle du:
+
+A. pétrole et du gaz  
+B. coton et du riz  
+C. bois et du fer  
+D. cacao et du café  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le passé composé de ''manger'' avec ''je'' est:
+
+A. j''ai mangé  
+B. je mange  
+C. je mangerai  
+D. je mangeais  
+
+---
+
+**Q2.** Complétez: Ils ____ à l''école.
+
+A. vont  
+B. va  
+C. allons  
+D. vais  
+
+---
+
+**Q3.** Le futur de ''être'' avec ''je'' est:
+
+A. je serai  
+B. j''étais  
+C. je suis  
+D. je fus  
+
+---
+
+**Q4.** Complétez: Tu ____ ton livre.
+
+A. as  
+B. avez  
+C. ont  
+D. a  
+
+---
+
+**Q5.** L''imparfait de ''avoir'' avec ''nous'' est:
+
+A. nous avions  
+B. nous eûmes  
+C. nous avons  
+D. nous aurons  
+
+---
+
+**Q6.** Complétez: Le livre ____ je parle est intéressant.
+
+A. dont  
+B. où  
+C. que  
+D. qui  
+
+---
+
+**Q7.** Complétez: La femme ____ chante est ma mère.
+
+A. que  
+B. qui  
+C. dont  
+D. où  
+
+---
+
+**Q8.** Le pluriel de ''le cheval'' est:
+
+A. les chevals  
+B. les chevaux  
+C. les chevauxs  
+D. les chevaus  
+
+---
+
+**Q9.** Complétez: ____ eau est bonne.
+
+A. Le  
+B. La  
+C. L''  
+D. Les  
+
+---
+
+**Q10.** Complétez: J''achète ____ pain.
+
+A. de la  
+B. des  
+C. le  
+D. du  
+
+---
+
+**Q11.** La négation de ''Il a mangé'' est:
+
+A. Il a pas mangé  
+B. Il n''a mangé pas  
+C. Il n''a pas mangé  
+D. Il ne mange pas  
+
+---
+
+**Q12.** Complétez: Elle est ____ grande que sa sœur.
+
+A. moins  
+B. très  
+C. aussi  
+D. plus  
+
+---
+
+**Q13.** Le féminin de ''acteur'' est:
+
+A. acteurse  
+B. actrice  
+C. acteure  
+D. acteuse  
+
+---
+
+**Q14.** Complétez: Il faut que tu ____.
+
+A. viendras  
+B. viennes  
+C. venais  
+D. viens  
+
+---
+
+**Q15.** Complétez: Je ____ voyager.
+
+A. veux  
+B. voudrai  
+C. voudrais  
+D. voulais  
+
+---
+
+**Q16.** Complétez: ____ maison est grande.
+
+A. Ces  
+B. Ce  
+C. Cet  
+D. Cette  
+
+---
+
+**Q17.** Complétez: ____ père travaille à l''hôpital.
+
+A. Mes  
+B. Ton  
+C. Mon  
+D. Ma  
+
+---
+
+**Q18.** Complétez: Nous ____ à Douala.
+
+A. habitent  
+B. habite  
+C. habitez  
+D. habitons  
+
+---
+
+**Q19.** Le passé composé de ''partir'' avec ''elle'' est:
+
+A. elle a partie  
+B. elle est partie  
+C. elle a parti  
+D. elle est parti  
+
+---
+
+**Q20.** Complétez: Il va ____ France.
+
+A. aux  
+B. en  
+C. au  
+D. à  
+
+---
+
+**Q21.** Complétez: Le livre est ____ la table.
+
+A. de  
+B. dans  
+C. sur  
+D. à  
+
+---
+
+**Q22.** Complétez: ____ enfants jouent dans la cour.
+
+A. Un  
+B. Le  
+C. La  
+D. Les  
+
+---
+
+**Q23.** Le pluriel de ''un travail'' est:
+
+A. des travail  
+B. des travailes  
+C. des travaux  
+D. des travails  
+
+---
+
+**Q24.** Complétez: Je ____ content.
+
+A. sommes  
+B. est  
+C. es  
+D. suis  
+
+---
+
+**Q25.** Complétez: Nous ____ le temps.
+
+A. aurons  
+B. avons  
+C. avions  
+D. eûmes  
+
+---
+
+**Q26.** Complétez: Elle ____ souvent.
+
+A. vient  
+B. viennent  
+C. viens  
+D. venez  
+
+---
+
+**Q27.** Complétez: Ils ____ leurs devoirs.
+
+A. font  
+B. fais  
+C. fait  
+D. faisons  
+
+---
+
+**Q28.** Complétez: Je ____ au marché.
+
+A. vais  
+B. vont  
+C. allons  
+D. va  
+
+---
+
+**Q29.** Complétez: Nous ____ français.
+
+A. parlons  
+B. parle  
+C. parlez  
+D. parlent  
+
+---
+
+**Q30.** Complétez: Elle ____ une lettre.
+
+A. écrit  
+B. écrivez  
+C. écrivent  
+D. écris  
+
+---
+
+**Q31.** L''équipe nationale de football du Cameroun s''appelle:
+
+A. les Éléphants  
+B. les Lions Indomptables  
+C. les Aigles  
+D. les Panthères  
+
+---
+
+**Q32.** Samuel Eto''o est un célèbre:
+
+A. chanteur  
+B. footballeur  
+C. médecin  
+D. écrivain  
+
+---
+
+**Q33.** Pour rester en bonne santé, il faut:
+
+A. fumer  
+B. boire de l''alcool  
+C. manger équilibré  
+D. ne pas dormir  
+
+---
+
+**Q34.** Le texte sur la pluie se termine par:
+
+A. une tempête  
+B. de la neige  
+C. un orage  
+D. un arc-en-ciel  
+
+---
+
+**Q35.** Dans le texte sur le marché, les vendeurs:
+
+A. chantent des chansons  
+B. lisent des livres  
+C. crient pour attirer les clients  
+D. dorment  
+
+---
+
+**Q36.** L''éducation est importante parce qu''elle:
+
+A. coûte cher  
+B. est facile  
+C. est obligatoire  
+D. forme des travailleurs qualifiés  
+
+---
+
+**Q37.** Les principales cultures d''exportation du Cameroun sont:
+
+A. le coton et le tabac  
+B. le cacao et le café  
+C. le riz et le blé  
+D. les bananes et les oranges  
+
+---
+
+**Q38.** Le commerce équitable garantit:
+
+A. plus de publicité  
+B. un prix juste pour les producteurs  
+C. des prix plus élevés  
+D. des produits gratuits  
+
+---
+
+**Q39.** Dans la culture camerounaise, les enfants:
+
+A. quittent la maison  
+B. ignorent leurs parents  
+C. respectent leurs aînés  
+D. ne parlent pas  
+
+---
+
+**Q40.** Pour protéger l''environnement, il faut:
+
+A. gaspiller l''eau  
+B. jeter les ordures dans la nature  
+C. couper les arbres  
+D. trier les déchets  
+
+---
+
+**Q41.** La technologie permet de:
+
+A. cuisiner plus vite  
+B. apprendre sans effort  
+C. voir ses proches à l''écran  
+D. voyager gratuitement  
+
+---
+
+**Q42.** Le texte sur la santé conseille de:
+
+A. manger trop  
+B. ne pas consulter le médecin  
+C. fumer  
+D. boire beaucoup d''eau  
+
+---
+
+**Q43.** Dans le texte sur la pluie, les enfants:
+
+A. travaillaient  
+B. jouaient dans les flaques d''eau  
+C. pleuraient  
+D. dormaient  
+
+---
+
+**Q44.** Le football est le sport le plus populaire:
+
+A. au Brésil  
+B. au Cameroun  
+C. en Chine  
+D. en France  
+
+---
+
+**Q45.** Les enfants jouent au football avec:
+
+A. des bouteilles  
+B. des ballons officiels  
+C. des ballons improvisés  
+D. des pierres  
+
+---
+
+**Q46.** Une lettre à un ami doit commencer par:
+
+A. Bonjour tout le monde  
+B. Monsieur le Président  
+C. À qui de droit  
+D. Cher/Cher ami  
+
+---
+
+**Q47.** Pour décrire sa journée typique, on utilise:
+
+A. le subjonctif  
+B. le futur  
+C. le présent  
+D. le passé composé  
+
+---
+
+**Q48.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
+
+A. l''impératif  
+B. le futur simple  
+C. le présent  
+D. le passé composé  
+
+---
+
+**Q49.** Un dialogue est un échange entre:
+
+A. deux personnes  
+B. une seule personne  
+C. un groupe de spectateurs  
+D. un professeur et un tableau  
+
+---
+
+**Q50.** Le texte sur la famille dit que les grandes occasions:
+
+A. rassemblent toute la famille  
+B. sont rares  
+C. ne concernent que les enfants  
+D. sont tristes  
+
+---
+
+**Q51.** Pour inviter un ami à son anniversaire, on écrit:
+
+A. une lettre d''invitation  
+B. une lettre de démission  
+C. une lettre de réclamation  
+D. un poème  
+
+---
+
+**Q52.** Le texte sur l''environnement dit que le respect commence:
+
+A. à la maison  
+B. au marché  
+C. à la plage  
+D. à l''école  
+
+---
+
+**Q53.** Dans le texte sur le marché, l''air est rempli:
+
+A. d''odeurs variées  
+B. de silence  
+C. de musique  
+D. de fumée  
+
+---
+
+**Q54.** Le texte sur l''éducation dit que l''éducation est:
+
+A. la clé du développement  
+B. réservée aux riches  
+C. une perte de temps  
+D. un luxe  
+
+---
+
+**Q55.** Pour rester en bonne santé, il faut éviter:
+
+A. l''eau et les fruits  
+B. le tabac et l''alcool  
+C. le sport et le sommeil  
+D. les légumes  
+
+---
+
+**Q56.** Le texte sur la technologie dit que certains pensent qu''elle:
+
+A. nous rapproche toujours  
+B. nous éloigne les uns des autres  
+C. est trop chère  
+D. est inutile  
+
+---
+
+**Q57.** Le texte sur le commerce équitable parle du:
+
+A. pétrole et du gaz  
+B. bois et du fer  
+C. cacao et du café  
+D. coton et du riz  
+
+---
+
+**Q58.** Le Cameroun est appelé:
+
+A. le pays des lions  
+B. la perle de l''Afrique  
+C. le grenier de l''Afrique  
+D. l''Afrique en miniature  
+
+---
+
+**Q59.** Combien de groupes ethniques compte le Cameroun?
+
+A. environ 50  
+B. moins de 100  
+C. plus de 250  
+D. plus de 1000  
+
+---
+
+**Q60.** Le marché de Mokolo se trouve à:
+
+A. Douala  
+B. Garoua  
+C. Bafoussam  
+D. Yaoundé  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Complétez: Tu ____ ton livre.
+
+A. as  
+B. a  
+C. avez  
+D. ont  
+
+---
+
+**Q2.** L''imparfait de ''avoir'' avec ''nous'' est:
+
+A. nous avions  
+B. nous avons  
+C. nous eûmes  
+D. nous aurons  
+
+---
+
+**Q3.** Complétez: Le livre ____ je parle est intéressant.
+
+A. dont  
+B. que  
+C. qui  
+D. où  
+
+---
+
+**Q4.** Complétez: La femme ____ chante est ma mère.
+
+A. qui  
+B. dont  
+C. où  
+D. que  
+
+---
+
+**Q5.** Le pluriel de ''le cheval'' est:
+
+A. les chevaux  
+B. les chevauxs  
+C. les chevals  
+D. les chevaus  
+
+---
+
+**Q6.** Complétez: ____ eau est bonne.
+
+A. L''  
+B. Les  
+C. La  
+D. Le  
+
+---
+
+**Q7.** Complétez: J''achète ____ pain.
+
+A. de la  
+B. du  
+C. des  
+D. le  
+
+---
+
+**Q8.** La négation de ''Il a mangé'' est:
+
+A. Il a pas mangé  
+B. Il n''a pas mangé  
+C. Il n''a mangé pas  
+D. Il ne mange pas  
+
+---
+
+**Q9.** Complétez: Elle est ____ grande que sa sœur.
+
+A. moins  
+B. aussi  
+C. plus  
+D. très  
+
+---
+
+**Q10.** Le féminin de ''acteur'' est:
+
+A. acteure  
+B. acteurse  
+C. acteuse  
+D. actrice  
+
+---
+
+**Q11.** Complétez: Il faut que tu ____.
+
+A. viens  
+B. venais  
+C. viennes  
+D. viendras  
+
+---
+
+**Q12.** Complétez: Je ____ voyager.
+
+A. voudrai  
+B. voulais  
+C. veux  
+D. voudrais  
+
+---
+
+**Q13.** Complétez: ____ maison est grande.
+
+A. Ces  
+B. Cette  
+C. Ce  
+D. Cet  
+
+---
+
+**Q14.** Complétez: ____ père travaille à l''hôpital.
+
+A. Mes  
+B. Mon  
+C. Ton  
+D. Ma  
+
+---
+
+**Q15.** Complétez: Nous ____ à Douala.
+
+A. habitent  
+B. habitez  
+C. habitons  
+D. habite  
+
+---
+
+**Q16.** Le passé composé de ''partir'' avec ''elle'' est:
+
+A. elle est parti  
+B. elle a parti  
+C. elle a partie  
+D. elle est partie  
+
+---
+
+**Q17.** Complétez: Il va ____ France.
+
+A. au  
+B. aux  
+C. en  
+D. à  
+
+---
+
+**Q18.** Complétez: Le livre est ____ la table.
+
+A. à  
+B. de  
+C. dans  
+D. sur  
+
+---
+
+**Q19.** Complétez: ____ enfants jouent dans la cour.
+
+A. Un  
+B. Les  
+C. Le  
+D. La  
+
+---
+
+**Q20.** Le pluriel de ''un travail'' est:
+
+A. des travail  
+B. des travaux  
+C. des travailes  
+D. des travails  
+
+---
+
+**Q21.** Complétez: Je ____ content.
+
+A. sommes  
+B. es  
+C. suis  
+D. est  
+
+---
+
+**Q22.** Complétez: Nous ____ le temps.
+
+A. eûmes  
+B. avons  
+C. avions  
+D. aurons  
+
+---
+
+**Q23.** Complétez: Elle ____ souvent.
+
+A. viens  
+B. venez  
+C. vient  
+D. viennent  
+
+---
+
+**Q24.** Complétez: Ils ____ leurs devoirs.
+
+A. faisons  
+B. fais  
+C. fait  
+D. font  
+
+---
+
+**Q25.** Complétez: Je ____ au marché.
+
+A. vais  
+B. va  
+C. vont  
+D. allons  
+
+---
+
+**Q26.** Complétez: Nous ____ français.
+
+A. parlons  
+B. parlez  
+C. parle  
+D. parlent  
+
+---
+
+**Q27.** Complétez: Elle ____ une lettre.
+
+A. écrit  
+B. écrivent  
+C. écris  
+D. écrivez  
+
+---
+
+**Q28.** Le passé composé de ''manger'' avec ''je'' est:
+
+A. j''ai mangé  
+B. je mangerai  
+C. je mangeais  
+D. je mange  
+
+---
+
+**Q29.** Complétez: Ils ____ à l''école.
+
+A. vont  
+B. allons  
+C. va  
+D. vais  
+
+---
+
+**Q30.** Le futur de ''être'' avec ''je'' est:
+
+A. je serai  
+B. je fus  
+C. j''étais  
+D. je suis  
+
+---
+
+**Q31.** Le texte sur la pluie se termine par:
+
+A. une tempête  
+B. un arc-en-ciel  
+C. de la neige  
+D. un orage  
+
+---
+
+**Q32.** Dans le texte sur le marché, les vendeurs:
+
+A. chantent des chansons  
+B. crient pour attirer les clients  
+C. lisent des livres  
+D. dorment  
+
+---
+
+**Q33.** L''éducation est importante parce qu''elle:
+
+A. coûte cher  
+B. est obligatoire  
+C. forme des travailleurs qualifiés  
+D. est facile  
+
+---
+
+**Q34.** Les principales cultures d''exportation du Cameroun sont:
+
+A. le riz et le blé  
+B. le coton et le tabac  
+C. les bananes et les oranges  
+D. le cacao et le café  
+
+---
+
+**Q35.** Le commerce équitable garantit:
+
+A. des produits gratuits  
+B. des prix plus élevés  
+C. un prix juste pour les producteurs  
+D. plus de publicité  
+
+---
+
+**Q36.** Dans la culture camerounaise, les enfants:
+
+A. ignorent leurs parents  
+B. ne parlent pas  
+C. quittent la maison  
+D. respectent leurs aînés  
+
+---
+
+**Q37.** Pour protéger l''environnement, il faut:
+
+A. gaspiller l''eau  
+B. trier les déchets  
+C. jeter les ordures dans la nature  
+D. couper les arbres  
+
+---
+
+**Q38.** La technologie permet de:
+
+A. cuisiner plus vite  
+B. voir ses proches à l''écran  
+C. apprendre sans effort  
+D. voyager gratuitement  
+
+---
+
+**Q39.** Le texte sur la santé conseille de:
+
+A. manger trop  
+B. fumer  
+C. boire beaucoup d''eau  
+D. ne pas consulter le médecin  
+
+---
+
+**Q40.** Dans le texte sur la pluie, les enfants:
+
+A. dormaient  
+B. pleuraient  
+C. travaillaient  
+D. jouaient dans les flaques d''eau  
+
+---
+
+**Q41.** Le football est le sport le plus populaire:
+
+A. en Chine  
+B. au Brésil  
+C. au Cameroun  
+D. en France  
+
+---
+
+**Q42.** Les enfants jouent au football avec:
+
+A. des pierres  
+B. des bouteilles  
+C. des ballons officiels  
+D. des ballons improvisés  
+
+---
+
+**Q43.** Une lettre à un ami doit commencer par:
+
+A. Bonjour tout le monde  
+B. Cher/Cher ami  
+C. Monsieur le Président  
+D. À qui de droit  
+
+---
+
+**Q44.** Pour décrire sa journée typique, on utilise:
+
+A. le subjonctif  
+B. le présent  
+C. le futur  
+D. le passé composé  
+
+---
+
+**Q45.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
+
+A. l''impératif  
+B. le présent  
+C. le passé composé  
+D. le futur simple  
+
+---
+
+**Q46.** Un dialogue est un échange entre:
+
+A. un professeur et un tableau  
+B. une seule personne  
+C. un groupe de spectateurs  
+D. deux personnes  
+
+---
+
+**Q47.** Le texte sur la famille dit que les grandes occasions:
+
+A. ne concernent que les enfants  
+B. sont tristes  
+C. rassemblent toute la famille  
+D. sont rares  
+
+---
+
+**Q48.** Pour inviter un ami à son anniversaire, on écrit:
+
+A. un poème  
+B. une lettre de démission  
+C. une lettre de réclamation  
+D. une lettre d''invitation  
+
+---
+
+**Q49.** Le texte sur l''environnement dit que le respect commence:
+
+A. à la maison  
+B. à l''école  
+C. au marché  
+D. à la plage  
+
+---
+
+**Q50.** Dans le texte sur le marché, l''air est rempli:
+
+A. d''odeurs variées  
+B. de musique  
+C. de silence  
+D. de fumée  
+
+---
+
+**Q51.** Le texte sur l''éducation dit que l''éducation est:
+
+A. la clé du développement  
+B. une perte de temps  
+C. un luxe  
+D. réservée aux riches  
+
+---
+
+**Q52.** Pour rester en bonne santé, il faut éviter:
+
+A. le tabac et l''alcool  
+B. le sport et le sommeil  
+C. les légumes  
+D. l''eau et les fruits  
+
+---
+
+**Q53.** Le texte sur la technologie dit que certains pensent qu''elle:
+
+A. nous éloigne les uns des autres  
+B. est trop chère  
+C. nous rapproche toujours  
+D. est inutile  
+
+---
+
+**Q54.** Le texte sur le commerce équitable parle du:
+
+A. cacao et du café  
+B. coton et du riz  
+C. bois et du fer  
+D. pétrole et du gaz  
+
+---
+
+**Q55.** Le Cameroun est appelé:
+
+A. le pays des lions  
+B. l''Afrique en miniature  
+C. la perle de l''Afrique  
+D. le grenier de l''Afrique  
+
+---
+
+**Q56.** Combien de groupes ethniques compte le Cameroun?
+
+A. environ 50  
+B. plus de 250  
+C. moins de 100  
+D. plus de 1000  
+
+---
+
+**Q57.** Le marché de Mokolo se trouve à:
+
+A. Douala  
+B. Bafoussam  
+C. Yaoundé  
+D. Garoua  
+
+---
+
+**Q58.** L''équipe nationale de football du Cameroun s''appelle:
+
+A. les Éléphants  
+B. les Aigles  
+C. les Panthères  
+D. les Lions Indomptables  
+
+---
+
+**Q59.** Samuel Eto''o est un célèbre:
+
+A. chanteur  
+B. médecin  
+C. footballeur  
+D. écrivain  
+
+---
+
+**Q60.** Pour rester en bonne santé, il faut:
+
+A. fumer  
+B. ne pas dormir  
+C. boire de l''alcool  
+D. manger équilibré  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 4
+
+## Structural Question Bank — Cells and transport
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: CELLS AND TRANSPORT
+
+**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*
+
+(b) State three differences between a plant cell and an animal cell. *(3 marks)*
+
+(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*
+
+---
+
+**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.
+
+(a) State what would happen to each cylinder. *(4 marks)*
+
+(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*
+
+(c) Name the process involved and state its importance in plants. *(3 marks)*
+
+---
+
+**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*
+
+(b) State three factors that affect the rate of diffusion. *(3 marks)*
+
+(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*
+
+---
+
+**Q4.** (a) What is active transport? *(3 marks)*
+
+(b) Give two differences between active transport and diffusion. *(4 marks)*
+
+(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*
+
+---
+
+**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*
+
+(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*
+
+(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*
+
+(b) State the function of iodine solution in this preparation. *(2 marks)*
+
+(c) Explain why the onion cell appears as a regular shape. *(3 marks)*
+
+---
+
+**Q7.** (a) What are enzymes? *(2 marks)*
+
+(b) State three properties of enzymes. *(3 marks)*
+
+(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*
+
+---
+
+**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*
+
+(b) Explain what happens when an enzyme is boiled. *(3 marks)*
+
+(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*
+
+---
+
+**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*
+
+(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*
+
+(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*
+
+---
+
+**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*
+
+(b) State the function of each labelled part. *(5 marks)*
+
+(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*
+
+---
+
+**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*
+
+(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*
+
+(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*
+
+---
+
+**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*
+
+(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*
+
+(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*
+
+(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*
+
+(c) Explain how selective permeability is important in the kidney. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "turgidity". *(2 marks)*
+
+(b) Explain how turgidity supports non-woody plants. *(4 marks)*
+
+(c) Describe what happens to a plant when it wilts. *(4 marks)*
+
+---
+
+**Q15.** (a) State three functions of the nucleus. *(3 marks)*
+
+(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*
+
+(c) Distinguish between a gene and a chromosome. *(3 marks)*
+
+---
+
+**Q16.** (a) What is the function of the mitochondria? *(2 marks)*
+
+(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*
+
+(c) State the equation for aerobic respiration. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*
+
+(b) Explain why amylase cannot digest proteins. *(4 marks)*
+
+(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*
+
+---
+
+**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of osmosis. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*
+
+---
+
+**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*
+
+(b) Explain why energy is required for active transport. *(3 marks)*
+
+(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5
+
+## Structural Question Bank — Nutrition, respiration, and excretion
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
+
+**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
+
+(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
+
+(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
+
+---
+
+**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
+
+(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
+
+(c) Describe how you would test a leaf for starch. *(5 marks)*
+
+---
+
+**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
+
+(b) State the uses of glucose in plants. *(4 marks)*
+
+(c) Explain why photosynthesis is important to animals. *(4 marks)*
+
+---
+
+**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
+
+(b) State the role of the stomach in digestion. *(4 marks)*
+
+(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
+
+---
+
+**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
+
+(b) State the products of digestion of each. *(3 marks)*
+
+(c) Explain the role of bile in digestion. *(4 marks)*
+
+---
+
+**Q6.** (a) What is a balanced diet? *(2 marks)*
+
+(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
+
+(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
+
+(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
+
+(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
+
+---
+
+**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
+
+(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
+
+(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
+
+---
+
+**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
+
+(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
+
+(c) Explain what is meant by "oxygen debt". *(4 marks)*
+
+---
+
+**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
+
+(b) State the main excretory product of each organ. *(3 marks)*
+
+(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
+
+---
+
+**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
+
+(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
+
+(c) State what happens to glucose in the kidney tubule. *(3 marks)*
+
+---
+
+**Q12.** (a) What is homeostasis? *(2 marks)*
+
+(b) Give two examples of homeostasis in the human body. *(2 marks)*
+
+(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
+
+---
+
+**Q13.** (a) Define the term "transpiration". *(2 marks)*
+
+(b) State three factors that affect the rate of transpiration. *(3 marks)*
+
+(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
+
+---
+
+**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
+
+(b) State the role of the xylem and phloem. *(4 marks)*
+
+(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
+
+---
+
+**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
+
+(b) Name two substances the liver produces or processes. *(2 marks)*
+
+(c) Explain how the liver regulates blood glucose level. *(5 marks)*
+
+---
+
+**Q16.** (a) State the function of the large intestine. *(2 marks)*
+
+(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
+
+(c) Describe what happens when too much water is absorbed. *(3 marks)*
+
+---
+
+**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
+
+(b) Explain why breathing rate increases during exercise. *(4 marks)*
+
+(c) State the effect of exercise on the rate of respiration. *(3 marks)*
+
+---
+
+**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
+
+(b) State the function of the pancreas. *(3 marks)*
+
+(c) Explain how the villi increase the rate of absorption. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
+
+(b) Name the substances lost through the skin. *(3 marks)*
+
+(c) Explain how sweating helps to cool the body. *(4 marks)*
+
+---
+
+**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
+
+(b) Explain why plants are described as producers. *(3 marks)*
+
+(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6
+
+## Structural Question Bank — Reproduction, genetics, and ecology
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: REPRODUCTION, GENETICS, AND ECOLOGY
+
+**Q1.** (a) Draw a labelled diagram of a flower. *(5 marks)*
+
+(b) State the function of each labelled part. *(5 marks)*
+
+(c) Distinguish between pollination and fertilisation. *(4 marks)*
+
+---
+
+**Q2.** (a) What is pollination? *(2 marks)*
+
+(b) State three features of insect-pollinated flowers. *(3 marks)*
+
+(c) Describe the process of fertilisation in a flowering plant. *(5 marks)*
+
+---
+
+**Q3.** (a) Describe the process of germination in a bean seed. *(5 marks)*
+
+(b) State the conditions necessary for germination. *(3 marks)*
+
+(c) Explain the role of the cotyledons during germination. *(3 marks)*
+
+---
+
+**Q4.** (a) Name the male and female reproductive organs of a flowering plant. *(2 marks)*
+
+(b) Explain how seeds are dispersed by wind and by animals. *(4 marks)*
+
+(c) State two advantages of seed dispersal. *(4 marks)*
+
+---
+
+**Q5.** (a) Describe the structure of the human male reproductive system. *(5 marks)*
+
+(b) State the function of each part. *(5 marks)*
+
+(c) Explain the role of hormones in the male reproductive system. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of the human female reproductive system. *(5 marks)*
+
+(b) State the function of each part. *(5 marks)*
+
+(c) Explain what happens during the menstrual cycle. *(5 marks)*
+
+---
+
+**Q7.** (a) What is fertilisation in humans? *(2 marks)*
+
+(b) Describe the development of the embryo in the uterus. *(5 marks)*
+
+(c) Explain the role of the placenta. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms gene, allele, and genotype. *(3 marks)*
+
+(b) Explain the difference between genotype and phenotype. *(4 marks)*
+
+(c) State the difference between homozygous and heterozygous. *(3 marks)*
+
+---
+
+**Q9.** (a) In a monohybrid cross between a tall plant (TT) and a short plant (tt), show the genotypes and phenotypes of the F1 and F2 generations. *(6 marks)*
+
+(b) State the phenotypic ratio of the F2 generation. *(2 marks)*
+
+(c) Explain what is meant by a dominant allele. *(3 marks)*
+
+---
+
+**Q10.** (a) What is a sex-linked characteristic? *(3 marks)*
+
+(b) Explain how colour blindness is inherited. *(5 marks)*
+
+(c) State why sex-linked disorders are more common in males. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "variation". *(2 marks)*
+
+(b) Distinguish between continuous and discontinuous variation, giving an example of each. *(4 marks)*
+
+(c) Explain the role of variation in natural selection. *(5 marks)*
+
+---
+
+**Q12.** (a) What is natural selection? *(3 marks)*
+
+(b) Explain how antibiotic resistance in bacteria illustrates natural selection. *(5 marks)*
+
+(c) State the role of mutation in evolution. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "ecosystem". *(2 marks)*
+
+(b) Name the components of an ecosystem. *(4 marks)*
+
+(c) Explain how energy flows through an ecosystem. *(5 marks)*
+
+---
+
+**Q14.** (a) What is a food chain? *(2 marks)*
+
+(b) Construct a food chain with four organisms found in a Cameroon ecosystem. *(3 marks)*
+
+(c) Explain why the number of organisms decreases along a food chain. *(5 marks)*
+
+---
+
+**Q15.** (a) Define the term "food web". *(2 marks)*
+
+(b) Explain why food webs are more stable than food chains. *(4 marks)*
+
+(c) Describe the effect of removing a top predator from a food web. *(4 marks)*
+
+---
+
+**Q16.** (a) Describe the carbon cycle. *(5 marks)*
+
+(b) Name the processes by which carbon is returned to the atmosphere. *(3 marks)*
+
+(c) Explain the effect of deforestation on the carbon cycle. *(4 marks)*
+
+---
+
+**Q17.** (a) Describe the nitrogen cycle. *(5 marks)*
+
+(b) Name the bacteria involved in the nitrogen cycle. *(3 marks)*
+
+(c) Explain why nitrogen is important to living organisms. *(3 marks)*
+
+---
+
+**Q18.** (a) What is a population? *(2 marks)*
+
+(b) State three factors that affect population size. *(3 marks)*
+
+(c) Explain how a predator-prey relationship affects population sizes. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "conservation". *(2 marks)*
+
+(b) State three reasons why conservation is important. *(3 marks)*
+
+(c) Describe two methods of conserving wildlife in Cameroon. *(5 marks)*
+
+---
+
+**Q20.** (a) What is pollution? *(2 marks)*
+
+(b) Name three types of pollution and their causes. *(6 marks)*
+
+(c) Explain the effect of water pollution on aquatic life. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7
+
+## Structural Question Bank — Cells and transport
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: CELLS AND TRANSPORT
+
+**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*
+
+(b) State three differences between a plant cell and an animal cell. *(3 marks)*
+
+(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*
+
+---
+
+**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.
+
+(a) State what would happen to each cylinder. *(4 marks)*
+
+(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*
+
+(c) Name the process involved and state its importance in plants. *(3 marks)*
+
+---
+
+**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*
+
+(b) State three factors that affect the rate of diffusion. *(3 marks)*
+
+(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*
+
+---
+
+**Q4.** (a) What is active transport? *(3 marks)*
+
+(b) Give two differences between active transport and diffusion. *(4 marks)*
+
+(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*
+
+---
+
+**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*
+
+(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*
+
+(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*
+
+(b) State the function of iodine solution in this preparation. *(2 marks)*
+
+(c) Explain why the onion cell appears as a regular shape. *(3 marks)*
+
+---
+
+**Q7.** (a) What are enzymes? *(2 marks)*
+
+(b) State three properties of enzymes. *(3 marks)*
+
+(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*
+
+---
+
+**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*
+
+(b) Explain what happens when an enzyme is boiled. *(3 marks)*
+
+(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*
+
+---
+
+**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*
+
+(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*
+
+(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*
+
+---
+
+**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*
+
+(b) State the function of each labelled part. *(5 marks)*
+
+(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*
+
+---
+
+**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*
+
+(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*
+
+(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*
+
+---
+
+**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*
+
+(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*
+
+(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*
+
+(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*
+
+(c) Explain how selective permeability is important in the kidney. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "turgidity". *(2 marks)*
+
+(b) Explain how turgidity supports non-woody plants. *(4 marks)*
+
+(c) Describe what happens to a plant when it wilts. *(4 marks)*
+
+---
+
+**Q15.** (a) State three functions of the nucleus. *(3 marks)*
+
+(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*
+
+(c) Distinguish between a gene and a chromosome. *(3 marks)*
+
+---
+
+**Q16.** (a) What is the function of the mitochondria? *(2 marks)*
+
+(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*
+
+(c) State the equation for aerobic respiration. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*
+
+(b) Explain why amylase cannot digest proteins. *(4 marks)*
+
+(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*
+
+---
+
+**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of osmosis. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*
+
+---
+
+**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*
+
+(b) Explain why energy is required for active transport. *(3 marks)*
+
+(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8
+
+## Structural Question Bank — Nutrition, respiration, and excretion
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
+
+**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
+
+(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
+
+(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
+
+---
+
+**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
+
+(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
+
+(c) Describe how you would test a leaf for starch. *(5 marks)*
+
+---
+
+**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
+
+(b) State the uses of glucose in plants. *(4 marks)*
+
+(c) Explain why photosynthesis is important to animals. *(4 marks)*
+
+---
+
+**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
+
+(b) State the role of the stomach in digestion. *(4 marks)*
+
+(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
+
+---
+
+**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
+
+(b) State the products of digestion of each. *(3 marks)*
+
+(c) Explain the role of bile in digestion. *(4 marks)*
+
+---
+
+**Q6.** (a) What is a balanced diet? *(2 marks)*
+
+(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
+
+(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
+
+(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
+
+(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
+
+---
+
+**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
+
+(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
+
+(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
+
+---
+
+**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
+
+(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
+
+(c) Explain what is meant by "oxygen debt". *(4 marks)*
+
+---
+
+**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
+
+(b) State the main excretory product of each organ. *(3 marks)*
+
+(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
+
+---
+
+**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
+
+(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
+
+(c) State what happens to glucose in the kidney tubule. *(3 marks)*
+
+---
+
+**Q12.** (a) What is homeostasis? *(2 marks)*
+
+(b) Give two examples of homeostasis in the human body. *(2 marks)*
+
+(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
+
+---
+
+**Q13.** (a) Define the term "transpiration". *(2 marks)*
+
+(b) State three factors that affect the rate of transpiration. *(3 marks)*
+
+(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
+
+---
+
+**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
+
+(b) State the role of the xylem and phloem. *(4 marks)*
+
+(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
+
+---
+
+**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
+
+(b) Name two substances the liver produces or processes. *(2 marks)*
+
+(c) Explain how the liver regulates blood glucose level. *(5 marks)*
+
+---
+
+**Q16.** (a) State the function of the large intestine. *(2 marks)*
+
+(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
+
+(c) Describe what happens when too much water is absorbed. *(3 marks)*
+
+---
+
+**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
+
+(b) Explain why breathing rate increases during exercise. *(4 marks)*
+
+(c) State the effect of exercise on the rate of respiration. *(3 marks)*
+
+---
+
+**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
+
+(b) State the function of the pancreas. *(3 marks)*
+
+(c) Explain how the villi increase the rate of absorption. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
+
+(b) Name the substances lost through the skin. *(3 marks)*
+
+(c) Explain how sweating helps to cool the body. *(4 marks)*
+
+---
+
+**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
+
+(b) Explain why plants are described as producers. *(3 marks)*
+
+(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The control centre of the cell is the:
+
+A. nucleus  
+B. cytoplasm  
+C. cell wall  
+D. vacuole  
+
+---
+
+**Q2.** The site of respiration in the cell is the:
+
+A. mitochondrion  
+B. ribosome  
+C. chloroplast  
+D. nucleus  
+
+---
+
+**Q3.** The site of protein synthesis is the:
+
+A. ribosome  
+B. nucleus  
+C. mitochondrion  
+D. cell wall  
+
+---
+
+**Q4.** Which structure is found in plant cells but not animal cells?
+
+A. cell wall  
+B. mitochondrion  
+C. ribosome  
+D. nucleus  
+
+---
+
+**Q5.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+
+A. osmosis  
+B. transpiration  
+C. diffusion  
+D. active transport  
+
+---
+
+**Q6.** The movement of molecules from a region of high concentration to low concentration is called:
+
+A. diffusion  
+B. translocation  
+C. active transport  
+D. osmosis  
+
+---
+
+**Q7.** Active transport requires:
+
+A. no energy  
+B. energy  
+C. light  
+D. chlorophyll  
+
+---
+
+**Q8.** The cell wall of a plant is made of:
+
+A. protein  
+B. cellulose  
+C. starch  
+D. lipid  
+
+---
+
+**Q9.** The green pigment found in chloroplasts is:
+
+A. haemoglobin  
+B. carotene  
+C. chlorophyll  
+D. melanin  
+
+---
+
+**Q10.** A red blood cell placed in distilled water will:
+
+A. shrink  
+B. remain unchanged  
+C. divide  
+D. burst  
+
+---
+
+**Q11.** A plant cell placed in a concentrated salt solution will:
+
+A. burst  
+B. remain unchanged  
+C. become plasmolysed  
+D. swell  
+
+---
+
+**Q12.** Enzymes are made of:
+
+A. carbohydrate  
+B. mineral salts  
+C. lipid  
+D. protein  
+
+---
+
+**Q13.** Enzymes work best at an optimum temperature of about:
+
+A. 0°C  
+B. 37°C  
+C. 100°C  
+D. 60°C  
+
+---
+
+**Q14.** When an enzyme is boiled, it becomes:
+
+A. larger  
+B. denatured  
+C. green  
+D. more active  
+
+---
+
+**Q15.** The process by which a cell takes in large particles is called:
+
+A. diffusion  
+B. osmosis  
+C. phagocytosis  
+D. transpiration  
+
+---
+
+**Q16.** The jelly-like substance that fills the cell is the:
+
+A. cell wall  
+B. nucleus  
+C. membrane  
+D. cytoplasm  
+
+---
+
+**Q17.** The cell membrane is described as:
+
+A. impermeable  
+B. rigid  
+C. partially permeable  
+D. fully permeable  
+
+---
+
+**Q18.** The cell wall is described as:
+
+A. impermeable  
+B. selectively permeable  
+C. partially permeable  
+D. fully permeable  
+
+---
+
+**Q19.** The organelle that carries out photosynthesis is the:
+
+A. nucleus  
+B. chloroplast  
+C. mitochondrion  
+D. ribosome  
+
+---
+
+**Q20.** A group of similar cells working together forms a:
+
+A. organism  
+B. tissue  
+C. system  
+D. organ  
+
+---
+
+**Q21.** The process by which plants make food is called:
+
+A. transpiration  
+B. respiration  
+C. photosynthesis  
+D. digestion  
+
+---
+
+**Q22.** The gas used in photosynthesis is:
+
+A. hydrogen  
+B. oxygen  
+C. nitrogen  
+D. carbon dioxide  
+
+---
+
+**Q23.** The gas released during photosynthesis is:
+
+A. ammonia  
+B. nitrogen  
+C. oxygen  
+D. carbon dioxide  
+
+---
+
+**Q24.** The green pigment needed for photosynthesis is:
+
+A. melanin  
+B. carotene  
+C. haemoglobin  
+D. chlorophyll  
+
+---
+
+**Q25.** The enzyme that digests starch is:
+
+A. amylase  
+B. protease  
+C. lipase  
+D. maltase  
+
+---
+
+**Q26.** The enzyme that digests proteins is:
+
+A. protease  
+B. amylase  
+C. catalase  
+D. lipase  
+
+---
+
+**Q27.** The enzyme that digests fats is:
+
+A. lipase  
+B. protease  
+C. amylase  
+D. maltase  
+
+---
+
+**Q28.** Bile is produced by the:
+
+A. liver  
+B. stomach  
+C. gall bladder  
+D. pancreas  
+
+---
+
+**Q29.** Bile is stored in the:
+
+A. gall bladder  
+B. small intestine  
+C. liver  
+D. pancreas  
+
+---
+
+**Q30.** The part of the gut where most absorption occurs is the:
+
+A. small intestine  
+B. mouth  
+C. large intestine  
+D. stomach  
+
+---
+
+**Q31.** The finger-like projections in the small intestine are called:
+
+A. alveoli  
+B. villi  
+C. nephrons  
+D. bronchi  
+
+---
+
+**Q32.** The site of gaseous exchange in the lungs is the:
+
+A. bronchi  
+B. alveoli  
+C. diaphragm  
+D. trachea  
+
+---
+
+**Q33.** Aerobic respiration uses:
+
+A. carbon dioxide  
+B. nitrogen  
+C. oxygen  
+D. chlorophyll  
+
+---
+
+**Q34.** The product of anaerobic respiration in muscles is:
+
+A. ethanol  
+B. carbon dioxide  
+C. glucose  
+D. lactic acid  
+
+---
+
+**Q35.** The main excretory organ of the body is the:
+
+A. liver  
+B. stomach  
+C. kidney  
+D. heart  
+
+---
+
+**Q36.** The functional unit of the kidney is the:
+
+A. alveolus  
+B. villus  
+C. neuron  
+D. nephron  
+
+---
+
+**Q37.** The process of maintaining a constant internal environment is called:
+
+A. respiration  
+B. homeostasis  
+C. excretion  
+D. digestion  
+
+---
+
+**Q38.** The loss of water vapour from plant leaves is called:
+
+A. osmosis  
+B. transpiration  
+C. diffusion  
+D. translocation  
+
+---
+
+**Q39.** The tissue that transports water in plants is the:
+
+A. epidermis  
+B. phloem  
+C. xylem  
+D. cortex  
+
+---
+
+**Q40.** The tissue that transports food in plants is the:
+
+A. epidermis  
+B. xylem  
+C. cortex  
+D. phloem  
+
+---
+
+**Q41.** The male reproductive organ of a flower is the:
+
+A. petal  
+B. sepal  
+C. stamen  
+D. carpel  
+
+---
+
+**Q42.** The female reproductive organ of a flower is the:
+
+A. petal  
+B. sepal  
+C. stamen  
+D. carpel  
+
+---
+
+**Q43.** The transfer of pollen from anther to stigma is called:
+
+A. transpiration  
+B. pollination  
+C. fertilisation  
+D. germination  
+
+---
+
+**Q44.** The fusion of male and female gametes is called:
+
+A. dispersal  
+B. fertilisation  
+C. germination  
+D. pollination  
+
+---
+
+**Q45.** The male gamete in humans is the:
+
+A. zygote  
+B. egg  
+C. sperm  
+D. ovum  
+
+---
+
+**Q46.** The female gamete in humans is the:
+
+A. embryo  
+B. sperm  
+C. zygote  
+D. ovum  
+
+---
+
+**Q47.** The organ that connects the foetus to the mother is the:
+
+A. umbilical cord  
+B. ovary  
+C. placenta  
+D. uterus  
+
+---
+
+**Q48.** The process of cell division that produces gametes is called:
+
+A. diffusion  
+B. osmosis  
+C. mitosis  
+D. meiosis  
+
+---
+
+**Q49.** The process of cell division that produces body cells is called:
+
+A. mitosis  
+B. meiosis  
+C. osmosis  
+D. diffusion  
+
+---
+
+**Q50.** The basic unit of heredity is the:
+
+A. gene  
+B. chromosome  
+C. tissue  
+D. cell  
+
+---
+
+**Q51.** The genetic make-up of an organism is its:
+
+A. genotype  
+B. chromosome  
+C. phenotype  
+D. gene  
+
+---
+
+**Q52.** The physical appearance of an organism is its:
+
+A. phenotype  
+B. gene  
+C. allele  
+D. genotype  
+
+---
+
+**Q53.** In a monohybrid cross TT × tt, the F1 generation is:
+
+A. all Tt  
+B. half TT, half tt  
+C. all TT  
+D. all tt  
+
+---
+
+**Q54.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+
+A. 3:1  
+B. 9:3:3:1  
+C. 1:2:1  
+D. 1:1  
+
+---
+
+**Q55.** A community of organisms and their environment forms an:
+
+A. population  
+B. ecosystem  
+C. organism  
+D. tissue  
+
+---
+
+**Q56.** A group of organisms of the same species in an area is a:
+
+A. community  
+B. population  
+C. habitat  
+D. ecosystem  
+
+---
+
+**Q57.** The sequence of organisms through which energy flows is a:
+
+A. food web  
+B. ecosystem  
+C. food chain  
+D. population  
+
+---
+
+**Q58.** Organisms that make their own food are called:
+
+A. consumers  
+B. decomposers  
+C. predators  
+D. producers  
+
+---
+
+**Q59.** Organisms that break down dead matter are called:
+
+A. producers  
+B. predators  
+C. decomposers  
+D. consumers  
+
+---
+
+**Q60.** The process by which organisms best adapted to their environment survive is called:
+
+A. artificial selection  
+B. germination  
+C. pollination  
+D. natural selection  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Which structure is found in plant cells but not animal cells?
+
+A. cell wall  
+B. nucleus  
+C. mitochondrion  
+D. ribosome  
+
+---
+
+**Q2.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+
+A. osmosis  
+B. diffusion  
+C. transpiration  
+D. active transport  
+
+---
+
+**Q3.** The movement of molecules from a region of high concentration to low concentration is called:
+
+A. diffusion  
+B. active transport  
+C. osmosis  
+D. translocation  
+
+---
+
+**Q4.** Active transport requires:
+
+A. energy  
+B. light  
+C. chlorophyll  
+D. no energy  
+
+---
+
+**Q5.** The cell wall of a plant is made of:
+
+A. cellulose  
+B. starch  
+C. protein  
+D. lipid  
+
+---
+
+**Q6.** The green pigment found in chloroplasts is:
+
+A. chlorophyll  
+B. melanin  
+C. carotene  
+D. haemoglobin  
+
+---
+
+**Q7.** A red blood cell placed in distilled water will:
+
+A. shrink  
+B. burst  
+C. remain unchanged  
+D. divide  
+
+---
+
+**Q8.** A plant cell placed in a concentrated salt solution will:
+
+A. burst  
+B. become plasmolysed  
+C. remain unchanged  
+D. swell  
+
+---
+
+**Q9.** Enzymes are made of:
+
+A. carbohydrate  
+B. lipid  
+C. protein  
+D. mineral salts  
+
+---
+
+**Q10.** Enzymes work best at an optimum temperature of about:
+
+A. 100°C  
+B. 0°C  
+C. 60°C  
+D. 37°C  
+
+---
+
+**Q11.** When an enzyme is boiled, it becomes:
+
+A. more active  
+B. green  
+C. denatured  
+D. larger  
+
+---
+
+**Q12.** The process by which a cell takes in large particles is called:
+
+A. osmosis  
+B. transpiration  
+C. diffusion  
+D. phagocytosis  
+
+---
+
+**Q13.** The jelly-like substance that fills the cell is the:
+
+A. cell wall  
+B. cytoplasm  
+C. nucleus  
+D. membrane  
+
+---
+
+**Q14.** The cell membrane is described as:
+
+A. impermeable  
+B. partially permeable  
+C. rigid  
+D. fully permeable  
+
+---
+
+**Q15.** The cell wall is described as:
+
+A. impermeable  
+B. partially permeable  
+C. fully permeable  
+D. selectively permeable  
+
+---
+
+**Q16.** The organelle that carries out photosynthesis is the:
+
+A. ribosome  
+B. mitochondrion  
+C. nucleus  
+D. chloroplast  
+
+---
+
+**Q17.** A group of similar cells working together forms a:
+
+A. system  
+B. organism  
+C. tissue  
+D. organ  
+
+---
+
+**Q18.** The control centre of the cell is the:
+
+A. cell wall  
+B. vacuole  
+C. cytoplasm  
+D. nucleus  
+
+---
+
+**Q19.** The site of respiration in the cell is the:
+
+A. chloroplast  
+B. mitochondrion  
+C. ribosome  
+D. nucleus  
+
+---
+
+**Q20.** The site of protein synthesis is the:
+
+A. cell wall  
+B. ribosome  
+C. nucleus  
+D. mitochondrion  
+
+---
+
+**Q21.** The green pigment needed for photosynthesis is:
+
+A. melanin  
+B. haemoglobin  
+C. chlorophyll  
+D. carotene  
+
+---
+
+**Q22.** The enzyme that digests starch is:
+
+A. maltase  
+B. protease  
+C. lipase  
+D. amylase  
+
+---
+
+**Q23.** The enzyme that digests proteins is:
+
+A. catalase  
+B. lipase  
+C. protease  
+D. amylase  
+
+---
+
+**Q24.** The enzyme that digests fats is:
+
+A. maltase  
+B. protease  
+C. amylase  
+D. lipase  
+
+---
+
+**Q25.** Bile is produced by the:
+
+A. liver  
+B. pancreas  
+C. stomach  
+D. gall bladder  
+
+---
+
+**Q26.** Bile is stored in the:
+
+A. gall bladder  
+B. liver  
+C. small intestine  
+D. pancreas  
+
+---
+
+**Q27.** The part of the gut where most absorption occurs is the:
+
+A. small intestine  
+B. large intestine  
+C. stomach  
+D. mouth  
+
+---
+
+**Q28.** The finger-like projections in the small intestine are called:
+
+A. villi  
+B. nephrons  
+C. bronchi  
+D. alveoli  
+
+---
+
+**Q29.** The site of gaseous exchange in the lungs is the:
+
+A. alveoli  
+B. diaphragm  
+C. bronchi  
+D. trachea  
+
+---
+
+**Q30.** Aerobic respiration uses:
+
+A. oxygen  
+B. chlorophyll  
+C. nitrogen  
+D. carbon dioxide  
+
+---
+
+**Q31.** The product of anaerobic respiration in muscles is:
+
+A. ethanol  
+B. lactic acid  
+C. carbon dioxide  
+D. glucose  
+
+---
+
+**Q32.** The main excretory organ of the body is the:
+
+A. liver  
+B. kidney  
+C. stomach  
+D. heart  
+
+---
+
+**Q33.** The functional unit of the kidney is the:
+
+A. alveolus  
+B. neuron  
+C. nephron  
+D. villus  
+
+---
+
+**Q34.** The process of maintaining a constant internal environment is called:
+
+A. excretion  
+B. respiration  
+C. digestion  
+D. homeostasis  
+
+---
+
+**Q35.** The loss of water vapour from plant leaves is called:
+
+A. translocation  
+B. diffusion  
+C. transpiration  
+D. osmosis  
+
+---
+
+**Q36.** The tissue that transports water in plants is the:
+
+A. phloem  
+B. cortex  
+C. epidermis  
+D. xylem  
+
+---
+
+**Q37.** The tissue that transports food in plants is the:
+
+A. epidermis  
+B. phloem  
+C. xylem  
+D. cortex  
+
+---
+
+**Q38.** The process by which plants make food is called:
+
+A. digestion  
+B. photosynthesis  
+C. transpiration  
+D. respiration  
+
+---
+
+**Q39.** The gas used in photosynthesis is:
+
+A. nitrogen  
+B. oxygen  
+C. carbon dioxide  
+D. hydrogen  
+
+---
+
+**Q40.** The gas released during photosynthesis is:
+
+A. nitrogen  
+B. carbon dioxide  
+C. ammonia  
+D. oxygen  
+
+---
+
+**Q41.** The fusion of male and female gametes is called:
+
+A. germination  
+B. dispersal  
+C. fertilisation  
+D. pollination  
+
+---
+
+**Q42.** The male gamete in humans is the:
+
+A. ovum  
+B. zygote  
+C. egg  
+D. sperm  
+
+---
+
+**Q43.** The female gamete in humans is the:
+
+A. embryo  
+B. ovum  
+C. sperm  
+D. zygote  
+
+---
+
+**Q44.** The organ that connects the foetus to the mother is the:
+
+A. umbilical cord  
+B. placenta  
+C. ovary  
+D. uterus  
+
+---
+
+**Q45.** The process of cell division that produces gametes is called:
+
+A. diffusion  
+B. mitosis  
+C. meiosis  
+D. osmosis  
+
+---
+
+**Q46.** The process of cell division that produces body cells is called:
+
+A. diffusion  
+B. meiosis  
+C. osmosis  
+D. mitosis  
+
+---
+
+**Q47.** The basic unit of heredity is the:
+
+A. tissue  
+B. cell  
+C. gene  
+D. chromosome  
+
+---
+
+**Q48.** The genetic make-up of an organism is its:
+
+A. gene  
+B. chromosome  
+C. phenotype  
+D. genotype  
+
+---
+
+**Q49.** The physical appearance of an organism is its:
+
+A. phenotype  
+B. genotype  
+C. gene  
+D. allele  
+
+---
+
+**Q50.** In a monohybrid cross TT × tt, the F1 generation is:
+
+A. all Tt  
+B. all TT  
+C. half TT, half tt  
+D. all tt  
+
+---
+
+**Q51.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+
+A. 3:1  
+B. 1:2:1  
+C. 1:1  
+D. 9:3:3:1  
+
+---
+
+**Q52.** A community of organisms and their environment forms an:
+
+A. ecosystem  
+B. organism  
+C. tissue  
+D. population  
+
+---
+
+**Q53.** A group of organisms of the same species in an area is a:
+
+A. population  
+B. habitat  
+C. community  
+D. ecosystem  
+
+---
+
+**Q54.** The sequence of organisms through which energy flows is a:
+
+A. food chain  
+B. population  
+C. ecosystem  
+D. food web  
+
+---
+
+**Q55.** Organisms that make their own food are called:
+
+A. consumers  
+B. producers  
+C. decomposers  
+D. predators  
+
+---
+
+**Q56.** Organisms that break down dead matter are called:
+
+A. producers  
+B. decomposers  
+C. predators  
+D. consumers  
+
+---
+
+**Q57.** The process by which organisms best adapted to their environment survive is called:
+
+A. artificial selection  
+B. pollination  
+C. natural selection  
+D. germination  
+
+---
+
+**Q58.** The male reproductive organ of a flower is the:
+
+A. carpel  
+B. petal  
+C. sepal  
+D. stamen  
+
+---
+
+**Q59.** The female reproductive organ of a flower is the:
+
+A. stamen  
+B. sepal  
+C. carpel  
+D. petal  
+
+---
+
+**Q60.** The transfer of pollen from anther to stigma is called:
+
+A. fertilisation  
+B. transpiration  
+C. germination  
+D. pollination  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Active transport requires:
+
+A. energy  
+B. no energy  
+C. light  
+D. chlorophyll  
+
+---
+
+**Q2.** The cell wall of a plant is made of:
+
+A. cellulose  
+B. protein  
+C. starch  
+D. lipid  
+
+---
+
+**Q3.** The green pigment found in chloroplasts is:
+
+A. chlorophyll  
+B. carotene  
+C. haemoglobin  
+D. melanin  
+
+---
+
+**Q4.** A red blood cell placed in distilled water will:
+
+A. burst  
+B. remain unchanged  
+C. divide  
+D. shrink  
+
+---
+
+**Q5.** A plant cell placed in a concentrated salt solution will:
+
+A. become plasmolysed  
+B. remain unchanged  
+C. burst  
+D. swell  
+
+---
+
+**Q6.** Enzymes are made of:
+
+A. protein  
+B. mineral salts  
+C. lipid  
+D. carbohydrate  
+
+---
+
+**Q7.** Enzymes work best at an optimum temperature of about:
+
+A. 100°C  
+B. 37°C  
+C. 0°C  
+D. 60°C  
+
+---
+
+**Q8.** When an enzyme is boiled, it becomes:
+
+A. more active  
+B. denatured  
+C. green  
+D. larger  
+
+---
+
+**Q9.** The process by which a cell takes in large particles is called:
+
+A. osmosis  
+B. diffusion  
+C. phagocytosis  
+D. transpiration  
+
+---
+
+**Q10.** The jelly-like substance that fills the cell is the:
+
+A. nucleus  
+B. cell wall  
+C. membrane  
+D. cytoplasm  
+
+---
+
+**Q11.** The cell membrane is described as:
+
+A. fully permeable  
+B. rigid  
+C. partially permeable  
+D. impermeable  
+
+---
+
+**Q12.** The cell wall is described as:
+
+A. partially permeable  
+B. selectively permeable  
+C. impermeable  
+D. fully permeable  
+
+---
+
+**Q13.** The organelle that carries out photosynthesis is the:
+
+A. ribosome  
+B. chloroplast  
+C. mitochondrion  
+D. nucleus  
+
+---
+
+**Q14.** A group of similar cells working together forms a:
+
+A. system  
+B. tissue  
+C. organism  
+D. organ  
+
+---
+
+**Q15.** The control centre of the cell is the:
+
+A. cell wall  
+B. cytoplasm  
+C. nucleus  
+D. vacuole  
+
+---
+
+**Q16.** The site of respiration in the cell is the:
+
+A. nucleus  
+B. ribosome  
+C. chloroplast  
+D. mitochondrion  
+
+---
+
+**Q17.** The site of protein synthesis is the:
+
+A. nucleus  
+B. cell wall  
+C. ribosome  
+D. mitochondrion  
+
+---
+
+**Q18.** Which structure is found in plant cells but not animal cells?
+
+A. mitochondrion  
+B. ribosome  
+C. nucleus  
+D. cell wall  
+
+---
+
+**Q19.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+
+A. transpiration  
+B. osmosis  
+C. diffusion  
+D. active transport  
+
+---
+
+**Q20.** The movement of molecules from a region of high concentration to low concentration is called:
+
+A. translocation  
+B. diffusion  
+C. active transport  
+D. osmosis  
+
+---
+
+**Q21.** The enzyme that digests fats is:
+
+A. maltase  
+B. amylase  
+C. lipase  
+D. protease  
+
+---
+
+**Q22.** Bile is produced by the:
+
+A. gall bladder  
+B. pancreas  
+C. stomach  
+D. liver  
+
+---
+
+**Q23.** Bile is stored in the:
+
+A. small intestine  
+B. pancreas  
+C. gall bladder  
+D. liver  
+
+---
+
+**Q24.** The part of the gut where most absorption occurs is the:
+
+A. mouth  
+B. large intestine  
+C. stomach  
+D. small intestine  
+
+---
+
+**Q25.** The finger-like projections in the small intestine are called:
+
+A. villi  
+B. alveoli  
+C. nephrons  
+D. bronchi  
+
+---
+
+**Q26.** The site of gaseous exchange in the lungs is the:
+
+A. alveoli  
+B. bronchi  
+C. diaphragm  
+D. trachea  
+
+---
+
+**Q27.** Aerobic respiration uses:
+
+A. oxygen  
+B. nitrogen  
+C. carbon dioxide  
+D. chlorophyll  
+
+---
+
+**Q28.** The product of anaerobic respiration in muscles is:
+
+A. lactic acid  
+B. carbon dioxide  
+C. glucose  
+D. ethanol  
+
+---
+
+**Q29.** The main excretory organ of the body is the:
+
+A. kidney  
+B. stomach  
+C. liver  
+D. heart  
+
+---
+
+**Q30.** The functional unit of the kidney is the:
+
+A. nephron  
+B. villus  
+C. neuron  
+D. alveolus  
+
+---
+
+**Q31.** The process of maintaining a constant internal environment is called:
+
+A. excretion  
+B. homeostasis  
+C. respiration  
+D. digestion  
+
+---
+
+**Q32.** The loss of water vapour from plant leaves is called:
+
+A. translocation  
+B. transpiration  
+C. diffusion  
+D. osmosis  
+
+---
+
+**Q33.** The tissue that transports water in plants is the:
+
+A. phloem  
+B. epidermis  
+C. xylem  
+D. cortex  
+
+---
+
+**Q34.** The tissue that transports food in plants is the:
+
+A. xylem  
+B. epidermis  
+C. cortex  
+D. phloem  
+
+---
+
+**Q35.** The process by which plants make food is called:
+
+A. respiration  
+B. transpiration  
+C. photosynthesis  
+D. digestion  
+
+---
+
+**Q36.** The gas used in photosynthesis is:
+
+A. oxygen  
+B. hydrogen  
+C. nitrogen  
+D. carbon dioxide  
+
+---
+
+**Q37.** The gas released during photosynthesis is:
+
+A. nitrogen  
+B. oxygen  
+C. carbon dioxide  
+D. ammonia  
+
+---
+
+**Q38.** The green pigment needed for photosynthesis is:
+
+A. carotene  
+B. chlorophyll  
+C. melanin  
+D. haemoglobin  
+
+---
+
+**Q39.** The enzyme that digests starch is:
+
+A. lipase  
+B. protease  
+C. amylase  
+D. maltase  
+
+---
+
+**Q40.** The enzyme that digests proteins is:
+
+A. lipase  
+B. amylase  
+C. catalase  
+D. protease  
+
+---
+
+**Q41.** The organ that connects the foetus to the mother is the:
+
+A. ovary  
+B. umbilical cord  
+C. placenta  
+D. uterus  
+
+---
+
+**Q42.** The process of cell division that produces gametes is called:
+
+A. osmosis  
+B. diffusion  
+C. mitosis  
+D. meiosis  
+
+---
+
+**Q43.** The process of cell division that produces body cells is called:
+
+A. diffusion  
+B. mitosis  
+C. meiosis  
+D. osmosis  
+
+---
+
+**Q44.** The basic unit of heredity is the:
+
+A. tissue  
+B. gene  
+C. cell  
+D. chromosome  
+
+---
+
+**Q45.** The genetic make-up of an organism is its:
+
+A. gene  
+B. phenotype  
+C. genotype  
+D. chromosome  
+
+---
+
+**Q46.** The physical appearance of an organism is its:
+
+A. allele  
+B. genotype  
+C. gene  
+D. phenotype  
+
+---
+
+**Q47.** In a monohybrid cross TT × tt, the F1 generation is:
+
+A. half TT, half tt  
+B. all tt  
+C. all Tt  
+D. all TT  
+
+---
+
+**Q48.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+
+A. 9:3:3:1  
+B. 1:2:1  
+C. 1:1  
+D. 3:1  
+
+---
+
+**Q49.** A community of organisms and their environment forms an:
+
+A. ecosystem  
+B. population  
+C. organism  
+D. tissue  
+
+---
+
+**Q50.** A group of organisms of the same species in an area is a:
+
+A. population  
+B. community  
+C. habitat  
+D. ecosystem  
+
+---
+
+**Q51.** The sequence of organisms through which energy flows is a:
+
+A. food chain  
+B. ecosystem  
+C. food web  
+D. population  
+
+---
+
+**Q52.** Organisms that make their own food are called:
+
+A. producers  
+B. decomposers  
+C. predators  
+D. consumers  
+
+---
+
+**Q53.** Organisms that break down dead matter are called:
+
+A. decomposers  
+B. predators  
+C. producers  
+D. consumers  
+
+---
+
+**Q54.** The process by which organisms best adapted to their environment survive is called:
+
+A. natural selection  
+B. germination  
+C. pollination  
+D. artificial selection  
+
+---
+
+**Q55.** The male reproductive organ of a flower is the:
+
+A. carpel  
+B. stamen  
+C. petal  
+D. sepal  
+
+---
+
+**Q56.** The female reproductive organ of a flower is the:
+
+A. stamen  
+B. carpel  
+C. sepal  
+D. petal  
+
+---
+
+**Q57.** The transfer of pollen from anther to stigma is called:
+
+A. fertilisation  
+B. germination  
+C. pollination  
+D. transpiration  
+
+---
+
+**Q58.** The fusion of male and female gametes is called:
+
+A. pollination  
+B. germination  
+C. dispersal  
+D. fertilisation  
+
+---
+
+**Q59.** The male gamete in humans is the:
+
+A. egg  
+B. zygote  
+C. sperm  
+D. ovum  
+
+---
+
+**Q60.** The female gamete in humans is the:
+
+A. sperm  
+B. embryo  
+C. zygote  
+D. ovum  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5
+
+## Structural Question Bank — Stoichiometry and reactions
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STOICHIOMETRY AND REACTIONS
+
+**Q1.** (a) Define the term "mole". *(2 marks)*
+
+(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*
+
+(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*
+
+---
+
+**Q2.** (a) State Avogadro''s constant. *(2 marks)*
+
+(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*
+
+(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*
+
+---
+
+**Q3.** (a) Balance the following equation:
+
+$Mg + O_2 \rightarrow MgO$ *(3 marks)*
+
+(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*
+
+---
+
+**Q4.** (a) What is a limiting reactant? *(3 marks)*
+
+(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*
+
+---
+
+**Q5.** (a) Define the term "acid". *(2 marks)*
+
+(b) State three properties of acids. *(3 marks)*
+
+(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*
+
+---
+
+**Q6.** (a) Define the term "base". *(2 marks)*
+
+(b) Distinguish between a base and an alkali. *(3 marks)*
+
+(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a salt? *(2 marks)*
+
+(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*
+
+(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*
+
+---
+
+**Q8.** (a) Define the term "pH". *(2 marks)*
+
+(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*
+
+(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*
+
+---
+
+**Q9.** (a) What is a redox reaction? *(3 marks)*
+
+(b) In the reaction $Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*
+
+(c) Explain your answer using the gain or loss of electrons. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*
+
+(b) Define the term "reduction" in terms of electrons. *(2 marks)*
+
+(c) In the reaction $2Mg + O_2 \rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*
+
+---
+
+**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*
+
+(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*
+
+(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*
+
+---
+
+**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of collision theory. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a catalyst? *(2 marks)*
+
+(b) State two uses of catalysts in industry. *(2 marks)*
+
+(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "equilibrium". *(3 marks)*
+
+(b) State Le Chatelier''s principle. *(3 marks)*
+
+(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \rightleftharpoons 2NH_3$. *(4 marks)*
+
+---
+
+**Q15.** (a) What is a reversible reaction? *(2 marks)*
+
+(b) Give one example of a reversible reaction. *(2 marks)*
+
+(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "concentration". *(2 marks)*
+
+(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*
+
+(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a titration? *(2 marks)*
+
+(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*
+
+(c) State the indicator used and the colour change at the end point. *(3 marks)*
+
+---
+
+**Q18.** (a) Define the term "empirical formula". *(2 marks)*
+
+(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*
+
+(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "molar volume". *(2 marks)*
+
+(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*
+
+(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 7
+
+## Structural Question Bank — Stoichiometry and reactions
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STOICHIOMETRY AND REACTIONS
+
+**Q1.** (a) Define the term "mole". *(2 marks)*
+
+(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*
+
+(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*
+
+---
+
+**Q2.** (a) State Avogadro''s constant. *(2 marks)*
+
+(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*
+
+(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*
+
+---
+
+**Q3.** (a) Balance the following equation:
+
+$Mg + O_2 \rightarrow MgO$ *(3 marks)*
+
+(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*
+
+---
+
+**Q4.** (a) What is a limiting reactant? *(3 marks)*
+
+(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*
+
+---
+
+**Q5.** (a) Define the term "acid". *(2 marks)*
+
+(b) State three properties of acids. *(3 marks)*
+
+(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*
+
+---
+
+**Q6.** (a) Define the term "base". *(2 marks)*
+
+(b) Distinguish between a base and an alkali. *(3 marks)*
+
+(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a salt? *(2 marks)*
+
+(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*
+
+(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*
+
+---
+
+**Q8.** (a) Define the term "pH". *(2 marks)*
+
+(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*
+
+(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*
+
+---
+
+**Q9.** (a) What is a redox reaction? *(3 marks)*
+
+(b) In the reaction $Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*
+
+(c) Explain your answer using the gain or loss of electrons. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*
+
+(b) Define the term "reduction" in terms of electrons. *(2 marks)*
+
+(c) In the reaction $2Mg + O_2 \rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*
+
+---
+
+**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*
+
+(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*
+
+(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*
+
+---
+
+**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of collision theory. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a catalyst? *(2 marks)*
+
+(b) State two uses of catalysts in industry. *(2 marks)*
+
+(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "equilibrium". *(3 marks)*
+
+(b) State Le Chatelier''s principle. *(3 marks)*
+
+(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \rightleftharpoons 2NH_3$. *(4 marks)*
+
+---
+
+**Q15.** (a) What is a reversible reaction? *(2 marks)*
+
+(b) Give one example of a reversible reaction. *(2 marks)*
+
+(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "concentration". *(2 marks)*
+
+(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*
+
+(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a titration? *(2 marks)*
+
+(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*
+
+(c) State the indicator used and the colour change at the end point. *(3 marks)*
+
+---
+
+**Q18.** (a) Define the term "empirical formula". *(2 marks)*
+
+(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*
+
+(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "molar volume". *(2 marks)*
+
+(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*
+
+(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 8
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The number of protons in an atom is called the:
+
+A. atomic number  
+B. mass number  
+C. valency  
+D. isotope number  
+
+---
+
+**Q2.** The total number of protons and neutrons is the:
+
+A. mass number  
+B. atomic number  
+C. atomic mass  
+D. valency  
+
+---
+
+**Q3.** An atom of carbon has 6 protons and 6 neutrons. Its mass number is:
+
+A. 12  
+B. 18  
+C. 6  
+D. 24  
+
+---
+
+**Q4.** The electronic configuration of sodium (atomic number 11) is:
+
+A. 2, 8, 1  
+B. 2, 8, 3  
+C. 2, 9  
+D. 2, 8, 2  
+
+---
+
+**Q5.** Atoms of the same element with different numbers of neutrons are called:
+
+A. isotopes  
+B. compounds  
+C. ions  
+D. molecules  
+
+---
+
+**Q6.** An ionic bond is formed by:
+
+A. transfer of electrons  
+B. transfer of neutrons  
+C. sharing of protons  
+D. sharing of electrons  
+
+---
+
+**Q7.** A covalent bond is formed by:
+
+A. transfer of electrons  
+B. sharing of electrons  
+C. transfer of protons  
+D. sharing of neutrons  
+
+---
+
+**Q8.** The bond in sodium chloride is:
+
+A. covalent  
+B. ionic  
+C. hydrogen  
+D. metallic  
+
+---
+
+**Q9.** The bond in water is:
+
+A. ionic  
+B. metallic  
+C. covalent  
+D. hydrogen  
+
+---
+
+**Q10.** The bond in iron is:
+
+A. ionic  
+B. covalent  
+C. hydrogen  
+D. metallic  
+
+---
+
+**Q11.** Ionic compounds conduct electricity when:
+
+A. solid  
+B. frozen  
+C. molten or dissolved  
+D. gaseous  
+
+---
+
+**Q12.** The formula of a sodium ion is:
+
+A. Na⁻  
+B. Na  
+C. Na²⁺  
+D. Na⁺  
+
+---
+
+**Q13.** The formula of a chloride ion is:
+
+A. Cl²⁻  
+B. Cl⁻  
+C. Cl⁺  
+D. Cl  
+
+---
+
+**Q14.** The valency of oxygen is:
+
+A. 3  
+B. 2  
+C. 4  
+D. 1  
+
+---
+
+**Q15.** The valency of nitrogen is:
+
+A. 2  
+B. 1  
+C. 3  
+D. 4  
+
+---
+
+**Q16.** The formula of water is:
+
+A. H₂O₂  
+B. HO₂  
+C. HO  
+D. H₂O  
+
+---
+
+**Q17.** The formula of carbon dioxide is:
+
+A. C₂O  
+B. CO₃  
+C. CO₂  
+D. CO  
+
+---
+
+**Q18.** The formula of ammonia is:
+
+A. N₂H  
+B. NH₂  
+C. NH₄  
+D. NH₃  
+
+---
+
+**Q19.** Graphite conducts electricity because it has:
+
+A. neutrons  
+B. free electrons  
+C. ions  
+D. protons  
+
+---
+
+**Q20.** Diamond is very hard because:
+
+A. it contains water  
+B. each carbon atom is bonded to four others  
+C. it is a metal  
+D. it has free electrons  
+
+---
+
+**Q21.** The particles in a solid are:
+
+A. closely packed and moving freely  
+B. far apart and moving freely  
+C. closely packed and vibrating  
+D. far apart and stationary  
+
+---
+
+**Q22.** The particles in a gas are:
+
+A. far apart and stationary  
+B. closely packed and vibrating  
+C. closely packed and moving freely  
+D. far apart and moving freely  
+
+---
+
+**Q23.** Elements in the same group have the same number of:
+
+A. shells  
+B. neutrons  
+C. outer electrons  
+D. protons  
+
+---
+
+**Q24.** The most reactive metal in Group I is:
+
+A. potassium  
+B. sodium  
+C. lithium  
+D. caesium  
+
+---
+
+**Q25.** The most reactive halogen is:
+
+A. fluorine  
+B. chlorine  
+C. bromine  
+D. iodine  
+
+---
+
+**Q26.** A mixture of sand and salt can be separated by:
+
+A. dissolving in water and filtering  
+B. distillation only  
+C. evaporation only  
+D. chromatography only  
+
+---
+
+**Q27.** The relative atomic mass of carbon is:
+
+A. 12  
+B. 24  
+C. 6  
+D. 1  
+
+---
+
+**Q28.** The relative atomic mass of oxygen is:
+
+A. 16  
+B. 32  
+C. 1  
+D. 8  
+
+---
+
+**Q29.** A substance made of two or more elements chemically combined is a:
+
+A. compound  
+B. solution  
+C. mixture  
+D. element  
+
+---
+
+**Q30.** The number of electrons in a neutral atom equals the number of:
+
+A. protons  
+B. shells  
+C. protons plus neutrons  
+D. neutrons  
+
+---
+
+**Q31.** One mole of a substance contains:
+
+A. 6.02 × 10²² particles  
+B. 6.02 × 10²³ particles  
+C. 1.0 × 10²³ particles  
+D. 6.02 × 10²⁴ particles  
+
+---
+
+**Q32.** The number of moles in 8 g of oxygen gas (O₂, Ar = 16) is:
+
+A. 0.5  
+B. 0.25  
+C. 2  
+D. 1  
+
+---
+
+**Q33.** The mass of 0.5 moles of CO₂ (Mr = 44) is:
+
+A. 44 g  
+B. 11 g  
+C. 22 g  
+D. 88 g  
+
+---
+
+**Q34.** The molar volume of a gas at room temperature and pressure is:
+
+A. 22.4 dm³  
+B. 6.02 dm³  
+C. 100 dm³  
+D. 24 dm³  
+
+---
+
+**Q35.** The volume of 0.5 moles of CO₂ at r.t.p. is:
+
+A. 24 dm³  
+B. 48 dm³  
+C. 12 dm³  
+D. 6 dm³  
+
+---
+
+**Q36.** An acid turns blue litmus:
+
+A. blue  
+B. colourless  
+C. green  
+D. red  
+
+---
+
+**Q37.** A base turns red litmus:
+
+A. green  
+B. blue  
+C. red  
+D. colourless  
+
+---
+
+**Q38.** The pH of a neutral solution is:
+
+A. 14  
+B. 7  
+C. 1  
+D. 0  
+
+---
+
+**Q39.** The pH of a strong acid is:
+
+A. 14  
+B. 7  
+C. 1  
+D. 10  
+
+---
+
+**Q40.** The pH of a strong alkali is:
+
+A. 7  
+B. 1  
+C. 5  
+D. 14  
+
+---
+
+**Q41.** The reaction between an acid and a base is called:
+
+A. reduction  
+B. combustion  
+C. neutralisation  
+D. oxidation  
+
+---
+
+**Q42.** The products of the reaction between an acid and an alkali are:
+
+A. salt and carbon dioxide  
+B. water and oxygen  
+C. salt and hydrogen  
+D. salt and water  
+
+---
+
+**Q43.** The products of the reaction between an acid and a metal are:
+
+A. water and hydrogen  
+B. salt and hydrogen  
+C. salt and water  
+D. salt and carbon dioxide  
+
+---
+
+**Q44.** The products of the reaction between an acid and a carbonate are:
+
+A. water and oxygen  
+B. salt, water, and carbon dioxide  
+C. salt and water  
+D. salt and hydrogen  
+
+---
+
+**Q45.** In the reaction Zn + CuSO₄ → ZnSO₄ + Cu, the substance oxidised is:
+
+A. oxygen  
+B. copper  
+C. zinc  
+D. sulfate  
+
+---
+
+**Q46.** Oxidation is the:
+
+A. loss of neutrons  
+B. gain of electrons  
+C. gain of protons  
+D. loss of electrons  
+
+---
+
+**Q47.** Reduction is the:
+
+A. loss of neutrons  
+B. gain of protons  
+C. gain of electrons  
+D. loss of electrons  
+
+---
+
+**Q48.** A substance that speeds up a reaction without being used up is a:
+
+A. indicator  
+B. product  
+C. reactant  
+D. catalyst  
+
+---
+
+**Q49.** Increasing the temperature of a reaction:
+
+A. increases the rate  
+B. decreases the rate  
+C. has no effect  
+D. stops the reaction  
+
+---
+
+**Q50.** Increasing the surface area of a solid reactant:
+
+A. increases the rate  
+B. decreases the rate  
+C. stops the reaction  
+D. has no effect  
+
+---
+
+**Q51.** The concentration of a solution containing 0.5 moles in 250 cm³ is:
+
+A. 2 mol/dm³  
+B. 1 mol/dm³  
+C. 0.5 mol/dm³  
+D. 0.25 mol/dm³  
+
+---
+
+**Q52.** The number of moles in 100 cm³ of a 0.2 mol/dm³ solution is:
+
+A. 0.02  
+B. 2  
+C. 20  
+D. 0.2  
+
+---
+
+**Q53.** A reaction that releases heat energy is:
+
+A. exothermic  
+B. neutral  
+C. endothermic  
+D. reversible  
+
+---
+
+**Q54.** A reaction that absorbs heat energy is:
+
+A. endothermic  
+B. neutral  
+C. reversible  
+D. exothermic  
+
+---
+
+**Q55.** The indicator used in a titration between a strong acid and a strong alkali is:
+
+A. universal indicator only  
+B. methyl orange or phenolphthalein  
+C. litmus only  
+D. starch  
+
+---
+
+**Q56.** The empirical formula of a compound with 40% C, 6.7% H, and 53.3% O is:
+
+A. CHO  
+B. CH₂O  
+C. CH₄O  
+D. C₂H₄O₂  
+
+---
+
+**Q57.** In the reaction 2Mg + O₂ → 2MgO, the substance reduced is:
+
+A. magnesium  
+B. magnesium oxide  
+C. oxygen  
+D. none  
+
+---
+
+**Q58.** Le Chatelier''s principle states that a system at equilibrium responds to a change by:
+
+A. increasing the change  
+B. ignoring the change  
+C. stopping the reaction  
+D. counteracting the change  
+
+---
+
+**Q59.** Increasing the pressure on N₂ + 3H₂ ⇌ 2NH₃ favours:
+
+A. the backward reaction  
+B. no change  
+C. the forward reaction  
+D. neither direction  
+
+---
+
+**Q60.** The number of moles in 48 dm³ of oxygen gas at r.t.p. is:
+
+A. 1  
+B. 4  
+C. 0.5  
+D. 2  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The electronic configuration of sodium (atomic number 11) is:
+
+A. 2, 8, 1  
+B. 2, 8, 2  
+C. 2, 8, 3  
+D. 2, 9  
+
+---
+
+**Q2.** Atoms of the same element with different numbers of neutrons are called:
+
+A. isotopes  
+B. ions  
+C. compounds  
+D. molecules  
+
+---
+
+**Q3.** An ionic bond is formed by:
+
+A. transfer of electrons  
+B. sharing of protons  
+C. sharing of electrons  
+D. transfer of neutrons  
+
+---
+
+**Q4.** A covalent bond is formed by:
+
+A. sharing of electrons  
+B. transfer of protons  
+C. sharing of neutrons  
+D. transfer of electrons  
+
+---
+
+**Q5.** The bond in sodium chloride is:
+
+A. ionic  
+B. hydrogen  
+C. covalent  
+D. metallic  
+
+---
+
+**Q6.** The bond in water is:
+
+A. covalent  
+B. hydrogen  
+C. metallic  
+D. ionic  
+
+---
+
+**Q7.** The bond in iron is:
+
+A. ionic  
+B. metallic  
+C. covalent  
+D. hydrogen  
+
+---
+
+**Q8.** Ionic compounds conduct electricity when:
+
+A. solid  
+B. molten or dissolved  
+C. frozen  
+D. gaseous  
+
+---
+
+**Q9.** The formula of a sodium ion is:
+
+A. Na⁻  
+B. Na²⁺  
+C. Na⁺  
+D. Na  
+
+---
+
+**Q10.** The formula of a chloride ion is:
+
+A. Cl⁺  
+B. Cl²⁻  
+C. Cl  
+D. Cl⁻  
+
+---
+
+**Q11.** The valency of oxygen is:
+
+A. 1  
+B. 4  
+C. 2  
+D. 3  
+
+---
+
+**Q12.** The valency of nitrogen is:
+
+A. 1  
+B. 4  
+C. 2  
+D. 3  
+
+---
+
+**Q13.** The formula of water is:
+
+A. H₂O₂  
+B. H₂O  
+C. HO₂  
+D. HO  
+
+---
+
+**Q14.** The formula of carbon dioxide is:
+
+A. C₂O  
+B. CO₂  
+C. CO₃  
+D. CO  
+
+---
+
+**Q15.** The formula of ammonia is:
+
+A. N₂H  
+B. NH₄  
+C. NH₃  
+D. NH₂  
+
+---
+
+**Q16.** Graphite conducts electricity because it has:
+
+A. protons  
+B. ions  
+C. neutrons  
+D. free electrons  
+
+---
+
+**Q17.** Diamond is very hard because:
+
+A. it is a metal  
+B. it contains water  
+C. each carbon atom is bonded to four others  
+D. it has free electrons  
+
+---
+
+**Q18.** The particles in a solid are:
+
+A. far apart and stationary  
+B. closely packed and moving freely  
+C. far apart and moving freely  
+D. closely packed and vibrating  
+
+---
+
+**Q19.** The particles in a gas are:
+
+A. far apart and stationary  
+B. far apart and moving freely  
+C. closely packed and vibrating  
+D. closely packed and moving freely  
+
+---
+
+**Q20.** Elements in the same group have the same number of:
+
+A. shells  
+B. outer electrons  
+C. neutrons  
+D. protons  
+
+---
+
+**Q21.** The most reactive metal in Group I is:
+
+A. potassium  
+B. lithium  
+C. caesium  
+D. sodium  
+
+---
+
+**Q22.** The most reactive halogen is:
+
+A. iodine  
+B. chlorine  
+C. bromine  
+D. fluorine  
+
+---
+
+**Q23.** A mixture of sand and salt can be separated by:
+
+A. evaporation only  
+B. chromatography only  
+C. dissolving in water and filtering  
+D. distillation only  
+
+---
+
+**Q24.** The relative atomic mass of carbon is:
+
+A. 1  
+B. 24  
+C. 6  
+D. 12  
+
+---
+
+**Q25.** The relative atomic mass of oxygen is:
+
+A. 16  
+B. 8  
+C. 32  
+D. 1  
+
+---
+
+**Q26.** A substance made of two or more elements chemically combined is a:
+
+A. compound  
+B. mixture  
+C. solution  
+D. element  
+
+---
+
+**Q27.** The number of electrons in a neutral atom equals the number of:
+
+A. protons  
+B. protons plus neutrons  
+C. neutrons  
+D. shells  
+
+---
+
+**Q28.** The number of protons in an atom is called the:
+
+A. atomic number  
+B. valency  
+C. isotope number  
+D. mass number  
+
+---
+
+**Q29.** The total number of protons and neutrons is the:
+
+A. mass number  
+B. atomic mass  
+C. atomic number  
+D. valency  
+
+---
+
+**Q30.** An atom of carbon has 6 protons and 6 neutrons. Its mass number is:
+
+A. 12  
+B. 24  
+C. 18  
+D. 6  
+
+---
+
+**Q31.** The molar volume of a gas at room temperature and pressure is:
+
+A. 22.4 dm³  
+B. 24 dm³  
+C. 6.02 dm³  
+D. 100 dm³  
+
+---
+
+**Q32.** The volume of 0.5 moles of CO₂ at r.t.p. is:
+
+A. 24 dm³  
+B. 12 dm³  
+C. 48 dm³  
+D. 6 dm³  
+
+---
+
+**Q33.** An acid turns blue litmus:
+
+A. blue  
+B. green  
+C. red  
+D. colourless  
+
+---
+
+**Q34.** A base turns red litmus:
+
+A. red  
+B. green  
+C. colourless  
+D. blue  
+
+---
+
+**Q35.** The pH of a neutral solution is:
+
+A. 0  
+B. 1  
+C. 7  
+D. 14  
+
+---
+
+**Q36.** The pH of a strong acid is:
+
+A. 7  
+B. 10  
+C. 14  
+D. 1  
+
+---
+
+**Q37.** The pH of a strong alkali is:
+
+A. 7  
+B. 14  
+C. 1  
+D. 5  
+
+---
+
+**Q38.** The reaction between an acid and a base is called:
+
+A. reduction  
+B. neutralisation  
+C. combustion  
+D. oxidation  
+
+---
+
+**Q39.** The products of the reaction between an acid and an alkali are:
+
+A. salt and carbon dioxide  
+B. salt and hydrogen  
+C. salt and water  
+D. water and oxygen  
+
+---
+
+**Q40.** The products of the reaction between an acid and a metal are:
+
+A. salt and carbon dioxide  
+B. salt and water  
+C. water and hydrogen  
+D. salt and hydrogen  
+
+---
+
+**Q41.** The products of the reaction between an acid and a carbonate are:
+
+A. salt and water  
+B. water and oxygen  
+C. salt, water, and carbon dioxide  
+D. salt and hydrogen  
+
+---
+
+**Q42.** In the reaction Zn + CuSO₄ → ZnSO₄ + Cu, the substance oxidised is:
+
+A. sulfate  
+B. oxygen  
+C. copper  
+D. zinc  
+
+---
+
+**Q43.** Oxidation is the:
+
+A. loss of neutrons  
+B. loss of electrons  
+C. gain of electrons  
+D. gain of protons  
+
+---
+
+**Q44.** Reduction is the:
+
+A. loss of neutrons  
+B. gain of electrons  
+C. gain of protons  
+D. loss of electrons  
+
+---
+
+**Q45.** A substance that speeds up a reaction without being used up is a:
+
+A. indicator  
+B. reactant  
+C. catalyst  
+D. product  
+
+---
+
+**Q46.** Increasing the temperature of a reaction:
+
+A. stops the reaction  
+B. decreases the rate  
+C. has no effect  
+D. increases the rate  
+
+---
+
+**Q47.** Increasing the surface area of a solid reactant:
+
+A. stops the reaction  
+B. has no effect  
+C. increases the rate  
+D. decreases the rate  
+
+---
+
+**Q48.** The concentration of a solution containing 0.5 moles in 250 cm³ is:
+
+A. 0.25 mol/dm³  
+B. 1 mol/dm³  
+C. 0.5 mol/dm³  
+D. 2 mol/dm³  
+
+---
+
+**Q49.** The number of moles in 100 cm³ of a 0.2 mol/dm³ solution is:
+
+A. 0.02  
+B. 0.2  
+C. 2  
+D. 20  
+
+---
+
+**Q50.** A reaction that releases heat energy is:
+
+A. exothermic  
+B. endothermic  
+C. neutral  
+D. reversible  
+
+---
+
+**Q51.** A reaction that absorbs heat energy is:
+
+A. endothermic  
+B. reversible  
+C. exothermic  
+D. neutral  
+
+---
+
+**Q52.** The indicator used in a titration between a strong acid and a strong alkali is:
+
+A. methyl orange or phenolphthalein  
+B. litmus only  
+C. starch  
+D. universal indicator only  
+
+---
+
+**Q53.** The empirical formula of a compound with 40% C, 6.7% H, and 53.3% O is:
+
+A. CH₂O  
+B. CH₄O  
+C. CHO  
+D. C₂H₄O₂  
+
+---
+
+**Q54.** In the reaction 2Mg + O₂ → 2MgO, the substance reduced is:
+
+A. oxygen  
+B. none  
+C. magnesium oxide  
+D. magnesium  
+
+---
+
+**Q55.** Le Chatelier''s principle states that a system at equilibrium responds to a change by:
+
+A. increasing the change  
+B. counteracting the change  
+C. ignoring the change  
+D. stopping the reaction  
+
+---
+
+**Q56.** Increasing the pressure on N₂ + 3H₂ ⇌ 2NH₃ favours:
+
+A. the backward reaction  
+B. the forward reaction  
+C. no change  
+D. neither direction  
+
+---
+
+**Q57.** The number of moles in 48 dm³ of oxygen gas at r.t.p. is:
+
+A. 1  
+B. 0.5  
+C. 2  
+D. 4  
+
+---
+
+**Q58.** One mole of a substance contains:
+
+A. 6.02 × 10²² particles  
+B. 1.0 × 10²³ particles  
+C. 6.02 × 10²⁴ particles  
+D. 6.02 × 10²³ particles  
+
+---
+
+**Q59.** The number of moles in 8 g of oxygen gas (O₂, Ar = 16) is:
+
+A. 0.5  
+B. 2  
+C. 0.25  
+D. 1  
+
+---
+
+**Q60.** The mass of 0.5 moles of CO₂ (Mr = 44) is:
+
+A. 44 g  
+B. 88 g  
+C. 11 g  
+D. 22 g  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** A covalent bond is formed by:
+
+A. sharing of electrons  
+B. transfer of electrons  
+C. transfer of protons  
+D. sharing of neutrons  
+
+---
+
+**Q2.** The bond in sodium chloride is:
+
+A. ionic  
+B. covalent  
+C. hydrogen  
+D. metallic  
+
+---
+
+**Q3.** The bond in water is:
+
+A. covalent  
+B. metallic  
+C. ionic  
+D. hydrogen  
+
+---
+
+**Q4.** The bond in iron is:
+
+A. metallic  
+B. covalent  
+C. hydrogen  
+D. ionic  
+
+---
+
+**Q5.** Ionic compounds conduct electricity when:
+
+A. molten or dissolved  
+B. frozen  
+C. solid  
+D. gaseous  
+
+---
+
+**Q6.** The formula of a sodium ion is:
+
+A. Na⁺  
+B. Na  
+C. Na²⁺  
+D. Na⁻  
+
+---
+
+**Q7.** The formula of a chloride ion is:
+
+A. Cl⁺  
+B. Cl⁻  
+C. Cl²⁻  
+D. Cl  
+
+---
+
+**Q8.** The valency of oxygen is:
+
+A. 1  
+B. 2  
+C. 4  
+D. 3  
+
+---
+
+**Q9.** The valency of nitrogen is:
+
+A. 1  
+B. 2  
+C. 3  
+D. 4  
+
+---
+
+**Q10.** The formula of water is:
+
+A. HO₂  
+B. H₂O₂  
+C. HO  
+D. H₂O  
+
+---
+
+**Q11.** The formula of carbon dioxide is:
+
+A. CO  
+B. CO₃  
+C. CO₂  
+D. C₂O  
+
+---
+
+**Q12.** The formula of ammonia is:
+
+A. NH₄  
+B. NH₂  
+C. N₂H  
+D. NH₃  
+
+---
+
+**Q13.** Graphite conducts electricity because it has:
+
+A. protons  
+B. free electrons  
+C. ions  
+D. neutrons  
+
+---
+
+**Q14.** Diamond is very hard because:
+
+A. it is a metal  
+B. each carbon atom is bonded to four others  
+C. it contains water  
+D. it has free electrons  
+
+---
+
+**Q15.** The particles in a solid are:
+
+A. far apart and stationary  
+B. far apart and moving freely  
+C. closely packed and vibrating  
+D. closely packed and moving freely  
+
+---
+
+**Q16.** The particles in a gas are:
+
+A. closely packed and moving freely  
+B. closely packed and vibrating  
+C. far apart and stationary  
+D. far apart and moving freely  
+
+---
+
+**Q17.** Elements in the same group have the same number of:
+
+A. neutrons  
+B. shells  
+C. outer electrons  
+D. protons  
+
+---
+
+**Q18.** The most reactive metal in Group I is:
+
+A. sodium  
+B. potassium  
+C. lithium  
+D. caesium  
+
+---
+
+**Q19.** The most reactive halogen is:
+
+A. iodine  
+B. fluorine  
+C. chlorine  
+D. bromine  
+
+---
+
+**Q20.** A mixture of sand and salt can be separated by:
+
+A. evaporation only  
+B. dissolving in water and filtering  
+C. chromatography only  
+D. distillation only  
+
+---
+
+**Q21.** The relative atomic mass of carbon is:
+
+A. 1  
+B. 6  
+C. 12  
+D. 24  
+
+---
+
+**Q22.** The relative atomic mass of oxygen is:
+
+A. 1  
+B. 8  
+C. 32  
+D. 16  
+
+---
+
+**Q23.** A substance made of two or more elements chemically combined is a:
+
+A. solution  
+B. element  
+C. compound  
+D. mixture  
+
+---
+
+**Q24.** The number of electrons in a neutral atom equals the number of:
+
+A. shells  
+B. protons plus neutrons  
+C. neutrons  
+D. protons  
+
+---
+
+**Q25.** The number of protons in an atom is called the:
+
+A. atomic number  
+B. mass number  
+C. valency  
+D. isotope number  
+
+---
+
+**Q26.** The total number of protons and neutrons is the:
+
+A. mass number  
+B. atomic number  
+C. atomic mass  
+D. valency  
+
+---
+
+**Q27.** An atom of carbon has 6 protons and 6 neutrons. Its mass number is:
+
+A. 12  
+B. 18  
+C. 6  
+D. 24  
+
+---
+
+**Q28.** The electronic configuration of sodium (atomic number 11) is:
+
+A. 2, 8, 1  
+B. 2, 8, 3  
+C. 2, 9  
+D. 2, 8, 2  
+
+---
+
+**Q29.** Atoms of the same element with different numbers of neutrons are called:
+
+A. isotopes  
+B. compounds  
+C. ions  
+D. molecules  
+
+---
+
+**Q30.** An ionic bond is formed by:
+
+A. transfer of electrons  
+B. transfer of neutrons  
+C. sharing of protons  
+D. sharing of electrons  
+
+---
+
+**Q31.** A base turns red litmus:
+
+A. red  
+B. blue  
+C. green  
+D. colourless  
+
+---
+
+**Q32.** The pH of a neutral solution is:
+
+A. 0  
+B. 7  
+C. 1  
+D. 14  
+
+---
+
+**Q33.** The pH of a strong acid is:
+
+A. 7  
+B. 14  
+C. 1  
+D. 10  
+
+---
+
+**Q34.** The pH of a strong alkali is:
+
+A. 1  
+B. 7  
+C. 5  
+D. 14  
+
+---
+
+**Q35.** The reaction between an acid and a base is called:
+
+A. oxidation  
+B. combustion  
+C. neutralisation  
+D. reduction  
+
+---
+
+**Q36.** The products of the reaction between an acid and an alkali are:
+
+A. salt and hydrogen  
+B. water and oxygen  
+C. salt and carbon dioxide  
+D. salt and water  
+
+---
+
+**Q37.** The products of the reaction between an acid and a metal are:
+
+A. salt and carbon dioxide  
+B. salt and hydrogen  
+C. salt and water  
+D. water and hydrogen  
+
+---
+
+**Q38.** The products of the reaction between an acid and a carbonate are:
+
+A. salt and water  
+B. salt, water, and carbon dioxide  
+C. water and oxygen  
+D. salt and hydrogen  
+
+---
+
+**Q39.** In the reaction Zn + CuSO₄ → ZnSO₄ + Cu, the substance oxidised is:
+
+A. sulfate  
+B. copper  
+C. zinc  
+D. oxygen  
+
+---
+
+**Q40.** Oxidation is the:
+
+A. gain of protons  
+B. gain of electrons  
+C. loss of neutrons  
+D. loss of electrons  
+
+---
+
+**Q41.** Reduction is the:
+
+A. gain of protons  
+B. loss of neutrons  
+C. gain of electrons  
+D. loss of electrons  
+
+---
+
+**Q42.** A substance that speeds up a reaction without being used up is a:
+
+A. product  
+B. indicator  
+C. reactant  
+D. catalyst  
+
+---
+
+**Q43.** Increasing the temperature of a reaction:
+
+A. stops the reaction  
+B. increases the rate  
+C. decreases the rate  
+D. has no effect  
+
+---
+
+**Q44.** Increasing the surface area of a solid reactant:
+
+A. stops the reaction  
+B. increases the rate  
+C. has no effect  
+D. decreases the rate  
+
+---
+
+**Q45.** The concentration of a solution containing 0.5 moles in 250 cm³ is:
+
+A. 0.25 mol/dm³  
+B. 0.5 mol/dm³  
+C. 2 mol/dm³  
+D. 1 mol/dm³  
+
+---
+
+**Q46.** The number of moles in 100 cm³ of a 0.2 mol/dm³ solution is:
+
+A. 20  
+B. 0.2  
+C. 2  
+D. 0.02  
+
+---
+
+**Q47.** A reaction that releases heat energy is:
+
+A. neutral  
+B. reversible  
+C. exothermic  
+D. endothermic  
+
+---
+
+**Q48.** A reaction that absorbs heat energy is:
+
+A. neutral  
+B. reversible  
+C. exothermic  
+D. endothermic  
+
+---
+
+**Q49.** The indicator used in a titration between a strong acid and a strong alkali is:
+
+A. methyl orange or phenolphthalein  
+B. universal indicator only  
+C. litmus only  
+D. starch  
+
+---
+
+**Q50.** The empirical formula of a compound with 40% C, 6.7% H, and 53.3% O is:
+
+A. CH₂O  
+B. CHO  
+C. CH₄O  
+D. C₂H₄O₂  
+
+---
+
+**Q51.** In the reaction 2Mg + O₂ → 2MgO, the substance reduced is:
+
+A. oxygen  
+B. magnesium oxide  
+C. magnesium  
+D. none  
+
+---
+
+**Q52.** Le Chatelier''s principle states that a system at equilibrium responds to a change by:
+
+A. counteracting the change  
+B. ignoring the change  
+C. stopping the reaction  
+D. increasing the change  
+
+---
+
+**Q53.** Increasing the pressure on N₂ + 3H₂ ⇌ 2NH₃ favours:
+
+A. the forward reaction  
+B. no change  
+C. the backward reaction  
+D. neither direction  
+
+---
+
+**Q54.** The number of moles in 48 dm³ of oxygen gas at r.t.p. is:
+
+A. 2  
+B. 4  
+C. 0.5  
+D. 1  
+
+---
+
+**Q55.** One mole of a substance contains:
+
+A. 6.02 × 10²² particles  
+B. 6.02 × 10²³ particles  
+C. 1.0 × 10²³ particles  
+D. 6.02 × 10²⁴ particles  
+
+---
+
+**Q56.** The number of moles in 8 g of oxygen gas (O₂, Ar = 16) is:
+
+A. 0.5  
+B. 0.25  
+C. 2  
+D. 1  
+
+---
+
+**Q57.** The mass of 0.5 moles of CO₂ (Mr = 44) is:
+
+A. 44 g  
+B. 11 g  
+C. 22 g  
+D. 88 g  
+
+---
+
+**Q58.** The molar volume of a gas at room temperature and pressure is:
+
+A. 22.4 dm³  
+B. 6.02 dm³  
+C. 100 dm³  
+D. 24 dm³  
+
+---
+
+**Q59.** The volume of 0.5 moles of CO₂ at r.t.p. is:
+
+A. 24 dm³  
+B. 48 dm³  
+C. 12 dm³  
+D. 6 dm³  
+
+---
+
+**Q60.** An acid turns blue litmus:
+
+A. blue  
+B. colourless  
+C. green  
+D. red  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 4
+
+## Structural Question Bank — Mechanics
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MECHANICS
+
+**Q1.** (a) Define the terms distance and displacement. *(3 marks)*
+
+(b) A car travels 60 km north then 80 km east. Calculate the total distance travelled and the magnitude of the displacement. *(5 marks)*
+
+(c) State the difference between speed and velocity. *(3 marks)*
+
+---
+
+**Q2.** (a) Define acceleration. *(2 marks)*
+
+(b) A car accelerates uniformly from rest to 20 m/s in 8 s. Calculate its acceleration. *(3 marks)*
+
+(c) Using the equations of motion, calculate the distance travelled by the car in part (b). *(4 marks)*
+
+---
+
+**Q3.** (a) State Newton''s three laws of motion. *(6 marks)*
+
+(b) A force of 12 N acts on a mass of 3 kg. Calculate the acceleration produced. *(3 marks)*
+
+(c) Explain why a passenger lurches forward when a bus stops suddenly. *(3 marks)*
+
+---
+
+**Q4.** (a) Define the term "momentum". *(2 marks)*
+
+(b) A ball of mass 0.5 kg moving at 4 m/s hits a wall and rebounds at 3 m/s. Calculate the change in momentum. *(4 marks)*
+
+(c) State the principle of conservation of momentum. *(3 marks)*
+
+---
+
+**Q5.** (a) Define the term "work". *(2 marks)*
+
+(b) A force of 50 N moves an object 4 m in the direction of the force. Calculate the work done. *(3 marks)*
+
+(c) A crane lifts a 200 kg load through 10 m. Calculate the work done. (Take g = 10 m/s²) *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "power". *(2 marks)*
+
+(b) A machine does 600 J of work in 20 s. Calculate its power. *(3 marks)*
+
+(c) A motor lifts a 500 kg load through 12 m in 30 s. Calculate the power output. (Take g = 10 m/s²) *(5 marks)*
+
+---
+
+**Q7.** (a) Define the terms kinetic energy and potential energy. *(4 marks)*
+
+(b) A car of mass 1000 kg moves at 20 m/s. Calculate its kinetic energy. *(3 marks)*
+
+(c) A ball of mass 2 kg is raised 5 m. Calculate its gravitational potential energy. (Take g = 10 m/s²) *(3 marks)*
+
+---
+
+**Q8.** (a) State the principle of conservation of energy. *(3 marks)*
+
+(b) A ball of mass 0.2 kg is dropped from a height of 20 m. Calculate its speed just before hitting the ground. (Take g = 10 m/s²) *(5 marks)*
+
+(c) Explain what happens to the energy when the ball hits the ground and bounces. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "pressure". *(2 marks)*
+
+(b) A force of 100 N acts on an area of 0.5 m². Calculate the pressure. *(3 marks)*
+
+(c) Explain why a sharp knife cuts better than a blunt knife. *(3 marks)*
+
+---
+
+**Q10.** (a) State the principle of moments. *(3 marks)*
+
+(b) A uniform metre rule is balanced at its centre. A 2 N weight is placed at the 20 cm mark. Calculate the force needed at the 80 cm mark to balance it. *(5 marks)*
+
+(c) State two conditions for a body to be in equilibrium. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "centre of gravity". *(2 marks)*
+
+(b) Explain why a tall narrow object is more likely to topple than a short wide one. *(4 marks)*
+
+(c) Describe how you would find the centre of gravity of an irregular lamina. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a simple machine? *(2 marks)*
+
+(b) Define the terms mechanical advantage, velocity ratio, and efficiency. *(6 marks)*
+
+(c) A machine has a mechanical advantage of 4 and an efficiency of 80%. Calculate its velocity ratio. *(4 marks)*
+
+---
+
+**Q13.** (a) A lever has a load arm of 0.5 m and an effort arm of 2 m. Calculate the velocity ratio. *(3 marks)*
+
+(b) If the load is 200 N and the effort is 60 N, calculate the mechanical advantage. *(3 marks)*
+
+(c) Calculate the efficiency of the lever. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "friction". *(2 marks)*
+
+(b) State two advantages and two disadvantages of friction. *(4 marks)*
+
+(c) Describe two ways of reducing friction. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "density". *(2 marks)*
+
+(b) A block of metal has a mass of 270 g and a volume of 100 cm³. Calculate its density in g/cm³ and in kg/m³. *(5 marks)*
+
+(c) Explain why ice floats on water. *(3 marks)*
+
+---
+
+**Q16.** (a) State Archimedes'' principle. *(3 marks)*
+
+(b) A stone weighs 5 N in air and 3 N in water. Calculate the upthrust. *(3 marks)*
+
+(c) Calculate the volume of the stone. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "relative density". *(2 marks)*
+
+(b) A body has a density of 800 kg/m³. Calculate its relative density. *(3 marks)*
+
+(c) Explain why a ship made of steel floats on water. *(4 marks)*
+
+---
+
+**Q18.** (a) State the law of floatation. *(3 marks)*
+
+(b) A floating object displaces 0.5 m³ of water. Calculate the upthrust on it. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*
+
+(c) Explain how a submarine controls its depth. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "velocity ratio" of a pulley system. *(2 marks)*
+
+(b) A pulley system with 4 ropes supports a load of 400 N with an effort of 120 N. Calculate the mechanical advantage and velocity ratio. *(5 marks)*
+
+(c) Calculate the efficiency of the pulley system. *(3 marks)*
+
+---
+
+**Q20.** (a) A car accelerates from 10 m/s to 30 m/s in 5 s. Calculate its acceleration. *(3 marks)*
+
+(b) Calculate the distance travelled during this time. *(3 marks)*
+
+(c) Sketch a velocity-time graph for this motion and state what the gradient represents. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 5
+
+## Structural Question Bank — Waves, electricity, and magnetism
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: WAVES, ELECTRICITY, AND MAGNETISM
+
+**Q1.** (a) Define the term "wave". *(2 marks)*
+
+(b) Distinguish between transverse and longitudinal waves, giving one example of each. *(4 marks)*
+
+(c) A wave has a frequency of 50 Hz and a wavelength of 4 m. Calculate its speed. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the terms frequency, wavelength, and amplitude. *(3 marks)*
+
+(b) A wave travels at 340 m/s with a frequency of 170 Hz. Calculate its wavelength. *(3 marks)*
+
+(c) State the relationship between frequency, wavelength, and wave speed. *(2 marks)*
+
+---
+
+**Q3.** (a) State the laws of reflection. *(4 marks)*
+
+(b) Describe an experiment to verify the laws of reflection. *(5 marks)*
+
+(c) A ray of light strikes a plane mirror at an angle of 30° to the normal. Calculate the angle of reflection. *(3 marks)*
+
+---
+
+**Q4.** (a) Define the terms real image and virtual image. *(4 marks)*
+
+(b) Describe the image formed by a plane mirror. *(4 marks)*
+
+(c) Explain why the image in a plane mirror is laterally inverted. *(3 marks)*
+
+---
+
+**Q5.** (a) State the laws of refraction. *(4 marks)*
+
+(b) Define the term "refractive index". *(2 marks)*
+
+(c) Light travels from air into glass with a refractive index of 1.5. If the angle of incidence is 45°, calculate the angle of refraction. *(5 marks)*
+
+---
+
+**Q6.** (a) Define the term "critical angle". *(3 marks)*
+
+(b) The critical angle for glass is 42°. Calculate the refractive index of the glass. *(4 marks)*
+
+(c) Explain what happens when light strikes the glass-air boundary at an angle greater than the critical angle. *(4 marks)*
+
+---
+
+**Q7.** (a) What is total internal reflection? *(3 marks)*
+
+(b) State two applications of total internal reflection. *(2 marks)*
+
+(c) Explain how an optical fibre transmits light. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms focal length and principal focus of a converging lens. *(4 marks)*
+
+(b) A converging lens has a focal length of 10 cm. An object is placed 30 cm from the lens. Using the lens formula, calculate the image distance. *(5 marks)*
+
+(c) State the nature of the image formed. *(3 marks)*
+
+---
+
+**Q9.** (a) Define the term "magnification". *(2 marks)*
+
+(b) An object 2 cm tall is placed 20 cm from a converging lens of focal length 10 cm. Calculate the image distance and the height of the image. *(6 marks)*
+
+(c) State whether the image is real or virtual. *(2 marks)*
+
+---
+
+**Q10.** (a) What is sound? *(2 marks)*
+
+(b) State three properties of sound waves. *(3 marks)*
+
+(c) Explain why sound cannot travel through a vacuum. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "echo". *(2 marks)*
+
+(b) A boy shouts near a cliff and hears the echo after 2 s. If the speed of sound is 340 m/s, calculate the distance of the cliff. *(4 marks)*
+
+(c) State two uses of echoes. *(2 marks)*
+
+---
+
+**Q12.** (a) Define the terms pitch and loudness. *(4 marks)*
+
+(b) State the factors that determine the pitch and loudness of a sound. *(4 marks)*
+
+(c) Explain how the human ear detects sound. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the terms heat, temperature, and specific heat capacity. *(4 marks)*
+
+(b) Calculate the heat needed to raise the temperature of 2 kg of water from 20°C to 80°C. (Specific heat capacity of water = 4200 J/kg°C) *(4 marks)*
+
+(c) State the principle of conservation of energy as applied to heat. *(3 marks)*
+
+---
+
+**Q14.** (a) Define the term "latent heat". *(2 marks)*
+
+(b) Calculate the heat needed to melt 0.5 kg of ice at 0°C. (Specific latent heat of fusion of ice = 3.34 × 10⁵ J/kg) *(4 marks)*
+
+(c) Explain why ice at 0°C is more effective at cooling than water at 0°C. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "electric current". *(2 marks)*
+
+(b) A current of 2 A flows through a wire for 5 minutes. Calculate the charge that passes. *(4 marks)*
+
+(c) State the unit of charge. *(2 marks)*
+
+---
+
+**Q16.** (a) State Ohm''s law. *(3 marks)*
+
+(b) A resistor of 12 Ω has a current of 0.5 A flowing through it. Calculate the potential difference across it. *(3 marks)*
+
+(c) Calculate the resistance of a wire that carries 2 A when 24 V is applied. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the terms resistance and resistivity. *(4 marks)*
+
+(b) Two resistors of 6 Ω and 3 Ω are connected in series. Calculate the total resistance. *(3 marks)*
+
+(c) The same resistors are now connected in parallel. Calculate the total resistance. *(4 marks)*
+
+---
+
+**Q18.** (a) State the formula for electrical power. *(2 marks)*
+
+(b) An electric heater operates at 240 V and draws a current of 5 A. Calculate its power. *(3 marks)*
+
+(c) Calculate the energy used by the heater in 2 hours, in joules and in kWh. *(5 marks)*
+
+---
+
+**Q19.** (a) State the properties of a magnet. *(3 marks)*
+
+(b) Describe how you would magnetise a steel bar using the stroking method. *(4 marks)*
+
+(c) Explain the difference between a magnet and a magnetic material. *(3 marks)*
+
+---
+
+**Q20.** (a) State the factors that affect the strength of an electromagnet. *(3 marks)*
+
+(b) Describe how an electric bell works. *(5 marks)*
+
+(c) State two uses of electromagnets. *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 6
+
+## Structural Question Bank — Mechanics
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MECHANICS
+
+**Q1.** (a) Define the terms distance and displacement. *(3 marks)*
+
+(b) A car travels 60 km north then 80 km east. Calculate the total distance travelled and the magnitude of the displacement. *(5 marks)*
+
+(c) State the difference between speed and velocity. *(3 marks)*
+
+---
+
+**Q2.** (a) Define acceleration. *(2 marks)*
+
+(b) A car accelerates uniformly from rest to 20 m/s in 8 s. Calculate its acceleration. *(3 marks)*
+
+(c) Using the equations of motion, calculate the distance travelled by the car in part (b). *(4 marks)*
+
+---
+
+**Q3.** (a) State Newton''s three laws of motion. *(6 marks)*
+
+(b) A force of 12 N acts on a mass of 3 kg. Calculate the acceleration produced. *(3 marks)*
+
+(c) Explain why a passenger lurches forward when a bus stops suddenly. *(3 marks)*
+
+---
+
+**Q4.** (a) Define the term "momentum". *(2 marks)*
+
+(b) A ball of mass 0.5 kg moving at 4 m/s hits a wall and rebounds at 3 m/s. Calculate the change in momentum. *(4 marks)*
+
+(c) State the principle of conservation of momentum. *(3 marks)*
+
+---
+
+**Q5.** (a) Define the term "work". *(2 marks)*
+
+(b) A force of 50 N moves an object 4 m in the direction of the force. Calculate the work done. *(3 marks)*
+
+(c) A crane lifts a 200 kg load through 10 m. Calculate the work done. (Take g = 10 m/s²) *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "power". *(2 marks)*
+
+(b) A machine does 600 J of work in 20 s. Calculate its power. *(3 marks)*
+
+(c) A motor lifts a 500 kg load through 12 m in 30 s. Calculate the power output. (Take g = 10 m/s²) *(5 marks)*
+
+---
+
+**Q7.** (a) Define the terms kinetic energy and potential energy. *(4 marks)*
+
+(b) A car of mass 1000 kg moves at 20 m/s. Calculate its kinetic energy. *(3 marks)*
+
+(c) A ball of mass 2 kg is raised 5 m. Calculate its gravitational potential energy. (Take g = 10 m/s²) *(3 marks)*
+
+---
+
+**Q8.** (a) State the principle of conservation of energy. *(3 marks)*
+
+(b) A ball of mass 0.2 kg is dropped from a height of 20 m. Calculate its speed just before hitting the ground. (Take g = 10 m/s²) *(5 marks)*
+
+(c) Explain what happens to the energy when the ball hits the ground and bounces. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "pressure". *(2 marks)*
+
+(b) A force of 100 N acts on an area of 0.5 m². Calculate the pressure. *(3 marks)*
+
+(c) Explain why a sharp knife cuts better than a blunt knife. *(3 marks)*
+
+---
+
+**Q10.** (a) State the principle of moments. *(3 marks)*
+
+(b) A uniform metre rule is balanced at its centre. A 2 N weight is placed at the 20 cm mark. Calculate the force needed at the 80 cm mark to balance it. *(5 marks)*
+
+(c) State two conditions for a body to be in equilibrium. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "centre of gravity". *(2 marks)*
+
+(b) Explain why a tall narrow object is more likely to topple than a short wide one. *(4 marks)*
+
+(c) Describe how you would find the centre of gravity of an irregular lamina. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a simple machine? *(2 marks)*
+
+(b) Define the terms mechanical advantage, velocity ratio, and efficiency. *(6 marks)*
+
+(c) A machine has a mechanical advantage of 4 and an efficiency of 80%. Calculate its velocity ratio. *(4 marks)*
+
+---
+
+**Q13.** (a) A lever has a load arm of 0.5 m and an effort arm of 2 m. Calculate the velocity ratio. *(3 marks)*
+
+(b) If the load is 200 N and the effort is 60 N, calculate the mechanical advantage. *(3 marks)*
+
+(c) Calculate the efficiency of the lever. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "friction". *(2 marks)*
+
+(b) State two advantages and two disadvantages of friction. *(4 marks)*
+
+(c) Describe two ways of reducing friction. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "density". *(2 marks)*
+
+(b) A block of metal has a mass of 270 g and a volume of 100 cm³. Calculate its density in g/cm³ and in kg/m³. *(5 marks)*
+
+(c) Explain why ice floats on water. *(3 marks)*
+
+---
+
+**Q16.** (a) State Archimedes'' principle. *(3 marks)*
+
+(b) A stone weighs 5 N in air and 3 N in water. Calculate the upthrust. *(3 marks)*
+
+(c) Calculate the volume of the stone. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "relative density". *(2 marks)*
+
+(b) A body has a density of 800 kg/m³. Calculate its relative density. *(3 marks)*
+
+(c) Explain why a ship made of steel floats on water. *(4 marks)*
+
+---
+
+**Q18.** (a) State the law of floatation. *(3 marks)*
+
+(b) A floating object displaces 0.5 m³ of water. Calculate the upthrust on it. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*
+
+(c) Explain how a submarine controls its depth. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "velocity ratio" of a pulley system. *(2 marks)*
+
+(b) A pulley system with 4 ropes supports a load of 400 N with an effort of 120 N. Calculate the mechanical advantage and velocity ratio. *(5 marks)*
+
+(c) Calculate the efficiency of the pulley system. *(3 marks)*
+
+---
+
+**Q20.** (a) A car accelerates from 10 m/s to 30 m/s in 5 s. Calculate its acceleration. *(3 marks)*
+
+(b) Calculate the distance travelled during this time. *(3 marks)*
+
+(c) Sketch a velocity-time graph for this motion and state what the gradient represents. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 7
+
+## Structural Question Bank — Waves, electricity, and magnetism
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: WAVES, ELECTRICITY, AND MAGNETISM
+
+**Q1.** (a) Define the term "wave". *(2 marks)*
+
+(b) Distinguish between transverse and longitudinal waves, giving one example of each. *(4 marks)*
+
+(c) A wave has a frequency of 50 Hz and a wavelength of 4 m. Calculate its speed. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the terms frequency, wavelength, and amplitude. *(3 marks)*
+
+(b) A wave travels at 340 m/s with a frequency of 170 Hz. Calculate its wavelength. *(3 marks)*
+
+(c) State the relationship between frequency, wavelength, and wave speed. *(2 marks)*
+
+---
+
+**Q3.** (a) State the laws of reflection. *(4 marks)*
+
+(b) Describe an experiment to verify the laws of reflection. *(5 marks)*
+
+(c) A ray of light strikes a plane mirror at an angle of 30° to the normal. Calculate the angle of reflection. *(3 marks)*
+
+---
+
+**Q4.** (a) Define the terms real image and virtual image. *(4 marks)*
+
+(b) Describe the image formed by a plane mirror. *(4 marks)*
+
+(c) Explain why the image in a plane mirror is laterally inverted. *(3 marks)*
+
+---
+
+**Q5.** (a) State the laws of refraction. *(4 marks)*
+
+(b) Define the term "refractive index". *(2 marks)*
+
+(c) Light travels from air into glass with a refractive index of 1.5. If the angle of incidence is 45°, calculate the angle of refraction. *(5 marks)*
+
+---
+
+**Q6.** (a) Define the term "critical angle". *(3 marks)*
+
+(b) The critical angle for glass is 42°. Calculate the refractive index of the glass. *(4 marks)*
+
+(c) Explain what happens when light strikes the glass-air boundary at an angle greater than the critical angle. *(4 marks)*
+
+---
+
+**Q7.** (a) What is total internal reflection? *(3 marks)*
+
+(b) State two applications of total internal reflection. *(2 marks)*
+
+(c) Explain how an optical fibre transmits light. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms focal length and principal focus of a converging lens. *(4 marks)*
+
+(b) A converging lens has a focal length of 10 cm. An object is placed 30 cm from the lens. Using the lens formula, calculate the image distance. *(5 marks)*
+
+(c) State the nature of the image formed. *(3 marks)*
+
+---
+
+**Q9.** (a) Define the term "magnification". *(2 marks)*
+
+(b) An object 2 cm tall is placed 20 cm from a converging lens of focal length 10 cm. Calculate the image distance and the height of the image. *(6 marks)*
+
+(c) State whether the image is real or virtual. *(2 marks)*
+
+---
+
+**Q10.** (a) What is sound? *(2 marks)*
+
+(b) State three properties of sound waves. *(3 marks)*
+
+(c) Explain why sound cannot travel through a vacuum. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "echo". *(2 marks)*
+
+(b) A boy shouts near a cliff and hears the echo after 2 s. If the speed of sound is 340 m/s, calculate the distance of the cliff. *(4 marks)*
+
+(c) State two uses of echoes. *(2 marks)*
+
+---
+
+**Q12.** (a) Define the terms pitch and loudness. *(4 marks)*
+
+(b) State the factors that determine the pitch and loudness of a sound. *(4 marks)*
+
+(c) Explain how the human ear detects sound. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the terms heat, temperature, and specific heat capacity. *(4 marks)*
+
+(b) Calculate the heat needed to raise the temperature of 2 kg of water from 20°C to 80°C. (Specific heat capacity of water = 4200 J/kg°C) *(4 marks)*
+
+(c) State the principle of conservation of energy as applied to heat. *(3 marks)*
+
+---
+
+**Q14.** (a) Define the term "latent heat". *(2 marks)*
+
+(b) Calculate the heat needed to melt 0.5 kg of ice at 0°C. (Specific latent heat of fusion of ice = 3.34 × 10⁵ J/kg) *(4 marks)*
+
+(c) Explain why ice at 0°C is more effective at cooling than water at 0°C. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "electric current". *(2 marks)*
+
+(b) A current of 2 A flows through a wire for 5 minutes. Calculate the charge that passes. *(4 marks)*
+
+(c) State the unit of charge. *(2 marks)*
+
+---
+
+**Q16.** (a) State Ohm''s law. *(3 marks)*
+
+(b) A resistor of 12 Ω has a current of 0.5 A flowing through it. Calculate the potential difference across it. *(3 marks)*
+
+(c) Calculate the resistance of a wire that carries 2 A when 24 V is applied. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the terms resistance and resistivity. *(4 marks)*
+
+(b) Two resistors of 6 Ω and 3 Ω are connected in series. Calculate the total resistance. *(3 marks)*
+
+(c) The same resistors are now connected in parallel. Calculate the total resistance. *(4 marks)*
+
+---
+
+**Q18.** (a) State the formula for electrical power. *(2 marks)*
+
+(b) An electric heater operates at 240 V and draws a current of 5 A. Calculate its power. *(3 marks)*
+
+(c) Calculate the energy used by the heater in 2 hours, in joules and in kWh. *(5 marks)*
+
+---
+
+**Q19.** (a) State the properties of a magnet. *(3 marks)*
+
+(b) Describe how you would magnetise a steel bar using the stroking method. *(4 marks)*
+
+(c) Explain the difference between a magnet and a magnetic material. *(3 marks)*
+
+---
+
+**Q20.** (a) State the factors that affect the strength of an electromagnet. *(3 marks)*
+
+(b) Describe how an electric bell works. *(5 marks)*
+
+(c) State two uses of electromagnets. *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P2 SET 8
+
+## Structural Question Bank — Mechanics
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MECHANICS
+
+**Q1.** (a) Define the terms distance and displacement. *(3 marks)*
+
+(b) A car travels 60 km north then 80 km east. Calculate the total distance travelled and the magnitude of the displacement. *(5 marks)*
+
+(c) State the difference between speed and velocity. *(3 marks)*
+
+---
+
+**Q2.** (a) Define acceleration. *(2 marks)*
+
+(b) A car accelerates uniformly from rest to 20 m/s in 8 s. Calculate its acceleration. *(3 marks)*
+
+(c) Using the equations of motion, calculate the distance travelled by the car in part (b). *(4 marks)*
+
+---
+
+**Q3.** (a) State Newton''s three laws of motion. *(6 marks)*
+
+(b) A force of 12 N acts on a mass of 3 kg. Calculate the acceleration produced. *(3 marks)*
+
+(c) Explain why a passenger lurches forward when a bus stops suddenly. *(3 marks)*
+
+---
+
+**Q4.** (a) Define the term "momentum". *(2 marks)*
+
+(b) A ball of mass 0.5 kg moving at 4 m/s hits a wall and rebounds at 3 m/s. Calculate the change in momentum. *(4 marks)*
+
+(c) State the principle of conservation of momentum. *(3 marks)*
+
+---
+
+**Q5.** (a) Define the term "work". *(2 marks)*
+
+(b) A force of 50 N moves an object 4 m in the direction of the force. Calculate the work done. *(3 marks)*
+
+(c) A crane lifts a 200 kg load through 10 m. Calculate the work done. (Take g = 10 m/s²) *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "power". *(2 marks)*
+
+(b) A machine does 600 J of work in 20 s. Calculate its power. *(3 marks)*
+
+(c) A motor lifts a 500 kg load through 12 m in 30 s. Calculate the power output. (Take g = 10 m/s²) *(5 marks)*
+
+---
+
+**Q7.** (a) Define the terms kinetic energy and potential energy. *(4 marks)*
+
+(b) A car of mass 1000 kg moves at 20 m/s. Calculate its kinetic energy. *(3 marks)*
+
+(c) A ball of mass 2 kg is raised 5 m. Calculate its gravitational potential energy. (Take g = 10 m/s²) *(3 marks)*
+
+---
+
+**Q8.** (a) State the principle of conservation of energy. *(3 marks)*
+
+(b) A ball of mass 0.2 kg is dropped from a height of 20 m. Calculate its speed just before hitting the ground. (Take g = 10 m/s²) *(5 marks)*
+
+(c) Explain what happens to the energy when the ball hits the ground and bounces. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "pressure". *(2 marks)*
+
+(b) A force of 100 N acts on an area of 0.5 m². Calculate the pressure. *(3 marks)*
+
+(c) Explain why a sharp knife cuts better than a blunt knife. *(3 marks)*
+
+---
+
+**Q10.** (a) State the principle of moments. *(3 marks)*
+
+(b) A uniform metre rule is balanced at its centre. A 2 N weight is placed at the 20 cm mark. Calculate the force needed at the 80 cm mark to balance it. *(5 marks)*
+
+(c) State two conditions for a body to be in equilibrium. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "centre of gravity". *(2 marks)*
+
+(b) Explain why a tall narrow object is more likely to topple than a short wide one. *(4 marks)*
+
+(c) Describe how you would find the centre of gravity of an irregular lamina. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a simple machine? *(2 marks)*
+
+(b) Define the terms mechanical advantage, velocity ratio, and efficiency. *(6 marks)*
+
+(c) A machine has a mechanical advantage of 4 and an efficiency of 80%. Calculate its velocity ratio. *(4 marks)*
+
+---
+
+**Q13.** (a) A lever has a load arm of 0.5 m and an effort arm of 2 m. Calculate the velocity ratio. *(3 marks)*
+
+(b) If the load is 200 N and the effort is 60 N, calculate the mechanical advantage. *(3 marks)*
+
+(c) Calculate the efficiency of the lever. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "friction". *(2 marks)*
+
+(b) State two advantages and two disadvantages of friction. *(4 marks)*
+
+(c) Describe two ways of reducing friction. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "density". *(2 marks)*
+
+(b) A block of metal has a mass of 270 g and a volume of 100 cm³. Calculate its density in g/cm³ and in kg/m³. *(5 marks)*
+
+(c) Explain why ice floats on water. *(3 marks)*
+
+---
+
+**Q16.** (a) State Archimedes'' principle. *(3 marks)*
+
+(b) A stone weighs 5 N in air and 3 N in water. Calculate the upthrust. *(3 marks)*
+
+(c) Calculate the volume of the stone. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "relative density". *(2 marks)*
+
+(b) A body has a density of 800 kg/m³. Calculate its relative density. *(3 marks)*
+
+(c) Explain why a ship made of steel floats on water. *(4 marks)*
+
+---
+
+**Q18.** (a) State the law of floatation. *(3 marks)*
+
+(b) A floating object displaces 0.5 m³ of water. Calculate the upthrust on it. (Density of water = 1000 kg/m³, g = 10 m/s²) *(4 marks)*
+
+(c) Explain how a submarine controls its depth. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "velocity ratio" of a pulley system. *(2 marks)*
+
+(b) A pulley system with 4 ropes supports a load of 400 N with an effort of 120 N. Calculate the mechanical advantage and velocity ratio. *(5 marks)*
+
+(c) Calculate the efficiency of the pulley system. *(3 marks)*
+
+---
+
+**Q20.** (a) A car accelerates from 10 m/s to 30 m/s in 5 s. Calculate its acceleration. *(3 marks)*
+
+(b) Calculate the distance travelled during this time. *(3 marks)*
+
+(c) Sketch a velocity-time graph for this motion and state what the gradient represents. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The SI unit of force is the:
+
+A. newton  
+B. joule  
+C. watt  
+D. pascal  
+
+---
+
+**Q2.** The SI unit of work is the:
+
+A. joule  
+B. newton  
+C. pascal  
+D. watt  
+
+---
+
+**Q3.** The SI unit of power is the:
+
+A. watt  
+B. newton  
+C. joule  
+D. pascal  
+
+---
+
+**Q4.** The SI unit of pressure is the:
+
+A. pascal  
+B. joule  
+C. watt  
+D. newton  
+
+---
+
+**Q5.** The rate of change of velocity is called:
+
+A. acceleration  
+B. momentum  
+C. speed  
+D. displacement  
+
+---
+
+**Q6.** The distance travelled per unit time is called:
+
+A. speed  
+B. displacement  
+C. acceleration  
+D. velocity  
+
+---
+
+**Q7.** A car accelerates uniformly from rest to 20 m/s in 5 s. Its acceleration is:
+
+A. 5 m/s²  
+B. 4 m/s²  
+C. 100 m/s²  
+D. 0.25 m/s²  
+
+---
+
+**Q8.** The product of mass and velocity is called:
+
+A. force  
+B. momentum  
+C. power  
+D. work  
+
+---
+
+**Q9.** The force that opposes motion is called:
+
+A. gravity  
+B. tension  
+C. friction  
+D. upthrust  
+
+---
+
+**Q10.** The energy of a moving object is called:
+
+A. potential energy  
+B. heat energy  
+C. sound energy  
+D. kinetic energy  
+
+---
+
+**Q11.** The energy stored in a raised object is called:
+
+A. kinetic energy  
+B. light energy  
+C. potential energy  
+D. heat energy  
+
+---
+
+**Q12.** The kinetic energy of a 2 kg object moving at 3 m/s is:
+
+A. 6 J  
+B. 12 J  
+C. 18 J  
+D. 9 J  
+
+---
+
+**Q13.** The work done when a force of 10 N moves an object 5 m is:
+
+A. 15 J  
+B. 50 J  
+C. 2 J  
+D. 0.5 J  
+
+---
+
+**Q14.** The power of a machine that does 300 J of work in 10 s is:
+
+A. 3 W  
+B. 30 W  
+C. 0.03 W  
+D. 3000 W  
+
+---
+
+**Q15.** The pressure exerted by a force of 50 N on an area of 2 m² is:
+
+A. 52 Pa  
+B. 100 Pa  
+C. 25 Pa  
+D. 0.04 Pa  
+
+---
+
+**Q16.** The principle of moments states that for equilibrium:
+
+A. work done = energy  
+B. sum of forces = 0  
+C. power = work × time  
+D. sum of clockwise moments = sum of anticlockwise moments  
+
+---
+
+**Q17.** The density of a substance is defined as:
+
+A. mass per unit area  
+B. volume per unit mass  
+C. mass per unit volume  
+D. weight per unit volume  
+
+---
+
+**Q18.** A block of mass 270 g and volume 100 cm³ has a density of:
+
+A. 27 g/cm³  
+B. 27000 g/cm³  
+C. 0.37 g/cm³  
+D. 2.7 g/cm³  
+
+---
+
+**Q19.** The upthrust on a body in a fluid is equal to:
+
+A. volume of the body  
+B. weight of fluid displaced  
+C. weight of the body  
+D. mass of the body  
+
+---
+
+**Q20.** A machine with a mechanical advantage of 4 and velocity ratio of 5 has an efficiency of:
+
+A. 9%  
+B. 80%  
+C. 125%  
+D. 20%  
+
+---
+
+**Q21.** The velocity ratio of a lever with effort arm 2 m and load arm 0.5 m is:
+
+A. 1.5  
+B. 0.25  
+C. 4  
+D. 2.5  
+
+---
+
+**Q22.** A body moving with constant velocity has:
+
+A. constant acceleration  
+B. increasing acceleration  
+C. decreasing acceleration  
+D. zero acceleration  
+
+---
+
+**Q23.** The SI unit of momentum is:
+
+A. J  
+B. N m  
+C. kg m/s  
+D. kg m/s²  
+
+---
+
+**Q24.** The gravitational potential energy of a 2 kg mass raised 5 m (g = 10 m/s²) is:
+
+A. 20 J  
+B. 50 J  
+C. 10 J  
+D. 100 J  
+
+---
+
+**Q25.** The speed of a ball dropped from 20 m just before hitting the ground (g = 10 m/s²) is:
+
+A. 20 m/s  
+B. 10 m/s  
+C. 40 m/s  
+D. 200 m/s  
+
+---
+
+**Q26.** The centre of gravity of a uniform rod is at its:
+
+A. midpoint  
+B. end  
+C. centre of mass of the rod  
+D. one-quarter point  
+
+---
+
+**Q27.** A body floats when its weight is:
+
+A. equal to the upthrust  
+B. less than the upthrust  
+C. greater than the upthrust  
+D. zero  
+
+---
+
+**Q28.** The relative density of a substance with density 800 kg/m³ (water = 1000 kg/m³) is:
+
+A. 0.8  
+B. 80  
+C. 1.25  
+D. 8  
+
+---
+
+**Q29.** The change in momentum of a 0.5 kg ball going from 4 m/s to 3 m/s in the opposite direction is:
+
+A. 3.5 kg m/s  
+B. 1 kg m/s  
+C. 0.5 kg m/s  
+D. 7 kg m/s  
+
+---
+
+**Q30.** A car travelling at 20 m/s has a kinetic energy of 200 kJ. Its mass is:
+
+A. 1000 kg  
+B. 10000 kg  
+C. 500 kg  
+D. 2000 kg  
+
+---
+
+**Q31.** The SI unit of frequency is the:
+
+A. watt  
+B. hertz  
+C. joule  
+D. newton  
+
+---
+
+**Q32.** The distance between two successive crests of a wave is the:
+
+A. amplitude  
+B. wavelength  
+C. period  
+D. frequency  
+
+---
+
+**Q33.** The maximum displacement of a wave from its rest position is the:
+
+A. wavelength  
+B. frequency  
+C. amplitude  
+D. speed  
+
+---
+
+**Q34.** Sound waves are:
+
+A. transverse  
+B. electromagnetic  
+C. stationary  
+D. longitudinal  
+
+---
+
+**Q35.** Light waves are:
+
+A. longitudinal  
+B. sound  
+C. transverse  
+D. mechanical  
+
+---
+
+**Q36.** The speed of a wave with frequency 50 Hz and wavelength 4 m is:
+
+A. 12.5 m/s  
+B. 46 m/s  
+C. 54 m/s  
+D. 200 m/s  
+
+---
+
+**Q37.** The angle of reflection is equal to the angle of:
+
+A. deviation  
+B. incidence  
+C. refraction  
+D. critical angle  
+
+---
+
+**Q38.** The image formed by a plane mirror is:
+
+A. virtual and upright  
+B. virtual and laterally inverted  
+C. real and upright  
+D. real and inverted  
+
+---
+
+**Q39.** The bending of light as it passes from one medium to another is called:
+
+A. diffraction  
+B. reflection  
+C. refraction  
+D. dispersion  
+
+---
+
+**Q40.** The refractive index of a medium is the ratio of:
+
+A. angle of incidence to angle of refraction  
+B. speed in the medium to speed in vacuum  
+C. wavelength to frequency  
+D. speed of light in vacuum to speed in the medium  
+
+---
+
+**Q41.** Total internal reflection occurs when light travels from:
+
+A. air to glass at any angle  
+B. a denser to a rarer medium at any angle  
+C. a denser to a rarer medium at an angle greater than the critical angle  
+D. a rarer to a denser medium  
+
+---
+
+**Q42.** The critical angle for glass is about:
+
+A. 30°  
+B. 60°  
+C. 90°  
+D. 42°  
+
+---
+
+**Q43.** The lens that converges light rays is a:
+
+A. prism  
+B. convex lens  
+C. concave lens  
+D. plane mirror  
+
+---
+
+**Q44.** The lens formula is:
+
+A. f = uv  
+B. 1/f = 1/v + 1/u  
+C. 1/f = v + u  
+D. f = v + u  
+
+---
+
+**Q45.** The SI unit of electric current is the:
+
+A. watt  
+B. volt  
+C. ampere  
+D. ohm  
+
+---
+
+**Q46.** The SI unit of potential difference is the:
+
+A. watt  
+B. ampere  
+C. ohm  
+D. volt  
+
+---
+
+**Q47.** The SI unit of resistance is the:
+
+A. watt  
+B. ampere  
+C. ohm  
+D. volt  
+
+---
+
+**Q48.** Ohm''s law states that:
+
+A. I = VR  
+B. V = R/I  
+C. V = I/R  
+D. V = IR  
+
+---
+
+**Q49.** The charge that passes when 2 A flows for 10 s is:
+
+A. 20 C  
+B. 5 C  
+C. 0.2 C  
+D. 12 C  
+
+---
+
+**Q50.** Two resistors of 6 Ω and 3 Ω in series have a total resistance of:
+
+A. 9 Ω  
+B. 2 Ω  
+C. 0.5 Ω  
+D. 18 Ω  
+
+---
+
+**Q51.** Two resistors of 6 Ω and 3 Ω in parallel have a total resistance of:
+
+A. 2 Ω  
+B. 18 Ω  
+C. 9 Ω  
+D. 0.5 Ω  
+
+---
+
+**Q52.** The power of a device operating at 240 V drawing 5 A is:
+
+A. 1200 W  
+B. 245 W  
+C. 235 W  
+D. 48 W  
+
+---
+
+**Q53.** The energy used by a 1200 W heater in 2 hours is:
+
+A. 2.4 kWh  
+B. 0.5 kWh  
+C. 2400 kWh  
+D. 600 kWh  
+
+---
+
+**Q54.** The specific heat capacity of water is:
+
+A. 4200 J/kg°C  
+B. 4.2 J/kg°C  
+C. 42000 J/kg°C  
+D. 420 J/kg°C  
+
+---
+
+**Q55.** The heat needed to raise 2 kg of water from 20°C to 80°C is:
+
+A. 504 J  
+B. 504000 J  
+C. 5040 J  
+D. 168000 J  
+
+---
+
+**Q56.** The specific latent heat of fusion of ice is:
+
+A. 3.34 J/kg  
+B. 3.34 × 10⁵ J/kg  
+C. 3.34 × 10³ J/kg  
+D. 334 J/kg  
+
+---
+
+**Q57.** A magnet has two poles called:
+
+A. east and west  
+B. positive and negative  
+C. north and south  
+D. top and bottom  
+
+---
+
+**Q58.** The strength of an electromagnet increases when:
+
+A. the current decreases  
+B. the core is removed  
+C. the wire is thinner  
+D. the number of turns increases  
+
+---
+
+**Q59.** The pitch of a sound depends on its:
+
+A. amplitude  
+B. wavelength  
+C. frequency  
+D. speed  
+
+---
+
+**Q60.** The loudness of a sound depends on its:
+
+A. frequency  
+B. wavelength  
+C. speed  
+D. amplitude  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The SI unit of pressure is the:
+
+A. pascal  
+B. newton  
+C. joule  
+D. watt  
+
+---
+
+**Q2.** The rate of change of velocity is called:
+
+A. acceleration  
+B. speed  
+C. momentum  
+D. displacement  
+
+---
+
+**Q3.** The distance travelled per unit time is called:
+
+A. speed  
+B. acceleration  
+C. velocity  
+D. displacement  
+
+---
+
+**Q4.** A car accelerates uniformly from rest to 20 m/s in 5 s. Its acceleration is:
+
+A. 4 m/s²  
+B. 100 m/s²  
+C. 0.25 m/s²  
+D. 5 m/s²  
+
+---
+
+**Q5.** The product of mass and velocity is called:
+
+A. momentum  
+B. power  
+C. force  
+D. work  
+
+---
+
+**Q6.** The force that opposes motion is called:
+
+A. friction  
+B. upthrust  
+C. tension  
+D. gravity  
+
+---
+
+**Q7.** The energy of a moving object is called:
+
+A. potential energy  
+B. kinetic energy  
+C. heat energy  
+D. sound energy  
+
+---
+
+**Q8.** The energy stored in a raised object is called:
+
+A. kinetic energy  
+B. potential energy  
+C. light energy  
+D. heat energy  
+
+---
+
+**Q9.** The kinetic energy of a 2 kg object moving at 3 m/s is:
+
+A. 6 J  
+B. 18 J  
+C. 9 J  
+D. 12 J  
+
+---
+
+**Q10.** The work done when a force of 10 N moves an object 5 m is:
+
+A. 2 J  
+B. 15 J  
+C. 0.5 J  
+D. 50 J  
+
+---
+
+**Q11.** The power of a machine that does 300 J of work in 10 s is:
+
+A. 3000 W  
+B. 0.03 W  
+C. 30 W  
+D. 3 W  
+
+---
+
+**Q12.** The pressure exerted by a force of 50 N on an area of 2 m² is:
+
+A. 100 Pa  
+B. 0.04 Pa  
+C. 52 Pa  
+D. 25 Pa  
+
+---
+
+**Q13.** The principle of moments states that for equilibrium:
+
+A. work done = energy  
+B. sum of clockwise moments = sum of anticlockwise moments  
+C. sum of forces = 0  
+D. power = work × time  
+
+---
+
+**Q14.** The density of a substance is defined as:
+
+A. mass per unit area  
+B. mass per unit volume  
+C. volume per unit mass  
+D. weight per unit volume  
+
+---
+
+**Q15.** A block of mass 270 g and volume 100 cm³ has a density of:
+
+A. 27 g/cm³  
+B. 0.37 g/cm³  
+C. 2.7 g/cm³  
+D. 27000 g/cm³  
+
+---
+
+**Q16.** The upthrust on a body in a fluid is equal to:
+
+A. mass of the body  
+B. weight of the body  
+C. volume of the body  
+D. weight of fluid displaced  
+
+---
+
+**Q17.** A machine with a mechanical advantage of 4 and velocity ratio of 5 has an efficiency of:
+
+A. 125%  
+B. 9%  
+C. 80%  
+D. 20%  
+
+---
+
+**Q18.** The velocity ratio of a lever with effort arm 2 m and load arm 0.5 m is:
+
+A. 2.5  
+B. 1.5  
+C. 0.25  
+D. 4  
+
+---
+
+**Q19.** A body moving with constant velocity has:
+
+A. constant acceleration  
+B. zero acceleration  
+C. increasing acceleration  
+D. decreasing acceleration  
+
+---
+
+**Q20.** The SI unit of momentum is:
+
+A. J  
+B. kg m/s  
+C. N m  
+D. kg m/s²  
+
+---
+
+**Q21.** The gravitational potential energy of a 2 kg mass raised 5 m (g = 10 m/s²) is:
+
+A. 20 J  
+B. 10 J  
+C. 100 J  
+D. 50 J  
+
+---
+
+**Q22.** The speed of a ball dropped from 20 m just before hitting the ground (g = 10 m/s²) is:
+
+A. 200 m/s  
+B. 10 m/s  
+C. 40 m/s  
+D. 20 m/s  
+
+---
+
+**Q23.** The centre of gravity of a uniform rod is at its:
+
+A. centre of mass of the rod  
+B. one-quarter point  
+C. midpoint  
+D. end  
+
+---
+
+**Q24.** A body floats when its weight is:
+
+A. zero  
+B. less than the upthrust  
+C. greater than the upthrust  
+D. equal to the upthrust  
+
+---
+
+**Q25.** The relative density of a substance with density 800 kg/m³ (water = 1000 kg/m³) is:
+
+A. 0.8  
+B. 8  
+C. 80  
+D. 1.25  
+
+---
+
+**Q26.** The change in momentum of a 0.5 kg ball going from 4 m/s to 3 m/s in the opposite direction is:
+
+A. 3.5 kg m/s  
+B. 0.5 kg m/s  
+C. 1 kg m/s  
+D. 7 kg m/s  
+
+---
+
+**Q27.** A car travelling at 20 m/s has a kinetic energy of 200 kJ. Its mass is:
+
+A. 1000 kg  
+B. 500 kg  
+C. 2000 kg  
+D. 10000 kg  
+
+---
+
+**Q28.** The SI unit of force is the:
+
+A. newton  
+B. watt  
+C. pascal  
+D. joule  
+
+---
+
+**Q29.** The SI unit of work is the:
+
+A. joule  
+B. pascal  
+C. newton  
+D. watt  
+
+---
+
+**Q30.** The SI unit of power is the:
+
+A. watt  
+B. pascal  
+C. newton  
+D. joule  
+
+---
+
+**Q31.** Sound waves are:
+
+A. transverse  
+B. longitudinal  
+C. electromagnetic  
+D. stationary  
+
+---
+
+**Q32.** Light waves are:
+
+A. longitudinal  
+B. transverse  
+C. sound  
+D. mechanical  
+
+---
+
+**Q33.** The speed of a wave with frequency 50 Hz and wavelength 4 m is:
+
+A. 12.5 m/s  
+B. 54 m/s  
+C. 200 m/s  
+D. 46 m/s  
+
+---
+
+**Q34.** The angle of reflection is equal to the angle of:
+
+A. refraction  
+B. deviation  
+C. critical angle  
+D. incidence  
+
+---
+
+**Q35.** The image formed by a plane mirror is:
+
+A. real and inverted  
+B. real and upright  
+C. virtual and laterally inverted  
+D. virtual and upright  
+
+---
+
+**Q36.** The bending of light as it passes from one medium to another is called:
+
+A. reflection  
+B. dispersion  
+C. diffraction  
+D. refraction  
+
+---
+
+**Q37.** The refractive index of a medium is the ratio of:
+
+A. angle of incidence to angle of refraction  
+B. speed of light in vacuum to speed in the medium  
+C. speed in the medium to speed in vacuum  
+D. wavelength to frequency  
+
+---
+
+**Q38.** Total internal reflection occurs when light travels from:
+
+A. air to glass at any angle  
+B. a denser to a rarer medium at an angle greater than the critical angle  
+C. a denser to a rarer medium at any angle  
+D. a rarer to a denser medium  
+
+---
+
+**Q39.** The critical angle for glass is about:
+
+A. 30°  
+B. 90°  
+C. 42°  
+D. 60°  
+
+---
+
+**Q40.** The lens that converges light rays is a:
+
+A. plane mirror  
+B. concave lens  
+C. prism  
+D. convex lens  
+
+---
+
+**Q41.** The lens formula is:
+
+A. 1/f = v + u  
+B. f = uv  
+C. 1/f = 1/v + 1/u  
+D. f = v + u  
+
+---
+
+**Q42.** The SI unit of electric current is the:
+
+A. ohm  
+B. watt  
+C. volt  
+D. ampere  
+
+---
+
+**Q43.** The SI unit of potential difference is the:
+
+A. watt  
+B. volt  
+C. ampere  
+D. ohm  
+
+---
+
+**Q44.** The SI unit of resistance is the:
+
+A. watt  
+B. ohm  
+C. ampere  
+D. volt  
+
+---
+
+**Q45.** Ohm''s law states that:
+
+A. I = VR  
+B. V = I/R  
+C. V = IR  
+D. V = R/I  
+
+---
+
+**Q46.** The charge that passes when 2 A flows for 10 s is:
+
+A. 12 C  
+B. 5 C  
+C. 0.2 C  
+D. 20 C  
+
+---
+
+**Q47.** Two resistors of 6 Ω and 3 Ω in series have a total resistance of:
+
+A. 0.5 Ω  
+B. 18 Ω  
+C. 9 Ω  
+D. 2 Ω  
+
+---
+
+**Q48.** Two resistors of 6 Ω and 3 Ω in parallel have a total resistance of:
+
+A. 0.5 Ω  
+B. 18 Ω  
+C. 9 Ω  
+D. 2 Ω  
+
+---
+
+**Q49.** The power of a device operating at 240 V drawing 5 A is:
+
+A. 1200 W  
+B. 48 W  
+C. 245 W  
+D. 235 W  
+
+---
+
+**Q50.** The energy used by a 1200 W heater in 2 hours is:
+
+A. 2.4 kWh  
+B. 2400 kWh  
+C. 0.5 kWh  
+D. 600 kWh  
+
+---
+
+**Q51.** The specific heat capacity of water is:
+
+A. 4200 J/kg°C  
+B. 42000 J/kg°C  
+C. 420 J/kg°C  
+D. 4.2 J/kg°C  
+
+---
+
+**Q52.** The heat needed to raise 2 kg of water from 20°C to 80°C is:
+
+A. 504000 J  
+B. 5040 J  
+C. 168000 J  
+D. 504 J  
+
+---
+
+**Q53.** The specific latent heat of fusion of ice is:
+
+A. 3.34 × 10⁵ J/kg  
+B. 3.34 × 10³ J/kg  
+C. 3.34 J/kg  
+D. 334 J/kg  
+
+---
+
+**Q54.** A magnet has two poles called:
+
+A. north and south  
+B. top and bottom  
+C. positive and negative  
+D. east and west  
+
+---
+
+**Q55.** The strength of an electromagnet increases when:
+
+A. the current decreases  
+B. the number of turns increases  
+C. the core is removed  
+D. the wire is thinner  
+
+---
+
+**Q56.** The pitch of a sound depends on its:
+
+A. amplitude  
+B. frequency  
+C. wavelength  
+D. speed  
+
+---
+
+**Q57.** The loudness of a sound depends on its:
+
+A. frequency  
+B. speed  
+C. amplitude  
+D. wavelength  
+
+---
+
+**Q58.** The SI unit of frequency is the:
+
+A. watt  
+B. joule  
+C. newton  
+D. hertz  
+
+---
+
+**Q59.** The distance between two successive crests of a wave is the:
+
+A. amplitude  
+B. period  
+C. wavelength  
+D. frequency  
+
+---
+
+**Q60.** The maximum displacement of a wave from its rest position is the:
+
+A. wavelength  
+B. speed  
+C. frequency  
+D. amplitude  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Physics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Physics',
+  'CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL PHYSICS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Physics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** A car accelerates uniformly from rest to 20 m/s in 5 s. Its acceleration is:
+
+A. 4 m/s²  
+B. 5 m/s²  
+C. 100 m/s²  
+D. 0.25 m/s²  
+
+---
+
+**Q2.** The product of mass and velocity is called:
+
+A. momentum  
+B. force  
+C. power  
+D. work  
+
+---
+
+**Q3.** The force that opposes motion is called:
+
+A. friction  
+B. tension  
+C. gravity  
+D. upthrust  
+
+---
+
+**Q4.** The energy of a moving object is called:
+
+A. kinetic energy  
+B. heat energy  
+C. sound energy  
+D. potential energy  
+
+---
+
+**Q5.** The energy stored in a raised object is called:
+
+A. potential energy  
+B. light energy  
+C. kinetic energy  
+D. heat energy  
+
+---
+
+**Q6.** The kinetic energy of a 2 kg object moving at 3 m/s is:
+
+A. 9 J  
+B. 12 J  
+C. 18 J  
+D. 6 J  
+
+---
+
+**Q7.** The work done when a force of 10 N moves an object 5 m is:
+
+A. 2 J  
+B. 50 J  
+C. 15 J  
+D. 0.5 J  
+
+---
+
+**Q8.** The power of a machine that does 300 J of work in 10 s is:
+
+A. 3000 W  
+B. 30 W  
+C. 0.03 W  
+D. 3 W  
+
+---
+
+**Q9.** The pressure exerted by a force of 50 N on an area of 2 m² is:
+
+A. 100 Pa  
+B. 52 Pa  
+C. 25 Pa  
+D. 0.04 Pa  
+
+---
+
+**Q10.** The principle of moments states that for equilibrium:
+
+A. sum of forces = 0  
+B. work done = energy  
+C. power = work × time  
+D. sum of clockwise moments = sum of anticlockwise moments  
+
+---
+
+**Q11.** The density of a substance is defined as:
+
+A. weight per unit volume  
+B. volume per unit mass  
+C. mass per unit volume  
+D. mass per unit area  
+
+---
+
+**Q12.** A block of mass 270 g and volume 100 cm³ has a density of:
+
+A. 0.37 g/cm³  
+B. 27000 g/cm³  
+C. 27 g/cm³  
+D. 2.7 g/cm³  
+
+---
+
+**Q13.** The upthrust on a body in a fluid is equal to:
+
+A. mass of the body  
+B. weight of fluid displaced  
+C. weight of the body  
+D. volume of the body  
+
+---
+
+**Q14.** A machine with a mechanical advantage of 4 and velocity ratio of 5 has an efficiency of:
+
+A. 125%  
+B. 80%  
+C. 9%  
+D. 20%  
+
+---
+
+**Q15.** The velocity ratio of a lever with effort arm 2 m and load arm 0.5 m is:
+
+A. 2.5  
+B. 0.25  
+C. 4  
+D. 1.5  
+
+---
+
+**Q16.** A body moving with constant velocity has:
+
+A. decreasing acceleration  
+B. increasing acceleration  
+C. constant acceleration  
+D. zero acceleration  
+
+---
+
+**Q17.** The SI unit of momentum is:
+
+A. N m  
+B. J  
+C. kg m/s  
+D. kg m/s²  
+
+---
+
+**Q18.** The gravitational potential energy of a 2 kg mass raised 5 m (g = 10 m/s²) is:
+
+A. 50 J  
+B. 20 J  
+C. 10 J  
+D. 100 J  
+
+---
+
+**Q19.** The speed of a ball dropped from 20 m just before hitting the ground (g = 10 m/s²) is:
+
+A. 200 m/s  
+B. 20 m/s  
+C. 10 m/s  
+D. 40 m/s  
+
+---
+
+**Q20.** The centre of gravity of a uniform rod is at its:
+
+A. centre of mass of the rod  
+B. midpoint  
+C. one-quarter point  
+D. end  
+
+---
+
+**Q21.** A body floats when its weight is:
+
+A. zero  
+B. greater than the upthrust  
+C. equal to the upthrust  
+D. less than the upthrust  
+
+---
+
+**Q22.** The relative density of a substance with density 800 kg/m³ (water = 1000 kg/m³) is:
+
+A. 1.25  
+B. 8  
+C. 80  
+D. 0.8  
+
+---
+
+**Q23.** The change in momentum of a 0.5 kg ball going from 4 m/s to 3 m/s in the opposite direction is:
+
+A. 1 kg m/s  
+B. 7 kg m/s  
+C. 3.5 kg m/s  
+D. 0.5 kg m/s  
+
+---
+
+**Q24.** A car travelling at 20 m/s has a kinetic energy of 200 kJ. Its mass is:
+
+A. 10000 kg  
+B. 500 kg  
+C. 2000 kg  
+D. 1000 kg  
+
+---
+
+**Q25.** The SI unit of force is the:
+
+A. newton  
+B. joule  
+C. watt  
+D. pascal  
+
+---
+
+**Q26.** The SI unit of work is the:
+
+A. joule  
+B. newton  
+C. pascal  
+D. watt  
+
+---
+
+**Q27.** The SI unit of power is the:
+
+A. watt  
+B. newton  
+C. joule  
+D. pascal  
+
+---
+
+**Q28.** The SI unit of pressure is the:
+
+A. pascal  
+B. joule  
+C. watt  
+D. newton  
+
+---
+
+**Q29.** The rate of change of velocity is called:
+
+A. acceleration  
+B. momentum  
+C. speed  
+D. displacement  
+
+---
+
+**Q30.** The distance travelled per unit time is called:
+
+A. speed  
+B. displacement  
+C. acceleration  
+D. velocity  
+
+---
+
+**Q31.** The angle of reflection is equal to the angle of:
+
+A. refraction  
+B. incidence  
+C. deviation  
+D. critical angle  
+
+---
+
+**Q32.** The image formed by a plane mirror is:
+
+A. real and inverted  
+B. virtual and laterally inverted  
+C. real and upright  
+D. virtual and upright  
+
+---
+
+**Q33.** The bending of light as it passes from one medium to another is called:
+
+A. reflection  
+B. diffraction  
+C. refraction  
+D. dispersion  
+
+---
+
+**Q34.** The refractive index of a medium is the ratio of:
+
+A. speed in the medium to speed in vacuum  
+B. angle of incidence to angle of refraction  
+C. wavelength to frequency  
+D. speed of light in vacuum to speed in the medium  
+
+---
+
+**Q35.** Total internal reflection occurs when light travels from:
+
+A. a rarer to a denser medium  
+B. a denser to a rarer medium at any angle  
+C. a denser to a rarer medium at an angle greater than the critical angle  
+D. air to glass at any angle  
+
+---
+
+**Q36.** The critical angle for glass is about:
+
+A. 90°  
+B. 60°  
+C. 30°  
+D. 42°  
+
+---
+
+**Q37.** The lens that converges light rays is a:
+
+A. plane mirror  
+B. convex lens  
+C. concave lens  
+D. prism  
+
+---
+
+**Q38.** The lens formula is:
+
+A. 1/f = v + u  
+B. 1/f = 1/v + 1/u  
+C. f = uv  
+D. f = v + u  
+
+---
+
+**Q39.** The SI unit of electric current is the:
+
+A. ohm  
+B. volt  
+C. ampere  
+D. watt  
+
+---
+
+**Q40.** The SI unit of potential difference is the:
+
+A. ohm  
+B. ampere  
+C. watt  
+D. volt  
+
+---
+
+**Q41.** The SI unit of resistance is the:
+
+A. ampere  
+B. watt  
+C. ohm  
+D. volt  
+
+---
+
+**Q42.** Ohm''s law states that:
+
+A. V = R/I  
+B. I = VR  
+C. V = I/R  
+D. V = IR  
+
+---
+
+**Q43.** The charge that passes when 2 A flows for 10 s is:
+
+A. 12 C  
+B. 20 C  
+C. 5 C  
+D. 0.2 C  
+
+---
+
+**Q44.** Two resistors of 6 Ω and 3 Ω in series have a total resistance of:
+
+A. 0.5 Ω  
+B. 9 Ω  
+C. 18 Ω  
+D. 2 Ω  
+
+---
+
+**Q45.** Two resistors of 6 Ω and 3 Ω in parallel have a total resistance of:
+
+A. 0.5 Ω  
+B. 9 Ω  
+C. 2 Ω  
+D. 18 Ω  
+
+---
+
+**Q46.** The power of a device operating at 240 V drawing 5 A is:
+
+A. 235 W  
+B. 48 W  
+C. 245 W  
+D. 1200 W  
+
+---
+
+**Q47.** The energy used by a 1200 W heater in 2 hours is:
+
+A. 0.5 kWh  
+B. 600 kWh  
+C. 2.4 kWh  
+D. 2400 kWh  
+
+---
+
+**Q48.** The specific heat capacity of water is:
+
+A. 4.2 J/kg°C  
+B. 42000 J/kg°C  
+C. 420 J/kg°C  
+D. 4200 J/kg°C  
+
+---
+
+**Q49.** The heat needed to raise 2 kg of water from 20°C to 80°C is:
+
+A. 504000 J  
+B. 504 J  
+C. 5040 J  
+D. 168000 J  
+
+---
+
+**Q50.** The specific latent heat of fusion of ice is:
+
+A. 3.34 × 10⁵ J/kg  
+B. 3.34 J/kg  
+C. 3.34 × 10³ J/kg  
+D. 334 J/kg  
+
+---
+
+**Q51.** A magnet has two poles called:
+
+A. north and south  
+B. positive and negative  
+C. east and west  
+D. top and bottom  
+
+---
+
+**Q52.** The strength of an electromagnet increases when:
+
+A. the number of turns increases  
+B. the core is removed  
+C. the wire is thinner  
+D. the current decreases  
+
+---
+
+**Q53.** The pitch of a sound depends on its:
+
+A. frequency  
+B. wavelength  
+C. amplitude  
+D. speed  
+
+---
+
+**Q54.** The loudness of a sound depends on its:
+
+A. amplitude  
+B. wavelength  
+C. speed  
+D. frequency  
+
+---
+
+**Q55.** The SI unit of frequency is the:
+
+A. watt  
+B. hertz  
+C. joule  
+D. newton  
+
+---
+
+**Q56.** The distance between two successive crests of a wave is the:
+
+A. amplitude  
+B. wavelength  
+C. period  
+D. frequency  
+
+---
+
+**Q57.** The maximum displacement of a wave from its rest position is the:
+
+A. wavelength  
+B. frequency  
+C. amplitude  
+D. speed  
+
+---
+
+**Q58.** Sound waves are:
+
+A. transverse  
+B. electromagnetic  
+C. stationary  
+D. longitudinal  
+
+---
+
+**Q59.** Light waves are:
+
+A. longitudinal  
+B. sound  
+C. transverse  
+D. mechanical  
+
+---
+
+**Q60.** The speed of a wave with frequency 50 Hz and wavelength 4 m is:
+
+A. 12.5 m/s  
+B. 46 m/s  
+C. 54 m/s  
+D. 200 m/s  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 4
+
+## Structural Question Bank — Productivity tools and digital communication
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PRODUCTIVITY TOOLS AND DIGITAL COMMUNICATION
+
+**Q1.** (a) What is a word processor? *(2 marks)*
+
+(b) State four features of a word processor. *(4 marks)*
+
+(c) Explain the difference between saving a document and printing a document. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the terms "cut", "copy", and "paste" as used in word processing. *(3 marks)*
+
+(b) Describe how you would change the font and size of text in a word processor. *(4 marks)*
+
+(c) State two advantages of using a word processor over a typewriter. *(4 marks)*
+
+---
+
+**Q3.** (a) What is a spreadsheet? *(2 marks)*
+
+(b) Define the terms cell, row, column, and range. *(4 marks)*
+
+(c) Explain the difference between a formula and a function in a spreadsheet. *(4 marks)*
+
+---
+
+**Q4.** (a) State the function of the following spreadsheet functions: SUM, AVERAGE, MAX, MIN. *(4 marks)*
+
+(b) Write the formula to add the values in cells A1 to A10. *(3 marks)*
+
+(c) Explain what happens when a formula is copied to another cell. *(4 marks)*
+
+---
+
+**Q5.** (a) What is a presentation? *(2 marks)*
+
+(b) State four features of a presentation program. *(4 marks)*
+
+(c) Explain the importance of using bullet points in a presentation. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the terms slide, transition, and animation. *(3 marks)*
+
+(b) Describe how you would add a transition to a slide. *(4 marks)*
+
+(c) State two guidelines for making an effective presentation. *(4 marks)*
+
+---
+
+**Q7.** (a) What is the internet? *(2 marks)*
+
+(b) State three services provided by the internet. *(3 marks)*
+
+(c) Explain the difference between the internet and the World Wide Web. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms URL, browser, and search engine. *(3 marks)*
+
+(b) Describe how you would search for information on the internet. *(4 marks)*
+
+(c) State two ways of evaluating the reliability of a website. *(4 marks)*
+
+---
+
+**Q9.** (a) What is email? *(2 marks)*
+
+(b) State the parts of an email address. *(3 marks)*
+
+(c) Explain the difference between "To", "Cc", and "Bcc" fields in an email. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the terms attachment and spam. *(2 marks)*
+
+(b) Describe how you would attach a file to an email. *(4 marks)*
+
+(c) State two precautions to take when opening email attachments. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a social media platform? *(2 marks)*
+
+(b) State three benefits of social media. *(3 marks)*
+
+(c) Explain two risks of using social media. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the term "digital citizenship". *(2 marks)*
+
+(b) State three responsibilities of a digital citizen. *(3 marks)*
+
+(c) Explain what is meant by "digital footprint". *(4 marks)*
+
+---
+
+**Q13.** (a) What is cyberbullying? *(2 marks)*
+
+(b) State three ways to protect yourself from cyberbullying. *(3 marks)*
+
+(c) Explain what you should do if you are a victim of cyberbullying. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the terms "netiquette" and "copyright". *(4 marks)*
+
+(b) State two examples of good netiquette. *(2 marks)*
+
+(c) Explain why it is important to respect copyright when using online content. *(4 marks)*
+
+---
+
+**Q15.** (a) What is cloud computing? *(2 marks)*
+
+(b) State three advantages of cloud storage. *(3 marks)*
+
+(c) Explain one risk of storing data in the cloud. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "upload" and "download". *(2 marks)*
+
+(b) Describe how you would share a document using a cloud service. *(4 marks)*
+
+(c) State two benefits of collaborating on documents online. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a database? *(2 marks)*
+
+(b) Define the terms table, record, and field. *(3 marks)*
+
+(c) Explain the difference between a primary key and a foreign key. *(4 marks)*
+
+---
+
+**Q18.** (a) State the function of a query in a database. *(2 marks)*
+
+(b) Describe how you would sort records in a database. *(4 marks)*
+
+(c) Explain the difference between a filter and a query. *(4 marks)*
+
+---
+
+**Q19.** (a) What is a computer virus? *(2 marks)*
+
+(b) State three ways a computer can be infected by a virus. *(3 marks)*
+
+(c) Describe two ways of protecting a computer from viruses. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the terms "firewall" and "antivirus software". *(4 marks)*
+
+(b) Explain the difference between a firewall and antivirus software. *(4 marks)*
+
+(c) State two other security measures for protecting data. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 5
+
+## Structural Question Bank — Data, web, and information systems
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: DATA, WEB, AND INFORMATION SYSTEMS
+
+**Q1.** (a) What is data? *(2 marks)*
+
+(b) Distinguish between data and information. *(4 marks)*
+
+(c) Give two examples of raw data and the information that can be derived from them. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "information system". *(2 marks)*
+
+(b) State the components of an information system. *(4 marks)*
+
+(c) Explain the role of a database in an information system. *(4 marks)*
+
+---
+
+**Q3.** (a) What is a database management system (DBMS)? *(2 marks)*
+
+(b) State three functions of a DBMS. *(3 marks)*
+
+(c) Give two examples of DBMS software. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the terms "entity" and "attribute" in a database. *(4 marks)*
+
+(b) Give an example of an entity with three attributes. *(3 marks)*
+
+(c) Explain what is meant by a "one-to-many" relationship. *(4 marks)*
+
+---
+
+**Q5.** (a) What is a relational database? *(2 marks)*
+
+(b) State two advantages of a relational database over a flat-file database. *(4 marks)*
+
+(c) Explain the purpose of a primary key. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "SQL". *(2 marks)*
+
+(b) Write an SQL statement to select all records from a table called "Students". *(3 marks)*
+
+(c) Write an SQL statement to insert a new record into the "Students" table. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a network? *(2 marks)*
+
+(b) Distinguish between a LAN and a WAN. *(4 marks)*
+
+(c) State two advantages of networking computers. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms "client" and "server". *(2 marks)*
+
+(b) Explain the client-server model. *(4 marks)*
+
+(c) State two examples of client-server applications. *(4 marks)*
+
+---
+
+**Q9.** (a) What is the internet? *(2 marks)*
+
+(b) Explain how data is transmitted over the internet using packets. *(5 marks)*
+
+(c) Define the term "IP address". *(3 marks)*
+
+---
+
+**Q10.** (a) Define the terms "domain name" and "DNS". *(4 marks)
+
+(b) Explain the purpose of the Domain Name System. *(4 marks)*
+
+(c) Give an example of a domain name and identify its parts. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a website? *(2 marks)*
+
+(b) State three components of a website. *(3 marks)*
+
+(c) Explain the difference between a static and a dynamic website. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the terms "HTML" and "CSS". *(4 marks)*
+
+(b) State the purpose of each. *(4 marks)*
+
+(c) Write a simple HTML tag to create a heading. *(3 marks)*
+
+---
+
+**Q13.** (a) What is a web browser? *(2 marks)*
+
+(b) State three features of a web browser. *(3 marks)*
+
+(c) Explain the function of a "bookmark" in a browser. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the terms "e-commerce" and "e-learning". *(4 marks)*
+
+(b) State two advantages of e-commerce. *(2 marks)*
+
+(c) Explain one disadvantage of e-commerce. *(4 marks)*
+
+---
+
+**Q15.** (a) What is cybersecurity? *(2 marks)*
+
+(b) State three types of cyber threats. *(3 marks)*
+
+(c) Explain the importance of strong passwords. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "phishing" and "malware". *(4 marks)*
+
+(b) Describe how phishing attacks work. *(4 marks)*
+
+(c) State two ways to avoid phishing attacks. *(4 marks)*
+
+---
+
+**Q17.** (a) What is encryption? *(2 marks)*
+
+(b) Explain how encryption protects data. *(4 marks)*
+
+(c) State two uses of encryption in everyday life. *(4 marks)*
+
+---
+
+**Q18.** (a) Define the term "backup". *(2 marks)*
+
+(b) State three reasons why regular backups are important. *(3 marks)*
+
+(c) Describe two backup strategies. *(4 marks)*
+
+---
+
+**Q19.** (a) What is a computer system? *(2 marks)*
+
+(b) State the hardware components of a computer system. *(4 marks)*
+
+(c) Explain the difference between hardware and software. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the terms "input device" and "output device". *(4 marks)*
+
+(b) Give two examples of each. *(4 marks)*
+
+(c) Explain the function of the CPU. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 6
+
+## Structural Question Bank — Productivity tools and digital communication
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PRODUCTIVITY TOOLS AND DIGITAL COMMUNICATION
+
+**Q1.** (a) What is a word processor? *(2 marks)*
+
+(b) State four features of a word processor. *(4 marks)*
+
+(c) Explain the difference between saving a document and printing a document. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the terms "cut", "copy", and "paste" as used in word processing. *(3 marks)*
+
+(b) Describe how you would change the font and size of text in a word processor. *(4 marks)*
+
+(c) State two advantages of using a word processor over a typewriter. *(4 marks)*
+
+---
+
+**Q3.** (a) What is a spreadsheet? *(2 marks)*
+
+(b) Define the terms cell, row, column, and range. *(4 marks)*
+
+(c) Explain the difference between a formula and a function in a spreadsheet. *(4 marks)*
+
+---
+
+**Q4.** (a) State the function of the following spreadsheet functions: SUM, AVERAGE, MAX, MIN. *(4 marks)*
+
+(b) Write the formula to add the values in cells A1 to A10. *(3 marks)*
+
+(c) Explain what happens when a formula is copied to another cell. *(4 marks)*
+
+---
+
+**Q5.** (a) What is a presentation? *(2 marks)*
+
+(b) State four features of a presentation program. *(4 marks)*
+
+(c) Explain the importance of using bullet points in a presentation. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the terms slide, transition, and animation. *(3 marks)*
+
+(b) Describe how you would add a transition to a slide. *(4 marks)*
+
+(c) State two guidelines for making an effective presentation. *(4 marks)*
+
+---
+
+**Q7.** (a) What is the internet? *(2 marks)*
+
+(b) State three services provided by the internet. *(3 marks)*
+
+(c) Explain the difference between the internet and the World Wide Web. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms URL, browser, and search engine. *(3 marks)*
+
+(b) Describe how you would search for information on the internet. *(4 marks)*
+
+(c) State two ways of evaluating the reliability of a website. *(4 marks)*
+
+---
+
+**Q9.** (a) What is email? *(2 marks)*
+
+(b) State the parts of an email address. *(3 marks)*
+
+(c) Explain the difference between "To", "Cc", and "Bcc" fields in an email. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the terms attachment and spam. *(2 marks)*
+
+(b) Describe how you would attach a file to an email. *(4 marks)*
+
+(c) State two precautions to take when opening email attachments. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a social media platform? *(2 marks)*
+
+(b) State three benefits of social media. *(3 marks)*
+
+(c) Explain two risks of using social media. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the term "digital citizenship". *(2 marks)*
+
+(b) State three responsibilities of a digital citizen. *(3 marks)*
+
+(c) Explain what is meant by "digital footprint". *(4 marks)*
+
+---
+
+**Q13.** (a) What is cyberbullying? *(2 marks)*
+
+(b) State three ways to protect yourself from cyberbullying. *(3 marks)*
+
+(c) Explain what you should do if you are a victim of cyberbullying. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the terms "netiquette" and "copyright". *(4 marks)*
+
+(b) State two examples of good netiquette. *(2 marks)*
+
+(c) Explain why it is important to respect copyright when using online content. *(4 marks)*
+
+---
+
+**Q15.** (a) What is cloud computing? *(2 marks)*
+
+(b) State three advantages of cloud storage. *(3 marks)*
+
+(c) Explain one risk of storing data in the cloud. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "upload" and "download". *(2 marks)*
+
+(b) Describe how you would share a document using a cloud service. *(4 marks)*
+
+(c) State two benefits of collaborating on documents online. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a database? *(2 marks)*
+
+(b) Define the terms table, record, and field. *(3 marks)*
+
+(c) Explain the difference between a primary key and a foreign key. *(4 marks)*
+
+---
+
+**Q18.** (a) State the function of a query in a database. *(2 marks)*
+
+(b) Describe how you would sort records in a database. *(4 marks)*
+
+(c) Explain the difference between a filter and a query. *(4 marks)*
+
+---
+
+**Q19.** (a) What is a computer virus? *(2 marks)*
+
+(b) State three ways a computer can be infected by a virus. *(3 marks)*
+
+(c) Describe two ways of protecting a computer from viruses. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the terms "firewall" and "antivirus software". *(4 marks)*
+
+(b) Explain the difference between a firewall and antivirus software. *(4 marks)*
+
+(c) State two other security measures for protecting data. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 7
+
+## Structural Question Bank — Data, web, and information systems
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: DATA, WEB, AND INFORMATION SYSTEMS
+
+**Q1.** (a) What is data? *(2 marks)*
+
+(b) Distinguish between data and information. *(4 marks)*
+
+(c) Give two examples of raw data and the information that can be derived from them. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "information system". *(2 marks)*
+
+(b) State the components of an information system. *(4 marks)*
+
+(c) Explain the role of a database in an information system. *(4 marks)*
+
+---
+
+**Q3.** (a) What is a database management system (DBMS)? *(2 marks)*
+
+(b) State three functions of a DBMS. *(3 marks)*
+
+(c) Give two examples of DBMS software. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the terms "entity" and "attribute" in a database. *(4 marks)*
+
+(b) Give an example of an entity with three attributes. *(3 marks)*
+
+(c) Explain what is meant by a "one-to-many" relationship. *(4 marks)*
+
+---
+
+**Q5.** (a) What is a relational database? *(2 marks)*
+
+(b) State two advantages of a relational database over a flat-file database. *(4 marks)*
+
+(c) Explain the purpose of a primary key. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "SQL". *(2 marks)*
+
+(b) Write an SQL statement to select all records from a table called "Students". *(3 marks)*
+
+(c) Write an SQL statement to insert a new record into the "Students" table. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a network? *(2 marks)*
+
+(b) Distinguish between a LAN and a WAN. *(4 marks)*
+
+(c) State two advantages of networking computers. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms "client" and "server". *(2 marks)*
+
+(b) Explain the client-server model. *(4 marks)*
+
+(c) State two examples of client-server applications. *(4 marks)*
+
+---
+
+**Q9.** (a) What is the internet? *(2 marks)*
+
+(b) Explain how data is transmitted over the internet using packets. *(5 marks)*
+
+(c) Define the term "IP address". *(3 marks)*
+
+---
+
+**Q10.** (a) Define the terms "domain name" and "DNS". *(4 marks)
+
+(b) Explain the purpose of the Domain Name System. *(4 marks)*
+
+(c) Give an example of a domain name and identify its parts. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a website? *(2 marks)*
+
+(b) State three components of a website. *(3 marks)*
+
+(c) Explain the difference between a static and a dynamic website. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the terms "HTML" and "CSS". *(4 marks)*
+
+(b) State the purpose of each. *(4 marks)*
+
+(c) Write a simple HTML tag to create a heading. *(3 marks)*
+
+---
+
+**Q13.** (a) What is a web browser? *(2 marks)*
+
+(b) State three features of a web browser. *(3 marks)*
+
+(c) Explain the function of a "bookmark" in a browser. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the terms "e-commerce" and "e-learning". *(4 marks)*
+
+(b) State two advantages of e-commerce. *(2 marks)*
+
+(c) Explain one disadvantage of e-commerce. *(4 marks)*
+
+---
+
+**Q15.** (a) What is cybersecurity? *(2 marks)*
+
+(b) State three types of cyber threats. *(3 marks)*
+
+(c) Explain the importance of strong passwords. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "phishing" and "malware". *(4 marks)*
+
+(b) Describe how phishing attacks work. *(4 marks)*
+
+(c) State two ways to avoid phishing attacks. *(4 marks)*
+
+---
+
+**Q17.** (a) What is encryption? *(2 marks)*
+
+(b) Explain how encryption protects data. *(4 marks)*
+
+(c) State two uses of encryption in everyday life. *(4 marks)*
+
+---
+
+**Q18.** (a) Define the term "backup". *(2 marks)*
+
+(b) State three reasons why regular backups are important. *(3 marks)*
+
+(c) Describe two backup strategies. *(4 marks)*
+
+---
+
+**Q19.** (a) What is a computer system? *(2 marks)*
+
+(b) State the hardware components of a computer system. *(4 marks)*
+
+(c) Explain the difference between hardware and software. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the terms "input device" and "output device". *(4 marks)*
+
+(b) Give two examples of each. *(4 marks)*
+
+(c) Explain the function of the CPU. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 8
+
+## Structural Question Bank — Productivity tools and digital communication
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PRODUCTIVITY TOOLS AND DIGITAL COMMUNICATION
+
+**Q1.** (a) What is a word processor? *(2 marks)*
+
+(b) State four features of a word processor. *(4 marks)*
+
+(c) Explain the difference between saving a document and printing a document. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the terms "cut", "copy", and "paste" as used in word processing. *(3 marks)*
+
+(b) Describe how you would change the font and size of text in a word processor. *(4 marks)*
+
+(c) State two advantages of using a word processor over a typewriter. *(4 marks)*
+
+---
+
+**Q3.** (a) What is a spreadsheet? *(2 marks)*
+
+(b) Define the terms cell, row, column, and range. *(4 marks)*
+
+(c) Explain the difference between a formula and a function in a spreadsheet. *(4 marks)*
+
+---
+
+**Q4.** (a) State the function of the following spreadsheet functions: SUM, AVERAGE, MAX, MIN. *(4 marks)*
+
+(b) Write the formula to add the values in cells A1 to A10. *(3 marks)*
+
+(c) Explain what happens when a formula is copied to another cell. *(4 marks)*
+
+---
+
+**Q5.** (a) What is a presentation? *(2 marks)*
+
+(b) State four features of a presentation program. *(4 marks)*
+
+(c) Explain the importance of using bullet points in a presentation. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the terms slide, transition, and animation. *(3 marks)*
+
+(b) Describe how you would add a transition to a slide. *(4 marks)*
+
+(c) State two guidelines for making an effective presentation. *(4 marks)*
+
+---
+
+**Q7.** (a) What is the internet? *(2 marks)*
+
+(b) State three services provided by the internet. *(3 marks)*
+
+(c) Explain the difference between the internet and the World Wide Web. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the terms URL, browser, and search engine. *(3 marks)*
+
+(b) Describe how you would search for information on the internet. *(4 marks)*
+
+(c) State two ways of evaluating the reliability of a website. *(4 marks)*
+
+---
+
+**Q9.** (a) What is email? *(2 marks)*
+
+(b) State the parts of an email address. *(3 marks)*
+
+(c) Explain the difference between "To", "Cc", and "Bcc" fields in an email. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the terms attachment and spam. *(2 marks)*
+
+(b) Describe how you would attach a file to an email. *(4 marks)*
+
+(c) State two precautions to take when opening email attachments. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a social media platform? *(2 marks)*
+
+(b) State three benefits of social media. *(3 marks)*
+
+(c) Explain two risks of using social media. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the term "digital citizenship". *(2 marks)*
+
+(b) State three responsibilities of a digital citizen. *(3 marks)*
+
+(c) Explain what is meant by "digital footprint". *(4 marks)*
+
+---
+
+**Q13.** (a) What is cyberbullying? *(2 marks)*
+
+(b) State three ways to protect yourself from cyberbullying. *(3 marks)*
+
+(c) Explain what you should do if you are a victim of cyberbullying. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the terms "netiquette" and "copyright". *(4 marks)*
+
+(b) State two examples of good netiquette. *(2 marks)*
+
+(c) Explain why it is important to respect copyright when using online content. *(4 marks)*
+
+---
+
+**Q15.** (a) What is cloud computing? *(2 marks)*
+
+(b) State three advantages of cloud storage. *(3 marks)*
+
+(c) Explain one risk of storing data in the cloud. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "upload" and "download". *(2 marks)*
+
+(b) Describe how you would share a document using a cloud service. *(4 marks)*
+
+(c) State two benefits of collaborating on documents online. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a database? *(2 marks)*
+
+(b) Define the terms table, record, and field. *(3 marks)*
+
+(c) Explain the difference between a primary key and a foreign key. *(4 marks)*
+
+---
+
+**Q18.** (a) State the function of a query in a database. *(2 marks)*
+
+(b) Describe how you would sort records in a database. *(4 marks)*
+
+(c) Explain the difference between a filter and a query. *(4 marks)*
+
+---
+
+**Q19.** (a) What is a computer virus? *(2 marks)*
+
+(b) State three ways a computer can be infected by a virus. *(3 marks)*
+
+(c) Describe two ways of protecting a computer from viruses. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the terms "firewall" and "antivirus software". *(4 marks)*
+
+(b) Explain the difference between a firewall and antivirus software. *(4 marks)*
+
+(c) State two other security measures for protecting data. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** A word processor is used to:
+
+A. create and edit text documents  
+B. make calculations  
+C. browse the internet  
+D. play games  
+
+---
+
+**Q2.** The feature that checks spelling in a word processor is called:
+
+A. spell checker  
+B. thesaurus  
+C. grammar checker  
+D. autocorrect  
+
+---
+
+**Q3.** The shortcut key for copying text is:
+
+A. Ctrl + C  
+B. Ctrl + X  
+C. Ctrl + V  
+D. Ctrl + P  
+
+---
+
+**Q4.** The shortcut key for pasting text is:
+
+A. Ctrl + V  
+B. Ctrl + X  
+C. Ctrl + P  
+D. Ctrl + C  
+
+---
+
+**Q5.** The shortcut key for printing a document is:
+
+A. Ctrl + P  
+B. Ctrl + S  
+C. Ctrl + C  
+D. Ctrl + V  
+
+---
+
+**Q6.** A spreadsheet is used to:
+
+A. organise and calculate data  
+B. send emails  
+C. edit photos  
+D. write letters  
+
+---
+
+**Q7.** In a spreadsheet, the intersection of a row and a column is called a:
+
+A. range  
+B. cell  
+C. worksheet  
+D. chart  
+
+---
+
+**Q8.** The function that adds a range of cells is:
+
+A. AVERAGE  
+B. SUM  
+C. MIN  
+D. MAX  
+
+---
+
+**Q9.** The function that finds the largest value in a range is:
+
+A. MIN  
+B. SUM  
+C. MAX  
+D. AVERAGE  
+
+---
+
+**Q10.** A formula in a spreadsheet always begins with:
+
+A. +  
+B. -  
+C. #  
+D. =  
+
+---
+
+**Q11.** A presentation program is used to:
+
+A. write essays  
+B. browse the web  
+C. create slideshows  
+D. calculate budgets  
+
+---
+
+**Q12.** The effect used when moving from one slide to the next is called a:
+
+A. animation  
+B. template  
+C. hyperlink  
+D. transition  
+
+---
+
+**Q13.** The movement of objects within a slide is called:
+
+A. hyperlink  
+B. animation  
+C. transition  
+D. layout  
+
+---
+
+**Q14.** The internet is:
+
+A. a type of software  
+B. a global network of computers  
+C. a web browser  
+D. a single computer  
+
+---
+
+**Q15.** The software used to access websites is a:
+
+A. server  
+B. search engine  
+C. browser  
+D. firewall  
+
+---
+
+**Q16.** A website address is called a:
+
+A. DNS  
+B. IP  
+C. HTML  
+D. URL  
+
+---
+
+**Q17.** The service used to send and receive messages electronically is:
+
+A. word processor  
+B. presentation  
+C. email  
+D. spreadsheet  
+
+---
+
+**Q18.** The part of an email address after the @ symbol is the:
+
+A. password  
+B. attachment  
+C. username  
+D. domain name  
+
+---
+
+**Q19.** An unwanted email sent in bulk is called:
+
+A. draft  
+B. spam  
+C. attachment  
+D. newsletter  
+
+---
+
+**Q20.** A file sent along with an email is called an:
+
+A. header  
+B. attachment  
+C. signature  
+D. hyperlink  
+
+---
+
+**Q21.** The responsible use of technology is called:
+
+A. phishing  
+B. cyberbullying  
+C. digital citizenship  
+D. hacking  
+
+---
+
+**Q22.** The trace of your online activity is called your:
+
+A. username  
+B. IP address  
+C. password  
+D. digital footprint  
+
+---
+
+**Q23.** Bullying carried out online is called:
+
+A. hacking  
+B. phishing  
+C. cyberbullying  
+D. spamming  
+
+---
+
+**Q24.** The rules of polite behaviour online are called:
+
+A. protocol  
+B. licence  
+C. copyright  
+D. netiquette  
+
+---
+
+**Q25.** Storing data on remote servers accessed via the internet is called:
+
+A. cloud computing  
+B. networking  
+C. programming  
+D. printing  
+
+---
+
+**Q26.** Sending a file from your computer to the internet is called:
+
+A. uploading  
+B. downloading  
+C. scanning  
+D. printing  
+
+---
+
+**Q27.** Receiving a file from the internet to your computer is called:
+
+A. downloading  
+B. printing  
+C. uploading  
+D. scanning  
+
+---
+
+**Q28.** A malicious program that spreads between computers is a:
+
+A. virus  
+B. spreadsheet  
+C. database  
+D. browser  
+
+---
+
+**Q29.** Software that protects a computer from viruses is called:
+
+A. antivirus  
+B. word processor  
+C. firewall  
+D. browser  
+
+---
+
+**Q30.** A security system that monitors incoming and outgoing network traffic is a:
+
+A. firewall  
+B. database  
+C. spreadsheet  
+D. antivirus  
+
+---
+
+**Q31.** Raw facts and figures are called:
+
+A. information  
+B. data  
+C. knowledge  
+D. wisdom  
+
+---
+
+**Q32.** Data that has been processed and given meaning is called:
+
+A. raw data  
+B. information  
+C. storage  
+D. input  
+
+---
+
+**Q33.** A collection of related data organised for easy access is a:
+
+A. spreadsheet  
+B. presentation  
+C. database  
+D. document  
+
+---
+
+**Q34.** In a database table, a row is called a:
+
+A. field  
+B. query  
+C. report  
+D. record  
+
+---
+
+**Q35.** In a database table, a column is called a:
+
+A. record  
+B. query  
+C. field  
+D. table  
+
+---
+
+**Q36.** The field that uniquely identifies each record is the:
+
+A. foreign key  
+B. query  
+C. index  
+D. primary key  
+
+---
+
+**Q37.** Software used to manage a database is called a:
+
+A. browser  
+B. DBMS  
+C. OS  
+D. compiler  
+
+---
+
+**Q38.** The language used to query a relational database is:
+
+A. CSS  
+B. SQL  
+C. Java  
+D. HTML  
+
+---
+
+**Q39.** A network that covers a small area such as a school is a:
+
+A. MAN  
+B. WAN  
+C. LAN  
+D. PAN  
+
+---
+
+**Q40.** A network that covers a large geographical area is a:
+
+A. MAN  
+B. LAN  
+C. PAN  
+D. WAN  
+
+---
+
+**Q41.** In a client-server model, the computer that provides services is the:
+
+A. router  
+B. switch  
+C. server  
+D. client  
+
+---
+
+**Q42.** The unique address of a device on a network is its:
+
+A. domain name  
+B. password  
+C. URL  
+D. IP address  
+
+---
+
+**Q43.** The system that translates domain names into IP addresses is:
+
+A. SQL  
+B. DNS  
+C. HTML  
+D. CSS  
+
+---
+
+**Q44.** The language used to create web pages is:
+
+A. Python  
+B. HTML  
+C. Java  
+D. SQL  
+
+---
+
+**Q45.** The language used to style web pages is:
+
+A. Java  
+B. HTML  
+C. CSS  
+D. SQL  
+
+---
+
+**Q46.** A website that allows users to interact and change content is:
+
+A. cached  
+B. static  
+C. offline  
+D. dynamic  
+
+---
+
+**Q47.** Buying and selling goods online is called:
+
+A. e-mail  
+B. e-banking  
+C. e-commerce  
+D. e-learning  
+
+---
+
+**Q48.** Learning using electronic devices and the internet is called:
+
+A. e-mail  
+B. e-banking  
+C. e-commerce  
+D. e-learning  
+
+---
+
+**Q49.** The practice of protecting systems and data from cyber threats is called:
+
+A. cybersecurity  
+B. networking  
+C. programming  
+D. printing  
+
+---
+
+**Q50.** A fraudulent attempt to obtain sensitive information by pretending to be a trusted source is:
+
+A. phishing  
+B. spamming  
+C. cracking  
+D. hacking  
+
+---
+
+**Q51.** Malicious software such as viruses and worms is called:
+
+A. malware  
+B. freeware  
+C. shareware  
+D. firmware  
+
+---
+
+**Q52.** The process of converting data into a coded form to prevent unauthorised access is:
+
+A. encryption  
+B. compression  
+C. deletion  
+D. decryption  
+
+---
+
+**Q53.** A copy of data kept for recovery purposes is called a:
+
+A. backup  
+B. cache  
+C. virus  
+D. firewall  
+
+---
+
+**Q54.** The physical parts of a computer are called:
+
+A. hardware  
+B. shareware  
+C. firmware  
+D. software  
+
+---
+
+**Q55.** The programs that run on a computer are called:
+
+A. hardware  
+B. software  
+C. peripherals  
+D. components  
+
+---
+
+**Q56.** The part of the computer that processes instructions is the:
+
+A. monitor  
+B. CPU  
+C. printer  
+D. keyboard  
+
+---
+
+**Q57.** A keyboard is an example of an:
+
+A. output device  
+B. storage device  
+C. input device  
+D. processing device  
+
+---
+
+**Q58.** A monitor is an example of an:
+
+A. input device  
+B. storage device  
+C. processing device  
+D. output device  
+
+---
+
+**Q59.** The process of arranging records in a particular order is called:
+
+A. filtering  
+B. indexing  
+C. sorting  
+D. querying  
+
+---
+
+**Q60.** The process of displaying only records that meet a condition is called:
+
+A. sorting  
+B. backing up  
+C. indexing  
+D. filtering  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The shortcut key for pasting text is:
+
+A. Ctrl + V  
+B. Ctrl + C  
+C. Ctrl + X  
+D. Ctrl + P  
+
+---
+
+**Q2.** The shortcut key for printing a document is:
+
+A. Ctrl + P  
+B. Ctrl + C  
+C. Ctrl + S  
+D. Ctrl + V  
+
+---
+
+**Q3.** A spreadsheet is used to:
+
+A. organise and calculate data  
+B. edit photos  
+C. write letters  
+D. send emails  
+
+---
+
+**Q4.** In a spreadsheet, the intersection of a row and a column is called a:
+
+A. cell  
+B. worksheet  
+C. chart  
+D. range  
+
+---
+
+**Q5.** The function that adds a range of cells is:
+
+A. SUM  
+B. MIN  
+C. AVERAGE  
+D. MAX  
+
+---
+
+**Q6.** The function that finds the largest value in a range is:
+
+A. MAX  
+B. AVERAGE  
+C. SUM  
+D. MIN  
+
+---
+
+**Q7.** A formula in a spreadsheet always begins with:
+
+A. +  
+B. =  
+C. -  
+D. #  
+
+---
+
+**Q8.** A presentation program is used to:
+
+A. write essays  
+B. create slideshows  
+C. browse the web  
+D. calculate budgets  
+
+---
+
+**Q9.** The effect used when moving from one slide to the next is called a:
+
+A. animation  
+B. hyperlink  
+C. transition  
+D. template  
+
+---
+
+**Q10.** The movement of objects within a slide is called:
+
+A. transition  
+B. hyperlink  
+C. layout  
+D. animation  
+
+---
+
+**Q11.** The internet is:
+
+A. a single computer  
+B. a web browser  
+C. a global network of computers  
+D. a type of software  
+
+---
+
+**Q12.** The software used to access websites is a:
+
+A. search engine  
+B. firewall  
+C. server  
+D. browser  
+
+---
+
+**Q13.** A website address is called a:
+
+A. DNS  
+B. URL  
+C. IP  
+D. HTML  
+
+---
+
+**Q14.** The service used to send and receive messages electronically is:
+
+A. word processor  
+B. email  
+C. presentation  
+D. spreadsheet  
+
+---
+
+**Q15.** The part of an email address after the @ symbol is the:
+
+A. password  
+B. username  
+C. domain name  
+D. attachment  
+
+---
+
+**Q16.** An unwanted email sent in bulk is called:
+
+A. newsletter  
+B. attachment  
+C. draft  
+D. spam  
+
+---
+
+**Q17.** A file sent along with an email is called an:
+
+A. signature  
+B. header  
+C. attachment  
+D. hyperlink  
+
+---
+
+**Q18.** The responsible use of technology is called:
+
+A. hacking  
+B. phishing  
+C. cyberbullying  
+D. digital citizenship  
+
+---
+
+**Q19.** The trace of your online activity is called your:
+
+A. username  
+B. digital footprint  
+C. IP address  
+D. password  
+
+---
+
+**Q20.** Bullying carried out online is called:
+
+A. hacking  
+B. cyberbullying  
+C. phishing  
+D. spamming  
+
+---
+
+**Q21.** The rules of polite behaviour online are called:
+
+A. protocol  
+B. copyright  
+C. netiquette  
+D. licence  
+
+---
+
+**Q22.** Storing data on remote servers accessed via the internet is called:
+
+A. printing  
+B. networking  
+C. programming  
+D. cloud computing  
+
+---
+
+**Q23.** Sending a file from your computer to the internet is called:
+
+A. scanning  
+B. printing  
+C. uploading  
+D. downloading  
+
+---
+
+**Q24.** Receiving a file from the internet to your computer is called:
+
+A. scanning  
+B. printing  
+C. uploading  
+D. downloading  
+
+---
+
+**Q25.** A malicious program that spreads between computers is a:
+
+A. virus  
+B. browser  
+C. spreadsheet  
+D. database  
+
+---
+
+**Q26.** Software that protects a computer from viruses is called:
+
+A. antivirus  
+B. firewall  
+C. word processor  
+D. browser  
+
+---
+
+**Q27.** A security system that monitors incoming and outgoing network traffic is a:
+
+A. firewall  
+B. spreadsheet  
+C. antivirus  
+D. database  
+
+---
+
+**Q28.** A word processor is used to:
+
+A. create and edit text documents  
+B. browse the internet  
+C. play games  
+D. make calculations  
+
+---
+
+**Q29.** The feature that checks spelling in a word processor is called:
+
+A. spell checker  
+B. grammar checker  
+C. thesaurus  
+D. autocorrect  
+
+---
+
+**Q30.** The shortcut key for copying text is:
+
+A. Ctrl + C  
+B. Ctrl + P  
+C. Ctrl + X  
+D. Ctrl + V  
+
+---
+
+**Q31.** In a database table, a row is called a:
+
+A. field  
+B. record  
+C. query  
+D. report  
+
+---
+
+**Q32.** In a database table, a column is called a:
+
+A. record  
+B. field  
+C. query  
+D. table  
+
+---
+
+**Q33.** The field that uniquely identifies each record is the:
+
+A. foreign key  
+B. index  
+C. primary key  
+D. query  
+
+---
+
+**Q34.** Software used to manage a database is called a:
+
+A. OS  
+B. browser  
+C. compiler  
+D. DBMS  
+
+---
+
+**Q35.** The language used to query a relational database is:
+
+A. HTML  
+B. Java  
+C. SQL  
+D. CSS  
+
+---
+
+**Q36.** A network that covers a small area such as a school is a:
+
+A. WAN  
+B. PAN  
+C. MAN  
+D. LAN  
+
+---
+
+**Q37.** A network that covers a large geographical area is a:
+
+A. MAN  
+B. WAN  
+C. LAN  
+D. PAN  
+
+---
+
+**Q38.** In a client-server model, the computer that provides services is the:
+
+A. router  
+B. server  
+C. switch  
+D. client  
+
+---
+
+**Q39.** The unique address of a device on a network is its:
+
+A. domain name  
+B. URL  
+C. IP address  
+D. password  
+
+---
+
+**Q40.** The system that translates domain names into IP addresses is:
+
+A. CSS  
+B. HTML  
+C. SQL  
+D. DNS  
+
+---
+
+**Q41.** The language used to create web pages is:
+
+A. Java  
+B. Python  
+C. HTML  
+D. SQL  
+
+---
+
+**Q42.** The language used to style web pages is:
+
+A. SQL  
+B. Java  
+C. HTML  
+D. CSS  
+
+---
+
+**Q43.** A website that allows users to interact and change content is:
+
+A. cached  
+B. dynamic  
+C. static  
+D. offline  
+
+---
+
+**Q44.** Buying and selling goods online is called:
+
+A. e-mail  
+B. e-commerce  
+C. e-banking  
+D. e-learning  
+
+---
+
+**Q45.** Learning using electronic devices and the internet is called:
+
+A. e-mail  
+B. e-commerce  
+C. e-learning  
+D. e-banking  
+
+---
+
+**Q46.** The practice of protecting systems and data from cyber threats is called:
+
+A. printing  
+B. networking  
+C. programming  
+D. cybersecurity  
+
+---
+
+**Q47.** A fraudulent attempt to obtain sensitive information by pretending to be a trusted source is:
+
+A. cracking  
+B. hacking  
+C. phishing  
+D. spamming  
+
+---
+
+**Q48.** Malicious software such as viruses and worms is called:
+
+A. firmware  
+B. freeware  
+C. shareware  
+D. malware  
+
+---
+
+**Q49.** The process of converting data into a coded form to prevent unauthorised access is:
+
+A. encryption  
+B. decryption  
+C. compression  
+D. deletion  
+
+---
+
+**Q50.** A copy of data kept for recovery purposes is called a:
+
+A. backup  
+B. virus  
+C. cache  
+D. firewall  
+
+---
+
+**Q51.** The physical parts of a computer are called:
+
+A. hardware  
+B. firmware  
+C. software  
+D. shareware  
+
+---
+
+**Q52.** The programs that run on a computer are called:
+
+A. software  
+B. peripherals  
+C. components  
+D. hardware  
+
+---
+
+**Q53.** The part of the computer that processes instructions is the:
+
+A. CPU  
+B. printer  
+C. monitor  
+D. keyboard  
+
+---
+
+**Q54.** A keyboard is an example of an:
+
+A. input device  
+B. processing device  
+C. storage device  
+D. output device  
+
+---
+
+**Q55.** A monitor is an example of an:
+
+A. input device  
+B. output device  
+C. storage device  
+D. processing device  
+
+---
+
+**Q56.** The process of arranging records in a particular order is called:
+
+A. filtering  
+B. sorting  
+C. indexing  
+D. querying  
+
+---
+
+**Q57.** The process of displaying only records that meet a condition is called:
+
+A. sorting  
+B. indexing  
+C. filtering  
+D. backing up  
+
+---
+
+**Q58.** Raw facts and figures are called:
+
+A. information  
+B. knowledge  
+C. wisdom  
+D. data  
+
+---
+
+**Q59.** Data that has been processed and given meaning is called:
+
+A. raw data  
+B. storage  
+C. information  
+D. input  
+
+---
+
+**Q60.** A collection of related data organised for easy access is a:
+
+A. spreadsheet  
+B. document  
+C. presentation  
+D. database  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'ICT'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'ICT',
+  'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ICT P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, commercial, technical
+**Subject:** ICT
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** In a spreadsheet, the intersection of a row and a column is called a:
+
+A. cell  
+B. range  
+C. worksheet  
+D. chart  
+
+---
+
+**Q2.** The function that adds a range of cells is:
+
+A. SUM  
+B. AVERAGE  
+C. MIN  
+D. MAX  
+
+---
+
+**Q3.** The function that finds the largest value in a range is:
+
+A. MAX  
+B. SUM  
+C. MIN  
+D. AVERAGE  
+
+---
+
+**Q4.** A formula in a spreadsheet always begins with:
+
+A. =  
+B. -  
+C. #  
+D. +  
+
+---
+
+**Q5.** A presentation program is used to:
+
+A. create slideshows  
+B. browse the web  
+C. write essays  
+D. calculate budgets  
+
+---
+
+**Q6.** The effect used when moving from one slide to the next is called a:
+
+A. transition  
+B. template  
+C. hyperlink  
+D. animation  
+
+---
+
+**Q7.** The movement of objects within a slide is called:
+
+A. transition  
+B. animation  
+C. hyperlink  
+D. layout  
+
+---
+
+**Q8.** The internet is:
+
+A. a single computer  
+B. a global network of computers  
+C. a web browser  
+D. a type of software  
+
+---
+
+**Q9.** The software used to access websites is a:
+
+A. search engine  
+B. server  
+C. browser  
+D. firewall  
+
+---
+
+**Q10.** A website address is called a:
+
+A. IP  
+B. DNS  
+C. HTML  
+D. URL  
+
+---
+
+**Q11.** The service used to send and receive messages electronically is:
+
+A. spreadsheet  
+B. presentation  
+C. email  
+D. word processor  
+
+---
+
+**Q12.** The part of an email address after the @ symbol is the:
+
+A. username  
+B. attachment  
+C. password  
+D. domain name  
+
+---
+
+**Q13.** An unwanted email sent in bulk is called:
+
+A. newsletter  
+B. spam  
+C. attachment  
+D. draft  
+
+---
+
+**Q14.** A file sent along with an email is called an:
+
+A. signature  
+B. attachment  
+C. header  
+D. hyperlink  
+
+---
+
+**Q15.** The responsible use of technology is called:
+
+A. hacking  
+B. cyberbullying  
+C. digital citizenship  
+D. phishing  
+
+---
+
+**Q16.** The trace of your online activity is called your:
+
+A. password  
+B. IP address  
+C. username  
+D. digital footprint  
+
+---
+
+**Q17.** Bullying carried out online is called:
+
+A. phishing  
+B. hacking  
+C. cyberbullying  
+D. spamming  
+
+---
+
+**Q18.** The rules of polite behaviour online are called:
+
+A. licence  
+B. protocol  
+C. copyright  
+D. netiquette  
+
+---
+
+**Q19.** Storing data on remote servers accessed via the internet is called:
+
+A. printing  
+B. cloud computing  
+C. networking  
+D. programming  
+
+---
+
+**Q20.** Sending a file from your computer to the internet is called:
+
+A. scanning  
+B. uploading  
+C. printing  
+D. downloading  
+
+---
+
+**Q21.** Receiving a file from the internet to your computer is called:
+
+A. scanning  
+B. uploading  
+C. downloading  
+D. printing  
+
+---
+
+**Q22.** A malicious program that spreads between computers is a:
+
+A. database  
+B. browser  
+C. spreadsheet  
+D. virus  
+
+---
+
+**Q23.** Software that protects a computer from viruses is called:
+
+A. word processor  
+B. browser  
+C. antivirus  
+D. firewall  
+
+---
+
+**Q24.** A security system that monitors incoming and outgoing network traffic is a:
+
+A. database  
+B. spreadsheet  
+C. antivirus  
+D. firewall  
+
+---
+
+**Q25.** A word processor is used to:
+
+A. create and edit text documents  
+B. make calculations  
+C. browse the internet  
+D. play games  
+
+---
+
+**Q26.** The feature that checks spelling in a word processor is called:
+
+A. spell checker  
+B. thesaurus  
+C. grammar checker  
+D. autocorrect  
+
+---
+
+**Q27.** The shortcut key for copying text is:
+
+A. Ctrl + C  
+B. Ctrl + X  
+C. Ctrl + V  
+D. Ctrl + P  
+
+---
+
+**Q28.** The shortcut key for pasting text is:
+
+A. Ctrl + V  
+B. Ctrl + X  
+C. Ctrl + P  
+D. Ctrl + C  
+
+---
+
+**Q29.** The shortcut key for printing a document is:
+
+A. Ctrl + P  
+B. Ctrl + S  
+C. Ctrl + C  
+D. Ctrl + V  
+
+---
+
+**Q30.** A spreadsheet is used to:
+
+A. organise and calculate data  
+B. send emails  
+C. edit photos  
+D. write letters  
+
+---
+
+**Q31.** Software used to manage a database is called a:
+
+A. OS  
+B. DBMS  
+C. browser  
+D. compiler  
+
+---
+
+**Q32.** The language used to query a relational database is:
+
+A. HTML  
+B. SQL  
+C. Java  
+D. CSS  
+
+---
+
+**Q33.** A network that covers a small area such as a school is a:
+
+A. WAN  
+B. MAN  
+C. LAN  
+D. PAN  
+
+---
+
+**Q34.** A network that covers a large geographical area is a:
+
+A. LAN  
+B. MAN  
+C. PAN  
+D. WAN  
+
+---
+
+**Q35.** In a client-server model, the computer that provides services is the:
+
+A. client  
+B. switch  
+C. server  
+D. router  
+
+---
+
+**Q36.** The unique address of a device on a network is its:
+
+A. URL  
+B. password  
+C. domain name  
+D. IP address  
+
+---
+
+**Q37.** The system that translates domain names into IP addresses is:
+
+A. CSS  
+B. DNS  
+C. HTML  
+D. SQL  
+
+---
+
+**Q38.** The language used to create web pages is:
+
+A. Java  
+B. HTML  
+C. Python  
+D. SQL  
+
+---
+
+**Q39.** The language used to style web pages is:
+
+A. SQL  
+B. HTML  
+C. CSS  
+D. Java  
+
+---
+
+**Q40.** A website that allows users to interact and change content is:
+
+A. offline  
+B. static  
+C. cached  
+D. dynamic  
+
+---
+
+**Q41.** Buying and selling goods online is called:
+
+A. e-banking  
+B. e-mail  
+C. e-commerce  
+D. e-learning  
+
+---
+
+**Q42.** Learning using electronic devices and the internet is called:
+
+A. e-banking  
+B. e-mail  
+C. e-commerce  
+D. e-learning  
+
+---
+
+**Q43.** The practice of protecting systems and data from cyber threats is called:
+
+A. printing  
+B. cybersecurity  
+C. networking  
+D. programming  
+
+---
+
+**Q44.** A fraudulent attempt to obtain sensitive information by pretending to be a trusted source is:
+
+A. cracking  
+B. phishing  
+C. hacking  
+D. spamming  
+
+---
+
+**Q45.** Malicious software such as viruses and worms is called:
+
+A. firmware  
+B. shareware  
+C. malware  
+D. freeware  
+
+---
+
+**Q46.** The process of converting data into a coded form to prevent unauthorised access is:
+
+A. deletion  
+B. decryption  
+C. compression  
+D. encryption  
+
+---
+
+**Q47.** A copy of data kept for recovery purposes is called a:
+
+A. cache  
+B. firewall  
+C. backup  
+D. virus  
+
+---
+
+**Q48.** The physical parts of a computer are called:
+
+A. shareware  
+B. firmware  
+C. software  
+D. hardware  
+
+---
+
+**Q49.** The programs that run on a computer are called:
+
+A. software  
+B. hardware  
+C. peripherals  
+D. components  
+
+---
+
+**Q50.** The part of the computer that processes instructions is the:
+
+A. CPU  
+B. monitor  
+C. printer  
+D. keyboard  
+
+---
+
+**Q51.** A keyboard is an example of an:
+
+A. input device  
+B. storage device  
+C. output device  
+D. processing device  
+
+---
+
+**Q52.** A monitor is an example of an:
+
+A. output device  
+B. storage device  
+C. processing device  
+D. input device  
+
+---
+
+**Q53.** The process of arranging records in a particular order is called:
+
+A. sorting  
+B. indexing  
+C. filtering  
+D. querying  
+
+---
+
+**Q54.** The process of displaying only records that meet a condition is called:
+
+A. filtering  
+B. backing up  
+C. indexing  
+D. sorting  
+
+---
+
+**Q55.** Raw facts and figures are called:
+
+A. information  
+B. data  
+C. knowledge  
+D. wisdom  
+
+---
+
+**Q56.** Data that has been processed and given meaning is called:
+
+A. raw data  
+B. information  
+C. storage  
+D. input  
+
+---
+
+**Q57.** A collection of related data organised for easy access is a:
+
+A. spreadsheet  
+B. presentation  
+C. database  
+D. document  
+
+---
+
+**Q58.** In a database table, a row is called a:
+
+A. field  
+B. query  
+C. report  
+D. record  
+
+---
+
+**Q59.** In a database table, a column is called a:
+
+A. record  
+B. query  
+C. field  
+D. table  
+
+---
+
+**Q60.** The field that uniquely identifies each record is the:
+
+A. foreign key  
+B. query  
+C. index  
+D. primary key  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 4
+
+## Structural Question Bank — Physical geography
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PHYSICAL GEOGRAPHY
+
+**Q1.** (a) Define the term "weathering". *(2 marks)*
+
+(b) Distinguish between physical and chemical weathering. *(4 marks)*
+
+(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*
+
+---
+
+**Q2.** (a) What is a rock? *(2 marks)*
+
+(b) Describe the three main types of rocks and how each is formed. *(6 marks)*
+
+(c) Give one example of each type of rock. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*
+
+(b) Explain how limestone is formed. *(4 marks)*
+
+(c) State two uses of limestone. *(2 marks)*
+
+---
+
+**Q4.** (a) What is the water cycle? *(2 marks)*
+
+(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*
+
+(c) Explain the importance of the water cycle. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the term "climate". *(2 marks)*
+
+(b) Distinguish between climate and weather. *(4 marks)*
+
+(c) State three factors that affect the climate of a place. *(3 marks)*
+
+---
+
+**Q6.** (a) What is a river? *(2 marks)*
+
+(b) Describe the three stages of a river. *(6 marks)*
+
+(c) Explain how a waterfall is formed. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*
+
+(b) Describe three ways a river transports its load. *(6 marks)*
+
+(c) Explain how a delta is formed. *(4 marks)*
+
+---
+
+**Q8.** (a) What is a drainage basin? *(2 marks)*
+
+(b) Describe the features of a drainage basin. *(4 marks)*
+
+(c) Explain the difference between a tributary and a distributary. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "coast". *(2 marks)*
+
+(b) Describe two landforms created by coastal erosion. *(4 marks)*
+
+(c) Explain how a beach is formed. *(4 marks)*
+
+---
+
+**Q10.** (a) What is a wave? *(2 marks)*
+
+(b) Distinguish between constructive and destructive waves. *(4 marks)*
+
+(c) Explain how a spit is formed. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "soil". *(2 marks)*
+
+(b) Describe the layers of a soil profile. *(4 marks)*
+
+(c) State three factors that affect soil formation. *(3 marks)*
+
+---
+
+**Q12.** (a) What is soil erosion? *(2 marks)*
+
+(b) State three causes of soil erosion. *(3 marks)*
+
+(c) Describe two methods of preventing soil erosion. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "vegetation". *(2 marks)*
+
+(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*
+
+(c) Explain how climate affects vegetation. *(4 marks)*
+
+---
+
+**Q14.** (a) What is a natural hazard? *(2 marks)*
+
+(b) State three examples of natural hazards. *(3 marks)*
+
+(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*
+
+---
+
+**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)
+
+(b) Explain how an earthquake occurs. *(4 marks)*
+
+(c) State two effects of earthquakes. *(2 marks)*
+
+---
+
+**Q16.** (a) What is a tropical storm? *(2 marks)*
+
+(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*
+
+(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "ecosystem". *(2 marks)*
+
+(b) Describe the components of an ecosystem. *(4 marks)*
+
+(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*
+
+---
+
+**Q18.** (a) What is deforestation? *(2 marks)*
+
+(b) State three causes of deforestation. *(3 marks)*
+
+(c) Explain the effects of deforestation on the environment. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "desertification". *(2 marks)*
+
+(b) State three causes of desertification. *(3 marks)*
+
+(c) Describe two ways of reducing desertification. *(4 marks)*
+
+---
+
+**Q20.** (a) What is climate change? *(2 marks)*
+
+(b) State three causes of climate change. *(3 marks)*
+
+(c) Explain two effects of climate change on Cameroon. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 5
+
+## Structural Question Bank — Human and Cameroon geography
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: HUMAN AND CAMEROON GEOGRAPHY
+
+**Q1.** (a) Define the term "population". *(2 marks)*
+
+(b) State three factors that affect population distribution. *(3 marks)*
+
+(c) Explain the difference between population density and population distribution. *(4 marks)*
+
+---
+
+**Q2.** (a) What is population growth? *(2 marks)*
+
+(b) State three causes of rapid population growth. *(3 marks)*
+
+(c) Explain two effects of rapid population growth on a country. *(5 marks)*
+
+---
+
+**Q3.** (a) Define the terms "birth rate" and "death rate". *(4 marks)*
+
+(b) Explain how birth rate and death rate affect population change. *(4 marks)*
+
+(c) State two ways of controlling population growth. *(2 marks)*
+
+---
+
+**Q4.** (a) What is migration? *(2 marks)*
+
+(b) Distinguish between internal and international migration. *(4 marks)*
+
+(c) State three causes of rural-urban migration. *(3 marks)*
+
+---
+
+**Q5.** (a) Define the term "settlement". *(2 marks)*
+
+(b) Distinguish between rural and urban settlements. *(4 marks)*
+
+(c) State three functions of urban settlements. *(3 marks)*
+
+---
+
+**Q6.** (a) What is urbanisation? *(2 marks)*
+
+(b) State three causes of urbanisation. *(3 marks)*
+
+(c) Explain two problems caused by rapid urbanisation. *(5 marks)*
+
+---
+
+**Q7.** (a) Define the term "agriculture". *(2 marks)*
+
+(b) Distinguish between subsistence and commercial farming. *(4 marks)*
+
+(c) State three factors that affect agriculture. *(3 marks)*
+
+---
+
+**Q8.** (a) What is plantation agriculture? *(2 marks)*
+
+(b) Describe the characteristics of plantation agriculture. *(4 marks)*
+
+(c) State two advantages and two disadvantages of plantation agriculture. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the terms "crop rotation" and "mixed farming". *(4 marks)*
+
+(b) Explain the importance of agriculture to the economy of Cameroon. *(4 marks)*
+
+(c) State two problems facing agriculture in Cameroon. *(2 marks)*
+
+---
+
+**Q10.** (a) What is industry? *(2 marks)*
+
+(b) Distinguish between primary, secondary, and tertiary industries. *(6 marks)*
+
+(c) Give two examples of each type of industry. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "manufacturing". *(2 marks)*
+
+(b) State three factors that influence the location of an industry. *(3 marks)*
+
+(c) Explain why industries are often located near ports. *(4 marks)*
+
+---
+
+**Q12.** (a) What is transport? *(2 marks)*
+
+(b) State three modes of transport. *(3 marks)*
+
+(c) Explain the importance of transport to economic development. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "trade". *(2 marks)*
+
+(b) Distinguish between internal and international trade. *(4 marks)*
+
+(c) State three reasons why countries trade with each other. *(3 marks)*
+
+---
+
+**Q14.** (a) What is a map? *(2 marks)*
+
+(b) State three features of a good map. *(3 marks)*
+
+(c) Explain how to measure distance on a map using a scale. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the terms "contour line" and "relief". *(4 marks)*
+
+(b) Explain how contour lines show the shape of the land. *(4 marks)*
+
+(c) Describe how you would identify a hill and a valley on a map. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a compass bearing? *(2 marks)*
+
+(b) State the eight points of the compass. *(4 marks)*
+
+(c) Explain how to find the bearing of one place from another on a map. *(4 marks)*
+
+---
+
+**Q17.** (a) Name the ten regions of Cameroon. *(5 marks)*
+
+(b) State the capital city of Cameroon. *(1 mark)*
+
+(c) Describe the main economic activity of two regions of Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is the relief of Cameroon? *(2 marks)*
+
+(b) Describe the main physical features of Cameroon. *(4 marks)*
+
+(c) Explain how the relief of Cameroon affects agriculture. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "tourism". *(2 marks)*
+
+(b) State three tourist attractions in Cameroon. *(3 marks)*
+
+(c) Explain two benefits of tourism to Cameroon. *(4 marks)*
+
+---
+
+**Q20.** (a) What is sustainable development? *(2 marks)*
+
+(b) State three ways Cameroon can achieve sustainable development. *(3 marks)*
+
+(c) Explain the importance of conserving natural resources. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 6
+
+## Structural Question Bank — Physical geography
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PHYSICAL GEOGRAPHY
+
+**Q1.** (a) Define the term "weathering". *(2 marks)*
+
+(b) Distinguish between physical and chemical weathering. *(4 marks)*
+
+(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*
+
+---
+
+**Q2.** (a) What is a rock? *(2 marks)*
+
+(b) Describe the three main types of rocks and how each is formed. *(6 marks)*
+
+(c) Give one example of each type of rock. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*
+
+(b) Explain how limestone is formed. *(4 marks)*
+
+(c) State two uses of limestone. *(2 marks)*
+
+---
+
+**Q4.** (a) What is the water cycle? *(2 marks)*
+
+(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*
+
+(c) Explain the importance of the water cycle. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the term "climate". *(2 marks)*
+
+(b) Distinguish between climate and weather. *(4 marks)*
+
+(c) State three factors that affect the climate of a place. *(3 marks)*
+
+---
+
+**Q6.** (a) What is a river? *(2 marks)*
+
+(b) Describe the three stages of a river. *(6 marks)*
+
+(c) Explain how a waterfall is formed. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*
+
+(b) Describe three ways a river transports its load. *(6 marks)*
+
+(c) Explain how a delta is formed. *(4 marks)*
+
+---
+
+**Q8.** (a) What is a drainage basin? *(2 marks)*
+
+(b) Describe the features of a drainage basin. *(4 marks)*
+
+(c) Explain the difference between a tributary and a distributary. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "coast". *(2 marks)*
+
+(b) Describe two landforms created by coastal erosion. *(4 marks)*
+
+(c) Explain how a beach is formed. *(4 marks)*
+
+---
+
+**Q10.** (a) What is a wave? *(2 marks)*
+
+(b) Distinguish between constructive and destructive waves. *(4 marks)*
+
+(c) Explain how a spit is formed. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "soil". *(2 marks)*
+
+(b) Describe the layers of a soil profile. *(4 marks)*
+
+(c) State three factors that affect soil formation. *(3 marks)*
+
+---
+
+**Q12.** (a) What is soil erosion? *(2 marks)*
+
+(b) State three causes of soil erosion. *(3 marks)*
+
+(c) Describe two methods of preventing soil erosion. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "vegetation". *(2 marks)*
+
+(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*
+
+(c) Explain how climate affects vegetation. *(4 marks)*
+
+---
+
+**Q14.** (a) What is a natural hazard? *(2 marks)*
+
+(b) State three examples of natural hazards. *(3 marks)*
+
+(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*
+
+---
+
+**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)
+
+(b) Explain how an earthquake occurs. *(4 marks)*
+
+(c) State two effects of earthquakes. *(2 marks)*
+
+---
+
+**Q16.** (a) What is a tropical storm? *(2 marks)*
+
+(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*
+
+(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "ecosystem". *(2 marks)*
+
+(b) Describe the components of an ecosystem. *(4 marks)*
+
+(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*
+
+---
+
+**Q18.** (a) What is deforestation? *(2 marks)*
+
+(b) State three causes of deforestation. *(3 marks)*
+
+(c) Explain the effects of deforestation on the environment. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "desertification". *(2 marks)*
+
+(b) State three causes of desertification. *(3 marks)*
+
+(c) Describe two ways of reducing desertification. *(4 marks)*
+
+---
+
+**Q20.** (a) What is climate change? *(2 marks)*
+
+(b) State three causes of climate change. *(3 marks)*
+
+(c) Explain two effects of climate change on Cameroon. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 7
+
+## Structural Question Bank — Human and Cameroon geography
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: HUMAN AND CAMEROON GEOGRAPHY
+
+**Q1.** (a) Define the term "population". *(2 marks)*
+
+(b) State three factors that affect population distribution. *(3 marks)*
+
+(c) Explain the difference between population density and population distribution. *(4 marks)*
+
+---
+
+**Q2.** (a) What is population growth? *(2 marks)*
+
+(b) State three causes of rapid population growth. *(3 marks)*
+
+(c) Explain two effects of rapid population growth on a country. *(5 marks)*
+
+---
+
+**Q3.** (a) Define the terms "birth rate" and "death rate". *(4 marks)*
+
+(b) Explain how birth rate and death rate affect population change. *(4 marks)*
+
+(c) State two ways of controlling population growth. *(2 marks)*
+
+---
+
+**Q4.** (a) What is migration? *(2 marks)*
+
+(b) Distinguish between internal and international migration. *(4 marks)*
+
+(c) State three causes of rural-urban migration. *(3 marks)*
+
+---
+
+**Q5.** (a) Define the term "settlement". *(2 marks)*
+
+(b) Distinguish between rural and urban settlements. *(4 marks)*
+
+(c) State three functions of urban settlements. *(3 marks)*
+
+---
+
+**Q6.** (a) What is urbanisation? *(2 marks)*
+
+(b) State three causes of urbanisation. *(3 marks)*
+
+(c) Explain two problems caused by rapid urbanisation. *(5 marks)*
+
+---
+
+**Q7.** (a) Define the term "agriculture". *(2 marks)*
+
+(b) Distinguish between subsistence and commercial farming. *(4 marks)*
+
+(c) State three factors that affect agriculture. *(3 marks)*
+
+---
+
+**Q8.** (a) What is plantation agriculture? *(2 marks)*
+
+(b) Describe the characteristics of plantation agriculture. *(4 marks)*
+
+(c) State two advantages and two disadvantages of plantation agriculture. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the terms "crop rotation" and "mixed farming". *(4 marks)*
+
+(b) Explain the importance of agriculture to the economy of Cameroon. *(4 marks)*
+
+(c) State two problems facing agriculture in Cameroon. *(2 marks)*
+
+---
+
+**Q10.** (a) What is industry? *(2 marks)*
+
+(b) Distinguish between primary, secondary, and tertiary industries. *(6 marks)*
+
+(c) Give two examples of each type of industry. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "manufacturing". *(2 marks)*
+
+(b) State three factors that influence the location of an industry. *(3 marks)*
+
+(c) Explain why industries are often located near ports. *(4 marks)*
+
+---
+
+**Q12.** (a) What is transport? *(2 marks)*
+
+(b) State three modes of transport. *(3 marks)*
+
+(c) Explain the importance of transport to economic development. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "trade". *(2 marks)*
+
+(b) Distinguish between internal and international trade. *(4 marks)*
+
+(c) State three reasons why countries trade with each other. *(3 marks)*
+
+---
+
+**Q14.** (a) What is a map? *(2 marks)*
+
+(b) State three features of a good map. *(3 marks)*
+
+(c) Explain how to measure distance on a map using a scale. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the terms "contour line" and "relief". *(4 marks)*
+
+(b) Explain how contour lines show the shape of the land. *(4 marks)*
+
+(c) Describe how you would identify a hill and a valley on a map. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a compass bearing? *(2 marks)*
+
+(b) State the eight points of the compass. *(4 marks)*
+
+(c) Explain how to find the bearing of one place from another on a map. *(4 marks)*
+
+---
+
+**Q17.** (a) Name the ten regions of Cameroon. *(5 marks)*
+
+(b) State the capital city of Cameroon. *(1 mark)*
+
+(c) Describe the main economic activity of two regions of Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is the relief of Cameroon? *(2 marks)*
+
+(b) Describe the main physical features of Cameroon. *(4 marks)*
+
+(c) Explain how the relief of Cameroon affects agriculture. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "tourism". *(2 marks)*
+
+(b) State three tourist attractions in Cameroon. *(3 marks)*
+
+(c) Explain two benefits of tourism to Cameroon. *(4 marks)*
+
+---
+
+**Q20.** (a) What is sustainable development? *(2 marks)*
+
+(b) State three ways Cameroon can achieve sustainable development. *(3 marks)*
+
+(c) Explain the importance of conserving natural resources. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 8
+
+## Structural Question Bank — Physical geography
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PHYSICAL GEOGRAPHY
+
+**Q1.** (a) Define the term "weathering". *(2 marks)*
+
+(b) Distinguish between physical and chemical weathering. *(4 marks)*
+
+(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*
+
+---
+
+**Q2.** (a) What is a rock? *(2 marks)*
+
+(b) Describe the three main types of rocks and how each is formed. *(6 marks)*
+
+(c) Give one example of each type of rock. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*
+
+(b) Explain how limestone is formed. *(4 marks)*
+
+(c) State two uses of limestone. *(2 marks)*
+
+---
+
+**Q4.** (a) What is the water cycle? *(2 marks)*
+
+(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*
+
+(c) Explain the importance of the water cycle. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the term "climate". *(2 marks)*
+
+(b) Distinguish between climate and weather. *(4 marks)*
+
+(c) State three factors that affect the climate of a place. *(3 marks)*
+
+---
+
+**Q6.** (a) What is a river? *(2 marks)*
+
+(b) Describe the three stages of a river. *(6 marks)*
+
+(c) Explain how a waterfall is formed. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*
+
+(b) Describe three ways a river transports its load. *(6 marks)*
+
+(c) Explain how a delta is formed. *(4 marks)*
+
+---
+
+**Q8.** (a) What is a drainage basin? *(2 marks)*
+
+(b) Describe the features of a drainage basin. *(4 marks)*
+
+(c) Explain the difference between a tributary and a distributary. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "coast". *(2 marks)*
+
+(b) Describe two landforms created by coastal erosion. *(4 marks)*
+
+(c) Explain how a beach is formed. *(4 marks)*
+
+---
+
+**Q10.** (a) What is a wave? *(2 marks)*
+
+(b) Distinguish between constructive and destructive waves. *(4 marks)*
+
+(c) Explain how a spit is formed. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "soil". *(2 marks)*
+
+(b) Describe the layers of a soil profile. *(4 marks)*
+
+(c) State three factors that affect soil formation. *(3 marks)*
+
+---
+
+**Q12.** (a) What is soil erosion? *(2 marks)*
+
+(b) State three causes of soil erosion. *(3 marks)*
+
+(c) Describe two methods of preventing soil erosion. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "vegetation". *(2 marks)*
+
+(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*
+
+(c) Explain how climate affects vegetation. *(4 marks)*
+
+---
+
+**Q14.** (a) What is a natural hazard? *(2 marks)*
+
+(b) State three examples of natural hazards. *(3 marks)*
+
+(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*
+
+---
+
+**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)
+
+(b) Explain how an earthquake occurs. *(4 marks)*
+
+(c) State two effects of earthquakes. *(2 marks)*
+
+---
+
+**Q16.** (a) What is a tropical storm? *(2 marks)*
+
+(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*
+
+(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "ecosystem". *(2 marks)*
+
+(b) Describe the components of an ecosystem. *(4 marks)*
+
+(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*
+
+---
+
+**Q18.** (a) What is deforestation? *(2 marks)*
+
+(b) State three causes of deforestation. *(3 marks)*
+
+(c) Explain the effects of deforestation on the environment. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "desertification". *(2 marks)*
+
+(b) State three causes of desertification. *(3 marks)*
+
+(c) Describe two ways of reducing desertification. *(4 marks)*
+
+---
+
+**Q20.** (a) What is climate change? *(2 marks)*
+
+(b) State three causes of climate change. *(3 marks)*
+
+(c) Explain two effects of climate change on Cameroon. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The breaking down of rocks in place is called:
+
+A. weathering  
+B. erosion  
+C. deposition  
+D. transportation  
+
+---
+
+**Q2.** The movement of weathered material by rivers is called:
+
+A. erosion  
+B. weathering  
+C. evaporation  
+D. deposition  
+
+---
+
+**Q3.** The laying down of eroded material is called:
+
+A. deposition  
+B. weathering  
+C. erosion  
+D. transportation  
+
+---
+
+**Q4.** The type of rock formed from cooled magma is:
+
+A. igneous  
+B. metamorphic  
+C. organic  
+D. sedimentary  
+
+---
+
+**Q5.** The type of rock formed from compressed layers of sediment is:
+
+A. sedimentary  
+B. volcanic  
+C. igneous  
+D. metamorphic  
+
+---
+
+**Q6.** The type of rock changed by heat and pressure is:
+
+A. metamorphic  
+B. organic  
+C. sedimentary  
+D. igneous  
+
+---
+
+**Q7.** An example of an igneous rock is:
+
+A. limestone  
+B. granite  
+C. sandstone  
+D. marble  
+
+---
+
+**Q8.** An example of a sedimentary rock is:
+
+A. granite  
+B. limestone  
+C. marble  
+D. basalt  
+
+---
+
+**Q9.** An example of a metamorphic rock is:
+
+A. granite  
+B. sandstone  
+C. marble  
+D. basalt  
+
+---
+
+**Q10.** The process by which water changes from liquid to vapour is:
+
+A. condensation  
+B. precipitation  
+C. infiltration  
+D. evaporation  
+
+---
+
+**Q11.** The process by which water vapour changes to liquid is:
+
+A. evaporation  
+B. transpiration  
+C. condensation  
+D. precipitation  
+
+---
+
+**Q12.** Rain, snow, and hail are all forms of:
+
+A. condensation  
+B. runoff  
+C. evaporation  
+D. precipitation  
+
+---
+
+**Q13.** The average weather conditions of a place over a long period is its:
+
+A. temperature  
+B. climate  
+C. weather  
+D. season  
+
+---
+
+**Q14.** The conditions of the atmosphere at a particular time and place is the:
+
+A. season  
+B. weather  
+C. relief  
+D. climate  
+
+---
+
+**Q15.** The upper course of a river is characterised by:
+
+A. wide floodplain  
+B. slow flow and deposition  
+C. fast flow and erosion  
+D. meanders  
+
+---
+
+**Q16.** The lower course of a river is characterised by:
+
+A. steep valleys  
+B. fast flow and waterfalls  
+C. rapids  
+D. deposition and a wide floodplain  
+
+---
+
+**Q17.** A waterfall is formed mainly by:
+
+A. weathering  
+B. evaporation  
+C. differential erosion  
+D. deposition  
+
+---
+
+**Q18.** A delta is formed at the:
+
+A. middle course  
+B. waterfall  
+C. source of a river  
+D. mouth of a river  
+
+---
+
+**Q19.** The wearing away of the coast by waves is called:
+
+A. flooding  
+B. coastal erosion  
+C. coastal deposition  
+D. weathering  
+
+---
+
+**Q20.** A ridge of sand deposited by waves is called a:
+
+A. cave  
+B. beach  
+C. spit  
+D. cliff  
+
+---
+
+**Q21.** The top layer of the soil profile is the:
+
+A. parent material  
+B. subsoil  
+C. humus layer  
+D. bedrock  
+
+---
+
+**Q22.** The removal of topsoil by wind and water is called:
+
+A. leaching  
+B. soil formation  
+C. weathering  
+D. soil erosion  
+
+---
+
+**Q23.** The dense evergreen forest found near the equator is the:
+
+A. temperate forest  
+B. desert  
+C. tropical rainforest  
+D. savanna  
+
+---
+
+**Q24.** A sudden shaking of the ground caused by movements in the earth''s crust is an:
+
+A. tsunami  
+B. tornado  
+C. volcano  
+D. earthquake  
+
+---
+
+**Q25.** A mountain formed by the eruption of magma is a:
+
+A. volcano  
+B. fold mountain  
+C. block mountain  
+D. plateau  
+
+---
+
+**Q26.** A violent tropical storm is called a:
+
+A. hurricane  
+B. blizzard  
+C. frost  
+D. drought  
+
+---
+
+**Q27.** The clearing of forests is called:
+
+A. deforestation  
+B. reforestation  
+C. afforestation  
+D. conservation  
+
+---
+
+**Q28.** The spread of desert conditions into semi-arid areas is called:
+
+A. desertification  
+B. urbanisation  
+C. migration  
+D. deforestation  
+
+---
+
+**Q29.** The long-term change in average weather patterns is called:
+
+A. climate change  
+B. relief change  
+C. weather change  
+D. seasonal change  
+
+---
+
+**Q30.** A community of living organisms and their environment is an:
+
+A. ecosystem  
+B. habitat  
+C. biome  
+D. ecotone  
+
+---
+
+**Q31.** The number of people living in an area is its:
+
+A. settlement  
+B. population  
+C. community  
+D. society  
+
+---
+
+**Q32.** The number of people per unit area is called:
+
+A. population distribution  
+B. population density  
+C. birth rate  
+D. population growth  
+
+---
+
+**Q33.** The number of live births per 1000 people per year is the:
+
+A. death rate  
+B. growth rate  
+C. birth rate  
+D. fertility rate  
+
+---
+
+**Q34.** The movement of people from one place to another is called:
+
+A. urbanisation  
+B. settlement  
+C. trade  
+D. migration  
+
+---
+
+**Q35.** The movement of people from rural areas to towns is called:
+
+A. urban-rural migration  
+B. seasonal migration  
+C. rural-urban migration  
+D. international migration  
+
+---
+
+**Q36.** A permanent human community is called a:
+
+A. migration  
+B. region  
+C. population  
+D. settlement  
+
+---
+
+**Q37.** The growth of towns and cities is called:
+
+A. industrialisation  
+B. urbanisation  
+C. migration  
+D. ruralisation  
+
+---
+
+**Q38.** Farming for the farmer''s own family is called:
+
+A. plantation farming  
+B. subsistence farming  
+C. mixed farming  
+D. commercial farming  
+
+---
+
+**Q39.** Farming for sale in the market is called:
+
+A. shifting cultivation  
+B. subsistence farming  
+C. commercial farming  
+D. pastoral farming  
+
+---
+
+**Q40.** A large farm growing a single cash crop is a:
+
+A. ranch  
+B. smallholding  
+C. orchard  
+D. plantation  
+
+---
+
+**Q41.** The growing of crops and rearing of animals together is called:
+
+A. monoculture  
+B. shifting cultivation  
+C. mixed farming  
+D. crop rotation  
+
+---
+
+**Q42.** The extraction of raw materials is a:
+
+A. tertiary industry  
+B. quaternary industry  
+C. secondary industry  
+D. primary industry  
+
+---
+
+**Q43.** The manufacturing of goods is a:
+
+A. quaternary industry  
+B. secondary industry  
+C. primary industry  
+D. tertiary industry  
+
+---
+
+**Q44.** The provision of services is a:
+
+A. quaternary industry  
+B. tertiary industry  
+C. secondary industry  
+D. primary industry  
+
+---
+
+**Q45.** The movement of goods and people is called:
+
+A. communication  
+B. trade  
+C. transport  
+D. migration  
+
+---
+
+**Q46.** The buying and selling of goods is called:
+
+A. agriculture  
+B. transport  
+C. industry  
+D. trade  
+
+---
+
+**Q47.** Trade between countries is called:
+
+A. barter trade  
+B. local trade  
+C. international trade  
+D. internal trade  
+
+---
+
+**Q48.** The capital city of Cameroon is:
+
+A. Bamenda  
+B. Buea  
+C. Douala  
+D. Yaoundé  
+
+---
+
+**Q49.** The largest city and main port of Cameroon is:
+
+A. Douala  
+B. Yaoundé  
+C. Buea  
+D. Garoua  
+
+---
+
+**Q50.** The number of regions in Cameroon is:
+
+A. 10  
+B. 8  
+C. 6  
+D. 12  
+
+---
+
+**Q51.** The line joining points of equal height on a map is a:
+
+A. contour line  
+B. latitude  
+C. grid line  
+D. longitude  
+
+---
+
+**Q52.** The shape of the land surface is called:
+
+A. relief  
+B. climate  
+C. drainage  
+D. vegetation  
+
+---
+
+**Q53.** The direction of one place from another measured in degrees is a:
+
+A. bearing  
+B. gradient  
+C. contour  
+D. scale  
+
+---
+
+**Q54.** The ratio between distance on a map and distance on the ground is the:
+
+A. scale  
+B. legend  
+C. relief  
+D. bearing  
+
+---
+
+**Q55.** The highest mountain in Cameroon is:
+
+A. Mount Fako  
+B. Mount Cameroon  
+C. Mount Oku  
+D. Mount Bamboutos  
+
+---
+
+**Q56.** The main cash crop grown in the highlands of Cameroon is:
+
+A. rice  
+B. coffee  
+C. banana  
+D. cotton  
+
+---
+
+**Q57.** The main cash crop grown in northern Cameroon is:
+
+A. coffee  
+B. cocoa  
+C. cotton  
+D. tea  
+
+---
+
+**Q58.** The main cash crop grown in the south of Cameroon is:
+
+A. cotton  
+B. millet  
+C. groundnut  
+D. cocoa  
+
+---
+
+**Q59.** The industry that serves tourists is called:
+
+A. manufacturing  
+B. fishing  
+C. tourism  
+D. mining  
+
+---
+
+**Q60.** Development that meets present needs without harming future generations is called:
+
+A. economic growth  
+B. urbanisation  
+C. industrialisation  
+D. sustainable development  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The type of rock formed from cooled magma is:
+
+A. igneous  
+B. sedimentary  
+C. metamorphic  
+D. organic  
+
+---
+
+**Q2.** The type of rock formed from compressed layers of sediment is:
+
+A. sedimentary  
+B. igneous  
+C. volcanic  
+D. metamorphic  
+
+---
+
+**Q3.** The type of rock changed by heat and pressure is:
+
+A. metamorphic  
+B. sedimentary  
+C. igneous  
+D. organic  
+
+---
+
+**Q4.** An example of an igneous rock is:
+
+A. granite  
+B. sandstone  
+C. marble  
+D. limestone  
+
+---
+
+**Q5.** An example of a sedimentary rock is:
+
+A. limestone  
+B. marble  
+C. granite  
+D. basalt  
+
+---
+
+**Q6.** An example of a metamorphic rock is:
+
+A. marble  
+B. basalt  
+C. sandstone  
+D. granite  
+
+---
+
+**Q7.** The process by which water changes from liquid to vapour is:
+
+A. condensation  
+B. evaporation  
+C. precipitation  
+D. infiltration  
+
+---
+
+**Q8.** The process by which water vapour changes to liquid is:
+
+A. evaporation  
+B. condensation  
+C. transpiration  
+D. precipitation  
+
+---
+
+**Q9.** Rain, snow, and hail are all forms of:
+
+A. condensation  
+B. evaporation  
+C. precipitation  
+D. runoff  
+
+---
+
+**Q10.** The average weather conditions of a place over a long period is its:
+
+A. weather  
+B. temperature  
+C. season  
+D. climate  
+
+---
+
+**Q11.** The conditions of the atmosphere at a particular time and place is the:
+
+A. climate  
+B. relief  
+C. weather  
+D. season  
+
+---
+
+**Q12.** The upper course of a river is characterised by:
+
+A. slow flow and deposition  
+B. meanders  
+C. wide floodplain  
+D. fast flow and erosion  
+
+---
+
+**Q13.** The lower course of a river is characterised by:
+
+A. steep valleys  
+B. deposition and a wide floodplain  
+C. fast flow and waterfalls  
+D. rapids  
+
+---
+
+**Q14.** A waterfall is formed mainly by:
+
+A. weathering  
+B. differential erosion  
+C. evaporation  
+D. deposition  
+
+---
+
+**Q15.** A delta is formed at the:
+
+A. middle course  
+B. source of a river  
+C. mouth of a river  
+D. waterfall  
+
+---
+
+**Q16.** The wearing away of the coast by waves is called:
+
+A. weathering  
+B. coastal deposition  
+C. flooding  
+D. coastal erosion  
+
+---
+
+**Q17.** A ridge of sand deposited by waves is called a:
+
+A. spit  
+B. cave  
+C. beach  
+D. cliff  
+
+---
+
+**Q18.** The top layer of the soil profile is the:
+
+A. bedrock  
+B. parent material  
+C. subsoil  
+D. humus layer  
+
+---
+
+**Q19.** The removal of topsoil by wind and water is called:
+
+A. leaching  
+B. soil erosion  
+C. soil formation  
+D. weathering  
+
+---
+
+**Q20.** The dense evergreen forest found near the equator is the:
+
+A. temperate forest  
+B. tropical rainforest  
+C. desert  
+D. savanna  
+
+---
+
+**Q21.** A sudden shaking of the ground caused by movements in the earth''s crust is an:
+
+A. tsunami  
+B. volcano  
+C. earthquake  
+D. tornado  
+
+---
+
+**Q22.** A mountain formed by the eruption of magma is a:
+
+A. plateau  
+B. fold mountain  
+C. block mountain  
+D. volcano  
+
+---
+
+**Q23.** A violent tropical storm is called a:
+
+A. frost  
+B. drought  
+C. hurricane  
+D. blizzard  
+
+---
+
+**Q24.** The clearing of forests is called:
+
+A. conservation  
+B. reforestation  
+C. afforestation  
+D. deforestation  
+
+---
+
+**Q25.** The spread of desert conditions into semi-arid areas is called:
+
+A. desertification  
+B. deforestation  
+C. urbanisation  
+D. migration  
+
+---
+
+**Q26.** The long-term change in average weather patterns is called:
+
+A. climate change  
+B. weather change  
+C. relief change  
+D. seasonal change  
+
+---
+
+**Q27.** A community of living organisms and their environment is an:
+
+A. ecosystem  
+B. biome  
+C. ecotone  
+D. habitat  
+
+---
+
+**Q28.** The breaking down of rocks in place is called:
+
+A. weathering  
+B. deposition  
+C. transportation  
+D. erosion  
+
+---
+
+**Q29.** The movement of weathered material by rivers is called:
+
+A. erosion  
+B. evaporation  
+C. weathering  
+D. deposition  
+
+---
+
+**Q30.** The laying down of eroded material is called:
+
+A. deposition  
+B. transportation  
+C. weathering  
+D. erosion  
+
+---
+
+**Q31.** The movement of people from one place to another is called:
+
+A. urbanisation  
+B. migration  
+C. settlement  
+D. trade  
+
+---
+
+**Q32.** The movement of people from rural areas to towns is called:
+
+A. urban-rural migration  
+B. rural-urban migration  
+C. seasonal migration  
+D. international migration  
+
+---
+
+**Q33.** A permanent human community is called a:
+
+A. migration  
+B. population  
+C. settlement  
+D. region  
+
+---
+
+**Q34.** The growth of towns and cities is called:
+
+A. migration  
+B. industrialisation  
+C. ruralisation  
+D. urbanisation  
+
+---
+
+**Q35.** Farming for the farmer''s own family is called:
+
+A. commercial farming  
+B. mixed farming  
+C. subsistence farming  
+D. plantation farming  
+
+---
+
+**Q36.** Farming for sale in the market is called:
+
+A. subsistence farming  
+B. pastoral farming  
+C. shifting cultivation  
+D. commercial farming  
+
+---
+
+**Q37.** A large farm growing a single cash crop is a:
+
+A. ranch  
+B. plantation  
+C. smallholding  
+D. orchard  
+
+---
+
+**Q38.** The growing of crops and rearing of animals together is called:
+
+A. monoculture  
+B. mixed farming  
+C. shifting cultivation  
+D. crop rotation  
+
+---
+
+**Q39.** The extraction of raw materials is a:
+
+A. tertiary industry  
+B. secondary industry  
+C. primary industry  
+D. quaternary industry  
+
+---
+
+**Q40.** The manufacturing of goods is a:
+
+A. tertiary industry  
+B. primary industry  
+C. quaternary industry  
+D. secondary industry  
+
+---
+
+**Q41.** The provision of services is a:
+
+A. secondary industry  
+B. quaternary industry  
+C. tertiary industry  
+D. primary industry  
+
+---
+
+**Q42.** The movement of goods and people is called:
+
+A. migration  
+B. communication  
+C. trade  
+D. transport  
+
+---
+
+**Q43.** The buying and selling of goods is called:
+
+A. agriculture  
+B. trade  
+C. transport  
+D. industry  
+
+---
+
+**Q44.** Trade between countries is called:
+
+A. barter trade  
+B. international trade  
+C. local trade  
+D. internal trade  
+
+---
+
+**Q45.** The capital city of Cameroon is:
+
+A. Bamenda  
+B. Douala  
+C. Yaoundé  
+D. Buea  
+
+---
+
+**Q46.** The largest city and main port of Cameroon is:
+
+A. Garoua  
+B. Yaoundé  
+C. Buea  
+D. Douala  
+
+---
+
+**Q47.** The number of regions in Cameroon is:
+
+A. 6  
+B. 12  
+C. 10  
+D. 8  
+
+---
+
+**Q48.** The line joining points of equal height on a map is a:
+
+A. longitude  
+B. latitude  
+C. grid line  
+D. contour line  
+
+---
+
+**Q49.** The shape of the land surface is called:
+
+A. relief  
+B. vegetation  
+C. climate  
+D. drainage  
+
+---
+
+**Q50.** The direction of one place from another measured in degrees is a:
+
+A. bearing  
+B. contour  
+C. gradient  
+D. scale  
+
+---
+
+**Q51.** The ratio between distance on a map and distance on the ground is the:
+
+A. scale  
+B. relief  
+C. bearing  
+D. legend  
+
+---
+
+**Q52.** The highest mountain in Cameroon is:
+
+A. Mount Cameroon  
+B. Mount Oku  
+C. Mount Bamboutos  
+D. Mount Fako  
+
+---
+
+**Q53.** The main cash crop grown in the highlands of Cameroon is:
+
+A. coffee  
+B. banana  
+C. rice  
+D. cotton  
+
+---
+
+**Q54.** The main cash crop grown in northern Cameroon is:
+
+A. cotton  
+B. tea  
+C. cocoa  
+D. coffee  
+
+---
+
+**Q55.** The main cash crop grown in the south of Cameroon is:
+
+A. cotton  
+B. cocoa  
+C. millet  
+D. groundnut  
+
+---
+
+**Q56.** The industry that serves tourists is called:
+
+A. manufacturing  
+B. tourism  
+C. fishing  
+D. mining  
+
+---
+
+**Q57.** Development that meets present needs without harming future generations is called:
+
+A. economic growth  
+B. industrialisation  
+C. sustainable development  
+D. urbanisation  
+
+---
+
+**Q58.** The number of people living in an area is its:
+
+A. settlement  
+B. community  
+C. society  
+D. population  
+
+---
+
+**Q59.** The number of people per unit area is called:
+
+A. population distribution  
+B. birth rate  
+C. population density  
+D. population growth  
+
+---
+
+**Q60.** The number of live births per 1000 people per year is the:
+
+A. death rate  
+B. fertility rate  
+C. growth rate  
+D. birth rate  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Geography'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Geography',
+  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Geography
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** An example of an igneous rock is:
+
+A. granite  
+B. limestone  
+C. sandstone  
+D. marble  
+
+---
+
+**Q2.** An example of a sedimentary rock is:
+
+A. limestone  
+B. granite  
+C. marble  
+D. basalt  
+
+---
+
+**Q3.** An example of a metamorphic rock is:
+
+A. marble  
+B. sandstone  
+C. granite  
+D. basalt  
+
+---
+
+**Q4.** The process by which water changes from liquid to vapour is:
+
+A. evaporation  
+B. precipitation  
+C. infiltration  
+D. condensation  
+
+---
+
+**Q5.** The process by which water vapour changes to liquid is:
+
+A. condensation  
+B. transpiration  
+C. evaporation  
+D. precipitation  
+
+---
+
+**Q6.** Rain, snow, and hail are all forms of:
+
+A. precipitation  
+B. runoff  
+C. evaporation  
+D. condensation  
+
+---
+
+**Q7.** The average weather conditions of a place over a long period is its:
+
+A. weather  
+B. climate  
+C. temperature  
+D. season  
+
+---
+
+**Q8.** The conditions of the atmosphere at a particular time and place is the:
+
+A. climate  
+B. weather  
+C. relief  
+D. season  
+
+---
+
+**Q9.** The upper course of a river is characterised by:
+
+A. slow flow and deposition  
+B. wide floodplain  
+C. fast flow and erosion  
+D. meanders  
+
+---
+
+**Q10.** The lower course of a river is characterised by:
+
+A. fast flow and waterfalls  
+B. steep valleys  
+C. rapids  
+D. deposition and a wide floodplain  
+
+---
+
+**Q11.** A waterfall is formed mainly by:
+
+A. deposition  
+B. evaporation  
+C. differential erosion  
+D. weathering  
+
+---
+
+**Q12.** A delta is formed at the:
+
+A. source of a river  
+B. waterfall  
+C. middle course  
+D. mouth of a river  
+
+---
+
+**Q13.** The wearing away of the coast by waves is called:
+
+A. weathering  
+B. coastal erosion  
+C. coastal deposition  
+D. flooding  
+
+---
+
+**Q14.** A ridge of sand deposited by waves is called a:
+
+A. spit  
+B. beach  
+C. cave  
+D. cliff  
+
+---
+
+**Q15.** The top layer of the soil profile is the:
+
+A. bedrock  
+B. subsoil  
+C. humus layer  
+D. parent material  
+
+---
+
+**Q16.** The removal of topsoil by wind and water is called:
+
+A. weathering  
+B. soil formation  
+C. leaching  
+D. soil erosion  
+
+---
+
+**Q17.** The dense evergreen forest found near the equator is the:
+
+A. desert  
+B. temperate forest  
+C. tropical rainforest  
+D. savanna  
+
+---
+
+**Q18.** A sudden shaking of the ground caused by movements in the earth''s crust is an:
+
+A. tornado  
+B. tsunami  
+C. volcano  
+D. earthquake  
+
+---
+
+**Q19.** A mountain formed by the eruption of magma is a:
+
+A. plateau  
+B. volcano  
+C. fold mountain  
+D. block mountain  
+
+---
+
+**Q20.** A violent tropical storm is called a:
+
+A. frost  
+B. hurricane  
+C. drought  
+D. blizzard  
+
+---
+
+**Q21.** The clearing of forests is called:
+
+A. conservation  
+B. afforestation  
+C. deforestation  
+D. reforestation  
+
+---
+
+**Q22.** The spread of desert conditions into semi-arid areas is called:
+
+A. migration  
+B. deforestation  
+C. urbanisation  
+D. desertification  
+
+---
+
+**Q23.** The long-term change in average weather patterns is called:
+
+A. relief change  
+B. seasonal change  
+C. climate change  
+D. weather change  
+
+---
+
+**Q24.** A community of living organisms and their environment is an:
+
+A. habitat  
+B. biome  
+C. ecotone  
+D. ecosystem  
+
+---
+
+**Q25.** The breaking down of rocks in place is called:
+
+A. weathering  
+B. erosion  
+C. deposition  
+D. transportation  
+
+---
+
+**Q26.** The movement of weathered material by rivers is called:
+
+A. erosion  
+B. weathering  
+C. evaporation  
+D. deposition  
+
+---
+
+**Q27.** The laying down of eroded material is called:
+
+A. deposition  
+B. weathering  
+C. erosion  
+D. transportation  
+
+---
+
+**Q28.** The type of rock formed from cooled magma is:
+
+A. igneous  
+B. metamorphic  
+C. organic  
+D. sedimentary  
+
+---
+
+**Q29.** The type of rock formed from compressed layers of sediment is:
+
+A. sedimentary  
+B. volcanic  
+C. igneous  
+D. metamorphic  
+
+---
+
+**Q30.** The type of rock changed by heat and pressure is:
+
+A. metamorphic  
+B. organic  
+C. sedimentary  
+D. igneous  
+
+---
+
+**Q31.** The growth of towns and cities is called:
+
+A. migration  
+B. urbanisation  
+C. industrialisation  
+D. ruralisation  
+
+---
+
+**Q32.** Farming for the farmer''s own family is called:
+
+A. commercial farming  
+B. subsistence farming  
+C. mixed farming  
+D. plantation farming  
+
+---
+
+**Q33.** Farming for sale in the market is called:
+
+A. subsistence farming  
+B. shifting cultivation  
+C. commercial farming  
+D. pastoral farming  
+
+---
+
+**Q34.** A large farm growing a single cash crop is a:
+
+A. smallholding  
+B. ranch  
+C. orchard  
+D. plantation  
+
+---
+
+**Q35.** The growing of crops and rearing of animals together is called:
+
+A. crop rotation  
+B. shifting cultivation  
+C. mixed farming  
+D. monoculture  
+
+---
+
+**Q36.** The extraction of raw materials is a:
+
+A. secondary industry  
+B. quaternary industry  
+C. tertiary industry  
+D. primary industry  
+
+---
+
+**Q37.** The manufacturing of goods is a:
+
+A. tertiary industry  
+B. secondary industry  
+C. primary industry  
+D. quaternary industry  
+
+---
+
+**Q38.** The provision of services is a:
+
+A. secondary industry  
+B. tertiary industry  
+C. quaternary industry  
+D. primary industry  
+
+---
+
+**Q39.** The movement of goods and people is called:
+
+A. migration  
+B. trade  
+C. transport  
+D. communication  
+
+---
+
+**Q40.** The buying and selling of goods is called:
+
+A. industry  
+B. transport  
+C. agriculture  
+D. trade  
+
+---
+
+**Q41.** Trade between countries is called:
+
+A. local trade  
+B. barter trade  
+C. international trade  
+D. internal trade  
+
+---
+
+**Q42.** The capital city of Cameroon is:
+
+A. Buea  
+B. Bamenda  
+C. Douala  
+D. Yaoundé  
+
+---
+
+**Q43.** The largest city and main port of Cameroon is:
+
+A. Garoua  
+B. Douala  
+C. Yaoundé  
+D. Buea  
+
+---
+
+**Q44.** The number of regions in Cameroon is:
+
+A. 6  
+B. 10  
+C. 12  
+D. 8  
+
+---
+
+**Q45.** The line joining points of equal height on a map is a:
+
+A. longitude  
+B. grid line  
+C. contour line  
+D. latitude  
+
+---
+
+**Q46.** The shape of the land surface is called:
+
+A. drainage  
+B. vegetation  
+C. climate  
+D. relief  
+
+---
+
+**Q47.** The direction of one place from another measured in degrees is a:
+
+A. gradient  
+B. scale  
+C. bearing  
+D. contour  
+
+---
+
+**Q48.** The ratio between distance on a map and distance on the ground is the:
+
+A. legend  
+B. relief  
+C. bearing  
+D. scale  
+
+---
+
+**Q49.** The highest mountain in Cameroon is:
+
+A. Mount Cameroon  
+B. Mount Fako  
+C. Mount Oku  
+D. Mount Bamboutos  
+
+---
+
+**Q50.** The main cash crop grown in the highlands of Cameroon is:
+
+A. coffee  
+B. rice  
+C. banana  
+D. cotton  
+
+---
+
+**Q51.** The main cash crop grown in northern Cameroon is:
+
+A. cotton  
+B. cocoa  
+C. coffee  
+D. tea  
+
+---
+
+**Q52.** The main cash crop grown in the south of Cameroon is:
+
+A. cocoa  
+B. millet  
+C. groundnut  
+D. cotton  
+
+---
+
+**Q53.** The industry that serves tourists is called:
+
+A. tourism  
+B. fishing  
+C. manufacturing  
+D. mining  
+
+---
+
+**Q54.** Development that meets present needs without harming future generations is called:
+
+A. sustainable development  
+B. urbanisation  
+C. industrialisation  
+D. economic growth  
+
+---
+
+**Q55.** The number of people living in an area is its:
+
+A. settlement  
+B. population  
+C. community  
+D. society  
+
+---
+
+**Q56.** The number of people per unit area is called:
+
+A. population distribution  
+B. population density  
+C. birth rate  
+D. population growth  
+
+---
+
+**Q57.** The number of live births per 1000 people per year is the:
+
+A. death rate  
+B. growth rate  
+C. birth rate  
+D. fertility rate  
+
+---
+
+**Q58.** The movement of people from one place to another is called:
+
+A. urbanisation  
+B. settlement  
+C. trade  
+D. migration  
+
+---
+
+**Q59.** The movement of people from rural areas to towns is called:
+
+A. urban-rural migration  
+B. seasonal migration  
+C. rural-urban migration  
+D. international migration  
+
+---
+
+**Q60.** A permanent human community is called a:
+
+A. migration  
+B. region  
+C. population  
+D. settlement  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 4
+
+## Structural Question Bank — Cameroon and African history
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: CAMEROON AND AFRICAN HISTORY
+
+**Q1.** (a) What is history? *(2 marks)*
+
+(b) State three sources of history. *(3 marks)*
+
+(c) Explain the importance of studying history. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "pre-colonial". *(2 marks)*
+
+(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*
+
+(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*
+
+---
+
+**Q3.** (a) What was the slave trade? *(2 marks)*
+
+(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*
+
+(c) Explain why the slave trade was abolished. *(4 marks)*
+
+---
+
+**Q4.** (a) Define the term "colonisation". *(2 marks)*
+
+(b) Explain why European powers colonised Africa. *(4 marks)*
+
+(c) Describe how Germany colonised Cameroon. *(5 marks)*
+
+---
+
+**Q5.** (a) What was the Berlin Conference? *(2 marks)*
+
+(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*
+
+(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "mandate". *(2 marks)*
+
+(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*
+
+(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*
+
+---
+
+**Q7.** (a) What is nationalism? *(2 marks)*
+
+(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*
+
+(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*
+
+---
+
+**Q8.** (a) When did Cameroon gain independence? *(2 marks)*
+
+(b) Describe the process by which French Cameroon gained independence. *(4 marks)*
+
+(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*
+
+---
+
+**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*
+
+(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*
+
+(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "reunification". *(2 marks)
+
+(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*
+
+(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a federation? *(2 marks)*
+
+(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*
+
+(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the term "unitary state". *(2 marks)*
+
+(b) Describe the political changes in Cameroon after 1972. *(4 marks)*
+
+(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*
+
+---
+
+**Q13.** (a) What is multiparty democracy? *(2 marks)*
+
+(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*
+
+(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*
+
+(b) State three aims of pan-Africanism. *(3 marks)*
+
+(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*
+
+---
+
+**Q15.** (a) What was the Scramble for Africa? *(2 marks)*
+
+(b) Describe the causes of the Scramble for Africa. *(4 marks)*
+
+(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "decolonisation". *(2 marks)*
+
+(b) State three factors that led to the decolonisation of Africa. *(3 marks)*
+
+(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*
+
+---
+
+**Q17.** (a) What is apartheid? *(2 marks)*
+
+(b) Describe the system of apartheid in South Africa. *(4 marks)*
+
+(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*
+
+---
+
+**Q18.** (a) Define the term "civil war". *(2 marks)*
+
+(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*
+
+(c) Explain the effects of the civil war on Nigeria. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the African Union? *(2 marks)*
+
+(b) State three objectives of the African Union. *(3 marks)*
+
+(c) Explain the difference between the OAU and the African Union. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "economic integration". *(2 marks)*
+
+(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*
+
+(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 5
+
+## Structural Question Bank — World history
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: WORLD HISTORY
+
+**Q1.** (a) What was the First World War? *(2 marks)*
+
+(b) State three causes of the First World War. *(3 marks)*
+
+(c) Explain how the assassination of Archduke Franz Ferdinand led to the war. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "alliance". *(2 marks)*
+
+(b) Describe the alliance system in Europe before 1914. *(4 marks)*
+
+(c) Explain how the alliance system contributed to the outbreak of the First World War. *(4 marks)*
+
+---
+
+**Q3.** (a) What was the Treaty of Versailles? *(2 marks)*
+
+(b) State three terms of the Treaty of Versailles. *(3 marks)*
+
+(c) Explain the effects of the Treaty of Versailles on Germany. *(5 marks)*
+
+---
+
+**Q4.** (a) Define the term "League of Nations". *(2 marks)*
+
+(b) State three aims of the League of Nations. *(3 marks)*
+
+(c) Explain why the League of Nations failed to prevent the Second World War. *(5 marks)*
+
+---
+
+**Q5.** (a) What was the Second World War? *(2 marks)*
+
+(b) State three causes of the Second World War. *(3 marks)*
+
+(c) Explain the role of Adolf Hitler in causing the Second World War. *(5 marks)*
+
+---
+
+**Q6.** (a) Define the term "totalitarianism". *(2 marks)*
+
+(b) Describe the rise of fascism in Italy and Nazism in Germany. *(5 marks)*
+
+(c) Explain the effects of totalitarian rule on the people of Germany. *(4 marks)*
+
+---
+
+**Q7.** (a) What was the Holocaust? *(2 marks)*
+
+(b) Describe the persecution of Jews under Nazi rule. *(4 marks)*
+
+(c) Explain the consequences of the Holocaust. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the term "Cold War". *(2 marks)*
+
+(b) State three causes of the Cold War. *(3 marks)*
+
+(c) Explain how the Cold War divided the world into two blocs. *(5 marks)*
+
+---
+
+**Q9.** (a) What was the Berlin Wall? *(2 marks)*
+
+(b) Describe the events leading to the construction of the Berlin Wall in 1961. *(4 marks)*
+
+(c) Explain the significance of the fall of the Berlin Wall in 1989. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "nuclear arms race". *(2 marks)*
+
+(b) Describe the development of nuclear weapons during the Cold War. *(4 marks)*
+
+(c) Explain the importance of arms control agreements such as SALT. *(4 marks)*
+
+---
+
+**Q11.** (a) What was the United Nations? *(2 marks)*
+
+(b) State three organs of the United Nations. *(3 marks)*
+
+(c) Explain the role of the UN Security Council in maintaining peace. *(5 marks)*
+
+---
+
+**Q12.** (a) Define the term "decolonisation". *(2 marks)*
+
+(b) State three factors that led to decolonisation after 1945. *(3 marks)*
+
+(c) Explain the role of the UN in the decolonisation of Africa. *(4 marks)*
+
+---
+
+**Q13.** (a) What is globalisation? *(2 marks)*
+
+(b) State three features of globalisation. *(3 marks)*
+
+(c) Explain two effects of globalisation on developing countries. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "international organisation". *(2 marks)*
+
+(b) Describe the aims of the World Trade Organization. *(4 marks)*
+
+(c) Explain the importance of the International Monetary Fund. *(4 marks)*
+
+---
+
+**Q15.** (a) What was the Cuban Missile Crisis? *(2 marks)*
+
+(b) Describe the events of the Cuban Missile Crisis of 1962. *(5 marks)*
+
+(c) Explain the consequences of the crisis for the Cold War. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "proxy war". *(2 marks)*
+
+(b) Describe the Korean War as a proxy war of the Cold War. *(4 marks)*
+
+(c) Explain the effects of the Vietnam War on the United States. *(4 marks)*
+
+---
+
+**Q17.** (a) What was the European Union? *(2 marks)*
+
+(b) Describe the stages of European integration from the EEC to the EU. *(5 marks)*
+
+(c) Explain the benefits of the European Union to its members. *(4 marks)*
+
+---
+
+**Q18.** (a) Define the term "terrorism". *(2 marks)*
+
+(b) State three causes of terrorism. *(3 marks)*
+
+(c) Explain the effects of international terrorism on global security. *(5 marks)*
+
+---
+
+**Q19.** (a) What is the Commonwealth? *(2 marks)*
+
+(b) State three objectives of the Commonwealth. *(3 marks)*
+
+(c) Explain the importance of the Commonwealth to Cameroon. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "human rights". *(2 marks)*
+
+(b) State three examples of human rights. *(3 marks)*
+
+(c) Explain the role of the Universal Declaration of Human Rights in protecting people. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 6
+
+## Structural Question Bank — Cameroon and African history
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: CAMEROON AND AFRICAN HISTORY
+
+**Q1.** (a) What is history? *(2 marks)*
+
+(b) State three sources of history. *(3 marks)*
+
+(c) Explain the importance of studying history. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "pre-colonial". *(2 marks)*
+
+(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*
+
+(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*
+
+---
+
+**Q3.** (a) What was the slave trade? *(2 marks)*
+
+(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*
+
+(c) Explain why the slave trade was abolished. *(4 marks)*
+
+---
+
+**Q4.** (a) Define the term "colonisation". *(2 marks)*
+
+(b) Explain why European powers colonised Africa. *(4 marks)*
+
+(c) Describe how Germany colonised Cameroon. *(5 marks)*
+
+---
+
+**Q5.** (a) What was the Berlin Conference? *(2 marks)*
+
+(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*
+
+(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "mandate". *(2 marks)*
+
+(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*
+
+(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*
+
+---
+
+**Q7.** (a) What is nationalism? *(2 marks)*
+
+(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*
+
+(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*
+
+---
+
+**Q8.** (a) When did Cameroon gain independence? *(2 marks)*
+
+(b) Describe the process by which French Cameroon gained independence. *(4 marks)*
+
+(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*
+
+---
+
+**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*
+
+(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*
+
+(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "reunification". *(2 marks)
+
+(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*
+
+(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a federation? *(2 marks)*
+
+(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*
+
+(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the term "unitary state". *(2 marks)*
+
+(b) Describe the political changes in Cameroon after 1972. *(4 marks)*
+
+(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*
+
+---
+
+**Q13.** (a) What is multiparty democracy? *(2 marks)*
+
+(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*
+
+(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*
+
+(b) State three aims of pan-Africanism. *(3 marks)*
+
+(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*
+
+---
+
+**Q15.** (a) What was the Scramble for Africa? *(2 marks)*
+
+(b) Describe the causes of the Scramble for Africa. *(4 marks)*
+
+(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "decolonisation". *(2 marks)*
+
+(b) State three factors that led to the decolonisation of Africa. *(3 marks)*
+
+(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*
+
+---
+
+**Q17.** (a) What is apartheid? *(2 marks)*
+
+(b) Describe the system of apartheid in South Africa. *(4 marks)*
+
+(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*
+
+---
+
+**Q18.** (a) Define the term "civil war". *(2 marks)*
+
+(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*
+
+(c) Explain the effects of the civil war on Nigeria. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the African Union? *(2 marks)*
+
+(b) State three objectives of the African Union. *(3 marks)*
+
+(c) Explain the difference between the OAU and the African Union. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "economic integration". *(2 marks)*
+
+(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*
+
+(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 7
+
+## Structural Question Bank — World history
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: WORLD HISTORY
+
+**Q1.** (a) What was the First World War? *(2 marks)*
+
+(b) State three causes of the First World War. *(3 marks)*
+
+(c) Explain how the assassination of Archduke Franz Ferdinand led to the war. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "alliance". *(2 marks)*
+
+(b) Describe the alliance system in Europe before 1914. *(4 marks)*
+
+(c) Explain how the alliance system contributed to the outbreak of the First World War. *(4 marks)*
+
+---
+
+**Q3.** (a) What was the Treaty of Versailles? *(2 marks)*
+
+(b) State three terms of the Treaty of Versailles. *(3 marks)*
+
+(c) Explain the effects of the Treaty of Versailles on Germany. *(5 marks)*
+
+---
+
+**Q4.** (a) Define the term "League of Nations". *(2 marks)*
+
+(b) State three aims of the League of Nations. *(3 marks)*
+
+(c) Explain why the League of Nations failed to prevent the Second World War. *(5 marks)*
+
+---
+
+**Q5.** (a) What was the Second World War? *(2 marks)*
+
+(b) State three causes of the Second World War. *(3 marks)*
+
+(c) Explain the role of Adolf Hitler in causing the Second World War. *(5 marks)*
+
+---
+
+**Q6.** (a) Define the term "totalitarianism". *(2 marks)*
+
+(b) Describe the rise of fascism in Italy and Nazism in Germany. *(5 marks)*
+
+(c) Explain the effects of totalitarian rule on the people of Germany. *(4 marks)*
+
+---
+
+**Q7.** (a) What was the Holocaust? *(2 marks)*
+
+(b) Describe the persecution of Jews under Nazi rule. *(4 marks)*
+
+(c) Explain the consequences of the Holocaust. *(4 marks)*
+
+---
+
+**Q8.** (a) Define the term "Cold War". *(2 marks)*
+
+(b) State three causes of the Cold War. *(3 marks)*
+
+(c) Explain how the Cold War divided the world into two blocs. *(5 marks)*
+
+---
+
+**Q9.** (a) What was the Berlin Wall? *(2 marks)*
+
+(b) Describe the events leading to the construction of the Berlin Wall in 1961. *(4 marks)*
+
+(c) Explain the significance of the fall of the Berlin Wall in 1989. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "nuclear arms race". *(2 marks)*
+
+(b) Describe the development of nuclear weapons during the Cold War. *(4 marks)*
+
+(c) Explain the importance of arms control agreements such as SALT. *(4 marks)*
+
+---
+
+**Q11.** (a) What was the United Nations? *(2 marks)*
+
+(b) State three organs of the United Nations. *(3 marks)*
+
+(c) Explain the role of the UN Security Council in maintaining peace. *(5 marks)*
+
+---
+
+**Q12.** (a) Define the term "decolonisation". *(2 marks)*
+
+(b) State three factors that led to decolonisation after 1945. *(3 marks)*
+
+(c) Explain the role of the UN in the decolonisation of Africa. *(4 marks)*
+
+---
+
+**Q13.** (a) What is globalisation? *(2 marks)*
+
+(b) State three features of globalisation. *(3 marks)*
+
+(c) Explain two effects of globalisation on developing countries. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "international organisation". *(2 marks)*
+
+(b) Describe the aims of the World Trade Organization. *(4 marks)*
+
+(c) Explain the importance of the International Monetary Fund. *(4 marks)*
+
+---
+
+**Q15.** (a) What was the Cuban Missile Crisis? *(2 marks)*
+
+(b) Describe the events of the Cuban Missile Crisis of 1962. *(5 marks)*
+
+(c) Explain the consequences of the crisis for the Cold War. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "proxy war". *(2 marks)*
+
+(b) Describe the Korean War as a proxy war of the Cold War. *(4 marks)*
+
+(c) Explain the effects of the Vietnam War on the United States. *(4 marks)*
+
+---
+
+**Q17.** (a) What was the European Union? *(2 marks)*
+
+(b) Describe the stages of European integration from the EEC to the EU. *(5 marks)*
+
+(c) Explain the benefits of the European Union to its members. *(4 marks)*
+
+---
+
+**Q18.** (a) Define the term "terrorism". *(2 marks)*
+
+(b) State three causes of terrorism. *(3 marks)*
+
+(c) Explain the effects of international terrorism on global security. *(5 marks)*
+
+---
+
+**Q19.** (a) What is the Commonwealth? *(2 marks)*
+
+(b) State three objectives of the Commonwealth. *(3 marks)*
+
+(c) Explain the importance of the Commonwealth to Cameroon. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "human rights". *(2 marks)*
+
+(b) State three examples of human rights. *(3 marks)*
+
+(c) Explain the role of the Universal Declaration of Human Rights in protecting people. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 8
+
+## Structural Question Bank — Cameroon and African history
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: CAMEROON AND AFRICAN HISTORY
+
+**Q1.** (a) What is history? *(2 marks)*
+
+(b) State three sources of history. *(3 marks)*
+
+(c) Explain the importance of studying history. *(4 marks)*
+
+---
+
+**Q2.** (a) Define the term "pre-colonial". *(2 marks)*
+
+(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*
+
+(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*
+
+---
+
+**Q3.** (a) What was the slave trade? *(2 marks)*
+
+(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*
+
+(c) Explain why the slave trade was abolished. *(4 marks)*
+
+---
+
+**Q4.** (a) Define the term "colonisation". *(2 marks)*
+
+(b) Explain why European powers colonised Africa. *(4 marks)*
+
+(c) Describe how Germany colonised Cameroon. *(5 marks)*
+
+---
+
+**Q5.** (a) What was the Berlin Conference? *(2 marks)*
+
+(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*
+
+(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "mandate". *(2 marks)*
+
+(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*
+
+(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*
+
+---
+
+**Q7.** (a) What is nationalism? *(2 marks)*
+
+(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*
+
+(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*
+
+---
+
+**Q8.** (a) When did Cameroon gain independence? *(2 marks)*
+
+(b) Describe the process by which French Cameroon gained independence. *(4 marks)*
+
+(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*
+
+---
+
+**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*
+
+(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*
+
+(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "reunification". *(2 marks)
+
+(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*
+
+(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*
+
+---
+
+**Q11.** (a) What is a federation? *(2 marks)*
+
+(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*
+
+(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*
+
+---
+
+**Q12.** (a) Define the term "unitary state". *(2 marks)*
+
+(b) Describe the political changes in Cameroon after 1972. *(4 marks)*
+
+(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*
+
+---
+
+**Q13.** (a) What is multiparty democracy? *(2 marks)*
+
+(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*
+
+(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*
+
+(b) State three aims of pan-Africanism. *(3 marks)*
+
+(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*
+
+---
+
+**Q15.** (a) What was the Scramble for Africa? *(2 marks)*
+
+(b) Describe the causes of the Scramble for Africa. *(4 marks)*
+
+(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "decolonisation". *(2 marks)*
+
+(b) State three factors that led to the decolonisation of Africa. *(3 marks)*
+
+(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*
+
+---
+
+**Q17.** (a) What is apartheid? *(2 marks)*
+
+(b) Describe the system of apartheid in South Africa. *(4 marks)*
+
+(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*
+
+---
+
+**Q18.** (a) Define the term "civil war". *(2 marks)*
+
+(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*
+
+(c) Explain the effects of the civil war on Nigeria. *(4 marks)*
+
+---
+
+**Q19.** (a) What is the African Union? *(2 marks)*
+
+(b) State three objectives of the African Union. *(3 marks)*
+
+(c) Explain the difference between the OAU and the African Union. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "economic integration". *(2 marks)*
+
+(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*
+
+(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The study of past events is called:
+
+A. history  
+B. geography  
+C. economics  
+D. sociology  
+
+---
+
+**Q2.** Written records of the past are called:
+
+A. documents  
+B. artefacts  
+C. legends  
+D. monuments  
+
+---
+
+**Q3.** Objects made by people in the past are called:
+
+A. artefacts  
+B. archives  
+C. documents  
+D. manuscripts  
+
+---
+
+**Q4.** The traditional ruler of the Bamenda people is the:
+
+A. Fon  
+B. Lamido  
+C. Chief  
+D. Sultan  
+
+---
+
+**Q5.** The traditional ruler of the Bamoun people is the:
+
+A. Sultan  
+B. Emir  
+C. Fon  
+D. Lamido  
+
+---
+
+**Q6.** The forced removal of Africans to the Americas was called the:
+
+A. slave trade  
+B. mandate  
+C. partition  
+D. scramble  
+
+---
+
+**Q7.** The slave trade was abolished in the British Empire in:
+
+A. 1884  
+B. 1807  
+C. 1914  
+D. 1945  
+
+---
+
+**Q8.** The conference that divided Africa among European powers was the:
+
+A. Paris Conference  
+B. Berlin Conference  
+C. London Conference  
+D. Geneva Conference  
+
+---
+
+**Q9.** The Berlin Conference took place in:
+
+A. 1914-1918  
+B. 1939-1945  
+C. 1884-1885  
+D. 1960-1961  
+
+---
+
+**Q10.** The European power that first colonised Cameroon was:
+
+A. Britain  
+B. France  
+C. Belgium  
+D. Germany  
+
+---
+
+**Q11.** Germany lost Cameroon after the:
+
+A. Second World War  
+B. Scramble for Africa  
+C. First World War  
+D. Berlin Conference  
+
+---
+
+**Q12.** After the First World War, Cameroon was divided between:
+
+A. Britain and Germany  
+B. Germany and Italy  
+C. France and Belgium  
+D. Britain and France  
+
+---
+
+**Q13.** The system of government used by the British in Cameroon was:
+
+A. assimilation  
+B. indirect rule  
+C. direct rule  
+D. apartheid  
+
+---
+
+**Q14.** The system of government used by the French in Cameroon was:
+
+A. apartheid  
+B. assimilation  
+C. federation  
+D. indirect rule  
+
+---
+
+**Q15.** The desire of a people to govern themselves is called:
+
+A. imperialism  
+B. colonialism  
+C. nationalism  
+D. federalism  
+
+---
+
+**Q16.** The political party that led the struggle for independence in French Cameroon was the:
+
+A. CPNC  
+B. KNDP  
+C. CNO  
+D. UPC  
+
+---
+
+**Q17.** French Cameroon gained independence in:
+
+A. 1945  
+B. 1972  
+C. 1960  
+D. 1961  
+
+---
+
+**Q18.** The vote held in British Southern Cameroons in 1961 was called the:
+
+A. election  
+B. census  
+C. referendum  
+D. plebiscite  
+
+---
+
+**Q19.** The reunification of Cameroon took place in:
+
+A. 1982  
+B. 1961  
+C. 1960  
+D. 1972  
+
+---
+
+**Q20.** The conference that discussed the reunification of Cameroon was held at:
+
+A. Buea  
+B. Foumban  
+C. Douala  
+D. Yaoundé  
+
+---
+
+**Q21.** Cameroon became a federation in:
+
+A. 1984  
+B. 1960  
+C. 1961  
+D. 1972  
+
+---
+
+**Q22.** The federal system in Cameroon was replaced by a unitary system in:
+
+A. 1990  
+B. 1961  
+C. 1982  
+D. 1972  
+
+---
+
+**Q23.** The first president of Cameroon was:
+
+A. Ruben Um Nyobé  
+B. John Ngu Foncha  
+C. Ahmadou Ahidjo  
+D. Paul Biya  
+
+---
+
+**Q24.** The current president of Cameroon is:
+
+A. Emmanuel Nganou  
+B. John Ngu Foncha  
+C. Ahmadou Ahidjo  
+D. Paul Biya  
+
+---
+
+**Q25.** Multiparty politics was reintroduced in Cameroon in:
+
+A. 1990  
+B. 1972  
+C. 1961  
+D. 1982  
+
+---
+
+**Q26.** The organisation formed in 1963 to unite African states was the:
+
+A. OAU  
+B. AU  
+C. ECOWAS  
+D. UN  
+
+---
+
+**Q27.** The OAU was replaced by the African Union in:
+
+A. 2002  
+B. 1963  
+C. 1990  
+D. 2010  
+
+---
+
+**Q28.** The system of racial segregation in South Africa was called:
+
+A. apartheid  
+B. indirect rule  
+C. colonialism  
+D. assimilation  
+
+---
+
+**Q29.** The leader who fought against apartheid in South Africa was:
+
+A. Nelson Mandela  
+B. Julius Nyerere  
+C. Kwame Nkrumah  
+D. Jomo Kenyatta  
+
+---
+
+**Q30.** The first president of independent Ghana was:
+
+A. Kwame Nkrumah  
+B. Julius Nyerere  
+C. Jomo Kenyatta  
+D. Nelson Mandela  
+
+---
+
+**Q31.** The First World War began in:
+
+A. 1918  
+B. 1914  
+C. 1939  
+D. 1900  
+
+---
+
+**Q32.** The First World War ended in:
+
+A. 1914  
+B. 1918  
+C. 1920  
+D. 1945  
+
+---
+
+**Q33.** The assassination that triggered the First World War was that of:
+
+A. Adolf Hitler  
+B. Napoleon  
+C. Archduke Franz Ferdinand  
+D. Kaiser Wilhelm  
+
+---
+
+**Q34.** The alliance of Germany, Austria-Hungary, and Italy was called the:
+
+A. Triple Entente  
+B. Axis  
+C. Allies  
+D. Triple Alliance  
+
+---
+
+**Q35.** The alliance of Britain, France, and Russia was called the:
+
+A. Triple Alliance  
+B. Central Powers  
+C. Triple Entente  
+D. Axis  
+
+---
+
+**Q36.** The treaty that ended the First World War was the:
+
+A. Treaty of Paris  
+B. Treaty of Rome  
+C. Treaty of Berlin  
+D. Treaty of Versailles  
+
+---
+
+**Q37.** The international organisation formed after the First World War was the:
+
+A. African Union  
+B. League of Nations  
+C. United Nations  
+D. European Union  
+
+---
+
+**Q38.** The Second World War began in:
+
+A. 1945  
+B. 1939  
+C. 1929  
+D. 1914  
+
+---
+
+**Q39.** The Second World War ended in:
+
+A. 1918  
+B. 1939  
+C. 1945  
+D. 1950  
+
+---
+
+**Q40.** The leader of Nazi Germany was:
+
+A. Joseph Stalin  
+B. Benito Mussolini  
+C. Winston Churchill  
+D. Adolf Hitler  
+
+---
+
+**Q41.** The leader of Fascist Italy was:
+
+A. Joseph Stalin  
+B. Francisco Franco  
+C. Benito Mussolini  
+D. Adolf Hitler  
+
+---
+
+**Q42.** The systematic murder of six million Jews by the Nazis was called the:
+
+A. Pogrom  
+B. Inquisition  
+C. Genocide  
+D. Holocaust  
+
+---
+
+**Q43.** The state of tension between the USA and the USSR after 1945 was called the:
+
+A. Trade War  
+B. Cold War  
+C. World War  
+D. Proxy War  
+
+---
+
+**Q44.** The wall that divided Berlin was built in:
+
+A. 1950  
+B. 1961  
+C. 1989  
+D. 1945  
+
+---
+
+**Q45.** The Berlin Wall fell in:
+
+A. 1991  
+B. 1961  
+C. 1989  
+D. 1945  
+
+---
+
+**Q46.** The international organisation formed in 1945 to maintain peace was the:
+
+A. European Union  
+B. League of Nations  
+C. African Union  
+D. United Nations  
+
+---
+
+**Q47.** The organ of the UN responsible for maintaining peace is the:
+
+A. ICJ  
+B. Secretariat  
+C. Security Council  
+D. General Assembly  
+
+---
+
+**Q48.** The crisis of 1962 that brought the world close to nuclear war was the:
+
+A. Korean Crisis  
+B. Suez Crisis  
+C. Berlin Crisis  
+D. Cuban Missile Crisis  
+
+---
+
+**Q49.** The war fought between North and South Korea from 1950 to 1953 was a:
+
+A. proxy war  
+B. world war  
+C. civil war  
+D. trade war  
+
+---
+
+**Q50.** The process of granting independence to colonies is called:
+
+A. decolonisation  
+B. colonisation  
+C. globalisation  
+D. imperialism  
+
+---
+
+**Q51.** The economic union of European states is called the:
+
+A. European Union  
+B. United Nations  
+C. African Union  
+D. Commonwealth  
+
+---
+
+**Q52.** The organisation that regulates international trade is the:
+
+A. WTO  
+B. UN  
+C. AU  
+D. IMF  
+
+---
+
+**Q53.** The organisation that provides financial assistance to countries is the:
+
+A. IMF  
+B. AU  
+C. WTO  
+D. UN  
+
+---
+
+**Q54.** The increasing interconnection of the world''s economies is called:
+
+A. globalisation  
+B. protectionism  
+C. nationalism  
+D. colonisation  
+
+---
+
+**Q55.** The use of violence for political aims is called:
+
+A. nationalism  
+B. terrorism  
+C. imperialism  
+D. diplomacy  
+
+---
+
+**Q56.** The association of former British colonies is called the:
+
+A. European Union  
+B. Commonwealth  
+C. United Nations  
+D. African Union  
+
+---
+
+**Q57.** The declaration that protects the rights of all people was the:
+
+A. Treaty of Versailles  
+B. Berlin Act  
+C. Universal Declaration of Human Rights  
+D. Atlantic Charter  
+
+---
+
+**Q58.** The Universal Declaration of Human Rights was adopted in:
+
+A. 1918  
+B. 1939  
+C. 1960  
+D. 1948  
+
+---
+
+**Q59.** The leader of the Soviet Union during the Cuban Missile Crisis was:
+
+A. Joseph Stalin  
+B. Mikhail Gorbachev  
+C. Nikita Khrushchev  
+D. Vladimir Lenin  
+
+---
+
+**Q60.** The leader of the United States during the Cuban Missile Crisis was:
+
+A. Franklin Roosevelt  
+B. Richard Nixon  
+C. Harry Truman  
+D. John F. Kennedy  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The traditional ruler of the Bamenda people is the:
+
+A. Fon  
+B. Sultan  
+C. Lamido  
+D. Chief  
+
+---
+
+**Q2.** The traditional ruler of the Bamoun people is the:
+
+A. Sultan  
+B. Fon  
+C. Emir  
+D. Lamido  
+
+---
+
+**Q3.** The forced removal of Africans to the Americas was called the:
+
+A. slave trade  
+B. partition  
+C. scramble  
+D. mandate  
+
+---
+
+**Q4.** The slave trade was abolished in the British Empire in:
+
+A. 1807  
+B. 1914  
+C. 1945  
+D. 1884  
+
+---
+
+**Q5.** The conference that divided Africa among European powers was the:
+
+A. Berlin Conference  
+B. London Conference  
+C. Paris Conference  
+D. Geneva Conference  
+
+---
+
+**Q6.** The Berlin Conference took place in:
+
+A. 1884-1885  
+B. 1960-1961  
+C. 1939-1945  
+D. 1914-1918  
+
+---
+
+**Q7.** The European power that first colonised Cameroon was:
+
+A. Britain  
+B. Germany  
+C. France  
+D. Belgium  
+
+---
+
+**Q8.** Germany lost Cameroon after the:
+
+A. Second World War  
+B. First World War  
+C. Scramble for Africa  
+D. Berlin Conference  
+
+---
+
+**Q9.** After the First World War, Cameroon was divided between:
+
+A. Britain and Germany  
+B. France and Belgium  
+C. Britain and France  
+D. Germany and Italy  
+
+---
+
+**Q10.** The system of government used by the British in Cameroon was:
+
+A. direct rule  
+B. assimilation  
+C. apartheid  
+D. indirect rule  
+
+---
+
+**Q11.** The system of government used by the French in Cameroon was:
+
+A. indirect rule  
+B. federation  
+C. assimilation  
+D. apartheid  
+
+---
+
+**Q12.** The desire of a people to govern themselves is called:
+
+A. colonialism  
+B. federalism  
+C. imperialism  
+D. nationalism  
+
+---
+
+**Q13.** The political party that led the struggle for independence in French Cameroon was the:
+
+A. CPNC  
+B. UPC  
+C. KNDP  
+D. CNO  
+
+---
+
+**Q14.** French Cameroon gained independence in:
+
+A. 1945  
+B. 1960  
+C. 1972  
+D. 1961  
+
+---
+
+**Q15.** The vote held in British Southern Cameroons in 1961 was called the:
+
+A. election  
+B. referendum  
+C. plebiscite  
+D. census  
+
+---
+
+**Q16.** The reunification of Cameroon took place in:
+
+A. 1972  
+B. 1960  
+C. 1982  
+D. 1961  
+
+---
+
+**Q17.** The conference that discussed the reunification of Cameroon was held at:
+
+A. Douala  
+B. Buea  
+C. Foumban  
+D. Yaoundé  
+
+---
+
+**Q18.** Cameroon became a federation in:
+
+A. 1972  
+B. 1984  
+C. 1960  
+D. 1961  
+
+---
+
+**Q19.** The federal system in Cameroon was replaced by a unitary system in:
+
+A. 1990  
+B. 1972  
+C. 1961  
+D. 1982  
+
+---
+
+**Q20.** The first president of Cameroon was:
+
+A. Ruben Um Nyobé  
+B. Ahmadou Ahidjo  
+C. John Ngu Foncha  
+D. Paul Biya  
+
+---
+
+**Q21.** The current president of Cameroon is:
+
+A. Emmanuel Nganou  
+B. Ahmadou Ahidjo  
+C. Paul Biya  
+D. John Ngu Foncha  
+
+---
+
+**Q22.** Multiparty politics was reintroduced in Cameroon in:
+
+A. 1982  
+B. 1972  
+C. 1961  
+D. 1990  
+
+---
+
+**Q23.** The organisation formed in 1963 to unite African states was the:
+
+A. ECOWAS  
+B. UN  
+C. OAU  
+D. AU  
+
+---
+
+**Q24.** The OAU was replaced by the African Union in:
+
+A. 2010  
+B. 1963  
+C. 1990  
+D. 2002  
+
+---
+
+**Q25.** The system of racial segregation in South Africa was called:
+
+A. apartheid  
+B. assimilation  
+C. indirect rule  
+D. colonialism  
+
+---
+
+**Q26.** The leader who fought against apartheid in South Africa was:
+
+A. Nelson Mandela  
+B. Kwame Nkrumah  
+C. Julius Nyerere  
+D. Jomo Kenyatta  
+
+---
+
+**Q27.** The first president of independent Ghana was:
+
+A. Kwame Nkrumah  
+B. Jomo Kenyatta  
+C. Nelson Mandela  
+D. Julius Nyerere  
+
+---
+
+**Q28.** The study of past events is called:
+
+A. history  
+B. economics  
+C. sociology  
+D. geography  
+
+---
+
+**Q29.** Written records of the past are called:
+
+A. documents  
+B. legends  
+C. artefacts  
+D. monuments  
+
+---
+
+**Q30.** Objects made by people in the past are called:
+
+A. artefacts  
+B. manuscripts  
+C. archives  
+D. documents  
+
+---
+
+**Q31.** The alliance of Germany, Austria-Hungary, and Italy was called the:
+
+A. Triple Entente  
+B. Triple Alliance  
+C. Axis  
+D. Allies  
+
+---
+
+**Q32.** The alliance of Britain, France, and Russia was called the:
+
+A. Triple Alliance  
+B. Triple Entente  
+C. Central Powers  
+D. Axis  
+
+---
+
+**Q33.** The treaty that ended the First World War was the:
+
+A. Treaty of Paris  
+B. Treaty of Berlin  
+C. Treaty of Versailles  
+D. Treaty of Rome  
+
+---
+
+**Q34.** The international organisation formed after the First World War was the:
+
+A. United Nations  
+B. African Union  
+C. European Union  
+D. League of Nations  
+
+---
+
+**Q35.** The Second World War began in:
+
+A. 1914  
+B. 1929  
+C. 1939  
+D. 1945  
+
+---
+
+**Q36.** The Second World War ended in:
+
+A. 1939  
+B. 1950  
+C. 1918  
+D. 1945  
+
+---
+
+**Q37.** The leader of Nazi Germany was:
+
+A. Joseph Stalin  
+B. Adolf Hitler  
+C. Benito Mussolini  
+D. Winston Churchill  
+
+---
+
+**Q38.** The leader of Fascist Italy was:
+
+A. Joseph Stalin  
+B. Benito Mussolini  
+C. Francisco Franco  
+D. Adolf Hitler  
+
+---
+
+**Q39.** The systematic murder of six million Jews by the Nazis was called the:
+
+A. Pogrom  
+B. Genocide  
+C. Holocaust  
+D. Inquisition  
+
+---
+
+**Q40.** The state of tension between the USA and the USSR after 1945 was called the:
+
+A. Proxy War  
+B. World War  
+C. Trade War  
+D. Cold War  
+
+---
+
+**Q41.** The wall that divided Berlin was built in:
+
+A. 1989  
+B. 1950  
+C. 1961  
+D. 1945  
+
+---
+
+**Q42.** The Berlin Wall fell in:
+
+A. 1945  
+B. 1991  
+C. 1961  
+D. 1989  
+
+---
+
+**Q43.** The international organisation formed in 1945 to maintain peace was the:
+
+A. European Union  
+B. United Nations  
+C. League of Nations  
+D. African Union  
+
+---
+
+**Q44.** The organ of the UN responsible for maintaining peace is the:
+
+A. ICJ  
+B. Security Council  
+C. Secretariat  
+D. General Assembly  
+
+---
+
+**Q45.** The crisis of 1962 that brought the world close to nuclear war was the:
+
+A. Korean Crisis  
+B. Berlin Crisis  
+C. Cuban Missile Crisis  
+D. Suez Crisis  
+
+---
+
+**Q46.** The war fought between North and South Korea from 1950 to 1953 was a:
+
+A. trade war  
+B. world war  
+C. civil war  
+D. proxy war  
+
+---
+
+**Q47.** The process of granting independence to colonies is called:
+
+A. globalisation  
+B. imperialism  
+C. decolonisation  
+D. colonisation  
+
+---
+
+**Q48.** The economic union of European states is called the:
+
+A. Commonwealth  
+B. United Nations  
+C. African Union  
+D. European Union  
+
+---
+
+**Q49.** The organisation that regulates international trade is the:
+
+A. WTO  
+B. IMF  
+C. UN  
+D. AU  
+
+---
+
+**Q50.** The organisation that provides financial assistance to countries is the:
+
+A. IMF  
+B. WTO  
+C. AU  
+D. UN  
+
+---
+
+**Q51.** The increasing interconnection of the world''s economies is called:
+
+A. globalisation  
+B. nationalism  
+C. colonisation  
+D. protectionism  
+
+---
+
+**Q52.** The use of violence for political aims is called:
+
+A. terrorism  
+B. imperialism  
+C. diplomacy  
+D. nationalism  
+
+---
+
+**Q53.** The association of former British colonies is called the:
+
+A. Commonwealth  
+B. United Nations  
+C. European Union  
+D. African Union  
+
+---
+
+**Q54.** The declaration that protects the rights of all people was the:
+
+A. Universal Declaration of Human Rights  
+B. Atlantic Charter  
+C. Berlin Act  
+D. Treaty of Versailles  
+
+---
+
+**Q55.** The Universal Declaration of Human Rights was adopted in:
+
+A. 1918  
+B. 1948  
+C. 1939  
+D. 1960  
+
+---
+
+**Q56.** The leader of the Soviet Union during the Cuban Missile Crisis was:
+
+A. Joseph Stalin  
+B. Nikita Khrushchev  
+C. Mikhail Gorbachev  
+D. Vladimir Lenin  
+
+---
+
+**Q57.** The leader of the United States during the Cuban Missile Crisis was:
+
+A. Franklin Roosevelt  
+B. Harry Truman  
+C. John F. Kennedy  
+D. Richard Nixon  
+
+---
+
+**Q58.** The First World War began in:
+
+A. 1918  
+B. 1939  
+C. 1900  
+D. 1914  
+
+---
+
+**Q59.** The First World War ended in:
+
+A. 1914  
+B. 1920  
+C. 1918  
+D. 1945  
+
+---
+
+**Q60.** The assassination that triggered the First World War was that of:
+
+A. Adolf Hitler  
+B. Kaiser Wilhelm  
+C. Napoleon  
+D. Archduke Franz Ferdinand  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'History'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'History',
+  'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** History
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The slave trade was abolished in the British Empire in:
+
+A. 1807  
+B. 1884  
+C. 1914  
+D. 1945  
+
+---
+
+**Q2.** The conference that divided Africa among European powers was the:
+
+A. Berlin Conference  
+B. Paris Conference  
+C. London Conference  
+D. Geneva Conference  
+
+---
+
+**Q3.** The Berlin Conference took place in:
+
+A. 1884-1885  
+B. 1939-1945  
+C. 1914-1918  
+D. 1960-1961  
+
+---
+
+**Q4.** The European power that first colonised Cameroon was:
+
+A. Germany  
+B. France  
+C. Belgium  
+D. Britain  
+
+---
+
+**Q5.** Germany lost Cameroon after the:
+
+A. First World War  
+B. Scramble for Africa  
+C. Second World War  
+D. Berlin Conference  
+
+---
+
+**Q6.** After the First World War, Cameroon was divided between:
+
+A. Britain and France  
+B. Germany and Italy  
+C. France and Belgium  
+D. Britain and Germany  
+
+---
+
+**Q7.** The system of government used by the British in Cameroon was:
+
+A. direct rule  
+B. indirect rule  
+C. assimilation  
+D. apartheid  
+
+---
+
+**Q8.** The system of government used by the French in Cameroon was:
+
+A. indirect rule  
+B. assimilation  
+C. federation  
+D. apartheid  
+
+---
+
+**Q9.** The desire of a people to govern themselves is called:
+
+A. colonialism  
+B. imperialism  
+C. nationalism  
+D. federalism  
+
+---
+
+**Q10.** The political party that led the struggle for independence in French Cameroon was the:
+
+A. KNDP  
+B. CPNC  
+C. CNO  
+D. UPC  
+
+---
+
+**Q11.** French Cameroon gained independence in:
+
+A. 1961  
+B. 1972  
+C. 1960  
+D. 1945  
+
+---
+
+**Q12.** The vote held in British Southern Cameroons in 1961 was called the:
+
+A. referendum  
+B. census  
+C. election  
+D. plebiscite  
+
+---
+
+**Q13.** The reunification of Cameroon took place in:
+
+A. 1972  
+B. 1961  
+C. 1960  
+D. 1982  
+
+---
+
+**Q14.** The conference that discussed the reunification of Cameroon was held at:
+
+A. Douala  
+B. Foumban  
+C. Buea  
+D. Yaoundé  
+
+---
+
+**Q15.** Cameroon became a federation in:
+
+A. 1972  
+B. 1960  
+C. 1961  
+D. 1984  
+
+---
+
+**Q16.** The federal system in Cameroon was replaced by a unitary system in:
+
+A. 1982  
+B. 1961  
+C. 1990  
+D. 1972  
+
+---
+
+**Q17.** The first president of Cameroon was:
+
+A. John Ngu Foncha  
+B. Ruben Um Nyobé  
+C. Ahmadou Ahidjo  
+D. Paul Biya  
+
+---
+
+**Q18.** The current president of Cameroon is:
+
+A. John Ngu Foncha  
+B. Emmanuel Nganou  
+C. Ahmadou Ahidjo  
+D. Paul Biya  
+
+---
+
+**Q19.** Multiparty politics was reintroduced in Cameroon in:
+
+A. 1982  
+B. 1990  
+C. 1972  
+D. 1961  
+
+---
+
+**Q20.** The organisation formed in 1963 to unite African states was the:
+
+A. ECOWAS  
+B. OAU  
+C. UN  
+D. AU  
+
+---
+
+**Q21.** The OAU was replaced by the African Union in:
+
+A. 2010  
+B. 1990  
+C. 2002  
+D. 1963  
+
+---
+
+**Q22.** The system of racial segregation in South Africa was called:
+
+A. colonialism  
+B. assimilation  
+C. indirect rule  
+D. apartheid  
+
+---
+
+**Q23.** The leader who fought against apartheid in South Africa was:
+
+A. Julius Nyerere  
+B. Jomo Kenyatta  
+C. Nelson Mandela  
+D. Kwame Nkrumah  
+
+---
+
+**Q24.** The first president of independent Ghana was:
+
+A. Julius Nyerere  
+B. Jomo Kenyatta  
+C. Nelson Mandela  
+D. Kwame Nkrumah  
+
+---
+
+**Q25.** The study of past events is called:
+
+A. history  
+B. geography  
+C. economics  
+D. sociology  
+
+---
+
+**Q26.** Written records of the past are called:
+
+A. documents  
+B. artefacts  
+C. legends  
+D. monuments  
+
+---
+
+**Q27.** Objects made by people in the past are called:
+
+A. artefacts  
+B. archives  
+C. documents  
+D. manuscripts  
+
+---
+
+**Q28.** The traditional ruler of the Bamenda people is the:
+
+A. Fon  
+B. Lamido  
+C. Chief  
+D. Sultan  
+
+---
+
+**Q29.** The traditional ruler of the Bamoun people is the:
+
+A. Sultan  
+B. Emir  
+C. Fon  
+D. Lamido  
+
+---
+
+**Q30.** The forced removal of Africans to the Americas was called the:
+
+A. slave trade  
+B. mandate  
+C. partition  
+D. scramble  
+
+---
+
+**Q31.** The international organisation formed after the First World War was the:
+
+A. United Nations  
+B. League of Nations  
+C. African Union  
+D. European Union  
+
+---
+
+**Q32.** The Second World War began in:
+
+A. 1914  
+B. 1939  
+C. 1929  
+D. 1945  
+
+---
+
+**Q33.** The Second World War ended in:
+
+A. 1939  
+B. 1918  
+C. 1945  
+D. 1950  
+
+---
+
+**Q34.** The leader of Nazi Germany was:
+
+A. Benito Mussolini  
+B. Joseph Stalin  
+C. Winston Churchill  
+D. Adolf Hitler  
+
+---
+
+**Q35.** The leader of Fascist Italy was:
+
+A. Adolf Hitler  
+B. Francisco Franco  
+C. Benito Mussolini  
+D. Joseph Stalin  
+
+---
+
+**Q36.** The systematic murder of six million Jews by the Nazis was called the:
+
+A. Genocide  
+B. Inquisition  
+C. Pogrom  
+D. Holocaust  
+
+---
+
+**Q37.** The state of tension between the USA and the USSR after 1945 was called the:
+
+A. Proxy War  
+B. Cold War  
+C. World War  
+D. Trade War  
+
+---
+
+**Q38.** The wall that divided Berlin was built in:
+
+A. 1989  
+B. 1961  
+C. 1950  
+D. 1945  
+
+---
+
+**Q39.** The Berlin Wall fell in:
+
+A. 1945  
+B. 1961  
+C. 1989  
+D. 1991  
+
+---
+
+**Q40.** The international organisation formed in 1945 to maintain peace was the:
+
+A. African Union  
+B. League of Nations  
+C. European Union  
+D. United Nations  
+
+---
+
+**Q41.** The organ of the UN responsible for maintaining peace is the:
+
+A. Secretariat  
+B. ICJ  
+C. Security Council  
+D. General Assembly  
+
+---
+
+**Q42.** The crisis of 1962 that brought the world close to nuclear war was the:
+
+A. Suez Crisis  
+B. Korean Crisis  
+C. Berlin Crisis  
+D. Cuban Missile Crisis  
+
+---
+
+**Q43.** The war fought between North and South Korea from 1950 to 1953 was a:
+
+A. trade war  
+B. proxy war  
+C. world war  
+D. civil war  
+
+---
+
+**Q44.** The process of granting independence to colonies is called:
+
+A. globalisation  
+B. decolonisation  
+C. imperialism  
+D. colonisation  
+
+---
+
+**Q45.** The economic union of European states is called the:
+
+A. Commonwealth  
+B. African Union  
+C. European Union  
+D. United Nations  
+
+---
+
+**Q46.** The organisation that regulates international trade is the:
+
+A. AU  
+B. IMF  
+C. UN  
+D. WTO  
+
+---
+
+**Q47.** The organisation that provides financial assistance to countries is the:
+
+A. AU  
+B. UN  
+C. IMF  
+D. WTO  
+
+---
+
+**Q48.** The increasing interconnection of the world''s economies is called:
+
+A. protectionism  
+B. nationalism  
+C. colonisation  
+D. globalisation  
+
+---
+
+**Q49.** The use of violence for political aims is called:
+
+A. terrorism  
+B. nationalism  
+C. imperialism  
+D. diplomacy  
+
+---
+
+**Q50.** The association of former British colonies is called the:
+
+A. Commonwealth  
+B. European Union  
+C. United Nations  
+D. African Union  
+
+---
+
+**Q51.** The declaration that protects the rights of all people was the:
+
+A. Universal Declaration of Human Rights  
+B. Berlin Act  
+C. Treaty of Versailles  
+D. Atlantic Charter  
+
+---
+
+**Q52.** The Universal Declaration of Human Rights was adopted in:
+
+A. 1948  
+B. 1939  
+C. 1960  
+D. 1918  
+
+---
+
+**Q53.** The leader of the Soviet Union during the Cuban Missile Crisis was:
+
+A. Nikita Khrushchev  
+B. Mikhail Gorbachev  
+C. Joseph Stalin  
+D. Vladimir Lenin  
+
+---
+
+**Q54.** The leader of the United States during the Cuban Missile Crisis was:
+
+A. John F. Kennedy  
+B. Richard Nixon  
+C. Harry Truman  
+D. Franklin Roosevelt  
+
+---
+
+**Q55.** The First World War began in:
+
+A. 1918  
+B. 1914  
+C. 1939  
+D. 1900  
+
+---
+
+**Q56.** The First World War ended in:
+
+A. 1914  
+B. 1918  
+C. 1920  
+D. 1945  
+
+---
+
+**Q57.** The assassination that triggered the First World War was that of:
+
+A. Adolf Hitler  
+B. Napoleon  
+C. Archduke Franz Ferdinand  
+D. Kaiser Wilhelm  
+
+---
+
+**Q58.** The alliance of Germany, Austria-Hungary, and Italy was called the:
+
+A. Triple Entente  
+B. Axis  
+C. Allies  
+D. Triple Alliance  
+
+---
+
+**Q59.** The alliance of Britain, France, and Russia was called the:
+
+A. Triple Alliance  
+B. Central Powers  
+C. Triple Entente  
+D. Axis  
+
+---
+
+**Q60.** The treaty that ended the First World War was the:
+
+A. Treaty of Paris  
+B. Treaty of Rome  
+C. Treaty of Berlin  
+D. Treaty of Versailles  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 4
+
+## Structural Question Bank — Trade and business documents
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: TRADE AND BUSINESS DOCUMENTS
+
+**Q1.** (a) Define the term "commerce". *(2 marks)*
+
+(b) Distinguish between trade and aids to trade. *(4 marks)*
+
+(c) Explain the importance of commerce to the economy of Cameroon. *(4 marks)*
+
+---
+
+**Q2.** (a) What is home trade? *(2 marks)*
+
+(b) Distinguish between wholesale and retail trade. *(4 marks)*
+
+(c) State three functions of a wholesaler. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the term "retailer". *(2 marks)*
+
+(b) State three functions of a retailer. *(3 marks)*
+
+(c) Explain two problems faced by retailers in Cameroon. *(4 marks)*
+
+---
+
+**Q4.** (a) What is foreign trade? *(2 marks)*
+
+(b) Distinguish between imports and exports. *(4 marks)*
+
+(c) Explain the importance of foreign trade to Cameroon. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+
+(b) Explain the difference between a favourable and an unfavourable balance of trade. *(4 marks)*
+
+(c) State three ways of correcting an unfavourable balance of trade. *(3 marks)*
+
+---
+
+**Q6.** (a) What is an invoice? *(2 marks)*
+
+(b) State the information contained in an invoice. *(4 marks)*
+
+(c) Distinguish between a proforma invoice and a commercial invoice. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the terms "receipt" and "credit note". *(4 marks)*
+
+(b) Explain when a credit note is issued. *(3 marks)*
+
+(c) Distinguish between a debit note and a credit note. *(4 marks)*
+
+---
+
+**Q8.** (a) What is a bill of lading? *(2 marks)*
+
+(b) State the functions of a bill of lading. *(4 marks)*
+
+(c) Explain the difference between a bill of lading and an air waybill. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "transport". *(2 marks)*
+
+(b) State three modes of transport used in trade. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of road transport. *(5 marks)*
+
+---
+
+**Q10.** (a) What is a warehouse? *(2 marks)*
+
+(b) State three functions of warehousing. *(3 marks)
+
+(c) Explain the importance of warehousing to a wholesaler. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "advertising". *(2 marks)*
+
+(b) State three media used for advertising. *(3 marks)*
+
+(c) Explain the importance of advertising to a business. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market? *(2 marks)*
+
+(b) Distinguish between a consumer market and an industrial market. *(4 marks)*
+
+(c) State three factors that influence the choice of a market. *(3 marks)*
+
+---
+
+**Q13.** (a) Define the term "marketing". *(2 marks)*
+
+(b) State the four Ps of the marketing mix. *(4 marks)*
+
+(c) Explain the importance of the marketing mix to a business. *(4 marks)*
+
+---
+
+**Q14.** (a) What is a sole proprietorship? *(2 marks)*
+
+(b) State three advantages and three disadvantages of a sole proprietorship. *(6 marks)*
+
+(c) Explain why many small businesses in Cameroon are sole proprietorships. *(3 marks)*
+
+---
+
+**Q15.** (a) Define the term "partnership". *(2 marks)*
+
+(b) State three features of a partnership. *(3 marks)*
+
+(c) Explain the difference between a general partner and a limited partner. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a limited liability company? *(2 marks)*
+
+(b) Distinguish between a private limited company and a public limited company. *(4 marks)*
+
+(c) State three advantages of a limited liability company. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the term "cooperative society". *(2 marks)*
+
+(b) State three types of cooperative societies. *(3 marks)*
+
+(c) Explain the importance of cooperative societies to farmers in Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is a multinational company? *(2 marks)*
+
+(b) State three characteristics of a multinational company. *(3 marks)*
+
+(c) Explain two advantages and two disadvantages of multinational companies to Cameroon. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "e-commerce". *(2 marks)*
+
+(b) State three forms of e-commerce. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of e-commerce. *(5 marks)*
+
+---
+
+**Q20.** (a) What is a trade union? *(2 marks)*
+
+(b) State three functions of a trade union. *(3 marks)*
+
+(c) Explain the importance of trade unions to workers. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 5
+
+## Structural Question Bank — Finance, banking, and insurance
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FINANCE, BANKING, AND INSURANCE
+
+**Q1.** (a) Define the term "money". *(2 marks)*
+
+(b) State the functions of money. *(4 marks)*
+
+(c) Explain the qualities of good money. *(4 marks)*
+
+---
+
+**Q2.** (a) What is a bank? *(2 marks)*
+
+(b) Distinguish between a commercial bank and a central bank. *(4 marks)*
+
+(c) State three functions of a commercial bank. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the terms "deposit" and "withdrawal". *(4 marks)*
+
+(b) State three types of bank accounts. *(3 marks)*
+
+(c) Explain the difference between a current account and a savings account. *(4 marks)*
+
+---
+
+**Q4.** (a) What is a cheque? *(2 marks)*
+
+(b) State the parties to a cheque. *(3 marks)*
+
+(c) Distinguish between an open cheque and a crossed cheque. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the terms "credit" and "debit". *(4 marks)*
+
+(b) State three forms of credit. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of buying on credit. *(4 marks)*
+
+---
+
+**Q6.** (a) What is a loan? *(2 marks)*
+
+(b) State three types of loans offered by banks. *(3 marks)*
+
+(c) Explain the importance of loans to businesses. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the term "interest". *(2 marks)*
+
+(b) Explain the difference between simple interest and compound interest. *(4 marks)*
+
+(c) Calculate the simple interest on 100,000 FCFA at 5% per annum for 2 years. *(4 marks)*
+
+---
+
+**Q8.** (a) What is insurance? *(2 marks)*
+
+(b) State the principles of insurance. *(4 marks)*
+
+(c) Explain the difference between life insurance and general insurance. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the terms "premium" and "policy". *(4 marks)*
+
+(b) Explain the principle of insurable interest. *(4 marks)*
+
+(c) State three types of insurance policies. *(3 marks)*
+
+---
+
+**Q10.** (a) What is a claim? *(2 marks)*
+
+(b) Describe the procedure for making an insurance claim. *(4 marks)*
+
+(c) Explain the principle of indemnity. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "communication". *(2 marks)*
+
+(b) State three means of communication used in business. *(3 marks)*
+
+(c) Explain the importance of communication in business. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a telephone? *(2 marks)*
+
+(b) State three advantages of using the telephone in business. *(3 marks)*
+
+(c) Explain the difference between a landline and a mobile phone. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "advertising". *(2 marks)*
+
+(b) State three objectives of advertising. *(3 marks)*
+
+(c) Explain the difference between informative and persuasive advertising. *(4 marks)*
+
+---
+
+**Q14.** (a) What is consumer protection? *(2 marks)*
+
+(b) State three rights of a consumer. *(3 marks)*
+
+(c) Explain the role of the government in protecting consumers. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "consumer association". *(2 marks)*
+
+(b) State three functions of a consumer association. *(3 marks)*
+
+(c) Explain how consumers can protect themselves from exploitation. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a savings and loan cooperative? *(2 marks)*
+
+(b) State three functions of savings and loan cooperatives. *(3 marks)*
+
+(c) Explain the importance of microfinance institutions to small businesses. *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "stock exchange". *(2 marks)*
+
+(b) State three functions of a stock exchange. *(3 marks)*
+
+(c) Explain the importance of the Douala Stock Exchange to Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is a bond? *(2 marks)*
+
+(b) Distinguish between shares and bonds. *(4 marks)*
+
+(c) State three types of shares. *(3 marks)*
+
+---
+
+**Q19.** (a) Define the term "inflation". *(2 marks)*
+
+(b) State three causes of inflation. *(3 marks)*
+
+(c) Explain the effects of inflation on consumers and businesses. *(5 marks)*
+
+---
+
+**Q20.** (a) What is a budget? *(2 marks)*
+
+(b) State three types of budgets. *(3 marks)*
+
+(c) Explain the importance of budgeting to a business. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 6
+
+## Structural Question Bank — Trade and business documents
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: TRADE AND BUSINESS DOCUMENTS
+
+**Q1.** (a) Define the term "commerce". *(2 marks)*
+
+(b) Distinguish between trade and aids to trade. *(4 marks)*
+
+(c) Explain the importance of commerce to the economy of Cameroon. *(4 marks)*
+
+---
+
+**Q2.** (a) What is home trade? *(2 marks)*
+
+(b) Distinguish between wholesale and retail trade. *(4 marks)*
+
+(c) State three functions of a wholesaler. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the term "retailer". *(2 marks)*
+
+(b) State three functions of a retailer. *(3 marks)*
+
+(c) Explain two problems faced by retailers in Cameroon. *(4 marks)*
+
+---
+
+**Q4.** (a) What is foreign trade? *(2 marks)*
+
+(b) Distinguish between imports and exports. *(4 marks)*
+
+(c) Explain the importance of foreign trade to Cameroon. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+
+(b) Explain the difference between a favourable and an unfavourable balance of trade. *(4 marks)*
+
+(c) State three ways of correcting an unfavourable balance of trade. *(3 marks)*
+
+---
+
+**Q6.** (a) What is an invoice? *(2 marks)*
+
+(b) State the information contained in an invoice. *(4 marks)*
+
+(c) Distinguish between a proforma invoice and a commercial invoice. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the terms "receipt" and "credit note". *(4 marks)*
+
+(b) Explain when a credit note is issued. *(3 marks)*
+
+(c) Distinguish between a debit note and a credit note. *(4 marks)*
+
+---
+
+**Q8.** (a) What is a bill of lading? *(2 marks)*
+
+(b) State the functions of a bill of lading. *(4 marks)*
+
+(c) Explain the difference between a bill of lading and an air waybill. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "transport". *(2 marks)*
+
+(b) State three modes of transport used in trade. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of road transport. *(5 marks)*
+
+---
+
+**Q10.** (a) What is a warehouse? *(2 marks)*
+
+(b) State three functions of warehousing. *(3 marks)
+
+(c) Explain the importance of warehousing to a wholesaler. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "advertising". *(2 marks)*
+
+(b) State three media used for advertising. *(3 marks)*
+
+(c) Explain the importance of advertising to a business. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market? *(2 marks)*
+
+(b) Distinguish between a consumer market and an industrial market. *(4 marks)*
+
+(c) State three factors that influence the choice of a market. *(3 marks)*
+
+---
+
+**Q13.** (a) Define the term "marketing". *(2 marks)*
+
+(b) State the four Ps of the marketing mix. *(4 marks)*
+
+(c) Explain the importance of the marketing mix to a business. *(4 marks)*
+
+---
+
+**Q14.** (a) What is a sole proprietorship? *(2 marks)*
+
+(b) State three advantages and three disadvantages of a sole proprietorship. *(6 marks)*
+
+(c) Explain why many small businesses in Cameroon are sole proprietorships. *(3 marks)*
+
+---
+
+**Q15.** (a) Define the term "partnership". *(2 marks)*
+
+(b) State three features of a partnership. *(3 marks)*
+
+(c) Explain the difference between a general partner and a limited partner. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a limited liability company? *(2 marks)*
+
+(b) Distinguish between a private limited company and a public limited company. *(4 marks)*
+
+(c) State three advantages of a limited liability company. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the term "cooperative society". *(2 marks)*
+
+(b) State three types of cooperative societies. *(3 marks)*
+
+(c) Explain the importance of cooperative societies to farmers in Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is a multinational company? *(2 marks)*
+
+(b) State three characteristics of a multinational company. *(3 marks)*
+
+(c) Explain two advantages and two disadvantages of multinational companies to Cameroon. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "e-commerce". *(2 marks)*
+
+(b) State three forms of e-commerce. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of e-commerce. *(5 marks)*
+
+---
+
+**Q20.** (a) What is a trade union? *(2 marks)*
+
+(b) State three functions of a trade union. *(3 marks)*
+
+(c) Explain the importance of trade unions to workers. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 7
+
+## Structural Question Bank — Finance, banking, and insurance
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FINANCE, BANKING, AND INSURANCE
+
+**Q1.** (a) Define the term "money". *(2 marks)*
+
+(b) State the functions of money. *(4 marks)*
+
+(c) Explain the qualities of good money. *(4 marks)*
+
+---
+
+**Q2.** (a) What is a bank? *(2 marks)*
+
+(b) Distinguish between a commercial bank and a central bank. *(4 marks)*
+
+(c) State three functions of a commercial bank. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the terms "deposit" and "withdrawal". *(4 marks)*
+
+(b) State three types of bank accounts. *(3 marks)*
+
+(c) Explain the difference between a current account and a savings account. *(4 marks)*
+
+---
+
+**Q4.** (a) What is a cheque? *(2 marks)*
+
+(b) State the parties to a cheque. *(3 marks)*
+
+(c) Distinguish between an open cheque and a crossed cheque. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the terms "credit" and "debit". *(4 marks)*
+
+(b) State three forms of credit. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of buying on credit. *(4 marks)*
+
+---
+
+**Q6.** (a) What is a loan? *(2 marks)*
+
+(b) State three types of loans offered by banks. *(3 marks)*
+
+(c) Explain the importance of loans to businesses. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the term "interest". *(2 marks)*
+
+(b) Explain the difference between simple interest and compound interest. *(4 marks)*
+
+(c) Calculate the simple interest on 100,000 FCFA at 5% per annum for 2 years. *(4 marks)*
+
+---
+
+**Q8.** (a) What is insurance? *(2 marks)*
+
+(b) State the principles of insurance. *(4 marks)*
+
+(c) Explain the difference between life insurance and general insurance. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the terms "premium" and "policy". *(4 marks)*
+
+(b) Explain the principle of insurable interest. *(4 marks)*
+
+(c) State three types of insurance policies. *(3 marks)*
+
+---
+
+**Q10.** (a) What is a claim? *(2 marks)*
+
+(b) Describe the procedure for making an insurance claim. *(4 marks)*
+
+(c) Explain the principle of indemnity. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "communication". *(2 marks)*
+
+(b) State three means of communication used in business. *(3 marks)*
+
+(c) Explain the importance of communication in business. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a telephone? *(2 marks)*
+
+(b) State three advantages of using the telephone in business. *(3 marks)*
+
+(c) Explain the difference between a landline and a mobile phone. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "advertising". *(2 marks)*
+
+(b) State three objectives of advertising. *(3 marks)*
+
+(c) Explain the difference between informative and persuasive advertising. *(4 marks)*
+
+---
+
+**Q14.** (a) What is consumer protection? *(2 marks)*
+
+(b) State three rights of a consumer. *(3 marks)*
+
+(c) Explain the role of the government in protecting consumers. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "consumer association". *(2 marks)*
+
+(b) State three functions of a consumer association. *(3 marks)*
+
+(c) Explain how consumers can protect themselves from exploitation. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a savings and loan cooperative? *(2 marks)*
+
+(b) State three functions of savings and loan cooperatives. *(3 marks)*
+
+(c) Explain the importance of microfinance institutions to small businesses. *(4 marks)*
+
+---
+
+**Q17.** (a) Define the term "stock exchange". *(2 marks)*
+
+(b) State three functions of a stock exchange. *(3 marks)*
+
+(c) Explain the importance of the Douala Stock Exchange to Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is a bond? *(2 marks)*
+
+(b) Distinguish between shares and bonds. *(4 marks)*
+
+(c) State three types of shares. *(3 marks)*
+
+---
+
+**Q19.** (a) Define the term "inflation". *(2 marks)*
+
+(b) State three causes of inflation. *(3 marks)*
+
+(c) Explain the effects of inflation on consumers and businesses. *(5 marks)*
+
+---
+
+**Q20.** (a) What is a budget? *(2 marks)*
+
+(b) State three types of budgets. *(3 marks)*
+
+(c) Explain the importance of budgeting to a business. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 8
+
+## Structural Question Bank — Trade and business documents
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: TRADE AND BUSINESS DOCUMENTS
+
+**Q1.** (a) Define the term "commerce". *(2 marks)*
+
+(b) Distinguish between trade and aids to trade. *(4 marks)*
+
+(c) Explain the importance of commerce to the economy of Cameroon. *(4 marks)*
+
+---
+
+**Q2.** (a) What is home trade? *(2 marks)*
+
+(b) Distinguish between wholesale and retail trade. *(4 marks)*
+
+(c) State three functions of a wholesaler. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the term "retailer". *(2 marks)*
+
+(b) State three functions of a retailer. *(3 marks)*
+
+(c) Explain two problems faced by retailers in Cameroon. *(4 marks)*
+
+---
+
+**Q4.** (a) What is foreign trade? *(2 marks)*
+
+(b) Distinguish between imports and exports. *(4 marks)*
+
+(c) Explain the importance of foreign trade to Cameroon. *(4 marks)*
+
+---
+
+**Q5.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+
+(b) Explain the difference between a favourable and an unfavourable balance of trade. *(4 marks)*
+
+(c) State three ways of correcting an unfavourable balance of trade. *(3 marks)*
+
+---
+
+**Q6.** (a) What is an invoice? *(2 marks)*
+
+(b) State the information contained in an invoice. *(4 marks)*
+
+(c) Distinguish between a proforma invoice and a commercial invoice. *(4 marks)*
+
+---
+
+**Q7.** (a) Define the terms "receipt" and "credit note". *(4 marks)*
+
+(b) Explain when a credit note is issued. *(3 marks)*
+
+(c) Distinguish between a debit note and a credit note. *(4 marks)*
+
+---
+
+**Q8.** (a) What is a bill of lading? *(2 marks)*
+
+(b) State the functions of a bill of lading. *(4 marks)*
+
+(c) Explain the difference between a bill of lading and an air waybill. *(4 marks)*
+
+---
+
+**Q9.** (a) Define the term "transport". *(2 marks)*
+
+(b) State three modes of transport used in trade. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of road transport. *(5 marks)*
+
+---
+
+**Q10.** (a) What is a warehouse? *(2 marks)*
+
+(b) State three functions of warehousing. *(3 marks)
+
+(c) Explain the importance of warehousing to a wholesaler. *(4 marks)*
+
+---
+
+**Q11.** (a) Define the term "advertising". *(2 marks)*
+
+(b) State three media used for advertising. *(3 marks)*
+
+(c) Explain the importance of advertising to a business. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market? *(2 marks)*
+
+(b) Distinguish between a consumer market and an industrial market. *(4 marks)*
+
+(c) State three factors that influence the choice of a market. *(3 marks)*
+
+---
+
+**Q13.** (a) Define the term "marketing". *(2 marks)*
+
+(b) State the four Ps of the marketing mix. *(4 marks)*
+
+(c) Explain the importance of the marketing mix to a business. *(4 marks)*
+
+---
+
+**Q14.** (a) What is a sole proprietorship? *(2 marks)*
+
+(b) State three advantages and three disadvantages of a sole proprietorship. *(6 marks)*
+
+(c) Explain why many small businesses in Cameroon are sole proprietorships. *(3 marks)*
+
+---
+
+**Q15.** (a) Define the term "partnership". *(2 marks)*
+
+(b) State three features of a partnership. *(3 marks)*
+
+(c) Explain the difference between a general partner and a limited partner. *(4 marks)*
+
+---
+
+**Q16.** (a) What is a limited liability company? *(2 marks)*
+
+(b) Distinguish between a private limited company and a public limited company. *(4 marks)*
+
+(c) State three advantages of a limited liability company. *(3 marks)*
+
+---
+
+**Q17.** (a) Define the term "cooperative society". *(2 marks)*
+
+(b) State three types of cooperative societies. *(3 marks)*
+
+(c) Explain the importance of cooperative societies to farmers in Cameroon. *(4 marks)*
+
+---
+
+**Q18.** (a) What is a multinational company? *(2 marks)*
+
+(b) State three characteristics of a multinational company. *(3 marks)*
+
+(c) Explain two advantages and two disadvantages of multinational companies to Cameroon. *(5 marks)*
+
+---
+
+**Q19.** (a) Define the term "e-commerce". *(2 marks)*
+
+(b) State three forms of e-commerce. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of e-commerce. *(5 marks)*
+
+---
+
+**Q20.** (a) What is a trade union? *(2 marks)*
+
+(b) State three functions of a trade union. *(3 marks)*
+
+(c) Explain the importance of trade unions to workers. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The buying and selling of goods and services is called:
+
+A. trade  
+B. commerce  
+C. industry  
+D. transport  
+
+---
+
+**Q2.** The activities that facilitate trade are called:
+
+A. aids to trade  
+B. commerce  
+C. production  
+D. industry  
+
+---
+
+**Q3.** Trade carried out within a country is called:
+
+A. home trade  
+B. international trade  
+C. foreign trade  
+D. barter trade  
+
+---
+
+**Q4.** Trade carried out between countries is called:
+
+A. foreign trade  
+B. local trade  
+C. retail trade  
+D. home trade  
+
+---
+
+**Q5.** The person who buys goods in large quantities from producers is the:
+
+A. wholesaler  
+B. agent  
+C. retailer  
+D. consumer  
+
+---
+
+**Q6.** The person who sells goods in small quantities to consumers is the:
+
+A. retailer  
+B. manufacturer  
+C. producer  
+D. wholesaler  
+
+---
+
+**Q7.** Goods bought from other countries are called:
+
+A. exports  
+B. imports  
+C. surplus  
+D. deficit  
+
+---
+
+**Q8.** Goods sold to other countries are called:
+
+A. imports  
+B. exports  
+C. deficit  
+D. surplus  
+
+---
+
+**Q9.** The document that lists the goods sold and their prices is an:
+
+A. receipt  
+B. cheque  
+C. invoice  
+D. order  
+
+---
+
+**Q10.** The document issued to confirm payment is a:
+
+A. invoice  
+B. credit note  
+C. debit note  
+D. receipt  
+
+---
+
+**Q11.** The document issued when goods are returned by a buyer is a:
+
+A. debit note  
+B. receipt  
+C. credit note  
+D. invoice  
+
+---
+
+**Q12.** The document issued when goods are returned by a seller is a:
+
+A. credit note  
+B. receipt  
+C. invoice  
+D. debit note  
+
+---
+
+**Q13.** The document used in sea transport of goods is the:
+
+A. invoice  
+B. bill of lading  
+C. air waybill  
+D. receipt  
+
+---
+
+**Q14.** The document used in air transport of goods is the:
+
+A. invoice  
+B. air waybill  
+C. receipt  
+D. bill of lading  
+
+---
+
+**Q15.** The storage of goods until they are needed is called:
+
+A. advertising  
+B. transport  
+C. warehousing  
+D. insurance  
+
+---
+
+**Q16.** The movement of goods from one place to another is called:
+
+A. advertising  
+B. warehousing  
+C. banking  
+D. transport  
+
+---
+
+**Q17.** The promotion of goods to attract buyers is called:
+
+A. warehousing  
+B. insurance  
+C. advertising  
+D. transport  
+
+---
+
+**Q18.** A business owned by one person is a:
+
+A. company  
+B. cooperative  
+C. partnership  
+D. sole proprietorship  
+
+---
+
+**Q19.** A business owned by two to twenty people is a:
+
+A. cooperative  
+B. partnership  
+C. sole proprietorship  
+D. company  
+
+---
+
+**Q20.** A business with limited liability owned by shareholders is a:
+
+A. cooperative  
+B. limited liability company  
+C. partnership  
+D. sole proprietorship  
+
+---
+
+**Q21.** A business owned and run by its members is a:
+
+A. company  
+B. sole proprietorship  
+C. cooperative society  
+D. partnership  
+
+---
+
+**Q22.** A company whose shares are sold to the public is a:
+
+A. partnership  
+B. private limited company  
+C. sole proprietorship  
+D. public limited company  
+
+---
+
+**Q23.** A company whose shares are not sold to the public is a:
+
+A. partnership  
+B. sole proprietorship  
+C. private limited company  
+D. public limited company  
+
+---
+
+**Q24.** A large company operating in several countries is a:
+
+A. cooperative  
+B. partnership  
+C. sole proprietorship  
+D. multinational company  
+
+---
+
+**Q25.** Buying and selling goods over the internet is called:
+
+A. e-commerce  
+B. e-banking  
+C. e-learning  
+D. e-mail  
+
+---
+
+**Q26.** An organisation that protects the interests of workers is a:
+
+A. trade union  
+B. consumer association  
+C. company  
+D. cooperative  
+
+---
+
+**Q27.** The four Ps of the marketing mix are product, price, place, and:
+
+A. promotion  
+B. process  
+C. people  
+D. profit  
+
+---
+
+**Q28.** The place where buyers and sellers meet to exchange goods is a:
+
+A. market  
+B. bank  
+C. factory  
+D. warehouse  
+
+---
+
+**Q29.** The person who buys goods for personal use is a:
+
+A. consumer  
+B. producer  
+C. retailer  
+D. wholesaler  
+
+---
+
+**Q30.** The person who produces goods is a:
+
+A. producer  
+B. wholesaler  
+C. retailer  
+D. consumer  
+
+---
+
+**Q31.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. money  
+C. services  
+D. credit  
+
+---
+
+**Q32.** The bank that issues currency and controls the money supply is the:
+
+A. commercial bank  
+B. central bank  
+C. merchant bank  
+D. development bank  
+
+---
+
+**Q33.** The bank that accepts deposits and gives loans to the public is a:
+
+A. central bank  
+B. development bank  
+C. commercial bank  
+D. stock exchange  
+
+---
+
+**Q34.** The account used for frequent transactions is a:
+
+A. savings account  
+B. fixed deposit account  
+C. loan account  
+D. current account  
+
+---
+
+**Q35.** The account that earns interest and encourages saving is a:
+
+A. current account  
+B. loan account  
+C. savings account  
+D. overdraft account  
+
+---
+
+**Q36.** A written order to a bank to pay a stated sum is a:
+
+A. receipt  
+B. credit note  
+C. invoice  
+D. cheque  
+
+---
+
+**Q37.** A cheque that can only be paid into a bank account is a:
+
+A. blank cheque  
+B. crossed cheque  
+C. open cheque  
+D. post-dated cheque  
+
+---
+
+**Q38.** The person who writes a cheque is the:
+
+A. payee  
+B. drawer  
+C. endorser  
+D. drawee  
+
+---
+
+**Q39.** The bank on which a cheque is drawn is the:
+
+A. payee  
+B. drawer  
+C. drawee  
+D. endorser  
+
+---
+
+**Q40.** The person to whom a cheque is paid is the:
+
+A. drawee  
+B. drawer  
+C. endorser  
+D. payee  
+
+---
+
+**Q41.** The money charged for borrowing money is called:
+
+A. commission  
+B. dividend  
+C. interest  
+D. premium  
+
+---
+
+**Q42.** The simple interest on 100,000 FCFA at 5% for 2 years is:
+
+A. 20,000 FCFA  
+B. 2,000 FCFA  
+C. 5,000 FCFA  
+D. 10,000 FCFA  
+
+---
+
+**Q43.** The protection against financial loss is called:
+
+A. warehousing  
+B. insurance  
+C. banking  
+D. advertising  
+
+---
+
+**Q44.** The amount paid for an insurance policy is the:
+
+A. dividend  
+B. premium  
+C. interest  
+D. claim  
+
+---
+
+**Q45.** The document that contains the terms of an insurance contract is the:
+
+A. receipt  
+B. premium  
+C. policy  
+D. claim  
+
+---
+
+**Q46.** The payment made by an insurance company for a loss is a:
+
+A. dividend  
+B. premium  
+C. policy  
+D. claim  
+
+---
+
+**Q47.** The principle that the insured must not profit from a loss is:
+
+A. contribution  
+B. utmost good faith  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q48.** The principle that the insured must have a financial interest in the subject matter is:
+
+A. subrogation  
+B. utmost good faith  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q49.** Insurance against the death of the insured is:
+
+A. life insurance  
+B. fire insurance  
+C. marine insurance  
+D. motor insurance  
+
+---
+
+**Q50.** Insurance against damage to goods in transit by sea is:
+
+A. marine insurance  
+B. fire insurance  
+C. motor insurance  
+D. life insurance  
+
+---
+
+**Q51.** The exchange of information between people is called:
+
+A. communication  
+B. advertising  
+C. transport  
+D. banking  
+
+---
+
+**Q52.** The protection of consumers from unfair practices is called:
+
+A. consumer protection  
+B. marketing  
+C. insurance  
+D. advertising  
+
+---
+
+**Q53.** An organisation that protects the interests of consumers is a:
+
+A. consumer association  
+B. company  
+C. trade union  
+D. cooperative  
+
+---
+
+**Q54.** A financial institution that gives small loans to small businesses is a:
+
+A. microfinance institution  
+B. insurance company  
+C. stock exchange  
+D. central bank  
+
+---
+
+**Q55.** The market where shares are bought and sold is the:
+
+A. commodity market  
+B. stock exchange  
+C. money market  
+D. foreign exchange market  
+
+---
+
+**Q56.** The unit of ownership of a company is a:
+
+A. bond  
+B. share  
+C. premium  
+D. cheque  
+
+---
+
+**Q57.** A loan to a company or government that pays interest is a:
+
+A. share  
+B. cheque  
+C. bond  
+D. premium  
+
+---
+
+**Q58.** A general rise in the price level is called:
+
+A. deflation  
+B. recession  
+C. depression  
+D. inflation  
+
+---
+
+**Q59.** A plan of expected income and expenditure is a:
+
+A. balance sheet  
+B. receipt  
+C. budget  
+D. invoice  
+
+---
+
+**Q60.** The stock exchange in Cameroon is located in:
+
+A. Yaoundé  
+B. Garoua  
+C. Buea  
+D. Douala  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Trade carried out between countries is called:
+
+A. foreign trade  
+B. home trade  
+C. local trade  
+D. retail trade  
+
+---
+
+**Q2.** The person who buys goods in large quantities from producers is the:
+
+A. wholesaler  
+B. retailer  
+C. agent  
+D. consumer  
+
+---
+
+**Q3.** The person who sells goods in small quantities to consumers is the:
+
+A. retailer  
+B. producer  
+C. wholesaler  
+D. manufacturer  
+
+---
+
+**Q4.** Goods bought from other countries are called:
+
+A. imports  
+B. surplus  
+C. deficit  
+D. exports  
+
+---
+
+**Q5.** Goods sold to other countries are called:
+
+A. exports  
+B. deficit  
+C. imports  
+D. surplus  
+
+---
+
+**Q6.** The document that lists the goods sold and their prices is an:
+
+A. invoice  
+B. order  
+C. cheque  
+D. receipt  
+
+---
+
+**Q7.** The document issued to confirm payment is a:
+
+A. invoice  
+B. receipt  
+C. credit note  
+D. debit note  
+
+---
+
+**Q8.** The document issued when goods are returned by a buyer is a:
+
+A. debit note  
+B. credit note  
+C. receipt  
+D. invoice  
+
+---
+
+**Q9.** The document issued when goods are returned by a seller is a:
+
+A. credit note  
+B. invoice  
+C. debit note  
+D. receipt  
+
+---
+
+**Q10.** The document used in sea transport of goods is the:
+
+A. air waybill  
+B. invoice  
+C. receipt  
+D. bill of lading  
+
+---
+
+**Q11.** The document used in air transport of goods is the:
+
+A. bill of lading  
+B. receipt  
+C. air waybill  
+D. invoice  
+
+---
+
+**Q12.** The storage of goods until they are needed is called:
+
+A. transport  
+B. insurance  
+C. advertising  
+D. warehousing  
+
+---
+
+**Q13.** The movement of goods from one place to another is called:
+
+A. advertising  
+B. transport  
+C. warehousing  
+D. banking  
+
+---
+
+**Q14.** The promotion of goods to attract buyers is called:
+
+A. warehousing  
+B. advertising  
+C. insurance  
+D. transport  
+
+---
+
+**Q15.** A business owned by one person is a:
+
+A. company  
+B. partnership  
+C. sole proprietorship  
+D. cooperative  
+
+---
+
+**Q16.** A business owned by two to twenty people is a:
+
+A. company  
+B. sole proprietorship  
+C. cooperative  
+D. partnership  
+
+---
+
+**Q17.** A business with limited liability owned by shareholders is a:
+
+A. partnership  
+B. cooperative  
+C. limited liability company  
+D. sole proprietorship  
+
+---
+
+**Q18.** A business owned and run by its members is a:
+
+A. partnership  
+B. company  
+C. sole proprietorship  
+D. cooperative society  
+
+---
+
+**Q19.** A company whose shares are sold to the public is a:
+
+A. partnership  
+B. public limited company  
+C. private limited company  
+D. sole proprietorship  
+
+---
+
+**Q20.** A company whose shares are not sold to the public is a:
+
+A. partnership  
+B. private limited company  
+C. sole proprietorship  
+D. public limited company  
+
+---
+
+**Q21.** A large company operating in several countries is a:
+
+A. cooperative  
+B. sole proprietorship  
+C. multinational company  
+D. partnership  
+
+---
+
+**Q22.** Buying and selling goods over the internet is called:
+
+A. e-mail  
+B. e-banking  
+C. e-learning  
+D. e-commerce  
+
+---
+
+**Q23.** An organisation that protects the interests of workers is a:
+
+A. company  
+B. cooperative  
+C. trade union  
+D. consumer association  
+
+---
+
+**Q24.** The four Ps of the marketing mix are product, price, place, and:
+
+A. profit  
+B. process  
+C. people  
+D. promotion  
+
+---
+
+**Q25.** The place where buyers and sellers meet to exchange goods is a:
+
+A. market  
+B. warehouse  
+C. bank  
+D. factory  
+
+---
+
+**Q26.** The person who buys goods for personal use is a:
+
+A. consumer  
+B. retailer  
+C. producer  
+D. wholesaler  
+
+---
+
+**Q27.** The person who produces goods is a:
+
+A. producer  
+B. retailer  
+C. consumer  
+D. wholesaler  
+
+---
+
+**Q28.** The buying and selling of goods and services is called:
+
+A. trade  
+B. industry  
+C. transport  
+D. commerce  
+
+---
+
+**Q29.** The activities that facilitate trade are called:
+
+A. aids to trade  
+B. production  
+C. commerce  
+D. industry  
+
+---
+
+**Q30.** Trade carried out within a country is called:
+
+A. home trade  
+B. barter trade  
+C. international trade  
+D. foreign trade  
+
+---
+
+**Q31.** The account used for frequent transactions is a:
+
+A. savings account  
+B. current account  
+C. fixed deposit account  
+D. loan account  
+
+---
+
+**Q32.** The account that earns interest and encourages saving is a:
+
+A. current account  
+B. savings account  
+C. loan account  
+D. overdraft account  
+
+---
+
+**Q33.** A written order to a bank to pay a stated sum is a:
+
+A. receipt  
+B. invoice  
+C. cheque  
+D. credit note  
+
+---
+
+**Q34.** A cheque that can only be paid into a bank account is a:
+
+A. open cheque  
+B. blank cheque  
+C. post-dated cheque  
+D. crossed cheque  
+
+---
+
+**Q35.** The person who writes a cheque is the:
+
+A. drawee  
+B. endorser  
+C. drawer  
+D. payee  
+
+---
+
+**Q36.** The bank on which a cheque is drawn is the:
+
+A. drawer  
+B. endorser  
+C. payee  
+D. drawee  
+
+---
+
+**Q37.** The person to whom a cheque is paid is the:
+
+A. drawee  
+B. payee  
+C. drawer  
+D. endorser  
+
+---
+
+**Q38.** The money charged for borrowing money is called:
+
+A. commission  
+B. interest  
+C. dividend  
+D. premium  
+
+---
+
+**Q39.** The simple interest on 100,000 FCFA at 5% for 2 years is:
+
+A. 20,000 FCFA  
+B. 5,000 FCFA  
+C. 10,000 FCFA  
+D. 2,000 FCFA  
+
+---
+
+**Q40.** The protection against financial loss is called:
+
+A. advertising  
+B. banking  
+C. warehousing  
+D. insurance  
+
+---
+
+**Q41.** The amount paid for an insurance policy is the:
+
+A. interest  
+B. dividend  
+C. premium  
+D. claim  
+
+---
+
+**Q42.** The document that contains the terms of an insurance contract is the:
+
+A. claim  
+B. receipt  
+C. premium  
+D. policy  
+
+---
+
+**Q43.** The payment made by an insurance company for a loss is a:
+
+A. dividend  
+B. claim  
+C. premium  
+D. policy  
+
+---
+
+**Q44.** The principle that the insured must not profit from a loss is:
+
+A. contribution  
+B. indemnity  
+C. utmost good faith  
+D. insurable interest  
+
+---
+
+**Q45.** The principle that the insured must have a financial interest in the subject matter is:
+
+A. subrogation  
+B. indemnity  
+C. insurable interest  
+D. utmost good faith  
+
+---
+
+**Q46.** Insurance against the death of the insured is:
+
+A. motor insurance  
+B. fire insurance  
+C. marine insurance  
+D. life insurance  
+
+---
+
+**Q47.** Insurance against damage to goods in transit by sea is:
+
+A. motor insurance  
+B. life insurance  
+C. marine insurance  
+D. fire insurance  
+
+---
+
+**Q48.** The exchange of information between people is called:
+
+A. banking  
+B. advertising  
+C. transport  
+D. communication  
+
+---
+
+**Q49.** The protection of consumers from unfair practices is called:
+
+A. consumer protection  
+B. advertising  
+C. marketing  
+D. insurance  
+
+---
+
+**Q50.** An organisation that protects the interests of consumers is a:
+
+A. consumer association  
+B. trade union  
+C. company  
+D. cooperative  
+
+---
+
+**Q51.** A financial institution that gives small loans to small businesses is a:
+
+A. microfinance institution  
+B. stock exchange  
+C. central bank  
+D. insurance company  
+
+---
+
+**Q52.** The market where shares are bought and sold is the:
+
+A. stock exchange  
+B. money market  
+C. foreign exchange market  
+D. commodity market  
+
+---
+
+**Q53.** The unit of ownership of a company is a:
+
+A. share  
+B. premium  
+C. bond  
+D. cheque  
+
+---
+
+**Q54.** A loan to a company or government that pays interest is a:
+
+A. bond  
+B. premium  
+C. cheque  
+D. share  
+
+---
+
+**Q55.** A general rise in the price level is called:
+
+A. deflation  
+B. inflation  
+C. recession  
+D. depression  
+
+---
+
+**Q56.** A plan of expected income and expenditure is a:
+
+A. balance sheet  
+B. budget  
+C. receipt  
+D. invoice  
+
+---
+
+**Q57.** The stock exchange in Cameroon is located in:
+
+A. Yaoundé  
+B. Buea  
+C. Douala  
+D. Garoua  
+
+---
+
+**Q58.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. services  
+C. credit  
+D. money  
+
+---
+
+**Q59.** The bank that issues currency and controls the money supply is the:
+
+A. commercial bank  
+B. merchant bank  
+C. central bank  
+D. development bank  
+
+---
+
+**Q60.** The bank that accepts deposits and gives loans to the public is a:
+
+A. central bank  
+B. stock exchange  
+C. development bank  
+D. commercial bank  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Goods bought from other countries are called:
+
+A. imports  
+B. exports  
+C. surplus  
+D. deficit  
+
+---
+
+**Q2.** Goods sold to other countries are called:
+
+A. exports  
+B. imports  
+C. deficit  
+D. surplus  
+
+---
+
+**Q3.** The document that lists the goods sold and their prices is an:
+
+A. invoice  
+B. cheque  
+C. receipt  
+D. order  
+
+---
+
+**Q4.** The document issued to confirm payment is a:
+
+A. receipt  
+B. credit note  
+C. debit note  
+D. invoice  
+
+---
+
+**Q5.** The document issued when goods are returned by a buyer is a:
+
+A. credit note  
+B. receipt  
+C. debit note  
+D. invoice  
+
+---
+
+**Q6.** The document issued when goods are returned by a seller is a:
+
+A. debit note  
+B. receipt  
+C. invoice  
+D. credit note  
+
+---
+
+**Q7.** The document used in sea transport of goods is the:
+
+A. air waybill  
+B. bill of lading  
+C. invoice  
+D. receipt  
+
+---
+
+**Q8.** The document used in air transport of goods is the:
+
+A. bill of lading  
+B. air waybill  
+C. receipt  
+D. invoice  
+
+---
+
+**Q9.** The storage of goods until they are needed is called:
+
+A. transport  
+B. advertising  
+C. warehousing  
+D. insurance  
+
+---
+
+**Q10.** The movement of goods from one place to another is called:
+
+A. warehousing  
+B. advertising  
+C. banking  
+D. transport  
+
+---
+
+**Q11.** The promotion of goods to attract buyers is called:
+
+A. transport  
+B. insurance  
+C. advertising  
+D. warehousing  
+
+---
+
+**Q12.** A business owned by one person is a:
+
+A. partnership  
+B. cooperative  
+C. company  
+D. sole proprietorship  
+
+---
+
+**Q13.** A business owned by two to twenty people is a:
+
+A. company  
+B. partnership  
+C. sole proprietorship  
+D. cooperative  
+
+---
+
+**Q14.** A business with limited liability owned by shareholders is a:
+
+A. partnership  
+B. limited liability company  
+C. cooperative  
+D. sole proprietorship  
+
+---
+
+**Q15.** A business owned and run by its members is a:
+
+A. partnership  
+B. sole proprietorship  
+C. cooperative society  
+D. company  
+
+---
+
+**Q16.** A company whose shares are sold to the public is a:
+
+A. sole proprietorship  
+B. private limited company  
+C. partnership  
+D. public limited company  
+
+---
+
+**Q17.** A company whose shares are not sold to the public is a:
+
+A. sole proprietorship  
+B. partnership  
+C. private limited company  
+D. public limited company  
+
+---
+
+**Q18.** A large company operating in several countries is a:
+
+A. partnership  
+B. cooperative  
+C. sole proprietorship  
+D. multinational company  
+
+---
+
+**Q19.** Buying and selling goods over the internet is called:
+
+A. e-mail  
+B. e-commerce  
+C. e-banking  
+D. e-learning  
+
+---
+
+**Q20.** An organisation that protects the interests of workers is a:
+
+A. company  
+B. trade union  
+C. cooperative  
+D. consumer association  
+
+---
+
+**Q21.** The four Ps of the marketing mix are product, price, place, and:
+
+A. profit  
+B. people  
+C. promotion  
+D. process  
+
+---
+
+**Q22.** The place where buyers and sellers meet to exchange goods is a:
+
+A. factory  
+B. warehouse  
+C. bank  
+D. market  
+
+---
+
+**Q23.** The person who buys goods for personal use is a:
+
+A. producer  
+B. wholesaler  
+C. consumer  
+D. retailer  
+
+---
+
+**Q24.** The person who produces goods is a:
+
+A. wholesaler  
+B. retailer  
+C. consumer  
+D. producer  
+
+---
+
+**Q25.** The buying and selling of goods and services is called:
+
+A. trade  
+B. commerce  
+C. industry  
+D. transport  
+
+---
+
+**Q26.** The activities that facilitate trade are called:
+
+A. aids to trade  
+B. commerce  
+C. production  
+D. industry  
+
+---
+
+**Q27.** Trade carried out within a country is called:
+
+A. home trade  
+B. international trade  
+C. foreign trade  
+D. barter trade  
+
+---
+
+**Q28.** Trade carried out between countries is called:
+
+A. foreign trade  
+B. local trade  
+C. retail trade  
+D. home trade  
+
+---
+
+**Q29.** The person who buys goods in large quantities from producers is the:
+
+A. wholesaler  
+B. agent  
+C. retailer  
+D. consumer  
+
+---
+
+**Q30.** The person who sells goods in small quantities to consumers is the:
+
+A. retailer  
+B. manufacturer  
+C. producer  
+D. wholesaler  
+
+---
+
+**Q31.** A cheque that can only be paid into a bank account is a:
+
+A. open cheque  
+B. crossed cheque  
+C. blank cheque  
+D. post-dated cheque  
+
+---
+
+**Q32.** The person who writes a cheque is the:
+
+A. drawee  
+B. drawer  
+C. endorser  
+D. payee  
+
+---
+
+**Q33.** The bank on which a cheque is drawn is the:
+
+A. drawer  
+B. payee  
+C. drawee  
+D. endorser  
+
+---
+
+**Q34.** The person to whom a cheque is paid is the:
+
+A. drawer  
+B. drawee  
+C. endorser  
+D. payee  
+
+---
+
+**Q35.** The money charged for borrowing money is called:
+
+A. premium  
+B. dividend  
+C. interest  
+D. commission  
+
+---
+
+**Q36.** The simple interest on 100,000 FCFA at 5% for 2 years is:
+
+A. 5,000 FCFA  
+B. 2,000 FCFA  
+C. 20,000 FCFA  
+D. 10,000 FCFA  
+
+---
+
+**Q37.** The protection against financial loss is called:
+
+A. advertising  
+B. insurance  
+C. banking  
+D. warehousing  
+
+---
+
+**Q38.** The amount paid for an insurance policy is the:
+
+A. interest  
+B. premium  
+C. dividend  
+D. claim  
+
+---
+
+**Q39.** The document that contains the terms of an insurance contract is the:
+
+A. claim  
+B. premium  
+C. policy  
+D. receipt  
+
+---
+
+**Q40.** The payment made by an insurance company for a loss is a:
+
+A. policy  
+B. premium  
+C. dividend  
+D. claim  
+
+---
+
+**Q41.** The principle that the insured must not profit from a loss is:
+
+A. utmost good faith  
+B. contribution  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q42.** The principle that the insured must have a financial interest in the subject matter is:
+
+A. utmost good faith  
+B. subrogation  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q43.** Insurance against the death of the insured is:
+
+A. motor insurance  
+B. life insurance  
+C. fire insurance  
+D. marine insurance  
+
+---
+
+**Q44.** Insurance against damage to goods in transit by sea is:
+
+A. motor insurance  
+B. marine insurance  
+C. life insurance  
+D. fire insurance  
+
+---
+
+**Q45.** The exchange of information between people is called:
+
+A. banking  
+B. transport  
+C. communication  
+D. advertising  
+
+---
+
+**Q46.** The protection of consumers from unfair practices is called:
+
+A. insurance  
+B. advertising  
+C. marketing  
+D. consumer protection  
+
+---
+
+**Q47.** An organisation that protects the interests of consumers is a:
+
+A. company  
+B. cooperative  
+C. consumer association  
+D. trade union  
+
+---
+
+**Q48.** A financial institution that gives small loans to small businesses is a:
+
+A. insurance company  
+B. stock exchange  
+C. central bank  
+D. microfinance institution  
+
+---
+
+**Q49.** The market where shares are bought and sold is the:
+
+A. stock exchange  
+B. commodity market  
+C. money market  
+D. foreign exchange market  
+
+---
+
+**Q50.** The unit of ownership of a company is a:
+
+A. share  
+B. bond  
+C. premium  
+D. cheque  
+
+---
+
+**Q51.** A loan to a company or government that pays interest is a:
+
+A. bond  
+B. cheque  
+C. share  
+D. premium  
+
+---
+
+**Q52.** A general rise in the price level is called:
+
+A. inflation  
+B. recession  
+C. depression  
+D. deflation  
+
+---
+
+**Q53.** A plan of expected income and expenditure is a:
+
+A. budget  
+B. receipt  
+C. balance sheet  
+D. invoice  
+
+---
+
+**Q54.** The stock exchange in Cameroon is located in:
+
+A. Douala  
+B. Garoua  
+C. Buea  
+D. Yaoundé  
+
+---
+
+**Q55.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. money  
+C. services  
+D. credit  
+
+---
+
+**Q56.** The bank that issues currency and controls the money supply is the:
+
+A. commercial bank  
+B. central bank  
+C. merchant bank  
+D. development bank  
+
+---
+
+**Q57.** The bank that accepts deposits and gives loans to the public is a:
+
+A. central bank  
+B. development bank  
+C. commercial bank  
+D. stock exchange  
+
+---
+
+**Q58.** The account used for frequent transactions is a:
+
+A. savings account  
+B. fixed deposit account  
+C. loan account  
+D. current account  
+
+---
+
+**Q59.** The account that earns interest and encourages saving is a:
+
+A. current account  
+B. loan account  
+C. savings account  
+D. overdraft account  
+
+---
+
+**Q60.** A written order to a bank to pay a stated sum is a:
+
+A. receipt  
+B. credit note  
+C. invoice  
+D. cheque  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 4',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 4
+
+## Structural Question Bank — Microeconomics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MICROECONOMICS
+
+**Q1.** (a) Define the term "scarcity". *(2 marks)*
+
+(b) Explain the basic economic problem. *(4 marks)*
+
+(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*
+
+---
+
+**Q2.** (a) What is opportunity cost? *(2 marks)*
+
+(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*
+
+(c) State three factors of production. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the term "demand". *(2 marks)*
+
+(b) State the law of demand. *(3 marks)*
+
+(c) Explain three factors that cause a change in demand. *(5 marks)*
+
+---
+
+**Q4.** (a) Define the term "supply". *(2 marks)*
+
+(b) State the law of supply. *(3 marks)*
+
+(c) Explain three factors that cause a change in supply. *(5 marks)*
+
+---
+
+**Q5.** (a) What is market equilibrium? *(2 marks)*
+
+(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*
+
+(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*
+
+(b) State the formula for price elasticity of demand. *(3 marks)*
+
+(c) Explain the difference between elastic and inelastic demand. *(4 marks)*
+
+---
+
+**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*
+
+(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*
+
+---
+
+**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*
+
+(b) Explain the relationship between income and demand for a normal good. *(4 marks)*
+
+(c) Give one example of each type of good. *(2 marks)*
+
+---
+
+**Q9.** (a) Define the term "production". *(2 marks)*
+
+(b) Distinguish between short-run and long-run production. *(4 marks)*
+
+(c) Explain the law of diminishing returns. *(5 marks)*
+
+---
+
+**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*
+
+(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*
+
+(c) State the relationship between marginal cost and average cost. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "economies of scale". *(2 marks)*
+
+(b) State three internal economies of scale. *(3 marks)*
+
+(c) Explain two diseconomies of scale. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market structure? *(2 marks)*
+
+(b) Describe the characteristics of perfect competition. *(5 marks)*
+
+(c) Explain why firms in perfect competition are price takers. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "monopoly". *(2 marks)*
+
+(b) State three characteristics of a monopoly. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*
+
+---
+
+**Q14.** (a) What is monopolistic competition? *(2 marks)*
+
+(b) Describe the characteristics of monopolistic competition. *(4 marks)*
+
+(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "oligopoly". *(2 marks)*
+
+(b) State three characteristics of an oligopoly. *(3 marks)*
+
+(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*
+
+(b) Distinguish between accounting profit and economic profit. *(4 marks)*
+
+(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a price ceiling? *(2 marks)*
+
+(b) Explain the effects of a price ceiling on the market. *(4 marks)*
+
+(c) State two examples of price controls used by governments. *(2 marks)*
+
+---
+
+**Q18.** (a) Define the term "consumer surplus". *(2 marks)*
+
+(b) Explain how consumer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "producer surplus". *(2 marks)*
+
+(b) Explain how producer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price fall on producer surplus. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the division of labour? *(2 marks)*
+
+(b) State three advantages of the division of labour. *(3 marks)*
+
+(c) Explain two disadvantages of the division of labour. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 5',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 5
+
+## Structural Question Bank — Macroeconomics and development
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MACROECONOMICS AND DEVELOPMENT
+
+**Q1.** (a) Define the term "national income". *(2 marks)*
+
+(b) State the three methods of measuring national income. *(3 marks)*
+
+(c) Explain the difficulties in measuring national income in developing countries. *(5 marks)*
+
+---
+
+**Q2.** (a) Define the terms "GDP" and "GNP". *(4 marks)*
+
+(b) Distinguish between GDP at market prices and GDP at factor cost. *(4 marks)*
+
+(c) Explain the difference between nominal GDP and real GDP. *(4 marks)*
+
+---
+
+**Q3.** (a) What is money? *(2 marks)*
+
+(b) State the functions of money. *(4 marks)*
+
+(c) Explain the qualities of good money. *(4 marks)*
+
+---
+
+**Q4.** (a) Define the term "money supply". *(2 marks)*
+
+(b) State three components of the money supply. *(3 marks)*
+
+(c) Explain how the central bank controls the money supply. *(5 marks)*
+
+---
+
+**Q5.** (a) What is a commercial bank? *(2 marks)*
+
+(b) State three functions of a commercial bank. *(3 marks)*
+
+(c) Explain how commercial banks create credit. *(5 marks)*
+
+---
+
+**Q6.** (a) Define the term "inflation". *(2 marks)*
+
+(b) State three causes of inflation. *(3 marks)*
+
+(c) Explain the effects of inflation on the economy. *(5 marks)*
+
+---
+
+**Q7.** (a) Define the terms "demand-pull inflation" and "cost-push inflation". *(4 marks)
+
+(b) Explain the difference between the two types of inflation. *(4 marks)*
+
+(c) State two policies used to control inflation. *(2 marks)*
+
+---
+
+**Q8.** (a) What is unemployment? *(2 marks)*
+
+(b) State three types of unemployment. *(3 marks)*
+
+(c) Explain the causes and effects of unemployment. *(5 marks)*
+
+---
+
+**Q9.** (a) Define the term "international trade". *(2 marks)*
+
+(b) Explain the principle of comparative advantage. *(5 marks)*
+
+(c) State three benefits of international trade. *(3 marks)*
+
+---
+
+**Q10.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+
+(b) Explain the causes of a deficit in the balance of payments. *(4 marks)*
+
+(c) State three measures to correct a balance of payments deficit. *(3 marks)*
+
+---
+
+**Q11.** (a) What is a tariff? *(2 marks)*
+
+(b) Distinguish between a tariff and a quota. *(4 marks)*
+
+(c) Explain the arguments for and against protectionism. *(5 marks)*
+
+---
+
+**Q12.** (a) Define the term "public finance". *(2 marks)*
+
+(b) State the sources of government revenue. *(4 marks)*
+
+(c) Explain the difference between direct and indirect taxes. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a budget? *(2 marks)*
+
+(b) Distinguish between a balanced, a surplus, and a deficit budget. *(4 marks)*
+
+(c) Explain the importance of the budget as a tool of economic policy. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "economic growth". *(2 marks)*
+
+(b) Distinguish between economic growth and economic development. *(4 marks)*
+
+(c) State three factors that promote economic growth. *(3 marks)*
+
+---
+
+**Q15.** (a) What is economic development? *(2 marks)*
+
+(b) State three indicators of economic development. *(3 marks)*
+
+(c) Explain the difference between the Human Development Index and GDP per capita. *(5 marks)*
+
+---
+
+**Q16.** (a) Define the term "foreign direct investment". *(2 marks)*
+
+(b) State three advantages of foreign direct investment to a developing country. *(3 marks)*
+
+(c) Explain two disadvantages of foreign direct investment. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a developing country? *(2 marks)*
+
+(b) State three characteristics of developing countries. *(3 marks)*
+
+(c) Explain the problems facing developing countries in achieving development. *(5 marks)*
+
+---
+
+**Q18.** (a) Define the term "structural adjustment programme". *(2 marks)*
+
+(b) State three conditions attached to structural adjustment programmes. *(3 marks)*
+
+(c) Explain the effects of structural adjustment programmes on developing countries. *(5 marks)*
+
+---
+
+**Q19.** (a) What is the International Monetary Fund? *(2 marks)*
+
+(b) State three functions of the IMF. *(3 marks)*
+
+(c) Explain the role of the World Bank in financing development. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "regional integration". *(2 marks)*
+
+(b) State three objectives of the Economic Community of Central African States (ECCAS). *(3 marks)*
+
+(c) Explain the benefits of regional integration to Cameroon. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 6',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 6
+
+## Structural Question Bank — Microeconomics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MICROECONOMICS
+
+**Q1.** (a) Define the term "scarcity". *(2 marks)*
+
+(b) Explain the basic economic problem. *(4 marks)*
+
+(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*
+
+---
+
+**Q2.** (a) What is opportunity cost? *(2 marks)*
+
+(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*
+
+(c) State three factors of production. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the term "demand". *(2 marks)*
+
+(b) State the law of demand. *(3 marks)*
+
+(c) Explain three factors that cause a change in demand. *(5 marks)*
+
+---
+
+**Q4.** (a) Define the term "supply". *(2 marks)*
+
+(b) State the law of supply. *(3 marks)*
+
+(c) Explain three factors that cause a change in supply. *(5 marks)*
+
+---
+
+**Q5.** (a) What is market equilibrium? *(2 marks)*
+
+(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*
+
+(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*
+
+(b) State the formula for price elasticity of demand. *(3 marks)*
+
+(c) Explain the difference between elastic and inelastic demand. *(4 marks)*
+
+---
+
+**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*
+
+(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*
+
+---
+
+**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*
+
+(b) Explain the relationship between income and demand for a normal good. *(4 marks)*
+
+(c) Give one example of each type of good. *(2 marks)*
+
+---
+
+**Q9.** (a) Define the term "production". *(2 marks)*
+
+(b) Distinguish between short-run and long-run production. *(4 marks)*
+
+(c) Explain the law of diminishing returns. *(5 marks)*
+
+---
+
+**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*
+
+(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*
+
+(c) State the relationship between marginal cost and average cost. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "economies of scale". *(2 marks)*
+
+(b) State three internal economies of scale. *(3 marks)*
+
+(c) Explain two diseconomies of scale. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market structure? *(2 marks)*
+
+(b) Describe the characteristics of perfect competition. *(5 marks)*
+
+(c) Explain why firms in perfect competition are price takers. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "monopoly". *(2 marks)*
+
+(b) State three characteristics of a monopoly. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*
+
+---
+
+**Q14.** (a) What is monopolistic competition? *(2 marks)*
+
+(b) Describe the characteristics of monopolistic competition. *(4 marks)*
+
+(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "oligopoly". *(2 marks)*
+
+(b) State three characteristics of an oligopoly. *(3 marks)*
+
+(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*
+
+(b) Distinguish between accounting profit and economic profit. *(4 marks)*
+
+(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a price ceiling? *(2 marks)*
+
+(b) Explain the effects of a price ceiling on the market. *(4 marks)*
+
+(c) State two examples of price controls used by governments. *(2 marks)*
+
+---
+
+**Q18.** (a) Define the term "consumer surplus". *(2 marks)*
+
+(b) Explain how consumer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "producer surplus". *(2 marks)*
+
+(b) Explain how producer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price fall on producer surplus. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the division of labour? *(2 marks)*
+
+(b) State three advantages of the division of labour. *(3 marks)*
+
+(c) Explain two disadvantages of the division of labour. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 7',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 7
+
+## Structural Question Bank — Macroeconomics and development
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MACROECONOMICS AND DEVELOPMENT
+
+**Q1.** (a) Define the term "national income". *(2 marks)*
+
+(b) State the three methods of measuring national income. *(3 marks)*
+
+(c) Explain the difficulties in measuring national income in developing countries. *(5 marks)*
+
+---
+
+**Q2.** (a) Define the terms "GDP" and "GNP". *(4 marks)*
+
+(b) Distinguish between GDP at market prices and GDP at factor cost. *(4 marks)*
+
+(c) Explain the difference between nominal GDP and real GDP. *(4 marks)*
+
+---
+
+**Q3.** (a) What is money? *(2 marks)*
+
+(b) State the functions of money. *(4 marks)*
+
+(c) Explain the qualities of good money. *(4 marks)*
+
+---
+
+**Q4.** (a) Define the term "money supply". *(2 marks)*
+
+(b) State three components of the money supply. *(3 marks)*
+
+(c) Explain how the central bank controls the money supply. *(5 marks)*
+
+---
+
+**Q5.** (a) What is a commercial bank? *(2 marks)*
+
+(b) State three functions of a commercial bank. *(3 marks)*
+
+(c) Explain how commercial banks create credit. *(5 marks)*
+
+---
+
+**Q6.** (a) Define the term "inflation". *(2 marks)*
+
+(b) State three causes of inflation. *(3 marks)*
+
+(c) Explain the effects of inflation on the economy. *(5 marks)*
+
+---
+
+**Q7.** (a) Define the terms "demand-pull inflation" and "cost-push inflation". *(4 marks)
+
+(b) Explain the difference between the two types of inflation. *(4 marks)*
+
+(c) State two policies used to control inflation. *(2 marks)*
+
+---
+
+**Q8.** (a) What is unemployment? *(2 marks)*
+
+(b) State three types of unemployment. *(3 marks)*
+
+(c) Explain the causes and effects of unemployment. *(5 marks)*
+
+---
+
+**Q9.** (a) Define the term "international trade". *(2 marks)*
+
+(b) Explain the principle of comparative advantage. *(5 marks)*
+
+(c) State three benefits of international trade. *(3 marks)*
+
+---
+
+**Q10.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+
+(b) Explain the causes of a deficit in the balance of payments. *(4 marks)*
+
+(c) State three measures to correct a balance of payments deficit. *(3 marks)*
+
+---
+
+**Q11.** (a) What is a tariff? *(2 marks)*
+
+(b) Distinguish between a tariff and a quota. *(4 marks)*
+
+(c) Explain the arguments for and against protectionism. *(5 marks)*
+
+---
+
+**Q12.** (a) Define the term "public finance". *(2 marks)*
+
+(b) State the sources of government revenue. *(4 marks)*
+
+(c) Explain the difference between direct and indirect taxes. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a budget? *(2 marks)*
+
+(b) Distinguish between a balanced, a surplus, and a deficit budget. *(4 marks)*
+
+(c) Explain the importance of the budget as a tool of economic policy. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "economic growth". *(2 marks)*
+
+(b) Distinguish between economic growth and economic development. *(4 marks)*
+
+(c) State three factors that promote economic growth. *(3 marks)*
+
+---
+
+**Q15.** (a) What is economic development? *(2 marks)*
+
+(b) State three indicators of economic development. *(3 marks)*
+
+(c) Explain the difference between the Human Development Index and GDP per capita. *(5 marks)*
+
+---
+
+**Q16.** (a) Define the term "foreign direct investment". *(2 marks)*
+
+(b) State three advantages of foreign direct investment to a developing country. *(3 marks)*
+
+(c) Explain two disadvantages of foreign direct investment. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a developing country? *(2 marks)*
+
+(b) State three characteristics of developing countries. *(3 marks)*
+
+(c) Explain the problems facing developing countries in achieving development. *(5 marks)*
+
+---
+
+**Q18.** (a) Define the term "structural adjustment programme". *(2 marks)*
+
+(b) State three conditions attached to structural adjustment programmes. *(3 marks)*
+
+(c) Explain the effects of structural adjustment programmes on developing countries. *(5 marks)*
+
+---
+
+**Q19.** (a) What is the International Monetary Fund? *(2 marks)*
+
+(b) State three functions of the IMF. *(3 marks)*
+
+(c) Explain the role of the World Bank in financing development. *(4 marks)*
+
+---
+
+**Q20.** (a) Define the term "regional integration". *(2 marks)*
+
+(b) State three objectives of the Economic Community of Central African States (ECCAS). *(3 marks)*
+
+(c) Explain the benefits of regional integration to Cameroon. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 8',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 8
+
+## Structural Question Bank — Microeconomics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MICROECONOMICS
+
+**Q1.** (a) Define the term "scarcity". *(2 marks)*
+
+(b) Explain the basic economic problem. *(4 marks)*
+
+(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*
+
+---
+
+**Q2.** (a) What is opportunity cost? *(2 marks)*
+
+(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*
+
+(c) State three factors of production. *(3 marks)*
+
+---
+
+**Q3.** (a) Define the term "demand". *(2 marks)*
+
+(b) State the law of demand. *(3 marks)*
+
+(c) Explain three factors that cause a change in demand. *(5 marks)*
+
+---
+
+**Q4.** (a) Define the term "supply". *(2 marks)*
+
+(b) State the law of supply. *(3 marks)*
+
+(c) Explain three factors that cause a change in supply. *(5 marks)*
+
+---
+
+**Q5.** (a) What is market equilibrium? *(2 marks)*
+
+(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*
+
+(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*
+
+---
+
+**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*
+
+(b) State the formula for price elasticity of demand. *(3 marks)*
+
+(c) Explain the difference between elastic and inelastic demand. *(4 marks)*
+
+---
+
+**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*
+
+(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*
+
+---
+
+**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*
+
+(b) Explain the relationship between income and demand for a normal good. *(4 marks)*
+
+(c) Give one example of each type of good. *(2 marks)*
+
+---
+
+**Q9.** (a) Define the term "production". *(2 marks)*
+
+(b) Distinguish between short-run and long-run production. *(4 marks)*
+
+(c) Explain the law of diminishing returns. *(5 marks)*
+
+---
+
+**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*
+
+(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*
+
+(c) State the relationship between marginal cost and average cost. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "economies of scale". *(2 marks)*
+
+(b) State three internal economies of scale. *(3 marks)*
+
+(c) Explain two diseconomies of scale. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market structure? *(2 marks)*
+
+(b) Describe the characteristics of perfect competition. *(5 marks)*
+
+(c) Explain why firms in perfect competition are price takers. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "monopoly". *(2 marks)*
+
+(b) State three characteristics of a monopoly. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*
+
+---
+
+**Q14.** (a) What is monopolistic competition? *(2 marks)*
+
+(b) Describe the characteristics of monopolistic competition. *(4 marks)*
+
+(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "oligopoly". *(2 marks)*
+
+(b) State three characteristics of an oligopoly. *(3 marks)*
+
+(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*
+
+(b) Distinguish between accounting profit and economic profit. *(4 marks)*
+
+(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a price ceiling? *(2 marks)*
+
+(b) Explain the effects of a price ceiling on the market. *(4 marks)*
+
+(c) State two examples of price controls used by governments. *(2 marks)*
+
+---
+
+**Q18.** (a) Define the term "consumer surplus". *(2 marks)*
+
+(b) Explain how consumer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "producer surplus". *(2 marks)*
+
+(b) Explain how producer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price fall on producer surplus. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the division of labour? *(2 marks)*
+
+(b) State three advantages of the division of labour. *(3 marks)*
+
+(c) Explain two disadvantages of the division of labour. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 1',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The basic economic problem is:
+
+A. scarcity  
+B. inflation  
+C. unemployment  
+D. taxation  
+
+---
+
+**Q2.** The next best alternative forgone when a choice is made is the:
+
+A. opportunity cost  
+B. marginal cost  
+C. fixed cost  
+D. sunk cost  
+
+---
+
+**Q3.** The factors of production are land, labour, capital, and:
+
+A. enterprise  
+B. goods  
+C. money  
+D. services  
+
+---
+
+**Q4.** The reward for labour is:
+
+A. wages  
+B. interest  
+C. profit  
+D. rent  
+
+---
+
+**Q5.** The reward for capital is:
+
+A. interest  
+B. profit  
+C. wages  
+D. rent  
+
+---
+
+**Q6.** The reward for land is:
+
+A. rent  
+B. profit  
+C. interest  
+D. wages  
+
+---
+
+**Q7.** The reward for enterprise is:
+
+A. wages  
+B. profit  
+C. rent  
+D. interest  
+
+---
+
+**Q8.** The law of demand states that as price rises, quantity demanded:
+
+A. rises  
+B. falls  
+C. doubles  
+D. stays constant  
+
+---
+
+**Q9.** The law of supply states that as price rises, quantity supplied:
+
+A. falls  
+B. stays constant  
+C. rises  
+D. halves  
+
+---
+
+**Q10.** The price at which quantity demanded equals quantity supplied is the:
+
+A. ceiling price  
+B. floor price  
+C. market price  
+D. equilibrium price  
+
+---
+
+**Q11.** If a 10% price rise causes a 20% fall in quantity demanded, demand is:
+
+A. inelastic  
+B. perfectly inelastic  
+C. elastic  
+D. unit elastic  
+
+---
+
+**Q12.** If a 10% price rise causes a 5% fall in quantity demanded, demand is:
+
+A. elastic  
+B. perfectly elastic  
+C. unit elastic  
+D. inelastic  
+
+---
+
+**Q13.** The price elasticity of demand is calculated as:
+
+A. change in price ÷ change in quantity  
+B. % change in quantity demanded ÷ % change in price  
+C. % change in price ÷ % change in quantity demanded  
+D. quantity ÷ price  
+
+---
+
+**Q14.** A good whose demand rises when income rises is a:
+
+A. substitute good  
+B. normal good  
+C. complementary good  
+D. inferior good  
+
+---
+
+**Q15.** A good whose demand falls when income rises is an:
+
+A. luxury good  
+B. normal good  
+C. inferior good  
+D. necessity  
+
+---
+
+**Q16.** The law of diminishing returns applies in the:
+
+A. very long run  
+B. long run  
+C. market period  
+D. short run  
+
+---
+
+**Q17.** Costs that do not change with output are:
+
+A. marginal costs  
+B. total costs  
+C. fixed costs  
+D. variable costs  
+
+---
+
+**Q18.** Costs that change with output are:
+
+A. sunk costs  
+B. overhead costs  
+C. fixed costs  
+D. variable costs  
+
+---
+
+**Q19.** The extra cost of producing one more unit is the:
+
+A. total cost  
+B. marginal cost  
+C. average cost  
+D. fixed cost  
+
+---
+
+**Q20.** A market with many buyers and sellers of identical products is:
+
+A. monopolistic competition  
+B. perfect competition  
+C. oligopoly  
+D. monopoly  
+
+---
+
+**Q21.** A market with a single seller is a:
+
+A. duopoly  
+B. perfect competition  
+C. monopoly  
+D. oligopoly  
+
+---
+
+**Q22.** A market with a few large sellers is an:
+
+A. monopolistic competition  
+B. monopoly  
+C. perfect competition  
+D. oligopoly  
+
+---
+
+**Q23.** A market with many sellers of differentiated products is:
+
+A. oligopoly  
+B. monopoly  
+C. monopolistic competition  
+D. perfect competition  
+
+---
+
+**Q24.** A firm in perfect competition is a:
+
+A. oligopolist  
+B. monopolist  
+C. price maker  
+D. price taker  
+
+---
+
+**Q25.** A monopolist is a:
+
+A. price maker  
+B. price taker  
+C. price follower  
+D. price cutter  
+
+---
+
+**Q26.** The reduction in average cost as output increases is called:
+
+A. economies of scale  
+B. diseconomies of scale  
+C. increasing returns  
+D. diminishing returns  
+
+---
+
+**Q27.** The increase in average cost when a firm becomes too large is called:
+
+A. diseconomies of scale  
+B. diminishing returns  
+C. economies of scale  
+D. constant returns  
+
+---
+
+**Q28.** A maximum price set by the government is a:
+
+A. price ceiling  
+B. equilibrium price  
+C. market price  
+D. price floor  
+
+---
+
+**Q29.** A minimum price set by the government is a:
+
+A. price floor  
+B. market price  
+C. price ceiling  
+D. equilibrium price  
+
+---
+
+**Q30.** The benefit consumers gain when they pay less than they are willing to pay is:
+
+A. consumer surplus  
+B. revenue  
+C. profit  
+D. producer surplus  
+
+---
+
+**Q31.** The total value of goods and services produced in a country in a year is the:
+
+A. national debt  
+B. national income  
+C. balance of trade  
+D. money supply  
+
+---
+
+**Q32.** GDP stands for:
+
+A. Gross Domestic Profit  
+B. Gross Domestic Product  
+C. Gross Development Plan  
+D. General Domestic Product  
+
+---
+
+**Q33.** GNP stands for:
+
+A. Gross National Profit  
+B. General National Product  
+C. Gross National Product  
+D. Gross Net Product  
+
+---
+
+**Q34.** The three methods of measuring national income are income, output, and:
+
+A. savings  
+B. investment  
+C. taxation  
+D. expenditure  
+
+---
+
+**Q35.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. credit  
+C. money  
+D. services  
+
+---
+
+**Q36.** The total amount of money in circulation is the:
+
+A. national income  
+B. public debt  
+C. balance of payments  
+D. money supply  
+
+---
+
+**Q37.** The bank that controls the money supply is the:
+
+A. development bank  
+B. central bank  
+C. commercial bank  
+D. merchant bank  
+
+---
+
+**Q38.** The bank that accepts deposits and gives loans is a:
+
+A. stock exchange  
+B. commercial bank  
+C. insurance company  
+D. central bank  
+
+---
+
+**Q39.** A general and sustained rise in the price level is:
+
+A. recession  
+B. deflation  
+C. inflation  
+D. depression  
+
+---
+
+**Q40.** Inflation caused by excess demand is called:
+
+A. hyperinflation  
+B. cost-push inflation  
+C. stagflation  
+D. demand-pull inflation  
+
+---
+
+**Q41.** Inflation caused by rising costs of production is called:
+
+A. hyperinflation  
+B. deflation  
+C. cost-push inflation  
+D. demand-pull inflation  
+
+---
+
+**Q42.** The situation where people who are able and willing to work cannot find jobs is:
+
+A. deflation  
+B. recession  
+C. inflation  
+D. unemployment  
+
+---
+
+**Q43.** Trade between countries is called:
+
+A. retail trade  
+B. international trade  
+C. home trade  
+D. local trade  
+
+---
+
+**Q44.** The principle that a country should specialise in producing goods it produces most efficiently is:
+
+A. economies of scale  
+B. comparative advantage  
+C. opportunity cost  
+D. absolute advantage  
+
+---
+
+**Q45.** The difference between the value of exports and imports is the:
+
+A. public debt  
+B. balance of payments  
+C. balance of trade  
+D. national income  
+
+---
+
+**Q46.** A tax on imported goods is a:
+
+A. grant  
+B. quota  
+C. subsidy  
+D. tariff  
+
+---
+
+**Q47.** A limit on the quantity of a good that can be imported is a:
+
+A. embargo  
+B. subsidy  
+C. quota  
+D. tariff  
+
+---
+
+**Q48.** Taxes on income and profits are:
+
+A. quotas  
+B. tariffs  
+C. indirect taxes  
+D. direct taxes  
+
+---
+
+**Q49.** Taxes on goods and services are:
+
+A. indirect taxes  
+B. direct taxes  
+C. income taxes  
+D. profit taxes  
+
+---
+
+**Q50.** A plan of government revenue and expenditure is the:
+
+A. budget  
+B. balance sheet  
+C. receipt  
+D. invoice  
+
+---
+
+**Q51.** A budget where revenue equals expenditure is:
+
+A. balanced  
+B. deficit  
+C. surplus  
+D. unbalanced  
+
+---
+
+**Q52.** A budget where revenue exceeds expenditure is:
+
+A. surplus  
+B. balanced  
+C. unbalanced  
+D. deficit  
+
+---
+
+**Q53.** A budget where expenditure exceeds revenue is:
+
+A. deficit  
+B. unbalanced  
+C. surplus  
+D. balanced  
+
+---
+
+**Q54.** The increase in a country''s output of goods and services over time is:
+
+A. economic growth  
+B. recession  
+C. inflation  
+D. economic development  
+
+---
+
+**Q55.** The improvement in the standard of living and welfare of people is:
+
+A. economic growth  
+B. economic development  
+C. inflation  
+D. deflation  
+
+---
+
+**Q56.** The index that measures human welfare is the:
+
+A. Consumer Price Index  
+B. Human Development Index  
+C. Price Index  
+D. Stock Index  
+
+---
+
+**Q57.** Investment by foreign companies in a country is called:
+
+A. portfolio investment  
+B. public investment  
+C. foreign direct investment  
+D. domestic investment  
+
+---
+
+**Q58.** The international organisation that provides loans to countries in balance of payments difficulties is the:
+
+A. World Bank  
+B. WTO  
+C. UN  
+D. IMF  
+
+---
+
+**Q59.** The international organisation that finances development projects is the:
+
+A. IMF  
+B. UN  
+C. World Bank  
+D. WTO  
+
+---
+
+**Q60.** The economic community of Central African states is:
+
+A. ECOWAS  
+B. COMESA  
+C. SADC  
+D. ECCAS  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 2',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The reward for labour is:
+
+A. wages  
+B. rent  
+C. interest  
+D. profit  
+
+---
+
+**Q2.** The reward for capital is:
+
+A. interest  
+B. wages  
+C. profit  
+D. rent  
+
+---
+
+**Q3.** The reward for land is:
+
+A. rent  
+B. interest  
+C. wages  
+D. profit  
+
+---
+
+**Q4.** The reward for enterprise is:
+
+A. profit  
+B. rent  
+C. interest  
+D. wages  
+
+---
+
+**Q5.** The law of demand states that as price rises, quantity demanded:
+
+A. falls  
+B. doubles  
+C. rises  
+D. stays constant  
+
+---
+
+**Q6.** The law of supply states that as price rises, quantity supplied:
+
+A. rises  
+B. halves  
+C. stays constant  
+D. falls  
+
+---
+
+**Q7.** The price at which quantity demanded equals quantity supplied is the:
+
+A. ceiling price  
+B. equilibrium price  
+C. floor price  
+D. market price  
+
+---
+
+**Q8.** If a 10% price rise causes a 20% fall in quantity demanded, demand is:
+
+A. inelastic  
+B. elastic  
+C. perfectly inelastic  
+D. unit elastic  
+
+---
+
+**Q9.** If a 10% price rise causes a 5% fall in quantity demanded, demand is:
+
+A. elastic  
+B. unit elastic  
+C. inelastic  
+D. perfectly elastic  
+
+---
+
+**Q10.** The price elasticity of demand is calculated as:
+
+A. % change in price ÷ % change in quantity demanded  
+B. change in price ÷ change in quantity  
+C. quantity ÷ price  
+D. % change in quantity demanded ÷ % change in price  
+
+---
+
+**Q11.** A good whose demand rises when income rises is a:
+
+A. inferior good  
+B. complementary good  
+C. normal good  
+D. substitute good  
+
+---
+
+**Q12.** A good whose demand falls when income rises is an:
+
+A. normal good  
+B. necessity  
+C. luxury good  
+D. inferior good  
+
+---
+
+**Q13.** The law of diminishing returns applies in the:
+
+A. very long run  
+B. short run  
+C. long run  
+D. market period  
+
+---
+
+**Q14.** Costs that do not change with output are:
+
+A. marginal costs  
+B. fixed costs  
+C. total costs  
+D. variable costs  
+
+---
+
+**Q15.** Costs that change with output are:
+
+A. sunk costs  
+B. fixed costs  
+C. variable costs  
+D. overhead costs  
+
+---
+
+**Q16.** The extra cost of producing one more unit is the:
+
+A. fixed cost  
+B. average cost  
+C. total cost  
+D. marginal cost  
+
+---
+
+**Q17.** A market with many buyers and sellers of identical products is:
+
+A. oligopoly  
+B. monopolistic competition  
+C. perfect competition  
+D. monopoly  
+
+---
+
+**Q18.** A market with a single seller is a:
+
+A. oligopoly  
+B. duopoly  
+C. perfect competition  
+D. monopoly  
+
+---
+
+**Q19.** A market with a few large sellers is an:
+
+A. monopolistic competition  
+B. oligopoly  
+C. monopoly  
+D. perfect competition  
+
+---
+
+**Q20.** A market with many sellers of differentiated products is:
+
+A. oligopoly  
+B. monopolistic competition  
+C. monopoly  
+D. perfect competition  
+
+---
+
+**Q21.** A firm in perfect competition is a:
+
+A. oligopolist  
+B. price maker  
+C. price taker  
+D. monopolist  
+
+---
+
+**Q22.** A monopolist is a:
+
+A. price cutter  
+B. price taker  
+C. price follower  
+D. price maker  
+
+---
+
+**Q23.** The reduction in average cost as output increases is called:
+
+A. increasing returns  
+B. diminishing returns  
+C. economies of scale  
+D. diseconomies of scale  
+
+---
+
+**Q24.** The increase in average cost when a firm becomes too large is called:
+
+A. constant returns  
+B. diminishing returns  
+C. economies of scale  
+D. diseconomies of scale  
+
+---
+
+**Q25.** A maximum price set by the government is a:
+
+A. price ceiling  
+B. price floor  
+C. equilibrium price  
+D. market price  
+
+---
+
+**Q26.** A minimum price set by the government is a:
+
+A. price floor  
+B. price ceiling  
+C. market price  
+D. equilibrium price  
+
+---
+
+**Q27.** The benefit consumers gain when they pay less than they are willing to pay is:
+
+A. consumer surplus  
+B. profit  
+C. producer surplus  
+D. revenue  
+
+---
+
+**Q28.** The basic economic problem is:
+
+A. scarcity  
+B. unemployment  
+C. taxation  
+D. inflation  
+
+---
+
+**Q29.** The next best alternative forgone when a choice is made is the:
+
+A. opportunity cost  
+B. fixed cost  
+C. marginal cost  
+D. sunk cost  
+
+---
+
+**Q30.** The factors of production are land, labour, capital, and:
+
+A. enterprise  
+B. services  
+C. goods  
+D. money  
+
+---
+
+**Q31.** The three methods of measuring national income are income, output, and:
+
+A. savings  
+B. expenditure  
+C. investment  
+D. taxation  
+
+---
+
+**Q32.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. money  
+C. credit  
+D. services  
+
+---
+
+**Q33.** The total amount of money in circulation is the:
+
+A. national income  
+B. balance of payments  
+C. money supply  
+D. public debt  
+
+---
+
+**Q34.** The bank that controls the money supply is the:
+
+A. commercial bank  
+B. development bank  
+C. merchant bank  
+D. central bank  
+
+---
+
+**Q35.** The bank that accepts deposits and gives loans is a:
+
+A. central bank  
+B. insurance company  
+C. commercial bank  
+D. stock exchange  
+
+---
+
+**Q36.** A general and sustained rise in the price level is:
+
+A. deflation  
+B. depression  
+C. recession  
+D. inflation  
+
+---
+
+**Q37.** Inflation caused by excess demand is called:
+
+A. hyperinflation  
+B. demand-pull inflation  
+C. cost-push inflation  
+D. stagflation  
+
+---
+
+**Q38.** Inflation caused by rising costs of production is called:
+
+A. hyperinflation  
+B. cost-push inflation  
+C. deflation  
+D. demand-pull inflation  
+
+---
+
+**Q39.** The situation where people who are able and willing to work cannot find jobs is:
+
+A. deflation  
+B. inflation  
+C. unemployment  
+D. recession  
+
+---
+
+**Q40.** Trade between countries is called:
+
+A. local trade  
+B. home trade  
+C. retail trade  
+D. international trade  
+
+---
+
+**Q41.** The principle that a country should specialise in producing goods it produces most efficiently is:
+
+A. opportunity cost  
+B. economies of scale  
+C. comparative advantage  
+D. absolute advantage  
+
+---
+
+**Q42.** The difference between the value of exports and imports is the:
+
+A. national income  
+B. public debt  
+C. balance of payments  
+D. balance of trade  
+
+---
+
+**Q43.** A tax on imported goods is a:
+
+A. grant  
+B. tariff  
+C. quota  
+D. subsidy  
+
+---
+
+**Q44.** A limit on the quantity of a good that can be imported is a:
+
+A. embargo  
+B. quota  
+C. subsidy  
+D. tariff  
+
+---
+
+**Q45.** Taxes on income and profits are:
+
+A. quotas  
+B. indirect taxes  
+C. direct taxes  
+D. tariffs  
+
+---
+
+**Q46.** Taxes on goods and services are:
+
+A. profit taxes  
+B. direct taxes  
+C. income taxes  
+D. indirect taxes  
+
+---
+
+**Q47.** A plan of government revenue and expenditure is the:
+
+A. receipt  
+B. invoice  
+C. budget  
+D. balance sheet  
+
+---
+
+**Q48.** A budget where revenue equals expenditure is:
+
+A. unbalanced  
+B. deficit  
+C. surplus  
+D. balanced  
+
+---
+
+**Q49.** A budget where revenue exceeds expenditure is:
+
+A. surplus  
+B. deficit  
+C. balanced  
+D. unbalanced  
+
+---
+
+**Q50.** A budget where expenditure exceeds revenue is:
+
+A. deficit  
+B. surplus  
+C. unbalanced  
+D. balanced  
+
+---
+
+**Q51.** The increase in a country''s output of goods and services over time is:
+
+A. economic growth  
+B. inflation  
+C. economic development  
+D. recession  
+
+---
+
+**Q52.** The improvement in the standard of living and welfare of people is:
+
+A. economic development  
+B. inflation  
+C. deflation  
+D. economic growth  
+
+---
+
+**Q53.** The index that measures human welfare is the:
+
+A. Human Development Index  
+B. Price Index  
+C. Consumer Price Index  
+D. Stock Index  
+
+---
+
+**Q54.** Investment by foreign companies in a country is called:
+
+A. foreign direct investment  
+B. domestic investment  
+C. public investment  
+D. portfolio investment  
+
+---
+
+**Q55.** The international organisation that provides loans to countries in balance of payments difficulties is the:
+
+A. World Bank  
+B. IMF  
+C. WTO  
+D. UN  
+
+---
+
+**Q56.** The international organisation that finances development projects is the:
+
+A. IMF  
+B. World Bank  
+C. UN  
+D. WTO  
+
+---
+
+**Q57.** The economic community of Central African states is:
+
+A. ECOWAS  
+B. SADC  
+C. ECCAS  
+D. COMESA  
+
+---
+
+**Q58.** The total value of goods and services produced in a country in a year is the:
+
+A. national debt  
+B. balance of trade  
+C. money supply  
+D. national income  
+
+---
+
+**Q59.** GDP stands for:
+
+A. Gross Domestic Profit  
+B. Gross Development Plan  
+C. Gross Domestic Product  
+D. General Domestic Product  
+
+---
+
+**Q60.** GNP stands for:
+
+A. Gross National Profit  
+B. Gross Net Product  
+C. General National Product  
+D. Gross National Product  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The reward for enterprise is:
+
+A. profit  
+B. wages  
+C. rent  
+D. interest  
+
+---
+
+**Q2.** The law of demand states that as price rises, quantity demanded:
+
+A. falls  
+B. rises  
+C. doubles  
+D. stays constant  
+
+---
+
+**Q3.** The law of supply states that as price rises, quantity supplied:
+
+A. rises  
+B. stays constant  
+C. falls  
+D. halves  
+
+---
+
+**Q4.** The price at which quantity demanded equals quantity supplied is the:
+
+A. equilibrium price  
+B. floor price  
+C. market price  
+D. ceiling price  
+
+---
+
+**Q5.** If a 10% price rise causes a 20% fall in quantity demanded, demand is:
+
+A. elastic  
+B. perfectly inelastic  
+C. inelastic  
+D. unit elastic  
+
+---
+
+**Q6.** If a 10% price rise causes a 5% fall in quantity demanded, demand is:
+
+A. inelastic  
+B. perfectly elastic  
+C. unit elastic  
+D. elastic  
+
+---
+
+**Q7.** The price elasticity of demand is calculated as:
+
+A. % change in price ÷ % change in quantity demanded  
+B. % change in quantity demanded ÷ % change in price  
+C. change in price ÷ change in quantity  
+D. quantity ÷ price  
+
+---
+
+**Q8.** A good whose demand rises when income rises is a:
+
+A. inferior good  
+B. normal good  
+C. complementary good  
+D. substitute good  
+
+---
+
+**Q9.** A good whose demand falls when income rises is an:
+
+A. normal good  
+B. luxury good  
+C. inferior good  
+D. necessity  
+
+---
+
+**Q10.** The law of diminishing returns applies in the:
+
+A. long run  
+B. very long run  
+C. market period  
+D. short run  
+
+---
+
+**Q11.** Costs that do not change with output are:
+
+A. variable costs  
+B. total costs  
+C. fixed costs  
+D. marginal costs  
+
+---
+
+**Q12.** Costs that change with output are:
+
+A. fixed costs  
+B. overhead costs  
+C. sunk costs  
+D. variable costs  
+
+---
+
+**Q13.** The extra cost of producing one more unit is the:
+
+A. fixed cost  
+B. marginal cost  
+C. average cost  
+D. total cost  
+
+---
+
+**Q14.** A market with many buyers and sellers of identical products is:
+
+A. oligopoly  
+B. perfect competition  
+C. monopolistic competition  
+D. monopoly  
+
+---
+
+**Q15.** A market with a single seller is a:
+
+A. oligopoly  
+B. perfect competition  
+C. monopoly  
+D. duopoly  
+
+---
+
+**Q16.** A market with a few large sellers is an:
+
+A. perfect competition  
+B. monopoly  
+C. monopolistic competition  
+D. oligopoly  
+
+---
+
+**Q17.** A market with many sellers of differentiated products is:
+
+A. monopoly  
+B. oligopoly  
+C. monopolistic competition  
+D. perfect competition  
+
+---
+
+**Q18.** A firm in perfect competition is a:
+
+A. monopolist  
+B. oligopolist  
+C. price maker  
+D. price taker  
+
+---
+
+**Q19.** A monopolist is a:
+
+A. price cutter  
+B. price maker  
+C. price taker  
+D. price follower  
+
+---
+
+**Q20.** The reduction in average cost as output increases is called:
+
+A. increasing returns  
+B. economies of scale  
+C. diminishing returns  
+D. diseconomies of scale  
+
+---
+
+**Q21.** The increase in average cost when a firm becomes too large is called:
+
+A. constant returns  
+B. economies of scale  
+C. diseconomies of scale  
+D. diminishing returns  
+
+---
+
+**Q22.** A maximum price set by the government is a:
+
+A. market price  
+B. price floor  
+C. equilibrium price  
+D. price ceiling  
+
+---
+
+**Q23.** A minimum price set by the government is a:
+
+A. market price  
+B. equilibrium price  
+C. price floor  
+D. price ceiling  
+
+---
+
+**Q24.** The benefit consumers gain when they pay less than they are willing to pay is:
+
+A. revenue  
+B. profit  
+C. producer surplus  
+D. consumer surplus  
+
+---
+
+**Q25.** The basic economic problem is:
+
+A. scarcity  
+B. inflation  
+C. unemployment  
+D. taxation  
+
+---
+
+**Q26.** The next best alternative forgone when a choice is made is the:
+
+A. opportunity cost  
+B. marginal cost  
+C. fixed cost  
+D. sunk cost  
+
+---
+
+**Q27.** The factors of production are land, labour, capital, and:
+
+A. enterprise  
+B. goods  
+C. money  
+D. services  
+
+---
+
+**Q28.** The reward for labour is:
+
+A. wages  
+B. interest  
+C. profit  
+D. rent  
+
+---
+
+**Q29.** The reward for capital is:
+
+A. interest  
+B. profit  
+C. wages  
+D. rent  
+
+---
+
+**Q30.** The reward for land is:
+
+A. rent  
+B. profit  
+C. interest  
+D. wages  
+
+---
+
+**Q31.** The bank that controls the money supply is the:
+
+A. commercial bank  
+B. central bank  
+C. development bank  
+D. merchant bank  
+
+---
+
+**Q32.** The bank that accepts deposits and gives loans is a:
+
+A. central bank  
+B. commercial bank  
+C. insurance company  
+D. stock exchange  
+
+---
+
+**Q33.** A general and sustained rise in the price level is:
+
+A. deflation  
+B. recession  
+C. inflation  
+D. depression  
+
+---
+
+**Q34.** Inflation caused by excess demand is called:
+
+A. cost-push inflation  
+B. hyperinflation  
+C. stagflation  
+D. demand-pull inflation  
+
+---
+
+**Q35.** Inflation caused by rising costs of production is called:
+
+A. demand-pull inflation  
+B. deflation  
+C. cost-push inflation  
+D. hyperinflation  
+
+---
+
+**Q36.** The situation where people who are able and willing to work cannot find jobs is:
+
+A. inflation  
+B. recession  
+C. deflation  
+D. unemployment  
+
+---
+
+**Q37.** Trade between countries is called:
+
+A. local trade  
+B. international trade  
+C. home trade  
+D. retail trade  
+
+---
+
+**Q38.** The principle that a country should specialise in producing goods it produces most efficiently is:
+
+A. opportunity cost  
+B. comparative advantage  
+C. economies of scale  
+D. absolute advantage  
+
+---
+
+**Q39.** The difference between the value of exports and imports is the:
+
+A. national income  
+B. balance of payments  
+C. balance of trade  
+D. public debt  
+
+---
+
+**Q40.** A tax on imported goods is a:
+
+A. subsidy  
+B. quota  
+C. grant  
+D. tariff  
+
+---
+
+**Q41.** A limit on the quantity of a good that can be imported is a:
+
+A. subsidy  
+B. embargo  
+C. quota  
+D. tariff  
+
+---
+
+**Q42.** Taxes on income and profits are:
+
+A. tariffs  
+B. quotas  
+C. indirect taxes  
+D. direct taxes  
+
+---
+
+**Q43.** Taxes on goods and services are:
+
+A. profit taxes  
+B. indirect taxes  
+C. direct taxes  
+D. income taxes  
+
+---
+
+**Q44.** A plan of government revenue and expenditure is the:
+
+A. receipt  
+B. budget  
+C. invoice  
+D. balance sheet  
+
+---
+
+**Q45.** A budget where revenue equals expenditure is:
+
+A. unbalanced  
+B. surplus  
+C. balanced  
+D. deficit  
+
+---
+
+**Q46.** A budget where revenue exceeds expenditure is:
+
+A. unbalanced  
+B. deficit  
+C. balanced  
+D. surplus  
+
+---
+
+**Q47.** A budget where expenditure exceeds revenue is:
+
+A. unbalanced  
+B. balanced  
+C. deficit  
+D. surplus  
+
+---
+
+**Q48.** The increase in a country''s output of goods and services over time is:
+
+A. recession  
+B. inflation  
+C. economic development  
+D. economic growth  
+
+---
+
+**Q49.** The improvement in the standard of living and welfare of people is:
+
+A. economic development  
+B. economic growth  
+C. inflation  
+D. deflation  
+
+---
+
+**Q50.** The index that measures human welfare is the:
+
+A. Human Development Index  
+B. Consumer Price Index  
+C. Price Index  
+D. Stock Index  
+
+---
+
+**Q51.** Investment by foreign companies in a country is called:
+
+A. foreign direct investment  
+B. public investment  
+C. portfolio investment  
+D. domestic investment  
+
+---
+
+**Q52.** The international organisation that provides loans to countries in balance of payments difficulties is the:
+
+A. IMF  
+B. WTO  
+C. UN  
+D. World Bank  
+
+---
+
+**Q53.** The international organisation that finances development projects is the:
+
+A. World Bank  
+B. UN  
+C. IMF  
+D. WTO  
+
+---
+
+**Q54.** The economic community of Central African states is:
+
+A. ECCAS  
+B. COMESA  
+C. SADC  
+D. ECOWAS  
+
+---
+
+**Q55.** The total value of goods and services produced in a country in a year is the:
+
+A. national debt  
+B. national income  
+C. balance of trade  
+D. money supply  
+
+---
+
+**Q56.** GDP stands for:
+
+A. Gross Domestic Profit  
+B. Gross Domestic Product  
+C. Gross Development Plan  
+D. General Domestic Product  
+
+---
+
+**Q57.** GNP stands for:
+
+A. Gross National Profit  
+B. General National Product  
+C. Gross National Product  
+D. Gross Net Product  
+
+---
+
+**Q58.** The three methods of measuring national income are income, output, and:
+
+A. savings  
+B. investment  
+C. taxation  
+D. expenditure  
+
+---
+
+**Q59.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. credit  
+C. money  
+D. services  
+
+---
+
+**Q60.** The total amount of money in circulation is the:
+
+A. national income  
+B. public debt  
+C. balance of payments  
+D. money supply  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 4',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 4
+
+## Structural Question Bank — Pure mathematics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PURE MATHEMATICS
+
+**Q1.** (a) Express $z = 3 + 4i$ in modulus-argument form. *(4 marks)*
+
+(b) Find the modulus and argument of $z^2$. *(4 marks)*
+
+(c) Solve the equation $z^2 + 2z + 5 = 0$, giving your answers in the form $a + bi$. *(4 marks)*
+
+---
+
+**Q2.** (a) Given $z_1 = 2 + 3i$ and $z_2 = 1 - i$, find $z_1 z_2$ and $\frac{z_1}{z_2}$. *(6 marks)*
+
+(b) Find the square roots of $-8 + 6i$. *(6 marks)*
+
+---
+
+**Q3.** (a) Express $z = 2(\cos 60^\circ + i\sin 60^\circ)$ in the form $a + bi$. *(3 marks)*
+
+(b) Use De Moivre''s theorem to find $(1 + i)^8$. *(5 marks)*
+
+(c) Solve $z^3 = 8$, giving all three roots. *(5 marks)*
+
+---
+
+**Q4.** (a) State the conditions for two matrices to be multiplied. *(2 marks)*
+
+(b) Given $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$, find $AB$ and $BA$. *(6 marks)*
+
+(c) Show that $AB \neq BA$. *(2 marks)*
+
+---
+
+**Q5.** (a) Find the determinant and inverse of $A = \begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$. *(5 marks)*
+
+(b) Use the inverse matrix method to solve the simultaneous equations $2x + 3y = 7$ and $x + 4y = 6$. *(5 marks)*
+
+---
+
+**Q6.** (a) Find the eigenvalues and eigenvectors of $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$. *(6 marks)*
+
+(b) State the trace and determinant of $A$. *(2 marks)*
+
+(c) Verify that the sum of the eigenvalues equals the trace. *(2 marks)*
+
+---
+
+**Q7.** (a) Given $\mathbf{a} = 2\mathbf{i} + 3\mathbf{j} - \mathbf{k}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j} + 4\mathbf{k}$, find $\mathbf{a} \cdot \mathbf{b}$. *(3 marks)*
+
+(b) Find the angle between $\mathbf{a}$ and $\mathbf{b}$. *(4 marks)*
+
+(c) Find $\mathbf{a} \times \mathbf{b}$. *(4 marks)*
+
+---
+
+**Q8.** (a) Find the equation of the plane passing through the points $(1, 2, 3)$, $(2, 0, 1)$, and $(0, 1, 2)$. *(6 marks)*
+
+(b) Find the distance from the point $(1, 1, 1)$ to this plane. *(4 marks)*
+
+---
+
+**Q9.** (a) Prove by induction that $1^2 + 2^2 + 3^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}$. *(6 marks)*
+
+(b) Prove by induction that $3^n > n^2$ for all positive integers $n$. *(5 marks)*
+
+---
+
+**Q10.** (a) Prove by contradiction that $\sqrt{2}$ is irrational. *(5 marks)*
+
+(b) Prove that the sum of two odd numbers is even. *(3 marks)*
+
+(c) Prove that $n^3 - n$ is divisible by 6 for all positive integers $n$. *(5 marks)*
+
+---
+
+**Q11.** (a) Find the sum of the series $1 + 2 + 3 + \cdots + n$. *(3 marks)*
+
+(b) Find the sum of the series $1^2 + 3^2 + 5^2 + \cdots + (2n-1)^2$. *(5 marks)*
+
+(c) Determine whether the series $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$ converges, and find its sum. *(5 marks)*
+
+---
+
+**Q12.** (a) State the binomial theorem. *(2 marks)*
+
+(b) Expand $(1 + x)^{10}$ up to the term in $x^3$. *(4 marks)*
+
+(c) Find the coefficient of $x^5$ in the expansion of $(2 - 3x)^8$. *(5 marks)*
+
+---
+
+**Q13.** (a) Find the first three terms in the binomial expansion of $\frac{1}{\sqrt{1 + x}}$ for $|x| < 1$. *(5 marks)*
+
+(b) Use your expansion to approximate $\frac{1}{\sqrt{1.1}}$. *(3 marks)*
+
+(c) State the range of validity of the expansion. *(2 marks)*
+
+---
+
+**Q14.** (a) Find the general solution of the differential equation $\frac{dy}{dx} = \frac{y}{x}$. *(4 marks)*
+
+(b) Solve the differential equation $\frac{dy}{dx} + 2y = e^{-x}$ given that $y = 1$ when $x = 0$. *(6 marks)*
+
+---
+
+**Q15.** (a) Solve the differential equation $\frac{d^2y}{dx^2} - 3\frac{dy}{dx} + 2y = 0$. *(5 marks)*
+
+(b) Given that $y = 1$ and $\frac{dy}{dx} = 0$ when $x = 0$, find the particular solution. *(4 marks)*
+
+---
+
+**Q16.** (a) Express $f(x) = \frac{3x + 1}{(x-1)(x+2)}$ in partial fractions. *(5 marks)*
+
+(b) Express $\frac{2x^2 + 3x + 1}{(x+1)(x^2 + 1)}$ in partial fractions. *(6 marks)*
+
+---
+
+**Q17.** (a) Find the roots of the equation $x^3 - 6x^2 + 11x - 6 = 0$. *(5 marks)*
+
+(b) Given that $1 - i$ is a root of $x^3 - 3x^2 + 4x - 2 = 0$, find the other roots. *(5 marks)*
+
+---
+
+**Q18.** (a) State the remainder theorem. *(2 marks)*
+
+(b) Find the remainder when $x^4 - 3x^3 + 2x - 1$ is divided by $x - 2$. *(4 marks)*
+
+(c) Given that $x - 1$ is a factor of $x^3 + ax^2 + bx - 6$, and the remainder is 4 when divided by $x - 2$, find $a$ and $b$. *(6 marks)*
+
+---
+
+**Q19.** (a) Find $\lim_{x \to 0} \frac{\sin 3x}{x}$. *(3 marks)*
+
+(b) Find $\lim_{x \to \infty} \frac{3x^2 + 2x}{x^2 - 1}$. *(3 marks)*
+
+(c) Find $\lim_{x \to 0} \frac{e^x - 1}{x}$. *(3 marks)*
+
+---
+
+**Q20.** (a) Find the sum to infinity of the geometric series $1 + \frac{1}{2} + \frac{1}{4} + \cdots$. *(3 marks)*
+
+(b) Find the sum of the first $n$ terms of the arithmetic series $3 + 7 + 11 + \cdots$. *(4 marks)*
+
+(c) The sum of the first $n$ terms of a series is $n^2 + 3n$. Find the $n$th term. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 5',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 5
+
+## Structural Question Bank — Mechanics and statistics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MECHANICS AND STATISTICS
+
+**Q1.** (a) State Newton''s second law of motion. *(2 marks)*
+
+(b) A force of 10 N acts on a body of mass 2 kg. Calculate the acceleration. *(3 marks)*
+
+(c) A body of mass 5 kg is pulled along a rough horizontal surface by a force of 20 N. If the frictional force is 8 N, calculate the acceleration. *(5 marks)*
+
+---
+
+**Q2.** (a) Define the terms "momentum" and "impulse". *(4 marks)*
+
+(b) A ball of mass 0.2 kg moving at 5 m/s strikes a wall and rebounds at 4 m/s. Calculate the impulse. *(4 marks)*
+
+(c) State the principle of conservation of momentum. *(2 marks)*
+
+---
+
+**Q3.** (a) A projectile is fired at 50 m/s at an angle of $30^\circ$ to the horizontal. Calculate the time of flight. *(4 marks)*
+
+(b) Calculate the maximum height reached. *(4 marks)*
+
+(c) Calculate the horizontal range. *(4 marks)*
+
+---
+
+**Q4.** (a) A particle moves in a straight line with acceleration $a = 2t$ m/s². Given that its velocity is 3 m/s when $t = 0$, find its velocity at time $t$. *(4 marks)*
+
+(b) Find its displacement at time $t$ given that it starts from the origin. *(4 marks)*
+
+(c) Find the displacement when $t = 3$ s. *(3 marks)*
+
+---
+
+**Q5.** (a) State the principle of moments. *(2 marks)*
+
+(b) A uniform rod AB of length 4 m and weight 40 N is pivoted at its centre. A weight of 20 N is placed at A. Calculate the force needed at B to balance the rod. *(5 marks)*
+
+(c) A uniform ladder of weight 200 N rests against a smooth vertical wall. Find the reactions at the wall and the ground. *(6 marks)*
+
+---
+
+**Q6.** (a) Define the terms "centre of mass" and "centre of gravity". *(4 marks)*
+
+(b) Find the centre of mass of a uniform triangular lamina. *(4 marks)*
+
+(c) A uniform rod of length 6 m and weight 60 N has a 30 N weight attached at one end. Find the position of the centre of mass. *(5 marks)*
+
+---
+
+**Q7.** (a) Define the term "work done". *(2 marks)*
+
+(b) A force of 30 N acts at an angle of $60^\circ$ to the direction of motion. Calculate the work done in moving the body 10 m. *(4 marks)*
+
+(c) A body of mass 4 kg is raised through 5 m. Calculate the work done against gravity. (Take $g = 10$ m/s²) *(4 marks)*
+
+---
+
+**Q8.** (a) State the work-energy theorem. *(2 marks)*
+
+(b) A body of mass 2 kg moving at 4 m/s is brought to rest by a constant force. Calculate the work done. *(4 marks)*
+
+(c) A car of mass 1000 kg accelerates from 10 m/s to 20 m/s. Calculate the work done. *(5 marks)*
+
+---
+
+**Q9.** (a) Define the terms "kinetic energy" and "potential energy". *(4 marks)*
+
+(b) A body of mass 3 kg is projected vertically upwards with a speed of 20 m/s. Calculate its maximum height. (Take $g = 10$ m/s²) *(5 marks)*
+
+(c) Calculate the kinetic energy of the body when it has risen 10 m. *(5 marks)*
+
+---
+
+**Q10.** (a) Define the term "power". *(2 marks)*
+
+(b) A motor lifts a load of 500 kg through 20 m in 25 s. Calculate the power output. (Take $g = 10$ m/s²) *(5 marks)*
+
+(c) A car of mass 1200 kg moves at a constant speed of 30 m/s against a resistance of 400 N. Calculate the power developed. *(5 marks)*
+
+---
+
+**Q11.** (a) Define the terms "discrete" and "continuous" random variables. *(4 marks)*
+
+(b) A discrete random variable $X$ has the probability distribution $P(X = x) = kx$ for $x = 1, 2, 3, 4$. Find $k$. *(4 marks)*
+
+(c) Find $E(X)$ and $Var(X)$ for this distribution. *(5 marks)*
+
+---
+
+**Q12.** (a) State the conditions for a binomial distribution. *(3 marks)*
+
+(b) A fair coin is tossed 10 times. Find the probability of getting exactly 6 heads. *(4 marks)*
+
+(c) Find the mean and variance of this binomial distribution. *(3 marks)*
+
+---
+
+**Q13.** (a) State the probability density function of a normal distribution. *(2 marks)*
+
+(b) Given that $X \sim N(50, 16)$, find $P(46 < X < 54)$. *(5 marks)*
+
+(c) Find the value of $x$ such that $P(X < x) = 0.95$. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "Poisson distribution". *(2 marks)*
+
+(b) The number of accidents per day at a junction follows a Poisson distribution with mean 2. Find the probability of exactly 3 accidents in a day. *(4 marks)*
+
+(c) Find the probability of at least 1 accident in a day. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the terms "population" and "sample". *(4 marks)*
+
+(b) State three methods of sampling. *(3 marks)*
+
+(c) Explain the difference between a parameter and a statistic. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "confidence interval". *(2 marks)*
+
+(b) A sample of 100 students has a mean score of 60 with a standard deviation of 8. Construct a 95% confidence interval for the population mean. *(6 marks)*
+
+(c) State the effect of increasing the sample size on the confidence interval. *(3 marks)*
+
+---
+
+**Q17.** (a) State the null and alternative hypotheses for a two-tailed test of a population mean. *(4 marks)*
+
+(b) A sample of 50 items has a mean of 102 and standard deviation 10. Test at the 5% level whether the population mean differs from 100. *(6 marks)*
+
+---
+
+**Q18.** (a) Define the term "correlation". *(2 marks)*
+
+(b) Calculate the Pearson correlation coefficient for the data: $x = 1, 2, 3, 4, 5$; $y = 2, 4, 5, 4, 5$. *(6 marks)*
+
+(c) Interpret your result. *(3 marks)*
+
+---
+
+**Q19.** (a) Define the term "regression". *(2 marks)*
+
+(b) Find the equation of the least squares regression line of $y$ on $x$ for the data: $x = 1, 2, 3, 4, 5$; $y = 2, 4, 5, 4, 5$. *(6 marks)*
+
+(c) Estimate $y$ when $x = 6$. *(3 marks)*
+
+---
+
+**Q20.** (a) Define the term "probability". *(2 marks)*
+
+(b) Two dice are thrown. Find the probability that the sum is 7. *(4 marks)*
+
+(c) A bag contains 3 red and 5 blue balls. Two balls are drawn without replacement. Find the probability that both are red. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 6',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 6
+
+## Structural Question Bank — Pure mathematics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PURE MATHEMATICS
+
+**Q1.** (a) Express $z = 3 + 4i$ in modulus-argument form. *(4 marks)*
+
+(b) Find the modulus and argument of $z^2$. *(4 marks)*
+
+(c) Solve the equation $z^2 + 2z + 5 = 0$, giving your answers in the form $a + bi$. *(4 marks)*
+
+---
+
+**Q2.** (a) Given $z_1 = 2 + 3i$ and $z_2 = 1 - i$, find $z_1 z_2$ and $\frac{z_1}{z_2}$. *(6 marks)*
+
+(b) Find the square roots of $-8 + 6i$. *(6 marks)*
+
+---
+
+**Q3.** (a) Express $z = 2(\cos 60^\circ + i\sin 60^\circ)$ in the form $a + bi$. *(3 marks)*
+
+(b) Use De Moivre''s theorem to find $(1 + i)^8$. *(5 marks)*
+
+(c) Solve $z^3 = 8$, giving all three roots. *(5 marks)*
+
+---
+
+**Q4.** (a) State the conditions for two matrices to be multiplied. *(2 marks)*
+
+(b) Given $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$, find $AB$ and $BA$. *(6 marks)*
+
+(c) Show that $AB \neq BA$. *(2 marks)*
+
+---
+
+**Q5.** (a) Find the determinant and inverse of $A = \begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$. *(5 marks)*
+
+(b) Use the inverse matrix method to solve the simultaneous equations $2x + 3y = 7$ and $x + 4y = 6$. *(5 marks)*
+
+---
+
+**Q6.** (a) Find the eigenvalues and eigenvectors of $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$. *(6 marks)*
+
+(b) State the trace and determinant of $A$. *(2 marks)*
+
+(c) Verify that the sum of the eigenvalues equals the trace. *(2 marks)*
+
+---
+
+**Q7.** (a) Given $\mathbf{a} = 2\mathbf{i} + 3\mathbf{j} - \mathbf{k}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j} + 4\mathbf{k}$, find $\mathbf{a} \cdot \mathbf{b}$. *(3 marks)*
+
+(b) Find the angle between $\mathbf{a}$ and $\mathbf{b}$. *(4 marks)*
+
+(c) Find $\mathbf{a} \times \mathbf{b}$. *(4 marks)*
+
+---
+
+**Q8.** (a) Find the equation of the plane passing through the points $(1, 2, 3)$, $(2, 0, 1)$, and $(0, 1, 2)$. *(6 marks)*
+
+(b) Find the distance from the point $(1, 1, 1)$ to this plane. *(4 marks)*
+
+---
+
+**Q9.** (a) Prove by induction that $1^2 + 2^2 + 3^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}$. *(6 marks)*
+
+(b) Prove by induction that $3^n > n^2$ for all positive integers $n$. *(5 marks)*
+
+---
+
+**Q10.** (a) Prove by contradiction that $\sqrt{2}$ is irrational. *(5 marks)*
+
+(b) Prove that the sum of two odd numbers is even. *(3 marks)*
+
+(c) Prove that $n^3 - n$ is divisible by 6 for all positive integers $n$. *(5 marks)*
+
+---
+
+**Q11.** (a) Find the sum of the series $1 + 2 + 3 + \cdots + n$. *(3 marks)*
+
+(b) Find the sum of the series $1^2 + 3^2 + 5^2 + \cdots + (2n-1)^2$. *(5 marks)*
+
+(c) Determine whether the series $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$ converges, and find its sum. *(5 marks)*
+
+---
+
+**Q12.** (a) State the binomial theorem. *(2 marks)*
+
+(b) Expand $(1 + x)^{10}$ up to the term in $x^3$. *(4 marks)*
+
+(c) Find the coefficient of $x^5$ in the expansion of $(2 - 3x)^8$. *(5 marks)*
+
+---
+
+**Q13.** (a) Find the first three terms in the binomial expansion of $\frac{1}{\sqrt{1 + x}}$ for $|x| < 1$. *(5 marks)*
+
+(b) Use your expansion to approximate $\frac{1}{\sqrt{1.1}}$. *(3 marks)*
+
+(c) State the range of validity of the expansion. *(2 marks)*
+
+---
+
+**Q14.** (a) Find the general solution of the differential equation $\frac{dy}{dx} = \frac{y}{x}$. *(4 marks)*
+
+(b) Solve the differential equation $\frac{dy}{dx} + 2y = e^{-x}$ given that $y = 1$ when $x = 0$. *(6 marks)*
+
+---
+
+**Q15.** (a) Solve the differential equation $\frac{d^2y}{dx^2} - 3\frac{dy}{dx} + 2y = 0$. *(5 marks)*
+
+(b) Given that $y = 1$ and $\frac{dy}{dx} = 0$ when $x = 0$, find the particular solution. *(4 marks)*
+
+---
+
+**Q16.** (a) Express $f(x) = \frac{3x + 1}{(x-1)(x+2)}$ in partial fractions. *(5 marks)*
+
+(b) Express $\frac{2x^2 + 3x + 1}{(x+1)(x^2 + 1)}$ in partial fractions. *(6 marks)*
+
+---
+
+**Q17.** (a) Find the roots of the equation $x^3 - 6x^2 + 11x - 6 = 0$. *(5 marks)*
+
+(b) Given that $1 - i$ is a root of $x^3 - 3x^2 + 4x - 2 = 0$, find the other roots. *(5 marks)*
+
+---
+
+**Q18.** (a) State the remainder theorem. *(2 marks)*
+
+(b) Find the remainder when $x^4 - 3x^3 + 2x - 1$ is divided by $x - 2$. *(4 marks)*
+
+(c) Given that $x - 1$ is a factor of $x^3 + ax^2 + bx - 6$, and the remainder is 4 when divided by $x - 2$, find $a$ and $b$. *(6 marks)*
+
+---
+
+**Q19.** (a) Find $\lim_{x \to 0} \frac{\sin 3x}{x}$. *(3 marks)*
+
+(b) Find $\lim_{x \to \infty} \frac{3x^2 + 2x}{x^2 - 1}$. *(3 marks)*
+
+(c) Find $\lim_{x \to 0} \frac{e^x - 1}{x}$. *(3 marks)*
+
+---
+
+**Q20.** (a) Find the sum to infinity of the geometric series $1 + \frac{1}{2} + \frac{1}{4} + \cdots$. *(3 marks)*
+
+(b) Find the sum of the first $n$ terms of the arithmetic series $3 + 7 + 11 + \cdots$. *(4 marks)*
+
+(c) The sum of the first $n$ terms of a series is $n^2 + 3n$. Find the $n$th term. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 7',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 7
+
+## Structural Question Bank — Mechanics and statistics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: MECHANICS AND STATISTICS
+
+**Q1.** (a) State Newton''s second law of motion. *(2 marks)*
+
+(b) A force of 10 N acts on a body of mass 2 kg. Calculate the acceleration. *(3 marks)*
+
+(c) A body of mass 5 kg is pulled along a rough horizontal surface by a force of 20 N. If the frictional force is 8 N, calculate the acceleration. *(5 marks)*
+
+---
+
+**Q2.** (a) Define the terms "momentum" and "impulse". *(4 marks)*
+
+(b) A ball of mass 0.2 kg moving at 5 m/s strikes a wall and rebounds at 4 m/s. Calculate the impulse. *(4 marks)*
+
+(c) State the principle of conservation of momentum. *(2 marks)*
+
+---
+
+**Q3.** (a) A projectile is fired at 50 m/s at an angle of $30^\circ$ to the horizontal. Calculate the time of flight. *(4 marks)*
+
+(b) Calculate the maximum height reached. *(4 marks)*
+
+(c) Calculate the horizontal range. *(4 marks)*
+
+---
+
+**Q4.** (a) A particle moves in a straight line with acceleration $a = 2t$ m/s². Given that its velocity is 3 m/s when $t = 0$, find its velocity at time $t$. *(4 marks)*
+
+(b) Find its displacement at time $t$ given that it starts from the origin. *(4 marks)*
+
+(c) Find the displacement when $t = 3$ s. *(3 marks)*
+
+---
+
+**Q5.** (a) State the principle of moments. *(2 marks)*
+
+(b) A uniform rod AB of length 4 m and weight 40 N is pivoted at its centre. A weight of 20 N is placed at A. Calculate the force needed at B to balance the rod. *(5 marks)*
+
+(c) A uniform ladder of weight 200 N rests against a smooth vertical wall. Find the reactions at the wall and the ground. *(6 marks)*
+
+---
+
+**Q6.** (a) Define the terms "centre of mass" and "centre of gravity". *(4 marks)*
+
+(b) Find the centre of mass of a uniform triangular lamina. *(4 marks)*
+
+(c) A uniform rod of length 6 m and weight 60 N has a 30 N weight attached at one end. Find the position of the centre of mass. *(5 marks)*
+
+---
+
+**Q7.** (a) Define the term "work done". *(2 marks)*
+
+(b) A force of 30 N acts at an angle of $60^\circ$ to the direction of motion. Calculate the work done in moving the body 10 m. *(4 marks)*
+
+(c) A body of mass 4 kg is raised through 5 m. Calculate the work done against gravity. (Take $g = 10$ m/s²) *(4 marks)*
+
+---
+
+**Q8.** (a) State the work-energy theorem. *(2 marks)*
+
+(b) A body of mass 2 kg moving at 4 m/s is brought to rest by a constant force. Calculate the work done. *(4 marks)*
+
+(c) A car of mass 1000 kg accelerates from 10 m/s to 20 m/s. Calculate the work done. *(5 marks)*
+
+---
+
+**Q9.** (a) Define the terms "kinetic energy" and "potential energy". *(4 marks)*
+
+(b) A body of mass 3 kg is projected vertically upwards with a speed of 20 m/s. Calculate its maximum height. (Take $g = 10$ m/s²) *(5 marks)*
+
+(c) Calculate the kinetic energy of the body when it has risen 10 m. *(5 marks)*
+
+---
+
+**Q10.** (a) Define the term "power". *(2 marks)*
+
+(b) A motor lifts a load of 500 kg through 20 m in 25 s. Calculate the power output. (Take $g = 10$ m/s²) *(5 marks)*
+
+(c) A car of mass 1200 kg moves at a constant speed of 30 m/s against a resistance of 400 N. Calculate the power developed. *(5 marks)*
+
+---
+
+**Q11.** (a) Define the terms "discrete" and "continuous" random variables. *(4 marks)*
+
+(b) A discrete random variable $X$ has the probability distribution $P(X = x) = kx$ for $x = 1, 2, 3, 4$. Find $k$. *(4 marks)*
+
+(c) Find $E(X)$ and $Var(X)$ for this distribution. *(5 marks)*
+
+---
+
+**Q12.** (a) State the conditions for a binomial distribution. *(3 marks)*
+
+(b) A fair coin is tossed 10 times. Find the probability of getting exactly 6 heads. *(4 marks)*
+
+(c) Find the mean and variance of this binomial distribution. *(3 marks)*
+
+---
+
+**Q13.** (a) State the probability density function of a normal distribution. *(2 marks)*
+
+(b) Given that $X \sim N(50, 16)$, find $P(46 < X < 54)$. *(5 marks)*
+
+(c) Find the value of $x$ such that $P(X < x) = 0.95$. *(5 marks)*
+
+---
+
+**Q14.** (a) Define the term "Poisson distribution". *(2 marks)*
+
+(b) The number of accidents per day at a junction follows a Poisson distribution with mean 2. Find the probability of exactly 3 accidents in a day. *(4 marks)*
+
+(c) Find the probability of at least 1 accident in a day. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the terms "population" and "sample". *(4 marks)*
+
+(b) State three methods of sampling. *(3 marks)*
+
+(c) Explain the difference between a parameter and a statistic. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "confidence interval". *(2 marks)*
+
+(b) A sample of 100 students has a mean score of 60 with a standard deviation of 8. Construct a 95% confidence interval for the population mean. *(6 marks)*
+
+(c) State the effect of increasing the sample size on the confidence interval. *(3 marks)*
+
+---
+
+**Q17.** (a) State the null and alternative hypotheses for a two-tailed test of a population mean. *(4 marks)*
+
+(b) A sample of 50 items has a mean of 102 and standard deviation 10. Test at the 5% level whether the population mean differs from 100. *(6 marks)*
+
+---
+
+**Q18.** (a) Define the term "correlation". *(2 marks)*
+
+(b) Calculate the Pearson correlation coefficient for the data: $x = 1, 2, 3, 4, 5$; $y = 2, 4, 5, 4, 5$. *(6 marks)*
+
+(c) Interpret your result. *(3 marks)*
+
+---
+
+**Q19.** (a) Define the term "regression". *(2 marks)*
+
+(b) Find the equation of the least squares regression line of $y$ on $x$ for the data: $x = 1, 2, 3, 4, 5$; $y = 2, 4, 5, 4, 5$. *(6 marks)*
+
+(c) Estimate $y$ when $x = 6$. *(3 marks)*
+
+---
+
+**Q20.** (a) Define the term "probability". *(2 marks)*
+
+(b) Two dice are thrown. Find the probability that the sum is 7. *(4 marks)*
+
+(c) A bag contains 3 red and 5 blue balls. Two balls are drawn without replacement. Find the probability that both are red. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 8',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 8
+
+## Structural Question Bank — Pure mathematics
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: PURE MATHEMATICS
+
+**Q1.** (a) Express $z = 3 + 4i$ in modulus-argument form. *(4 marks)*
+
+(b) Find the modulus and argument of $z^2$. *(4 marks)*
+
+(c) Solve the equation $z^2 + 2z + 5 = 0$, giving your answers in the form $a + bi$. *(4 marks)*
+
+---
+
+**Q2.** (a) Given $z_1 = 2 + 3i$ and $z_2 = 1 - i$, find $z_1 z_2$ and $\frac{z_1}{z_2}$. *(6 marks)*
+
+(b) Find the square roots of $-8 + 6i$. *(6 marks)*
+
+---
+
+**Q3.** (a) Express $z = 2(\cos 60^\circ + i\sin 60^\circ)$ in the form $a + bi$. *(3 marks)*
+
+(b) Use De Moivre''s theorem to find $(1 + i)^8$. *(5 marks)*
+
+(c) Solve $z^3 = 8$, giving all three roots. *(5 marks)*
+
+---
+
+**Q4.** (a) State the conditions for two matrices to be multiplied. *(2 marks)*
+
+(b) Given $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$, find $AB$ and $BA$. *(6 marks)*
+
+(c) Show that $AB \neq BA$. *(2 marks)*
+
+---
+
+**Q5.** (a) Find the determinant and inverse of $A = \begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$. *(5 marks)*
+
+(b) Use the inverse matrix method to solve the simultaneous equations $2x + 3y = 7$ and $x + 4y = 6$. *(5 marks)*
+
+---
+
+**Q6.** (a) Find the eigenvalues and eigenvectors of $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$. *(6 marks)*
+
+(b) State the trace and determinant of $A$. *(2 marks)*
+
+(c) Verify that the sum of the eigenvalues equals the trace. *(2 marks)*
+
+---
+
+**Q7.** (a) Given $\mathbf{a} = 2\mathbf{i} + 3\mathbf{j} - \mathbf{k}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j} + 4\mathbf{k}$, find $\mathbf{a} \cdot \mathbf{b}$. *(3 marks)*
+
+(b) Find the angle between $\mathbf{a}$ and $\mathbf{b}$. *(4 marks)*
+
+(c) Find $\mathbf{a} \times \mathbf{b}$. *(4 marks)*
+
+---
+
+**Q8.** (a) Find the equation of the plane passing through the points $(1, 2, 3)$, $(2, 0, 1)$, and $(0, 1, 2)$. *(6 marks)*
+
+(b) Find the distance from the point $(1, 1, 1)$ to this plane. *(4 marks)*
+
+---
+
+**Q9.** (a) Prove by induction that $1^2 + 2^2 + 3^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}$. *(6 marks)*
+
+(b) Prove by induction that $3^n > n^2$ for all positive integers $n$. *(5 marks)*
+
+---
+
+**Q10.** (a) Prove by contradiction that $\sqrt{2}$ is irrational. *(5 marks)*
+
+(b) Prove that the sum of two odd numbers is even. *(3 marks)*
+
+(c) Prove that $n^3 - n$ is divisible by 6 for all positive integers $n$. *(5 marks)*
+
+---
+
+**Q11.** (a) Find the sum of the series $1 + 2 + 3 + \cdots + n$. *(3 marks)*
+
+(b) Find the sum of the series $1^2 + 3^2 + 5^2 + \cdots + (2n-1)^2$. *(5 marks)*
+
+(c) Determine whether the series $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$ converges, and find its sum. *(5 marks)*
+
+---
+
+**Q12.** (a) State the binomial theorem. *(2 marks)*
+
+(b) Expand $(1 + x)^{10}$ up to the term in $x^3$. *(4 marks)*
+
+(c) Find the coefficient of $x^5$ in the expansion of $(2 - 3x)^8$. *(5 marks)*
+
+---
+
+**Q13.** (a) Find the first three terms in the binomial expansion of $\frac{1}{\sqrt{1 + x}}$ for $|x| < 1$. *(5 marks)*
+
+(b) Use your expansion to approximate $\frac{1}{\sqrt{1.1}}$. *(3 marks)*
+
+(c) State the range of validity of the expansion. *(2 marks)*
+
+---
+
+**Q14.** (a) Find the general solution of the differential equation $\frac{dy}{dx} = \frac{y}{x}$. *(4 marks)*
+
+(b) Solve the differential equation $\frac{dy}{dx} + 2y = e^{-x}$ given that $y = 1$ when $x = 0$. *(6 marks)*
+
+---
+
+**Q15.** (a) Solve the differential equation $\frac{d^2y}{dx^2} - 3\frac{dy}{dx} + 2y = 0$. *(5 marks)*
+
+(b) Given that $y = 1$ and $\frac{dy}{dx} = 0$ when $x = 0$, find the particular solution. *(4 marks)*
+
+---
+
+**Q16.** (a) Express $f(x) = \frac{3x + 1}{(x-1)(x+2)}$ in partial fractions. *(5 marks)*
+
+(b) Express $\frac{2x^2 + 3x + 1}{(x+1)(x^2 + 1)}$ in partial fractions. *(6 marks)*
+
+---
+
+**Q17.** (a) Find the roots of the equation $x^3 - 6x^2 + 11x - 6 = 0$. *(5 marks)*
+
+(b) Given that $1 - i$ is a root of $x^3 - 3x^2 + 4x - 2 = 0$, find the other roots. *(5 marks)*
+
+---
+
+**Q18.** (a) State the remainder theorem. *(2 marks)*
+
+(b) Find the remainder when $x^4 - 3x^3 + 2x - 1$ is divided by $x - 2$. *(4 marks)*
+
+(c) Given that $x - 1$ is a factor of $x^3 + ax^2 + bx - 6$, and the remainder is 4 when divided by $x - 2$, find $a$ and $b$. *(6 marks)*
+
+---
+
+**Q19.** (a) Find $\lim_{x \to 0} \frac{\sin 3x}{x}$. *(3 marks)*
+
+(b) Find $\lim_{x \to \infty} \frac{3x^2 + 2x}{x^2 - 1}$. *(3 marks)*
+
+(c) Find $\lim_{x \to 0} \frac{e^x - 1}{x}$. *(3 marks)*
+
+---
+
+**Q20.** (a) Find the sum to infinity of the geometric series $1 + \frac{1}{2} + \frac{1}{4} + \cdots$. *(3 marks)*
+
+(b) Find the sum of the first $n$ terms of the arithmetic series $3 + 7 + 11 + \cdots$. *(4 marks)*
+
+(c) The sum of the first $n$ terms of a series is $n^2 + 3n$. Find the $n$th term. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 1',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The modulus of $3 + 4i$ is:
+
+A. 5  
+B. 7  
+C. 1  
+D. 25  
+
+---
+
+**Q2.** The argument of $1 + i$ is:
+
+A. 45°  
+B. 90°  
+C. 30°  
+D. 135°  
+
+---
+
+**Q3.** The complex conjugate of $2 - 3i$ is:
+
+A. 2 + 3i  
+B. -2 + 3i  
+C. 2 - 3i  
+D. -2 - 3i  
+
+---
+
+**Q4.** The product $(1 + i)(1 - i)$ equals:
+
+A. 2  
+B. 1  
+C. -2  
+D. 0  
+
+---
+
+**Q5.** The roots of $z^2 + 4 = 0$ are:
+
+A. ±2i  
+B. ±4  
+C. ±2  
+D. ±4i  
+
+---
+
+**Q6.** The value of $i^2$ is:
+
+A. -1  
+B. -i  
+C. i  
+D. 1  
+
+---
+
+**Q7.** The value of $i^4$ is:
+
+A. -1  
+B. 1  
+C. i  
+D. -i  
+
+---
+
+**Q8.** The determinant of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
+
+A. 11  
+B. 5  
+C. 6  
+D. 10  
+
+---
+
+**Q9.** The inverse of $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$ is:
+
+A. $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$  
+B. $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$  
+C. $\begin{pmatrix} 1/2 & 0 \\ 0 & 1/4 \end{pmatrix}$  
+D. $\begin{pmatrix} 0 & 2 \\ 4 & 0 \end{pmatrix}$  
+
+---
+
+**Q10.** The trace of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
+
+A. 5  
+B. 11  
+C. 10  
+D. 6  
+
+---
+
+**Q11.** The eigenvalues of $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ are:
+
+A. 5 and 6  
+B. 0 and 1  
+C. 2 and 3  
+D. 1 and 2  
+
+---
+
+**Q12.** The dot product of $\mathbf{i} + 2\mathbf{j}$ and $2\mathbf{i} + 3\mathbf{j}$ is:
+
+A. 7  
+B. 5  
+C. 6  
+D. 8  
+
+---
+
+**Q13.** The vectors $\mathbf{a} = 2\mathbf{i} + \mathbf{j}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j}$ are:
+
+A. equal  
+B. perpendicular  
+C. parallel  
+D. opposite  
+
+---
+
+**Q14.** The sum $1 + 2 + 3 + \cdots + n$ equals:
+
+A. $n^2$  
+B. $\frac{n(n+1)}{2}$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $\frac{n(n-1)}{2}$  
+
+---
+
+**Q15.** The sum $1^2 + 2^2 + \cdots + n^2$ equals:
+
+A. $n^3$  
+B. $\frac{n(n+1)}{2}$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $\frac{n^2(n+1)}{2}$  
+
+---
+
+**Q16.** The sum to infinity of $1 + \frac{1}{2} + \frac{1}{4} + \cdots$ is:
+
+A. 3  
+B. 1  
+C. $\frac{3}{2}$  
+D. 2  
+
+---
+
+**Q17.** The coefficient of $x^2$ in $(1 + x)^4$ is:
+
+A. 12  
+B. 8  
+C. 6  
+D. 4  
+
+---
+
+**Q18.** The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:
+
+A. 2  
+B. -1  
+C. 1  
+D. 0  
+
+---
+
+**Q19.** Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:
+
+A. $x^2 - 1$  
+B. $x^2 + x + 1$  
+C. $x^2 - x + 1$  
+D. $x^2 + 1$  
+
+---
+
+**Q20.** The value of $\lim_{x \to 0} \frac{\sin x}{x}$ is:
+
+A. undefined  
+B. 1  
+C. ∞  
+D. 0  
+
+---
+
+**Q21.** The value of $\lim_{x \to \infty} \frac{1}{x}$ is:
+
+A. undefined  
+B. 1  
+C. 0  
+D. ∞  
+
+---
+
+**Q22.** The general solution of $\frac{dy}{dx} = \frac{y}{x}$ is:
+
+A. $y = e^{kx}$  
+B. $y = k/x$  
+C. $y = kx^2$  
+D. $y = kx$  
+
+---
+
+**Q23.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 5 and 6  
+B. -2 and -3  
+C. 2 and 3  
+D. 1 and 6  
+
+---
+
+**Q24.** The sum of the roots of $x^2 - 5x + 6 = 0$ is:
+
+A. -6  
+B. -5  
+C. 6  
+D. 5  
+
+---
+
+**Q25.** The product of the roots of $x^2 - 5x + 6 = 0$ is:
+
+A. 6  
+B. 5  
+C. -6  
+D. -5  
+
+---
+
+**Q26.** The partial fractions of $\frac{1}{(x-1)(x+1)}$ are:
+
+A. $\frac{1/2}{x-1} - \frac{1/2}{x+1}$  
+B. $\frac{1}{x-1} + \frac{1}{x+1}$  
+C. $\frac{1}{x-1} - \frac{1}{x+1}$  
+D. $\frac{1/2}{x-1} + \frac{1/2}{x+1}$  
+
+---
+
+**Q27.** The value of $(1 + i)^2$ is:
+
+A. 2i  
+B. -2i  
+C. 2  
+D. -2  
+
+---
+
+**Q28.** The value of $(1 + i)^4$ is:
+
+A. -4  
+B. 4i  
+C. -4i  
+D. 4  
+
+---
+
+**Q29.** The modulus of $\frac{1}{i}$ is:
+
+A. 1  
+B. -1  
+C. 0  
+D. i  
+
+---
+
+**Q30.** The argument of $-1$ is:
+
+A. 180°  
+B. 270°  
+C. 90°  
+D. 0°  
+
+---
+
+**Q31.** The SI unit of force is the:
+
+A. joule  
+B. newton  
+C. watt  
+D. pascal  
+
+---
+
+**Q32.** The SI unit of momentum is:
+
+A. kg m/s²  
+B. kg m/s  
+C. J  
+D. N m  
+
+---
+
+**Q33.** The SI unit of impulse is:
+
+A. N m  
+B. J  
+C. N s  
+D. W  
+
+---
+
+**Q34.** The acceleration of a body of mass 2 kg under a force of 10 N is:
+
+A. 2 m/s²  
+B. 20 m/s²  
+C. 0.2 m/s²  
+D. 5 m/s²  
+
+---
+
+**Q35.** The momentum of a 3 kg body moving at 4 m/s is:
+
+A. 7 kg m/s  
+B. 48 kg m/s  
+C. 12 kg m/s  
+D. 1 kg m/s  
+
+---
+
+**Q36.** The kinetic energy of a 2 kg body moving at 3 m/s is:
+
+A. 6 J  
+B. 12 J  
+C. 18 J  
+D. 9 J  
+
+---
+
+**Q37.** The work done by a force of 10 N moving a body 5 m is:
+
+A. 15 J  
+B. 50 J  
+C. 2 J  
+D. 0.5 J  
+
+---
+
+**Q38.** The power of a machine doing 300 J of work in 10 s is:
+
+A. 3 W  
+B. 30 W  
+C. 0.03 W  
+D. 3000 W  
+
+---
+
+**Q39.** The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:
+
+A. 40 m  
+B. 10 m  
+C. 20 m  
+D. 2 m  
+
+---
+
+**Q40.** The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:
+
+A. 2.5 s  
+B. 10 s  
+C. 50 s  
+D. 5 s  
+
+---
+
+**Q41.** The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:
+
+A. 250 m  
+B. 433 m  
+C. 216.5 m  
+D. 125 m  
+
+---
+
+**Q42.** A uniform rod is balanced at its centre. The principle of moments states:
+
+A. work = force × distance  
+B. power = work ÷ time  
+C. sum of forces = 0  
+D. sum of clockwise moments = sum of anticlockwise moments  
+
+---
+
+**Q43.** The centre of mass of a uniform rod is at its:
+
+A. centre of gravity of the rod  
+B. midpoint  
+C. end  
+D. one-quarter point  
+
+---
+
+**Q44.** The probability of getting exactly 6 heads in 10 tosses of a fair coin is:
+
+A. $6/10$  
+B. $\binom{10}{6}(1/2)^{10}$  
+C. $\binom{10}{6}(1/2)^6$  
+D. $(1/2)^6$  
+
+---
+
+**Q45.** The mean of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 0.5  
+B. 2.5  
+C. 5  
+D. 10  
+
+---
+
+**Q46.** The variance of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 0.5  
+B. 5  
+C. 10  
+D. 2.5  
+
+---
+
+**Q47.** The mean of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. √λ  
+C. λ  
+D. λ²  
+
+---
+
+**Q48.** The variance of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. √λ  
+C. λ²  
+D. λ  
+
+---
+
+**Q49.** For a standard normal distribution, the mean is:
+
+A. 0  
+B. 1  
+C. 50  
+D. 100  
+
+---
+
+**Q50.** For a standard normal distribution, the variance is:
+
+A. 1  
+B. 0  
+C. 100  
+D. 50  
+
+---
+
+**Q51.** The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:
+
+A. 2  
+B. 0.5  
+C. 10  
+D. 1.2  
+
+---
+
+**Q52.** The 95% confidence interval for a mean uses the z-value:
+
+A. 1.96  
+B. 2.58  
+C. 0.95  
+D. 1.64  
+
+---
+
+**Q53.** The 99% confidence interval for a mean uses the z-value:
+
+A. 2.58  
+B. 0.99  
+C. 1.96  
+D. 1.64  
+
+---
+
+**Q54.** A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:
+
+A. 0.8  
+B. 80  
+C. 0.08  
+D. 8  
+
+---
+
+**Q55.** The Pearson correlation coefficient ranges from:
+
+A. 0 to 1  
+B. -1 to 1  
+C. -∞ to ∞  
+D. 0 to 100  
+
+---
+
+**Q56.** A correlation coefficient of 0 indicates:
+
+A. perfect positive correlation  
+B. no linear correlation  
+C. strong correlation  
+D. perfect negative correlation  
+
+---
+
+**Q57.** The probability of getting a sum of 7 when two dice are thrown is:
+
+A. 1/36  
+B. 7/36  
+C. 6/36  
+D. 1/6  
+
+---
+
+**Q58.** The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:
+
+A. 5/8  
+B. 3/5  
+C. 1/8  
+D. 3/8  
+
+---
+
+**Q59.** Two events are independent if:
+
+A. P(A∩B) = P(A) + P(B)  
+B. P(A) = P(B)  
+C. P(A∩B) = P(A)P(B)  
+D. P(A∪B) = P(A)P(B)  
+
+---
+
+**Q60.** The probability of an impossible event is:
+
+A. 1  
+B. undefined  
+C. 0.5  
+D. 0  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 2',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The product $(1 + i)(1 - i)$ equals:
+
+A. 2  
+B. 0  
+C. 1  
+D. -2  
+
+---
+
+**Q2.** The roots of $z^2 + 4 = 0$ are:
+
+A. ±2i  
+B. ±2  
+C. ±4  
+D. ±4i  
+
+---
+
+**Q3.** The value of $i^2$ is:
+
+A. -1  
+B. i  
+C. 1  
+D. -i  
+
+---
+
+**Q4.** The value of $i^4$ is:
+
+A. 1  
+B. i  
+C. -i  
+D. -1  
+
+---
+
+**Q5.** The determinant of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
+
+A. 5  
+B. 6  
+C. 11  
+D. 10  
+
+---
+
+**Q6.** The inverse of $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$ is:
+
+A. $\begin{pmatrix} 1/2 & 0 \\ 0 & 1/4 \end{pmatrix}$  
+B. $\begin{pmatrix} 0 & 2 \\ 4 & 0 \end{pmatrix}$  
+C. $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$  
+D. $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$  
+
+---
+
+**Q7.** The trace of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
+
+A. 5  
+B. 6  
+C. 11  
+D. 10  
+
+---
+
+**Q8.** The eigenvalues of $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ are:
+
+A. 5 and 6  
+B. 2 and 3  
+C. 0 and 1  
+D. 1 and 2  
+
+---
+
+**Q9.** The dot product of $\mathbf{i} + 2\mathbf{j}$ and $2\mathbf{i} + 3\mathbf{j}$ is:
+
+A. 7  
+B. 6  
+C. 8  
+D. 5  
+
+---
+
+**Q10.** The vectors $\mathbf{a} = 2\mathbf{i} + \mathbf{j}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j}$ are:
+
+A. parallel  
+B. equal  
+C. opposite  
+D. perpendicular  
+
+---
+
+**Q11.** The sum $1 + 2 + 3 + \cdots + n$ equals:
+
+A. $\frac{n(n-1)}{2}$  
+B. $\frac{n(n+1)(2n+1)}{6}$  
+C. $\frac{n(n+1)}{2}$  
+D. $n^2$  
+
+---
+
+**Q12.** The sum $1^2 + 2^2 + \cdots + n^2$ equals:
+
+A. $\frac{n(n+1)}{2}$  
+B. $\frac{n^2(n+1)}{2}$  
+C. $n^3$  
+D. $\frac{n(n+1)(2n+1)}{6}$  
+
+---
+
+**Q13.** The sum to infinity of $1 + \frac{1}{2} + \frac{1}{4} + \cdots$ is:
+
+A. 3  
+B. 2  
+C. 1  
+D. $\frac{3}{2}$  
+
+---
+
+**Q14.** The coefficient of $x^2$ in $(1 + x)^4$ is:
+
+A. 12  
+B. 6  
+C. 8  
+D. 4  
+
+---
+
+**Q15.** The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:
+
+A. 2  
+B. 1  
+C. 0  
+D. -1  
+
+---
+
+**Q16.** Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:
+
+A. $x^2 + 1$  
+B. $x^2 - x + 1$  
+C. $x^2 - 1$  
+D. $x^2 + x + 1$  
+
+---
+
+**Q17.** The value of $\lim_{x \to 0} \frac{\sin x}{x}$ is:
+
+A. ∞  
+B. undefined  
+C. 1  
+D. 0  
+
+---
+
+**Q18.** The value of $\lim_{x \to \infty} \frac{1}{x}$ is:
+
+A. ∞  
+B. undefined  
+C. 1  
+D. 0  
+
+---
+
+**Q19.** The general solution of $\frac{dy}{dx} = \frac{y}{x}$ is:
+
+A. $y = e^{kx}$  
+B. $y = kx$  
+C. $y = k/x$  
+D. $y = kx^2$  
+
+---
+
+**Q20.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. 5 and 6  
+B. 2 and 3  
+C. -2 and -3  
+D. 1 and 6  
+
+---
+
+**Q21.** The sum of the roots of $x^2 - 5x + 6 = 0$ is:
+
+A. -6  
+B. 6  
+C. 5  
+D. -5  
+
+---
+
+**Q22.** The product of the roots of $x^2 - 5x + 6 = 0$ is:
+
+A. -5  
+B. 5  
+C. -6  
+D. 6  
+
+---
+
+**Q23.** The partial fractions of $\frac{1}{(x-1)(x+1)}$ are:
+
+A. $\frac{1}{x-1} - \frac{1}{x+1}$  
+B. $\frac{1/2}{x-1} + \frac{1/2}{x+1}$  
+C. $\frac{1/2}{x-1} - \frac{1/2}{x+1}$  
+D. $\frac{1}{x-1} + \frac{1}{x+1}$  
+
+---
+
+**Q24.** The value of $(1 + i)^2$ is:
+
+A. -2  
+B. -2i  
+C. 2  
+D. 2i  
+
+---
+
+**Q25.** The value of $(1 + i)^4$ is:
+
+A. -4  
+B. 4  
+C. 4i  
+D. -4i  
+
+---
+
+**Q26.** The modulus of $\frac{1}{i}$ is:
+
+A. 1  
+B. 0  
+C. -1  
+D. i  
+
+---
+
+**Q27.** The argument of $-1$ is:
+
+A. 180°  
+B. 90°  
+C. 0°  
+D. 270°  
+
+---
+
+**Q28.** The modulus of $3 + 4i$ is:
+
+A. 5  
+B. 1  
+C. 25  
+D. 7  
+
+---
+
+**Q29.** The argument of $1 + i$ is:
+
+A. 45°  
+B. 30°  
+C. 90°  
+D. 135°  
+
+---
+
+**Q30.** The complex conjugate of $2 - 3i$ is:
+
+A. 2 + 3i  
+B. -2 - 3i  
+C. -2 + 3i  
+D. 2 - 3i  
+
+---
+
+**Q31.** The acceleration of a body of mass 2 kg under a force of 10 N is:
+
+A. 2 m/s²  
+B. 5 m/s²  
+C. 20 m/s²  
+D. 0.2 m/s²  
+
+---
+
+**Q32.** The momentum of a 3 kg body moving at 4 m/s is:
+
+A. 7 kg m/s  
+B. 12 kg m/s  
+C. 48 kg m/s  
+D. 1 kg m/s  
+
+---
+
+**Q33.** The kinetic energy of a 2 kg body moving at 3 m/s is:
+
+A. 6 J  
+B. 18 J  
+C. 9 J  
+D. 12 J  
+
+---
+
+**Q34.** The work done by a force of 10 N moving a body 5 m is:
+
+A. 2 J  
+B. 15 J  
+C. 0.5 J  
+D. 50 J  
+
+---
+
+**Q35.** The power of a machine doing 300 J of work in 10 s is:
+
+A. 3000 W  
+B. 0.03 W  
+C. 30 W  
+D. 3 W  
+
+---
+
+**Q36.** The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:
+
+A. 10 m  
+B. 2 m  
+C. 40 m  
+D. 20 m  
+
+---
+
+**Q37.** The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:
+
+A. 2.5 s  
+B. 5 s  
+C. 10 s  
+D. 50 s  
+
+---
+
+**Q38.** The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:
+
+A. 250 m  
+B. 216.5 m  
+C. 433 m  
+D. 125 m  
+
+---
+
+**Q39.** A uniform rod is balanced at its centre. The principle of moments states:
+
+A. work = force × distance  
+B. sum of forces = 0  
+C. sum of clockwise moments = sum of anticlockwise moments  
+D. power = work ÷ time  
+
+---
+
+**Q40.** The centre of mass of a uniform rod is at its:
+
+A. one-quarter point  
+B. end  
+C. centre of gravity of the rod  
+D. midpoint  
+
+---
+
+**Q41.** The probability of getting exactly 6 heads in 10 tosses of a fair coin is:
+
+A. $\binom{10}{6}(1/2)^6$  
+B. $6/10$  
+C. $\binom{10}{6}(1/2)^{10}$  
+D. $(1/2)^6$  
+
+---
+
+**Q42.** The mean of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 10  
+B. 0.5  
+C. 2.5  
+D. 5  
+
+---
+
+**Q43.** The variance of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 0.5  
+B. 2.5  
+C. 5  
+D. 10  
+
+---
+
+**Q44.** The mean of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. λ  
+C. √λ  
+D. λ²  
+
+---
+
+**Q45.** The variance of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. λ²  
+C. λ  
+D. √λ  
+
+---
+
+**Q46.** For a standard normal distribution, the mean is:
+
+A. 100  
+B. 1  
+C. 50  
+D. 0  
+
+---
+
+**Q47.** For a standard normal distribution, the variance is:
+
+A. 100  
+B. 50  
+C. 1  
+D. 0  
+
+---
+
+**Q48.** The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:
+
+A. 1.2  
+B. 0.5  
+C. 10  
+D. 2  
+
+---
+
+**Q49.** The 95% confidence interval for a mean uses the z-value:
+
+A. 1.96  
+B. 1.64  
+C. 2.58  
+D. 0.95  
+
+---
+
+**Q50.** The 99% confidence interval for a mean uses the z-value:
+
+A. 2.58  
+B. 1.96  
+C. 0.99  
+D. 1.64  
+
+---
+
+**Q51.** A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:
+
+A. 0.8  
+B. 0.08  
+C. 8  
+D. 80  
+
+---
+
+**Q52.** The Pearson correlation coefficient ranges from:
+
+A. -1 to 1  
+B. -∞ to ∞  
+C. 0 to 100  
+D. 0 to 1  
+
+---
+
+**Q53.** A correlation coefficient of 0 indicates:
+
+A. no linear correlation  
+B. strong correlation  
+C. perfect positive correlation  
+D. perfect negative correlation  
+
+---
+
+**Q54.** The probability of getting a sum of 7 when two dice are thrown is:
+
+A. 6/36  
+B. 1/6  
+C. 7/36  
+D. 1/36  
+
+---
+
+**Q55.** The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:
+
+A. 5/8  
+B. 3/8  
+C. 3/5  
+D. 1/8  
+
+---
+
+**Q56.** Two events are independent if:
+
+A. P(A∩B) = P(A) + P(B)  
+B. P(A∩B) = P(A)P(B)  
+C. P(A) = P(B)  
+D. P(A∪B) = P(A)P(B)  
+
+---
+
+**Q57.** The probability of an impossible event is:
+
+A. 1  
+B. 0.5  
+C. 0  
+D. undefined  
+
+---
+
+**Q58.** The probability of a certain event is:
+
+A. 0  
+B. 0.5  
+C. undefined  
+D. 1  
+
+---
+
+**Q59.** The SI unit of force is the:
+
+A. joule  
+B. pascal  
+C. newton  
+D. watt  
+
+---
+
+**Q60.** The SI unit of momentum is:
+
+A. kg m/s²  
+B. J  
+C. N m  
+D. kg m/s  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The value of $i^4$ is:
+
+A. 1  
+B. -1  
+C. i  
+D. -i  
+
+---
+
+**Q2.** The determinant of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
+
+A. 5  
+B. 11  
+C. 6  
+D. 10  
+
+---
+
+**Q3.** The inverse of $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$ is:
+
+A. $\begin{pmatrix} 1/2 & 0 \\ 0 & 1/4 \end{pmatrix}$  
+B. $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$  
+C. $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$  
+D. $\begin{pmatrix} 0 & 2 \\ 4 & 0 \end{pmatrix}$  
+
+---
+
+**Q4.** The trace of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
+
+A. 6  
+B. 11  
+C. 10  
+D. 5  
+
+---
+
+**Q5.** The eigenvalues of $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ are:
+
+A. 2 and 3  
+B. 0 and 1  
+C. 5 and 6  
+D. 1 and 2  
+
+---
+
+**Q6.** The dot product of $\mathbf{i} + 2\mathbf{j}$ and $2\mathbf{i} + 3\mathbf{j}$ is:
+
+A. 8  
+B. 5  
+C. 6  
+D. 7  
+
+---
+
+**Q7.** The vectors $\mathbf{a} = 2\mathbf{i} + \mathbf{j}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j}$ are:
+
+A. parallel  
+B. perpendicular  
+C. equal  
+D. opposite  
+
+---
+
+**Q8.** The sum $1 + 2 + 3 + \cdots + n$ equals:
+
+A. $\frac{n(n-1)}{2}$  
+B. $\frac{n(n+1)}{2}$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $n^2$  
+
+---
+
+**Q9.** The sum $1^2 + 2^2 + \cdots + n^2$ equals:
+
+A. $\frac{n(n+1)}{2}$  
+B. $n^3$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $\frac{n^2(n+1)}{2}$  
+
+---
+
+**Q10.** The sum to infinity of $1 + \frac{1}{2} + \frac{1}{4} + \cdots$ is:
+
+A. 1  
+B. 3  
+C. $\frac{3}{2}$  
+D. 2  
+
+---
+
+**Q11.** The coefficient of $x^2$ in $(1 + x)^4$ is:
+
+A. 4  
+B. 8  
+C. 6  
+D. 12  
+
+---
+
+**Q12.** The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:
+
+A. 1  
+B. -1  
+C. 2  
+D. 0  
+
+---
+
+**Q13.** Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:
+
+A. $x^2 + 1$  
+B. $x^2 + x + 1$  
+C. $x^2 - x + 1$  
+D. $x^2 - 1$  
+
+---
+
+**Q14.** The value of $\lim_{x \to 0} \frac{\sin x}{x}$ is:
+
+A. ∞  
+B. 1  
+C. undefined  
+D. 0  
+
+---
+
+**Q15.** The value of $\lim_{x \to \infty} \frac{1}{x}$ is:
+
+A. ∞  
+B. 1  
+C. 0  
+D. undefined  
+
+---
+
+**Q16.** The general solution of $\frac{dy}{dx} = \frac{y}{x}$ is:
+
+A. $y = kx^2$  
+B. $y = k/x$  
+C. $y = e^{kx}$  
+D. $y = kx$  
+
+---
+
+**Q17.** The roots of $x^2 - 5x + 6 = 0$ are:
+
+A. -2 and -3  
+B. 5 and 6  
+C. 2 and 3  
+D. 1 and 6  
+
+---
+
+**Q18.** The sum of the roots of $x^2 - 5x + 6 = 0$ is:
+
+A. -5  
+B. -6  
+C. 6  
+D. 5  
+
+---
+
+**Q19.** The product of the roots of $x^2 - 5x + 6 = 0$ is:
+
+A. -5  
+B. 6  
+C. 5  
+D. -6  
+
+---
+
+**Q20.** The partial fractions of $\frac{1}{(x-1)(x+1)}$ are:
+
+A. $\frac{1}{x-1} - \frac{1}{x+1}$  
+B. $\frac{1/2}{x-1} - \frac{1/2}{x+1}$  
+C. $\frac{1/2}{x-1} + \frac{1/2}{x+1}$  
+D. $\frac{1}{x-1} + \frac{1}{x+1}$  
+
+---
+
+**Q21.** The value of $(1 + i)^2$ is:
+
+A. -2  
+B. 2  
+C. 2i  
+D. -2i  
+
+---
+
+**Q22.** The value of $(1 + i)^4$ is:
+
+A. -4i  
+B. 4  
+C. 4i  
+D. -4  
+
+---
+
+**Q23.** The modulus of $\frac{1}{i}$ is:
+
+A. -1  
+B. i  
+C. 1  
+D. 0  
+
+---
+
+**Q24.** The argument of $-1$ is:
+
+A. 270°  
+B. 90°  
+C. 0°  
+D. 180°  
+
+---
+
+**Q25.** The modulus of $3 + 4i$ is:
+
+A. 5  
+B. 7  
+C. 1  
+D. 25  
+
+---
+
+**Q26.** The argument of $1 + i$ is:
+
+A. 45°  
+B. 90°  
+C. 30°  
+D. 135°  
+
+---
+
+**Q27.** The complex conjugate of $2 - 3i$ is:
+
+A. 2 + 3i  
+B. -2 + 3i  
+C. 2 - 3i  
+D. -2 - 3i  
+
+---
+
+**Q28.** The product $(1 + i)(1 - i)$ equals:
+
+A. 2  
+B. 1  
+C. -2  
+D. 0  
+
+---
+
+**Q29.** The roots of $z^2 + 4 = 0$ are:
+
+A. ±2i  
+B. ±4  
+C. ±2  
+D. ±4i  
+
+---
+
+**Q30.** The value of $i^2$ is:
+
+A. -1  
+B. -i  
+C. i  
+D. 1  
+
+---
+
+**Q31.** The work done by a force of 10 N moving a body 5 m is:
+
+A. 2 J  
+B. 50 J  
+C. 15 J  
+D. 0.5 J  
+
+---
+
+**Q32.** The power of a machine doing 300 J of work in 10 s is:
+
+A. 3000 W  
+B. 30 W  
+C. 0.03 W  
+D. 3 W  
+
+---
+
+**Q33.** The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:
+
+A. 10 m  
+B. 40 m  
+C. 20 m  
+D. 2 m  
+
+---
+
+**Q34.** The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:
+
+A. 10 s  
+B. 2.5 s  
+C. 50 s  
+D. 5 s  
+
+---
+
+**Q35.** The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:
+
+A. 125 m  
+B. 433 m  
+C. 216.5 m  
+D. 250 m  
+
+---
+
+**Q36.** A uniform rod is balanced at its centre. The principle of moments states:
+
+A. sum of forces = 0  
+B. power = work ÷ time  
+C. work = force × distance  
+D. sum of clockwise moments = sum of anticlockwise moments  
+
+---
+
+**Q37.** The centre of mass of a uniform rod is at its:
+
+A. one-quarter point  
+B. midpoint  
+C. end  
+D. centre of gravity of the rod  
+
+---
+
+**Q38.** The probability of getting exactly 6 heads in 10 tosses of a fair coin is:
+
+A. $\binom{10}{6}(1/2)^6$  
+B. $\binom{10}{6}(1/2)^{10}$  
+C. $6/10$  
+D. $(1/2)^6$  
+
+---
+
+**Q39.** The mean of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 10  
+B. 2.5  
+C. 5  
+D. 0.5  
+
+---
+
+**Q40.** The variance of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 10  
+B. 5  
+C. 0.5  
+D. 2.5  
+
+---
+
+**Q41.** The mean of a Poisson distribution with parameter λ is:
+
+A. √λ  
+B. 1/λ  
+C. λ  
+D. λ²  
+
+---
+
+**Q42.** The variance of a Poisson distribution with parameter λ is:
+
+A. √λ  
+B. 1/λ  
+C. λ²  
+D. λ  
+
+---
+
+**Q43.** For a standard normal distribution, the mean is:
+
+A. 100  
+B. 0  
+C. 1  
+D. 50  
+
+---
+
+**Q44.** For a standard normal distribution, the variance is:
+
+A. 100  
+B. 1  
+C. 50  
+D. 0  
+
+---
+
+**Q45.** The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:
+
+A. 1.2  
+B. 10  
+C. 2  
+D. 0.5  
+
+---
+
+**Q46.** The 95% confidence interval for a mean uses the z-value:
+
+A. 0.95  
+B. 1.64  
+C. 2.58  
+D. 1.96  
+
+---
+
+**Q47.** The 99% confidence interval for a mean uses the z-value:
+
+A. 0.99  
+B. 1.64  
+C. 2.58  
+D. 1.96  
+
+---
+
+**Q48.** A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:
+
+A. 80  
+B. 0.08  
+C. 8  
+D. 0.8  
+
+---
+
+**Q49.** The Pearson correlation coefficient ranges from:
+
+A. -1 to 1  
+B. 0 to 1  
+C. -∞ to ∞  
+D. 0 to 100  
+
+---
+
+**Q50.** A correlation coefficient of 0 indicates:
+
+A. no linear correlation  
+B. perfect positive correlation  
+C. strong correlation  
+D. perfect negative correlation  
+
+---
+
+**Q51.** The probability of getting a sum of 7 when two dice are thrown is:
+
+A. 6/36  
+B. 7/36  
+C. 1/36  
+D. 1/6  
+
+---
+
+**Q52.** The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:
+
+A. 3/8  
+B. 3/5  
+C. 1/8  
+D. 5/8  
+
+---
+
+**Q53.** Two events are independent if:
+
+A. P(A∩B) = P(A)P(B)  
+B. P(A) = P(B)  
+C. P(A∩B) = P(A) + P(B)  
+D. P(A∪B) = P(A)P(B)  
+
+---
+
+**Q54.** The probability of an impossible event is:
+
+A. 0  
+B. undefined  
+C. 0.5  
+D. 1  
+
+---
+
+**Q55.** The probability of a certain event is:
+
+A. 0  
+B. 1  
+C. 0.5  
+D. undefined  
+
+---
+
+**Q56.** The SI unit of force is the:
+
+A. joule  
+B. newton  
+C. pascal  
+D. watt  
+
+---
+
+**Q57.** The SI unit of momentum is:
+
+A. kg m/s²  
+B. N m  
+C. kg m/s  
+D. J  
+
+---
+
+**Q58.** The SI unit of impulse is:
+
+A. N m  
+B. J  
+C. W  
+D. N s  
+
+---
+
+**Q59.** The acceleration of a body of mass 2 kg under a force of 10 N is:
+
+A. 2 m/s²  
+B. 0.2 m/s²  
+C. 5 m/s²  
+D. 20 m/s²  
+
+---
+
+**Q60.** The momentum of a 3 kg body moving at 4 m/s is:
+
+A. 7 kg m/s  
+B. 48 kg m/s  
+C. 1 kg m/s  
+D. 12 kg m/s  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
 ',
   null
 )
