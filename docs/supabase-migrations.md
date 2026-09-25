@@ -137,68 +137,78 @@ Use these categories:
 
 ## Migration Inventory
 
-| File | Category | Purpose | Rerun Guidance |
-| --- | --- | --- | --- |
-| `000_full_studyspark_setup.sql` | one-shot baseline | Full early setup bundle for learner tables, RLS, seed content, account deletion, grants, and schema cache refresh. | One-time only. Do not run on an existing production database unless rebuilding from scratch. |
-| `001_studyspark_schema.sql` | baseline | Creates learner profile, topics, questions, practice attempts, triggers, RLS, policies, and indexes. | Mostly idempotent, but treat as baseline only. |
-| `002_seed_sample_content.sql` | seed | Adds initial sample topics/questions. | Rerunnable because it uses upserts, but not production-critical. |
-| `003_delete_current_user.sql` | feature | Adds account deletion RPC. | Rerunnable function replacement. |
-| `004_learner_api_grants.sql` | hardening | Grants authenticated learner API access to required tables. | Rerunnable grants. |
-| `005_attempt_details.sql` | feature | Adds detail fields to practice attempts. | Rerunnable because columns are added with `if not exists`. |
-| `006_safe_learner_questions.sql` | hardening | Adds learner-safe question listing/grading without answer-key exposure. | Rerunnable function/policy refresh. |
-| `007_secure_admin_layer.sql` | hardening | Adds admin audit logs, admin role helpers, admin RPCs, and admin policies. | Rerunnable with caution; replaces many admin functions. |
-| `008_course_markdown_documents.sql` | feature | Adds protected Markdown course/paper documents and admin document RPCs. | Rerunnable with caution; replaces document functions. |
-| `009_cameroon_curriculum_topics.sql` | seed | Adds Cameroon curriculum topic rows. | Rerunnable upsert seed. |
-| `010_course_document_publish_defaults.sql` | feature | Sets course document publish defaults. | Rerunnable. |
-| `011_structural_paper_progress.sql` | feature | Adds structural paper question progress and retires legacy quiz progress in learner flow. | One-time feature migration; rerun only after reviewing current data. |
-| `012_structural_progress_timing.sql` | feature | Adds timing columns to structural question progress. | Rerunnable column/update migration. |
-| `013_level_leaderboard.sql` | feature | Adds level-based leaderboard from structural paper progress. | Rerunnable function replacement. |
-| `014_profile_location_leaderboard.sql` | feature | Adds location fields and location-aware leaderboard output. | Rerunnable with care; updates profile defaults. |
-| `015_progress_aware_course_documents.sql` | feature | Keeps started papers visible even after profile changes. | Rerunnable function replacement. |
-| `016_location_verification_fields.sql` | feature | Adds browser-permission location verification fields. | Rerunnable column migration. |
-| `017_protected_content_events.sql` | hardening | Adds protected content view audit events. | Rerunnable schema/policy migration. |
-| `018_retire_legacy_quiz_api.sql` | hardening | Revokes retired MCQ/quiz API access. | Rerunnable revokes. |
-| `019_production_hardening.sql` | hardening | Locks down retired quiz access, progress writes, profile updates, and admin reporting. | One-time production hardening; rerun only after reviewing effects. |
-| `020_premium_paper_access.sql` | feature | Adds premium paper access gate. | Rerunnable function/policy refresh. |
-| `021_premium_features.sql` | feature | Adds streak freezes and admin plan management. | Rerunnable with care; creates tables/functions. |
-| `022_premium_setup_one_shot.sql` | one-shot | Bundles premium access, premium tools, and Fapshi setup for environments that missed those pieces. | Alternative one-shot. Do not run if `020`, `021`, and `023` already ran. |
-| `023_fapshi_payments.sql` | feature | Adds Fapshi payment tracking and webhook/payment RPCs. | Rerunnable with care; payment tables must preserve production records. |
-| `024_fix_structural_progress_ambiguous_document_id.sql` | repair | Fixes ambiguous `document_id` references in structural progress RPC. | Rerunnable function replacement. |
-| `025_require_started_before_completion.sql` | feature | Requires `started` before marking structural questions passed/failed. | Rerunnable function replacement. |
-| `026_fix_structural_progress_constraint_name.sql` | repair | Uses actual unique constraint name in structural progress upsert. | Rerunnable function replacement. |
-| `027_reading_progress_tracking.sql` | feature | Adds reading sessions, checkpoints, and reflections. | Rerunnable schema/policy migration. |
-| `028_learner_notification_state.sql` | feature | Adds cross-device notification state and preferences. | Rerunnable schema/policy migration. |
-| `029_mobile_push_token.sql` | feature | Adds Expo push token column and scoped grant. | Rerunnable column/grant migration. |
-| `030_course_doc_types.sql` | feature | Adds document type metadata for course documents. | Rerunnable column/index migration. |
-| `030_reviewer_role_split.sql` | hardening | Splits reviewer read-only access from admin write access. | Rerunnable function replacement. Note duplicate `030` prefix. |
-| `031_course_content_kinds.sql` | feature | Splits course/textbook content kinds and updates admin document RPC. | Rerunnable with care; changes constraints/functions. |
-| `032_paper_content_kind.sql` | repair | Reclassifies question papers separately from courses/textbooks. | Rerunnable content repair with care. |
-| `033_expanded_gce_course_catalog.sql` | content refresh | Adds/refreshes detailed Cameroon GCE course documents. | Rerunnable upsert content refresh. Large file; apply during low traffic. |
-| `034_cheatsheets_content_kind.sql` | feature | Adds cheatsheet content kind and keeps revision sheets out of full courses. | Rerunnable with care; changes constraints/functions/content rows. |
-| `035_stable_course_document_ids.sql` | repair | Stabilizes course document IDs and foreign keys for reading/protected events. | One-off repair. Rerun only after checking FK state and duplicate rows. |
-| `036_stable_cheatsheet_document_ids.sql` | repair | Stabilizes cheatsheet document IDs and removes duplicates. | One-off repair. Rerun only after checking duplicate rows. |
-| `037_fix_profile_update_lock_blank_city.sql` | repair | Fixes profile lock false failures when city is blank/null. | Rerunnable function replacement. |
-| `038_preserve_locked_profile_fields_after_progress.sql` | repair | Allows harmless profile settings saves after progress while preserving locked fields. | Rerunnable function replacement. Superseded by `040` for track updates. |
-| `039_keep_blank_profile_city_not_null.sql` | repair | Keeps blank city values non-null while preserving harmless saves. | Rerunnable function replacement. Superseded by `040` for track updates. |
-| `040_allow_profile_study_track_updates.sql` | feature | Allows learners to correct class/series/subjects after progress exists. | Rerunnable function replacement. |
-| `041_topic_understanding_progress.sql` | feature | Adds per-topic understood/needs-review tracking for courses and cheatsheets. | Rerunnable schema/policy migration. |
-| `042_advanced_level_cheatsheets_and_progress_signals.sql` | content refresh | Adds A-Level cheatsheets and progress signal content. | Rerunnable upsert content refresh. |
-| `043_enrich_cheatsheet_formula_content.sql` | content refresh | Enriches A-Level cheatsheets with formula-heavy markdown/KaTeX content. | Rerunnable content update. |
+| File                                                      | Category          | Purpose                                                                                                            | Rerun Guidance                                                                               |
+| --------------------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| `000_full_studyspark_setup.sql`                           | one-shot baseline | Full early setup bundle for learner tables, RLS, seed content, account deletion, grants, and schema cache refresh. | One-time only. Do not run on an existing production database unless rebuilding from scratch. |
+| `001_studyspark_schema.sql`                               | baseline          | Creates learner profile, topics, questions, practice attempts, triggers, RLS, policies, and indexes.               | Mostly idempotent, but treat as baseline only.                                               |
+| `002_seed_sample_content.sql`                             | seed              | Adds initial sample topics/questions.                                                                              | Rerunnable because it uses upserts, but not production-critical.                             |
+| `003_delete_current_user.sql`                             | feature           | Adds account deletion RPC.                                                                                         | Rerunnable function replacement.                                                             |
+| `004_learner_api_grants.sql`                              | hardening         | Grants authenticated learner API access to required tables.                                                        | Rerunnable grants.                                                                           |
+| `005_attempt_details.sql`                                 | feature           | Adds detail fields to practice attempts.                                                                           | Rerunnable because columns are added with `if not exists`.                                   |
+| `006_safe_learner_questions.sql`                          | hardening         | Adds learner-safe question listing/grading without answer-key exposure.                                            | Rerunnable function/policy refresh.                                                          |
+| `007_secure_admin_layer.sql`                              | hardening         | Adds admin audit logs, admin role helpers, admin RPCs, and admin policies.                                         | Rerunnable with caution; replaces many admin functions.                                      |
+| `008_course_markdown_documents.sql`                       | feature           | Adds protected Markdown course/paper documents and admin document RPCs.                                            | Rerunnable with caution; replaces document functions.                                        |
+| `009_cameroon_curriculum_topics.sql`                      | seed              | Adds Cameroon curriculum topic rows.                                                                               | Rerunnable upsert seed.                                                                      |
+| `010_course_document_publish_defaults.sql`                | feature           | Sets course document publish defaults.                                                                             | Rerunnable.                                                                                  |
+| `011_structural_paper_progress.sql`                       | feature           | Adds structural paper question progress and retires legacy quiz progress in learner flow.                          | One-time feature migration; rerun only after reviewing current data.                         |
+| `012_structural_progress_timing.sql`                      | feature           | Adds timing columns to structural question progress.                                                               | Rerunnable column/update migration.                                                          |
+| `013_level_leaderboard.sql`                               | feature           | Adds level-based leaderboard from structural paper progress.                                                       | Rerunnable function replacement.                                                             |
+| `014_profile_location_leaderboard.sql`                    | feature           | Adds location fields and location-aware leaderboard output.                                                        | Rerunnable with care; updates profile defaults.                                              |
+| `015_progress_aware_course_documents.sql`                 | feature           | Keeps started papers visible even after profile changes.                                                           | Rerunnable function replacement.                                                             |
+| `016_location_verification_fields.sql`                    | feature           | Adds browser-permission location verification fields.                                                              | Rerunnable column migration.                                                                 |
+| `017_protected_content_events.sql`                        | hardening         | Adds protected content view audit events.                                                                          | Rerunnable schema/policy migration.                                                          |
+| `018_retire_legacy_quiz_api.sql`                          | hardening         | Revokes retired MCQ/quiz API access.                                                                               | Rerunnable revokes.                                                                          |
+| `019_production_hardening.sql`                            | hardening         | Locks down retired quiz access, progress writes, profile updates, and admin reporting.                             | One-time production hardening; rerun only after reviewing effects.                           |
+| `020_premium_paper_access.sql`                            | feature           | Adds premium paper access gate.                                                                                    | Rerunnable function/policy refresh.                                                          |
+| `021_premium_features.sql`                                | feature           | Adds streak freezes and admin plan management.                                                                     | Rerunnable with care; creates tables/functions.                                              |
+| `022_premium_setup_one_shot.sql`                          | one-shot          | Bundles premium access, premium tools, and Fapshi setup for environments that missed those pieces.                 | Alternative one-shot. Do not run if `020`, `021`, and `023` already ran.                     |
+| `023_fapshi_payments.sql`                                 | feature           | Adds Fapshi payment tracking and webhook/payment RPCs.                                                             | Rerunnable with care; payment tables must preserve production records.                       |
+| `024_fix_structural_progress_ambiguous_document_id.sql`   | repair            | Fixes ambiguous `document_id` references in structural progress RPC.                                               | Rerunnable function replacement.                                                             |
+| `025_require_started_before_completion.sql`               | feature           | Requires `started` before marking structural questions passed/failed.                                              | Rerunnable function replacement.                                                             |
+| `026_fix_structural_progress_constraint_name.sql`         | repair            | Uses actual unique constraint name in structural progress upsert.                                                  | Rerunnable function replacement.                                                             |
+| `027_reading_progress_tracking.sql`                       | feature           | Adds reading sessions, checkpoints, and reflections.                                                               | Rerunnable schema/policy migration.                                                          |
+| `028_learner_notification_state.sql`                      | feature           | Adds cross-device notification state and preferences.                                                              | Rerunnable schema/policy migration.                                                          |
+| `029_mobile_push_token.sql`                               | feature           | Adds Expo push token column and scoped grant.                                                                      | Rerunnable column/grant migration.                                                           |
+| `030_course_doc_types.sql`                                | feature           | Adds document type metadata for course documents.                                                                  | Rerunnable column/index migration.                                                           |
+| `030_reviewer_role_split.sql`                             | hardening         | Splits reviewer read-only access from admin write access.                                                          | Rerunnable function replacement. Note duplicate `030` prefix.                                |
+| `031_course_content_kinds.sql`                            | feature           | Splits course/textbook content kinds and updates admin document RPC.                                               | Rerunnable with care; changes constraints/functions.                                         |
+| `032_paper_content_kind.sql`                              | repair            | Reclassifies question papers separately from courses/textbooks.                                                    | Rerunnable content repair with care.                                                         |
+| `033_expanded_gce_course_catalog.sql`                     | content refresh   | Adds/refreshes detailed Cameroon GCE course documents.                                                             | Rerunnable upsert content refresh. Large file; apply during low traffic.                     |
+| `034_cheatsheets_content_kind.sql`                        | feature           | Adds cheatsheet content kind and keeps revision sheets out of full courses.                                        | Rerunnable with care; changes constraints/functions/content rows.                            |
+| `035_stable_course_document_ids.sql`                      | repair            | Stabilizes course document IDs and foreign keys for reading/protected events.                                      | One-off repair. Rerun only after checking FK state and duplicate rows.                       |
+| `036_stable_cheatsheet_document_ids.sql`                  | repair            | Stabilizes cheatsheet document IDs and removes duplicates.                                                         | One-off repair. Rerun only after checking duplicate rows.                                    |
+| `037_fix_profile_update_lock_blank_city.sql`              | repair            | Fixes profile lock false failures when city is blank/null.                                                         | Rerunnable function replacement.                                                             |
+| `038_preserve_locked_profile_fields_after_progress.sql`   | repair            | Allows harmless profile settings saves after progress while preserving locked fields.                              | Rerunnable function replacement. Superseded by `040` for track updates.                      |
+| `039_keep_blank_profile_city_not_null.sql`                | repair            | Keeps blank city values non-null while preserving harmless saves.                                                  | Rerunnable function replacement. Superseded by `040` for track updates.                      |
+| `040_allow_profile_study_track_updates.sql`               | feature           | Allows learners to correct class/series/subjects after progress exists.                                            | Rerunnable function replacement.                                                             |
+| `041_topic_understanding_progress.sql`                    | feature           | Adds per-topic understood/needs-review tracking for courses and cheatsheets.                                       | Rerunnable schema/policy migration.                                                          |
+| `042_advanced_level_cheatsheets_and_progress_signals.sql` | content refresh   | Adds A-Level cheatsheets and progress signal content.                                                              | Rerunnable upsert content refresh.                                                           |
+| `043_enrich_cheatsheet_formula_content.sql`               | content refresh   | Enriches A-Level cheatsheets with formula-heavy markdown/KaTeX content.                                            | Rerunnable content update.                                                                   |
+
+### CLI-tracked migrations applied to production
+
+These timestamped files live in `supabase/migrations/` and are recorded in the linked project's `supabase_migrations.schema_migrations` history (via `supabase migration repair --status applied` after direct apply).
+
+| Version                                                 | Purpose                                                                                                                                                                        |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `20260924161116_v2_detailed_cheatsheets_all_levels.sql` | Adds 163 v2 per-topic cheatsheets (109 ordinary + 54 advanced) with level-aware topic IDs.                                                                                     |
+| `20260925084507_fix_paper_class_levels_series.sql`      | Repairs paper `class_levels`/`series` to match `content/papers/manifest.csv` (the one-shot import had seeded the first 3 sets of each subject with broad class levels/series). |
+| `20260925084558_fix_orphaned_advanced_math_papers.sql`  | Scopes the two orphaned advanced "Mathematics" P2 papers (not in the manifest) to `upper_sixth`/`a_science`.                                                                   |
 
 ## Domain Map
 
-| Domain | Relevant Files |
-| --- | --- |
-| Auth and profiles | `001`, `003`, `007`, `014`, `016`, `019`, `037`, `038`, `039`, `040` |
-| Premium access | `020`, `021`, `022`, `023` |
-| Fapshi payments | `023`, or `022` only as an alternative one-shot setup |
-| Protected content | `008`, `010`, `015`, `017`, `019`, `020`, `031`, `032`, `034`, `035`, `036` |
-| Structural question progress | `011`, `012`, `013`, `014`, `019`, `024`, `025`, `026`, `035` |
-| Reading progress | `027`, `035` |
-| Topic understanding progress | `041`, `042` |
-| Notifications and push | `028`, `029` |
-| Courses and cheatsheets | `008`, `009`, `010`, `030_course_doc_types`, `031`, `032`, `033`, `034`, `035`, `036`, `042`, `043` |
-| Admin/reviewer controls | `007`, `019`, `021`, `030_reviewer_role_split` |
+| Domain                       | Relevant Files                                                                                      |
+| ---------------------------- | --------------------------------------------------------------------------------------------------- |
+| Auth and profiles            | `001`, `003`, `007`, `014`, `016`, `019`, `037`, `038`, `039`, `040`                                |
+| Premium access               | `020`, `021`, `022`, `023`                                                                          |
+| Fapshi payments              | `023`, or `022` only as an alternative one-shot setup                                               |
+| Protected content            | `008`, `010`, `015`, `017`, `019`, `020`, `031`, `032`, `034`, `035`, `036`                         |
+| Structural question progress | `011`, `012`, `013`, `014`, `019`, `024`, `025`, `026`, `035`                                       |
+| Reading progress             | `027`, `035`                                                                                        |
+| Topic understanding progress | `041`, `042`                                                                                        |
+| Notifications and push       | `028`, `029`                                                                                        |
+| Courses and cheatsheets      | `008`, `009`, `010`, `030_course_doc_types`, `031`, `032`, `033`, `034`, `035`, `036`, `042`, `043` |
+| Admin/reviewer controls      | `007`, `019`, `021`, `030_reviewer_role_split`                                                      |
 
 ## Fresh Environment Setup
 
