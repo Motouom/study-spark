@@ -216,20 +216,23 @@ export type AiLearningPathDay = {
 };
 
 export function parseAiLearningPath(value: string): AiLearningPathDay[] {
-  // Aggressively extract JSON: remove markdown fences, find first '{' to last '}'
+  // Aggressively extract JSON: providers sometimes wrap valid JSON in prose or fences.
   let cleaned = value.trim();
 
-  // Remove markdown code blocks
-  cleaned = cleaned
-    .replace(/^```(?:json)?\s*/i, "")
-    .replace(/\s*```$/i, "")
-    .trim();
+  const fencedJson = cleaned.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fencedJson?.[1]) {
+    cleaned = fencedJson[1].trim();
+  }
 
-  // If there's explanatory text before/after JSON, extract just the JSON object
-  const firstBrace = cleaned.indexOf("{");
-  const lastBrace = cleaned.lastIndexOf("}");
-  if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-    cleaned = cleaned.slice(firstBrace, lastBrace + 1);
+  const firstObject = cleaned.indexOf("{");
+  const firstArray = cleaned.indexOf("[");
+  const starts = [firstObject, firstArray].filter((index) => index >= 0);
+  if (starts.length > 0) {
+    const start = Math.min(...starts);
+    const opener = cleaned[start];
+    const closer = opener === "{" ? "}" : "]";
+    const end = cleaned.lastIndexOf(closer);
+    if (end > start) cleaned = cleaned.slice(start, end + 1);
   }
 
   let parsed: unknown;

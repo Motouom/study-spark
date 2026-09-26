@@ -452,7 +452,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             );
             const planText = await generateAiText({
               system:
-                "Rewrite learning path descriptions. Keep every paper title identical to fixedDays. Return compact JSON only.",
+                'Rewrite learning path descriptions. Keep every paper title identical to fixedDays. Return only valid JSON shaped as {"days":[...]}. Do not add prose, markdown fences, or comments.',
               prompt: JSON.stringify({
                 fixedDays: deterministicDays.map((d) => ({
                   day: d.day,
@@ -464,7 +464,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                   reviews: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
                 })),
                 instruction:
-                  'Return compact JSON: [{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]. Paper must match EXACT_PAPER_NAME exactly.',
+                  'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. Paper must match EXACT_PAPER_NAME exactly.',
               }),
               maxTokens: 1400,
             });
