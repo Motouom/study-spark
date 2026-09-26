@@ -447,29 +447,47 @@ export const Route = createFileRoute("/api/ai/learning-path")({
 
           // Use AI ONLY to enrich the text — paper assignments are fixed
           try {
-            console.log(
-              `[AI LearningPath] user=${user.id} — invoking generateAiText for enrichment...`,
-            );
-            const planText = await generateAiText({
-              system:
-                'Rewrite learning path descriptions. Keep every paper title identical to fixedDays. Return only valid JSON shaped as {"days":[...]}. Do not add prose, markdown fences, or comments.',
-              prompt: JSON.stringify({
-                fixedDays: deterministicDays.map((d) => ({
-                  day: d.day,
-                  paper: d.paper,
-                  failedQ:
-                    difficultyRanking
-                      .find((e) => e.title === d.paper)
-                      ?.failedQuestions.slice(0, 3) ?? [],
-                  reviews: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
-                })),
-                instruction:
-                  'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. Paper must match EXACT_PAPER_NAME exactly.',
-              }),
-              maxTokens: 1400,
-            });
-            console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
-            let days = parseAiLearningPath(planText);
+            let days = null as ReturnType<typeof parseAiLearningPath> | null;
+            let lastAiError: unknown = null;
+
+            for (let attempt = 1; attempt <= 2; attempt++) {
+              try {
+                console.log(
+                  `[AI LearningPath] user=${user.id} — invoking generateAiText for enrichment attempt ${attempt}...`,
+                );
+                const planText = await generateAiText({
+                  system:
+                    'Rewrite learning path descriptions. Keep every paper title identical to fixedDays. Return only valid JSON shaped as {"days":[...]}. Do not add prose, markdown fences, comments, safety classifications, or explanations.',
+                  prompt: JSON.stringify({
+                    fixedDays: deterministicDays.map((d) => ({
+                      day: d.day,
+                      paper: d.paper,
+                      failedQ:
+                        difficultyRanking
+                          .find((e) => e.title === d.paper)
+                          ?.failedQuestions.slice(0, 3) ?? [],
+                      reviews: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
+                    })),
+                    instruction:
+                      'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. Paper must match EXACT_PAPER_NAME exactly.',
+                  }),
+                  maxTokens: 1400,
+                });
+                console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
+                days = parseAiLearningPath(planText);
+                break;
+              } catch (parseOrProviderError) {
+                lastAiError = parseOrProviderError;
+                logAiFailure("ai.learning_path.enrichment_attempt_failed", parseOrProviderError, {
+                  userId: user.id,
+                  attempt,
+                });
+              }
+            }
+
+            if (!days) {
+              throw lastAiError ?? new Error("AI enrichment returned no usable days.");
+            }
 
             // Force-fix: ensure AI didn't change any paper titles
             days = days.map((day, index) => {

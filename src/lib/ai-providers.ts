@@ -130,6 +130,14 @@ function extractOpenAiContent(payload: unknown): string | null {
   return null;
 }
 
+function isProviderNonAnswer(content: string): boolean {
+  return /^User Safety:/i.test(content) || /^(safe|unsafe)$/i.test(content.trim());
+}
+
+function wantsJsonResponse(input: AiCallInput): boolean {
+  return /\bjson\b/i.test(`${input.system}\n${input.prompt}`);
+}
+
 function extractGeminiContent(payload: unknown): string | null {
   if (!payload || typeof payload !== "object") return null;
   const p = payload as Record<string, unknown>;
@@ -298,6 +306,7 @@ async function callOpenAiCompatible(
         ],
         temperature: 0.25,
         max_tokens: input.maxTokens ?? 700,
+        ...(wantsJsonResponse(input) ? { response_format: { type: "json_object" } } : {}),
       }),
     });
 
@@ -321,6 +330,15 @@ async function callOpenAiCompatible(
       throw new AiProviderError("empty_response", `${config.name} returned an empty response.`, {
         retryable: true,
       });
+    }
+    if (isProviderNonAnswer(content)) {
+      throw new AiProviderError(
+        "empty_response",
+        `${config.name} returned a moderation non-answer.`,
+        {
+          retryable: true,
+        },
+      );
     }
     return { content, provider: config.name };
   } catch (error) {
