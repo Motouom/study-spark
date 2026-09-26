@@ -3,14 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Language'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P1 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -20,21 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 3',
+  'English Language',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P1 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 3
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
 
 **Instructions:**
 
@@ -47,543 +47,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** If $f(x) = 3x - 2$ and $g(x) = x^2$, then $gf(2)$ is:
+**Q1.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
 
-A. 16  
-B. 10  
-C. 22  
-D. 36  
-
----
-
-**Q2.** The range of $y = x^2$ for $x \geq 0$ is:
-
-A. $y \geq 0$  
-B. $y > 0$  
-C. $y \leq 0$  
-D. all real $y$  
+A. the centre of community life  
+B. a noisy place  
+C. a place of conflict  
+D. a modern building  
 
 ---
 
-**Q3.** The equation $2^{2x} = 16$ has solution:
+**Q2.** In summary writing, the first step is to:
 
-A. $x = 2$  
-B. $x = 8$  
-C. $x = 4$  
-D. $x = 16$  
-
----
-
-**Q4.** If $f(x) = x^2 - 1$, the value of $f(-2)$ is:
-
-A. 3  
-B. 5  
-C. -5  
-D. -3  
+A. read the passage carefully to understand the main ideas  
+B. copy the first sentence of each paragraph  
+C. write your own opinions about the topic  
+D. count the words in the passage  
 
 ---
 
-**Q5.** The axis of symmetry of $y = x^2 - 6x + 8$ is:
+**Q3.** A summary should be written:
 
-A. $x = 3$  
-B. $x = 2$  
-C. $x = -3$  
-D. $x = 6$  
-
----
-
-**Q6.** If $f(x) = 2x$ and $g(x) = x + 1$, then $fg(x)$ is:
-
-A. $2x + 2$  
-B. $2x$  
-C. $x + 2$  
-D. $2x + 1$  
+A. in your own words  
+B. in note form only  
+C. using long quotations from the passage  
+D. as a list of examples  
 
 ---
 
-**Q7.** The minimum value of $y = x^2 + 2x + 1$ is:
+**Q4.** The main idea of a passage is best described as:
 
-A. 1  
-B. 0  
-C. 2  
-D. -1  
-
----
-
-**Q8.** For $f(x) = \sqrt{x}$, the domain is:
-
-A. $x > 0$  
-B. $x \geq 0$  
-C. $x \leq 0$  
-D. all real $x$  
+A. the central point the writer is making  
+B. the most difficult word in the passage  
+C. the writer''s personal opinion only  
+D. the first sentence of the passage  
 
 ---
 
-**Q9.** The graph of $y = -x^2$ is the graph of $y = x^2$:
+**Q5.** Read: ''The words evaporated.'' This means the speaker:
 
-A. translated down  
-B. translated up  
-C. reflected in the $x$-axis  
-D. stretched  
-
----
-
-**Q10.** If $f(x) = x^3$, then $f^{-1}(x)$ is:
-
-A. $x^3$  
-B. $\dfrac{1}{x^3}$  
-C. $3x$  
-D. $\sqrt[3]{x}$  
+A. forgot what he wanted to say  
+B. was interrupted by the crowd  
+C. spoke very quietly  
+D. wrote his speech down  
 
 ---
 
-**Q11.** The sum of the roots of $2x^2 - 6x + 3 = 0$ is:
+**Q6.** When asked to ''state the main idea in one sentence'', you should:
 
-A. -3  
-B. 6  
-C. 3  
-D. $\dfrac{3}{2}$  
-
----
-
-**Q12.** If $f(x) = x + 2$ and $g(x) = 3x$, then $gf(x)$ is:
-
-A. $3x + 2$  
-B. $3x$  
-C. $x + 6$  
-D. $3x + 6$  
+A. summarise the whole passage briefly  
+B. list all the details  
+C. repeat the title  
+D. quote the longest sentence  
 
 ---
 
-**Q13.** The graph of $y = |x|$ at $x = 0$ has:
+**Q7.** An inference is:
 
-A. a vertical asymptote  
-B. a sharp corner  
-C. a smooth curve  
-D. a horizontal asymptote  
-
----
-
-**Q14.** If $f(x) = \dfrac{x+1}{x-1}$, $x \neq 1$, then $f(3)$ is:
-
-A. $\dfrac{1}{2}$  
-B. 2  
-C. 3  
-D. 4  
+A. a fact stated directly in the text  
+B. a conclusion drawn from evidence in the text  
+C. a quotation from the text  
+D. a question about the text  
 
 ---
 
-**Q15.** The product of the roots of $x^2 - 4x + 7 = 0$ is:
+**Q8.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
 
-A. -4  
-B. 4  
-C. 7  
-D. -7  
-
----
-
-**Q16.** The graph of $y = (x+1)^2$ has turning point:
-
-A. (0, 1)  
-B. (1, 0)  
-C. (0, -1)  
-D. (-1, 0)  
+A. was very wide  
+B. provided many benefits  
+C. was polluted  
+D. flowed very fast  
 
 ---
 
-**Q17.** If $f(x) = 2x - 1$, then $f^{-1}(3)$ is:
+**Q9.** In a summary, you should NOT include:
 
-A. 1  
-B. 4  
-C. 2  
-D. 5  
-
----
-
-**Q18.** The equation $x^2 - 2x + 5 = 0$ has:
-
-A. one repeated root  
-B. three roots  
-C. two distinct real roots  
-D. no real roots  
+A. the main points  
+B. the key facts  
+C. your personal opinions  
+D. the essential ideas  
 
 ---
 
-**Q19.** If $f(x) = x^2$ and $g(x) = 2x$, then $fg(3)$ is:
+**Q10.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
 
-A. 9  
-B. 36  
-C. 18  
-D. 12  
-
----
-
-**Q20.** The range of $f(x) = x^2 + 1$ is:
-
-A. $y \geq 0$  
-B. $y \geq 1$  
-C. all real $y$  
-D. $y > 1$  
+A. very large in size  
+B. completely untouched  
+C. difficult to reach  
+D. containing many different species  
 
 ---
 
-**Q21.** The graph of $y = x^2$ stretched vertically by factor 2 becomes:
+**Q11.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
 
-A. $y = x^2 + 2$  
-B. $y = x^4$  
-C. $y = 2x^2$  
-D. $y = (2x)^2$  
-
----
-
-**Q22.** If $f(x) = \dfrac{2}{x}$, then $f^{-1}(x)$ is:
-
-A. $-\dfrac{2}{x}$  
-B. $\dfrac{x}{2}$  
-C. $2x$  
-D. $\dfrac{2}{x}$  
+A. leave the stage  
+B. change his topic  
+C. feel calmer and begin speaking  
+D. memorise his speech  
 
 ---
 
-**Q23.** The discriminant of $x^2 - 4x + 4 = 0$ is:
+**Q12.** When summarising, the word limit means you must:
 
-A. 4  
-B. -16  
-C. 0  
-D. 16  
-
----
-
-**Q24.** If $f(x) = x + 1$ and $g(x) = x - 1$, then $fg(x)$ is:
-
-A. $x - 2$  
-B. $x + 2$  
-C. $x^2 - 1$  
-D. $x$  
+A. write exactly the same number of words as the passage  
+B. ignore the word limit  
+C. write as many words as possible  
+D. keep your summary within the stated number of words  
 
 ---
 
-**Q25.** If $f(x) = 2x + 3$, then $f^{-1}(x)$ is:
+**Q13.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
 
-A. $\dfrac{x-3}{2}$  
-B. $\dfrac{x+3}{2}$  
-C. $2x - 3$  
-D. $\dfrac{x}{2} + 3$  
-
----
-
-**Q26.** If $f(x) = x^2$ and $g(x) = x + 1$, then $fg(x)$ is:
-
-A. $(x+1)^2$  
-B. $x^2 + 1$  
-C. $x + 1$  
-D. $x^2 + x$  
+A. is declining rapidly  
+B. has great potential that is not yet realised  
+C. is completely absent  
+D. is too expensive for visitors  
 
 ---
 
-**Q27.** The turning point of $y = x^2 - 4x + 3$ is:
+**Q14.** The purpose of a comprehension passage is usually to:
 
-A. (2, -1)  
-B. (4, 3)  
-C. (-2, 15)  
-D. (2, 3)  
-
----
-
-**Q28.** The roots of $x^2 - 5x + 6 = 0$ are:
-
-A. 2 and 3  
-B. -2 and -3  
-C. 5 and 6  
-D. 1 and 6  
+A. teach grammar rules  
+B. test understanding of the text  
+C. list vocabulary words  
+D. provide entertainment only  
 
 ---
 
-**Q29.** If $f(x) = \dfrac{1}{x}$, $x \neq 0$, then $f^{-1}(x)$ is:
+**Q15.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
 
-A. $\dfrac{1}{x}$  
-B. $x^2$  
-C. $x$  
-D. $-x$  
-
----
-
-**Q30.** The graph of $y = x^2$ translated 3 units right becomes:
-
-A. $y = (x-3)^2$  
-B. $y = x^2 - 3$  
-C. $y = x^2 + 3$  
-D. $y = (x+3)^2$  
+A. had never heard promises before  
+B. were happy with the announcement  
+C. did not trust the government''s promises  
+D. were celebrating quietly  
 
 ---
 
-**Q31.** $\int 3\,dx$ is:
+**Q16.** A good summary should be:
 
-A. $\dfrac{3x^2}{2} + c$  
-B. $3x + c$  
-C. $x^3 + c$  
-D. $3 + c$  
-
----
-
-**Q32.** A stationary point occurs where:
-
-A. $y = 0$  
-B. $\dfrac{dy}{dx} = 0$  
-C. $\dfrac{dy}{dx} = 1$  
-D. $x = 0$  
+A. the same length as the original passage  
+B. longer than the original passage  
+C. a copy of the original passage  
+D. shorter than the original passage  
 
 ---
 
-**Q33.** The derivative of $x^2 + 3x$ is:
+**Q17.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
 
-A. $2x$  
-B. $x^2 + 3$  
-C. $2x + 3$  
-D. $2x^2 + 3x$  
-
----
-
-**Q34.** $\int_0^1 x\,dx$ is:
-
-A. 1  
-B. 0  
-C. 2  
-D. $\dfrac{1}{2}$  
+A. swept very quickly  
+B. hired someone to sweep  
+C. found peace in sweeping  
+D. disliked sweeping  
 
 ---
 
-**Q35.** The second derivative of $x^3$ is:
+**Q18.** When a question asks you to ''explain in your own words'', you should:
 
-A. $3x^2$  
-B. $3x$  
-C. $6x$  
-D. $6x^2$  
-
----
-
-**Q36.** The equation of the tangent to $y = x^2$ at $(1, 1)$ is:
-
-A. $y = x$  
-B. $y = x - 1$  
-C. $y = 2x + 1$  
-D. $y = 2x - 1$  
+A. write a longer version of the passage  
+B. give your own opinion  
+C. quote the passage directly  
+D. rephrase the idea without copying  
 
 ---
 
-**Q37.** If $\dfrac{dy}{dx} = 2x$ and $y = 1$ when $x = 0$, then $y$ is:
+**Q19.** Read: ''Success is not a destination but a journey.'' The writer means success is:
 
-A. $2x + 1$  
-B. $x^2 + 1$  
-C. $x^2$  
-D. $x^2 - 1$  
-
----
-
-**Q38.** The derivative of $\sqrt{x}$ is:
-
-A. $2\sqrt{x}$  
-B. $\dfrac{1}{2\sqrt{x}}$  
-C. $\dfrac{1}{2}x$  
-D. $\dfrac{1}{\sqrt{x}}$  
+A. measured by certificates  
+B. a continuous process  
+C. a final goal  
+D. impossible to achieve  
 
 ---
 
-**Q39.** The area under $y = x$ from $x = 0$ to $x = 2$ is:
+**Q20.** The best title for a passage about plastic waste clogging drainage channels would be:
 
-A. 1  
-B. 4  
-C. 2  
-D. 3  
-
----
-
-**Q40.** A maximum point has:
-
-A. $\dfrac{dy}{dx} > 0$  
-B. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} > 0$  
-C. $\dfrac{d^2y}{dx^2} = 0$  
-D. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} < 0$  
+A. A Day at the Market  
+B. The Problem of Plastic Waste in Our Cities  
+C. The History of Plastic  
+D. How to Build Drainage Channels  
 
 ---
 
-**Q41.** The derivative of $4x^3 - 2x$ is:
+**Q21.** Choose the correct sentence:
 
-A. $4x^2 - 2$  
-B. $12x^3 - 2$  
-C. $12x^2 - 2$  
-D. $12x^2$  
-
----
-
-**Q42.** $\int (x^2 + 1)\,dx$ is:
-
-A. $\dfrac{x^3}{3} + c$  
-B. $2x + c$  
-C. $x^3 + x + c$  
-D. $\dfrac{x^3}{3} + x + c$  
+A. Neither of the boys have been present.  
+B. Neither of the boys were present.  
+C. Neither of the boys was present.  
+D. Neither of the boys are present.  
 
 ---
 
-**Q43.** The gradient of $y = 3x - 2$ is:
+**Q22.** Choose the correct sentence:
 
-A. 1  
-B. 3  
-C. -2  
-D. 2  
-
----
-
-**Q44.** If $s = t^2$, the velocity when $t = 3$ is:
-
-A. 12  
-B. 6  
-C. 3  
-D. 9  
+A. The committee were deciding to postpone the event.  
+B. The committee have decided to postpone the event.  
+C. The committee are deciding to postpone the event.  
+D. The committee has decided to postpone the event.  
 
 ---
 
-**Q45.** The derivative of $x^4$ is:
+**Q23.** Choose the correct sentence:
 
-A. $\dfrac{x^5}{5}$  
-B. $x^3$  
-C. $4x^3$  
-D. $4x$  
-
----
-
-**Q46.** $\int \dfrac{1}{x^2}\,dx$ is:
-
-A. $-x + c$  
-B. $\dfrac{1}{x} + c$  
-C. $\ln x + c$  
-D. $-\dfrac{1}{x} + c$  
+A. Each of the students were submitting the assignment.  
+B. Each of the students are submitting the assignment.  
+C. Each of the students has submitted the assignment.  
+D. Each of the students have submitted the assignment.  
 
 ---
 
-**Q47.** The turning point of $y = x^2 - 2x$ is:
+**Q24.** Choose the correct sentence:
 
-A. (2, 0)  
-B. (1, 1)  
-C. (1, -1)  
-D. (-1, 3)  
-
----
-
-**Q48.** The derivative of $y = (2x+1)^2$ is:
-
-A. $4x$  
-B. $2(2x+1)$  
-C. $4x + 2$  
-D. $8x + 4$  
+A. The number of accidents have been increasing.  
+B. The number of accidents were increasing.  
+C. The number of accidents are increasing.  
+D. The number of accidents is increasing.  
 
 ---
 
-**Q49.** $\int_0^1 2x\,dx$ is:
+**Q25.** Choose the correct sentence:
 
-A. 1  
-B. 2  
-C. 0  
-D. 4  
-
----
-
-**Q50.** If $\dfrac{dy}{dx} = 3x^2$, then $y$ is:
-
-A. $x^3 + c$  
-B. $3x^3 + c$  
-C. $\dfrac{x^3}{3} + c$  
-D. $6x + c$  
+A. She is good at mathematics.  
+B. She is good in mathematics.  
+C. She is good on mathematics.  
+D. She is good for mathematics.  
 
 ---
 
-**Q51.** The normal to a curve is perpendicular to the:
+**Q26.** Choose the correct sentence:
 
-A. tangent  
-B. $x$-axis  
-C. curve itself  
-D. $y$-axis  
-
----
-
-**Q52.** The derivative of $2x^3$ is:
-
-A. $6x^2$  
-B. $6x^3$  
-C. $3x^2$  
-D. $2x^2$  
+A. He was accused of theft.  
+B. He was accused for theft.  
+C. He was accused on theft.  
+D. He was accused with theft.  
 
 ---
 
-**Q53.** $\int (3x^2 - 2)\,dx$ is:
+**Q27.** Choose the correct sentence:
 
-A. $x^3 - 2x + c$  
-B. $6x - 2 + c$  
-C. $3x^3 - 2x + c$  
-D. $x^3 - 2 + c$  
-
----
-
-**Q54.** The area under $y = x^2$ from $x = 0$ to $x = 1$ is:
-
-A. $\dfrac{1}{3}$  
-B. 2  
-C. $\dfrac{1}{2}$  
-D. 1  
+A. The committee consists of ten members.  
+B. The committee consists with ten members.  
+C. The committee consists in ten members.  
+D. The committee consists on ten members.  
 
 ---
 
-**Q55.** The derivative of $x^3$ is:
+**Q28.** Choose the correct sentence:
 
-A. $x^2$  
-B. $3x^2$  
-C. $3x$  
-D. $\dfrac{x^4}{4}$  
-
----
-
-**Q56.** The derivative of $5x^2$ is:
-
-A. $5x$  
-B. $10x$  
-C. $25x$  
-D. $2x$  
+A. She is interested in learning French.  
+B. She is interested for learning French.  
+C. She is interested at learning French.  
+D. She is interested on learning French.  
 
 ---
 
-**Q57.** The derivative of a constant is:
+**Q29.** Choose the correct word: The principal gave the students some useful ____.
 
-A. 1  
-B. the constant itself  
-C. 0  
-D. undefined  
-
----
-
-**Q58.** $\int 2x\,dx$ is:
-
-A. $2x^2 + c$  
-B. $x + c$  
-C. $\dfrac{x^2}{2} + c$  
-D. $x^2 + c$  
+A. advice  
+B. advising  
+C. advise  
+D. advices  
 
 ---
 
-**Q59.** The gradient of $y = x^2$ at $x = 3$ is:
+**Q30.** Choose the correct word: The new policy will ____ all workers.
 
-A. 9  
-B. 12  
-C. 6  
-D. 3  
+A. affect  
+B. effects  
+C. affects  
+D. effect  
 
 ---
 
-**Q60.** The derivative of $\dfrac{1}{x}$ is:
+**Q31.** Choose the correct word: Please ____ this letter to the post office.
 
-A. $\dfrac{1}{x^2}$  
-B. $\ln x$  
-C. $-x^2$  
-D. $-\dfrac{1}{x^2}$  
+A. bring  
+B. take  
+C. carry  
+D. fetch  
+
+---
+
+**Q32.** Choose the correct word: The company''s ____ concern is customer satisfaction.
+
+A. principle  
+B. principal  
+C. principles  
+D. principally  
+
+---
+
+**Q33.** Choose the correct sentence:
+
+A. The news are good.  
+B. The news were good.  
+C. The news is good.  
+D. The news have been good.  
+
+---
+
+**Q34.** Choose the correct sentence:
+
+A. I look forward to hear from you.  
+B. I look forward to heard from you.  
+C. I look forward to hears from you.  
+D. I look forward to hearing from you.  
+
+---
+
+**Q35.** Choose the correct sentence:
+
+A. He is the tallest of the two brothers.  
+B. He is most tallest of the two brothers.  
+C. He is the taller of the two brothers.  
+D. He is more taller of the two brothers.  
+
+---
+
+**Q36.** Choose the correct sentence:
+
+A. She is more taller than her sister.  
+B. She is tallest than her sister.  
+C. She is most taller than her sister.  
+D. She is taller than her sister.  
+
+---
+
+**Q37.** Choose the correct word: The dog wagged ____ tail.
+
+A. its''  
+B. its  
+C. it''s  
+D. itses  
+
+---
+
+**Q38.** Choose the correct word: ____ going to the market.
+
+A. There  
+B. They''re  
+C. Theirs  
+D. Their  
+
+---
+
+**Q39.** Choose the correct word: ____ book is this?
+
+A. Whom  
+B. Who''s  
+C. Whose  
+D. Who  
+
+---
+
+**Q40.** Choose the correct sentence:
+
+A. The teacher, along with her students, were going on the trip.  
+B. The teacher, along with her students, are going on the trip.  
+C. The teacher, along with her students, have been going on the trip.  
+D. The teacher, along with her students, is going on the trip.  
+
+---
+
+**Q41.** An essay that tells a story is called:
+
+A. an expository essay  
+B. a descriptive essay  
+C. a narrative essay  
+D. an argumentative essay  
+
+---
+
+**Q42.** An essay that presents reasons for and against a position is called:
+
+A. a descriptive essay  
+B. a letter  
+C. a narrative essay  
+D. an argumentative essay  
+
+---
+
+**Q43.** An essay that explains or informs is called:
+
+A. a poem  
+B. an expository essay  
+C. a narrative essay  
+D. a story  
+
+---
+
+**Q44.** An essay that uses sensory details to paint a picture is called:
+
+A. a summary  
+B. a descriptive essay  
+C. an expository essay  
+D. an argumentative essay  
+
+---
+
+**Q45.** The first paragraph of an essay is called the:
+
+A. title  
+B. conclusion  
+C. introduction  
+D. body  
+
+---
+
+**Q46.** The final paragraph of an essay is called the:
+
+A. heading  
+B. introduction  
+C. body  
+D. conclusion  
+
+---
+
+**Q47.** A formal letter should begin with:
+
+A. a joke  
+B. a greeting like ''Hi''  
+C. the sender''s address and the date  
+D. the recipient''s name only  
+
+---
+
+**Q48.** The main paragraphs of an essay form the:
+
+A. title  
+B. conclusion  
+C. introduction  
+D. body  
+
+---
+
+**Q49.** A letter of application should include:
+
+A. your qualifications and experience  
+B. only your name  
+C. a list of your friends  
+D. your favourite hobbies  
+
+---
+
+**Q50.** When writing an argumentative essay, you should:
+
+A. support your argument with reasons and examples  
+B. avoid giving any reasons  
+C. write without paragraphs  
+D. only state the opposing view  
+
+---
+
+**Q51.** A narrative essay should have:
+
+A. a clear sequence of events  
+B. no setting  
+C. no characters  
+D. only statistics  
+
+---
+
+**Q52.** The purpose of an introduction is to:
+
+A. present the topic and capture the reader''s interest  
+B. list all the details  
+C. repeat the title  
+D. give the conclusion  
+
+---
+
+**Q53.** A descriptive essay about a market should include:
+
+A. sights, sounds, and smells  
+B. mathematical calculations  
+C. only prices  
+D. a list of items  
+
+---
+
+**Q54.** A formal letter to the editor should:
+
+A. express a clear opinion on an issue  
+B. be very short  
+C. have no address  
+D. be written in slang  
+
+---
+
+**Q55.** The best way to organise an expository essay is:
+
+A. random ideas  
+B. logical paragraphs with clear points  
+C. a single long paragraph  
+D. a list without explanation  
+
+---
+
+**Q56.** A story that illustrates a proverb should:
+
+A. state the proverb only  
+B. show the lesson through events  
+C. be about animals only  
+D. avoid any lesson  
+
+---
+
+**Q57.** When writing an essay, you should:
+
+A. start writing without a plan  
+B. copy from a friend  
+C. plan your ideas before writing  
+D. write only one paragraph  
+
+---
+
+**Q58.** The word count of an essay refers to:
+
+A. the number of paragraphs  
+B. the number of pages  
+C. the number of sentences  
+D. the number of words in the essay  
+
+---
+
+**Q59.** A letter of complaint should:
+
+A. only greet the recipient  
+B. be written in verse  
+C. clearly state the problem and request action  
+D. avoid mentioning the problem  
+
+---
+
+**Q60.** To make an essay interesting, a writer should:
+
+A. repeat the same word  
+B. avoid examples  
+C. use only short sentences  
+D. use vivid and varied language  
 
 ---
 
@@ -667,14 +667,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Language'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P1 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -684,1354 +684,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4',
+  'English Language',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P1 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4
-
-## Structural Question Bank — Grammaire et conjugaison
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** French
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: GRAMMAIRE ET CONJUGAISON
-
-**Q1.** Mettez les verbes au temps qui convient:
-
-(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
-
-(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
-
-(c) Demain, nous (aller) ____ au marché. *(2 marks)*
-
----
-
-**Q2.** Accordez correctement les participes passés:
-
-(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
-
-(b) Elles se sont (laver) ____ les mains. *(3 marks)*
-
-(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
-
----
-
-**Q3.** Transformez au discours indirect:
-
-(a) Il dit: "Je viendrai demain." *(4 marks)*
-
-(b) Elle demande: "Où est la gare?" *(4 marks)*
-
-(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
-
----
-
-**Q4.** Remplacez les mots soulignés par un pronom:
-
-(a) Je donne le livre à Marie. *(3 marks)*
-
-(b) Il parle de ses vacances. *(3 marks)*
-
-(c) Nous avons vu les enfants. *(3 marks)*
-
----
-
-**Q5.** Mettez au pluriel:
-
-(a) Le cheval blanc. *(2 marks)*
-
-(b) Un travail difficile. *(2 marks)
-
-(c) Le journal du matin. *(2 marks)*
-
-(d) Un prix spécial. *(2 marks)*
-
----
-
-**Q6.** Conjuguez au passé composé:
-
-(a) Elle (partir) ____ tôt. *(3 marks)*
-
-(b) Nous (finir) ____ le travail. *(3 marks)*
-
-(c) Ils (se lever) ____ à six heures. *(3 marks)*
-
----
-
-**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
-
-(a) ____ eau est importante pour la santé. *(2 marks)*
-
-(b) J''achète ____ pain et ____ beurre. *(4 marks)*
-
-(c) ____ enfants jouent dans la cour. *(2 marks)*
-
----
-
-**Q8.** Mettez les phrases au négatif:
-
-(a) Il a mangé quelque chose. *(3 marks)*
-
-(b) Nous avons vu quelqu''un. *(3 marks)*
-
-(c) Elle vient souvent. *(3 marks)*
-
----
-
-**Q9.** Transformez au futur simple:
-
-(a) Je (être) ____ content. *(2 marks)*
-
-(b) Nous (avoir) ____ le temps. *(2 marks)*
-
-(c) Ils (faire) ____ un effort. *(2 marks)*
-
-(d) Tu (aller) ____ à l''école. *(2 marks)*
-
----
-
-**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
-
-(a) La ville ____ je suis né est belle. *(2 marks)*
-
-(b) Le livre ____ tu parles est intéressant. *(2 marks)*
-
-(c) La femme ____ chante est ma mère. *(2 marks)*
-
-(d) Le film ____ nous avons vu était long. *(2 marks)*
-
----
-
-**Q11.** Mettez au féminin:
-
-(a) Un acteur célèbre. *(2 marks)*
-
-(b) Le directeur est gentil. *(2 marks)*
-
-(c) Un sportif courageux. *(2 marks)*
-
-(d) Le voisin est patient. *(2 marks)*
-
----
-
-**Q12.** Conjuguez à l''imparfait:
-
-(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
-
-(b) Il (pleuvoir) ____ souvent. *(3 marks)*
-
-(c) Nous (habiter) ____ à Douala. *(3 marks)*
-
----
-
-**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
-
-(a) Il va ____ France. *(2 marks)*
-
-(b) Elle habite ____ Douala. *(2 marks)*
-
-(c) Nous partons ____ l''école. *(2 marks)*
-
-(d) Le livre est ____ la table. *(2 marks)*
-
----
-
-**Q14.** Transformez au plus-que-parfait:
-
-(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
-
-(b) Nous (déjà voir) ____ ce film. *(3 marks)*
-
-(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
-
----
-
-**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
-
-(a) ____ livre est intéressant. *(2 marks)*
-
-(b) ____ maison est grande. *(2 marks)*
-
-(c) J''aime ____ fleurs. *(2 marks)*
-
-(d) ____ père travaille à l''hôpital. *(2 marks)*
-
----
-
-**Q16.** Mettez au comparatif ou superlatif:
-
-(a) Paul est ____ (grand) que Pierre. *(3 marks)*
-
-(b) C''est ____ (bon) élève de la classe. *(3 marks)*
-
-(c) Elle parle ____ (lentement) que moi. *(3 marks)*
-
----
-
-**Q17.** Transformez au conditionnel présent:
-
-(a) Je (aimer) ____ voyager. *(3 marks)*
-
-(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
-
-(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
-
----
-
-**Q18.** Complétez avec le subjonctif:
-
-(a) Il faut que tu (venir) ____. *(3 marks)*
-
-(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
-
-(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
-
----
-
-**Q19.** Corrigez les erreurs dans les phrases suivantes:
-
-(a) "Je suis allé au marché hier." *(2 marks)*
-
-(b) "Elle a mangé des pommes." *(2 marks)*
-
-(c) "Nous avons vu un film intéressant." *(2 marks)*
-
-(d) "Ils sont arrivés à temps." *(2 marks)*
-
----
-
-**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
-
-(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
-
-(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
-
-(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5
-
-## Structural Question Bank — Comprehension et expression ecrite
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** French
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: COMPREHENSION ET EXPRESSION ECRITE
-
-**Q1.** Lisez le texte et répondez aux questions:
-
-*"Le Cameroun est souvent appelé ''l''Afrique en miniature'' à cause de sa diversité. On y trouve des plages, des montagnes, des forêts et des savanes. Cette diversité se reflète aussi dans sa culture, avec plus de 250 groupes ethniques."*
-
-(a) Pourquoi appelle-t-on le Cameroun "l''Afrique en miniature"? *(3 marks)*
-
-(b) Citez deux types de paysages qu''on trouve au Cameroun. *(3 marks)*
-
-(c) Combien de groupes ethniques compte le Cameroun? *(2 marks)*
-
----
-
-**Q2.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Ma ville natale"
-
-Décrivez les lieux, les gens et les activités. *(10 marks)*
-
----
-
-**Q3.** Lisez le texte et répondez aux questions:
-
-*"La pluie tombait depuis trois jours. Les rues de la ville étaient transformées en rivières. Les enfants, ravis, jouaient dans les flaques d''eau, tandis que les adultes cherchaient un abri. Soudain, le soleil perça les nuages et tout le monde sortit pour admirer l''arc-en-ciel."*
-
-(a) Depuis combien de temps pleuvait-il? *(2 marks)*
-
-(b) Que faisaient les enfants? *(3 marks)*
-
-(c) Qu''est-ce qui est apparu à la fin? *(2 marks)*
-
-(d) Quel temps fait-il dans ce texte? *(3 marks)*
-
----
-
-**Q4.** Écrivez une lettre à votre ami(e) pour l''inviter à votre anniversaire. (80 à 100 mots)
-
-Incluez la date, le lieu, l''heure et ce que vous prévoyez. *(10 marks)*
-
----
-
-**Q5.** Lisez le texte et répondez aux questions:
-
-*"Le marché de Mokolo est l''un des plus grands marchés de Yaoundé. Chaque jour, des milliers de personnes y viennent pour acheter des vêtements, des fruits, des légumes et des articles ménagers. Les vendeurs crient pour attirer les clients, et l''air est rempli d''odeurs variées."*
-
-(a) Où se trouve le marché de Mokolo? *(2 marks)*
-
-(b) Qu''est-ce qu''on peut acheter au marché? *(3 marks)*
-
-(c) Comment les vendeurs attirent-ils les clients? *(3 marks)*
-
----
-
-**Q6.** Rédigez un dialogue de 80 à 100 mots entre deux amis qui discutent de leurs projets pour les vacances. *(10 marks)*
-
----
-
-**Q7.** Lisez le texte et répondez aux questions:
-
-*"L''éducation est la clé du développement. Un pays qui investit dans l''éducation de ses enfants investit dans son avenir. Les écoles forment non seulement des travailleurs qualifiés, mais aussi des citoyens responsables capables de prendre de bonnes décisions."*
-
-(a) Pourquoi l''éducation est-elle importante selon le texte? *(3 marks)*
-
-(b) Que forment les écoles? *(3 marks)*
-
-(c) Donnez un titre au texte. *(2 marks)*
-
----
-
-**Q8.** Traduisez en français:
-
-(a) "I am going to the market." *(3 marks)*
-
-(b) "She has three brothers." *(3 marks)*
-
-(c) "We visited our grandparents last week." *(4 marks)*
-
----
-
-**Q9.** Lisez le texte et répondez aux questions:
-
-*"La santé est notre bien le plus précieux. Pour rester en bonne santé, il faut manger équilibré, faire du sport et dormir suffisamment. Il faut aussi éviter le tabac et l''alcool. Les médecins conseillent de boire beaucoup d''eau et de consulter régulièrement."*
-
-(a) Citez trois habitudes pour rester en bonne santé. *(3 marks)*
-
-(b) Que faut-il éviter? *(2 marks)*
-
-(c) Que conseillent les médecins? *(3 marks)*
-
----
-
-**Q10.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Ce que je ferai après mes examens"
-
-Parlez de vos projets et de vos rêves. *(10 marks)*
-
----
-
-**Q11.** Lisez le texte et répondez aux questions:
-
-*"Le football est le sport le plus populaire au Cameroun. Les Lions Indomptables, l''équipe nationale, ont gagné plusieurs coupes d''Afrique. Dans les rues, les enfants jouent au football avec des ballons improvisés, rêvant de devenir des stars comme Samuel Eto''o."*
-
-(a) Quel est le sport le plus populaire au Cameroun? *(2 marks)*
-
-(b) Comment s''appelle l''équipe nationale? *(2 marks)*
-
-(c) Avec quoi les enfants jouent-ils? *(3 marks)*
-
-(d) De quoi rêvent les enfants? *(3 marks)*
-
----
-
-**Q12.** Écrivez un texte de 80 à 100 mots décrivant votre journée typique.
-
-Commencez par: "Ma journée commence à..." *(10 marks)*
-
----
-
-**Q13.** Lisez le texte et répondez aux questions:
-
-*"La technologie a changé notre façon de communiquer. Avec un téléphone portable, on peut appeler, envoyer des messages et même voir ses proches à l''écran. Mais certains pensent que la technologie nous éloigne les uns des autres."*
-
-(a) Qu''est-ce qu''on peut faire avec un téléphone portable? *(3 marks)*
-
-(b) Quel est l''inconvénient de la technologie selon certains? *(3 marks)*
-
-(c) Êtes-vous d''accord? Justifiez votre réponse. *(3 marks)*
-
----
-
-**Q14.** Traduisez en anglais:
-
-(a) "Je vais au marché avec ma mère." *(3 marks)*
-
-(b) "Nous avons mangé du poisson hier soir." *(3 marks)*
-
-(c) "Elle est plus grande que son frère." *(4 marks)*
-
----
-
-**Q15.** Lisez le texte et répondez aux questions:
-
-*"Le respect de l''environnement commence à la maison. Il faut trier les déchets, économiser l''eau et l''électricité, et éviter de jeter les ordures dans la nature. Chaque petit geste compte pour protéger notre planète."*
-
-(a) Citez trois gestes pour protéger l''environnement. *(3 marks)*
-
-(b) Où commence le respect de l''environnement? *(2 marks)*
-
-(c) Que signifie "Chaque petit geste compte"? *(3 marks)*
-
----
-
-**Q16.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Pourquoi j''apprends le français"
-
-Donnez au moins trois raisons. *(10 marks)*
-
----
-
-**Q17.** Lisez le texte et répondez aux questions:
-
-*"La famille est très importante dans la culture camerounaise. Les enfants respectent leurs parents et leurs aînés. Les grandes occasions comme les mariages et les funérailles rassemblent toute la famille, parfois des centaines de personnes."*
-
-(a) Pourquoi la famille est-elle importante? *(2 marks)*
-
-(b) Comment les enfants traitent-ils leurs aînés? *(3 marks)*
-
-(c) Quelles occasions rassemblent la famille? *(3 marks)*
-
----
-
-**Q18.** Écrivez un texte de 80 à 100 mots racontant ce que vous avez fait le week-end dernier.
-
-Utilisez le passé composé. *(10 marks)*
-
----
-
-**Q19.** Lisez le texte et répondez aux questions:
-
-*"Le commerce équitable garantit que les producteurs reçoivent un prix juste pour leur travail. Au Cameroun, le cacao et le café sont les principales cultures d''exportation. En achetant des produits équitables, les consommateurs aident les agriculteurs à améliorer leurs conditions de vie."*
-
-(a) Qu''est-ce que le commerce équitable garantit? *(3 marks)*
-
-(b) Quelles sont les principales cultures d''exportation du Cameroun? *(3 marks)*
-
-(c) Comment les consommateurs peuvent-ils aider les agriculteurs? *(3 marks)*
-
----
-
-**Q20.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Mon plat préféré"
-
-Décrivez le plat, ses ingrédients et pourquoi vous l''aimez. *(10 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6
-
-## Structural Question Bank — Grammaire et conjugaison
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** French
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: GRAMMAIRE ET CONJUGAISON
-
-**Q1.** Mettez les verbes au temps qui convient:
-
-(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
-
-(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
-
-(c) Demain, nous (aller) ____ au marché. *(2 marks)*
-
----
-
-**Q2.** Accordez correctement les participes passés:
-
-(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
-
-(b) Elles se sont (laver) ____ les mains. *(3 marks)*
-
-(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
-
----
-
-**Q3.** Transformez au discours indirect:
-
-(a) Il dit: "Je viendrai demain." *(4 marks)*
-
-(b) Elle demande: "Où est la gare?" *(4 marks)*
-
-(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
-
----
-
-**Q4.** Remplacez les mots soulignés par un pronom:
-
-(a) Je donne le livre à Marie. *(3 marks)*
-
-(b) Il parle de ses vacances. *(3 marks)*
-
-(c) Nous avons vu les enfants. *(3 marks)*
-
----
-
-**Q5.** Mettez au pluriel:
-
-(a) Le cheval blanc. *(2 marks)*
-
-(b) Un travail difficile. *(2 marks)
-
-(c) Le journal du matin. *(2 marks)*
-
-(d) Un prix spécial. *(2 marks)*
-
----
-
-**Q6.** Conjuguez au passé composé:
-
-(a) Elle (partir) ____ tôt. *(3 marks)*
-
-(b) Nous (finir) ____ le travail. *(3 marks)*
-
-(c) Ils (se lever) ____ à six heures. *(3 marks)*
-
----
-
-**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
-
-(a) ____ eau est importante pour la santé. *(2 marks)*
-
-(b) J''achète ____ pain et ____ beurre. *(4 marks)*
-
-(c) ____ enfants jouent dans la cour. *(2 marks)*
-
----
-
-**Q8.** Mettez les phrases au négatif:
-
-(a) Il a mangé quelque chose. *(3 marks)*
-
-(b) Nous avons vu quelqu''un. *(3 marks)*
-
-(c) Elle vient souvent. *(3 marks)*
-
----
-
-**Q9.** Transformez au futur simple:
-
-(a) Je (être) ____ content. *(2 marks)*
-
-(b) Nous (avoir) ____ le temps. *(2 marks)*
-
-(c) Ils (faire) ____ un effort. *(2 marks)*
-
-(d) Tu (aller) ____ à l''école. *(2 marks)*
-
----
-
-**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
-
-(a) La ville ____ je suis né est belle. *(2 marks)*
-
-(b) Le livre ____ tu parles est intéressant. *(2 marks)*
-
-(c) La femme ____ chante est ma mère. *(2 marks)*
-
-(d) Le film ____ nous avons vu était long. *(2 marks)*
-
----
-
-**Q11.** Mettez au féminin:
-
-(a) Un acteur célèbre. *(2 marks)*
-
-(b) Le directeur est gentil. *(2 marks)*
-
-(c) Un sportif courageux. *(2 marks)*
-
-(d) Le voisin est patient. *(2 marks)*
-
----
-
-**Q12.** Conjuguez à l''imparfait:
-
-(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
-
-(b) Il (pleuvoir) ____ souvent. *(3 marks)*
-
-(c) Nous (habiter) ____ à Douala. *(3 marks)*
-
----
-
-**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
-
-(a) Il va ____ France. *(2 marks)*
-
-(b) Elle habite ____ Douala. *(2 marks)*
-
-(c) Nous partons ____ l''école. *(2 marks)*
-
-(d) Le livre est ____ la table. *(2 marks)*
-
----
-
-**Q14.** Transformez au plus-que-parfait:
-
-(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
-
-(b) Nous (déjà voir) ____ ce film. *(3 marks)*
-
-(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
-
----
-
-**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
-
-(a) ____ livre est intéressant. *(2 marks)*
-
-(b) ____ maison est grande. *(2 marks)*
-
-(c) J''aime ____ fleurs. *(2 marks)*
-
-(d) ____ père travaille à l''hôpital. *(2 marks)*
-
----
-
-**Q16.** Mettez au comparatif ou superlatif:
-
-(a) Paul est ____ (grand) que Pierre. *(3 marks)*
-
-(b) C''est ____ (bon) élève de la classe. *(3 marks)*
-
-(c) Elle parle ____ (lentement) que moi. *(3 marks)*
-
----
-
-**Q17.** Transformez au conditionnel présent:
-
-(a) Je (aimer) ____ voyager. *(3 marks)*
-
-(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
-
-(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
-
----
-
-**Q18.** Complétez avec le subjonctif:
-
-(a) Il faut que tu (venir) ____. *(3 marks)*
-
-(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
-
-(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
-
----
-
-**Q19.** Corrigez les erreurs dans les phrases suivantes:
-
-(a) "Je suis allé au marché hier." *(2 marks)*
-
-(b) "Elle a mangé des pommes." *(2 marks)*
-
-(c) "Nous avons vu un film intéressant." *(2 marks)*
-
-(d) "Ils sont arrivés à temps." *(2 marks)*
-
----
-
-**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
-
-(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
-
-(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
-
-(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7
-
-## Structural Question Bank — Comprehension et expression ecrite
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** French
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: COMPREHENSION ET EXPRESSION ECRITE
-
-**Q1.** Lisez le texte et répondez aux questions:
-
-*"Le Cameroun est souvent appelé ''l''Afrique en miniature'' à cause de sa diversité. On y trouve des plages, des montagnes, des forêts et des savanes. Cette diversité se reflète aussi dans sa culture, avec plus de 250 groupes ethniques."*
-
-(a) Pourquoi appelle-t-on le Cameroun "l''Afrique en miniature"? *(3 marks)*
-
-(b) Citez deux types de paysages qu''on trouve au Cameroun. *(3 marks)*
-
-(c) Combien de groupes ethniques compte le Cameroun? *(2 marks)*
-
----
-
-**Q2.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Ma ville natale"
-
-Décrivez les lieux, les gens et les activités. *(10 marks)*
-
----
-
-**Q3.** Lisez le texte et répondez aux questions:
-
-*"La pluie tombait depuis trois jours. Les rues de la ville étaient transformées en rivières. Les enfants, ravis, jouaient dans les flaques d''eau, tandis que les adultes cherchaient un abri. Soudain, le soleil perça les nuages et tout le monde sortit pour admirer l''arc-en-ciel."*
-
-(a) Depuis combien de temps pleuvait-il? *(2 marks)*
-
-(b) Que faisaient les enfants? *(3 marks)*
-
-(c) Qu''est-ce qui est apparu à la fin? *(2 marks)*
-
-(d) Quel temps fait-il dans ce texte? *(3 marks)*
-
----
-
-**Q4.** Écrivez une lettre à votre ami(e) pour l''inviter à votre anniversaire. (80 à 100 mots)
-
-Incluez la date, le lieu, l''heure et ce que vous prévoyez. *(10 marks)*
-
----
-
-**Q5.** Lisez le texte et répondez aux questions:
-
-*"Le marché de Mokolo est l''un des plus grands marchés de Yaoundé. Chaque jour, des milliers de personnes y viennent pour acheter des vêtements, des fruits, des légumes et des articles ménagers. Les vendeurs crient pour attirer les clients, et l''air est rempli d''odeurs variées."*
-
-(a) Où se trouve le marché de Mokolo? *(2 marks)*
-
-(b) Qu''est-ce qu''on peut acheter au marché? *(3 marks)*
-
-(c) Comment les vendeurs attirent-ils les clients? *(3 marks)*
-
----
-
-**Q6.** Rédigez un dialogue de 80 à 100 mots entre deux amis qui discutent de leurs projets pour les vacances. *(10 marks)*
-
----
-
-**Q7.** Lisez le texte et répondez aux questions:
-
-*"L''éducation est la clé du développement. Un pays qui investit dans l''éducation de ses enfants investit dans son avenir. Les écoles forment non seulement des travailleurs qualifiés, mais aussi des citoyens responsables capables de prendre de bonnes décisions."*
-
-(a) Pourquoi l''éducation est-elle importante selon le texte? *(3 marks)*
-
-(b) Que forment les écoles? *(3 marks)*
-
-(c) Donnez un titre au texte. *(2 marks)*
-
----
-
-**Q8.** Traduisez en français:
-
-(a) "I am going to the market." *(3 marks)*
-
-(b) "She has three brothers." *(3 marks)*
-
-(c) "We visited our grandparents last week." *(4 marks)*
-
----
-
-**Q9.** Lisez le texte et répondez aux questions:
-
-*"La santé est notre bien le plus précieux. Pour rester en bonne santé, il faut manger équilibré, faire du sport et dormir suffisamment. Il faut aussi éviter le tabac et l''alcool. Les médecins conseillent de boire beaucoup d''eau et de consulter régulièrement."*
-
-(a) Citez trois habitudes pour rester en bonne santé. *(3 marks)*
-
-(b) Que faut-il éviter? *(2 marks)*
-
-(c) Que conseillent les médecins? *(3 marks)*
-
----
-
-**Q10.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Ce que je ferai après mes examens"
-
-Parlez de vos projets et de vos rêves. *(10 marks)*
-
----
-
-**Q11.** Lisez le texte et répondez aux questions:
-
-*"Le football est le sport le plus populaire au Cameroun. Les Lions Indomptables, l''équipe nationale, ont gagné plusieurs coupes d''Afrique. Dans les rues, les enfants jouent au football avec des ballons improvisés, rêvant de devenir des stars comme Samuel Eto''o."*
-
-(a) Quel est le sport le plus populaire au Cameroun? *(2 marks)*
-
-(b) Comment s''appelle l''équipe nationale? *(2 marks)*
-
-(c) Avec quoi les enfants jouent-ils? *(3 marks)*
-
-(d) De quoi rêvent les enfants? *(3 marks)*
-
----
-
-**Q12.** Écrivez un texte de 80 à 100 mots décrivant votre journée typique.
-
-Commencez par: "Ma journée commence à..." *(10 marks)*
-
----
-
-**Q13.** Lisez le texte et répondez aux questions:
-
-*"La technologie a changé notre façon de communiquer. Avec un téléphone portable, on peut appeler, envoyer des messages et même voir ses proches à l''écran. Mais certains pensent que la technologie nous éloigne les uns des autres."*
-
-(a) Qu''est-ce qu''on peut faire avec un téléphone portable? *(3 marks)*
-
-(b) Quel est l''inconvénient de la technologie selon certains? *(3 marks)*
-
-(c) Êtes-vous d''accord? Justifiez votre réponse. *(3 marks)*
-
----
-
-**Q14.** Traduisez en anglais:
-
-(a) "Je vais au marché avec ma mère." *(3 marks)*
-
-(b) "Nous avons mangé du poisson hier soir." *(3 marks)*
-
-(c) "Elle est plus grande que son frère." *(4 marks)*
-
----
-
-**Q15.** Lisez le texte et répondez aux questions:
-
-*"Le respect de l''environnement commence à la maison. Il faut trier les déchets, économiser l''eau et l''électricité, et éviter de jeter les ordures dans la nature. Chaque petit geste compte pour protéger notre planète."*
-
-(a) Citez trois gestes pour protéger l''environnement. *(3 marks)*
-
-(b) Où commence le respect de l''environnement? *(2 marks)*
-
-(c) Que signifie "Chaque petit geste compte"? *(3 marks)*
-
----
-
-**Q16.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Pourquoi j''apprends le français"
-
-Donnez au moins trois raisons. *(10 marks)*
-
----
-
-**Q17.** Lisez le texte et répondez aux questions:
-
-*"La famille est très importante dans la culture camerounaise. Les enfants respectent leurs parents et leurs aînés. Les grandes occasions comme les mariages et les funérailles rassemblent toute la famille, parfois des centaines de personnes."*
-
-(a) Pourquoi la famille est-elle importante? *(2 marks)*
-
-(b) Comment les enfants traitent-ils leurs aînés? *(3 marks)*
-
-(c) Quelles occasions rassemblent la famille? *(3 marks)*
-
----
-
-**Q18.** Écrivez un texte de 80 à 100 mots racontant ce que vous avez fait le week-end dernier.
-
-Utilisez le passé composé. *(10 marks)*
-
----
-
-**Q19.** Lisez le texte et répondez aux questions:
-
-*"Le commerce équitable garantit que les producteurs reçoivent un prix juste pour leur travail. Au Cameroun, le cacao et le café sont les principales cultures d''exportation. En achetant des produits équitables, les consommateurs aident les agriculteurs à améliorer leurs conditions de vie."*
-
-(a) Qu''est-ce que le commerce équitable garantit? *(3 marks)*
-
-(b) Quelles sont les principales cultures d''exportation du Cameroun? *(3 marks)*
-
-(c) Comment les consommateurs peuvent-ils aider les agriculteurs? *(3 marks)*
-
----
-
-**Q20.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
-
-"Mon plat préféré"
-
-Décrivez le plat, ses ingrédients et pourquoi vous l''aimez. *(10 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8
-
-## Structural Question Bank — Grammaire et conjugaison
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** French
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: GRAMMAIRE ET CONJUGAISON
-
-**Q1.** Mettez les verbes au temps qui convient:
-
-(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
-
-(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
-
-(c) Demain, nous (aller) ____ au marché. *(2 marks)*
-
----
-
-**Q2.** Accordez correctement les participes passés:
-
-(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
-
-(b) Elles se sont (laver) ____ les mains. *(3 marks)*
-
-(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
-
----
-
-**Q3.** Transformez au discours indirect:
-
-(a) Il dit: "Je viendrai demain." *(4 marks)*
-
-(b) Elle demande: "Où est la gare?" *(4 marks)*
-
-(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
-
----
-
-**Q4.** Remplacez les mots soulignés par un pronom:
-
-(a) Je donne le livre à Marie. *(3 marks)*
-
-(b) Il parle de ses vacances. *(3 marks)*
-
-(c) Nous avons vu les enfants. *(3 marks)*
-
----
-
-**Q5.** Mettez au pluriel:
-
-(a) Le cheval blanc. *(2 marks)*
-
-(b) Un travail difficile. *(2 marks)
-
-(c) Le journal du matin. *(2 marks)*
-
-(d) Un prix spécial. *(2 marks)*
-
----
-
-**Q6.** Conjuguez au passé composé:
-
-(a) Elle (partir) ____ tôt. *(3 marks)*
-
-(b) Nous (finir) ____ le travail. *(3 marks)*
-
-(c) Ils (se lever) ____ à six heures. *(3 marks)*
-
----
-
-**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
-
-(a) ____ eau est importante pour la santé. *(2 marks)*
-
-(b) J''achète ____ pain et ____ beurre. *(4 marks)*
-
-(c) ____ enfants jouent dans la cour. *(2 marks)*
-
----
-
-**Q8.** Mettez les phrases au négatif:
-
-(a) Il a mangé quelque chose. *(3 marks)*
-
-(b) Nous avons vu quelqu''un. *(3 marks)*
-
-(c) Elle vient souvent. *(3 marks)*
-
----
-
-**Q9.** Transformez au futur simple:
-
-(a) Je (être) ____ content. *(2 marks)*
-
-(b) Nous (avoir) ____ le temps. *(2 marks)*
-
-(c) Ils (faire) ____ un effort. *(2 marks)*
-
-(d) Tu (aller) ____ à l''école. *(2 marks)*
-
----
-
-**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
-
-(a) La ville ____ je suis né est belle. *(2 marks)*
-
-(b) Le livre ____ tu parles est intéressant. *(2 marks)*
-
-(c) La femme ____ chante est ma mère. *(2 marks)*
-
-(d) Le film ____ nous avons vu était long. *(2 marks)*
-
----
-
-**Q11.** Mettez au féminin:
-
-(a) Un acteur célèbre. *(2 marks)*
-
-(b) Le directeur est gentil. *(2 marks)*
-
-(c) Un sportif courageux. *(2 marks)*
-
-(d) Le voisin est patient. *(2 marks)*
-
----
-
-**Q12.** Conjuguez à l''imparfait:
-
-(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
-
-(b) Il (pleuvoir) ____ souvent. *(3 marks)*
-
-(c) Nous (habiter) ____ à Douala. *(3 marks)*
-
----
-
-**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
-
-(a) Il va ____ France. *(2 marks)*
-
-(b) Elle habite ____ Douala. *(2 marks)*
-
-(c) Nous partons ____ l''école. *(2 marks)*
-
-(d) Le livre est ____ la table. *(2 marks)*
-
----
-
-**Q14.** Transformez au plus-que-parfait:
-
-(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
-
-(b) Nous (déjà voir) ____ ce film. *(3 marks)*
-
-(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
-
----
-
-**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
-
-(a) ____ livre est intéressant. *(2 marks)*
-
-(b) ____ maison est grande. *(2 marks)*
-
-(c) J''aime ____ fleurs. *(2 marks)*
-
-(d) ____ père travaille à l''hôpital. *(2 marks)*
-
----
-
-**Q16.** Mettez au comparatif ou superlatif:
-
-(a) Paul est ____ (grand) que Pierre. *(3 marks)*
-
-(b) C''est ____ (bon) élève de la classe. *(3 marks)*
-
-(c) Elle parle ____ (lentement) que moi. *(3 marks)*
-
----
-
-**Q17.** Transformez au conditionnel présent:
-
-(a) Je (aimer) ____ voyager. *(3 marks)*
-
-(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
-
-(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
-
----
-
-**Q18.** Complétez avec le subjonctif:
-
-(a) Il faut que tu (venir) ____. *(3 marks)*
-
-(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
-
-(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
-
----
-
-**Q19.** Corrigez les erreurs dans les phrases suivantes:
-
-(a) "Je suis allé au marché hier." *(2 marks)*
-
-(b) "Elle a mangé des pommes." *(2 marks)*
-
-(c) "Nous avons vu un film intéressant." *(2 marks)*
-
-(d) "Ils sont arrivés à temps." *(2 marks)*
-
----
-
-**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
-
-(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
-
-(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
-
-(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
 **Series:** general, science, arts, commercial, technical
-**Subject:** French
+**Subject:** English Language
 
 **Instructions:**
 
@@ -2044,543 +711,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** Complétez: Je ____ au marché.
+**Q1.** The main idea of a passage is best described as:
 
-A. vais  
-B. va  
-C. vont  
-D. allons  
-
----
-
-**Q2.** Complétez: Nous ____ français.
-
-A. parlons  
-B. parlez  
-C. parle  
-D. parlent  
+A. the central point the writer is making  
+B. the first sentence of the passage  
+C. the most difficult word in the passage  
+D. the writer''s personal opinion only  
 
 ---
 
-**Q3.** Complétez: Elle ____ une lettre.
+**Q2.** Read: ''The words evaporated.'' This means the speaker:
 
-A. écrit  
-B. écrivent  
-C. écris  
-D. écrivez  
-
----
-
-**Q4.** Le passé composé de ''manger'' avec ''je'' est:
-
-A. j''ai mangé  
-B. je mangerai  
-C. je mangeais  
-D. je mange  
+A. forgot what he wanted to say  
+B. spoke very quietly  
+C. was interrupted by the crowd  
+D. wrote his speech down  
 
 ---
 
-**Q5.** Complétez: Ils ____ à l''école.
+**Q3.** When asked to ''state the main idea in one sentence'', you should:
 
-A. vont  
-B. allons  
-C. va  
-D. vais  
-
----
-
-**Q6.** Le futur de ''être'' avec ''je'' est:
-
-A. je serai  
-B. je fus  
-C. j''étais  
-D. je suis  
+A. summarise the whole passage briefly  
+B. repeat the title  
+C. quote the longest sentence  
+D. list all the details  
 
 ---
 
-**Q7.** Complétez: Tu ____ ton livre.
+**Q4.** An inference is:
 
-A. a  
-B. as  
-C. avez  
-D. ont  
-
----
-
-**Q8.** L''imparfait de ''avoir'' avec ''nous'' est:
-
-A. nous avons  
-B. nous avions  
-C. nous eûmes  
-D. nous aurons  
+A. a conclusion drawn from evidence in the text  
+B. a quotation from the text  
+C. a question about the text  
+D. a fact stated directly in the text  
 
 ---
 
-**Q9.** Complétez: Le livre ____ je parle est intéressant.
+**Q5.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
 
-A. qui  
-B. que  
-C. dont  
-D. où  
-
----
-
-**Q10.** Complétez: La femme ____ chante est ma mère.
-
-A. que  
-B. dont  
-C. où  
-D. qui  
+A. provided many benefits  
+B. was polluted  
+C. was very wide  
+D. flowed very fast  
 
 ---
 
-**Q11.** Le pluriel de ''le cheval'' est:
+**Q6.** In a summary, you should NOT include:
 
-A. les chevals  
-B. les chevauxs  
-C. les chevaux  
-D. les chevaus  
-
----
-
-**Q12.** Complétez: ____ eau est bonne.
-
-A. Le  
-B. Les  
-C. La  
-D. L''  
+A. your personal opinions  
+B. the essential ideas  
+C. the key facts  
+D. the main points  
 
 ---
 
-**Q13.** Complétez: J''achète ____ pain.
+**Q7.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
 
-A. des  
-B. du  
-C. de la  
-D. le  
-
----
-
-**Q14.** La négation de ''Il a mangé'' est:
-
-A. Il ne mange pas  
-B. Il n''a pas mangé  
-C. Il n''a mangé pas  
-D. Il a pas mangé  
+A. very large in size  
+B. containing many different species  
+C. completely untouched  
+D. difficult to reach  
 
 ---
 
-**Q15.** Complétez: Elle est ____ grande que sa sœur.
+**Q8.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
 
-A. aussi  
-B. moins  
-C. plus  
-D. très  
-
----
-
-**Q16.** Le féminin de ''acteur'' est:
-
-A. acteurse  
-B. acteure  
-C. acteuse  
-D. actrice  
+A. leave the stage  
+B. feel calmer and begin speaking  
+C. change his topic  
+D. memorise his speech  
 
 ---
 
-**Q17.** Complétez: Il faut que tu ____.
+**Q9.** When summarising, the word limit means you must:
 
-A. viendras  
-B. venais  
-C. viennes  
-D. viens  
-
----
-
-**Q18.** Complétez: Je ____ voyager.
-
-A. veux  
-B. voulais  
-C. voudrai  
-D. voudrais  
+A. write exactly the same number of words as the passage  
+B. write as many words as possible  
+C. keep your summary within the stated number of words  
+D. ignore the word limit  
 
 ---
 
-**Q19.** Complétez: ____ maison est grande.
+**Q10.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
 
-A. Cet  
-B. Cette  
-C. Ce  
-D. Ces  
-
----
-
-**Q20.** Complétez: ____ père travaille à l''hôpital.
-
-A. Ton  
-B. Mon  
-C. Mes  
-D. Ma  
+A. is completely absent  
+B. is declining rapidly  
+C. is too expensive for visitors  
+D. has great potential that is not yet realised  
 
 ---
 
-**Q21.** Complétez: Nous ____ à Douala.
+**Q11.** The purpose of a comprehension passage is usually to:
 
-A. habite  
-B. habitez  
-C. habitons  
-D. habitent  
-
----
-
-**Q22.** Le passé composé de ''partir'' avec ''elle'' est:
-
-A. elle a partie  
-B. elle a parti  
-C. elle est parti  
-D. elle est partie  
+A. provide entertainment only  
+B. list vocabulary words  
+C. test understanding of the text  
+D. teach grammar rules  
 
 ---
 
-**Q23.** Complétez: Il va ____ France.
+**Q12.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
 
-A. aux  
-B. au  
-C. en  
-D. à  
-
----
-
-**Q24.** Complétez: Le livre est ____ la table.
-
-A. de  
-B. à  
-C. dans  
-D. sur  
+A. were happy with the announcement  
+B. were celebrating quietly  
+C. had never heard promises before  
+D. did not trust the government''s promises  
 
 ---
 
-**Q25.** Complétez: ____ enfants jouent dans la cour.
+**Q13.** A good summary should be:
 
-A. Les  
-B. Le  
-C. La  
-D. Un  
-
----
-
-**Q26.** Le pluriel de ''un travail'' est:
-
-A. des travaux  
-B. des travails  
-C. des travail  
-D. des travailes  
+A. the same length as the original passage  
+B. shorter than the original passage  
+C. longer than the original passage  
+D. a copy of the original passage  
 
 ---
 
-**Q27.** Complétez: Je ____ content.
+**Q14.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
 
-A. suis  
-B. est  
-C. es  
-D. sommes  
-
----
-
-**Q28.** Complétez: Nous ____ le temps.
-
-A. aurons  
-B. avions  
-C. eûmes  
-D. avons  
+A. swept very quickly  
+B. found peace in sweeping  
+C. hired someone to sweep  
+D. disliked sweeping  
 
 ---
 
-**Q29.** Complétez: Elle ____ souvent.
+**Q15.** When a question asks you to ''explain in your own words'', you should:
 
-A. vient  
-B. viens  
-C. viennent  
-D. venez  
-
----
-
-**Q30.** Complétez: Ils ____ leurs devoirs.
-
-A. font  
-B. faisons  
-C. fais  
-D. fait  
+A. write a longer version of the passage  
+B. quote the passage directly  
+C. rephrase the idea without copying  
+D. give your own opinion  
 
 ---
 
-**Q31.** Le Cameroun est appelé:
+**Q16.** Read: ''Success is not a destination but a journey.'' The writer means success is:
 
-A. le pays des lions  
-B. l''Afrique en miniature  
-C. la perle de l''Afrique  
-D. le grenier de l''Afrique  
-
----
-
-**Q32.** Combien de groupes ethniques compte le Cameroun?
-
-A. environ 50  
-B. plus de 250  
-C. moins de 100  
-D. plus de 1000  
+A. impossible to achieve  
+B. a final goal  
+C. measured by certificates  
+D. a continuous process  
 
 ---
 
-**Q33.** Le marché de Mokolo se trouve à:
+**Q17.** The best title for a passage about plastic waste clogging drainage channels would be:
 
-A. Douala  
-B. Bafoussam  
-C. Yaoundé  
-D. Garoua  
-
----
-
-**Q34.** L''équipe nationale de football du Cameroun s''appelle:
-
-A. les Éléphants  
-B. les Aigles  
-C. les Panthères  
-D. les Lions Indomptables  
+A. The History of Plastic  
+B. A Day at the Market  
+C. The Problem of Plastic Waste in Our Cities  
+D. How to Build Drainage Channels  
 
 ---
 
-**Q35.** Samuel Eto''o est un célèbre:
+**Q18.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
 
-A. chanteur  
-B. médecin  
-C. footballeur  
-D. écrivain  
-
----
-
-**Q36.** Pour rester en bonne santé, il faut:
-
-A. fumer  
-B. ne pas dormir  
-C. boire de l''alcool  
-D. manger équilibré  
+A. a place of conflict  
+B. a modern building  
+C. a noisy place  
+D. the centre of community life  
 
 ---
 
-**Q37.** Le texte sur la pluie se termine par:
+**Q19.** In summary writing, the first step is to:
 
-A. de la neige  
-B. un arc-en-ciel  
-C. une tempête  
-D. un orage  
-
----
-
-**Q38.** Dans le texte sur le marché, les vendeurs:
-
-A. dorment  
-B. crient pour attirer les clients  
-C. lisent des livres  
-D. chantent des chansons  
+A. write your own opinions about the topic  
+B. read the passage carefully to understand the main ideas  
+C. copy the first sentence of each paragraph  
+D. count the words in the passage  
 
 ---
 
-**Q39.** L''éducation est importante parce qu''elle:
+**Q20.** A summary should be written:
 
-A. est obligatoire  
-B. coûte cher  
-C. forme des travailleurs qualifiés  
-D. est facile  
-
----
-
-**Q40.** Les principales cultures d''exportation du Cameroun sont:
-
-A. le coton et le tabac  
-B. le riz et le blé  
-C. les bananes et les oranges  
-D. le cacao et le café  
+A. as a list of examples  
+B. in your own words  
+C. in note form only  
+D. using long quotations from the passage  
 
 ---
 
-**Q41.** Le commerce équitable garantit:
+**Q21.** Choose the correct sentence:
 
-A. plus de publicité  
-B. des prix plus élevés  
-C. un prix juste pour les producteurs  
-D. des produits gratuits  
-
----
-
-**Q42.** Dans la culture camerounaise, les enfants:
-
-A. quittent la maison  
-B. ne parlent pas  
-C. ignorent leurs parents  
-D. respectent leurs aînés  
+A. The number of accidents have been increasing.  
+B. The number of accidents are increasing.  
+C. The number of accidents is increasing.  
+D. The number of accidents were increasing.  
 
 ---
 
-**Q43.** Pour protéger l''environnement, il faut:
+**Q22.** Choose the correct sentence:
 
-A. couper les arbres  
-B. trier les déchets  
-C. jeter les ordures dans la nature  
-D. gaspiller l''eau  
-
----
-
-**Q44.** La technologie permet de:
-
-A. apprendre sans effort  
-B. voir ses proches à l''écran  
-C. cuisiner plus vite  
-D. voyager gratuitement  
+A. She is good for mathematics.  
+B. She is good in mathematics.  
+C. She is good on mathematics.  
+D. She is good at mathematics.  
 
 ---
 
-**Q45.** Le texte sur la santé conseille de:
+**Q23.** Choose the correct sentence:
 
-A. ne pas consulter le médecin  
-B. fumer  
-C. boire beaucoup d''eau  
-D. manger trop  
-
----
-
-**Q46.** Dans le texte sur la pluie, les enfants:
-
-A. travaillaient  
-B. pleuraient  
-C. dormaient  
-D. jouaient dans les flaques d''eau  
+A. He was accused on theft.  
+B. He was accused with theft.  
+C. He was accused of theft.  
+D. He was accused for theft.  
 
 ---
 
-**Q47.** Le football est le sport le plus populaire:
+**Q24.** Choose the correct sentence:
 
-A. au Brésil  
-B. en Chine  
-C. au Cameroun  
-D. en France  
-
----
-
-**Q48.** Les enfants jouent au football avec:
-
-A. des bouteilles  
-B. des pierres  
-C. des ballons officiels  
-D. des ballons improvisés  
+A. The committee consists on ten members.  
+B. The committee consists with ten members.  
+C. The committee consists in ten members.  
+D. The committee consists of ten members.  
 
 ---
 
-**Q49.** Une lettre à un ami doit commencer par:
+**Q25.** Choose the correct sentence:
 
-A. Cher/Cher ami  
-B. Monsieur le Président  
-C. À qui de droit  
-D. Bonjour tout le monde  
-
----
-
-**Q50.** Pour décrire sa journée typique, on utilise:
-
-A. le présent  
-B. le passé composé  
-C. le subjonctif  
-D. le futur  
+A. She is interested in learning French.  
+B. She is interested on learning French.  
+C. She is interested for learning French.  
+D. She is interested at learning French.  
 
 ---
 
-**Q51.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
+**Q26.** Choose the correct word: The principal gave the students some useful ____.
 
-A. le passé composé  
-B. le futur simple  
-C. le présent  
-D. l''impératif  
-
----
-
-**Q52.** Un dialogue est un échange entre:
-
-A. deux personnes  
-B. un groupe de spectateurs  
-C. un professeur et un tableau  
-D. une seule personne  
+A. advice  
+B. advise  
+C. advising  
+D. advices  
 
 ---
 
-**Q53.** Le texte sur la famille dit que les grandes occasions:
+**Q27.** Choose the correct word: The new policy will ____ all workers.
 
-A. rassemblent toute la famille  
-B. ne concernent que les enfants  
-C. sont rares  
-D. sont tristes  
-
----
-
-**Q54.** Pour inviter un ami à son anniversaire, on écrit:
-
-A. une lettre d''invitation  
-B. un poème  
-C. une lettre de démission  
-D. une lettre de réclamation  
+A. affect  
+B. affects  
+C. effect  
+D. effects  
 
 ---
 
-**Q55.** Le texte sur l''environnement dit que le respect commence:
+**Q28.** Choose the correct word: Please ____ this letter to the post office.
 
-A. à l''école  
-B. à la maison  
-C. au marché  
-D. à la plage  
-
----
-
-**Q56.** Dans le texte sur le marché, l''air est rempli:
-
-A. de musique  
-B. d''odeurs variées  
-C. de silence  
-D. de fumée  
+A. take  
+B. carry  
+C. fetch  
+D. bring  
 
 ---
 
-**Q57.** Le texte sur l''éducation dit que l''éducation est:
+**Q29.** Choose the correct word: The company''s ____ concern is customer satisfaction.
 
-A. un luxe  
-B. une perte de temps  
-C. la clé du développement  
-D. réservée aux riches  
-
----
-
-**Q58.** Pour rester en bonne santé, il faut éviter:
-
-A. l''eau et les fruits  
-B. le sport et le sommeil  
-C. les légumes  
-D. le tabac et l''alcool  
+A. principal  
+B. principles  
+C. principle  
+D. principally  
 
 ---
 
-**Q59.** Le texte sur la technologie dit que certains pensent qu''elle:
+**Q30.** Choose the correct sentence:
 
-A. nous rapproche toujours  
-B. est trop chère  
-C. nous éloigne les uns des autres  
-D. est inutile  
+A. The news is good.  
+B. The news have been good.  
+C. The news were good.  
+D. The news are good.  
 
 ---
 
-**Q60.** Le texte sur le commerce équitable parle du:
+**Q31.** Choose the correct sentence:
 
-A. pétrole et du gaz  
-B. coton et du riz  
-C. bois et du fer  
-D. cacao et du café  
+A. I look forward to hear from you.  
+B. I look forward to hearing from you.  
+C. I look forward to heard from you.  
+D. I look forward to hears from you.  
+
+---
+
+**Q32.** Choose the correct sentence:
+
+A. He is the tallest of the two brothers.  
+B. He is the taller of the two brothers.  
+C. He is most tallest of the two brothers.  
+D. He is more taller of the two brothers.  
+
+---
+
+**Q33.** Choose the correct sentence:
+
+A. She is more taller than her sister.  
+B. She is most taller than her sister.  
+C. She is taller than her sister.  
+D. She is tallest than her sister.  
+
+---
+
+**Q34.** Choose the correct word: The dog wagged ____ tail.
+
+A. it''s  
+B. its''  
+C. itses  
+D. its  
+
+---
+
+**Q35.** Choose the correct word: ____ going to the market.
+
+A. Their  
+B. Theirs  
+C. They''re  
+D. There  
+
+---
+
+**Q36.** Choose the correct word: ____ book is this?
+
+A. Who''s  
+B. Who  
+C. Whom  
+D. Whose  
+
+---
+
+**Q37.** Choose the correct sentence:
+
+A. The teacher, along with her students, were going on the trip.  
+B. The teacher, along with her students, is going on the trip.  
+C. The teacher, along with her students, are going on the trip.  
+D. The teacher, along with her students, have been going on the trip.  
+
+---
+
+**Q38.** Choose the correct sentence:
+
+A. Neither of the boys are present.  
+B. Neither of the boys was present.  
+C. Neither of the boys have been present.  
+D. Neither of the boys were present.  
+
+---
+
+**Q39.** Choose the correct sentence:
+
+A. The committee are deciding to postpone the event.  
+B. The committee have decided to postpone the event.  
+C. The committee has decided to postpone the event.  
+D. The committee were deciding to postpone the event.  
+
+---
+
+**Q40.** Choose the correct sentence:
+
+A. Each of the students are submitting the assignment.  
+B. Each of the students have submitted the assignment.  
+C. Each of the students were submitting the assignment.  
+D. Each of the students has submitted the assignment.  
+
+---
+
+**Q41.** An essay that uses sensory details to paint a picture is called:
+
+A. an expository essay  
+B. a summary  
+C. a descriptive essay  
+D. an argumentative essay  
+
+---
+
+**Q42.** The first paragraph of an essay is called the:
+
+A. body  
+B. title  
+C. conclusion  
+D. introduction  
+
+---
+
+**Q43.** The final paragraph of an essay is called the:
+
+A. heading  
+B. conclusion  
+C. introduction  
+D. body  
+
+---
+
+**Q44.** A formal letter should begin with:
+
+A. a joke  
+B. the sender''s address and the date  
+C. a greeting like ''Hi''  
+D. the recipient''s name only  
+
+---
+
+**Q45.** The main paragraphs of an essay form the:
+
+A. title  
+B. introduction  
+C. body  
+D. conclusion  
+
+---
+
+**Q46.** A letter of application should include:
+
+A. your favourite hobbies  
+B. only your name  
+C. a list of your friends  
+D. your qualifications and experience  
+
+---
+
+**Q47.** When writing an argumentative essay, you should:
+
+A. write without paragraphs  
+B. only state the opposing view  
+C. support your argument with reasons and examples  
+D. avoid giving any reasons  
+
+---
+
+**Q48.** A narrative essay should have:
+
+A. only statistics  
+B. no setting  
+C. no characters  
+D. a clear sequence of events  
+
+---
+
+**Q49.** The purpose of an introduction is to:
+
+A. present the topic and capture the reader''s interest  
+B. give the conclusion  
+C. list all the details  
+D. repeat the title  
+
+---
+
+**Q50.** A descriptive essay about a market should include:
+
+A. sights, sounds, and smells  
+B. only prices  
+C. mathematical calculations  
+D. a list of items  
+
+---
+
+**Q51.** A formal letter to the editor should:
+
+A. express a clear opinion on an issue  
+B. have no address  
+C. be written in slang  
+D. be very short  
+
+---
+
+**Q52.** The best way to organise an expository essay is:
+
+A. logical paragraphs with clear points  
+B. a single long paragraph  
+C. a list without explanation  
+D. random ideas  
+
+---
+
+**Q53.** A story that illustrates a proverb should:
+
+A. show the lesson through events  
+B. be about animals only  
+C. state the proverb only  
+D. avoid any lesson  
+
+---
+
+**Q54.** When writing an essay, you should:
+
+A. plan your ideas before writing  
+B. write only one paragraph  
+C. copy from a friend  
+D. start writing without a plan  
+
+---
+
+**Q55.** The word count of an essay refers to:
+
+A. the number of paragraphs  
+B. the number of words in the essay  
+C. the number of pages  
+D. the number of sentences  
+
+---
+
+**Q56.** A letter of complaint should:
+
+A. only greet the recipient  
+B. clearly state the problem and request action  
+C. be written in verse  
+D. avoid mentioning the problem  
+
+---
+
+**Q57.** To make an essay interesting, a writer should:
+
+A. repeat the same word  
+B. use only short sentences  
+C. use vivid and varied language  
+D. avoid examples  
+
+---
+
+**Q58.** An essay that tells a story is called:
+
+A. an argumentative essay  
+B. an expository essay  
+C. a descriptive essay  
+D. a narrative essay  
+
+---
+
+**Q59.** An essay that presents reasons for and against a position is called:
+
+A. a narrative essay  
+B. a letter  
+C. an argumentative essay  
+D. a descriptive essay  
+
+---
+
+**Q60.** An essay that explains or informs is called:
+
+A. a narrative essay  
+B. a poem  
+C. a story  
+D. an expository essay  
 
 ---
 
@@ -2664,14 +1331,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Language'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P1 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -2681,21 +1348,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2',
+  'English Language',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P1 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
 **Series:** general, science, arts, commercial, technical
-**Subject:** French
+**Subject:** English Language
 
 **Instructions:**
 
@@ -2708,543 +1375,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** Le passé composé de ''manger'' avec ''je'' est:
+**Q1.** An inference is:
 
-A. j''ai mangé  
-B. je mange  
-C. je mangerai  
-D. je mangeais  
-
----
-
-**Q2.** Complétez: Ils ____ à l''école.
-
-A. vont  
-B. va  
-C. allons  
-D. vais  
+A. a conclusion drawn from evidence in the text  
+B. a fact stated directly in the text  
+C. a quotation from the text  
+D. a question about the text  
 
 ---
 
-**Q3.** Le futur de ''être'' avec ''je'' est:
+**Q2.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
 
-A. je serai  
-B. j''étais  
-C. je suis  
-D. je fus  
-
----
-
-**Q4.** Complétez: Tu ____ ton livre.
-
-A. as  
-B. avez  
-C. ont  
-D. a  
+A. provided many benefits  
+B. was very wide  
+C. was polluted  
+D. flowed very fast  
 
 ---
 
-**Q5.** L''imparfait de ''avoir'' avec ''nous'' est:
+**Q3.** In a summary, you should NOT include:
 
-A. nous avions  
-B. nous eûmes  
-C. nous avons  
-D. nous aurons  
-
----
-
-**Q6.** Complétez: Le livre ____ je parle est intéressant.
-
-A. dont  
-B. où  
-C. que  
-D. qui  
+A. your personal opinions  
+B. the key facts  
+C. the main points  
+D. the essential ideas  
 
 ---
 
-**Q7.** Complétez: La femme ____ chante est ma mère.
+**Q4.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
 
-A. que  
-B. qui  
-C. dont  
-D. où  
-
----
-
-**Q8.** Le pluriel de ''le cheval'' est:
-
-A. les chevals  
-B. les chevaux  
-C. les chevauxs  
-D. les chevaus  
+A. containing many different species  
+B. completely untouched  
+C. difficult to reach  
+D. very large in size  
 
 ---
 
-**Q9.** Complétez: ____ eau est bonne.
+**Q5.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
 
-A. Le  
-B. La  
-C. L''  
-D. Les  
-
----
-
-**Q10.** Complétez: J''achète ____ pain.
-
-A. de la  
-B. des  
-C. le  
-D. du  
+A. feel calmer and begin speaking  
+B. change his topic  
+C. leave the stage  
+D. memorise his speech  
 
 ---
 
-**Q11.** La négation de ''Il a mangé'' est:
+**Q6.** When summarising, the word limit means you must:
 
-A. Il a pas mangé  
-B. Il n''a mangé pas  
-C. Il n''a pas mangé  
-D. Il ne mange pas  
-
----
-
-**Q12.** Complétez: Elle est ____ grande que sa sœur.
-
-A. moins  
-B. très  
-C. aussi  
-D. plus  
+A. keep your summary within the stated number of words  
+B. ignore the word limit  
+C. write as many words as possible  
+D. write exactly the same number of words as the passage  
 
 ---
 
-**Q13.** Le féminin de ''acteur'' est:
+**Q7.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
 
-A. acteurse  
-B. actrice  
-C. acteure  
-D. acteuse  
-
----
-
-**Q14.** Complétez: Il faut que tu ____.
-
-A. viendras  
-B. viennes  
-C. venais  
-D. viens  
+A. is completely absent  
+B. has great potential that is not yet realised  
+C. is declining rapidly  
+D. is too expensive for visitors  
 
 ---
 
-**Q15.** Complétez: Je ____ voyager.
+**Q8.** The purpose of a comprehension passage is usually to:
 
-A. veux  
-B. voudrai  
-C. voudrais  
-D. voulais  
-
----
-
-**Q16.** Complétez: ____ maison est grande.
-
-A. Ces  
-B. Ce  
-C. Cet  
-D. Cette  
+A. provide entertainment only  
+B. test understanding of the text  
+C. list vocabulary words  
+D. teach grammar rules  
 
 ---
 
-**Q17.** Complétez: ____ père travaille à l''hôpital.
+**Q9.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
 
-A. Mes  
-B. Ton  
-C. Mon  
-D. Ma  
-
----
-
-**Q18.** Complétez: Nous ____ à Douala.
-
-A. habitent  
-B. habite  
-C. habitez  
-D. habitons  
+A. were happy with the announcement  
+B. had never heard promises before  
+C. did not trust the government''s promises  
+D. were celebrating quietly  
 
 ---
 
-**Q19.** Le passé composé de ''partir'' avec ''elle'' est:
+**Q10.** A good summary should be:
 
-A. elle a partie  
-B. elle est partie  
-C. elle a parti  
-D. elle est parti  
-
----
-
-**Q20.** Complétez: Il va ____ France.
-
-A. aux  
-B. en  
-C. au  
-D. à  
+A. longer than the original passage  
+B. the same length as the original passage  
+C. a copy of the original passage  
+D. shorter than the original passage  
 
 ---
 
-**Q21.** Complétez: Le livre est ____ la table.
+**Q11.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
 
-A. de  
-B. dans  
-C. sur  
-D. à  
-
----
-
-**Q22.** Complétez: ____ enfants jouent dans la cour.
-
-A. Un  
-B. Le  
-C. La  
-D. Les  
+A. disliked sweeping  
+B. hired someone to sweep  
+C. found peace in sweeping  
+D. swept very quickly  
 
 ---
 
-**Q23.** Le pluriel de ''un travail'' est:
+**Q12.** When a question asks you to ''explain in your own words'', you should:
 
-A. des travail  
-B. des travailes  
-C. des travaux  
-D. des travails  
-
----
-
-**Q24.** Complétez: Je ____ content.
-
-A. sommes  
-B. est  
-C. es  
-D. suis  
+A. quote the passage directly  
+B. give your own opinion  
+C. write a longer version of the passage  
+D. rephrase the idea without copying  
 
 ---
 
-**Q25.** Complétez: Nous ____ le temps.
+**Q13.** Read: ''Success is not a destination but a journey.'' The writer means success is:
 
-A. aurons  
-B. avons  
-C. avions  
-D. eûmes  
-
----
-
-**Q26.** Complétez: Elle ____ souvent.
-
-A. vient  
-B. viennent  
-C. viens  
-D. venez  
+A. impossible to achieve  
+B. a continuous process  
+C. a final goal  
+D. measured by certificates  
 
 ---
 
-**Q27.** Complétez: Ils ____ leurs devoirs.
+**Q14.** The best title for a passage about plastic waste clogging drainage channels would be:
 
-A. font  
-B. fais  
-C. fait  
-D. faisons  
-
----
-
-**Q28.** Complétez: Je ____ au marché.
-
-A. vais  
-B. vont  
-C. allons  
-D. va  
+A. The History of Plastic  
+B. The Problem of Plastic Waste in Our Cities  
+C. A Day at the Market  
+D. How to Build Drainage Channels  
 
 ---
 
-**Q29.** Complétez: Nous ____ français.
+**Q15.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
 
-A. parlons  
-B. parle  
-C. parlez  
-D. parlent  
-
----
-
-**Q30.** Complétez: Elle ____ une lettre.
-
-A. écrit  
-B. écrivez  
-C. écrivent  
-D. écris  
+A. a place of conflict  
+B. a noisy place  
+C. the centre of community life  
+D. a modern building  
 
 ---
 
-**Q31.** L''équipe nationale de football du Cameroun s''appelle:
+**Q16.** In summary writing, the first step is to:
 
-A. les Éléphants  
-B. les Lions Indomptables  
-C. les Aigles  
-D. les Panthères  
-
----
-
-**Q32.** Samuel Eto''o est un célèbre:
-
-A. chanteur  
-B. footballeur  
-C. médecin  
-D. écrivain  
+A. count the words in the passage  
+B. copy the first sentence of each paragraph  
+C. write your own opinions about the topic  
+D. read the passage carefully to understand the main ideas  
 
 ---
 
-**Q33.** Pour rester en bonne santé, il faut:
+**Q17.** A summary should be written:
 
-A. fumer  
-B. boire de l''alcool  
-C. manger équilibré  
-D. ne pas dormir  
-
----
-
-**Q34.** Le texte sur la pluie se termine par:
-
-A. une tempête  
-B. de la neige  
-C. un orage  
-D. un arc-en-ciel  
+A. in note form only  
+B. as a list of examples  
+C. in your own words  
+D. using long quotations from the passage  
 
 ---
 
-**Q35.** Dans le texte sur le marché, les vendeurs:
+**Q18.** The main idea of a passage is best described as:
 
-A. chantent des chansons  
-B. lisent des livres  
-C. crient pour attirer les clients  
-D. dorment  
-
----
-
-**Q36.** L''éducation est importante parce qu''elle:
-
-A. coûte cher  
-B. est facile  
-C. est obligatoire  
-D. forme des travailleurs qualifiés  
+A. the most difficult word in the passage  
+B. the writer''s personal opinion only  
+C. the first sentence of the passage  
+D. the central point the writer is making  
 
 ---
 
-**Q37.** Les principales cultures d''exportation du Cameroun sont:
+**Q19.** Read: ''The words evaporated.'' This means the speaker:
 
-A. le coton et le tabac  
-B. le cacao et le café  
-C. le riz et le blé  
-D. les bananes et les oranges  
-
----
-
-**Q38.** Le commerce équitable garantit:
-
-A. plus de publicité  
-B. un prix juste pour les producteurs  
-C. des prix plus élevés  
-D. des produits gratuits  
+A. was interrupted by the crowd  
+B. forgot what he wanted to say  
+C. spoke very quietly  
+D. wrote his speech down  
 
 ---
 
-**Q39.** Dans la culture camerounaise, les enfants:
+**Q20.** When asked to ''state the main idea in one sentence'', you should:
 
-A. quittent la maison  
-B. ignorent leurs parents  
-C. respectent leurs aînés  
-D. ne parlent pas  
-
----
-
-**Q40.** Pour protéger l''environnement, il faut:
-
-A. gaspiller l''eau  
-B. jeter les ordures dans la nature  
-C. couper les arbres  
-D. trier les déchets  
+A. list all the details  
+B. summarise the whole passage briefly  
+C. repeat the title  
+D. quote the longest sentence  
 
 ---
 
-**Q41.** La technologie permet de:
+**Q21.** Choose the correct sentence:
 
-A. cuisiner plus vite  
-B. apprendre sans effort  
-C. voir ses proches à l''écran  
-D. voyager gratuitement  
-
----
-
-**Q42.** Le texte sur la santé conseille de:
-
-A. manger trop  
-B. ne pas consulter le médecin  
-C. fumer  
-D. boire beaucoup d''eau  
+A. The committee consists on ten members.  
+B. The committee consists in ten members.  
+C. The committee consists of ten members.  
+D. The committee consists with ten members.  
 
 ---
 
-**Q43.** Dans le texte sur la pluie, les enfants:
+**Q22.** Choose the correct sentence:
 
-A. travaillaient  
-B. jouaient dans les flaques d''eau  
-C. pleuraient  
-D. dormaient  
-
----
-
-**Q44.** Le football est le sport le plus populaire:
-
-A. au Brésil  
-B. au Cameroun  
-C. en Chine  
-D. en France  
+A. She is interested at learning French.  
+B. She is interested on learning French.  
+C. She is interested for learning French.  
+D. She is interested in learning French.  
 
 ---
 
-**Q45.** Les enfants jouent au football avec:
+**Q23.** Choose the correct word: The principal gave the students some useful ____.
 
-A. des bouteilles  
-B. des ballons officiels  
-C. des ballons improvisés  
-D. des pierres  
-
----
-
-**Q46.** Une lettre à un ami doit commencer par:
-
-A. Bonjour tout le monde  
-B. Monsieur le Président  
-C. À qui de droit  
-D. Cher/Cher ami  
+A. advising  
+B. advices  
+C. advice  
+D. advise  
 
 ---
 
-**Q47.** Pour décrire sa journée typique, on utilise:
+**Q24.** Choose the correct word: The new policy will ____ all workers.
 
-A. le subjonctif  
-B. le futur  
-C. le présent  
-D. le passé composé  
-
----
-
-**Q48.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
-
-A. l''impératif  
-B. le futur simple  
-C. le présent  
-D. le passé composé  
+A. effects  
+B. affects  
+C. effect  
+D. affect  
 
 ---
 
-**Q49.** Un dialogue est un échange entre:
+**Q25.** Choose the correct word: Please ____ this letter to the post office.
 
-A. deux personnes  
-B. une seule personne  
-C. un groupe de spectateurs  
-D. un professeur et un tableau  
-
----
-
-**Q50.** Le texte sur la famille dit que les grandes occasions:
-
-A. rassemblent toute la famille  
-B. sont rares  
-C. ne concernent que les enfants  
-D. sont tristes  
+A. take  
+B. bring  
+C. carry  
+D. fetch  
 
 ---
 
-**Q51.** Pour inviter un ami à son anniversaire, on écrit:
+**Q26.** Choose the correct word: The company''s ____ concern is customer satisfaction.
 
-A. une lettre d''invitation  
-B. une lettre de démission  
-C. une lettre de réclamation  
-D. un poème  
-
----
-
-**Q52.** Le texte sur l''environnement dit que le respect commence:
-
-A. à la maison  
-B. au marché  
-C. à la plage  
-D. à l''école  
+A. principal  
+B. principle  
+C. principles  
+D. principally  
 
 ---
 
-**Q53.** Dans le texte sur le marché, l''air est rempli:
+**Q27.** Choose the correct sentence:
 
-A. d''odeurs variées  
-B. de silence  
-C. de musique  
-D. de fumée  
-
----
-
-**Q54.** Le texte sur l''éducation dit que l''éducation est:
-
-A. la clé du développement  
-B. réservée aux riches  
-C. une perte de temps  
-D. un luxe  
+A. The news is good.  
+B. The news were good.  
+C. The news are good.  
+D. The news have been good.  
 
 ---
 
-**Q55.** Pour rester en bonne santé, il faut éviter:
+**Q28.** Choose the correct sentence:
 
-A. l''eau et les fruits  
-B. le tabac et l''alcool  
-C. le sport et le sommeil  
-D. les légumes  
-
----
-
-**Q56.** Le texte sur la technologie dit que certains pensent qu''elle:
-
-A. nous rapproche toujours  
-B. nous éloigne les uns des autres  
-C. est trop chère  
-D. est inutile  
+A. I look forward to hearing from you.  
+B. I look forward to heard from you.  
+C. I look forward to hears from you.  
+D. I look forward to hear from you.  
 
 ---
 
-**Q57.** Le texte sur le commerce équitable parle du:
+**Q29.** Choose the correct sentence:
 
-A. pétrole et du gaz  
-B. bois et du fer  
-C. cacao et du café  
-D. coton et du riz  
-
----
-
-**Q58.** Le Cameroun est appelé:
-
-A. le pays des lions  
-B. la perle de l''Afrique  
-C. le grenier de l''Afrique  
-D. l''Afrique en miniature  
+A. He is the taller of the two brothers.  
+B. He is most tallest of the two brothers.  
+C. He is the tallest of the two brothers.  
+D. He is more taller of the two brothers.  
 
 ---
 
-**Q59.** Combien de groupes ethniques compte le Cameroun?
+**Q30.** Choose the correct sentence:
 
-A. environ 50  
-B. moins de 100  
-C. plus de 250  
-D. plus de 1000  
+A. She is taller than her sister.  
+B. She is tallest than her sister.  
+C. She is most taller than her sister.  
+D. She is more taller than her sister.  
 
 ---
 
-**Q60.** Le marché de Mokolo se trouve à:
+**Q31.** Choose the correct word: The dog wagged ____ tail.
 
-A. Douala  
-B. Garoua  
-C. Bafoussam  
-D. Yaoundé  
+A. it''s  
+B. its  
+C. its''  
+D. itses  
+
+---
+
+**Q32.** Choose the correct word: ____ going to the market.
+
+A. Their  
+B. They''re  
+C. Theirs  
+D. There  
+
+---
+
+**Q33.** Choose the correct word: ____ book is this?
+
+A. Who''s  
+B. Whom  
+C. Whose  
+D. Who  
+
+---
+
+**Q34.** Choose the correct sentence:
+
+A. The teacher, along with her students, are going on the trip.  
+B. The teacher, along with her students, were going on the trip.  
+C. The teacher, along with her students, have been going on the trip.  
+D. The teacher, along with her students, is going on the trip.  
+
+---
+
+**Q35.** Choose the correct sentence:
+
+A. Neither of the boys were present.  
+B. Neither of the boys have been present.  
+C. Neither of the boys was present.  
+D. Neither of the boys are present.  
+
+---
+
+**Q36.** Choose the correct sentence:
+
+A. The committee have decided to postpone the event.  
+B. The committee were deciding to postpone the event.  
+C. The committee are deciding to postpone the event.  
+D. The committee has decided to postpone the event.  
+
+---
+
+**Q37.** Choose the correct sentence:
+
+A. Each of the students are submitting the assignment.  
+B. Each of the students has submitted the assignment.  
+C. Each of the students have submitted the assignment.  
+D. Each of the students were submitting the assignment.  
+
+---
+
+**Q38.** Choose the correct sentence:
+
+A. The number of accidents were increasing.  
+B. The number of accidents is increasing.  
+C. The number of accidents have been increasing.  
+D. The number of accidents are increasing.  
+
+---
+
+**Q39.** Choose the correct sentence:
+
+A. She is good on mathematics.  
+B. She is good in mathematics.  
+C. She is good at mathematics.  
+D. She is good for mathematics.  
+
+---
+
+**Q40.** Choose the correct sentence:
+
+A. He was accused with theft.  
+B. He was accused for theft.  
+C. He was accused on theft.  
+D. He was accused of theft.  
+
+---
+
+**Q41.** A formal letter should begin with:
+
+A. a greeting like ''Hi''  
+B. a joke  
+C. the sender''s address and the date  
+D. the recipient''s name only  
+
+---
+
+**Q42.** The main paragraphs of an essay form the:
+
+A. conclusion  
+B. title  
+C. introduction  
+D. body  
+
+---
+
+**Q43.** A letter of application should include:
+
+A. your favourite hobbies  
+B. your qualifications and experience  
+C. only your name  
+D. a list of your friends  
+
+---
+
+**Q44.** When writing an argumentative essay, you should:
+
+A. write without paragraphs  
+B. support your argument with reasons and examples  
+C. only state the opposing view  
+D. avoid giving any reasons  
+
+---
+
+**Q45.** A narrative essay should have:
+
+A. only statistics  
+B. no characters  
+C. a clear sequence of events  
+D. no setting  
+
+---
+
+**Q46.** The purpose of an introduction is to:
+
+A. repeat the title  
+B. give the conclusion  
+C. list all the details  
+D. present the topic and capture the reader''s interest  
+
+---
+
+**Q47.** A descriptive essay about a market should include:
+
+A. mathematical calculations  
+B. a list of items  
+C. sights, sounds, and smells  
+D. only prices  
+
+---
+
+**Q48.** A formal letter to the editor should:
+
+A. be very short  
+B. have no address  
+C. be written in slang  
+D. express a clear opinion on an issue  
+
+---
+
+**Q49.** The best way to organise an expository essay is:
+
+A. logical paragraphs with clear points  
+B. random ideas  
+C. a single long paragraph  
+D. a list without explanation  
+
+---
+
+**Q50.** A story that illustrates a proverb should:
+
+A. show the lesson through events  
+B. state the proverb only  
+C. be about animals only  
+D. avoid any lesson  
+
+---
+
+**Q51.** When writing an essay, you should:
+
+A. plan your ideas before writing  
+B. copy from a friend  
+C. start writing without a plan  
+D. write only one paragraph  
+
+---
+
+**Q52.** The word count of an essay refers to:
+
+A. the number of words in the essay  
+B. the number of pages  
+C. the number of sentences  
+D. the number of paragraphs  
+
+---
+
+**Q53.** A letter of complaint should:
+
+A. clearly state the problem and request action  
+B. be written in verse  
+C. only greet the recipient  
+D. avoid mentioning the problem  
+
+---
+
+**Q54.** To make an essay interesting, a writer should:
+
+A. use vivid and varied language  
+B. avoid examples  
+C. use only short sentences  
+D. repeat the same word  
+
+---
+
+**Q55.** An essay that tells a story is called:
+
+A. an argumentative essay  
+B. a narrative essay  
+C. an expository essay  
+D. a descriptive essay  
+
+---
+
+**Q56.** An essay that presents reasons for and against a position is called:
+
+A. a narrative essay  
+B. an argumentative essay  
+C. a letter  
+D. a descriptive essay  
+
+---
+
+**Q57.** An essay that explains or informs is called:
+
+A. a narrative essay  
+B. a story  
+C. an expository essay  
+D. a poem  
+
+---
+
+**Q58.** An essay that uses sensory details to paint a picture is called:
+
+A. an argumentative essay  
+B. an expository essay  
+C. a summary  
+D. a descriptive essay  
+
+---
+
+**Q59.** The first paragraph of an essay is called the:
+
+A. conclusion  
+B. title  
+C. introduction  
+D. body  
+
+---
+
+**Q60.** The final paragraph of an essay is called the:
+
+A. introduction  
+B. heading  
+C. body  
+D. conclusion  
 
 ---
 
@@ -3328,14 +1995,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'French'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Language'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P2 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -3345,685 +2012,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'French',
-  'CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3',
+  'English Language',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P2 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 1
 
-## Multiple Choice Question Bank
+## Structural Question Bank - Set 1
 
 **Level:** Ordinary Level
 **Class:** FORM 5
 **Series:** general, science, arts, commercial, technical
-**Subject:** French
-
-**Instructions:**
-
-- Choose the correct option A, B, C or D for each question.
-- Record your answers clearly on the answer sheet provided.
-- Each question carries equal marks. No marks is deducted for wrong answers.
-- Use the answer key at the end of the paper to check your responses.
-
----
-
-## QUESTIONS
-
-**Q1.** Complétez: Tu ____ ton livre.
-
-A. as  
-B. a  
-C. avez  
-D. ont  
-
----
-
-**Q2.** L''imparfait de ''avoir'' avec ''nous'' est:
-
-A. nous avions  
-B. nous avons  
-C. nous eûmes  
-D. nous aurons  
-
----
-
-**Q3.** Complétez: Le livre ____ je parle est intéressant.
-
-A. dont  
-B. que  
-C. qui  
-D. où  
-
----
-
-**Q4.** Complétez: La femme ____ chante est ma mère.
-
-A. qui  
-B. dont  
-C. où  
-D. que  
-
----
-
-**Q5.** Le pluriel de ''le cheval'' est:
-
-A. les chevaux  
-B. les chevauxs  
-C. les chevals  
-D. les chevaus  
-
----
-
-**Q6.** Complétez: ____ eau est bonne.
-
-A. L''  
-B. Les  
-C. La  
-D. Le  
-
----
-
-**Q7.** Complétez: J''achète ____ pain.
-
-A. de la  
-B. du  
-C. des  
-D. le  
-
----
-
-**Q8.** La négation de ''Il a mangé'' est:
-
-A. Il a pas mangé  
-B. Il n''a pas mangé  
-C. Il n''a mangé pas  
-D. Il ne mange pas  
-
----
-
-**Q9.** Complétez: Elle est ____ grande que sa sœur.
-
-A. moins  
-B. aussi  
-C. plus  
-D. très  
-
----
-
-**Q10.** Le féminin de ''acteur'' est:
-
-A. acteure  
-B. acteurse  
-C. acteuse  
-D. actrice  
-
----
-
-**Q11.** Complétez: Il faut que tu ____.
-
-A. viens  
-B. venais  
-C. viennes  
-D. viendras  
-
----
-
-**Q12.** Complétez: Je ____ voyager.
-
-A. voudrai  
-B. voulais  
-C. veux  
-D. voudrais  
-
----
-
-**Q13.** Complétez: ____ maison est grande.
-
-A. Ces  
-B. Cette  
-C. Ce  
-D. Cet  
-
----
-
-**Q14.** Complétez: ____ père travaille à l''hôpital.
-
-A. Mes  
-B. Mon  
-C. Ton  
-D. Ma  
-
----
-
-**Q15.** Complétez: Nous ____ à Douala.
-
-A. habitent  
-B. habitez  
-C. habitons  
-D. habite  
-
----
-
-**Q16.** Le passé composé de ''partir'' avec ''elle'' est:
-
-A. elle est parti  
-B. elle a parti  
-C. elle a partie  
-D. elle est partie  
-
----
-
-**Q17.** Complétez: Il va ____ France.
-
-A. au  
-B. aux  
-C. en  
-D. à  
-
----
-
-**Q18.** Complétez: Le livre est ____ la table.
-
-A. à  
-B. de  
-C. dans  
-D. sur  
-
----
-
-**Q19.** Complétez: ____ enfants jouent dans la cour.
-
-A. Un  
-B. Les  
-C. Le  
-D. La  
-
----
-
-**Q20.** Le pluriel de ''un travail'' est:
-
-A. des travail  
-B. des travaux  
-C. des travailes  
-D. des travails  
-
----
-
-**Q21.** Complétez: Je ____ content.
-
-A. sommes  
-B. es  
-C. suis  
-D. est  
-
----
-
-**Q22.** Complétez: Nous ____ le temps.
-
-A. eûmes  
-B. avons  
-C. avions  
-D. aurons  
-
----
-
-**Q23.** Complétez: Elle ____ souvent.
-
-A. viens  
-B. venez  
-C. vient  
-D. viennent  
-
----
-
-**Q24.** Complétez: Ils ____ leurs devoirs.
-
-A. faisons  
-B. fais  
-C. fait  
-D. font  
-
----
-
-**Q25.** Complétez: Je ____ au marché.
-
-A. vais  
-B. va  
-C. vont  
-D. allons  
-
----
-
-**Q26.** Complétez: Nous ____ français.
-
-A. parlons  
-B. parlez  
-C. parle  
-D. parlent  
-
----
-
-**Q27.** Complétez: Elle ____ une lettre.
-
-A. écrit  
-B. écrivent  
-C. écris  
-D. écrivez  
-
----
-
-**Q28.** Le passé composé de ''manger'' avec ''je'' est:
-
-A. j''ai mangé  
-B. je mangerai  
-C. je mangeais  
-D. je mange  
-
----
-
-**Q29.** Complétez: Ils ____ à l''école.
-
-A. vont  
-B. allons  
-C. va  
-D. vais  
-
----
-
-**Q30.** Le futur de ''être'' avec ''je'' est:
-
-A. je serai  
-B. je fus  
-C. j''étais  
-D. je suis  
-
----
-
-**Q31.** Le texte sur la pluie se termine par:
-
-A. une tempête  
-B. un arc-en-ciel  
-C. de la neige  
-D. un orage  
-
----
-
-**Q32.** Dans le texte sur le marché, les vendeurs:
-
-A. chantent des chansons  
-B. crient pour attirer les clients  
-C. lisent des livres  
-D. dorment  
-
----
-
-**Q33.** L''éducation est importante parce qu''elle:
-
-A. coûte cher  
-B. est obligatoire  
-C. forme des travailleurs qualifiés  
-D. est facile  
-
----
-
-**Q34.** Les principales cultures d''exportation du Cameroun sont:
-
-A. le riz et le blé  
-B. le coton et le tabac  
-C. les bananes et les oranges  
-D. le cacao et le café  
-
----
-
-**Q35.** Le commerce équitable garantit:
-
-A. des produits gratuits  
-B. des prix plus élevés  
-C. un prix juste pour les producteurs  
-D. plus de publicité  
-
----
-
-**Q36.** Dans la culture camerounaise, les enfants:
-
-A. ignorent leurs parents  
-B. ne parlent pas  
-C. quittent la maison  
-D. respectent leurs aînés  
-
----
-
-**Q37.** Pour protéger l''environnement, il faut:
-
-A. gaspiller l''eau  
-B. trier les déchets  
-C. jeter les ordures dans la nature  
-D. couper les arbres  
-
----
-
-**Q38.** La technologie permet de:
-
-A. cuisiner plus vite  
-B. voir ses proches à l''écran  
-C. apprendre sans effort  
-D. voyager gratuitement  
-
----
-
-**Q39.** Le texte sur la santé conseille de:
-
-A. manger trop  
-B. fumer  
-C. boire beaucoup d''eau  
-D. ne pas consulter le médecin  
-
----
-
-**Q40.** Dans le texte sur la pluie, les enfants:
-
-A. dormaient  
-B. pleuraient  
-C. travaillaient  
-D. jouaient dans les flaques d''eau  
-
----
-
-**Q41.** Le football est le sport le plus populaire:
-
-A. en Chine  
-B. au Brésil  
-C. au Cameroun  
-D. en France  
-
----
-
-**Q42.** Les enfants jouent au football avec:
-
-A. des pierres  
-B. des bouteilles  
-C. des ballons officiels  
-D. des ballons improvisés  
-
----
-
-**Q43.** Une lettre à un ami doit commencer par:
-
-A. Bonjour tout le monde  
-B. Cher/Cher ami  
-C. Monsieur le Président  
-D. À qui de droit  
-
----
-
-**Q44.** Pour décrire sa journée typique, on utilise:
-
-A. le subjonctif  
-B. le présent  
-C. le futur  
-D. le passé composé  
-
----
-
-**Q45.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
-
-A. l''impératif  
-B. le présent  
-C. le passé composé  
-D. le futur simple  
-
----
-
-**Q46.** Un dialogue est un échange entre:
-
-A. un professeur et un tableau  
-B. une seule personne  
-C. un groupe de spectateurs  
-D. deux personnes  
-
----
-
-**Q47.** Le texte sur la famille dit que les grandes occasions:
-
-A. ne concernent que les enfants  
-B. sont tristes  
-C. rassemblent toute la famille  
-D. sont rares  
-
----
-
-**Q48.** Pour inviter un ami à son anniversaire, on écrit:
-
-A. un poème  
-B. une lettre de démission  
-C. une lettre de réclamation  
-D. une lettre d''invitation  
-
----
-
-**Q49.** Le texte sur l''environnement dit que le respect commence:
-
-A. à la maison  
-B. à l''école  
-C. au marché  
-D. à la plage  
-
----
-
-**Q50.** Dans le texte sur le marché, l''air est rempli:
-
-A. d''odeurs variées  
-B. de musique  
-C. de silence  
-D. de fumée  
-
----
-
-**Q51.** Le texte sur l''éducation dit que l''éducation est:
-
-A. la clé du développement  
-B. une perte de temps  
-C. un luxe  
-D. réservée aux riches  
-
----
-
-**Q52.** Pour rester en bonne santé, il faut éviter:
-
-A. le tabac et l''alcool  
-B. le sport et le sommeil  
-C. les légumes  
-D. l''eau et les fruits  
-
----
-
-**Q53.** Le texte sur la technologie dit que certains pensent qu''elle:
-
-A. nous éloigne les uns des autres  
-B. est trop chère  
-C. nous rapproche toujours  
-D. est inutile  
-
----
-
-**Q54.** Le texte sur le commerce équitable parle du:
-
-A. cacao et du café  
-B. coton et du riz  
-C. bois et du fer  
-D. pétrole et du gaz  
-
----
-
-**Q55.** Le Cameroun est appelé:
-
-A. le pays des lions  
-B. l''Afrique en miniature  
-C. la perle de l''Afrique  
-D. le grenier de l''Afrique  
-
----
-
-**Q56.** Combien de groupes ethniques compte le Cameroun?
-
-A. environ 50  
-B. plus de 250  
-C. moins de 100  
-D. plus de 1000  
-
----
-
-**Q57.** Le marché de Mokolo se trouve à:
-
-A. Douala  
-B. Bafoussam  
-C. Yaoundé  
-D. Garoua  
-
----
-
-**Q58.** L''équipe nationale de football du Cameroun s''appelle:
-
-A. les Éléphants  
-B. les Aigles  
-C. les Panthères  
-D. les Lions Indomptables  
-
----
-
-**Q59.** Samuel Eto''o est un célèbre:
-
-A. chanteur  
-B. médecin  
-C. footballeur  
-D. écrivain  
-
----
-
-**Q60.** Pour rester en bonne santé, il faut:
-
-A. fumer  
-B. ne pas dormir  
-C. boire de l''alcool  
-D. manger équilibré  
-
----
-
-## ANSWER KEY
-
-1. A
-2. A
-3. A
-4. A
-5. A
-6. A
-7. B
-8. B
-9. C
-10. D
-11. C
-12. D
-13. B
-14. B
-15. C
-16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
-23. C
-24. D
-25. A
-26. A
-27. A
-28. A
-29. A
-30. A
-31. B
-32. B
-33. C
-34. D
-35. C
-36. D
-37. B
-38. B
-39. C
-40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
-47. C
-48. D
-49. A
-50. A
-51. A
-52. A
-53. A
-54. A
-55. B
-56. B
-57. C
-58. D
-59. C
-60. D
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 4'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 4',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 4
-
-## Structural Question Bank — Cells and transport
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
+**Subject:** English Language
 
 **Instructions:**
 
@@ -4034,167 +2037,2439 @@ values (
 
 ---
 
-## SECTION 1: CELLS AND TRANSPORT
+## SECTION 1: COMPREHENSION
 
-**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*
+**Q1.** Comprehension: Read original passage 1: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) State three differences between a plant cell and an animal cell. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.
-
-(a) State what would happen to each cylinder. *(4 marks)*
-
-(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*
-
-(c) Name the process involved and state its importance in plants. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*
+**Q2.** Comprehension: Read original passage 2: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) State three factors that affect the rate of diffusion. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
----
-
-**Q4.** (a) What is active transport? *(3 marks)*
-
-(b) Give two differences between active transport and diffusion. *(4 marks)*
-
-(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*
+**Q3.** Comprehension: Read original passage 3: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*
-
-(b) State the function of iodine solution in this preparation. *(2 marks)*
-
-(c) Explain why the onion cell appears as a regular shape. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** (a) What are enzymes? *(2 marks)*
+**Q4.** Comprehension: Read original passage 4: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) State three properties of enzymes. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*
-
-(b) Explain what happens when an enzyme is boiled. *(3 marks)*
-
-(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*
+**Q5.** Comprehension: Read original passage 5: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*
-
-(b) State the function of each labelled part. *(5 marks)*
-
-(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*
+## SECTION 2: SUMMARY
 
-(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*
+**Q6.** Summary: Read original passage 6: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
 
-(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
----
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*
-
-(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*
-
-(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*
+**Q7.** Summary: Read original passage 7: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
 
-(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain how selective permeability is important in the kidney. *(5 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q14.** (a) Define the term "turgidity". *(2 marks)*
-
-(b) Explain how turgidity supports non-woody plants. *(4 marks)*
-
-(c) Describe what happens to a plant when it wilts. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q15.** (a) State three functions of the nucleus. *(3 marks)*
+**Q8.** Summary: Read original passage 8: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
 
-(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Distinguish between a gene and a chromosome. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q16.** (a) What is the function of the mitochondria? *(2 marks)*
-
-(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*
-
-(c) State the equation for aerobic respiration. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*
+**Q9.** Summary: Read original passage 9: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
 
-(b) Explain why amylase cannot digest proteins. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*
-
-(b) State the results you would expect. *(3 marks)*
-
-(c) Explain the results in terms of osmosis. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*
+**Q10.** Summary: Read original passage 10: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
 
-(b) Give one example of each. *(2 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*
+## SECTION 3: DIRECTED WRITING
 
-(b) Explain why energy is required for active transport. *(3 marks)*
+**Q11.** Directed writing: Read original passage 11: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
 
-(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Directed writing: Read original passage 12: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Directed writing: Read original passage 13: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Directed writing: Read original passage 14: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Directed writing: Read original passage 15: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ESSAY WRITING
+
+**Q16.** Essay writing: Read original passage 16: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Essay writing: Read original passage 17: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Essay writing: Read original passage 18: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Essay writing: Read original passage 19: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Essay writing: Read original passage 20: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: GRAMMAR
+
+**Q21.** Grammar: Read original passage 21: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Grammar: Read original passage 22: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Grammar: Read original passage 23: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Grammar: Read original passage 24: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Grammar: Read original passage 25: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: VOCABULARY
+
+**Q26.** Vocabulary: Read original passage 26: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Vocabulary: Read original passage 27: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Vocabulary: Read original passage 28: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Vocabulary: Read original passage 29: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Vocabulary: Read original passage 30: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: REGISTER
+
+**Q31.** Register: Read original passage 31: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Register: Read original passage 32: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Register: Read original passage 33: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Register: Read original passage 34: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Register: Read original passage 35: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: ORAL ENGLISH
+
+**Q36.** Oral English: Read original passage 36: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Oral English: Read original passage 37: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Oral English: Read original passage 38: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Oral English: Read original passage 39: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Oral English: Read original passage 40: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P2 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P2 SET 2',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 2
+
+## Structural Question Bank - Set 2
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION
+
+**Q1.** Comprehension: Read original passage 1: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q2.** Comprehension: Read original passage 2: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q3.** Comprehension: Read original passage 3: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q4.** Comprehension: Read original passage 4: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q5.** Comprehension: Read original passage 5: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 2: SUMMARY
+
+**Q6.** Summary: Read original passage 6: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q7.** Summary: Read original passage 7: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q8.** Summary: Read original passage 8: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q9.** Summary: Read original passage 9: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q10.** Summary: Read original passage 10: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 3: DIRECTED WRITING
+
+**Q11.** Directed writing: Read original passage 11: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Directed writing: Read original passage 12: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Directed writing: Read original passage 13: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Directed writing: Read original passage 14: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Directed writing: Read original passage 15: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ESSAY WRITING
+
+**Q16.** Essay writing: Read original passage 16: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Essay writing: Read original passage 17: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Essay writing: Read original passage 18: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Essay writing: Read original passage 19: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Essay writing: Read original passage 20: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: GRAMMAR
+
+**Q21.** Grammar: Read original passage 21: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Grammar: Read original passage 22: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Grammar: Read original passage 23: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Grammar: Read original passage 24: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Grammar: Read original passage 25: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: VOCABULARY
+
+**Q26.** Vocabulary: Read original passage 26: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Vocabulary: Read original passage 27: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Vocabulary: Read original passage 28: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Vocabulary: Read original passage 29: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Vocabulary: Read original passage 30: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: REGISTER
+
+**Q31.** Register: Read original passage 31: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Register: Read original passage 32: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Register: Read original passage 33: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Register: Read original passage 34: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Register: Read original passage 35: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: ORAL ENGLISH
+
+**Q36.** Oral English: Read original passage 36: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Oral English: Read original passage 37: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Oral English: Read original passage 38: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Oral English: Read original passage 39: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Oral English: Read original passage 40: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P2 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LANGUAGE P2 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 3
+
+## Structural Question Bank - Set 3
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION
+
+**Q1.** Comprehension: Read original passage 1: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q2.** Comprehension: Read original passage 2: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q3.** Comprehension: Read original passage 3: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q4.** Comprehension: Read original passage 4: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q5.** Comprehension: Read original passage 5: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 2: SUMMARY
+
+**Q6.** Summary: Read original passage 6: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q7.** Summary: Read original passage 7: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q8.** Summary: Read original passage 8: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q9.** Summary: Read original passage 9: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q10.** Summary: Read original passage 10: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on summary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 3: DIRECTED WRITING
+
+**Q11.** Directed writing: Read original passage 11: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Directed writing: Read original passage 12: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Directed writing: Read original passage 13: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Directed writing: Read original passage 14: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Directed writing: Read original passage 15: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on directed writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ESSAY WRITING
+
+**Q16.** Essay writing: Read original passage 16: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Essay writing: Read original passage 17: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Essay writing: Read original passage 18: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Essay writing: Read original passage 19: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Essay writing: Read original passage 20: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: GRAMMAR
+
+**Q21.** Grammar: Read original passage 21: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Grammar: Read original passage 22: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Grammar: Read original passage 23: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Grammar: Read original passage 24: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Grammar: Read original passage 25: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: VOCABULARY
+
+**Q26.** Vocabulary: Read original passage 26: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Vocabulary: Read original passage 27: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Vocabulary: Read original passage 28: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Vocabulary: Read original passage 29: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Vocabulary: Read original passage 30: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: REGISTER
+
+**Q31.** Register: Read original passage 31: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Register: Read original passage 32: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Register: Read original passage 33: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Register: Read original passage 34: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Register: Read original passage 35: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on register.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: ORAL ENGLISH
+
+**Q36.** Oral English: Read original passage 36: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Oral English: Read original passage 37: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Oral English: Read original passage 38: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Oral English: Read original passage 39: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Oral English: Read original passage 40: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on oral english.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 4
+
+## Structural Question Bank — Comprehension and summary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION AND SUMMARY
+
+**Q1.** Read the passage below and answer the questions that follow.
+
+*"The village market was more than a place of trade; it was the beating heart of the community. Here, farmers exchanged news with traders, and children learned the value of honest dealing. Yet in recent years, the market has been shrinking as young people migrate to the cities, leaving behind ageing vendors and empty stalls."*
+
+(a) In one sentence, state the main idea of the passage. *(3 marks)*
+
+(b) Give two reasons the writer gives for the market''s decline. *(4 marks)*
+
+(c) Explain what the writer means by "the beating heart of the community". *(4 marks)*
+
+---
+
+**Q2.** Summarise the following passage in not more than 60 words.
+
+*"Rainwater harvesting is an ancient practice that is regaining importance in Cameroon. By collecting runoff from rooftops into storage tanks, households can reduce their dependence on erratic municipal supplies. The water is ideal for gardening, washing, and, after proper treatment, even drinking. Critics argue that the initial cost of tanks and guttering is prohibitive, but supporters point out that the investment pays for itself within a few years through lower water bills and greater self-reliance."*
+
+Your summary must be in continuous prose and must not include direct quotations. *(10 marks)*
+
+---
+
+**Q3.** Read the passage and answer the questions that follow.
+
+*"The examination results were posted at dawn. For Amina, the moment was both terrifying and liberating. She had spent three sleepless nights rehearsing the worst-case scenario, yet when her name appeared on the list of successful candidates, she felt a surge of relief so powerful it left her breathless."*
+
+(a) Identify the dominant emotion in the passage and quote one phrase that supports your answer. *(4 marks)*
+
+(b) What does the phrase "rehearsing the worst-case scenario" reveal about Amina''s character? *(4 marks)*
+
+(c) Suggest a suitable title for the passage. *(2 marks)*
+
+---
+
+**Q4.** Read the passage and answer the questions that follow.
+
+*"Cameroon''s forests are among the most biodiverse on the continent, sheltering elephants, gorillas, and thousands of plant species. However, illegal logging and slash-and-burn farming are destroying these habitats at an alarming rate. Conservationists argue that protecting the forests is not merely an environmental concern but an economic one, since ecotourism and sustainable harvesting can generate lasting income for local communities."*
+
+(a) State two threats to Cameroon''s forests mentioned in the passage. *(4 marks)*
+
+(b) Explain why the writer describes forest protection as "an economic one". *(4 marks)*
+
+(c) Give the meaning of "biodiverse" as used in the passage. *(2 marks)*
+
+---
+
+**Q5.** Summarise the following passage in not more than 70 words.
+
+*"Mobile money has transformed financial life in Cameroon. Before its arrival, many rural families had no access to banks and relied on risky methods of storing and transferring cash. Today, a farmer can sell his cocoa, receive payment on his phone, and pay his children''s school fees without travelling to a town. Mobile money has also created jobs, as agents earn commissions on every transaction. Nevertheless, concerns remain about fraud, network failures, and the exclusion of the elderly who struggle with the technology."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q6.** Read the passage and answer the questions that follow.
+
+*"The old woman refused to be rushed. Each morning she swept her compound with slow, deliberate strokes, as if the dust were an enemy she had known for years. Her neighbours, who hurried past with phones pressed to their ears, did not understand that for her, sweeping was not a chore but a meditation."*
+
+(a) What does the writer suggest about the difference between the old woman and her neighbours? *(4 marks)*
+
+(b) Explain the meaning of "a meditation" in the context of the passage. *(4 marks)*
+
+(c) Identify one figure of speech used in the passage and explain its effect. *(4 marks)*
+
+---
+
+**Q7.** Read the passage and answer the questions that follow.
+
+*"The river had always been generous, giving the village fish, water, and fertile soil. But generosity, the elders warned, must never be taken for granted. When the rains failed and the river shrank to a muddy trickle, the village learned that nature''s gifts come with conditions."*
+
+(a) State the lesson the village learned. *(3 marks)*
+
+(b) Explain how the writer uses personification in the passage. *(4 marks)*
+
+(c) What is the writer''s attitude towards the river? Support your answer with evidence. *(4 marks)*
+
+---
+
+**Q8.** Summarise the following passage in not more than 60 words.
+
+*"School feeding programmes in Cameroon serve a dual purpose. For children, a guaranteed midday meal improves concentration, attendance, and overall health. For farmers, the programmes provide a reliable market for their produce, since schools purchase staples such as maize, beans, and groundnuts from local cooperatives. Critics note that the programmes are expensive to run and vulnerable to corruption, but supporters argue that the long-term benefits to education and agriculture outweigh the costs."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q9.** Read the passage and answer the questions that follow.
+
+*"He had rehearsed the speech a hundred times, yet when he stood before the crowd, the words evaporated. His palms were slick, his throat dry. Then he remembered his father''s advice: ''The audience wants you to succeed.'' He took a breath, and the first sentence came out steady."*
+
+(a) Describe the speaker''s state of mind at the start of the passage. *(3 marks)*
+
+(b) What effect does the father''s advice have on the speaker? *(4 marks)*
+
+(c) Explain the meaning of "the words evaporated". *(3 marks)*
+
+---
+
+**Q10.** Read the passage and answer the questions that follow.
+
+*"Plastic waste is choking Cameroon''s cities. Discarded bottles clog drainage channels, causing floods during the rainy season, while burning the waste releases toxic fumes. Some entrepreneurs have begun collecting plastics and recycling them into paving blocks, creating jobs and cleaning the streets. The challenge, they say, is not a lack of solutions but a lack of will."*
+
+(a) State two problems caused by plastic waste. *(4 marks)*
+
+(b) How have some entrepreneurs responded to the problem? *(3 marks)*
+
+(c) Explain the final sentence: "The challenge... is not a lack of solutions but a lack of will." *(4 marks)*
+
+---
+
+**Q11.** Summarise the following passage in not more than 65 words.
+
+*"Community health workers are the backbone of rural healthcare in Cameroon. Trained to diagnose common illnesses, administer vaccines, and advise on hygiene, they bring medical care to villages that would otherwise travel hours to reach a clinic. Their work has reduced infant mortality and improved maternal health in many regions. Yet these workers are often unpaid volunteers, and many leave the profession once they find better-paying work. Health experts argue that investing in community health workers is one of the most cost-effective ways to strengthen the health system."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q12.** Read the passage and answer the questions that follow.
+
+*"The two brothers inherited the same plot of land. One planted cocoa and prospered; the other planted nothing and waited for the land to feed him. Years later, the first brother built a house, while the second still waited, blaming the soil for his poverty."*
+
+(a) What is the moral of the passage? *(4 marks)*
+
+(b) Contrast the attitudes of the two brothers. *(4 marks)*
+
+(c) Explain the irony in the final sentence. *(4 marks)*
+
+---
+
+**Q13.** Read the passage and answer the questions that follow.
+
+*"Tourism in Cameroon is a sleeping giant. The country boasts beaches, mountains, wildlife parks, and a rich cultural heritage, yet it attracts a fraction of the visitors that smaller neighbours receive. Poor infrastructure, limited marketing, and safety concerns are often cited as reasons. Those who have visited, however, speak of a country that rewards the adventurous traveller."*
+
+(a) What does the writer mean by calling tourism "a sleeping giant"? *(4 marks)*
+
+(b) Give two reasons why Cameroon attracts few tourists. *(4 marks)*
+
+(c) What is the writer''s overall attitude towards Cameroon''s tourism potential? *(3 marks)*
+
+---
+
+**Q14.** Summarise the following passage in not more than 60 words.
+
+*"The traditional African family is often described as an extended family, where uncles, aunts, and grandparents share in raising children. This system provides a safety net: when parents fall ill or travel, relatives step in. It also transmits values, history, and skills across generations. However, urbanisation and economic pressures are weakening these ties, as families become smaller and more mobile. Sociologists warn that the loss of the extended family could leave many children without the support they once enjoyed."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q15.** Read the passage and answer the questions that follow.
+
+*"The teacher wrote a single word on the board: ''Why?'' For a moment the class was silent. Then hands shot up. The question, she explained, was more important than any answer, because it was the beginning of every discovery. From that day, her students stopped memorising and started questioning."*
+
+(a) What change does the teacher bring about in her students? *(4 marks)*
+
+(b) Explain the significance of the word "Why?" in the passage. *(4 marks)*
+
+(c) What does the passage suggest about the difference between memorising and questioning? *(4 marks)*
+
+---
+
+**Q16.** Read the passage and answer the questions that follow.
+
+*"The harvest festival drew people from every village in the district. Drummers led the procession, dancers in bright cloth followed, and elders presided over the ceremony with quiet dignity. For the young, it was a spectacle; for the old, a memory renewed. The festival was not merely entertainment; it was the community''s way of giving thanks and reaffirming its identity."*
+
+(a) State two purposes of the harvest festival. *(4 marks)*
+
+(b) Explain the difference between how the young and the old view the festival. *(4 marks)*
+
+(c) What does the phrase "a memory renewed" suggest? *(3 marks)*
+
+---
+
+**Q17.** Summarise the following passage in not more than 70 words.
+
+*"Reading is a habit that is dying among young people, replaced by short videos and instant messages. Yet reading offers what these distractions cannot: the ability to follow a complex argument, to enter another person''s mind, and to build the vocabulary that examinations reward. Teachers report that students who read widely write better essays and score higher in comprehension. Parents can help by setting aside time for reading at home and by letting children choose books that interest them, rather than forcing classics upon them."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q18.** Read the passage and answer the questions that follow.
+
+*"The bridge collapsed without warning, cutting off the only road to the hospital. For three days, the sick were carried across the river in canoes, and the dead were buried on the wrong side of the water. When the government finally announced plans to rebuild, the villagers did not celebrate; they had heard such promises before."*
+
+(a) What were the consequences of the bridge''s collapse? *(4 marks)*
+
+(b) Why did the villagers not celebrate the government''s announcement? *(4 marks)*
+
+(c) What does the passage reveal about the relationship between the villagers and the government? *(4 marks)*
+
+---
+
+**Q19.** Read the passage and answer the questions that follow.
+
+*"Success, the speaker told the graduates, is not a destination but a journey. It is measured not by the certificates on your wall but by the obstacles you overcome and the people you help along the way. The audience applauded, though some wondered privately whether the speaker, who had inherited his father''s business, truly understood the obstacles they faced."*
+
+(a) State the speaker''s definition of success. *(3 marks)*
+
+(b) Explain the irony in the final sentence. *(4 marks)*
+
+(c) Do you agree with the speaker''s view? Give a reason. *(3 marks)*
+
+---
+
+**Q20.** Read the passage and answer the questions that follow.
+
+*"The baobab tree stood at the centre of the village, older than anyone could remember. Its trunk was a storehouse of water, its bark a source of medicine, its leaves a vegetable for the evening pot. When developers proposed cutting it down to widen the road, the village united in protest. They had lost many things to progress; they would not lose the baobab."*
+
+(a) List three uses of the baobab tree mentioned in the passage. *(3 marks)*
+
+(b) Why did the village protest against the developers? *(4 marks)*
+
+(c) What does the final sentence reveal about the villagers'' attitude towards progress? *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 5
+
+## Structural Question Bank — Grammar and vocabulary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAR AND VOCABULARY
+
+**Q1.** Rewrite the following sentences, correcting the errors:
+
+(a) "Neither of the boys were present at the meeting." *(2 marks)*
+
+(b) "The committee have decided to postpone the event." *(2 marks)*
+
+(c) "Each of the students have submitted their assignment." *(2 marks)*
+
+(d) "The number of accidents are increasing every year." *(2 marks)*
+
+---
+
+**Q2.** Change the following sentences from direct to indirect speech:
+
+(a) "I will visit you tomorrow," she said. *(3 marks)*
+
+(b) "Have you finished the report?" the manager asked. *(3 marks)*
+
+(c) "Do not touch the exhibits," the guard warned. *(3 marks)*
+
+---
+
+**Q3.** Fill in each blank with the correct form of the verb in brackets:
+
+(a) By the time we arrived, the ceremony ____ (already begin). *(2 marks)*
+
+(b) She ____ (live) in Douala for ten years before she moved to Yaoundé. *(2 marks)*
+
+(c) If I ____ (know) the answer, I would have told you. *(2 marks)*
+
+(d) The children ____ (play) in the yard when it started to rain. *(2 marks)*
+
+---
+
+**Q4.** Combine each pair of sentences using the conjunction in brackets:
+
+(a) He was tired. He continued working. (although) *(3 marks)*
+
+(b) The rain stopped. We went out. (as soon as) *(3 marks)*
+
+(c) She studied hard. She failed the examination. (even though) *(3 marks)*
+
+---
+
+**Q5.** Choose the word that is closest in meaning to the word in bold:
+
+(a) The meeting was **adjourned** until the following week. *(2 marks)*
+
+(b) His **arrogant** behaviour offended his colleagues. *(2 marks)*
+
+(c) The evidence was **inconclusive**, so the case was dismissed. *(2 marks)*
+
+(d) She gave a **lucid** explanation of the difficult concept. *(2 marks)*
+
+---
+
+**Q6.** Rewrite the following sentences in the passive voice:
+
+(a) The government built the new bridge last year. *(2 marks)*
+
+(b) Someone has stolen my bicycle. *(2 marks)*
+
+(c) They will announce the results on Friday. *(2 marks)*
+
+(d) The chef is preparing the meal. *(2 marks)*
+
+---
+
+**Q7.** Identify the grammatical function of the underlined words in the following sentences:
+
+(a) The **runner** won the race. *(2 marks)*
+
+(b) She gave **him** a gift. *(2 marks)*
+
+(c) The book on the table is **mine**. *(2 marks)*
+
+(d) **Running** is good exercise. *(2 marks)*
+
+---
+
+**Q8.** Complete each sentence with the correct preposition:
+
+(a) She is good ____ mathematics. *(1 mark)*
+
+(b) He was accused ____ theft. *(1 mark)*
+
+(c) The committee consists ____ ten members. *(1 mark)*
+
+(d) We arrived ____ the station just in time. *(1 mark)*
+
+(e) She is interested ____ learning French. *(1 mark)*
+
+(f) The cat jumped ____ the table. *(1 mark)*
+
+---
+
+**Q9.** Rewrite the following sentences, using the correct form of the word in brackets:
+
+(a) The ____ (decide) was made unanimously. *(2 marks)*
+
+(b) Her ____ (perform) in the examination was outstanding. *(2 marks)*
+
+(c) The ____ (manage) of the company resigned. *(2 marks)*
+
+(d) We were impressed by his ____ (honest). *(2 marks)*
+
+---
+
+**Q10.** Punctuate the following passage correctly:
+
+*"the minister said the government will build a new hospital in bamenda next year the project will create hundreds of jobs and improve healthcare in the region"* *(8 marks)*
+
+---
+
+**Q11.** Choose the correct word to complete each sentence:
+
+(a) The principal gave the students ____ (advice / advise) on how to prepare for the examination. *(2 marks)*
+
+(b) The new policy will ____ (affect / effect) all workers. *(2 marks)*
+
+(c) Please ____ (bring / take) this letter to the post office. *(2 marks)*
+
+(d) The company''s ____ (principal / principle) concern is customer satisfaction. *(2 marks)*
+
+---
+
+**Q12.** Rewrite the following sentences, beginning with the word given:
+
+(a) "It is unlikely that he will pass the examination." → "He is unlikely ____." *(3 marks)*
+
+(b) "She is too young to travel alone." → "She is not ____." *(3 marks)*
+
+(c) "The problem was so difficult that nobody could solve it." → "It was such ____." *(3 marks)*
+
+---
+
+**Q13.** Identify and correct the error in each of the following sentences:
+
+(a) "The two girls are very different from each other." *(2 marks)*
+
+(b) "He is one of the students who has won the prize." *(2 marks)*
+
+(c) "I look forward to hear from you." *(2 marks)*
+
+(d) "The news are good." *(2 marks)*
+
+---
+
+**Q14.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (long) of the river is over 1,000 kilometres. *(2 marks)*
+
+(b) She spoke with great ____ (confident). *(2 marks)*
+
+(c) The ____ (fail) of the plan surprised everyone. *(2 marks)*
+
+(d) His ____ (refuse) to cooperate delayed the project. *(2 marks)*
+
+---
+
+**Q15.** Rewrite the following sentences, replacing the underlined words with a suitable phrasal verb:
+
+(a) He **postponed** the meeting until Monday. *(2 marks)*
+
+(b) She **discovered** the truth by accident. *(2 marks)*
+
+(c) The plane **departed** at noon. *(2 marks)*
+
+(d) They **continued** working despite the noise. *(2 marks)*
+
+---
+
+**Q16.** Change the following sentences from active to passive, or vice versa:
+
+(a) The letter was written by the secretary. *(2 marks)*
+
+(b) The children are being taught by a new teacher. *(2 marks)*
+
+(c) The manager will interview the candidates tomorrow. *(2 marks)*
+
+(d) The bridge was being repaired when we crossed it. *(2 marks)*
+
+---
+
+**Q17.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (arrive) of the delegation was delayed. *(2 marks)*
+
+(b) She has a strong ____ (believe) in hard work. *(2 marks)*
+
+(c) The ____ (compare) between the two products was interesting. *(2 marks)*
+
+(d) His ____ (behave) at the meeting was unacceptable. *(2 marks)*
+
+---
+
+**Q18.** Rewrite the following sentences, using the correct tense:
+
+(a) "I have seen that film yesterday." *(2 marks)*
+
+(b) "She has been working here since five years." *(2 marks)*
+
+(c) "When I arrived, he already left." *(2 marks)*
+
+(d) "I will call you when I will arrive." *(2 marks)*
+
+---
+
+**Q19.** Choose the correct word to complete each sentence:
+
+(a) The ____ (weather / whether) was perfect for the picnic. *(2 marks)*
+
+(b) ____ (Their / There / They''re) going to the market. *(2 marks)*
+
+(c) The dog wagged ____ (its / it''s) tail. *(2 marks)*
+
+(d) ____ (Who''s / Whose) book is this? *(2 marks)*
+
+---
+
+**Q20.** Rewrite the following sentences, correcting the errors:
+
+(a) "The teacher, along with her students, are going on the trip." *(2 marks)*
+
+(b) "He is the tallest of the two brothers." *(2 marks)*
+
+(c) "I have less money than him." *(2 marks)*
+
+(d) "She is more taller than her sister." *(2 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 6
+
+## Structural Question Bank — Composition and essay writing
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPOSITION AND ESSAY WRITING
+
+**Q1.** Write an essay of about 450 words on the following topic:
+
+"Describe a journey you will never forget. Explain why it remains memorable."
+
+Your essay should have a clear introduction, body, and conclusion. *(20 marks)*
+
+---
+
+**Q2.** Write an argumentative essay of about 450 words on the topic:
+
+"Mobile phones should be banned in secondary schools."
+
+Present a clear argument, support it with reasons and examples, and address at least one counter-argument. *(20 marks)*
+
+---
+
+**Q3.** Write a narrative essay of about 450 words beginning with the sentence:
+
+*"It was the last day of the school year, and nothing had gone as planned."*
+
+Use vivid description and a clear sequence of events. *(20 marks)*
+
+---
+
+**Q4.** Write an expository essay of about 450 words on the topic:
+
+"Explain the importance of agriculture to the economy of Cameroon."
+
+Organise your ideas logically and support them with specific examples. *(20 marks)*
+
+---
+
+**Q5.** Write a descriptive essay of about 450 words on the topic:
+
+"Describe your favourite place and explain why it is special to you."
+
+Use sensory details (sight, sound, smell, touch, taste) to bring the place to life. *(20 marks)*
+
+---
+
+**Q6.** Write an argumentative essay of about 450 words on the topic:
+
+"Examinations are not the best way to measure a student''s ability."
+
+Give reasons for your position and consider the opposing view. *(20 marks)*
+
+---
+
+**Q7.** Write a narrative essay of about 450 words ending with the sentence:
+
+*"That was the day I learned that honesty is always the best policy."*
+
+Build your story towards this conclusion. *(20 marks)*
+
+---
+
+**Q8.** Write a formal letter to the mayor of your town, complaining about the poor state of the roads in your area. Your letter should be about 350 words and should include:
+
+(a) Your address and the date. *(2 marks)*
+
+(b) A clear statement of the problem. *(6 marks)*
+
+(c) The effects of the problem on the community. *(6 marks)*
+
+(d) A request for action. *(6 marks)*
+
+---
+
+**Q9.** Write an expository essay of about 450 words on the topic:
+
+"Discuss the causes and effects of drug abuse among young people."
+
+Structure your essay with clear paragraphs. *(20 marks)*
+
+---
+
+**Q10.** Write a narrative essay of about 450 words on the topic:
+
+"Write a story that illustrates the saying: ''A friend in need is a friend indeed.''"
+
+Your story should have a clear plot, characters, and a lesson. *(20 marks)*
+
+---
+
+**Q11.** Write an argumentative essay of about 450 words on the topic:
+
+"Social media does more harm than good to young people."
+
+Support your argument with evidence and address the opposing view. *(20 marks)*
+
+---
+
+**Q12.** Write a descriptive essay of about 450 words on the topic:
+
+"Describe the scene at a busy market in your town."
+
+Use vivid language to convey the sights, sounds, and atmosphere. *(20 marks)*
+
+---
+
+**Q13.** Write a formal letter of application for the post of a sales assistant in a supermarket. Your letter should be about 350 words and should include:
+
+(a) Your address and the date. *(2 marks)*
+
+(b) The post you are applying for and where you saw it advertised. *(4 marks)*
+
+(c) Your qualifications and relevant experience. *(8 marks)*
+
+(d) A request for an interview. *(6 marks)*
+
+---
+
+**Q14.** Write an expository essay of about 450 words on the topic:
+
+"Explain the causes of road accidents in Cameroon and suggest ways to reduce them."
+
+Organise your answer into causes and solutions. *(20 marks)*
+
+---
+
+**Q15.** Write a narrative essay of about 450 words on the topic:
+
+"Write a story about a time when you had to make a difficult decision."
+
+Describe the situation, the options you faced, and the outcome. *(20 marks)*
+
+---
+
+**Q16.** Write an argumentative essay of about 450 words on the topic:
+
+"University education should be free for all students in Cameroon."
+
+Present a clear position with supporting arguments and counter-arguments. *(20 marks)*
+
+---
+
+**Q17.** Write a descriptive essay of about 450 words on the topic:
+
+"Describe a traditional ceremony you have witnessed."
+
+Include details of the setting, the participants, and the significance of the ceremony. *(20 marks)*
+
+---
+
+**Q18.** Write a formal letter to the editor of a national newspaper, expressing your views on the topic:
+
+"The importance of preserving Cameroon''s cultural heritage."
+
+Your letter should be about 350 words and should include a clear introduction, body, and conclusion. *(20 marks)*
+
+---
+
+**Q19.** Write an expository essay of about 450 words on the topic:
+
+"Discuss the benefits of learning a second language."
+
+Support your points with specific examples. *(20 marks)*
+
+---
+
+**Q20.** Write a narrative essay of about 450 words on the topic:
+
+"Write a story that ends with the sentence: ''Sometimes the smallest act of kindness means the most.''"
+
+Build your story towards this ending. *(20 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Language'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 7
+
+## Structural Question Bank — Comprehension and summary
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION AND SUMMARY
+
+**Q1.** Read the passage below and answer the questions that follow.
+
+*"The village market was more than a place of trade; it was the beating heart of the community. Here, farmers exchanged news with traders, and children learned the value of honest dealing. Yet in recent years, the market has been shrinking as young people migrate to the cities, leaving behind ageing vendors and empty stalls."*
+
+(a) In one sentence, state the main idea of the passage. *(3 marks)*
+
+(b) Give two reasons the writer gives for the market''s decline. *(4 marks)*
+
+(c) Explain what the writer means by "the beating heart of the community". *(4 marks)*
+
+---
+
+**Q2.** Summarise the following passage in not more than 60 words.
+
+*"Rainwater harvesting is an ancient practice that is regaining importance in Cameroon. By collecting runoff from rooftops into storage tanks, households can reduce their dependence on erratic municipal supplies. The water is ideal for gardening, washing, and, after proper treatment, even drinking. Critics argue that the initial cost of tanks and guttering is prohibitive, but supporters point out that the investment pays for itself within a few years through lower water bills and greater self-reliance."*
+
+Your summary must be in continuous prose and must not include direct quotations. *(10 marks)*
+
+---
+
+**Q3.** Read the passage and answer the questions that follow.
+
+*"The examination results were posted at dawn. For Amina, the moment was both terrifying and liberating. She had spent three sleepless nights rehearsing the worst-case scenario, yet when her name appeared on the list of successful candidates, she felt a surge of relief so powerful it left her breathless."*
+
+(a) Identify the dominant emotion in the passage and quote one phrase that supports your answer. *(4 marks)*
+
+(b) What does the phrase "rehearsing the worst-case scenario" reveal about Amina''s character? *(4 marks)*
+
+(c) Suggest a suitable title for the passage. *(2 marks)*
+
+---
+
+**Q4.** Read the passage and answer the questions that follow.
+
+*"Cameroon''s forests are among the most biodiverse on the continent, sheltering elephants, gorillas, and thousands of plant species. However, illegal logging and slash-and-burn farming are destroying these habitats at an alarming rate. Conservationists argue that protecting the forests is not merely an environmental concern but an economic one, since ecotourism and sustainable harvesting can generate lasting income for local communities."*
+
+(a) State two threats to Cameroon''s forests mentioned in the passage. *(4 marks)*
+
+(b) Explain why the writer describes forest protection as "an economic one". *(4 marks)*
+
+(c) Give the meaning of "biodiverse" as used in the passage. *(2 marks)*
+
+---
+
+**Q5.** Summarise the following passage in not more than 70 words.
+
+*"Mobile money has transformed financial life in Cameroon. Before its arrival, many rural families had no access to banks and relied on risky methods of storing and transferring cash. Today, a farmer can sell his cocoa, receive payment on his phone, and pay his children''s school fees without travelling to a town. Mobile money has also created jobs, as agents earn commissions on every transaction. Nevertheless, concerns remain about fraud, network failures, and the exclusion of the elderly who struggle with the technology."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q6.** Read the passage and answer the questions that follow.
+
+*"The old woman refused to be rushed. Each morning she swept her compound with slow, deliberate strokes, as if the dust were an enemy she had known for years. Her neighbours, who hurried past with phones pressed to their ears, did not understand that for her, sweeping was not a chore but a meditation."*
+
+(a) What does the writer suggest about the difference between the old woman and her neighbours? *(4 marks)*
+
+(b) Explain the meaning of "a meditation" in the context of the passage. *(4 marks)*
+
+(c) Identify one figure of speech used in the passage and explain its effect. *(4 marks)*
+
+---
+
+**Q7.** Read the passage and answer the questions that follow.
+
+*"The river had always been generous, giving the village fish, water, and fertile soil. But generosity, the elders warned, must never be taken for granted. When the rains failed and the river shrank to a muddy trickle, the village learned that nature''s gifts come with conditions."*
+
+(a) State the lesson the village learned. *(3 marks)*
+
+(b) Explain how the writer uses personification in the passage. *(4 marks)*
+
+(c) What is the writer''s attitude towards the river? Support your answer with evidence. *(4 marks)*
+
+---
+
+**Q8.** Summarise the following passage in not more than 60 words.
+
+*"School feeding programmes in Cameroon serve a dual purpose. For children, a guaranteed midday meal improves concentration, attendance, and overall health. For farmers, the programmes provide a reliable market for their produce, since schools purchase staples such as maize, beans, and groundnuts from local cooperatives. Critics note that the programmes are expensive to run and vulnerable to corruption, but supporters argue that the long-term benefits to education and agriculture outweigh the costs."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q9.** Read the passage and answer the questions that follow.
+
+*"He had rehearsed the speech a hundred times, yet when he stood before the crowd, the words evaporated. His palms were slick, his throat dry. Then he remembered his father''s advice: ''The audience wants you to succeed.'' He took a breath, and the first sentence came out steady."*
+
+(a) Describe the speaker''s state of mind at the start of the passage. *(3 marks)*
+
+(b) What effect does the father''s advice have on the speaker? *(4 marks)*
+
+(c) Explain the meaning of "the words evaporated". *(3 marks)*
+
+---
+
+**Q10.** Read the passage and answer the questions that follow.
+
+*"Plastic waste is choking Cameroon''s cities. Discarded bottles clog drainage channels, causing floods during the rainy season, while burning the waste releases toxic fumes. Some entrepreneurs have begun collecting plastics and recycling them into paving blocks, creating jobs and cleaning the streets. The challenge, they say, is not a lack of solutions but a lack of will."*
+
+(a) State two problems caused by plastic waste. *(4 marks)*
+
+(b) How have some entrepreneurs responded to the problem? *(3 marks)*
+
+(c) Explain the final sentence: "The challenge... is not a lack of solutions but a lack of will." *(4 marks)*
+
+---
+
+**Q11.** Summarise the following passage in not more than 65 words.
+
+*"Community health workers are the backbone of rural healthcare in Cameroon. Trained to diagnose common illnesses, administer vaccines, and advise on hygiene, they bring medical care to villages that would otherwise travel hours to reach a clinic. Their work has reduced infant mortality and improved maternal health in many regions. Yet these workers are often unpaid volunteers, and many leave the profession once they find better-paying work. Health experts argue that investing in community health workers is one of the most cost-effective ways to strengthen the health system."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q12.** Read the passage and answer the questions that follow.
+
+*"The two brothers inherited the same plot of land. One planted cocoa and prospered; the other planted nothing and waited for the land to feed him. Years later, the first brother built a house, while the second still waited, blaming the soil for his poverty."*
+
+(a) What is the moral of the passage? *(4 marks)*
+
+(b) Contrast the attitudes of the two brothers. *(4 marks)*
+
+(c) Explain the irony in the final sentence. *(4 marks)*
+
+---
+
+**Q13.** Read the passage and answer the questions that follow.
+
+*"Tourism in Cameroon is a sleeping giant. The country boasts beaches, mountains, wildlife parks, and a rich cultural heritage, yet it attracts a fraction of the visitors that smaller neighbours receive. Poor infrastructure, limited marketing, and safety concerns are often cited as reasons. Those who have visited, however, speak of a country that rewards the adventurous traveller."*
+
+(a) What does the writer mean by calling tourism "a sleeping giant"? *(4 marks)*
+
+(b) Give two reasons why Cameroon attracts few tourists. *(4 marks)*
+
+(c) What is the writer''s overall attitude towards Cameroon''s tourism potential? *(3 marks)*
+
+---
+
+**Q14.** Summarise the following passage in not more than 60 words.
+
+*"The traditional African family is often described as an extended family, where uncles, aunts, and grandparents share in raising children. This system provides a safety net: when parents fall ill or travel, relatives step in. It also transmits values, history, and skills across generations. However, urbanisation and economic pressures are weakening these ties, as families become smaller and more mobile. Sociologists warn that the loss of the extended family could leave many children without the support they once enjoyed."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q15.** Read the passage and answer the questions that follow.
+
+*"The teacher wrote a single word on the board: ''Why?'' For a moment the class was silent. Then hands shot up. The question, she explained, was more important than any answer, because it was the beginning of every discovery. From that day, her students stopped memorising and started questioning."*
+
+(a) What change does the teacher bring about in her students? *(4 marks)*
+
+(b) Explain the significance of the word "Why?" in the passage. *(4 marks)*
+
+(c) What does the passage suggest about the difference between memorising and questioning? *(4 marks)*
+
+---
+
+**Q16.** Read the passage and answer the questions that follow.
+
+*"The harvest festival drew people from every village in the district. Drummers led the procession, dancers in bright cloth followed, and elders presided over the ceremony with quiet dignity. For the young, it was a spectacle; for the old, a memory renewed. The festival was not merely entertainment; it was the community''s way of giving thanks and reaffirming its identity."*
+
+(a) State two purposes of the harvest festival. *(4 marks)*
+
+(b) Explain the difference between how the young and the old view the festival. *(4 marks)*
+
+(c) What does the phrase "a memory renewed" suggest? *(3 marks)*
+
+---
+
+**Q17.** Summarise the following passage in not more than 70 words.
+
+*"Reading is a habit that is dying among young people, replaced by short videos and instant messages. Yet reading offers what these distractions cannot: the ability to follow a complex argument, to enter another person''s mind, and to build the vocabulary that examinations reward. Teachers report that students who read widely write better essays and score higher in comprehension. Parents can help by setting aside time for reading at home and by letting children choose books that interest them, rather than forcing classics upon them."*
+
+Your summary must be in continuous prose. *(10 marks)*
+
+---
+
+**Q18.** Read the passage and answer the questions that follow.
+
+*"The bridge collapsed without warning, cutting off the only road to the hospital. For three days, the sick were carried across the river in canoes, and the dead were buried on the wrong side of the water. When the government finally announced plans to rebuild, the villagers did not celebrate; they had heard such promises before."*
+
+(a) What were the consequences of the bridge''s collapse? *(4 marks)*
+
+(b) Why did the villagers not celebrate the government''s announcement? *(4 marks)*
+
+(c) What does the passage reveal about the relationship between the villagers and the government? *(4 marks)*
+
+---
+
+**Q19.** Read the passage and answer the questions that follow.
+
+*"Success, the speaker told the graduates, is not a destination but a journey. It is measured not by the certificates on your wall but by the obstacles you overcome and the people you help along the way. The audience applauded, though some wondered privately whether the speaker, who had inherited his father''s business, truly understood the obstacles they faced."*
+
+(a) State the speaker''s definition of success. *(3 marks)*
+
+(b) Explain the irony in the final sentence. *(4 marks)*
+
+(c) Do you agree with the speaker''s view? Give a reason. *(3 marks)*
+
+---
+
+**Q20.** Read the passage and answer the questions that follow.
+
+*"The baobab tree stood at the centre of the village, older than anyone could remember. Its trunk was a storehouse of water, its bark a source of medicine, its leaves a vegetable for the evening pot. When developers proposed cutting it down to widen the road, the village united in protest. They had lost many things to progress; they would not lose the baobab."*
+
+(a) List three uses of the baobab tree mentioned in the passage. *(3 marks)*
+
+(b) Why did the village protest against the developers? *(4 marks)*
+
+(c) What does the final sentence reveal about the villagers'' attitude towards progress? *(4 marks)*
 ',
   null
 )

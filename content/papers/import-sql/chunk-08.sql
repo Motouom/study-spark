@@ -3,968 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Computer Science'
-  order by case when level = 'advanced' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 2'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Computer Science',
-  'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 2',
-  'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 2
-
-## Structural Question Bank - Set 2
-
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
-**Subject:** Computer Science
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: DATA REPRESENTATION
-
-**Q1.** Data representation: A school system with 31 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Data representation: A school system with 32 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Data representation: A school system with 33 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-![Computer network topology](/paper-diagrams/computer-network.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Data representation: A school system with 34 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Data representation: A school system with 35 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: COMPUTER ARCHITECTURE
-
-**Q6.** Computer architecture: A school system with 36 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Computer architecture: A school system with 37 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Computer architecture: A school system with 38 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Computer architecture: A school system with 39 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Computer architecture: A school system with 40 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: ALGORITHMS
-
-**Q11.** Algorithms: A school system with 41 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Algorithms: A school system with 42 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Algorithms: A school system with 43 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Algorithms: A school system with 44 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Algorithms: A school system with 45 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: PROGRAMMING
-
-**Q16.** Programming: A school system with 46 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Programming: A school system with 47 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Programming: A school system with 48 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Programming: A school system with 49 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Programming: A school system with 50 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: DATABASES
-
-**Q21.** Databases: A school system with 51 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Databases: A school system with 52 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Databases: A school system with 53 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Databases: A school system with 54 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Databases: A school system with 55 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: NETWORKS
-
-**Q26.** Networks: A school system with 56 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Networks: A school system with 57 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Networks: A school system with 58 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Networks: A school system with 59 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Networks: A school system with 60 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: SYSTEMS ANALYSIS
-
-**Q31.** Systems analysis: A school system with 61 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Systems analysis: A school system with 62 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Systems analysis: A school system with 63 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Systems analysis: A school system with 64 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Systems analysis: A school system with 65 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: CYBERSECURITY
-
-**Q36.** Cybersecurity: A school system with 66 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Cybersecurity: A school system with 67 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Cybersecurity: A school system with 68 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Cybersecurity: A school system with 69 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Cybersecurity: A school system with 70 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Computer Science'
-  order by case when level = 'advanced' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 3'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Computer Science',
-  'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 3',
-  'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 3
-
-## Structural Question Bank - Set 3
-
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
-**Subject:** Computer Science
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: DATA REPRESENTATION
-
-**Q1.** Data representation: A school system with 31 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Data representation: A school system with 32 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-![Computer network topology](/paper-diagrams/computer-network.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Data representation: A school system with 33 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Data representation: A school system with 34 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Data representation: A school system with 35 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: COMPUTER ARCHITECTURE
-
-**Q6.** Computer architecture: A school system with 36 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Computer architecture: A school system with 37 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Computer architecture: A school system with 38 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Computer architecture: A school system with 39 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Computer architecture: A school system with 40 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: ALGORITHMS
-
-**Q11.** Algorithms: A school system with 41 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Algorithms: A school system with 42 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Algorithms: A school system with 43 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Algorithms: A school system with 44 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Algorithms: A school system with 45 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: PROGRAMMING
-
-**Q16.** Programming: A school system with 46 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Programming: A school system with 47 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Programming: A school system with 48 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Programming: A school system with 49 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Programming: A school system with 50 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: DATABASES
-
-**Q21.** Databases: A school system with 51 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Databases: A school system with 52 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Databases: A school system with 53 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Databases: A school system with 54 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Databases: A school system with 55 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: NETWORKS
-
-**Q26.** Networks: A school system with 56 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Networks: A school system with 57 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Networks: A school system with 58 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Networks: A school system with 59 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Networks: A school system with 60 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: SYSTEMS ANALYSIS
-
-**Q31.** Systems analysis: A school system with 61 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Systems analysis: A school system with 62 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Systems analysis: A school system with 63 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Systems analysis: A school system with 64 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Systems analysis: A school system with 65 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: CYBERSECURITY
-
-**Q36.** Cybersecurity: A school system with 66 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Cybersecurity: A school system with 67 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Cybersecurity: A school system with 68 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Cybersecurity: A school system with 69 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Cybersecurity: A school system with 70 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'ICT'
+  where subject = 'Citizenship Education'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 1'
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -974,498 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'ICT',
-  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 1',
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 2',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 1
-
-## Structural Question Bank - Set 1
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical, science
-**Subject:** ICT
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: COMPUTER SYSTEMS
-
-**Q1.** Computer systems: A school system with 31 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Computer systems: A school system with 32 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-![Computer network topology](/paper-diagrams/computer-network.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Computer systems: A school system with 33 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Computer systems: A school system with 34 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Computer systems: A school system with 35 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: WORD PROCESSING
-
-**Q6.** Word processing: A school system with 36 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Word processing: A school system with 37 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Word processing: A school system with 38 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Word processing: A school system with 39 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Word processing: A school system with 40 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: SPREADSHEETS
-
-**Q11.** Spreadsheets: A school system with 41 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Spreadsheets: A school system with 42 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Spreadsheets: A school system with 43 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Spreadsheets: A school system with 44 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Spreadsheets: A school system with 45 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: DATABASES
-
-**Q16.** Databases: A school system with 46 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Databases: A school system with 47 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Databases: A school system with 48 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Databases: A school system with 49 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Databases: A school system with 50 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: INTERNET
-
-**Q21.** Internet: A school system with 51 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Internet: A school system with 52 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Internet: A school system with 53 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Internet: A school system with 54 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Internet: A school system with 55 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: PRESENTATION SOFTWARE
-
-**Q26.** Presentation software: A school system with 56 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Presentation software: A school system with 57 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Presentation software: A school system with 58 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Presentation software: A school system with 59 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Presentation software: A school system with 60 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: DIGITAL SAFETY
-
-**Q31.** Digital safety: A school system with 61 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Digital safety: A school system with 62 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Digital safety: A school system with 63 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Digital safety: A school system with 64 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Digital safety: A school system with 65 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: ICT IN SOCIETY
-
-**Q36.** ICT in society: A school system with 66 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** ICT in society: A school system with 67 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** ICT in society: A school system with 68 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** ICT in society: A school system with 69 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** ICT in society: A school system with 70 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'ICT'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 2'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'ICT',
-  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 2',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 2
 
 ## Structural Question Bank - Set 2
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** commercial, technical, science
-**Subject:** ICT
+**Series:** general, arts
+**Subject:** Citizenship Education
 
 **Instructions:**
 
@@ -1476,421 +45,419 @@ values (
 
 ---
 
-## SECTION 1: COMPUTER SYSTEMS
+## SECTION 1: STATE AND NATION
 
-**Q1.** Computer systems: A school system with 31 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q1.** State and nation: Community case 1 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Computer systems: A school system with 32 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** Computer systems: A school system with 33 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q2.** State and nation: Community case 2 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-![Computer network topology](/paper-diagrams/computer-network.svg)
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q4.** Computer systems: A school system with 34 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q3.** State and nation: Community case 3 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Computer systems: A school system with 35 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 2: WORD PROCESSING
+**Q4.** State and nation: Community case 4 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-**Q6.** Word processing: A school system with 36 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** Word processing: A school system with 37 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q5.** State and nation: Community case 5 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Word processing: A school system with 38 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** Word processing: A school system with 39 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 2: RIGHTS AND DUTIES
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q6.** Rights and duties: Community case 6 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
----
-
-**Q10.** Word processing: A school system with 40 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 3: SPREADSHEETS
+**Q7.** Rights and duties: Community case 7 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-**Q11.** Spreadsheets: A school system with 41 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q12.** Spreadsheets: A school system with 42 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q8.** Rights and duties: Community case 8 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Spreadsheets: A school system with 43 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q14.** Spreadsheets: A school system with 44 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q9.** Rights and duties: Community case 9 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Spreadsheets: A school system with 45 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 4: DATABASES
+**Q10.** Rights and duties: Community case 10 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-**Q16.** Databases: A school system with 46 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** Databases: A school system with 47 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 3: DEMOCRACY
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q11.** Democracy: Community case 11 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q18.** Databases: A school system with 48 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** Databases: A school system with 49 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q12.** Democracy: Community case 12 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Databases: A school system with 50 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 5: INTERNET
+**Q13.** Democracy: Community case 13 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-**Q21.** Internet: A school system with 51 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q22.** Internet: A school system with 52 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q14.** Democracy: Community case 14 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Internet: A school system with 53 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q24.** Internet: A school system with 54 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q15.** Democracy: Community case 15 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Internet: A school system with 55 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 6: PRESENTATION SOFTWARE
+## SECTION 4: ELECTIONS
 
-**Q26.** Presentation software: A school system with 56 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q16.** Elections: Community case 16 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Presentation software: A school system with 57 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q28.** Presentation software: A school system with 58 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q17.** Elections: Community case 17 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Presentation software: A school system with 59 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q30.** Presentation software: A school system with 60 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q18.** Elections: Community case 18 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: DIGITAL SAFETY
-
-**Q31.** Digital safety: A school system with 61 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q32.** Digital safety: A school system with 62 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q19.** Elections: Community case 19 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Digital safety: A school system with 63 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q34.** Digital safety: A school system with 64 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q20.** Elections: Community case 20 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Digital safety: A school system with 65 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 8: ICT IN SOCIETY
+## SECTION 5: CONSTITUTION
 
-**Q36.** ICT in society: A school system with 66 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q21.** Constitution: Community case 21 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** ICT in society: A school system with 67 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q38.** ICT in society: A school system with 68 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q22.** Constitution: Community case 22 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** ICT in society: A school system with 69 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q40.** ICT in society: A school system with 70 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q23.** Constitution: Community case 23 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Constitution: Community case 24 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Constitution: Community case 25 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: PEACE AND CONFLICT
+
+**Q26.** Peace and conflict: Community case 26 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Peace and conflict: Community case 27 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Peace and conflict: Community case 28 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Peace and conflict: Community case 29 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Peace and conflict: Community case 30 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: NATIONAL INTEGRATION
+
+**Q31.** National integration: Community case 31 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** National integration: Community case 32 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** National integration: Community case 33 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** National integration: Community case 34 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** National integration: Community case 35 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CIVIC RESPONSIBILITY
+
+**Q36.** Civic responsibility: Community case 36 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Civic responsibility: Community case 37 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Civic responsibility: Community case 38 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Civic responsibility: Community case 39 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Civic responsibility: Community case 40 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 ',
@@ -1911,14 +478,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'ICT'
+  where subject = 'Citizenship Education'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 3'
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -1928,21 +495,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'ICT',
-  'CAMEROON GCE ORDINARY LEVEL ICT P2 SET 3',
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 3',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ICT P2 SET 3
+  '# CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 3
 
 ## Structural Question Bank - Set 3
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** commercial, technical, science
-**Subject:** ICT
+**Series:** general, arts
+**Subject:** Citizenship Education
 
 **Instructions:**
 
@@ -1953,421 +520,419 @@ values (
 
 ---
 
-## SECTION 1: COMPUTER SYSTEMS
+## SECTION 1: STATE AND NATION
 
-**Q1.** Computer systems: A school system with 31 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q1.** State and nation: Community case 1 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Computer systems: A school system with 32 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-![Computer network topology](/paper-diagrams/computer-network.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** Computer systems: A school system with 33 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q2.** State and nation: Community case 2 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Computer systems: A school system with 34 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q5.** Computer systems: A school system with 35 learner records must process computer systems securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q3.** State and nation: Community case 3 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: WORD PROCESSING
-
-**Q6.** Word processing: A school system with 36 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** Word processing: A school system with 37 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q4.** State and nation: Community case 4 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Word processing: A school system with 38 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** Word processing: A school system with 39 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q5.** State and nation: Community case 5 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Word processing: A school system with 40 learner records must process word processing securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 3: SPREADSHEETS
+## SECTION 2: RIGHTS AND DUTIES
 
-**Q11.** Spreadsheets: A school system with 41 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q6.** Rights and duties: Community case 6 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Spreadsheets: A school system with 42 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q13.** Spreadsheets: A school system with 43 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q7.** Rights and duties: Community case 7 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Spreadsheets: A school system with 44 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q15.** Spreadsheets: A school system with 45 learner records must process spreadsheets securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q8.** Rights and duties: Community case 8 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: DATABASES
-
-**Q16.** Databases: A school system with 46 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** Databases: A school system with 47 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q9.** Rights and duties: Community case 9 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Databases: A school system with 48 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** Databases: A school system with 49 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q10.** Rights and duties: Community case 10 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Databases: A school system with 50 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 5: INTERNET
+## SECTION 3: DEMOCRACY
 
-**Q21.** Internet: A school system with 51 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q11.** Democracy: Community case 11 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Internet: A school system with 52 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q23.** Internet: A school system with 53 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q12.** Democracy: Community case 12 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Internet: A school system with 54 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q25.** Internet: A school system with 55 learner records must process internet securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q13.** Democracy: Community case 13 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: PRESENTATION SOFTWARE
-
-**Q26.** Presentation software: A school system with 56 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q27.** Presentation software: A school system with 57 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q14.** Democracy: Community case 14 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Presentation software: A school system with 58 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q29.** Presentation software: A school system with 59 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q15.** Democracy: Community case 15 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Presentation software: A school system with 60 learner records must process presentation software securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-## SECTION 7: DIGITAL SAFETY
+## SECTION 4: ELECTIONS
 
-**Q31.** Digital safety: A school system with 61 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q16.** Elections: Community case 16 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Digital safety: A school system with 62 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q33.** Digital safety: A school system with 63 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q17.** Elections: Community case 17 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Digital safety: A school system with 64 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q35.** Digital safety: A school system with 65 learner records must process digital safety securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q18.** Elections: Community case 18 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: ICT IN SOCIETY
-
-**Q36.** ICT in society: A school system with 66 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q37.** ICT in society: A school system with 67 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q19.** Elections: Community case 19 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** ICT in society: A school system with 68 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q39.** ICT in society: A school system with 69 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q20.** Elections: Community case 20 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q40.** ICT in society: A school system with 70 learner records must process ict in society securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 5: CONSTITUTION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q21.** Constitution: Community case 21 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Constitution: Community case 22 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Constitution: Community case 23 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Constitution: Community case 24 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Constitution: Community case 25 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: PEACE AND CONFLICT
+
+**Q26.** Peace and conflict: Community case 26 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Peace and conflict: Community case 27 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Peace and conflict: Community case 28 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Peace and conflict: Community case 29 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Peace and conflict: Community case 30 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: NATIONAL INTEGRATION
+
+**Q31.** National integration: Community case 31 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** National integration: Community case 32 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** National integration: Community case 33 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** National integration: Community case 34 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** National integration: Community case 35 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CIVIC RESPONSIBILITY
+
+**Q36.** Civic responsibility: Community case 36 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Civic responsibility: Community case 37 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Civic responsibility: Community case 38 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Civic responsibility: Community case 39 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Civic responsibility: Community case 40 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 ',
@@ -2388,14 +953,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Food and Nutrition'
+  where subject = 'Citizenship Education'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 1'
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 4'
   limit 1
 )
 insert into public.course_documents (
@@ -2405,21 +970,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Food and Nutrition',
-  'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 1',
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 4',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 1
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P2 SET 4
 
-## Structural Question Bank - Set 1
+## Structural Question Bank - Set 4
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general
-**Subject:** Food and Nutrition
+**Series:** general, arts
+**Subject:** Citizenship Education
 
 **Instructions:**
 
@@ -2430,33 +995,23 @@ values (
 
 ---
 
-## SECTION 1: NUTRIENTS
+## SECTION 1: RIGHTS & DUTIES
 
-**Q1.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
 
-![Balanced diet plate](/paper-diagrams/food-plate.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q3.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 2: GOVERNMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q2.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
@@ -2464,31 +1019,23 @@ values (
 
 ---
 
-**Q4.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 3: CONSTITUTION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q3.** Constitution: A detailed examination question covering constitution concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-## SECTION 2: MEAL PLANNING
+## SECTION 4: DEMOCRACY
 
-**Q6.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** Democracy: A detailed examination question covering democracy concepts and applications.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
@@ -2496,29 +1043,23 @@ values (
 
 ---
 
-**Q7.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 5: HUMAN RIGHTS
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q5.** Human Rights: A detailed examination question covering human rights concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q8.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 6: CIVIC PARTICIPATION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q6.** Civic Participation: A detailed examination question covering civic participation concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
@@ -2526,21 +1067,23 @@ values (
 
 ---
 
-**Q10.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 7: NATIONAL IDENTITY
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q7.** National Identity: A detailed examination question covering national identity concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-## SECTION 3: FOOD HYGIENE
+## SECTION 8: GLOBAL CITIZENSHIP
 
-**Q11.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q8.** Global Citizenship: A detailed examination question covering global citizenship concepts and applications.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
@@ -2548,29 +1091,23 @@ values (
 
 ---
 
-**Q12.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 9: RIGHTS & DUTIES
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q9.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q14.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 10: GOVERNMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q10.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
@@ -2578,275 +1115,6 @@ values (
 
 ---
 
-**Q15.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: COOKING METHODS
-
-**Q16.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: FOOD PRESERVATION
-
-**Q21.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: DIET AND HEALTH
-
-**Q26.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: CONSUMER EDUCATION
-
-**Q31.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: PRACTICAL PLANNING
-
-**Q36.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
 ',
   null
 )
@@ -2865,14 +1133,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Food and Nutrition'
+  where subject = 'Citizenship Education'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 2'
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 5'
   limit 1
 )
 insert into public.course_documents (
@@ -2882,21 +1150,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Food and Nutrition',
-  'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 2',
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 5',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 2
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P2 SET 5
 
-## Structural Question Bank - Set 2
+## Structural Question Bank - Set 5
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general
-**Subject:** Food and Nutrition
+**Series:** general, arts
+**Subject:** Citizenship Education
 
 **Instructions:**
 
@@ -2907,33 +1175,23 @@ values (
 
 ---
 
-## SECTION 1: NUTRIENTS
+## SECTION 1: RIGHTS & DUTIES
 
-**Q1.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
 
-![Balanced diet plate](/paper-diagrams/food-plate.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q3.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 2: GOVERNMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q2.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
@@ -2941,31 +1199,23 @@ values (
 
 ---
 
-**Q4.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 3: CONSTITUTION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q3.** Constitution: A detailed examination question covering constitution concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-## SECTION 2: MEAL PLANNING
+## SECTION 4: DEMOCRACY
 
-**Q6.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** Democracy: A detailed examination question covering democracy concepts and applications.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
@@ -2973,29 +1223,23 @@ values (
 
 ---
 
-**Q7.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 5: HUMAN RIGHTS
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q5.** Human Rights: A detailed examination question covering human rights concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q8.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 6: CIVIC PARTICIPATION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q6.** Civic Participation: A detailed examination question covering civic participation concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
@@ -3003,21 +1247,23 @@ values (
 
 ---
 
-**Q10.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 7: NATIONAL IDENTITY
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q7.** National Identity: A detailed examination question covering national identity concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-## SECTION 3: FOOD HYGIENE
+## SECTION 8: GLOBAL CITIZENSHIP
 
-**Q11.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q8.** Global Citizenship: A detailed examination question covering global citizenship concepts and applications.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
@@ -3025,29 +1271,23 @@ values (
 
 ---
 
-**Q12.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 9: RIGHTS & DUTIES
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q9.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q14.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 10: GOVERNMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q10.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
@@ -3055,275 +1295,6 @@ values (
 
 ---
 
-**Q15.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: COOKING METHODS
-
-**Q16.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: FOOD PRESERVATION
-
-**Q21.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: DIET AND HEALTH
-
-**Q26.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: CONSUMER EDUCATION
-
-**Q31.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: PRACTICAL PLANNING
-
-**Q36.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
 ',
   null
 )
@@ -3342,14 +1313,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Food and Nutrition'
+  where subject = 'Citizenship Education'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 3'
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 6'
   limit 1
 )
 insert into public.course_documents (
@@ -3359,21 +1330,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Food and Nutrition',
-  'CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 3',
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 6',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL FOOD AND NUTRITION P2 SET 3
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P2 SET 6
 
-## Structural Question Bank - Set 3
+## Structural Question Bank - Set 6
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general
-**Subject:** Food and Nutrition
+**Series:** general, arts
+**Subject:** Citizenship Education
 
 **Instructions:**
 
@@ -3384,33 +1355,23 @@ values (
 
 ---
 
-## SECTION 1: NUTRIENTS
+## SECTION 1: RIGHTS & DUTIES
 
-**Q1.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
 
-![Balanced diet plate](/paper-diagrams/food-plate.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q3.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 2: GOVERNMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q2.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
@@ -3418,31 +1379,23 @@ values (
 
 ---
 
-**Q4.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 3: CONSTITUTION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q3.** Constitution: A detailed examination question covering constitution concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Nutrients: A biological investigation on nutrients compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-## SECTION 2: MEAL PLANNING
+## SECTION 4: DEMOCRACY
 
-**Q6.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** Democracy: A detailed examination question covering democracy concepts and applications.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
@@ -3450,29 +1403,23 @@ values (
 
 ---
 
-**Q7.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 5: HUMAN RIGHTS
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q5.** Human Rights: A detailed examination question covering human rights concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q8.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 6: CIVIC PARTICIPATION
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q6.** Civic Participation: A detailed examination question covering civic participation concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
@@ -3480,21 +1427,23 @@ values (
 
 ---
 
-**Q10.** Meal planning: A biological investigation on meal planning compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 7: NATIONAL IDENTITY
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q7.** National Identity: A detailed examination question covering national identity concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-## SECTION 3: FOOD HYGIENE
+## SECTION 8: GLOBAL CITIZENSHIP
 
-**Q11.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q8.** Global Citizenship: A detailed examination question covering global citizenship concepts and applications.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
 
@@ -3502,29 +1451,23 @@ values (
 
 ---
 
-**Q12.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 9: RIGHTS & DUTIES
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q9.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
 
 ---
 
-**Q14.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 10: GOVERNMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q10.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
 
@@ -3532,275 +1475,6 @@ values (
 
 ---
 
-**Q15.** Food hygiene: A biological investigation on food hygiene compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: COOKING METHODS
-
-**Q16.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Cooking methods: A biological investigation on cooking methods compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: FOOD PRESERVATION
-
-**Q21.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Food preservation: A biological investigation on food preservation compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: DIET AND HEALTH
-
-**Q26.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Diet and health: A biological investigation on diet and health compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: CONSUMER EDUCATION
-
-**Q31.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Consumer education: A biological investigation on consumer education compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: PRACTICAL PLANNING
-
-**Q36.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Practical planning: A biological investigation on practical planning compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
 ',
   null
 )
@@ -3819,14 +1493,374 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Food Science and Nutrition'
+  where subject = 'Citizenship Education'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P2 SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Citizenship Education
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: RIGHTS & DUTIES
+
+**Q1.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: GOVERNMENT
+
+**Q2.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: CONSTITUTION
+
+**Q3.** Constitution: A detailed examination question covering constitution concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: DEMOCRACY
+
+**Q4.** Democracy: A detailed examination question covering democracy concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: HUMAN RIGHTS
+
+**Q5.** Human Rights: A detailed examination question covering human rights concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: CIVIC PARTICIPATION
+
+**Q6.** Civic Participation: A detailed examination question covering civic participation concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: NATIONAL IDENTITY
+
+**Q7.** National Identity: A detailed examination question covering national identity concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: GLOBAL CITIZENSHIP
+
+**Q8.** Global Citizenship: A detailed examination question covering global citizenship concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 9: RIGHTS & DUTIES
+
+**Q9.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 10: GOVERNMENT
+
+**Q10.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Citizenship Education'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P2 SET 8
+
+## Structural Question Bank - Set 8
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Citizenship Education
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: RIGHTS & DUTIES
+
+**Q1.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: GOVERNMENT
+
+**Q2.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: CONSTITUTION
+
+**Q3.** Constitution: A detailed examination question covering constitution concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: DEMOCRACY
+
+**Q4.** Democracy: A detailed examination question covering democracy concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: HUMAN RIGHTS
+
+**Q5.** Human Rights: A detailed examination question covering human rights concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: CIVIC PARTICIPATION
+
+**Q6.** Civic Participation: A detailed examination question covering civic participation concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: NATIONAL IDENTITY
+
+**Q7.** National Identity: A detailed examination question covering national identity concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: GLOBAL CITIZENSHIP
+
+**Q8.** Global Citizenship: A detailed examination question covering global citizenship concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 9: RIGHTS & DUTIES
+
+**Q9.** Rights & Duties: A detailed examination question covering rights & duties concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 10: GOVERNMENT
+
+**Q10.** Government: A detailed examination question covering government concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
   order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 1'
+  where title = 'CAMEROON GCE ADVANCED LEVEL COMMERCE P1 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -3836,448 +1870,635 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Food Science and Nutrition',
-  'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 1',
+  'Commerce',
+  'CAMEROON GCE ADVANCED LEVEL COMMERCE P1 SET 1',
   'english',
   'advanced',
   array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 1
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 1
 
-## Structural Question Bank - Set 1
+## Multiple Choice Question Bank
 
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
-**Subject:** Food Science and Nutrition
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
 
 **Instructions:**
 
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
 
 ---
 
-## SECTION 1: FOOD CHEMISTRY
+## QUESTIONS
 
-**Q1.** Food chemistry: Experiment 1 studies food chemistry by changing concentration 0.2 mol dm-3, temperature 21 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q1.** The buying and selling of goods and services is called:
 
-![Balanced diet plate](/paper-diagrams/food-plate.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. trade  
+B. commerce  
+C. industry  
+D. transport  
 
 ---
 
-**Q2.** Food chemistry: Experiment 2 studies food chemistry by changing concentration 0.3 mol dm-3, temperature 22 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q2.** The activities that facilitate trade are called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Food chemistry: Experiment 3 studies food chemistry by changing concentration 0.4 mol dm-3, temperature 23 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. aids to trade  
+B. commerce  
+C. production  
+D. industry  
 
 ---
 
-**Q4.** Food chemistry: Experiment 4 studies food chemistry by changing concentration 0.5 mol dm-3, temperature 24 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q3.** Trade carried out within a country is called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Food chemistry: Experiment 5 studies food chemistry by changing concentration 0.6 mol dm-3, temperature 25 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. home trade  
+B. international trade  
+C. foreign trade  
+D. barter trade  
 
 ---
 
-## SECTION 2: MICROBIOLOGY
+**Q4.** Trade carried out between countries is called:
 
-**Q6.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. foreign trade  
+B. local trade  
+C. retail trade  
+D. home trade  
 
 ---
 
-**Q7.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q5.** The person who buys goods in large quantities from producers is the:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. wholesaler  
+B. agent  
+C. retailer  
+D. consumer  
 
 ---
 
-**Q9.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q6.** The person who sells goods in small quantities to consumers is the:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. retailer  
+B. manufacturer  
+C. producer  
+D. wholesaler  
 
 ---
 
-## SECTION 3: NUTRITIONAL BIOCHEMISTRY
+**Q7.** Goods bought from other countries are called:
 
-**Q11.** Nutritional biochemistry: Experiment 11 studies nutritional biochemistry by changing concentration 1.2 mol dm-3, temperature 31 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. exports  
+B. imports  
+C. surplus  
+D. deficit  
 
 ---
 
-**Q12.** Nutritional biochemistry: Experiment 12 studies nutritional biochemistry by changing concentration 1.3 mol dm-3, temperature 32 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q8.** Goods sold to other countries are called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Nutritional biochemistry: Experiment 13 studies nutritional biochemistry by changing concentration 1.4 mol dm-3, temperature 33 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. imports  
+B. exports  
+C. deficit  
+D. surplus  
 
 ---
 
-**Q14.** Nutritional biochemistry: Experiment 14 studies nutritional biochemistry by changing concentration 1.5 mol dm-3, temperature 34 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q9.** The document that lists the goods sold and their prices is an:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Nutritional biochemistry: Experiment 15 studies nutritional biochemistry by changing concentration 1.6 mol dm-3, temperature 35 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. receipt  
+B. cheque  
+C. invoice  
+D. order  
 
 ---
 
-## SECTION 4: FOOD PROCESSING
+**Q10.** The document issued to confirm payment is a:
 
-**Q16.** Food processing: A biological investigation on food processing compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. invoice  
+B. credit note  
+C. debit note  
+D. receipt  
 
 ---
 
-**Q17.** Food processing: A biological investigation on food processing compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q11.** The document issued when goods are returned by a buyer is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Food processing: A biological investigation on food processing compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. debit note  
+B. receipt  
+C. credit note  
+D. invoice  
 
 ---
 
-**Q19.** Food processing: A biological investigation on food processing compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** The document issued when goods are returned by a seller is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Food processing: A biological investigation on food processing compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. credit note  
+B. receipt  
+C. invoice  
+D. debit note  
 
 ---
 
-## SECTION 5: QUALITY CONTROL
+**Q13.** The document used in sea transport of goods is the:
 
-**Q21.** Quality control: A biological investigation on quality control compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. invoice  
+B. bill of lading  
+C. air waybill  
+D. receipt  
 
 ---
 
-**Q22.** Quality control: A biological investigation on quality control compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** The document used in air transport of goods is the:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Quality control: A biological investigation on quality control compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. invoice  
+B. air waybill  
+C. receipt  
+D. bill of lading  
 
 ---
 
-**Q24.** Quality control: A biological investigation on quality control compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q15.** The storage of goods until they are needed is called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Quality control: A biological investigation on quality control compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. advertising  
+B. transport  
+C. warehousing  
+D. insurance  
 
 ---
 
-## SECTION 6: DIET THERAPY
+**Q16.** The movement of goods from one place to another is called:
 
-**Q26.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. advertising  
+B. warehousing  
+C. banking  
+D. transport  
 
 ---
 
-**Q27.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** The promotion of goods to attract buyers is called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. warehousing  
+B. insurance  
+C. advertising  
+D. transport  
 
 ---
 
-**Q29.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** A business owned by one person is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. company  
+B. cooperative  
+C. partnership  
+D. sole proprietorship  
 
 ---
 
-## SECTION 7: PUBLIC HEALTH NUTRITION
+**Q19.** A business owned by two to twenty people is a:
 
-**Q31.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. cooperative  
+B. partnership  
+C. sole proprietorship  
+D. company  
 
 ---
 
-**Q32.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q20.** A business with limited liability owned by shareholders is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. cooperative  
+B. limited liability company  
+C. partnership  
+D. sole proprietorship  
 
 ---
 
-**Q34.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q21.** A business owned and run by its members is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. company  
+B. sole proprietorship  
+C. cooperative society  
+D. partnership  
 
 ---
 
-## SECTION 8: FOOD PRODUCT DEVELOPMENT
+**Q22.** A company whose shares are sold to the public is a:
 
-**Q36.** Food product development: A biological investigation on food product development compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. partnership  
+B. private limited company  
+C. sole proprietorship  
+D. public limited company  
 
 ---
 
-**Q37.** Food product development: A biological investigation on food product development compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q23.** A company whose shares are not sold to the public is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Food product development: A biological investigation on food product development compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. partnership  
+B. sole proprietorship  
+C. private limited company  
+D. public limited company  
 
 ---
 
-**Q39.** Food product development: A biological investigation on food product development compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q24.** A large company operating in several countries is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+A. cooperative  
+B. partnership  
+C. sole proprietorship  
+D. multinational company  
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+---
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+**Q25.** Buying and selling goods over the internet is called:
+
+A. e-commerce  
+B. e-banking  
+C. e-learning  
+D. e-mail  
 
 ---
 
-**Q40.** Food product development: A biological investigation on food product development compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q26.** An organisation that protects the interests of workers is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. trade union  
+B. consumer association  
+C. company  
+D. cooperative  
 
 ---
+
+**Q27.** The four Ps of the marketing mix are product, price, place, and:
+
+A. promotion  
+B. process  
+C. people  
+D. profit  
+
+---
+
+**Q28.** The place where buyers and sellers meet to exchange goods is a:
+
+A. market  
+B. bank  
+C. factory  
+D. warehouse  
+
+---
+
+**Q29.** The person who buys goods for personal use is a:
+
+A. consumer  
+B. producer  
+C. retailer  
+D. wholesaler  
+
+---
+
+**Q30.** The person who produces goods is a:
+
+A. producer  
+B. wholesaler  
+C. retailer  
+D. consumer  
+
+---
+
+**Q31.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. money  
+C. services  
+D. credit  
+
+---
+
+**Q32.** The bank that issues currency and controls the money supply is the:
+
+A. commercial bank  
+B. central bank  
+C. merchant bank  
+D. development bank  
+
+---
+
+**Q33.** The bank that accepts deposits and gives loans to the public is a:
+
+A. central bank  
+B. development bank  
+C. commercial bank  
+D. stock exchange  
+
+---
+
+**Q34.** The account used for frequent transactions is a:
+
+A. savings account  
+B. fixed deposit account  
+C. loan account  
+D. current account  
+
+---
+
+**Q35.** The account that earns interest and encourages saving is a:
+
+A. current account  
+B. loan account  
+C. savings account  
+D. overdraft account  
+
+---
+
+**Q36.** A written order to a bank to pay a stated sum is a:
+
+A. receipt  
+B. credit note  
+C. invoice  
+D. cheque  
+
+---
+
+**Q37.** A cheque that can only be paid into a bank account is a:
+
+A. blank cheque  
+B. crossed cheque  
+C. open cheque  
+D. post-dated cheque  
+
+---
+
+**Q38.** The person who writes a cheque is the:
+
+A. payee  
+B. drawer  
+C. endorser  
+D. drawee  
+
+---
+
+**Q39.** The bank on which a cheque is drawn is the:
+
+A. payee  
+B. drawer  
+C. drawee  
+D. endorser  
+
+---
+
+**Q40.** The person to whom a cheque is paid is the:
+
+A. drawee  
+B. drawer  
+C. endorser  
+D. payee  
+
+---
+
+**Q41.** The money charged for borrowing money is called:
+
+A. commission  
+B. dividend  
+C. interest  
+D. premium  
+
+---
+
+**Q42.** The simple interest on 100,000 FCFA at 5% for 2 years is:
+
+A. 20,000 FCFA  
+B. 2,000 FCFA  
+C. 5,000 FCFA  
+D. 10,000 FCFA  
+
+---
+
+**Q43.** The protection against financial loss is called:
+
+A. warehousing  
+B. insurance  
+C. banking  
+D. advertising  
+
+---
+
+**Q44.** The amount paid for an insurance policy is the:
+
+A. dividend  
+B. premium  
+C. interest  
+D. claim  
+
+---
+
+**Q45.** The document that contains the terms of an insurance contract is the:
+
+A. receipt  
+B. premium  
+C. policy  
+D. claim  
+
+---
+
+**Q46.** The payment made by an insurance company for a loss is a:
+
+A. dividend  
+B. premium  
+C. policy  
+D. claim  
+
+---
+
+**Q47.** The principle that the insured must not profit from a loss is:
+
+A. contribution  
+B. utmost good faith  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q48.** The principle that the insured must have a financial interest in the subject matter is:
+
+A. subrogation  
+B. utmost good faith  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q49.** Insurance against the death of the insured is:
+
+A. life insurance  
+B. fire insurance  
+C. marine insurance  
+D. motor insurance  
+
+---
+
+**Q50.** Insurance against damage to goods in transit by sea is:
+
+A. marine insurance  
+B. fire insurance  
+C. motor insurance  
+D. life insurance  
+
+---
+
+**Q51.** The exchange of information between people is called:
+
+A. communication  
+B. advertising  
+C. transport  
+D. banking  
+
+---
+
+**Q52.** The protection of consumers from unfair practices is called:
+
+A. consumer protection  
+B. marketing  
+C. insurance  
+D. advertising  
+
+---
+
+**Q53.** An organisation that protects the interests of consumers is a:
+
+A. consumer association  
+B. company  
+C. trade union  
+D. cooperative  
+
+---
+
+**Q54.** A financial institution that gives small loans to small businesses is a:
+
+A. microfinance institution  
+B. insurance company  
+C. stock exchange  
+D. central bank  
+
+---
+
+**Q55.** The market where shares are bought and sold is the:
+
+A. commodity market  
+B. stock exchange  
+C. money market  
+D. foreign exchange market  
+
+---
+
+**Q56.** The unit of ownership of a company is a:
+
+A. bond  
+B. share  
+C. premium  
+D. cheque  
+
+---
+
+**Q57.** A loan to a company or government that pays interest is a:
+
+A. share  
+B. cheque  
+C. bond  
+D. premium  
+
+---
+
+**Q58.** A general rise in the price level is called:
+
+A. deflation  
+B. recession  
+C. depression  
+D. inflation  
+
+---
+
+**Q59.** A plan of expected income and expenditure is a:
+
+A. balance sheet  
+B. receipt  
+C. budget  
+D. invoice  
+
+---
+
+**Q60.** The stock exchange in Cameroon is located in:
+
+A. Yaoundé  
+B. Garoua  
+C. Buea  
+D. Douala  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
 ',
   null
 )
@@ -4296,14 +2517,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Food Science and Nutrition'
+  where subject = 'Commerce'
   order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL COMMERCE P1 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -4313,448 +2534,1299 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Food Science and Nutrition',
-  'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 2',
+  'Commerce',
+  'CAMEROON GCE ADVANCED LEVEL COMMERCE P1 SET 2',
   'english',
   'advanced',
   array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 2
 
-## Structural Question Bank - Set 2
+## Multiple Choice Question Bank
 
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
-**Subject:** Food Science and Nutrition
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
 
 **Instructions:**
 
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
 
 ---
 
-## SECTION 1: FOOD CHEMISTRY
+## QUESTIONS
 
-**Q1.** Food chemistry: Experiment 1 studies food chemistry by changing concentration 0.3 mol dm-3, temperature 21 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q1.** Trade carried out between countries is called:
 
-![Balanced diet plate](/paper-diagrams/food-plate.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. foreign trade  
+B. home trade  
+C. local trade  
+D. retail trade  
 
 ---
 
-**Q2.** Food chemistry: Experiment 2 studies food chemistry by changing concentration 0.4 mol dm-3, temperature 22 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q2.** The person who buys goods in large quantities from producers is the:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Food chemistry: Experiment 3 studies food chemistry by changing concentration 0.5 mol dm-3, temperature 23 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. wholesaler  
+B. retailer  
+C. agent  
+D. consumer  
 
 ---
 
-**Q4.** Food chemistry: Experiment 4 studies food chemistry by changing concentration 0.6 mol dm-3, temperature 24 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q3.** The person who sells goods in small quantities to consumers is the:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Food chemistry: Experiment 5 studies food chemistry by changing concentration 0.7 mol dm-3, temperature 25 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. retailer  
+B. producer  
+C. wholesaler  
+D. manufacturer  
 
 ---
 
-## SECTION 2: MICROBIOLOGY
+**Q4.** Goods bought from other countries are called:
 
-**Q6.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. imports  
+B. surplus  
+C. deficit  
+D. exports  
 
 ---
 
-**Q7.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q5.** Goods sold to other countries are called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. exports  
+B. deficit  
+C. imports  
+D. surplus  
 
 ---
 
-**Q9.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q6.** The document that lists the goods sold and their prices is an:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Microbiology: A biological investigation on microbiology compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. invoice  
+B. order  
+C. cheque  
+D. receipt  
 
 ---
 
-## SECTION 3: NUTRITIONAL BIOCHEMISTRY
+**Q7.** The document issued to confirm payment is a:
 
-**Q11.** Nutritional biochemistry: Experiment 11 studies nutritional biochemistry by changing concentration 1.3 mol dm-3, temperature 31 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. invoice  
+B. receipt  
+C. credit note  
+D. debit note  
 
 ---
 
-**Q12.** Nutritional biochemistry: Experiment 12 studies nutritional biochemistry by changing concentration 1.4 mol dm-3, temperature 32 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q8.** The document issued when goods are returned by a buyer is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Nutritional biochemistry: Experiment 13 studies nutritional biochemistry by changing concentration 1.5 mol dm-3, temperature 33 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. debit note  
+B. credit note  
+C. receipt  
+D. invoice  
 
 ---
 
-**Q14.** Nutritional biochemistry: Experiment 14 studies nutritional biochemistry by changing concentration 1.6 mol dm-3, temperature 34 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q9.** The document issued when goods are returned by a seller is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Nutritional biochemistry: Experiment 15 studies nutritional biochemistry by changing concentration 1.7 mol dm-3, temperature 35 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. credit note  
+B. invoice  
+C. debit note  
+D. receipt  
 
 ---
 
-## SECTION 4: FOOD PROCESSING
+**Q10.** The document used in sea transport of goods is the:
 
-**Q16.** Food processing: A biological investigation on food processing compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. air waybill  
+B. invoice  
+C. receipt  
+D. bill of lading  
 
 ---
 
-**Q17.** Food processing: A biological investigation on food processing compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q11.** The document used in air transport of goods is the:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Food processing: A biological investigation on food processing compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. bill of lading  
+B. receipt  
+C. air waybill  
+D. invoice  
 
 ---
 
-**Q19.** Food processing: A biological investigation on food processing compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** The storage of goods until they are needed is called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Food processing: A biological investigation on food processing compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. transport  
+B. insurance  
+C. advertising  
+D. warehousing  
 
 ---
 
-## SECTION 5: QUALITY CONTROL
+**Q13.** The movement of goods from one place to another is called:
 
-**Q21.** Quality control: A biological investigation on quality control compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. advertising  
+B. transport  
+C. warehousing  
+D. banking  
 
 ---
 
-**Q22.** Quality control: A biological investigation on quality control compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** The promotion of goods to attract buyers is called:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Quality control: A biological investigation on quality control compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. warehousing  
+B. advertising  
+C. insurance  
+D. transport  
 
 ---
 
-**Q24.** Quality control: A biological investigation on quality control compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q15.** A business owned by one person is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Quality control: A biological investigation on quality control compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. company  
+B. partnership  
+C. sole proprietorship  
+D. cooperative  
 
 ---
 
-## SECTION 6: DIET THERAPY
+**Q16.** A business owned by two to twenty people is a:
 
-**Q26.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. company  
+B. sole proprietorship  
+C. cooperative  
+D. partnership  
 
 ---
 
-**Q27.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** A business with limited liability owned by shareholders is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. partnership  
+B. cooperative  
+C. limited liability company  
+D. sole proprietorship  
 
 ---
 
-**Q29.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** A business owned and run by its members is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Diet therapy: A biological investigation on diet therapy compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. partnership  
+B. company  
+C. sole proprietorship  
+D. cooperative society  
 
 ---
 
-## SECTION 7: PUBLIC HEALTH NUTRITION
+**Q19.** A company whose shares are sold to the public is a:
 
-**Q31.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. partnership  
+B. public limited company  
+C. private limited company  
+D. sole proprietorship  
 
 ---
 
-**Q32.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q20.** A company whose shares are not sold to the public is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. partnership  
+B. private limited company  
+C. sole proprietorship  
+D. public limited company  
 
 ---
 
-**Q34.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q21.** A large company operating in several countries is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Public health nutrition: A biological investigation on public health nutrition compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. cooperative  
+B. sole proprietorship  
+C. multinational company  
+D. partnership  
 
 ---
 
-## SECTION 8: FOOD PRODUCT DEVELOPMENT
+**Q22.** Buying and selling goods over the internet is called:
 
-**Q36.** Food product development: A biological investigation on food product development compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. e-mail  
+B. e-banking  
+C. e-learning  
+D. e-commerce  
 
 ---
 
-**Q37.** Food product development: A biological investigation on food product development compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q23.** An organisation that protects the interests of workers is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Food product development: A biological investigation on food product development compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. company  
+B. cooperative  
+C. trade union  
+D. consumer association  
 
 ---
 
-**Q39.** Food product development: A biological investigation on food product development compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q24.** The four Ps of the marketing mix are product, price, place, and:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+A. profit  
+B. process  
+C. people  
+D. promotion  
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+---
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+**Q25.** The place where buyers and sellers meet to exchange goods is a:
+
+A. market  
+B. warehouse  
+C. bank  
+D. factory  
 
 ---
 
-**Q40.** Food product development: A biological investigation on food product development compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q26.** The person who buys goods for personal use is a:
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+A. consumer  
+B. retailer  
+C. producer  
+D. wholesaler  
 
 ---
+
+**Q27.** The person who produces goods is a:
+
+A. producer  
+B. retailer  
+C. consumer  
+D. wholesaler  
+
+---
+
+**Q28.** The buying and selling of goods and services is called:
+
+A. trade  
+B. industry  
+C. transport  
+D. commerce  
+
+---
+
+**Q29.** The activities that facilitate trade are called:
+
+A. aids to trade  
+B. production  
+C. commerce  
+D. industry  
+
+---
+
+**Q30.** Trade carried out within a country is called:
+
+A. home trade  
+B. barter trade  
+C. international trade  
+D. foreign trade  
+
+---
+
+**Q31.** The account used for frequent transactions is a:
+
+A. savings account  
+B. current account  
+C. fixed deposit account  
+D. loan account  
+
+---
+
+**Q32.** The account that earns interest and encourages saving is a:
+
+A. current account  
+B. savings account  
+C. loan account  
+D. overdraft account  
+
+---
+
+**Q33.** A written order to a bank to pay a stated sum is a:
+
+A. receipt  
+B. invoice  
+C. cheque  
+D. credit note  
+
+---
+
+**Q34.** A cheque that can only be paid into a bank account is a:
+
+A. open cheque  
+B. blank cheque  
+C. post-dated cheque  
+D. crossed cheque  
+
+---
+
+**Q35.** The person who writes a cheque is the:
+
+A. drawee  
+B. endorser  
+C. drawer  
+D. payee  
+
+---
+
+**Q36.** The bank on which a cheque is drawn is the:
+
+A. drawer  
+B. endorser  
+C. payee  
+D. drawee  
+
+---
+
+**Q37.** The person to whom a cheque is paid is the:
+
+A. drawee  
+B. payee  
+C. drawer  
+D. endorser  
+
+---
+
+**Q38.** The money charged for borrowing money is called:
+
+A. commission  
+B. interest  
+C. dividend  
+D. premium  
+
+---
+
+**Q39.** The simple interest on 100,000 FCFA at 5% for 2 years is:
+
+A. 20,000 FCFA  
+B. 5,000 FCFA  
+C. 10,000 FCFA  
+D. 2,000 FCFA  
+
+---
+
+**Q40.** The protection against financial loss is called:
+
+A. advertising  
+B. banking  
+C. warehousing  
+D. insurance  
+
+---
+
+**Q41.** The amount paid for an insurance policy is the:
+
+A. interest  
+B. dividend  
+C. premium  
+D. claim  
+
+---
+
+**Q42.** The document that contains the terms of an insurance contract is the:
+
+A. claim  
+B. receipt  
+C. premium  
+D. policy  
+
+---
+
+**Q43.** The payment made by an insurance company for a loss is a:
+
+A. dividend  
+B. claim  
+C. premium  
+D. policy  
+
+---
+
+**Q44.** The principle that the insured must not profit from a loss is:
+
+A. contribution  
+B. indemnity  
+C. utmost good faith  
+D. insurable interest  
+
+---
+
+**Q45.** The principle that the insured must have a financial interest in the subject matter is:
+
+A. subrogation  
+B. indemnity  
+C. insurable interest  
+D. utmost good faith  
+
+---
+
+**Q46.** Insurance against the death of the insured is:
+
+A. motor insurance  
+B. fire insurance  
+C. marine insurance  
+D. life insurance  
+
+---
+
+**Q47.** Insurance against damage to goods in transit by sea is:
+
+A. motor insurance  
+B. life insurance  
+C. marine insurance  
+D. fire insurance  
+
+---
+
+**Q48.** The exchange of information between people is called:
+
+A. banking  
+B. advertising  
+C. transport  
+D. communication  
+
+---
+
+**Q49.** The protection of consumers from unfair practices is called:
+
+A. consumer protection  
+B. advertising  
+C. marketing  
+D. insurance  
+
+---
+
+**Q50.** An organisation that protects the interests of consumers is a:
+
+A. consumer association  
+B. trade union  
+C. company  
+D. cooperative  
+
+---
+
+**Q51.** A financial institution that gives small loans to small businesses is a:
+
+A. microfinance institution  
+B. stock exchange  
+C. central bank  
+D. insurance company  
+
+---
+
+**Q52.** The market where shares are bought and sold is the:
+
+A. stock exchange  
+B. money market  
+C. foreign exchange market  
+D. commodity market  
+
+---
+
+**Q53.** The unit of ownership of a company is a:
+
+A. share  
+B. premium  
+C. bond  
+D. cheque  
+
+---
+
+**Q54.** A loan to a company or government that pays interest is a:
+
+A. bond  
+B. premium  
+C. cheque  
+D. share  
+
+---
+
+**Q55.** A general rise in the price level is called:
+
+A. deflation  
+B. inflation  
+C. recession  
+D. depression  
+
+---
+
+**Q56.** A plan of expected income and expenditure is a:
+
+A. balance sheet  
+B. budget  
+C. receipt  
+D. invoice  
+
+---
+
+**Q57.** The stock exchange in Cameroon is located in:
+
+A. Yaoundé  
+B. Buea  
+C. Douala  
+D. Garoua  
+
+---
+
+**Q58.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. services  
+C. credit  
+D. money  
+
+---
+
+**Q59.** The bank that issues currency and controls the money supply is the:
+
+A. commercial bank  
+B. merchant bank  
+C. central bank  
+D. development bank  
+
+---
+
+**Q60.** The bank that accepts deposits and gives loans to the public is a:
+
+A. central bank  
+B. stock exchange  
+C. development bank  
+D. commercial bank  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Commerce'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL COMMERCE P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Commerce',
+  'CAMEROON GCE ADVANCED LEVEL COMMERCE P1 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** commercial, technical
+**Subject:** Commerce
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Goods bought from other countries are called:
+
+A. imports  
+B. exports  
+C. surplus  
+D. deficit  
+
+---
+
+**Q2.** Goods sold to other countries are called:
+
+A. exports  
+B. imports  
+C. deficit  
+D. surplus  
+
+---
+
+**Q3.** The document that lists the goods sold and their prices is an:
+
+A. invoice  
+B. cheque  
+C. receipt  
+D. order  
+
+---
+
+**Q4.** The document issued to confirm payment is a:
+
+A. receipt  
+B. credit note  
+C. debit note  
+D. invoice  
+
+---
+
+**Q5.** The document issued when goods are returned by a buyer is a:
+
+A. credit note  
+B. receipt  
+C. debit note  
+D. invoice  
+
+---
+
+**Q6.** The document issued when goods are returned by a seller is a:
+
+A. debit note  
+B. receipt  
+C. invoice  
+D. credit note  
+
+---
+
+**Q7.** The document used in sea transport of goods is the:
+
+A. air waybill  
+B. bill of lading  
+C. invoice  
+D. receipt  
+
+---
+
+**Q8.** The document used in air transport of goods is the:
+
+A. bill of lading  
+B. air waybill  
+C. receipt  
+D. invoice  
+
+---
+
+**Q9.** The storage of goods until they are needed is called:
+
+A. transport  
+B. advertising  
+C. warehousing  
+D. insurance  
+
+---
+
+**Q10.** The movement of goods from one place to another is called:
+
+A. warehousing  
+B. advertising  
+C. banking  
+D. transport  
+
+---
+
+**Q11.** The promotion of goods to attract buyers is called:
+
+A. transport  
+B. insurance  
+C. advertising  
+D. warehousing  
+
+---
+
+**Q12.** A business owned by one person is a:
+
+A. partnership  
+B. cooperative  
+C. company  
+D. sole proprietorship  
+
+---
+
+**Q13.** A business owned by two to twenty people is a:
+
+A. company  
+B. partnership  
+C. sole proprietorship  
+D. cooperative  
+
+---
+
+**Q14.** A business with limited liability owned by shareholders is a:
+
+A. partnership  
+B. limited liability company  
+C. cooperative  
+D. sole proprietorship  
+
+---
+
+**Q15.** A business owned and run by its members is a:
+
+A. partnership  
+B. sole proprietorship  
+C. cooperative society  
+D. company  
+
+---
+
+**Q16.** A company whose shares are sold to the public is a:
+
+A. sole proprietorship  
+B. private limited company  
+C. partnership  
+D. public limited company  
+
+---
+
+**Q17.** A company whose shares are not sold to the public is a:
+
+A. sole proprietorship  
+B. partnership  
+C. private limited company  
+D. public limited company  
+
+---
+
+**Q18.** A large company operating in several countries is a:
+
+A. partnership  
+B. cooperative  
+C. sole proprietorship  
+D. multinational company  
+
+---
+
+**Q19.** Buying and selling goods over the internet is called:
+
+A. e-mail  
+B. e-commerce  
+C. e-banking  
+D. e-learning  
+
+---
+
+**Q20.** An organisation that protects the interests of workers is a:
+
+A. company  
+B. trade union  
+C. cooperative  
+D. consumer association  
+
+---
+
+**Q21.** The four Ps of the marketing mix are product, price, place, and:
+
+A. profit  
+B. people  
+C. promotion  
+D. process  
+
+---
+
+**Q22.** The place where buyers and sellers meet to exchange goods is a:
+
+A. factory  
+B. warehouse  
+C. bank  
+D. market  
+
+---
+
+**Q23.** The person who buys goods for personal use is a:
+
+A. producer  
+B. wholesaler  
+C. consumer  
+D. retailer  
+
+---
+
+**Q24.** The person who produces goods is a:
+
+A. wholesaler  
+B. retailer  
+C. consumer  
+D. producer  
+
+---
+
+**Q25.** The buying and selling of goods and services is called:
+
+A. trade  
+B. commerce  
+C. industry  
+D. transport  
+
+---
+
+**Q26.** The activities that facilitate trade are called:
+
+A. aids to trade  
+B. commerce  
+C. production  
+D. industry  
+
+---
+
+**Q27.** Trade carried out within a country is called:
+
+A. home trade  
+B. international trade  
+C. foreign trade  
+D. barter trade  
+
+---
+
+**Q28.** Trade carried out between countries is called:
+
+A. foreign trade  
+B. local trade  
+C. retail trade  
+D. home trade  
+
+---
+
+**Q29.** The person who buys goods in large quantities from producers is the:
+
+A. wholesaler  
+B. agent  
+C. retailer  
+D. consumer  
+
+---
+
+**Q30.** The person who sells goods in small quantities to consumers is the:
+
+A. retailer  
+B. manufacturer  
+C. producer  
+D. wholesaler  
+
+---
+
+**Q31.** A cheque that can only be paid into a bank account is a:
+
+A. open cheque  
+B. crossed cheque  
+C. blank cheque  
+D. post-dated cheque  
+
+---
+
+**Q32.** The person who writes a cheque is the:
+
+A. drawee  
+B. drawer  
+C. endorser  
+D. payee  
+
+---
+
+**Q33.** The bank on which a cheque is drawn is the:
+
+A. drawer  
+B. payee  
+C. drawee  
+D. endorser  
+
+---
+
+**Q34.** The person to whom a cheque is paid is the:
+
+A. drawer  
+B. drawee  
+C. endorser  
+D. payee  
+
+---
+
+**Q35.** The money charged for borrowing money is called:
+
+A. premium  
+B. dividend  
+C. interest  
+D. commission  
+
+---
+
+**Q36.** The simple interest on 100,000 FCFA at 5% for 2 years is:
+
+A. 5,000 FCFA  
+B. 2,000 FCFA  
+C. 20,000 FCFA  
+D. 10,000 FCFA  
+
+---
+
+**Q37.** The protection against financial loss is called:
+
+A. advertising  
+B. insurance  
+C. banking  
+D. warehousing  
+
+---
+
+**Q38.** The amount paid for an insurance policy is the:
+
+A. interest  
+B. premium  
+C. dividend  
+D. claim  
+
+---
+
+**Q39.** The document that contains the terms of an insurance contract is the:
+
+A. claim  
+B. premium  
+C. policy  
+D. receipt  
+
+---
+
+**Q40.** The payment made by an insurance company for a loss is a:
+
+A. policy  
+B. premium  
+C. dividend  
+D. claim  
+
+---
+
+**Q41.** The principle that the insured must not profit from a loss is:
+
+A. utmost good faith  
+B. contribution  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q42.** The principle that the insured must have a financial interest in the subject matter is:
+
+A. utmost good faith  
+B. subrogation  
+C. indemnity  
+D. insurable interest  
+
+---
+
+**Q43.** Insurance against the death of the insured is:
+
+A. motor insurance  
+B. life insurance  
+C. fire insurance  
+D. marine insurance  
+
+---
+
+**Q44.** Insurance against damage to goods in transit by sea is:
+
+A. motor insurance  
+B. marine insurance  
+C. life insurance  
+D. fire insurance  
+
+---
+
+**Q45.** The exchange of information between people is called:
+
+A. banking  
+B. transport  
+C. communication  
+D. advertising  
+
+---
+
+**Q46.** The protection of consumers from unfair practices is called:
+
+A. insurance  
+B. advertising  
+C. marketing  
+D. consumer protection  
+
+---
+
+**Q47.** An organisation that protects the interests of consumers is a:
+
+A. company  
+B. cooperative  
+C. consumer association  
+D. trade union  
+
+---
+
+**Q48.** A financial institution that gives small loans to small businesses is a:
+
+A. insurance company  
+B. stock exchange  
+C. central bank  
+D. microfinance institution  
+
+---
+
+**Q49.** The market where shares are bought and sold is the:
+
+A. stock exchange  
+B. commodity market  
+C. money market  
+D. foreign exchange market  
+
+---
+
+**Q50.** The unit of ownership of a company is a:
+
+A. share  
+B. bond  
+C. premium  
+D. cheque  
+
+---
+
+**Q51.** A loan to a company or government that pays interest is a:
+
+A. bond  
+B. cheque  
+C. share  
+D. premium  
+
+---
+
+**Q52.** A general rise in the price level is called:
+
+A. inflation  
+B. recession  
+C. depression  
+D. deflation  
+
+---
+
+**Q53.** A plan of expected income and expenditure is a:
+
+A. budget  
+B. receipt  
+C. balance sheet  
+D. invoice  
+
+---
+
+**Q54.** The stock exchange in Cameroon is located in:
+
+A. Douala  
+B. Garoua  
+C. Buea  
+D. Yaoundé  
+
+---
+
+**Q55.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. money  
+C. services  
+D. credit  
+
+---
+
+**Q56.** The bank that issues currency and controls the money supply is the:
+
+A. commercial bank  
+B. central bank  
+C. merchant bank  
+D. development bank  
+
+---
+
+**Q57.** The bank that accepts deposits and gives loans to the public is a:
+
+A. central bank  
+B. development bank  
+C. commercial bank  
+D. stock exchange  
+
+---
+
+**Q58.** The account used for frequent transactions is a:
+
+A. savings account  
+B. fixed deposit account  
+C. loan account  
+D. current account  
+
+---
+
+**Q59.** The account that earns interest and encourages saving is a:
+
+A. current account  
+B. loan account  
+C. savings account  
+D. overdraft account  
+
+---
+
+**Q60.** A written order to a bank to pay a stated sum is a:
+
+A. receipt  
+B. credit note  
+C. invoice  
+D. cheque  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
 ',
   null
 )

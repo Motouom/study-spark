@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   hasMath,
+  normalizeAnswerKey,
   normalizeLegacyLatex,
   normalizeQuestionHeadings,
   slugifyHeading,
@@ -50,7 +51,34 @@ describe("ProtectedMarkdown helpers", () => {
       "ordinary (parentheses)",
     ].join("\n\n");
 
-    expect(normalizeLegacyLatex(markdown)).toBe(markdown);
+    expect(normalizeLegacyLatex(markdown)).toBe(
+      [
+        "$x^2$",
+        "$$\nE=mc^2\n$$",
+        "`(\\frac{x}{y})`",
+        "```\\frac{code}{example}```",
+        "https://example.com/(\\frac{x}{y})",
+        "ordinary (parentheses)",
+      ].join("\n\n"),
+    );
+  });
+
+  it("rewrites single-line display math to fenced blocks so it renders as display", () => {
+    const markdown = [
+      "$$\\lim_{x\\to a} (mx+p)=ma+p$$",
+      "$$\\begin{cases} ax+by=c \\\\ a'x+b'y=c' \\end{cases}$$",
+      "Inline $x^2$ stays inline.",
+      "$$x=-\\frac{b}{a}$$",
+    ].join("\n\n");
+
+    expect(normalizeLegacyLatex(markdown)).toBe(
+      [
+        "$$\n\\lim_{x\\to a} (mx+p)=ma+p\n$$",
+        "$$\n\\begin{cases} ax+by=c \\\\ a'x+b'y=c' \\end{cases}\n$$",
+        "Inline $x^2$ stays inline.",
+        "$$\nx=-\\frac{b}{a}\n$$",
+      ].join("\n\n"),
+    );
   });
 
   it("normalizes multiple formulas in one paragraph", () => {
@@ -90,5 +118,22 @@ describe("ProtectedMarkdown helpers", () => {
     const split = splitSimpleQuestionLabel("Q1. Solve for x");
     expect(split?.questionNumber).toBe(1);
     expect(split?.rest).toBe("Solve for x");
+  });
+
+  it("converts answer key lists into answerkey code blocks", () => {
+    const markdown = ["## ANSWER KEY", "", "1. A", "2. B", "3. C", "4. D"].join("\n");
+    expect(normalizeAnswerKey(markdown)).toBe(
+      ["## ANSWER KEY", "", "```answerkey", "1. A", "2. B", "3. C", "4. D", "```"].join("\n"),
+    );
+  });
+
+  it("keeps the heading when no answer lines follow", () => {
+    const markdown = ["## ANSWER KEY", "", "See the solution below."].join("\n");
+    expect(normalizeAnswerKey(markdown)).toBe(markdown);
+  });
+
+  it("leaves ordinary content untouched", () => {
+    const markdown = ["## QUESTIONS", "", "1. A", "2. B"].join("\n");
+    expect(normalizeAnswerKey(markdown)).toBe(markdown);
   });
 });

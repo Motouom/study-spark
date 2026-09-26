@@ -3,14 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Biology'
+  where subject = 'English Language'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5'
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 8'
   limit 1
 )
 insert into public.course_documents (
@@ -20,21 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5',
+  'English Language',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 8',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5
+  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P2 SET 8
 
-## Structural Question Bank — Nutrition, respiration, and excretion
+## Structural Question Bank — Grammar and vocabulary
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
+**Series:** general, science, arts, commercial, technical
+**Subject:** English Language
 
 **Instructions:**
 
@@ -45,165 +45,237 @@ values (
 
 ---
 
-## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
+## SECTION 1: GRAMMAR AND VOCABULARY
 
-**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
+**Q1.** Rewrite the following sentences, correcting the errors:
 
-(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
+(a) "Neither of the boys were present at the meeting." *(2 marks)*
 
-(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
+(b) "The committee have decided to postpone the event." *(2 marks)*
 
----
+(c) "Each of the students have submitted their assignment." *(2 marks)*
 
-**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
-
-(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
-
-(c) Describe how you would test a leaf for starch. *(5 marks)*
+(d) "The number of accidents are increasing every year." *(2 marks)*
 
 ---
 
-**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
+**Q2.** Change the following sentences from direct to indirect speech:
 
-(b) State the uses of glucose in plants. *(4 marks)*
+(a) "I will visit you tomorrow," she said. *(3 marks)*
 
-(c) Explain why photosynthesis is important to animals. *(4 marks)*
+(b) "Have you finished the report?" the manager asked. *(3 marks)*
 
----
-
-**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
-
-(b) State the role of the stomach in digestion. *(4 marks)*
-
-(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
+(c) "Do not touch the exhibits," the guard warned. *(3 marks)*
 
 ---
 
-**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
+**Q3.** Fill in each blank with the correct form of the verb in brackets:
 
-(b) State the products of digestion of each. *(3 marks)*
+(a) By the time we arrived, the ceremony ____ (already begin). *(2 marks)*
 
-(c) Explain the role of bile in digestion. *(4 marks)*
+(b) She ____ (live) in Douala for ten years before she moved to Yaoundé. *(2 marks)*
 
----
+(c) If I ____ (know) the answer, I would have told you. *(2 marks)*
 
-**Q6.** (a) What is a balanced diet? *(2 marks)*
-
-(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
-
-(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
+(d) The children ____ (play) in the yard when it started to rain. *(2 marks)*
 
 ---
 
-**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
+**Q4.** Combine each pair of sentences using the conjunction in brackets:
 
-(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
+(a) He was tired. He continued working. (although) *(3 marks)*
 
-(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
+(b) The rain stopped. We went out. (as soon as) *(3 marks)*
 
----
-
-**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
-
-(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
-
-(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
+(c) She studied hard. She failed the examination. (even though) *(3 marks)*
 
 ---
 
-**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
+**Q5.** Choose the word that is closest in meaning to the word in bold:
 
-(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
+(a) The meeting was **adjourned** until the following week. *(2 marks)*
 
-(c) Explain what is meant by "oxygen debt". *(4 marks)*
+(b) His **arrogant** behaviour offended his colleagues. *(2 marks)*
 
----
+(c) The evidence was **inconclusive**, so the case was dismissed. *(2 marks)*
 
-**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
-
-(b) State the main excretory product of each organ. *(3 marks)*
-
-(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
+(d) She gave a **lucid** explanation of the difficult concept. *(2 marks)*
 
 ---
 
-**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
+**Q6.** Rewrite the following sentences in the passive voice:
 
-(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
+(a) The government built the new bridge last year. *(2 marks)*
 
-(c) State what happens to glucose in the kidney tubule. *(3 marks)*
+(b) Someone has stolen my bicycle. *(2 marks)*
 
----
+(c) They will announce the results on Friday. *(2 marks)*
 
-**Q12.** (a) What is homeostasis? *(2 marks)*
-
-(b) Give two examples of homeostasis in the human body. *(2 marks)*
-
-(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
+(d) The chef is preparing the meal. *(2 marks)*
 
 ---
 
-**Q13.** (a) Define the term "transpiration". *(2 marks)*
+**Q7.** Identify the grammatical function of the underlined words in the following sentences:
 
-(b) State three factors that affect the rate of transpiration. *(3 marks)*
+(a) The **runner** won the race. *(2 marks)*
 
-(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
+(b) She gave **him** a gift. *(2 marks)*
 
----
+(c) The book on the table is **mine**. *(2 marks)*
 
-**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
-
-(b) State the role of the xylem and phloem. *(4 marks)*
-
-(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
+(d) **Running** is good exercise. *(2 marks)*
 
 ---
 
-**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
+**Q8.** Complete each sentence with the correct preposition:
 
-(b) Name two substances the liver produces or processes. *(2 marks)*
+(a) She is good ____ mathematics. *(1 mark)*
 
-(c) Explain how the liver regulates blood glucose level. *(5 marks)*
+(b) He was accused ____ theft. *(1 mark)*
 
----
+(c) The committee consists ____ ten members. *(1 mark)*
 
-**Q16.** (a) State the function of the large intestine. *(2 marks)*
+(d) We arrived ____ the station just in time. *(1 mark)*
 
-(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
+(e) She is interested ____ learning French. *(1 mark)*
 
-(c) Describe what happens when too much water is absorbed. *(3 marks)*
-
----
-
-**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
-
-(b) Explain why breathing rate increases during exercise. *(4 marks)*
-
-(c) State the effect of exercise on the rate of respiration. *(3 marks)*
+(f) The cat jumped ____ the table. *(1 mark)*
 
 ---
 
-**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
+**Q9.** Rewrite the following sentences, using the correct form of the word in brackets:
 
-(b) State the function of the pancreas. *(3 marks)*
+(a) The ____ (decide) was made unanimously. *(2 marks)*
 
-(c) Explain how the villi increase the rate of absorption. *(4 marks)*
+(b) Her ____ (perform) in the examination was outstanding. *(2 marks)*
 
----
+(c) The ____ (manage) of the company resigned. *(2 marks)*
 
-**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
-
-(b) Name the substances lost through the skin. *(3 marks)*
-
-(c) Explain how sweating helps to cool the body. *(4 marks)*
+(d) We were impressed by his ____ (honest). *(2 marks)*
 
 ---
 
-**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
+**Q10.** Punctuate the following passage correctly:
 
-(b) Explain why plants are described as producers. *(3 marks)*
+*"the minister said the government will build a new hospital in bamenda next year the project will create hundreds of jobs and improve healthcare in the region"* *(8 marks)*
 
-(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
+---
+
+**Q11.** Choose the correct word to complete each sentence:
+
+(a) The principal gave the students ____ (advice / advise) on how to prepare for the examination. *(2 marks)*
+
+(b) The new policy will ____ (affect / effect) all workers. *(2 marks)*
+
+(c) Please ____ (bring / take) this letter to the post office. *(2 marks)*
+
+(d) The company''s ____ (principal / principle) concern is customer satisfaction. *(2 marks)*
+
+---
+
+**Q12.** Rewrite the following sentences, beginning with the word given:
+
+(a) "It is unlikely that he will pass the examination." → "He is unlikely ____." *(3 marks)*
+
+(b) "She is too young to travel alone." → "She is not ____." *(3 marks)*
+
+(c) "The problem was so difficult that nobody could solve it." → "It was such ____." *(3 marks)*
+
+---
+
+**Q13.** Identify and correct the error in each of the following sentences:
+
+(a) "The two girls are very different from each other." *(2 marks)*
+
+(b) "He is one of the students who has won the prize." *(2 marks)*
+
+(c) "I look forward to hear from you." *(2 marks)*
+
+(d) "The news are good." *(2 marks)*
+
+---
+
+**Q14.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (long) of the river is over 1,000 kilometres. *(2 marks)*
+
+(b) She spoke with great ____ (confident). *(2 marks)*
+
+(c) The ____ (fail) of the plan surprised everyone. *(2 marks)*
+
+(d) His ____ (refuse) to cooperate delayed the project. *(2 marks)*
+
+---
+
+**Q15.** Rewrite the following sentences, replacing the underlined words with a suitable phrasal verb:
+
+(a) He **postponed** the meeting until Monday. *(2 marks)*
+
+(b) She **discovered** the truth by accident. *(2 marks)*
+
+(c) The plane **departed** at noon. *(2 marks)*
+
+(d) They **continued** working despite the noise. *(2 marks)*
+
+---
+
+**Q16.** Change the following sentences from active to passive, or vice versa:
+
+(a) The letter was written by the secretary. *(2 marks)*
+
+(b) The children are being taught by a new teacher. *(2 marks)*
+
+(c) The manager will interview the candidates tomorrow. *(2 marks)*
+
+(d) The bridge was being repaired when we crossed it. *(2 marks)*
+
+---
+
+**Q17.** Complete each sentence with the correct form of the word in brackets:
+
+(a) The ____ (arrive) of the delegation was delayed. *(2 marks)*
+
+(b) She has a strong ____ (believe) in hard work. *(2 marks)*
+
+(c) The ____ (compare) between the two products was interesting. *(2 marks)*
+
+(d) His ____ (behave) at the meeting was unacceptable. *(2 marks)*
+
+---
+
+**Q18.** Rewrite the following sentences, using the correct tense:
+
+(a) "I have seen that film yesterday." *(2 marks)*
+
+(b) "She has been working here since five years." *(2 marks)*
+
+(c) "When I arrived, he already left." *(2 marks)*
+
+(d) "I will call you when I will arrive." *(2 marks)*
+
+---
+
+**Q19.** Choose the correct word to complete each sentence:
+
+(a) The ____ (weather / whether) was perfect for the picnic. *(2 marks)*
+
+(b) ____ (Their / There / They''re) going to the market. *(2 marks)*
+
+(c) The dog wagged ____ (its / it''s) tail. *(2 marks)*
+
+(d) ____ (Who''s / Whose) book is this? *(2 marks)*
+
+---
+
+**Q20.** Rewrite the following sentences, correcting the errors:
+
+(a) "The teacher, along with her students, are going on the trip." *(2 marks)*
+
+(b) "He is the tallest of the two brothers." *(2 marks)*
+
+(c) "I have less money than him." *(2 marks)*
+
+(d) "She is more taller than her sister." *(2 marks)*
 ',
   null
 )
@@ -222,14 +294,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Literature'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P1 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -239,680 +311,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6',
+  'English Literature',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P1 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6
-
-## Structural Question Bank — Reproduction, genetics, and ecology
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: REPRODUCTION, GENETICS, AND ECOLOGY
-
-**Q1.** (a) Draw a labelled diagram of a flower. *(5 marks)*
-
-(b) State the function of each labelled part. *(5 marks)*
-
-(c) Distinguish between pollination and fertilisation. *(4 marks)*
-
----
-
-**Q2.** (a) What is pollination? *(2 marks)*
-
-(b) State three features of insect-pollinated flowers. *(3 marks)*
-
-(c) Describe the process of fertilisation in a flowering plant. *(5 marks)*
-
----
-
-**Q3.** (a) Describe the process of germination in a bean seed. *(5 marks)*
-
-(b) State the conditions necessary for germination. *(3 marks)*
-
-(c) Explain the role of the cotyledons during germination. *(3 marks)*
-
----
-
-**Q4.** (a) Name the male and female reproductive organs of a flowering plant. *(2 marks)*
-
-(b) Explain how seeds are dispersed by wind and by animals. *(4 marks)*
-
-(c) State two advantages of seed dispersal. *(4 marks)*
-
----
-
-**Q5.** (a) Describe the structure of the human male reproductive system. *(5 marks)*
-
-(b) State the function of each part. *(5 marks)*
-
-(c) Explain the role of hormones in the male reproductive system. *(4 marks)*
-
----
-
-**Q6.** (a) Describe the structure of the human female reproductive system. *(5 marks)*
-
-(b) State the function of each part. *(5 marks)*
-
-(c) Explain what happens during the menstrual cycle. *(5 marks)*
-
----
-
-**Q7.** (a) What is fertilisation in humans? *(2 marks)*
-
-(b) Describe the development of the embryo in the uterus. *(5 marks)*
-
-(c) Explain the role of the placenta. *(4 marks)*
-
----
-
-**Q8.** (a) Define the terms gene, allele, and genotype. *(3 marks)*
-
-(b) Explain the difference between genotype and phenotype. *(4 marks)*
-
-(c) State the difference between homozygous and heterozygous. *(3 marks)*
-
----
-
-**Q9.** (a) In a monohybrid cross between a tall plant (TT) and a short plant (tt), show the genotypes and phenotypes of the F1 and F2 generations. *(6 marks)*
-
-(b) State the phenotypic ratio of the F2 generation. *(2 marks)*
-
-(c) Explain what is meant by a dominant allele. *(3 marks)*
-
----
-
-**Q10.** (a) What is a sex-linked characteristic? *(3 marks)*
-
-(b) Explain how colour blindness is inherited. *(5 marks)*
-
-(c) State why sex-linked disorders are more common in males. *(4 marks)*
-
----
-
-**Q11.** (a) Define the term "variation". *(2 marks)*
-
-(b) Distinguish between continuous and discontinuous variation, giving an example of each. *(4 marks)*
-
-(c) Explain the role of variation in natural selection. *(5 marks)*
-
----
-
-**Q12.** (a) What is natural selection? *(3 marks)*
-
-(b) Explain how antibiotic resistance in bacteria illustrates natural selection. *(5 marks)*
-
-(c) State the role of mutation in evolution. *(4 marks)*
-
----
-
-**Q13.** (a) Define the term "ecosystem". *(2 marks)*
-
-(b) Name the components of an ecosystem. *(4 marks)*
-
-(c) Explain how energy flows through an ecosystem. *(5 marks)*
-
----
-
-**Q14.** (a) What is a food chain? *(2 marks)*
-
-(b) Construct a food chain with four organisms found in a Cameroon ecosystem. *(3 marks)*
-
-(c) Explain why the number of organisms decreases along a food chain. *(5 marks)*
-
----
-
-**Q15.** (a) Define the term "food web". *(2 marks)*
-
-(b) Explain why food webs are more stable than food chains. *(4 marks)*
-
-(c) Describe the effect of removing a top predator from a food web. *(4 marks)*
-
----
-
-**Q16.** (a) Describe the carbon cycle. *(5 marks)*
-
-(b) Name the processes by which carbon is returned to the atmosphere. *(3 marks)*
-
-(c) Explain the effect of deforestation on the carbon cycle. *(4 marks)*
-
----
-
-**Q17.** (a) Describe the nitrogen cycle. *(5 marks)*
-
-(b) Name the bacteria involved in the nitrogen cycle. *(3 marks)*
-
-(c) Explain why nitrogen is important to living organisms. *(3 marks)*
-
----
-
-**Q18.** (a) What is a population? *(2 marks)*
-
-(b) State three factors that affect population size. *(3 marks)*
-
-(c) Explain how a predator-prey relationship affects population sizes. *(5 marks)*
-
----
-
-**Q19.** (a) Define the term "conservation". *(2 marks)*
-
-(b) State three reasons why conservation is important. *(3 marks)*
-
-(c) Describe two methods of conserving wildlife in Cameroon. *(5 marks)*
-
----
-
-**Q20.** (a) What is pollution? *(2 marks)*
-
-(b) Name three types of pollution and their causes. *(6 marks)*
-
-(c) Explain the effect of water pollution on aquatic life. *(4 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7
-
-## Structural Question Bank — Cells and transport
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: CELLS AND TRANSPORT
-
-**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*
-
-(b) State three differences between a plant cell and an animal cell. *(3 marks)*
-
-(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*
-
----
-
-**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.
-
-(a) State what would happen to each cylinder. *(4 marks)*
-
-(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*
-
-(c) Name the process involved and state its importance in plants. *(3 marks)*
-
----
-
-**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*
-
-(b) State three factors that affect the rate of diffusion. *(3 marks)*
-
-(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*
-
----
-
-**Q4.** (a) What is active transport? *(3 marks)*
-
-(b) Give two differences between active transport and diffusion. *(4 marks)*
-
-(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*
-
----
-
-**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*
-
-(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*
-
-(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*
-
----
-
-**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*
-
-(b) State the function of iodine solution in this preparation. *(2 marks)*
-
-(c) Explain why the onion cell appears as a regular shape. *(3 marks)*
-
----
-
-**Q7.** (a) What are enzymes? *(2 marks)*
-
-(b) State three properties of enzymes. *(3 marks)*
-
-(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*
-
----
-
-**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*
-
-(b) Explain what happens when an enzyme is boiled. *(3 marks)*
-
-(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*
-
----
-
-**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*
-
-(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*
-
-(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*
-
----
-
-**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*
-
-(b) State the function of each labelled part. *(5 marks)*
-
-(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*
-
----
-
-**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*
-
-(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*
-
-(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*
-
----
-
-**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*
-
-(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*
-
-(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*
-
----
-
-**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*
-
-(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*
-
-(c) Explain how selective permeability is important in the kidney. *(5 marks)*
-
----
-
-**Q14.** (a) Define the term "turgidity". *(2 marks)*
-
-(b) Explain how turgidity supports non-woody plants. *(4 marks)*
-
-(c) Describe what happens to a plant when it wilts. *(4 marks)*
-
----
-
-**Q15.** (a) State three functions of the nucleus. *(3 marks)*
-
-(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*
-
-(c) Distinguish between a gene and a chromosome. *(3 marks)*
-
----
-
-**Q16.** (a) What is the function of the mitochondria? *(2 marks)*
-
-(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*
-
-(c) State the equation for aerobic respiration. *(3 marks)*
-
----
-
-**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*
-
-(b) Explain why amylase cannot digest proteins. *(4 marks)*
-
-(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*
-
----
-
-**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*
-
-(b) State the results you would expect. *(3 marks)*
-
-(c) Explain the results in terms of osmosis. *(4 marks)*
-
----
-
-**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*
-
-(b) Give one example of each. *(2 marks)*
-
-(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*
-
----
-
-**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*
-
-(b) Explain why energy is required for active transport. *(3 marks)*
-
-(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8
-
-## Structural Question Bank — Nutrition, respiration, and excretion
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
-
-**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
-
-(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
-
-(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
-
----
-
-**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
-
-(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
-
-(c) Describe how you would test a leaf for starch. *(5 marks)*
-
----
-
-**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
-
-(b) State the uses of glucose in plants. *(4 marks)*
-
-(c) Explain why photosynthesis is important to animals. *(4 marks)*
-
----
-
-**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
-
-(b) State the role of the stomach in digestion. *(4 marks)*
-
-(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
-
----
-
-**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
-
-(b) State the products of digestion of each. *(3 marks)*
-
-(c) Explain the role of bile in digestion. *(4 marks)*
-
----
-
-**Q6.** (a) What is a balanced diet? *(2 marks)*
-
-(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
-
-(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
-
----
-
-**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
-
-(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
-
-(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
-
----
-
-**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
-
-(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
-
-(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
-
----
-
-**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
-
-(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
-
-(c) Explain what is meant by "oxygen debt". *(4 marks)*
-
----
-
-**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
-
-(b) State the main excretory product of each organ. *(3 marks)*
-
-(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
-
----
-
-**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
-
-(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
-
-(c) State what happens to glucose in the kidney tubule. *(3 marks)*
-
----
-
-**Q12.** (a) What is homeostasis? *(2 marks)*
-
-(b) Give two examples of homeostasis in the human body. *(2 marks)*
-
-(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
-
----
-
-**Q13.** (a) Define the term "transpiration". *(2 marks)*
-
-(b) State three factors that affect the rate of transpiration. *(3 marks)*
-
-(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
-
----
-
-**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
-
-(b) State the role of the xylem and phloem. *(4 marks)*
-
-(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
-
----
-
-**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
-
-(b) Name two substances the liver produces or processes. *(2 marks)*
-
-(c) Explain how the liver regulates blood glucose level. *(5 marks)*
-
----
-
-**Q16.** (a) State the function of the large intestine. *(2 marks)*
-
-(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
-
-(c) Describe what happens when too much water is absorbed. *(3 marks)*
-
----
-
-**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
-
-(b) Explain why breathing rate increases during exercise. *(4 marks)*
-
-(c) State the effect of exercise on the rate of respiration. *(3 marks)*
-
----
-
-**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
-
-(b) State the function of the pancreas. *(3 marks)*
-
-(c) Explain how the villi increase the rate of absorption. *(4 marks)*
-
----
-
-**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
-
-(b) Name the substances lost through the skin. *(3 marks)*
-
-(c) Explain how sweating helps to cool the body. *(4 marks)*
-
----
-
-**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
-
-(b) Explain why plants are described as producers. *(3 marks)*
-
-(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 1
+  '# CAMEROON GCE Ordinary Level ENGLISH LITERATURE P1 SET 1
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
+**Series:** arts
+**Subject:** English Literature
 
 **Instructions:**
 
@@ -925,606 +338,606 @@ values (
 
 ## QUESTIONS
 
-**Q1.** The control centre of the cell is the:
+**Q1.** Poetry: Sample question 1 for English Literature Ordinary Level Paper 1.
 
-A. nucleus  
-B. cytoplasm  
-C. cell wall  
-D. vacuole  
-
----
-
-**Q2.** The site of respiration in the cell is the:
-
-A. mitochondrion  
-B. ribosome  
-C. chloroplast  
-D. nucleus  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q3.** The site of protein synthesis is the:
+**Q2.** Drama: Sample question 2 for English Literature Ordinary Level Paper 1.
 
-A. ribosome  
-B. nucleus  
-C. mitochondrion  
-D. cell wall  
-
----
-
-**Q4.** Which structure is found in plant cells but not animal cells?
-
-A. cell wall  
-B. mitochondrion  
-C. ribosome  
-D. nucleus  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q5.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+**Q3.** Prose: Sample question 3 for English Literature Ordinary Level Paper 1.
 
-A. osmosis  
-B. transpiration  
-C. diffusion  
-D. active transport  
-
----
-
-**Q6.** The movement of molecules from a region of high concentration to low concentration is called:
-
-A. diffusion  
-B. translocation  
-C. active transport  
-D. osmosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q7.** Active transport requires:
+**Q4.** Literary Terms: Sample question 4 for English Literature Ordinary Level Paper 1.
 
-A. no energy  
-B. energy  
-C. light  
-D. chlorophyll  
-
----
-
-**Q8.** The cell wall of a plant is made of:
-
-A. protein  
-B. cellulose  
-C. starch  
-D. lipid  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q9.** The green pigment found in chloroplasts is:
+**Q5.** Context: Sample question 5 for English Literature Ordinary Level Paper 1.
 
-A. haemoglobin  
-B. carotene  
-C. chlorophyll  
-D. melanin  
-
----
-
-**Q10.** A red blood cell placed in distilled water will:
-
-A. shrink  
-B. remain unchanged  
-C. divide  
-D. burst  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q11.** A plant cell placed in a concentrated salt solution will:
+**Q6.** Comparison: Sample question 6 for English Literature Ordinary Level Paper 1.
 
-A. burst  
-B. remain unchanged  
-C. become plasmolysed  
-D. swell  
-
----
-
-**Q12.** Enzymes are made of:
-
-A. carbohydrate  
-B. mineral salts  
-C. lipid  
-D. protein  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q13.** Enzymes work best at an optimum temperature of about:
+**Q7.** Unseen: Sample question 7 for English Literature Ordinary Level Paper 1.
 
-A. 0°C  
-B. 37°C  
-C. 100°C  
-D. 60°C  
-
----
-
-**Q14.** When an enzyme is boiled, it becomes:
-
-A. larger  
-B. denatured  
-C. green  
-D. more active  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q15.** The process by which a cell takes in large particles is called:
+**Q8.** Essay Skills: Sample question 8 for English Literature Ordinary Level Paper 1.
 
-A. diffusion  
-B. osmosis  
-C. phagocytosis  
-D. transpiration  
-
----
-
-**Q16.** The jelly-like substance that fills the cell is the:
-
-A. cell wall  
-B. nucleus  
-C. membrane  
-D. cytoplasm  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q17.** The cell membrane is described as:
+**Q9.** Poetry: Sample question 9 for English Literature Ordinary Level Paper 1.
 
-A. impermeable  
-B. rigid  
-C. partially permeable  
-D. fully permeable  
-
----
-
-**Q18.** The cell wall is described as:
-
-A. impermeable  
-B. selectively permeable  
-C. partially permeable  
-D. fully permeable  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q19.** The organelle that carries out photosynthesis is the:
+**Q10.** Drama: Sample question 10 for English Literature Ordinary Level Paper 1.
 
-A. nucleus  
-B. chloroplast  
-C. mitochondrion  
-D. ribosome  
-
----
-
-**Q20.** A group of similar cells working together forms a:
-
-A. organism  
-B. tissue  
-C. system  
-D. organ  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q21.** The process by which plants make food is called:
+**Q11.** Prose: Sample question 11 for English Literature Ordinary Level Paper 1.
 
-A. transpiration  
-B. respiration  
-C. photosynthesis  
-D. digestion  
-
----
-
-**Q22.** The gas used in photosynthesis is:
-
-A. hydrogen  
-B. oxygen  
-C. nitrogen  
-D. carbon dioxide  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q23.** The gas released during photosynthesis is:
+**Q12.** Literary Terms: Sample question 12 for English Literature Ordinary Level Paper 1.
 
-A. ammonia  
-B. nitrogen  
-C. oxygen  
-D. carbon dioxide  
-
----
-
-**Q24.** The green pigment needed for photosynthesis is:
-
-A. melanin  
-B. carotene  
-C. haemoglobin  
-D. chlorophyll  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q25.** The enzyme that digests starch is:
+**Q13.** Context: Sample question 13 for English Literature Ordinary Level Paper 1.
 
-A. amylase  
-B. protease  
-C. lipase  
-D. maltase  
-
----
-
-**Q26.** The enzyme that digests proteins is:
-
-A. protease  
-B. amylase  
-C. catalase  
-D. lipase  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q27.** The enzyme that digests fats is:
+**Q14.** Comparison: Sample question 14 for English Literature Ordinary Level Paper 1.
 
-A. lipase  
-B. protease  
-C. amylase  
-D. maltase  
-
----
-
-**Q28.** Bile is produced by the:
-
-A. liver  
-B. stomach  
-C. gall bladder  
-D. pancreas  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q29.** Bile is stored in the:
+**Q15.** Unseen: Sample question 15 for English Literature Ordinary Level Paper 1.
 
-A. gall bladder  
-B. small intestine  
-C. liver  
-D. pancreas  
-
----
-
-**Q30.** The part of the gut where most absorption occurs is the:
-
-A. small intestine  
-B. mouth  
-C. large intestine  
-D. stomach  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q31.** The finger-like projections in the small intestine are called:
+**Q16.** Essay Skills: Sample question 16 for English Literature Ordinary Level Paper 1.
 
-A. alveoli  
-B. villi  
-C. nephrons  
-D. bronchi  
-
----
-
-**Q32.** The site of gaseous exchange in the lungs is the:
-
-A. bronchi  
-B. alveoli  
-C. diaphragm  
-D. trachea  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q33.** Aerobic respiration uses:
+**Q17.** Poetry: Sample question 17 for English Literature Ordinary Level Paper 1.
 
-A. carbon dioxide  
-B. nitrogen  
-C. oxygen  
-D. chlorophyll  
-
----
-
-**Q34.** The product of anaerobic respiration in muscles is:
-
-A. ethanol  
-B. carbon dioxide  
-C. glucose  
-D. lactic acid  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q35.** The main excretory organ of the body is the:
+**Q18.** Drama: Sample question 18 for English Literature Ordinary Level Paper 1.
 
-A. liver  
-B. stomach  
-C. kidney  
-D. heart  
-
----
-
-**Q36.** The functional unit of the kidney is the:
-
-A. alveolus  
-B. villus  
-C. neuron  
-D. nephron  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q37.** The process of maintaining a constant internal environment is called:
+**Q19.** Prose: Sample question 19 for English Literature Ordinary Level Paper 1.
 
-A. respiration  
-B. homeostasis  
-C. excretion  
-D. digestion  
-
----
-
-**Q38.** The loss of water vapour from plant leaves is called:
-
-A. osmosis  
-B. transpiration  
-C. diffusion  
-D. translocation  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q39.** The tissue that transports water in plants is the:
+**Q20.** Literary Terms: Sample question 20 for English Literature Ordinary Level Paper 1.
 
-A. epidermis  
-B. phloem  
-C. xylem  
-D. cortex  
-
----
-
-**Q40.** The tissue that transports food in plants is the:
-
-A. epidermis  
-B. xylem  
-C. cortex  
-D. phloem  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q41.** The male reproductive organ of a flower is the:
+**Q21.** Context: Sample question 21 for English Literature Ordinary Level Paper 1.
 
-A. petal  
-B. sepal  
-C. stamen  
-D. carpel  
-
----
-
-**Q42.** The female reproductive organ of a flower is the:
-
-A. petal  
-B. sepal  
-C. stamen  
-D. carpel  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q43.** The transfer of pollen from anther to stigma is called:
+**Q22.** Comparison: Sample question 22 for English Literature Ordinary Level Paper 1.
 
-A. transpiration  
-B. pollination  
-C. fertilisation  
-D. germination  
-
----
-
-**Q44.** The fusion of male and female gametes is called:
-
-A. dispersal  
-B. fertilisation  
-C. germination  
-D. pollination  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q45.** The male gamete in humans is the:
+**Q23.** Unseen: Sample question 23 for English Literature Ordinary Level Paper 1.
 
-A. zygote  
-B. egg  
-C. sperm  
-D. ovum  
-
----
-
-**Q46.** The female gamete in humans is the:
-
-A. embryo  
-B. sperm  
-C. zygote  
-D. ovum  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q47.** The organ that connects the foetus to the mother is the:
+**Q24.** Essay Skills: Sample question 24 for English Literature Ordinary Level Paper 1.
 
-A. umbilical cord  
-B. ovary  
-C. placenta  
-D. uterus  
-
----
-
-**Q48.** The process of cell division that produces gametes is called:
-
-A. diffusion  
-B. osmosis  
-C. mitosis  
-D. meiosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q49.** The process of cell division that produces body cells is called:
+**Q25.** Poetry: Sample question 25 for English Literature Ordinary Level Paper 1.
 
-A. mitosis  
-B. meiosis  
-C. osmosis  
-D. diffusion  
-
----
-
-**Q50.** The basic unit of heredity is the:
-
-A. gene  
-B. chromosome  
-C. tissue  
-D. cell  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q51.** The genetic make-up of an organism is its:
+**Q26.** Drama: Sample question 26 for English Literature Ordinary Level Paper 1.
 
-A. genotype  
-B. chromosome  
-C. phenotype  
-D. gene  
-
----
-
-**Q52.** The physical appearance of an organism is its:
-
-A. phenotype  
-B. gene  
-C. allele  
-D. genotype  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q53.** In a monohybrid cross TT × tt, the F1 generation is:
+**Q27.** Prose: Sample question 27 for English Literature Ordinary Level Paper 1.
 
-A. all Tt  
-B. half TT, half tt  
-C. all TT  
-D. all tt  
-
----
-
-**Q54.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
-
-A. 3:1  
-B. 9:3:3:1  
-C. 1:2:1  
-D. 1:1  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q55.** A community of organisms and their environment forms an:
+**Q28.** Literary Terms: Sample question 28 for English Literature Ordinary Level Paper 1.
 
-A. population  
-B. ecosystem  
-C. organism  
-D. tissue  
-
----
-
-**Q56.** A group of organisms of the same species in an area is a:
-
-A. community  
-B. population  
-C. habitat  
-D. ecosystem  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q57.** The sequence of organisms through which energy flows is a:
+**Q29.** Context: Sample question 29 for English Literature Ordinary Level Paper 1.
 
-A. food web  
-B. ecosystem  
-C. food chain  
-D. population  
-
----
-
-**Q58.** Organisms that make their own food are called:
-
-A. consumers  
-B. decomposers  
-C. predators  
-D. producers  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q59.** Organisms that break down dead matter are called:
+**Q30.** Comparison: Sample question 30 for English Literature Ordinary Level Paper 1.
 
-A. producers  
-B. predators  
-C. decomposers  
-D. consumers  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q60.** The process by which organisms best adapted to their environment survive is called:
+**Q31.** Unseen: Sample question 31 for English Literature Ordinary Level Paper 1.
 
-A. artificial selection  
-B. germination  
-C. pollination  
-D. natural selection  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Essay Skills: Sample question 32 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Poetry: Sample question 33 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Drama: Sample question 34 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Prose: Sample question 35 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Literary Terms: Sample question 36 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Context: Sample question 37 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Comparison: Sample question 38 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** Unseen: Sample question 39 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Essay Skills: Sample question 40 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Poetry: Sample question 41 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Drama: Sample question 42 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Prose: Sample question 43 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Literary Terms: Sample question 44 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Context: Sample question 45 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Comparison: Sample question 46 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** Unseen: Sample question 47 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Essay Skills: Sample question 48 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Poetry: Sample question 49 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Drama: Sample question 50 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Prose: Sample question 51 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Literary Terms: Sample question 52 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Context: Sample question 53 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Comparison: Sample question 54 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** Unseen: Sample question 55 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Essay Skills: Sample question 56 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Poetry: Sample question 57 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Drama: Sample question 58 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Prose: Sample question 59 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Literary Terms: Sample question 60 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
 ## ANSWER KEY
 
 1. A
-2. A
-3. A
-4. A
+2. B
+3. C
+4. D
 5. A
-6. A
-7. B
-8. B
-9. C
-10. D
+6. B
+7. C
+8. D
+9. A
+10. B
 11. C
 12. D
-13. B
+13. A
 14. B
 15. C
 16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
 23. C
 24. D
 25. A
-26. A
-27. A
-28. A
+26. B
+27. C
+28. D
 29. A
-30. A
-31. B
-32. B
-33. C
-34. D
+30. B
+31. C
+32. D
+33. A
+34. B
 35. C
 36. D
-37. B
+37. A
 38. B
 39. C
 40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
 47. C
 48. D
 49. A
-50. A
-51. A
-52. A
+50. B
+51. C
+52. D
 53. A
-54. A
-55. B
-56. B
-57. C
-58. D
+54. B
+55. C
+56. D
+57. A
+58. B
 59. C
 60. D
 ',
@@ -1545,14 +958,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Literature'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P1 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -1562,21 +975,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2',
+  'English Literature',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P1 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 2
+  '# CAMEROON GCE Ordinary Level ENGLISH LITERATURE P1 SET 2
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
+**Series:** arts
+**Subject:** English Literature
 
 **Instructions:**
 
@@ -1589,606 +1002,606 @@ values (
 
 ## QUESTIONS
 
-**Q1.** Which structure is found in plant cells but not animal cells?
+**Q1.** Poetry: Sample question 1 for English Literature Ordinary Level Paper 1.
 
-A. cell wall  
-B. nucleus  
-C. mitochondrion  
-D. ribosome  
-
----
-
-**Q2.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
-
-A. osmosis  
-B. diffusion  
-C. transpiration  
-D. active transport  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q3.** The movement of molecules from a region of high concentration to low concentration is called:
+**Q2.** Drama: Sample question 2 for English Literature Ordinary Level Paper 1.
 
-A. diffusion  
-B. active transport  
-C. osmosis  
-D. translocation  
-
----
-
-**Q4.** Active transport requires:
-
-A. energy  
-B. light  
-C. chlorophyll  
-D. no energy  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q5.** The cell wall of a plant is made of:
+**Q3.** Prose: Sample question 3 for English Literature Ordinary Level Paper 1.
 
-A. cellulose  
-B. starch  
-C. protein  
-D. lipid  
-
----
-
-**Q6.** The green pigment found in chloroplasts is:
-
-A. chlorophyll  
-B. melanin  
-C. carotene  
-D. haemoglobin  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q7.** A red blood cell placed in distilled water will:
+**Q4.** Literary Terms: Sample question 4 for English Literature Ordinary Level Paper 1.
 
-A. shrink  
-B. burst  
-C. remain unchanged  
-D. divide  
-
----
-
-**Q8.** A plant cell placed in a concentrated salt solution will:
-
-A. burst  
-B. become plasmolysed  
-C. remain unchanged  
-D. swell  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q9.** Enzymes are made of:
+**Q5.** Context: Sample question 5 for English Literature Ordinary Level Paper 1.
 
-A. carbohydrate  
-B. lipid  
-C. protein  
-D. mineral salts  
-
----
-
-**Q10.** Enzymes work best at an optimum temperature of about:
-
-A. 100°C  
-B. 0°C  
-C. 60°C  
-D. 37°C  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q11.** When an enzyme is boiled, it becomes:
+**Q6.** Comparison: Sample question 6 for English Literature Ordinary Level Paper 1.
 
-A. more active  
-B. green  
-C. denatured  
-D. larger  
-
----
-
-**Q12.** The process by which a cell takes in large particles is called:
-
-A. osmosis  
-B. transpiration  
-C. diffusion  
-D. phagocytosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q13.** The jelly-like substance that fills the cell is the:
+**Q7.** Unseen: Sample question 7 for English Literature Ordinary Level Paper 1.
 
-A. cell wall  
-B. cytoplasm  
-C. nucleus  
-D. membrane  
-
----
-
-**Q14.** The cell membrane is described as:
-
-A. impermeable  
-B. partially permeable  
-C. rigid  
-D. fully permeable  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q15.** The cell wall is described as:
+**Q8.** Essay Skills: Sample question 8 for English Literature Ordinary Level Paper 1.
 
-A. impermeable  
-B. partially permeable  
-C. fully permeable  
-D. selectively permeable  
-
----
-
-**Q16.** The organelle that carries out photosynthesis is the:
-
-A. ribosome  
-B. mitochondrion  
-C. nucleus  
-D. chloroplast  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q17.** A group of similar cells working together forms a:
+**Q9.** Poetry: Sample question 9 for English Literature Ordinary Level Paper 1.
 
-A. system  
-B. organism  
-C. tissue  
-D. organ  
-
----
-
-**Q18.** The control centre of the cell is the:
-
-A. cell wall  
-B. vacuole  
-C. cytoplasm  
-D. nucleus  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q19.** The site of respiration in the cell is the:
+**Q10.** Drama: Sample question 10 for English Literature Ordinary Level Paper 1.
 
-A. chloroplast  
-B. mitochondrion  
-C. ribosome  
-D. nucleus  
-
----
-
-**Q20.** The site of protein synthesis is the:
-
-A. cell wall  
-B. ribosome  
-C. nucleus  
-D. mitochondrion  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q21.** The green pigment needed for photosynthesis is:
+**Q11.** Prose: Sample question 11 for English Literature Ordinary Level Paper 1.
 
-A. melanin  
-B. haemoglobin  
-C. chlorophyll  
-D. carotene  
-
----
-
-**Q22.** The enzyme that digests starch is:
-
-A. maltase  
-B. protease  
-C. lipase  
-D. amylase  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q23.** The enzyme that digests proteins is:
+**Q12.** Literary Terms: Sample question 12 for English Literature Ordinary Level Paper 1.
 
-A. catalase  
-B. lipase  
-C. protease  
-D. amylase  
-
----
-
-**Q24.** The enzyme that digests fats is:
-
-A. maltase  
-B. protease  
-C. amylase  
-D. lipase  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q25.** Bile is produced by the:
+**Q13.** Context: Sample question 13 for English Literature Ordinary Level Paper 1.
 
-A. liver  
-B. pancreas  
-C. stomach  
-D. gall bladder  
-
----
-
-**Q26.** Bile is stored in the:
-
-A. gall bladder  
-B. liver  
-C. small intestine  
-D. pancreas  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q27.** The part of the gut where most absorption occurs is the:
+**Q14.** Comparison: Sample question 14 for English Literature Ordinary Level Paper 1.
 
-A. small intestine  
-B. large intestine  
-C. stomach  
-D. mouth  
-
----
-
-**Q28.** The finger-like projections in the small intestine are called:
-
-A. villi  
-B. nephrons  
-C. bronchi  
-D. alveoli  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q29.** The site of gaseous exchange in the lungs is the:
+**Q15.** Unseen: Sample question 15 for English Literature Ordinary Level Paper 1.
 
-A. alveoli  
-B. diaphragm  
-C. bronchi  
-D. trachea  
-
----
-
-**Q30.** Aerobic respiration uses:
-
-A. oxygen  
-B. chlorophyll  
-C. nitrogen  
-D. carbon dioxide  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q31.** The product of anaerobic respiration in muscles is:
+**Q16.** Essay Skills: Sample question 16 for English Literature Ordinary Level Paper 1.
 
-A. ethanol  
-B. lactic acid  
-C. carbon dioxide  
-D. glucose  
-
----
-
-**Q32.** The main excretory organ of the body is the:
-
-A. liver  
-B. kidney  
-C. stomach  
-D. heart  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q33.** The functional unit of the kidney is the:
+**Q17.** Poetry: Sample question 17 for English Literature Ordinary Level Paper 1.
 
-A. alveolus  
-B. neuron  
-C. nephron  
-D. villus  
-
----
-
-**Q34.** The process of maintaining a constant internal environment is called:
-
-A. excretion  
-B. respiration  
-C. digestion  
-D. homeostasis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q35.** The loss of water vapour from plant leaves is called:
+**Q18.** Drama: Sample question 18 for English Literature Ordinary Level Paper 1.
 
-A. translocation  
-B. diffusion  
-C. transpiration  
-D. osmosis  
-
----
-
-**Q36.** The tissue that transports water in plants is the:
-
-A. phloem  
-B. cortex  
-C. epidermis  
-D. xylem  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q37.** The tissue that transports food in plants is the:
+**Q19.** Prose: Sample question 19 for English Literature Ordinary Level Paper 1.
 
-A. epidermis  
-B. phloem  
-C. xylem  
-D. cortex  
-
----
-
-**Q38.** The process by which plants make food is called:
-
-A. digestion  
-B. photosynthesis  
-C. transpiration  
-D. respiration  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q39.** The gas used in photosynthesis is:
+**Q20.** Literary Terms: Sample question 20 for English Literature Ordinary Level Paper 1.
 
-A. nitrogen  
-B. oxygen  
-C. carbon dioxide  
-D. hydrogen  
-
----
-
-**Q40.** The gas released during photosynthesis is:
-
-A. nitrogen  
-B. carbon dioxide  
-C. ammonia  
-D. oxygen  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q41.** The fusion of male and female gametes is called:
+**Q21.** Context: Sample question 21 for English Literature Ordinary Level Paper 1.
 
-A. germination  
-B. dispersal  
-C. fertilisation  
-D. pollination  
-
----
-
-**Q42.** The male gamete in humans is the:
-
-A. ovum  
-B. zygote  
-C. egg  
-D. sperm  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q43.** The female gamete in humans is the:
+**Q22.** Comparison: Sample question 22 for English Literature Ordinary Level Paper 1.
 
-A. embryo  
-B. ovum  
-C. sperm  
-D. zygote  
-
----
-
-**Q44.** The organ that connects the foetus to the mother is the:
-
-A. umbilical cord  
-B. placenta  
-C. ovary  
-D. uterus  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q45.** The process of cell division that produces gametes is called:
+**Q23.** Unseen: Sample question 23 for English Literature Ordinary Level Paper 1.
 
-A. diffusion  
-B. mitosis  
-C. meiosis  
-D. osmosis  
-
----
-
-**Q46.** The process of cell division that produces body cells is called:
-
-A. diffusion  
-B. meiosis  
-C. osmosis  
-D. mitosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q47.** The basic unit of heredity is the:
+**Q24.** Essay Skills: Sample question 24 for English Literature Ordinary Level Paper 1.
 
-A. tissue  
-B. cell  
-C. gene  
-D. chromosome  
-
----
-
-**Q48.** The genetic make-up of an organism is its:
-
-A. gene  
-B. chromosome  
-C. phenotype  
-D. genotype  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q49.** The physical appearance of an organism is its:
+**Q25.** Poetry: Sample question 25 for English Literature Ordinary Level Paper 1.
 
-A. phenotype  
-B. genotype  
-C. gene  
-D. allele  
-
----
-
-**Q50.** In a monohybrid cross TT × tt, the F1 generation is:
-
-A. all Tt  
-B. all TT  
-C. half TT, half tt  
-D. all tt  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q51.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
+**Q26.** Drama: Sample question 26 for English Literature Ordinary Level Paper 1.
 
-A. 3:1  
-B. 1:2:1  
-C. 1:1  
-D. 9:3:3:1  
-
----
-
-**Q52.** A community of organisms and their environment forms an:
-
-A. ecosystem  
-B. organism  
-C. tissue  
-D. population  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q53.** A group of organisms of the same species in an area is a:
+**Q27.** Prose: Sample question 27 for English Literature Ordinary Level Paper 1.
 
-A. population  
-B. habitat  
-C. community  
-D. ecosystem  
-
----
-
-**Q54.** The sequence of organisms through which energy flows is a:
-
-A. food chain  
-B. population  
-C. ecosystem  
-D. food web  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q55.** Organisms that make their own food are called:
+**Q28.** Literary Terms: Sample question 28 for English Literature Ordinary Level Paper 1.
 
-A. consumers  
-B. producers  
-C. decomposers  
-D. predators  
-
----
-
-**Q56.** Organisms that break down dead matter are called:
-
-A. producers  
-B. decomposers  
-C. predators  
-D. consumers  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q57.** The process by which organisms best adapted to their environment survive is called:
+**Q29.** Context: Sample question 29 for English Literature Ordinary Level Paper 1.
 
-A. artificial selection  
-B. pollination  
-C. natural selection  
-D. germination  
-
----
-
-**Q58.** The male reproductive organ of a flower is the:
-
-A. carpel  
-B. petal  
-C. sepal  
-D. stamen  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q59.** The female reproductive organ of a flower is the:
+**Q30.** Comparison: Sample question 30 for English Literature Ordinary Level Paper 1.
 
-A. stamen  
-B. sepal  
-C. carpel  
-D. petal  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q60.** The transfer of pollen from anther to stigma is called:
+**Q31.** Unseen: Sample question 31 for English Literature Ordinary Level Paper 1.
 
-A. fertilisation  
-B. transpiration  
-C. germination  
-D. pollination  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Essay Skills: Sample question 32 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Poetry: Sample question 33 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Drama: Sample question 34 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Prose: Sample question 35 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Literary Terms: Sample question 36 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Context: Sample question 37 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Comparison: Sample question 38 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** Unseen: Sample question 39 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Essay Skills: Sample question 40 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Poetry: Sample question 41 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Drama: Sample question 42 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Prose: Sample question 43 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Literary Terms: Sample question 44 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Context: Sample question 45 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Comparison: Sample question 46 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** Unseen: Sample question 47 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Essay Skills: Sample question 48 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Poetry: Sample question 49 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Drama: Sample question 50 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Prose: Sample question 51 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Literary Terms: Sample question 52 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Context: Sample question 53 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Comparison: Sample question 54 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** Unseen: Sample question 55 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Essay Skills: Sample question 56 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Poetry: Sample question 57 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Drama: Sample question 58 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Prose: Sample question 59 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Literary Terms: Sample question 60 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
 ## ANSWER KEY
 
 1. A
-2. A
-3. A
-4. A
+2. B
+3. C
+4. D
 5. A
-6. A
-7. B
-8. B
-9. C
-10. D
+6. B
+7. C
+8. D
+9. A
+10. B
 11. C
 12. D
-13. B
+13. A
 14. B
 15. C
 16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
 23. C
 24. D
 25. A
-26. A
-27. A
-28. A
+26. B
+27. C
+28. D
 29. A
-30. A
-31. B
-32. B
-33. C
-34. D
+30. B
+31. C
+32. D
+33. A
+34. B
 35. C
 36. D
-37. B
+37. A
 38. B
 39. C
 40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
 47. C
 48. D
 49. A
-50. A
-51. A
-52. A
+50. B
+51. C
+52. D
 53. A
-54. A
-55. B
-56. B
-57. C
-58. D
+54. B
+55. C
+56. D
+57. A
+58. B
 59. C
 60. D
 ',
@@ -2209,14 +1622,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Literature'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P1 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -2226,21 +1639,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Biology',
-  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3',
+  'English Literature',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P1 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P1 SET 3
+  '# CAMEROON GCE Ordinary Level ENGLISH LITERATURE P1 SET 3
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Biology
+**Series:** arts
+**Subject:** English Literature
 
 **Instructions:**
 
@@ -2253,606 +1666,606 @@ values (
 
 ## QUESTIONS
 
-**Q1.** Active transport requires:
+**Q1.** Poetry: Sample question 1 for English Literature Ordinary Level Paper 1.
 
-A. energy  
-B. no energy  
-C. light  
-D. chlorophyll  
-
----
-
-**Q2.** The cell wall of a plant is made of:
-
-A. cellulose  
-B. protein  
-C. starch  
-D. lipid  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q3.** The green pigment found in chloroplasts is:
+**Q2.** Drama: Sample question 2 for English Literature Ordinary Level Paper 1.
 
-A. chlorophyll  
-B. carotene  
-C. haemoglobin  
-D. melanin  
-
----
-
-**Q4.** A red blood cell placed in distilled water will:
-
-A. burst  
-B. remain unchanged  
-C. divide  
-D. shrink  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q5.** A plant cell placed in a concentrated salt solution will:
+**Q3.** Prose: Sample question 3 for English Literature Ordinary Level Paper 1.
 
-A. become plasmolysed  
-B. remain unchanged  
-C. burst  
-D. swell  
-
----
-
-**Q6.** Enzymes are made of:
-
-A. protein  
-B. mineral salts  
-C. lipid  
-D. carbohydrate  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q7.** Enzymes work best at an optimum temperature of about:
+**Q4.** Literary Terms: Sample question 4 for English Literature Ordinary Level Paper 1.
 
-A. 100°C  
-B. 37°C  
-C. 0°C  
-D. 60°C  
-
----
-
-**Q8.** When an enzyme is boiled, it becomes:
-
-A. more active  
-B. denatured  
-C. green  
-D. larger  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q9.** The process by which a cell takes in large particles is called:
+**Q5.** Context: Sample question 5 for English Literature Ordinary Level Paper 1.
 
-A. osmosis  
-B. diffusion  
-C. phagocytosis  
-D. transpiration  
-
----
-
-**Q10.** The jelly-like substance that fills the cell is the:
-
-A. nucleus  
-B. cell wall  
-C. membrane  
-D. cytoplasm  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q11.** The cell membrane is described as:
+**Q6.** Comparison: Sample question 6 for English Literature Ordinary Level Paper 1.
 
-A. fully permeable  
-B. rigid  
-C. partially permeable  
-D. impermeable  
-
----
-
-**Q12.** The cell wall is described as:
-
-A. partially permeable  
-B. selectively permeable  
-C. impermeable  
-D. fully permeable  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q13.** The organelle that carries out photosynthesis is the:
+**Q7.** Unseen: Sample question 7 for English Literature Ordinary Level Paper 1.
 
-A. ribosome  
-B. chloroplast  
-C. mitochondrion  
-D. nucleus  
-
----
-
-**Q14.** A group of similar cells working together forms a:
-
-A. system  
-B. tissue  
-C. organism  
-D. organ  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q15.** The control centre of the cell is the:
+**Q8.** Essay Skills: Sample question 8 for English Literature Ordinary Level Paper 1.
 
-A. cell wall  
-B. cytoplasm  
-C. nucleus  
-D. vacuole  
-
----
-
-**Q16.** The site of respiration in the cell is the:
-
-A. nucleus  
-B. ribosome  
-C. chloroplast  
-D. mitochondrion  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q17.** The site of protein synthesis is the:
+**Q9.** Poetry: Sample question 9 for English Literature Ordinary Level Paper 1.
 
-A. nucleus  
-B. cell wall  
-C. ribosome  
-D. mitochondrion  
-
----
-
-**Q18.** Which structure is found in plant cells but not animal cells?
-
-A. mitochondrion  
-B. ribosome  
-C. nucleus  
-D. cell wall  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q19.** The movement of water molecules from a dilute to a concentrated solution through a partially permeable membrane is called:
+**Q10.** Drama: Sample question 10 for English Literature Ordinary Level Paper 1.
 
-A. transpiration  
-B. osmosis  
-C. diffusion  
-D. active transport  
-
----
-
-**Q20.** The movement of molecules from a region of high concentration to low concentration is called:
-
-A. translocation  
-B. diffusion  
-C. active transport  
-D. osmosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q21.** The enzyme that digests fats is:
+**Q11.** Prose: Sample question 11 for English Literature Ordinary Level Paper 1.
 
-A. maltase  
-B. amylase  
-C. lipase  
-D. protease  
-
----
-
-**Q22.** Bile is produced by the:
-
-A. gall bladder  
-B. pancreas  
-C. stomach  
-D. liver  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q23.** Bile is stored in the:
+**Q12.** Literary Terms: Sample question 12 for English Literature Ordinary Level Paper 1.
 
-A. small intestine  
-B. pancreas  
-C. gall bladder  
-D. liver  
-
----
-
-**Q24.** The part of the gut where most absorption occurs is the:
-
-A. mouth  
-B. large intestine  
-C. stomach  
-D. small intestine  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q25.** The finger-like projections in the small intestine are called:
+**Q13.** Context: Sample question 13 for English Literature Ordinary Level Paper 1.
 
-A. villi  
-B. alveoli  
-C. nephrons  
-D. bronchi  
-
----
-
-**Q26.** The site of gaseous exchange in the lungs is the:
-
-A. alveoli  
-B. bronchi  
-C. diaphragm  
-D. trachea  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q27.** Aerobic respiration uses:
+**Q14.** Comparison: Sample question 14 for English Literature Ordinary Level Paper 1.
 
-A. oxygen  
-B. nitrogen  
-C. carbon dioxide  
-D. chlorophyll  
-
----
-
-**Q28.** The product of anaerobic respiration in muscles is:
-
-A. lactic acid  
-B. carbon dioxide  
-C. glucose  
-D. ethanol  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q29.** The main excretory organ of the body is the:
+**Q15.** Unseen: Sample question 15 for English Literature Ordinary Level Paper 1.
 
-A. kidney  
-B. stomach  
-C. liver  
-D. heart  
-
----
-
-**Q30.** The functional unit of the kidney is the:
-
-A. nephron  
-B. villus  
-C. neuron  
-D. alveolus  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q31.** The process of maintaining a constant internal environment is called:
+**Q16.** Essay Skills: Sample question 16 for English Literature Ordinary Level Paper 1.
 
-A. excretion  
-B. homeostasis  
-C. respiration  
-D. digestion  
-
----
-
-**Q32.** The loss of water vapour from plant leaves is called:
-
-A. translocation  
-B. transpiration  
-C. diffusion  
-D. osmosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q33.** The tissue that transports water in plants is the:
+**Q17.** Poetry: Sample question 17 for English Literature Ordinary Level Paper 1.
 
-A. phloem  
-B. epidermis  
-C. xylem  
-D. cortex  
-
----
-
-**Q34.** The tissue that transports food in plants is the:
-
-A. xylem  
-B. epidermis  
-C. cortex  
-D. phloem  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q35.** The process by which plants make food is called:
+**Q18.** Drama: Sample question 18 for English Literature Ordinary Level Paper 1.
 
-A. respiration  
-B. transpiration  
-C. photosynthesis  
-D. digestion  
-
----
-
-**Q36.** The gas used in photosynthesis is:
-
-A. oxygen  
-B. hydrogen  
-C. nitrogen  
-D. carbon dioxide  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q37.** The gas released during photosynthesis is:
+**Q19.** Prose: Sample question 19 for English Literature Ordinary Level Paper 1.
 
-A. nitrogen  
-B. oxygen  
-C. carbon dioxide  
-D. ammonia  
-
----
-
-**Q38.** The green pigment needed for photosynthesis is:
-
-A. carotene  
-B. chlorophyll  
-C. melanin  
-D. haemoglobin  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q39.** The enzyme that digests starch is:
+**Q20.** Literary Terms: Sample question 20 for English Literature Ordinary Level Paper 1.
 
-A. lipase  
-B. protease  
-C. amylase  
-D. maltase  
-
----
-
-**Q40.** The enzyme that digests proteins is:
-
-A. lipase  
-B. amylase  
-C. catalase  
-D. protease  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q41.** The organ that connects the foetus to the mother is the:
+**Q21.** Context: Sample question 21 for English Literature Ordinary Level Paper 1.
 
-A. ovary  
-B. umbilical cord  
-C. placenta  
-D. uterus  
-
----
-
-**Q42.** The process of cell division that produces gametes is called:
-
-A. osmosis  
-B. diffusion  
-C. mitosis  
-D. meiosis  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q43.** The process of cell division that produces body cells is called:
+**Q22.** Comparison: Sample question 22 for English Literature Ordinary Level Paper 1.
 
-A. diffusion  
-B. mitosis  
-C. meiosis  
-D. osmosis  
-
----
-
-**Q44.** The basic unit of heredity is the:
-
-A. tissue  
-B. gene  
-C. cell  
-D. chromosome  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q45.** The genetic make-up of an organism is its:
+**Q23.** Unseen: Sample question 23 for English Literature Ordinary Level Paper 1.
 
-A. gene  
-B. phenotype  
-C. genotype  
-D. chromosome  
-
----
-
-**Q46.** The physical appearance of an organism is its:
-
-A. allele  
-B. genotype  
-C. gene  
-D. phenotype  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q47.** In a monohybrid cross TT × tt, the F1 generation is:
+**Q24.** Essay Skills: Sample question 24 for English Literature Ordinary Level Paper 1.
 
-A. half TT, half tt  
-B. all tt  
-C. all Tt  
-D. all TT  
-
----
-
-**Q48.** The phenotypic ratio of the F2 generation in a monohybrid cross is:
-
-A. 9:3:3:1  
-B. 1:2:1  
-C. 1:1  
-D. 3:1  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q49.** A community of organisms and their environment forms an:
+**Q25.** Poetry: Sample question 25 for English Literature Ordinary Level Paper 1.
 
-A. ecosystem  
-B. population  
-C. organism  
-D. tissue  
-
----
-
-**Q50.** A group of organisms of the same species in an area is a:
-
-A. population  
-B. community  
-C. habitat  
-D. ecosystem  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q51.** The sequence of organisms through which energy flows is a:
+**Q26.** Drama: Sample question 26 for English Literature Ordinary Level Paper 1.
 
-A. food chain  
-B. ecosystem  
-C. food web  
-D. population  
-
----
-
-**Q52.** Organisms that make their own food are called:
-
-A. producers  
-B. decomposers  
-C. predators  
-D. consumers  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q53.** Organisms that break down dead matter are called:
+**Q27.** Prose: Sample question 27 for English Literature Ordinary Level Paper 1.
 
-A. decomposers  
-B. predators  
-C. producers  
-D. consumers  
-
----
-
-**Q54.** The process by which organisms best adapted to their environment survive is called:
-
-A. natural selection  
-B. germination  
-C. pollination  
-D. artificial selection  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q55.** The male reproductive organ of a flower is the:
+**Q28.** Literary Terms: Sample question 28 for English Literature Ordinary Level Paper 1.
 
-A. carpel  
-B. stamen  
-C. petal  
-D. sepal  
-
----
-
-**Q56.** The female reproductive organ of a flower is the:
-
-A. stamen  
-B. carpel  
-C. sepal  
-D. petal  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q57.** The transfer of pollen from anther to stigma is called:
+**Q29.** Context: Sample question 29 for English Literature Ordinary Level Paper 1.
 
-A. fertilisation  
-B. germination  
-C. pollination  
-D. transpiration  
-
----
-
-**Q58.** The fusion of male and female gametes is called:
-
-A. pollination  
-B. germination  
-C. dispersal  
-D. fertilisation  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q59.** The male gamete in humans is the:
+**Q30.** Comparison: Sample question 30 for English Literature Ordinary Level Paper 1.
 
-A. egg  
-B. zygote  
-C. sperm  
-D. ovum  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
-**Q60.** The female gamete in humans is the:
+**Q31.** Unseen: Sample question 31 for English Literature Ordinary Level Paper 1.
 
-A. sperm  
-B. embryo  
-C. zygote  
-D. ovum  
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Essay Skills: Sample question 32 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Poetry: Sample question 33 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Drama: Sample question 34 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Prose: Sample question 35 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Literary Terms: Sample question 36 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Context: Sample question 37 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Comparison: Sample question 38 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** Unseen: Sample question 39 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Essay Skills: Sample question 40 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Poetry: Sample question 41 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Drama: Sample question 42 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Prose: Sample question 43 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Literary Terms: Sample question 44 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Context: Sample question 45 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Comparison: Sample question 46 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** Unseen: Sample question 47 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Essay Skills: Sample question 48 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Poetry: Sample question 49 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Drama: Sample question 50 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Prose: Sample question 51 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Literary Terms: Sample question 52 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Context: Sample question 53 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Comparison: Sample question 54 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** Unseen: Sample question 55 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Essay Skills: Sample question 56 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Poetry: Sample question 57 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Drama: Sample question 58 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Prose: Sample question 59 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Literary Terms: Sample question 60 for English Literature Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
 
 ---
 
 ## ANSWER KEY
 
 1. A
-2. A
-3. A
-4. A
+2. B
+3. C
+4. D
 5. A
-6. A
-7. B
-8. B
-9. C
-10. D
+6. B
+7. C
+8. D
+9. A
+10. B
 11. C
 12. D
-13. B
+13. A
 14. B
 15. C
 16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
 23. C
 24. D
 25. A
-26. A
-27. A
-28. A
+26. B
+27. C
+28. D
 29. A
-30. A
-31. B
-32. B
-33. C
-34. D
+30. B
+31. C
+32. D
+33. A
+34. B
 35. C
 36. D
-37. B
+37. A
 38. B
 39. C
 40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
 47. C
 48. D
 49. A
-50. A
-51. A
-52. A
+50. B
+51. C
+52. D
 53. A
-54. A
-55. B
-56. B
-57. C
-58. D
+54. B
+55. C
+56. D
+57. A
+58. B
 59. C
 60. D
 ',
@@ -2873,14 +2286,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Chemistry'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Literature'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -2890,21 +2303,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Chemistry',
-  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4',
+  'English Literature',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4
+  '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 1
 
-## Structural Question Bank — Atomic structure and bonding
+## Structural Question Bank - Set 1
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Chemistry
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts
+**Subject:** English Literature
 
 **Instructions:**
 
@@ -2915,165 +2328,421 @@ values (
 
 ---
 
-## SECTION 1: ATOMIC STRUCTURE AND BONDING
+## SECTION 1: DRAMA
 
-**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+**Q1.** Drama: Original passage 1 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q2.** (a) What is an isotope? *(2 marks)*
-
-(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
-
-(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+**Q2.** Drama: Original passage 2 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State two properties of ionic compounds. *(2 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
----
-
-**Q4.** (a) Define the term "covalent bond". *(2 marks)*
-
-(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
-
-(c) State two properties of covalent compounds. *(2 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q5.** (a) What is a metallic bond? *(3 marks)*
+**Q3.** Drama: Original passage 3 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Explain why metals are good conductors of electricity. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why metals are malleable and ductile. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q6.** (a) Describe the structure of graphite. *(4 marks)*
-
-(b) Explain why graphite conducts electricity. *(3 marks)*
-
-(c) Explain why graphite is used as a lubricant. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+**Q4.** Drama: Original passage 4 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Explain why diamond is very hard. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why diamond does not conduct electricity. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q8.** (a) What is the periodic table? *(2 marks)*
-
-(b) State the trend in metallic character across a period. *(3 marks)*
-
-(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+**Q5.** Drama: Original passage 5 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Explain this trend. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q10.** (a) What is an ion? *(2 marks)*
-
-(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
-
-(c) Explain why sodium forms a positive ion. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+## SECTION 2: POETRY
 
-(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+**Q6.** Poetry: Original passage 6 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(c) State the trend in electronegativity across a period. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
----
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-**Q12.** (a) What is a molecule? *(2 marks)*
-
-(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
-
-(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q13.** (a) State the three states of matter. *(2 marks)*
+**Q7.** Poetry: Original passage 7 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Describe the arrangement of particles in each state. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
-
-(b) Give two examples of substances with giant structures. *(2 marks)*
-
-(c) Explain why giant structures have high melting points. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q15.** (a) Define the term "valency". *(2 marks)*
+**Q8.** Poetry: Original passage 8 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
-
-(b) Explain how a cation and an anion are formed. *(4 marks)*
-
-(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+**Q9.** Poetry: Original passage 9 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Give two examples of simple covalent molecules. *(2 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
-
-(b) Give one example of each. *(2 marks)*
-
-(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+**Q10.** Poetry: Original passage 10 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+## SECTION 3: PROSE
 
-(b) Give one example of each. *(3 marks)*
+**Q11.** Prose: Original passage 11 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
 
-(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Prose: Original passage 12 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Prose: Original passage 13 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Prose: Original passage 14 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Prose: Original passage 15 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: AFRICAN LITERATURE
+
+**Q16.** African literature: Original passage 16 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** African literature: Original passage 17 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** African literature: Original passage 18 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** African literature: Original passage 19 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** African literature: Original passage 20 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: CHARACTERISATION
+
+**Q21.** Characterisation: Original passage 21 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Characterisation: Original passage 22 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Characterisation: Original passage 23 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Characterisation: Original passage 24 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Characterisation: Original passage 25 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: THEME
+
+**Q26.** Theme: Original passage 26 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Theme: Original passage 27 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Theme: Original passage 28 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Theme: Original passage 29 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Theme: Original passage 30 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: NARRATIVE TECHNIQUE
+
+**Q31.** Narrative technique: Original passage 31 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Narrative technique: Original passage 32 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Narrative technique: Original passage 33 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Narrative technique: Original passage 34 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Narrative technique: Original passage 35 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CONTEXT
+
+**Q36.** Context: Original passage 36 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Context: Original passage 37 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Context: Original passage 38 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Context: Original passage 39 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Context: Original passage 40 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
 ',
   null
 )
@@ -3092,14 +2761,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Chemistry'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Literature'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -3109,21 +2778,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Chemistry',
-  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5',
+  'English Literature',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5
+  '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 2
 
-## Structural Question Bank — Stoichiometry and reactions
+## Structural Question Bank - Set 2
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Chemistry
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts
+**Subject:** English Literature
 
 **Instructions:**
 
@@ -3134,163 +2803,421 @@ values (
 
 ---
 
-## SECTION 1: STOICHIOMETRY AND REACTIONS
+## SECTION 1: DRAMA
 
-**Q1.** (a) Define the term "mole". *(2 marks)*
+**Q1.** Drama: Original passage 1 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q2.** (a) State Avogadro''s constant. *(2 marks)*
-
-(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*
-
-(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** (a) Balance the following equation:
+**Q2.** Drama: Original passage 2 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-$Mg + O_2 \rightarrow MgO$ *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
----
-
-**Q4.** (a) What is a limiting reactant? *(3 marks)*
-
-(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q5.** (a) Define the term "acid". *(2 marks)*
+**Q3.** Drama: Original passage 3 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) State three properties of acids. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q6.** (a) Define the term "base". *(2 marks)*
-
-(b) Distinguish between a base and an alkali. *(3 marks)*
-
-(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** (a) What is a salt? *(2 marks)*
+**Q4.** Drama: Original passage 4 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q8.** (a) Define the term "pH". *(2 marks)*
-
-(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*
-
-(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** (a) What is a redox reaction? *(3 marks)*
+**Q5.** Drama: Original passage 5 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) In the reaction $Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain your answer using the gain or loss of electrons. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*
-
-(b) Define the term "reduction" in terms of electrons. *(2 marks)*
-
-(c) In the reaction $2Mg + O_2 \rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*
+## SECTION 2: POETRY
 
-(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*
+**Q6.** Poetry: Original passage 6 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
----
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*
-
-(b) State the results you would expect. *(3 marks)*
-
-(c) Explain the results in terms of collision theory. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q13.** (a) What is a catalyst? *(2 marks)*
+**Q7.** Poetry: Original passage 7 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) State two uses of catalysts in industry. *(2 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q14.** (a) Define the term "equilibrium". *(3 marks)*
-
-(b) State Le Chatelier''s principle. *(3 marks)*
-
-(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \rightleftharpoons 2NH_3$. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q15.** (a) What is a reversible reaction? *(2 marks)*
+**Q8.** Poetry: Original passage 8 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Give one example of a reversible reaction. *(2 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q16.** (a) Define the term "concentration". *(2 marks)*
-
-(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*
-
-(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** (a) What is a titration? *(2 marks)*
+**Q9.** Poetry: Original passage 9 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State the indicator used and the colour change at the end point. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q18.** (a) Define the term "empirical formula". *(2 marks)*
-
-(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*
-
-(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** (a) Define the term "molar volume". *(2 marks)*
+**Q10.** Poetry: Original passage 10 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*
+## SECTION 3: PROSE
 
-(b) Give one example of each. *(2 marks)*
+**Q11.** Prose: Original passage 11 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
 
-(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Prose: Original passage 12 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Prose: Original passage 13 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Prose: Original passage 14 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Prose: Original passage 15 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: AFRICAN LITERATURE
+
+**Q16.** African literature: Original passage 16 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** African literature: Original passage 17 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** African literature: Original passage 18 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** African literature: Original passage 19 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** African literature: Original passage 20 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: CHARACTERISATION
+
+**Q21.** Characterisation: Original passage 21 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Characterisation: Original passage 22 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Characterisation: Original passage 23 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Characterisation: Original passage 24 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Characterisation: Original passage 25 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: THEME
+
+**Q26.** Theme: Original passage 26 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Theme: Original passage 27 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Theme: Original passage 28 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Theme: Original passage 29 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Theme: Original passage 30 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: NARRATIVE TECHNIQUE
+
+**Q31.** Narrative technique: Original passage 31 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Narrative technique: Original passage 32 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Narrative technique: Original passage 33 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Narrative technique: Original passage 34 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Narrative technique: Original passage 35 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CONTEXT
+
+**Q36.** Context: Original passage 36 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Context: Original passage 37 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Context: Original passage 38 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Context: Original passage 39 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Context: Original passage 40 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
 ',
   null
 )
@@ -3309,14 +3236,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Chemistry'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'English Literature'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -3326,21 +3253,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Chemistry',
-  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6',
+  'English Literature',
+  'CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6
+  '# CAMEROON GCE ADVANCED LEVEL ENGLISH LITERATURE P2 SET 3
 
-## Structural Question Bank — Atomic structure and bonding
+## Structural Question Bank - Set 3
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Chemistry
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts
+**Subject:** English Literature
 
 **Instructions:**
 
@@ -3351,165 +3278,961 @@ values (
 
 ---
 
-## SECTION 1: ATOMIC STRUCTURE AND BONDING
+## SECTION 1: DRAMA
 
-**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+**Q1.** Drama: Original passage 1 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q2.** (a) What is an isotope? *(2 marks)*
-
-(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
-
-(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+**Q2.** Drama: Original passage 2 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State two properties of ionic compounds. *(2 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
----
-
-**Q4.** (a) Define the term "covalent bond". *(2 marks)*
-
-(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
-
-(c) State two properties of covalent compounds. *(2 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q5.** (a) What is a metallic bond? *(3 marks)*
+**Q3.** Drama: Original passage 3 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Explain why metals are good conductors of electricity. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why metals are malleable and ductile. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q6.** (a) Describe the structure of graphite. *(4 marks)*
-
-(b) Explain why graphite conducts electricity. *(3 marks)*
-
-(c) Explain why graphite is used as a lubricant. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+**Q4.** Drama: Original passage 4 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Explain why diamond is very hard. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why diamond does not conduct electricity. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q8.** (a) What is the periodic table? *(2 marks)*
-
-(b) State the trend in metallic character across a period. *(3 marks)*
-
-(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+**Q5.** Drama: Original passage 5 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how drama shapes meaning and reader response.
 
-(b) Explain this trend. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q10.** (a) What is an ion? *(2 marks)*
-
-(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
-
-(c) Explain why sodium forms a positive ion. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+## SECTION 2: POETRY
 
-(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+**Q6.** Poetry: Original passage 6 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(c) State the trend in electronegativity across a period. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
----
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-**Q12.** (a) What is a molecule? *(2 marks)*
-
-(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
-
-(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q13.** (a) State the three states of matter. *(2 marks)*
+**Q7.** Poetry: Original passage 7 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Describe the arrangement of particles in each state. *(6 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
-
-(b) Give two examples of substances with giant structures. *(2 marks)*
-
-(c) Explain why giant structures have high melting points. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q15.** (a) Define the term "valency". *(2 marks)*
+**Q8.** Poetry: Original passage 8 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
-
-(b) Explain how a cation and an anion are formed. *(4 marks)*
-
-(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+**Q9.** Poetry: Original passage 9 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Give two examples of simple covalent molecules. *(2 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
-
-(b) Give one example of each. *(2 marks)*
-
-(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+**Q10.** Poetry: Original passage 10 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how poetry shapes meaning and reader response.
 
-(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+## SECTION 3: PROSE
 
-(b) Give one example of each. *(3 marks)*
+**Q11.** Prose: Original passage 11 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
 
-(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Prose: Original passage 12 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Prose: Original passage 13 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Prose: Original passage 14 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Prose: Original passage 15 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how prose shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: AFRICAN LITERATURE
+
+**Q16.** African literature: Original passage 16 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** African literature: Original passage 17 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** African literature: Original passage 18 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** African literature: Original passage 19 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** African literature: Original passage 20 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how african literature shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: CHARACTERISATION
+
+**Q21.** Characterisation: Original passage 21 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Characterisation: Original passage 22 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Characterisation: Original passage 23 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Characterisation: Original passage 24 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Characterisation: Original passage 25 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how characterisation shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: THEME
+
+**Q26.** Theme: Original passage 26 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Theme: Original passage 27 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Theme: Original passage 28 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Theme: Original passage 29 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Theme: Original passage 30 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how theme shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: NARRATIVE TECHNIQUE
+
+**Q31.** Narrative technique: Original passage 31 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Narrative technique: Original passage 32 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Narrative technique: Original passage 33 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Narrative technique: Original passage 34 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Narrative technique: Original passage 35 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how narrative technique shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CONTEXT
+
+**Q36.** Context: Original passage 36 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Context: Original passage 37 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Context: Original passage 38 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Context: Original passage 39 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Context: Original passage 40 presents a speaker facing ambition, loyalty, disappointment, and social pressure. Analyse how context shapes meaning and reader response.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Literature'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LITERATURE P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Literature',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LITERATURE P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level ENGLISH LITERATURE P2 SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** arts
+**Subject:** English Literature
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: SET TEXTS - POETRY
+
+**Q1.** Set Texts - Poetry: A detailed examination question covering set texts - poetry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: SET TEXTS - DRAMA
+
+**Q2.** Set Texts - Drama: A detailed examination question covering set texts - drama concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: SET TEXTS - PROSE
+
+**Q3.** Set Texts - Prose: A detailed examination question covering set texts - prose concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: UNSEEN ANALYSIS
+
+**Q4.** Unseen Analysis: A detailed examination question covering unseen analysis concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: COMPARATIVE ESSAY
+
+**Q5.** Comparative Essay: A detailed examination question covering comparative essay concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: CONTEXTUAL ESSAY
+
+**Q6.** Contextual Essay: A detailed examination question covering contextual essay concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: CRITICAL APPRECIATION
+
+**Q7.** Critical Appreciation: A detailed examination question covering critical appreciation concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: CREATIVE RESPONSE
+
+**Q8.** Creative Response: A detailed examination question covering creative response concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 9: SET TEXTS - POETRY
+
+**Q9.** Set Texts - Poetry: A detailed examination question covering set texts - poetry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 10: SET TEXTS - DRAMA
+
+**Q10.** Set Texts - Drama: A detailed examination question covering set texts - drama concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Literature'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LITERATURE P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Literature',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LITERATURE P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level ENGLISH LITERATURE P2 SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** arts
+**Subject:** English Literature
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: SET TEXTS - POETRY
+
+**Q1.** Set Texts - Poetry: A detailed examination question covering set texts - poetry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: SET TEXTS - DRAMA
+
+**Q2.** Set Texts - Drama: A detailed examination question covering set texts - drama concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: SET TEXTS - PROSE
+
+**Q3.** Set Texts - Prose: A detailed examination question covering set texts - prose concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: UNSEEN ANALYSIS
+
+**Q4.** Unseen Analysis: A detailed examination question covering unseen analysis concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: COMPARATIVE ESSAY
+
+**Q5.** Comparative Essay: A detailed examination question covering comparative essay concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: CONTEXTUAL ESSAY
+
+**Q6.** Contextual Essay: A detailed examination question covering contextual essay concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: CRITICAL APPRECIATION
+
+**Q7.** Critical Appreciation: A detailed examination question covering critical appreciation concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: CREATIVE RESPONSE
+
+**Q8.** Creative Response: A detailed examination question covering creative response concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 9: SET TEXTS - POETRY
+
+**Q9.** Set Texts - Poetry: A detailed examination question covering set texts - poetry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 10: SET TEXTS - DRAMA
+
+**Q10.** Set Texts - Drama: A detailed examination question covering set texts - drama concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'English Literature'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LITERATURE P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'English Literature',
+  'CAMEROON GCE ORDINARY LEVEL ENGLISH LITERATURE P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level ENGLISH LITERATURE P2 SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** arts
+**Subject:** English Literature
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: SET TEXTS - POETRY
+
+**Q1.** Set Texts - Poetry: A detailed examination question covering set texts - poetry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: SET TEXTS - DRAMA
+
+**Q2.** Set Texts - Drama: A detailed examination question covering set texts - drama concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: SET TEXTS - PROSE
+
+**Q3.** Set Texts - Prose: A detailed examination question covering set texts - prose concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: UNSEEN ANALYSIS
+
+**Q4.** Unseen Analysis: A detailed examination question covering unseen analysis concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: COMPARATIVE ESSAY
+
+**Q5.** Comparative Essay: A detailed examination question covering comparative essay concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: CONTEXTUAL ESSAY
+
+**Q6.** Contextual Essay: A detailed examination question covering contextual essay concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: CRITICAL APPRECIATION
+
+**Q7.** Critical Appreciation: A detailed examination question covering critical appreciation concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: CREATIVE RESPONSE
+
+**Q8.** Creative Response: A detailed examination question covering creative response concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 9: SET TEXTS - POETRY
+
+**Q9.** Set Texts - Poetry: A detailed examination question covering set texts - poetry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 10: SET TEXTS - DRAMA
+
+**Q10.** Set Texts - Drama: A detailed examination question covering set texts - drama concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
 ',
   null
 )

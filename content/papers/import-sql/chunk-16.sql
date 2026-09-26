@@ -3,14 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'ICT'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Food Science and Nutrition'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 5'
   limit 1
 )
 insert into public.course_documents (
@@ -20,21 +20,645 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'ICT',
-  'CAMEROON GCE ORDINARY LEVEL ICT P1 SET 3',
+  'Food Science and Nutrition',
+  'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 5',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ICT P1 SET 3
+  '# CAMEROON GCE Advanced Level FOOD SCIENCE AND NUTRITION P2 SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Food Science and Nutrition
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FOOD CHEMISTRY
+
+**Q1.** Food Chemistry: A detailed examination question covering food chemistry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: NUTRITION SCIENCE
+
+**Q2.** Nutrition Science: A detailed examination question covering nutrition science concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: FOOD MICROBIOLOGY
+
+**Q3.** Food Microbiology: A detailed examination question covering food microbiology concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: FOOD PROCESSING
+
+**Q4.** Food Processing: A detailed examination question covering food processing concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: DIET THERAPY
+
+**Q5.** Diet Therapy: A detailed examination question covering diet therapy concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: PUBLIC HEALTH NUTRITION
+
+**Q6.** Public Health Nutrition: A detailed examination question covering public health nutrition concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: FOOD SAFETY
+
+**Q7.** Food Safety: A detailed examination question covering food safety concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: PRODUCT DEVELOPMENT
+
+**Q8.** Product Development: A detailed examination question covering product development concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Food Science and Nutrition'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Food Science and Nutrition',
+  'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 6',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Advanced Level FOOD SCIENCE AND NUTRITION P2 SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Food Science and Nutrition
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FOOD CHEMISTRY
+
+**Q1.** Food Chemistry: A detailed examination question covering food chemistry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: NUTRITION SCIENCE
+
+**Q2.** Nutrition Science: A detailed examination question covering nutrition science concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: FOOD MICROBIOLOGY
+
+**Q3.** Food Microbiology: A detailed examination question covering food microbiology concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: FOOD PROCESSING
+
+**Q4.** Food Processing: A detailed examination question covering food processing concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: DIET THERAPY
+
+**Q5.** Diet Therapy: A detailed examination question covering diet therapy concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: PUBLIC HEALTH NUTRITION
+
+**Q6.** Public Health Nutrition: A detailed examination question covering public health nutrition concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: FOOD SAFETY
+
+**Q7.** Food Safety: A detailed examination question covering food safety concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: PRODUCT DEVELOPMENT
+
+**Q8.** Product Development: A detailed examination question covering product development concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Food Science and Nutrition'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Food Science and Nutrition',
+  'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 7',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Advanced Level FOOD SCIENCE AND NUTRITION P2 SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Food Science and Nutrition
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FOOD CHEMISTRY
+
+**Q1.** Food Chemistry: A detailed examination question covering food chemistry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: NUTRITION SCIENCE
+
+**Q2.** Nutrition Science: A detailed examination question covering nutrition science concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: FOOD MICROBIOLOGY
+
+**Q3.** Food Microbiology: A detailed examination question covering food microbiology concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: FOOD PROCESSING
+
+**Q4.** Food Processing: A detailed examination question covering food processing concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: DIET THERAPY
+
+**Q5.** Diet Therapy: A detailed examination question covering diet therapy concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: PUBLIC HEALTH NUTRITION
+
+**Q6.** Public Health Nutrition: A detailed examination question covering public health nutrition concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: FOOD SAFETY
+
+**Q7.** Food Safety: A detailed examination question covering food safety concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: PRODUCT DEVELOPMENT
+
+**Q8.** Product Development: A detailed examination question covering product development concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Food Science and Nutrition'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Food Science and Nutrition',
+  'CAMEROON GCE ADVANCED LEVEL FOOD SCIENCE AND NUTRITION P2 SET 8',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Advanced Level FOOD SCIENCE AND NUTRITION P2 SET 8
+
+## Structural Question Bank - Set 8
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Food Science and Nutrition
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: FOOD CHEMISTRY
+
+**Q1.** Food Chemistry: A detailed examination question covering food chemistry concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 2: NUTRITION SCIENCE
+
+**Q2.** Nutrition Science: A detailed examination question covering nutrition science concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 3: FOOD MICROBIOLOGY
+
+**Q3.** Food Microbiology: A detailed examination question covering food microbiology concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 4: FOOD PROCESSING
+
+**Q4.** Food Processing: A detailed examination question covering food processing concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 5: DIET THERAPY
+
+**Q5.** Diet Therapy: A detailed examination question covering diet therapy concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 6: PUBLIC HEALTH NUTRITION
+
+**Q6.** Public Health Nutrition: A detailed examination question covering public health nutrition concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+## SECTION 7: FOOD SAFETY
+
+**Q7.** Food Safety: A detailed examination question covering food safety concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(6 marks)*
+
+---
+
+## SECTION 8: PRODUCT DEVELOPMENT
+
+**Q8.** Product Development: A detailed examination question covering product development concepts and applications.
+
+(a) Identify the key concept, principle, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FRENCH P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ADVANCED LEVEL FRENCH P1 SET 1',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 1
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** science, commercial, technical
-**Subject:** ICT
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -47,2302 +671,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** In a spreadsheet, the intersection of a row and a column is called a:
+**Q1.** Complétez: Je ____ au marché.
 
-A. cell  
-B. range  
-C. worksheet  
-D. chart  
+A. vais  
+B. va  
+C. vont  
+D. allons  
 
 ---
 
-**Q2.** The function that adds a range of cells is:
+**Q2.** Complétez: Nous ____ français.
 
-A. SUM  
-B. AVERAGE  
-C. MIN  
-D. MAX  
+A. parlons  
+B. parlez  
+C. parle  
+D. parlent  
 
 ---
 
-**Q3.** The function that finds the largest value in a range is:
+**Q3.** Complétez: Elle ____ une lettre.
 
-A. MAX  
-B. SUM  
-C. MIN  
-D. AVERAGE  
+A. écrit  
+B. écrivent  
+C. écris  
+D. écrivez  
 
 ---
 
-**Q4.** A formula in a spreadsheet always begins with:
+**Q4.** Le passé composé de ''manger'' avec ''je'' est:
 
-A. =  
-B. -  
-C. #  
-D. +  
+A. j''ai mangé  
+B. je mangerai  
+C. je mangeais  
+D. je mange  
 
 ---
 
-**Q5.** A presentation program is used to:
+**Q5.** Complétez: Ils ____ à l''école.
 
-A. create slideshows  
-B. browse the web  
-C. write essays  
-D. calculate budgets  
+A. vont  
+B. allons  
+C. va  
+D. vais  
 
 ---
 
-**Q6.** The effect used when moving from one slide to the next is called a:
+**Q6.** Le futur de ''être'' avec ''je'' est:
 
-A. transition  
-B. template  
-C. hyperlink  
-D. animation  
+A. je serai  
+B. je fus  
+C. j''étais  
+D. je suis  
 
 ---
 
-**Q7.** The movement of objects within a slide is called:
+**Q7.** Complétez: Tu ____ ton livre.
 
-A. transition  
-B. animation  
-C. hyperlink  
-D. layout  
+A. a  
+B. as  
+C. avez  
+D. ont  
 
 ---
 
-**Q8.** The internet is:
+**Q8.** L''imparfait de ''avoir'' avec ''nous'' est:
 
-A. a single computer  
-B. a global network of computers  
-C. a web browser  
-D. a type of software  
+A. nous avons  
+B. nous avions  
+C. nous eûmes  
+D. nous aurons  
 
 ---
 
-**Q9.** The software used to access websites is a:
+**Q9.** Complétez: Le livre ____ je parle est intéressant.
 
-A. search engine  
-B. server  
-C. browser  
-D. firewall  
+A. qui  
+B. que  
+C. dont  
+D. où  
 
 ---
 
-**Q10.** A website address is called a:
+**Q10.** Complétez: La femme ____ chante est ma mère.
 
-A. IP  
-B. DNS  
-C. HTML  
-D. URL  
+A. que  
+B. dont  
+C. où  
+D. qui  
 
 ---
 
-**Q11.** The service used to send and receive messages electronically is:
+**Q11.** Le pluriel de ''le cheval'' est:
 
-A. spreadsheet  
-B. presentation  
-C. email  
-D. word processor  
+A. les chevals  
+B. les chevauxs  
+C. les chevaux  
+D. les chevaus  
 
 ---
 
-**Q12.** The part of an email address after the @ symbol is the:
+**Q12.** Complétez: ____ eau est bonne.
 
-A. username  
-B. attachment  
-C. password  
-D. domain name  
+A. Le  
+B. Les  
+C. La  
+D. L''  
 
 ---
 
-**Q13.** An unwanted email sent in bulk is called:
+**Q13.** Complétez: J''achète ____ pain.
 
-A. newsletter  
-B. spam  
-C. attachment  
-D. draft  
+A. des  
+B. du  
+C. de la  
+D. le  
 
 ---
 
-**Q14.** A file sent along with an email is called an:
+**Q14.** La négation de ''Il a mangé'' est:
 
-A. signature  
-B. attachment  
-C. header  
-D. hyperlink  
+A. Il ne mange pas  
+B. Il n''a pas mangé  
+C. Il n''a mangé pas  
+D. Il a pas mangé  
 
 ---
 
-**Q15.** The responsible use of technology is called:
+**Q15.** Complétez: Elle est ____ grande que sa sœur.
 
-A. hacking  
-B. cyberbullying  
-C. digital citizenship  
-D. phishing  
+A. aussi  
+B. moins  
+C. plus  
+D. très  
 
 ---
 
-**Q16.** The trace of your online activity is called your:
+**Q16.** Le féminin de ''acteur'' est:
 
-A. password  
-B. IP address  
-C. username  
-D. digital footprint  
+A. acteurse  
+B. acteure  
+C. acteuse  
+D. actrice  
 
 ---
 
-**Q17.** Bullying carried out online is called:
+**Q17.** Complétez: Il faut que tu ____.
 
-A. phishing  
-B. hacking  
-C. cyberbullying  
-D. spamming  
+A. viendras  
+B. venais  
+C. viennes  
+D. viens  
 
 ---
 
-**Q18.** The rules of polite behaviour online are called:
+**Q18.** Complétez: Je ____ voyager.
 
-A. licence  
-B. protocol  
-C. copyright  
-D. netiquette  
+A. veux  
+B. voulais  
+C. voudrai  
+D. voudrais  
 
 ---
 
-**Q19.** Storing data on remote servers accessed via the internet is called:
+**Q19.** Complétez: ____ maison est grande.
 
-A. printing  
-B. cloud computing  
-C. networking  
-D. programming  
+A. Cet  
+B. Cette  
+C. Ce  
+D. Ces  
 
 ---
 
-**Q20.** Sending a file from your computer to the internet is called:
+**Q20.** Complétez: ____ père travaille à l''hôpital.
 
-A. scanning  
-B. uploading  
-C. printing  
-D. downloading  
+A. Ton  
+B. Mon  
+C. Mes  
+D. Ma  
 
 ---
 
-**Q21.** Receiving a file from the internet to your computer is called:
+**Q21.** Complétez: Nous ____ à Douala.
 
-A. scanning  
-B. uploading  
-C. downloading  
-D. printing  
+A. habite  
+B. habitez  
+C. habitons  
+D. habitent  
 
 ---
 
-**Q22.** A malicious program that spreads between computers is a:
+**Q22.** Le passé composé de ''partir'' avec ''elle'' est:
 
-A. database  
-B. browser  
-C. spreadsheet  
-D. virus  
+A. elle a partie  
+B. elle a parti  
+C. elle est parti  
+D. elle est partie  
 
 ---
 
-**Q23.** Software that protects a computer from viruses is called:
+**Q23.** Complétez: Il va ____ France.
 
-A. word processor  
-B. browser  
-C. antivirus  
-D. firewall  
+A. aux  
+B. au  
+C. en  
+D. à  
 
 ---
 
-**Q24.** A security system that monitors incoming and outgoing network traffic is a:
+**Q24.** Complétez: Le livre est ____ la table.
 
-A. database  
-B. spreadsheet  
-C. antivirus  
-D. firewall  
+A. de  
+B. à  
+C. dans  
+D. sur  
 
 ---
 
-**Q25.** A word processor is used to:
+**Q25.** Complétez: ____ enfants jouent dans la cour.
 
-A. create and edit text documents  
-B. make calculations  
-C. browse the internet  
-D. play games  
+A. Les  
+B. Le  
+C. La  
+D. Un  
 
 ---
 
-**Q26.** The feature that checks spelling in a word processor is called:
+**Q26.** Le pluriel de ''un travail'' est:
 
-A. spell checker  
-B. thesaurus  
-C. grammar checker  
-D. autocorrect  
+A. des travaux  
+B. des travails  
+C. des travail  
+D. des travailes  
 
 ---
 
-**Q27.** The shortcut key for copying text is:
+**Q27.** Complétez: Je ____ content.
 
-A. Ctrl + C  
-B. Ctrl + X  
-C. Ctrl + V  
-D. Ctrl + P  
+A. suis  
+B. est  
+C. es  
+D. sommes  
 
 ---
 
-**Q28.** The shortcut key for pasting text is:
+**Q28.** Complétez: Nous ____ le temps.
 
-A. Ctrl + V  
-B. Ctrl + X  
-C. Ctrl + P  
-D. Ctrl + C  
+A. aurons  
+B. avions  
+C. eûmes  
+D. avons  
 
 ---
 
-**Q29.** The shortcut key for printing a document is:
+**Q29.** Complétez: Elle ____ souvent.
 
-A. Ctrl + P  
-B. Ctrl + S  
-C. Ctrl + C  
-D. Ctrl + V  
+A. vient  
+B. viens  
+C. viennent  
+D. venez  
 
 ---
 
-**Q30.** A spreadsheet is used to:
+**Q30.** Complétez: Ils ____ leurs devoirs.
 
-A. organise and calculate data  
-B. send emails  
-C. edit photos  
-D. write letters  
+A. font  
+B. faisons  
+C. fais  
+D. fait  
 
 ---
 
-**Q31.** Software used to manage a database is called a:
+**Q31.** Le Cameroun est appelé:
 
-A. OS  
-B. DBMS  
-C. browser  
-D. compiler  
+A. le pays des lions  
+B. l''Afrique en miniature  
+C. la perle de l''Afrique  
+D. le grenier de l''Afrique  
 
 ---
 
-**Q32.** The language used to query a relational database is:
+**Q32.** Combien de groupes ethniques compte le Cameroun?
 
-A. HTML  
-B. SQL  
-C. Java  
-D. CSS  
+A. environ 50  
+B. plus de 250  
+C. moins de 100  
+D. plus de 1000  
 
 ---
 
-**Q33.** A network that covers a small area such as a school is a:
-
-A. WAN  
-B. MAN  
-C. LAN  
-D. PAN  
-
----
-
-**Q34.** A network that covers a large geographical area is a:
-
-A. LAN  
-B. MAN  
-C. PAN  
-D. WAN  
-
----
-
-**Q35.** In a client-server model, the computer that provides services is the:
-
-A. client  
-B. switch  
-C. server  
-D. router  
-
----
-
-**Q36.** The unique address of a device on a network is its:
-
-A. URL  
-B. password  
-C. domain name  
-D. IP address  
-
----
-
-**Q37.** The system that translates domain names into IP addresses is:
-
-A. CSS  
-B. DNS  
-C. HTML  
-D. SQL  
-
----
-
-**Q38.** The language used to create web pages is:
-
-A. Java  
-B. HTML  
-C. Python  
-D. SQL  
-
----
-
-**Q39.** The language used to style web pages is:
-
-A. SQL  
-B. HTML  
-C. CSS  
-D. Java  
-
----
-
-**Q40.** A website that allows users to interact and change content is:
-
-A. offline  
-B. static  
-C. cached  
-D. dynamic  
-
----
-
-**Q41.** Buying and selling goods online is called:
-
-A. e-banking  
-B. e-mail  
-C. e-commerce  
-D. e-learning  
-
----
-
-**Q42.** Learning using electronic devices and the internet is called:
-
-A. e-banking  
-B. e-mail  
-C. e-commerce  
-D. e-learning  
-
----
-
-**Q43.** The practice of protecting systems and data from cyber threats is called:
-
-A. printing  
-B. cybersecurity  
-C. networking  
-D. programming  
-
----
-
-**Q44.** A fraudulent attempt to obtain sensitive information by pretending to be a trusted source is:
-
-A. cracking  
-B. phishing  
-C. hacking  
-D. spamming  
-
----
-
-**Q45.** Malicious software such as viruses and worms is called:
-
-A. firmware  
-B. shareware  
-C. malware  
-D. freeware  
-
----
-
-**Q46.** The process of converting data into a coded form to prevent unauthorised access is:
-
-A. deletion  
-B. decryption  
-C. compression  
-D. encryption  
-
----
-
-**Q47.** A copy of data kept for recovery purposes is called a:
-
-A. cache  
-B. firewall  
-C. backup  
-D. virus  
-
----
-
-**Q48.** The physical parts of a computer are called:
-
-A. shareware  
-B. firmware  
-C. software  
-D. hardware  
-
----
-
-**Q49.** The programs that run on a computer are called:
-
-A. software  
-B. hardware  
-C. peripherals  
-D. components  
-
----
-
-**Q50.** The part of the computer that processes instructions is the:
-
-A. CPU  
-B. monitor  
-C. printer  
-D. keyboard  
-
----
-
-**Q51.** A keyboard is an example of an:
-
-A. input device  
-B. storage device  
-C. output device  
-D. processing device  
-
----
-
-**Q52.** A monitor is an example of an:
-
-A. output device  
-B. storage device  
-C. processing device  
-D. input device  
-
----
-
-**Q53.** The process of arranging records in a particular order is called:
-
-A. sorting  
-B. indexing  
-C. filtering  
-D. querying  
-
----
-
-**Q54.** The process of displaying only records that meet a condition is called:
-
-A. filtering  
-B. backing up  
-C. indexing  
-D. sorting  
-
----
-
-**Q55.** Raw facts and figures are called:
-
-A. information  
-B. data  
-C. knowledge  
-D. wisdom  
-
----
-
-**Q56.** Data that has been processed and given meaning is called:
-
-A. raw data  
-B. information  
-C. storage  
-D. input  
-
----
-
-**Q57.** A collection of related data organised for easy access is a:
-
-A. spreadsheet  
-B. presentation  
-C. database  
-D. document  
-
----
-
-**Q58.** In a database table, a row is called a:
-
-A. field  
-B. query  
-C. report  
-D. record  
-
----
-
-**Q59.** In a database table, a column is called a:
-
-A. record  
-B. query  
-C. field  
-D. table  
-
----
-
-**Q60.** The field that uniquely identifies each record is the:
-
-A. foreign key  
-B. query  
-C. index  
-D. primary key  
-
----
-
-## ANSWER KEY
-
-1. A
-2. A
-3. A
-4. A
-5. A
-6. A
-7. B
-8. B
-9. C
-10. D
-11. C
-12. D
-13. B
-14. B
-15. C
-16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
-23. C
-24. D
-25. A
-26. A
-27. A
-28. A
-29. A
-30. A
-31. B
-32. B
-33. C
-34. D
-35. C
-36. D
-37. B
-38. B
-39. C
-40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
-47. C
-48. D
-49. A
-50. A
-51. A
-52. A
-53. A
-54. A
-55. B
-56. B
-57. C
-58. D
-59. C
-60. D
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 4'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 4',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 4
-
-## Structural Question Bank — Physical geography
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: PHYSICAL GEOGRAPHY
-
-**Q1.** (a) Define the term "weathering". *(2 marks)*
-
-(b) Distinguish between physical and chemical weathering. *(4 marks)*
-
-(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*
-
----
-
-**Q2.** (a) What is a rock? *(2 marks)*
-
-(b) Describe the three main types of rocks and how each is formed. *(6 marks)*
-
-(c) Give one example of each type of rock. *(3 marks)*
-
----
-
-**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*
-
-(b) Explain how limestone is formed. *(4 marks)*
-
-(c) State two uses of limestone. *(2 marks)*
-
----
-
-**Q4.** (a) What is the water cycle? *(2 marks)*
-
-(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*
-
-(c) Explain the importance of the water cycle. *(4 marks)*
-
----
-
-**Q5.** (a) Define the term "climate". *(2 marks)*
-
-(b) Distinguish between climate and weather. *(4 marks)*
-
-(c) State three factors that affect the climate of a place. *(3 marks)*
-
----
-
-**Q6.** (a) What is a river? *(2 marks)*
-
-(b) Describe the three stages of a river. *(6 marks)*
-
-(c) Explain how a waterfall is formed. *(4 marks)*
-
----
-
-**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*
-
-(b) Describe three ways a river transports its load. *(6 marks)*
-
-(c) Explain how a delta is formed. *(4 marks)*
-
----
-
-**Q8.** (a) What is a drainage basin? *(2 marks)*
-
-(b) Describe the features of a drainage basin. *(4 marks)*
-
-(c) Explain the difference between a tributary and a distributary. *(4 marks)*
-
----
-
-**Q9.** (a) Define the term "coast". *(2 marks)*
-
-(b) Describe two landforms created by coastal erosion. *(4 marks)*
-
-(c) Explain how a beach is formed. *(4 marks)*
-
----
-
-**Q10.** (a) What is a wave? *(2 marks)*
-
-(b) Distinguish between constructive and destructive waves. *(4 marks)*
-
-(c) Explain how a spit is formed. *(4 marks)*
-
----
-
-**Q11.** (a) Define the term "soil". *(2 marks)*
-
-(b) Describe the layers of a soil profile. *(4 marks)*
-
-(c) State three factors that affect soil formation. *(3 marks)*
-
----
-
-**Q12.** (a) What is soil erosion? *(2 marks)*
-
-(b) State three causes of soil erosion. *(3 marks)*
-
-(c) Describe two methods of preventing soil erosion. *(4 marks)*
-
----
-
-**Q13.** (a) Define the term "vegetation". *(2 marks)*
-
-(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*
-
-(c) Explain how climate affects vegetation. *(4 marks)*
-
----
-
-**Q14.** (a) What is a natural hazard? *(2 marks)*
-
-(b) State three examples of natural hazards. *(3 marks)*
-
-(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*
-
----
-
-**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)
-
-(b) Explain how an earthquake occurs. *(4 marks)*
-
-(c) State two effects of earthquakes. *(2 marks)*
-
----
-
-**Q16.** (a) What is a tropical storm? *(2 marks)*
-
-(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*
-
-(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*
-
----
-
-**Q17.** (a) Define the term "ecosystem". *(2 marks)*
-
-(b) Describe the components of an ecosystem. *(4 marks)*
-
-(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*
-
----
-
-**Q18.** (a) What is deforestation? *(2 marks)*
-
-(b) State three causes of deforestation. *(3 marks)*
-
-(c) Explain the effects of deforestation on the environment. *(5 marks)*
-
----
-
-**Q19.** (a) Define the term "desertification". *(2 marks)*
-
-(b) State three causes of desertification. *(3 marks)*
-
-(c) Describe two ways of reducing desertification. *(4 marks)*
-
----
-
-**Q20.** (a) What is climate change? *(2 marks)*
-
-(b) State three causes of climate change. *(3 marks)*
-
-(c) Explain two effects of climate change on Cameroon. *(5 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 5'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 5',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 5
-
-## Structural Question Bank — Human and Cameroon geography
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: HUMAN AND CAMEROON GEOGRAPHY
-
-**Q1.** (a) Define the term "population". *(2 marks)*
-
-(b) State three factors that affect population distribution. *(3 marks)*
-
-(c) Explain the difference between population density and population distribution. *(4 marks)*
-
----
-
-**Q2.** (a) What is population growth? *(2 marks)*
-
-(b) State three causes of rapid population growth. *(3 marks)*
-
-(c) Explain two effects of rapid population growth on a country. *(5 marks)*
-
----
-
-**Q3.** (a) Define the terms "birth rate" and "death rate". *(4 marks)*
-
-(b) Explain how birth rate and death rate affect population change. *(4 marks)*
-
-(c) State two ways of controlling population growth. *(2 marks)*
-
----
-
-**Q4.** (a) What is migration? *(2 marks)*
-
-(b) Distinguish between internal and international migration. *(4 marks)*
-
-(c) State three causes of rural-urban migration. *(3 marks)*
-
----
-
-**Q5.** (a) Define the term "settlement". *(2 marks)*
-
-(b) Distinguish between rural and urban settlements. *(4 marks)*
-
-(c) State three functions of urban settlements. *(3 marks)*
-
----
-
-**Q6.** (a) What is urbanisation? *(2 marks)*
-
-(b) State three causes of urbanisation. *(3 marks)*
-
-(c) Explain two problems caused by rapid urbanisation. *(5 marks)*
-
----
-
-**Q7.** (a) Define the term "agriculture". *(2 marks)*
-
-(b) Distinguish between subsistence and commercial farming. *(4 marks)*
-
-(c) State three factors that affect agriculture. *(3 marks)*
-
----
-
-**Q8.** (a) What is plantation agriculture? *(2 marks)*
-
-(b) Describe the characteristics of plantation agriculture. *(4 marks)*
-
-(c) State two advantages and two disadvantages of plantation agriculture. *(4 marks)*
-
----
-
-**Q9.** (a) Define the terms "crop rotation" and "mixed farming". *(4 marks)*
-
-(b) Explain the importance of agriculture to the economy of Cameroon. *(4 marks)*
-
-(c) State two problems facing agriculture in Cameroon. *(2 marks)*
-
----
-
-**Q10.** (a) What is industry? *(2 marks)*
-
-(b) Distinguish between primary, secondary, and tertiary industries. *(6 marks)*
-
-(c) Give two examples of each type of industry. *(3 marks)*
-
----
-
-**Q11.** (a) Define the term "manufacturing". *(2 marks)*
-
-(b) State three factors that influence the location of an industry. *(3 marks)*
-
-(c) Explain why industries are often located near ports. *(4 marks)*
-
----
-
-**Q12.** (a) What is transport? *(2 marks)*
-
-(b) State three modes of transport. *(3 marks)*
-
-(c) Explain the importance of transport to economic development. *(4 marks)*
-
----
-
-**Q13.** (a) Define the term "trade". *(2 marks)*
-
-(b) Distinguish between internal and international trade. *(4 marks)*
-
-(c) State three reasons why countries trade with each other. *(3 marks)*
-
----
-
-**Q14.** (a) What is a map? *(2 marks)*
-
-(b) State three features of a good map. *(3 marks)*
-
-(c) Explain how to measure distance on a map using a scale. *(4 marks)*
-
----
-
-**Q15.** (a) Define the terms "contour line" and "relief". *(4 marks)*
-
-(b) Explain how contour lines show the shape of the land. *(4 marks)*
-
-(c) Describe how you would identify a hill and a valley on a map. *(4 marks)*
-
----
-
-**Q16.** (a) What is a compass bearing? *(2 marks)*
-
-(b) State the eight points of the compass. *(4 marks)*
-
-(c) Explain how to find the bearing of one place from another on a map. *(4 marks)*
-
----
-
-**Q17.** (a) Name the ten regions of Cameroon. *(5 marks)*
-
-(b) State the capital city of Cameroon. *(1 mark)*
-
-(c) Describe the main economic activity of two regions of Cameroon. *(4 marks)*
-
----
-
-**Q18.** (a) What is the relief of Cameroon? *(2 marks)*
-
-(b) Describe the main physical features of Cameroon. *(4 marks)*
-
-(c) Explain how the relief of Cameroon affects agriculture. *(4 marks)*
-
----
-
-**Q19.** (a) Define the term "tourism". *(2 marks)*
-
-(b) State three tourist attractions in Cameroon. *(3 marks)*
-
-(c) Explain two benefits of tourism to Cameroon. *(4 marks)*
-
----
-
-**Q20.** (a) What is sustainable development? *(2 marks)*
-
-(b) State three ways Cameroon can achieve sustainable development. *(3 marks)*
-
-(c) Explain the importance of conserving natural resources. *(4 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 6'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 6',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 6
-
-## Structural Question Bank — Physical geography
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: PHYSICAL GEOGRAPHY
-
-**Q1.** (a) Define the term "weathering". *(2 marks)*
-
-(b) Distinguish between physical and chemical weathering. *(4 marks)*
-
-(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*
-
----
-
-**Q2.** (a) What is a rock? *(2 marks)*
-
-(b) Describe the three main types of rocks and how each is formed. *(6 marks)*
-
-(c) Give one example of each type of rock. *(3 marks)*
-
----
-
-**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*
-
-(b) Explain how limestone is formed. *(4 marks)*
-
-(c) State two uses of limestone. *(2 marks)*
-
----
-
-**Q4.** (a) What is the water cycle? *(2 marks)*
-
-(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*
-
-(c) Explain the importance of the water cycle. *(4 marks)*
-
----
-
-**Q5.** (a) Define the term "climate". *(2 marks)*
-
-(b) Distinguish between climate and weather. *(4 marks)*
-
-(c) State three factors that affect the climate of a place. *(3 marks)*
-
----
-
-**Q6.** (a) What is a river? *(2 marks)*
-
-(b) Describe the three stages of a river. *(6 marks)*
-
-(c) Explain how a waterfall is formed. *(4 marks)*
-
----
-
-**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*
-
-(b) Describe three ways a river transports its load. *(6 marks)*
-
-(c) Explain how a delta is formed. *(4 marks)*
-
----
-
-**Q8.** (a) What is a drainage basin? *(2 marks)*
-
-(b) Describe the features of a drainage basin. *(4 marks)*
-
-(c) Explain the difference between a tributary and a distributary. *(4 marks)*
-
----
-
-**Q9.** (a) Define the term "coast". *(2 marks)*
-
-(b) Describe two landforms created by coastal erosion. *(4 marks)*
-
-(c) Explain how a beach is formed. *(4 marks)*
-
----
-
-**Q10.** (a) What is a wave? *(2 marks)*
-
-(b) Distinguish between constructive and destructive waves. *(4 marks)*
-
-(c) Explain how a spit is formed. *(4 marks)*
-
----
-
-**Q11.** (a) Define the term "soil". *(2 marks)*
-
-(b) Describe the layers of a soil profile. *(4 marks)*
-
-(c) State three factors that affect soil formation. *(3 marks)*
-
----
-
-**Q12.** (a) What is soil erosion? *(2 marks)*
-
-(b) State three causes of soil erosion. *(3 marks)*
-
-(c) Describe two methods of preventing soil erosion. *(4 marks)*
-
----
-
-**Q13.** (a) Define the term "vegetation". *(2 marks)*
-
-(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*
-
-(c) Explain how climate affects vegetation. *(4 marks)*
-
----
-
-**Q14.** (a) What is a natural hazard? *(2 marks)*
-
-(b) State three examples of natural hazards. *(3 marks)*
-
-(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*
-
----
-
-**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)
-
-(b) Explain how an earthquake occurs. *(4 marks)*
-
-(c) State two effects of earthquakes. *(2 marks)*
-
----
-
-**Q16.** (a) What is a tropical storm? *(2 marks)*
-
-(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*
-
-(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*
-
----
-
-**Q17.** (a) Define the term "ecosystem". *(2 marks)*
-
-(b) Describe the components of an ecosystem. *(4 marks)*
-
-(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*
-
----
-
-**Q18.** (a) What is deforestation? *(2 marks)*
-
-(b) State three causes of deforestation. *(3 marks)*
-
-(c) Explain the effects of deforestation on the environment. *(5 marks)*
-
----
-
-**Q19.** (a) Define the term "desertification". *(2 marks)*
-
-(b) State three causes of desertification. *(3 marks)*
-
-(c) Describe two ways of reducing desertification. *(4 marks)*
-
----
-
-**Q20.** (a) What is climate change? *(2 marks)*
-
-(b) State three causes of climate change. *(3 marks)*
-
-(c) Explain two effects of climate change on Cameroon. *(5 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 7'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 7',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 7
-
-## Structural Question Bank — Human and Cameroon geography
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: HUMAN AND CAMEROON GEOGRAPHY
-
-**Q1.** (a) Define the term "population". *(2 marks)*
-
-(b) State three factors that affect population distribution. *(3 marks)*
-
-(c) Explain the difference between population density and population distribution. *(4 marks)*
-
----
-
-**Q2.** (a) What is population growth? *(2 marks)*
-
-(b) State three causes of rapid population growth. *(3 marks)*
-
-(c) Explain two effects of rapid population growth on a country. *(5 marks)*
-
----
-
-**Q3.** (a) Define the terms "birth rate" and "death rate". *(4 marks)*
-
-(b) Explain how birth rate and death rate affect population change. *(4 marks)*
-
-(c) State two ways of controlling population growth. *(2 marks)*
-
----
-
-**Q4.** (a) What is migration? *(2 marks)*
-
-(b) Distinguish between internal and international migration. *(4 marks)*
-
-(c) State three causes of rural-urban migration. *(3 marks)*
-
----
-
-**Q5.** (a) Define the term "settlement". *(2 marks)*
-
-(b) Distinguish between rural and urban settlements. *(4 marks)*
-
-(c) State three functions of urban settlements. *(3 marks)*
-
----
-
-**Q6.** (a) What is urbanisation? *(2 marks)*
-
-(b) State three causes of urbanisation. *(3 marks)*
-
-(c) Explain two problems caused by rapid urbanisation. *(5 marks)*
-
----
-
-**Q7.** (a) Define the term "agriculture". *(2 marks)*
-
-(b) Distinguish between subsistence and commercial farming. *(4 marks)*
-
-(c) State three factors that affect agriculture. *(3 marks)*
-
----
-
-**Q8.** (a) What is plantation agriculture? *(2 marks)*
-
-(b) Describe the characteristics of plantation agriculture. *(4 marks)*
-
-(c) State two advantages and two disadvantages of plantation agriculture. *(4 marks)*
-
----
-
-**Q9.** (a) Define the terms "crop rotation" and "mixed farming". *(4 marks)*
-
-(b) Explain the importance of agriculture to the economy of Cameroon. *(4 marks)*
-
-(c) State two problems facing agriculture in Cameroon. *(2 marks)*
-
----
-
-**Q10.** (a) What is industry? *(2 marks)*
-
-(b) Distinguish between primary, secondary, and tertiary industries. *(6 marks)*
-
-(c) Give two examples of each type of industry. *(3 marks)*
-
----
-
-**Q11.** (a) Define the term "manufacturing". *(2 marks)*
-
-(b) State three factors that influence the location of an industry. *(3 marks)*
-
-(c) Explain why industries are often located near ports. *(4 marks)*
-
----
-
-**Q12.** (a) What is transport? *(2 marks)*
-
-(b) State three modes of transport. *(3 marks)*
-
-(c) Explain the importance of transport to economic development. *(4 marks)*
-
----
-
-**Q13.** (a) Define the term "trade". *(2 marks)*
-
-(b) Distinguish between internal and international trade. *(4 marks)*
-
-(c) State three reasons why countries trade with each other. *(3 marks)*
-
----
-
-**Q14.** (a) What is a map? *(2 marks)*
-
-(b) State three features of a good map. *(3 marks)*
-
-(c) Explain how to measure distance on a map using a scale. *(4 marks)*
-
----
-
-**Q15.** (a) Define the terms "contour line" and "relief". *(4 marks)*
-
-(b) Explain how contour lines show the shape of the land. *(4 marks)*
-
-(c) Describe how you would identify a hill and a valley on a map. *(4 marks)*
-
----
-
-**Q16.** (a) What is a compass bearing? *(2 marks)*
-
-(b) State the eight points of the compass. *(4 marks)*
-
-(c) Explain how to find the bearing of one place from another on a map. *(4 marks)*
-
----
-
-**Q17.** (a) Name the ten regions of Cameroon. *(5 marks)*
-
-(b) State the capital city of Cameroon. *(1 mark)*
-
-(c) Describe the main economic activity of two regions of Cameroon. *(4 marks)*
-
----
-
-**Q18.** (a) What is the relief of Cameroon? *(2 marks)*
-
-(b) Describe the main physical features of Cameroon. *(4 marks)*
-
-(c) Explain how the relief of Cameroon affects agriculture. *(4 marks)*
-
----
-
-**Q19.** (a) Define the term "tourism". *(2 marks)*
-
-(b) State three tourist attractions in Cameroon. *(3 marks)*
-
-(c) Explain two benefits of tourism to Cameroon. *(4 marks)*
-
----
-
-**Q20.** (a) What is sustainable development? *(2 marks)*
-
-(b) State three ways Cameroon can achieve sustainable development. *(3 marks)*
-
-(c) Explain the importance of conserving natural resources. *(4 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 8'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 8',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P2 SET 8
-
-## Structural Question Bank — Physical geography
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: PHYSICAL GEOGRAPHY
-
-**Q1.** (a) Define the term "weathering". *(2 marks)*
-
-(b) Distinguish between physical and chemical weathering. *(4 marks)*
-
-(c) Describe two processes of physical weathering and two of chemical weathering. *(6 marks)*
-
----
-
-**Q2.** (a) What is a rock? *(2 marks)*
-
-(b) Describe the three main types of rocks and how each is formed. *(6 marks)*
-
-(c) Give one example of each type of rock. *(3 marks)*
-
----
-
-**Q3.** (a) Define the terms "igneous", "sedimentary", and "metamorphic" rocks. *(3 marks)*
-
-(b) Explain how limestone is formed. *(4 marks)*
-
-(c) State two uses of limestone. *(2 marks)*
-
----
-
-**Q4.** (a) What is the water cycle? *(2 marks)*
-
-(b) Describe the processes of evaporation, condensation, and precipitation. *(6 marks)*
-
-(c) Explain the importance of the water cycle. *(4 marks)*
-
----
-
-**Q5.** (a) Define the term "climate". *(2 marks)*
-
-(b) Distinguish between climate and weather. *(4 marks)*
-
-(c) State three factors that affect the climate of a place. *(3 marks)*
-
----
-
-**Q6.** (a) What is a river? *(2 marks)*
-
-(b) Describe the three stages of a river. *(6 marks)*
-
-(c) Explain how a waterfall is formed. *(4 marks)*
-
----
-
-**Q7.** (a) Define the terms "erosion", "transportation", and "deposition". *(3 marks)*
-
-(b) Describe three ways a river transports its load. *(6 marks)*
-
-(c) Explain how a delta is formed. *(4 marks)*
-
----
-
-**Q8.** (a) What is a drainage basin? *(2 marks)*
-
-(b) Describe the features of a drainage basin. *(4 marks)*
-
-(c) Explain the difference between a tributary and a distributary. *(4 marks)*
-
----
-
-**Q9.** (a) Define the term "coast". *(2 marks)*
-
-(b) Describe two landforms created by coastal erosion. *(4 marks)*
-
-(c) Explain how a beach is formed. *(4 marks)*
-
----
-
-**Q10.** (a) What is a wave? *(2 marks)*
-
-(b) Distinguish between constructive and destructive waves. *(4 marks)*
-
-(c) Explain how a spit is formed. *(4 marks)*
-
----
-
-**Q11.** (a) Define the term "soil". *(2 marks)*
-
-(b) Describe the layers of a soil profile. *(4 marks)*
-
-(c) State three factors that affect soil formation. *(3 marks)*
-
----
-
-**Q12.** (a) What is soil erosion? *(2 marks)*
-
-(b) State three causes of soil erosion. *(3 marks)*
-
-(c) Describe two methods of preventing soil erosion. *(4 marks)*
-
----
-
-**Q13.** (a) Define the term "vegetation". *(2 marks)*
-
-(b) Describe the characteristics of tropical rainforest vegetation. *(4 marks)*
-
-(c) Explain how climate affects vegetation. *(4 marks)*
-
----
-
-**Q14.** (a) What is a natural hazard? *(2 marks)*
-
-(b) State three examples of natural hazards. *(3 marks)*
-
-(c) Describe the effects of one natural hazard on people and the environment. *(5 marks)*
-
----
-
-**Q15.** (a) Define the terms "earthquake" and "volcano". *(4 marks)
-
-(b) Explain how an earthquake occurs. *(4 marks)*
-
-(c) State two effects of earthquakes. *(2 marks)*
-
----
-
-**Q16.** (a) What is a tropical storm? *(2 marks)*
-
-(b) Describe the conditions needed for a tropical storm to form. *(4 marks)*
-
-(c) Explain the effects of a tropical storm on coastal areas. *(4 marks)*
-
----
-
-**Q17.** (a) Define the term "ecosystem". *(2 marks)*
-
-(b) Describe the components of an ecosystem. *(4 marks)*
-
-(c) Explain how a change in one component affects the whole ecosystem. *(4 marks)*
-
----
-
-**Q18.** (a) What is deforestation? *(2 marks)*
-
-(b) State three causes of deforestation. *(3 marks)*
-
-(c) Explain the effects of deforestation on the environment. *(5 marks)*
-
----
-
-**Q19.** (a) Define the term "desertification". *(2 marks)*
-
-(b) State three causes of desertification. *(3 marks)*
-
-(c) Describe two ways of reducing desertification. *(4 marks)*
-
----
-
-**Q20.** (a) What is climate change? *(2 marks)*
-
-(b) State three causes of climate change. *(3 marks)*
-
-(c) Explain two effects of climate change on Cameroon. *(5 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 1',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 1
-
-## Multiple Choice Question Bank
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Choose the correct option A, B, C or D for each question.
-- Record your answers clearly on the answer sheet provided.
-- Each question carries equal marks. No marks is deducted for wrong answers.
-- Use the answer key at the end of the paper to check your responses.
-
----
-
-## QUESTIONS
-
-**Q1.** The breaking down of rocks in place is called:
-
-A. weathering  
-B. erosion  
-C. deposition  
-D. transportation  
-
----
-
-**Q2.** The movement of weathered material by rivers is called:
-
-A. erosion  
-B. weathering  
-C. evaporation  
-D. deposition  
-
----
-
-**Q3.** The laying down of eroded material is called:
-
-A. deposition  
-B. weathering  
-C. erosion  
-D. transportation  
-
----
-
-**Q4.** The type of rock formed from cooled magma is:
-
-A. igneous  
-B. metamorphic  
-C. organic  
-D. sedimentary  
-
----
-
-**Q5.** The type of rock formed from compressed layers of sediment is:
-
-A. sedimentary  
-B. volcanic  
-C. igneous  
-D. metamorphic  
-
----
-
-**Q6.** The type of rock changed by heat and pressure is:
-
-A. metamorphic  
-B. organic  
-C. sedimentary  
-D. igneous  
-
----
-
-**Q7.** An example of an igneous rock is:
-
-A. limestone  
-B. granite  
-C. sandstone  
-D. marble  
-
----
-
-**Q8.** An example of a sedimentary rock is:
-
-A. granite  
-B. limestone  
-C. marble  
-D. basalt  
-
----
-
-**Q9.** An example of a metamorphic rock is:
-
-A. granite  
-B. sandstone  
-C. marble  
-D. basalt  
-
----
-
-**Q10.** The process by which water changes from liquid to vapour is:
-
-A. condensation  
-B. precipitation  
-C. infiltration  
-D. evaporation  
-
----
-
-**Q11.** The process by which water vapour changes to liquid is:
-
-A. evaporation  
-B. transpiration  
-C. condensation  
-D. precipitation  
-
----
-
-**Q12.** Rain, snow, and hail are all forms of:
-
-A. condensation  
-B. runoff  
-C. evaporation  
-D. precipitation  
-
----
-
-**Q13.** The average weather conditions of a place over a long period is its:
-
-A. temperature  
-B. climate  
-C. weather  
-D. season  
-
----
-
-**Q14.** The conditions of the atmosphere at a particular time and place is the:
-
-A. season  
-B. weather  
-C. relief  
-D. climate  
-
----
-
-**Q15.** The upper course of a river is characterised by:
-
-A. wide floodplain  
-B. slow flow and deposition  
-C. fast flow and erosion  
-D. meanders  
-
----
-
-**Q16.** The lower course of a river is characterised by:
-
-A. steep valleys  
-B. fast flow and waterfalls  
-C. rapids  
-D. deposition and a wide floodplain  
-
----
-
-**Q17.** A waterfall is formed mainly by:
-
-A. weathering  
-B. evaporation  
-C. differential erosion  
-D. deposition  
-
----
-
-**Q18.** A delta is formed at the:
-
-A. middle course  
-B. waterfall  
-C. source of a river  
-D. mouth of a river  
-
----
-
-**Q19.** The wearing away of the coast by waves is called:
-
-A. flooding  
-B. coastal erosion  
-C. coastal deposition  
-D. weathering  
-
----
-
-**Q20.** A ridge of sand deposited by waves is called a:
-
-A. cave  
-B. beach  
-C. spit  
-D. cliff  
-
----
-
-**Q21.** The top layer of the soil profile is the:
-
-A. parent material  
-B. subsoil  
-C. humus layer  
-D. bedrock  
-
----
-
-**Q22.** The removal of topsoil by wind and water is called:
-
-A. leaching  
-B. soil formation  
-C. weathering  
-D. soil erosion  
-
----
-
-**Q23.** The dense evergreen forest found near the equator is the:
-
-A. temperate forest  
-B. desert  
-C. tropical rainforest  
-D. savanna  
-
----
-
-**Q24.** A sudden shaking of the ground caused by movements in the earth''s crust is an:
-
-A. tsunami  
-B. tornado  
-C. volcano  
-D. earthquake  
-
----
-
-**Q25.** A mountain formed by the eruption of magma is a:
-
-A. volcano  
-B. fold mountain  
-C. block mountain  
-D. plateau  
-
----
-
-**Q26.** A violent tropical storm is called a:
-
-A. hurricane  
-B. blizzard  
-C. frost  
-D. drought  
-
----
-
-**Q27.** The clearing of forests is called:
-
-A. deforestation  
-B. reforestation  
-C. afforestation  
-D. conservation  
-
----
-
-**Q28.** The spread of desert conditions into semi-arid areas is called:
-
-A. desertification  
-B. urbanisation  
-C. migration  
-D. deforestation  
-
----
-
-**Q29.** The long-term change in average weather patterns is called:
-
-A. climate change  
-B. relief change  
-C. weather change  
-D. seasonal change  
-
----
-
-**Q30.** A community of living organisms and their environment is an:
-
-A. ecosystem  
-B. habitat  
-C. biome  
-D. ecotone  
-
----
-
-**Q31.** The number of people living in an area is its:
-
-A. settlement  
-B. population  
-C. community  
-D. society  
-
----
-
-**Q32.** The number of people per unit area is called:
-
-A. population distribution  
-B. population density  
-C. birth rate  
-D. population growth  
-
----
-
-**Q33.** The number of live births per 1000 people per year is the:
-
-A. death rate  
-B. growth rate  
-C. birth rate  
-D. fertility rate  
-
----
-
-**Q34.** The movement of people from one place to another is called:
-
-A. urbanisation  
-B. settlement  
-C. trade  
-D. migration  
-
----
-
-**Q35.** The movement of people from rural areas to towns is called:
-
-A. urban-rural migration  
-B. seasonal migration  
-C. rural-urban migration  
-D. international migration  
-
----
-
-**Q36.** A permanent human community is called a:
-
-A. migration  
-B. region  
-C. population  
-D. settlement  
-
----
-
-**Q37.** The growth of towns and cities is called:
-
-A. industrialisation  
-B. urbanisation  
-C. migration  
-D. ruralisation  
-
----
-
-**Q38.** Farming for the farmer''s own family is called:
-
-A. plantation farming  
-B. subsistence farming  
-C. mixed farming  
-D. commercial farming  
-
----
-
-**Q39.** Farming for sale in the market is called:
-
-A. shifting cultivation  
-B. subsistence farming  
-C. commercial farming  
-D. pastoral farming  
-
----
-
-**Q40.** A large farm growing a single cash crop is a:
-
-A. ranch  
-B. smallholding  
-C. orchard  
-D. plantation  
-
----
-
-**Q41.** The growing of crops and rearing of animals together is called:
-
-A. monoculture  
-B. shifting cultivation  
-C. mixed farming  
-D. crop rotation  
-
----
-
-**Q42.** The extraction of raw materials is a:
-
-A. tertiary industry  
-B. quaternary industry  
-C. secondary industry  
-D. primary industry  
-
----
-
-**Q43.** The manufacturing of goods is a:
-
-A. quaternary industry  
-B. secondary industry  
-C. primary industry  
-D. tertiary industry  
-
----
-
-**Q44.** The provision of services is a:
-
-A. quaternary industry  
-B. tertiary industry  
-C. secondary industry  
-D. primary industry  
-
----
-
-**Q45.** The movement of goods and people is called:
-
-A. communication  
-B. trade  
-C. transport  
-D. migration  
-
----
-
-**Q46.** The buying and selling of goods is called:
-
-A. agriculture  
-B. transport  
-C. industry  
-D. trade  
-
----
-
-**Q47.** Trade between countries is called:
-
-A. barter trade  
-B. local trade  
-C. international trade  
-D. internal trade  
-
----
-
-**Q48.** The capital city of Cameroon is:
-
-A. Bamenda  
-B. Buea  
-C. Douala  
-D. Yaoundé  
-
----
-
-**Q49.** The largest city and main port of Cameroon is:
+**Q33.** Le marché de Mokolo se trouve à:
 
 A. Douala  
-B. Yaoundé  
-C. Buea  
+B. Bafoussam  
+C. Yaoundé  
 D. Garoua  
 
 ---
 
-**Q50.** The number of regions in Cameroon is:
+**Q34.** L''équipe nationale de football du Cameroun s''appelle:
 
-A. 10  
-B. 8  
-C. 6  
-D. 12  
-
----
-
-**Q51.** The line joining points of equal height on a map is a:
-
-A. contour line  
-B. latitude  
-C. grid line  
-D. longitude  
+A. les Éléphants  
+B. les Aigles  
+C. les Panthères  
+D. les Lions Indomptables  
 
 ---
 
-**Q52.** The shape of the land surface is called:
+**Q35.** Samuel Eto''o est un célèbre:
 
-A. relief  
-B. climate  
-C. drainage  
-D. vegetation  
-
----
-
-**Q53.** The direction of one place from another measured in degrees is a:
-
-A. bearing  
-B. gradient  
-C. contour  
-D. scale  
+A. chanteur  
+B. médecin  
+C. footballeur  
+D. écrivain  
 
 ---
 
-**Q54.** The ratio between distance on a map and distance on the ground is the:
+**Q36.** Pour rester en bonne santé, il faut:
 
-A. scale  
-B. legend  
-C. relief  
-D. bearing  
-
----
-
-**Q55.** The highest mountain in Cameroon is:
-
-A. Mount Fako  
-B. Mount Cameroon  
-C. Mount Oku  
-D. Mount Bamboutos  
+A. fumer  
+B. ne pas dormir  
+C. boire de l''alcool  
+D. manger équilibré  
 
 ---
 
-**Q56.** The main cash crop grown in the highlands of Cameroon is:
+**Q37.** Le texte sur la pluie se termine par:
 
-A. rice  
-B. coffee  
-C. banana  
-D. cotton  
-
----
-
-**Q57.** The main cash crop grown in northern Cameroon is:
-
-A. coffee  
-B. cocoa  
-C. cotton  
-D. tea  
+A. de la neige  
+B. un arc-en-ciel  
+C. une tempête  
+D. un orage  
 
 ---
 
-**Q58.** The main cash crop grown in the south of Cameroon is:
+**Q38.** Dans le texte sur le marché, les vendeurs:
 
-A. cotton  
-B. millet  
-C. groundnut  
-D. cocoa  
-
----
-
-**Q59.** The industry that serves tourists is called:
-
-A. manufacturing  
-B. fishing  
-C. tourism  
-D. mining  
+A. dorment  
+B. crient pour attirer les clients  
+C. lisent des livres  
+D. chantent des chansons  
 
 ---
 
-**Q60.** Development that meets present needs without harming future generations is called:
+**Q39.** L''éducation est importante parce qu''elle:
 
-A. economic growth  
-B. urbanisation  
-C. industrialisation  
-D. sustainable development  
+A. est obligatoire  
+B. coûte cher  
+C. forme des travailleurs qualifiés  
+D. est facile  
+
+---
+
+**Q40.** Les principales cultures d''exportation du Cameroun sont:
+
+A. le coton et le tabac  
+B. le riz et le blé  
+C. les bananes et les oranges  
+D. le cacao et le café  
+
+---
+
+**Q41.** Le commerce équitable garantit:
+
+A. plus de publicité  
+B. des prix plus élevés  
+C. un prix juste pour les producteurs  
+D. des produits gratuits  
+
+---
+
+**Q42.** Dans la culture camerounaise, les enfants:
+
+A. quittent la maison  
+B. ne parlent pas  
+C. ignorent leurs parents  
+D. respectent leurs aînés  
+
+---
+
+**Q43.** Pour protéger l''environnement, il faut:
+
+A. couper les arbres  
+B. trier les déchets  
+C. jeter les ordures dans la nature  
+D. gaspiller l''eau  
+
+---
+
+**Q44.** La technologie permet de:
+
+A. apprendre sans effort  
+B. voir ses proches à l''écran  
+C. cuisiner plus vite  
+D. voyager gratuitement  
+
+---
+
+**Q45.** Le texte sur la santé conseille de:
+
+A. ne pas consulter le médecin  
+B. fumer  
+C. boire beaucoup d''eau  
+D. manger trop  
+
+---
+
+**Q46.** Dans le texte sur la pluie, les enfants:
+
+A. travaillaient  
+B. pleuraient  
+C. dormaient  
+D. jouaient dans les flaques d''eau  
+
+---
+
+**Q47.** Le football est le sport le plus populaire:
+
+A. au Brésil  
+B. en Chine  
+C. au Cameroun  
+D. en France  
+
+---
+
+**Q48.** Les enfants jouent au football avec:
+
+A. des bouteilles  
+B. des pierres  
+C. des ballons officiels  
+D. des ballons improvisés  
+
+---
+
+**Q49.** Une lettre à un ami doit commencer par:
+
+A. Cher/Cher ami  
+B. Monsieur le Président  
+C. À qui de droit  
+D. Bonjour tout le monde  
+
+---
+
+**Q50.** Pour décrire sa journée typique, on utilise:
+
+A. le présent  
+B. le passé composé  
+C. le subjonctif  
+D. le futur  
+
+---
+
+**Q51.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
+
+A. le passé composé  
+B. le futur simple  
+C. le présent  
+D. l''impératif  
+
+---
+
+**Q52.** Un dialogue est un échange entre:
+
+A. deux personnes  
+B. un groupe de spectateurs  
+C. un professeur et un tableau  
+D. une seule personne  
+
+---
+
+**Q53.** Le texte sur la famille dit que les grandes occasions:
+
+A. rassemblent toute la famille  
+B. ne concernent que les enfants  
+C. sont rares  
+D. sont tristes  
+
+---
+
+**Q54.** Pour inviter un ami à son anniversaire, on écrit:
+
+A. une lettre d''invitation  
+B. un poème  
+C. une lettre de démission  
+D. une lettre de réclamation  
+
+---
+
+**Q55.** Le texte sur l''environnement dit que le respect commence:
+
+A. à l''école  
+B. à la maison  
+C. au marché  
+D. à la plage  
+
+---
+
+**Q56.** Dans le texte sur le marché, l''air est rempli:
+
+A. de musique  
+B. d''odeurs variées  
+C. de silence  
+D. de fumée  
+
+---
+
+**Q57.** Le texte sur l''éducation dit que l''éducation est:
+
+A. un luxe  
+B. une perte de temps  
+C. la clé du développement  
+D. réservée aux riches  
+
+---
+
+**Q58.** Pour rester en bonne santé, il faut éviter:
+
+A. l''eau et les fruits  
+B. le sport et le sommeil  
+C. les légumes  
+D. le tabac et l''alcool  
+
+---
+
+**Q59.** Le texte sur la technologie dit que certains pensent qu''elle:
+
+A. nous rapproche toujours  
+B. est trop chère  
+C. nous éloigne les uns des autres  
+D. est inutile  
+
+---
+
+**Q60.** Le texte sur le commerce équitable parle du:
+
+A. pétrole et du gaz  
+B. coton et du riz  
+C. bois et du fer  
+D. cacao et du café  
 
 ---
 
@@ -2426,14 +1291,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'French'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FRENCH P1 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -2443,21 +1308,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 2',
+  'French',
+  'CAMEROON GCE ADVANCED LEVEL FRENCH P1 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 2
 
 ## Multiple Choice Question Bank
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -2470,1207 +1335,1207 @@ values (
 
 ## QUESTIONS
 
-**Q1.** The type of rock formed from cooled magma is:
+**Q1.** Le passé composé de ''manger'' avec ''je'' est:
 
-A. igneous  
-B. sedimentary  
-C. metamorphic  
-D. organic  
+A. j''ai mangé  
+B. je mange  
+C. je mangerai  
+D. je mangeais  
 
 ---
 
-**Q2.** The type of rock formed from compressed layers of sediment is:
+**Q2.** Complétez: Ils ____ à l''école.
 
-A. sedimentary  
-B. igneous  
-C. volcanic  
-D. metamorphic  
+A. vont  
+B. va  
+C. allons  
+D. vais  
 
 ---
 
-**Q3.** The type of rock changed by heat and pressure is:
+**Q3.** Le futur de ''être'' avec ''je'' est:
 
-A. metamorphic  
-B. sedimentary  
-C. igneous  
-D. organic  
+A. je serai  
+B. j''étais  
+C. je suis  
+D. je fus  
 
 ---
 
-**Q4.** An example of an igneous rock is:
+**Q4.** Complétez: Tu ____ ton livre.
 
-A. granite  
-B. sandstone  
-C. marble  
-D. limestone  
+A. as  
+B. avez  
+C. ont  
+D. a  
 
 ---
 
-**Q5.** An example of a sedimentary rock is:
+**Q5.** L''imparfait de ''avoir'' avec ''nous'' est:
 
-A. limestone  
-B. marble  
-C. granite  
-D. basalt  
+A. nous avions  
+B. nous eûmes  
+C. nous avons  
+D. nous aurons  
 
 ---
 
-**Q6.** An example of a metamorphic rock is:
+**Q6.** Complétez: Le livre ____ je parle est intéressant.
 
-A. marble  
-B. basalt  
-C. sandstone  
-D. granite  
+A. dont  
+B. où  
+C. que  
+D. qui  
 
 ---
 
-**Q7.** The process by which water changes from liquid to vapour is:
+**Q7.** Complétez: La femme ____ chante est ma mère.
 
-A. condensation  
-B. evaporation  
-C. precipitation  
-D. infiltration  
+A. que  
+B. qui  
+C. dont  
+D. où  
 
 ---
 
-**Q8.** The process by which water vapour changes to liquid is:
+**Q8.** Le pluriel de ''le cheval'' est:
 
-A. evaporation  
-B. condensation  
-C. transpiration  
-D. precipitation  
+A. les chevals  
+B. les chevaux  
+C. les chevauxs  
+D. les chevaus  
 
 ---
 
-**Q9.** Rain, snow, and hail are all forms of:
+**Q9.** Complétez: ____ eau est bonne.
 
-A. condensation  
-B. evaporation  
-C. precipitation  
-D. runoff  
+A. Le  
+B. La  
+C. L''  
+D. Les  
 
 ---
 
-**Q10.** The average weather conditions of a place over a long period is its:
+**Q10.** Complétez: J''achète ____ pain.
 
-A. weather  
-B. temperature  
-C. season  
-D. climate  
+A. de la  
+B. des  
+C. le  
+D. du  
 
 ---
 
-**Q11.** The conditions of the atmosphere at a particular time and place is the:
+**Q11.** La négation de ''Il a mangé'' est:
 
-A. climate  
-B. relief  
-C. weather  
-D. season  
+A. Il a pas mangé  
+B. Il n''a mangé pas  
+C. Il n''a pas mangé  
+D. Il ne mange pas  
 
 ---
 
-**Q12.** The upper course of a river is characterised by:
+**Q12.** Complétez: Elle est ____ grande que sa sœur.
 
-A. slow flow and deposition  
-B. meanders  
-C. wide floodplain  
-D. fast flow and erosion  
+A. moins  
+B. très  
+C. aussi  
+D. plus  
 
 ---
 
-**Q13.** The lower course of a river is characterised by:
+**Q13.** Le féminin de ''acteur'' est:
 
-A. steep valleys  
-B. deposition and a wide floodplain  
-C. fast flow and waterfalls  
-D. rapids  
+A. acteurse  
+B. actrice  
+C. acteure  
+D. acteuse  
 
 ---
 
-**Q14.** A waterfall is formed mainly by:
+**Q14.** Complétez: Il faut que tu ____.
 
-A. weathering  
-B. differential erosion  
-C. evaporation  
-D. deposition  
+A. viendras  
+B. viennes  
+C. venais  
+D. viens  
 
 ---
 
-**Q15.** A delta is formed at the:
+**Q15.** Complétez: Je ____ voyager.
 
-A. middle course  
-B. source of a river  
-C. mouth of a river  
-D. waterfall  
+A. veux  
+B. voudrai  
+C. voudrais  
+D. voulais  
 
 ---
 
-**Q16.** The wearing away of the coast by waves is called:
+**Q16.** Complétez: ____ maison est grande.
 
-A. weathering  
-B. coastal deposition  
-C. flooding  
-D. coastal erosion  
+A. Ces  
+B. Ce  
+C. Cet  
+D. Cette  
 
 ---
 
-**Q17.** A ridge of sand deposited by waves is called a:
+**Q17.** Complétez: ____ père travaille à l''hôpital.
 
-A. spit  
-B. cave  
-C. beach  
-D. cliff  
+A. Mes  
+B. Ton  
+C. Mon  
+D. Ma  
 
 ---
 
-**Q18.** The top layer of the soil profile is the:
+**Q18.** Complétez: Nous ____ à Douala.
 
-A. bedrock  
-B. parent material  
-C. subsoil  
-D. humus layer  
+A. habitent  
+B. habite  
+C. habitez  
+D. habitons  
 
 ---
 
-**Q19.** The removal of topsoil by wind and water is called:
+**Q19.** Le passé composé de ''partir'' avec ''elle'' est:
 
-A. leaching  
-B. soil erosion  
-C. soil formation  
-D. weathering  
+A. elle a partie  
+B. elle est partie  
+C. elle a parti  
+D. elle est parti  
 
 ---
 
-**Q20.** The dense evergreen forest found near the equator is the:
+**Q20.** Complétez: Il va ____ France.
 
-A. temperate forest  
-B. tropical rainforest  
-C. desert  
-D. savanna  
+A. aux  
+B. en  
+C. au  
+D. à  
 
 ---
 
-**Q21.** A sudden shaking of the ground caused by movements in the earth''s crust is an:
+**Q21.** Complétez: Le livre est ____ la table.
 
-A. tsunami  
-B. volcano  
-C. earthquake  
-D. tornado  
+A. de  
+B. dans  
+C. sur  
+D. à  
 
 ---
 
-**Q22.** A mountain formed by the eruption of magma is a:
+**Q22.** Complétez: ____ enfants jouent dans la cour.
 
-A. plateau  
-B. fold mountain  
-C. block mountain  
-D. volcano  
+A. Un  
+B. Le  
+C. La  
+D. Les  
 
 ---
 
-**Q23.** A violent tropical storm is called a:
+**Q23.** Le pluriel de ''un travail'' est:
 
-A. frost  
-B. drought  
-C. hurricane  
-D. blizzard  
+A. des travail  
+B. des travailes  
+C. des travaux  
+D. des travails  
 
 ---
 
-**Q24.** The clearing of forests is called:
+**Q24.** Complétez: Je ____ content.
 
-A. conservation  
-B. reforestation  
-C. afforestation  
-D. deforestation  
+A. sommes  
+B. est  
+C. es  
+D. suis  
 
 ---
 
-**Q25.** The spread of desert conditions into semi-arid areas is called:
+**Q25.** Complétez: Nous ____ le temps.
 
-A. desertification  
-B. deforestation  
-C. urbanisation  
-D. migration  
+A. aurons  
+B. avons  
+C. avions  
+D. eûmes  
 
 ---
 
-**Q26.** The long-term change in average weather patterns is called:
+**Q26.** Complétez: Elle ____ souvent.
 
-A. climate change  
-B. weather change  
-C. relief change  
-D. seasonal change  
+A. vient  
+B. viennent  
+C. viens  
+D. venez  
 
 ---
 
-**Q27.** A community of living organisms and their environment is an:
+**Q27.** Complétez: Ils ____ leurs devoirs.
 
-A. ecosystem  
-B. biome  
-C. ecotone  
-D. habitat  
+A. font  
+B. fais  
+C. fait  
+D. faisons  
 
 ---
 
-**Q28.** The breaking down of rocks in place is called:
+**Q28.** Complétez: Je ____ au marché.
 
-A. weathering  
-B. deposition  
-C. transportation  
-D. erosion  
+A. vais  
+B. vont  
+C. allons  
+D. va  
 
 ---
 
-**Q29.** The movement of weathered material by rivers is called:
+**Q29.** Complétez: Nous ____ français.
 
-A. erosion  
-B. evaporation  
-C. weathering  
-D. deposition  
+A. parlons  
+B. parle  
+C. parlez  
+D. parlent  
 
 ---
 
-**Q30.** The laying down of eroded material is called:
+**Q30.** Complétez: Elle ____ une lettre.
 
-A. deposition  
-B. transportation  
-C. weathering  
-D. erosion  
+A. écrit  
+B. écrivez  
+C. écrivent  
+D. écris  
 
 ---
 
-**Q31.** The movement of people from one place to another is called:
+**Q31.** L''équipe nationale de football du Cameroun s''appelle:
 
-A. urbanisation  
-B. migration  
-C. settlement  
-D. trade  
+A. les Éléphants  
+B. les Lions Indomptables  
+C. les Aigles  
+D. les Panthères  
 
 ---
 
-**Q32.** The movement of people from rural areas to towns is called:
+**Q32.** Samuel Eto''o est un célèbre:
 
-A. urban-rural migration  
-B. rural-urban migration  
-C. seasonal migration  
-D. international migration  
+A. chanteur  
+B. footballeur  
+C. médecin  
+D. écrivain  
 
 ---
 
-**Q33.** A permanent human community is called a:
+**Q33.** Pour rester en bonne santé, il faut:
 
-A. migration  
-B. population  
-C. settlement  
-D. region  
+A. fumer  
+B. boire de l''alcool  
+C. manger équilibré  
+D. ne pas dormir  
 
 ---
 
-**Q34.** The growth of towns and cities is called:
+**Q34.** Le texte sur la pluie se termine par:
 
-A. migration  
-B. industrialisation  
-C. ruralisation  
-D. urbanisation  
+A. une tempête  
+B. de la neige  
+C. un orage  
+D. un arc-en-ciel  
 
 ---
 
-**Q35.** Farming for the farmer''s own family is called:
+**Q35.** Dans le texte sur le marché, les vendeurs:
 
-A. commercial farming  
-B. mixed farming  
-C. subsistence farming  
-D. plantation farming  
+A. chantent des chansons  
+B. lisent des livres  
+C. crient pour attirer les clients  
+D. dorment  
 
 ---
 
-**Q36.** Farming for sale in the market is called:
+**Q36.** L''éducation est importante parce qu''elle:
 
-A. subsistence farming  
-B. pastoral farming  
-C. shifting cultivation  
-D. commercial farming  
+A. coûte cher  
+B. est facile  
+C. est obligatoire  
+D. forme des travailleurs qualifiés  
 
 ---
 
-**Q37.** A large farm growing a single cash crop is a:
+**Q37.** Les principales cultures d''exportation du Cameroun sont:
 
-A. ranch  
-B. plantation  
-C. smallholding  
-D. orchard  
+A. le coton et le tabac  
+B. le cacao et le café  
+C. le riz et le blé  
+D. les bananes et les oranges  
 
 ---
 
-**Q38.** The growing of crops and rearing of animals together is called:
+**Q38.** Le commerce équitable garantit:
 
-A. monoculture  
-B. mixed farming  
-C. shifting cultivation  
-D. crop rotation  
+A. plus de publicité  
+B. un prix juste pour les producteurs  
+C. des prix plus élevés  
+D. des produits gratuits  
 
 ---
 
-**Q39.** The extraction of raw materials is a:
+**Q39.** Dans la culture camerounaise, les enfants:
 
-A. tertiary industry  
-B. secondary industry  
-C. primary industry  
-D. quaternary industry  
+A. quittent la maison  
+B. ignorent leurs parents  
+C. respectent leurs aînés  
+D. ne parlent pas  
 
 ---
 
-**Q40.** The manufacturing of goods is a:
+**Q40.** Pour protéger l''environnement, il faut:
 
-A. tertiary industry  
-B. primary industry  
-C. quaternary industry  
-D. secondary industry  
+A. gaspiller l''eau  
+B. jeter les ordures dans la nature  
+C. couper les arbres  
+D. trier les déchets  
 
 ---
 
-**Q41.** The provision of services is a:
+**Q41.** La technologie permet de:
 
-A. secondary industry  
-B. quaternary industry  
-C. tertiary industry  
-D. primary industry  
+A. cuisiner plus vite  
+B. apprendre sans effort  
+C. voir ses proches à l''écran  
+D. voyager gratuitement  
 
 ---
 
-**Q42.** The movement of goods and people is called:
+**Q42.** Le texte sur la santé conseille de:
 
-A. migration  
-B. communication  
-C. trade  
-D. transport  
+A. manger trop  
+B. ne pas consulter le médecin  
+C. fumer  
+D. boire beaucoup d''eau  
 
 ---
 
-**Q43.** The buying and selling of goods is called:
+**Q43.** Dans le texte sur la pluie, les enfants:
 
-A. agriculture  
-B. trade  
-C. transport  
-D. industry  
+A. travaillaient  
+B. jouaient dans les flaques d''eau  
+C. pleuraient  
+D. dormaient  
 
 ---
 
-**Q44.** Trade between countries is called:
+**Q44.** Le football est le sport le plus populaire:
 
-A. barter trade  
-B. international trade  
-C. local trade  
-D. internal trade  
+A. au Brésil  
+B. au Cameroun  
+C. en Chine  
+D. en France  
 
 ---
 
-**Q45.** The capital city of Cameroon is:
+**Q45.** Les enfants jouent au football avec:
 
-A. Bamenda  
-B. Douala  
-C. Yaoundé  
-D. Buea  
+A. des bouteilles  
+B. des ballons officiels  
+C. des ballons improvisés  
+D. des pierres  
 
 ---
 
-**Q46.** The largest city and main port of Cameroon is:
+**Q46.** Une lettre à un ami doit commencer par:
 
-A. Garoua  
-B. Yaoundé  
-C. Buea  
-D. Douala  
+A. Bonjour tout le monde  
+B. Monsieur le Président  
+C. À qui de droit  
+D. Cher/Cher ami  
 
 ---
 
-**Q47.** The number of regions in Cameroon is:
+**Q47.** Pour décrire sa journée typique, on utilise:
 
-A. 6  
-B. 12  
-C. 10  
-D. 8  
+A. le subjonctif  
+B. le futur  
+C. le présent  
+D. le passé composé  
 
 ---
 
-**Q48.** The line joining points of equal height on a map is a:
+**Q48.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
 
-A. longitude  
-B. latitude  
-C. grid line  
-D. contour line  
+A. l''impératif  
+B. le futur simple  
+C. le présent  
+D. le passé composé  
 
 ---
 
-**Q49.** The shape of the land surface is called:
+**Q49.** Un dialogue est un échange entre:
 
-A. relief  
-B. vegetation  
-C. climate  
-D. drainage  
+A. deux personnes  
+B. une seule personne  
+C. un groupe de spectateurs  
+D. un professeur et un tableau  
 
 ---
 
-**Q50.** The direction of one place from another measured in degrees is a:
+**Q50.** Le texte sur la famille dit que les grandes occasions:
 
-A. bearing  
-B. contour  
-C. gradient  
-D. scale  
+A. rassemblent toute la famille  
+B. sont rares  
+C. ne concernent que les enfants  
+D. sont tristes  
 
 ---
 
-**Q51.** The ratio between distance on a map and distance on the ground is the:
+**Q51.** Pour inviter un ami à son anniversaire, on écrit:
 
-A. scale  
-B. relief  
-C. bearing  
-D. legend  
+A. une lettre d''invitation  
+B. une lettre de démission  
+C. une lettre de réclamation  
+D. un poème  
 
 ---
 
-**Q52.** The highest mountain in Cameroon is:
+**Q52.** Le texte sur l''environnement dit que le respect commence:
 
-A. Mount Cameroon  
-B. Mount Oku  
-C. Mount Bamboutos  
-D. Mount Fako  
+A. à la maison  
+B. au marché  
+C. à la plage  
+D. à l''école  
 
 ---
 
-**Q53.** The main cash crop grown in the highlands of Cameroon is:
+**Q53.** Dans le texte sur le marché, l''air est rempli:
 
-A. coffee  
-B. banana  
-C. rice  
-D. cotton  
+A. d''odeurs variées  
+B. de silence  
+C. de musique  
+D. de fumée  
 
 ---
 
-**Q54.** The main cash crop grown in northern Cameroon is:
+**Q54.** Le texte sur l''éducation dit que l''éducation est:
 
-A. cotton  
-B. tea  
-C. cocoa  
-D. coffee  
+A. la clé du développement  
+B. réservée aux riches  
+C. une perte de temps  
+D. un luxe  
 
 ---
 
-**Q55.** The main cash crop grown in the south of Cameroon is:
+**Q55.** Pour rester en bonne santé, il faut éviter:
 
-A. cotton  
-B. cocoa  
-C. millet  
-D. groundnut  
+A. l''eau et les fruits  
+B. le tabac et l''alcool  
+C. le sport et le sommeil  
+D. les légumes  
 
 ---
 
-**Q56.** The industry that serves tourists is called:
+**Q56.** Le texte sur la technologie dit que certains pensent qu''elle:
 
-A. manufacturing  
-B. tourism  
-C. fishing  
-D. mining  
+A. nous rapproche toujours  
+B. nous éloigne les uns des autres  
+C. est trop chère  
+D. est inutile  
 
 ---
 
-**Q57.** Development that meets present needs without harming future generations is called:
+**Q57.** Le texte sur le commerce équitable parle du:
 
-A. economic growth  
-B. industrialisation  
-C. sustainable development  
-D. urbanisation  
+A. pétrole et du gaz  
+B. bois et du fer  
+C. cacao et du café  
+D. coton et du riz  
 
 ---
 
-**Q58.** The number of people living in an area is its:
+**Q58.** Le Cameroun est appelé:
 
-A. settlement  
-B. community  
-C. society  
-D. population  
+A. le pays des lions  
+B. la perle de l''Afrique  
+C. le grenier de l''Afrique  
+D. l''Afrique en miniature  
 
 ---
 
-**Q59.** The number of people per unit area is called:
+**Q59.** Combien de groupes ethniques compte le Cameroun?
 
-A. population distribution  
-B. birth rate  
-C. population density  
-D. population growth  
+A. environ 50  
+B. moins de 100  
+C. plus de 250  
+D. plus de 1000  
 
 ---
 
-**Q60.** The number of live births per 1000 people per year is the:
+**Q60.** Le marché de Mokolo se trouve à:
 
-A. death rate  
-B. fertility rate  
-C. growth rate  
-D. birth rate  
-
----
-
-## ANSWER KEY
-
-1. A
-2. A
-3. A
-4. A
-5. A
-6. A
-7. B
-8. B
-9. C
-10. D
-11. C
-12. D
-13. B
-14. B
-15. C
-16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
-23. C
-24. D
-25. A
-26. A
-27. A
-28. A
-29. A
-30. A
-31. B
-32. B
-33. C
-34. D
-35. C
-36. D
-37. B
-38. B
-39. C
-40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
-47. C
-48. D
-49. A
-50. A
-51. A
-52. A
-53. A
-54. A
-55. B
-56. B
-57. C
-58. D
-59. C
-60. D
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geography'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 3'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geography',
-  'CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 3',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL GEOGRAPHY P1 SET 3
-
-## Multiple Choice Question Bank
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** Geography
-
-**Instructions:**
-
-- Choose the correct option A, B, C or D for each question.
-- Record your answers clearly on the answer sheet provided.
-- Each question carries equal marks. No marks is deducted for wrong answers.
-- Use the answer key at the end of the paper to check your responses.
-
----
-
-## QUESTIONS
-
-**Q1.** An example of an igneous rock is:
-
-A. granite  
-B. limestone  
-C. sandstone  
-D. marble  
-
----
-
-**Q2.** An example of a sedimentary rock is:
-
-A. limestone  
-B. granite  
-C. marble  
-D. basalt  
-
----
-
-**Q3.** An example of a metamorphic rock is:
-
-A. marble  
-B. sandstone  
-C. granite  
-D. basalt  
-
----
-
-**Q4.** The process by which water changes from liquid to vapour is:
-
-A. evaporation  
-B. precipitation  
-C. infiltration  
-D. condensation  
-
----
-
-**Q5.** The process by which water vapour changes to liquid is:
-
-A. condensation  
-B. transpiration  
-C. evaporation  
-D. precipitation  
-
----
-
-**Q6.** Rain, snow, and hail are all forms of:
-
-A. precipitation  
-B. runoff  
-C. evaporation  
-D. condensation  
-
----
-
-**Q7.** The average weather conditions of a place over a long period is its:
-
-A. weather  
-B. climate  
-C. temperature  
-D. season  
-
----
-
-**Q8.** The conditions of the atmosphere at a particular time and place is the:
-
-A. climate  
-B. weather  
-C. relief  
-D. season  
-
----
-
-**Q9.** The upper course of a river is characterised by:
-
-A. slow flow and deposition  
-B. wide floodplain  
-C. fast flow and erosion  
-D. meanders  
-
----
-
-**Q10.** The lower course of a river is characterised by:
-
-A. fast flow and waterfalls  
-B. steep valleys  
-C. rapids  
-D. deposition and a wide floodplain  
-
----
-
-**Q11.** A waterfall is formed mainly by:
-
-A. deposition  
-B. evaporation  
-C. differential erosion  
-D. weathering  
-
----
-
-**Q12.** A delta is formed at the:
-
-A. source of a river  
-B. waterfall  
-C. middle course  
-D. mouth of a river  
-
----
-
-**Q13.** The wearing away of the coast by waves is called:
-
-A. weathering  
-B. coastal erosion  
-C. coastal deposition  
-D. flooding  
-
----
-
-**Q14.** A ridge of sand deposited by waves is called a:
-
-A. spit  
-B. beach  
-C. cave  
-D. cliff  
-
----
-
-**Q15.** The top layer of the soil profile is the:
-
-A. bedrock  
-B. subsoil  
-C. humus layer  
-D. parent material  
-
----
-
-**Q16.** The removal of topsoil by wind and water is called:
-
-A. weathering  
-B. soil formation  
-C. leaching  
-D. soil erosion  
-
----
-
-**Q17.** The dense evergreen forest found near the equator is the:
-
-A. desert  
-B. temperate forest  
-C. tropical rainforest  
-D. savanna  
-
----
-
-**Q18.** A sudden shaking of the ground caused by movements in the earth''s crust is an:
-
-A. tornado  
-B. tsunami  
-C. volcano  
-D. earthquake  
-
----
-
-**Q19.** A mountain formed by the eruption of magma is a:
-
-A. plateau  
-B. volcano  
-C. fold mountain  
-D. block mountain  
-
----
-
-**Q20.** A violent tropical storm is called a:
-
-A. frost  
-B. hurricane  
-C. drought  
-D. blizzard  
-
----
-
-**Q21.** The clearing of forests is called:
-
-A. conservation  
-B. afforestation  
-C. deforestation  
-D. reforestation  
-
----
-
-**Q22.** The spread of desert conditions into semi-arid areas is called:
-
-A. migration  
-B. deforestation  
-C. urbanisation  
-D. desertification  
-
----
-
-**Q23.** The long-term change in average weather patterns is called:
-
-A. relief change  
-B. seasonal change  
-C. climate change  
-D. weather change  
-
----
-
-**Q24.** A community of living organisms and their environment is an:
-
-A. habitat  
-B. biome  
-C. ecotone  
-D. ecosystem  
-
----
-
-**Q25.** The breaking down of rocks in place is called:
-
-A. weathering  
-B. erosion  
-C. deposition  
-D. transportation  
-
----
-
-**Q26.** The movement of weathered material by rivers is called:
-
-A. erosion  
-B. weathering  
-C. evaporation  
-D. deposition  
-
----
-
-**Q27.** The laying down of eroded material is called:
-
-A. deposition  
-B. weathering  
-C. erosion  
-D. transportation  
-
----
-
-**Q28.** The type of rock formed from cooled magma is:
-
-A. igneous  
-B. metamorphic  
-C. organic  
-D. sedimentary  
-
----
-
-**Q29.** The type of rock formed from compressed layers of sediment is:
-
-A. sedimentary  
-B. volcanic  
-C. igneous  
-D. metamorphic  
-
----
-
-**Q30.** The type of rock changed by heat and pressure is:
-
-A. metamorphic  
-B. organic  
-C. sedimentary  
-D. igneous  
-
----
-
-**Q31.** The growth of towns and cities is called:
-
-A. migration  
-B. urbanisation  
-C. industrialisation  
-D. ruralisation  
-
----
-
-**Q32.** Farming for the farmer''s own family is called:
-
-A. commercial farming  
-B. subsistence farming  
-C. mixed farming  
-D. plantation farming  
-
----
-
-**Q33.** Farming for sale in the market is called:
-
-A. subsistence farming  
-B. shifting cultivation  
-C. commercial farming  
-D. pastoral farming  
-
----
-
-**Q34.** A large farm growing a single cash crop is a:
-
-A. smallholding  
-B. ranch  
-C. orchard  
-D. plantation  
-
----
-
-**Q35.** The growing of crops and rearing of animals together is called:
-
-A. crop rotation  
-B. shifting cultivation  
-C. mixed farming  
-D. monoculture  
-
----
-
-**Q36.** The extraction of raw materials is a:
-
-A. secondary industry  
-B. quaternary industry  
-C. tertiary industry  
-D. primary industry  
-
----
-
-**Q37.** The manufacturing of goods is a:
-
-A. tertiary industry  
-B. secondary industry  
-C. primary industry  
-D. quaternary industry  
-
----
-
-**Q38.** The provision of services is a:
-
-A. secondary industry  
-B. tertiary industry  
-C. quaternary industry  
-D. primary industry  
-
----
-
-**Q39.** The movement of goods and people is called:
-
-A. migration  
-B. trade  
-C. transport  
-D. communication  
-
----
-
-**Q40.** The buying and selling of goods is called:
-
-A. industry  
-B. transport  
-C. agriculture  
-D. trade  
-
----
-
-**Q41.** Trade between countries is called:
-
-A. local trade  
-B. barter trade  
-C. international trade  
-D. internal trade  
-
----
-
-**Q42.** The capital city of Cameroon is:
-
-A. Buea  
-B. Bamenda  
-C. Douala  
+A. Douala  
+B. Garoua  
+C. Bafoussam  
 D. Yaoundé  
 
 ---
 
-**Q43.** The largest city and main port of Cameroon is:
+## ANSWER KEY
 
-A. Garoua  
-B. Douala  
+1. A
+2. A
+3. A
+4. A
+5. A
+6. A
+7. B
+8. B
+9. C
+10. D
+11. C
+12. D
+13. B
+14. B
+15. C
+16. D
+17. C
+18. D
+19. B
+20. B
+21. C
+22. D
+23. C
+24. D
+25. A
+26. A
+27. A
+28. A
+29. A
+30. A
+31. B
+32. B
+33. C
+34. D
+35. C
+36. D
+37. B
+38. B
+39. C
+40. D
+41. C
+42. D
+43. B
+44. B
+45. C
+46. D
+47. C
+48. D
+49. A
+50. A
+51. A
+52. A
+53. A
+54. A
+55. B
+56. B
+57. C
+58. D
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FRENCH P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ADVANCED LEVEL FRENCH P1 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Complétez: Tu ____ ton livre.
+
+A. as  
+B. a  
+C. avez  
+D. ont  
+
+---
+
+**Q2.** L''imparfait de ''avoir'' avec ''nous'' est:
+
+A. nous avions  
+B. nous avons  
+C. nous eûmes  
+D. nous aurons  
+
+---
+
+**Q3.** Complétez: Le livre ____ je parle est intéressant.
+
+A. dont  
+B. que  
+C. qui  
+D. où  
+
+---
+
+**Q4.** Complétez: La femme ____ chante est ma mère.
+
+A. qui  
+B. dont  
+C. où  
+D. que  
+
+---
+
+**Q5.** Le pluriel de ''le cheval'' est:
+
+A. les chevaux  
+B. les chevauxs  
+C. les chevals  
+D. les chevaus  
+
+---
+
+**Q6.** Complétez: ____ eau est bonne.
+
+A. L''  
+B. Les  
+C. La  
+D. Le  
+
+---
+
+**Q7.** Complétez: J''achète ____ pain.
+
+A. de la  
+B. du  
+C. des  
+D. le  
+
+---
+
+**Q8.** La négation de ''Il a mangé'' est:
+
+A. Il a pas mangé  
+B. Il n''a pas mangé  
+C. Il n''a mangé pas  
+D. Il ne mange pas  
+
+---
+
+**Q9.** Complétez: Elle est ____ grande que sa sœur.
+
+A. moins  
+B. aussi  
+C. plus  
+D. très  
+
+---
+
+**Q10.** Le féminin de ''acteur'' est:
+
+A. acteure  
+B. acteurse  
+C. acteuse  
+D. actrice  
+
+---
+
+**Q11.** Complétez: Il faut que tu ____.
+
+A. viens  
+B. venais  
+C. viennes  
+D. viendras  
+
+---
+
+**Q12.** Complétez: Je ____ voyager.
+
+A. voudrai  
+B. voulais  
+C. veux  
+D. voudrais  
+
+---
+
+**Q13.** Complétez: ____ maison est grande.
+
+A. Ces  
+B. Cette  
+C. Ce  
+D. Cet  
+
+---
+
+**Q14.** Complétez: ____ père travaille à l''hôpital.
+
+A. Mes  
+B. Mon  
+C. Ton  
+D. Ma  
+
+---
+
+**Q15.** Complétez: Nous ____ à Douala.
+
+A. habitent  
+B. habitez  
+C. habitons  
+D. habite  
+
+---
+
+**Q16.** Le passé composé de ''partir'' avec ''elle'' est:
+
+A. elle est parti  
+B. elle a parti  
+C. elle a partie  
+D. elle est partie  
+
+---
+
+**Q17.** Complétez: Il va ____ France.
+
+A. au  
+B. aux  
+C. en  
+D. à  
+
+---
+
+**Q18.** Complétez: Le livre est ____ la table.
+
+A. à  
+B. de  
+C. dans  
+D. sur  
+
+---
+
+**Q19.** Complétez: ____ enfants jouent dans la cour.
+
+A. Un  
+B. Les  
+C. Le  
+D. La  
+
+---
+
+**Q20.** Le pluriel de ''un travail'' est:
+
+A. des travail  
+B. des travaux  
+C. des travailes  
+D. des travails  
+
+---
+
+**Q21.** Complétez: Je ____ content.
+
+A. sommes  
+B. es  
+C. suis  
+D. est  
+
+---
+
+**Q22.** Complétez: Nous ____ le temps.
+
+A. eûmes  
+B. avons  
+C. avions  
+D. aurons  
+
+---
+
+**Q23.** Complétez: Elle ____ souvent.
+
+A. viens  
+B. venez  
+C. vient  
+D. viennent  
+
+---
+
+**Q24.** Complétez: Ils ____ leurs devoirs.
+
+A. faisons  
+B. fais  
+C. fait  
+D. font  
+
+---
+
+**Q25.** Complétez: Je ____ au marché.
+
+A. vais  
+B. va  
+C. vont  
+D. allons  
+
+---
+
+**Q26.** Complétez: Nous ____ français.
+
+A. parlons  
+B. parlez  
+C. parle  
+D. parlent  
+
+---
+
+**Q27.** Complétez: Elle ____ une lettre.
+
+A. écrit  
+B. écrivent  
+C. écris  
+D. écrivez  
+
+---
+
+**Q28.** Le passé composé de ''manger'' avec ''je'' est:
+
+A. j''ai mangé  
+B. je mangerai  
+C. je mangeais  
+D. je mange  
+
+---
+
+**Q29.** Complétez: Ils ____ à l''école.
+
+A. vont  
+B. allons  
+C. va  
+D. vais  
+
+---
+
+**Q30.** Le futur de ''être'' avec ''je'' est:
+
+A. je serai  
+B. je fus  
+C. j''étais  
+D. je suis  
+
+---
+
+**Q31.** Le texte sur la pluie se termine par:
+
+A. une tempête  
+B. un arc-en-ciel  
+C. de la neige  
+D. un orage  
+
+---
+
+**Q32.** Dans le texte sur le marché, les vendeurs:
+
+A. chantent des chansons  
+B. crient pour attirer les clients  
+C. lisent des livres  
+D. dorment  
+
+---
+
+**Q33.** L''éducation est importante parce qu''elle:
+
+A. coûte cher  
+B. est obligatoire  
+C. forme des travailleurs qualifiés  
+D. est facile  
+
+---
+
+**Q34.** Les principales cultures d''exportation du Cameroun sont:
+
+A. le riz et le blé  
+B. le coton et le tabac  
+C. les bananes et les oranges  
+D. le cacao et le café  
+
+---
+
+**Q35.** Le commerce équitable garantit:
+
+A. des produits gratuits  
+B. des prix plus élevés  
+C. un prix juste pour les producteurs  
+D. plus de publicité  
+
+---
+
+**Q36.** Dans la culture camerounaise, les enfants:
+
+A. ignorent leurs parents  
+B. ne parlent pas  
+C. quittent la maison  
+D. respectent leurs aînés  
+
+---
+
+**Q37.** Pour protéger l''environnement, il faut:
+
+A. gaspiller l''eau  
+B. trier les déchets  
+C. jeter les ordures dans la nature  
+D. couper les arbres  
+
+---
+
+**Q38.** La technologie permet de:
+
+A. cuisiner plus vite  
+B. voir ses proches à l''écran  
+C. apprendre sans effort  
+D. voyager gratuitement  
+
+---
+
+**Q39.** Le texte sur la santé conseille de:
+
+A. manger trop  
+B. fumer  
+C. boire beaucoup d''eau  
+D. ne pas consulter le médecin  
+
+---
+
+**Q40.** Dans le texte sur la pluie, les enfants:
+
+A. dormaient  
+B. pleuraient  
+C. travaillaient  
+D. jouaient dans les flaques d''eau  
+
+---
+
+**Q41.** Le football est le sport le plus populaire:
+
+A. en Chine  
+B. au Brésil  
+C. au Cameroun  
+D. en France  
+
+---
+
+**Q42.** Les enfants jouent au football avec:
+
+A. des pierres  
+B. des bouteilles  
+C. des ballons officiels  
+D. des ballons improvisés  
+
+---
+
+**Q43.** Une lettre à un ami doit commencer par:
+
+A. Bonjour tout le monde  
+B. Cher/Cher ami  
+C. Monsieur le Président  
+D. À qui de droit  
+
+---
+
+**Q44.** Pour décrire sa journée typique, on utilise:
+
+A. le subjonctif  
+B. le présent  
+C. le futur  
+D. le passé composé  
+
+---
+
+**Q45.** Pour raconter ce qu''on a fait le week-end dernier, on utilise:
+
+A. l''impératif  
+B. le présent  
+C. le passé composé  
+D. le futur simple  
+
+---
+
+**Q46.** Un dialogue est un échange entre:
+
+A. un professeur et un tableau  
+B. une seule personne  
+C. un groupe de spectateurs  
+D. deux personnes  
+
+---
+
+**Q47.** Le texte sur la famille dit que les grandes occasions:
+
+A. ne concernent que les enfants  
+B. sont tristes  
+C. rassemblent toute la famille  
+D. sont rares  
+
+---
+
+**Q48.** Pour inviter un ami à son anniversaire, on écrit:
+
+A. un poème  
+B. une lettre de démission  
+C. une lettre de réclamation  
+D. une lettre d''invitation  
+
+---
+
+**Q49.** Le texte sur l''environnement dit que le respect commence:
+
+A. à la maison  
+B. à l''école  
+C. au marché  
+D. à la plage  
+
+---
+
+**Q50.** Dans le texte sur le marché, l''air est rempli:
+
+A. d''odeurs variées  
+B. de musique  
+C. de silence  
+D. de fumée  
+
+---
+
+**Q51.** Le texte sur l''éducation dit que l''éducation est:
+
+A. la clé du développement  
+B. une perte de temps  
+C. un luxe  
+D. réservée aux riches  
+
+---
+
+**Q52.** Pour rester en bonne santé, il faut éviter:
+
+A. le tabac et l''alcool  
+B. le sport et le sommeil  
+C. les légumes  
+D. l''eau et les fruits  
+
+---
+
+**Q53.** Le texte sur la technologie dit que certains pensent qu''elle:
+
+A. nous éloigne les uns des autres  
+B. est trop chère  
+C. nous rapproche toujours  
+D. est inutile  
+
+---
+
+**Q54.** Le texte sur le commerce équitable parle du:
+
+A. cacao et du café  
+B. coton et du riz  
+C. bois et du fer  
+D. pétrole et du gaz  
+
+---
+
+**Q55.** Le Cameroun est appelé:
+
+A. le pays des lions  
+B. l''Afrique en miniature  
+C. la perle de l''Afrique  
+D. le grenier de l''Afrique  
+
+---
+
+**Q56.** Combien de groupes ethniques compte le Cameroun?
+
+A. environ 50  
+B. plus de 250  
+C. moins de 100  
+D. plus de 1000  
+
+---
+
+**Q57.** Le marché de Mokolo se trouve à:
+
+A. Douala  
+B. Bafoussam  
 C. Yaoundé  
-D. Buea  
+D. Garoua  
 
 ---
 
-**Q44.** The number of regions in Cameroon is:
+**Q58.** L''équipe nationale de football du Cameroun s''appelle:
 
-A. 6  
-B. 10  
-C. 12  
-D. 8  
-
----
-
-**Q45.** The line joining points of equal height on a map is a:
-
-A. longitude  
-B. grid line  
-C. contour line  
-D. latitude  
+A. les Éléphants  
+B. les Aigles  
+C. les Panthères  
+D. les Lions Indomptables  
 
 ---
 
-**Q46.** The shape of the land surface is called:
+**Q59.** Samuel Eto''o est un célèbre:
 
-A. drainage  
-B. vegetation  
-C. climate  
-D. relief  
-
----
-
-**Q47.** The direction of one place from another measured in degrees is a:
-
-A. gradient  
-B. scale  
-C. bearing  
-D. contour  
+A. chanteur  
+B. médecin  
+C. footballeur  
+D. écrivain  
 
 ---
 
-**Q48.** The ratio between distance on a map and distance on the ground is the:
+**Q60.** Pour rester en bonne santé, il faut:
 
-A. legend  
-B. relief  
-C. bearing  
-D. scale  
-
----
-
-**Q49.** The highest mountain in Cameroon is:
-
-A. Mount Cameroon  
-B. Mount Fako  
-C. Mount Oku  
-D. Mount Bamboutos  
-
----
-
-**Q50.** The main cash crop grown in the highlands of Cameroon is:
-
-A. coffee  
-B. rice  
-C. banana  
-D. cotton  
-
----
-
-**Q51.** The main cash crop grown in northern Cameroon is:
-
-A. cotton  
-B. cocoa  
-C. coffee  
-D. tea  
-
----
-
-**Q52.** The main cash crop grown in the south of Cameroon is:
-
-A. cocoa  
-B. millet  
-C. groundnut  
-D. cotton  
-
----
-
-**Q53.** The industry that serves tourists is called:
-
-A. tourism  
-B. fishing  
-C. manufacturing  
-D. mining  
-
----
-
-**Q54.** Development that meets present needs without harming future generations is called:
-
-A. sustainable development  
-B. urbanisation  
-C. industrialisation  
-D. economic growth  
-
----
-
-**Q55.** The number of people living in an area is its:
-
-A. settlement  
-B. population  
-C. community  
-D. society  
-
----
-
-**Q56.** The number of people per unit area is called:
-
-A. population distribution  
-B. population density  
-C. birth rate  
-D. population growth  
-
----
-
-**Q57.** The number of live births per 1000 people per year is the:
-
-A. death rate  
-B. growth rate  
-C. birth rate  
-D. fertility rate  
-
----
-
-**Q58.** The movement of people from one place to another is called:
-
-A. urbanisation  
-B. settlement  
-C. trade  
-D. migration  
-
----
-
-**Q59.** The movement of people from rural areas to towns is called:
-
-A. urban-rural migration  
-B. seasonal migration  
-C. rural-urban migration  
-D. international migration  
-
----
-
-**Q60.** A permanent human community is called a:
-
-A. migration  
-B. region  
-C. population  
-D. settlement  
+A. fumer  
+B. ne pas dormir  
+C. boire de l''alcool  
+D. manger équilibré  
 
 ---
 
@@ -3754,14 +2619,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'French'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 4'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FRENCH P2 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -3771,21 +2636,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 4',
+  'French',
+  'CAMEROON GCE ADVANCED LEVEL FRENCH P2 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 4
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 1
 
-## Structural Question Bank — Cameroon and African history
+## Structural Question Bank - Set 1
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -3796,165 +2661,1371 @@ values (
 
 ---
 
-## SECTION 1: CAMEROON AND AFRICAN HISTORY
+## SECTION 1: COMPREHENSION
 
-**Q1.** (a) What is history? *(2 marks)*
+**Q1.** Comprehension: Read original passage 1: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) State three sources of history. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the importance of studying history. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q2.** (a) Define the term "pre-colonial". *(2 marks)*
-
-(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*
-
-(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q3.** (a) What was the slave trade? *(2 marks)*
+**Q2.** Comprehension: Read original passage 2: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain why the slave trade was abolished. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
----
-
-**Q4.** (a) Define the term "colonisation". *(2 marks)*
-
-(b) Explain why European powers colonised Africa. *(4 marks)*
-
-(c) Describe how Germany colonised Cameroon. *(5 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q5.** (a) What was the Berlin Conference? *(2 marks)*
+**Q3.** Comprehension: Read original passage 3: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q6.** (a) Define the term "mandate". *(2 marks)*
-
-(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*
-
-(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q7.** (a) What is nationalism? *(2 marks)*
+**Q4.** Comprehension: Read original passage 4: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q8.** (a) When did Cameroon gain independence? *(2 marks)*
-
-(b) Describe the process by which French Cameroon gained independence. *(4 marks)*
-
-(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*
+**Q5.** Comprehension: Read original passage 5: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
 
-(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q10.** (a) Define the term "reunification". *(2 marks)
-
-(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*
-
-(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q11.** (a) What is a federation? *(2 marks)*
+## SECTION 2: GRAMMAR
 
-(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*
+**Q6.** Grammar: Read original passage 6: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
 
-(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
----
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
 
-**Q12.** (a) Define the term "unitary state". *(2 marks)*
-
-(b) Describe the political changes in Cameroon after 1972. *(4 marks)*
-
-(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q13.** (a) What is multiparty democracy? *(2 marks)*
+**Q7.** Grammar: Read original passage 7: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
 
-(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
 
----
-
-**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*
-
-(b) State three aims of pan-Africanism. *(3 marks)*
-
-(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q15.** (a) What was the Scramble for Africa? *(2 marks)*
+**Q8.** Grammar: Read original passage 8: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
 
-(b) Describe the causes of the Scramble for Africa. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
 
----
-
-**Q16.** (a) Define the term "decolonisation". *(2 marks)*
-
-(b) State three factors that led to the decolonisation of Africa. *(3 marks)*
-
-(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q17.** (a) What is apartheid? *(2 marks)*
+**Q9.** Grammar: Read original passage 9: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
 
-(b) Describe the system of apartheid in South Africa. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
 
----
-
-**Q18.** (a) Define the term "civil war". *(2 marks)*
-
-(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*
-
-(c) Explain the effects of the civil war on Nigeria. *(4 marks)*
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q19.** (a) What is the African Union? *(2 marks)*
+**Q10.** Grammar: Read original passage 10: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
 
-(b) State three objectives of the African Union. *(3 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
 
-(c) Explain the difference between the OAU and the African Union. *(4 marks)*
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 
-**Q20.** (a) Define the term "economic integration". *(2 marks)*
+## SECTION 3: TRANSLATION
 
-(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*
+**Q11.** Translation: Read original passage 11: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
 
-(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Translation: Read original passage 12: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Translation: Read original passage 13: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Translation: Read original passage 14: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Translation: Read original passage 15: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ESSAY WRITING
+
+**Q16.** Essay writing: Read original passage 16: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Essay writing: Read original passage 17: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Essay writing: Read original passage 18: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Essay writing: Read original passage 19: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Essay writing: Read original passage 20: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: VOCABULARY
+
+**Q21.** Vocabulary: Read original passage 21: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Vocabulary: Read original passage 22: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Vocabulary: Read original passage 23: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Vocabulary: Read original passage 24: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Vocabulary: Read original passage 25: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: DIALOGUE
+
+**Q26.** Dialogue: Read original passage 26: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Dialogue: Read original passage 27: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Dialogue: Read original passage 28: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Dialogue: Read original passage 29: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Dialogue: Read original passage 30: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: LETTER WRITING
+
+**Q31.** Letter writing: Read original passage 31: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Letter writing: Read original passage 32: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Letter writing: Read original passage 33: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Letter writing: Read original passage 34: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Letter writing: Read original passage 35: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CULTURE
+
+**Q36.** Culture: Read original passage 36: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Culture: Read original passage 37: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Culture: Read original passage 38: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Culture: Read original passage 39: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Culture: Read original passage 40: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FRENCH P2 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ADVANCED LEVEL FRENCH P2 SET 2',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 2
+
+## Structural Question Bank - Set 2
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION
+
+**Q1.** Comprehension: Read original passage 1: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q2.** Comprehension: Read original passage 2: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q3.** Comprehension: Read original passage 3: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q4.** Comprehension: Read original passage 4: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q5.** Comprehension: Read original passage 5: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 2: GRAMMAR
+
+**Q6.** Grammar: Read original passage 6: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q7.** Grammar: Read original passage 7: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q8.** Grammar: Read original passage 8: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q9.** Grammar: Read original passage 9: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q10.** Grammar: Read original passage 10: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 3: TRANSLATION
+
+**Q11.** Translation: Read original passage 11: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Translation: Read original passage 12: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Translation: Read original passage 13: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Translation: Read original passage 14: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Translation: Read original passage 15: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ESSAY WRITING
+
+**Q16.** Essay writing: Read original passage 16: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Essay writing: Read original passage 17: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Essay writing: Read original passage 18: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Essay writing: Read original passage 19: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Essay writing: Read original passage 20: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: VOCABULARY
+
+**Q21.** Vocabulary: Read original passage 21: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Vocabulary: Read original passage 22: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Vocabulary: Read original passage 23: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Vocabulary: Read original passage 24: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Vocabulary: Read original passage 25: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: DIALOGUE
+
+**Q26.** Dialogue: Read original passage 26: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Dialogue: Read original passage 27: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Dialogue: Read original passage 28: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Dialogue: Read original passage 29: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Dialogue: Read original passage 30: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: LETTER WRITING
+
+**Q31.** Letter writing: Read original passage 31: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Letter writing: Read original passage 32: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Letter writing: Read original passage 33: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Letter writing: Read original passage 34: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Letter writing: Read original passage 35: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CULTURE
+
+**Q36.** Culture: Read original passage 36: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Culture: Read original passage 37: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Culture: Read original passage 38: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Culture: Read original passage 39: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Culture: Read original passage 40: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'French'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FRENCH P2 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'French',
+  'CAMEROON GCE ADVANCED LEVEL FRENCH P2 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 3
+
+## Structural Question Bank - Set 3
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: COMPREHENSION
+
+**Q1.** Comprehension: Read original passage 1: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q2.** Comprehension: Read original passage 2: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q3.** Comprehension: Read original passage 3: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q4.** Comprehension: Read original passage 4: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q5.** Comprehension: Read original passage 5: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on comprehension.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 2: GRAMMAR
+
+**Q6.** Grammar: Read original passage 6: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q7.** Grammar: Read original passage 7: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q8.** Grammar: Read original passage 8: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q9.** Grammar: Read original passage 9: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q10.** Grammar: Read original passage 10: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on grammar.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 3: TRANSLATION
+
+**Q11.** Translation: Read original passage 11: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Translation: Read original passage 12: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Translation: Read original passage 13: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Translation: Read original passage 14: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Translation: Read original passage 15: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on translation.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ESSAY WRITING
+
+**Q16.** Essay writing: Read original passage 16: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Essay writing: Read original passage 17: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Essay writing: Read original passage 18: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Essay writing: Read original passage 19: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Essay writing: Read original passage 20: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on essay writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: VOCABULARY
+
+**Q21.** Vocabulary: Read original passage 21: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Vocabulary: Read original passage 22: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Vocabulary: Read original passage 23: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Vocabulary: Read original passage 24: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Vocabulary: Read original passage 25: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on vocabulary.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: DIALOGUE
+
+**Q26.** Dialogue: Read original passage 26: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Dialogue: Read original passage 27: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Dialogue: Read original passage 28: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Dialogue: Read original passage 29: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Dialogue: Read original passage 30: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on dialogue.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: LETTER WRITING
+
+**Q31.** Letter writing: Read original passage 31: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** Letter writing: Read original passage 32: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** Letter writing: Read original passage 33: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** Letter writing: Read original passage 34: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** Letter writing: Read original passage 35: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on letter writing.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CULTURE
+
+**Q36.** Culture: Read original passage 36: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Culture: Read original passage 37: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Culture: Read original passage 38: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Culture: Read original passage 39: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Culture: Read original passage 40: a learner writes to a school authority about discipline, study habits, community service, and future plans. Use it to answer on culture.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
 ',
   null
 )

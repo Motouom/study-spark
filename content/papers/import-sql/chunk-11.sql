@@ -3,14 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'English Language'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -20,21 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'English Language',
-  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1',
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 1
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 2
 
 ## Multiple Choice Question Bank
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** English Language
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -47,543 +47,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
+**Q1.** The reward for labour is:
 
-A. the centre of community life  
-B. a noisy place  
-C. a place of conflict  
-D. a modern building  
-
----
-
-**Q2.** In summary writing, the first step is to:
-
-A. read the passage carefully to understand the main ideas  
-B. copy the first sentence of each paragraph  
-C. write your own opinions about the topic  
-D. count the words in the passage  
+A. wages  
+B. rent  
+C. interest  
+D. profit  
 
 ---
 
-**Q3.** A summary should be written:
+**Q2.** The reward for capital is:
 
-A. in your own words  
-B. in note form only  
-C. using long quotations from the passage  
-D. as a list of examples  
-
----
-
-**Q4.** The main idea of a passage is best described as:
-
-A. the central point the writer is making  
-B. the most difficult word in the passage  
-C. the writer''s personal opinion only  
-D. the first sentence of the passage  
+A. interest  
+B. wages  
+C. profit  
+D. rent  
 
 ---
 
-**Q5.** Read: ''The words evaporated.'' This means the speaker:
+**Q3.** The reward for land is:
 
-A. forgot what he wanted to say  
-B. was interrupted by the crowd  
-C. spoke very quietly  
-D. wrote his speech down  
-
----
-
-**Q6.** When asked to ''state the main idea in one sentence'', you should:
-
-A. summarise the whole passage briefly  
-B. list all the details  
-C. repeat the title  
-D. quote the longest sentence  
+A. rent  
+B. interest  
+C. wages  
+D. profit  
 
 ---
 
-**Q7.** An inference is:
+**Q4.** The reward for enterprise is:
 
-A. a fact stated directly in the text  
-B. a conclusion drawn from evidence in the text  
-C. a quotation from the text  
-D. a question about the text  
-
----
-
-**Q8.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
-
-A. was very wide  
-B. provided many benefits  
-C. was polluted  
-D. flowed very fast  
+A. profit  
+B. rent  
+C. interest  
+D. wages  
 
 ---
 
-**Q9.** In a summary, you should NOT include:
+**Q5.** The law of demand states that as price rises, quantity demanded:
 
-A. the main points  
-B. the key facts  
-C. your personal opinions  
-D. the essential ideas  
-
----
-
-**Q10.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
-
-A. very large in size  
-B. completely untouched  
-C. difficult to reach  
-D. containing many different species  
+A. falls  
+B. doubles  
+C. rises  
+D. stays constant  
 
 ---
 
-**Q11.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
+**Q6.** The law of supply states that as price rises, quantity supplied:
 
-A. leave the stage  
-B. change his topic  
-C. feel calmer and begin speaking  
-D. memorise his speech  
-
----
-
-**Q12.** When summarising, the word limit means you must:
-
-A. write exactly the same number of words as the passage  
-B. ignore the word limit  
-C. write as many words as possible  
-D. keep your summary within the stated number of words  
+A. rises  
+B. halves  
+C. stays constant  
+D. falls  
 
 ---
 
-**Q13.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
+**Q7.** The price at which quantity demanded equals quantity supplied is the:
 
-A. is declining rapidly  
-B. has great potential that is not yet realised  
-C. is completely absent  
-D. is too expensive for visitors  
-
----
-
-**Q14.** The purpose of a comprehension passage is usually to:
-
-A. teach grammar rules  
-B. test understanding of the text  
-C. list vocabulary words  
-D. provide entertainment only  
+A. ceiling price  
+B. equilibrium price  
+C. floor price  
+D. market price  
 
 ---
 
-**Q15.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
+**Q8.** If a 10% price rise causes a 20% fall in quantity demanded, demand is:
 
-A. had never heard promises before  
-B. were happy with the announcement  
-C. did not trust the government''s promises  
-D. were celebrating quietly  
-
----
-
-**Q16.** A good summary should be:
-
-A. the same length as the original passage  
-B. longer than the original passage  
-C. a copy of the original passage  
-D. shorter than the original passage  
+A. inelastic  
+B. elastic  
+C. perfectly inelastic  
+D. unit elastic  
 
 ---
 
-**Q17.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
+**Q9.** If a 10% price rise causes a 5% fall in quantity demanded, demand is:
 
-A. swept very quickly  
-B. hired someone to sweep  
-C. found peace in sweeping  
-D. disliked sweeping  
-
----
-
-**Q18.** When a question asks you to ''explain in your own words'', you should:
-
-A. write a longer version of the passage  
-B. give your own opinion  
-C. quote the passage directly  
-D. rephrase the idea without copying  
+A. elastic  
+B. unit elastic  
+C. inelastic  
+D. perfectly elastic  
 
 ---
 
-**Q19.** Read: ''Success is not a destination but a journey.'' The writer means success is:
+**Q10.** The price elasticity of demand is calculated as:
 
-A. measured by certificates  
-B. a continuous process  
-C. a final goal  
-D. impossible to achieve  
-
----
-
-**Q20.** The best title for a passage about plastic waste clogging drainage channels would be:
-
-A. A Day at the Market  
-B. The Problem of Plastic Waste in Our Cities  
-C. The History of Plastic  
-D. How to Build Drainage Channels  
+A. % change in price ÷ % change in quantity demanded  
+B. change in price ÷ change in quantity  
+C. quantity ÷ price  
+D. % change in quantity demanded ÷ % change in price  
 
 ---
 
-**Q21.** Choose the correct sentence:
+**Q11.** A good whose demand rises when income rises is a:
 
-A. Neither of the boys have been present.  
-B. Neither of the boys were present.  
-C. Neither of the boys was present.  
-D. Neither of the boys are present.  
-
----
-
-**Q22.** Choose the correct sentence:
-
-A. The committee were deciding to postpone the event.  
-B. The committee have decided to postpone the event.  
-C. The committee are deciding to postpone the event.  
-D. The committee has decided to postpone the event.  
+A. inferior good  
+B. complementary good  
+C. normal good  
+D. substitute good  
 
 ---
 
-**Q23.** Choose the correct sentence:
+**Q12.** A good whose demand falls when income rises is an:
 
-A. Each of the students were submitting the assignment.  
-B. Each of the students are submitting the assignment.  
-C. Each of the students has submitted the assignment.  
-D. Each of the students have submitted the assignment.  
-
----
-
-**Q24.** Choose the correct sentence:
-
-A. The number of accidents have been increasing.  
-B. The number of accidents were increasing.  
-C. The number of accidents are increasing.  
-D. The number of accidents is increasing.  
+A. normal good  
+B. necessity  
+C. luxury good  
+D. inferior good  
 
 ---
 
-**Q25.** Choose the correct sentence:
+**Q13.** The law of diminishing returns applies in the:
 
-A. She is good at mathematics.  
-B. She is good in mathematics.  
-C. She is good on mathematics.  
-D. She is good for mathematics.  
-
----
-
-**Q26.** Choose the correct sentence:
-
-A. He was accused of theft.  
-B. He was accused for theft.  
-C. He was accused on theft.  
-D. He was accused with theft.  
+A. very long run  
+B. short run  
+C. long run  
+D. market period  
 
 ---
 
-**Q27.** Choose the correct sentence:
+**Q14.** Costs that do not change with output are:
 
-A. The committee consists of ten members.  
-B. The committee consists with ten members.  
-C. The committee consists in ten members.  
-D. The committee consists on ten members.  
-
----
-
-**Q28.** Choose the correct sentence:
-
-A. She is interested in learning French.  
-B. She is interested for learning French.  
-C. She is interested at learning French.  
-D. She is interested on learning French.  
+A. marginal costs  
+B. fixed costs  
+C. total costs  
+D. variable costs  
 
 ---
 
-**Q29.** Choose the correct word: The principal gave the students some useful ____.
+**Q15.** Costs that change with output are:
 
-A. advice  
-B. advising  
-C. advise  
-D. advices  
-
----
-
-**Q30.** Choose the correct word: The new policy will ____ all workers.
-
-A. affect  
-B. effects  
-C. affects  
-D. effect  
+A. sunk costs  
+B. fixed costs  
+C. variable costs  
+D. overhead costs  
 
 ---
 
-**Q31.** Choose the correct word: Please ____ this letter to the post office.
+**Q16.** The extra cost of producing one more unit is the:
 
-A. bring  
-B. take  
-C. carry  
-D. fetch  
-
----
-
-**Q32.** Choose the correct word: The company''s ____ concern is customer satisfaction.
-
-A. principle  
-B. principal  
-C. principles  
-D. principally  
+A. fixed cost  
+B. average cost  
+C. total cost  
+D. marginal cost  
 
 ---
 
-**Q33.** Choose the correct sentence:
+**Q17.** A market with many buyers and sellers of identical products is:
 
-A. The news are good.  
-B. The news were good.  
-C. The news is good.  
-D. The news have been good.  
-
----
-
-**Q34.** Choose the correct sentence:
-
-A. I look forward to hear from you.  
-B. I look forward to heard from you.  
-C. I look forward to hears from you.  
-D. I look forward to hearing from you.  
+A. oligopoly  
+B. monopolistic competition  
+C. perfect competition  
+D. monopoly  
 
 ---
 
-**Q35.** Choose the correct sentence:
+**Q18.** A market with a single seller is a:
 
-A. He is the tallest of the two brothers.  
-B. He is most tallest of the two brothers.  
-C. He is the taller of the two brothers.  
-D. He is more taller of the two brothers.  
-
----
-
-**Q36.** Choose the correct sentence:
-
-A. She is more taller than her sister.  
-B. She is tallest than her sister.  
-C. She is most taller than her sister.  
-D. She is taller than her sister.  
+A. oligopoly  
+B. duopoly  
+C. perfect competition  
+D. monopoly  
 
 ---
 
-**Q37.** Choose the correct word: The dog wagged ____ tail.
+**Q19.** A market with a few large sellers is an:
 
-A. its''  
-B. its  
-C. it''s  
-D. itses  
-
----
-
-**Q38.** Choose the correct word: ____ going to the market.
-
-A. There  
-B. They''re  
-C. Theirs  
-D. Their  
+A. monopolistic competition  
+B. oligopoly  
+C. monopoly  
+D. perfect competition  
 
 ---
 
-**Q39.** Choose the correct word: ____ book is this?
+**Q20.** A market with many sellers of differentiated products is:
 
-A. Whom  
-B. Who''s  
-C. Whose  
-D. Who  
-
----
-
-**Q40.** Choose the correct sentence:
-
-A. The teacher, along with her students, were going on the trip.  
-B. The teacher, along with her students, are going on the trip.  
-C. The teacher, along with her students, have been going on the trip.  
-D. The teacher, along with her students, is going on the trip.  
+A. oligopoly  
+B. monopolistic competition  
+C. monopoly  
+D. perfect competition  
 
 ---
 
-**Q41.** An essay that tells a story is called:
+**Q21.** A firm in perfect competition is a:
 
-A. an expository essay  
-B. a descriptive essay  
-C. a narrative essay  
-D. an argumentative essay  
-
----
-
-**Q42.** An essay that presents reasons for and against a position is called:
-
-A. a descriptive essay  
-B. a letter  
-C. a narrative essay  
-D. an argumentative essay  
+A. oligopolist  
+B. price maker  
+C. price taker  
+D. monopolist  
 
 ---
 
-**Q43.** An essay that explains or informs is called:
+**Q22.** A monopolist is a:
 
-A. a poem  
-B. an expository essay  
-C. a narrative essay  
-D. a story  
-
----
-
-**Q44.** An essay that uses sensory details to paint a picture is called:
-
-A. a summary  
-B. a descriptive essay  
-C. an expository essay  
-D. an argumentative essay  
+A. price cutter  
+B. price taker  
+C. price follower  
+D. price maker  
 
 ---
 
-**Q45.** The first paragraph of an essay is called the:
+**Q23.** The reduction in average cost as output increases is called:
 
-A. title  
-B. conclusion  
-C. introduction  
-D. body  
-
----
-
-**Q46.** The final paragraph of an essay is called the:
-
-A. heading  
-B. introduction  
-C. body  
-D. conclusion  
+A. increasing returns  
+B. diminishing returns  
+C. economies of scale  
+D. diseconomies of scale  
 
 ---
 
-**Q47.** A formal letter should begin with:
+**Q24.** The increase in average cost when a firm becomes too large is called:
 
-A. a joke  
-B. a greeting like ''Hi''  
-C. the sender''s address and the date  
-D. the recipient''s name only  
-
----
-
-**Q48.** The main paragraphs of an essay form the:
-
-A. title  
-B. conclusion  
-C. introduction  
-D. body  
+A. constant returns  
+B. diminishing returns  
+C. economies of scale  
+D. diseconomies of scale  
 
 ---
 
-**Q49.** A letter of application should include:
+**Q25.** A maximum price set by the government is a:
 
-A. your qualifications and experience  
-B. only your name  
-C. a list of your friends  
-D. your favourite hobbies  
-
----
-
-**Q50.** When writing an argumentative essay, you should:
-
-A. support your argument with reasons and examples  
-B. avoid giving any reasons  
-C. write without paragraphs  
-D. only state the opposing view  
+A. price ceiling  
+B. price floor  
+C. equilibrium price  
+D. market price  
 
 ---
 
-**Q51.** A narrative essay should have:
+**Q26.** A minimum price set by the government is a:
 
-A. a clear sequence of events  
-B. no setting  
-C. no characters  
-D. only statistics  
-
----
-
-**Q52.** The purpose of an introduction is to:
-
-A. present the topic and capture the reader''s interest  
-B. list all the details  
-C. repeat the title  
-D. give the conclusion  
+A. price floor  
+B. price ceiling  
+C. market price  
+D. equilibrium price  
 
 ---
 
-**Q53.** A descriptive essay about a market should include:
+**Q27.** The benefit consumers gain when they pay less than they are willing to pay is:
 
-A. sights, sounds, and smells  
-B. mathematical calculations  
-C. only prices  
-D. a list of items  
-
----
-
-**Q54.** A formal letter to the editor should:
-
-A. express a clear opinion on an issue  
-B. be very short  
-C. have no address  
-D. be written in slang  
+A. consumer surplus  
+B. profit  
+C. producer surplus  
+D. revenue  
 
 ---
 
-**Q55.** The best way to organise an expository essay is:
+**Q28.** The basic economic problem is:
 
-A. random ideas  
-B. logical paragraphs with clear points  
-C. a single long paragraph  
-D. a list without explanation  
-
----
-
-**Q56.** A story that illustrates a proverb should:
-
-A. state the proverb only  
-B. show the lesson through events  
-C. be about animals only  
-D. avoid any lesson  
+A. scarcity  
+B. unemployment  
+C. taxation  
+D. inflation  
 
 ---
 
-**Q57.** When writing an essay, you should:
+**Q29.** The next best alternative forgone when a choice is made is the:
 
-A. start writing without a plan  
-B. copy from a friend  
-C. plan your ideas before writing  
-D. write only one paragraph  
-
----
-
-**Q58.** The word count of an essay refers to:
-
-A. the number of paragraphs  
-B. the number of pages  
-C. the number of sentences  
-D. the number of words in the essay  
+A. opportunity cost  
+B. fixed cost  
+C. marginal cost  
+D. sunk cost  
 
 ---
 
-**Q59.** A letter of complaint should:
+**Q30.** The factors of production are land, labour, capital, and:
 
-A. only greet the recipient  
-B. be written in verse  
-C. clearly state the problem and request action  
-D. avoid mentioning the problem  
+A. enterprise  
+B. services  
+C. goods  
+D. money  
 
 ---
 
-**Q60.** To make an essay interesting, a writer should:
+**Q31.** The three methods of measuring national income are income, output, and:
 
-A. repeat the same word  
-B. avoid examples  
-C. use only short sentences  
-D. use vivid and varied language  
+A. savings  
+B. expenditure  
+C. investment  
+D. taxation  
+
+---
+
+**Q32.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. money  
+C. credit  
+D. services  
+
+---
+
+**Q33.** The total amount of money in circulation is the:
+
+A. national income  
+B. balance of payments  
+C. money supply  
+D. public debt  
+
+---
+
+**Q34.** The bank that controls the money supply is the:
+
+A. commercial bank  
+B. development bank  
+C. merchant bank  
+D. central bank  
+
+---
+
+**Q35.** The bank that accepts deposits and gives loans is a:
+
+A. central bank  
+B. insurance company  
+C. commercial bank  
+D. stock exchange  
+
+---
+
+**Q36.** A general and sustained rise in the price level is:
+
+A. deflation  
+B. depression  
+C. recession  
+D. inflation  
+
+---
+
+**Q37.** Inflation caused by excess demand is called:
+
+A. hyperinflation  
+B. demand-pull inflation  
+C. cost-push inflation  
+D. stagflation  
+
+---
+
+**Q38.** Inflation caused by rising costs of production is called:
+
+A. hyperinflation  
+B. cost-push inflation  
+C. deflation  
+D. demand-pull inflation  
+
+---
+
+**Q39.** The situation where people who are able and willing to work cannot find jobs is:
+
+A. deflation  
+B. inflation  
+C. unemployment  
+D. recession  
+
+---
+
+**Q40.** Trade between countries is called:
+
+A. local trade  
+B. home trade  
+C. retail trade  
+D. international trade  
+
+---
+
+**Q41.** The principle that a country should specialise in producing goods it produces most efficiently is:
+
+A. opportunity cost  
+B. economies of scale  
+C. comparative advantage  
+D. absolute advantage  
+
+---
+
+**Q42.** The difference between the value of exports and imports is the:
+
+A. national income  
+B. public debt  
+C. balance of payments  
+D. balance of trade  
+
+---
+
+**Q43.** A tax on imported goods is a:
+
+A. grant  
+B. tariff  
+C. quota  
+D. subsidy  
+
+---
+
+**Q44.** A limit on the quantity of a good that can be imported is a:
+
+A. embargo  
+B. quota  
+C. subsidy  
+D. tariff  
+
+---
+
+**Q45.** Taxes on income and profits are:
+
+A. quotas  
+B. indirect taxes  
+C. direct taxes  
+D. tariffs  
+
+---
+
+**Q46.** Taxes on goods and services are:
+
+A. profit taxes  
+B. direct taxes  
+C. income taxes  
+D. indirect taxes  
+
+---
+
+**Q47.** A plan of government revenue and expenditure is the:
+
+A. receipt  
+B. invoice  
+C. budget  
+D. balance sheet  
+
+---
+
+**Q48.** A budget where revenue equals expenditure is:
+
+A. unbalanced  
+B. deficit  
+C. surplus  
+D. balanced  
+
+---
+
+**Q49.** A budget where revenue exceeds expenditure is:
+
+A. surplus  
+B. deficit  
+C. balanced  
+D. unbalanced  
+
+---
+
+**Q50.** A budget where expenditure exceeds revenue is:
+
+A. deficit  
+B. surplus  
+C. unbalanced  
+D. balanced  
+
+---
+
+**Q51.** The increase in a country''s output of goods and services over time is:
+
+A. economic growth  
+B. inflation  
+C. economic development  
+D. recession  
+
+---
+
+**Q52.** The improvement in the standard of living and welfare of people is:
+
+A. economic development  
+B. inflation  
+C. deflation  
+D. economic growth  
+
+---
+
+**Q53.** The index that measures human welfare is the:
+
+A. Human Development Index  
+B. Price Index  
+C. Consumer Price Index  
+D. Stock Index  
+
+---
+
+**Q54.** Investment by foreign companies in a country is called:
+
+A. foreign direct investment  
+B. domestic investment  
+C. public investment  
+D. portfolio investment  
+
+---
+
+**Q55.** The international organisation that provides loans to countries in balance of payments difficulties is the:
+
+A. World Bank  
+B. IMF  
+C. WTO  
+D. UN  
+
+---
+
+**Q56.** The international organisation that finances development projects is the:
+
+A. IMF  
+B. World Bank  
+C. UN  
+D. WTO  
+
+---
+
+**Q57.** The economic community of Central African states is:
+
+A. ECOWAS  
+B. SADC  
+C. ECCAS  
+D. COMESA  
+
+---
+
+**Q58.** The total value of goods and services produced in a country in a year is the:
+
+A. national debt  
+B. balance of trade  
+C. money supply  
+D. national income  
+
+---
+
+**Q59.** GDP stands for:
+
+A. Gross Domestic Profit  
+B. Gross Development Plan  
+C. Gross Domestic Product  
+D. General Domestic Product  
+
+---
+
+**Q60.** GNP stands for:
+
+A. Gross National Profit  
+B. Gross Net Product  
+C. General National Product  
+D. Gross National Product  
 
 ---
 
@@ -667,14 +667,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'English Language'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -684,21 +684,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'English Language',
-  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2',
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 2
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P1 SET 3
 
 ## Multiple Choice Question Bank
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** English Language
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -711,543 +711,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** The main idea of a passage is best described as:
+**Q1.** The reward for enterprise is:
 
-A. the central point the writer is making  
-B. the first sentence of the passage  
-C. the most difficult word in the passage  
-D. the writer''s personal opinion only  
-
----
-
-**Q2.** Read: ''The words evaporated.'' This means the speaker:
-
-A. forgot what he wanted to say  
-B. spoke very quietly  
-C. was interrupted by the crowd  
-D. wrote his speech down  
+A. profit  
+B. wages  
+C. rent  
+D. interest  
 
 ---
 
-**Q3.** When asked to ''state the main idea in one sentence'', you should:
+**Q2.** The law of demand states that as price rises, quantity demanded:
 
-A. summarise the whole passage briefly  
-B. repeat the title  
-C. quote the longest sentence  
-D. list all the details  
-
----
-
-**Q4.** An inference is:
-
-A. a conclusion drawn from evidence in the text  
-B. a quotation from the text  
-C. a question about the text  
-D. a fact stated directly in the text  
+A. falls  
+B. rises  
+C. doubles  
+D. stays constant  
 
 ---
 
-**Q5.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
+**Q3.** The law of supply states that as price rises, quantity supplied:
 
-A. provided many benefits  
-B. was polluted  
-C. was very wide  
-D. flowed very fast  
-
----
-
-**Q6.** In a summary, you should NOT include:
-
-A. your personal opinions  
-B. the essential ideas  
-C. the key facts  
-D. the main points  
+A. rises  
+B. stays constant  
+C. falls  
+D. halves  
 
 ---
 
-**Q7.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
+**Q4.** The price at which quantity demanded equals quantity supplied is the:
 
-A. very large in size  
-B. containing many different species  
-C. completely untouched  
-D. difficult to reach  
-
----
-
-**Q8.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
-
-A. leave the stage  
-B. feel calmer and begin speaking  
-C. change his topic  
-D. memorise his speech  
+A. equilibrium price  
+B. floor price  
+C. market price  
+D. ceiling price  
 
 ---
 
-**Q9.** When summarising, the word limit means you must:
+**Q5.** If a 10% price rise causes a 20% fall in quantity demanded, demand is:
 
-A. write exactly the same number of words as the passage  
-B. write as many words as possible  
-C. keep your summary within the stated number of words  
-D. ignore the word limit  
-
----
-
-**Q10.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
-
-A. is completely absent  
-B. is declining rapidly  
-C. is too expensive for visitors  
-D. has great potential that is not yet realised  
+A. elastic  
+B. perfectly inelastic  
+C. inelastic  
+D. unit elastic  
 
 ---
 
-**Q11.** The purpose of a comprehension passage is usually to:
+**Q6.** If a 10% price rise causes a 5% fall in quantity demanded, demand is:
 
-A. provide entertainment only  
-B. list vocabulary words  
-C. test understanding of the text  
-D. teach grammar rules  
-
----
-
-**Q12.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
-
-A. were happy with the announcement  
-B. were celebrating quietly  
-C. had never heard promises before  
-D. did not trust the government''s promises  
+A. inelastic  
+B. perfectly elastic  
+C. unit elastic  
+D. elastic  
 
 ---
 
-**Q13.** A good summary should be:
+**Q7.** The price elasticity of demand is calculated as:
 
-A. the same length as the original passage  
-B. shorter than the original passage  
-C. longer than the original passage  
-D. a copy of the original passage  
-
----
-
-**Q14.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
-
-A. swept very quickly  
-B. found peace in sweeping  
-C. hired someone to sweep  
-D. disliked sweeping  
+A. % change in price ÷ % change in quantity demanded  
+B. % change in quantity demanded ÷ % change in price  
+C. change in price ÷ change in quantity  
+D. quantity ÷ price  
 
 ---
 
-**Q15.** When a question asks you to ''explain in your own words'', you should:
+**Q8.** A good whose demand rises when income rises is a:
 
-A. write a longer version of the passage  
-B. quote the passage directly  
-C. rephrase the idea without copying  
-D. give your own opinion  
-
----
-
-**Q16.** Read: ''Success is not a destination but a journey.'' The writer means success is:
-
-A. impossible to achieve  
-B. a final goal  
-C. measured by certificates  
-D. a continuous process  
+A. inferior good  
+B. normal good  
+C. complementary good  
+D. substitute good  
 
 ---
 
-**Q17.** The best title for a passage about plastic waste clogging drainage channels would be:
+**Q9.** A good whose demand falls when income rises is an:
 
-A. The History of Plastic  
-B. A Day at the Market  
-C. The Problem of Plastic Waste in Our Cities  
-D. How to Build Drainage Channels  
-
----
-
-**Q18.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
-
-A. a place of conflict  
-B. a modern building  
-C. a noisy place  
-D. the centre of community life  
+A. normal good  
+B. luxury good  
+C. inferior good  
+D. necessity  
 
 ---
 
-**Q19.** In summary writing, the first step is to:
+**Q10.** The law of diminishing returns applies in the:
 
-A. write your own opinions about the topic  
-B. read the passage carefully to understand the main ideas  
-C. copy the first sentence of each paragraph  
-D. count the words in the passage  
-
----
-
-**Q20.** A summary should be written:
-
-A. as a list of examples  
-B. in your own words  
-C. in note form only  
-D. using long quotations from the passage  
+A. long run  
+B. very long run  
+C. market period  
+D. short run  
 
 ---
 
-**Q21.** Choose the correct sentence:
+**Q11.** Costs that do not change with output are:
 
-A. The number of accidents have been increasing.  
-B. The number of accidents are increasing.  
-C. The number of accidents is increasing.  
-D. The number of accidents were increasing.  
-
----
-
-**Q22.** Choose the correct sentence:
-
-A. She is good for mathematics.  
-B. She is good in mathematics.  
-C. She is good on mathematics.  
-D. She is good at mathematics.  
+A. variable costs  
+B. total costs  
+C. fixed costs  
+D. marginal costs  
 
 ---
 
-**Q23.** Choose the correct sentence:
+**Q12.** Costs that change with output are:
 
-A. He was accused on theft.  
-B. He was accused with theft.  
-C. He was accused of theft.  
-D. He was accused for theft.  
-
----
-
-**Q24.** Choose the correct sentence:
-
-A. The committee consists on ten members.  
-B. The committee consists with ten members.  
-C. The committee consists in ten members.  
-D. The committee consists of ten members.  
+A. fixed costs  
+B. overhead costs  
+C. sunk costs  
+D. variable costs  
 
 ---
 
-**Q25.** Choose the correct sentence:
+**Q13.** The extra cost of producing one more unit is the:
 
-A. She is interested in learning French.  
-B. She is interested on learning French.  
-C. She is interested for learning French.  
-D. She is interested at learning French.  
-
----
-
-**Q26.** Choose the correct word: The principal gave the students some useful ____.
-
-A. advice  
-B. advise  
-C. advising  
-D. advices  
+A. fixed cost  
+B. marginal cost  
+C. average cost  
+D. total cost  
 
 ---
 
-**Q27.** Choose the correct word: The new policy will ____ all workers.
+**Q14.** A market with many buyers and sellers of identical products is:
 
-A. affect  
-B. affects  
-C. effect  
-D. effects  
-
----
-
-**Q28.** Choose the correct word: Please ____ this letter to the post office.
-
-A. take  
-B. carry  
-C. fetch  
-D. bring  
+A. oligopoly  
+B. perfect competition  
+C. monopolistic competition  
+D. monopoly  
 
 ---
 
-**Q29.** Choose the correct word: The company''s ____ concern is customer satisfaction.
+**Q15.** A market with a single seller is a:
 
-A. principal  
-B. principles  
-C. principle  
-D. principally  
-
----
-
-**Q30.** Choose the correct sentence:
-
-A. The news is good.  
-B. The news have been good.  
-C. The news were good.  
-D. The news are good.  
+A. oligopoly  
+B. perfect competition  
+C. monopoly  
+D. duopoly  
 
 ---
 
-**Q31.** Choose the correct sentence:
+**Q16.** A market with a few large sellers is an:
 
-A. I look forward to hear from you.  
-B. I look forward to hearing from you.  
-C. I look forward to heard from you.  
-D. I look forward to hears from you.  
-
----
-
-**Q32.** Choose the correct sentence:
-
-A. He is the tallest of the two brothers.  
-B. He is the taller of the two brothers.  
-C. He is most tallest of the two brothers.  
-D. He is more taller of the two brothers.  
+A. perfect competition  
+B. monopoly  
+C. monopolistic competition  
+D. oligopoly  
 
 ---
 
-**Q33.** Choose the correct sentence:
+**Q17.** A market with many sellers of differentiated products is:
 
-A. She is more taller than her sister.  
-B. She is most taller than her sister.  
-C. She is taller than her sister.  
-D. She is tallest than her sister.  
-
----
-
-**Q34.** Choose the correct word: The dog wagged ____ tail.
-
-A. it''s  
-B. its''  
-C. itses  
-D. its  
+A. monopoly  
+B. oligopoly  
+C. monopolistic competition  
+D. perfect competition  
 
 ---
 
-**Q35.** Choose the correct word: ____ going to the market.
+**Q18.** A firm in perfect competition is a:
 
-A. Their  
-B. Theirs  
-C. They''re  
-D. There  
-
----
-
-**Q36.** Choose the correct word: ____ book is this?
-
-A. Who''s  
-B. Who  
-C. Whom  
-D. Whose  
+A. monopolist  
+B. oligopolist  
+C. price maker  
+D. price taker  
 
 ---
 
-**Q37.** Choose the correct sentence:
+**Q19.** A monopolist is a:
 
-A. The teacher, along with her students, were going on the trip.  
-B. The teacher, along with her students, is going on the trip.  
-C. The teacher, along with her students, are going on the trip.  
-D. The teacher, along with her students, have been going on the trip.  
-
----
-
-**Q38.** Choose the correct sentence:
-
-A. Neither of the boys are present.  
-B. Neither of the boys was present.  
-C. Neither of the boys have been present.  
-D. Neither of the boys were present.  
+A. price cutter  
+B. price maker  
+C. price taker  
+D. price follower  
 
 ---
 
-**Q39.** Choose the correct sentence:
+**Q20.** The reduction in average cost as output increases is called:
 
-A. The committee are deciding to postpone the event.  
-B. The committee have decided to postpone the event.  
-C. The committee has decided to postpone the event.  
-D. The committee were deciding to postpone the event.  
-
----
-
-**Q40.** Choose the correct sentence:
-
-A. Each of the students are submitting the assignment.  
-B. Each of the students have submitted the assignment.  
-C. Each of the students were submitting the assignment.  
-D. Each of the students has submitted the assignment.  
+A. increasing returns  
+B. economies of scale  
+C. diminishing returns  
+D. diseconomies of scale  
 
 ---
 
-**Q41.** An essay that uses sensory details to paint a picture is called:
+**Q21.** The increase in average cost when a firm becomes too large is called:
 
-A. an expository essay  
-B. a summary  
-C. a descriptive essay  
-D. an argumentative essay  
-
----
-
-**Q42.** The first paragraph of an essay is called the:
-
-A. body  
-B. title  
-C. conclusion  
-D. introduction  
+A. constant returns  
+B. economies of scale  
+C. diseconomies of scale  
+D. diminishing returns  
 
 ---
 
-**Q43.** The final paragraph of an essay is called the:
+**Q22.** A maximum price set by the government is a:
 
-A. heading  
-B. conclusion  
-C. introduction  
-D. body  
-
----
-
-**Q44.** A formal letter should begin with:
-
-A. a joke  
-B. the sender''s address and the date  
-C. a greeting like ''Hi''  
-D. the recipient''s name only  
+A. market price  
+B. price floor  
+C. equilibrium price  
+D. price ceiling  
 
 ---
 
-**Q45.** The main paragraphs of an essay form the:
+**Q23.** A minimum price set by the government is a:
 
-A. title  
-B. introduction  
-C. body  
-D. conclusion  
-
----
-
-**Q46.** A letter of application should include:
-
-A. your favourite hobbies  
-B. only your name  
-C. a list of your friends  
-D. your qualifications and experience  
+A. market price  
+B. equilibrium price  
+C. price floor  
+D. price ceiling  
 
 ---
 
-**Q47.** When writing an argumentative essay, you should:
+**Q24.** The benefit consumers gain when they pay less than they are willing to pay is:
 
-A. write without paragraphs  
-B. only state the opposing view  
-C. support your argument with reasons and examples  
-D. avoid giving any reasons  
-
----
-
-**Q48.** A narrative essay should have:
-
-A. only statistics  
-B. no setting  
-C. no characters  
-D. a clear sequence of events  
+A. revenue  
+B. profit  
+C. producer surplus  
+D. consumer surplus  
 
 ---
 
-**Q49.** The purpose of an introduction is to:
+**Q25.** The basic economic problem is:
 
-A. present the topic and capture the reader''s interest  
-B. give the conclusion  
-C. list all the details  
-D. repeat the title  
-
----
-
-**Q50.** A descriptive essay about a market should include:
-
-A. sights, sounds, and smells  
-B. only prices  
-C. mathematical calculations  
-D. a list of items  
+A. scarcity  
+B. inflation  
+C. unemployment  
+D. taxation  
 
 ---
 
-**Q51.** A formal letter to the editor should:
+**Q26.** The next best alternative forgone when a choice is made is the:
 
-A. express a clear opinion on an issue  
-B. have no address  
-C. be written in slang  
-D. be very short  
-
----
-
-**Q52.** The best way to organise an expository essay is:
-
-A. logical paragraphs with clear points  
-B. a single long paragraph  
-C. a list without explanation  
-D. random ideas  
+A. opportunity cost  
+B. marginal cost  
+C. fixed cost  
+D. sunk cost  
 
 ---
 
-**Q53.** A story that illustrates a proverb should:
+**Q27.** The factors of production are land, labour, capital, and:
 
-A. show the lesson through events  
-B. be about animals only  
-C. state the proverb only  
-D. avoid any lesson  
-
----
-
-**Q54.** When writing an essay, you should:
-
-A. plan your ideas before writing  
-B. write only one paragraph  
-C. copy from a friend  
-D. start writing without a plan  
+A. enterprise  
+B. goods  
+C. money  
+D. services  
 
 ---
 
-**Q55.** The word count of an essay refers to:
+**Q28.** The reward for labour is:
 
-A. the number of paragraphs  
-B. the number of words in the essay  
-C. the number of pages  
-D. the number of sentences  
-
----
-
-**Q56.** A letter of complaint should:
-
-A. only greet the recipient  
-B. clearly state the problem and request action  
-C. be written in verse  
-D. avoid mentioning the problem  
+A. wages  
+B. interest  
+C. profit  
+D. rent  
 
 ---
 
-**Q57.** To make an essay interesting, a writer should:
+**Q29.** The reward for capital is:
 
-A. repeat the same word  
-B. use only short sentences  
-C. use vivid and varied language  
-D. avoid examples  
-
----
-
-**Q58.** An essay that tells a story is called:
-
-A. an argumentative essay  
-B. an expository essay  
-C. a descriptive essay  
-D. a narrative essay  
+A. interest  
+B. profit  
+C. wages  
+D. rent  
 
 ---
 
-**Q59.** An essay that presents reasons for and against a position is called:
+**Q30.** The reward for land is:
 
-A. a narrative essay  
-B. a letter  
-C. an argumentative essay  
-D. a descriptive essay  
+A. rent  
+B. profit  
+C. interest  
+D. wages  
 
 ---
 
-**Q60.** An essay that explains or informs is called:
+**Q31.** The bank that controls the money supply is the:
 
-A. a narrative essay  
-B. a poem  
-C. a story  
-D. an expository essay  
+A. commercial bank  
+B. central bank  
+C. development bank  
+D. merchant bank  
+
+---
+
+**Q32.** The bank that accepts deposits and gives loans is a:
+
+A. central bank  
+B. commercial bank  
+C. insurance company  
+D. stock exchange  
+
+---
+
+**Q33.** A general and sustained rise in the price level is:
+
+A. deflation  
+B. recession  
+C. inflation  
+D. depression  
+
+---
+
+**Q34.** Inflation caused by excess demand is called:
+
+A. cost-push inflation  
+B. hyperinflation  
+C. stagflation  
+D. demand-pull inflation  
+
+---
+
+**Q35.** Inflation caused by rising costs of production is called:
+
+A. demand-pull inflation  
+B. deflation  
+C. cost-push inflation  
+D. hyperinflation  
+
+---
+
+**Q36.** The situation where people who are able and willing to work cannot find jobs is:
+
+A. inflation  
+B. recession  
+C. deflation  
+D. unemployment  
+
+---
+
+**Q37.** Trade between countries is called:
+
+A. local trade  
+B. international trade  
+C. home trade  
+D. retail trade  
+
+---
+
+**Q38.** The principle that a country should specialise in producing goods it produces most efficiently is:
+
+A. opportunity cost  
+B. comparative advantage  
+C. economies of scale  
+D. absolute advantage  
+
+---
+
+**Q39.** The difference between the value of exports and imports is the:
+
+A. national income  
+B. balance of payments  
+C. balance of trade  
+D. public debt  
+
+---
+
+**Q40.** A tax on imported goods is a:
+
+A. subsidy  
+B. quota  
+C. grant  
+D. tariff  
+
+---
+
+**Q41.** A limit on the quantity of a good that can be imported is a:
+
+A. subsidy  
+B. embargo  
+C. quota  
+D. tariff  
+
+---
+
+**Q42.** Taxes on income and profits are:
+
+A. tariffs  
+B. quotas  
+C. indirect taxes  
+D. direct taxes  
+
+---
+
+**Q43.** Taxes on goods and services are:
+
+A. profit taxes  
+B. indirect taxes  
+C. direct taxes  
+D. income taxes  
+
+---
+
+**Q44.** A plan of government revenue and expenditure is the:
+
+A. receipt  
+B. budget  
+C. invoice  
+D. balance sheet  
+
+---
+
+**Q45.** A budget where revenue equals expenditure is:
+
+A. unbalanced  
+B. surplus  
+C. balanced  
+D. deficit  
+
+---
+
+**Q46.** A budget where revenue exceeds expenditure is:
+
+A. unbalanced  
+B. deficit  
+C. balanced  
+D. surplus  
+
+---
+
+**Q47.** A budget where expenditure exceeds revenue is:
+
+A. unbalanced  
+B. balanced  
+C. deficit  
+D. surplus  
+
+---
+
+**Q48.** The increase in a country''s output of goods and services over time is:
+
+A. recession  
+B. inflation  
+C. economic development  
+D. economic growth  
+
+---
+
+**Q49.** The improvement in the standard of living and welfare of people is:
+
+A. economic development  
+B. economic growth  
+C. inflation  
+D. deflation  
+
+---
+
+**Q50.** The index that measures human welfare is the:
+
+A. Human Development Index  
+B. Consumer Price Index  
+C. Price Index  
+D. Stock Index  
+
+---
+
+**Q51.** Investment by foreign companies in a country is called:
+
+A. foreign direct investment  
+B. public investment  
+C. portfolio investment  
+D. domestic investment  
+
+---
+
+**Q52.** The international organisation that provides loans to countries in balance of payments difficulties is the:
+
+A. IMF  
+B. WTO  
+C. UN  
+D. World Bank  
+
+---
+
+**Q53.** The international organisation that finances development projects is the:
+
+A. World Bank  
+B. UN  
+C. IMF  
+D. WTO  
+
+---
+
+**Q54.** The economic community of Central African states is:
+
+A. ECCAS  
+B. COMESA  
+C. SADC  
+D. ECOWAS  
+
+---
+
+**Q55.** The total value of goods and services produced in a country in a year is the:
+
+A. national debt  
+B. national income  
+C. balance of trade  
+D. money supply  
+
+---
+
+**Q56.** GDP stands for:
+
+A. Gross Domestic Profit  
+B. Gross Domestic Product  
+C. Gross Development Plan  
+D. General Domestic Product  
+
+---
+
+**Q57.** GNP stands for:
+
+A. Gross National Profit  
+B. General National Product  
+C. Gross National Product  
+D. Gross Net Product  
+
+---
+
+**Q58.** The three methods of measuring national income are income, output, and:
+
+A. savings  
+B. investment  
+C. taxation  
+D. expenditure  
+
+---
+
+**Q59.** Anything generally accepted as a medium of exchange is:
+
+A. goods  
+B. credit  
+C. money  
+D. services  
+
+---
+
+**Q60.** The total amount of money in circulation is the:
+
+A. national income  
+B. public debt  
+C. balance of payments  
+D. money supply  
 
 ---
 
@@ -1331,14 +1331,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'English Language'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -1348,685 +1348,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'English Language',
-  'CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3',
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ENGLISH LANGUAGE P1 SET 3
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 1
 
-## Multiple Choice Question Bank
+## Structural Question Bank - Set 1
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, science, arts, commercial, technical
-**Subject:** English Language
-
-**Instructions:**
-
-- Choose the correct option A, B, C or D for each question.
-- Record your answers clearly on the answer sheet provided.
-- Each question carries equal marks. No marks is deducted for wrong answers.
-- Use the answer key at the end of the paper to check your responses.
-
----
-
-## QUESTIONS
-
-**Q1.** An inference is:
-
-A. a conclusion drawn from evidence in the text  
-B. a fact stated directly in the text  
-C. a quotation from the text  
-D. a question about the text  
-
----
-
-**Q2.** Read: ''The river had always been generous.'' The word ''generous'' here suggests the river:
-
-A. provided many benefits  
-B. was very wide  
-C. was polluted  
-D. flowed very fast  
-
----
-
-**Q3.** In a summary, you should NOT include:
-
-A. your personal opinions  
-B. the key facts  
-C. the main points  
-D. the essential ideas  
-
----
-
-**Q4.** The word ''biodiverse'' in ''Cameroon''s forests are among the most biodiverse'' means:
-
-A. containing many different species  
-B. completely untouched  
-C. difficult to reach  
-D. very large in size  
-
----
-
-**Q5.** Read: ''The audience wants you to succeed.'' This advice helped the speaker to:
-
-A. feel calmer and begin speaking  
-B. change his topic  
-C. leave the stage  
-D. memorise his speech  
-
----
-
-**Q6.** When summarising, the word limit means you must:
-
-A. keep your summary within the stated number of words  
-B. ignore the word limit  
-C. write as many words as possible  
-D. write exactly the same number of words as the passage  
-
----
-
-**Q7.** Read: ''Tourism in Cameroon is a sleeping giant.'' This means tourism:
-
-A. is completely absent  
-B. has great potential that is not yet realised  
-C. is declining rapidly  
-D. is too expensive for visitors  
-
----
-
-**Q8.** The purpose of a comprehension passage is usually to:
-
-A. provide entertainment only  
-B. test understanding of the text  
-C. list vocabulary words  
-D. teach grammar rules  
-
----
-
-**Q9.** Read: ''The villagers did not celebrate; they had heard such promises before.'' This suggests the villagers:
-
-A. were happy with the announcement  
-B. had never heard promises before  
-C. did not trust the government''s promises  
-D. were celebrating quietly  
-
----
-
-**Q10.** A good summary should be:
-
-A. longer than the original passage  
-B. the same length as the original passage  
-C. a copy of the original passage  
-D. shorter than the original passage  
-
----
-
-**Q11.** Read: ''For her, sweeping was not a chore but a meditation.'' This means the old woman:
-
-A. disliked sweeping  
-B. hired someone to sweep  
-C. found peace in sweeping  
-D. swept very quickly  
-
----
-
-**Q12.** When a question asks you to ''explain in your own words'', you should:
-
-A. quote the passage directly  
-B. give your own opinion  
-C. write a longer version of the passage  
-D. rephrase the idea without copying  
-
----
-
-**Q13.** Read: ''Success is not a destination but a journey.'' The writer means success is:
-
-A. impossible to achieve  
-B. a continuous process  
-C. a final goal  
-D. measured by certificates  
-
----
-
-**Q14.** The best title for a passage about plastic waste clogging drainage channels would be:
-
-A. The History of Plastic  
-B. The Problem of Plastic Waste in Our Cities  
-C. A Day at the Market  
-D. How to Build Drainage Channels  
-
----
-
-**Q15.** Read: ''The market was the beating heart of the community.'' The phrase ''beating heart'' suggests the market was:
-
-A. a place of conflict  
-B. a noisy place  
-C. the centre of community life  
-D. a modern building  
-
----
-
-**Q16.** In summary writing, the first step is to:
-
-A. count the words in the passage  
-B. copy the first sentence of each paragraph  
-C. write your own opinions about the topic  
-D. read the passage carefully to understand the main ideas  
-
----
-
-**Q17.** A summary should be written:
-
-A. in note form only  
-B. as a list of examples  
-C. in your own words  
-D. using long quotations from the passage  
-
----
-
-**Q18.** The main idea of a passage is best described as:
-
-A. the most difficult word in the passage  
-B. the writer''s personal opinion only  
-C. the first sentence of the passage  
-D. the central point the writer is making  
-
----
-
-**Q19.** Read: ''The words evaporated.'' This means the speaker:
-
-A. was interrupted by the crowd  
-B. forgot what he wanted to say  
-C. spoke very quietly  
-D. wrote his speech down  
-
----
-
-**Q20.** When asked to ''state the main idea in one sentence'', you should:
-
-A. list all the details  
-B. summarise the whole passage briefly  
-C. repeat the title  
-D. quote the longest sentence  
-
----
-
-**Q21.** Choose the correct sentence:
-
-A. The committee consists on ten members.  
-B. The committee consists in ten members.  
-C. The committee consists of ten members.  
-D. The committee consists with ten members.  
-
----
-
-**Q22.** Choose the correct sentence:
-
-A. She is interested at learning French.  
-B. She is interested on learning French.  
-C. She is interested for learning French.  
-D. She is interested in learning French.  
-
----
-
-**Q23.** Choose the correct word: The principal gave the students some useful ____.
-
-A. advising  
-B. advices  
-C. advice  
-D. advise  
-
----
-
-**Q24.** Choose the correct word: The new policy will ____ all workers.
-
-A. effects  
-B. affects  
-C. effect  
-D. affect  
-
----
-
-**Q25.** Choose the correct word: Please ____ this letter to the post office.
-
-A. take  
-B. bring  
-C. carry  
-D. fetch  
-
----
-
-**Q26.** Choose the correct word: The company''s ____ concern is customer satisfaction.
-
-A. principal  
-B. principle  
-C. principles  
-D. principally  
-
----
-
-**Q27.** Choose the correct sentence:
-
-A. The news is good.  
-B. The news were good.  
-C. The news are good.  
-D. The news have been good.  
-
----
-
-**Q28.** Choose the correct sentence:
-
-A. I look forward to hearing from you.  
-B. I look forward to heard from you.  
-C. I look forward to hears from you.  
-D. I look forward to hear from you.  
-
----
-
-**Q29.** Choose the correct sentence:
-
-A. He is the taller of the two brothers.  
-B. He is most tallest of the two brothers.  
-C. He is the tallest of the two brothers.  
-D. He is more taller of the two brothers.  
-
----
-
-**Q30.** Choose the correct sentence:
-
-A. She is taller than her sister.  
-B. She is tallest than her sister.  
-C. She is most taller than her sister.  
-D. She is more taller than her sister.  
-
----
-
-**Q31.** Choose the correct word: The dog wagged ____ tail.
-
-A. it''s  
-B. its  
-C. its''  
-D. itses  
-
----
-
-**Q32.** Choose the correct word: ____ going to the market.
-
-A. Their  
-B. They''re  
-C. Theirs  
-D. There  
-
----
-
-**Q33.** Choose the correct word: ____ book is this?
-
-A. Who''s  
-B. Whom  
-C. Whose  
-D. Who  
-
----
-
-**Q34.** Choose the correct sentence:
-
-A. The teacher, along with her students, are going on the trip.  
-B. The teacher, along with her students, were going on the trip.  
-C. The teacher, along with her students, have been going on the trip.  
-D. The teacher, along with her students, is going on the trip.  
-
----
-
-**Q35.** Choose the correct sentence:
-
-A. Neither of the boys were present.  
-B. Neither of the boys have been present.  
-C. Neither of the boys was present.  
-D. Neither of the boys are present.  
-
----
-
-**Q36.** Choose the correct sentence:
-
-A. The committee have decided to postpone the event.  
-B. The committee were deciding to postpone the event.  
-C. The committee are deciding to postpone the event.  
-D. The committee has decided to postpone the event.  
-
----
-
-**Q37.** Choose the correct sentence:
-
-A. Each of the students are submitting the assignment.  
-B. Each of the students has submitted the assignment.  
-C. Each of the students have submitted the assignment.  
-D. Each of the students were submitting the assignment.  
-
----
-
-**Q38.** Choose the correct sentence:
-
-A. The number of accidents were increasing.  
-B. The number of accidents is increasing.  
-C. The number of accidents have been increasing.  
-D. The number of accidents are increasing.  
-
----
-
-**Q39.** Choose the correct sentence:
-
-A. She is good on mathematics.  
-B. She is good in mathematics.  
-C. She is good at mathematics.  
-D. She is good for mathematics.  
-
----
-
-**Q40.** Choose the correct sentence:
-
-A. He was accused with theft.  
-B. He was accused for theft.  
-C. He was accused on theft.  
-D. He was accused of theft.  
-
----
-
-**Q41.** A formal letter should begin with:
-
-A. a greeting like ''Hi''  
-B. a joke  
-C. the sender''s address and the date  
-D. the recipient''s name only  
-
----
-
-**Q42.** The main paragraphs of an essay form the:
-
-A. conclusion  
-B. title  
-C. introduction  
-D. body  
-
----
-
-**Q43.** A letter of application should include:
-
-A. your favourite hobbies  
-B. your qualifications and experience  
-C. only your name  
-D. a list of your friends  
-
----
-
-**Q44.** When writing an argumentative essay, you should:
-
-A. write without paragraphs  
-B. support your argument with reasons and examples  
-C. only state the opposing view  
-D. avoid giving any reasons  
-
----
-
-**Q45.** A narrative essay should have:
-
-A. only statistics  
-B. no characters  
-C. a clear sequence of events  
-D. no setting  
-
----
-
-**Q46.** The purpose of an introduction is to:
-
-A. repeat the title  
-B. give the conclusion  
-C. list all the details  
-D. present the topic and capture the reader''s interest  
-
----
-
-**Q47.** A descriptive essay about a market should include:
-
-A. mathematical calculations  
-B. a list of items  
-C. sights, sounds, and smells  
-D. only prices  
-
----
-
-**Q48.** A formal letter to the editor should:
-
-A. be very short  
-B. have no address  
-C. be written in slang  
-D. express a clear opinion on an issue  
-
----
-
-**Q49.** The best way to organise an expository essay is:
-
-A. logical paragraphs with clear points  
-B. random ideas  
-C. a single long paragraph  
-D. a list without explanation  
-
----
-
-**Q50.** A story that illustrates a proverb should:
-
-A. show the lesson through events  
-B. state the proverb only  
-C. be about animals only  
-D. avoid any lesson  
-
----
-
-**Q51.** When writing an essay, you should:
-
-A. plan your ideas before writing  
-B. copy from a friend  
-C. start writing without a plan  
-D. write only one paragraph  
-
----
-
-**Q52.** The word count of an essay refers to:
-
-A. the number of words in the essay  
-B. the number of pages  
-C. the number of sentences  
-D. the number of paragraphs  
-
----
-
-**Q53.** A letter of complaint should:
-
-A. clearly state the problem and request action  
-B. be written in verse  
-C. only greet the recipient  
-D. avoid mentioning the problem  
-
----
-
-**Q54.** To make an essay interesting, a writer should:
-
-A. use vivid and varied language  
-B. avoid examples  
-C. use only short sentences  
-D. repeat the same word  
-
----
-
-**Q55.** An essay that tells a story is called:
-
-A. an argumentative essay  
-B. a narrative essay  
-C. an expository essay  
-D. a descriptive essay  
-
----
-
-**Q56.** An essay that presents reasons for and against a position is called:
-
-A. a narrative essay  
-B. an argumentative essay  
-C. a letter  
-D. a descriptive essay  
-
----
-
-**Q57.** An essay that explains or informs is called:
-
-A. a narrative essay  
-B. a story  
-C. an expository essay  
-D. a poem  
-
----
-
-**Q58.** An essay that uses sensory details to paint a picture is called:
-
-A. an argumentative essay  
-B. an expository essay  
-C. a summary  
-D. a descriptive essay  
-
----
-
-**Q59.** The first paragraph of an essay is called the:
-
-A. conclusion  
-B. title  
-C. introduction  
-D. body  
-
----
-
-**Q60.** The final paragraph of an essay is called the:
-
-A. introduction  
-B. heading  
-C. body  
-D. conclusion  
-
----
-
-## ANSWER KEY
-
-1. A
-2. A
-3. A
-4. A
-5. A
-6. A
-7. B
-8. B
-9. C
-10. D
-11. C
-12. D
-13. B
-14. B
-15. C
-16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
-23. C
-24. D
-25. A
-26. A
-27. A
-28. A
-29. A
-30. A
-31. B
-32. B
-33. C
-34. D
-35. C
-36. D
-37. B
-38. B
-39. C
-40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
-47. C
-48. D
-49. A
-50. A
-51. A
-52. A
-53. A
-54. A
-55. B
-56. B
-57. C
-58. D
-59. C
-60. D
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Additional Mathematics'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 4'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 4',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 4
-
-## Structural Question Bank — Functions and graphs
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -2037,181 +1373,423 @@ values (
 
 ---
 
-## SECTION 1: FUNCTIONS AND GRAPHS
+## SECTION 1: BASIC CONCEPTS
 
-**Q1.** Given $f(x) = \dfrac{2x+1}{x-3}$, $x \neq 3$:
+**Q1.** Basic concepts: Market case 1 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+![Demand and supply graph](/paper-diagrams/economics-demand-supply.svg)
 
-(b) State the domain and range of $f^{-1}$. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) Solve $f(x) = f^{-1}(x)$. *(5 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
----
-
-**Q2.** The functions $f$ and $g$ are defined by $f(x) = 3x - 2$ and $g(x) = x^2 + 1$.
-
-(a) Find $fg(x)$ and $gf(x)$. *(4 marks)*
-
-(b) Solve $fg(x) = gf(x)$. *(5 marks)*
-
-(c) Find the value of $x$ for which $f^{-1}(x) = g(2)$. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q3.** A quadratic function has roots $\alpha$ and $\beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+**Q2.** Basic concepts: Market case 2 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Write down the quadratic equation. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find the value of $\alpha^2 + \beta^2$. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(5 marks)*
-
----
-
-**Q4.** Sketch the graph of $y = 2x^2 - 8x + 5$, showing clearly:
-
-(a) the coordinates of the turning point; *(4 marks)*
-
-(b) the roots of the equation $2x^2 - 8x + 5 = 0$; *(4 marks)*
-
-(c) the $y$-intercept. *(2 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q5.** The function $f(x) = x^2 - 4x + 3$ is defined for $x \geq 2$.
+**Q3.** Basic concepts: Market case 3 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Show that $f$ is one-to-one on this domain. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find $f^{-1}(x)$. *(5 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State the domain of $f^{-1}$. *(2 marks)*
-
----
-
-**Q6.** Given $f(x) = \dfrac{1}{x}$, $x \neq 0$, and $g(x) = x + 2$:
-
-(a) Find $gf(x)$ and state its domain. *(4 marks)*
-
-(b) Find $fg(x)$ and state its domain. *(4 marks)*
-
-(c) Solve $gf(x) = fg(x)$. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q7.** The graph of $y = x^2$ is transformed to $y = (x-3)^2 + 4$.
+**Q4.** Basic concepts: Market case 4 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Describe the two transformations. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) State the coordinates of the turning point of the new graph. *(2 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) Sketch both graphs on the same axes. *(4 marks)*
-
----
-
-**Q8.** Solve the equation $2^{2x} - 5(2^x) + 4 = 0$. *(7 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q9.** The functions $f(x) = 2x + 1$ and $g(x) = \dfrac{x-1}{2}$ are given.
+**Q5.** Basic concepts: Market case 5 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Show that $f$ and $g$ are inverse functions. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find $fg(3)$ and $gf(3)$. *(3 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) Sketch the graphs of $f$ and $g$ on the same axes, showing the line $y = x$. *(4 marks)*
-
----
-
-**Q10.** A curve has equation $y = x^2 - 6x + 10$.
-
-(a) Express $y$ in the form $(x-a)^2 + b$. *(3 marks)*
-
-(b) State the minimum value of $y$ and the value of $x$ at which it occurs. *(3 marks)*
-
-(c) Find the range of $y$ for $0 \leq x \leq 5$. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q11.** Given $f(x) = \sqrt{x+1}$, $x \geq -1$:
+## SECTION 2: DEMAND AND SUPPLY
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+**Q6.** Demand and supply: Market case 6 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
 
-(b) State the domain and range of $f$ and of $f^{-1}$. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) Solve $f(x) = f^{-1}(x)$. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
----
-
-**Q12.** The roots of $x^2 - 3x + 1 = 0$ are $\alpha$ and $\beta$.
-
-(a) Write down the values of $\alpha + \beta$ and $\alpha\beta$. *(2 marks)*
-
-(b) Find the value of $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(4 marks)*
-
-(c) Find a quadratic equation with roots $\alpha + 1$ and $\beta + 1$. *(5 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q13.** Sketch the graph of $y = |x - 2|$ for $-1 \leq x \leq 5$, and hence solve $|x - 2| = 3$. *(7 marks)*
+**Q7.** Demand and supply: Market case 7 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q14.** The function $f(x) = ax^2 + bx + c$ has a maximum value of 9 at $x = 1$, and passes through $(0, 5)$. Find $a$, $b$ and $c$. *(7 marks)*
+**Q8.** Demand and supply: Market case 8 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q15.** Given $f(x) = \dfrac{2x}{x+1}$, $x \neq -1$:
+**Q9.** Demand and supply: Market case 9 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find $f^2(x) = ff(x)$. *(5 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) Solve $f^2(x) = x$. *(4 marks)*
-
----
-
-**Q16.** The graph of $y = f(x)$ is reflected in the $y$-axis and then translated 2 units down.
-
-(a) Write down the equation of the resulting graph. *(3 marks)*
-
-(b) If $f(x) = x^2 - 4x$, find the equation of the resulting graph in simplified form. *(5 marks)*
-
-(c) State the turning point of the resulting graph. *(3 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q17.** Solve the simultaneous equations $y = x^2 - 2x$ and $y = 2x - 3$. *(6 marks)*
+**Q10.** Demand and supply: Market case 10 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q18.** Given $f(x) = \dfrac{x+2}{x-1}$, $x \neq 1$:
+## SECTION 3: ELASTICITY
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+**Q11.** Elasticity: Market case 11 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
 
-(b) Show that $f^{-1}(x) = f(x)$. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) Find $f^2(x)$. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
----
-
-**Q19.** A function $f$ is defined by $f(x) = 2x^2 - 4x + 1$ for $x \geq 1$.
-
-(a) Complete the square. *(3 marks)*
-
-(b) Find the range of $f$. *(3 marks)*
-
-(c) Find $f^{-1}(x)$. *(5 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q20.** The graph of $y = x^2$ is stretched parallel to the $y$-axis by factor 3 and translated 1 unit left.
+**Q12.** Elasticity: Market case 12 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
 
-(a) Write down the equation of the resulting graph. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) State the coordinates of its turning point. *(2 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) Find the value of $y$ when $x = 2$. *(2 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q13.** Elasticity: Market case 13 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q14.** Elasticity: Market case 14 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q15.** Elasticity: Market case 15 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 4: PRODUCTION AND COSTS
+
+**Q16.** Production and costs: Market case 16 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q17.** Production and costs: Market case 17 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q18.** Production and costs: Market case 18 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q19.** Production and costs: Market case 19 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q20.** Production and costs: Market case 20 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 5: MARKET STRUCTURES
+
+**Q21.** Market structures: Market case 21 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q22.** Market structures: Market case 22 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q23.** Market structures: Market case 23 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q24.** Market structures: Market case 24 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q25.** Market structures: Market case 25 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 6: NATIONAL INCOME
+
+**Q26.** National income: Market case 26 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q27.** National income: Market case 27 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q28.** National income: Market case 28 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q29.** National income: Market case 29 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q30.** National income: Market case 30 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 7: MONEY AND BANKING
+
+**Q31.** Money and banking: Market case 31 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q32.** Money and banking: Market case 32 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q33.** Money and banking: Market case 33 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q34.** Money and banking: Market case 34 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q35.** Money and banking: Market case 35 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 8: INTERNATIONAL TRADE
+
+**Q36.** International trade: Market case 36 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q37.** International trade: Market case 37 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q38.** International trade: Market case 38 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q39.** International trade: Market case 39 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q40.** International trade: Market case 40 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
 ',
   null
 )
@@ -2230,14 +1808,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 5'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -2247,21 +1825,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 5',
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 5
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 2
 
-## Structural Question Bank — Introductory calculus
+## Structural Question Bank - Set 2
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -2272,107 +1850,423 @@ values (
 
 ---
 
-## SECTION 1: INTRODUCTORY CALCULUS
+## SECTION 1: BASIC CONCEPTS
 
-**Q1.** Differentiate from first principles $y = x^2 + 3x$. *(6 marks)*
+**Q1.** Basic concepts: Market case 1 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
----
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-**Q2.** Find the derivative of each of the following:
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(a) $y = 3x^4 - 2x^3 + 5x - 7$ *(3 marks)*
-
-(b) $y = \dfrac{2}{x^3}$ *(3 marks)*
-
-(c) $y = \sqrt{x} + \dfrac{1}{\sqrt{x}}$ *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q3.** Find the equation of the tangent to the curve $y = x^3 - 2x$ at the point where $x = 1$. *(6 marks)*
+**Q2.** Basic concepts: Market case 2 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q4.** Find the coordinates of the stationary points of $y = x^3 - 3x^2 - 9x + 5$ and determine their nature. *(8 marks)*
+**Q3.** Basic concepts: Market case 3 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q5.** Evaluate the following integrals:
+**Q4.** Basic concepts: Market case 4 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) $\int (3x^2 + 2x - 1)\,dx$ *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) $\int \dfrac{1}{x^2}\,dx$ *(3 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) $\int \sqrt{x}\,dx$ *(3 marks)*
-
----
-
-**Q6.** Find the area enclosed by the curve $y = x^2 - 4x + 3$ and the $x$-axis. *(7 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q7.** A curve passes through the point $(1, 4)$ and has gradient function $\dfrac{dy}{dx} = 2x + 3$. Find the equation of the curve. *(5 marks)*
+**Q5.** Basic concepts: Market case 5 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
+
+![Demand and supply graph](/paper-diagrams/economics-demand-supply.svg)
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q8.** Find the equation of the normal to the curve $y = x^2 - 4x + 2$ at the point where $x = 3$. *(6 marks)*
+## SECTION 2: DEMAND AND SUPPLY
+
+**Q6.** Demand and supply: Market case 6 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q9.** A rectangular field is to be fenced using 200 m of fencing. Find the maximum area that can be enclosed. *(7 marks)*
+**Q7.** Demand and supply: Market case 7 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q10.** Differentiate $y = (2x + 1)^5$ using the chain rule. *(4 marks)*
+**Q8.** Demand and supply: Market case 8 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q11.** Find $\dfrac{dy}{dx}$ for each of the following:
+**Q9.** Demand and supply: Market case 9 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
 
-(a) $y = \dfrac{x^2 + 1}{x}$ *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) $y = (x^2 - 1)(x + 2)$ *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
----
-
-**Q12.** Evaluate $\int_0^2 (x^2 + 1)\,dx$. *(5 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q13.** The displacement of a particle is given by $s = t^3 - 6t^2 + 9t$.
+**Q10.** Demand and supply: Market case 10 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
 
-(a) Find the velocity and acceleration. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find the times when the particle is at rest. *(3 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) Find the displacement when the particle is at rest. *(3 marks)*
-
----
-
-**Q14.** Find the maximum and minimum values of $y = 2x^3 - 9x^2 + 12x$ on the interval $0 \leq x \leq 3$. *(8 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q15.** Find the area between the curves $y = x^2$ and $y = x + 2$. *(8 marks)*
+## SECTION 3: ELASTICITY
+
+**Q11.** Elasticity: Market case 11 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q16.** Given $y = \dfrac{3}{x} - x^2$, find $\dfrac{dy}{dx}$ and hence find the gradient of the curve at $x = 1$. *(5 marks)*
+**Q12.** Elasticity: Market case 12 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q17.** A curve has equation $y = x^3 - 3x$. Find the coordinates of the points where the gradient is 9. *(6 marks)*
+**Q13.** Elasticity: Market case 13 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q18.** Find $\int (2x + 1)(x - 3)\,dx$. *(5 marks)*
+**Q14.** Elasticity: Market case 14 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q19.** The volume of a sphere is increasing at a rate of $8\pi$ cm³/s. Find the rate of increase of the radius when the radius is 4 cm. *(6 marks)*
+**Q15.** Elasticity: Market case 15 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q20.** Find the equation of the tangent to $y = \dfrac{1}{x}$ at the point $(2, \tfrac{1}{2})$. *(5 marks)*
+## SECTION 4: PRODUCTION AND COSTS
+
+**Q16.** Production and costs: Market case 16 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q17.** Production and costs: Market case 17 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q18.** Production and costs: Market case 18 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q19.** Production and costs: Market case 19 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q20.** Production and costs: Market case 20 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 5: MARKET STRUCTURES
+
+**Q21.** Market structures: Market case 21 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q22.** Market structures: Market case 22 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q23.** Market structures: Market case 23 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q24.** Market structures: Market case 24 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q25.** Market structures: Market case 25 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 6: NATIONAL INCOME
+
+**Q26.** National income: Market case 26 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q27.** National income: Market case 27 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q28.** National income: Market case 28 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q29.** National income: Market case 29 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q30.** National income: Market case 30 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 7: MONEY AND BANKING
+
+**Q31.** Money and banking: Market case 31 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q32.** Money and banking: Market case 32 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q33.** Money and banking: Market case 33 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q34.** Money and banking: Market case 34 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q35.** Money and banking: Market case 35 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 8: INTERNATIONAL TRADE
+
+**Q36.** International trade: Market case 36 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q37.** International trade: Market case 37 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q38.** International trade: Market case 38 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q39.** International trade: Market case 39 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q40.** International trade: Market case 40 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
 ',
   null
 )
@@ -2391,14 +2285,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Economics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 6'
+  where title = 'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -2408,21 +2302,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 6',
+  'Economics',
+  'CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 6
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 3
 
-## Structural Question Bank — Functions and graphs
+## Structural Question Bank - Set 3
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -2433,181 +2327,423 @@ values (
 
 ---
 
-## SECTION 1: FUNCTIONS AND GRAPHS
+## SECTION 1: BASIC CONCEPTS
 
-**Q1.** Given $f(x) = \dfrac{2x+1}{x-3}$, $x \neq 3$:
+**Q1.** Basic concepts: Market case 1 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+![Demand and supply graph](/paper-diagrams/economics-demand-supply.svg)
 
-(b) State the domain and range of $f^{-1}$. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) Solve $f(x) = f^{-1}(x)$. *(5 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
----
-
-**Q2.** The functions $f$ and $g$ are defined by $f(x) = 3x - 2$ and $g(x) = x^2 + 1$.
-
-(a) Find $fg(x)$ and $gf(x)$. *(4 marks)*
-
-(b) Solve $fg(x) = gf(x)$. *(5 marks)*
-
-(c) Find the value of $x$ for which $f^{-1}(x) = g(2)$. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q3.** A quadratic function has roots $\alpha$ and $\beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+**Q2.** Basic concepts: Market case 2 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Write down the quadratic equation. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find the value of $\alpha^2 + \beta^2$. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(5 marks)*
-
----
-
-**Q4.** Sketch the graph of $y = 2x^2 - 8x + 5$, showing clearly:
-
-(a) the coordinates of the turning point; *(4 marks)*
-
-(b) the roots of the equation $2x^2 - 8x + 5 = 0$; *(4 marks)*
-
-(c) the $y$-intercept. *(2 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q5.** The function $f(x) = x^2 - 4x + 3$ is defined for $x \geq 2$.
+**Q3.** Basic concepts: Market case 3 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Show that $f$ is one-to-one on this domain. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find $f^{-1}(x)$. *(5 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State the domain of $f^{-1}$. *(2 marks)*
-
----
-
-**Q6.** Given $f(x) = \dfrac{1}{x}$, $x \neq 0$, and $g(x) = x + 2$:
-
-(a) Find $gf(x)$ and state its domain. *(4 marks)*
-
-(b) Find $fg(x)$ and state its domain. *(4 marks)*
-
-(c) Solve $gf(x) = fg(x)$. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q7.** The graph of $y = x^2$ is transformed to $y = (x-3)^2 + 4$.
+**Q4.** Basic concepts: Market case 4 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Describe the two transformations. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) State the coordinates of the turning point of the new graph. *(2 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) Sketch both graphs on the same axes. *(4 marks)*
-
----
-
-**Q8.** Solve the equation $2^{2x} - 5(2^x) + 4 = 0$. *(7 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q9.** The functions $f(x) = 2x + 1$ and $g(x) = \dfrac{x-1}{2}$ are given.
+**Q5.** Basic concepts: Market case 5 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse basic concepts using diagrams and Cameroon examples.
 
-(a) Show that $f$ and $g$ are inverse functions. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find $fg(3)$ and $gf(3)$. *(3 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) Sketch the graphs of $f$ and $g$ on the same axes, showing the line $y = x$. *(4 marks)*
-
----
-
-**Q10.** A curve has equation $y = x^2 - 6x + 10$.
-
-(a) Express $y$ in the form $(x-a)^2 + b$. *(3 marks)*
-
-(b) State the minimum value of $y$ and the value of $x$ at which it occurs. *(3 marks)*
-
-(c) Find the range of $y$ for $0 \leq x \leq 5$. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q11.** Given $f(x) = \sqrt{x+1}$, $x \geq -1$:
+## SECTION 2: DEMAND AND SUPPLY
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+**Q6.** Demand and supply: Market case 6 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
 
-(b) State the domain and range of $f$ and of $f^{-1}$. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) Solve $f(x) = f^{-1}(x)$. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
----
-
-**Q12.** The roots of $x^2 - 3x + 1 = 0$ are $\alpha$ and $\beta$.
-
-(a) Write down the values of $\alpha + \beta$ and $\alpha\beta$. *(2 marks)*
-
-(b) Find the value of $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(4 marks)*
-
-(c) Find a quadratic equation with roots $\alpha + 1$ and $\beta + 1$. *(5 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q13.** Sketch the graph of $y = |x - 2|$ for $-1 \leq x \leq 5$, and hence solve $|x - 2| = 3$. *(7 marks)*
+**Q7.** Demand and supply: Market case 7 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q14.** The function $f(x) = ax^2 + bx + c$ has a maximum value of 9 at $x = 1$, and passes through $(0, 5)$. Find $a$, $b$ and $c$. *(7 marks)*
+**Q8.** Demand and supply: Market case 8 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q15.** Given $f(x) = \dfrac{2x}{x+1}$, $x \neq -1$:
+**Q9.** Demand and supply: Market case 9 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Find $f^2(x) = ff(x)$. *(5 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) Solve $f^2(x) = x$. *(4 marks)*
-
----
-
-**Q16.** The graph of $y = f(x)$ is reflected in the $y$-axis and then translated 2 units down.
-
-(a) Write down the equation of the resulting graph. *(3 marks)*
-
-(b) If $f(x) = x^2 - 4x$, find the equation of the resulting graph in simplified form. *(5 marks)*
-
-(c) State the turning point of the resulting graph. *(3 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q17.** Solve the simultaneous equations $y = x^2 - 2x$ and $y = 2x - 3$. *(6 marks)*
+**Q10.** Demand and supply: Market case 10 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse demand and supply using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q18.** Given $f(x) = \dfrac{x+2}{x-1}$, $x \neq 1$:
+## SECTION 3: ELASTICITY
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+**Q11.** Elasticity: Market case 11 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
 
-(b) Show that $f^{-1}(x) = f(x)$. *(3 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) Find $f^2(x)$. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
----
-
-**Q19.** A function $f$ is defined by $f(x) = 2x^2 - 4x + 1$ for $x \geq 1$.
-
-(a) Complete the square. *(3 marks)*
-
-(b) Find the range of $f$. *(3 marks)*
-
-(c) Find $f^{-1}(x)$. *(5 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q20.** The graph of $y = x^2$ is stretched parallel to the $y$-axis by factor 3 and translated 1 unit left.
+**Q12.** Elasticity: Market case 12 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
 
-(a) Write down the equation of the resulting graph. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) State the coordinates of its turning point. *(2 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) Find the value of $y$ when $x = 2$. *(2 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q13.** Elasticity: Market case 13 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q14.** Elasticity: Market case 14 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q15.** Elasticity: Market case 15 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse elasticity using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 4: PRODUCTION AND COSTS
+
+**Q16.** Production and costs: Market case 16 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q17.** Production and costs: Market case 17 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q18.** Production and costs: Market case 18 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q19.** Production and costs: Market case 19 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q20.** Production and costs: Market case 20 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse production and costs using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 5: MARKET STRUCTURES
+
+**Q21.** Market structures: Market case 21 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q22.** Market structures: Market case 22 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q23.** Market structures: Market case 23 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q24.** Market structures: Market case 24 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q25.** Market structures: Market case 25 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse market structures using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 6: NATIONAL INCOME
+
+**Q26.** National income: Market case 26 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q27.** National income: Market case 27 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q28.** National income: Market case 28 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q29.** National income: Market case 29 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q30.** National income: Market case 30 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse national income using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 7: MONEY AND BANKING
+
+**Q31.** Money and banking: Market case 31 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q32.** Money and banking: Market case 32 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q33.** Money and banking: Market case 33 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q34.** Money and banking: Market case 34 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q35.** Money and banking: Market case 35 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse money and banking using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 8: INTERNATIONAL TRADE
+
+**Q36.** International trade: Market case 36 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q37.** International trade: Market case 37 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q38.** International trade: Market case 38 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q39.** International trade: Market case 39 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q40.** International trade: Market case 40 for a staple good changes after income, price, taxation, and supply conditions shift. Analyse international trade using diagrams and Cameroon examples.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
 ',
   null
 )
@@ -2626,14 +2762,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
+  where subject = 'Economics'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 7'
+  where title = 'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 4'
   limit 1
 )
 insert into public.course_documents (
@@ -2643,21 +2779,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 7',
+  'Economics',
+  'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 4',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 7
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 4
 
-## Structural Question Bank — Introductory calculus
+## Structural Question Bank — Microeconomics
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -2668,107 +2804,163 @@ values (
 
 ---
 
-## SECTION 1: INTRODUCTORY CALCULUS
+## SECTION 1: MICROECONOMICS
 
-**Q1.** Differentiate from first principles $y = x^2 + 3x$. *(6 marks)*
+**Q1.** (a) Define the term "scarcity". *(2 marks)*
 
----
+(b) Explain the basic economic problem. *(4 marks)*
 
-**Q2.** Find the derivative of each of the following:
-
-(a) $y = 3x^4 - 2x^3 + 5x - 7$ *(3 marks)*
-
-(b) $y = \dfrac{2}{x^3}$ *(3 marks)*
-
-(c) $y = \sqrt{x} + \dfrac{1}{\sqrt{x}}$ *(4 marks)*
+(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*
 
 ---
 
-**Q3.** Find the equation of the tangent to the curve $y = x^3 - 2x$ at the point where $x = 1$. *(6 marks)*
+**Q2.** (a) What is opportunity cost? *(2 marks)*
+
+(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*
+
+(c) State three factors of production. *(3 marks)*
 
 ---
 
-**Q4.** Find the coordinates of the stationary points of $y = x^3 - 3x^2 - 9x + 5$ and determine their nature. *(8 marks)*
+**Q3.** (a) Define the term "demand". *(2 marks)*
+
+(b) State the law of demand. *(3 marks)*
+
+(c) Explain three factors that cause a change in demand. *(5 marks)*
 
 ---
 
-**Q5.** Evaluate the following integrals:
+**Q4.** (a) Define the term "supply". *(2 marks)*
 
-(a) $\int (3x^2 + 2x - 1)\,dx$ *(3 marks)*
+(b) State the law of supply. *(3 marks)*
 
-(b) $\int \dfrac{1}{x^2}\,dx$ *(3 marks)*
-
-(c) $\int \sqrt{x}\,dx$ *(3 marks)*
+(c) Explain three factors that cause a change in supply. *(5 marks)*
 
 ---
 
-**Q6.** Find the area enclosed by the curve $y = x^2 - 4x + 3$ and the $x$-axis. *(7 marks)*
+**Q5.** (a) What is market equilibrium? *(2 marks)*
+
+(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*
+
+(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*
 
 ---
 
-**Q7.** A curve passes through the point $(1, 4)$ and has gradient function $\dfrac{dy}{dx} = 2x + 3$. Find the equation of the curve. *(5 marks)*
+**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*
+
+(b) State the formula for price elasticity of demand. *(3 marks)*
+
+(c) Explain the difference between elastic and inelastic demand. *(4 marks)*
 
 ---
 
-**Q8.** Find the equation of the normal to the curve $y = x^2 - 4x + 2$ at the point where $x = 3$. *(6 marks)*
+**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*
+
+(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*
 
 ---
 
-**Q9.** A rectangular field is to be fenced using 200 m of fencing. Find the maximum area that can be enclosed. *(7 marks)*
+**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*
+
+(b) Explain the relationship between income and demand for a normal good. *(4 marks)*
+
+(c) Give one example of each type of good. *(2 marks)*
 
 ---
 
-**Q10.** Differentiate $y = (2x + 1)^5$ using the chain rule. *(4 marks)*
+**Q9.** (a) Define the term "production". *(2 marks)*
+
+(b) Distinguish between short-run and long-run production. *(4 marks)*
+
+(c) Explain the law of diminishing returns. *(5 marks)*
 
 ---
 
-**Q11.** Find $\dfrac{dy}{dx}$ for each of the following:
+**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*
 
-(a) $y = \dfrac{x^2 + 1}{x}$ *(4 marks)*
+(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*
 
-(b) $y = (x^2 - 1)(x + 2)$ *(4 marks)*
-
----
-
-**Q12.** Evaluate $\int_0^2 (x^2 + 1)\,dx$. *(5 marks)*
+(c) State the relationship between marginal cost and average cost. *(3 marks)*
 
 ---
 
-**Q13.** The displacement of a particle is given by $s = t^3 - 6t^2 + 9t$.
+**Q11.** (a) Define the term "economies of scale". *(2 marks)*
 
-(a) Find the velocity and acceleration. *(4 marks)*
+(b) State three internal economies of scale. *(3 marks)*
 
-(b) Find the times when the particle is at rest. *(3 marks)*
-
-(c) Find the displacement when the particle is at rest. *(3 marks)*
+(c) Explain two diseconomies of scale. *(4 marks)*
 
 ---
 
-**Q14.** Find the maximum and minimum values of $y = 2x^3 - 9x^2 + 12x$ on the interval $0 \leq x \leq 3$. *(8 marks)*
+**Q12.** (a) What is a market structure? *(2 marks)*
+
+(b) Describe the characteristics of perfect competition. *(5 marks)*
+
+(c) Explain why firms in perfect competition are price takers. *(4 marks)*
 
 ---
 
-**Q15.** Find the area between the curves $y = x^2$ and $y = x + 2$. *(8 marks)*
+**Q13.** (a) Define the term "monopoly". *(2 marks)*
+
+(b) State three characteristics of a monopoly. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*
 
 ---
 
-**Q16.** Given $y = \dfrac{3}{x} - x^2$, find $\dfrac{dy}{dx}$ and hence find the gradient of the curve at $x = 1$. *(5 marks)*
+**Q14.** (a) What is monopolistic competition? *(2 marks)*
+
+(b) Describe the characteristics of monopolistic competition. *(4 marks)*
+
+(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*
 
 ---
 
-**Q17.** A curve has equation $y = x^3 - 3x$. Find the coordinates of the points where the gradient is 9. *(6 marks)*
+**Q15.** (a) Define the term "oligopoly". *(2 marks)*
+
+(b) State three characteristics of an oligopoly. *(3 marks)*
+
+(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*
 
 ---
 
-**Q18.** Find $\int (2x + 1)(x - 3)\,dx$. *(5 marks)*
+**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*
+
+(b) Distinguish between accounting profit and economic profit. *(4 marks)*
+
+(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*
 
 ---
 
-**Q19.** The volume of a sphere is increasing at a rate of $8\pi$ cm³/s. Find the rate of increase of the radius when the radius is 4 cm. *(6 marks)*
+**Q17.** (a) What is a price ceiling? *(2 marks)*
+
+(b) Explain the effects of a price ceiling on the market. *(4 marks)*
+
+(c) State two examples of price controls used by governments. *(2 marks)*
 
 ---
 
-**Q20.** Find the equation of the tangent to $y = \dfrac{1}{x}$ at the point $(2, \tfrac{1}{2})$. *(5 marks)*
+**Q18.** (a) Define the term "consumer surplus". *(2 marks)*
+
+(b) Explain how consumer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "producer surplus". *(2 marks)*
+
+(b) Explain how producer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price fall on producer surplus. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the division of labour? *(2 marks)*
+
+(b) State three advantages of the division of labour. *(3 marks)*
+
+(c) Explain two disadvantages of the division of labour. *(4 marks)*
 ',
   null
 )
@@ -2787,14 +2979,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
+  where subject = 'Economics'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 8'
+  where title = 'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 5'
   limit 1
 )
 insert into public.course_documents (
@@ -2804,21 +2996,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 8',
+  'Economics',
+  'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 5',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P2 SET 8
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 5
 
-## Structural Question Bank — Functions and graphs
+## Structural Question Bank — Macroeconomics and development
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
@@ -2829,181 +3021,165 @@ values (
 
 ---
 
-## SECTION 1: FUNCTIONS AND GRAPHS
+## SECTION 1: MACROECONOMICS AND DEVELOPMENT
 
-**Q1.** Given $f(x) = \dfrac{2x+1}{x-3}$, $x \neq 3$:
+**Q1.** (a) Define the term "national income". *(2 marks)*
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+(b) State the three methods of measuring national income. *(3 marks)*
 
-(b) State the domain and range of $f^{-1}$. *(3 marks)*
-
-(c) Solve $f(x) = f^{-1}(x)$. *(5 marks)*
+(c) Explain the difficulties in measuring national income in developing countries. *(5 marks)*
 
 ---
 
-**Q2.** The functions $f$ and $g$ are defined by $f(x) = 3x - 2$ and $g(x) = x^2 + 1$.
+**Q2.** (a) Define the terms "GDP" and "GNP". *(4 marks)*
 
-(a) Find $fg(x)$ and $gf(x)$. *(4 marks)*
+(b) Distinguish between GDP at market prices and GDP at factor cost. *(4 marks)*
 
-(b) Solve $fg(x) = gf(x)$. *(5 marks)*
-
-(c) Find the value of $x$ for which $f^{-1}(x) = g(2)$. *(4 marks)*
+(c) Explain the difference between nominal GDP and real GDP. *(4 marks)*
 
 ---
 
-**Q3.** A quadratic function has roots $\alpha$ and $\beta$ where $\alpha + \beta = 5$ and $\alpha\beta = 6$.
+**Q3.** (a) What is money? *(2 marks)*
 
-(a) Write down the quadratic equation. *(3 marks)*
+(b) State the functions of money. *(4 marks)*
 
-(b) Find the value of $\alpha^2 + \beta^2$. *(4 marks)*
-
-(c) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(5 marks)*
+(c) Explain the qualities of good money. *(4 marks)*
 
 ---
 
-**Q4.** Sketch the graph of $y = 2x^2 - 8x + 5$, showing clearly:
+**Q4.** (a) Define the term "money supply". *(2 marks)*
 
-(a) the coordinates of the turning point; *(4 marks)*
+(b) State three components of the money supply. *(3 marks)*
 
-(b) the roots of the equation $2x^2 - 8x + 5 = 0$; *(4 marks)*
-
-(c) the $y$-intercept. *(2 marks)*
+(c) Explain how the central bank controls the money supply. *(5 marks)*
 
 ---
 
-**Q5.** The function $f(x) = x^2 - 4x + 3$ is defined for $x \geq 2$.
+**Q5.** (a) What is a commercial bank? *(2 marks)*
 
-(a) Show that $f$ is one-to-one on this domain. *(3 marks)*
+(b) State three functions of a commercial bank. *(3 marks)*
 
-(b) Find $f^{-1}(x)$. *(5 marks)*
-
-(c) State the domain of $f^{-1}$. *(2 marks)*
+(c) Explain how commercial banks create credit. *(5 marks)*
 
 ---
 
-**Q6.** Given $f(x) = \dfrac{1}{x}$, $x \neq 0$, and $g(x) = x + 2$:
+**Q6.** (a) Define the term "inflation". *(2 marks)*
 
-(a) Find $gf(x)$ and state its domain. *(4 marks)*
+(b) State three causes of inflation. *(3 marks)*
 
-(b) Find $fg(x)$ and state its domain. *(4 marks)*
-
-(c) Solve $gf(x) = fg(x)$. *(4 marks)*
+(c) Explain the effects of inflation on the economy. *(5 marks)*
 
 ---
 
-**Q7.** The graph of $y = x^2$ is transformed to $y = (x-3)^2 + 4$.
+**Q7.** (a) Define the terms "demand-pull inflation" and "cost-push inflation". *(4 marks)
 
-(a) Describe the two transformations. *(4 marks)*
+(b) Explain the difference between the two types of inflation. *(4 marks)*
 
-(b) State the coordinates of the turning point of the new graph. *(2 marks)*
-
-(c) Sketch both graphs on the same axes. *(4 marks)*
+(c) State two policies used to control inflation. *(2 marks)*
 
 ---
 
-**Q8.** Solve the equation $2^{2x} - 5(2^x) + 4 = 0$. *(7 marks)*
+**Q8.** (a) What is unemployment? *(2 marks)*
+
+(b) State three types of unemployment. *(3 marks)*
+
+(c) Explain the causes and effects of unemployment. *(5 marks)*
 
 ---
 
-**Q9.** The functions $f(x) = 2x + 1$ and $g(x) = \dfrac{x-1}{2}$ are given.
+**Q9.** (a) Define the term "international trade". *(2 marks)*
 
-(a) Show that $f$ and $g$ are inverse functions. *(4 marks)*
+(b) Explain the principle of comparative advantage. *(5 marks)*
 
-(b) Find $fg(3)$ and $gf(3)$. *(3 marks)*
-
-(c) Sketch the graphs of $f$ and $g$ on the same axes, showing the line $y = x$. *(4 marks)*
+(c) State three benefits of international trade. *(3 marks)*
 
 ---
 
-**Q10.** A curve has equation $y = x^2 - 6x + 10$.
+**Q10.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
 
-(a) Express $y$ in the form $(x-a)^2 + b$. *(3 marks)*
+(b) Explain the causes of a deficit in the balance of payments. *(4 marks)*
 
-(b) State the minimum value of $y$ and the value of $x$ at which it occurs. *(3 marks)*
-
-(c) Find the range of $y$ for $0 \leq x \leq 5$. *(4 marks)*
+(c) State three measures to correct a balance of payments deficit. *(3 marks)*
 
 ---
 
-**Q11.** Given $f(x) = \sqrt{x+1}$, $x \geq -1$:
+**Q11.** (a) What is a tariff? *(2 marks)*
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+(b) Distinguish between a tariff and a quota. *(4 marks)*
 
-(b) State the domain and range of $f$ and of $f^{-1}$. *(4 marks)*
-
-(c) Solve $f(x) = f^{-1}(x)$. *(4 marks)*
+(c) Explain the arguments for and against protectionism. *(5 marks)*
 
 ---
 
-**Q12.** The roots of $x^2 - 3x + 1 = 0$ are $\alpha$ and $\beta$.
+**Q12.** (a) Define the term "public finance". *(2 marks)*
 
-(a) Write down the values of $\alpha + \beta$ and $\alpha\beta$. *(2 marks)*
+(b) State the sources of government revenue. *(4 marks)*
 
-(b) Find the value of $\dfrac{1}{\alpha} + \dfrac{1}{\beta}$. *(4 marks)*
-
-(c) Find a quadratic equation with roots $\alpha + 1$ and $\beta + 1$. *(5 marks)*
+(c) Explain the difference between direct and indirect taxes. *(4 marks)*
 
 ---
 
-**Q13.** Sketch the graph of $y = |x - 2|$ for $-1 \leq x \leq 5$, and hence solve $|x - 2| = 3$. *(7 marks)*
+**Q13.** (a) What is a budget? *(2 marks)*
+
+(b) Distinguish between a balanced, a surplus, and a deficit budget. *(4 marks)*
+
+(c) Explain the importance of the budget as a tool of economic policy. *(4 marks)*
 
 ---
 
-**Q14.** The function $f(x) = ax^2 + bx + c$ has a maximum value of 9 at $x = 1$, and passes through $(0, 5)$. Find $a$, $b$ and $c$. *(7 marks)*
+**Q14.** (a) Define the term "economic growth". *(2 marks)*
+
+(b) Distinguish between economic growth and economic development. *(4 marks)*
+
+(c) State three factors that promote economic growth. *(3 marks)*
 
 ---
 
-**Q15.** Given $f(x) = \dfrac{2x}{x+1}$, $x \neq -1$:
+**Q15.** (a) What is economic development? *(2 marks)*
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+(b) State three indicators of economic development. *(3 marks)*
 
-(b) Find $f^2(x) = ff(x)$. *(5 marks)*
-
-(c) Solve $f^2(x) = x$. *(4 marks)*
+(c) Explain the difference between the Human Development Index and GDP per capita. *(5 marks)*
 
 ---
 
-**Q16.** The graph of $y = f(x)$ is reflected in the $y$-axis and then translated 2 units down.
+**Q16.** (a) Define the term "foreign direct investment". *(2 marks)*
 
-(a) Write down the equation of the resulting graph. *(3 marks)*
+(b) State three advantages of foreign direct investment to a developing country. *(3 marks)*
 
-(b) If $f(x) = x^2 - 4x$, find the equation of the resulting graph in simplified form. *(5 marks)*
-
-(c) State the turning point of the resulting graph. *(3 marks)*
+(c) Explain two disadvantages of foreign direct investment. *(4 marks)*
 
 ---
 
-**Q17.** Solve the simultaneous equations $y = x^2 - 2x$ and $y = 2x - 3$. *(6 marks)*
+**Q17.** (a) What is a developing country? *(2 marks)*
+
+(b) State three characteristics of developing countries. *(3 marks)*
+
+(c) Explain the problems facing developing countries in achieving development. *(5 marks)*
 
 ---
 
-**Q18.** Given $f(x) = \dfrac{x+2}{x-1}$, $x \neq 1$:
+**Q18.** (a) Define the term "structural adjustment programme". *(2 marks)*
 
-(a) Find $f^{-1}(x)$. *(4 marks)*
+(b) State three conditions attached to structural adjustment programmes. *(3 marks)*
 
-(b) Show that $f^{-1}(x) = f(x)$. *(3 marks)*
-
-(c) Find $f^2(x)$. *(4 marks)*
+(c) Explain the effects of structural adjustment programmes on developing countries. *(5 marks)*
 
 ---
 
-**Q19.** A function $f$ is defined by $f(x) = 2x^2 - 4x + 1$ for $x \geq 1$.
+**Q19.** (a) What is the International Monetary Fund? *(2 marks)*
 
-(a) Complete the square. *(3 marks)*
+(b) State three functions of the IMF. *(3 marks)*
 
-(b) Find the range of $f$. *(3 marks)*
-
-(c) Find $f^{-1}(x)$. *(5 marks)*
+(c) Explain the role of the World Bank in financing development. *(4 marks)*
 
 ---
 
-**Q20.** The graph of $y = x^2$ is stretched parallel to the $y$-axis by factor 3 and translated 1 unit left.
+**Q20.** (a) Define the term "regional integration". *(2 marks)*
 
-(a) Write down the equation of the resulting graph. *(4 marks)*
+(b) State three objectives of the Economic Community of Central African States (ECCAS). *(3 marks)*
 
-(b) State the coordinates of its turning point. *(2 marks)*
-
-(c) Find the value of $y$ when $x = 2$. *(2 marks)*
+(c) Explain the benefits of regional integration to Cameroon. *(4 marks)*
 ',
   null
 )
@@ -3022,14 +3198,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
+  where subject = 'Economics'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 1'
+  where title = 'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 6'
   limit 1
 )
 insert into public.course_documents (
@@ -3039,635 +3215,188 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 1',
+  'Economics',
+  'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 6',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 1
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 6
 
-## Multiple Choice Question Bank
+## Structural Question Bank — Microeconomics
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
-- Choose the correct option A, B, C or D for each question.
-- Record your answers clearly on the answer sheet provided.
-- Each question carries equal marks. No marks is deducted for wrong answers.
-- Use the answer key at the end of the paper to check your responses.
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
 
 ---
 
-## QUESTIONS
+## SECTION 1: MICROECONOMICS
 
-**Q1.** If $f(x) = 2x + 3$, then $f^{-1}(x)$ is:
+**Q1.** (a) Define the term "scarcity". *(2 marks)*
 
-A. $\dfrac{x-3}{2}$  
-B. $\dfrac{x+3}{2}$  
-C. $2x - 3$  
-D. $\dfrac{x}{2} + 3$  
+(b) Explain the basic economic problem. *(4 marks)*
 
----
-
-**Q2.** If $f(x) = x^2$ and $g(x) = x + 1$, then $fg(x)$ is:
-
-A. $(x+1)^2$  
-B. $x^2 + 1$  
-C. $x + 1$  
-D. $x^2 + x$  
+(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*
 
 ---
 
-**Q3.** The turning point of $y = x^2 - 4x + 3$ is:
+**Q2.** (a) What is opportunity cost? *(2 marks)*
 
-A. (2, -1)  
-B. (4, 3)  
-C. (-2, 15)  
-D. (2, 3)  
+(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*
 
----
-
-**Q4.** The roots of $x^2 - 5x + 6 = 0$ are:
-
-A. 2 and 3  
-B. -2 and -3  
-C. 5 and 6  
-D. 1 and 6  
+(c) State three factors of production. *(3 marks)*
 
 ---
 
-**Q5.** If $f(x) = \dfrac{1}{x}$, $x \neq 0$, then $f^{-1}(x)$ is:
+**Q3.** (a) Define the term "demand". *(2 marks)*
 
-A. $\dfrac{1}{x}$  
-B. $x^2$  
-C. $x$  
-D. $-x$  
+(b) State the law of demand. *(3 marks)*
 
----
-
-**Q6.** The graph of $y = x^2$ translated 3 units right becomes:
-
-A. $y = (x-3)^2$  
-B. $y = x^2 - 3$  
-C. $y = x^2 + 3$  
-D. $y = (x+3)^2$  
+(c) Explain three factors that cause a change in demand. *(5 marks)*
 
 ---
 
-**Q7.** If $f(x) = 3x - 2$ and $g(x) = x^2$, then $gf(2)$ is:
+**Q4.** (a) Define the term "supply". *(2 marks)*
 
-A. 10  
-B. 16  
-C. 22  
-D. 36  
+(b) State the law of supply. *(3 marks)*
 
----
-
-**Q8.** The range of $y = x^2$ for $x \geq 0$ is:
-
-A. $y > 0$  
-B. $y \geq 0$  
-C. $y \leq 0$  
-D. all real $y$  
+(c) Explain three factors that cause a change in supply. *(5 marks)*
 
 ---
 
-**Q9.** The equation $2^{2x} = 16$ has solution:
+**Q5.** (a) What is market equilibrium? *(2 marks)*
 
-A. $x = 4$  
-B. $x = 8$  
-C. $x = 2$  
-D. $x = 16$  
+(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*
 
----
-
-**Q10.** If $f(x) = x^2 - 1$, the value of $f(-2)$ is:
-
-A. -3  
-B. 5  
-C. -5  
-D. 3  
+(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*
 
 ---
 
-**Q11.** The axis of symmetry of $y = x^2 - 6x + 8$ is:
+**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*
 
-A. $x = -3$  
-B. $x = 2$  
-C. $x = 3$  
-D. $x = 6$  
+(b) State the formula for price elasticity of demand. *(3 marks)*
 
----
-
-**Q12.** If $f(x) = 2x$ and $g(x) = x + 1$, then $fg(x)$ is:
-
-A. $2x + 1$  
-B. $2x$  
-C. $x + 2$  
-D. $2x + 2$  
+(c) Explain the difference between elastic and inelastic demand. *(4 marks)*
 
 ---
 
-**Q13.** The minimum value of $y = x^2 + 2x + 1$ is:
+**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*
 
-A. 2  
-B. 0  
-C. 1  
-D. -1  
+(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*
 
 ---
 
-**Q14.** For $f(x) = \sqrt{x}$, the domain is:
+**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*
 
-A. all real $x$  
-B. $x \geq 0$  
-C. $x \leq 0$  
-D. $x > 0$  
+(b) Explain the relationship between income and demand for a normal good. *(4 marks)*
 
----
-
-**Q15.** The graph of $y = -x^2$ is the graph of $y = x^2$:
-
-A. translated up  
-B. translated down  
-C. reflected in the $x$-axis  
-D. stretched  
+(c) Give one example of each type of good. *(2 marks)*
 
 ---
 
-**Q16.** If $f(x) = x^3$, then $f^{-1}(x)$ is:
+**Q9.** (a) Define the term "production". *(2 marks)*
 
-A. $\dfrac{1}{x^3}$  
-B. $x^3$  
-C. $3x$  
-D. $\sqrt[3]{x}$  
+(b) Distinguish between short-run and long-run production. *(4 marks)*
 
----
-
-**Q17.** The sum of the roots of $2x^2 - 6x + 3 = 0$ is:
-
-A. $\dfrac{3}{2}$  
-B. 6  
-C. 3  
-D. -3  
+(c) Explain the law of diminishing returns. *(5 marks)*
 
 ---
 
-**Q18.** If $f(x) = x + 2$ and $g(x) = 3x$, then $gf(x)$ is:
+**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*
 
-A. $x + 6$  
-B. $3x$  
-C. $3x + 2$  
-D. $3x + 6$  
+(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*
 
----
-
-**Q19.** The graph of $y = |x|$ at $x = 0$ has:
-
-A. a horizontal asymptote  
-B. a sharp corner  
-C. a smooth curve  
-D. a vertical asymptote  
+(c) State the relationship between marginal cost and average cost. *(3 marks)*
 
 ---
 
-**Q20.** If $f(x) = \dfrac{x+1}{x-1}$, $x \neq 1$, then $f(3)$ is:
+**Q11.** (a) Define the term "economies of scale". *(2 marks)*
 
-A. 3  
-B. 2  
-C. $\dfrac{1}{2}$  
-D. 4  
+(b) State three internal economies of scale. *(3 marks)*
 
----
-
-**Q21.** The product of the roots of $x^2 - 4x + 7 = 0$ is:
-
-A. -7  
-B. 4  
-C. 7  
-D. -4  
+(c) Explain two diseconomies of scale. *(4 marks)*
 
 ---
 
-**Q22.** The graph of $y = (x+1)^2$ has turning point:
+**Q12.** (a) What is a market structure? *(2 marks)*
 
-A. (0, -1)  
-B. (1, 0)  
-C. (0, 1)  
-D. (-1, 0)  
+(b) Describe the characteristics of perfect competition. *(5 marks)*
 
----
-
-**Q23.** If $f(x) = 2x - 1$, then $f^{-1}(3)$ is:
-
-A. 4  
-B. 1  
-C. 2  
-D. 5  
+(c) Explain why firms in perfect competition are price takers. *(4 marks)*
 
 ---
 
-**Q24.** The equation $x^2 - 2x + 5 = 0$ has:
+**Q13.** (a) Define the term "monopoly". *(2 marks)*
 
-A. three roots  
-B. one repeated root  
-C. two distinct real roots  
-D. no real roots  
+(b) State three characteristics of a monopoly. *(3 marks)*
 
----
-
-**Q25.** If $f(x) = x^2$ and $g(x) = 2x$, then $fg(3)$ is:
-
-A. 36  
-B. 18  
-C. 12  
-D. 9  
+(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*
 
 ---
 
-**Q26.** The range of $f(x) = x^2 + 1$ is:
+**Q14.** (a) What is monopolistic competition? *(2 marks)*
 
-A. $y \geq 1$  
-B. $y > 1$  
-C. $y \geq 0$  
-D. all real $y$  
+(b) Describe the characteristics of monopolistic competition. *(4 marks)*
 
----
-
-**Q27.** The graph of $y = x^2$ stretched vertically by factor 2 becomes:
-
-A. $y = 2x^2$  
-B. $y = (2x)^2$  
-C. $y = x^4$  
-D. $y = x^2 + 2$  
+(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*
 
 ---
 
-**Q28.** If $f(x) = \dfrac{2}{x}$, then $f^{-1}(x)$ is:
+**Q15.** (a) Define the term "oligopoly". *(2 marks)*
 
-A. $\dfrac{2}{x}$  
-B. $2x$  
-C. $-\dfrac{2}{x}$  
-D. $\dfrac{x}{2}$  
+(b) State three characteristics of an oligopoly. *(3 marks)*
 
----
-
-**Q29.** The discriminant of $x^2 - 4x + 4 = 0$ is:
-
-A. 0  
-B. 4  
-C. 16  
-D. -16  
+(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*
 
 ---
 
-**Q30.** If $f(x) = x + 1$ and $g(x) = x - 1$, then $fg(x)$ is:
+**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*
 
-A. $x$  
-B. $x - 2$  
-C. $x + 2$  
-D. $x^2 - 1$  
+(b) Distinguish between accounting profit and economic profit. *(4 marks)*
 
----
-
-**Q31.** The derivative of $x^3$ is:
-
-A. $x^2$  
-B. $3x^2$  
-C. $3x$  
-D. $\dfrac{x^4}{4}$  
+(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*
 
 ---
 
-**Q32.** The derivative of $5x^2$ is:
+**Q17.** (a) What is a price ceiling? *(2 marks)*
 
-A. $5x$  
-B. $10x$  
-C. $25x$  
-D. $2x$  
+(b) Explain the effects of a price ceiling on the market. *(4 marks)*
 
----
-
-**Q33.** The derivative of a constant is:
-
-A. 1  
-B. the constant itself  
-C. 0  
-D. undefined  
+(c) State two examples of price controls used by governments. *(2 marks)*
 
 ---
 
-**Q34.** $\int 2x\,dx$ is:
+**Q18.** (a) Define the term "consumer surplus". *(2 marks)*
 
-A. $2x^2 + c$  
-B. $x + c$  
-C. $\dfrac{x^2}{2} + c$  
-D. $x^2 + c$  
+(b) Explain how consumer surplus is measured. *(4 marks)*
 
----
-
-**Q35.** The gradient of $y = x^2$ at $x = 3$ is:
-
-A. 9  
-B. 12  
-C. 6  
-D. 3  
+(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*
 
 ---
 
-**Q36.** The derivative of $\dfrac{1}{x}$ is:
+**Q19.** (a) Define the term "producer surplus". *(2 marks)*
 
-A. $\dfrac{1}{x^2}$  
-B. $\ln x$  
-C. $-x^2$  
-D. $-\dfrac{1}{x^2}$  
+(b) Explain how producer surplus is measured. *(4 marks)*
 
----
-
-**Q37.** $\int 3\,dx$ is:
-
-A. $x^3 + c$  
-B. $3x + c$  
-C. $\dfrac{3x^2}{2} + c$  
-D. $3 + c$  
+(c) Explain the effect of a price fall on producer surplus. *(4 marks)*
 
 ---
 
-**Q38.** A stationary point occurs where:
+**Q20.** (a) What is the division of labour? *(2 marks)*
 
-A. $x = 0$  
-B. $\dfrac{dy}{dx} = 0$  
-C. $\dfrac{dy}{dx} = 1$  
-D. $y = 0$  
+(b) State three advantages of the division of labour. *(3 marks)*
 
----
-
-**Q39.** The derivative of $x^2 + 3x$ is:
-
-A. $x^2 + 3$  
-B. $2x$  
-C. $2x + 3$  
-D. $2x^2 + 3x$  
-
----
-
-**Q40.** $\int_0^1 x\,dx$ is:
-
-A. 0  
-B. 1  
-C. 2  
-D. $\dfrac{1}{2}$  
-
----
-
-**Q41.** The second derivative of $x^3$ is:
-
-A. $6x^2$  
-B. $3x$  
-C. $6x$  
-D. $3x^2$  
-
----
-
-**Q42.** The equation of the tangent to $y = x^2$ at $(1, 1)$ is:
-
-A. $y = 2x + 1$  
-B. $y = x - 1$  
-C. $y = x$  
-D. $y = 2x - 1$  
-
----
-
-**Q43.** If $\dfrac{dy}{dx} = 2x$ and $y = 1$ when $x = 0$, then $y$ is:
-
-A. $x^2 - 1$  
-B. $x^2 + 1$  
-C. $x^2$  
-D. $2x + 1$  
-
----
-
-**Q44.** The derivative of $\sqrt{x}$ is:
-
-A. $\dfrac{1}{2}x$  
-B. $\dfrac{1}{2\sqrt{x}}$  
-C. $2\sqrt{x}$  
-D. $\dfrac{1}{\sqrt{x}}$  
-
----
-
-**Q45.** The area under $y = x$ from $x = 0$ to $x = 2$ is:
-
-A. 3  
-B. 4  
-C. 2  
-D. 1  
-
----
-
-**Q46.** A maximum point has:
-
-A. $\dfrac{d^2y}{dx^2} = 0$  
-B. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} > 0$  
-C. $\dfrac{dy}{dx} > 0$  
-D. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} < 0$  
-
----
-
-**Q47.** The derivative of $4x^3 - 2x$ is:
-
-A. $12x^3 - 2$  
-B. $4x^2 - 2$  
-C. $12x^2 - 2$  
-D. $12x^2$  
-
----
-
-**Q48.** $\int (x^2 + 1)\,dx$ is:
-
-A. $2x + c$  
-B. $\dfrac{x^3}{3} + c$  
-C. $x^3 + x + c$  
-D. $\dfrac{x^3}{3} + x + c$  
-
----
-
-**Q49.** The gradient of $y = 3x - 2$ is:
-
-A. 3  
-B. -2  
-C. 2  
-D. 1  
-
----
-
-**Q50.** If $s = t^2$, the velocity when $t = 3$ is:
-
-A. 6  
-B. 9  
-C. 12  
-D. 3  
-
----
-
-**Q51.** The derivative of $x^4$ is:
-
-A. $4x^3$  
-B. $4x$  
-C. $x^3$  
-D. $\dfrac{x^5}{5}$  
-
----
-
-**Q52.** $\int \dfrac{1}{x^2}\,dx$ is:
-
-A. $-\dfrac{1}{x} + c$  
-B. $\ln x + c$  
-C. $-x + c$  
-D. $\dfrac{1}{x} + c$  
-
----
-
-**Q53.** The turning point of $y = x^2 - 2x$ is:
-
-A. (1, -1)  
-B. (2, 0)  
-C. (-1, 3)  
-D. (1, 1)  
-
----
-
-**Q54.** The derivative of $y = (2x+1)^2$ is:
-
-A. $8x + 4$  
-B. $4x$  
-C. $2(2x+1)$  
-D. $4x + 2$  
-
----
-
-**Q55.** $\int_0^1 2x\,dx$ is:
-
-A. 2  
-B. 1  
-C. 0  
-D. 4  
-
----
-
-**Q56.** If $\dfrac{dy}{dx} = 3x^2$, then $y$ is:
-
-A. $3x^3 + c$  
-B. $x^3 + c$  
-C. $\dfrac{x^3}{3} + c$  
-D. $6x + c$  
-
----
-
-**Q57.** The normal to a curve is perpendicular to the:
-
-A. curve itself  
-B. $x$-axis  
-C. tangent  
-D. $y$-axis  
-
----
-
-**Q58.** The derivative of $2x^3$ is:
-
-A. $2x^2$  
-B. $6x^3$  
-C. $3x^2$  
-D. $6x^2$  
-
----
-
-**Q59.** $\int (3x^2 - 2)\,dx$ is:
-
-A. $3x^3 - 2x + c$  
-B. $6x - 2 + c$  
-C. $x^3 - 2x + c$  
-D. $x^3 - 2 + c$  
-
----
-
-**Q60.** The area under $y = x^2$ from $x = 0$ to $x = 1$ is:
-
-A. 1  
-B. 2  
-C. $\dfrac{1}{2}$  
-D. $\dfrac{1}{3}$  
-
----
-
-## ANSWER KEY
-
-1. A
-2. A
-3. A
-4. A
-5. A
-6. A
-7. B
-8. B
-9. C
-10. D
-11. C
-12. D
-13. B
-14. B
-15. C
-16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
-23. C
-24. D
-25. A
-26. A
-27. A
-28. A
-29. A
-30. A
-31. B
-32. B
-33. C
-34. D
-35. C
-36. D
-37. B
-38. B
-39. C
-40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
-47. C
-48. D
-49. A
-50. A
-51. A
-52. A
-53. A
-54. A
-55. B
-56. B
-57. C
-58. D
-59. C
-60. D
+(c) Explain two disadvantages of the division of labour. *(4 marks)*
 ',
   null
 )
@@ -3686,14 +3415,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Additional Mathematics'
+  where subject = 'Economics'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 2'
+  where title = 'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 7'
   limit 1
 )
 insert into public.course_documents (
@@ -3703,635 +3432,407 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Additional Mathematics',
-  'CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 2',
+  'Economics',
+  'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 7',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL ADDITIONAL MATHEMATICS P1 SET 2
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 7
 
-## Multiple Choice Question Bank
+## Structural Question Bank — Macroeconomics and development
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** science, technical
-**Subject:** Additional Mathematics
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
 **Instructions:**
 
-- Choose the correct option A, B, C or D for each question.
-- Record your answers clearly on the answer sheet provided.
-- Each question carries equal marks. No marks is deducted for wrong answers.
-- Use the answer key at the end of the paper to check your responses.
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
 
 ---
 
-## QUESTIONS
+## SECTION 1: MACROECONOMICS AND DEVELOPMENT
 
-**Q1.** The roots of $x^2 - 5x + 6 = 0$ are:
+**Q1.** (a) Define the term "national income". *(2 marks)*
 
-A. 2 and 3  
-B. 1 and 6  
-C. -2 and -3  
-D. 5 and 6  
+(b) State the three methods of measuring national income. *(3 marks)*
 
----
-
-**Q2.** If $f(x) = \dfrac{1}{x}$, $x \neq 0$, then $f^{-1}(x)$ is:
-
-A. $\dfrac{1}{x}$  
-B. $x$  
-C. $x^2$  
-D. $-x$  
+(c) Explain the difficulties in measuring national income in developing countries. *(5 marks)*
 
 ---
 
-**Q3.** The graph of $y = x^2$ translated 3 units right becomes:
+**Q2.** (a) Define the terms "GDP" and "GNP". *(4 marks)*
 
-A. $y = (x-3)^2$  
-B. $y = x^2 + 3$  
-C. $y = (x+3)^2$  
-D. $y = x^2 - 3$  
+(b) Distinguish between GDP at market prices and GDP at factor cost. *(4 marks)*
 
----
-
-**Q4.** If $f(x) = 3x - 2$ and $g(x) = x^2$, then $gf(2)$ is:
-
-A. 16  
-B. 22  
-C. 36  
-D. 10  
+(c) Explain the difference between nominal GDP and real GDP. *(4 marks)*
 
 ---
 
-**Q5.** The range of $y = x^2$ for $x \geq 0$ is:
+**Q3.** (a) What is money? *(2 marks)*
 
-A. $y \geq 0$  
-B. $y \leq 0$  
-C. $y > 0$  
-D. all real $y$  
+(b) State the functions of money. *(4 marks)*
 
----
-
-**Q6.** The equation $2^{2x} = 16$ has solution:
-
-A. $x = 2$  
-B. $x = 16$  
-C. $x = 8$  
-D. $x = 4$  
+(c) Explain the qualities of good money. *(4 marks)*
 
 ---
 
-**Q7.** If $f(x) = x^2 - 1$, the value of $f(-2)$ is:
+**Q4.** (a) Define the term "money supply". *(2 marks)*
 
-A. -3  
-B. 3  
-C. 5  
-D. -5  
+(b) State three components of the money supply. *(3 marks)*
 
----
-
-**Q8.** The axis of symmetry of $y = x^2 - 6x + 8$ is:
-
-A. $x = -3$  
-B. $x = 3$  
-C. $x = 2$  
-D. $x = 6$  
+(c) Explain how the central bank controls the money supply. *(5 marks)*
 
 ---
 
-**Q9.** If $f(x) = 2x$ and $g(x) = x + 1$, then $fg(x)$ is:
+**Q5.** (a) What is a commercial bank? *(2 marks)*
 
-A. $2x + 1$  
-B. $x + 2$  
-C. $2x + 2$  
-D. $2x$  
+(b) State three functions of a commercial bank. *(3 marks)*
 
----
-
-**Q10.** The minimum value of $y = x^2 + 2x + 1$ is:
-
-A. 1  
-B. 2  
-C. -1  
-D. 0  
+(c) Explain how commercial banks create credit. *(5 marks)*
 
 ---
 
-**Q11.** For $f(x) = \sqrt{x}$, the domain is:
+**Q6.** (a) Define the term "inflation". *(2 marks)*
 
-A. $x > 0$  
-B. $x \leq 0$  
-C. $x \geq 0$  
-D. all real $x$  
+(b) State three causes of inflation. *(3 marks)*
 
----
-
-**Q12.** The graph of $y = -x^2$ is the graph of $y = x^2$:
-
-A. translated down  
-B. stretched  
-C. translated up  
-D. reflected in the $x$-axis  
+(c) Explain the effects of inflation on the economy. *(5 marks)*
 
 ---
 
-**Q13.** If $f(x) = x^3$, then $f^{-1}(x)$ is:
+**Q7.** (a) Define the terms "demand-pull inflation" and "cost-push inflation". *(4 marks)
 
-A. $\dfrac{1}{x^3}$  
-B. $\sqrt[3]{x}$  
-C. $x^3$  
-D. $3x$  
+(b) Explain the difference between the two types of inflation. *(4 marks)*
 
----
-
-**Q14.** The sum of the roots of $2x^2 - 6x + 3 = 0$ is:
-
-A. $\dfrac{3}{2}$  
-B. 3  
-C. 6  
-D. -3  
+(c) State two policies used to control inflation. *(2 marks)*
 
 ---
 
-**Q15.** If $f(x) = x + 2$ and $g(x) = 3x$, then $gf(x)$ is:
+**Q8.** (a) What is unemployment? *(2 marks)*
 
-A. $x + 6$  
-B. $3x + 2$  
-C. $3x + 6$  
-D. $3x$  
+(b) State three types of unemployment. *(3 marks)*
 
----
-
-**Q16.** The graph of $y = |x|$ at $x = 0$ has:
-
-A. a vertical asymptote  
-B. a smooth curve  
-C. a horizontal asymptote  
-D. a sharp corner  
+(c) Explain the causes and effects of unemployment. *(5 marks)*
 
 ---
 
-**Q17.** If $f(x) = \dfrac{x+1}{x-1}$, $x \neq 1$, then $f(3)$ is:
+**Q9.** (a) Define the term "international trade". *(2 marks)*
 
-A. $\dfrac{1}{2}$  
-B. 3  
-C. 2  
-D. 4  
+(b) Explain the principle of comparative advantage. *(5 marks)*
 
----
-
-**Q18.** The product of the roots of $x^2 - 4x + 7 = 0$ is:
-
-A. -4  
-B. -7  
-C. 4  
-D. 7  
+(c) State three benefits of international trade. *(3 marks)*
 
 ---
 
-**Q19.** The graph of $y = (x+1)^2$ has turning point:
+**Q10.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
 
-A. (0, -1)  
-B. (-1, 0)  
-C. (1, 0)  
-D. (0, 1)  
+(b) Explain the causes of a deficit in the balance of payments. *(4 marks)*
 
----
-
-**Q20.** If $f(x) = 2x - 1$, then $f^{-1}(3)$ is:
-
-A. 4  
-B. 2  
-C. 1  
-D. 5  
+(c) State three measures to correct a balance of payments deficit. *(3 marks)*
 
 ---
 
-**Q21.** The equation $x^2 - 2x + 5 = 0$ has:
+**Q11.** (a) What is a tariff? *(2 marks)*
 
-A. three roots  
-B. two distinct real roots  
-C. no real roots  
-D. one repeated root  
+(b) Distinguish between a tariff and a quota. *(4 marks)*
 
----
-
-**Q22.** If $f(x) = x^2$ and $g(x) = 2x$, then $fg(3)$ is:
-
-A. 9  
-B. 18  
-C. 12  
-D. 36  
+(c) Explain the arguments for and against protectionism. *(5 marks)*
 
 ---
 
-**Q23.** The range of $f(x) = x^2 + 1$ is:
+**Q12.** (a) Define the term "public finance". *(2 marks)*
 
-A. $y \geq 0$  
-B. all real $y$  
-C. $y \geq 1$  
-D. $y > 1$  
+(b) State the sources of government revenue. *(4 marks)*
 
----
-
-**Q24.** The graph of $y = x^2$ stretched vertically by factor 2 becomes:
-
-A. $y = x^2 + 2$  
-B. $y = (2x)^2$  
-C. $y = x^4$  
-D. $y = 2x^2$  
+(c) Explain the difference between direct and indirect taxes. *(4 marks)*
 
 ---
 
-**Q25.** If $f(x) = \dfrac{2}{x}$, then $f^{-1}(x)$ is:
+**Q13.** (a) What is a budget? *(2 marks)*
 
-A. $\dfrac{2}{x}$  
-B. $\dfrac{x}{2}$  
-C. $2x$  
-D. $-\dfrac{2}{x}$  
+(b) Distinguish between a balanced, a surplus, and a deficit budget. *(4 marks)*
 
----
-
-**Q26.** The discriminant of $x^2 - 4x + 4 = 0$ is:
-
-A. 0  
-B. 16  
-C. 4  
-D. -16  
+(c) Explain the importance of the budget as a tool of economic policy. *(4 marks)*
 
 ---
 
-**Q27.** If $f(x) = x + 1$ and $g(x) = x - 1$, then $fg(x)$ is:
+**Q14.** (a) Define the term "economic growth". *(2 marks)*
 
-A. $x$  
-B. $x + 2$  
-C. $x^2 - 1$  
-D. $x - 2$  
+(b) Distinguish between economic growth and economic development. *(4 marks)*
 
----
-
-**Q28.** If $f(x) = 2x + 3$, then $f^{-1}(x)$ is:
-
-A. $\dfrac{x-3}{2}$  
-B. $2x - 3$  
-C. $\dfrac{x}{2} + 3$  
-D. $\dfrac{x+3}{2}$  
+(c) State three factors that promote economic growth. *(3 marks)*
 
 ---
 
-**Q29.** If $f(x) = x^2$ and $g(x) = x + 1$, then $fg(x)$ is:
+**Q15.** (a) What is economic development? *(2 marks)*
 
-A. $(x+1)^2$  
-B. $x + 1$  
-C. $x^2 + 1$  
-D. $x^2 + x$  
+(b) State three indicators of economic development. *(3 marks)*
 
----
-
-**Q30.** The turning point of $y = x^2 - 4x + 3$ is:
-
-A. (2, -1)  
-B. (2, 3)  
-C. (4, 3)  
-D. (-2, 15)  
+(c) Explain the difference between the Human Development Index and GDP per capita. *(5 marks)*
 
 ---
 
-**Q31.** $\int 2x\,dx$ is:
+**Q16.** (a) Define the term "foreign direct investment". *(2 marks)*
 
-A. $2x^2 + c$  
-B. $x^2 + c$  
-C. $x + c$  
-D. $\dfrac{x^2}{2} + c$  
+(b) State three advantages of foreign direct investment to a developing country. *(3 marks)*
 
----
-
-**Q32.** The gradient of $y = x^2$ at $x = 3$ is:
-
-A. 9  
-B. 6  
-C. 12  
-D. 3  
+(c) Explain two disadvantages of foreign direct investment. *(4 marks)*
 
 ---
 
-**Q33.** The derivative of $\dfrac{1}{x}$ is:
+**Q17.** (a) What is a developing country? *(2 marks)*
 
-A. $\dfrac{1}{x^2}$  
-B. $-x^2$  
-C. $-\dfrac{1}{x^2}$  
-D. $\ln x$  
+(b) State three characteristics of developing countries. *(3 marks)*
 
----
-
-**Q34.** $\int 3\,dx$ is:
-
-A. $\dfrac{3x^2}{2} + c$  
-B. $x^3 + c$  
-C. $3 + c$  
-D. $3x + c$  
+(c) Explain the problems facing developing countries in achieving development. *(5 marks)*
 
 ---
 
-**Q35.** A stationary point occurs where:
+**Q18.** (a) Define the term "structural adjustment programme". *(2 marks)*
 
-A. $y = 0$  
-B. $\dfrac{dy}{dx} = 1$  
-C. $\dfrac{dy}{dx} = 0$  
-D. $x = 0$  
+(b) State three conditions attached to structural adjustment programmes. *(3 marks)*
 
----
-
-**Q36.** The derivative of $x^2 + 3x$ is:
-
-A. $2x$  
-B. $2x^2 + 3x$  
-C. $x^2 + 3$  
-D. $2x + 3$  
+(c) Explain the effects of structural adjustment programmes on developing countries. *(5 marks)*
 
 ---
 
-**Q37.** $\int_0^1 x\,dx$ is:
+**Q19.** (a) What is the International Monetary Fund? *(2 marks)*
 
-A. 0  
-B. $\dfrac{1}{2}$  
-C. 1  
-D. 2  
+(b) State three functions of the IMF. *(3 marks)*
 
----
-
-**Q38.** The second derivative of $x^3$ is:
-
-A. $6x^2$  
-B. $6x$  
-C. $3x$  
-D. $3x^2$  
+(c) Explain the role of the World Bank in financing development. *(4 marks)*
 
 ---
 
-**Q39.** The equation of the tangent to $y = x^2$ at $(1, 1)$ is:
+**Q20.** (a) Define the term "regional integration". *(2 marks)*
 
-A. $y = 2x + 1$  
-B. $y = x$  
-C. $y = 2x - 1$  
-D. $y = x - 1$  
+(b) State three objectives of the Economic Community of Central African States (ECCAS). *(3 marks)*
 
----
+(c) Explain the benefits of regional integration to Cameroon. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
 
-**Q40.** If $\dfrac{dy}{dx} = 2x$ and $y = 1$ when $x = 0$, then $y$ is:
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Economics'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Economics',
+  'CAMEROON GCE ORDINARY LEVEL ECONOMICS P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL ECONOMICS P2 SET 8
 
-A. $2x + 1$  
-B. $x^2$  
-C. $x^2 - 1$  
-D. $x^2 + 1$  
+## Structural Question Bank — Microeconomics
 
----
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_arts, a_commercial
+**Subject:** Economics
 
-**Q41.** The derivative of $\sqrt{x}$ is:
+**Instructions:**
 
-A. $2\sqrt{x}$  
-B. $\dfrac{1}{2}x$  
-C. $\dfrac{1}{2\sqrt{x}}$  
-D. $\dfrac{1}{\sqrt{x}}$  
-
----
-
-**Q42.** The area under $y = x$ from $x = 0$ to $x = 2$ is:
-
-A. 1  
-B. 3  
-C. 4  
-D. 2  
-
----
-
-**Q43.** A maximum point has:
-
-A. $\dfrac{d^2y}{dx^2} = 0$  
-B. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} < 0$  
-C. $\dfrac{dy}{dx} = 0$ and $\dfrac{d^2y}{dx^2} > 0$  
-D. $\dfrac{dy}{dx} > 0$  
-
----
-
-**Q44.** The derivative of $4x^3 - 2x$ is:
-
-A. $12x^3 - 2$  
-B. $12x^2 - 2$  
-C. $4x^2 - 2$  
-D. $12x^2$  
-
----
-
-**Q45.** $\int (x^2 + 1)\,dx$ is:
-
-A. $2x + c$  
-B. $x^3 + x + c$  
-C. $\dfrac{x^3}{3} + x + c$  
-D. $\dfrac{x^3}{3} + c$  
-
----
-
-**Q46.** The gradient of $y = 3x - 2$ is:
-
-A. 1  
-B. -2  
-C. 2  
-D. 3  
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
 
 ---
 
-**Q47.** If $s = t^2$, the velocity when $t = 3$ is:
+## SECTION 1: MICROECONOMICS
 
-A. 12  
-B. 3  
-C. 6  
-D. 9  
+**Q1.** (a) Define the term "scarcity". *(2 marks)*
 
----
+(b) Explain the basic economic problem. *(4 marks)*
 
-**Q48.** The derivative of $x^4$ is:
-
-A. $\dfrac{x^5}{5}$  
-B. $4x$  
-C. $x^3$  
-D. $4x^3$  
+(c) Distinguish between needs and wants, giving two examples of each. *(4 marks)*
 
 ---
 
-**Q49.** $\int \dfrac{1}{x^2}\,dx$ is:
+**Q2.** (a) What is opportunity cost? *(2 marks)*
 
-A. $-\dfrac{1}{x} + c$  
-B. $\dfrac{1}{x} + c$  
-C. $\ln x + c$  
-D. $-x + c$  
+(b) Explain the concept of opportunity cost using a production possibility curve. *(5 marks)*
 
----
-
-**Q50.** The turning point of $y = x^2 - 2x$ is:
-
-A. (1, -1)  
-B. (-1, 3)  
-C. (2, 0)  
-D. (1, 1)  
+(c) State three factors of production. *(3 marks)*
 
 ---
 
-**Q51.** The derivative of $y = (2x+1)^2$ is:
+**Q3.** (a) Define the term "demand". *(2 marks)*
 
-A. $8x + 4$  
-B. $2(2x+1)$  
-C. $4x + 2$  
-D. $4x$  
+(b) State the law of demand. *(3 marks)*
 
----
-
-**Q52.** $\int_0^1 2x\,dx$ is:
-
-A. 1  
-B. 0  
-C. 4  
-D. 2  
+(c) Explain three factors that cause a change in demand. *(5 marks)*
 
 ---
 
-**Q53.** If $\dfrac{dy}{dx} = 3x^2$, then $y$ is:
+**Q4.** (a) Define the term "supply". *(2 marks)*
 
-A. $x^3 + c$  
-B. $\dfrac{x^3}{3} + c$  
-C. $3x^3 + c$  
-D. $6x + c$  
+(b) State the law of supply. *(3 marks)*
 
----
-
-**Q54.** The normal to a curve is perpendicular to the:
-
-A. tangent  
-B. $y$-axis  
-C. $x$-axis  
-D. curve itself  
+(c) Explain three factors that cause a change in supply. *(5 marks)*
 
 ---
 
-**Q55.** The derivative of $2x^3$ is:
+**Q5.** (a) What is market equilibrium? *(2 marks)*
 
-A. $2x^2$  
-B. $6x^2$  
-C. $6x^3$  
-D. $3x^2$  
+(b) Explain how the equilibrium price is determined by demand and supply. *(5 marks)*
 
----
-
-**Q56.** $\int (3x^2 - 2)\,dx$ is:
-
-A. $3x^3 - 2x + c$  
-B. $x^3 - 2x + c$  
-C. $6x - 2 + c$  
-D. $x^3 - 2 + c$  
+(c) Describe what happens when the price is set above the equilibrium price. *(4 marks)*
 
 ---
 
-**Q57.** The area under $y = x^2$ from $x = 0$ to $x = 1$ is:
+**Q6.** (a) Define the term "price elasticity of demand". *(3 marks)*
 
-A. 1  
-B. $\dfrac{1}{2}$  
-C. $\dfrac{1}{3}$  
-D. 2  
+(b) State the formula for price elasticity of demand. *(3 marks)*
 
----
-
-**Q58.** The derivative of $x^3$ is:
-
-A. $x^2$  
-B. $3x$  
-C. $\dfrac{x^4}{4}$  
-D. $3x^2$  
+(c) Explain the difference between elastic and inelastic demand. *(4 marks)*
 
 ---
 
-**Q59.** The derivative of $5x^2$ is:
+**Q7.** (a) A 10% rise in price leads to a 20% fall in quantity demanded. Calculate the price elasticity of demand and state whether demand is elastic or inelastic. *(5 marks)*
 
-A. $5x$  
-B. $25x$  
-C. $10x$  
-D. $2x$  
+(b) Explain the factors that determine the price elasticity of demand. *(5 marks)*
 
 ---
 
-**Q60.** The derivative of a constant is:
+**Q8.** (a) Define the terms "normal good" and "inferior good". *(4 marks)*
 
-A. 1  
-B. undefined  
-C. the constant itself  
-D. 0  
+(b) Explain the relationship between income and demand for a normal good. *(4 marks)*
+
+(c) Give one example of each type of good. *(2 marks)*
 
 ---
 
-## ANSWER KEY
+**Q9.** (a) Define the term "production". *(2 marks)*
 
-1. A
-2. A
-3. A
-4. A
-5. A
-6. A
-7. B
-8. B
-9. C
-10. D
-11. C
-12. D
-13. B
-14. B
-15. C
-16. D
-17. C
-18. D
-19. B
-20. B
-21. C
-22. D
-23. C
-24. D
-25. A
-26. A
-27. A
-28. A
-29. A
-30. A
-31. B
-32. B
-33. C
-34. D
-35. C
-36. D
-37. B
-38. B
-39. C
-40. D
-41. C
-42. D
-43. B
-44. B
-45. C
-46. D
-47. C
-48. D
-49. A
-50. A
-51. A
-52. A
-53. A
-54. A
-55. B
-56. B
-57. C
-58. D
-59. C
-60. D
+(b) Distinguish between short-run and long-run production. *(4 marks)*
+
+(c) Explain the law of diminishing returns. *(5 marks)*
+
+---
+
+**Q10.** (a) Define the terms "fixed cost" and "variable cost". *(4 marks)*
+
+(b) Explain the difference between total cost, average cost, and marginal cost. *(5 marks)*
+
+(c) State the relationship between marginal cost and average cost. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "economies of scale". *(2 marks)*
+
+(b) State three internal economies of scale. *(3 marks)*
+
+(c) Explain two diseconomies of scale. *(4 marks)*
+
+---
+
+**Q12.** (a) What is a market structure? *(2 marks)*
+
+(b) Describe the characteristics of perfect competition. *(5 marks)*
+
+(c) Explain why firms in perfect competition are price takers. *(4 marks)*
+
+---
+
+**Q13.** (a) Define the term "monopoly". *(2 marks)*
+
+(b) State three characteristics of a monopoly. *(3 marks)*
+
+(c) Explain the advantages and disadvantages of a monopoly. *(5 marks)*
+
+---
+
+**Q14.** (a) What is monopolistic competition? *(2 marks)*
+
+(b) Describe the characteristics of monopolistic competition. *(4 marks)*
+
+(c) Distinguish between monopolistic competition and perfect competition. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "oligopoly". *(2 marks)*
+
+(b) State three characteristics of an oligopoly. *(3 marks)*
+
+(c) Explain the importance of non-price competition in an oligopoly. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the terms "revenue" and "profit". *(4 marks)*
+
+(b) Distinguish between accounting profit and economic profit. *(4 marks)*
+
+(c) Explain the difference between normal profit and supernormal profit. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a price ceiling? *(2 marks)*
+
+(b) Explain the effects of a price ceiling on the market. *(4 marks)*
+
+(c) State two examples of price controls used by governments. *(2 marks)*
+
+---
+
+**Q18.** (a) Define the term "consumer surplus". *(2 marks)*
+
+(b) Explain how consumer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price rise on consumer surplus. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "producer surplus". *(2 marks)*
+
+(b) Explain how producer surplus is measured. *(4 marks)*
+
+(c) Explain the effect of a price fall on producer surplus. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the division of labour? *(2 marks)*
+
+(b) State three advantages of the division of labour. *(3 marks)*
+
+(c) Explain two disadvantages of the division of labour. *(4 marks)*
 ',
   null
 )

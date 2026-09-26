@@ -3,14 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
+  where subject = 'French'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 5'
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4'
   limit 1
 )
 insert into public.course_documents (
@@ -20,21 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 5',
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 5
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 4
 
-## Structural Question Bank — World history
+## Structural Question Bank — Grammaire et conjugaison
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -45,165 +45,219 @@ values (
 
 ---
 
-## SECTION 1: WORLD HISTORY
+## SECTION 1: GRAMMAIRE ET CONJUGAISON
 
-**Q1.** (a) What was the First World War? *(2 marks)*
+**Q1.** Mettez les verbes au temps qui convient:
 
-(b) State three causes of the First World War. *(3 marks)*
+(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
 
-(c) Explain how the assassination of Archduke Franz Ferdinand led to the war. *(4 marks)*
+(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
 
----
-
-**Q2.** (a) Define the term "alliance". *(2 marks)*
-
-(b) Describe the alliance system in Europe before 1914. *(4 marks)*
-
-(c) Explain how the alliance system contributed to the outbreak of the First World War. *(4 marks)*
+(c) Demain, nous (aller) ____ au marché. *(2 marks)*
 
 ---
 
-**Q3.** (a) What was the Treaty of Versailles? *(2 marks)*
+**Q2.** Accordez correctement les participes passés:
 
-(b) State three terms of the Treaty of Versailles. *(3 marks)*
+(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
 
-(c) Explain the effects of the Treaty of Versailles on Germany. *(5 marks)*
+(b) Elles se sont (laver) ____ les mains. *(3 marks)*
 
----
-
-**Q4.** (a) Define the term "League of Nations". *(2 marks)*
-
-(b) State three aims of the League of Nations. *(3 marks)*
-
-(c) Explain why the League of Nations failed to prevent the Second World War. *(5 marks)*
+(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
 
 ---
 
-**Q5.** (a) What was the Second World War? *(2 marks)*
+**Q3.** Transformez au discours indirect:
 
-(b) State three causes of the Second World War. *(3 marks)*
+(a) Il dit: "Je viendrai demain." *(4 marks)*
 
-(c) Explain the role of Adolf Hitler in causing the Second World War. *(5 marks)*
+(b) Elle demande: "Où est la gare?" *(4 marks)*
 
----
-
-**Q6.** (a) Define the term "totalitarianism". *(2 marks)*
-
-(b) Describe the rise of fascism in Italy and Nazism in Germany. *(5 marks)*
-
-(c) Explain the effects of totalitarian rule on the people of Germany. *(4 marks)*
+(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
 
 ---
 
-**Q7.** (a) What was the Holocaust? *(2 marks)*
+**Q4.** Remplacez les mots soulignés par un pronom:
 
-(b) Describe the persecution of Jews under Nazi rule. *(4 marks)*
+(a) Je donne le livre à Marie. *(3 marks)*
 
-(c) Explain the consequences of the Holocaust. *(4 marks)*
+(b) Il parle de ses vacances. *(3 marks)*
 
----
-
-**Q8.** (a) Define the term "Cold War". *(2 marks)*
-
-(b) State three causes of the Cold War. *(3 marks)*
-
-(c) Explain how the Cold War divided the world into two blocs. *(5 marks)*
+(c) Nous avons vu les enfants. *(3 marks)*
 
 ---
 
-**Q9.** (a) What was the Berlin Wall? *(2 marks)*
+**Q5.** Mettez au pluriel:
 
-(b) Describe the events leading to the construction of the Berlin Wall in 1961. *(4 marks)*
+(a) Le cheval blanc. *(2 marks)*
 
-(c) Explain the significance of the fall of the Berlin Wall in 1989. *(4 marks)*
+(b) Un travail difficile. *(2 marks)
 
----
+(c) Le journal du matin. *(2 marks)*
 
-**Q10.** (a) Define the term "nuclear arms race". *(2 marks)*
-
-(b) Describe the development of nuclear weapons during the Cold War. *(4 marks)*
-
-(c) Explain the importance of arms control agreements such as SALT. *(4 marks)*
+(d) Un prix spécial. *(2 marks)*
 
 ---
 
-**Q11.** (a) What was the United Nations? *(2 marks)*
+**Q6.** Conjuguez au passé composé:
 
-(b) State three organs of the United Nations. *(3 marks)*
+(a) Elle (partir) ____ tôt. *(3 marks)*
 
-(c) Explain the role of the UN Security Council in maintaining peace. *(5 marks)*
+(b) Nous (finir) ____ le travail. *(3 marks)*
 
----
-
-**Q12.** (a) Define the term "decolonisation". *(2 marks)*
-
-(b) State three factors that led to decolonisation after 1945. *(3 marks)*
-
-(c) Explain the role of the UN in the decolonisation of Africa. *(4 marks)*
+(c) Ils (se lever) ____ à six heures. *(3 marks)*
 
 ---
 
-**Q13.** (a) What is globalisation? *(2 marks)*
+**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
 
-(b) State three features of globalisation. *(3 marks)*
+(a) ____ eau est importante pour la santé. *(2 marks)*
 
-(c) Explain two effects of globalisation on developing countries. *(5 marks)*
+(b) J''achète ____ pain et ____ beurre. *(4 marks)*
 
----
-
-**Q14.** (a) Define the term "international organisation". *(2 marks)*
-
-(b) Describe the aims of the World Trade Organization. *(4 marks)*
-
-(c) Explain the importance of the International Monetary Fund. *(4 marks)*
+(c) ____ enfants jouent dans la cour. *(2 marks)*
 
 ---
 
-**Q15.** (a) What was the Cuban Missile Crisis? *(2 marks)*
+**Q8.** Mettez les phrases au négatif:
 
-(b) Describe the events of the Cuban Missile Crisis of 1962. *(5 marks)*
+(a) Il a mangé quelque chose. *(3 marks)*
 
-(c) Explain the consequences of the crisis for the Cold War. *(4 marks)*
+(b) Nous avons vu quelqu''un. *(3 marks)*
 
----
-
-**Q16.** (a) Define the term "proxy war". *(2 marks)*
-
-(b) Describe the Korean War as a proxy war of the Cold War. *(4 marks)*
-
-(c) Explain the effects of the Vietnam War on the United States. *(4 marks)*
+(c) Elle vient souvent. *(3 marks)*
 
 ---
 
-**Q17.** (a) What was the European Union? *(2 marks)*
+**Q9.** Transformez au futur simple:
 
-(b) Describe the stages of European integration from the EEC to the EU. *(5 marks)*
+(a) Je (être) ____ content. *(2 marks)*
 
-(c) Explain the benefits of the European Union to its members. *(4 marks)*
+(b) Nous (avoir) ____ le temps. *(2 marks)*
 
----
+(c) Ils (faire) ____ un effort. *(2 marks)*
 
-**Q18.** (a) Define the term "terrorism". *(2 marks)*
-
-(b) State three causes of terrorism. *(3 marks)*
-
-(c) Explain the effects of international terrorism on global security. *(5 marks)*
+(d) Tu (aller) ____ à l''école. *(2 marks)*
 
 ---
 
-**Q19.** (a) What is the Commonwealth? *(2 marks)*
+**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
 
-(b) State three objectives of the Commonwealth. *(3 marks)*
+(a) La ville ____ je suis né est belle. *(2 marks)*
 
-(c) Explain the importance of the Commonwealth to Cameroon. *(4 marks)*
+(b) Le livre ____ tu parles est intéressant. *(2 marks)*
+
+(c) La femme ____ chante est ma mère. *(2 marks)*
+
+(d) Le film ____ nous avons vu était long. *(2 marks)*
 
 ---
 
-**Q20.** (a) Define the term "human rights". *(2 marks)*
+**Q11.** Mettez au féminin:
 
-(b) State three examples of human rights. *(3 marks)*
+(a) Un acteur célèbre. *(2 marks)*
 
-(c) Explain the role of the Universal Declaration of Human Rights in protecting people. *(5 marks)*
+(b) Le directeur est gentil. *(2 marks)*
+
+(c) Un sportif courageux. *(2 marks)*
+
+(d) Le voisin est patient. *(2 marks)*
+
+---
+
+**Q12.** Conjuguez à l''imparfait:
+
+(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
+
+(b) Il (pleuvoir) ____ souvent. *(3 marks)*
+
+(c) Nous (habiter) ____ à Douala. *(3 marks)*
+
+---
+
+**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
+
+(a) Il va ____ France. *(2 marks)*
+
+(b) Elle habite ____ Douala. *(2 marks)*
+
+(c) Nous partons ____ l''école. *(2 marks)*
+
+(d) Le livre est ____ la table. *(2 marks)*
+
+---
+
+**Q14.** Transformez au plus-que-parfait:
+
+(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
+
+(b) Nous (déjà voir) ____ ce film. *(3 marks)*
+
+(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
+
+---
+
+**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
+
+(a) ____ livre est intéressant. *(2 marks)*
+
+(b) ____ maison est grande. *(2 marks)*
+
+(c) J''aime ____ fleurs. *(2 marks)*
+
+(d) ____ père travaille à l''hôpital. *(2 marks)*
+
+---
+
+**Q16.** Mettez au comparatif ou superlatif:
+
+(a) Paul est ____ (grand) que Pierre. *(3 marks)*
+
+(b) C''est ____ (bon) élève de la classe. *(3 marks)*
+
+(c) Elle parle ____ (lentement) que moi. *(3 marks)*
+
+---
+
+**Q17.** Transformez au conditionnel présent:
+
+(a) Je (aimer) ____ voyager. *(3 marks)*
+
+(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
+
+(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
+
+---
+
+**Q18.** Complétez avec le subjonctif:
+
+(a) Il faut que tu (venir) ____. *(3 marks)*
+
+(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
+
+(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
+
+---
+
+**Q19.** Corrigez les erreurs dans les phrases suivantes:
+
+(a) "Je suis allé au marché hier." *(2 marks)*
+
+(b) "Elle a mangé des pommes." *(2 marks)*
+
+(c) "Nous avons vu un film intéressant." *(2 marks)*
+
+(d) "Ils sont arrivés à temps." *(2 marks)*
+
+---
+
+**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
+
+(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
+
+(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
+
+(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
 ',
   null
 )
@@ -222,14 +276,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
+  where subject = 'French'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 6'
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5'
   limit 1
 )
 insert into public.course_documents (
@@ -239,21 +293,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 6',
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 6
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 5
 
-## Structural Question Bank — Cameroon and African history
+## Structural Question Bank — Comprehension et expression ecrite
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -264,165 +318,203 @@ values (
 
 ---
 
-## SECTION 1: CAMEROON AND AFRICAN HISTORY
+## SECTION 1: COMPREHENSION ET EXPRESSION ECRITE
 
-**Q1.** (a) What is history? *(2 marks)*
+**Q1.** Lisez le texte et répondez aux questions:
 
-(b) State three sources of history. *(3 marks)*
+*"Le Cameroun est souvent appelé ''l''Afrique en miniature'' à cause de sa diversité. On y trouve des plages, des montagnes, des forêts et des savanes. Cette diversité se reflète aussi dans sa culture, avec plus de 250 groupes ethniques."*
 
-(c) Explain the importance of studying history. *(4 marks)*
+(a) Pourquoi appelle-t-on le Cameroun "l''Afrique en miniature"? *(3 marks)*
 
----
+(b) Citez deux types de paysages qu''on trouve au Cameroun. *(3 marks)*
 
-**Q2.** (a) Define the term "pre-colonial". *(2 marks)*
-
-(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*
-
-(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*
+(c) Combien de groupes ethniques compte le Cameroun? *(2 marks)*
 
 ---
 
-**Q3.** (a) What was the slave trade? *(2 marks)*
+**Q2.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
 
-(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*
+"Ma ville natale"
 
-(c) Explain why the slave trade was abolished. *(4 marks)*
-
----
-
-**Q4.** (a) Define the term "colonisation". *(2 marks)*
-
-(b) Explain why European powers colonised Africa. *(4 marks)*
-
-(c) Describe how Germany colonised Cameroon. *(5 marks)*
+Décrivez les lieux, les gens et les activités. *(10 marks)*
 
 ---
 
-**Q5.** (a) What was the Berlin Conference? *(2 marks)*
+**Q3.** Lisez le texte et répondez aux questions:
 
-(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*
+*"La pluie tombait depuis trois jours. Les rues de la ville étaient transformées en rivières. Les enfants, ravis, jouaient dans les flaques d''eau, tandis que les adultes cherchaient un abri. Soudain, le soleil perça les nuages et tout le monde sortit pour admirer l''arc-en-ciel."*
 
-(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*
+(a) Depuis combien de temps pleuvait-il? *(2 marks)*
 
----
+(b) Que faisaient les enfants? *(3 marks)*
 
-**Q6.** (a) Define the term "mandate". *(2 marks)*
+(c) Qu''est-ce qui est apparu à la fin? *(2 marks)*
 
-(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*
-
-(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*
+(d) Quel temps fait-il dans ce texte? *(3 marks)*
 
 ---
 
-**Q7.** (a) What is nationalism? *(2 marks)*
+**Q4.** Écrivez une lettre à votre ami(e) pour l''inviter à votre anniversaire. (80 à 100 mots)
 
-(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*
-
-(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*
+Incluez la date, le lieu, l''heure et ce que vous prévoyez. *(10 marks)*
 
 ---
 
-**Q8.** (a) When did Cameroon gain independence? *(2 marks)*
+**Q5.** Lisez le texte et répondez aux questions:
 
-(b) Describe the process by which French Cameroon gained independence. *(4 marks)*
+*"Le marché de Mokolo est l''un des plus grands marchés de Yaoundé. Chaque jour, des milliers de personnes y viennent pour acheter des vêtements, des fruits, des légumes et des articles ménagers. Les vendeurs crient pour attirer les clients, et l''air est rempli d''odeurs variées."*
 
-(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*
+(a) Où se trouve le marché de Mokolo? *(2 marks)*
 
----
+(b) Qu''est-ce qu''on peut acheter au marché? *(3 marks)*
 
-**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*
-
-(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*
-
-(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*
+(c) Comment les vendeurs attirent-ils les clients? *(3 marks)*
 
 ---
 
-**Q10.** (a) Define the term "reunification". *(2 marks)
-
-(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*
-
-(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*
+**Q6.** Rédigez un dialogue de 80 à 100 mots entre deux amis qui discutent de leurs projets pour les vacances. *(10 marks)*
 
 ---
 
-**Q11.** (a) What is a federation? *(2 marks)*
+**Q7.** Lisez le texte et répondez aux questions:
 
-(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*
+*"L''éducation est la clé du développement. Un pays qui investit dans l''éducation de ses enfants investit dans son avenir. Les écoles forment non seulement des travailleurs qualifiés, mais aussi des citoyens responsables capables de prendre de bonnes décisions."*
 
-(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*
+(a) Pourquoi l''éducation est-elle importante selon le texte? *(3 marks)*
 
----
+(b) Que forment les écoles? *(3 marks)*
 
-**Q12.** (a) Define the term "unitary state". *(2 marks)*
-
-(b) Describe the political changes in Cameroon after 1972. *(4 marks)*
-
-(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*
+(c) Donnez un titre au texte. *(2 marks)*
 
 ---
 
-**Q13.** (a) What is multiparty democracy? *(2 marks)*
+**Q8.** Traduisez en français:
 
-(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*
+(a) "I am going to the market." *(3 marks)*
 
-(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*
+(b) "She has three brothers." *(3 marks)*
 
----
-
-**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*
-
-(b) State three aims of pan-Africanism. *(3 marks)*
-
-(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*
+(c) "We visited our grandparents last week." *(4 marks)*
 
 ---
 
-**Q15.** (a) What was the Scramble for Africa? *(2 marks)*
+**Q9.** Lisez le texte et répondez aux questions:
 
-(b) Describe the causes of the Scramble for Africa. *(4 marks)*
+*"La santé est notre bien le plus précieux. Pour rester en bonne santé, il faut manger équilibré, faire du sport et dormir suffisamment. Il faut aussi éviter le tabac et l''alcool. Les médecins conseillent de boire beaucoup d''eau et de consulter régulièrement."*
 
-(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*
+(a) Citez trois habitudes pour rester en bonne santé. *(3 marks)*
 
----
+(b) Que faut-il éviter? *(2 marks)*
 
-**Q16.** (a) Define the term "decolonisation". *(2 marks)*
-
-(b) State three factors that led to the decolonisation of Africa. *(3 marks)*
-
-(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*
+(c) Que conseillent les médecins? *(3 marks)*
 
 ---
 
-**Q17.** (a) What is apartheid? *(2 marks)*
+**Q10.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
 
-(b) Describe the system of apartheid in South Africa. *(4 marks)*
+"Ce que je ferai après mes examens"
 
-(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*
-
----
-
-**Q18.** (a) Define the term "civil war". *(2 marks)*
-
-(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*
-
-(c) Explain the effects of the civil war on Nigeria. *(4 marks)*
+Parlez de vos projets et de vos rêves. *(10 marks)*
 
 ---
 
-**Q19.** (a) What is the African Union? *(2 marks)*
+**Q11.** Lisez le texte et répondez aux questions:
 
-(b) State three objectives of the African Union. *(3 marks)*
+*"Le football est le sport le plus populaire au Cameroun. Les Lions Indomptables, l''équipe nationale, ont gagné plusieurs coupes d''Afrique. Dans les rues, les enfants jouent au football avec des ballons improvisés, rêvant de devenir des stars comme Samuel Eto''o."*
 
-(c) Explain the difference between the OAU and the African Union. *(4 marks)*
+(a) Quel est le sport le plus populaire au Cameroun? *(2 marks)*
+
+(b) Comment s''appelle l''équipe nationale? *(2 marks)*
+
+(c) Avec quoi les enfants jouent-ils? *(3 marks)*
+
+(d) De quoi rêvent les enfants? *(3 marks)*
 
 ---
 
-**Q20.** (a) Define the term "economic integration". *(2 marks)*
+**Q12.** Écrivez un texte de 80 à 100 mots décrivant votre journée typique.
 
-(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*
+Commencez par: "Ma journée commence à..." *(10 marks)*
 
-(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*
+---
+
+**Q13.** Lisez le texte et répondez aux questions:
+
+*"La technologie a changé notre façon de communiquer. Avec un téléphone portable, on peut appeler, envoyer des messages et même voir ses proches à l''écran. Mais certains pensent que la technologie nous éloigne les uns des autres."*
+
+(a) Qu''est-ce qu''on peut faire avec un téléphone portable? *(3 marks)*
+
+(b) Quel est l''inconvénient de la technologie selon certains? *(3 marks)*
+
+(c) Êtes-vous d''accord? Justifiez votre réponse. *(3 marks)*
+
+---
+
+**Q14.** Traduisez en anglais:
+
+(a) "Je vais au marché avec ma mère." *(3 marks)*
+
+(b) "Nous avons mangé du poisson hier soir." *(3 marks)*
+
+(c) "Elle est plus grande que son frère." *(4 marks)*
+
+---
+
+**Q15.** Lisez le texte et répondez aux questions:
+
+*"Le respect de l''environnement commence à la maison. Il faut trier les déchets, économiser l''eau et l''électricité, et éviter de jeter les ordures dans la nature. Chaque petit geste compte pour protéger notre planète."*
+
+(a) Citez trois gestes pour protéger l''environnement. *(3 marks)*
+
+(b) Où commence le respect de l''environnement? *(2 marks)*
+
+(c) Que signifie "Chaque petit geste compte"? *(3 marks)*
+
+---
+
+**Q16.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Pourquoi j''apprends le français"
+
+Donnez au moins trois raisons. *(10 marks)*
+
+---
+
+**Q17.** Lisez le texte et répondez aux questions:
+
+*"La famille est très importante dans la culture camerounaise. Les enfants respectent leurs parents et leurs aînés. Les grandes occasions comme les mariages et les funérailles rassemblent toute la famille, parfois des centaines de personnes."*
+
+(a) Pourquoi la famille est-elle importante? *(2 marks)*
+
+(b) Comment les enfants traitent-ils leurs aînés? *(3 marks)*
+
+(c) Quelles occasions rassemblent la famille? *(3 marks)*
+
+---
+
+**Q18.** Écrivez un texte de 80 à 100 mots racontant ce que vous avez fait le week-end dernier.
+
+Utilisez le passé composé. *(10 marks)*
+
+---
+
+**Q19.** Lisez le texte et répondez aux questions:
+
+*"Le commerce équitable garantit que les producteurs reçoivent un prix juste pour leur travail. Au Cameroun, le cacao et le café sont les principales cultures d''exportation. En achetant des produits équitables, les consommateurs aident les agriculteurs à améliorer leurs conditions de vie."*
+
+(a) Qu''est-ce que le commerce équitable garantit? *(3 marks)*
+
+(b) Quelles sont les principales cultures d''exportation du Cameroun? *(3 marks)*
+
+(c) Comment les consommateurs peuvent-ils aider les agriculteurs? *(3 marks)*
+
+---
+
+**Q20.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Mon plat préféré"
+
+Décrivez le plat, ses ingrédients et pourquoi vous l''aimez. *(10 marks)*
 ',
   null
 )
@@ -441,14 +533,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
+  where subject = 'French'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 7'
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6'
   limit 1
 )
 insert into public.course_documents (
@@ -458,21 +550,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 7',
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 7
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 6
 
-## Structural Question Bank — World history
+## Structural Question Bank — Grammaire et conjugaison
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -483,165 +575,219 @@ values (
 
 ---
 
-## SECTION 1: WORLD HISTORY
+## SECTION 1: GRAMMAIRE ET CONJUGAISON
 
-**Q1.** (a) What was the First World War? *(2 marks)*
+**Q1.** Mettez les verbes au temps qui convient:
 
-(b) State three causes of the First World War. *(3 marks)*
+(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
 
-(c) Explain how the assassination of Archduke Franz Ferdinand led to the war. *(4 marks)*
+(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
 
----
-
-**Q2.** (a) Define the term "alliance". *(2 marks)*
-
-(b) Describe the alliance system in Europe before 1914. *(4 marks)*
-
-(c) Explain how the alliance system contributed to the outbreak of the First World War. *(4 marks)*
+(c) Demain, nous (aller) ____ au marché. *(2 marks)*
 
 ---
 
-**Q3.** (a) What was the Treaty of Versailles? *(2 marks)*
+**Q2.** Accordez correctement les participes passés:
 
-(b) State three terms of the Treaty of Versailles. *(3 marks)*
+(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
 
-(c) Explain the effects of the Treaty of Versailles on Germany. *(5 marks)*
+(b) Elles se sont (laver) ____ les mains. *(3 marks)*
 
----
-
-**Q4.** (a) Define the term "League of Nations". *(2 marks)*
-
-(b) State three aims of the League of Nations. *(3 marks)*
-
-(c) Explain why the League of Nations failed to prevent the Second World War. *(5 marks)*
+(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
 
 ---
 
-**Q5.** (a) What was the Second World War? *(2 marks)*
+**Q3.** Transformez au discours indirect:
 
-(b) State three causes of the Second World War. *(3 marks)*
+(a) Il dit: "Je viendrai demain." *(4 marks)*
 
-(c) Explain the role of Adolf Hitler in causing the Second World War. *(5 marks)*
+(b) Elle demande: "Où est la gare?" *(4 marks)*
 
----
-
-**Q6.** (a) Define the term "totalitarianism". *(2 marks)*
-
-(b) Describe the rise of fascism in Italy and Nazism in Germany. *(5 marks)*
-
-(c) Explain the effects of totalitarian rule on the people of Germany. *(4 marks)*
+(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
 
 ---
 
-**Q7.** (a) What was the Holocaust? *(2 marks)*
+**Q4.** Remplacez les mots soulignés par un pronom:
 
-(b) Describe the persecution of Jews under Nazi rule. *(4 marks)*
+(a) Je donne le livre à Marie. *(3 marks)*
 
-(c) Explain the consequences of the Holocaust. *(4 marks)*
+(b) Il parle de ses vacances. *(3 marks)*
 
----
-
-**Q8.** (a) Define the term "Cold War". *(2 marks)*
-
-(b) State three causes of the Cold War. *(3 marks)*
-
-(c) Explain how the Cold War divided the world into two blocs. *(5 marks)*
+(c) Nous avons vu les enfants. *(3 marks)*
 
 ---
 
-**Q9.** (a) What was the Berlin Wall? *(2 marks)*
+**Q5.** Mettez au pluriel:
 
-(b) Describe the events leading to the construction of the Berlin Wall in 1961. *(4 marks)*
+(a) Le cheval blanc. *(2 marks)*
 
-(c) Explain the significance of the fall of the Berlin Wall in 1989. *(4 marks)*
+(b) Un travail difficile. *(2 marks)
 
----
+(c) Le journal du matin. *(2 marks)*
 
-**Q10.** (a) Define the term "nuclear arms race". *(2 marks)*
-
-(b) Describe the development of nuclear weapons during the Cold War. *(4 marks)*
-
-(c) Explain the importance of arms control agreements such as SALT. *(4 marks)*
+(d) Un prix spécial. *(2 marks)*
 
 ---
 
-**Q11.** (a) What was the United Nations? *(2 marks)*
+**Q6.** Conjuguez au passé composé:
 
-(b) State three organs of the United Nations. *(3 marks)*
+(a) Elle (partir) ____ tôt. *(3 marks)*
 
-(c) Explain the role of the UN Security Council in maintaining peace. *(5 marks)*
+(b) Nous (finir) ____ le travail. *(3 marks)*
 
----
-
-**Q12.** (a) Define the term "decolonisation". *(2 marks)*
-
-(b) State three factors that led to decolonisation after 1945. *(3 marks)*
-
-(c) Explain the role of the UN in the decolonisation of Africa. *(4 marks)*
+(c) Ils (se lever) ____ à six heures. *(3 marks)*
 
 ---
 
-**Q13.** (a) What is globalisation? *(2 marks)*
+**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
 
-(b) State three features of globalisation. *(3 marks)*
+(a) ____ eau est importante pour la santé. *(2 marks)*
 
-(c) Explain two effects of globalisation on developing countries. *(5 marks)*
+(b) J''achète ____ pain et ____ beurre. *(4 marks)*
 
----
-
-**Q14.** (a) Define the term "international organisation". *(2 marks)*
-
-(b) Describe the aims of the World Trade Organization. *(4 marks)*
-
-(c) Explain the importance of the International Monetary Fund. *(4 marks)*
+(c) ____ enfants jouent dans la cour. *(2 marks)*
 
 ---
 
-**Q15.** (a) What was the Cuban Missile Crisis? *(2 marks)*
+**Q8.** Mettez les phrases au négatif:
 
-(b) Describe the events of the Cuban Missile Crisis of 1962. *(5 marks)*
+(a) Il a mangé quelque chose. *(3 marks)*
 
-(c) Explain the consequences of the crisis for the Cold War. *(4 marks)*
+(b) Nous avons vu quelqu''un. *(3 marks)*
 
----
-
-**Q16.** (a) Define the term "proxy war". *(2 marks)*
-
-(b) Describe the Korean War as a proxy war of the Cold War. *(4 marks)*
-
-(c) Explain the effects of the Vietnam War on the United States. *(4 marks)*
+(c) Elle vient souvent. *(3 marks)*
 
 ---
 
-**Q17.** (a) What was the European Union? *(2 marks)*
+**Q9.** Transformez au futur simple:
 
-(b) Describe the stages of European integration from the EEC to the EU. *(5 marks)*
+(a) Je (être) ____ content. *(2 marks)*
 
-(c) Explain the benefits of the European Union to its members. *(4 marks)*
+(b) Nous (avoir) ____ le temps. *(2 marks)*
 
----
+(c) Ils (faire) ____ un effort. *(2 marks)*
 
-**Q18.** (a) Define the term "terrorism". *(2 marks)*
-
-(b) State three causes of terrorism. *(3 marks)*
-
-(c) Explain the effects of international terrorism on global security. *(5 marks)*
+(d) Tu (aller) ____ à l''école. *(2 marks)*
 
 ---
 
-**Q19.** (a) What is the Commonwealth? *(2 marks)*
+**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
 
-(b) State three objectives of the Commonwealth. *(3 marks)*
+(a) La ville ____ je suis né est belle. *(2 marks)*
 
-(c) Explain the importance of the Commonwealth to Cameroon. *(4 marks)*
+(b) Le livre ____ tu parles est intéressant. *(2 marks)*
+
+(c) La femme ____ chante est ma mère. *(2 marks)*
+
+(d) Le film ____ nous avons vu était long. *(2 marks)*
 
 ---
 
-**Q20.** (a) Define the term "human rights". *(2 marks)*
+**Q11.** Mettez au féminin:
 
-(b) State three examples of human rights. *(3 marks)*
+(a) Un acteur célèbre. *(2 marks)*
 
-(c) Explain the role of the Universal Declaration of Human Rights in protecting people. *(5 marks)*
+(b) Le directeur est gentil. *(2 marks)*
+
+(c) Un sportif courageux. *(2 marks)*
+
+(d) Le voisin est patient. *(2 marks)*
+
+---
+
+**Q12.** Conjuguez à l''imparfait:
+
+(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
+
+(b) Il (pleuvoir) ____ souvent. *(3 marks)*
+
+(c) Nous (habiter) ____ à Douala. *(3 marks)*
+
+---
+
+**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
+
+(a) Il va ____ France. *(2 marks)*
+
+(b) Elle habite ____ Douala. *(2 marks)*
+
+(c) Nous partons ____ l''école. *(2 marks)*
+
+(d) Le livre est ____ la table. *(2 marks)*
+
+---
+
+**Q14.** Transformez au plus-que-parfait:
+
+(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
+
+(b) Nous (déjà voir) ____ ce film. *(3 marks)*
+
+(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
+
+---
+
+**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
+
+(a) ____ livre est intéressant. *(2 marks)*
+
+(b) ____ maison est grande. *(2 marks)*
+
+(c) J''aime ____ fleurs. *(2 marks)*
+
+(d) ____ père travaille à l''hôpital. *(2 marks)*
+
+---
+
+**Q16.** Mettez au comparatif ou superlatif:
+
+(a) Paul est ____ (grand) que Pierre. *(3 marks)*
+
+(b) C''est ____ (bon) élève de la classe. *(3 marks)*
+
+(c) Elle parle ____ (lentement) que moi. *(3 marks)*
+
+---
+
+**Q17.** Transformez au conditionnel présent:
+
+(a) Je (aimer) ____ voyager. *(3 marks)*
+
+(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
+
+(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
+
+---
+
+**Q18.** Complétez avec le subjonctif:
+
+(a) Il faut que tu (venir) ____. *(3 marks)*
+
+(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
+
+(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
+
+---
+
+**Q19.** Corrigez les erreurs dans les phrases suivantes:
+
+(a) "Je suis allé au marché hier." *(2 marks)*
+
+(b) "Elle a mangé des pommes." *(2 marks)*
+
+(c) "Nous avons vu un film intéressant." *(2 marks)*
+
+(d) "Ils sont arrivés à temps." *(2 marks)*
+
+---
+
+**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
+
+(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
+
+(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
+
+(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
 ',
   null
 )
@@ -660,14 +806,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
+  where subject = 'French'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 8'
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7'
   limit 1
 )
 insert into public.course_documents (
@@ -677,21 +823,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 8',
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P2 SET 8
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 7
 
-## Structural Question Bank — Cameroon and African history
+## Structural Question Bank — Comprehension et expression ecrite
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
 
 **Instructions:**
 
@@ -702,165 +848,203 @@ values (
 
 ---
 
-## SECTION 1: CAMEROON AND AFRICAN HISTORY
+## SECTION 1: COMPREHENSION ET EXPRESSION ECRITE
 
-**Q1.** (a) What is history? *(2 marks)*
+**Q1.** Lisez le texte et répondez aux questions:
 
-(b) State three sources of history. *(3 marks)*
+*"Le Cameroun est souvent appelé ''l''Afrique en miniature'' à cause de sa diversité. On y trouve des plages, des montagnes, des forêts et des savanes. Cette diversité se reflète aussi dans sa culture, avec plus de 250 groupes ethniques."*
 
-(c) Explain the importance of studying history. *(4 marks)*
+(a) Pourquoi appelle-t-on le Cameroun "l''Afrique en miniature"? *(3 marks)*
 
----
+(b) Citez deux types de paysages qu''on trouve au Cameroun. *(3 marks)*
 
-**Q2.** (a) Define the term "pre-colonial". *(2 marks)*
-
-(b) Describe the political organisation of the Bamoun kingdom before colonisation. *(5 marks)*
-
-(c) Explain the role of the Fon in the traditional Bamenda society. *(4 marks)*
+(c) Combien de groupes ethniques compte le Cameroun? *(2 marks)*
 
 ---
 
-**Q3.** (a) What was the slave trade? *(2 marks)*
+**Q2.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
 
-(b) Describe the effects of the transatlantic slave trade on Africa. *(5 marks)*
+"Ma ville natale"
 
-(c) Explain why the slave trade was abolished. *(4 marks)*
-
----
-
-**Q4.** (a) Define the term "colonisation". *(2 marks)*
-
-(b) Explain why European powers colonised Africa. *(4 marks)*
-
-(c) Describe how Germany colonised Cameroon. *(5 marks)*
+Décrivez les lieux, les gens et les activités. *(10 marks)*
 
 ---
 
-**Q5.** (a) What was the Berlin Conference? *(2 marks)*
+**Q3.** Lisez le texte et répondez aux questions:
 
-(b) State the decisions taken at the Berlin Conference of 1884-1885. *(4 marks)*
+*"La pluie tombait depuis trois jours. Les rues de la ville étaient transformées en rivières. Les enfants, ravis, jouaient dans les flaques d''eau, tandis que les adultes cherchaient un abri. Soudain, le soleil perça les nuages et tout le monde sortit pour admirer l''arc-en-ciel."*
 
-(c) Explain the effects of the Berlin Conference on Africa. *(4 marks)*
+(a) Depuis combien de temps pleuvait-il? *(2 marks)*
 
----
+(b) Que faisaient les enfants? *(3 marks)*
 
-**Q6.** (a) Define the term "mandate". *(2 marks)*
+(c) Qu''est-ce qui est apparu à la fin? *(2 marks)*
 
-(b) Explain how Cameroon was divided between Britain and France after the First World War. *(5 marks)*
-
-(c) Describe the system of indirect rule used by the British in Cameroon. *(4 marks)*
+(d) Quel temps fait-il dans ce texte? *(3 marks)*
 
 ---
 
-**Q7.** (a) What is nationalism? *(2 marks)*
+**Q4.** Écrivez une lettre à votre ami(e) pour l''inviter à votre anniversaire. (80 à 100 mots)
 
-(b) State three factors that led to the rise of nationalism in Cameroon. *(3 marks)*
-
-(c) Explain the role of the UPC in the struggle for independence in Cameroon. *(5 marks)*
+Incluez la date, le lieu, l''heure et ce que vous prévoyez. *(10 marks)*
 
 ---
 
-**Q8.** (a) When did Cameroon gain independence? *(2 marks)*
+**Q5.** Lisez le texte et répondez aux questions:
 
-(b) Describe the process by which French Cameroon gained independence. *(4 marks)*
+*"Le marché de Mokolo est l''un des plus grands marchés de Yaoundé. Chaque jour, des milliers de personnes y viennent pour acheter des vêtements, des fruits, des légumes et des articles ménagers. Les vendeurs crient pour attirer les clients, et l''air est rempli d''odeurs variées."*
 
-(c) Explain the role of Ahmadou Ahidjo in the independence of Cameroon. *(4 marks)*
+(a) Où se trouve le marché de Mokolo? *(2 marks)*
 
----
+(b) Qu''est-ce qu''on peut acheter au marché? *(3 marks)*
 
-**Q9.** (a) What was the plebiscite of 1961? *(2 marks)*
-
-(b) Describe the results of the 1961 plebiscite in British Southern Cameroons. *(4 marks)*
-
-(c) Explain the consequences of the plebiscite for the reunification of Cameroon. *(4 marks)*
+(c) Comment les vendeurs attirent-ils les clients? *(3 marks)*
 
 ---
 
-**Q10.** (a) Define the term "reunification". *(2 marks)
-
-(b) Describe the events leading to the reunification of Cameroon in 1961. *(5 marks)*
-
-(c) Explain the importance of the Foumban Conference of 1961. *(4 marks)*
+**Q6.** Rédigez un dialogue de 80 à 100 mots entre deux amis qui discutent de leurs projets pour les vacances. *(10 marks)*
 
 ---
 
-**Q11.** (a) What is a federation? *(2 marks)*
+**Q7.** Lisez le texte et répondez aux questions:
 
-(b) Describe the federal system of government in Cameroon from 1961 to 1972. *(5 marks)*
+*"L''éducation est la clé du développement. Un pays qui investit dans l''éducation de ses enfants investit dans son avenir. Les écoles forment non seulement des travailleurs qualifiés, mais aussi des citoyens responsables capables de prendre de bonnes décisions."*
 
-(c) Explain why the federal system was replaced by a unitary system. *(4 marks)*
+(a) Pourquoi l''éducation est-elle importante selon le texte? *(3 marks)*
 
----
+(b) Que forment les écoles? *(3 marks)*
 
-**Q12.** (a) Define the term "unitary state". *(2 marks)*
-
-(b) Describe the political changes in Cameroon after 1972. *(4 marks)*
-
-(c) Explain the role of Paul Biya in the political history of Cameroon. *(4 marks)*
+(c) Donnez un titre au texte. *(2 marks)*
 
 ---
 
-**Q13.** (a) What is multiparty democracy? *(2 marks)*
+**Q8.** Traduisez en français:
 
-(b) Describe the reintroduction of multiparty politics in Cameroon in 1990. *(4 marks)*
+(a) "I am going to the market." *(3 marks)*
 
-(c) Explain the importance of the 1996 constitution in Cameroon. *(4 marks)*
+(b) "She has three brothers." *(3 marks)*
 
----
-
-**Q14.** (a) Define the term "pan-Africanism". *(2 marks)*
-
-(b) State three aims of pan-Africanism. *(3 marks)*
-
-(c) Explain the role of the Organisation of African Unity in African history. *(5 marks)*
+(c) "We visited our grandparents last week." *(4 marks)*
 
 ---
 
-**Q15.** (a) What was the Scramble for Africa? *(2 marks)*
+**Q9.** Lisez le texte et répondez aux questions:
 
-(b) Describe the causes of the Scramble for Africa. *(4 marks)*
+*"La santé est notre bien le plus précieux. Pour rester en bonne santé, il faut manger équilibré, faire du sport et dormir suffisamment. Il faut aussi éviter le tabac et l''alcool. Les médecins conseillent de boire beaucoup d''eau et de consulter régulièrement."*
 
-(c) Explain the effects of the Scramble for Africa on the continent. *(4 marks)*
+(a) Citez trois habitudes pour rester en bonne santé. *(3 marks)*
 
----
+(b) Que faut-il éviter? *(2 marks)*
 
-**Q16.** (a) Define the term "decolonisation". *(2 marks)*
-
-(b) State three factors that led to the decolonisation of Africa. *(3 marks)*
-
-(c) Explain the role of Kwame Nkrumah in the decolonisation of Ghana. *(5 marks)*
+(c) Que conseillent les médecins? *(3 marks)*
 
 ---
 
-**Q17.** (a) What is apartheid? *(2 marks)*
+**Q10.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
 
-(b) Describe the system of apartheid in South Africa. *(4 marks)*
+"Ce que je ferai après mes examens"
 
-(c) Explain the role of Nelson Mandela in ending apartheid. *(5 marks)*
-
----
-
-**Q18.** (a) Define the term "civil war". *(2 marks)*
-
-(b) Describe the causes of the Nigerian Civil War (1967-1970). *(4 marks)*
-
-(c) Explain the effects of the civil war on Nigeria. *(4 marks)*
+Parlez de vos projets et de vos rêves. *(10 marks)*
 
 ---
 
-**Q19.** (a) What is the African Union? *(2 marks)*
+**Q11.** Lisez le texte et répondez aux questions:
 
-(b) State three objectives of the African Union. *(3 marks)*
+*"Le football est le sport le plus populaire au Cameroun. Les Lions Indomptables, l''équipe nationale, ont gagné plusieurs coupes d''Afrique. Dans les rues, les enfants jouent au football avec des ballons improvisés, rêvant de devenir des stars comme Samuel Eto''o."*
 
-(c) Explain the difference between the OAU and the African Union. *(4 marks)*
+(a) Quel est le sport le plus populaire au Cameroun? *(2 marks)*
+
+(b) Comment s''appelle l''équipe nationale? *(2 marks)*
+
+(c) Avec quoi les enfants jouent-ils? *(3 marks)*
+
+(d) De quoi rêvent les enfants? *(3 marks)*
 
 ---
 
-**Q20.** (a) Define the term "economic integration". *(2 marks)*
+**Q12.** Écrivez un texte de 80 à 100 mots décrivant votre journée typique.
 
-(b) Describe the aims of the Economic Community of Central African States (ECCAS). *(4 marks)*
+Commencez par: "Ma journée commence à..." *(10 marks)*
 
-(c) Explain the importance of regional economic integration for Cameroon. *(4 marks)*
+---
+
+**Q13.** Lisez le texte et répondez aux questions:
+
+*"La technologie a changé notre façon de communiquer. Avec un téléphone portable, on peut appeler, envoyer des messages et même voir ses proches à l''écran. Mais certains pensent que la technologie nous éloigne les uns des autres."*
+
+(a) Qu''est-ce qu''on peut faire avec un téléphone portable? *(3 marks)*
+
+(b) Quel est l''inconvénient de la technologie selon certains? *(3 marks)*
+
+(c) Êtes-vous d''accord? Justifiez votre réponse. *(3 marks)*
+
+---
+
+**Q14.** Traduisez en anglais:
+
+(a) "Je vais au marché avec ma mère." *(3 marks)*
+
+(b) "Nous avons mangé du poisson hier soir." *(3 marks)*
+
+(c) "Elle est plus grande que son frère." *(4 marks)*
+
+---
+
+**Q15.** Lisez le texte et répondez aux questions:
+
+*"Le respect de l''environnement commence à la maison. Il faut trier les déchets, économiser l''eau et l''électricité, et éviter de jeter les ordures dans la nature. Chaque petit geste compte pour protéger notre planète."*
+
+(a) Citez trois gestes pour protéger l''environnement. *(3 marks)*
+
+(b) Où commence le respect de l''environnement? *(2 marks)*
+
+(c) Que signifie "Chaque petit geste compte"? *(3 marks)*
+
+---
+
+**Q16.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Pourquoi j''apprends le français"
+
+Donnez au moins trois raisons. *(10 marks)*
+
+---
+
+**Q17.** Lisez le texte et répondez aux questions:
+
+*"La famille est très importante dans la culture camerounaise. Les enfants respectent leurs parents et leurs aînés. Les grandes occasions comme les mariages et les funérailles rassemblent toute la famille, parfois des centaines de personnes."*
+
+(a) Pourquoi la famille est-elle importante? *(2 marks)*
+
+(b) Comment les enfants traitent-ils leurs aînés? *(3 marks)*
+
+(c) Quelles occasions rassemblent la famille? *(3 marks)*
+
+---
+
+**Q18.** Écrivez un texte de 80 à 100 mots racontant ce que vous avez fait le week-end dernier.
+
+Utilisez le passé composé. *(10 marks)*
+
+---
+
+**Q19.** Lisez le texte et répondez aux questions:
+
+*"Le commerce équitable garantit que les producteurs reçoivent un prix juste pour leur travail. Au Cameroun, le cacao et le café sont les principales cultures d''exportation. En achetant des produits équitables, les consommateurs aident les agriculteurs à améliorer leurs conditions de vie."*
+
+(a) Qu''est-ce que le commerce équitable garantit? *(3 marks)*
+
+(b) Quelles sont les principales cultures d''exportation du Cameroun? *(3 marks)*
+
+(c) Comment les consommateurs peuvent-ils aider les agriculteurs? *(3 marks)*
+
+---
+
+**Q20.** Rédigez un paragraphe de 80 à 100 mots sur le sujet:
+
+"Mon plat préféré"
+
+Décrivez le plat, ses ingrédients et pourquoi vous l''aimez. *(10 marks)*
 ',
   null
 )
@@ -879,14 +1063,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
+  where subject = 'French'
   order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 1'
+  where title = 'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8'
   limit 1
 )
 insert into public.course_documents (
@@ -896,21 +1080,294 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 1',
+  'French',
+  'CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8',
   'english',
   'ordinary',
   array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 1
+  '# CAMEROON GCE ORDINARY LEVEL FRENCH P2 SET 8
+
+## Structural Question Bank — Grammaire et conjugaison
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science, arts, commercial, technical
+**Subject:** French
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: GRAMMAIRE ET CONJUGAISON
+
+**Q1.** Mettez les verbes au temps qui convient:
+
+(a) Quand je (arriver) ____, ils (déjà partir) ____. *(4 marks)*
+
+(b) Si j''avais su, je (venir) ____ plus tôt. *(3 marks)*
+
+(c) Demain, nous (aller) ____ au marché. *(2 marks)*
+
+---
+
+**Q2.** Accordez correctement les participes passés:
+
+(a) Les fleurs que j''ai (acheter) ____ sont belles. *(3 marks)*
+
+(b) Elles se sont (laver) ____ les mains. *(3 marks)*
+
+(c) La lettre qu''il a (écrire) ____ était longue. *(3 marks)*
+
+---
+
+**Q3.** Transformez au discours indirect:
+
+(a) Il dit: "Je viendrai demain." *(4 marks)*
+
+(b) Elle demande: "Où est la gare?" *(4 marks)*
+
+(c) Le professeur dit: "Faites vos devoirs." *(4 marks)*
+
+---
+
+**Q4.** Remplacez les mots soulignés par un pronom:
+
+(a) Je donne le livre à Marie. *(3 marks)*
+
+(b) Il parle de ses vacances. *(3 marks)*
+
+(c) Nous avons vu les enfants. *(3 marks)*
+
+---
+
+**Q5.** Mettez au pluriel:
+
+(a) Le cheval blanc. *(2 marks)*
+
+(b) Un travail difficile. *(2 marks)
+
+(c) Le journal du matin. *(2 marks)*
+
+(d) Un prix spécial. *(2 marks)*
+
+---
+
+**Q6.** Conjuguez au passé composé:
+
+(a) Elle (partir) ____ tôt. *(3 marks)*
+
+(b) Nous (finir) ____ le travail. *(3 marks)*
+
+(c) Ils (se lever) ____ à six heures. *(3 marks)*
+
+---
+
+**Q7.** Complétez avec l''article qui convient (le, la, les, un, une, des, du, de la):
+
+(a) ____ eau est importante pour la santé. *(2 marks)*
+
+(b) J''achète ____ pain et ____ beurre. *(4 marks)*
+
+(c) ____ enfants jouent dans la cour. *(2 marks)*
+
+---
+
+**Q8.** Mettez les phrases au négatif:
+
+(a) Il a mangé quelque chose. *(3 marks)*
+
+(b) Nous avons vu quelqu''un. *(3 marks)*
+
+(c) Elle vient souvent. *(3 marks)*
+
+---
+
+**Q9.** Transformez au futur simple:
+
+(a) Je (être) ____ content. *(2 marks)*
+
+(b) Nous (avoir) ____ le temps. *(2 marks)*
+
+(c) Ils (faire) ____ un effort. *(2 marks)*
+
+(d) Tu (aller) ____ à l''école. *(2 marks)*
+
+---
+
+**Q10.** Complétez avec le pronom relatif qui convient (qui, que, dont, où):
+
+(a) La ville ____ je suis né est belle. *(2 marks)*
+
+(b) Le livre ____ tu parles est intéressant. *(2 marks)*
+
+(c) La femme ____ chante est ma mère. *(2 marks)*
+
+(d) Le film ____ nous avons vu était long. *(2 marks)*
+
+---
+
+**Q11.** Mettez au féminin:
+
+(a) Un acteur célèbre. *(2 marks)*
+
+(b) Le directeur est gentil. *(2 marks)*
+
+(c) Un sportif courageux. *(2 marks)*
+
+(d) Le voisin est patient. *(2 marks)*
+
+---
+
+**Q12.** Conjuguez à l''imparfait:
+
+(a) Quand j''étais petit, je (jouer) ____ au football. *(3 marks)*
+
+(b) Il (pleuvoir) ____ souvent. *(3 marks)*
+
+(c) Nous (habiter) ____ à Douala. *(3 marks)*
+
+---
+
+**Q13.** Complétez avec la préposition qui convient (à, de, en, dans, sur, pour):
+
+(a) Il va ____ France. *(2 marks)*
+
+(b) Elle habite ____ Douala. *(2 marks)*
+
+(c) Nous partons ____ l''école. *(2 marks)*
+
+(d) Le livre est ____ la table. *(2 marks)*
+
+---
+
+**Q14.** Transformez au plus-que-parfait:
+
+(a) Il (finir) ____ son travail avant de partir. *(3 marks)*
+
+(b) Nous (déjà voir) ____ ce film. *(3 marks)*
+
+(c) Elle (manger) ____ avant d''arriver. *(3 marks)*
+
+---
+
+**Q15.** Complétez avec le bon déterminant (ce, cette, ces, mon, ma, mes):
+
+(a) ____ livre est intéressant. *(2 marks)*
+
+(b) ____ maison est grande. *(2 marks)*
+
+(c) J''aime ____ fleurs. *(2 marks)*
+
+(d) ____ père travaille à l''hôpital. *(2 marks)*
+
+---
+
+**Q16.** Mettez au comparatif ou superlatif:
+
+(a) Paul est ____ (grand) que Pierre. *(3 marks)*
+
+(b) C''est ____ (bon) élève de la classe. *(3 marks)*
+
+(c) Elle parle ____ (lentement) que moi. *(3 marks)*
+
+---
+
+**Q17.** Transformez au conditionnel présent:
+
+(a) Je (aimer) ____ voyager. *(3 marks)*
+
+(b) Nous (pouvoir) ____ vous aider. *(3 marks)*
+
+(c) Elle (venir) ____ si elle avait le temps. *(3 marks)*
+
+---
+
+**Q18.** Complétez avec le subjonctif:
+
+(a) Il faut que tu (venir) ____. *(3 marks)*
+
+(b) Je veux qu''il (faire) ____ son travail. *(3 marks)*
+
+(c) Bien qu''il (être) ____ fatigué, il continue. *(3 marks)*
+
+---
+
+**Q19.** Corrigez les erreurs dans les phrases suivantes:
+
+(a) "Je suis allé au marché hier." *(2 marks)*
+
+(b) "Elle a mangé des pommes." *(2 marks)*
+
+(c) "Nous avons vu un film intéressant." *(2 marks)*
+
+(d) "Ils sont arrivés à temps." *(2 marks)*
+
+---
+
+**Q20.** Complétez avec le temps qui convient (présent, passé composé, imparfait):
+
+(a) Hier, je (rencontrer) ____ un ami. *(3 marks)*
+
+(b) Quand j''étais jeune, je (jouer) ____ au tennis. *(3 marks)*
+
+(c) Maintenant, nous (étudier) ____ le français. *(3 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 1',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 1
 
 ## Multiple Choice Question Bank
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
 
 **Instructions:**
 
@@ -923,543 +1380,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** The study of past events is called:
+**Q1.** The modulus of $3 + 4i$ is:
 
-A. history  
-B. geography  
-C. economics  
-D. sociology  
-
----
-
-**Q2.** Written records of the past are called:
-
-A. documents  
-B. artefacts  
-C. legends  
-D. monuments  
+A. 5  
+B. 7  
+C. 1  
+D. 25  
 
 ---
 
-**Q3.** Objects made by people in the past are called:
+**Q2.** The argument of $1 + i$ is:
 
-A. artefacts  
-B. archives  
-C. documents  
-D. manuscripts  
-
----
-
-**Q4.** The traditional ruler of the Bamenda people is the:
-
-A. Fon  
-B. Lamido  
-C. Chief  
-D. Sultan  
+A. 45°  
+B. 90°  
+C. 30°  
+D. 135°  
 
 ---
 
-**Q5.** The traditional ruler of the Bamoun people is the:
+**Q3.** The complex conjugate of $2 - 3i$ is:
 
-A. Sultan  
-B. Emir  
-C. Fon  
-D. Lamido  
-
----
-
-**Q6.** The forced removal of Africans to the Americas was called the:
-
-A. slave trade  
-B. mandate  
-C. partition  
-D. scramble  
+A. 2 + 3i  
+B. -2 + 3i  
+C. 2 - 3i  
+D. -2 - 3i  
 
 ---
 
-**Q7.** The slave trade was abolished in the British Empire in:
+**Q4.** The product $(1 + i)(1 - i)$ equals:
 
-A. 1884  
-B. 1807  
-C. 1914  
-D. 1945  
-
----
-
-**Q8.** The conference that divided Africa among European powers was the:
-
-A. Paris Conference  
-B. Berlin Conference  
-C. London Conference  
-D. Geneva Conference  
+A. 2  
+B. 1  
+C. -2  
+D. 0  
 
 ---
 
-**Q9.** The Berlin Conference took place in:
+**Q5.** The roots of $z^2 + 4 = 0$ are:
 
-A. 1914-1918  
-B. 1939-1945  
-C. 1884-1885  
-D. 1960-1961  
-
----
-
-**Q10.** The European power that first colonised Cameroon was:
-
-A. Britain  
-B. France  
-C. Belgium  
-D. Germany  
+A. ±2i  
+B. ±4  
+C. ±2  
+D. ±4i  
 
 ---
 
-**Q11.** Germany lost Cameroon after the:
+**Q6.** The value of $i^2$ is:
 
-A. Second World War  
-B. Scramble for Africa  
-C. First World War  
-D. Berlin Conference  
-
----
-
-**Q12.** After the First World War, Cameroon was divided between:
-
-A. Britain and Germany  
-B. Germany and Italy  
-C. France and Belgium  
-D. Britain and France  
+A. -1  
+B. -i  
+C. i  
+D. 1  
 
 ---
 
-**Q13.** The system of government used by the British in Cameroon was:
+**Q7.** The value of $i^4$ is:
 
-A. assimilation  
-B. indirect rule  
-C. direct rule  
-D. apartheid  
-
----
-
-**Q14.** The system of government used by the French in Cameroon was:
-
-A. apartheid  
-B. assimilation  
-C. federation  
-D. indirect rule  
+A. -1  
+B. 1  
+C. i  
+D. -i  
 
 ---
 
-**Q15.** The desire of a people to govern themselves is called:
+**Q8.** The determinant of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
 
-A. imperialism  
-B. colonialism  
-C. nationalism  
-D. federalism  
-
----
-
-**Q16.** The political party that led the struggle for independence in French Cameroon was the:
-
-A. CPNC  
-B. KNDP  
-C. CNO  
-D. UPC  
+A. 11  
+B. 5  
+C. 6  
+D. 10  
 
 ---
 
-**Q17.** French Cameroon gained independence in:
+**Q9.** The inverse of $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$ is:
 
-A. 1945  
-B. 1972  
-C. 1960  
-D. 1961  
-
----
-
-**Q18.** The vote held in British Southern Cameroons in 1961 was called the:
-
-A. election  
-B. census  
-C. referendum  
-D. plebiscite  
+A. $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$  
+B. $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$  
+C. $\begin{pmatrix} 1/2 & 0 \\ 0 & 1/4 \end{pmatrix}$  
+D. $\begin{pmatrix} 0 & 2 \\ 4 & 0 \end{pmatrix}$  
 
 ---
 
-**Q19.** The reunification of Cameroon took place in:
+**Q10.** The trace of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
 
-A. 1982  
-B. 1961  
-C. 1960  
-D. 1972  
-
----
-
-**Q20.** The conference that discussed the reunification of Cameroon was held at:
-
-A. Buea  
-B. Foumban  
-C. Douala  
-D. Yaoundé  
+A. 5  
+B. 11  
+C. 10  
+D. 6  
 
 ---
 
-**Q21.** Cameroon became a federation in:
+**Q11.** The eigenvalues of $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ are:
 
-A. 1984  
-B. 1960  
-C. 1961  
-D. 1972  
-
----
-
-**Q22.** The federal system in Cameroon was replaced by a unitary system in:
-
-A. 1990  
-B. 1961  
-C. 1982  
-D. 1972  
+A. 5 and 6  
+B. 0 and 1  
+C. 2 and 3  
+D. 1 and 2  
 
 ---
 
-**Q23.** The first president of Cameroon was:
+**Q12.** The dot product of $\mathbf{i} + 2\mathbf{j}$ and $2\mathbf{i} + 3\mathbf{j}$ is:
 
-A. Ruben Um Nyobé  
-B. John Ngu Foncha  
-C. Ahmadou Ahidjo  
-D. Paul Biya  
-
----
-
-**Q24.** The current president of Cameroon is:
-
-A. Emmanuel Nganou  
-B. John Ngu Foncha  
-C. Ahmadou Ahidjo  
-D. Paul Biya  
+A. 7  
+B. 5  
+C. 6  
+D. 8  
 
 ---
 
-**Q25.** Multiparty politics was reintroduced in Cameroon in:
+**Q13.** The vectors $\mathbf{a} = 2\mathbf{i} + \mathbf{j}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j}$ are:
 
-A. 1990  
-B. 1972  
-C. 1961  
-D. 1982  
-
----
-
-**Q26.** The organisation formed in 1963 to unite African states was the:
-
-A. OAU  
-B. AU  
-C. ECOWAS  
-D. UN  
+A. equal  
+B. perpendicular  
+C. parallel  
+D. opposite  
 
 ---
 
-**Q27.** The OAU was replaced by the African Union in:
+**Q14.** The sum $1 + 2 + 3 + \cdots + n$ equals:
 
-A. 2002  
-B. 1963  
-C. 1990  
-D. 2010  
-
----
-
-**Q28.** The system of racial segregation in South Africa was called:
-
-A. apartheid  
-B. indirect rule  
-C. colonialism  
-D. assimilation  
+A. $n^2$  
+B. $\frac{n(n+1)}{2}$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $\frac{n(n-1)}{2}$  
 
 ---
 
-**Q29.** The leader who fought against apartheid in South Africa was:
+**Q15.** The sum $1^2 + 2^2 + \cdots + n^2$ equals:
 
-A. Nelson Mandela  
-B. Julius Nyerere  
-C. Kwame Nkrumah  
-D. Jomo Kenyatta  
-
----
-
-**Q30.** The first president of independent Ghana was:
-
-A. Kwame Nkrumah  
-B. Julius Nyerere  
-C. Jomo Kenyatta  
-D. Nelson Mandela  
+A. $n^3$  
+B. $\frac{n(n+1)}{2}$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $\frac{n^2(n+1)}{2}$  
 
 ---
 
-**Q31.** The First World War began in:
+**Q16.** The sum to infinity of $1 + \frac{1}{2} + \frac{1}{4} + \cdots$ is:
 
-A. 1918  
-B. 1914  
-C. 1939  
-D. 1900  
-
----
-
-**Q32.** The First World War ended in:
-
-A. 1914  
-B. 1918  
-C. 1920  
-D. 1945  
+A. 3  
+B. 1  
+C. $\frac{3}{2}$  
+D. 2  
 
 ---
 
-**Q33.** The assassination that triggered the First World War was that of:
+**Q17.** The coefficient of $x^2$ in $(1 + x)^4$ is:
 
-A. Adolf Hitler  
-B. Napoleon  
-C. Archduke Franz Ferdinand  
-D. Kaiser Wilhelm  
-
----
-
-**Q34.** The alliance of Germany, Austria-Hungary, and Italy was called the:
-
-A. Triple Entente  
-B. Axis  
-C. Allies  
-D. Triple Alliance  
+A. 12  
+B. 8  
+C. 6  
+D. 4  
 
 ---
 
-**Q35.** The alliance of Britain, France, and Russia was called the:
+**Q18.** The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:
 
-A. Triple Alliance  
-B. Central Powers  
-C. Triple Entente  
-D. Axis  
-
----
-
-**Q36.** The treaty that ended the First World War was the:
-
-A. Treaty of Paris  
-B. Treaty of Rome  
-C. Treaty of Berlin  
-D. Treaty of Versailles  
+A. 2  
+B. -1  
+C. 1  
+D. 0  
 
 ---
 
-**Q37.** The international organisation formed after the First World War was the:
+**Q19.** Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:
 
-A. African Union  
-B. League of Nations  
-C. United Nations  
-D. European Union  
-
----
-
-**Q38.** The Second World War began in:
-
-A. 1945  
-B. 1939  
-C. 1929  
-D. 1914  
+A. $x^2 - 1$  
+B. $x^2 + x + 1$  
+C. $x^2 - x + 1$  
+D. $x^2 + 1$  
 
 ---
 
-**Q39.** The Second World War ended in:
+**Q20.** The value of $\lim_{x \to 0} \frac{\sin x}{x}$ is:
 
-A. 1918  
-B. 1939  
-C. 1945  
-D. 1950  
-
----
-
-**Q40.** The leader of Nazi Germany was:
-
-A. Joseph Stalin  
-B. Benito Mussolini  
-C. Winston Churchill  
-D. Adolf Hitler  
+A. undefined  
+B. 1  
+C. ∞  
+D. 0  
 
 ---
 
-**Q41.** The leader of Fascist Italy was:
+**Q21.** The value of $\lim_{x \to \infty} \frac{1}{x}$ is:
 
-A. Joseph Stalin  
-B. Francisco Franco  
-C. Benito Mussolini  
-D. Adolf Hitler  
-
----
-
-**Q42.** The systematic murder of six million Jews by the Nazis was called the:
-
-A. Pogrom  
-B. Inquisition  
-C. Genocide  
-D. Holocaust  
+A. undefined  
+B. 1  
+C. 0  
+D. ∞  
 
 ---
 
-**Q43.** The state of tension between the USA and the USSR after 1945 was called the:
+**Q22.** The general solution of $\frac{dy}{dx} = \frac{y}{x}$ is:
 
-A. Trade War  
-B. Cold War  
-C. World War  
-D. Proxy War  
-
----
-
-**Q44.** The wall that divided Berlin was built in:
-
-A. 1950  
-B. 1961  
-C. 1989  
-D. 1945  
+A. $y = e^{kx}$  
+B. $y = k/x$  
+C. $y = kx^2$  
+D. $y = kx$  
 
 ---
 
-**Q45.** The Berlin Wall fell in:
+**Q23.** The roots of $x^2 - 5x + 6 = 0$ are:
 
-A. 1991  
-B. 1961  
-C. 1989  
-D. 1945  
-
----
-
-**Q46.** The international organisation formed in 1945 to maintain peace was the:
-
-A. European Union  
-B. League of Nations  
-C. African Union  
-D. United Nations  
+A. 5 and 6  
+B. -2 and -3  
+C. 2 and 3  
+D. 1 and 6  
 
 ---
 
-**Q47.** The organ of the UN responsible for maintaining peace is the:
+**Q24.** The sum of the roots of $x^2 - 5x + 6 = 0$ is:
 
-A. ICJ  
-B. Secretariat  
-C. Security Council  
-D. General Assembly  
-
----
-
-**Q48.** The crisis of 1962 that brought the world close to nuclear war was the:
-
-A. Korean Crisis  
-B. Suez Crisis  
-C. Berlin Crisis  
-D. Cuban Missile Crisis  
+A. -6  
+B. -5  
+C. 6  
+D. 5  
 
 ---
 
-**Q49.** The war fought between North and South Korea from 1950 to 1953 was a:
+**Q25.** The product of the roots of $x^2 - 5x + 6 = 0$ is:
 
-A. proxy war  
-B. world war  
-C. civil war  
-D. trade war  
-
----
-
-**Q50.** The process of granting independence to colonies is called:
-
-A. decolonisation  
-B. colonisation  
-C. globalisation  
-D. imperialism  
+A. 6  
+B. 5  
+C. -6  
+D. -5  
 
 ---
 
-**Q51.** The economic union of European states is called the:
+**Q26.** The partial fractions of $\frac{1}{(x-1)(x+1)}$ are:
 
-A. European Union  
-B. United Nations  
-C. African Union  
-D. Commonwealth  
-
----
-
-**Q52.** The organisation that regulates international trade is the:
-
-A. WTO  
-B. UN  
-C. AU  
-D. IMF  
+A. $\frac{1/2}{x-1} - \frac{1/2}{x+1}$  
+B. $\frac{1}{x-1} + \frac{1}{x+1}$  
+C. $\frac{1}{x-1} - \frac{1}{x+1}$  
+D. $\frac{1/2}{x-1} + \frac{1/2}{x+1}$  
 
 ---
 
-**Q53.** The organisation that provides financial assistance to countries is the:
+**Q27.** The value of $(1 + i)^2$ is:
 
-A. IMF  
-B. AU  
-C. WTO  
-D. UN  
-
----
-
-**Q54.** The increasing interconnection of the world''s economies is called:
-
-A. globalisation  
-B. protectionism  
-C. nationalism  
-D. colonisation  
+A. 2i  
+B. -2i  
+C. 2  
+D. -2  
 
 ---
 
-**Q55.** The use of violence for political aims is called:
+**Q28.** The value of $(1 + i)^4$ is:
 
-A. nationalism  
-B. terrorism  
-C. imperialism  
-D. diplomacy  
-
----
-
-**Q56.** The association of former British colonies is called the:
-
-A. European Union  
-B. Commonwealth  
-C. United Nations  
-D. African Union  
+A. -4  
+B. 4i  
+C. -4i  
+D. 4  
 
 ---
 
-**Q57.** The declaration that protects the rights of all people was the:
+**Q29.** The modulus of $\frac{1}{i}$ is:
 
-A. Treaty of Versailles  
-B. Berlin Act  
-C. Universal Declaration of Human Rights  
-D. Atlantic Charter  
-
----
-
-**Q58.** The Universal Declaration of Human Rights was adopted in:
-
-A. 1918  
-B. 1939  
-C. 1960  
-D. 1948  
+A. 1  
+B. -1  
+C. 0  
+D. i  
 
 ---
 
-**Q59.** The leader of the Soviet Union during the Cuban Missile Crisis was:
+**Q30.** The argument of $-1$ is:
 
-A. Joseph Stalin  
-B. Mikhail Gorbachev  
-C. Nikita Khrushchev  
-D. Vladimir Lenin  
+A. 180°  
+B. 270°  
+C. 90°  
+D. 0°  
 
 ---
 
-**Q60.** The leader of the United States during the Cuban Missile Crisis was:
+**Q31.** The SI unit of force is the:
 
-A. Franklin Roosevelt  
-B. Richard Nixon  
-C. Harry Truman  
-D. John F. Kennedy  
+A. joule  
+B. newton  
+C. watt  
+D. pascal  
+
+---
+
+**Q32.** The SI unit of momentum is:
+
+A. kg m/s²  
+B. kg m/s  
+C. J  
+D. N m  
+
+---
+
+**Q33.** The SI unit of impulse is:
+
+A. N m  
+B. J  
+C. N s  
+D. W  
+
+---
+
+**Q34.** The acceleration of a body of mass 2 kg under a force of 10 N is:
+
+A. 2 m/s²  
+B. 20 m/s²  
+C. 0.2 m/s²  
+D. 5 m/s²  
+
+---
+
+**Q35.** The momentum of a 3 kg body moving at 4 m/s is:
+
+A. 7 kg m/s  
+B. 48 kg m/s  
+C. 12 kg m/s  
+D. 1 kg m/s  
+
+---
+
+**Q36.** The kinetic energy of a 2 kg body moving at 3 m/s is:
+
+A. 6 J  
+B. 12 J  
+C. 18 J  
+D. 9 J  
+
+---
+
+**Q37.** The work done by a force of 10 N moving a body 5 m is:
+
+A. 15 J  
+B. 50 J  
+C. 2 J  
+D. 0.5 J  
+
+---
+
+**Q38.** The power of a machine doing 300 J of work in 10 s is:
+
+A. 3 W  
+B. 30 W  
+C. 0.03 W  
+D. 3000 W  
+
+---
+
+**Q39.** The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:
+
+A. 40 m  
+B. 10 m  
+C. 20 m  
+D. 2 m  
+
+---
+
+**Q40.** The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:
+
+A. 2.5 s  
+B. 10 s  
+C. 50 s  
+D. 5 s  
+
+---
+
+**Q41.** The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:
+
+A. 250 m  
+B. 433 m  
+C. 216.5 m  
+D. 125 m  
+
+---
+
+**Q42.** A uniform rod is balanced at its centre. The principle of moments states:
+
+A. work = force × distance  
+B. power = work ÷ time  
+C. sum of forces = 0  
+D. sum of clockwise moments = sum of anticlockwise moments  
+
+---
+
+**Q43.** The centre of mass of a uniform rod is at its:
+
+A. centre of gravity of the rod  
+B. midpoint  
+C. end  
+D. one-quarter point  
+
+---
+
+**Q44.** The probability of getting exactly 6 heads in 10 tosses of a fair coin is:
+
+A. $6/10$  
+B. $\binom{10}{6}(1/2)^{10}$  
+C. $\binom{10}{6}(1/2)^6$  
+D. $(1/2)^6$  
+
+---
+
+**Q45.** The mean of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 0.5  
+B. 2.5  
+C. 5  
+D. 10  
+
+---
+
+**Q46.** The variance of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 0.5  
+B. 5  
+C. 10  
+D. 2.5  
+
+---
+
+**Q47.** The mean of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. √λ  
+C. λ  
+D. λ²  
+
+---
+
+**Q48.** The variance of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. √λ  
+C. λ²  
+D. λ  
+
+---
+
+**Q49.** For a standard normal distribution, the mean is:
+
+A. 0  
+B. 1  
+C. 50  
+D. 100  
+
+---
+
+**Q50.** For a standard normal distribution, the variance is:
+
+A. 1  
+B. 0  
+C. 100  
+D. 50  
+
+---
+
+**Q51.** The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:
+
+A. 2  
+B. 0.5  
+C. 10  
+D. 1.2  
+
+---
+
+**Q52.** The 95% confidence interval for a mean uses the z-value:
+
+A. 1.96  
+B. 2.58  
+C. 0.95  
+D. 1.64  
+
+---
+
+**Q53.** The 99% confidence interval for a mean uses the z-value:
+
+A. 2.58  
+B. 0.99  
+C. 1.96  
+D. 1.64  
+
+---
+
+**Q54.** A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:
+
+A. 0.8  
+B. 80  
+C. 0.08  
+D. 8  
+
+---
+
+**Q55.** The Pearson correlation coefficient ranges from:
+
+A. 0 to 1  
+B. -1 to 1  
+C. -∞ to ∞  
+D. 0 to 100  
+
+---
+
+**Q56.** A correlation coefficient of 0 indicates:
+
+A. perfect positive correlation  
+B. no linear correlation  
+C. strong correlation  
+D. perfect negative correlation  
+
+---
+
+**Q57.** The probability of getting a sum of 7 when two dice are thrown is:
+
+A. 1/36  
+B. 7/36  
+C. 6/36  
+D. 1/6  
+
+---
+
+**Q58.** The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:
+
+A. 5/8  
+B. 3/5  
+C. 1/8  
+D. 3/8  
+
+---
+
+**Q59.** Two events are independent if:
+
+A. P(A∩B) = P(A) + P(B)  
+B. P(A) = P(B)  
+C. P(A∩B) = P(A)P(B)  
+D. P(A∪B) = P(A)P(B)  
+
+---
+
+**Q60.** The probability of an impossible event is:
+
+A. 1  
+B. undefined  
+C. 0.5  
+D. 0  
 
 ---
 
@@ -1543,14 +2000,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -1560,21 +2017,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 2',
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 2
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 2
 
 ## Multiple Choice Question Bank
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
 
 **Instructions:**
 
@@ -1587,543 +2044,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** The traditional ruler of the Bamenda people is the:
+**Q1.** The product $(1 + i)(1 - i)$ equals:
 
-A. Fon  
-B. Sultan  
-C. Lamido  
-D. Chief  
-
----
-
-**Q2.** The traditional ruler of the Bamoun people is the:
-
-A. Sultan  
-B. Fon  
-C. Emir  
-D. Lamido  
+A. 2  
+B. 0  
+C. 1  
+D. -2  
 
 ---
 
-**Q3.** The forced removal of Africans to the Americas was called the:
+**Q2.** The roots of $z^2 + 4 = 0$ are:
 
-A. slave trade  
-B. partition  
-C. scramble  
-D. mandate  
-
----
-
-**Q4.** The slave trade was abolished in the British Empire in:
-
-A. 1807  
-B. 1914  
-C. 1945  
-D. 1884  
+A. ±2i  
+B. ±2  
+C. ±4  
+D. ±4i  
 
 ---
 
-**Q5.** The conference that divided Africa among European powers was the:
+**Q3.** The value of $i^2$ is:
 
-A. Berlin Conference  
-B. London Conference  
-C. Paris Conference  
-D. Geneva Conference  
-
----
-
-**Q6.** The Berlin Conference took place in:
-
-A. 1884-1885  
-B. 1960-1961  
-C. 1939-1945  
-D. 1914-1918  
+A. -1  
+B. i  
+C. 1  
+D. -i  
 
 ---
 
-**Q7.** The European power that first colonised Cameroon was:
+**Q4.** The value of $i^4$ is:
 
-A. Britain  
-B. Germany  
-C. France  
-D. Belgium  
-
----
-
-**Q8.** Germany lost Cameroon after the:
-
-A. Second World War  
-B. First World War  
-C. Scramble for Africa  
-D. Berlin Conference  
+A. 1  
+B. i  
+C. -i  
+D. -1  
 
 ---
 
-**Q9.** After the First World War, Cameroon was divided between:
+**Q5.** The determinant of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
 
-A. Britain and Germany  
-B. France and Belgium  
-C. Britain and France  
-D. Germany and Italy  
-
----
-
-**Q10.** The system of government used by the British in Cameroon was:
-
-A. direct rule  
-B. assimilation  
-C. apartheid  
-D. indirect rule  
+A. 5  
+B. 6  
+C. 11  
+D. 10  
 
 ---
 
-**Q11.** The system of government used by the French in Cameroon was:
+**Q6.** The inverse of $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$ is:
 
-A. indirect rule  
-B. federation  
-C. assimilation  
-D. apartheid  
-
----
-
-**Q12.** The desire of a people to govern themselves is called:
-
-A. colonialism  
-B. federalism  
-C. imperialism  
-D. nationalism  
+A. $\begin{pmatrix} 1/2 & 0 \\ 0 & 1/4 \end{pmatrix}$  
+B. $\begin{pmatrix} 0 & 2 \\ 4 & 0 \end{pmatrix}$  
+C. $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$  
+D. $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$  
 
 ---
 
-**Q13.** The political party that led the struggle for independence in French Cameroon was the:
+**Q7.** The trace of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
 
-A. CPNC  
-B. UPC  
-C. KNDP  
-D. CNO  
-
----
-
-**Q14.** French Cameroon gained independence in:
-
-A. 1945  
-B. 1960  
-C. 1972  
-D. 1961  
+A. 5  
+B. 6  
+C. 11  
+D. 10  
 
 ---
 
-**Q15.** The vote held in British Southern Cameroons in 1961 was called the:
+**Q8.** The eigenvalues of $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ are:
 
-A. election  
-B. referendum  
-C. plebiscite  
-D. census  
-
----
-
-**Q16.** The reunification of Cameroon took place in:
-
-A. 1972  
-B. 1960  
-C. 1982  
-D. 1961  
+A. 5 and 6  
+B. 2 and 3  
+C. 0 and 1  
+D. 1 and 2  
 
 ---
 
-**Q17.** The conference that discussed the reunification of Cameroon was held at:
+**Q9.** The dot product of $\mathbf{i} + 2\mathbf{j}$ and $2\mathbf{i} + 3\mathbf{j}$ is:
 
-A. Douala  
-B. Buea  
-C. Foumban  
-D. Yaoundé  
-
----
-
-**Q18.** Cameroon became a federation in:
-
-A. 1972  
-B. 1984  
-C. 1960  
-D. 1961  
+A. 7  
+B. 6  
+C. 8  
+D. 5  
 
 ---
 
-**Q19.** The federal system in Cameroon was replaced by a unitary system in:
+**Q10.** The vectors $\mathbf{a} = 2\mathbf{i} + \mathbf{j}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j}$ are:
 
-A. 1990  
-B. 1972  
-C. 1961  
-D. 1982  
-
----
-
-**Q20.** The first president of Cameroon was:
-
-A. Ruben Um Nyobé  
-B. Ahmadou Ahidjo  
-C. John Ngu Foncha  
-D. Paul Biya  
+A. parallel  
+B. equal  
+C. opposite  
+D. perpendicular  
 
 ---
 
-**Q21.** The current president of Cameroon is:
+**Q11.** The sum $1 + 2 + 3 + \cdots + n$ equals:
 
-A. Emmanuel Nganou  
-B. Ahmadou Ahidjo  
-C. Paul Biya  
-D. John Ngu Foncha  
-
----
-
-**Q22.** Multiparty politics was reintroduced in Cameroon in:
-
-A. 1982  
-B. 1972  
-C. 1961  
-D. 1990  
+A. $\frac{n(n-1)}{2}$  
+B. $\frac{n(n+1)(2n+1)}{6}$  
+C. $\frac{n(n+1)}{2}$  
+D. $n^2$  
 
 ---
 
-**Q23.** The organisation formed in 1963 to unite African states was the:
+**Q12.** The sum $1^2 + 2^2 + \cdots + n^2$ equals:
 
-A. ECOWAS  
-B. UN  
-C. OAU  
-D. AU  
-
----
-
-**Q24.** The OAU was replaced by the African Union in:
-
-A. 2010  
-B. 1963  
-C. 1990  
-D. 2002  
+A. $\frac{n(n+1)}{2}$  
+B. $\frac{n^2(n+1)}{2}$  
+C. $n^3$  
+D. $\frac{n(n+1)(2n+1)}{6}$  
 
 ---
 
-**Q25.** The system of racial segregation in South Africa was called:
+**Q13.** The sum to infinity of $1 + \frac{1}{2} + \frac{1}{4} + \cdots$ is:
 
-A. apartheid  
-B. assimilation  
-C. indirect rule  
-D. colonialism  
-
----
-
-**Q26.** The leader who fought against apartheid in South Africa was:
-
-A. Nelson Mandela  
-B. Kwame Nkrumah  
-C. Julius Nyerere  
-D. Jomo Kenyatta  
+A. 3  
+B. 2  
+C. 1  
+D. $\frac{3}{2}$  
 
 ---
 
-**Q27.** The first president of independent Ghana was:
+**Q14.** The coefficient of $x^2$ in $(1 + x)^4$ is:
 
-A. Kwame Nkrumah  
-B. Jomo Kenyatta  
-C. Nelson Mandela  
-D. Julius Nyerere  
-
----
-
-**Q28.** The study of past events is called:
-
-A. history  
-B. economics  
-C. sociology  
-D. geography  
+A. 12  
+B. 6  
+C. 8  
+D. 4  
 
 ---
 
-**Q29.** Written records of the past are called:
+**Q15.** The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:
 
-A. documents  
-B. legends  
-C. artefacts  
-D. monuments  
-
----
-
-**Q30.** Objects made by people in the past are called:
-
-A. artefacts  
-B. manuscripts  
-C. archives  
-D. documents  
+A. 2  
+B. 1  
+C. 0  
+D. -1  
 
 ---
 
-**Q31.** The alliance of Germany, Austria-Hungary, and Italy was called the:
+**Q16.** Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:
 
-A. Triple Entente  
-B. Triple Alliance  
-C. Axis  
-D. Allies  
-
----
-
-**Q32.** The alliance of Britain, France, and Russia was called the:
-
-A. Triple Alliance  
-B. Triple Entente  
-C. Central Powers  
-D. Axis  
+A. $x^2 + 1$  
+B. $x^2 - x + 1$  
+C. $x^2 - 1$  
+D. $x^2 + x + 1$  
 
 ---
 
-**Q33.** The treaty that ended the First World War was the:
+**Q17.** The value of $\lim_{x \to 0} \frac{\sin x}{x}$ is:
 
-A. Treaty of Paris  
-B. Treaty of Berlin  
-C. Treaty of Versailles  
-D. Treaty of Rome  
-
----
-
-**Q34.** The international organisation formed after the First World War was the:
-
-A. United Nations  
-B. African Union  
-C. European Union  
-D. League of Nations  
+A. ∞  
+B. undefined  
+C. 1  
+D. 0  
 
 ---
 
-**Q35.** The Second World War began in:
+**Q18.** The value of $\lim_{x \to \infty} \frac{1}{x}$ is:
 
-A. 1914  
-B. 1929  
-C. 1939  
-D. 1945  
-
----
-
-**Q36.** The Second World War ended in:
-
-A. 1939  
-B. 1950  
-C. 1918  
-D. 1945  
+A. ∞  
+B. undefined  
+C. 1  
+D. 0  
 
 ---
 
-**Q37.** The leader of Nazi Germany was:
+**Q19.** The general solution of $\frac{dy}{dx} = \frac{y}{x}$ is:
 
-A. Joseph Stalin  
-B. Adolf Hitler  
-C. Benito Mussolini  
-D. Winston Churchill  
-
----
-
-**Q38.** The leader of Fascist Italy was:
-
-A. Joseph Stalin  
-B. Benito Mussolini  
-C. Francisco Franco  
-D. Adolf Hitler  
+A. $y = e^{kx}$  
+B. $y = kx$  
+C. $y = k/x$  
+D. $y = kx^2$  
 
 ---
 
-**Q39.** The systematic murder of six million Jews by the Nazis was called the:
+**Q20.** The roots of $x^2 - 5x + 6 = 0$ are:
 
-A. Pogrom  
-B. Genocide  
-C. Holocaust  
-D. Inquisition  
-
----
-
-**Q40.** The state of tension between the USA and the USSR after 1945 was called the:
-
-A. Proxy War  
-B. World War  
-C. Trade War  
-D. Cold War  
+A. 5 and 6  
+B. 2 and 3  
+C. -2 and -3  
+D. 1 and 6  
 
 ---
 
-**Q41.** The wall that divided Berlin was built in:
+**Q21.** The sum of the roots of $x^2 - 5x + 6 = 0$ is:
 
-A. 1989  
-B. 1950  
-C. 1961  
-D. 1945  
-
----
-
-**Q42.** The Berlin Wall fell in:
-
-A. 1945  
-B. 1991  
-C. 1961  
-D. 1989  
+A. -6  
+B. 6  
+C. 5  
+D. -5  
 
 ---
 
-**Q43.** The international organisation formed in 1945 to maintain peace was the:
+**Q22.** The product of the roots of $x^2 - 5x + 6 = 0$ is:
 
-A. European Union  
-B. United Nations  
-C. League of Nations  
-D. African Union  
-
----
-
-**Q44.** The organ of the UN responsible for maintaining peace is the:
-
-A. ICJ  
-B. Security Council  
-C. Secretariat  
-D. General Assembly  
+A. -5  
+B. 5  
+C. -6  
+D. 6  
 
 ---
 
-**Q45.** The crisis of 1962 that brought the world close to nuclear war was the:
+**Q23.** The partial fractions of $\frac{1}{(x-1)(x+1)}$ are:
 
-A. Korean Crisis  
-B. Berlin Crisis  
-C. Cuban Missile Crisis  
-D. Suez Crisis  
-
----
-
-**Q46.** The war fought between North and South Korea from 1950 to 1953 was a:
-
-A. trade war  
-B. world war  
-C. civil war  
-D. proxy war  
+A. $\frac{1}{x-1} - \frac{1}{x+1}$  
+B. $\frac{1/2}{x-1} + \frac{1/2}{x+1}$  
+C. $\frac{1/2}{x-1} - \frac{1/2}{x+1}$  
+D. $\frac{1}{x-1} + \frac{1}{x+1}$  
 
 ---
 
-**Q47.** The process of granting independence to colonies is called:
+**Q24.** The value of $(1 + i)^2$ is:
 
-A. globalisation  
-B. imperialism  
-C. decolonisation  
-D. colonisation  
-
----
-
-**Q48.** The economic union of European states is called the:
-
-A. Commonwealth  
-B. United Nations  
-C. African Union  
-D. European Union  
+A. -2  
+B. -2i  
+C. 2  
+D. 2i  
 
 ---
 
-**Q49.** The organisation that regulates international trade is the:
+**Q25.** The value of $(1 + i)^4$ is:
 
-A. WTO  
-B. IMF  
-C. UN  
-D. AU  
-
----
-
-**Q50.** The organisation that provides financial assistance to countries is the:
-
-A. IMF  
-B. WTO  
-C. AU  
-D. UN  
+A. -4  
+B. 4  
+C. 4i  
+D. -4i  
 
 ---
 
-**Q51.** The increasing interconnection of the world''s economies is called:
+**Q26.** The modulus of $\frac{1}{i}$ is:
 
-A. globalisation  
-B. nationalism  
-C. colonisation  
-D. protectionism  
-
----
-
-**Q52.** The use of violence for political aims is called:
-
-A. terrorism  
-B. imperialism  
-C. diplomacy  
-D. nationalism  
+A. 1  
+B. 0  
+C. -1  
+D. i  
 
 ---
 
-**Q53.** The association of former British colonies is called the:
+**Q27.** The argument of $-1$ is:
 
-A. Commonwealth  
-B. United Nations  
-C. European Union  
-D. African Union  
-
----
-
-**Q54.** The declaration that protects the rights of all people was the:
-
-A. Universal Declaration of Human Rights  
-B. Atlantic Charter  
-C. Berlin Act  
-D. Treaty of Versailles  
+A. 180°  
+B. 90°  
+C. 0°  
+D. 270°  
 
 ---
 
-**Q55.** The Universal Declaration of Human Rights was adopted in:
+**Q28.** The modulus of $3 + 4i$ is:
 
-A. 1918  
-B. 1948  
-C. 1939  
-D. 1960  
-
----
-
-**Q56.** The leader of the Soviet Union during the Cuban Missile Crisis was:
-
-A. Joseph Stalin  
-B. Nikita Khrushchev  
-C. Mikhail Gorbachev  
-D. Vladimir Lenin  
+A. 5  
+B. 1  
+C. 25  
+D. 7  
 
 ---
 
-**Q57.** The leader of the United States during the Cuban Missile Crisis was:
+**Q29.** The argument of $1 + i$ is:
 
-A. Franklin Roosevelt  
-B. Harry Truman  
-C. John F. Kennedy  
-D. Richard Nixon  
-
----
-
-**Q58.** The First World War began in:
-
-A. 1918  
-B. 1939  
-C. 1900  
-D. 1914  
+A. 45°  
+B. 30°  
+C. 90°  
+D. 135°  
 
 ---
 
-**Q59.** The First World War ended in:
+**Q30.** The complex conjugate of $2 - 3i$ is:
 
-A. 1914  
-B. 1920  
-C. 1918  
-D. 1945  
+A. 2 + 3i  
+B. -2 - 3i  
+C. -2 + 3i  
+D. 2 - 3i  
 
 ---
 
-**Q60.** The assassination that triggered the First World War was that of:
+**Q31.** The acceleration of a body of mass 2 kg under a force of 10 N is:
 
-A. Adolf Hitler  
-B. Kaiser Wilhelm  
-C. Napoleon  
-D. Archduke Franz Ferdinand  
+A. 2 m/s²  
+B. 5 m/s²  
+C. 20 m/s²  
+D. 0.2 m/s²  
+
+---
+
+**Q32.** The momentum of a 3 kg body moving at 4 m/s is:
+
+A. 7 kg m/s  
+B. 12 kg m/s  
+C. 48 kg m/s  
+D. 1 kg m/s  
+
+---
+
+**Q33.** The kinetic energy of a 2 kg body moving at 3 m/s is:
+
+A. 6 J  
+B. 18 J  
+C. 9 J  
+D. 12 J  
+
+---
+
+**Q34.** The work done by a force of 10 N moving a body 5 m is:
+
+A. 2 J  
+B. 15 J  
+C. 0.5 J  
+D. 50 J  
+
+---
+
+**Q35.** The power of a machine doing 300 J of work in 10 s is:
+
+A. 3000 W  
+B. 0.03 W  
+C. 30 W  
+D. 3 W  
+
+---
+
+**Q36.** The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:
+
+A. 10 m  
+B. 2 m  
+C. 40 m  
+D. 20 m  
+
+---
+
+**Q37.** The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:
+
+A. 2.5 s  
+B. 5 s  
+C. 10 s  
+D. 50 s  
+
+---
+
+**Q38.** The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:
+
+A. 250 m  
+B. 216.5 m  
+C. 433 m  
+D. 125 m  
+
+---
+
+**Q39.** A uniform rod is balanced at its centre. The principle of moments states:
+
+A. work = force × distance  
+B. sum of forces = 0  
+C. sum of clockwise moments = sum of anticlockwise moments  
+D. power = work ÷ time  
+
+---
+
+**Q40.** The centre of mass of a uniform rod is at its:
+
+A. one-quarter point  
+B. end  
+C. centre of gravity of the rod  
+D. midpoint  
+
+---
+
+**Q41.** The probability of getting exactly 6 heads in 10 tosses of a fair coin is:
+
+A. $\binom{10}{6}(1/2)^6$  
+B. $6/10$  
+C. $\binom{10}{6}(1/2)^{10}$  
+D. $(1/2)^6$  
+
+---
+
+**Q42.** The mean of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 10  
+B. 0.5  
+C. 2.5  
+D. 5  
+
+---
+
+**Q43.** The variance of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 0.5  
+B. 2.5  
+C. 5  
+D. 10  
+
+---
+
+**Q44.** The mean of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. λ  
+C. √λ  
+D. λ²  
+
+---
+
+**Q45.** The variance of a Poisson distribution with parameter λ is:
+
+A. 1/λ  
+B. λ²  
+C. λ  
+D. √λ  
+
+---
+
+**Q46.** For a standard normal distribution, the mean is:
+
+A. 100  
+B. 1  
+C. 50  
+D. 0  
+
+---
+
+**Q47.** For a standard normal distribution, the variance is:
+
+A. 100  
+B. 50  
+C. 1  
+D. 0  
+
+---
+
+**Q48.** The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:
+
+A. 1.2  
+B. 0.5  
+C. 10  
+D. 2  
+
+---
+
+**Q49.** The 95% confidence interval for a mean uses the z-value:
+
+A. 1.96  
+B. 1.64  
+C. 2.58  
+D. 0.95  
+
+---
+
+**Q50.** The 99% confidence interval for a mean uses the z-value:
+
+A. 2.58  
+B. 1.96  
+C. 0.99  
+D. 1.64  
+
+---
+
+**Q51.** A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:
+
+A. 0.8  
+B. 0.08  
+C. 8  
+D. 80  
+
+---
+
+**Q52.** The Pearson correlation coefficient ranges from:
+
+A. -1 to 1  
+B. -∞ to ∞  
+C. 0 to 100  
+D. 0 to 1  
+
+---
+
+**Q53.** A correlation coefficient of 0 indicates:
+
+A. no linear correlation  
+B. strong correlation  
+C. perfect positive correlation  
+D. perfect negative correlation  
+
+---
+
+**Q54.** The probability of getting a sum of 7 when two dice are thrown is:
+
+A. 6/36  
+B. 1/6  
+C. 7/36  
+D. 1/36  
+
+---
+
+**Q55.** The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:
+
+A. 5/8  
+B. 3/8  
+C. 3/5  
+D. 1/8  
+
+---
+
+**Q56.** Two events are independent if:
+
+A. P(A∩B) = P(A) + P(B)  
+B. P(A∩B) = P(A)P(B)  
+C. P(A) = P(B)  
+D. P(A∪B) = P(A)P(B)  
+
+---
+
+**Q57.** The probability of an impossible event is:
+
+A. 1  
+B. 0.5  
+C. 0  
+D. undefined  
+
+---
+
+**Q58.** The probability of a certain event is:
+
+A. 0  
+B. 0.5  
+C. undefined  
+D. 1  
+
+---
+
+**Q59.** The SI unit of force is the:
+
+A. joule  
+B. pascal  
+C. newton  
+D. watt  
+
+---
+
+**Q60.** The SI unit of momentum is:
+
+A. kg m/s²  
+B. J  
+C. N m  
+D. kg m/s  
 
 ---
 
@@ -2207,14 +2664,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'History'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -2224,21 +2681,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'History',
-  'CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 3',
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HISTORY P1 SET 3
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P1 SET 3
 
 ## Multiple Choice Question Bank
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** general, arts
-**Subject:** History
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
 
 **Instructions:**
 
@@ -2251,543 +2708,543 @@ values (
 
 ## QUESTIONS
 
-**Q1.** The slave trade was abolished in the British Empire in:
+**Q1.** The value of $i^4$ is:
 
-A. 1807  
-B. 1884  
-C. 1914  
-D. 1945  
-
----
-
-**Q2.** The conference that divided Africa among European powers was the:
-
-A. Berlin Conference  
-B. Paris Conference  
-C. London Conference  
-D. Geneva Conference  
+A. 1  
+B. -1  
+C. i  
+D. -i  
 
 ---
 
-**Q3.** The Berlin Conference took place in:
+**Q2.** The determinant of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
 
-A. 1884-1885  
-B. 1939-1945  
-C. 1914-1918  
-D. 1960-1961  
-
----
-
-**Q4.** The European power that first colonised Cameroon was:
-
-A. Germany  
-B. France  
-C. Belgium  
-D. Britain  
+A. 5  
+B. 11  
+C. 6  
+D. 10  
 
 ---
 
-**Q5.** Germany lost Cameroon after the:
+**Q3.** The inverse of $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$ is:
 
-A. First World War  
-B. Scramble for Africa  
-C. Second World War  
-D. Berlin Conference  
-
----
-
-**Q6.** After the First World War, Cameroon was divided between:
-
-A. Britain and France  
-B. Germany and Italy  
-C. France and Belgium  
-D. Britain and Germany  
+A. $\begin{pmatrix} 1/2 & 0 \\ 0 & 1/4 \end{pmatrix}$  
+B. $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$  
+C. $\begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$  
+D. $\begin{pmatrix} 0 & 2 \\ 4 & 0 \end{pmatrix}$  
 
 ---
 
-**Q7.** The system of government used by the British in Cameroon was:
+**Q4.** The trace of $\begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$ is:
 
-A. direct rule  
-B. indirect rule  
-C. assimilation  
-D. apartheid  
-
----
-
-**Q8.** The system of government used by the French in Cameroon was:
-
-A. indirect rule  
-B. assimilation  
-C. federation  
-D. apartheid  
+A. 6  
+B. 11  
+C. 10  
+D. 5  
 
 ---
 
-**Q9.** The desire of a people to govern themselves is called:
+**Q5.** The eigenvalues of $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$ are:
 
-A. colonialism  
-B. imperialism  
-C. nationalism  
-D. federalism  
-
----
-
-**Q10.** The political party that led the struggle for independence in French Cameroon was the:
-
-A. KNDP  
-B. CPNC  
-C. CNO  
-D. UPC  
+A. 2 and 3  
+B. 0 and 1  
+C. 5 and 6  
+D. 1 and 2  
 
 ---
 
-**Q11.** French Cameroon gained independence in:
+**Q6.** The dot product of $\mathbf{i} + 2\mathbf{j}$ and $2\mathbf{i} + 3\mathbf{j}$ is:
 
-A. 1961  
-B. 1972  
-C. 1960  
-D. 1945  
-
----
-
-**Q12.** The vote held in British Southern Cameroons in 1961 was called the:
-
-A. referendum  
-B. census  
-C. election  
-D. plebiscite  
+A. 8  
+B. 5  
+C. 6  
+D. 7  
 
 ---
 
-**Q13.** The reunification of Cameroon took place in:
+**Q7.** The vectors $\mathbf{a} = 2\mathbf{i} + \mathbf{j}$ and $\mathbf{b} = \mathbf{i} - 2\mathbf{j}$ are:
 
-A. 1972  
-B. 1961  
-C. 1960  
-D. 1982  
-
----
-
-**Q14.** The conference that discussed the reunification of Cameroon was held at:
-
-A. Douala  
-B. Foumban  
-C. Buea  
-D. Yaoundé  
+A. parallel  
+B. perpendicular  
+C. equal  
+D. opposite  
 
 ---
 
-**Q15.** Cameroon became a federation in:
+**Q8.** The sum $1 + 2 + 3 + \cdots + n$ equals:
 
-A. 1972  
-B. 1960  
-C. 1961  
-D. 1984  
-
----
-
-**Q16.** The federal system in Cameroon was replaced by a unitary system in:
-
-A. 1982  
-B. 1961  
-C. 1990  
-D. 1972  
+A. $\frac{n(n-1)}{2}$  
+B. $\frac{n(n+1)}{2}$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $n^2$  
 
 ---
 
-**Q17.** The first president of Cameroon was:
+**Q9.** The sum $1^2 + 2^2 + \cdots + n^2$ equals:
 
-A. John Ngu Foncha  
-B. Ruben Um Nyobé  
-C. Ahmadou Ahidjo  
-D. Paul Biya  
-
----
-
-**Q18.** The current president of Cameroon is:
-
-A. John Ngu Foncha  
-B. Emmanuel Nganou  
-C. Ahmadou Ahidjo  
-D. Paul Biya  
+A. $\frac{n(n+1)}{2}$  
+B. $n^3$  
+C. $\frac{n(n+1)(2n+1)}{6}$  
+D. $\frac{n^2(n+1)}{2}$  
 
 ---
 
-**Q19.** Multiparty politics was reintroduced in Cameroon in:
+**Q10.** The sum to infinity of $1 + \frac{1}{2} + \frac{1}{4} + \cdots$ is:
 
-A. 1982  
-B. 1990  
-C. 1972  
-D. 1961  
-
----
-
-**Q20.** The organisation formed in 1963 to unite African states was the:
-
-A. ECOWAS  
-B. OAU  
-C. UN  
-D. AU  
+A. 1  
+B. 3  
+C. $\frac{3}{2}$  
+D. 2  
 
 ---
 
-**Q21.** The OAU was replaced by the African Union in:
+**Q11.** The coefficient of $x^2$ in $(1 + x)^4$ is:
 
-A. 2010  
-B. 1990  
-C. 2002  
-D. 1963  
-
----
-
-**Q22.** The system of racial segregation in South Africa was called:
-
-A. colonialism  
-B. assimilation  
-C. indirect rule  
-D. apartheid  
+A. 4  
+B. 8  
+C. 6  
+D. 12  
 
 ---
 
-**Q23.** The leader who fought against apartheid in South Africa was:
+**Q12.** The remainder when $x^3 - 2x + 1$ is divided by $x - 1$ is:
 
-A. Julius Nyerere  
-B. Jomo Kenyatta  
-C. Nelson Mandela  
-D. Kwame Nkrumah  
-
----
-
-**Q24.** The first president of independent Ghana was:
-
-A. Julius Nyerere  
-B. Jomo Kenyatta  
-C. Nelson Mandela  
-D. Kwame Nkrumah  
+A. 1  
+B. -1  
+C. 2  
+D. 0  
 
 ---
 
-**Q25.** The study of past events is called:
+**Q13.** Given that $x - 1$ is a factor of $x^3 - 1$, the other factor is:
 
-A. history  
-B. geography  
-C. economics  
-D. sociology  
-
----
-
-**Q26.** Written records of the past are called:
-
-A. documents  
-B. artefacts  
-C. legends  
-D. monuments  
+A. $x^2 + 1$  
+B. $x^2 + x + 1$  
+C. $x^2 - x + 1$  
+D. $x^2 - 1$  
 
 ---
 
-**Q27.** Objects made by people in the past are called:
+**Q14.** The value of $\lim_{x \to 0} \frac{\sin x}{x}$ is:
 
-A. artefacts  
-B. archives  
-C. documents  
-D. manuscripts  
-
----
-
-**Q28.** The traditional ruler of the Bamenda people is the:
-
-A. Fon  
-B. Lamido  
-C. Chief  
-D. Sultan  
+A. ∞  
+B. 1  
+C. undefined  
+D. 0  
 
 ---
 
-**Q29.** The traditional ruler of the Bamoun people is the:
+**Q15.** The value of $\lim_{x \to \infty} \frac{1}{x}$ is:
 
-A. Sultan  
-B. Emir  
-C. Fon  
-D. Lamido  
-
----
-
-**Q30.** The forced removal of Africans to the Americas was called the:
-
-A. slave trade  
-B. mandate  
-C. partition  
-D. scramble  
+A. ∞  
+B. 1  
+C. 0  
+D. undefined  
 
 ---
 
-**Q31.** The international organisation formed after the First World War was the:
+**Q16.** The general solution of $\frac{dy}{dx} = \frac{y}{x}$ is:
 
-A. United Nations  
-B. League of Nations  
-C. African Union  
-D. European Union  
-
----
-
-**Q32.** The Second World War began in:
-
-A. 1914  
-B. 1939  
-C. 1929  
-D. 1945  
+A. $y = kx^2$  
+B. $y = k/x$  
+C. $y = e^{kx}$  
+D. $y = kx$  
 
 ---
 
-**Q33.** The Second World War ended in:
+**Q17.** The roots of $x^2 - 5x + 6 = 0$ are:
 
-A. 1939  
-B. 1918  
-C. 1945  
-D. 1950  
-
----
-
-**Q34.** The leader of Nazi Germany was:
-
-A. Benito Mussolini  
-B. Joseph Stalin  
-C. Winston Churchill  
-D. Adolf Hitler  
+A. -2 and -3  
+B. 5 and 6  
+C. 2 and 3  
+D. 1 and 6  
 
 ---
 
-**Q35.** The leader of Fascist Italy was:
+**Q18.** The sum of the roots of $x^2 - 5x + 6 = 0$ is:
 
-A. Adolf Hitler  
-B. Francisco Franco  
-C. Benito Mussolini  
-D. Joseph Stalin  
-
----
-
-**Q36.** The systematic murder of six million Jews by the Nazis was called the:
-
-A. Genocide  
-B. Inquisition  
-C. Pogrom  
-D. Holocaust  
+A. -5  
+B. -6  
+C. 6  
+D. 5  
 
 ---
 
-**Q37.** The state of tension between the USA and the USSR after 1945 was called the:
+**Q19.** The product of the roots of $x^2 - 5x + 6 = 0$ is:
 
-A. Proxy War  
-B. Cold War  
-C. World War  
-D. Trade War  
-
----
-
-**Q38.** The wall that divided Berlin was built in:
-
-A. 1989  
-B. 1961  
-C. 1950  
-D. 1945  
+A. -5  
+B. 6  
+C. 5  
+D. -6  
 
 ---
 
-**Q39.** The Berlin Wall fell in:
+**Q20.** The partial fractions of $\frac{1}{(x-1)(x+1)}$ are:
 
-A. 1945  
-B. 1961  
-C. 1989  
-D. 1991  
-
----
-
-**Q40.** The international organisation formed in 1945 to maintain peace was the:
-
-A. African Union  
-B. League of Nations  
-C. European Union  
-D. United Nations  
+A. $\frac{1}{x-1} - \frac{1}{x+1}$  
+B. $\frac{1/2}{x-1} - \frac{1/2}{x+1}$  
+C. $\frac{1/2}{x-1} + \frac{1/2}{x+1}$  
+D. $\frac{1}{x-1} + \frac{1}{x+1}$  
 
 ---
 
-**Q41.** The organ of the UN responsible for maintaining peace is the:
+**Q21.** The value of $(1 + i)^2$ is:
 
-A. Secretariat  
-B. ICJ  
-C. Security Council  
-D. General Assembly  
-
----
-
-**Q42.** The crisis of 1962 that brought the world close to nuclear war was the:
-
-A. Suez Crisis  
-B. Korean Crisis  
-C. Berlin Crisis  
-D. Cuban Missile Crisis  
+A. -2  
+B. 2  
+C. 2i  
+D. -2i  
 
 ---
 
-**Q43.** The war fought between North and South Korea from 1950 to 1953 was a:
+**Q22.** The value of $(1 + i)^4$ is:
 
-A. trade war  
-B. proxy war  
-C. world war  
-D. civil war  
-
----
-
-**Q44.** The process of granting independence to colonies is called:
-
-A. globalisation  
-B. decolonisation  
-C. imperialism  
-D. colonisation  
+A. -4i  
+B. 4  
+C. 4i  
+D. -4  
 
 ---
 
-**Q45.** The economic union of European states is called the:
+**Q23.** The modulus of $\frac{1}{i}$ is:
 
-A. Commonwealth  
-B. African Union  
-C. European Union  
-D. United Nations  
-
----
-
-**Q46.** The organisation that regulates international trade is the:
-
-A. AU  
-B. IMF  
-C. UN  
-D. WTO  
+A. -1  
+B. i  
+C. 1  
+D. 0  
 
 ---
 
-**Q47.** The organisation that provides financial assistance to countries is the:
+**Q24.** The argument of $-1$ is:
 
-A. AU  
-B. UN  
-C. IMF  
-D. WTO  
-
----
-
-**Q48.** The increasing interconnection of the world''s economies is called:
-
-A. protectionism  
-B. nationalism  
-C. colonisation  
-D. globalisation  
+A. 270°  
+B. 90°  
+C. 0°  
+D. 180°  
 
 ---
 
-**Q49.** The use of violence for political aims is called:
+**Q25.** The modulus of $3 + 4i$ is:
 
-A. terrorism  
-B. nationalism  
-C. imperialism  
-D. diplomacy  
-
----
-
-**Q50.** The association of former British colonies is called the:
-
-A. Commonwealth  
-B. European Union  
-C. United Nations  
-D. African Union  
+A. 5  
+B. 7  
+C. 1  
+D. 25  
 
 ---
 
-**Q51.** The declaration that protects the rights of all people was the:
+**Q26.** The argument of $1 + i$ is:
 
-A. Universal Declaration of Human Rights  
-B. Berlin Act  
-C. Treaty of Versailles  
-D. Atlantic Charter  
-
----
-
-**Q52.** The Universal Declaration of Human Rights was adopted in:
-
-A. 1948  
-B. 1939  
-C. 1960  
-D. 1918  
+A. 45°  
+B. 90°  
+C. 30°  
+D. 135°  
 
 ---
 
-**Q53.** The leader of the Soviet Union during the Cuban Missile Crisis was:
+**Q27.** The complex conjugate of $2 - 3i$ is:
 
-A. Nikita Khrushchev  
-B. Mikhail Gorbachev  
-C. Joseph Stalin  
-D. Vladimir Lenin  
-
----
-
-**Q54.** The leader of the United States during the Cuban Missile Crisis was:
-
-A. John F. Kennedy  
-B. Richard Nixon  
-C. Harry Truman  
-D. Franklin Roosevelt  
+A. 2 + 3i  
+B. -2 + 3i  
+C. 2 - 3i  
+D. -2 - 3i  
 
 ---
 
-**Q55.** The First World War began in:
+**Q28.** The product $(1 + i)(1 - i)$ equals:
 
-A. 1918  
-B. 1914  
-C. 1939  
-D. 1900  
-
----
-
-**Q56.** The First World War ended in:
-
-A. 1914  
-B. 1918  
-C. 1920  
-D. 1945  
+A. 2  
+B. 1  
+C. -2  
+D. 0  
 
 ---
 
-**Q57.** The assassination that triggered the First World War was that of:
+**Q29.** The roots of $z^2 + 4 = 0$ are:
 
-A. Adolf Hitler  
-B. Napoleon  
-C. Archduke Franz Ferdinand  
-D. Kaiser Wilhelm  
-
----
-
-**Q58.** The alliance of Germany, Austria-Hungary, and Italy was called the:
-
-A. Triple Entente  
-B. Axis  
-C. Allies  
-D. Triple Alliance  
+A. ±2i  
+B. ±4  
+C. ±2  
+D. ±4i  
 
 ---
 
-**Q59.** The alliance of Britain, France, and Russia was called the:
+**Q30.** The value of $i^2$ is:
 
-A. Triple Alliance  
-B. Central Powers  
-C. Triple Entente  
-D. Axis  
+A. -1  
+B. -i  
+C. i  
+D. 1  
 
 ---
 
-**Q60.** The treaty that ended the First World War was the:
+**Q31.** The work done by a force of 10 N moving a body 5 m is:
 
-A. Treaty of Paris  
-B. Treaty of Rome  
-C. Treaty of Berlin  
-D. Treaty of Versailles  
+A. 2 J  
+B. 50 J  
+C. 15 J  
+D. 0.5 J  
+
+---
+
+**Q32.** The power of a machine doing 300 J of work in 10 s is:
+
+A. 3000 W  
+B. 30 W  
+C. 0.03 W  
+D. 3 W  
+
+---
+
+**Q33.** The maximum height reached by a body projected at 20 m/s (g = 10 m/s²) is:
+
+A. 10 m  
+B. 40 m  
+C. 20 m  
+D. 2 m  
+
+---
+
+**Q34.** The time of flight of a projectile fired at 50 m/s at 30° to the horizontal (g = 10 m/s²) is:
+
+A. 10 s  
+B. 2.5 s  
+C. 50 s  
+D. 5 s  
+
+---
+
+**Q35.** The horizontal range of a projectile fired at 50 m/s at 30° (g = 10 m/s²) is:
+
+A. 125 m  
+B. 433 m  
+C. 216.5 m  
+D. 250 m  
+
+---
+
+**Q36.** A uniform rod is balanced at its centre. The principle of moments states:
+
+A. sum of forces = 0  
+B. power = work ÷ time  
+C. work = force × distance  
+D. sum of clockwise moments = sum of anticlockwise moments  
+
+---
+
+**Q37.** The centre of mass of a uniform rod is at its:
+
+A. one-quarter point  
+B. midpoint  
+C. end  
+D. centre of gravity of the rod  
+
+---
+
+**Q38.** The probability of getting exactly 6 heads in 10 tosses of a fair coin is:
+
+A. $\binom{10}{6}(1/2)^6$  
+B. $\binom{10}{6}(1/2)^{10}$  
+C. $6/10$  
+D. $(1/2)^6$  
+
+---
+
+**Q39.** The mean of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 10  
+B. 2.5  
+C. 5  
+D. 0.5  
+
+---
+
+**Q40.** The variance of a binomial distribution with n = 10 and p = 0.5 is:
+
+A. 10  
+B. 5  
+C. 0.5  
+D. 2.5  
+
+---
+
+**Q41.** The mean of a Poisson distribution with parameter λ is:
+
+A. √λ  
+B. 1/λ  
+C. λ  
+D. λ²  
+
+---
+
+**Q42.** The variance of a Poisson distribution with parameter λ is:
+
+A. √λ  
+B. 1/λ  
+C. λ²  
+D. λ  
+
+---
+
+**Q43.** For a standard normal distribution, the mean is:
+
+A. 100  
+B. 0  
+C. 1  
+D. 50  
+
+---
+
+**Q44.** For a standard normal distribution, the variance is:
+
+A. 100  
+B. 1  
+C. 50  
+D. 0  
+
+---
+
+**Q45.** The z-score of a value 60 from a normal distribution with mean 50 and standard deviation 5 is:
+
+A. 1.2  
+B. 10  
+C. 2  
+D. 0.5  
+
+---
+
+**Q46.** The 95% confidence interval for a mean uses the z-value:
+
+A. 0.95  
+B. 1.64  
+C. 2.58  
+D. 1.96  
+
+---
+
+**Q47.** The 99% confidence interval for a mean uses the z-value:
+
+A. 0.99  
+B. 1.64  
+C. 2.58  
+D. 1.96  
+
+---
+
+**Q48.** A sample of 100 items has mean 60 and standard deviation 8. The standard error of the mean is:
+
+A. 80  
+B. 0.08  
+C. 8  
+D. 0.8  
+
+---
+
+**Q49.** The Pearson correlation coefficient ranges from:
+
+A. -1 to 1  
+B. 0 to 1  
+C. -∞ to ∞  
+D. 0 to 100  
+
+---
+
+**Q50.** A correlation coefficient of 0 indicates:
+
+A. no linear correlation  
+B. perfect positive correlation  
+C. strong correlation  
+D. perfect negative correlation  
+
+---
+
+**Q51.** The probability of getting a sum of 7 when two dice are thrown is:
+
+A. 6/36  
+B. 7/36  
+C. 1/36  
+D. 1/6  
+
+---
+
+**Q52.** The probability of drawing a red ball from a bag of 3 red and 5 blue balls is:
+
+A. 3/8  
+B. 3/5  
+C. 1/8  
+D. 5/8  
+
+---
+
+**Q53.** Two events are independent if:
+
+A. P(A∩B) = P(A)P(B)  
+B. P(A) = P(B)  
+C. P(A∩B) = P(A) + P(B)  
+D. P(A∪B) = P(A)P(B)  
+
+---
+
+**Q54.** The probability of an impossible event is:
+
+A. 0  
+B. undefined  
+C. 0.5  
+D. 1  
+
+---
+
+**Q55.** The probability of a certain event is:
+
+A. 0  
+B. 1  
+C. 0.5  
+D. undefined  
+
+---
+
+**Q56.** The SI unit of force is the:
+
+A. joule  
+B. newton  
+C. pascal  
+D. watt  
+
+---
+
+**Q57.** The SI unit of momentum is:
+
+A. kg m/s²  
+B. N m  
+C. kg m/s  
+D. J  
+
+---
+
+**Q58.** The SI unit of impulse is:
+
+A. N m  
+B. J  
+C. W  
+D. N s  
+
+---
+
+**Q59.** The acceleration of a body of mass 2 kg under a force of 10 N is:
+
+A. 2 m/s²  
+B. 0.2 m/s²  
+C. 5 m/s²  
+D. 20 m/s²  
+
+---
+
+**Q60.** The momentum of a 3 kg body moving at 4 m/s is:
+
+A. 7 kg m/s  
+B. 48 kg m/s  
+C. 1 kg m/s  
+D. 12 kg m/s  
 
 ---
 
@@ -2871,14 +3328,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Commerce'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 4'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -2888,21 +3345,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Commerce',
-  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 4',
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 4
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 1
 
-## Structural Question Bank — Trade and business documents
+## Structural Question Bank - Set 1
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Commerce
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
 
 **Instructions:**
 
@@ -2913,165 +3370,367 @@ values (
 
 ---
 
-## SECTION 1: TRADE AND BUSINESS DOCUMENTS
+## SECTION 1: ALGEBRA - Polynomials, Inequalities and Partial Fractions
 
-**Q1.** (a) Define the term "commerce". *(2 marks)*
+**Q1.** The polynomial $P(x) = 2x^4 - 3x^3 + ax^2 + bx - 6$ has $(2x - 1)$ and $(x + 2)$ as factors.
 
-(b) Distinguish between trade and aids to trade. *(4 marks)*
+(a) Find the values of $a$ and $b$. *(4 marks)*
 
-(c) Explain the importance of commerce to the economy of Cameroon. *(4 marks)*
+(b) Factorise $P(x)$ completely over $\mathbb{R}$. *(3 marks)*
 
----
-
-**Q2.** (a) What is home trade? *(2 marks)*
-
-(b) Distinguish between wholesale and retail trade. *(4 marks)*
-
-(c) State three functions of a wholesaler. *(3 marks)*
+(c) Hence, solve the inequality $P(x) \geq 0$, expressing your answer in interval notation. *(3 marks)*
 
 ---
 
-**Q3.** (a) Define the term "retailer". *(2 marks)*
+**Q2.** Given that $f(x) = \dfrac{3x^3 - x^2 - 13x + 7}{(x-2)(x^2 - x - 1)}$:
 
-(b) State three functions of a retailer. *(3 marks)*
+(a) Express $f(x)$ in partial fractions. *(6 marks)*
 
-(c) Explain two problems faced by retailers in Cameroon. *(4 marks)*
-
----
-
-**Q4.** (a) What is foreign trade? *(2 marks)*
-
-(b) Distinguish between imports and exports. *(4 marks)*
-
-(c) Explain the importance of foreign trade to Cameroon. *(4 marks)*
+(b) Hence evaluate $\displaystyle\int_0^{1} f(x)\, dx$, leaving your answer in the form $a\ln 2 + b\ln 5 + c\ln 3$. *(4 marks)*
 
 ---
 
-**Q5.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+**Q3.** (a) Show that the equation $x^4 - 6x^2 + 2x + 3 = 0$ has a root between $x = 2$ and $x = 3$. *(2 marks)*
 
-(b) Explain the difference between a favourable and an unfavourable balance of trade. *(4 marks)*
+(b) Using the substitution $x = u + \dfrac{1}{u}$, or otherwise, solve $x^4 - 6x^2 + 2x + 3 = 0$ giving all real roots correct to 3 significant figures. *(6 marks)*
 
-(c) State three ways of correcting an unfavourable balance of trade. *(3 marks)*
-
----
-
-**Q6.** (a) What is an invoice? *(2 marks)*
-
-(b) State the information contained in an invoice. *(4 marks)*
-
-(c) Distinguish between a proforma invoice and a commercial invoice. *(4 marks)*
+(c) Without further calculation, state the nature and number of complex roots. *(2 marks)*
 
 ---
 
-**Q7.** (a) Define the terms "receipt" and "credit note". *(4 marks)*
+**Q4.** Solve simultaneously the system:
 
-(b) Explain when a credit note is issued. *(3 marks)*
+$$\log_2(x + y) = 3, \quad \log_4(x - y) = 2, \quad x, y \in \mathbb{R}$$
 
-(c) Distinguish between a debit note and a credit note. *(4 marks)*
-
----
-
-**Q8.** (a) What is a bill of lading? *(2 marks)*
-
-(b) State the functions of a bill of lading. *(4 marks)*
-
-(c) Explain the difference between a bill of lading and an air waybill. *(4 marks)*
+Hence find all pairs $(x, y)$ that also satisfy $\dfrac{x^2 - y^2}{x + y} = 2y - 1$. *(10 marks)*
 
 ---
 
-**Q9.** (a) Define the term "transport". *(2 marks)*
+**Q5.** Given that $\alpha, \beta, \gamma$ are the roots of $x^3 - px + q = 0$, where $p, q \neq 0$:
 
-(b) State three modes of transport used in trade. *(3 marks)*
+(a) Find $\alpha^2+\beta^2+\gamma^2$, $\alpha^3+\beta^3+\gamma^3$, and $\alpha^4+\beta^4+\gamma^4$ in terms of $p$ and $q$. *(6 marks)*
 
-(c) Explain the advantages and disadvantages of road transport. *(5 marks)*
-
----
-
-**Q10.** (a) What is a warehouse? *(2 marks)*
-
-(b) State three functions of warehousing. *(3 marks)
-
-(c) Explain the importance of warehousing to a wholesaler. *(4 marks)*
+(b) Find the cubic equation whose roots are $\alpha^2, \beta^2, \gamma^2$. *(4 marks)*
 
 ---
 
-**Q11.** (a) Define the term "advertising". *(2 marks)*
+## SECTION 2: FUNCTIONS, SERIES AND TRIGONOMETRY
 
-(b) State three media used for advertising. *(3 marks)*
+**Q6.** (a) Find the first four terms in the expansion of $(1 - 3x)^{-2}$ in ascending powers of $x$, stating the range of validity. *(4 marks)*
 
-(c) Explain the importance of advertising to a business. *(4 marks)*
+(b) Use your expansion to estimate $\dfrac{1}{0.97^2}$ correct to 5 decimal places. *(3 marks)*
 
----
-
-**Q12.** (a) What is a market? *(2 marks)*
-
-(b) Distinguish between a consumer market and an industrial market. *(4 marks)*
-
-(c) State three factors that influence the choice of a market. *(3 marks)*
+(c) Find the coefficient of $x^8$ in $(1 + x + x^2)^9$. *(5 marks)*
 
 ---
 
-**Q13.** (a) Define the term "marketing". *(2 marks)*
+**Q7.** The functions $f$ and $g$ are defined by $f(x)=e^{2x}-5$ and $g(x)=\dfrac{x+1}{x-3}$, $x \neq 3$.
 
-(b) State the four Ps of the marketing mix. *(4 marks)*
+(a) Find $f^{-1}(x)$ and state its domain. *(4 marks)*
 
-(c) Explain the importance of the marketing mix to a business. *(4 marks)*
+(b) Solve $f(g(x)) = g(f(x))$ where both sides are defined. *(6 marks)*
 
----
-
-**Q14.** (a) What is a sole proprietorship? *(2 marks)*
-
-(b) State three advantages and three disadvantages of a sole proprietorship. *(6 marks)*
-
-(c) Explain why many small businesses in Cameroon are sole proprietorships. *(3 marks)*
+(c) Find the fixed points of $g \circ g$. *(4 marks)*
 
 ---
 
-**Q15.** (a) Define the term "partnership". *(2 marks)*
+**Q8.** The function $h(x)=x^2-6x+11$ is restricted to a domain on which it is one-to-one.
 
-(b) State three features of a partnership. *(3 marks)*
+(a) State a suitable maximal domain and find $h^{-1}(x)$. *(4 marks)*
 
-(c) Explain the difference between a general partner and a limited partner. *(4 marks)*
+(b) Sketch $y=h(x)$ and $y=h^{-1}(x)$ on the same axes. *(3 marks)*
 
----
-
-**Q16.** (a) What is a limited liability company? *(2 marks)*
-
-(b) Distinguish between a private limited company and a public limited company. *(4 marks)*
-
-(c) State three advantages of a limited liability company. *(3 marks)*
+(c) Solve $h(x)=h^{-1}(x)$ for all possible values on the chosen domain. *(5 marks)*
 
 ---
 
-**Q17.** (a) Define the term "cooperative society". *(2 marks)*
+**Q9.** (a) Prove that $\cot\theta - \tan\theta \equiv 2\cot 2\theta$. *(4 marks)*
 
-(b) State three types of cooperative societies. *(3 marks)*
+(b) Solve $2\sin^2 x + 5\cos x - 4 = 0$ for $0^\circ \leq x \leq 360^\circ$. *(4 marks)*
 
-(c) Explain the importance of cooperative societies to farmers in Cameroon. *(4 marks)*
-
----
-
-**Q18.** (a) What is a multinational company? *(2 marks)*
-
-(b) State three characteristics of a multinational company. *(3 marks)*
-
-(c) Explain two advantages and two disadvantages of multinational companies to Cameroon. *(5 marks)*
+(c) Find the general solution of $\cos 3x + \cos x = \cos 2x$. *(5 marks)*
 
 ---
 
-**Q19.** (a) Define the term "e-commerce". *(2 marks)*
+**Q10.** In triangle $ABC$, $a=7$, $b=8$, and $c=9$.
 
-(b) State three forms of e-commerce. *(3 marks)*
+(a) Find all angles of the triangle correct to the nearest $0.1^\circ$. *(4 marks)*
 
-(c) Explain the advantages and disadvantages of e-commerce. *(5 marks)*
+(b) Find the area of the triangle using Heron''s formula. *(3 marks)*
+
+(c) Hence find the radius of the incircle and the circumcircle. *(5 marks)*
 
 ---
 
-**Q20.** (a) What is a trade union? *(2 marks)*
+## SECTION 3: LOGARITHMS, COMPLEX NUMBERS AND DIFFERENTIATION
 
-(b) State three functions of a trade union. *(3 marks)*
+**Q11.** (a) Prove that $\cosh^2 x - \sinh^2 x = 1$. *(3 marks)*
 
-(c) Explain the importance of trade unions to workers. *(4 marks)*
+(b) Solve $\cosh x + 3\sinh x = 5$, giving exact answers in logarithmic form. *(6 marks)*
+
+(c) Evaluate $\displaystyle\int_0^{1/2}\tanh^{-1}x\,dx$. *(5 marks)*
+
+---
+
+**Q12.** (a) Solve $\log_3(x+5)+\log_9(x+5)=\log_3(x+5)\log_9(x+5)+1$ for $x>-5$. *(5 marks)*
+
+(b) Show that $\dfrac{\ln 2}{\ln 3}\cdot\dfrac{\ln 3}{\ln 5}\cdot\dfrac{\ln 5}{\ln 8}=\dfrac13$. *(3 marks)*
+
+(c) Find the exact solution of $2^x=3^{x-1}5^{2-x}$. *(5 marks)*
+
+---
+
+**Q13.** The complex number $z$ satisfies $|z-3i|=|z+3|$ and $\arg(z-1)=\dfrac{\pi}{4}$.
+
+![Argand diagram](/paper-diagrams/math-argand.svg)
+
+(a) Describe each locus geometrically and sketch them on an Argand diagram. *(4 marks)*
+
+(b) Find the complex number satisfying both conditions. *(4 marks)*
+
+(c) Find all cube roots of $-8i$ in exact polar form. *(5 marks)*
+
+---
+
+**Q14.** (a) Differentiate from first principles $f(x)=\dfrac{1}{\sqrt{2x+1}}$. *(4 marks)*
+
+(b) Given $y=x^{\sin x}$, $x>0$, find $\dfrac{dy}{dx}$. *(5 marks)*
+
+(c) The equation $e^{xy}=x+y$ defines $y$ implicitly. Find $\dfrac{dy}{dx}$ at $(1,0)$. *(4 marks)*
+
+---
+
+**Q15.** A curve is defined parametrically by $x=\dfrac{3t}{1+t^3}$ and $y=\dfrac{3t^2}{1+t^3}$, $t \neq -1$.
+
+(a) Show that $x^3+y^3=3xy$. *(3 marks)*
+
+(b) Find the equation of the tangent at $t=1$. *(4 marks)*
+
+(c) Show that $x+y+1=0$ is an asymptote. *(4 marks)*
+
+---
+
+## SECTION 4: INTEGRATION AND MECHANICS
+
+**Q16.** (a) Use the Mean Value Theorem to prove that for $0<a<b$, $\dfrac{b-a}{b}<\ln\dfrac{b}{a}<\dfrac{b-a}{a}$. *(5 marks)*
+
+(b) Find the stationary points of $y=x^3-6x^2+9x+4$ and determine their nature. *(5 marks)*
+
+---
+
+**Q17.** (a) Evaluate $\displaystyle\int \dfrac{2x+5}{x^2+5x+6}\,dx$. *(4 marks)*
+
+(b) Use integration by parts to evaluate $\displaystyle\int_0^1 x^2e^x\,dx$. *(5 marks)*
+
+(c) Find the area enclosed by $y=x^2$ and $y=2x+3$. *(5 marks)*
+
+---
+
+**Q18.** (a) Find a reduction formula for $I_n=\displaystyle\int_0^{\pi/2}\sin^n x\,dx$. *(6 marks)*
+
+(b) Hence evaluate $I_6$. *(3 marks)*
+
+(c) Use the result to estimate $\displaystyle\int_0^{\pi/2}\sin^6x\cos^2x\,dx$. *(5 marks)*
+
+---
+
+**Q19.** A particle moves in a straight line with displacement $s=t^3-6t^2+9t+4$ metres after $t$ seconds.
+
+(a) Find its velocity and acceleration at time $t$. *(3 marks)*
+
+(b) Determine when the particle is at rest. *(3 marks)*
+
+(c) Find the total distance travelled in the first 5 seconds. *(6 marks)*
+
+---
+
+**Q20.** A projectile is fired with speed $40\,\text{m s}^{-1}$ at an angle $30^\circ$ to the horizontal from level ground.
+
+(a) Find the time of flight. *(3 marks)*
+
+(b) Find the greatest height reached. *(3 marks)*
+
+(c) Find the horizontal range, taking $g=10\,\text{m s}^{-2}$. *(4 marks)*
+
+---
+
+## SECTION 5: STATISTICS, NUMERICAL METHODS AND MATRICES
+
+**Q21.** A body of mass $5\,\text{kg}$ rests on a rough plane inclined at $30^\circ$ to the horizontal. The coefficient of friction is $0.25$.
+
+(a) Find the component of weight down the plane. *(2 marks)*
+
+(b) Determine whether the body will slide. *(4 marks)*
+
+(c) Find the least force parallel to the plane needed to move the body upwards. *(5 marks)*
+
+---
+
+**Q22.** Two particles of masses $3\,\text{kg}$ and $5\,\text{kg}$ are connected by a light inextensible string over a smooth pulley.
+
+(a) Find the acceleration of the system. *(4 marks)*
+
+(b) Find the tension in the string. *(4 marks)*
+
+(c) State how your answer changes if the pulley is rough. *(2 marks)*
+
+---
+
+**Q23.** A random variable $X$ has probability distribution $P(X=x)=kx$ for $x=1,2,3,4$.
+
+(a) Find $k$. *(2 marks)*
+
+(b) Find $E(X)$ and $\operatorname{Var}(X)$. *(5 marks)*
+
+(c) Find $P(X\geq 3\mid X>1)$. *(3 marks)*
+
+---
+
+**Q24.** The marks of 60 candidates are grouped as follows: $0-9:4$, $10-19:8$, $20-29:15$, $30-39:18$, $40-49:10$, $50-59:5$.
+
+(a) Estimate the mean mark. *(4 marks)*
+
+(b) Estimate the median. *(4 marks)*
+
+(c) Draw a cumulative frequency curve and use it to estimate the interquartile range. *(5 marks)*
+
+---
+
+**Q25.** A sample of 100 bulbs has mean lifetime 1240 hours and standard deviation 80 hours.
+
+(a) Construct a 95% confidence interval for the population mean. *(5 marks)*
+
+(b) Test at the 5% level whether the mean lifetime differs from 1200 hours. *(6 marks)*
+
+---
+
+## SECTION 6: PROOF, COORDINATE GEOMETRY AND SEQUENCES
+
+**Q26.** (a) Use Newton-Raphson iteration to find a root of $x^3-x-1=0$ starting with $x_0=1$. Give three iterations. *(6 marks)*
+
+(b) Explain, using the graph of the function, why the iteration converges to the real root. *(3 marks)*
+
+---
+
+**Q27.** (a) Show that the matrix $A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$ is invertible and find $A^{-1}$. *(4 marks)*
+
+(b) Solve the system $2x+y=5$, $x+3y=7$ using the inverse matrix method. *(4 marks)*
+
+(c) Interpret the transformation represented by $A$ geometrically. *(4 marks)*
+
+---
+
+**Q28.** (a) Prove by induction that $1^2+2^2+\cdots+n^2=\dfrac{n(n+1)(2n+1)}{6}$. *(6 marks)*
+
+(b) Hence find $\sum_{r=1}^{20}(3r^2-2r+1)$. *(4 marks)*
+
+---
+
+**Q29.** The roots of $x^2-5x+6=0$ are $\alpha$ and $\beta$.
+
+(a) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(4 marks)*
+
+(b) Find a quadratic equation whose roots are $\dfrac{1}{\alpha}$ and $\dfrac{1}{\beta}$. *(4 marks)*
+
+(c) Hence evaluate $\alpha^4+\beta^4$. *(3 marks)*
+
+---
+
+**Q30.** (a) Solve $|2x-3|+|x+1|=8$. *(5 marks)*
+
+(b) Solve $\dfrac{x^2-4x+3}{x^2-x-6}\leq 0$. *(5 marks)*
+
+(c) Represent both solution sets on separate number lines. *(2 marks)*
+
+---
+
+## SECTION 7: DIFFERENTIAL EQUATIONS, MODELS AND NUMERICAL INTEGRATION
+
+**Q31.** (a) Find the equation of the circle passing through $(1,2)$, $(3,4)$, and $(5,0)$. *(6 marks)*
+
+(b) Find the tangent to the circle at $(1,2)$. *(4 marks)*
+
+---
+
+**Q32.** A line $y=mx+c$ is tangent to the parabola $y=x^2-4x+1$.
+
+(a) Find the condition relating $m$ and $c$. *(5 marks)*
+
+(b) Find the two tangents from the point $(0,-3)$ to the parabola. *(6 marks)*
+
+---
+
+**Q33.** (a) Solve $\sin x + \sqrt3\cos x = 1$ for $0\leq x\leq 2\pi$. *(5 marks)*
+
+(b) Prove that $\dfrac{1-\cos 2x}{\sin 2x}=\tan x$ where both sides are defined. *(3 marks)*
+
+(c) Find all $x$ such that $\tan 2x=\sqrt3$ in the interval $0^\circ\leq x\leq 180^\circ$. *(4 marks)*
+
+---
+
+**Q34.** The arithmetic progression has first term $a$ and common difference $d$. The 5th term is 17 and the sum of the first 10 terms is 200.
+
+(a) Find $a$ and $d$. *(5 marks)*
+
+(b) Find the least value of $n$ for which the sum of the first $n$ terms exceeds 500. *(5 marks)*
+
+---
+
+**Q35.** A geometric progression has first term 81 and common ratio $\dfrac{2}{3}$.
+
+(a) Find the 8th term. *(3 marks)*
+
+(b) Find the sum to infinity. *(3 marks)*
+
+(c) Find the number of terms required for the partial sum to exceed 230. *(5 marks)*
+
+---
+
+## SECTION 8: VECTORS AND THREE-DIMENSIONAL GEOMETRY
+
+**Q36.** (a) Solve the differential equation $\dfrac{dy}{dx}=3x^2(1+y)$ given that $y=0$ when $x=0$. *(6 marks)*
+
+(b) Find the value of $y$ when $x=1$. *(2 marks)*
+
+(c) Sketch the solution curve. *(3 marks)*
+
+---
+
+**Q37.** A population model is given by $P(t)=\dfrac{5000}{1+4e^{-0.3t}}$.
+
+(a) Find the initial population. *(2 marks)*
+
+(b) Find the time when the population first reaches 3000. *(4 marks)*
+
+(c) State the limiting population as $t\to\infty$. *(2 marks)*
+
+---
+
+**Q38.** (a) Use Simpson''s rule with four strips to estimate $\displaystyle\int_0^2 \dfrac{1}{1+x^2}\,dx$. *(6 marks)*
+
+(b) Compare your estimate with $\tan^{-1}2$ and comment on the accuracy. *(4 marks)*
+
+---
+
+**Q39.** The vectors $\mathbf{a}=2\mathbf{i}-\mathbf{j}+3\mathbf{k}$ and $\mathbf{b}=\mathbf{i}+4\mathbf{j}-2\mathbf{k}$ are given.
+
+(a) Find $\mathbf{a}\cdot\mathbf{b}$ and the angle between them. *(5 marks)*
+
+(b) Find $\mathbf{a}\times\mathbf{b}$. *(4 marks)*
+
+(c) Find the area of the parallelogram formed by $\mathbf{a}$ and $\mathbf{b}$. *(3 marks)*
+
+---
+
+**Q40.** The plane $2x-y+3z=6$ meets the coordinate axes at $A$, $B$, and $C$.
+
+(a) Find the coordinates of $A$, $B$, and $C$. *(3 marks)*
+
+(b) Find the area of triangle $ABC$. *(5 marks)*
+
+(c) Find the shortest distance from the origin to the plane. *(4 marks)*
+
+---
 ',
   null
 )
@@ -3090,14 +3749,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Commerce'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Further Mathematics'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 5'
+  where title = 'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -3107,21 +3766,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Commerce',
-  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 5',
+  'Further Mathematics',
+  'CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 5
+  '# CAMEROON GCE ADVANCED LEVEL FURTHER MATHEMATICS P2 SET 2
 
-## Structural Question Bank — Finance, banking, and insurance
+## Structural Question Bank - Set 2
 
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Commerce
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_science
+**Subject:** Further Mathematics
 
 **Instructions:**
 
@@ -3132,384 +3791,367 @@ values (
 
 ---
 
-## SECTION 1: FINANCE, BANKING, AND INSURANCE
+## SECTION 1: ALGEBRA - Polynomials, Inequalities and Partial Fractions
 
-**Q1.** (a) Define the term "money". *(2 marks)*
+**Q1.** The polynomial $P(x) = 2x^4 - 3x^3 + ax^2 + bx - 6$ has $(2x - 1)$ and $(x + 2)$ as factors.
 
-(b) State the functions of money. *(4 marks)*
+(a) Find the values of $a$ and $b$. *(4 marks)*
 
-(c) Explain the qualities of good money. *(4 marks)*
+(b) Factorise $P(x)$ completely over $\mathbb{R}$. *(3 marks)*
 
----
-
-**Q2.** (a) What is a bank? *(2 marks)*
-
-(b) Distinguish between a commercial bank and a central bank. *(4 marks)*
-
-(c) State three functions of a commercial bank. *(3 marks)*
+(c) Hence, solve the inequality $P(x) \geq 0$, expressing your answer in interval notation. *(3 marks)*
 
 ---
 
-**Q3.** (a) Define the terms "deposit" and "withdrawal". *(4 marks)*
+**Q2.** Given that $f(x) = \dfrac{3x^3 - x^2 - 13x + 7}{(x-2)(x^2 - x - 1)}$:
 
-(b) State three types of bank accounts. *(3 marks)*
+(a) Express $f(x)$ in partial fractions. *(6 marks)*
 
-(c) Explain the difference between a current account and a savings account. *(4 marks)*
-
----
-
-**Q4.** (a) What is a cheque? *(2 marks)*
-
-(b) State the parties to a cheque. *(3 marks)*
-
-(c) Distinguish between an open cheque and a crossed cheque. *(4 marks)*
+(b) Hence evaluate $\displaystyle\int_0^{1} f(x)\, dx$, leaving your answer in the form $a\ln 2 + b\ln 5 + c\ln 3$. *(4 marks)*
 
 ---
 
-**Q5.** (a) Define the terms "credit" and "debit". *(4 marks)*
+**Q3.** (a) Show that the equation $x^4 - 6x^2 + 2x + 3 = 0$ has a root between $x = 2$ and $x = 3$. *(2 marks)*
 
-(b) State three forms of credit. *(3 marks)*
+(b) Using the substitution $x = u + \dfrac{1}{u}$, or otherwise, solve $x^4 - 6x^2 + 2x + 3 = 0$ giving all real roots correct to 3 significant figures. *(6 marks)*
 
-(c) Explain the advantages and disadvantages of buying on credit. *(4 marks)*
-
----
-
-**Q6.** (a) What is a loan? *(2 marks)*
-
-(b) State three types of loans offered by banks. *(3 marks)*
-
-(c) Explain the importance of loans to businesses. *(4 marks)*
+(c) Without further calculation, state the nature and number of complex roots. *(2 marks)*
 
 ---
 
-**Q7.** (a) Define the term "interest". *(2 marks)*
+**Q4.** Solve simultaneously the system:
 
-(b) Explain the difference between simple interest and compound interest. *(4 marks)*
+$$\log_2(x + y) = 3, \quad \log_4(x - y) = 2, \quad x, y \in \mathbb{R}$$
 
-(c) Calculate the simple interest on 100,000 FCFA at 5% per annum for 2 years. *(4 marks)*
-
----
-
-**Q8.** (a) What is insurance? *(2 marks)*
-
-(b) State the principles of insurance. *(4 marks)*
-
-(c) Explain the difference between life insurance and general insurance. *(4 marks)*
+Hence find all pairs $(x, y)$ that also satisfy $\dfrac{x^2 - y^2}{x + y} = 2y - 1$. *(10 marks)*
 
 ---
 
-**Q9.** (a) Define the terms "premium" and "policy". *(4 marks)*
+**Q5.** Given that $\alpha, \beta, \gamma$ are the roots of $x^3 - px + q = 0$, where $p, q \neq 0$:
 
-(b) Explain the principle of insurable interest. *(4 marks)*
+(a) Find $\alpha^2+\beta^2+\gamma^2$, $\alpha^3+\beta^3+\gamma^3$, and $\alpha^4+\beta^4+\gamma^4$ in terms of $p$ and $q$. *(6 marks)*
 
-(c) State three types of insurance policies. *(3 marks)*
-
----
-
-**Q10.** (a) What is a claim? *(2 marks)*
-
-(b) Describe the procedure for making an insurance claim. *(4 marks)*
-
-(c) Explain the principle of indemnity. *(4 marks)*
+(b) Find the cubic equation whose roots are $\alpha^2, \beta^2, \gamma^2$. *(4 marks)*
 
 ---
 
-**Q11.** (a) Define the term "communication". *(2 marks)*
+## SECTION 2: FUNCTIONS, SERIES AND TRIGONOMETRY
 
-(b) State three means of communication used in business. *(3 marks)*
+**Q6.** (a) Find the first four terms in the expansion of $(1 - 3x)^{-2}$ in ascending powers of $x$, stating the range of validity. *(4 marks)*
 
-(c) Explain the importance of communication in business. *(4 marks)*
+(b) Use your expansion to estimate $\dfrac{1}{0.97^2}$ correct to 5 decimal places. *(3 marks)*
 
----
-
-**Q12.** (a) What is a telephone? *(2 marks)*
-
-(b) State three advantages of using the telephone in business. *(3 marks)*
-
-(c) Explain the difference between a landline and a mobile phone. *(4 marks)*
+(c) Find the coefficient of $x^8$ in $(1 + x + x^2)^9$. *(5 marks)*
 
 ---
 
-**Q13.** (a) Define the term "advertising". *(2 marks)*
+**Q7.** The functions $f$ and $g$ are defined by $f(x)=e^{2x}-5$ and $g(x)=\dfrac{x+1}{x-3}$, $x \neq 3$.
 
-(b) State three objectives of advertising. *(3 marks)*
+(a) Find $f^{-1}(x)$ and state its domain. *(4 marks)*
 
-(c) Explain the difference between informative and persuasive advertising. *(4 marks)*
+(b) Solve $f(g(x)) = g(f(x))$ where both sides are defined. *(6 marks)*
 
----
-
-**Q14.** (a) What is consumer protection? *(2 marks)*
-
-(b) State three rights of a consumer. *(3 marks)*
-
-(c) Explain the role of the government in protecting consumers. *(4 marks)*
+(c) Find the fixed points of $g \circ g$. *(4 marks)*
 
 ---
 
-**Q15.** (a) Define the term "consumer association". *(2 marks)*
+**Q8.** The function $h(x)=x^2-6x+11$ is restricted to a domain on which it is one-to-one.
 
-(b) State three functions of a consumer association. *(3 marks)*
+(a) State a suitable maximal domain and find $h^{-1}(x)$. *(4 marks)*
 
-(c) Explain how consumers can protect themselves from exploitation. *(4 marks)*
+(b) Sketch $y=h(x)$ and $y=h^{-1}(x)$ on the same axes. *(3 marks)*
 
----
-
-**Q16.** (a) What is a savings and loan cooperative? *(2 marks)*
-
-(b) State three functions of savings and loan cooperatives. *(3 marks)*
-
-(c) Explain the importance of microfinance institutions to small businesses. *(4 marks)*
+(c) Solve $h(x)=h^{-1}(x)$ for all possible values on the chosen domain. *(5 marks)*
 
 ---
 
-**Q17.** (a) Define the term "stock exchange". *(2 marks)*
+**Q9.** (a) Prove that $\cot\theta - \tan\theta \equiv 2\cot 2\theta$. *(4 marks)*
 
-(b) State three functions of a stock exchange. *(3 marks)*
+(b) Solve $2\sin^2 x + 5\cos x - 4 = 0$ for $0^\circ \leq x \leq 360^\circ$. *(4 marks)*
 
-(c) Explain the importance of the Douala Stock Exchange to Cameroon. *(4 marks)*
-
----
-
-**Q18.** (a) What is a bond? *(2 marks)*
-
-(b) Distinguish between shares and bonds. *(4 marks)*
-
-(c) State three types of shares. *(3 marks)*
+(c) Find the general solution of $\cos 3x + \cos x = \cos 2x$. *(5 marks)*
 
 ---
 
-**Q19.** (a) Define the term "inflation". *(2 marks)*
+**Q10.** In triangle $ABC$, $a=7$, $b=8$, and $c=9$.
 
-(b) State three causes of inflation. *(3 marks)*
+(a) Find all angles of the triangle correct to the nearest $0.1^\circ$. *(4 marks)*
 
-(c) Explain the effects of inflation on consumers and businesses. *(5 marks)*
+(b) Find the area of the triangle using Heron''s formula. *(3 marks)*
 
----
-
-**Q20.** (a) What is a budget? *(2 marks)*
-
-(b) State three types of budgets. *(3 marks)*
-
-(c) Explain the importance of budgeting to a business. *(4 marks)*
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Commerce'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 6'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Commerce',
-  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 6',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 6
-
-## Structural Question Bank — Trade and business documents
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Commerce
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+(c) Hence find the radius of the incircle and the circumcircle. *(5 marks)*
 
 ---
 
-## SECTION 1: TRADE AND BUSINESS DOCUMENTS
+## SECTION 3: LOGARITHMS, COMPLEX NUMBERS AND DIFFERENTIATION
 
-**Q1.** (a) Define the term "commerce". *(2 marks)*
+**Q11.** (a) Prove that $\cosh^2 x - \sinh^2 x = 1$. *(3 marks)*
 
-(b) Distinguish between trade and aids to trade. *(4 marks)*
+(b) Solve $\cosh x + 3\sinh x = 5$, giving exact answers in logarithmic form. *(6 marks)*
 
-(c) Explain the importance of commerce to the economy of Cameroon. *(4 marks)*
-
----
-
-**Q2.** (a) What is home trade? *(2 marks)*
-
-(b) Distinguish between wholesale and retail trade. *(4 marks)*
-
-(c) State three functions of a wholesaler. *(3 marks)*
+(c) Evaluate $\displaystyle\int_0^{1/2}\tanh^{-1}x\,dx$. *(5 marks)*
 
 ---
 
-**Q3.** (a) Define the term "retailer". *(2 marks)*
+**Q12.** (a) Solve $\log_3(x+5)+\log_9(x+5)=\log_3(x+5)\log_9(x+5)+1$ for $x>-5$. *(5 marks)*
 
-(b) State three functions of a retailer. *(3 marks)*
+(b) Show that $\dfrac{\ln 2}{\ln 3}\cdot\dfrac{\ln 3}{\ln 5}\cdot\dfrac{\ln 5}{\ln 8}=\dfrac13$. *(3 marks)*
 
-(c) Explain two problems faced by retailers in Cameroon. *(4 marks)*
-
----
-
-**Q4.** (a) What is foreign trade? *(2 marks)*
-
-(b) Distinguish between imports and exports. *(4 marks)*
-
-(c) Explain the importance of foreign trade to Cameroon. *(4 marks)*
+(c) Find the exact solution of $2^x=3^{x-1}5^{2-x}$. *(5 marks)*
 
 ---
 
-**Q5.** (a) Define the terms "balance of trade" and "balance of payments". *(4 marks)*
+**Q13.** The complex number $z$ satisfies $|z-3i|=|z+3|$ and $\arg(z-1)=\dfrac{\pi}{4}$.
 
-(b) Explain the difference between a favourable and an unfavourable balance of trade. *(4 marks)*
+(a) Describe each locus geometrically and sketch them on an Argand diagram. *(4 marks)*
 
-(c) State three ways of correcting an unfavourable balance of trade. *(3 marks)*
+(b) Find the complex number satisfying both conditions. *(4 marks)*
 
----
-
-**Q6.** (a) What is an invoice? *(2 marks)*
-
-(b) State the information contained in an invoice. *(4 marks)*
-
-(c) Distinguish between a proforma invoice and a commercial invoice. *(4 marks)*
+(c) Find all cube roots of $-8i$ in exact polar form. *(5 marks)*
 
 ---
 
-**Q7.** (a) Define the terms "receipt" and "credit note". *(4 marks)*
+**Q14.** (a) Differentiate from first principles $f(x)=\dfrac{1}{\sqrt{2x+1}}$. *(4 marks)*
 
-(b) Explain when a credit note is issued. *(3 marks)*
+(b) Given $y=x^{\sin x}$, $x>0$, find $\dfrac{dy}{dx}$. *(5 marks)*
 
-(c) Distinguish between a debit note and a credit note. *(4 marks)*
-
----
-
-**Q8.** (a) What is a bill of lading? *(2 marks)*
-
-(b) State the functions of a bill of lading. *(4 marks)*
-
-(c) Explain the difference between a bill of lading and an air waybill. *(4 marks)*
+(c) The equation $e^{xy}=x+y$ defines $y$ implicitly. Find $\dfrac{dy}{dx}$ at $(1,0)$. *(4 marks)*
 
 ---
 
-**Q9.** (a) Define the term "transport". *(2 marks)*
+**Q15.** A curve is defined parametrically by $x=\dfrac{3t}{1+t^3}$ and $y=\dfrac{3t^2}{1+t^3}$, $t \neq -1$.
 
-(b) State three modes of transport used in trade. *(3 marks)*
+(a) Show that $x^3+y^3=3xy$. *(3 marks)*
 
-(c) Explain the advantages and disadvantages of road transport. *(5 marks)*
+(b) Find the equation of the tangent at $t=1$. *(4 marks)*
 
----
-
-**Q10.** (a) What is a warehouse? *(2 marks)*
-
-(b) State three functions of warehousing. *(3 marks)
-
-(c) Explain the importance of warehousing to a wholesaler. *(4 marks)*
+(c) Show that $x+y+1=0$ is an asymptote. *(4 marks)*
 
 ---
 
-**Q11.** (a) Define the term "advertising". *(2 marks)*
+## SECTION 4: INTEGRATION AND MECHANICS
 
-(b) State three media used for advertising. *(3 marks)*
+**Q16.** (a) Use the Mean Value Theorem to prove that for $0<a<b$, $\dfrac{b-a}{b}<\ln\dfrac{b}{a}<\dfrac{b-a}{a}$. *(5 marks)*
 
-(c) Explain the importance of advertising to a business. *(4 marks)*
-
----
-
-**Q12.** (a) What is a market? *(2 marks)*
-
-(b) Distinguish between a consumer market and an industrial market. *(4 marks)*
-
-(c) State three factors that influence the choice of a market. *(3 marks)*
+(b) Find the stationary points of $y=x^3-6x^2+9x+4$ and determine their nature. *(5 marks)*
 
 ---
 
-**Q13.** (a) Define the term "marketing". *(2 marks)*
+**Q17.** (a) Evaluate $\displaystyle\int \dfrac{2x+5}{x^2+5x+6}\,dx$. *(4 marks)*
 
-(b) State the four Ps of the marketing mix. *(4 marks)*
+(b) Use integration by parts to evaluate $\displaystyle\int_0^1 x^2e^x\,dx$. *(5 marks)*
 
-(c) Explain the importance of the marketing mix to a business. *(4 marks)*
-
----
-
-**Q14.** (a) What is a sole proprietorship? *(2 marks)*
-
-(b) State three advantages and three disadvantages of a sole proprietorship. *(6 marks)*
-
-(c) Explain why many small businesses in Cameroon are sole proprietorships. *(3 marks)*
+(c) Find the area enclosed by $y=x^2$ and $y=2x+3$. *(5 marks)*
 
 ---
 
-**Q15.** (a) Define the term "partnership". *(2 marks)*
+**Q18.** (a) Find a reduction formula for $I_n=\displaystyle\int_0^{\pi/2}\sin^n x\,dx$. *(6 marks)*
 
-(b) State three features of a partnership. *(3 marks)*
+(b) Hence evaluate $I_6$. *(3 marks)*
 
-(c) Explain the difference between a general partner and a limited partner. *(4 marks)*
-
----
-
-**Q16.** (a) What is a limited liability company? *(2 marks)*
-
-(b) Distinguish between a private limited company and a public limited company. *(4 marks)*
-
-(c) State three advantages of a limited liability company. *(3 marks)*
+(c) Use the result to estimate $\displaystyle\int_0^{\pi/2}\sin^6x\cos^2x\,dx$. *(5 marks)*
 
 ---
 
-**Q17.** (a) Define the term "cooperative society". *(2 marks)*
+**Q19.** A particle moves in a straight line with displacement $s=t^3-6t^2+9t+4$ metres after $t$ seconds.
 
-(b) State three types of cooperative societies. *(3 marks)*
+(a) Find its velocity and acceleration at time $t$. *(3 marks)*
 
-(c) Explain the importance of cooperative societies to farmers in Cameroon. *(4 marks)*
+(b) Determine when the particle is at rest. *(3 marks)*
 
----
-
-**Q18.** (a) What is a multinational company? *(2 marks)*
-
-(b) State three characteristics of a multinational company. *(3 marks)*
-
-(c) Explain two advantages and two disadvantages of multinational companies to Cameroon. *(5 marks)*
+(c) Find the total distance travelled in the first 5 seconds. *(6 marks)*
 
 ---
 
-**Q19.** (a) Define the term "e-commerce". *(2 marks)*
+**Q20.** A projectile is fired with speed $40\,\text{m s}^{-1}$ at an angle $30^\circ$ to the horizontal from level ground.
 
-(b) State three forms of e-commerce. *(3 marks)*
+(a) Find the time of flight. *(3 marks)*
 
-(c) Explain the advantages and disadvantages of e-commerce. *(5 marks)*
+(b) Find the greatest height reached. *(3 marks)*
+
+(c) Find the horizontal range, taking $g=10\,\text{m s}^{-2}$. *(4 marks)*
 
 ---
 
-**Q20.** (a) What is a trade union? *(2 marks)*
+## SECTION 5: STATISTICS, NUMERICAL METHODS AND MATRICES
 
-(b) State three functions of a trade union. *(3 marks)*
+**Q21.** A body of mass $5\,\text{kg}$ rests on a rough plane inclined at $30^\circ$ to the horizontal. The coefficient of friction is $0.25$.
 
-(c) Explain the importance of trade unions to workers. *(4 marks)*
+(a) Find the component of weight down the plane. *(2 marks)*
+
+(b) Determine whether the body will slide. *(4 marks)*
+
+(c) Find the least force parallel to the plane needed to move the body upwards. *(5 marks)*
+
+---
+
+**Q22.** Two particles of masses $3\,\text{kg}$ and $5\,\text{kg}$ are connected by a light inextensible string over a smooth pulley.
+
+(a) Find the acceleration of the system. *(4 marks)*
+
+(b) Find the tension in the string. *(4 marks)*
+
+(c) State how your answer changes if the pulley is rough. *(2 marks)*
+
+---
+
+**Q23.** A random variable $X$ has probability distribution $P(X=x)=kx$ for $x=1,2,3,4$.
+
+(a) Find $k$. *(2 marks)*
+
+(b) Find $E(X)$ and $\operatorname{Var}(X)$. *(5 marks)*
+
+(c) Find $P(X\geq 3\mid X>1)$. *(3 marks)*
+
+---
+
+**Q24.** The marks of 60 candidates are grouped as follows: $0-9:4$, $10-19:8$, $20-29:15$, $30-39:18$, $40-49:10$, $50-59:5$.
+
+![Cumulative frequency curve](/paper-diagrams/math-statistics.svg)
+
+(a) Estimate the mean mark. *(4 marks)*
+
+(b) Estimate the median. *(4 marks)*
+
+(c) Draw a cumulative frequency curve and use it to estimate the interquartile range. *(5 marks)*
+
+---
+
+**Q25.** A sample of 100 bulbs has mean lifetime 1240 hours and standard deviation 80 hours.
+
+(a) Construct a 95% confidence interval for the population mean. *(5 marks)*
+
+(b) Test at the 5% level whether the mean lifetime differs from 1200 hours. *(6 marks)*
+
+---
+
+## SECTION 6: PROOF, COORDINATE GEOMETRY AND SEQUENCES
+
+**Q26.** (a) Use Newton-Raphson iteration to find a root of $x^3-x-1=0$ starting with $x_0=1$. Give three iterations. *(6 marks)*
+
+(b) Explain, using the graph of the function, why the iteration converges to the real root. *(3 marks)*
+
+---
+
+**Q27.** (a) Show that the matrix $A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$ is invertible and find $A^{-1}$. *(4 marks)*
+
+(b) Solve the system $2x+y=5$, $x+3y=7$ using the inverse matrix method. *(4 marks)*
+
+(c) Interpret the transformation represented by $A$ geometrically. *(4 marks)*
+
+---
+
+**Q28.** (a) Prove by induction that $1^2+2^2+\cdots+n^2=\dfrac{n(n+1)(2n+1)}{6}$. *(6 marks)*
+
+(b) Hence find $\sum_{r=1}^{20}(3r^2-2r+1)$. *(4 marks)*
+
+---
+
+**Q29.** The roots of $x^2-5x+6=0$ are $\alpha$ and $\beta$.
+
+(a) Find a quadratic equation whose roots are $\alpha^2$ and $\beta^2$. *(4 marks)*
+
+(b) Find a quadratic equation whose roots are $\dfrac{1}{\alpha}$ and $\dfrac{1}{\beta}$. *(4 marks)*
+
+(c) Hence evaluate $\alpha^4+\beta^4$. *(3 marks)*
+
+---
+
+**Q30.** (a) Solve $|2x-3|+|x+1|=8$. *(5 marks)*
+
+(b) Solve $\dfrac{x^2-4x+3}{x^2-x-6}\leq 0$. *(5 marks)*
+
+(c) Represent both solution sets on separate number lines. *(2 marks)*
+
+---
+
+## SECTION 7: DIFFERENTIAL EQUATIONS, MODELS AND NUMERICAL INTEGRATION
+
+**Q31.** (a) Find the equation of the circle passing through $(1,2)$, $(3,4)$, and $(5,0)$. *(6 marks)*
+
+(b) Find the tangent to the circle at $(1,2)$. *(4 marks)*
+
+---
+
+**Q32.** A line $y=mx+c$ is tangent to the parabola $y=x^2-4x+1$.
+
+(a) Find the condition relating $m$ and $c$. *(5 marks)*
+
+(b) Find the two tangents from the point $(0,-3)$ to the parabola. *(6 marks)*
+
+---
+
+**Q33.** (a) Solve $\sin x + \sqrt3\cos x = 1$ for $0\leq x\leq 2\pi$. *(5 marks)*
+
+(b) Prove that $\dfrac{1-\cos 2x}{\sin 2x}=\tan x$ where both sides are defined. *(3 marks)*
+
+(c) Find all $x$ such that $\tan 2x=\sqrt3$ in the interval $0^\circ\leq x\leq 180^\circ$. *(4 marks)*
+
+---
+
+**Q34.** The arithmetic progression has first term $a$ and common difference $d$. The 5th term is 17 and the sum of the first 10 terms is 200.
+
+(a) Find $a$ and $d$. *(5 marks)*
+
+(b) Find the least value of $n$ for which the sum of the first $n$ terms exceeds 500. *(5 marks)*
+
+---
+
+**Q35.** A geometric progression has first term 81 and common ratio $\dfrac{2}{3}$.
+
+(a) Find the 8th term. *(3 marks)*
+
+(b) Find the sum to infinity. *(3 marks)*
+
+(c) Find the number of terms required for the partial sum to exceed 230. *(5 marks)*
+
+---
+
+## SECTION 8: VECTORS AND THREE-DIMENSIONAL GEOMETRY
+
+**Q36.** (a) Solve the differential equation $\dfrac{dy}{dx}=3x^2(1+y)$ given that $y=0$ when $x=0$. *(6 marks)*
+
+(b) Find the value of $y$ when $x=1$. *(2 marks)*
+
+(c) Sketch the solution curve. *(3 marks)*
+
+---
+
+**Q37.** A population model is given by $P(t)=\dfrac{5000}{1+4e^{-0.3t}}$.
+
+(a) Find the initial population. *(2 marks)*
+
+(b) Find the time when the population first reaches 3000. *(4 marks)*
+
+(c) State the limiting population as $t\to\infty$. *(2 marks)*
+
+---
+
+**Q38.** (a) Use Simpson''s rule with four strips to estimate $\displaystyle\int_0^2 \dfrac{1}{1+x^2}\,dx$. *(6 marks)*
+
+(b) Compare your estimate with $\tan^{-1}2$ and comment on the accuracy. *(4 marks)*
+
+---
+
+**Q39.** The vectors $\mathbf{a}=2\mathbf{i}-\mathbf{j}+3\mathbf{k}$ and $\mathbf{b}=\mathbf{i}+4\mathbf{j}-2\mathbf{k}$ are given.
+
+(a) Find $\mathbf{a}\cdot\mathbf{b}$ and the angle between them. *(5 marks)*
+
+(b) Find $\mathbf{a}\times\mathbf{b}$. *(4 marks)*
+
+(c) Find the area of the parallelogram formed by $\mathbf{a}$ and $\mathbf{b}$. *(3 marks)*
+
+---
+
+**Q40.** The plane $2x-y+3z=6$ meets the coordinate axes at $A$, $B$, and $C$.
+
+(a) Find the coordinates of $A$, $B$, and $C$. *(3 marks)*
+
+(b) Find the area of triangle $ABC$. *(5 marks)*
+
+(c) Find the shortest distance from the origin to the plane. *(4 marks)*
+
+---
 ',
   null
 )

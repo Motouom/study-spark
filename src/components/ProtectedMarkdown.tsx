@@ -45,7 +45,7 @@ export function normalizeLegacyLatex(markdown: string) {
     },
   );
 
-  return normalized
+  const restored = normalized
     .replace(
       /__STUDYSPARK_CONVERTED_MATH_(\d+)__/g,
       (_, index: string) => convertedSegments[Number(index)],
@@ -54,6 +54,14 @@ export function normalizeLegacyLatex(markdown: string) {
       /__STUDYSPARK_LEGACY_MATH_(\d+)__/g,
       (_, index: string) => protectedSegments[Number(index)],
     );
+
+  // remark-math v6 parses a single-line `$$...$$` as inline math, so display
+  // formulas render small and inline. Rewrite them as fenced blocks so KaTeX
+  // renders them in display mode.
+  return restored.replace(
+    /^[ \t]*\$\$([^$\n]+)\$\$[ \t]*$/gm,
+    (_, expression: string) => `$$\n${expression}\n$$`,
+  );
 }
 
 export function slugifyHeading(value: string) {
@@ -87,6 +95,48 @@ export function normalizeQuestionHeadings(markdown: string) {
       return rest.trim() ? `${normalizedHeading}\n${indent}${rest.trimStart()}` : normalizedHeading;
     })
     .join("\n");
+}
+
+const ANSWER_KEY_HEADING_PATTERN = /^#{1,6}\s*answer\s*key\s*$/i;
+const ANSWER_KEY_LINE_PATTERN = /^\d+\.\s*[A-Da-d]\s*$/;
+
+export function normalizeAnswerKey(markdown: string) {
+  const lines = markdown.split("\n");
+  const output: string[] = [];
+  let index = 0;
+  while (index < lines.length) {
+    const line = lines[index];
+    if (!ANSWER_KEY_HEADING_PATTERN.test(line)) {
+      output.push(line);
+      index += 1;
+      continue;
+    }
+
+    const answers: string[] = [];
+    let cursor = index + 1;
+    let found = false;
+    while (cursor < lines.length) {
+      const candidate = lines[cursor].trim();
+      if (ANSWER_KEY_LINE_PATTERN.test(candidate)) {
+        found = true;
+        answers.push(candidate);
+        cursor += 1;
+      } else if (candidate === "") {
+        cursor += 1;
+      } else {
+        break;
+      }
+    }
+
+    if (found && answers.length > 0) {
+      output.push(line, "", "```answerkey", ...answers, "```");
+      index = cursor;
+    } else {
+      output.push(...lines.slice(index, cursor));
+      index = cursor;
+    }
+  }
+  return output.join("\n");
 }
 
 function renderFormula(value: string) {
@@ -198,9 +248,11 @@ export default function ProtectedMarkdown({
   const isCheatsheet = document.contentKind === "cheatsheet";
 
   const markdownContent = normalizeLegacyLatex(
-    renderQuestionControls
-      ? normalizeQuestionHeadings(document.markdownContent)
-      : document.markdownContent,
+    normalizeAnswerKey(
+      renderQuestionControls
+        ? normalizeQuestionHeadings(document.markdownContent)
+        : document.markdownContent,
+    ),
   );
   const markdownClass = isCourse
     ? "protected-markdown course-markdown relative font-sans text-[0.95rem] leading-[1.7] sm:text-base"
@@ -426,16 +478,48 @@ export default function ProtectedMarkdown({
                 {formatStudyInline(children)}
               </td>
             ),
-            code: ({ children }) => (
-              <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-sm">
-                {children}
-              </code>
-            ),
-            pre: ({ children }) => (
-              <pre className="my-5 overflow-x-auto rounded-lg border border-border bg-secondary/40 p-4 text-sm">
-                {children}
-              </pre>
-            ),
+            code: ({ className, children }) => {
+              if (className?.includes("language-answerkey")) {
+                const lines = String(children).trim().split("\n");
+                return (
+                  <div className="language-answerkey my-5 grid grid-cols-2 gap-x-6 gap-y-1.5 rounded-xl border border-border bg-background/70 p-4 shadow-sm sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                    {lines.map((line) => {
+                      const dot = line.indexOf(".");
+                      const number = line.slice(0, dot).trim();
+                      const answer = line.slice(dot + 1).trim();
+                      return (
+                        <div key={line} className="flex items-baseline gap-1.5 text-sm">
+                          <span className="text-muted-foreground">{number}.</span>
+                          <span className="font-semibold">{answer}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              }
+              return (
+                <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-sm">
+                  {children}
+                </code>
+              );
+            },
+            pre: ({ children }) => {
+              const items = Children.toArray(children);
+              const child = items[0];
+              if (
+                items.length === 1 &&
+                isValidElement<{ className?: string }>(child) &&
+                typeof child.props?.className === "string" &&
+                child.props.className.includes("language-answerkey")
+              ) {
+                return child;
+              }
+              return (
+                <pre className="my-5 overflow-x-auto rounded-lg border border-border bg-secondary/40 p-4 text-sm">
+                  {children}
+                </pre>
+              );
+            },
             a: ({ children }) => (
               <span className="font-medium underline decoration-dotted underline-offset-4">
                 {children}

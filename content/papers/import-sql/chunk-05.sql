@@ -3,14 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Chemistry'
-  order by case when level = 'advanced' then 0 else 1 end, title
+  where subject = 'Biology'
+  order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 2'
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5'
   limit 1
 )
 insert into public.course_documents (
@@ -20,21 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Chemistry',
-  'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 2',
+  'Biology',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5',
   'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 5
 
-## Structural Question Bank - Set 2
+## Structural Question Bank — Nutrition, respiration, and excretion
 
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
-**Subject:** Chemistry
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
+**Subject:** Biology
 
 **Instructions:**
 
@@ -45,900 +45,165 @@ values (
 
 ---
 
-## SECTION 1: ATOMIC STRUCTURE
+## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
 
-**Q1.** Atomic structure: A laboratory setup for atomic structure records readings 3, 5, 7, and 8 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
+**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Atomic structure: A laboratory setup for atomic structure records readings 4, 6, 8, and 10 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Atomic structure: A laboratory setup for atomic structure records readings 5, 7, 9, and 12 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Atomic structure: A laboratory setup for atomic structure records readings 6, 8, 10, and 14 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Atomic structure: A laboratory setup for atomic structure records readings 7, 9, 11, and 16 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: BONDING
-
-**Q6.** Bonding: Experiment 6 studies bonding by changing concentration 0.8 mol dm-3, temperature 26 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-![Electrochemical cell](/paper-diagrams/chemistry-cell.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Bonding: Experiment 7 studies bonding by changing concentration 0.9 mol dm-3, temperature 27 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Bonding: Experiment 8 studies bonding by changing concentration 1 mol dm-3, temperature 28 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Bonding: Experiment 9 studies bonding by changing concentration 1.1 mol dm-3, temperature 29 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Bonding: Experiment 10 studies bonding by changing concentration 1.2 mol dm-3, temperature 30 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: ENERGETICS
-
-**Q11.** Energetics: Experiment 11 studies energetics by changing concentration 1.3 mol dm-3, temperature 31 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Energetics: Experiment 12 studies energetics by changing concentration 1.4 mol dm-3, temperature 32 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Energetics: Experiment 13 studies energetics by changing concentration 1.5 mol dm-3, temperature 33 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Energetics: Experiment 14 studies energetics by changing concentration 1.6 mol dm-3, temperature 34 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Energetics: Experiment 15 studies energetics by changing concentration 1.7 mol dm-3, temperature 35 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: KINETICS
-
-**Q16.** Kinetics: Experiment 16 studies kinetics by changing concentration 1.8 mol dm-3, temperature 36 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Kinetics: Experiment 17 studies kinetics by changing concentration 1.9 mol dm-3, temperature 37 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Kinetics: Experiment 18 studies kinetics by changing concentration 2 mol dm-3, temperature 38 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Kinetics: Experiment 19 studies kinetics by changing concentration 2.1 mol dm-3, temperature 39 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Kinetics: Experiment 20 studies kinetics by changing concentration 2.2 mol dm-3, temperature 40 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: EQUILIBRIUM
-
-**Q21.** Equilibrium: Experiment 21 studies equilibrium by changing concentration 2.3 mol dm-3, temperature 41 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Equilibrium: Experiment 22 studies equilibrium by changing concentration 2.4 mol dm-3, temperature 42 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Equilibrium: Experiment 23 studies equilibrium by changing concentration 2.5 mol dm-3, temperature 43 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Equilibrium: Experiment 24 studies equilibrium by changing concentration 2.6 mol dm-3, temperature 44 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Equilibrium: Experiment 25 studies equilibrium by changing concentration 2.7 mol dm-3, temperature 45 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: ORGANIC CHEMISTRY
-
-**Q26.** Organic chemistry: Experiment 26 studies organic chemistry by changing concentration 2.8 mol dm-3, temperature 46 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Organic chemistry: Experiment 27 studies organic chemistry by changing concentration 2.9 mol dm-3, temperature 47 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Organic chemistry: Experiment 28 studies organic chemistry by changing concentration 3 mol dm-3, temperature 48 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Organic chemistry: Experiment 29 studies organic chemistry by changing concentration 3.1 mol dm-3, temperature 49 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Organic chemistry: Experiment 30 studies organic chemistry by changing concentration 3.2 mol dm-3, temperature 50 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: ELECTROCHEMISTRY
-
-**Q31.** Electrochemistry: Experiment 31 studies electrochemistry by changing concentration 3.3 mol dm-3, temperature 51 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Electrochemistry: Experiment 32 studies electrochemistry by changing concentration 3.4 mol dm-3, temperature 52 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Electrochemistry: Experiment 33 studies electrochemistry by changing concentration 3.5 mol dm-3, temperature 53 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
 
-**Q34.** Electrochemistry: Experiment 34 studies electrochemistry by changing concentration 3.6 mol dm-3, temperature 54 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(c) Describe how you would test a leaf for starch. *(5 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Electrochemistry: Experiment 35 studies electrochemistry by changing concentration 3.7 mol dm-3, temperature 55 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: QUALITATIVE ANALYSIS
-
-**Q36.** Qualitative analysis: Experiment 36 studies qualitative analysis by changing concentration 3.8 mol dm-3, temperature 56 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Qualitative analysis: Experiment 37 studies qualitative analysis by changing concentration 3.9 mol dm-3, temperature 57 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Qualitative analysis: Experiment 38 studies qualitative analysis by changing concentration 4 mol dm-3, temperature 58 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Qualitative analysis: Experiment 39 studies qualitative analysis by changing concentration 4.1 mol dm-3, temperature 59 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Qualitative analysis: Experiment 40 studies qualitative analysis by changing concentration 4.2 mol dm-3, temperature 60 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Chemistry'
-  order by case when level = 'advanced' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Chemistry',
-  'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3',
-  'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3
-
-## Structural Question Bank - Set 3
-
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
-**Subject:** Chemistry
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: ATOMIC STRUCTURE
-
-**Q1.** Atomic structure: A laboratory setup for atomic structure records readings 4, 7, 10, and 11 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Atomic structure: A laboratory setup for atomic structure records readings 5, 8, 11, and 13 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-![Titration apparatus](/paper-diagrams/chemistry-titration.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Atomic structure: A laboratory setup for atomic structure records readings 6, 9, 12, and 15 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Atomic structure: A laboratory setup for atomic structure records readings 7, 10, 13, and 17 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Atomic structure: A laboratory setup for atomic structure records readings 8, 11, 14, and 19 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: BONDING
-
-**Q6.** Bonding: Experiment 6 studies bonding by changing concentration 0.9 mol dm-3, temperature 26 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Bonding: Experiment 7 studies bonding by changing concentration 1 mol dm-3, temperature 27 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Bonding: Experiment 8 studies bonding by changing concentration 1.1 mol dm-3, temperature 28 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Bonding: Experiment 9 studies bonding by changing concentration 1.2 mol dm-3, temperature 29 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Bonding: Experiment 10 studies bonding by changing concentration 1.3 mol dm-3, temperature 30 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: ENERGETICS
-
-**Q11.** Energetics: Experiment 11 studies energetics by changing concentration 1.4 mol dm-3, temperature 31 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Energetics: Experiment 12 studies energetics by changing concentration 1.5 mol dm-3, temperature 32 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Energetics: Experiment 13 studies energetics by changing concentration 1.6 mol dm-3, temperature 33 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Energetics: Experiment 14 studies energetics by changing concentration 1.7 mol dm-3, temperature 34 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Energetics: Experiment 15 studies energetics by changing concentration 1.8 mol dm-3, temperature 35 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: KINETICS
-
-**Q16.** Kinetics: Experiment 16 studies kinetics by changing concentration 1.9 mol dm-3, temperature 36 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Kinetics: Experiment 17 studies kinetics by changing concentration 2 mol dm-3, temperature 37 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Kinetics: Experiment 18 studies kinetics by changing concentration 2.1 mol dm-3, temperature 38 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Kinetics: Experiment 19 studies kinetics by changing concentration 2.2 mol dm-3, temperature 39 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Kinetics: Experiment 20 studies kinetics by changing concentration 2.3 mol dm-3, temperature 40 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: EQUILIBRIUM
-
-**Q21.** Equilibrium: Experiment 21 studies equilibrium by changing concentration 2.4 mol dm-3, temperature 41 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Equilibrium: Experiment 22 studies equilibrium by changing concentration 2.5 mol dm-3, temperature 42 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
 
-**Q23.** Equilibrium: Experiment 23 studies equilibrium by changing concentration 2.6 mol dm-3, temperature 43 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the uses of glucose in plants. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(c) Explain why photosynthesis is important to animals. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
 
-**Q24.** Equilibrium: Experiment 24 studies equilibrium by changing concentration 2.7 mol dm-3, temperature 44 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the role of the stomach in digestion. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-**Q25.** Equilibrium: Experiment 25 studies equilibrium by changing concentration 2.8 mol dm-3, temperature 45 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) State the products of digestion of each. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of bile in digestion. *(4 marks)*
 
 ---
 
-## SECTION 6: ORGANIC CHEMISTRY
+**Q6.** (a) What is a balanced diet? *(2 marks)*
 
-**Q26.** Organic chemistry: Experiment 26 studies organic chemistry by changing concentration 2.9 mol dm-3, temperature 46 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-**Q27.** Organic chemistry: Experiment 27 studies organic chemistry by changing concentration 3 mol dm-3, temperature 47 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
 
 ---
 
-**Q28.** Organic chemistry: Experiment 28 studies organic chemistry by changing concentration 3.1 mol dm-3, temperature 48 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-**Q29.** Organic chemistry: Experiment 29 studies organic chemistry by changing concentration 3.2 mol dm-3, temperature 49 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain what is meant by "oxygen debt". *(4 marks)*
 
 ---
 
-**Q30.** Organic chemistry: Experiment 30 studies organic chemistry by changing concentration 3.3 mol dm-3, temperature 50 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the main excretory product of each organ. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-## SECTION 7: ELECTROCHEMISTRY
 
-**Q31.** Electrochemistry: Experiment 31 studies electrochemistry by changing concentration 3.4 mol dm-3, temperature 51 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(c) State what happens to glucose in the kidney tubule. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
 
-**Q32.** Electrochemistry: Experiment 32 studies electrochemistry by changing concentration 3.5 mol dm-3, temperature 52 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q12.** (a) What is homeostasis? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Give two examples of homeostasis in the human body. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-**Q33.** Electrochemistry: Experiment 33 studies electrochemistry by changing concentration 3.6 mol dm-3, temperature 53 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q13.** (a) Define the term "transpiration". *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) State three factors that affect the rate of transpiration. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
 
 ---
 
-**Q34.** Electrochemistry: Experiment 34 studies electrochemistry by changing concentration 3.7 mol dm-3, temperature 54 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the role of the xylem and phloem. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
 
-**Q35.** Electrochemistry: Experiment 35 studies electrochemistry by changing concentration 3.8 mol dm-3, temperature 55 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name two substances the liver produces or processes. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(c) Explain how the liver regulates blood glucose level. *(5 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-## SECTION 8: QUALITATIVE ANALYSIS
 
-**Q36.** Qualitative analysis: Experiment 36 studies qualitative analysis by changing concentration 3.9 mol dm-3, temperature 56 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q16.** (a) State the function of the large intestine. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(c) Describe what happens when too much water is absorbed. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
 
-**Q37.** Qualitative analysis: Experiment 37 studies qualitative analysis by changing concentration 4 mol dm-3, temperature 57 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why breathing rate increases during exercise. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(c) State the effect of exercise on the rate of respiration. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-**Q38.** Qualitative analysis: Experiment 38 studies qualitative analysis by changing concentration 4.1 mol dm-3, temperature 58 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) State the function of the pancreas. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the villi increase the rate of absorption. *(4 marks)*
 
 ---
 
-**Q39.** Qualitative analysis: Experiment 39 studies qualitative analysis by changing concentration 4.2 mol dm-3, temperature 59 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name the substances lost through the skin. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(c) Explain how sweating helps to cool the body. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
 ---
-
-**Q40.** Qualitative analysis: Experiment 40 studies qualitative analysis by changing concentration 4.3 mol dm-3, temperature 60 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Explain why plants are described as producers. *(3 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
+(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
 ',
   null
 )
@@ -958,13 +223,13 @@ with chosen_topic as (
   select id
   from public.topics
   where subject = 'Biology'
-  order by case when level = 'advanced' then 0 else 1 end, title
+  order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 1'
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6'
   limit 1
 )
 insert into public.course_documents (
@@ -975,19 +240,19 @@ values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
   'Biology',
-  'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 1',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6',
   'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 1
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 6
 
-## Structural Question Bank - Set 1
+## Structural Question Bank — Reproduction, genetics, and ecology
 
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
 **Subject:** Biology
 
 **Instructions:**
@@ -999,423 +264,165 @@ values (
 
 ---
 
-## SECTION 1: CELL BIOLOGY
+## SECTION 1: REPRODUCTION, GENETICS, AND ECOLOGY
 
-**Q1.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** (a) Draw a labelled diagram of a flower. *(5 marks)*
 
-![Plant cell diagram](/paper-diagrams/biology-cell.svg)
+(b) State the function of each labelled part. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Distinguish between pollination and fertilisation. *(4 marks)*
 
 ---
 
-**Q2.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q2.** (a) What is pollination? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three features of insect-pollinated flowers. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe the process of fertilisation in a flowering plant. *(5 marks)*
 
 ---
 
-**Q3.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q3.** (a) Describe the process of germination in a bean seed. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the conditions necessary for germination. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of the cotyledons during germination. *(3 marks)*
 
 ---
 
-**Q4.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** (a) Name the male and female reproductive organs of a flowering plant. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how seeds are dispersed by wind and by animals. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two advantages of seed dispersal. *(4 marks)*
 
 ---
 
-**Q5.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q5.** (a) Describe the structure of the human male reproductive system. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the function of each part. *(5 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of hormones in the male reproductive system. *(4 marks)*
 
 ---
 
-## SECTION 2: BIOCHEMISTRY
+**Q6.** (a) Describe the structure of the human female reproductive system. *(5 marks)*
 
-**Q6.** Biochemistry: Experiment 6 studies biochemistry by changing concentration 0.7 mol dm-3, temperature 26 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+(b) State the function of each part. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain what happens during the menstrual cycle. *(5 marks)*
 
 ---
 
-**Q7.** Biochemistry: Experiment 7 studies biochemistry by changing concentration 0.8 mol dm-3, temperature 27 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q7.** (a) What is fertilisation in humans? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Describe the development of the embryo in the uterus. *(5 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of the placenta. *(4 marks)*
 
 ---
 
-**Q8.** Biochemistry: Experiment 8 studies biochemistry by changing concentration 0.9 mol dm-3, temperature 28 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q8.** (a) Define the terms gene, allele, and genotype. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain the difference between genotype and phenotype. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State the difference between homozygous and heterozygous. *(3 marks)*
 
 ---
 
-**Q9.** Biochemistry: Experiment 9 studies biochemistry by changing concentration 1 mol dm-3, temperature 29 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q9.** (a) In a monohybrid cross between a tall plant (TT) and a short plant (tt), show the genotypes and phenotypes of the F1 and F2 generations. *(6 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the phenotypic ratio of the F2 generation. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain what is meant by a dominant allele. *(3 marks)*
 
 ---
 
-**Q10.** Biochemistry: Experiment 10 studies biochemistry by changing concentration 1.1 mol dm-3, temperature 30 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q10.** (a) What is a sex-linked characteristic? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how colour blindness is inherited. *(5 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State why sex-linked disorders are more common in males. *(4 marks)*
 
 ---
 
-## SECTION 3: GENETICS
+**Q11.** (a) Define the term "variation". *(2 marks)*
 
-**Q11.** Genetics: A biological investigation on genetics compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) Distinguish between continuous and discontinuous variation, giving an example of each. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of variation in natural selection. *(5 marks)*
 
 ---
 
-**Q12.** Genetics: A biological investigation on genetics compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** (a) What is natural selection? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how antibiotic resistance in bacteria illustrates natural selection. *(5 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State the role of mutation in evolution. *(4 marks)*
 
 ---
 
-**Q13.** Genetics: A biological investigation on genetics compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q13.** (a) Define the term "ecosystem". *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name the components of an ecosystem. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how energy flows through an ecosystem. *(5 marks)*
 
 ---
 
-**Q14.** Genetics: A biological investigation on genetics compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** (a) What is a food chain? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Construct a food chain with four organisms found in a Cameroon ecosystem. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why the number of organisms decreases along a food chain. *(5 marks)*
 
 ---
 
-**Q15.** Genetics: A biological investigation on genetics compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q15.** (a) Define the term "food web". *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why food webs are more stable than food chains. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe the effect of removing a top predator from a food web. *(4 marks)*
 
 ---
 
-## SECTION 4: ECOLOGY
+**Q16.** (a) Describe the carbon cycle. *(5 marks)*
 
-**Q16.** Ecology: A biological investigation on ecology compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) Name the processes by which carbon is returned to the atmosphere. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the effect of deforestation on the carbon cycle. *(4 marks)*
 
 ---
 
-**Q17.** Ecology: A biological investigation on ecology compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** (a) Describe the nitrogen cycle. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name the bacteria involved in the nitrogen cycle. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why nitrogen is important to living organisms. *(3 marks)*
 
 ---
 
-**Q18.** Ecology: A biological investigation on ecology compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** (a) What is a population? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three factors that affect population size. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how a predator-prey relationship affects population sizes. *(5 marks)*
 
 ---
 
-**Q19.** Ecology: A biological investigation on ecology compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q19.** (a) Define the term "conservation". *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three reasons why conservation is important. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe two methods of conserving wildlife in Cameroon. *(5 marks)*
 
 ---
 
-**Q20.** Ecology: A biological investigation on ecology compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q20.** (a) What is pollution? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name three types of pollution and their causes. *(6 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: PLANT PHYSIOLOGY
-
-**Q21.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: ANIMAL PHYSIOLOGY
-
-**Q26.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: EVOLUTION
-
-**Q31.** Evolution: A biological investigation on evolution compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Evolution: A biological investigation on evolution compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Evolution: A biological investigation on evolution compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Evolution: A biological investigation on evolution compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Evolution: A biological investigation on evolution compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: PRACTICAL BIOLOGY
-
-**Q36.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
+(c) Explain the effect of water pollution on aquatic life. *(4 marks)*
 ',
   null
 )
@@ -1435,13 +442,13 @@ with chosen_topic as (
   select id
   from public.topics
   where subject = 'Biology'
-  order by case when level = 'advanced' then 0 else 1 end, title
+  order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 2'
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7'
   limit 1
 )
 insert into public.course_documents (
@@ -1452,19 +459,19 @@ values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
   'Biology',
-  'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 2',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7',
   'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 7
 
-## Structural Question Bank - Set 2
+## Structural Question Bank — Cells and transport
 
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
 **Subject:** Biology
 
 **Instructions:**
@@ -1476,423 +483,167 @@ values (
 
 ---
 
-## SECTION 1: CELL BIOLOGY
+## SECTION 1: CELLS AND TRANSPORT
 
-**Q1.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** (a) Draw a labelled diagram of a plant cell as seen under a light microscope. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three differences between a plant cell and an animal cell. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the structure of the cell membrane is related to its function. *(4 marks)*
 
 ---
 
-**Q2.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q2.** An experiment was set up with a potato cylinder placed in distilled water and another in a concentrated salt solution.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) State what would happen to each cylinder. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Explain your answers using the terms osmosis, turgor, and plasmolysis. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Name the process involved and state its importance in plants. *(3 marks)*
 
 ---
 
-**Q4.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q3.** (a) Define diffusion and give two examples in living organisms. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three factors that affect the rate of diffusion. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why diffusion is important in the human respiratory system. *(4 marks)*
 
 ---
 
-**Q5.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** (a) What is active transport? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Give two differences between active transport and diffusion. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of active transport in the absorption of mineral salts by plant roots. *(5 marks)*
 
 ---
 
-## SECTION 2: BIOCHEMISTRY
+**Q5.** (a) State the functions of the following cell organelles: nucleus, mitochondria, ribosomes, chloroplast. *(4 marks)*
 
-**Q6.** Biochemistry: Experiment 6 studies biochemistry by changing concentration 0.8 mol dm-3, temperature 26 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+(b) A cell is found to contain many mitochondria. What does this suggest about its activity? Explain. *(4 marks)*
 
-![Human heart diagram](/paper-diagrams/biology-heart.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Distinguish between a tissue and an organ, giving one example of each. *(4 marks)*
 
 ---
 
-**Q7.** Biochemistry: Experiment 7 studies biochemistry by changing concentration 0.9 mol dm-3, temperature 27 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q6.** (a) Describe how you would prepare and observe an onion epidermal cell under a microscope. *(6 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the function of iodine solution in this preparation. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why the onion cell appears as a regular shape. *(3 marks)*
 
 ---
 
-**Q8.** Biochemistry: Experiment 8 studies biochemistry by changing concentration 1 mol dm-3, temperature 28 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q7.** (a) What are enzymes? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three properties of enzymes. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe an experiment to show the effect of temperature on the activity of an enzyme. *(6 marks)*
 
 ---
 
-**Q9.** Biochemistry: Experiment 9 studies biochemistry by changing concentration 1.1 mol dm-3, temperature 29 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q8.** (a) Define the term "lock and key hypothesis" as applied to enzymes. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain what happens when an enzyme is boiled. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two factors, other than temperature, that affect enzyme activity. *(2 marks)*
 
 ---
 
-**Q10.** Biochemistry: Experiment 10 studies biochemistry by changing concentration 1.2 mol dm-3, temperature 30 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q9.** (a) Distinguish between osmosis and diffusion. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) A red blood cell is placed in distilled water. State and explain what happens. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why a plant cell placed in distilled water does not burst. *(4 marks)*
 
 ---
 
-## SECTION 3: GENETICS
+**Q10.** (a) Draw and label a diagram of an animal cell. *(5 marks)*
 
-**Q11.** Genetics: A biological investigation on genetics compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) State the function of each labelled part. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the animal cell differs from a plant cell in terms of shape and why. *(3 marks)*
 
 ---
 
-**Q12.** Genetics: A biological investigation on genetics compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q11.** (a) What is meant by the term "concentration gradient"? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how a concentration gradient affects the rate of diffusion. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe how oxygen moves from the alveoli into the blood. *(4 marks)*
 
 ---
 
-**Q13.** Genetics: A biological investigation on genetics compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** (a) State the role of the cell wall in plants. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why the cell wall is described as "fully permeable". *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Compare the cell wall with the cell membrane in terms of permeability. *(4 marks)*
 
 ---
 
-**Q14.** Genetics: A biological investigation on genetics compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q13.** (a) What is a selectively permeable membrane? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Give two examples of selectively permeable membranes in living organisms. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how selective permeability is important in the kidney. *(5 marks)*
 
 ---
 
-**Q15.** Genetics: A biological investigation on genetics compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** (a) Define the term "turgidity". *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how turgidity supports non-woody plants. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe what happens to a plant when it wilts. *(4 marks)*
 
 ---
 
-## SECTION 4: ECOLOGY
+**Q15.** (a) State three functions of the nucleus. *(3 marks)*
 
-**Q16.** Ecology: A biological investigation on ecology compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) Explain why the nucleus is described as the "control centre" of the cell. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Distinguish between a gene and a chromosome. *(3 marks)*
 
 ---
 
-**Q17.** Ecology: A biological investigation on ecology compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q16.** (a) What is the function of the mitochondria? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why muscle cells contain more mitochondria than skin cells. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State the equation for aerobic respiration. *(3 marks)*
 
 ---
 
-**Q18.** Ecology: A biological investigation on ecology compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** (a) Define the term "enzyme specificity". *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why amylase cannot digest proteins. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two examples of enzymes and the substrates they act on. *(4 marks)*
 
 ---
 
-**Q19.** Ecology: A biological investigation on ecology compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** (a) Describe an experiment to demonstrate osmosis using a Visking tubing. *(6 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the results you would expect. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the results in terms of osmosis. *(4 marks)*
 
 ---
 
-**Q20.** Ecology: A biological investigation on ecology compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q19.** (a) What is the difference between a unicellular and a multicellular organism? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Give one example of each. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the cells of a multicellular organism become specialised. *(4 marks)*
 
 ---
 
-## SECTION 5: PLANT PHYSIOLOGY
+**Q20.** (a) State three differences between diffusion and active transport. *(3 marks)*
 
-**Q21.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) Explain why energy is required for active transport. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: ANIMAL PHYSIOLOGY
-
-**Q26.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: EVOLUTION
-
-**Q31.** Evolution: A biological investigation on evolution compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Evolution: A biological investigation on evolution compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Evolution: A biological investigation on evolution compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Evolution: A biological investigation on evolution compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Evolution: A biological investigation on evolution compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: PRACTICAL BIOLOGY
-
-**Q36.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
+(c) Describe how the small intestine uses active transport to absorb glucose. *(5 marks)*
 ',
   null
 )
@@ -1912,13 +663,13 @@ with chosen_topic as (
   select id
   from public.topics
   where subject = 'Biology'
-  order by case when level = 'advanced' then 0 else 1 end, title
+  order by case when level = 'ordinary' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 3'
+  where title = 'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8'
   limit 1
 )
 insert into public.course_documents (
@@ -1929,19 +680,19 @@ values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
   'Biology',
-  'CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 3',
+  'CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8',
   'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL BIOLOGY P2 SET 3
+  '# CAMEROON GCE ORDINARY LEVEL BIOLOGY P2 SET 8
 
-## Structural Question Bank - Set 3
+## Structural Question Bank — Nutrition, respiration, and excretion
 
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, science
 **Subject:** Biology
 
 **Instructions:**
@@ -1953,423 +704,165 @@ values (
 
 ---
 
-## SECTION 1: CELL BIOLOGY
+## SECTION 1: NUTRITION, RESPIRATION, AND EXCRETION
 
-**Q1.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** (a) State the word equation for photosynthesis. *(2 marks)*
 
-![Plant cell diagram](/paper-diagrams/biology-cell.svg)
+(b) Name three factors that affect the rate of photosynthesis. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe an experiment to show that light is necessary for photosynthesis. *(6 marks)*
 
 ---
 
-**Q2.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q2.** (a) What is the role of chlorophyll in photosynthesis? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why a destarched plant is used in photosynthesis experiments. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe how you would test a leaf for starch. *(5 marks)*
 
 ---
 
-**Q3.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q3.** (a) Name the products of photosynthesis. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the uses of glucose in plants. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why photosynthesis is important to animals. *(4 marks)*
 
 ---
 
-**Q4.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** (a) Describe the process of digestion in the mouth. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the role of the stomach in digestion. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the small intestine is adapted for absorption. *(5 marks)*
 
 ---
 
-**Q5.** Cell biology: A biological investigation on cell biology compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q5.** (a) Name the enzymes that digest carbohydrates, proteins, and fats. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the products of digestion of each. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of bile in digestion. *(4 marks)*
 
 ---
 
-## SECTION 2: BIOCHEMISTRY
+**Q6.** (a) What is a balanced diet? *(2 marks)*
 
-**Q6.** Biochemistry: Experiment 6 studies biochemistry by changing concentration 0.9 mol dm-3, temperature 26 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+(b) Name the seven components of a balanced diet and state one function of each. *(7 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why a pregnant woman needs more iron in her diet. *(3 marks)*
 
 ---
 
-**Q7.** Biochemistry: Experiment 7 studies biochemistry by changing concentration 1 mol dm-3, temperature 27 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q7.** (a) Describe the structure of the human respiratory system. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain how gaseous exchange occurs in the alveoli. *(5 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State two ways in which the alveoli are adapted for gaseous exchange. *(3 marks)*
 
 ---
 
-**Q8.** Biochemistry: Experiment 8 studies biochemistry by changing concentration 1.1 mol dm-3, temperature 28 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q8.** (a) State the word equation for aerobic respiration. *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Distinguish between aerobic and anaerobic respiration. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain why anaerobic respiration produces less energy than aerobic respiration. *(4 marks)*
 
 ---
 
-**Q9.** Biochemistry: Experiment 9 studies biochemistry by changing concentration 1.2 mol dm-3, temperature 29 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q9.** (a) What is anaerobic respiration in muscles? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name the product of anaerobic respiration in muscles and explain why it causes fatigue. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain what is meant by "oxygen debt". *(4 marks)*
 
 ---
 
-**Q10.** Biochemistry: Experiment 10 studies biochemistry by changing concentration 1.3 mol dm-3, temperature 30 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+**Q10.** (a) Name the excretory organs of the human body. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the main excretory product of each organ. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain the role of the kidney in excretion and osmoregulation. *(6 marks)*
 
 ---
 
-## SECTION 3: GENETICS
+**Q11.** (a) Describe the structure of a nephron. *(5 marks)*
 
-**Q11.** Genetics: A biological investigation on genetics compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) Explain how ultrafiltration occurs in the glomerulus. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State what happens to glucose in the kidney tubule. *(3 marks)*
 
 ---
 
-**Q12.** Genetics: A biological investigation on genetics compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** (a) What is homeostasis? *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Give two examples of homeostasis in the human body. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the body regulates its temperature when it is too hot. *(6 marks)*
 
 ---
 
-**Q13.** Genetics: A biological investigation on genetics compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q13.** (a) Define the term "transpiration". *(2 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State three factors that affect the rate of transpiration. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe an experiment to demonstrate transpiration. *(5 marks)*
 
 ---
 
-**Q14.** Genetics: A biological investigation on genetics compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** (a) Explain how water and mineral salts are transported in plants. *(5 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the role of the xylem and phloem. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the products of photosynthesis are transported in plants. *(4 marks)*
 
 ---
 
-**Q15.** Genetics: A biological investigation on genetics compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q15.** (a) What is the function of the liver in the body? *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name two substances the liver produces or processes. *(2 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the liver regulates blood glucose level. *(5 marks)*
 
 ---
 
-## SECTION 4: ECOLOGY
+**Q16.** (a) State the function of the large intestine. *(2 marks)*
 
-**Q16.** Ecology: A biological investigation on ecology compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(b) Explain how water is reabsorbed in the large intestine. *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Describe what happens when too much water is absorbed. *(3 marks)*
 
 ---
 
-**Q17.** Ecology: A biological investigation on ecology compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** (a) Distinguish between breathing and respiration. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why breathing rate increases during exercise. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) State the effect of exercise on the rate of respiration. *(3 marks)*
 
 ---
 
-**Q18.** Ecology: A biological investigation on ecology compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** (a) Name the parts of the human digestive system in order. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) State the function of the pancreas. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how the villi increase the rate of absorption. *(4 marks)*
 
 ---
 
-**Q19.** Ecology: A biological investigation on ecology compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q19.** (a) What is the role of the skin in excretion? *(3 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Name the substances lost through the skin. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Explain how sweating helps to cool the body. *(4 marks)*
 
 ---
 
-**Q20.** Ecology: A biological investigation on ecology compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q20.** (a) State the importance of photosynthesis to the ecosystem. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Explain why plants are described as producers. *(3 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: PLANT PHYSIOLOGY
-
-**Q21.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Plant physiology: A biological investigation on plant physiology compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: ANIMAL PHYSIOLOGY
-
-**Q26.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Animal physiology: A biological investigation on animal physiology compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: EVOLUTION
-
-**Q31.** Evolution: A biological investigation on evolution compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Evolution: A biological investigation on evolution compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Evolution: A biological investigation on evolution compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Evolution: A biological investigation on evolution compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Evolution: A biological investigation on evolution compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: PRACTICAL BIOLOGY
-
-**Q36.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Practical biology: A biological investigation on practical biology compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
+(c) Describe the carbon cycle, naming the processes involved. *(5 marks)*
 ',
   null
 )
@@ -2388,14 +881,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Human Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Business Studies'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 1'
+  where title = 'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P1 SET 1'
   limit 1
 )
 insert into public.course_documents (
@@ -2405,21 +898,2013 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Human Biology',
-  'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 1',
+  'Business Studies',
+  'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P1 SET 1',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 1
+  '# CAMEROON GCE Advanced Level BUSINESS STUDIES P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_commercial
+**Subject:** Business Studies
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Business Environment: Sample question 1 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q2.** Strategic Management: Sample question 2 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q3.** Marketing: Sample question 3 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q4.** Finance: Sample question 4 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q5.** Human Resources: Sample question 5 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q6.** Operations: Sample question 6 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q7.** Business Ethics: Sample question 7 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q8.** Global Business: Sample question 8 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q9.** Business Environment: Sample question 9 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q10.** Strategic Management: Sample question 10 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q11.** Marketing: Sample question 11 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q12.** Finance: Sample question 12 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q13.** Human Resources: Sample question 13 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q14.** Operations: Sample question 14 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q15.** Business Ethics: Sample question 15 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q16.** Global Business: Sample question 16 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q17.** Business Environment: Sample question 17 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q18.** Strategic Management: Sample question 18 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q19.** Marketing: Sample question 19 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q20.** Finance: Sample question 20 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q21.** Human Resources: Sample question 21 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q22.** Operations: Sample question 22 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q23.** Business Ethics: Sample question 23 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q24.** Global Business: Sample question 24 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q25.** Business Environment: Sample question 25 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q26.** Strategic Management: Sample question 26 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q27.** Marketing: Sample question 27 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q28.** Finance: Sample question 28 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q29.** Human Resources: Sample question 29 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q30.** Operations: Sample question 30 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q31.** Business Ethics: Sample question 31 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Global Business: Sample question 32 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Business Environment: Sample question 33 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Strategic Management: Sample question 34 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Marketing: Sample question 35 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Finance: Sample question 36 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Human Resources: Sample question 37 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Operations: Sample question 38 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** Business Ethics: Sample question 39 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Global Business: Sample question 40 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Business Environment: Sample question 41 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Strategic Management: Sample question 42 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Marketing: Sample question 43 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Finance: Sample question 44 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Human Resources: Sample question 45 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Operations: Sample question 46 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** Business Ethics: Sample question 47 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Global Business: Sample question 48 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Business Environment: Sample question 49 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Strategic Management: Sample question 50 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Marketing: Sample question 51 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Finance: Sample question 52 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Human Resources: Sample question 53 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Operations: Sample question 54 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** Business Ethics: Sample question 55 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Global Business: Sample question 56 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Business Environment: Sample question 57 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Strategic Management: Sample question 58 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Marketing: Sample question 59 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Finance: Sample question 60 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. B
+3. C
+4. D
+5. A
+6. B
+7. C
+8. D
+9. A
+10. B
+11. C
+12. D
+13. A
+14. B
+15. C
+16. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
+23. C
+24. D
+25. A
+26. B
+27. C
+28. D
+29. A
+30. B
+31. C
+32. D
+33. A
+34. B
+35. C
+36. D
+37. A
+38. B
+39. C
+40. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
+47. C
+48. D
+49. A
+50. B
+51. C
+52. D
+53. A
+54. B
+55. C
+56. D
+57. A
+58. B
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Business Studies'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Business Studies',
+  'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P1 SET 2',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Advanced Level BUSINESS STUDIES P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_commercial
+**Subject:** Business Studies
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Business Environment: Sample question 1 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q2.** Strategic Management: Sample question 2 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q3.** Marketing: Sample question 3 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q4.** Finance: Sample question 4 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q5.** Human Resources: Sample question 5 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q6.** Operations: Sample question 6 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q7.** Business Ethics: Sample question 7 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q8.** Global Business: Sample question 8 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q9.** Business Environment: Sample question 9 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q10.** Strategic Management: Sample question 10 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q11.** Marketing: Sample question 11 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q12.** Finance: Sample question 12 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q13.** Human Resources: Sample question 13 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q14.** Operations: Sample question 14 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q15.** Business Ethics: Sample question 15 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q16.** Global Business: Sample question 16 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q17.** Business Environment: Sample question 17 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q18.** Strategic Management: Sample question 18 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q19.** Marketing: Sample question 19 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q20.** Finance: Sample question 20 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q21.** Human Resources: Sample question 21 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q22.** Operations: Sample question 22 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q23.** Business Ethics: Sample question 23 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q24.** Global Business: Sample question 24 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q25.** Business Environment: Sample question 25 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q26.** Strategic Management: Sample question 26 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q27.** Marketing: Sample question 27 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q28.** Finance: Sample question 28 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q29.** Human Resources: Sample question 29 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q30.** Operations: Sample question 30 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q31.** Business Ethics: Sample question 31 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Global Business: Sample question 32 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Business Environment: Sample question 33 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Strategic Management: Sample question 34 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Marketing: Sample question 35 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Finance: Sample question 36 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Human Resources: Sample question 37 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Operations: Sample question 38 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** Business Ethics: Sample question 39 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Global Business: Sample question 40 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Business Environment: Sample question 41 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Strategic Management: Sample question 42 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Marketing: Sample question 43 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Finance: Sample question 44 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Human Resources: Sample question 45 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Operations: Sample question 46 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** Business Ethics: Sample question 47 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Global Business: Sample question 48 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Business Environment: Sample question 49 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Strategic Management: Sample question 50 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Marketing: Sample question 51 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Finance: Sample question 52 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Human Resources: Sample question 53 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Operations: Sample question 54 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** Business Ethics: Sample question 55 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Global Business: Sample question 56 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Business Environment: Sample question 57 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Strategic Management: Sample question 58 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Marketing: Sample question 59 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Finance: Sample question 60 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. B
+3. C
+4. D
+5. A
+6. B
+7. C
+8. D
+9. A
+10. B
+11. C
+12. D
+13. A
+14. B
+15. C
+16. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
+23. C
+24. D
+25. A
+26. B
+27. C
+28. D
+29. A
+30. B
+31. C
+32. D
+33. A
+34. B
+35. C
+36. D
+37. A
+38. B
+39. C
+40. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
+47. C
+48. D
+49. A
+50. B
+51. C
+52. D
+53. A
+54. B
+55. C
+56. D
+57. A
+58. B
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Business Studies'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Business Studies',
+  'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P1 SET 3',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Advanced Level BUSINESS STUDIES P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level
+**Class:** UPPER SIXTH
+**Series:** a_commercial
+**Subject:** Business Studies
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Business Environment: Sample question 1 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q2.** Strategic Management: Sample question 2 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q3.** Marketing: Sample question 3 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q4.** Finance: Sample question 4 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q5.** Human Resources: Sample question 5 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q6.** Operations: Sample question 6 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q7.** Business Ethics: Sample question 7 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q8.** Global Business: Sample question 8 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q9.** Business Environment: Sample question 9 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q10.** Strategic Management: Sample question 10 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q11.** Marketing: Sample question 11 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q12.** Finance: Sample question 12 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q13.** Human Resources: Sample question 13 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q14.** Operations: Sample question 14 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q15.** Business Ethics: Sample question 15 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q16.** Global Business: Sample question 16 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q17.** Business Environment: Sample question 17 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q18.** Strategic Management: Sample question 18 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q19.** Marketing: Sample question 19 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q20.** Finance: Sample question 20 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q21.** Human Resources: Sample question 21 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q22.** Operations: Sample question 22 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q23.** Business Ethics: Sample question 23 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q24.** Global Business: Sample question 24 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q25.** Business Environment: Sample question 25 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q26.** Strategic Management: Sample question 26 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q27.** Marketing: Sample question 27 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q28.** Finance: Sample question 28 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q29.** Human Resources: Sample question 29 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q30.** Operations: Sample question 30 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q31.** Business Ethics: Sample question 31 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Global Business: Sample question 32 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Business Environment: Sample question 33 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Strategic Management: Sample question 34 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Marketing: Sample question 35 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Finance: Sample question 36 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Human Resources: Sample question 37 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Operations: Sample question 38 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** Business Ethics: Sample question 39 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Global Business: Sample question 40 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Business Environment: Sample question 41 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Strategic Management: Sample question 42 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Marketing: Sample question 43 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Finance: Sample question 44 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Human Resources: Sample question 45 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Operations: Sample question 46 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** Business Ethics: Sample question 47 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Global Business: Sample question 48 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Business Environment: Sample question 49 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Strategic Management: Sample question 50 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Marketing: Sample question 51 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Finance: Sample question 52 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Human Resources: Sample question 53 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Operations: Sample question 54 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** Business Ethics: Sample question 55 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Global Business: Sample question 56 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Business Environment: Sample question 57 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Strategic Management: Sample question 58 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Marketing: Sample question 59 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Finance: Sample question 60 for Business Studies Advanced Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. B
+3. C
+4. D
+5. A
+6. B
+7. C
+8. D
+9. A
+10. B
+11. C
+12. D
+13. A
+14. B
+15. C
+16. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
+23. C
+24. D
+25. A
+26. B
+27. C
+28. D
+29. A
+30. B
+31. C
+32. D
+33. A
+34. B
+35. C
+36. D
+37. A
+38. B
+39. C
+40. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
+47. C
+48. D
+49. A
+50. B
+51. C
+52. D
+53. A
+54. B
+55. C
+56. D
+57. A
+58. B
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Business Studies'
+  order by case when level = 'advanced' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P2 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Business Studies',
+  'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P2 SET 1',
+  'english',
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 1
 
 ## Structural Question Bank - Set 1
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Human Biology
+**Series:** commercial, technical
+**Subject:** Business Studies
 
 **Instructions:**
 
@@ -2430,421 +2915,421 @@ values (
 
 ---
 
-## SECTION 1: CELLS AND TISSUES
+## SECTION 1: ENTERPRISE
 
-**Q1.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** Enterprise: Enterprise case 1 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-![Human heart diagram](/paper-diagrams/biology-heart.svg)
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q2.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q2.** Enterprise: Enterprise case 2 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q4.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q3.** Enterprise: Enterprise case 3 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+![Business market graph](/paper-diagrams/economics-demand-supply.svg)
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
----
-
-**Q5.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 2: NUTRITION
+**Q4.** Enterprise: Enterprise case 4 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-**Q6.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q7.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q5.** Enterprise: Enterprise case 5 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q9.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 2: BUSINESS OWNERSHIP
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q6.** Business ownership: Enterprise case 6 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
----
-
-**Q10.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 3: RESPIRATION
+**Q7.** Business ownership: Enterprise case 7 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-**Q11.** Respiration: A biological investigation on respiration compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q12.** Respiration: A biological investigation on respiration compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q8.** Business ownership: Enterprise case 8 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Respiration: A biological investigation on respiration compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q14.** Respiration: A biological investigation on respiration compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q9.** Business ownership: Enterprise case 9 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Respiration: A biological investigation on respiration compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 4: CIRCULATION
+**Q10.** Business ownership: Enterprise case 10 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-**Q16.** Circulation: A biological investigation on circulation compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q17.** Circulation: A biological investigation on circulation compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 3: MANAGEMENT
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q11.** Management: Enterprise case 11 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
----
-
-**Q18.** Circulation: A biological investigation on circulation compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q19.** Circulation: A biological investigation on circulation compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** Management: Enterprise case 12 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Circulation: A biological investigation on circulation compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 5: EXCRETION
+**Q13.** Management: Enterprise case 13 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-**Q21.** Excretion: A biological investigation on excretion compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q22.** Excretion: A biological investigation on excretion compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** Management: Enterprise case 14 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Excretion: A biological investigation on excretion compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q24.** Excretion: A biological investigation on excretion compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q15.** Management: Enterprise case 15 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Excretion: A biological investigation on excretion compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 6: COORDINATION
+## SECTION 4: MARKETING
 
-**Q26.** Coordination: A biological investigation on coordination compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q16.** Marketing: Enterprise case 16 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Coordination: A biological investigation on coordination compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q28.** Coordination: A biological investigation on coordination compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** Marketing: Enterprise case 17 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Coordination: A biological investigation on coordination compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q30.** Coordination: A biological investigation on coordination compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** Marketing: Enterprise case 18 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: REPRODUCTION
-
-**Q31.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q32.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q19.** Marketing: Enterprise case 19 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q34.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q20.** Marketing: Enterprise case 20 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 8: DISEASE AND IMMUNITY
+## SECTION 5: FINANCE
 
-**Q36.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q21.** Finance: Enterprise case 21 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q38.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q22.** Finance: Enterprise case 22 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q40.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q23.** Finance: Enterprise case 23 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q24.** Finance: Enterprise case 24 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q25.** Finance: Enterprise case 25 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 6: HUMAN RESOURCES
+
+**Q26.** Human resources: Enterprise case 26 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q27.** Human resources: Enterprise case 27 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q28.** Human resources: Enterprise case 28 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q29.** Human resources: Enterprise case 29 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q30.** Human resources: Enterprise case 30 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 7: PRODUCTION
+
+**Q31.** Production: Enterprise case 31 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q32.** Production: Enterprise case 32 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q33.** Production: Enterprise case 33 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q34.** Production: Enterprise case 34 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q35.** Production: Enterprise case 35 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 8: BUSINESS ENVIRONMENT
+
+**Q36.** Business environment: Enterprise case 36 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q37.** Business environment: Enterprise case 37 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q38.** Business environment: Enterprise case 38 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q39.** Business environment: Enterprise case 39 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q40.** Business environment: Enterprise case 40 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 ',
@@ -2865,14 +3350,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Human Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Business Studies'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 2'
+  where title = 'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P2 SET 2'
   limit 1
 )
 insert into public.course_documents (
@@ -2882,21 +3367,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Human Biology',
-  'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 2',
+  'Business Studies',
+  'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P2 SET 2',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 2
+  '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 2
 
 ## Structural Question Bank - Set 2
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Human Biology
+**Series:** commercial, technical
+**Subject:** Business Studies
 
 **Instructions:**
 
@@ -2907,421 +3392,421 @@ values (
 
 ---
 
-## SECTION 1: CELLS AND TISSUES
+## SECTION 1: ENTERPRISE
 
-**Q1.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** Enterprise: Enterprise case 1 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-![Cell diagram](/paper-diagrams/biology-cell.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q3.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q2.** Enterprise: Enterprise case 2 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q5.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q3.** Enterprise: Enterprise case 3 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+![Business market graph](/paper-diagrams/economics-demand-supply.svg)
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
----
-
-## SECTION 2: NUTRITION
-
-**Q6.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q7.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q4.** Enterprise: Enterprise case 4 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q9.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q5.** Enterprise: Enterprise case 5 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 3: RESPIRATION
+## SECTION 2: BUSINESS OWNERSHIP
 
-**Q11.** Respiration: A biological investigation on respiration compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q6.** Business ownership: Enterprise case 6 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Respiration: A biological investigation on respiration compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q13.** Respiration: A biological investigation on respiration compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q7.** Business ownership: Enterprise case 7 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Respiration: A biological investigation on respiration compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q15.** Respiration: A biological investigation on respiration compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q8.** Business ownership: Enterprise case 8 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: CIRCULATION
-
-**Q16.** Circulation: A biological investigation on circulation compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q17.** Circulation: A biological investigation on circulation compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q9.** Business ownership: Enterprise case 9 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Circulation: A biological investigation on circulation compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q19.** Circulation: A biological investigation on circulation compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q10.** Business ownership: Enterprise case 10 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Circulation: A biological investigation on circulation compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 5: EXCRETION
+## SECTION 3: MANAGEMENT
 
-**Q21.** Excretion: A biological investigation on excretion compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q11.** Management: Enterprise case 11 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Excretion: A biological investigation on excretion compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q23.** Excretion: A biological investigation on excretion compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q12.** Management: Enterprise case 12 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Excretion: A biological investigation on excretion compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q25.** Excretion: A biological investigation on excretion compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q13.** Management: Enterprise case 13 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: COORDINATION
-
-**Q26.** Coordination: A biological investigation on coordination compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q27.** Coordination: A biological investigation on coordination compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q14.** Management: Enterprise case 14 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Coordination: A biological investigation on coordination compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q29.** Coordination: A biological investigation on coordination compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q15.** Management: Enterprise case 15 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Coordination: A biological investigation on coordination compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 7: REPRODUCTION
+## SECTION 4: MARKETING
 
-**Q31.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q16.** Marketing: Enterprise case 16 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q33.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q17.** Marketing: Enterprise case 17 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q35.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q18.** Marketing: Enterprise case 18 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: DISEASE AND IMMUNITY
-
-**Q36.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q37.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q19.** Marketing: Enterprise case 19 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q39.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q20.** Marketing: Enterprise case 20 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q40.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+## SECTION 5: FINANCE
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+**Q21.** Finance: Enterprise case 21 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q22.** Finance: Enterprise case 22 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q23.** Finance: Enterprise case 23 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q24.** Finance: Enterprise case 24 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q25.** Finance: Enterprise case 25 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 6: HUMAN RESOURCES
+
+**Q26.** Human resources: Enterprise case 26 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q27.** Human resources: Enterprise case 27 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q28.** Human resources: Enterprise case 28 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q29.** Human resources: Enterprise case 29 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q30.** Human resources: Enterprise case 30 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 7: PRODUCTION
+
+**Q31.** Production: Enterprise case 31 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q32.** Production: Enterprise case 32 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q33.** Production: Enterprise case 33 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q34.** Production: Enterprise case 34 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q35.** Production: Enterprise case 35 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+## SECTION 8: BUSINESS ENVIRONMENT
+
+**Q36.** Business environment: Enterprise case 36 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q37.** Business environment: Enterprise case 37 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q38.** Business environment: Enterprise case 38 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q39.** Business environment: Enterprise case 39 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
+
+---
+
+**Q40.** Business environment: Enterprise case 40 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
+
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
+
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
+
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 ',
@@ -3342,14 +3827,14 @@ on conflict (id) do update set
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Human Biology'
-  order by case when level = 'ordinary' then 0 else 1 end, title
+  where subject = 'Business Studies'
+  order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 3'
+  where title = 'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P2 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -3359,21 +3844,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Human Biology',
-  'CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 3',
+  'Business Studies',
+  'CAMEROON GCE ADVANCED LEVEL BUSINESS STUDIES P2 SET 3',
   'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
+  'advanced',
+  array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ORDINARY LEVEL HUMAN BIOLOGY P2 SET 3
+  '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 3
 
 ## Structural Question Bank - Set 3
 
 **Level:** Ordinary Level
 **Class:** FORM 5
-**Series:** general, science
-**Subject:** Human Biology
+**Series:** commercial, technical
+**Subject:** Business Studies
 
 **Instructions:**
 
@@ -3384,1375 +3869,421 @@ values (
 
 ---
 
-## SECTION 1: CELLS AND TISSUES
+## SECTION 1: ENTERPRISE
 
-**Q1.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 3 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q1.** Enterprise: Enterprise case 1 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q2.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 4 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q2.** Enterprise: Enterprise case 2 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q3.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 5 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
+**Q3.** Enterprise: Enterprise case 3 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+![Business market graph](/paper-diagrams/economics-demand-supply.svg)
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
----
-
-**Q4.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 6 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Cells and tissues: A biological investigation on cells and tissues compares sample A with sample B after 7 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: NUTRITION
-
-**Q6.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 8 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-![Human heart diagram](/paper-diagrams/biology-heart.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 9 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 10 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 11 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Nutrition: A biological investigation on nutrition compares sample A with sample B after 12 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: RESPIRATION
-
-**Q11.** Respiration: A biological investigation on respiration compares sample A with sample B after 13 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Respiration: A biological investigation on respiration compares sample A with sample B after 14 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Respiration: A biological investigation on respiration compares sample A with sample B after 15 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Respiration: A biological investigation on respiration compares sample A with sample B after 16 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Respiration: A biological investigation on respiration compares sample A with sample B after 17 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: CIRCULATION
-
-**Q16.** Circulation: A biological investigation on circulation compares sample A with sample B after 18 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Circulation: A biological investigation on circulation compares sample A with sample B after 19 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Circulation: A biological investigation on circulation compares sample A with sample B after 20 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Circulation: A biological investigation on circulation compares sample A with sample B after 21 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Circulation: A biological investigation on circulation compares sample A with sample B after 22 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: EXCRETION
-
-**Q21.** Excretion: A biological investigation on excretion compares sample A with sample B after 23 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Excretion: A biological investigation on excretion compares sample A with sample B after 24 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Excretion: A biological investigation on excretion compares sample A with sample B after 25 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Excretion: A biological investigation on excretion compares sample A with sample B after 26 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Excretion: A biological investigation on excretion compares sample A with sample B after 27 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: COORDINATION
-
-**Q26.** Coordination: A biological investigation on coordination compares sample A with sample B after 28 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Coordination: A biological investigation on coordination compares sample A with sample B after 29 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Coordination: A biological investigation on coordination compares sample A with sample B after 30 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Coordination: A biological investigation on coordination compares sample A with sample B after 31 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Coordination: A biological investigation on coordination compares sample A with sample B after 32 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: REPRODUCTION
-
-**Q31.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 33 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 34 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 35 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 36 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Reproduction: A biological investigation on reproduction compares sample A with sample B after 37 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: DISEASE AND IMMUNITY
-
-**Q36.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 38 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 39 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 40 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 41 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Disease and immunity: A biological investigation on disease and immunity compares sample A with sample B after 42 days in a school or farm environment. Interpret the observations and relate them to health, growth, inheritance, or ecology.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geology'
-  order by case when level = 'advanced' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geology',
-  'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 1',
-  'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 1
-
-## Structural Question Bank - Set 1
-
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science, a_arts
-**Subject:** Geology
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: EARTH STRUCTURE
-
-**Q1.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-![Geological cross-section](/paper-diagrams/geology-section.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
-
-**Q4.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 2: MINERALS
-
-**Q6.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q7.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q8.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q9.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q10.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 3: ROCKS
-
-**Q11.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q12.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q13.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q14.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q15.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 4: PLATE TECTONICS
-
-**Q16.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q17.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q18.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q19.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q20.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 5: WEATHERING
-
-**Q21.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q22.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q23.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q24.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q25.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 6: STRATIGRAPHY
-
-**Q26.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q27.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q28.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q29.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q30.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 7: ECONOMIC GEOLOGY
-
-**Q31.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q32.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q33.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q34.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q35.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-## SECTION 8: GEOLOGICAL MAPS
-
-**Q36.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q37.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q38.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q39.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q40.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Geology'
-  order by case when level = 'advanced' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 2'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Geology',
-  'CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 2',
-  'english',
-  'advanced',
-  array['lower_sixth', 'upper_sixth']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ADVANCED LEVEL GEOLOGY P2 SET 2
-
-## Structural Question Bank - Set 2
-
-**Level:** Advanced Level
-**Class:** UPPER SIXTH
-**Series:** a_science, a_arts
-**Subject:** Geology
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: EARTH STRUCTURE
-
-**Q1.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
 
-![Geological cross-section](/paper-diagrams/geology-section.svg)
+**Q4.** Enterprise: Enterprise case 4 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q5.** Earth structure: A field study on earth structure describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q5.** Enterprise: Enterprise case 5 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 2: MINERALS
+## SECTION 2: BUSINESS OWNERSHIP
 
-**Q6.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q6.** Business ownership: Enterprise case 6 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q7.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q7.** Business ownership: Enterprise case 7 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q8.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q8.** Business ownership: Enterprise case 8 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q9.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q9.** Business ownership: Enterprise case 9 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q10.** Minerals: A field study on minerals describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q10.** Business ownership: Enterprise case 10 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 3: ROCKS
+## SECTION 3: MANAGEMENT
 
-**Q11.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q11.** Management: Enterprise case 11 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q12.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q12.** Management: Enterprise case 12 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q13.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q13.** Management: Enterprise case 13 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q14.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q14.** Management: Enterprise case 14 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q15.** Rocks: A field study on rocks describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q15.** Management: Enterprise case 15 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 4: PLATE TECTONICS
+## SECTION 4: MARKETING
 
-**Q16.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q16.** Marketing: Enterprise case 16 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q17.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q17.** Marketing: Enterprise case 17 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q18.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q18.** Marketing: Enterprise case 18 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q19.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q19.** Marketing: Enterprise case 19 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q20.** Plate tectonics: A field study on plate tectonics describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q20.** Marketing: Enterprise case 20 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 5: WEATHERING
+## SECTION 5: FINANCE
 
-**Q21.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q21.** Finance: Enterprise case 21 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q22.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q22.** Finance: Enterprise case 22 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q23.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q23.** Finance: Enterprise case 23 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q24.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q24.** Finance: Enterprise case 24 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q25.** Weathering: A field study on weathering describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q25.** Finance: Enterprise case 25 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 6: STRATIGRAPHY
+## SECTION 6: HUMAN RESOURCES
 
-**Q26.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q26.** Human resources: Enterprise case 26 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q27.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q27.** Human resources: Enterprise case 27 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q28.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q28.** Human resources: Enterprise case 28 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q29.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q29.** Human resources: Enterprise case 29 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q30.** Stratigraphy: A field study on stratigraphy describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q30.** Human resources: Enterprise case 30 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 7: ECONOMIC GEOLOGY
+## SECTION 7: PRODUCTION
 
-**Q31.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q31.** Production: Enterprise case 31 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q32.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q32.** Production: Enterprise case 32 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q33.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q33.** Production: Enterprise case 33 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q34.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q34.** Production: Enterprise case 34 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q35.** Economic geology: A field study on economic geology describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q35.** Production: Enterprise case 35 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-## SECTION 8: GEOLOGICAL MAPS
+## SECTION 8: BUSINESS ENVIRONMENT
 
-**Q36.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q36.** Business environment: Enterprise case 36 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q37.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q37.** Business environment: Enterprise case 37 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q38.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q38.** Business environment: Enterprise case 38 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q39.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q39.** Business environment: Enterprise case 39 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 
-**Q40.** Geological maps: A field study on geological maps describes rock layers A, B, and C, a fault, and map evidence from a Cameroon locality. Interpret the geological history and economic importance.
+**Q40.** Business environment: Enterprise case 40 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
 
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
 
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
 
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
 
 ---
 ',

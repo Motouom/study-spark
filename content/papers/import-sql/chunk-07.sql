@@ -3,4301 +3,14 @@ begin;
 with chosen_topic as (
   select id
   from public.topics
-  where subject = 'Commerce'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Commerce',
-  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 1',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 1
-
-## Structural Question Bank - Set 1
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Commerce
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: TRADE
-
-**Q1.** Trade: Trader case 1 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Trade: Trader case 2 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Trade: Trader case 3 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Trade: Trader case 4 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-![Market graph](/paper-diagrams/economics-demand-supply.svg)
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Trade: Trader case 5 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: RETAIL AND WHOLESALE
-
-**Q6.** Retail and wholesale: Trader case 6 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Retail and wholesale: Trader case 7 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Retail and wholesale: Trader case 8 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Retail and wholesale: Trader case 9 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Retail and wholesale: Trader case 10 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: BUSINESS UNITS
-
-**Q11.** Business units: Trader case 11 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Business units: Trader case 12 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Business units: Trader case 13 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Business units: Trader case 14 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Business units: Trader case 15 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: TRANSPORT
-
-**Q16.** Transport: Trader case 16 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Transport: Trader case 17 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Transport: Trader case 18 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Transport: Trader case 19 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Transport: Trader case 20 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: WAREHOUSING
-
-**Q21.** Warehousing: Trader case 21 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Warehousing: Trader case 22 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Warehousing: Trader case 23 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Warehousing: Trader case 24 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Warehousing: Trader case 25 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: INSURANCE
-
-**Q26.** Insurance: Trader case 26 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Insurance: Trader case 27 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Insurance: Trader case 28 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Insurance: Trader case 29 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Insurance: Trader case 30 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: BANKING
-
-**Q31.** Banking: Trader case 31 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Banking: Trader case 32 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Banking: Trader case 33 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Banking: Trader case 34 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Banking: Trader case 35 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: INTERNATIONAL TRADE
-
-**Q36.** International trade: Trader case 36 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** International trade: Trader case 37 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** International trade: Trader case 38 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** International trade: Trader case 39 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** International trade: Trader case 40 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Commerce'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 2'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Commerce',
-  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 2',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 2
-
-## Structural Question Bank - Set 2
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Commerce
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: TRADE
-
-**Q1.** Trade: Trader case 1 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Trade: Trader case 2 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Trade: Trader case 3 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Trade: Trader case 4 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-![Market graph](/paper-diagrams/economics-demand-supply.svg)
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Trade: Trader case 5 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: RETAIL AND WHOLESALE
-
-**Q6.** Retail and wholesale: Trader case 6 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Retail and wholesale: Trader case 7 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Retail and wholesale: Trader case 8 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Retail and wholesale: Trader case 9 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Retail and wholesale: Trader case 10 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: BUSINESS UNITS
-
-**Q11.** Business units: Trader case 11 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Business units: Trader case 12 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Business units: Trader case 13 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Business units: Trader case 14 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Business units: Trader case 15 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: TRANSPORT
-
-**Q16.** Transport: Trader case 16 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Transport: Trader case 17 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Transport: Trader case 18 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Transport: Trader case 19 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Transport: Trader case 20 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: WAREHOUSING
-
-**Q21.** Warehousing: Trader case 21 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Warehousing: Trader case 22 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Warehousing: Trader case 23 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Warehousing: Trader case 24 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Warehousing: Trader case 25 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: INSURANCE
-
-**Q26.** Insurance: Trader case 26 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Insurance: Trader case 27 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Insurance: Trader case 28 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Insurance: Trader case 29 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Insurance: Trader case 30 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: BANKING
-
-**Q31.** Banking: Trader case 31 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Banking: Trader case 32 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Banking: Trader case 33 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Banking: Trader case 34 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Banking: Trader case 35 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: INTERNATIONAL TRADE
-
-**Q36.** International trade: Trader case 36 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** International trade: Trader case 37 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** International trade: Trader case 38 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** International trade: Trader case 39 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** International trade: Trader case 40 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Commerce'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 3'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Commerce',
-  'CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 3',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL COMMERCE P2 SET 3
-
-## Structural Question Bank - Set 3
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Commerce
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: TRADE
-
-**Q1.** Trade: Trader case 1 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Trade: Trader case 2 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Trade: Trader case 3 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Trade: Trader case 4 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-![Market graph](/paper-diagrams/economics-demand-supply.svg)
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Trade: Trader case 5 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: RETAIL AND WHOLESALE
-
-**Q6.** Retail and wholesale: Trader case 6 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Retail and wholesale: Trader case 7 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Retail and wholesale: Trader case 8 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Retail and wholesale: Trader case 9 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Retail and wholesale: Trader case 10 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: BUSINESS UNITS
-
-**Q11.** Business units: Trader case 11 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Business units: Trader case 12 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Business units: Trader case 13 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Business units: Trader case 14 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Business units: Trader case 15 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: TRANSPORT
-
-**Q16.** Transport: Trader case 16 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Transport: Trader case 17 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Transport: Trader case 18 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Transport: Trader case 19 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Transport: Trader case 20 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: WAREHOUSING
-
-**Q21.** Warehousing: Trader case 21 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Warehousing: Trader case 22 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Warehousing: Trader case 23 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Warehousing: Trader case 24 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Warehousing: Trader case 25 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: INSURANCE
-
-**Q26.** Insurance: Trader case 26 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Insurance: Trader case 27 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Insurance: Trader case 28 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Insurance: Trader case 29 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Insurance: Trader case 30 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: BANKING
-
-**Q31.** Banking: Trader case 31 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Banking: Trader case 32 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Banking: Trader case 33 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Banking: Trader case 34 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Banking: Trader case 35 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: INTERNATIONAL TRADE
-
-**Q36.** International trade: Trader case 36 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** International trade: Trader case 37 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** International trade: Trader case 38 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** International trade: Trader case 39 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** International trade: Trader case 40 in Douala buys on credit, stores goods, transports them inland, insures them, and sells to retailers. Analyse the commercial documents and risks involved.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Accounting'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Accounting',
-  'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 1',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 1
-
-## Structural Question Bank - Set 1
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial
-**Subject:** Accounting
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: SOURCE DOCUMENTS
-
-**Q1.** Source documents: A business records transactions involving cash 2000, credit sales 3000, purchases 4000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Source documents: A business records transactions involving cash 3000, credit sales 4000, purchases 5000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Source documents: A business records transactions involving cash 4000, credit sales 5000, purchases 6000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Source documents: A business records transactions involving cash 5000, credit sales 6000, purchases 7000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Source documents: A business records transactions involving cash 6000, credit sales 7000, purchases 8000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: BOOKS OF ORIGINAL ENTRY
-
-**Q6.** Books of original entry: A business records transactions involving cash 7000, credit sales 8000, purchases 9000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Books of original entry: A business records transactions involving cash 8000, credit sales 9000, purchases 10000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Books of original entry: A business records transactions involving cash 9000, credit sales 10000, purchases 11000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Books of original entry: A business records transactions involving cash 10000, credit sales 11000, purchases 12000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Books of original entry: A business records transactions involving cash 11000, credit sales 12000, purchases 13000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: LEDGER ACCOUNTS
-
-**Q11.** Ledger accounts: A business records transactions involving cash 12000, credit sales 13000, purchases 14000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Ledger accounts: A business records transactions involving cash 13000, credit sales 14000, purchases 15000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Ledger accounts: A business records transactions involving cash 14000, credit sales 15000, purchases 16000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Ledger accounts: A business records transactions involving cash 15000, credit sales 16000, purchases 17000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Ledger accounts: A business records transactions involving cash 16000, credit sales 17000, purchases 18000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: TRIAL BALANCE
-
-**Q16.** Trial balance: A business records transactions involving cash 17000, credit sales 18000, purchases 19000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Trial balance: A business records transactions involving cash 18000, credit sales 19000, purchases 20000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Trial balance: A business records transactions involving cash 19000, credit sales 20000, purchases 21000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Trial balance: A business records transactions involving cash 20000, credit sales 21000, purchases 22000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Trial balance: A business records transactions involving cash 21000, credit sales 22000, purchases 23000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: FINAL ACCOUNTS
-
-**Q21.** Final accounts: A business records transactions involving cash 22000, credit sales 23000, purchases 24000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Final accounts: A business records transactions involving cash 23000, credit sales 24000, purchases 25000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Final accounts: A business records transactions involving cash 24000, credit sales 25000, purchases 26000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Final accounts: A business records transactions involving cash 25000, credit sales 26000, purchases 27000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Final accounts: A business records transactions involving cash 26000, credit sales 27000, purchases 28000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: CONTROL ACCOUNTS
-
-**Q26.** Control accounts: A business records transactions involving cash 27000, credit sales 28000, purchases 29000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Control accounts: A business records transactions involving cash 28000, credit sales 29000, purchases 30000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Control accounts: A business records transactions involving cash 29000, credit sales 30000, purchases 31000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Control accounts: A business records transactions involving cash 30000, credit sales 31000, purchases 32000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Control accounts: A business records transactions involving cash 31000, credit sales 32000, purchases 33000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: BANK RECONCILIATION
-
-**Q31.** Bank reconciliation: A business records transactions involving cash 32000, credit sales 33000, purchases 34000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Bank reconciliation: A business records transactions involving cash 33000, credit sales 34000, purchases 35000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Bank reconciliation: A business records transactions involving cash 34000, credit sales 35000, purchases 36000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Bank reconciliation: A business records transactions involving cash 35000, credit sales 36000, purchases 37000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Bank reconciliation: A business records transactions involving cash 36000, credit sales 37000, purchases 38000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: DEPRECIATION
-
-**Q36.** Depreciation: A business records transactions involving cash 37000, credit sales 38000, purchases 39000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** Depreciation: A business records transactions involving cash 38000, credit sales 39000, purchases 40000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** Depreciation: A business records transactions involving cash 39000, credit sales 40000, purchases 41000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** Depreciation: A business records transactions involving cash 40000, credit sales 41000, purchases 42000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** Depreciation: A business records transactions involving cash 41000, credit sales 42000, purchases 43000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Accounting'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 2'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Accounting',
-  'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 2',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 2
-
-## Structural Question Bank - Set 2
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial
-**Subject:** Accounting
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: SOURCE DOCUMENTS
-
-**Q1.** Source documents: A business records transactions involving cash 3000, credit sales 5000, purchases 7000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Source documents: A business records transactions involving cash 4000, credit sales 6000, purchases 8000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Source documents: A business records transactions involving cash 5000, credit sales 7000, purchases 9000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Source documents: A business records transactions involving cash 6000, credit sales 8000, purchases 10000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Source documents: A business records transactions involving cash 7000, credit sales 9000, purchases 11000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: BOOKS OF ORIGINAL ENTRY
-
-**Q6.** Books of original entry: A business records transactions involving cash 8000, credit sales 10000, purchases 12000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Books of original entry: A business records transactions involving cash 9000, credit sales 11000, purchases 13000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Books of original entry: A business records transactions involving cash 10000, credit sales 12000, purchases 14000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Books of original entry: A business records transactions involving cash 11000, credit sales 13000, purchases 15000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Books of original entry: A business records transactions involving cash 12000, credit sales 14000, purchases 16000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: LEDGER ACCOUNTS
-
-**Q11.** Ledger accounts: A business records transactions involving cash 13000, credit sales 15000, purchases 17000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Ledger accounts: A business records transactions involving cash 14000, credit sales 16000, purchases 18000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Ledger accounts: A business records transactions involving cash 15000, credit sales 17000, purchases 19000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Ledger accounts: A business records transactions involving cash 16000, credit sales 18000, purchases 20000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Ledger accounts: A business records transactions involving cash 17000, credit sales 19000, purchases 21000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: TRIAL BALANCE
-
-**Q16.** Trial balance: A business records transactions involving cash 18000, credit sales 20000, purchases 22000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Trial balance: A business records transactions involving cash 19000, credit sales 21000, purchases 23000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Trial balance: A business records transactions involving cash 20000, credit sales 22000, purchases 24000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Trial balance: A business records transactions involving cash 21000, credit sales 23000, purchases 25000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Trial balance: A business records transactions involving cash 22000, credit sales 24000, purchases 26000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: FINAL ACCOUNTS
-
-**Q21.** Final accounts: A business records transactions involving cash 23000, credit sales 25000, purchases 27000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Final accounts: A business records transactions involving cash 24000, credit sales 26000, purchases 28000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Final accounts: A business records transactions involving cash 25000, credit sales 27000, purchases 29000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Final accounts: A business records transactions involving cash 26000, credit sales 28000, purchases 30000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Final accounts: A business records transactions involving cash 27000, credit sales 29000, purchases 31000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: CONTROL ACCOUNTS
-
-**Q26.** Control accounts: A business records transactions involving cash 28000, credit sales 30000, purchases 32000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Control accounts: A business records transactions involving cash 29000, credit sales 31000, purchases 33000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Control accounts: A business records transactions involving cash 30000, credit sales 32000, purchases 34000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Control accounts: A business records transactions involving cash 31000, credit sales 33000, purchases 35000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Control accounts: A business records transactions involving cash 32000, credit sales 34000, purchases 36000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: BANK RECONCILIATION
-
-**Q31.** Bank reconciliation: A business records transactions involving cash 33000, credit sales 35000, purchases 37000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Bank reconciliation: A business records transactions involving cash 34000, credit sales 36000, purchases 38000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Bank reconciliation: A business records transactions involving cash 35000, credit sales 37000, purchases 39000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Bank reconciliation: A business records transactions involving cash 36000, credit sales 38000, purchases 40000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Bank reconciliation: A business records transactions involving cash 37000, credit sales 39000, purchases 41000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: DEPRECIATION
-
-**Q36.** Depreciation: A business records transactions involving cash 38000, credit sales 40000, purchases 42000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** Depreciation: A business records transactions involving cash 39000, credit sales 41000, purchases 43000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** Depreciation: A business records transactions involving cash 40000, credit sales 42000, purchases 44000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** Depreciation: A business records transactions involving cash 41000, credit sales 43000, purchases 45000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** Depreciation: A business records transactions involving cash 42000, credit sales 44000, purchases 46000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Accounting'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 3'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Accounting',
-  'CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 3',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL ACCOUNTING P2 SET 3
-
-## Structural Question Bank - Set 3
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial
-**Subject:** Accounting
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: SOURCE DOCUMENTS
-
-**Q1.** Source documents: A business records transactions involving cash 4000, credit sales 7000, purchases 10000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Source documents: A business records transactions involving cash 5000, credit sales 8000, purchases 11000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Source documents: A business records transactions involving cash 6000, credit sales 9000, purchases 12000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Source documents: A business records transactions involving cash 7000, credit sales 10000, purchases 13000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Source documents: A business records transactions involving cash 8000, credit sales 11000, purchases 14000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: BOOKS OF ORIGINAL ENTRY
-
-**Q6.** Books of original entry: A business records transactions involving cash 9000, credit sales 12000, purchases 15000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Books of original entry: A business records transactions involving cash 10000, credit sales 13000, purchases 16000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Books of original entry: A business records transactions involving cash 11000, credit sales 14000, purchases 17000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Books of original entry: A business records transactions involving cash 12000, credit sales 15000, purchases 18000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Books of original entry: A business records transactions involving cash 13000, credit sales 16000, purchases 19000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: LEDGER ACCOUNTS
-
-**Q11.** Ledger accounts: A business records transactions involving cash 14000, credit sales 17000, purchases 20000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Ledger accounts: A business records transactions involving cash 15000, credit sales 18000, purchases 21000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Ledger accounts: A business records transactions involving cash 16000, credit sales 19000, purchases 22000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Ledger accounts: A business records transactions involving cash 17000, credit sales 20000, purchases 23000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Ledger accounts: A business records transactions involving cash 18000, credit sales 21000, purchases 24000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: TRIAL BALANCE
-
-**Q16.** Trial balance: A business records transactions involving cash 19000, credit sales 22000, purchases 25000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Trial balance: A business records transactions involving cash 20000, credit sales 23000, purchases 26000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Trial balance: A business records transactions involving cash 21000, credit sales 24000, purchases 27000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Trial balance: A business records transactions involving cash 22000, credit sales 25000, purchases 28000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Trial balance: A business records transactions involving cash 23000, credit sales 26000, purchases 29000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: FINAL ACCOUNTS
-
-**Q21.** Final accounts: A business records transactions involving cash 24000, credit sales 27000, purchases 30000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Final accounts: A business records transactions involving cash 25000, credit sales 28000, purchases 31000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Final accounts: A business records transactions involving cash 26000, credit sales 29000, purchases 32000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Final accounts: A business records transactions involving cash 27000, credit sales 30000, purchases 33000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Final accounts: A business records transactions involving cash 28000, credit sales 31000, purchases 34000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: CONTROL ACCOUNTS
-
-**Q26.** Control accounts: A business records transactions involving cash 29000, credit sales 32000, purchases 35000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Control accounts: A business records transactions involving cash 30000, credit sales 33000, purchases 36000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Control accounts: A business records transactions involving cash 31000, credit sales 34000, purchases 37000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Control accounts: A business records transactions involving cash 32000, credit sales 35000, purchases 38000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Control accounts: A business records transactions involving cash 33000, credit sales 36000, purchases 39000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: BANK RECONCILIATION
-
-**Q31.** Bank reconciliation: A business records transactions involving cash 34000, credit sales 37000, purchases 40000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Bank reconciliation: A business records transactions involving cash 35000, credit sales 38000, purchases 41000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Bank reconciliation: A business records transactions involving cash 36000, credit sales 39000, purchases 42000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Bank reconciliation: A business records transactions involving cash 37000, credit sales 40000, purchases 43000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Bank reconciliation: A business records transactions involving cash 38000, credit sales 41000, purchases 44000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: DEPRECIATION
-
-**Q36.** Depreciation: A business records transactions involving cash 39000, credit sales 42000, purchases 45000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** Depreciation: A business records transactions involving cash 40000, credit sales 43000, purchases 46000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** Depreciation: A business records transactions involving cash 41000, credit sales 44000, purchases 47000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** Depreciation: A business records transactions involving cash 42000, credit sales 45000, purchases 48000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** Depreciation: A business records transactions involving cash 43000, credit sales 46000, purchases 49000, returns, and depreciation. Prepare or correct the required accounting records.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Business Studies'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 1'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Business Studies',
-  'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 1',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 1
-
-## Structural Question Bank - Set 1
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Business Studies
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: ENTERPRISE
-
-**Q1.** Enterprise: Enterprise case 1 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Enterprise: Enterprise case 2 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Enterprise: Enterprise case 3 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-![Business market graph](/paper-diagrams/economics-demand-supply.svg)
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Enterprise: Enterprise case 4 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Enterprise: Enterprise case 5 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: BUSINESS OWNERSHIP
-
-**Q6.** Business ownership: Enterprise case 6 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Business ownership: Enterprise case 7 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Business ownership: Enterprise case 8 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Business ownership: Enterprise case 9 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Business ownership: Enterprise case 10 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: MANAGEMENT
-
-**Q11.** Management: Enterprise case 11 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Management: Enterprise case 12 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Management: Enterprise case 13 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Management: Enterprise case 14 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Management: Enterprise case 15 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: MARKETING
-
-**Q16.** Marketing: Enterprise case 16 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Marketing: Enterprise case 17 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Marketing: Enterprise case 18 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Marketing: Enterprise case 19 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Marketing: Enterprise case 20 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: FINANCE
-
-**Q21.** Finance: Enterprise case 21 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Finance: Enterprise case 22 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Finance: Enterprise case 23 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Finance: Enterprise case 24 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Finance: Enterprise case 25 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: HUMAN RESOURCES
-
-**Q26.** Human resources: Enterprise case 26 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Human resources: Enterprise case 27 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Human resources: Enterprise case 28 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Human resources: Enterprise case 29 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Human resources: Enterprise case 30 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: PRODUCTION
-
-**Q31.** Production: Enterprise case 31 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Production: Enterprise case 32 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Production: Enterprise case 33 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Production: Enterprise case 34 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Production: Enterprise case 35 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: BUSINESS ENVIRONMENT
-
-**Q36.** Business environment: Enterprise case 36 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** Business environment: Enterprise case 37 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** Business environment: Enterprise case 38 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** Business environment: Enterprise case 39 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** Business environment: Enterprise case 40 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Business Studies'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 2'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Business Studies',
-  'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 2',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 2
-
-## Structural Question Bank - Set 2
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Business Studies
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: ENTERPRISE
-
-**Q1.** Enterprise: Enterprise case 1 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Enterprise: Enterprise case 2 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Enterprise: Enterprise case 3 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-![Business market graph](/paper-diagrams/economics-demand-supply.svg)
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Enterprise: Enterprise case 4 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Enterprise: Enterprise case 5 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: BUSINESS OWNERSHIP
-
-**Q6.** Business ownership: Enterprise case 6 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Business ownership: Enterprise case 7 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Business ownership: Enterprise case 8 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Business ownership: Enterprise case 9 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Business ownership: Enterprise case 10 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: MANAGEMENT
-
-**Q11.** Management: Enterprise case 11 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Management: Enterprise case 12 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Management: Enterprise case 13 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Management: Enterprise case 14 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Management: Enterprise case 15 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: MARKETING
-
-**Q16.** Marketing: Enterprise case 16 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Marketing: Enterprise case 17 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Marketing: Enterprise case 18 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Marketing: Enterprise case 19 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Marketing: Enterprise case 20 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: FINANCE
-
-**Q21.** Finance: Enterprise case 21 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Finance: Enterprise case 22 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Finance: Enterprise case 23 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Finance: Enterprise case 24 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Finance: Enterprise case 25 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: HUMAN RESOURCES
-
-**Q26.** Human resources: Enterprise case 26 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Human resources: Enterprise case 27 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Human resources: Enterprise case 28 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Human resources: Enterprise case 29 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Human resources: Enterprise case 30 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: PRODUCTION
-
-**Q31.** Production: Enterprise case 31 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Production: Enterprise case 32 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Production: Enterprise case 33 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Production: Enterprise case 34 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Production: Enterprise case 35 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: BUSINESS ENVIRONMENT
-
-**Q36.** Business environment: Enterprise case 36 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** Business environment: Enterprise case 37 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** Business environment: Enterprise case 38 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** Business environment: Enterprise case 39 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** Business environment: Enterprise case 40 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Business Studies'
-  order by case when level = 'ordinary' then 0 else 1 end, title
-  limit 1
-),
-existing as (
-  select id
-  from public.course_documents
-  where title = 'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 3'
-  limit 1
-)
-insert into public.course_documents (
-  id, topic_id, subject, title, language, level, class_levels, series, status,
-  markdown_content, created_by
-)
-values (
-  coalesce((select id from existing), gen_random_uuid()),
-  (select id from chosen_topic),
-  'Business Studies',
-  'CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 3',
-  'english',
-  'ordinary',
-  array['form_3', 'form_4', 'form_5']::text[],
-  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
-  'published',
-  '# CAMEROON GCE ORDINARY LEVEL BUSINESS STUDIES P2 SET 3
-
-## Structural Question Bank - Set 3
-
-**Level:** Ordinary Level
-**Class:** FORM 5
-**Series:** commercial, technical
-**Subject:** Business Studies
-
-**Instructions:**
-
-- Answer all questions in a clear and organized manner.
-- Show all working where calculations are required.
-- Use correct subject terminology and Cameroon GCE presentation standards.
-- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
-
----
-
-## SECTION 1: ENTERPRISE
-
-**Q1.** Enterprise: Enterprise case 1 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q2.** Enterprise: Enterprise case 2 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q3.** Enterprise: Enterprise case 3 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-![Business market graph](/paper-diagrams/economics-demand-supply.svg)
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q4.** Enterprise: Enterprise case 4 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q5.** Enterprise: Enterprise case 5 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply enterprise to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 2: BUSINESS OWNERSHIP
-
-**Q6.** Business ownership: Enterprise case 6 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q7.** Business ownership: Enterprise case 7 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q8.** Business ownership: Enterprise case 8 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q9.** Business ownership: Enterprise case 9 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q10.** Business ownership: Enterprise case 10 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business ownership to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 3: MANAGEMENT
-
-**Q11.** Management: Enterprise case 11 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q12.** Management: Enterprise case 12 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q13.** Management: Enterprise case 13 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q14.** Management: Enterprise case 14 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q15.** Management: Enterprise case 15 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply management to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 4: MARKETING
-
-**Q16.** Marketing: Enterprise case 16 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q17.** Marketing: Enterprise case 17 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q18.** Marketing: Enterprise case 18 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q19.** Marketing: Enterprise case 19 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q20.** Marketing: Enterprise case 20 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply marketing to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 5: FINANCE
-
-**Q21.** Finance: Enterprise case 21 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q22.** Finance: Enterprise case 22 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q23.** Finance: Enterprise case 23 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q24.** Finance: Enterprise case 24 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q25.** Finance: Enterprise case 25 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply finance to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 6: HUMAN RESOURCES
-
-**Q26.** Human resources: Enterprise case 26 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q27.** Human resources: Enterprise case 27 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q28.** Human resources: Enterprise case 28 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q29.** Human resources: Enterprise case 29 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q30.** Human resources: Enterprise case 30 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply human resources to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 7: PRODUCTION
-
-**Q31.** Production: Enterprise case 31 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q32.** Production: Enterprise case 32 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q33.** Production: Enterprise case 33 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q34.** Production: Enterprise case 34 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q35.** Production: Enterprise case 35 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply production to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-## SECTION 8: BUSINESS ENVIRONMENT
-
-**Q36.** Business environment: Enterprise case 36 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q37.** Business environment: Enterprise case 37 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(8 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q38.** Business environment: Enterprise case 38 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(10 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q39.** Business environment: Enterprise case 39 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(12 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-
-**Q40.** Business environment: Enterprise case 40 must decide on ownership, finance, staffing, production, marketing, and ethics. Apply business environment to the decision.
-
-(a) Explain the key concept, document, account, graph, or decision involved. *(4 marks)*
-
-(b) Apply the concept to the case using calculations, entries, schedules, diagrams, or reasoned commercial analysis where relevant. *(6 marks)*
-
-(c) Give two justified recommendations, controls, or conclusions based on your work. *(4 marks)*
-
----
-',
-  null
-)
-on conflict (id) do update set
-  topic_id = excluded.topic_id,
-  subject = excluded.subject,
-  title = excluded.title,
-  language = excluded.language,
-  level = excluded.level,
-  class_levels = excluded.class_levels,
-  series = excluded.series,
-  status = excluded.status,
-  markdown_content = excluded.markdown_content,
-  updated_at = now();
-
-with chosen_topic as (
-  select id
-  from public.topics
-  where subject = 'Computer Science'
+  where subject = 'Chemistry'
   order by case when level = 'advanced' then 0 else 1 end, title
   limit 1
 ),
 existing as (
   select id
   from public.course_documents
-  where title = 'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 1'
+  where title = 'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3'
   limit 1
 )
 insert into public.course_documents (
@@ -4307,21 +20,21 @@ insert into public.course_documents (
 values (
   coalesce((select id from existing), gen_random_uuid()),
   (select id from chosen_topic),
-  'Computer Science',
-  'CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 1',
+  'Chemistry',
+  'CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3',
   'english',
   'advanced',
   array['lower_sixth', 'upper_sixth']::text[],
   array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
   'published',
-  '# CAMEROON GCE ADVANCED LEVEL COMPUTER SCIENCE P2 SET 1
+  '# CAMEROON GCE ADVANCED LEVEL CHEMISTRY P2 SET 3
 
-## Structural Question Bank - Set 1
+## Structural Question Bank - Set 3
 
 **Level:** Advanced Level
 **Class:** UPPER SIXTH
 **Series:** a_science
-**Subject:** Computer Science
+**Subject:** Chemistry
 
 **Instructions:**
 
@@ -4332,51 +45,9 @@ values (
 
 ---
 
-## SECTION 1: DATA REPRESENTATION
+## SECTION 1: ATOMIC STRUCTURE
 
-**Q1.** Data representation: A school system with 31 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q2.** Data representation: A school system with 32 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-![Computer network topology](/paper-diagrams/computer-network.svg)
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q3.** Data representation: A school system with 33 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q4.** Data representation: A school system with 34 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
-
-(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
-
-(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
-
-(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
-
----
-
-**Q5.** Data representation: A school system with 35 learner records must process data representation securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q1.** Atomic structure: A laboratory setup for atomic structure records readings 4, 7, 10, and 11 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4386,9 +57,9 @@ values (
 
 ---
 
-## SECTION 2: COMPUTER ARCHITECTURE
+**Q2.** Atomic structure: A laboratory setup for atomic structure records readings 5, 8, 11, and 13 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
 
-**Q6.** Computer architecture: A school system with 36 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+![Titration apparatus](/paper-diagrams/chemistry-titration.svg)
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4398,7 +69,7 @@ values (
 
 ---
 
-**Q7.** Computer architecture: A school system with 37 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q3.** Atomic structure: A laboratory setup for atomic structure records readings 6, 9, 12, and 15 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4408,7 +79,7 @@ values (
 
 ---
 
-**Q8.** Computer architecture: A school system with 38 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q4.** Atomic structure: A laboratory setup for atomic structure records readings 7, 10, 13, and 17 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4418,7 +89,7 @@ values (
 
 ---
 
-**Q9.** Computer architecture: A school system with 39 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q5.** Atomic structure: A laboratory setup for atomic structure records readings 8, 11, 14, and 19 in suitable SI units. Use the data to determine the physical quantity, graph relationship, and reliability of the result.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4428,7 +99,9 @@ values (
 
 ---
 
-**Q10.** Computer architecture: A school system with 40 learner records must process computer architecture securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 2: BONDING
+
+**Q6.** Bonding: Experiment 6 studies bonding by changing concentration 0.9 mol dm-3, temperature 26 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4438,9 +111,7 @@ values (
 
 ---
 
-## SECTION 3: ALGORITHMS
-
-**Q11.** Algorithms: A school system with 41 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q7.** Bonding: Experiment 7 studies bonding by changing concentration 1 mol dm-3, temperature 27 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4450,7 +121,7 @@ values (
 
 ---
 
-**Q12.** Algorithms: A school system with 42 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q8.** Bonding: Experiment 8 studies bonding by changing concentration 1.1 mol dm-3, temperature 28 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4460,7 +131,7 @@ values (
 
 ---
 
-**Q13.** Algorithms: A school system with 43 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q9.** Bonding: Experiment 9 studies bonding by changing concentration 1.2 mol dm-3, temperature 29 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4470,7 +141,7 @@ values (
 
 ---
 
-**Q14.** Algorithms: A school system with 44 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q10.** Bonding: Experiment 10 studies bonding by changing concentration 1.3 mol dm-3, temperature 30 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4480,7 +151,9 @@ values (
 
 ---
 
-**Q15.** Algorithms: A school system with 45 learner records must process algorithms securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 3: ENERGETICS
+
+**Q11.** Energetics: Experiment 11 studies energetics by changing concentration 1.4 mol dm-3, temperature 31 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4490,9 +163,7 @@ values (
 
 ---
 
-## SECTION 4: PROGRAMMING
-
-**Q16.** Programming: A school system with 46 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q12.** Energetics: Experiment 12 studies energetics by changing concentration 1.5 mol dm-3, temperature 32 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4502,7 +173,7 @@ values (
 
 ---
 
-**Q17.** Programming: A school system with 47 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q13.** Energetics: Experiment 13 studies energetics by changing concentration 1.6 mol dm-3, temperature 33 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4512,7 +183,7 @@ values (
 
 ---
 
-**Q18.** Programming: A school system with 48 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q14.** Energetics: Experiment 14 studies energetics by changing concentration 1.7 mol dm-3, temperature 34 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4522,7 +193,7 @@ values (
 
 ---
 
-**Q19.** Programming: A school system with 49 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q15.** Energetics: Experiment 15 studies energetics by changing concentration 1.8 mol dm-3, temperature 35 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4532,7 +203,9 @@ values (
 
 ---
 
-**Q20.** Programming: A school system with 50 learner records must process programming securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 4: KINETICS
+
+**Q16.** Kinetics: Experiment 16 studies kinetics by changing concentration 1.9 mol dm-3, temperature 36 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4542,9 +215,7 @@ values (
 
 ---
 
-## SECTION 5: DATABASES
-
-**Q21.** Databases: A school system with 51 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q17.** Kinetics: Experiment 17 studies kinetics by changing concentration 2 mol dm-3, temperature 37 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4554,7 +225,7 @@ values (
 
 ---
 
-**Q22.** Databases: A school system with 52 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q18.** Kinetics: Experiment 18 studies kinetics by changing concentration 2.1 mol dm-3, temperature 38 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4564,7 +235,7 @@ values (
 
 ---
 
-**Q23.** Databases: A school system with 53 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q19.** Kinetics: Experiment 19 studies kinetics by changing concentration 2.2 mol dm-3, temperature 39 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4574,7 +245,7 @@ values (
 
 ---
 
-**Q24.** Databases: A school system with 54 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q20.** Kinetics: Experiment 20 studies kinetics by changing concentration 2.3 mol dm-3, temperature 40 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4584,7 +255,9 @@ values (
 
 ---
 
-**Q25.** Databases: A school system with 55 learner records must process databases securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 5: EQUILIBRIUM
+
+**Q21.** Equilibrium: Experiment 21 studies equilibrium by changing concentration 2.4 mol dm-3, temperature 41 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4594,9 +267,7 @@ values (
 
 ---
 
-## SECTION 6: NETWORKS
-
-**Q26.** Networks: A school system with 56 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q22.** Equilibrium: Experiment 22 studies equilibrium by changing concentration 2.5 mol dm-3, temperature 42 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4606,7 +277,7 @@ values (
 
 ---
 
-**Q27.** Networks: A school system with 57 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q23.** Equilibrium: Experiment 23 studies equilibrium by changing concentration 2.6 mol dm-3, temperature 43 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4616,7 +287,7 @@ values (
 
 ---
 
-**Q28.** Networks: A school system with 58 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q24.** Equilibrium: Experiment 24 studies equilibrium by changing concentration 2.7 mol dm-3, temperature 44 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4626,7 +297,7 @@ values (
 
 ---
 
-**Q29.** Networks: A school system with 59 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q25.** Equilibrium: Experiment 25 studies equilibrium by changing concentration 2.8 mol dm-3, temperature 45 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4636,7 +307,9 @@ values (
 
 ---
 
-**Q30.** Networks: A school system with 60 learner records must process networks securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 6: ORGANIC CHEMISTRY
+
+**Q26.** Organic chemistry: Experiment 26 studies organic chemistry by changing concentration 2.9 mol dm-3, temperature 46 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4646,9 +319,7 @@ values (
 
 ---
 
-## SECTION 7: SYSTEMS ANALYSIS
-
-**Q31.** Systems analysis: A school system with 61 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q27.** Organic chemistry: Experiment 27 studies organic chemistry by changing concentration 3 mol dm-3, temperature 47 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4658,7 +329,7 @@ values (
 
 ---
 
-**Q32.** Systems analysis: A school system with 62 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q28.** Organic chemistry: Experiment 28 studies organic chemistry by changing concentration 3.1 mol dm-3, temperature 48 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4668,7 +339,7 @@ values (
 
 ---
 
-**Q33.** Systems analysis: A school system with 63 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q29.** Organic chemistry: Experiment 29 studies organic chemistry by changing concentration 3.2 mol dm-3, temperature 49 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4678,7 +349,7 @@ values (
 
 ---
 
-**Q34.** Systems analysis: A school system with 64 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q30.** Organic chemistry: Experiment 30 studies organic chemistry by changing concentration 3.3 mol dm-3, temperature 50 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4688,7 +359,9 @@ values (
 
 ---
 
-**Q35.** Systems analysis: A school system with 65 learner records must process systems analysis securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 7: ELECTROCHEMISTRY
+
+**Q31.** Electrochemistry: Experiment 31 studies electrochemistry by changing concentration 3.4 mol dm-3, temperature 51 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4698,9 +371,7 @@ values (
 
 ---
 
-## SECTION 8: CYBERSECURITY
-
-**Q36.** Cybersecurity: A school system with 66 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q32.** Electrochemistry: Experiment 32 studies electrochemistry by changing concentration 3.5 mol dm-3, temperature 52 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4710,7 +381,7 @@ values (
 
 ---
 
-**Q37.** Cybersecurity: A school system with 67 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q33.** Electrochemistry: Experiment 33 studies electrochemistry by changing concentration 3.6 mol dm-3, temperature 53 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4720,7 +391,7 @@ values (
 
 ---
 
-**Q38.** Cybersecurity: A school system with 68 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q34.** Electrochemistry: Experiment 34 studies electrochemistry by changing concentration 3.7 mol dm-3, temperature 54 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4730,7 +401,7 @@ values (
 
 ---
 
-**Q39.** Cybersecurity: A school system with 69 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+**Q35.** Electrochemistry: Experiment 35 studies electrochemistry by changing concentration 3.8 mol dm-3, temperature 55 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
@@ -4740,13 +411,3613 @@ values (
 
 ---
 
-**Q40.** Cybersecurity: A school system with 70 learner records must process cybersecurity securely. Design or analyse the algorithm, data representation, database, network, or safety control required.
+## SECTION 8: QUALITATIVE ANALYSIS
+
+**Q36.** Qualitative analysis: Experiment 36 studies qualitative analysis by changing concentration 3.9 mol dm-3, temperature 56 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
 
 (a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
 
 (b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
 
 (c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+**Q37.** Qualitative analysis: Experiment 37 studies qualitative analysis by changing concentration 4 mol dm-3, temperature 57 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+
+(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(8 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+**Q38.** Qualitative analysis: Experiment 38 studies qualitative analysis by changing concentration 4.1 mol dm-3, temperature 58 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+
+(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(10 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+**Q39.** Qualitative analysis: Experiment 39 studies qualitative analysis by changing concentration 4.2 mol dm-3, temperature 59 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+
+(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(12 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+
+**Q40.** Qualitative analysis: Experiment 40 studies qualitative analysis by changing concentration 4.3 mol dm-3, temperature 60 degrees C, and catalyst conditions. Predict observations, calculate the required quantity, and justify the chemical change.
+
+(a) Identify the scientific principle, apparatus, variable, or process being tested. *(4 marks)*
+
+(b) Analyse the situation using labelled diagrams, equations, observations, calculations, or experimental procedure where appropriate. *(6 marks)*
+
+(c) State two precautions, limitations, sources of error, or real-life applications connected to the answer. *(4 marks)*
+
+---
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 4
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 5
+
+## Structural Question Bank — Stoichiometry and reactions
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STOICHIOMETRY AND REACTIONS
+
+**Q1.** (a) Define the term "mole". *(2 marks)*
+
+(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*
+
+(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*
+
+---
+
+**Q2.** (a) State Avogadro''s constant. *(2 marks)*
+
+(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*
+
+(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*
+
+---
+
+**Q3.** (a) Balance the following equation:
+
+$Mg + O_2 \rightarrow MgO$ *(3 marks)*
+
+(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*
+
+---
+
+**Q4.** (a) What is a limiting reactant? *(3 marks)*
+
+(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*
+
+---
+
+**Q5.** (a) Define the term "acid". *(2 marks)*
+
+(b) State three properties of acids. *(3 marks)*
+
+(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*
+
+---
+
+**Q6.** (a) Define the term "base". *(2 marks)*
+
+(b) Distinguish between a base and an alkali. *(3 marks)*
+
+(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a salt? *(2 marks)*
+
+(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*
+
+(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*
+
+---
+
+**Q8.** (a) Define the term "pH". *(2 marks)*
+
+(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*
+
+(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*
+
+---
+
+**Q9.** (a) What is a redox reaction? *(3 marks)*
+
+(b) In the reaction $Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*
+
+(c) Explain your answer using the gain or loss of electrons. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*
+
+(b) Define the term "reduction" in terms of electrons. *(2 marks)*
+
+(c) In the reaction $2Mg + O_2 \rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*
+
+---
+
+**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*
+
+(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*
+
+(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*
+
+---
+
+**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of collision theory. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a catalyst? *(2 marks)*
+
+(b) State two uses of catalysts in industry. *(2 marks)*
+
+(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "equilibrium". *(3 marks)*
+
+(b) State Le Chatelier''s principle. *(3 marks)*
+
+(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \rightleftharpoons 2NH_3$. *(4 marks)*
+
+---
+
+**Q15.** (a) What is a reversible reaction? *(2 marks)*
+
+(b) Give one example of a reversible reaction. *(2 marks)*
+
+(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "concentration". *(2 marks)*
+
+(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*
+
+(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a titration? *(2 marks)*
+
+(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*
+
+(c) State the indicator used and the colour change at the end point. *(3 marks)*
+
+---
+
+**Q18.** (a) Define the term "empirical formula". *(2 marks)*
+
+(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*
+
+(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "molar volume". *(2 marks)*
+
+(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*
+
+(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 6
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 7'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 7',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 7
+
+## Structural Question Bank — Stoichiometry and reactions
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STOICHIOMETRY AND REACTIONS
+
+**Q1.** (a) Define the term "mole". *(2 marks)*
+
+(b) Calculate the number of moles in 8 g of oxygen gas ($O_2$). (Relative atomic mass: O = 16) *(4 marks)*
+
+(c) Calculate the mass of 0.5 moles of carbon dioxide ($CO_2$). (Relative atomic masses: C = 12, O = 16) *(4 marks)*
+
+---
+
+**Q2.** (a) State Avogadro''s constant. *(2 marks)*
+
+(b) Calculate the number of molecules in 0.25 moles of water. *(3 marks)*
+
+(c) Calculate the number of atoms in 0.5 moles of oxygen gas ($O_2$). *(4 marks)*
+
+---
+
+**Q3.** (a) Balance the following equation:
+
+$Mg + O_2 \rightarrow MgO$ *(3 marks)*
+
+(b) Calculate the mass of magnesium oxide formed when 4.8 g of magnesium burns completely in oxygen. (Relative atomic masses: Mg = 24, O = 16) *(6 marks)*
+
+---
+
+**Q4.** (a) What is a limiting reactant? *(3 marks)*
+
+(b) 2 g of hydrogen reacts with 16 g of oxygen to form water. Determine the limiting reactant and the mass of water formed. (Relative atomic masses: H = 1, O = 16) *(6 marks)*
+
+---
+
+**Q5.** (a) Define the term "acid". *(2 marks)*
+
+(b) State three properties of acids. *(3 marks)*
+
+(c) Write the word equation for the reaction between hydrochloric acid and sodium hydroxide. *(3 marks)*
+
+---
+
+**Q6.** (a) Define the term "base". *(2 marks)*
+
+(b) Distinguish between a base and an alkali. *(3 marks)*
+
+(c) Describe the reaction between an acid and a metal carbonate, naming the products. *(4 marks)*
+
+---
+
+**Q7.** (a) What is a salt? *(2 marks)*
+
+(b) Describe how you would prepare a sample of copper(II) sulfate from copper(II) oxide and sulfuric acid. *(6 marks)*
+
+(c) Name the method used to obtain the salt crystals from the solution. *(2 marks)*
+
+---
+
+**Q8.** (a) Define the term "pH". *(2 marks)*
+
+(b) State the pH range of acids, bases, and neutral solutions. *(3 marks)*
+
+(c) Describe how you would use universal indicator to determine the pH of a solution. *(4 marks)*
+
+---
+
+**Q9.** (a) What is a redox reaction? *(3 marks)*
+
+(b) In the reaction $Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$, identify the substance oxidised and the substance reduced. *(4 marks)*
+
+(c) Explain your answer using the gain or loss of electrons. *(4 marks)*
+
+---
+
+**Q10.** (a) Define the term "oxidation" in terms of electrons. *(2 marks)*
+
+(b) Define the term "reduction" in terms of electrons. *(2 marks)*
+
+(c) In the reaction $2Mg + O_2 \rightarrow 2MgO$, state which substance is oxidised and which is reduced. *(4 marks)*
+
+---
+
+**Q11.** (a) What is the rate of a chemical reaction? *(2 marks)*
+
+(b) State three factors that affect the rate of a chemical reaction. *(3 marks)*
+
+(c) Explain how increasing temperature increases the rate of reaction. *(4 marks)*
+
+---
+
+**Q12.** (a) Describe an experiment to investigate the effect of concentration on the rate of reaction between hydrochloric acid and sodium thiosulfate. *(6 marks)*
+
+(b) State the results you would expect. *(3 marks)*
+
+(c) Explain the results in terms of collision theory. *(4 marks)*
+
+---
+
+**Q13.** (a) What is a catalyst? *(2 marks)*
+
+(b) State two uses of catalysts in industry. *(2 marks)*
+
+(c) Explain how a catalyst increases the rate of a reaction. *(4 marks)*
+
+---
+
+**Q14.** (a) Define the term "equilibrium". *(3 marks)*
+
+(b) State Le Chatelier''s principle. *(3 marks)*
+
+(c) Explain the effect of increasing pressure on the equilibrium $N_2 + 3H_2 \rightleftharpoons 2NH_3$. *(4 marks)*
+
+---
+
+**Q15.** (a) What is a reversible reaction? *(2 marks)*
+
+(b) Give one example of a reversible reaction. *(2 marks)*
+
+(c) Explain what is meant by a "closed system" in equilibrium. *(4 marks)*
+
+---
+
+**Q16.** (a) Define the term "concentration". *(2 marks)*
+
+(b) Calculate the concentration in mol/dm³ of a solution containing 0.5 moles of sodium chloride in 250 cm³ of solution. *(4 marks)*
+
+(c) Calculate the number of moles in 100 cm³ of a 0.2 mol/dm³ solution. *(4 marks)*
+
+---
+
+**Q17.** (a) What is a titration? *(2 marks)*
+
+(b) Describe how you would carry out a titration to find the concentration of a hydrochloric acid solution. *(6 marks)*
+
+(c) State the indicator used and the colour change at the end point. *(3 marks)*
+
+---
+
+**Q18.** (a) Define the term "empirical formula". *(2 marks)*
+
+(b) A compound contains 40% carbon, 6.7% hydrogen, and 53.3% oxygen. Find its empirical formula. (Relative atomic masses: C = 12, H = 1, O = 16) *(6 marks)*
+
+(c) If the relative molecular mass of the compound is 60, find its molecular formula. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "molar volume". *(2 marks)*
+
+(b) Calculate the volume occupied by 0.5 moles of carbon dioxide at room temperature and pressure. (Molar volume = 24 dm³/mol) *(4 marks)*
+
+(c) Calculate the number of moles in 48 dm³ of oxygen gas at room temperature and pressure. *(4 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an exothermic and an endothermic reaction? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) Describe an experiment to show that the reaction between hydrochloric acid and sodium hydroxide is exothermic. *(5 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Chemistry'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 8'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Chemistry',
+  'CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 8',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CHEMISTRY P2 SET 8
+
+## Structural Question Bank — Atomic structure and bonding
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** science, technical
+**Subject:** Chemistry
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: ATOMIC STRUCTURE AND BONDING
+
+**Q1.** (a) Define the terms atomic number and mass number. *(4 marks)*
+
+(b) An atom of chlorine has atomic number 17 and mass number 35. State the number of protons, neutrons, and electrons. *(3 marks)*
+
+(c) Write the electronic configuration of chlorine and state its group and period. *(4 marks)*
+
+---
+
+**Q2.** (a) What is an isotope? *(2 marks)*
+
+(b) Chlorine has two isotopes, $^{35}Cl$ and $^{37}Cl$. Explain why they have the same chemical properties. *(4 marks)*
+
+(c) Calculate the relative atomic mass of chlorine given that it is 75% $^{35}Cl$ and 25% $^{37}Cl$. *(4 marks)*
+
+---
+
+**Q3.** (a) Define the term "ionic bond". *(2 marks)*
+
+(b) Describe, with the aid of a diagram, how sodium and chlorine form an ionic bond. *(6 marks)*
+
+(c) State two properties of ionic compounds. *(2 marks)*
+
+---
+
+**Q4.** (a) Define the term "covalent bond". *(2 marks)*
+
+(b) Draw a dot-and-cross diagram to show the bonding in a water molecule. *(4 marks)*
+
+(c) State two properties of covalent compounds. *(2 marks)*
+
+---
+
+**Q5.** (a) What is a metallic bond? *(3 marks)*
+
+(b) Explain why metals are good conductors of electricity. *(4 marks)*
+
+(c) Explain why metals are malleable and ductile. *(4 marks)*
+
+---
+
+**Q6.** (a) Describe the structure of graphite. *(4 marks)*
+
+(b) Explain why graphite conducts electricity. *(3 marks)*
+
+(c) Explain why graphite is used as a lubricant. *(3 marks)*
+
+---
+
+**Q7.** (a) Describe the structure of diamond. *(4 marks)*
+
+(b) Explain why diamond is very hard. *(3 marks)*
+
+(c) Explain why diamond does not conduct electricity. *(3 marks)*
+
+---
+
+**Q8.** (a) What is the periodic table? *(2 marks)*
+
+(b) State the trend in metallic character across a period. *(3 marks)*
+
+(c) Explain why elements in the same group have similar chemical properties. *(4 marks)*
+
+---
+
+**Q9.** (a) Describe the trend in atomic radius down a group. *(3 marks)*
+
+(b) Explain this trend. *(4 marks)*
+
+(c) State how the reactivity of alkali metals changes down Group I. *(3 marks)*
+
+---
+
+**Q10.** (a) What is an ion? *(2 marks)*
+
+(b) Write the formula of the ions formed by sodium, magnesium, chlorine, and oxygen. *(4 marks)*
+
+(c) Explain why sodium forms a positive ion. *(3 marks)*
+
+---
+
+**Q11.** (a) Define the term "electronegativity". *(3 marks)*
+
+(b) Explain how electronegativity affects the type of bond formed between two atoms. *(4 marks)*
+
+(c) State the trend in electronegativity across a period. *(3 marks)*
+
+---
+
+**Q12.** (a) What is a molecule? *(2 marks)*
+
+(b) Draw the structure of a carbon dioxide molecule. *(3 marks)*
+
+(c) Explain why carbon dioxide is a gas at room temperature. *(4 marks)*
+
+---
+
+**Q13.** (a) State the three states of matter. *(2 marks)*
+
+(b) Describe the arrangement of particles in each state. *(6 marks)*
+
+(c) Explain what happens to the particles when a solid melts. *(4 marks)*
+
+---
+
+**Q14.** (a) What is meant by the term "giant structure"? *(3 marks)*
+
+(b) Give two examples of substances with giant structures. *(2 marks)*
+
+(c) Explain why giant structures have high melting points. *(4 marks)*
+
+---
+
+**Q15.** (a) Define the term "valency". *(2 marks)*
+
+(b) State the valency of hydrogen, oxygen, nitrogen, and carbon. *(4 marks)*
+
+(c) Use valency to write the formula of water, carbon dioxide, and ammonia. *(4 marks)*
+
+---
+
+**Q16.** (a) What is the difference between an atom and an ion? *(3 marks)*
+
+(b) Explain how a cation and an anion are formed. *(4 marks)*
+
+(c) Give the symbol and charge of a calcium ion and a fluoride ion. *(3 marks)*
+
+---
+
+**Q17.** (a) Describe the structure of a simple covalent molecule. *(3 marks)*
+
+(b) Explain why simple covalent molecules have low melting points. *(4 marks)*
+
+(c) Give two examples of simple covalent molecules. *(2 marks)*
+
+---
+
+**Q18.** (a) What is the difference between a physical change and a chemical change? *(4 marks)*
+
+(b) Give one example of each. *(2 marks)*
+
+(c) State two observations that indicate a chemical change has occurred. *(4 marks)*
+
+---
+
+**Q19.** (a) Define the term "relative atomic mass". *(3 marks)*
+
+(b) Explain why the relative atomic mass of an element may not be a whole number. *(4 marks)*
+
+(c) State the relative atomic mass of carbon, oxygen, and hydrogen. *(3 marks)*
+
+---
+
+**Q20.** (a) What is the difference between an element, a compound, and a mixture? *(4 marks)*
+
+(b) Give one example of each. *(3 marks)*
+
+(c) Describe how you would separate a mixture of sand and salt. *(4 marks)*
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Citizenship Education'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P1 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P1 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Citizenship Education
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Rights & Duties: Sample question 1 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q2.** Government: Sample question 2 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q3.** Constitution: Sample question 3 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q4.** Democracy: Sample question 4 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q5.** Human Rights: Sample question 5 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q6.** Civic Participation: Sample question 6 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q7.** National Identity: Sample question 7 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q8.** Global Citizenship: Sample question 8 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q9.** Rights & Duties: Sample question 9 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q10.** Government: Sample question 10 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q11.** Constitution: Sample question 11 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q12.** Democracy: Sample question 12 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q13.** Human Rights: Sample question 13 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q14.** Civic Participation: Sample question 14 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q15.** National Identity: Sample question 15 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q16.** Global Citizenship: Sample question 16 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q17.** Rights & Duties: Sample question 17 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q18.** Government: Sample question 18 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q19.** Constitution: Sample question 19 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q20.** Democracy: Sample question 20 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q21.** Human Rights: Sample question 21 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q22.** Civic Participation: Sample question 22 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q23.** National Identity: Sample question 23 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q24.** Global Citizenship: Sample question 24 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q25.** Rights & Duties: Sample question 25 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q26.** Government: Sample question 26 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q27.** Constitution: Sample question 27 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q28.** Democracy: Sample question 28 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q29.** Human Rights: Sample question 29 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q30.** Civic Participation: Sample question 30 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q31.** National Identity: Sample question 31 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Global Citizenship: Sample question 32 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Rights & Duties: Sample question 33 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Government: Sample question 34 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Constitution: Sample question 35 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Democracy: Sample question 36 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Human Rights: Sample question 37 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Civic Participation: Sample question 38 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** National Identity: Sample question 39 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Global Citizenship: Sample question 40 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Rights & Duties: Sample question 41 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Government: Sample question 42 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Constitution: Sample question 43 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Democracy: Sample question 44 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Human Rights: Sample question 45 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Civic Participation: Sample question 46 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** National Identity: Sample question 47 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Global Citizenship: Sample question 48 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Rights & Duties: Sample question 49 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Government: Sample question 50 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Constitution: Sample question 51 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Democracy: Sample question 52 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Human Rights: Sample question 53 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Civic Participation: Sample question 54 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** National Identity: Sample question 55 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Global Citizenship: Sample question 56 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Rights & Duties: Sample question 57 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Government: Sample question 58 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Constitution: Sample question 59 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Democracy: Sample question 60 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. B
+3. C
+4. D
+5. A
+6. B
+7. C
+8. D
+9. A
+10. B
+11. C
+12. D
+13. A
+14. B
+15. C
+16. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
+23. C
+24. D
+25. A
+26. B
+27. C
+28. D
+29. A
+30. B
+31. C
+32. D
+33. A
+34. B
+35. C
+36. D
+37. A
+38. B
+39. C
+40. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
+47. C
+48. D
+49. A
+50. B
+51. C
+52. D
+53. A
+54. B
+55. C
+56. D
+57. A
+58. B
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Citizenship Education'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P1 SET 2'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P1 SET 2',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Citizenship Education
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Rights & Duties: Sample question 1 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q2.** Government: Sample question 2 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q3.** Constitution: Sample question 3 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q4.** Democracy: Sample question 4 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q5.** Human Rights: Sample question 5 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q6.** Civic Participation: Sample question 6 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q7.** National Identity: Sample question 7 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q8.** Global Citizenship: Sample question 8 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q9.** Rights & Duties: Sample question 9 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q10.** Government: Sample question 10 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q11.** Constitution: Sample question 11 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q12.** Democracy: Sample question 12 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q13.** Human Rights: Sample question 13 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q14.** Civic Participation: Sample question 14 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q15.** National Identity: Sample question 15 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q16.** Global Citizenship: Sample question 16 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q17.** Rights & Duties: Sample question 17 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q18.** Government: Sample question 18 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q19.** Constitution: Sample question 19 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q20.** Democracy: Sample question 20 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q21.** Human Rights: Sample question 21 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q22.** Civic Participation: Sample question 22 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q23.** National Identity: Sample question 23 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q24.** Global Citizenship: Sample question 24 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q25.** Rights & Duties: Sample question 25 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q26.** Government: Sample question 26 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q27.** Constitution: Sample question 27 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q28.** Democracy: Sample question 28 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q29.** Human Rights: Sample question 29 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q30.** Civic Participation: Sample question 30 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q31.** National Identity: Sample question 31 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Global Citizenship: Sample question 32 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Rights & Duties: Sample question 33 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Government: Sample question 34 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Constitution: Sample question 35 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Democracy: Sample question 36 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Human Rights: Sample question 37 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Civic Participation: Sample question 38 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** National Identity: Sample question 39 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Global Citizenship: Sample question 40 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Rights & Duties: Sample question 41 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Government: Sample question 42 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Constitution: Sample question 43 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Democracy: Sample question 44 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Human Rights: Sample question 45 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Civic Participation: Sample question 46 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** National Identity: Sample question 47 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Global Citizenship: Sample question 48 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Rights & Duties: Sample question 49 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Government: Sample question 50 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Constitution: Sample question 51 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Democracy: Sample question 52 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Human Rights: Sample question 53 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Civic Participation: Sample question 54 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** National Identity: Sample question 55 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Global Citizenship: Sample question 56 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Rights & Duties: Sample question 57 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Government: Sample question 58 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Constitution: Sample question 59 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Democracy: Sample question 60 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. B
+3. C
+4. D
+5. A
+6. B
+7. C
+8. D
+9. A
+10. B
+11. C
+12. D
+13. A
+14. B
+15. C
+16. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
+23. C
+24. D
+25. A
+26. B
+27. C
+28. D
+29. A
+30. B
+31. C
+32. D
+33. A
+34. B
+35. C
+36. D
+37. A
+38. B
+39. C
+40. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
+47. C
+48. D
+49. A
+50. B
+51. C
+52. D
+53. A
+54. B
+55. C
+56. D
+57. A
+58. B
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Citizenship Education'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P1 SET 3'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P1 SET 3',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE Ordinary Level CITIZENSHIP EDUCATION P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Citizenship Education
+
+**Instructions:**
+
+- Choose the correct option A, B, C or D for each question.
+- Record your answers clearly on the answer sheet provided.
+- Each question carries equal marks. No marks is deducted for wrong answers.
+- Use the answer key at the end of the paper to check your responses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Rights & Duties: Sample question 1 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q2.** Government: Sample question 2 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q3.** Constitution: Sample question 3 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q4.** Democracy: Sample question 4 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q5.** Human Rights: Sample question 5 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q6.** Civic Participation: Sample question 6 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q7.** National Identity: Sample question 7 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q8.** Global Citizenship: Sample question 8 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q9.** Rights & Duties: Sample question 9 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q10.** Government: Sample question 10 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q11.** Constitution: Sample question 11 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q12.** Democracy: Sample question 12 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q13.** Human Rights: Sample question 13 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q14.** Civic Participation: Sample question 14 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q15.** National Identity: Sample question 15 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q16.** Global Citizenship: Sample question 16 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q17.** Rights & Duties: Sample question 17 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q18.** Government: Sample question 18 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q19.** Constitution: Sample question 19 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q20.** Democracy: Sample question 20 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q21.** Human Rights: Sample question 21 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q22.** Civic Participation: Sample question 22 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q23.** National Identity: Sample question 23 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q24.** Global Citizenship: Sample question 24 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q25.** Rights & Duties: Sample question 25 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q26.** Government: Sample question 26 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q27.** Constitution: Sample question 27 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q28.** Democracy: Sample question 28 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q29.** Human Rights: Sample question 29 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q30.** Civic Participation: Sample question 30 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q31.** National Identity: Sample question 31 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q32.** Global Citizenship: Sample question 32 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q33.** Rights & Duties: Sample question 33 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q34.** Government: Sample question 34 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q35.** Constitution: Sample question 35 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q36.** Democracy: Sample question 36 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q37.** Human Rights: Sample question 37 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q38.** Civic Participation: Sample question 38 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q39.** National Identity: Sample question 39 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q40.** Global Citizenship: Sample question 40 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q41.** Rights & Duties: Sample question 41 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q42.** Government: Sample question 42 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q43.** Constitution: Sample question 43 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q44.** Democracy: Sample question 44 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q45.** Human Rights: Sample question 45 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q46.** Civic Participation: Sample question 46 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q47.** National Identity: Sample question 47 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q48.** Global Citizenship: Sample question 48 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q49.** Rights & Duties: Sample question 49 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q50.** Government: Sample question 50 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q51.** Constitution: Sample question 51 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q52.** Democracy: Sample question 52 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q53.** Human Rights: Sample question 53 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q54.** Civic Participation: Sample question 54 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q55.** National Identity: Sample question 55 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q56.** Global Citizenship: Sample question 56 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q57.** Rights & Duties: Sample question 57 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q58.** Government: Sample question 58 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q59.** Constitution: Sample question 59 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+**Q60.** Democracy: Sample question 60 for Citizenship Education Ordinary Level Paper 1.
+
+A. Option A  
+B. Option B  
+C. Option C  
+D. Option D  
+
+---
+
+## ANSWER KEY
+
+1. A
+2. B
+3. C
+4. D
+5. A
+6. B
+7. C
+8. D
+9. A
+10. B
+11. C
+12. D
+13. A
+14. B
+15. C
+16. D
+17. A
+18. B
+19. C
+20. D
+21. A
+22. B
+23. C
+24. D
+25. A
+26. B
+27. C
+28. D
+29. A
+30. B
+31. C
+32. D
+33. A
+34. B
+35. C
+36. D
+37. A
+38. B
+39. C
+40. D
+41. A
+42. B
+43. C
+44. D
+45. A
+46. B
+47. C
+48. D
+49. A
+50. B
+51. C
+52. D
+53. A
+54. B
+55. C
+56. D
+57. A
+58. B
+59. C
+60. D
+',
+  null
+)
+on conflict (id) do update set
+  topic_id = excluded.topic_id,
+  subject = excluded.subject,
+  title = excluded.title,
+  language = excluded.language,
+  level = excluded.level,
+  class_levels = excluded.class_levels,
+  series = excluded.series,
+  status = excluded.status,
+  markdown_content = excluded.markdown_content,
+  updated_at = now();
+
+with chosen_topic as (
+  select id
+  from public.topics
+  where subject = 'Citizenship Education'
+  order by case when level = 'ordinary' then 0 else 1 end, title
+  limit 1
+),
+existing as (
+  select id
+  from public.course_documents
+  where title = 'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 1'
+  limit 1
+)
+insert into public.course_documents (
+  id, topic_id, subject, title, language, level, class_levels, series, status,
+  markdown_content, created_by
+)
+values (
+  coalesce((select id from existing), gen_random_uuid()),
+  (select id from chosen_topic),
+  'Citizenship Education',
+  'CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 1',
+  'english',
+  'ordinary',
+  array['form_3', 'form_4', 'form_5']::text[],
+  array['general', 'science', 'arts', 'commercial', 'technical', 'a_science', 'a_arts', 'a_commercial', 'a_technical']::text[],
+  'published',
+  '# CAMEROON GCE ORDINARY LEVEL CITIZENSHIP EDUCATION P2 SET 1
+
+## Structural Question Bank - Set 1
+
+**Level:** Ordinary Level
+**Class:** FORM 5
+**Series:** general, arts
+**Subject:** Citizenship Education
+
+**Instructions:**
+
+- Answer all questions in a clear and organized manner.
+- Show all working where calculations are required.
+- Use correct subject terminology and Cameroon GCE presentation standards.
+- Diagrams, tables, maps, labelled sketches, and examples should be included where useful.
+
+---
+
+## SECTION 1: STATE AND NATION
+
+**Q1.** State and nation: Community case 1 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q2.** State and nation: Community case 2 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q3.** State and nation: Community case 3 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q4.** State and nation: Community case 4 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q5.** State and nation: Community case 5 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply state and nation to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 2: RIGHTS AND DUTIES
+
+**Q6.** Rights and duties: Community case 6 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q7.** Rights and duties: Community case 7 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q8.** Rights and duties: Community case 8 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q9.** Rights and duties: Community case 9 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q10.** Rights and duties: Community case 10 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply rights and duties to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 3: DEMOCRACY
+
+**Q11.** Democracy: Community case 11 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q12.** Democracy: Community case 12 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q13.** Democracy: Community case 13 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q14.** Democracy: Community case 14 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q15.** Democracy: Community case 15 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply democracy to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 4: ELECTIONS
+
+**Q16.** Elections: Community case 16 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q17.** Elections: Community case 17 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q18.** Elections: Community case 18 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q19.** Elections: Community case 19 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q20.** Elections: Community case 20 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply elections to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 5: CONSTITUTION
+
+**Q21.** Constitution: Community case 21 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q22.** Constitution: Community case 22 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q23.** Constitution: Community case 23 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q24.** Constitution: Community case 24 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q25.** Constitution: Community case 25 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply constitution to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 6: PEACE AND CONFLICT
+
+**Q26.** Peace and conflict: Community case 26 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q27.** Peace and conflict: Community case 27 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q28.** Peace and conflict: Community case 28 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q29.** Peace and conflict: Community case 29 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q30.** Peace and conflict: Community case 30 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply peace and conflict to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 7: NATIONAL INTEGRATION
+
+**Q31.** National integration: Community case 31 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q32.** National integration: Community case 32 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q33.** National integration: Community case 33 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q34.** National integration: Community case 34 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q35.** National integration: Community case 35 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply national integration to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+## SECTION 8: CIVIC RESPONSIBILITY
+
+**Q36.** Civic responsibility: Community case 36 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q37.** Civic responsibility: Community case 37 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(8 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q38.** Civic responsibility: Community case 38 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(10 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q39.** Civic responsibility: Community case 39 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(12 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
+
+---
+
+**Q40.** Civic responsibility: Community case 40 involves rights, duties, elections, public property, conflict, and peaceful participation. Apply civic responsibility to resolve the case.
+
+(a) Identify the central issue, concept, theme, argument, or language feature being tested. *(4 marks)*
+
+(b) Write a developed response with clear paragraphs, accurate syllabus knowledge, and relevant Cameroon or textual examples. *(6 marks)*
+
+(c) Evaluate the strength, limitation, moral lesson, historical significance, or wider implication of your answer. *(6 marks)*
 
 ---
 ',
