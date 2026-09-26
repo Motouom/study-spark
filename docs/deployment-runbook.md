@@ -300,7 +300,9 @@ Check:
 - `OPENROUTER_API_KEY` is valid.
 - `AI_MODEL` exists and is available to the account.
 - `AI_BASE_URL` is correct.
-- Server logs show whether the fallback path was used.
+- `/api/ai/health` shows at least one configured provider for an admin user.
+- Server logs show whether a provider was called or the fallback path was used.
+- `SUPABASE_SERVICE_ROLE_KEY` is configured if persistent AI quota tracking is required. Missing quota tracking should not block AI provider calls.
 
 ## 10. Rollback
 

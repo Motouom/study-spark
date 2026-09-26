@@ -15,6 +15,7 @@ const GROQ_MODEL = "openai/gpt-oss-120b";
 const CEREBRAS_MODEL = "qwen-3.8-27b";
 
 const PROVIDER_ORDER: string[] = ["gemini", "groq", "cerebras", "openrouter"];
+const OPENROUTER_MODEL = "openrouter/free";
 
 function getProviderConfig(name: string) {
   switch (name) {
@@ -49,7 +50,7 @@ function getProviderConfig(name: string) {
         apiKey: openRouterKey,
         dailyCap: Number(readEnv("OPENROUTER_DAILY_CAP") ?? 200),
         baseUrl: readEnv("AI_BASE_URL") ?? "https://openrouter.ai/api/v1",
-        model: readEnv("AI_MODEL") ?? "openrouter/free",
+        model: readEnv("AI_MODEL") ?? OPENROUTER_MODEL,
       };
     }
     default:
@@ -61,7 +62,21 @@ function getProviderConfig(name: string) {
 //  Quota tracking (persistent, server-side only)
 /* ────────────────────────────────────────────────────────────────────────── */
 
-async function getUsage(supabase: SupabaseClient, provider: string): Promise<number> {
+function getOptionalServiceSupabase(): SupabaseClient | null {
+  try {
+    return getServiceSupabase();
+  } catch (error) {
+    console.warn(
+      "[AI Quota] Quota tracking disabled because the Supabase service client is unavailable:",
+      error instanceof Error ? error.message : error,
+    );
+    return null;
+  }
+}
+
+async function getUsage(supabase: SupabaseClient | null, provider: string): Promise<number> {
+  if (!supabase) return 0;
+
   try {
     const { data, error } = await supabase.rpc("get_ai_usage", { provider_name: provider });
     if (error) {
@@ -74,7 +89,9 @@ async function getUsage(supabase: SupabaseClient, provider: string): Promise<num
   }
 }
 
-async function incrementUsage(supabase: SupabaseClient, provider: string): Promise<void> {
+async function incrementUsage(supabase: SupabaseClient | null, provider: string): Promise<void> {
+  if (!supabase) return;
+
   try {
     await supabase.rpc("increment_ai_usage", { provider_name: provider });
   } catch (error) {
@@ -93,8 +110,24 @@ function extractOpenAiContent(payload: unknown): string | null {
   if (!Array.isArray(choices) || choices.length === 0) return null;
   const first = choices[0] as Record<string, unknown>;
   const message = first?.message as Record<string, unknown> | undefined;
-  const text = typeof message?.content === "string" ? message.content : null;
-  return text;
+  const content = message?.content;
+
+  if (typeof content === "string") return content.trim() || null;
+  if (Array.isArray(content)) {
+    const text = content
+      .map((part) => {
+        if (!part || typeof part !== "object") return "";
+        const row = part as Record<string, unknown>;
+        if (typeof row.text === "string") return row.text;
+        if (typeof row.content === "string") return row.content;
+        return "";
+      })
+      .join("")
+      .trim();
+    return text || null;
+  }
+
+  return null;
 }
 
 function extractGeminiContent(payload: unknown): string | null {
@@ -351,7 +384,7 @@ export async function askAI(input: {
   prompt: string;
   maxTokens?: number;
 }): Promise<{ content: string; provider: string }> {
-  const supabase = getServiceSupabase();
+  const supabase = getOptionalServiceSupabase();
   const errors: { provider: string; kind: string; status?: number; message: string }[] = [];
 
   console.log("[AI] askAI called. Checking providers in order:", PROVIDER_ORDER);
@@ -485,7 +518,7 @@ export function getMultiAiConfigStatus() {
       openrouter: {
         configured: openRouterKey,
         dailyCap: Number(readEnv("OPENROUTER_DAILY_CAP") ?? 200),
-        model: readEnv("AI_MODEL") ?? "openrouter/free",
+        model: readEnv("AI_MODEL") ?? OPENROUTER_MODEL,
       },
     },
   };
@@ -493,4 +526,16 @@ export function getMultiAiConfigStatus() {
 
 export function multiAiConfigured() {
   return getMultiAiConfigStatus().configured;
+}
+
+export function getAiQuotaStatus() {
+  const hasServiceRoleKey = Boolean(readEnv("SUPABASE_SERVICE_ROLE_KEY"));
+
+  return {
+    configured: hasServiceRoleKey,
+    mode: hasServiceRoleKey ? "persistent" : "disabled",
+    message: hasServiceRoleKey
+      ? "AI provider quota tracking is enabled."
+      : "AI provider quota tracking is disabled because SUPABASE_SERVICE_ROLE_KEY is not configured. AI calls still run.",
+  };
 }

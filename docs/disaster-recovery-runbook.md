@@ -191,7 +191,7 @@ the corresponding feature fails silently or with a 500 error.
 |---|---|---|
 | `VITE_SUPABASE_URL` | All Supabase calls | Supabase dashboard → Project settings → API |
 | `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser auth | Supabase dashboard → Project settings → API (anon/publishable key) |
-| `SUPABASE_SERVICE_ROLE_KEY` | Server-side RPCs | Supabase dashboard → Project settings → API (service role — keep secret) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server-side RPCs and persistent AI quota tracking | Supabase dashboard → Project settings → API (service role — keep secret) |
 | `VITE_ADMIN_AUTH_ENDPOINT` | Admin panel auth | Internal config — contact owner |
 | `FAPSHI_ENVIRONMENT` | Payments | `sandbox` or `live` |
 | `FAPSHI_API_USER` | Payments | Fapshi dashboard |

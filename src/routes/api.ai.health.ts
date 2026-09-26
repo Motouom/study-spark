@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { getMultiAiConfigStatus } from "@/lib/ai-providers";
+import { getAiQuotaStatus, getMultiAiConfigStatus } from "@/lib/ai-providers";
 import { getAuthenticatedUser } from "@/lib/server-supabase";
 
 export const Route = createFileRoute("/api/ai/health")({
@@ -14,9 +14,11 @@ export const Route = createFileRoute("/api/ai/health")({
           }
 
           const status = getMultiAiConfigStatus();
+          const quota = getAiQuotaStatus();
           return Response.json({
             ok: status.configured,
             providers: status.providers,
+            quota,
             priorityOrder: ["gemini", "groq", "cerebras", "openrouter"],
           });
         } catch (error) {
