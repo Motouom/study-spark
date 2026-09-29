@@ -195,6 +195,15 @@ These timestamped files live in `supabase/migrations/` and are recorded in the l
 | `20260925084507_fix_paper_class_levels_series.sql`      | Repairs paper `class_levels`/`series` to match `content/papers/manifest.csv` (the one-shot import had seeded the first 3 sets of each subject with broad class levels/series).                |
 | `20260925084558_fix_orphaned_advanced_math_papers.sql`  | Scopes the two orphaned advanced "Mathematics" P2 papers (not in the manifest) to `upper_sixth`/`a_science`.                                                                                  |
 | `20260925085337_broaden_paper_class_levels.sql`         | Makes English papers visible to all classes in their level (ordinary → `form_3,form_4,form_5`; advanced → `lower_sixth,upper_sixth`), matching cheatsheets/courses. Series scoping preserved. |
+| `20260925134141_complete_gce_paper_coverage.sql`        | Seeds complete Cameroon GCE paper coverage (Paper 1 MCQ + Paper 2 structural) across all supported English subjects and levels. Idempotent upsert.                                            |
+| `20260925134209_complete_gce_paper_coverage.sql`        | Completes GCE paper coverage for remaining English subjects/levels (idempotent upsert).                                                                                                       |
+| `20260925153000_targeted_gce_paper_coverage.sql`        | Targeted GCE paper coverage upsert for subjects/levels still missing papers.                                                                                                                  |
+| `20260929102455_french_paper_parity.sql`                | Seeds French MCQ (Paper 1) and structural sets for francophone subjects (BEPC + Terminale) to match English parity.                                                                           |
+| `20260929103424_french_paper_parity.sql`                | Additional French paper parity content (idempotent upsert).                                                                                                                                   |
+| `20260929103702_french_paper_parity.sql`                | Completes French paper parity for BEPC and Terminale subjects.                                                                                                                                |
+| `20260929104524_french_seconde_premiere.sql`            | Adds French Seconde/Première (Probatoire) papers for francophone subjects.                                                                                                                    |
+| `20260929120509_french_bepc_quality.sql`                | Upgrades French BEPC content quality: rich MCQ/structural papers + comprehensive courses + fiches de révision for 8 core subjects.                                                            |
+| `20260929125405_french_lycee_quality.sql`               | Upgrades French Lycée content quality: rich papers + courses + fiches for 12 advanced subjects.                                                                                               |
 
 ## Domain Map
 
