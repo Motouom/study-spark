@@ -41,9 +41,6 @@ test-results/
 blob-report/
 .nyc_output/
 
-# Wrangler / Cloudflare
-.wrangler/
-
 # Vercel / Netlify
 .vercel/
 .netlify/
