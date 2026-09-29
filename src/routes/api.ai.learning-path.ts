@@ -538,6 +538,9 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                       "Never create product-management, dashboard, UI, software, or analytics topics.",
                       "Every item must be about studying the assigned Cameroon exam paper/topic.",
                       "Keep each paper value exactly identical to fixedDays[index].paper.",
+                      "Use only real StudySpark actions: open the assigned paper/course/cheatsheet, redo Passed/Failed questions, mark Need review, mark Understood, use review marks, and revisit the learning path.",
+                      "Do not mention official solutions, flashcards, exam mode, notifications, teacher review, or features not provided in the input.",
+                      "Write specific target and focus text of 14 to 28 words each, not generic one-line labels.",
                       'Return only valid JSON shaped as {"days":[...]}.',
                       "Do not add prose, markdown fences, comments, safety classifications, or explanations.",
                     ].join(" "),
@@ -564,7 +567,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                       reviews: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
                     })),
                     instruction:
-                      'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. The paper fields must match the fixedDays paper values exactly. Titles, targets, and focuses must mention real studying actions such as redoing failed questions, revising weak subjects, marking review items, timed practice, or completing the assigned paper.',
+                      'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. The paper fields must match the fixedDays paper values exactly. Titles should be concrete. Targets and focuses must be 14-28 words each, practical, learner-facing, and limited to real StudySpark actions such as redoing failed questions, marking Need review, marking Understood, timed practice, or completing the assigned paper.',
                   }),
                   maxTokens: 1400,
                 });

@@ -17,6 +17,15 @@ export const Route = createFileRoute("/_app/learning-path")({
   component: LearningPathPage,
 });
 
+function normalizeTitle(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
 function LearningPathPage() {
   const { profile } = useStudyProfile();
   const content = useStudyContent(profile);
@@ -114,6 +123,22 @@ function LearningPathPage() {
     return updated >= start;
   }).length;
   const weeklyPercent = Math.min(100, Math.round((markedThisWeek / weeklyTarget) * 100));
+  const documentsByTitle = new Map(
+    content.documents.map((document) => [normalizeTitle(document.title), document]),
+  );
+
+  function findPathDocument(paperTitle: string) {
+    const normalized = normalizeTitle(paperTitle);
+    if (!normalized) return null;
+    const exact = documentsByTitle.get(normalized);
+    if (exact) return exact;
+    return (
+      content.documents.find((document) => {
+        const documentTitle = normalizeTitle(document.title);
+        return documentTitle.includes(normalized) || normalized.includes(documentTitle);
+      }) ?? null
+    );
+  }
 
   return (
     <>
@@ -173,31 +198,54 @@ function LearningPathPage() {
                       self-reported confidence.
                     </p>
                     <div className="grid gap-3 md:grid-cols-2">
-                      {aiPath.days.map((day) => (
-                        <div key={day.day} className="rounded-lg border border-border bg-card p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-foreground font-display text-background">
-                              {day.day}
+                      {aiPath.days.map((day) => {
+                        const document = findPathDocument(day.paper);
+                        const card = (
+                          <div className="h-full rounded-lg border border-border bg-card p-4 transition-colors hover:bg-secondary/35">
+                            <div className="flex items-start gap-3">
+                              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-foreground font-display text-background">
+                                {day.day}
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-start justify-between gap-3">
+                                  <div className="min-w-0">
+                                    <h3 className="text-sm font-medium">{day.title}</h3>
+                                    <p className="mt-1 text-xs text-muted-foreground">
+                                      {day.paper}
+                                    </p>
+                                  </div>
+                                  {document && (
+                                    <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
+                                  )}
+                                </div>
+                              </div>
                             </div>
-                            <div className="min-w-0">
-                              <h3 className="text-sm font-medium">{day.title}</h3>
-                              <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-                                {day.paper}
-                              </p>
+                            <div className="mt-4 grid gap-2 text-xs leading-relaxed">
+                              <div className="rounded-md bg-secondary/50 px-3 py-2">
+                                <span className="font-medium">Target: </span>
+                                <span className="text-muted-foreground">{day.target}</span>
+                              </div>
+                              <div className="rounded-md bg-secondary/50 px-3 py-2">
+                                <span className="font-medium">Focus: </span>
+                                <span className="text-muted-foreground">{day.focus}</span>
+                              </div>
                             </div>
                           </div>
-                          <div className="mt-4 grid gap-2 text-xs">
-                            <div className="rounded-md bg-secondary/50 px-3 py-2">
-                              <span className="font-medium">Target: </span>
-                              <span className="text-muted-foreground">{day.target}</span>
-                            </div>
-                            <div className="rounded-md bg-secondary/50 px-3 py-2">
-                              <span className="font-medium">Focus: </span>
-                              <span className="text-muted-foreground">{day.focus}</span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                        );
+
+                        return document ? (
+                          <Link
+                            key={day.day}
+                            to="/course/$documentId"
+                            params={{ documentId: document.id }}
+                            className="block h-full"
+                          >
+                            {card}
+                          </Link>
+                        ) : (
+                          <div key={day.day}>{card}</div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

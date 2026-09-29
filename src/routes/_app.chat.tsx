@@ -4,8 +4,13 @@ import { useMemo, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { normalizeLegacyLatex } from "@/components/ProtectedMarkdown";
 import { supabase } from "@/lib/supabase";
 import { PageHeader } from "@/routes/_app";
+import rehypeKatex from "rehype-katex";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 
 export const Route = createFileRoute("/_app/chat")({
   component: StudyChatPage,
@@ -24,6 +29,61 @@ const STARTERS = [
   "Make a simple revision plan for Physics this evening.",
   "Explain a hard Chemistry formula step by step.",
 ];
+
+function StudyChatMarkdown({ children }: { children: string }) {
+  return (
+    <div className="chat-markdown min-w-0 text-sm leading-relaxed">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          h1: ({ children: content }) => (
+            <h1 className="mb-3 mt-1 text-lg font-semibold leading-tight">{content}</h1>
+          ),
+          h2: ({ children: content }) => (
+            <h2 className="mb-2 mt-4 text-base font-semibold leading-tight">{content}</h2>
+          ),
+          h3: ({ children: content }) => (
+            <h3 className="mb-2 mt-4 text-sm font-semibold leading-tight">{content}</h3>
+          ),
+          p: ({ children: content }) => <p className="my-2 leading-relaxed">{content}</p>,
+          ul: ({ children: content }) => (
+            <ul className="my-2 list-disc space-y-1 pl-5">{content}</ul>
+          ),
+          ol: ({ children: content }) => (
+            <ol className="my-2 list-decimal space-y-1 pl-5">{content}</ol>
+          ),
+          li: ({ children: content }) => <li className="leading-relaxed">{content}</li>,
+          code: ({ children: content }) => (
+            <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-[0.85em]">
+              {content}
+            </code>
+          ),
+          pre: ({ children: content }) => (
+            <pre className="my-3 overflow-x-auto rounded-md border border-border bg-secondary/50 p-3 text-xs">
+              {content}
+            </pre>
+          ),
+          table: ({ children: content }) => (
+            <div className="my-3 overflow-x-auto rounded-md border border-border">
+              <table className="w-full min-w-[28rem] border-collapse text-xs">{content}</table>
+            </div>
+          ),
+          th: ({ children: content }) => (
+            <th className="border-b border-border bg-secondary/60 px-2 py-1.5 text-left font-semibold">
+              {content}
+            </th>
+          ),
+          td: ({ children: content }) => (
+            <td className="border-b border-border px-2 py-1.5 align-top">{content}</td>
+          ),
+        }}
+      >
+        {normalizeLegacyLatex(children)}
+      </ReactMarkdown>
+    </div>
+  );
+}
 
 async function authHeaders() {
   if (!supabase) throw new Error("Supabase is not configured.");
@@ -178,7 +238,11 @@ function StudyChatPage() {
                         : "bg-primary text-primary-foreground"
                     }`}
                   >
-                    <div className="whitespace-pre-wrap">{message.content}</div>
+                    {assistant ? (
+                      <StudyChatMarkdown>{message.content}</StudyChatMarkdown>
+                    ) : (
+                      <div className="whitespace-pre-wrap">{message.content}</div>
+                    )}
                     {assistant && message.source && (
                       <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
                         <Sparkles className="h-3 w-3" />
