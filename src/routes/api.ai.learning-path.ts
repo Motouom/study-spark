@@ -26,6 +26,44 @@ type DifficultyEntry = {
   difficultyScore: number;
 };
 
+type LearningPathDay = {
+  day: number;
+  title: string;
+  paper: string;
+  target: string;
+  focus: string;
+};
+
+const GENERIC_AI_PLAN_PATTERN =
+  /\b(progress dashboard|data tracking|state management|visualization|widget configuration|trend analysis|system synthesis|dashboard impact|ui components|caching strategies|lazy loading)\b/i;
+
+function normalizePaperName(value: string) {
+  return value.trim().replace(/\s+/g, " ");
+}
+
+function validateAiLearningPath(days: LearningPathDay[], fixedDays: LearningPathDay[]) {
+  if (days.length !== fixedDays.length) {
+    throw new Error(`AI returned ${days.length} days instead of ${fixedDays.length}.`);
+  }
+
+  const genericMatches = days.filter((day) =>
+    GENERIC_AI_PLAN_PATTERN.test(`${day.title} ${day.paper} ${day.target} ${day.focus}`),
+  );
+  if (genericMatches.length > 0) {
+    throw new Error("AI returned a generic dashboard/product plan instead of a learner study plan.");
+  }
+
+  days.forEach((day, index) => {
+    const expectedPaper = normalizePaperName(fixedDays[index]?.paper ?? "");
+    const actualPaper = normalizePaperName(day.paper);
+    if (!expectedPaper || actualPaper !== expectedPaper) {
+      throw new Error(
+        `AI changed day ${index + 1} paper from "${expectedPaper}" to "${actualPaper}".`,
+      );
+    }
+  });
+}
+
 // Rank papers by how much difficulty the learner has shown in them: review
 // marks, low reading depth, low self-reported confidence, and reflections
 // flagged for revision. This is what makes the path difficulty-aware instead
@@ -331,7 +369,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               if (rankIdx < ranked.length) return ranked[rankIdx++].title;
               if (freshIdx < fresh.length) return fresh[freshIdx++];
               if (sessionIdx < sessionPapers.length) return sessionPapers[sessionIdx++];
-              return "Progress dashboard";
+              return "Selected StudySpark paper";
             };
 
             const getFailedText = (entry: DifficultyEntry): string => {
@@ -418,9 +456,14 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             days.push({
               day: 7,
               title: "Weekly checkpoint",
-              paper: "Progress dashboard",
-              target: "Review pass rate, total time, and weak subjects",
-              focus: "Choose next week's first paper from the weakest subject",
+              paper: weakest?.title ?? sessionPapers[0] ?? fresh[0] ?? "Selected StudySpark paper",
+              target: weakest
+                ? `Re-mark the hardest questions from ${weakest.title.slice(0, 45)}`
+                : "Review this week's marked questions and topics",
+              focus:
+                weakest && weakest.failedQuestions.length > 0
+                  ? `Use Q${weakest.failedQuestions.slice(0, 4).join(", Q")} to choose next week's first revision block`
+                  : "Choose next week's first revision block from the weakest subject",
             });
 
             return days;
@@ -457,24 +500,45 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                 );
                 const planText = await generateAiText({
                   system:
-                    'Rewrite learning path descriptions. Keep every paper title identical to fixedDays. Return only valid JSON shaped as {"days":[...]}. Do not add prose, markdown fences, comments, safety classifications, or explanations.',
+                    [
+                      "You are StudySpark's Cameroon exam revision planner.",
+                      "Rewrite only the title, target, and focus text for the fixed 7-day plan.",
+                      "Never create product-management, dashboard, UI, software, or analytics topics.",
+                      "Every item must be about studying the assigned Cameroon exam paper/topic.",
+                      "Keep each paper value exactly identical to fixedDays[index].paper.",
+                      'Return only valid JSON shaped as {"days":[...]}.',
+                      "Do not add prose, markdown fences, comments, safety classifications, or explanations.",
+                    ].join(" "),
                   prompt: JSON.stringify({
                     fixedDays: deterministicDays.map((d) => ({
                       day: d.day,
+                      title: d.title,
                       paper: d.paper,
+                      target: d.target,
+                      focus: d.focus,
+                      subject:
+                        difficultyRanking.find((e) => e.title === d.paper)?.subject ??
+                        weakestSubjects[0] ??
+                        "selected subject",
                       failedQ:
                         difficultyRanking
                           .find((e) => e.title === d.paper)
                           ?.failedQuestions.slice(0, 3) ?? [],
+                      slowQ:
+                        difficultyRanking
+                          .find((e) => e.title === d.paper)
+                          ?.slowQuestions.map((q) => q.questionNumber)
+                          .slice(0, 3) ?? [],
                       reviews: difficultyRanking.find((e) => e.title === d.paper)?.reviewCount ?? 0,
                     })),
                     instruction:
-                      'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. Paper must match EXACT_PAPER_NAME exactly.',
+                      'Return compact JSON only: {"days":[{"day":1,"title":"...","paper":"EXACT_PAPER_NAME","target":"...","focus":"..."}]}. The paper fields must match the fixedDays paper values exactly. Titles, targets, and focuses must mention real studying actions such as redoing failed questions, revising weak subjects, marking review items, timed practice, or completing the assigned paper.',
                   }),
                   maxTokens: 1400,
                 });
                 console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
                 days = parseAiLearningPath(planText);
+                validateAiLearningPath(days, deterministicDays);
                 break;
               } catch (parseOrProviderError) {
                 lastAiError = parseOrProviderError;
