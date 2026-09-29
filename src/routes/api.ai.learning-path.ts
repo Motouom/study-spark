@@ -406,30 +406,32 @@ export const Route = createFileRoute("/api/ai/learning-path")({
 
             const getFailedText = (entry: DifficultyEntry): string => {
               if (entry.failedQuestions.length > 0) {
-                return `Redo failed questions Q${entry.failedQuestions.slice(0, 6).join(", Q")}`;
+                return `Redo failed questions Q${entry.failedQuestions
+                  .slice(0, 6)
+                  .join(", Q")} in the assigned paper, then mark each one Passed or Failed after checking your method.`;
               }
               if (entry.slowQuestions.length > 0) {
-                return `Speed up slow questions Q${entry.slowQuestions
+                return `Retry slow questions Q${entry.slowQuestions
                   .map((s) => s.questionNumber)
                   .slice(0, 5)
-                  .join(", Q")}`;
+                  .join(", Q")} under timed conditions, then compare your working with the key formula or method.`;
               }
               if (entry.reviewCount > 0) {
-                return `Review ${entry.reviewCount} marked question${entry.reviewCount > 1 ? "s" : ""}`;
+                return `Reopen the ${entry.reviewCount} checkpoint${entry.reviewCount > 1 ? "s" : ""} you marked Need review and rewrite the missing steps before moving on.`;
               }
-              return `Complete the paper — currently at ${entry.bestDepth}% depth`;
+              return `Complete the assigned paper from ${entry.bestDepth}% progress, marking difficult questions as Need review instead of relying on scroll depth.`;
             };
 
             const getFocusText = (entry: DifficultyEntry): string => {
               if (entry.difficultParts.length > 0)
-                return `Focus on: ${entry.difficultParts.join("; ")}`;
+                return `Focus first on ${entry.difficultParts.join("; ")}, then add one clear correction note before marking the topic Understood.`;
               if (entry.failedQuestions.length > 0) {
-                return `Correct working for Q${entry.failedQuestions.slice(0, 4).join(", Q")}`;
+                return `For Q${entry.failedQuestions.slice(0, 4).join(", Q")}, write the corrected formula, substitution, and final answer before changing the status.`;
               }
               if (entry.avgConfidence !== null && entry.avgConfidence < 3) {
-                return `Confidence was ${entry.avgConfidence}/5 — rebuild with timed practice`;
+                return `Confidence was ${entry.avgConfidence}/5, so rebuild the topic with one slow worked example before attempting timed practice.`;
               }
-              return `Read carefully and mark every confusing part for review`;
+              return `Read actively, pause at every confusing paragraph or formula, and mark only the parts that truly need review.`;
             };
 
             // Day 1-3: attack weakest papers (hardest first)
@@ -438,12 +440,16 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               const entry = ranked.find((e) => e.title === paper);
               days.push({
                 day: d,
-                title: entry ? `Attack your weakest paper: ${entry.subject}` : "Open a fresh paper",
+                title: entry
+                  ? `Target the weakest ${entry.subject} paper`
+                  : "Start a fresh StudySpark paper",
                 paper,
                 target: entry
                   ? getFailedText(entry)
-                  : "Study the full paper and mark confusing parts",
-                focus: entry ? getFocusText(entry) : "Build understanding before speed",
+                  : "Study the full paper once, answer each available question, and mark confusing parts as Need review for the next session.",
+                focus: entry
+                  ? getFocusText(entry)
+                  : "Build understanding before speed by writing the main formula, definition, or method beside each hard section.",
               });
             }
 
@@ -451,15 +457,15 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             const weakest = ranked[0];
             days.push({
               day: 4,
-              title: weakest ? `Error-log revision: ${weakest.subject}` : "Review your mistakes",
+              title: weakest ? `Repair the ${weakest.subject} error log` : "Review your mistakes",
               paper: weakest?.title ?? getPaper(),
               target: weakest
-                ? `Correct every failed question from ${weakest.title.slice(0, 40)}`
-                : "Review marked questions from the week",
+                ? `Correct every failed question from this paper, then leave the question Failed until your full method is clean.`
+                : "Review every question or topic you marked this week and separate true mistakes from simple missing notes.",
               focus:
                 weakest && weakest.failedQuestions.length > 0
-                  ? `Write corrected method beside Q${weakest.failedQuestions.slice(0, 4).join(", Q")}`
-                  : "Compare your answers with worked examples",
+                  ? `Write the corrected method beside Q${weakest.failedQuestions.slice(0, 4).join(", Q")} and repeat without looking before marking Passed.`
+                  : "Compare your answers with the content, rewrite weak steps, and mark only corrected items as Understood.",
             });
 
             // Day 5: next weakest or fresh paper
@@ -467,12 +473,14 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             const entry5 = ranked.find((e) => e.title === paper5);
             days.push({
               day: 5,
-              title: entry5 ? `Continue: ${entry5.subject}` : "Open a new paper",
+              title: entry5 ? `Continue the next ${entry5.subject} gap` : "Open a new paper",
               paper: paper5,
               target: entry5
                 ? getFailedText(entry5)
-                : "Study the full paper and mark confusing parts",
-              focus: entry5 ? getFocusText(entry5) : "Build understanding before speed",
+                : "Study the full paper, answer what you can, and mark uncertain sections so the next path has real evidence.",
+              focus: entry5
+                ? getFocusText(entry5)
+                : "Build understanding before speed by summarizing each topic in your own words after reading.",
             });
 
             // Day 6: mixed review across all weak areas
@@ -480,8 +488,10 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               day: 6,
               title: "Mixed review",
               paper: weakest?.title ?? getPaper(),
-              target: "Review 8 marked questions from your weakest papers",
-              focus: "Compare passed and failed work to spot repeated patterns",
+              target:
+                "Review up to eight marked questions across your weakest papers and update each one to Passed or Failed honestly.",
+              focus:
+                "Look for repeated errors in formulas, definitions, diagrams, or timing, then choose one pattern to fix first.",
             });
 
             // Day 7: weekly checkpoint
@@ -490,12 +500,12 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               title: "Weekly checkpoint",
               paper: weakest?.title ?? sessionPapers[0] ?? fresh[0] ?? "Selected StudySpark paper",
               target: weakest
-                ? `Re-mark the hardest questions from ${weakest.title.slice(0, 45)}`
-                : "Review this week's marked questions and topics",
+                ? "Re-mark the hardest questions from this paper after a fresh attempt, using Passed only for complete answers."
+                : "Review this week's marked questions and topics, then choose the next paper from the weakest remaining subject.",
               focus:
                 weakest && weakest.failedQuestions.length > 0
-                  ? `Use Q${weakest.failedQuestions.slice(0, 4).join(", Q")} to choose next week's first revision block`
-                  : "Choose next week's first revision block from the weakest subject",
+                  ? `Use Q${weakest.failedQuestions.slice(0, 4).join(", Q")} to choose next week's first revision block and avoid random planning.`
+                  : "Choose next week's first revision block from the weakest subject, not from what looks easiest.",
             });
 
             return days;
