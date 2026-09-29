@@ -362,7 +362,7 @@ function SettingsPage() {
         ) : (
           <>
             <Section title={t("settings.profile")} description={t("settings.profileDescription")}>
-              <Row label="Avatar">
+              <Row label={t("settings.avatar")}>
                 <div className="flex items-center gap-4">
                   <div className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground font-display text-xl text-background">
                     {name.charAt(0).toUpperCase()}
@@ -400,10 +400,7 @@ function SettingsPage() {
                   </SelectContent>
                 </Select>
               </Row>
-              <Row
-                label={t("settings.curriculumPath")}
-                hint="Controls class, series, subjects, and content access"
-              >
+              <Row label={t("settings.curriculumPath")} hint={t("settings.accessHint")}>
                 <Select
                   value={educationSystem}
                   onValueChange={(value) => resetCurriculumPath(value as EducationSystem)}

@@ -361,13 +361,15 @@ function Dashboard() {
                 : t("dashboard.recommendedPaper")}
             </div>
             <h2 className="mt-2 break-words font-display text-2xl text-foreground md:text-3xl">
-              {featuredPaper ? featuredPaper.title : "Open your paper library"}
+              {featuredPaper ? featuredPaper.title : t("dashboard.openLibrary")}
             </h2>
             <p className="mt-1.5 text-sm text-muted-foreground">
               {featuredPaper
                 ? continuePaper.resumePercent > 0
-                  ? `You're ${continuePaper.resumePercent}% through this ${featuredPaper.subject} paper — pick up right there.`
-                  : `Protected structural paper for ${featuredPaper.subject}.`
+                  ? t("dashboard.resumePercent")
+                      .replace("{percent}", String(continuePaper.resumePercent))
+                      .replace("{subject}", featuredPaper.subject)
+                  : t("dashboard.protectedPaper").replace("{subject}", featuredPaper.subject)
                 : t("dashboard.noPaper")}
             </p>
           </div>
@@ -399,7 +401,7 @@ function Dashboard() {
             icon={Flame}
             label={t("dashboard.currentStreak")}
             value={String(currentStreak)}
-            hint={currentStreak > 0 ? "study days" : t("dashboard.startToday")}
+            hint={currentStreak > 0 ? t("dashboard.studyDays") : t("dashboard.startToday")}
             tone="accent"
           />
           <Stat

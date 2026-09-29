@@ -1,6 +1,7 @@
 import { createFileRoute, Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import {
   LayoutDashboard,
   Library,
@@ -91,7 +92,7 @@ function SidebarContent({
   const { t } = useI18n();
   const { currentStreak } = useUnifiedStreak();
 
-  const shownName = displayName ?? profile?.name ?? "Student";
+  const shownName = displayName ?? profile?.name ?? t("app.student");
   const initials = shownName.slice(0, 1).toUpperCase();
   const premium = isPremiumActive(profile);
 
@@ -179,11 +180,12 @@ function SidebarContent({
             className="inline-flex items-center gap-1 rounded-full bg-secondary px-2 py-1 text-[10px] font-medium"
           >
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            {isPremiumActive(profile) ? "Premium" : "Free"}
+            {isPremiumActive(profile) ? t("common.premium") : t("common.free")}
           </Link>
         </div>
-        {/* Theme toggle */}
-        <div className="mt-2">
+        {/* Language + theme toggles */}
+        <div className="mt-2 flex items-center gap-2">
+          <LanguageSwitcher className="h-9 w-[7.5rem]" />
           <ThemeToggle />
         </div>
       </div>
@@ -293,7 +295,7 @@ function AppLayout() {
       <div className="fixed inset-x-0 top-0 z-30 flex h-14 items-center justify-between border-b border-border bg-background/90 px-4 backdrop-blur md:hidden">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" aria-label="Open menu">
+            <Button variant="ghost" size="icon" aria-label={t("app.openMenu")}>
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
@@ -312,12 +314,17 @@ function AppLayout() {
         </Sheet>
         <Logo to="/dashboard" />
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" aria-label="Search" onClick={() => setCmdOpen(true)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={t("app.searchAria")}
+            onClick={() => setCmdOpen(true)}
+          >
             <Search className="h-5 w-5" />
           </Button>
           <Link
             to="/notifications"
-            aria-label="Notifications"
+            aria-label={t("app.notificationsAria")}
             className="relative inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary"
           >
             <Bell className="h-5 w-5" />
@@ -355,7 +362,7 @@ function AppLayout() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                aria-label="Notifications"
+                aria-label={t("app.notificationsAria")}
                 className="relative inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-secondary"
               >
                 <Bell className="h-4 w-4" />

@@ -142,7 +142,7 @@ function LibraryPage() {
       <div className="space-y-6 px-4 py-6 md:px-10 md:py-8">
         {content.error && (
           <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-            Study content could not be loaded: {content.error}
+            {t("library.loadError").replace("{error}", content.error)}
           </div>
         )}
         <div className="flex min-w-0 items-center gap-2 rounded-lg border border-success/30 bg-success/10 p-3 text-sm text-success">
@@ -202,7 +202,9 @@ function LibraryPage() {
                     <SubjectRing percent={item.startedPercent} />
                   </div>
                   <h3 className="mt-4 text-base font-medium leading-snug">{item.name}</h3>
-                  <p className="mt-2 text-xs text-muted-foreground">ONE PAPER PER SUBJECT</p>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {t("library.onePaperPerSubject")}
+                  </p>
                 </button>
               ))}
             </div>

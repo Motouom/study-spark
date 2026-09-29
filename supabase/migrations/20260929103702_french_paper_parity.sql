@@ -1,0 +1,21192 @@
+-- Seed French MCQ (Paper 1) and structural sets for francophone subjects
+-- Generated: 2026-09-29T10:37:02.752783
+BEGIN;
+
+
+-- BEPC Mathématiques — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '3eb41e0c-6931-8e21-e3ce-cae4380f3137', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La dérivée de $x^3$ est :
+
+A. $3x^2$
+B. $x^2$
+C. $3x$
+D. $3x^3$
+
+---
+
+**Q2.** La dérivée de $\sin(x)$ est :
+
+A. $\cos(x)$
+B. $-\cos(x)$
+C. $\sin(x)$
+D. $-\sin(x)$
+
+---
+
+**Q3.** La dérivée de $\cos(x)$ est :
+
+A. $-\sin(x)$
+B. $\sin(x)$
+C. $\cos(x)$
+D. $-\cos(x)$
+
+---
+
+**Q4.** La dérivée de $e^x$ est :
+
+A. $e^x$
+B. $x e^x$
+C. $e^{x-1}$
+D. $\ln(x)$
+
+---
+
+**Q5.** La dérivée de $\ln(x)$ est :
+
+A. $\frac{1}{x}$
+B. $x$
+C. $\ln(x)$
+D. $\frac{1}{\ln(x)}$
+
+---
+
+**Q6.** L''intégrale de $x^2$ est :
+
+A. $\frac{x^3}{3} + C$
+B. $\frac{x^2}{2} + C$
+C. $x^3 + C$
+D. $2x + C$
+
+---
+
+**Q7.** L''intégrale de $\cos(x)$ est :
+
+A. $\sin(x) + C$
+B. $-\sin(x) + C$
+C. $\cos(x) + C$
+D. $-\cos(x) + C$
+
+---
+
+**Q8.** L''intégrale de $\frac{1}{x}$ est :
+
+A. $\ln|x| + C$
+B. $x + C$
+C. $\frac{1}{x^2} + C$
+D. $e^x + C$
+
+---
+
+**Q9.** La limite de $\frac{\sin(x)}{x}$ quand $x \to 0$ est :
+
+A. 1
+B. 0
+C. $\infty$
+D. n''existe pas
+
+---
+
+**Q10.** La limite de $\frac{1}{x}$ quand $x \to \infty$ est :
+
+A. 0
+B. $\infty$
+C. 1
+D. n''existe pas
+
+---
+
+**Q11.** La fonction $f(x) = x^2$ est :
+
+A. paire
+B. impaire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q12.** La fonction $f(x) = x^3$ est :
+
+A. impaire
+B. paire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q13.** La dérivée de $x^n$ est :
+
+A. $n x^{n-1}$
+B. $x^{n-1}$
+C. $n x^n$
+D. $(n-1)x^n$
+
+---
+
+**Q14.** L''équation $x^2 - 4 = 0$ a pour solutions :
+
+A. $x = 2$ et $x = -2$
+B. $x = 2$
+C. $x = 4$
+D. $x = 16$
+
+---
+
+**Q15.** Le discriminant de $ax^2 + bx + c = 0$ est :
+
+A. $b^2 - 4ac$
+B. $b^2 + 4ac$
+C. $4ac - b^2$
+D. $b - 4ac$
+
+---
+
+**Q16.** Si $\Delta > 0$, l''équation du second degré a :
+
+A. deux solutions réelles
+B. une solution
+C. aucune solution
+D. une solution complexe
+
+---
+
+**Q17.** Si $\Delta = 0$, l''équation du second degré a :
+
+A. une solution double
+B. deux solutions
+C. aucune solution
+D. deux solutions complexes
+
+---
+
+**Q18.** Si $\Delta < 0$, l''équation du second degré a :
+
+A. aucune solution réelle
+B. deux solutions réelles
+C. une solution
+D. une solution double
+
+---
+
+**Q19.** La dérivée de $\tan(x)$ est :
+
+A. $\frac{1}{\cos^2(x)}$
+B. $\sin(x)$
+C. $\cos(x)$
+D. $-\frac{1}{\sin^2(x)}$
+
+---
+
+**Q20.** L''intégrale de $e^x$ est :
+
+A. $e^x + C$
+B. $\frac{e^x}{x} + C$
+C. $x e^x + C$
+D. $\ln(x) + C$
+
+---
+
+## CORRIGÉ
+
+1. $3x^2$
+2. $\cos(x)$
+3. $-\sin(x)$
+4. $e^x$
+5. $\frac{1}{x}$
+6. $\frac{x^3}{3} + C$
+7. $\sin(x) + C$
+8. $\ln|x| + C$
+9. 1
+10. 0
+11. paire
+12. impaire
+13. $n x^{n-1}$
+14. $x = 2$ et $x = -2$
+15. $b^2 - 4ac$
+16. deux solutions réelles
+17. une solution double
+18. aucune solution réelle
+19. $\frac{1}{\cos^2(x)}$
+20. $e^x + C$
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Mathématiques — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '3e7ee059-8cfc-b4d5-e968-46f9963587c9', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La fonction exponentielle $e^x$ est :
+
+A. strictement croissante
+B. strictement décroissante
+C. constante
+D. périodique
+
+---
+
+**Q2.** La fonction logarithme $\ln(x)$ est définie pour :
+
+A. $x > 0$
+B. $x \geq 0$
+C. $x \neq 0$
+D. tout $x$
+
+---
+
+**Q3.** $\ln(1)$ est égal à :
+
+A. 0
+B. 1
+C. $e$
+D. $-1$
+
+---
+
+**Q4.** $\ln(e)$ est égal à :
+
+A. 1
+B. 0
+C. $e$
+D. $-1$
+
+---
+
+**Q5.** $e^0$ est égal à :
+
+A. 1
+B. 0
+C. $e$
+D. $-1$
+
+---
+
+**Q6.** La dérivée de $\frac{1}{x}$ est :
+
+A. $-\frac{1}{x^2}$
+B. $\frac{1}{x^2}$
+C. $-\frac{1}{x}$
+D. $\ln(x)$
+
+---
+
+**Q7.** L''intégrale de $\sin(x)$ est :
+
+A. $-\cos(x) + C$
+B. $\cos(x) + C$
+C. $\sin(x) + C$
+D. $-\sin(x) + C$
+
+---
+
+**Q8.** La limite de $\frac{x^2 - 1}{x - 1}$ quand $x \to 1$ est :
+
+A. 2
+B. 0
+C. 1
+D. $\infty$
+
+---
+
+**Q9.** La fonction $f(x) = \frac{1}{x}$ est :
+
+A. impaire
+B. paire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q10.** Le nombre dérivé de $f$ en $a$ est :
+
+A. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
+B. $f(a)$
+C. $\frac{f(a)}{a}$
+D. $f''(a) \times a$
+
+---
+
+**Q11.** La tangente à la courbe en $a$ a pour pente :
+
+A. $f''(a)$
+B. $f(a)$
+C. $a$
+D. $f''(a) \times a$
+
+---
+
+**Q12.** L''équation de la tangente en $a$ est :
+
+A. $y = f''(a)(x - a) + f(a)$
+B. $y = f(a)x$
+C. $y = f''(a)x$
+D. $y = f(a) + x$
+
+---
+
+**Q13.** La fonction $f(x) = x^2$ est croissante sur :
+
+A. $[0, +\infty[$
+B. $]-\infty, 0]$
+C. $\mathbb{R}$
+D. $]-\infty, +\infty[$
+
+---
+
+**Q14.** La fonction $f(x) = x^2$ est décroissante sur :
+
+A. $]-\infty, 0]$
+B. $[0, +\infty[$
+C. $\mathbb{R}$
+D. nulle part
+
+---
+
+**Q15.** Le point d''inflexion est :
+
+A. où la courbure change
+B. le maximum
+C. le minimum
+D. l''origine
+
+---
+
+**Q16.** La dérivée seconde de $x^3$ est :
+
+A. $6x$
+B. $3x^2$
+C. $3x$
+D. $6$
+
+---
+
+**Q17.** La fonction $f(x) = e^x$ a pour limite en $+\infty$ :
+
+A. $+\infty$
+B. 0
+C. 1
+D. $e$
+
+---
+
+**Q18.** La fonction $f(x) = e^x$ a pour limite en $-\infty$ :
+
+A. 0
+B. $+\infty$
+C. 1
+D. $e$
+
+---
+
+**Q19.** La fonction $f(x) = \ln(x)$ a pour limite en $+\infty$ :
+
+A. $+\infty$
+B. 0
+C. 1
+D. $-\infty$
+
+---
+
+**Q20.** La fonction $f(x) = \ln(x)$ a pour limite en $0^+$ :
+
+A. $-\infty$
+B. $+\infty$
+C. 0
+D. 1
+
+---
+
+## CORRIGÉ
+
+1. strictement croissante
+2. $x > 0$
+3. 0
+4. 1
+5. 1
+6. $-\frac{1}{x^2}$
+7. $-\cos(x) + C$
+8. 2
+9. impaire
+10. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
+11. $f''(a)$
+12. $y = f''(a)(x - a) + f(a)$
+13. $[0, +\infty[$
+14. $]-\infty, 0]$
+15. où la courbure change
+16. $6x$
+17. $+\infty$
+18. 0
+19. $+\infty$
+20. $-\infty$
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Mathématiques — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '07ed82b8-4104-f812-d986-a11073a42990', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''asymptote horizontale de $f(x) = \frac{1}{x}$ est :
+
+A. $y = 0$
+B. $x = 0$
+C. $y = 1$
+D. $y = x$
+
+---
+
+**Q2.** L''asymptote verticale de $f(x) = \frac{1}{x}$ est :
+
+A. $x = 0$
+B. $y = 0$
+C. $x = 1$
+D. $y = 1$
+
+---
+
+**Q3.** La suite $u_n = 2n + 1$ est :
+
+A. arithmétique
+B. géométrique
+C. ni l''un ni l''autre
+D. constante
+
+---
+
+**Q4.** La suite $u_n = 3 \times 2^n$ est :
+
+A. géométrique
+B. arithmétique
+C. ni l''un ni l''autre
+D. constante
+
+---
+
+**Q5.** La raison de la suite $u_n = 2n + 1$ est :
+
+A. 2
+B. 1
+C. 3
+D. n
+
+---
+
+**Q6.** La raison de la suite $u_n = 3 \times 2^n$ est :
+
+A. 2
+B. 3
+C. 6
+D. n
+
+---
+
+**Q7.** La somme des $n$ premiers termes d''une suite arithmétique de raison $r$ est :
+
+A. $\frac{n(u_1 + u_n)}{2}$
+B. $n \times r$
+C. $u_1 \times r^n$
+D. $\frac{n}{2} \times r$
+
+---
+
+**Q8.** La somme des $n$ premiers termes d''une suite géométrique de raison $q$ est :
+
+A. $u_1 \frac{1 - q^n}{1 - q}$
+B. $n \times u_1$
+C. $u_1 \times q^n$
+D. $\frac{n(u_1 + u_n)}{2}$
+
+---
+
+**Q9.** La probabilité d''un événement certain est :
+
+A. 1
+B. 0
+C. 0,5
+D. $\infty$
+
+---
+
+**Q10.** La probabilité d''un événement impossible est :
+
+A. 0
+B. 1
+C. 0,5
+D. $\infty$
+
+---
+
+**Q11.** La somme des probabilités d''un univers est :
+
+A. 1
+B. 0
+C. 0,5
+D. $\infty$
+
+---
+
+**Q12.** Deux événements incompatibles :
+
+A. ne peuvent pas se produire ensemble
+B. se produisent toujours ensemble
+C. sont certains
+D. sont impossibles
+
+---
+
+**Q13.** La probabilité de $A \cup B$ si $A$ et $B$ sont incompatibles est :
+
+A. $P(A) + P(B)$
+B. $P(A) \times P(B)$
+C. $P(A) - P(B)$
+D. $P(A) / P(B)$
+
+---
+
+**Q14.** La probabilité conditionnelle $P(A|B)$ est :
+
+A. $\frac{P(A \cap B)}{P(B)}$
+B. $P(A) \times P(B)$
+C. $P(A) + P(B)$
+D. $\frac{P(B)}{P(A)}$
+
+---
+
+**Q15.** L''espérance d''une variable aléatoire est :
+
+A. la moyenne pondérée
+B. le maximum
+C. le minimum
+D. la variance
+
+---
+
+**Q16.** La variance mesure :
+
+A. la dispersion
+B. la moyenne
+C. le maximum
+D. le minimum
+
+---
+
+**Q17.** L''écart-type est :
+
+A. la racine carrée de la variance
+B. la variance
+C. la moyenne
+D. le maximum
+
+---
+
+**Q18.** La loi binomiale $B(n, p)$ a pour espérance :
+
+A. $np$
+B. $n + p$
+C. $n - p$
+D. $p^n$
+
+---
+
+**Q19.** La loi normale est :
+
+A. une loi continue
+B. une loi discrète
+C. une loi constante
+D. une loi nulle
+
+---
+
+**Q20.** La courbe de la loi normale est :
+
+A. en cloche
+B. linéaire
+C. exponentielle
+D. constante
+
+---
+
+## CORRIGÉ
+
+1. $y = 0$
+2. $x = 0$
+3. arithmétique
+4. géométrique
+5. 2
+6. 2
+7. $\frac{n(u_1 + u_n)}{2}$
+8. $u_1 \frac{1 - q^n}{1 - q}$
+9. 1
+10. 0
+11. 1
+12. ne peuvent pas se produire ensemble
+13. $P(A) + P(B)$
+14. $\frac{P(A \cap B)}{P(B)}$
+15. la moyenne pondérée
+16. la dispersion
+17. la racine carrée de la variance
+18. $np$
+19. une loi continue
+20. en cloche
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Mathématiques — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '3b3358d0-2734-128a-6c44-76e682256505', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉOMÉTRIE ET COMPLEXES
+
+**Q1.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q1.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q1.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q1.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q1.** Résoudre un problème de géométrie dans l''espace.
+
+## SECTION 2: ANALYSE
+
+**Q2.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q2.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q2.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q2.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q2.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 3: ALGÈBRE ET SUITES
+
+**Q3.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q3.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q3.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q3.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q3.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 4: PROBABILITÉS ET STATISTIQUES
+
+**Q4.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q4.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q4.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q4.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q4.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Mathématiques — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '5ccde18e-b810-4481-73a4-756e3502f3c9', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ANALYSE
+
+**Q1.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q1.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q1.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q1.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q1.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 2: ALGÈBRE ET SUITES
+
+**Q2.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q2.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q2.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q2.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q2.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 3: PROBABILITÉS ET STATISTIQUES
+
+**Q3.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q3.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q3.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q3.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q3.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 4: GÉOMÉTRIE ET COMPLEXES
+
+**Q4.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q4.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q4.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q4.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q4.** Résoudre un problème de géométrie dans l''espace.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Mathématiques — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f4c7975a-bd94-6633-9a29-9bd604f1f87e', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ALGÈBRE ET SUITES
+
+**Q1.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q1.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q1.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q1.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q1.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 2: PROBABILITÉS ET STATISTIQUES
+
+**Q2.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q2.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q2.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q2.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q2.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 3: GÉOMÉTRIE ET COMPLEXES
+
+**Q3.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q3.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q3.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q3.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q3.** Résoudre un problème de géométrie dans l''espace.
+
+## SECTION 4: ANALYSE
+
+**Q4.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q4.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q4.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q4.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q4.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Mathématiques — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '2a096f48-fa2e-95b6-7142-1d3adbd41b5b', 'fr-bepc-math-equations', 'Mathématiques', 'BEPC Mathématiques — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PROBABILITÉS ET STATISTIQUES
+
+**Q1.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q1.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q1.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q1.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q1.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 2: GÉOMÉTRIE ET COMPLEXES
+
+**Q2.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q2.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q2.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q2.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q2.** Résoudre un problème de géométrie dans l''espace.
+
+## SECTION 3: ANALYSE
+
+**Q3.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q3.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q3.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q3.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q3.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 4: ALGÈBRE ET SUITES
+
+**Q4.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q4.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q4.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q4.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q4.** Factoriser et résoudre : $x^3 - 4x = 0$.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '6f2ef91b-15cf-436c-a90c-10ef4cac7e9e', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''unité de la tension électrique est :
+
+A. le volt
+B. l''ampère
+C. l''ohm
+D. le watt
+
+---
+
+**Q2.** L''intensité du courant se mesure avec :
+
+A. un ampèremètre
+B. un voltmètre
+C. un ohmmètre
+D. un wattmètre
+
+---
+
+**Q3.** La formule de la loi d''Ohm est :
+
+A. U = R × I
+B. U = R / I
+C. I = U × R
+D. R = U × I
+
+---
+
+**Q4.** L''unité de la résistance électrique est :
+
+A. l''ohm
+B. le volt
+C. l''ampère
+D. le joule
+
+---
+
+**Q5.** La masse volumique se calcule par :
+
+A. ρ = m / V
+B. ρ = m × V
+C. ρ = V / m
+D. ρ = m + V
+
+---
+
+**Q6.** L''unité de la force est :
+
+A. le newton
+B. le kilogramme
+C. le pascal
+D. le joule
+
+---
+
+**Q7.** La pression se calcule par :
+
+A. P = F / S
+B. P = F × S
+C. P = S / F
+D. P = F + S
+
+---
+
+**Q8.** L''unité de la pression est :
+
+A. le pascal
+B. le newton
+C. le joule
+D. le watt
+
+---
+
+**Q9.** Le symbole chimique de l''eau est :
+
+A. H₂O
+B. CO₂
+C. O₂
+D. H₂
+
+---
+
+**Q10.** Le pH d''une solution acide est :
+
+A. inférieur à 7
+B. supérieur à 7
+C. égal à 7
+D. égal à 0
+
+---
+
+**Q11.** L''énergie cinétique se calcule par :
+
+A. Ec = ½ mv²
+B. Ec = mv
+C. Ec = mgh
+D. Ec = ½ mgh
+
+---
+
+**Q12.** L''unité de l''énergie est :
+
+A. le joule
+B. le watt
+C. le newton
+D. le pascal
+
+---
+
+**Q13.** La vitesse se calcule par :
+
+A. v = d / t
+B. v = d × t
+C. v = t / d
+D. v = d + t
+
+---
+
+**Q14.** Le symbole chimique du dioxyde de carbone est :
+
+A. CO₂
+B. O₂
+C. CO
+D. C₂O
+
+---
+
+**Q15.** Un corps pur est :
+
+A. constitué d''une seule espèce chimique
+B. un mélange
+C. un alliage
+D. une solution
+
+---
+
+**Q16.** La température se mesure avec :
+
+A. un thermomètre
+B. un baromètre
+C. un manomètre
+D. un hygromètre
+
+---
+
+**Q17.** L''unité de la température en SI est :
+
+A. le kelvin
+B. le degré Celsius
+C. le degré Fahrenheit
+D. le joule
+
+---
+
+**Q18.** Le courant électrique est un déplacement de :
+
+A. charges électriques
+B. molécules
+C. atomes
+D. neutrons
+
+---
+
+**Q19.** Dans un circuit en série, l''intensité est :
+
+A. la même partout
+B. différente partout
+C. nulle
+D. maximale au début
+
+---
+
+**Q20.** Le symbole chimique du sel de cuisine (chlorure de sodium) est :
+
+A. NaCl
+B. NaCl₂
+C. Na₂Cl
+D. ClNa₂
+
+---
+
+## CORRIGÉ
+
+1. le volt
+2. un ampèremètre
+3. U = R × I
+4. l''ohm
+5. ρ = m / V
+6. le newton
+7. P = F / S
+8. le pascal
+9. H₂O
+10. inférieur à 7
+11. Ec = ½ mv²
+12. le joule
+13. v = d / t
+14. CO₂
+15. constitué d''une seule espèce chimique
+16. un thermomètre
+17. le kelvin
+18. charges électriques
+19. la même partout
+20. NaCl
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '505fb455-24e5-6e43-2e3c-41c62fc175e2', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La puissance électrique se calcule par :
+
+A. P = U × I
+B. P = U / I
+C. P = I / U
+D. P = U + I
+
+---
+
+**Q2.** L''unité de la puissance est :
+
+A. le watt
+B. le joule
+C. le volt
+D. l''ampère
+
+---
+
+**Q3.** Le poids d''un corps se calcule par :
+
+A. P = m × g
+B. P = m / g
+C. P = g / m
+D. P = m + g
+
+---
+
+**Q4.** La valeur de g (accélération de pesanteur) sur Terre est environ :
+
+A. 9,8 N/kg
+B. 10 N/kg
+C. 98 N/kg
+D. 0,98 N/kg
+
+---
+
+**Q5.** Une solution basique a un pH :
+
+A. supérieur à 7
+B. inférieur à 7
+C. égal à 7
+D. égal à 14
+
+---
+
+**Q6.** Le symbole chimique de l''oxygène est :
+
+A. O
+B. O₂
+C. Ox
+D. Og
+
+---
+
+**Q7.** La distillation permet de :
+
+A. séparer les constituants d''un mélange homogène
+B. mélanger deux liquides
+C. solidifier un liquide
+D. filtrer un solide
+
+---
+
+**Q8.** L''aimant attire :
+
+A. le fer
+B. le cuivre
+C. l''aluminium
+D. le verre
+
+---
+
+**Q9.** Le courant alternatif change de sens :
+
+A. périodiquement
+B. jamais
+C. une seule fois
+D. aléatoirement
+
+---
+
+**Q10.** L''unité de la fréquence est :
+
+A. le hertz
+B. le watt
+C. le volt
+D. l''ohm
+
+---
+
+**Q11.** Le symbole chimique du carbone est :
+
+A. C
+B. Ca
+C. Co
+D. Cr
+
+---
+
+**Q12.** La fusion est le passage de :
+
+A. solide à liquide
+B. liquide à gaz
+C. gaz à liquide
+D. solide à gaz
+
+---
+
+**Q13.** La vaporisation est le passage de :
+
+A. liquide à gaz
+B. solide à liquide
+C. gaz à solide
+D. liquide à solide
+
+---
+
+**Q14.** Le symbole chimique de l''azote est :
+
+A. N
+B. Az
+C. Na
+D. Ni
+
+---
+
+**Q15.** Un isolant électrique est :
+
+A. le plastique
+B. le cuivre
+C. le fer
+D. l''aluminium
+
+---
+
+**Q16.** Un conducteur électrique est :
+
+A. le cuivre
+B. le verre
+C. le plastique
+D. le bois
+
+---
+
+**Q17.** L''énergie potentielle de pesanteur se calcule par :
+
+A. Ep = mgh
+B. Ep = ½ mv²
+C. Ep = mv
+D. Ep = mgh²
+
+---
+
+**Q18.** Le symbole chimique du fer est :
+
+A. Fe
+B. F
+C. Fr
+D. Ir
+
+---
+
+**Q19.** La condensation est le passage de :
+
+A. gaz à liquide
+B. liquide à gaz
+C. solide à liquide
+D. gaz à solide
+
+---
+
+**Q20.** L''unité de la charge électrique est :
+
+A. le coulomb
+B. le volt
+C. l''ampère
+D. l''ohm
+
+---
+
+## CORRIGÉ
+
+1. P = U × I
+2. le watt
+3. P = m × g
+4. 9,8 N/kg
+5. supérieur à 7
+6. O
+7. séparer les constituants d''un mélange homogène
+8. le fer
+9. périodiquement
+10. le hertz
+11. C
+12. solide à liquide
+13. liquide à gaz
+14. N
+15. le plastique
+16. le cuivre
+17. Ep = mgh
+18. Fe
+19. gaz à liquide
+20. le coulomb
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '9a6eb1a1-5499-aee9-f687-f5c723366d30', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le symbole chimique de l''hydrogène est :
+
+A. H
+B. Hy
+C. He
+D. Hg
+
+---
+
+**Q2.** La dilution consiste à :
+
+A. ajouter de l''eau à une solution
+B. concentrer une solution
+C. chauffer une solution
+D. refroidir une solution
+
+---
+
+**Q3.** Le symbole chimique du calcium est :
+
+A. Ca
+B. C
+C. Cl
+D. Cr
+
+---
+
+**Q4.** Un aimant possède :
+
+A. deux pôles
+B. un pôle
+C. trois pôles
+D. aucun pôle
+
+---
+
+**Q5.** La sublimation est le passage de :
+
+A. solide à gaz
+B. gaz à liquide
+C. liquide à solide
+D. gaz à solide
+
+---
+
+**Q6.** Le symbole chimique du sodium est :
+
+A. Na
+B. So
+C. S
+D. N
+
+---
+
+**Q7.** L''énergie mécanique est la somme de :
+
+A. l''énergie cinétique et potentielle
+B. l''énergie thermique et électrique
+C. l''énergie chimique et nucléaire
+D. l''énergie lumineuse et sonore
+
+---
+
+**Q8.** Le symbole chimique du chlore est :
+
+A. Cl
+B. Ch
+C. C
+D. Cr
+
+---
+
+**Q9.** Un circuit électrique fermé permet :
+
+A. le passage du courant
+B. l''arrêt du courant
+C. la coupure du courant
+D. aucun courant
+
+---
+
+**Q10.** Le symbole chimique du potassium est :
+
+A. K
+B. P
+C. Po
+D. Ka
+
+---
+
+**Q11.** La masse se mesure avec :
+
+A. une balance
+B. un thermomètre
+C. un baromètre
+D. un voltmètre
+
+---
+
+**Q12.** Le symbole chimique du zinc est :
+
+A. Zn
+B. Z
+C. Zi
+D. Zr
+
+---
+
+**Q13.** L''unité de la masse en SI est :
+
+A. le kilogramme
+B. le gramme
+C. la tonne
+D. le newton
+
+---
+
+**Q14.** Le symbole chimique du cuivre est :
+
+A. Cu
+B. Co
+C. C
+D. Cp
+
+---
+
+**Q15.** La solidification est le passage de :
+
+A. liquide à solide
+B. solide à liquide
+C. gaz à liquide
+D. liquide à gaz
+
+---
+
+**Q16.** Le symbole chimique de l''aluminium est :
+
+A. Al
+B. A
+C. Am
+D. Ar
+
+---
+
+**Q17.** L''ampèremètre se branche :
+
+A. en série
+B. en dérivation
+C. en parallèle
+D. n''importe comment
+
+---
+
+**Q18.** Le voltmètre se branche :
+
+A. en dérivation
+B. en série
+C. en parallèle
+D. n''importe comment
+
+---
+
+**Q19.** Le symbole chimique du plomb est :
+
+A. Pb
+B. Pl
+C. P
+D. Po
+
+---
+
+**Q20.** La lumière se propage :
+
+A. en ligne droite
+B. en courbe
+C. en zigzag
+D. en cercle
+
+---
+
+## CORRIGÉ
+
+1. H
+2. ajouter de l''eau à une solution
+3. Ca
+4. deux pôles
+5. solide à gaz
+6. Na
+7. l''énergie cinétique et potentielle
+8. Cl
+9. le passage du courant
+10. K
+11. une balance
+12. Zn
+13. le kilogramme
+14. Cu
+15. liquide à solide
+16. Al
+17. en série
+18. en dérivation
+19. Pb
+20. en ligne droite
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f5757116-6764-e00d-18f4-0b1cd57dd762', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: OPTIQUE ET THERMIQUE
+
+**Q1.** Un rayon lumineux arrive sur un miroir plan avec un angle d''incidence de 30°. Calculer l''angle de réflexion.
+
+**Q1.** Convertir 25°C en kelvins.
+
+**Q1.** Calculer la quantité de chaleur pour élever 2 kg d''eau de 20°C à 60°C (c = 4 180 J/kg·K).
+
+**Q1.** Expliquer la différence entre la fusion et la vaporisation.
+
+**Q1.** Un objet est placé devant une lentille convergente. Décrire l''image obtenue selon la position de l''objet.
+
+## SECTION 2: ÉLECTRICITÉ
+
+**Q2.** Un circuit comporte une pile de 4,5 V et une résistance de 15 Ω. Calculer l''intensité du courant.
+
+**Q2.** Une lampe de puissance 60 W fonctionne sous 220 V. Calculer l''intensité du courant qui la traverse.
+
+**Q2.** Deux résistances de 10 Ω et 20 Ω sont montées en série. Calculer la résistance équivalente.
+
+**Q2.** Calculer l''énergie consommée par un appareil de 2 000 W fonctionnant pendant 3 heures (en kWh).
+
+**Q2.** Un ampèremètre indique 0,5 A dans un circuit. Combien de coulombs traversent le circuit en 2 minutes ?
+
+## SECTION 3: MÉCANIQUE
+
+**Q3.** Calculer le poids d''un corps de masse 25 kg (g = 10 N/kg).
+
+**Q3.** Un objet de masse 2 kg se déplace à 3 m/s. Calculer son énergie cinétique.
+
+**Q3.** Calculer l''énergie potentielle d''un objet de 5 kg placé à 4 m de hauteur (g = 10 N/kg).
+
+**Q3.** Une force de 20 N est appliquée sur une surface de 4 m². Calculer la pression.
+
+**Q3.** Un mobile parcourt 120 m en 15 s. Calculer sa vitesse moyenne.
+
+## SECTION 4: CHIMIE
+
+**Q4.** Équilibrer l''équation : $H_2 + O_2 \to H_2O$.
+
+**Q4.** Calculer la masse molaire de l''eau (H₂O) : H = 1 g/mol, O = 16 g/mol.
+
+**Q4.** Une solution a un pH de 3. Est-elle acide, basique ou neutre ? Justifier.
+
+**Q4.** Quelle est la formule chimique du dioxyde de carbone ? Donner sa composition.
+
+**Q4.** Distinguer un corps pur d''un mélange en donnant un exemple de chacun.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'd3cfc2a9-f83b-7ffe-a0e1-b46a8b3a6b74', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ÉLECTRICITÉ
+
+**Q1.** Un circuit comporte une pile de 4,5 V et une résistance de 15 Ω. Calculer l''intensité du courant.
+
+**Q1.** Une lampe de puissance 60 W fonctionne sous 220 V. Calculer l''intensité du courant qui la traverse.
+
+**Q1.** Deux résistances de 10 Ω et 20 Ω sont montées en série. Calculer la résistance équivalente.
+
+**Q1.** Calculer l''énergie consommée par un appareil de 2 000 W fonctionnant pendant 3 heures (en kWh).
+
+**Q1.** Un ampèremètre indique 0,5 A dans un circuit. Combien de coulombs traversent le circuit en 2 minutes ?
+
+## SECTION 2: MÉCANIQUE
+
+**Q2.** Calculer le poids d''un corps de masse 25 kg (g = 10 N/kg).
+
+**Q2.** Un objet de masse 2 kg se déplace à 3 m/s. Calculer son énergie cinétique.
+
+**Q2.** Calculer l''énergie potentielle d''un objet de 5 kg placé à 4 m de hauteur (g = 10 N/kg).
+
+**Q2.** Une force de 20 N est appliquée sur une surface de 4 m². Calculer la pression.
+
+**Q2.** Un mobile parcourt 120 m en 15 s. Calculer sa vitesse moyenne.
+
+## SECTION 3: CHIMIE
+
+**Q3.** Équilibrer l''équation : $H_2 + O_2 \to H_2O$.
+
+**Q3.** Calculer la masse molaire de l''eau (H₂O) : H = 1 g/mol, O = 16 g/mol.
+
+**Q3.** Une solution a un pH de 3. Est-elle acide, basique ou neutre ? Justifier.
+
+**Q3.** Quelle est la formule chimique du dioxyde de carbone ? Donner sa composition.
+
+**Q3.** Distinguer un corps pur d''un mélange en donnant un exemple de chacun.
+
+## SECTION 4: OPTIQUE ET THERMIQUE
+
+**Q4.** Un rayon lumineux arrive sur un miroir plan avec un angle d''incidence de 30°. Calculer l''angle de réflexion.
+
+**Q4.** Convertir 25°C en kelvins.
+
+**Q4.** Calculer la quantité de chaleur pour élever 2 kg d''eau de 20°C à 60°C (c = 4 180 J/kg·K).
+
+**Q4.** Expliquer la différence entre la fusion et la vaporisation.
+
+**Q4.** Un objet est placé devant une lentille convergente. Décrire l''image obtenue selon la position de l''objet.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'e0c25c42-3c0b-6918-91ca-a94e8dfa880d', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: MÉCANIQUE
+
+**Q1.** Calculer le poids d''un corps de masse 25 kg (g = 10 N/kg).
+
+**Q1.** Un objet de masse 2 kg se déplace à 3 m/s. Calculer son énergie cinétique.
+
+**Q1.** Calculer l''énergie potentielle d''un objet de 5 kg placé à 4 m de hauteur (g = 10 N/kg).
+
+**Q1.** Une force de 20 N est appliquée sur une surface de 4 m². Calculer la pression.
+
+**Q1.** Un mobile parcourt 120 m en 15 s. Calculer sa vitesse moyenne.
+
+## SECTION 2: CHIMIE
+
+**Q2.** Équilibrer l''équation : $H_2 + O_2 \to H_2O$.
+
+**Q2.** Calculer la masse molaire de l''eau (H₂O) : H = 1 g/mol, O = 16 g/mol.
+
+**Q2.** Une solution a un pH de 3. Est-elle acide, basique ou neutre ? Justifier.
+
+**Q2.** Quelle est la formule chimique du dioxyde de carbone ? Donner sa composition.
+
+**Q2.** Distinguer un corps pur d''un mélange en donnant un exemple de chacun.
+
+## SECTION 3: OPTIQUE ET THERMIQUE
+
+**Q3.** Un rayon lumineux arrive sur un miroir plan avec un angle d''incidence de 30°. Calculer l''angle de réflexion.
+
+**Q3.** Convertir 25°C en kelvins.
+
+**Q3.** Calculer la quantité de chaleur pour élever 2 kg d''eau de 20°C à 60°C (c = 4 180 J/kg·K).
+
+**Q3.** Expliquer la différence entre la fusion et la vaporisation.
+
+**Q3.** Un objet est placé devant une lentille convergente. Décrire l''image obtenue selon la position de l''objet.
+
+## SECTION 4: ÉLECTRICITÉ
+
+**Q4.** Un circuit comporte une pile de 4,5 V et une résistance de 15 Ω. Calculer l''intensité du courant.
+
+**Q4.** Une lampe de puissance 60 W fonctionne sous 220 V. Calculer l''intensité du courant qui la traverse.
+
+**Q4.** Deux résistances de 10 Ω et 20 Ω sont montées en série. Calculer la résistance équivalente.
+
+**Q4.** Calculer l''énergie consommée par un appareil de 2 000 W fonctionnant pendant 3 heures (en kWh).
+
+**Q4.** Un ampèremètre indique 0,5 A dans un circuit. Combien de coulombs traversent le circuit en 2 minutes ?
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Physique-Chimie — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'e1c59ae8-0d34-8e9a-dd2a-7e35fdd1b7cf', 'fr-bepc-pc-electricite-chimie', 'Physique-Chimie', 'BEPC Physique-Chimie — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC PHYSIQUE-CHIMIE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Physique-Chimie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CHIMIE
+
+**Q1.** Équilibrer l''équation : $H_2 + O_2 \to H_2O$.
+
+**Q1.** Calculer la masse molaire de l''eau (H₂O) : H = 1 g/mol, O = 16 g/mol.
+
+**Q1.** Une solution a un pH de 3. Est-elle acide, basique ou neutre ? Justifier.
+
+**Q1.** Quelle est la formule chimique du dioxyde de carbone ? Donner sa composition.
+
+**Q1.** Distinguer un corps pur d''un mélange en donnant un exemple de chacun.
+
+## SECTION 2: OPTIQUE ET THERMIQUE
+
+**Q2.** Un rayon lumineux arrive sur un miroir plan avec un angle d''incidence de 30°. Calculer l''angle de réflexion.
+
+**Q2.** Convertir 25°C en kelvins.
+
+**Q2.** Calculer la quantité de chaleur pour élever 2 kg d''eau de 20°C à 60°C (c = 4 180 J/kg·K).
+
+**Q2.** Expliquer la différence entre la fusion et la vaporisation.
+
+**Q2.** Un objet est placé devant une lentille convergente. Décrire l''image obtenue selon la position de l''objet.
+
+## SECTION 3: ÉLECTRICITÉ
+
+**Q3.** Un circuit comporte une pile de 4,5 V et une résistance de 15 Ω. Calculer l''intensité du courant.
+
+**Q3.** Une lampe de puissance 60 W fonctionne sous 220 V. Calculer l''intensité du courant qui la traverse.
+
+**Q3.** Deux résistances de 10 Ω et 20 Ω sont montées en série. Calculer la résistance équivalente.
+
+**Q3.** Calculer l''énergie consommée par un appareil de 2 000 W fonctionnant pendant 3 heures (en kWh).
+
+**Q3.** Un ampèremètre indique 0,5 A dans un circuit. Combien de coulombs traversent le circuit en 2 minutes ?
+
+## SECTION 4: MÉCANIQUE
+
+**Q4.** Calculer le poids d''un corps de masse 25 kg (g = 10 N/kg).
+
+**Q4.** Un objet de masse 2 kg se déplace à 3 m/s. Calculer son énergie cinétique.
+
+**Q4.** Calculer l''énergie potentielle d''un objet de 5 kg placé à 4 m de hauteur (g = 10 N/kg).
+
+**Q4.** Une force de 20 N est appliquée sur une surface de 4 m². Calculer la pression.
+
+**Q4.** Un mobile parcourt 120 m en 15 s. Calculer sa vitesse moyenne.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Physique-Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '9f839507-bd15-0a70-c6e2-b58a8eb66f03', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''unité de base du vivant est :
+
+A. la cellule
+B. l''atome
+C. la molécule
+D. l''organe
+
+---
+
+**Q2.** La photosynthèse se déroule dans :
+
+A. les chloroplastes
+B. les mitochondries
+C. le noyau
+D. la membrane
+
+---
+
+**Q3.** Le dioxygène est produit par :
+
+A. la photosynthèse
+B. la respiration
+C. la digestion
+D. la fermentation
+
+---
+
+**Q4.** L''organe de la respiration chez l''homme est :
+
+A. le poumon
+B. le cœur
+C. le foie
+D. le rein
+
+---
+
+**Q5.** Le sang est pompé par :
+
+A. le cœur
+B. le poumon
+C. le cerveau
+D. le foie
+
+---
+
+**Q6.** L''unité de filtration du rein est :
+
+A. le néphron
+B. le neurone
+C. l''alvéole
+D. le glomérule
+
+---
+
+**Q7.** La cellule nerveuse s''appelle :
+
+A. le neurone
+B. le néphron
+C. le globule
+D. le gamète
+
+---
+
+**Q8.** L''ADN se trouve dans :
+
+A. le noyau
+B. le cytoplasme
+C. la membrane
+D. la paroi
+
+---
+
+**Q9.** La reproduction sexuée fait intervenir :
+
+A. deux gamètes
+B. un seul gamète
+C. aucun gamète
+D. des spores
+
+---
+
+**Q10.** Le gamète mâle chez l''homme est :
+
+A. le spermatozoïde
+B. l''ovule
+C. le globule rouge
+D. le neurone
+
+---
+
+**Q11.** Le gamète femelle chez la femme est :
+
+A. l''ovule
+B. le spermatozoïde
+C. le globule blanc
+D. le neurone
+
+---
+
+**Q12.** L''écosystème est constitué de :
+
+A. le biotope et la biocénose
+B. uniquement des plantes
+C. uniquement des animaux
+D. uniquement de l''eau
+
+---
+
+**Q13.** Le prédateur est un être qui :
+
+A. chasse et se nourrit d''autres êtres
+B. est chassé
+C. se nourrit de plantes
+D. décompose la matière
+
+---
+
+**Q14.** La chaîne alimentaire commence par :
+
+A. un producteur
+B. un consommateur
+C. un décomposeur
+D. un prédateur
+
+---
+
+**Q15.** Le décomposeur transforme la matière organique en :
+
+A. matière minérale
+B. matière organique
+C. énergie
+D. gaz carbonique
+
+---
+
+**Q16.** La fécondation est la fusion de :
+
+A. deux gamètes
+B. deux cellules somatiques
+C. deux neurones
+D. deux globules
+
+---
+
+**Q17.** Le groupe sanguin universel donneur est :
+
+A. O
+B. A
+C. B
+D. AB
+
+---
+
+**Q18.** Le groupe sanguin universel receveur est :
+
+A. AB
+B. O
+C. A
+D. B
+
+---
+
+**Q19.** La vaccination consiste à :
+
+A. injecter un antigène atténué
+B. injecter des anticorps
+C. prendre des antibiotiques
+D. faire une transfusion
+
+---
+
+**Q20.** L''antibiotique agit contre :
+
+A. les bactéries
+B. les virus
+C. les parasites
+D. les champignons
+
+---
+
+## CORRIGÉ
+
+1. la cellule
+2. les chloroplastes
+3. la photosynthèse
+4. le poumon
+5. le cœur
+6. le néphron
+7. le neurone
+8. le noyau
+9. deux gamètes
+10. le spermatozoïde
+11. l''ovule
+12. le biotope et la biocénose
+13. chasse et se nourrit d''autres êtres
+14. un producteur
+15. matière minérale
+16. deux gamètes
+17. O
+18. AB
+19. injecter un antigène atténué
+20. les bactéries
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f758d21f-c9bc-30d6-9622-bea7e2a2eb25', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le virus du SIDA s''appelle :
+
+A. le VIH
+B. le VHB
+C. le VHC
+D. le VPH
+
+---
+
+**Q2.** La digestion commence dans :
+
+A. la bouche
+B. l''estomac
+C. l''intestin
+D. l''œsophage
+
+---
+
+**Q3.** L''enzyme digestive de la salive est :
+
+A. l''amylase
+B. la pepsine
+C. la lipase
+D. la trypsine
+
+---
+
+**Q4.** La bile est produite par :
+
+A. le foie
+B. l''estomac
+C. le pancréas
+D. la vésicule
+
+---
+
+**Q5.** L''insuline est produite par :
+
+A. le pancréas
+B. le foie
+C. le rein
+D. la thyroïde
+
+---
+
+**Q6.** Le diabète est dû à un problème de :
+
+A. l''insuline
+B. l''adrénaline
+C. la thyroxine
+D. l''œstrogène
+
+---
+
+**Q7.** La cellule végétale possède en plus de la cellule animale :
+
+A. une paroi et des chloroplastes
+B. un noyau
+C. une membrane
+D. des mitochondries
+
+---
+
+**Q8.** La mitose permet :
+
+A. la division cellulaire
+B. la formation des gamètes
+C. la respiration
+D. la digestion
+
+---
+
+**Q9.** La méiose permet :
+
+A. la formation des gamètes
+B. la division cellulaire
+C. la croissance
+D. la régénération
+
+---
+
+**Q10.** Le chromosome est constitué de :
+
+A. ADN et protéines
+B. ARN et lipides
+C. glucides et protéines
+D. eau et sels minéraux
+
+---
+
+**Q11.** Le nombre de chromosomes chez l''homme est :
+
+A. 46
+B. 44
+C. 48
+D. 23
+
+---
+
+**Q12.** Le caryotype humain normal possède :
+
+A. 23 paires de chromosomes
+B. 46 paires
+C. 22 paires
+D. 24 paires
+
+---
+
+**Q13.** La transpiration se fait par :
+
+A. la peau
+B. le rein
+C. le poumon
+D. le foie
+
+---
+
+**Q14.** L''homéostasie est :
+
+A. le maintien de l''équilibre interne
+B. la croissance
+C. la reproduction
+D. la digestion
+
+---
+
+**Q15.** Le réflexe est :
+
+A. une réponse rapide et involontaire
+B. une réponse lente
+C. une action volontaire
+D. une pensée
+
+---
+
+**Q16.** L''arc réflexe passe par :
+
+A. la moelle épinière
+B. le cerveau
+C. le cervelet
+D. le bulbe
+
+---
+
+**Q17.** Le cervelet contrôle :
+
+A. l''équilibre
+B. la mémoire
+C. la respiration
+D. la digestion
+
+---
+
+**Q18.** Le bulbe rachidien contrôle :
+
+A. la respiration
+B. la mémoire
+C. l''équilibre
+D. la vision
+
+---
+
+**Q19.** La géologie étudie :
+
+A. la Terre
+B. les étoiles
+C. les plantes
+D. les animaux
+
+---
+
+**Q20.** Les roches magmatiques proviennent :
+
+A. du refroidissement du magma
+B. de la sédimentation
+C. du métamorphisme
+D. de l''érosion
+
+---
+
+## CORRIGÉ
+
+1. le VIH
+2. la bouche
+3. l''amylase
+4. le foie
+5. le pancréas
+6. l''insuline
+7. une paroi et des chloroplastes
+8. la division cellulaire
+9. la formation des gamètes
+10. ADN et protéines
+11. 46
+12. 23 paires de chromosomes
+13. la peau
+14. le maintien de l''équilibre interne
+15. une réponse rapide et involontaire
+16. la moelle épinière
+17. l''équilibre
+18. la respiration
+19. la Terre
+20. du refroidissement du magma
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '5b16a47d-1bb2-4fd7-e36f-0cebf27f03cb', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le basalte est une roche :
+
+A. volcanique
+B. sédimentaire
+C. métamorphique
+D. organique
+
+---
+
+**Q2.** Le granite est une roche :
+
+A. plutonique
+B. volcanique
+C. sédimentaire
+D. métamorphique
+
+---
+
+**Q3.** Le calcaire est une roche :
+
+A. sédimentaire
+B. volcanique
+C. plutonique
+D. métamorphique
+
+---
+
+**Q4.** Le fossile est :
+
+A. un reste d''être vivant conservé
+B. une roche
+C. un minéral
+D. un volcan
+
+---
+
+**Q5.** La tectonique des plaques explique :
+
+A. les séismes et volcans
+B. la photosynthèse
+C. la digestion
+D. la respiration
+
+---
+
+**Q6.** Le séisme est dû à :
+
+A. la rupture des roches en profondeur
+B. la pluie
+C. le vent
+D. la chaleur
+
+---
+
+**Q7.** L''échelle de Richter mesure :
+
+A. la magnitude d''un séisme
+B. la température
+C. la pression
+D. l''altitude
+
+---
+
+**Q8.** Le volcanisme est lié à :
+
+A. la remontée du magma
+B. la pluie
+C. le vent
+D. la neige
+
+---
+
+**Q9.** L''érosion est :
+
+A. l''usure des roches
+B. la formation des roches
+C. la fusion des roches
+D. la cristallisation
+
+---
+
+**Q10.** Le sol est formé par :
+
+A. l''altération des roches
+B. la photosynthèse
+C. la respiration
+D. la transpiration
+
+---
+
+**Q11.** L''humus est :
+
+A. de la matière organique décomposée
+B. une roche
+C. un minéral
+D. de l''eau
+
+---
+
+**Q12.** La couche d''ozone protège contre :
+
+A. les UV
+B. les rayons X
+C. les infrarouges
+D. la lumière visible
+
+---
+
+**Q13.** L''effet de serre est dû à :
+
+A. l''accumulation de CO₂
+B. la couche d''ozone
+C. les UV
+D. la pluie
+
+---
+
+**Q14.** Le réchauffement climatique est causé par :
+
+A. l''augmentation des gaz à effet de serre
+B. la diminution de l''oxygène
+C. l''augmentation de l''azote
+D. la baisse du CO₂
+
+---
+
+**Q15.** La biodiversité est :
+
+A. la variété des êtres vivants
+B. la quantité d''eau
+C. la température
+D. la pression
+
+---
+
+**Q16.** L''espèce menacée est :
+
+A. une espèce en danger de disparition
+B. une espèce abondante
+C. une espèce nouvelle
+D. une espèce domestique
+
+---
+
+**Q17.** La contraception permet :
+
+A. d''éviter une grossesse
+B. de favoriser la grossesse
+C. de guérir une maladie
+D. de stimuler la croissance
+
+---
+
+**Q18.** Le préservatif protège contre :
+
+A. les IST et le VIH
+B. la grossesse uniquement
+C. le diabète
+D. le paludisme
+
+---
+
+**Q19.** Le paludisme est transmis par :
+
+A. le moustique
+B. la mouche
+C. le rat
+D. le pou
+
+---
+
+**Q20.** Le plasmodium est :
+
+A. le parasite du paludisme
+B. un virus
+C. une bactérie
+D. un champignon
+
+---
+
+## CORRIGÉ
+
+1. volcanique
+2. plutonique
+3. sédimentaire
+4. un reste d''être vivant conservé
+5. les séismes et volcans
+6. la rupture des roches en profondeur
+7. la magnitude d''un séisme
+8. la remontée du magma
+9. l''usure des roches
+10. l''altération des roches
+11. de la matière organique décomposée
+12. les UV
+13. l''accumulation de CO₂
+14. l''augmentation des gaz à effet de serre
+15. la variété des êtres vivants
+16. une espèce en danger de disparition
+17. d''éviter une grossesse
+18. les IST et le VIH
+19. le moustique
+20. le parasite du paludisme
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ceff7090-fd57-e982-c027-eb2d3a85ae0f', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉOLOGIE ET ÉVOLUTION
+
+**Q1.** Expliquer la théorie de la tectonique des plaques.
+
+**Q1.** Décrire les différents types de roches et leur formation.
+
+**Q1.** Expliquer les méthodes de datation relative et absolue.
+
+**Q1.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q1.** Expliquer les preuves de l''évolution des espèces.
+
+## SECTION 2: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q2.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q2.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q2.** Résoudre un exercice de génétique mendélienne.
+
+**Q2.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q2.** Analyser un caryotype et identifier les anomalies.
+
+## SECTION 3: IMMUNOLOGIE
+
+**Q3.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q3.** Expliquer le rôle des lymphocytes B et T.
+
+**Q3.** Décrire le fonctionnement de la vaccination.
+
+**Q3.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q3.** Expliquer les réactions de rejet de greffe.
+
+## SECTION 4: PHYSIOLOGIE ET RÉGULATION
+
+**Q4.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q4.** Expliquer la régulation de la glycémie.
+
+**Q4.** Décrire le fonctionnement du système endocrinien.
+
+**Q4.** Expliquer la régulation de la température corporelle.
+
+**Q4.** Décrire le fonctionnement de la reproduction humaine.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'e00b933a-4c57-754a-812f-47edc93abfb9', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q1.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q1.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q1.** Résoudre un exercice de génétique mendélienne.
+
+**Q1.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q1.** Analyser un caryotype et identifier les anomalies.
+
+## SECTION 2: IMMUNOLOGIE
+
+**Q2.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q2.** Expliquer le rôle des lymphocytes B et T.
+
+**Q2.** Décrire le fonctionnement de la vaccination.
+
+**Q2.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q2.** Expliquer les réactions de rejet de greffe.
+
+## SECTION 3: PHYSIOLOGIE ET RÉGULATION
+
+**Q3.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q3.** Expliquer la régulation de la glycémie.
+
+**Q3.** Décrire le fonctionnement du système endocrinien.
+
+**Q3.** Expliquer la régulation de la température corporelle.
+
+**Q3.** Décrire le fonctionnement de la reproduction humaine.
+
+## SECTION 4: GÉOLOGIE ET ÉVOLUTION
+
+**Q4.** Expliquer la théorie de la tectonique des plaques.
+
+**Q4.** Décrire les différents types de roches et leur formation.
+
+**Q4.** Expliquer les méthodes de datation relative et absolue.
+
+**Q4.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q4.** Expliquer les preuves de l''évolution des espèces.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'b5274931-0a1d-aa3e-2315-3b569ad301a0', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: IMMUNOLOGIE
+
+**Q1.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q1.** Expliquer le rôle des lymphocytes B et T.
+
+**Q1.** Décrire le fonctionnement de la vaccination.
+
+**Q1.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q1.** Expliquer les réactions de rejet de greffe.
+
+## SECTION 2: PHYSIOLOGIE ET RÉGULATION
+
+**Q2.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q2.** Expliquer la régulation de la glycémie.
+
+**Q2.** Décrire le fonctionnement du système endocrinien.
+
+**Q2.** Expliquer la régulation de la température corporelle.
+
+**Q2.** Décrire le fonctionnement de la reproduction humaine.
+
+## SECTION 3: GÉOLOGIE ET ÉVOLUTION
+
+**Q3.** Expliquer la théorie de la tectonique des plaques.
+
+**Q3.** Décrire les différents types de roches et leur formation.
+
+**Q3.** Expliquer les méthodes de datation relative et absolue.
+
+**Q3.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q3.** Expliquer les preuves de l''évolution des espèces.
+
+## SECTION 4: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q4.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q4.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q4.** Résoudre un exercice de génétique mendélienne.
+
+**Q4.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q4.** Analyser un caryotype et identifier les anomalies.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '12a69021-7c1f-7d95-1d23-b6986dda0878', 'fr-bepc-svt-vivant-terre', 'Sciences de la Vie et de la Terre', 'BEPC Sciences de la Vie et de la Terre — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PHYSIOLOGIE ET RÉGULATION
+
+**Q1.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q1.** Expliquer la régulation de la glycémie.
+
+**Q1.** Décrire le fonctionnement du système endocrinien.
+
+**Q1.** Expliquer la régulation de la température corporelle.
+
+**Q1.** Décrire le fonctionnement de la reproduction humaine.
+
+## SECTION 2: GÉOLOGIE ET ÉVOLUTION
+
+**Q2.** Expliquer la théorie de la tectonique des plaques.
+
+**Q2.** Décrire les différents types de roches et leur formation.
+
+**Q2.** Expliquer les méthodes de datation relative et absolue.
+
+**Q2.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q2.** Expliquer les preuves de l''évolution des espèces.
+
+## SECTION 3: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q3.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q3.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q3.** Résoudre un exercice de génétique mendélienne.
+
+**Q3.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q3.** Analyser un caryotype et identifier les anomalies.
+
+## SECTION 4: IMMUNOLOGIE
+
+**Q4.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q4.** Expliquer le rôle des lymphocytes B et T.
+
+**Q4.** Décrire le fonctionnement de la vaccination.
+
+**Q4.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q4.** Expliquer les réactions de rejet de greffe.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '677b5b9a-e86a-4481-8e43-af850e54798f', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le Cameroun est situé en :
+
+A. Afrique centrale
+B. Afrique de l''Ouest
+C. Afrique de l''Est
+D. Afrique du Nord
+
+---
+
+**Q2.** La capitale politique du Cameroun est :
+
+A. Yaoundé
+B. Douala
+C. Bafoussam
+D. Garoua
+
+---
+
+**Q3.** La capitale économique du Cameroun est :
+
+A. Douala
+B. Yaoundé
+C. Kribi
+D. Buea
+
+---
+
+**Q4.** Le Cameroun a obtenu son indépendance en :
+
+A. 1960
+B. 1958
+C. 1962
+D. 1972
+
+---
+
+**Q5.** Le premier président du Cameroun fut :
+
+A. Ahmadou Ahidjo
+B. Paul Biya
+C. Ruben Um Nyobé
+D. Ernest Ouandié
+
+---
+
+**Q6.** Le Cameroun compte combien de régions ?
+
+A. 10
+B. 8
+C. 12
+D. 6
+
+---
+
+**Q7.** Le fleuve le plus long du Cameroun est :
+
+A. la Sanaga
+B. le Wouri
+C. le Nyong
+D. la Bénoué
+
+---
+
+**Q8.** Le mont Cameroun est :
+
+A. un volcan
+B. un fleuve
+C. une ville
+D. un lac
+
+---
+
+**Q9.** L''altitude du mont Cameroun est environ :
+
+A. 4095 m
+B. 2000 m
+C. 5000 m
+D. 3000 m
+
+---
+
+**Q10.** Le climat équatorial se caractérise par :
+
+A. des pluies abondantes toute l''année
+B. une saison sèche longue
+C. des températures froides
+D. peu de pluie
+
+---
+
+**Q11.** Le Cameroun est surnommé :
+
+A. l''Afrique en miniature
+B. le pays des mille collines
+C. la perle de l''Afrique
+D. le grenier de l''Afrique
+
+---
+
+**Q12.** La première guerre mondiale a eu lieu en :
+
+A. 1914-1918
+B. 1939-1945
+C. 1870-1871
+D. 1918-1920
+
+---
+
+**Q13.** La deuxième guerre mondiale a eu lieu en :
+
+A. 1939-1945
+B. 1914-1918
+C. 1945-1950
+D. 1929-1933
+
+---
+
+**Q14.** La Révolution française a eu lieu en :
+
+A. 1789
+B. 1776
+C. 1804
+D. 1815
+
+---
+
+**Q15.** Napoléon Bonaparte a été couronné empereur en :
+
+A. 1804
+B. 1789
+C. 1815
+D. 1799
+
+---
+
+**Q16.** La traite négrière transatlantique concernait :
+
+A. l''Afrique et l''Amérique
+B. l''Europe et l''Asie
+C. l''Afrique et l''Asie
+D. l''Europe et l''Amérique
+
+---
+
+**Q17.** La colonisation du Cameroun par l''Allemagne a commencé en :
+
+A. 1884
+B. 1916
+C. 1900
+D. 1870
+
+---
+
+**Q18.** Après la Première Guerre mondiale, le Cameroun fut partagé entre :
+
+A. la France et l''Angleterre
+B. l''Allemagne et la France
+C. la France et l''Espagne
+D. l''Angleterre et l''Italie
+
+---
+
+**Q19.** Le Cameroun oriental était sous mandat :
+
+A. français
+B. anglais
+C. allemand
+D. belge
+
+---
+
+**Q20.** Le Cameroun occidental était sous mandat :
+
+A. anglais
+B. français
+C. allemand
+D. belge
+
+---
+
+## CORRIGÉ
+
+1. Afrique centrale
+2. Yaoundé
+3. Douala
+4. 1960
+5. Ahmadou Ahidjo
+6. 10
+7. la Sanaga
+8. un volcan
+9. 4095 m
+10. des pluies abondantes toute l''année
+11. l''Afrique en miniature
+12. 1914-1918
+13. 1939-1945
+14. 1789
+15. 1804
+16. l''Afrique et l''Amérique
+17. 1884
+18. la France et l''Angleterre
+19. français
+20. anglais
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '51ac473d-a6d8-176e-31e1-b59622712646', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le référendum de 1961 a permis :
+
+A. la réunification du Cameroun
+B. l''indépendance
+C. la colonisation
+D. la partition
+
+---
+
+**Q2.** La République fédérale du Cameroun a été créée en :
+
+A. 1961
+B. 1960
+C. 1972
+D. 1984
+
+---
+
+**Q3.** Le Cameroun est devenu République unie en :
+
+A. 1972
+B. 1961
+C. 1984
+D. 1960
+
+---
+
+**Q4.** Le Cameroun est devenu République du Cameroun en :
+
+A. 1984
+B. 1972
+C. 1961
+D. 1990
+
+---
+
+**Q5.** Le multipartisme a été rétabli au Cameroun en :
+
+A. 1990
+B. 1980
+C. 1972
+D. 2000
+
+---
+
+**Q6.** L''ONU a été créée en :
+
+A. 1945
+B. 1919
+C. 1939
+D. 1950
+
+---
+
+**Q7.** La SDN a été créée en :
+
+A. 1919
+B. 1945
+C. 1939
+D. 1900
+
+---
+
+**Q8.** L''OUA a été créée en :
+
+A. 1963
+B. 1945
+C. 1975
+D. 1955
+
+---
+
+**Q9.** L''Union africaine a remplacé l''OUA en :
+
+A. 2002
+B. 1990
+C. 1980
+D. 2010
+
+---
+
+**Q10.** La CEMAC est une organisation :
+
+A. économique et monétaire
+B. politique
+C. militaire
+D. culturelle
+
+---
+
+**Q11.** Le siège de la CEMAC est à :
+
+A. Yaoundé
+B. Douala
+C. Libreville
+D. N''Djamena
+
+---
+
+**Q12.** La monnaie utilisée au Cameroun est :
+
+A. le franc CFA
+B. le dollar
+C. l''euro
+D. le naira
+
+---
+
+**Q13.** Le Cameroun est membre de :
+
+A. l''ONU, l''UA et la CEMAC
+B. l''OTAN
+C. l''UE
+D. l''ALENA
+
+---
+
+**Q14.** Le relief du Cameroun comprend :
+
+A. des montagnes, plateaux et plaines
+B. uniquement des plaines
+C. uniquement des montagnes
+D. uniquement des déserts
+
+---
+
+**Q15.** Le lac Tchad se situe au :
+
+A. nord du Cameroun
+B. sud du Cameroun
+C. est du Cameroun
+D. ouest du Cameroun
+
+---
+
+**Q16.** La principale culture d''exportation du Cameroun est :
+
+A. le cacao
+B. le blé
+C. le riz
+D. la pomme de terre
+
+---
+
+**Q17.** Le Cameroun est un grand producteur de :
+
+A. café et cacao
+B. pétrole et diamant
+C. or et argent
+D. blé et maïs
+
+---
+
+**Q18.** Le port le plus important du Cameroun est :
+
+A. Douala
+B. Kribi
+C. Limbé
+D. Garoua
+
+---
+
+**Q19.** Le barrage de Lagdo se trouve sur :
+
+A. la Bénoué
+B. la Sanaga
+C. le Wouri
+D. le Nyong
+
+---
+
+**Q20.** Le barrage de Song Loulou se trouve sur :
+
+A. la Sanaga
+B. la Bénoué
+C. le Wouri
+D. le Nyong
+
+---
+
+## CORRIGÉ
+
+1. la réunification du Cameroun
+2. 1961
+3. 1972
+4. 1984
+5. 1990
+6. 1945
+7. 1919
+8. 1963
+9. 2002
+10. économique et monétaire
+11. Yaoundé
+12. le franc CFA
+13. l''ONU, l''UA et la CEMAC
+14. des montagnes, plateaux et plaines
+15. nord du Cameroun
+16. le cacao
+17. café et cacao
+18. Douala
+19. la Bénoué
+20. la Sanaga
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '1ce65546-a147-3fb0-d08c-d765a71604de', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La population du Cameroun est d''environ :
+
+A. 27 millions
+B. 10 millions
+C. 50 millions
+D. 5 millions
+
+---
+
+**Q2.** La densité de population est la plus forte :
+
+A. dans les grandes villes
+B. dans le désert
+C. en montagne
+D. en forêt dense
+
+---
+
+**Q3.** L''exode rural est :
+
+A. le départ des campagnes vers les villes
+B. le départ des villes vers les campagnes
+C. l''immigration
+D. l''émigration
+
+---
+
+**Q4.** Le taux de natalité est :
+
+A. le nombre de naissances pour 1000 habitants
+B. le nombre de décès
+C. la croissance
+D. la densité
+
+---
+
+**Q5.** Le taux de mortalité est :
+
+A. le nombre de décès pour 1000 habitants
+B. le nombre de naissances
+C. la densité
+D. la croissance
+
+---
+
+**Q6.** L''accroissement naturel est :
+
+A. natalité - mortalité
+B. natalité + mortalité
+C. immigration - émigration
+D. densité × surface
+
+---
+
+**Q7.** La savane se trouve principalement :
+
+A. au nord du Cameroun
+B. au sud du Cameroun
+C. à l''ouest
+D. sur le littoral
+
+---
+
+**Q8.** La forêt dense se trouve principalement :
+
+A. au sud du Cameroun
+B. au nord
+C. à l''extrême-nord
+D. sur les hauts plateaux
+
+---
+
+**Q9.** Le climat soudano-sahélien se trouve :
+
+A. au nord du Cameroun
+B. au sud
+C. à l''ouest
+D. sur le littoral
+
+---
+
+**Q10.** Le climat équatorial se trouve :
+
+A. au sud du Cameroun
+B. au nord
+C. à l''extrême-nord
+D. sur les hauts plateaux
+
+---
+
+**Q11.** Le climat tropical humide se trouve :
+
+A. dans le centre du Cameroun
+B. au nord
+C. au sud
+D. sur le littoral
+
+---
+
+**Q12.** L''agriculture vivrière produit :
+
+A. du manioc, maïs et banane
+B. du cacao et café
+C. du coton et arachide
+D. du pétrole
+
+---
+
+**Q13.** L''agriculture de rente produit :
+
+A. du cacao, café et coton
+B. du manioc et maïs
+C. de la banane plantain
+D. des légumes
+
+---
+
+**Q14.** Le pétrole est exploité :
+
+A. dans le bassin du Rio del Rey
+B. au mont Cameroun
+C. à Yaoundé
+D. à Bafoussam
+
+---
+
+**Q15.** Le tourisme au Cameroun est favorisé par :
+
+A. la diversité des paysages
+B. le désert
+C. la neige
+D. les glaciers
+
+---
+
+**Q16.** Le parc national de Waza se trouve :
+
+A. à l''extrême-nord
+B. au sud
+C. à l''ouest
+D. sur le littoral
+
+---
+
+**Q17.** Le parc national de Korup se trouve :
+
+A. au sud-ouest
+B. au nord
+C. à l''est
+D. au centre
+
+---
+
+**Q18.** La déforestation est :
+
+A. la destruction de la forêt
+B. la plantation d''arbres
+C. la protection de la forêt
+D. la culture
+
+---
+
+**Q19.** Le développement durable vise :
+
+A. à satisfaire les besoins sans compromettre l''avenir
+B. la croissance rapide
+C. l''exploitation maximale
+D. la consommation
+
+---
+
+**Q20.** La mondialisation est :
+
+A. l''interdépendance croissante des économies
+B. l''isolement des pays
+C. la guerre
+D. la colonisation
+
+---
+
+## CORRIGÉ
+
+1. 27 millions
+2. dans les grandes villes
+3. le départ des campagnes vers les villes
+4. le nombre de naissances pour 1000 habitants
+5. le nombre de décès pour 1000 habitants
+6. natalité - mortalité
+7. au nord du Cameroun
+8. au sud du Cameroun
+9. au nord du Cameroun
+10. au sud du Cameroun
+11. dans le centre du Cameroun
+12. du manioc, maïs et banane
+13. du cacao, café et coton
+14. dans le bassin du Rio del Rey
+15. la diversité des paysages
+16. à l''extrême-nord
+17. au sud-ouest
+18. la destruction de la forêt
+19. à satisfaire les besoins sans compromettre l''avenir
+20. l''interdépendance croissante des économies
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '3ca41b9f-abe0-e20c-e602-8830134898e8', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉOGRAPHIE HUMAINE ET ÉCONOMIQUE
+
+**Q1.** Expliquer la répartition de la population au Cameroun.
+
+**Q1.** Décrire les principales activités économiques du Cameroun.
+
+**Q1.** Expliquer les causes et conséquences de l''exode rural.
+
+**Q1.** Décrire les principaux produits d''exportation du Cameroun.
+
+**Q1.** Expliquer les problèmes de développement au Cameroun et les solutions.
+
+## SECTION 2: HISTOIRE DU CAMEROUN
+
+**Q2.** Raconter les étapes de la colonisation du Cameroun par l''Allemagne.
+
+**Q2.** Expliquer le partage du Cameroun entre la France et l''Angleterre après la Première Guerre mondiale.
+
+**Q2.** Décrire le processus d''indépendance du Cameroun en 1960.
+
+**Q2.** Expliquer la réunification du Cameroun en 1961.
+
+**Q2.** Décrire l''évolution politique du Cameroun de 1960 à nos jours.
+
+## SECTION 3: HISTOIRE GÉNÉRALE
+
+**Q3.** Expliquer les causes et conséquences de la Première Guerre mondiale.
+
+**Q3.** Expliquer les causes et conséquences de la Deuxième Guerre mondiale.
+
+**Q3.** Décrire la traite négrière transatlantique et ses conséquences.
+
+**Q3.** Expliquer le processus de décolonisation de l''Afrique.
+
+**Q3.** Décrire la création et le rôle de l''ONU.
+
+## SECTION 4: GÉOGRAPHIE PHYSIQUE
+
+**Q4.** Décrire le relief du Cameroun.
+
+**Q4.** Expliquer les différents climats du Cameroun.
+
+**Q4.** Décrire les principaux fleuves du Cameroun.
+
+**Q4.** Expliquer la répartition de la végétation au Cameroun.
+
+**Q4.** Décrire les ressources naturelles du Cameroun.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '14d6c4b6-57d3-25a7-a62a-882cbc343010', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: HISTOIRE DU CAMEROUN
+
+**Q1.** Raconter les étapes de la colonisation du Cameroun par l''Allemagne.
+
+**Q1.** Expliquer le partage du Cameroun entre la France et l''Angleterre après la Première Guerre mondiale.
+
+**Q1.** Décrire le processus d''indépendance du Cameroun en 1960.
+
+**Q1.** Expliquer la réunification du Cameroun en 1961.
+
+**Q1.** Décrire l''évolution politique du Cameroun de 1960 à nos jours.
+
+## SECTION 2: HISTOIRE GÉNÉRALE
+
+**Q2.** Expliquer les causes et conséquences de la Première Guerre mondiale.
+
+**Q2.** Expliquer les causes et conséquences de la Deuxième Guerre mondiale.
+
+**Q2.** Décrire la traite négrière transatlantique et ses conséquences.
+
+**Q2.** Expliquer le processus de décolonisation de l''Afrique.
+
+**Q2.** Décrire la création et le rôle de l''ONU.
+
+## SECTION 3: GÉOGRAPHIE PHYSIQUE
+
+**Q3.** Décrire le relief du Cameroun.
+
+**Q3.** Expliquer les différents climats du Cameroun.
+
+**Q3.** Décrire les principaux fleuves du Cameroun.
+
+**Q3.** Expliquer la répartition de la végétation au Cameroun.
+
+**Q3.** Décrire les ressources naturelles du Cameroun.
+
+## SECTION 4: GÉOGRAPHIE HUMAINE ET ÉCONOMIQUE
+
+**Q4.** Expliquer la répartition de la population au Cameroun.
+
+**Q4.** Décrire les principales activités économiques du Cameroun.
+
+**Q4.** Expliquer les causes et conséquences de l''exode rural.
+
+**Q4.** Décrire les principaux produits d''exportation du Cameroun.
+
+**Q4.** Expliquer les problèmes de développement au Cameroun et les solutions.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'e541a62c-6704-e6ed-a237-e5e6189c3f8f', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: HISTOIRE GÉNÉRALE
+
+**Q1.** Expliquer les causes et conséquences de la Première Guerre mondiale.
+
+**Q1.** Expliquer les causes et conséquences de la Deuxième Guerre mondiale.
+
+**Q1.** Décrire la traite négrière transatlantique et ses conséquences.
+
+**Q1.** Expliquer le processus de décolonisation de l''Afrique.
+
+**Q1.** Décrire la création et le rôle de l''ONU.
+
+## SECTION 2: GÉOGRAPHIE PHYSIQUE
+
+**Q2.** Décrire le relief du Cameroun.
+
+**Q2.** Expliquer les différents climats du Cameroun.
+
+**Q2.** Décrire les principaux fleuves du Cameroun.
+
+**Q2.** Expliquer la répartition de la végétation au Cameroun.
+
+**Q2.** Décrire les ressources naturelles du Cameroun.
+
+## SECTION 3: GÉOGRAPHIE HUMAINE ET ÉCONOMIQUE
+
+**Q3.** Expliquer la répartition de la population au Cameroun.
+
+**Q3.** Décrire les principales activités économiques du Cameroun.
+
+**Q3.** Expliquer les causes et conséquences de l''exode rural.
+
+**Q3.** Décrire les principaux produits d''exportation du Cameroun.
+
+**Q3.** Expliquer les problèmes de développement au Cameroun et les solutions.
+
+## SECTION 4: HISTOIRE DU CAMEROUN
+
+**Q4.** Raconter les étapes de la colonisation du Cameroun par l''Allemagne.
+
+**Q4.** Expliquer le partage du Cameroun entre la France et l''Angleterre après la Première Guerre mondiale.
+
+**Q4.** Décrire le processus d''indépendance du Cameroun en 1960.
+
+**Q4.** Expliquer la réunification du Cameroun en 1961.
+
+**Q4.** Décrire l''évolution politique du Cameroun de 1960 à nos jours.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Histoire-Géographie — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0bbbe30f-6611-64db-3e5b-fe81ba31eafd', 'fr-bepc-hg-cameroun-afrique', 'Histoire-Géographie', 'BEPC Histoire-Géographie — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Histoire-Géographie
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉOGRAPHIE PHYSIQUE
+
+**Q1.** Décrire le relief du Cameroun.
+
+**Q1.** Expliquer les différents climats du Cameroun.
+
+**Q1.** Décrire les principaux fleuves du Cameroun.
+
+**Q1.** Expliquer la répartition de la végétation au Cameroun.
+
+**Q1.** Décrire les ressources naturelles du Cameroun.
+
+## SECTION 2: GÉOGRAPHIE HUMAINE ET ÉCONOMIQUE
+
+**Q2.** Expliquer la répartition de la population au Cameroun.
+
+**Q2.** Décrire les principales activités économiques du Cameroun.
+
+**Q2.** Expliquer les causes et conséquences de l''exode rural.
+
+**Q2.** Décrire les principaux produits d''exportation du Cameroun.
+
+**Q2.** Expliquer les problèmes de développement au Cameroun et les solutions.
+
+## SECTION 3: HISTOIRE DU CAMEROUN
+
+**Q3.** Raconter les étapes de la colonisation du Cameroun par l''Allemagne.
+
+**Q3.** Expliquer le partage du Cameroun entre la France et l''Angleterre après la Première Guerre mondiale.
+
+**Q3.** Décrire le processus d''indépendance du Cameroun en 1960.
+
+**Q3.** Expliquer la réunification du Cameroun en 1961.
+
+**Q3.** Décrire l''évolution politique du Cameroun de 1960 à nos jours.
+
+## SECTION 4: HISTOIRE GÉNÉRALE
+
+**Q4.** Expliquer les causes et conséquences de la Première Guerre mondiale.
+
+**Q4.** Expliquer les causes et conséquences de la Deuxième Guerre mondiale.
+
+**Q4.** Décrire la traite négrière transatlantique et ses conséquences.
+
+**Q4.** Expliquer le processus de décolonisation de l''Afrique.
+
+**Q4.** Décrire la création et le rôle de l''ONU.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Histoire-Géographie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '4084a1e5-155f-7de9-8be1-4533e6be8d5f', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le commentaire composé consiste à :
+
+A. analyser un texte
+B. résumer un texte
+C. inventer un texte
+D. traduire un texte
+
+---
+
+**Q2.** La dissertation :
+
+A. développe une réflexion argumentée
+B. résume un texte
+C. décrit un lieu
+D. raconte une histoire
+
+---
+
+**Q3.** La contraction de texte :
+
+A. réduit un texte en respectant l''essentiel
+B. développe un texte
+C. traduit un texte
+D. invente un texte
+
+---
+
+**Q4.** Le registre lyrique exprime :
+
+A. les sentiments personnels
+B. la peur
+C. le rire
+D. la colère
+
+---
+
+**Q5.** Le registre tragique :
+
+A. la fatalité et la mort
+B. la joie
+C. le comique
+D. l''ironie
+
+---
+
+**Q6.** Le registre comique :
+
+A. provoque le rire
+B. provoque la peur
+C. exprime la tristesse
+D. exprime la colère
+
+---
+
+**Q7.** Le registre épique :
+
+A. héroïsme et grandeur
+B. le rire
+C. la peur
+D. la tristesse
+
+---
+
+**Q8.** Le registre pathétique :
+
+A. susciter l''émotion et la pitié
+B. provoquer le rire
+C. exprimer la colère
+D. décrire
+
+---
+
+**Q9.** Le registre ironique :
+
+A. dire le contraire de ce qu''on pense
+B. exprimer la joie
+C. décrire
+D. raconter
+
+---
+
+**Q10.** La tragédie classique respecte :
+
+A. la règle des trois unités
+B. aucune règle
+C. la liberté totale
+D. le comique
+
+---
+
+**Q11.** La règle des trois unités :
+
+A. temps, lieu, action
+B. temps, lieu, personnage
+C. action, personnage, décor
+D. temps, action, dialogue
+
+---
+
+**Q12.** La catharsis :
+
+A. la purgation des passions
+B. le rire
+C. la peur
+D. la colère
+
+---
+
+**Q13.** Le théâtre de l''absurde :
+
+A. l''absurdité de la condition humaine
+B. le réalisme
+C. le romantisme
+D. le classicisme
+
+---
+
+**Q14.** Le romantisme :
+
+A. l''expression des sentiments
+B. la raison
+C. la mesure
+D. le classicisme
+
+---
+
+**Q15.** Le réalisme :
+
+A. la représentation fidèle de la réalité
+B. l''idéalisation
+C. le rêve
+D. le fantastique
+
+---
+
+**Q16.** Le naturalisme :
+
+A. l''application de la méthode scientifique
+B. l''idéalisation
+C. le rêve
+D. le fantastique
+
+---
+
+**Q17.** Le symbolisme :
+
+A. les symboles et les correspondances
+B. le réalisme
+C. le naturalisme
+D. le classicisme
+
+---
+
+**Q18.** Le surréalisme :
+
+A. l''inconscient et le rêve
+B. la raison
+C. la mesure
+D. le classicisme
+
+---
+
+**Q19.** La poésie lyrique :
+
+A. exprime les sentiments
+B. raconte une histoire
+C. décrit
+D. argumente
+
+---
+
+**Q20.** Le sonnet :
+
+A. 14 vers
+B. 12 vers
+C. 10 vers
+D. 16 vers
+
+---
+
+## CORRIGÉ
+
+1. analyser un texte
+2. développe une réflexion argumentée
+3. réduit un texte en respectant l''essentiel
+4. les sentiments personnels
+5. la fatalité et la mort
+6. provoque le rire
+7. héroïsme et grandeur
+8. susciter l''émotion et la pitié
+9. dire le contraire de ce qu''on pense
+10. la règle des trois unités
+11. temps, lieu, action
+12. la purgation des passions
+13. l''absurdité de la condition humaine
+14. l''expression des sentiments
+15. la représentation fidèle de la réalité
+16. l''application de la méthode scientifique
+17. les symboles et les correspondances
+18. l''inconscient et le rêve
+19. exprime les sentiments
+20. 14 vers
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0232b458-223d-c5bf-e681-39e0de21b027', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''alexandrin :
+
+A. 12 syllabes
+B. 10 syllabes
+C. 8 syllabes
+D. 14 syllabes
+
+---
+
+**Q2.** Le décasyllabe :
+
+A. 10 syllabes
+B. 12 syllabes
+C. 8 syllabes
+D. 14 syllabes
+
+---
+
+**Q3.** L''octosyllabe :
+
+A. 8 syllabes
+B. 10 syllabes
+C. 12 syllabes
+D. 14 syllabes
+
+---
+
+**Q4.** La rime plate :
+
+A. aabb
+B. abab
+C. abba
+D. aaaa
+
+---
+
+**Q5.** La rime croisée :
+
+A. abab
+B. aabb
+C. abba
+D. aaaa
+
+---
+
+**Q6.** La rime embrassée :
+
+A. abba
+B. aabb
+C. abab
+D. aaaa
+
+---
+
+**Q7.** L''enjambement :
+
+A. le rejet d''un mot à la ligne suivante
+B. la fin du vers
+C. la rime
+D. la césure
+
+---
+
+**Q8.** La métaphore filée :
+
+A. une métaphore prolongée
+B. une comparaison
+C. une hyperbole
+D. une litote
+
+---
+
+**Q9.** L''oxymore :
+
+A. l''union de termes contradictoires
+B. une comparaison
+C. une hyperbole
+D. une litote
+
+---
+
+**Q10.** L''antithèse :
+
+A. l''opposition de deux idées
+B. l''union de contraires
+C. une exagération
+D. une atténuation
+
+---
+
+**Q11.** Le chiasme :
+
+A. une structure croisée
+B. une répétition
+C. une exagération
+D. une atténuation
+
+---
+
+**Q12.** L''anaphore :
+
+A. la répétition d''un mot en début de phrase
+B. une exagération
+C. une atténuation
+D. une comparaison
+
+---
+
+**Q13.** La gradation :
+
+A. une progression croissante ou décroissante
+B. une répétition
+C. une exagération
+D. une atténuation
+
+---
+
+**Q14.** L''euphémisme :
+
+A. atténue une réalité désagréable
+B. exagère
+C. compare
+D. oppose
+
+---
+
+**Q15.** La métonymie :
+
+A. remplace un terme par un autre lié
+B. compare
+C. exagère
+D. atténue
+
+---
+
+**Q16.** La synecdoque :
+
+A. la partie pour le tout
+B. le tout pour la partie
+C. une comparaison
+D. une exagération
+
+---
+
+**Q17.** Le discours narratif :
+
+A. raconte une histoire
+B. argumente
+C. décrit
+D. explique
+
+---
+
+**Q18.** Le discours argumentatif :
+
+A. convainc et persuade
+B. raconte
+C. décrit
+D. explique
+
+---
+
+**Q19.** Le discours descriptif :
+
+A. décrit un lieu, une personne
+B. raconte
+C. argumente
+D. explique
+
+---
+
+**Q20.** Le discours explicatif :
+
+A. explique un phénomène
+B. raconte
+C. convainc
+D. décrit
+
+---
+
+## CORRIGÉ
+
+1. 12 syllabes
+2. 10 syllabes
+3. 8 syllabes
+4. aabb
+5. abab
+6. abba
+7. le rejet d''un mot à la ligne suivante
+8. une métaphore prolongée
+9. l''union de termes contradictoires
+10. l''opposition de deux idées
+11. une structure croisée
+12. la répétition d''un mot en début de phrase
+13. une progression croissante ou décroissante
+14. atténue une réalité désagréable
+15. remplace un terme par un autre lié
+16. la partie pour le tout
+17. raconte une histoire
+18. convainc et persuade
+19. décrit un lieu, une personne
+20. explique un phénomène
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ddbd824d-50d0-f34f-1e86-27a0d49eb211', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le point de vue interne :
+
+A. le narrateur voit par les yeux d''un personnage
+B. le narrateur voit tout
+C. le narrateur est absent
+D. le narrateur juge
+
+---
+
+**Q2.** Le point de vue omniscient :
+
+A. le narrateur sait tout
+B. le narrateur voit par un personnage
+C. le narrateur est absent
+D. le narrateur juge
+
+---
+
+**Q3.** Le point de vue externe :
+
+A. le narrateur observe de l''extérieur
+B. le narrateur sait tout
+C. le narrateur voit par un personnage
+D. le narrateur juge
+
+---
+
+**Q4.** Le narrateur interne :
+
+A. est un personnage de l''histoire
+B. est extérieur
+C. est omniscient
+D. est absent
+
+---
+
+**Q5.** Le narrateur externe :
+
+A. n''est pas un personnage
+B. est un personnage
+C. est omniscient
+D. est le héros
+
+---
+
+**Q6.** La focalisation zéro :
+
+A. le narrateur omniscient
+B. le narrateur interne
+C. le narrateur externe
+D. le narrateur absent
+
+---
+
+**Q7.** La focalisation interne :
+
+A. le narrateur voit par un personnage
+B. le narrateur omniscient
+C. le narrateur externe
+D. le narrateur absent
+
+---
+
+**Q8.** La focalisation externe :
+
+A. le narrateur observe de l''extérieur
+B. le narrateur omniscient
+C. le narrateur interne
+D. le narrateur absent
+
+---
+
+**Q9.** Le classicisme :
+
+A. la mesure et la raison
+B. l''expression des sentiments
+C. le rêve
+D. l''absurde
+
+---
+
+**Q10.** Le siècle des Lumières :
+
+A. la raison et la critique
+B. le sentiment
+C. le rêve
+D. l''absurde
+
+---
+
+**Q11.** L''humanisme :
+
+A. la confiance en l''homme
+B. la foi
+C. le doute
+D. l''absurde
+
+---
+
+**Q12.** Le baroque :
+
+A. le mouvement et l''instabilité
+B. la mesure
+C. la raison
+D. le classicisme
+
+---
+
+**Q13.** La littérature africaine :
+
+A. reflète les réalités africaines
+B. est européenne
+C. est asiatique
+D. est américaine
+
+---
+
+**Q14.** La négritude :
+
+A. la valorisation de la culture noire
+B. le rejet de la culture
+C. la colonisation
+D. l''esclavage
+
+---
+
+**Q15.** Senghor est :
+
+A. un poète de la négritude
+B. un romancier
+C. un dramaturge
+D. un essayiste
+
+---
+
+**Q16.** Le roman :
+
+A. un récit en prose
+B. un poème
+C. une pièce de théâtre
+D. un essai
+
+---
+
+**Q17.** La nouvelle :
+
+A. un récit court
+B. un roman
+C. un poème
+D. une pièce
+
+---
+
+**Q18.** L''essai :
+
+A. une réflexion argumentée
+B. un récit
+C. un poème
+D. une pièce
+
+---
+
+**Q19.** La fable :
+
+A. un récit allégorique avec morale
+B. un roman
+C. une pièce
+D. un essai
+
+---
+
+**Q20.** La satire :
+
+A. critique les défauts
+B. loue les qualités
+C. raconte
+D. décrit
+
+---
+
+## CORRIGÉ
+
+1. le narrateur voit par les yeux d''un personnage
+2. le narrateur sait tout
+3. le narrateur observe de l''extérieur
+4. est un personnage de l''histoire
+5. n''est pas un personnage
+6. le narrateur omniscient
+7. le narrateur voit par un personnage
+8. le narrateur observe de l''extérieur
+9. la mesure et la raison
+10. la raison et la critique
+11. la confiance en l''homme
+12. le mouvement et l''instabilité
+13. reflète les réalités africaines
+14. la valorisation de la culture noire
+15. un poète de la négritude
+16. un récit en prose
+17. un récit court
+18. une réflexion argumentée
+19. un récit allégorique avec morale
+20. critique les défauts
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '8bf7085f-009e-b765-534e-8705268d600e', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: EXPRESSION ÉCRITE ET ORALE
+
+**Q1.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q1.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q1.** Préparer et présenter un exposé oral.
+
+**Q1.** Rédiger un compte rendu de lecture.
+
+**Q1.** Écrire un dialogue argumentatif entre deux personnages.
+
+## SECTION 2: COMMENTAIRE COMPOSÉ
+
+**Q2.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q2.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q2.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q2.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q2.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+
+## SECTION 3: DISSERTATION
+
+**Q3.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q3.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q3.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q3.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q3.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+
+## SECTION 4: CONTRACTION ET SUIVI DE TEXTE
+
+**Q4.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q4.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q4.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q4.** Analyser la structure d''un texte et dégager son plan.
+
+**Q4.** Reformuler les idées d''un texte sans le recopier.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '10df859a-8243-ff76-9ecc-06f13bbb0cf3', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: COMMENTAIRE COMPOSÉ
+
+**Q1.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q1.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q1.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q1.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q1.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+
+## SECTION 2: DISSERTATION
+
+**Q2.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q2.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q2.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q2.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q2.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+
+## SECTION 3: CONTRACTION ET SUIVI DE TEXTE
+
+**Q3.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q3.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q3.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q3.** Analyser la structure d''un texte et dégager son plan.
+
+**Q3.** Reformuler les idées d''un texte sans le recopier.
+
+## SECTION 4: EXPRESSION ÉCRITE ET ORALE
+
+**Q4.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q4.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q4.** Préparer et présenter un exposé oral.
+
+**Q4.** Rédiger un compte rendu de lecture.
+
+**Q4.** Écrire un dialogue argumentatif entre deux personnages.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '9f562106-7112-d39c-53d1-970a5402f51e', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: DISSERTATION
+
+**Q1.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q1.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q1.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q1.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q1.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+
+## SECTION 2: CONTRACTION ET SUIVI DE TEXTE
+
+**Q2.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q2.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q2.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q2.** Analyser la structure d''un texte et dégager son plan.
+
+**Q2.** Reformuler les idées d''un texte sans le recopier.
+
+## SECTION 3: EXPRESSION ÉCRITE ET ORALE
+
+**Q3.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q3.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q3.** Préparer et présenter un exposé oral.
+
+**Q3.** Rédiger un compte rendu de lecture.
+
+**Q3.** Écrire un dialogue argumentatif entre deux personnages.
+
+## SECTION 4: COMMENTAIRE COMPOSÉ
+
+**Q4.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q4.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q4.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q4.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q4.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Français — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '20e917d8-2101-0529-ecda-8e85ce089e57', 'fr-bepc-francais-expression', 'Français', 'BEPC Français — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CONTRACTION ET SUIVI DE TEXTE
+
+**Q1.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q1.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q1.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q1.** Analyser la structure d''un texte et dégager son plan.
+
+**Q1.** Reformuler les idées d''un texte sans le recopier.
+
+## SECTION 2: EXPRESSION ÉCRITE ET ORALE
+
+**Q2.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q2.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q2.** Préparer et présenter un exposé oral.
+
+**Q2.** Rédiger un compte rendu de lecture.
+
+**Q2.** Écrire un dialogue argumentatif entre deux personnages.
+
+## SECTION 3: COMMENTAIRE COMPOSÉ
+
+**Q3.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q3.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q3.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q3.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q3.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+
+## SECTION 4: DISSERTATION
+
+**Q4.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q4.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q4.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q4.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q4.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'aa06c477-affd-c909-351b-f094e0dcf180', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The plural of « book » is :
+
+A. books
+B. bookes
+C. book
+D. bookies
+
+---
+
+**Q2.** The past tense of « go » is :
+
+A. went
+B. goed
+C. gone
+D. going
+
+---
+
+**Q3.** The past participle of « eat » is :
+
+A. eaten
+B. ate
+C. eated
+D. eating
+
+---
+
+**Q4.** « She ___ a student. » (present of to be)
+
+A. is
+B. are
+C. am
+D. be
+
+---
+
+**Q5.** « They ___ playing football. » (present continuous)
+
+A. are
+B. is
+C. am
+D. be
+
+---
+
+**Q6.** The opposite of « big » is :
+
+A. small
+B. large
+C. huge
+D. tall
+
+---
+
+**Q7.** The synonym of « happy » is :
+
+A. glad
+B. sad
+C. angry
+D. tired
+
+---
+
+**Q8.** « I ___ to school every day. » (present simple)
+
+A. go
+B. goes
+C. going
+D. gone
+
+---
+
+**Q9.** « He ___ his homework. » (present simple, 3rd person)
+
+A. does
+B. do
+C. doing
+D. done
+
+---
+
+**Q10.** The plural of « child » is :
+
+A. children
+B. childs
+C. childes
+D. childrens
+
+---
+
+**Q11.** The plural of « man » is :
+
+A. men
+B. mans
+C. menes
+D. man
+
+---
+
+**Q12.** The plural of « woman » is :
+
+A. women
+B. womans
+C. womens
+D. woman
+
+---
+
+**Q13.** The plural of « foot » is :
+
+A. feet
+B. foots
+C. feets
+D. foot
+
+---
+
+**Q14.** The plural of « tooth » is :
+
+A. teeth
+B. tooths
+C. teeths
+D. tooth
+
+---
+
+**Q15.** « There ___ a book on the table. »
+
+A. is
+B. are
+C. am
+D. be
+
+---
+
+**Q16.** « There ___ many students in the class. »
+
+A. are
+B. is
+C. am
+D. be
+
+---
+
+**Q17.** The comparative of « tall » is :
+
+A. taller
+B. more tall
+C. tallest
+D. most tall
+
+---
+
+**Q18.** The superlative of « tall » is :
+
+A. tallest
+B. taller
+C. more tall
+D. most tall
+
+---
+
+**Q19.** « I have ___ apple. »
+
+A. an
+B. a
+C. the
+D. some
+
+---
+
+**Q20.** « He is ___ engineer. »
+
+A. an
+B. a
+C. the
+D. some
+
+---
+
+## CORRIGÉ
+
+1. books
+2. went
+3. eaten
+4. is
+5. are
+6. small
+7. glad
+8. go
+9. does
+10. children
+11. men
+12. women
+13. feet
+14. teeth
+15. is
+16. are
+17. taller
+18. tallest
+19. an
+20. an
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '4a13871b-3b24-19ec-1482-5cbec7583e98', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The past tense of « see » is :
+
+A. saw
+B. seen
+C. seed
+D. seeing
+
+---
+
+**Q2.** The past tense of « come » is :
+
+A. came
+B. comed
+C. come
+D. coming
+
+---
+
+**Q3.** The past tense of « buy » is :
+
+A. bought
+B. buyed
+C. boughten
+D. buying
+
+---
+
+**Q4.** The past tense of « think » is :
+
+A. thought
+B. thinked
+C. thunk
+D. thinking
+
+---
+
+**Q5.** « She ___ to the market yesterday. »
+
+A. went
+B. goes
+C. go
+D. going
+
+---
+
+**Q6.** « We ___ watching TV now. »
+
+A. are
+B. is
+C. am
+D. be
+
+---
+
+**Q7.** The question form of « You like tea. » is :
+
+A. Do you like tea?
+B. You like tea?
+C. Does you like tea?
+D. Are you like tea?
+
+---
+
+**Q8.** The negative of « He works. » is :
+
+A. He does not work.
+B. He not works.
+C. He do not work.
+D. He works not.
+
+---
+
+**Q9.** « I ___ a letter yesterday. » (write, past)
+
+A. wrote
+B. written
+C. writed
+D. writing
+
+---
+
+**Q10.** The future of « go » is :
+
+A. will go
+B. went
+C. gone
+D. going
+
+---
+
+**Q11.** « She will ___ to school. »
+
+A. go
+B. goes
+C. going
+D. gone
+
+---
+
+**Q12.** The possessive of « John » is :
+
+A. John''s
+B. Johns
+C. John
+D. Johnes
+
+---
+
+**Q13.** « This is ___ book. » (belonging to me)
+
+A. my
+B. mine
+C. me
+D. I
+
+---
+
+**Q14.** « This book is ___. » (belonging to me)
+
+A. mine
+B. my
+C. me
+D. I
+
+---
+
+**Q15.** The pronoun for « the teacher » (he/she) is :
+
+A. he or she
+B. it
+C. they
+D. we
+
+---
+
+**Q16.** The pronoun for « the books » is :
+
+A. they
+B. it
+C. he
+D. she
+
+---
+
+**Q17.** « How ___ are you? » (age)
+
+A. old
+B. tall
+C. big
+D. much
+
+---
+
+**Q18.** « How ___ does it cost? »
+
+A. much
+B. many
+C. old
+D. tall
+
+---
+
+**Q19.** « How ___ books do you have? »
+
+A. many
+B. much
+C. old
+D. tall
+
+---
+
+**Q20.** The time « 7:30 » is :
+
+A. half past seven
+B. seven thirty
+C. thirty past seven
+D. half seven
+
+---
+
+## CORRIGÉ
+
+1. saw
+2. came
+3. bought
+4. thought
+5. went
+6. are
+7. Do you like tea?
+8. He does not work.
+9. wrote
+10. will go
+11. go
+12. John''s
+13. my
+14. mine
+15. he or she
+16. they
+17. old
+18. much
+19. many
+20. half past seven
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '4068bf79-93aa-8efb-511b-b5be5612c135', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** The time « 8:15 » is :
+
+A. quarter past eight
+B. eight fifteen
+C. quarter eight
+D. fifteen eight
+
+---
+
+**Q2.** « Good morning » is said :
+
+A. in the morning
+B. at night
+C. in the afternoon
+D. in the evening
+
+---
+
+**Q3.** « Thank you » means :
+
+A. merci
+B. bonjour
+C. au revoir
+D. s''il vous plaît
+
+---
+
+**Q4.** « Please » means :
+
+A. s''il vous plaît
+B. merci
+C. bonjour
+D. excusez-moi
+
+---
+
+**Q5.** The color of the sky is :
+
+A. blue
+B. red
+C. green
+D. black
+
+---
+
+**Q6.** The color of blood is :
+
+A. red
+B. blue
+C. green
+D. yellow
+
+---
+
+**Q7.** « I am hungry » means :
+
+A. j''ai faim
+B. j''ai soif
+C. j''ai sommeil
+D. j''ai chaud
+
+---
+
+**Q8.** « I am thirsty » means :
+
+A. j''ai soif
+B. j''ai faim
+C. j''ai sommeil
+D. j''ai froid
+
+---
+
+**Q9.** The day after Monday is :
+
+A. Tuesday
+B. Wednesday
+C. Sunday
+D. Friday
+
+---
+
+**Q10.** The first month of the year is :
+
+A. January
+B. February
+C. March
+D. December
+
+---
+
+**Q11.** « She is taller than me » means :
+
+A. elle est plus grande que moi
+B. elle est plus petite que moi
+C. elle est aussi grande que moi
+D. elle est grande
+
+---
+
+**Q12.** The past tense of « have » is :
+
+A. had
+B. haved
+C. has
+D. having
+
+---
+
+**Q13.** « I have lived here ___ 2010. »
+
+A. since
+B. for
+C. from
+D. at
+
+---
+
+**Q14.** « I have lived here ___ five years. »
+
+A. for
+B. since
+C. from
+D. at
+
+---
+
+**Q15.** The present perfect of « finish » (I) is :
+
+A. I have finished
+B. I finished
+C. I finish
+D. I am finishing
+
+---
+
+**Q16.** « ___ you like some tea? »
+
+A. Would
+B. Do
+C. Are
+D. Is
+
+---
+
+**Q17.** The word « beautiful » is :
+
+A. an adjective
+B. a noun
+C. a verb
+D. an adverb
+
+---
+
+**Q18.** The word « quickly » is :
+
+A. an adverb
+B. an adjective
+C. a noun
+D. a verb
+
+---
+
+**Q19.** The word « happiness » is :
+
+A. a noun
+B. an adjective
+C. a verb
+D. an adverb
+
+---
+
+**Q20.** « I am going to the market » — the market is :
+
+A. a place
+B. a person
+C. a thing
+D. an idea
+
+---
+
+## CORRIGÉ
+
+1. quarter past eight
+2. in the morning
+3. merci
+4. s''il vous plaît
+5. blue
+6. red
+7. j''ai faim
+8. j''ai soif
+9. Tuesday
+10. January
+11. elle est plus grande que moi
+12. had
+13. since
+14. for
+15. I have finished
+16. Would
+17. an adjective
+18. an adverb
+19. a noun
+20. a place
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'b2b7fab0-6b85-95e4-0149-a16d0deaaa6d', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: WRITING
+
+**Q1.** Write a short paragraph about your daily routine.
+
+**Q1.** Write a letter to your friend describing your school.
+
+**Q1.** Write a dialogue between two friends about their weekend plans.
+
+**Q1.** Write a short composition about your favourite subject.
+
+**Q1.** Write an invitation card for a birthday party.
+
+## SECTION 2: GRAMMAR
+
+**Q2.** Put the verbs in brackets into the correct tense: « She ___ (go) to school every day. »
+
+**Q2.** Rewrite the sentences in the negative and interrogative forms.
+
+**Q2.** Complete with the correct preposition: in, on, at, for, since.
+
+**Q2.** Change the sentences from active to passive voice.
+
+**Q2.** Use the correct form of the comparative and superlative of adjectives.
+
+## SECTION 3: VOCABULARY
+
+**Q3.** Give the opposite of: happy, big, hot, fast, expensive.
+
+**Q3.** Match the words with their definitions.
+
+**Q3.** Complete the sentences with the correct word from the list.
+
+**Q3.** Find the synonyms of: beautiful, clever, difficult, important.
+
+**Q3.** Use the correct word: much/many, some/any, a/an.
+
+## SECTION 4: COMPREHENSION
+
+**Q4.** Read the passage and answer the questions.
+
+**Q4.** Answer true or false and justify your answers.
+
+**Q4.** Find words in the text that mean the same as given definitions.
+
+**Q4.** Answer questions about the main idea of the passage.
+
+**Q4.** Complete the sentences based on the text.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '979cb84d-27ba-d670-8098-1b0567c7bb58', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GRAMMAR
+
+**Q1.** Put the verbs in brackets into the correct tense: « She ___ (go) to school every day. »
+
+**Q1.** Rewrite the sentences in the negative and interrogative forms.
+
+**Q1.** Complete with the correct preposition: in, on, at, for, since.
+
+**Q1.** Change the sentences from active to passive voice.
+
+**Q1.** Use the correct form of the comparative and superlative of adjectives.
+
+## SECTION 2: VOCABULARY
+
+**Q2.** Give the opposite of: happy, big, hot, fast, expensive.
+
+**Q2.** Match the words with their definitions.
+
+**Q2.** Complete the sentences with the correct word from the list.
+
+**Q2.** Find the synonyms of: beautiful, clever, difficult, important.
+
+**Q2.** Use the correct word: much/many, some/any, a/an.
+
+## SECTION 3: COMPREHENSION
+
+**Q3.** Read the passage and answer the questions.
+
+**Q3.** Answer true or false and justify your answers.
+
+**Q3.** Find words in the text that mean the same as given definitions.
+
+**Q3.** Answer questions about the main idea of the passage.
+
+**Q3.** Complete the sentences based on the text.
+
+## SECTION 4: WRITING
+
+**Q4.** Write a short paragraph about your daily routine.
+
+**Q4.** Write a letter to your friend describing your school.
+
+**Q4.** Write a dialogue between two friends about their weekend plans.
+
+**Q4.** Write a short composition about your favourite subject.
+
+**Q4.** Write an invitation card for a birthday party.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'fbd21a2c-aaa8-d677-32d9-e1a497bfbcb1', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: VOCABULARY
+
+**Q1.** Give the opposite of: happy, big, hot, fast, expensive.
+
+**Q1.** Match the words with their definitions.
+
+**Q1.** Complete the sentences with the correct word from the list.
+
+**Q1.** Find the synonyms of: beautiful, clever, difficult, important.
+
+**Q1.** Use the correct word: much/many, some/any, a/an.
+
+## SECTION 2: COMPREHENSION
+
+**Q2.** Read the passage and answer the questions.
+
+**Q2.** Answer true or false and justify your answers.
+
+**Q2.** Find words in the text that mean the same as given definitions.
+
+**Q2.** Answer questions about the main idea of the passage.
+
+**Q2.** Complete the sentences based on the text.
+
+## SECTION 3: WRITING
+
+**Q3.** Write a short paragraph about your daily routine.
+
+**Q3.** Write a letter to your friend describing your school.
+
+**Q3.** Write a dialogue between two friends about their weekend plans.
+
+**Q3.** Write a short composition about your favourite subject.
+
+**Q3.** Write an invitation card for a birthday party.
+
+## SECTION 4: GRAMMAR
+
+**Q4.** Put the verbs in brackets into the correct tense: « She ___ (go) to school every day. »
+
+**Q4.** Rewrite the sentences in the negative and interrogative forms.
+
+**Q4.** Complete with the correct preposition: in, on, at, for, since.
+
+**Q4.** Change the sentences from active to passive voice.
+
+**Q4.** Use the correct form of the comparative and superlative of adjectives.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Anglais — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0f5da525-1000-5d72-c6b6-b516dfde5078', 'fr-bepc-anglais-communication', 'Anglais', 'BEPC Anglais — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ANGLAIS SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Anglais
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: COMPREHENSION
+
+**Q1.** Read the passage and answer the questions.
+
+**Q1.** Answer true or false and justify your answers.
+
+**Q1.** Find words in the text that mean the same as given definitions.
+
+**Q1.** Answer questions about the main idea of the passage.
+
+**Q1.** Complete the sentences based on the text.
+
+## SECTION 2: WRITING
+
+**Q2.** Write a short paragraph about your daily routine.
+
+**Q2.** Write a letter to your friend describing your school.
+
+**Q2.** Write a dialogue between two friends about their weekend plans.
+
+**Q2.** Write a short composition about your favourite subject.
+
+**Q2.** Write an invitation card for a birthday party.
+
+## SECTION 3: GRAMMAR
+
+**Q3.** Put the verbs in brackets into the correct tense: « She ___ (go) to school every day. »
+
+**Q3.** Rewrite the sentences in the negative and interrogative forms.
+
+**Q3.** Complete with the correct preposition: in, on, at, for, since.
+
+**Q3.** Change the sentences from active to passive voice.
+
+**Q3.** Use the correct form of the comparative and superlative of adjectives.
+
+## SECTION 4: VOCABULARY
+
+**Q4.** Give the opposite of: happy, big, hot, fast, expensive.
+
+**Q4.** Match the words with their definitions.
+
+**Q4.** Complete the sentences with the correct word from the list.
+
+**Q4.** Find the synonyms of: beautiful, clever, difficult, important.
+
+**Q4.** Use the correct word: much/many, some/any, a/an.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Anglais Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '4fc58411-1d9b-b263-b21f-d111d3282fea', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La capitale du Cameroun est :
+
+A. Yaoundé
+B. Douala
+C. Bafoussam
+D. Garoua
+
+---
+
+**Q2.** Le drapeau camerounais a :
+
+A. trois couleurs
+B. deux couleurs
+C. quatre couleurs
+D. cinq couleurs
+
+---
+
+**Q3.** Les couleurs du drapeau camerounais sont :
+
+A. vert, rouge, jaune
+B. bleu, blanc, rouge
+C. vert, blanc, rouge
+D. jaune, noir, vert
+
+---
+
+**Q4.** L''hymne national du Cameroun s''appelle :
+
+A. Ô Cameroun, berceau de nos ancêtres
+B. La Marseillaise
+C. God Bless Africa
+D. L''Internationale
+
+---
+
+**Q5.** La devise du Cameroun est :
+
+A. Paix - Travail - Patrie
+B. Liberté - Égalité - Fraternité
+C. Unité - Progrès - Justice
+D. Dieu et Patrie
+
+---
+
+**Q6.** Le président actuel du Cameroun est :
+
+A. Paul Biya
+B. Ahmadou Ahidjo
+C. Ruben Um Nyobé
+D. Ernest Ouandié
+
+---
+
+**Q7.** Le Cameroun est une :
+
+A. République
+B. monarchie
+C. empire
+D. fédération
+
+---
+
+**Q8.** Le pouvoir législatif est exercé par :
+
+A. l''Assemblée nationale et le Sénat
+B. le président
+C. le gouvernement
+D. la justice
+
+---
+
+**Q9.** Le pouvoir exécutif est exercé par :
+
+A. le président et le gouvernement
+B. l''Assemblée nationale
+C. le Sénat
+D. les tribunaux
+
+---
+
+**Q10.** Le pouvoir judiciaire est exercé par :
+
+A. les tribunaux
+B. le président
+C. le gouvernement
+D. l''Assemblée
+
+---
+
+**Q11.** La séparation des pouvoirs vise à :
+
+A. éviter la concentration des pouvoirs
+B. concentrer le pouvoir
+C. supprimer les pouvoirs
+D. créer un seul pouvoir
+
+---
+
+**Q12.** Le droit de vote s''acquiert au Cameroun à :
+
+A. 18 ans
+B. 16 ans
+C. 21 ans
+D. 20 ans
+
+---
+
+**Q13.** Le suffrage universel signifie :
+
+A. tous les citoyens votent
+B. seuls les riches votent
+C. seuls les hommes votent
+D. seuls les instruits votent
+
+---
+
+**Q14.** Le vote est :
+
+A. un droit et un devoir
+B. un privilège
+C. une obligation
+D. un choix
+
+---
+
+**Q15.** La démocratie est :
+
+A. le gouvernement du peuple par le peuple
+B. le gouvernement d''un seul
+C. le gouvernement des riches
+D. le gouvernement des militaires
+
+---
+
+**Q16.** Les droits de l''homme sont :
+
+A. les droits fondamentaux de chaque personne
+B. des privilèges
+C. des obligations
+D. des interdictions
+
+---
+
+**Q17.** La Déclaration universelle des droits de l''homme a été adoptée en :
+
+A. 1948
+B. 1789
+C. 1960
+D. 1919
+
+---
+
+**Q18.** Le droit à l''éducation est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q19.** Le droit à la santé est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q20.** Le devoir du citoyen est :
+
+A. de respecter les lois
+B. de ne rien faire
+C. de s''enrichir
+D. de fuir
+
+---
+
+## CORRIGÉ
+
+1. Yaoundé
+2. trois couleurs
+3. vert, rouge, jaune
+4. Ô Cameroun, berceau de nos ancêtres
+5. Paix - Travail - Patrie
+6. Paul Biya
+7. République
+8. l''Assemblée nationale et le Sénat
+9. le président et le gouvernement
+10. les tribunaux
+11. éviter la concentration des pouvoirs
+12. 18 ans
+13. tous les citoyens votent
+14. un droit et un devoir
+15. le gouvernement du peuple par le peuple
+16. les droits fondamentaux de chaque personne
+17. 1948
+18. un droit fondamental
+19. un droit fondamental
+20. de respecter les lois
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'def660cc-75aa-4a35-d5de-d766f47c8510', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Payer ses impôts est :
+
+A. un devoir civique
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q2.** Le service national est :
+
+A. un devoir civique
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q3.** La corruption est :
+
+A. un acte illégal
+B. un acte légal
+C. un devoir
+D. un droit
+
+---
+
+**Q4.** La lutte contre la corruption est :
+
+A. un devoir de chaque citoyen
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q5.** L''égalité entre hommes et femmes est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q6.** La tolérance signifie :
+
+A. accepter les différences
+B. rejeter les autres
+C. se moquer
+D. ignorer
+
+---
+
+**Q7.** Le respect des autres est :
+
+A. une valeur citoyenne
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q8.** La solidarité signifie :
+
+A. s''entraider
+B. s''isoler
+C. se concurrencer
+D. s''ignorer
+
+---
+
+**Q9.** La paix est :
+
+A. l''absence de conflit et la sécurité
+B. la guerre
+C. la violence
+D. le chaos
+
+---
+
+**Q10.** Le dialogue est :
+
+A. un moyen de résoudre les conflits
+B. une source de conflit
+C. une violence
+D. une fuite
+
+---
+
+**Q11.** La violence est :
+
+A. interdite et condamnée
+B. autorisée
+C. un droit
+D. un devoir
+
+---
+
+**Q12.** Le harcèlement scolaire est :
+
+A. interdit
+B. autorisé
+C. un droit
+D. un devoir
+
+---
+
+**Q13.** La protection de l''environnement est :
+
+A. un devoir de chaque citoyen
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q14.** Le tri des déchets est :
+
+A. un geste écologique
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q15.** L''économie d''eau est :
+
+A. un geste écologique
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q16.** La Constitution est :
+
+A. la loi fondamentale d''un pays
+B. une loi ordinaire
+C. un décret
+D. un arrêté
+
+---
+
+**Q17.** La Constitution camerounaise actuelle date de :
+
+A. 1996
+B. 1960
+C. 1972
+D. 1984
+
+---
+
+**Q18.** Le Cameroun est membre de :
+
+A. l''ONU, l''UA et la CEMAC
+B. l''OTAN
+C. l''UE
+D. l''ALENA
+
+---
+
+**Q19.** L''ONU a pour but :
+
+A. de maintenir la paix dans le monde
+B. de faire la guerre
+C. de coloniser
+D. de diviser
+
+---
+
+**Q20.** L''UNESCO s''occupe de :
+
+A. l''éducation, la science et la culture
+B. la guerre
+C. l''économie
+D. la santé
+
+---
+
+## CORRIGÉ
+
+1. un devoir civique
+2. un devoir civique
+3. un acte illégal
+4. un devoir de chaque citoyen
+5. un droit fondamental
+6. accepter les différences
+7. une valeur citoyenne
+8. s''entraider
+9. l''absence de conflit et la sécurité
+10. un moyen de résoudre les conflits
+11. interdite et condamnée
+12. interdit
+13. un devoir de chaque citoyen
+14. un geste écologique
+15. un geste écologique
+16. la loi fondamentale d''un pays
+17. 1996
+18. l''ONU, l''UA et la CEMAC
+19. de maintenir la paix dans le monde
+20. l''éducation, la science et la culture
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '33f59eb5-e1f7-9c1a-102e-e8a6f5aad739', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''OMS s''occupe de :
+
+A. la santé
+B. l''éducation
+C. la culture
+D. l''économie
+
+---
+
+**Q2.** La citoyenneté mondiale signifie :
+
+A. se sentir responsable du monde
+B. être citoyen d''un seul pays
+C. ne pas avoir de pays
+D. voyager
+
+---
+
+**Q3.** Le bénévolat est :
+
+A. un engagement volontaire
+B. un travail payé
+C. une obligation
+D. une interdiction
+
+---
+
+**Q4.** L''association caritative :
+
+A. aide les personnes dans le besoin
+B. fait du profit
+C. divise
+D. isole
+
+---
+
+**Q5.** Le don de sang est :
+
+A. un acte de solidarité
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q6.** La laïcité signifie :
+
+A. la séparation de l''État et des religions
+B. une religion d''État
+C. l''athéisme
+D. l''interdiction des religions
+
+---
+
+**Q7.** La liberté de religion est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q8.** La liberté d''expression est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q9.** La liberté de la presse est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q10.** L''abus de la liberté d''expression est :
+
+A. interdit
+B. autorisé
+C. un droit
+D. un devoir
+
+---
+
+**Q11.** La diffamation est :
+
+A. interdite
+B. autorisée
+C. un droit
+D. un devoir
+
+---
+
+**Q12.** Le respect de la vie privée est :
+
+A. un droit fondamental
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q13.** La protection des données personnelles est :
+
+A. un droit
+B. un privilège
+C. une option
+D. une interdiction
+
+---
+
+**Q14.** Le cyberharcèlement est :
+
+A. interdit
+B. autorisé
+C. un droit
+D. un devoir
+
+---
+
+**Q15.** L''utilisation responsable d''Internet est :
+
+A. un devoir
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q16.** Le civisme numérique signifie :
+
+A. un comportement responsable en ligne
+B. l''anonymat total
+C. la liberté totale
+D. l''isolement
+
+---
+
+**Q17.** La participation aux élections est :
+
+A. un devoir civique
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q18.** Le respect des symboles de la République est :
+
+A. un devoir civique
+B. un choix
+C. une option
+D. une interdiction
+
+---
+
+**Q19.** La patrie est :
+
+A. le pays auquel on appartient
+B. un continent
+C. une ville
+D. une région
+
+---
+
+**Q20.** Le patriotisme est :
+
+A. l''amour de sa patrie
+B. la haine des autres
+C. l''indifférence
+D. la fuite
+
+---
+
+## CORRIGÉ
+
+1. la santé
+2. se sentir responsable du monde
+3. un engagement volontaire
+4. aide les personnes dans le besoin
+5. un acte de solidarité
+6. la séparation de l''État et des religions
+7. un droit fondamental
+8. un droit fondamental
+9. un droit fondamental
+10. interdit
+11. interdite
+12. un droit fondamental
+13. un droit
+14. interdit
+15. un devoir
+16. un comportement responsable en ligne
+17. un devoir civique
+18. un devoir civique
+19. le pays auquel on appartient
+20. l''amour de sa patrie
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'a97fbea9-2d6f-fb62-f964-042f1fb274e5', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ENVIRONNEMENT ET DÉVELOPPEMENT
+
+**Q1.** Expliquer l''importance de la protection de l''environnement.
+
+**Q1.** Décrire les gestes écologiques au quotidien.
+
+**Q1.** Expliquer le concept de développement durable.
+
+**Q1.** Décrire les problèmes environnementaux du Cameroun.
+
+**Q1.** Proposer des solutions pour protéger l''environnement.
+
+## SECTION 2: INSTITUTIONS ET DÉMOCRATIE
+
+**Q2.** Décrire les institutions de la République du Cameroun.
+
+**Q2.** Expliquer le fonctionnement de la démocratie au Cameroun.
+
+**Q2.** Décrire le rôle du président, du gouvernement et du parlement.
+
+**Q2.** Expliquer l''importance de la séparation des pouvoirs.
+
+**Q2.** Décrire le processus électoral au Cameroun.
+
+## SECTION 3: DROITS ET DEVOIRS
+
+**Q3.** Énumérer les droits fondamentaux du citoyen camerounais.
+
+**Q3.** Expliquer les devoirs du citoyen envers la patrie.
+
+**Q3.** Décrire les droits de l''enfant et leur protection.
+
+**Q3.** Expliquer l''importance du respect des lois.
+
+**Q3.** Décrire le rôle de la justice dans la société.
+
+## SECTION 4: CITOYENNETÉ ET MORALE
+
+**Q4.** Expliquer les valeurs de la citoyenneté : tolérance, solidarité, respect.
+
+**Q4.** Décrire les comportements civiques au quotidien.
+
+**Q4.** Expliquer l''importance de la lutte contre la corruption.
+
+**Q4.** Décrire les dangers de la violence et du harcèlement.
+
+**Q4.** Expliquer le rôle de l''éducation civique dans la société.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ae80e44e-b880-cff6-8049-1aafbcb492aa', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: INSTITUTIONS ET DÉMOCRATIE
+
+**Q1.** Décrire les institutions de la République du Cameroun.
+
+**Q1.** Expliquer le fonctionnement de la démocratie au Cameroun.
+
+**Q1.** Décrire le rôle du président, du gouvernement et du parlement.
+
+**Q1.** Expliquer l''importance de la séparation des pouvoirs.
+
+**Q1.** Décrire le processus électoral au Cameroun.
+
+## SECTION 2: DROITS ET DEVOIRS
+
+**Q2.** Énumérer les droits fondamentaux du citoyen camerounais.
+
+**Q2.** Expliquer les devoirs du citoyen envers la patrie.
+
+**Q2.** Décrire les droits de l''enfant et leur protection.
+
+**Q2.** Expliquer l''importance du respect des lois.
+
+**Q2.** Décrire le rôle de la justice dans la société.
+
+## SECTION 3: CITOYENNETÉ ET MORALE
+
+**Q3.** Expliquer les valeurs de la citoyenneté : tolérance, solidarité, respect.
+
+**Q3.** Décrire les comportements civiques au quotidien.
+
+**Q3.** Expliquer l''importance de la lutte contre la corruption.
+
+**Q3.** Décrire les dangers de la violence et du harcèlement.
+
+**Q3.** Expliquer le rôle de l''éducation civique dans la société.
+
+## SECTION 4: ENVIRONNEMENT ET DÉVELOPPEMENT
+
+**Q4.** Expliquer l''importance de la protection de l''environnement.
+
+**Q4.** Décrire les gestes écologiques au quotidien.
+
+**Q4.** Expliquer le concept de développement durable.
+
+**Q4.** Décrire les problèmes environnementaux du Cameroun.
+
+**Q4.** Proposer des solutions pour protéger l''environnement.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '4a792a33-5391-09e4-0a0a-755ff78a7aa9', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: DROITS ET DEVOIRS
+
+**Q1.** Énumérer les droits fondamentaux du citoyen camerounais.
+
+**Q1.** Expliquer les devoirs du citoyen envers la patrie.
+
+**Q1.** Décrire les droits de l''enfant et leur protection.
+
+**Q1.** Expliquer l''importance du respect des lois.
+
+**Q1.** Décrire le rôle de la justice dans la société.
+
+## SECTION 2: CITOYENNETÉ ET MORALE
+
+**Q2.** Expliquer les valeurs de la citoyenneté : tolérance, solidarité, respect.
+
+**Q2.** Décrire les comportements civiques au quotidien.
+
+**Q2.** Expliquer l''importance de la lutte contre la corruption.
+
+**Q2.** Décrire les dangers de la violence et du harcèlement.
+
+**Q2.** Expliquer le rôle de l''éducation civique dans la société.
+
+## SECTION 3: ENVIRONNEMENT ET DÉVELOPPEMENT
+
+**Q3.** Expliquer l''importance de la protection de l''environnement.
+
+**Q3.** Décrire les gestes écologiques au quotidien.
+
+**Q3.** Expliquer le concept de développement durable.
+
+**Q3.** Décrire les problèmes environnementaux du Cameroun.
+
+**Q3.** Proposer des solutions pour protéger l''environnement.
+
+## SECTION 4: INSTITUTIONS ET DÉMOCRATIE
+
+**Q4.** Décrire les institutions de la République du Cameroun.
+
+**Q4.** Expliquer le fonctionnement de la démocratie au Cameroun.
+
+**Q4.** Décrire le rôle du président, du gouvernement et du parlement.
+
+**Q4.** Expliquer l''importance de la séparation des pouvoirs.
+
+**Q4.** Décrire le processus électoral au Cameroun.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'c5921495-af36-610f-efde-6e789fa4afd0', 'fr-bepc-ecm-citoyennete', 'Éducation à la Citoyenneté et à la Morale', 'BEPC Éducation à la Citoyenneté et à la Morale — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Ordinary Level (Collège)
+**Class:** Troisième
+**Series:** Tronc Commun
+**Subject:** Éducation à la Citoyenneté et à la Morale
+**Exam:** BEPC
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CITOYENNETÉ ET MORALE
+
+**Q1.** Expliquer les valeurs de la citoyenneté : tolérance, solidarité, respect.
+
+**Q1.** Décrire les comportements civiques au quotidien.
+
+**Q1.** Expliquer l''importance de la lutte contre la corruption.
+
+**Q1.** Décrire les dangers de la violence et du harcèlement.
+
+**Q1.** Expliquer le rôle de l''éducation civique dans la société.
+
+## SECTION 2: ENVIRONNEMENT ET DÉVELOPPEMENT
+
+**Q2.** Expliquer l''importance de la protection de l''environnement.
+
+**Q2.** Décrire les gestes écologiques au quotidien.
+
+**Q2.** Expliquer le concept de développement durable.
+
+**Q2.** Décrire les problèmes environnementaux du Cameroun.
+
+**Q2.** Proposer des solutions pour protéger l''environnement.
+
+## SECTION 3: INSTITUTIONS ET DÉMOCRATIE
+
+**Q3.** Décrire les institutions de la République du Cameroun.
+
+**Q3.** Expliquer le fonctionnement de la démocratie au Cameroun.
+
+**Q3.** Décrire le rôle du président, du gouvernement et du parlement.
+
+**Q3.** Expliquer l''importance de la séparation des pouvoirs.
+
+**Q3.** Décrire le processus électoral au Cameroun.
+
+## SECTION 4: DROITS ET DEVOIRS
+
+**Q4.** Énumérer les droits fondamentaux du citoyen camerounais.
+
+**Q4.** Expliquer les devoirs du citoyen envers la patrie.
+
+**Q4.** Décrire les droits de l''enfant et leur protection.
+
+**Q4.** Expliquer l''importance du respect des lois.
+
+**Q4.** Décrire le rôle de la justice dans la société.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Éducation à la Citoyenneté et à la Morale Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'b5f82c56-74d8-335a-581d-9df9563df250', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — QCM (Épreuve 1) — Série 1',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Un algorithme est :
+
+A. une suite d''instructions
+B. un périphérique
+C. une mémoire
+D. un composant
+
+---
+
+**Q2.** La variable est :
+
+A. un espace mémoire nommé
+B. un périphérique
+C. une mémoire
+D. un composant
+
+---
+
+**Q3.** Le type entier :
+
+A. représente des nombres entiers
+B. représente des nombres décimaux
+C. représente du texte
+D. représente un booléen
+
+---
+
+**Q4.** Le type réel :
+
+A. représente des nombres décimaux
+B. représente des entiers
+C. représente du texte
+D. représente un booléen
+
+---
+
+**Q5.** Le type chaîne :
+
+A. représente du texte
+B. représente des entiers
+C. représente des décimaux
+D. représente un booléen
+
+---
+
+**Q6.** Le type booléen :
+
+A. vrai ou faux
+B. des nombres
+C. du texte
+D. des caractères
+
+---
+
+**Q7.** La structure conditionnelle :
+
+A. si... alors... sinon
+B. pour... faire
+C. tant que... faire
+D. répéter... jusqu''à
+
+---
+
+**Q8.** La boucle « pour » :
+
+A. répète un nombre fixe de fois
+B. répète tant qu''une condition est vraie
+C. est une condition
+D. est une variable
+
+---
+
+**Q9.** La boucle « tant que » :
+
+A. répète tant qu''une condition est vraie
+B. répète un nombre fixe de fois
+C. est une condition
+D. est une variable
+
+---
+
+**Q10.** L''opérateur de comparaison est :
+
+A. =
+B. +
+C. *
+D. /
+
+---
+
+**Q11.** L''opérateur d''affectation :
+
+A. attribue une valeur à une variable
+B. compare deux valeurs
+C. additionne
+D. multiplie
+
+---
+
+**Q12.** Le tableau :
+
+A. une collection de valeurs
+B. une variable
+C. une condition
+D. une boucle
+
+---
+
+**Q13.** L''indice d''un tableau commence à :
+
+A. 0 ou 1
+B. 10
+C. -1
+D. n''importe où
+
+---
+
+**Q14.** La fonction :
+
+A. un bloc de code réutilisable
+B. une variable
+C. une condition
+D. une boucle
+
+---
+
+**Q15.** Le paramètre d''une fonction :
+
+A. une donnée d''entrée
+B. une sortie
+C. une condition
+D. une boucle
+
+---
+
+**Q16.** La récursivité :
+
+A. une fonction qui s''appelle elle-même
+B. une boucle
+C. une condition
+D. une variable
+
+---
+
+**Q17.** La complexité algorithmique :
+
+A. mesure l''efficacité
+B. mesure la taille
+C. mesure la vitesse du processeur
+D. mesure la mémoire
+
+---
+
+**Q18.** Le tri à bulles :
+
+A. un algorithme de tri
+B. une recherche
+C. une boucle
+D. une condition
+
+---
+
+**Q19.** La recherche dichotomique :
+
+A. recherche dans un tableau trié
+B. recherche aléatoire
+C. un tri
+D. une boucle
+
+---
+
+**Q20.** La structure de données Pile :
+
+A. LIFO (dernier entré, premier sorti)
+B. FIFO (premier entré, premier sorti)
+C. une file
+D. un tableau
+
+---
+
+## CORRIGÉ
+
+1. une suite d''instructions
+2. un espace mémoire nommé
+3. représente des nombres entiers
+4. représente des nombres décimaux
+5. représente du texte
+6. vrai ou faux
+7. si... alors... sinon
+8. répète un nombre fixe de fois
+9. répète tant qu''une condition est vraie
+10. =
+11. attribue une valeur à une variable
+12. une collection de valeurs
+13. 0 ou 1
+14. un bloc de code réutilisable
+15. une donnée d''entrée
+16. une fonction qui s''appelle elle-même
+17. mesure l''efficacité
+18. un algorithme de tri
+19. recherche dans un tableau trié
+20. LIFO (dernier entré, premier sorti)
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '5f3cae13-98a5-dcb6-9889-970c155f0bb4', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — QCM (Épreuve 1) — Série 2',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La structure de données File :
+
+A. FIFO (premier entré, premier sorti)
+B. LIFO (dernier entré, premier sorti)
+C. une pile
+D. un tableau
+
+---
+
+**Q2.** L''arbre binaire :
+
+A. une structure hiérarchique
+B. une pile
+C. une file
+D. un tableau
+
+---
+
+**Q3.** Le graphe :
+
+A. un ensemble de nœuds et d''arêtes
+B. une pile
+C. une file
+D. un tableau
+
+---
+
+**Q4.** La base de données :
+
+A. un ensemble structuré de données
+B. un fichier
+C. un programme
+D. un périphérique
+
+---
+
+**Q5.** Le SGBD :
+
+A. système de gestion de base de données
+B. un fichier
+C. un programme
+D. un périphérique
+
+---
+
+**Q6.** Le langage SQL :
+
+A. interroge les bases de données
+B. crée des pages web
+C. est un système d''exploitation
+D. est un périphérique
+
+---
+
+**Q7.** La requête SELECT :
+
+A. interroge les données
+B. insère des données
+C. supprime des données
+D. modifie des données
+
+---
+
+**Q8.** La requête INSERT :
+
+A. insère des données
+B. interroge les données
+C. supprime des données
+D. modifie des données
+
+---
+
+**Q9.** La requête UPDATE :
+
+A. modifie des données
+B. interroge les données
+C. insère des données
+D. supprime des données
+
+---
+
+**Q10.** La requête DELETE :
+
+A. supprime des données
+B. interroge les données
+C. insère des données
+D. modifie des données
+
+---
+
+**Q11.** La clé primaire :
+
+A. identifie de façon unique une ligne
+B. est une colonne
+C. est une table
+D. est une requête
+
+---
+
+**Q12.** La clé étrangère :
+
+A. relie deux tables
+B. identifie une ligne
+C. est une colonne
+D. est une requête
+
+---
+
+**Q13.** Le réseau informatique :
+
+A. connecte des ordinateurs
+B. est un fichier
+C. est un programme
+D. est une mémoire
+
+---
+
+**Q14.** Le protocole :
+
+A. règle de communication
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q15.** Le protocole TCP/IP :
+
+A. la base d''Internet
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q16.** L''adresse IP :
+
+A. identifie un ordinateur sur un réseau
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q17.** Le DNS :
+
+A. traduit les noms en adresses IP
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q18.** Le HTML :
+
+A. langage de création de pages web
+B. un système d''exploitation
+C. un protocole
+D. une base de données
+
+---
+
+**Q19.** Le CSS :
+
+A. met en forme les pages web
+B. crée le contenu
+C. est un système d''exploitation
+D. est un protocole
+
+---
+
+**Q20.** Le JavaScript :
+
+A. rend les pages web interactives
+B. crée le contenu
+C. met en forme
+D. est un système d''exploitation
+
+---
+
+## CORRIGÉ
+
+1. FIFO (premier entré, premier sorti)
+2. une structure hiérarchique
+3. un ensemble de nœuds et d''arêtes
+4. un ensemble structuré de données
+5. système de gestion de base de données
+6. interroge les bases de données
+7. interroge les données
+8. insère des données
+9. modifie des données
+10. supprime des données
+11. identifie de façon unique une ligne
+12. relie deux tables
+13. connecte des ordinateurs
+14. règle de communication
+15. la base d''Internet
+16. identifie un ordinateur sur un réseau
+17. traduit les noms en adresses IP
+18. langage de création de pages web
+19. met en forme les pages web
+20. rend les pages web interactives
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'a6c2d719-4477-d2f3-9b89-08ba6116a797', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — QCM (Épreuve 1) — Série 3',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le client-serveur :
+
+A. un modèle de communication
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q2.** Le cloud computing :
+
+A. le stockage et le calcul à distance
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q3.** La cybersécurité :
+
+A. protège les systèmes
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q4.** Le chiffrement :
+
+A. protège les données
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q5.** L''authentification :
+
+A. vérifie l''identité
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q6.** Le pare-feu :
+
+A. protège le réseau
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q7.** L''intelligence artificielle :
+
+A. simule l''intelligence humaine
+B. est un jeu
+C. est un fichier
+D. est une mémoire
+
+---
+
+**Q8.** Le machine learning :
+
+A. l''apprentissage automatique
+B. est un jeu
+C. est un fichier
+D. est une mémoire
+
+---
+
+**Q9.** Le système d''exploitation :
+
+A. gère les ressources de l''ordinateur
+B. est un fichier
+C. est un jeu
+D. est une mémoire
+
+---
+
+**Q10.** Le processus :
+
+A. un programme en cours d''exécution
+B. un fichier
+C. un jeu
+D. une mémoire
+
+---
+
+**Q11.** Le thread :
+
+A. un fil d''exécution
+B. un fichier
+C. un jeu
+D. une mémoire
+
+---
+
+**Q12.** La mémoire virtuelle :
+
+A. étend la mémoire physique
+B. est un fichier
+C. est un jeu
+D. est un périphérique
+
+---
+
+**Q13.** Le compilateur :
+
+A. traduit le code en langage machine
+B. exécute le code
+C. est un fichier
+D. est un jeu
+
+---
+
+**Q14.** L''interpréteur :
+
+A. exécute le code ligne par ligne
+B. traduit tout le code
+C. est un fichier
+D. est un jeu
+
+---
+
+**Q15.** Le débogage :
+
+A. corrige les erreurs
+B. crée des erreurs
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q16.** Le test unitaire :
+
+A. teste une unité de code
+B. teste tout le système
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q17.** La documentation :
+
+A. explique le code
+B. est inutile
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q18.** Le versionnage :
+
+A. gère les versions du code
+B. est inutile
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q19.** Git est :
+
+A. un outil de versionnage
+B. un jeu
+C. un fichier
+D. une mémoire
+
+---
+
+**Q20.** Le dépôt (repository) :
+
+A. stocke le code versionné
+B. est un jeu
+C. est un fichier
+D. est une mémoire
+
+---
+
+## CORRIGÉ
+
+1. un modèle de communication
+2. le stockage et le calcul à distance
+3. protège les systèmes
+4. protège les données
+5. vérifie l''identité
+6. protège le réseau
+7. simule l''intelligence humaine
+8. l''apprentissage automatique
+9. gère les ressources de l''ordinateur
+10. un programme en cours d''exécution
+11. un fil d''exécution
+12. étend la mémoire physique
+13. traduit le code en langage machine
+14. exécute le code ligne par ligne
+15. corrige les erreurs
+16. teste une unité de code
+17. explique le code
+18. gère les versions du code
+19. un outil de versionnage
+20. stocke le code versionné
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f913048a-dbe4-5c14-9df1-b5c2a7ca3d81', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — Sujet structuré — Série 4',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: RÉSEAUX ET WEB
+
+**Q1.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q1.** Créer une page web en HTML et CSS.
+
+**Q1.** Expliquer le modèle client-serveur.
+
+**Q1.** Décrire les principes de la cybersécurité.
+
+**Q1.** Expliquer le fonctionnement du cloud computing.
+
+## SECTION 2: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q2.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q2.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q2.** Écrire un algorithme de tri d''un tableau.
+
+**Q2.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q2.** Écrire un algorithme de recherche dichotomique.
+
+## SECTION 3: STRUCTURES DE DONNÉES
+
+**Q3.** Implémenter une pile et une file.
+
+**Q3.** Parcourir un arbre binaire.
+
+**Q3.** Représenter et parcourir un graphe.
+
+**Q3.** Implémenter une liste chaînée.
+
+**Q3.** Comparer les complexités des structures de données.
+
+## SECTION 4: BASES DE DONNÉES
+
+**Q4.** Créer une base de données et ses tables.
+
+**Q4.** Écrire des requêtes SQL pour interroger les données.
+
+**Q4.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q4.** Définir les clés primaires et étrangères.
+
+**Q4.** Normaliser une base de données.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '7c26eeee-b9c5-3cec-ff42-aa6d768e4e4c', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — Sujet structuré — Série 5',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q1.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q1.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q1.** Écrire un algorithme de tri d''un tableau.
+
+**Q1.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q1.** Écrire un algorithme de recherche dichotomique.
+
+## SECTION 2: STRUCTURES DE DONNÉES
+
+**Q2.** Implémenter une pile et une file.
+
+**Q2.** Parcourir un arbre binaire.
+
+**Q2.** Représenter et parcourir un graphe.
+
+**Q2.** Implémenter une liste chaînée.
+
+**Q2.** Comparer les complexités des structures de données.
+
+## SECTION 3: BASES DE DONNÉES
+
+**Q3.** Créer une base de données et ses tables.
+
+**Q3.** Écrire des requêtes SQL pour interroger les données.
+
+**Q3.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q3.** Définir les clés primaires et étrangères.
+
+**Q3.** Normaliser une base de données.
+
+## SECTION 4: RÉSEAUX ET WEB
+
+**Q4.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q4.** Créer une page web en HTML et CSS.
+
+**Q4.** Expliquer le modèle client-serveur.
+
+**Q4.** Décrire les principes de la cybersécurité.
+
+**Q4.** Expliquer le fonctionnement du cloud computing.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'a3e6c9c5-7904-2158-4448-8debbee36b86', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — Sujet structuré — Série 6',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: STRUCTURES DE DONNÉES
+
+**Q1.** Implémenter une pile et une file.
+
+**Q1.** Parcourir un arbre binaire.
+
+**Q1.** Représenter et parcourir un graphe.
+
+**Q1.** Implémenter une liste chaînée.
+
+**Q1.** Comparer les complexités des structures de données.
+
+## SECTION 2: BASES DE DONNÉES
+
+**Q2.** Créer une base de données et ses tables.
+
+**Q2.** Écrire des requêtes SQL pour interroger les données.
+
+**Q2.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q2.** Définir les clés primaires et étrangères.
+
+**Q2.** Normaliser une base de données.
+
+## SECTION 3: RÉSEAUX ET WEB
+
+**Q3.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q3.** Créer une page web en HTML et CSS.
+
+**Q3.** Expliquer le modèle client-serveur.
+
+**Q3.** Décrire les principes de la cybersécurité.
+
+**Q3.** Expliquer le fonctionnement du cloud computing.
+
+## SECTION 4: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q4.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q4.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q4.** Écrire un algorithme de tri d''un tableau.
+
+**Q4.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q4.** Écrire un algorithme de recherche dichotomique.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- BEPC Informatique — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '2736cf81-891d-d7ee-0498-73f7ea3436ac', 'fr-bepc-info-bureautique', 'Informatique', 'BEPC Informatique — Sujet structuré — Série 7',
+    'french', 'ordinary', array['troisieme']::text[], array['tronc_commun']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: BASES DE DONNÉES
+
+**Q1.** Créer une base de données et ses tables.
+
+**Q1.** Écrire des requêtes SQL pour interroger les données.
+
+**Q1.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q1.** Définir les clés primaires et étrangères.
+
+**Q1.** Normaliser une base de données.
+
+## SECTION 2: RÉSEAUX ET WEB
+
+**Q2.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q2.** Créer une page web en HTML et CSS.
+
+**Q2.** Expliquer le modèle client-serveur.
+
+**Q2.** Décrire les principes de la cybersécurité.
+
+**Q2.** Expliquer le fonctionnement du cloud computing.
+
+## SECTION 3: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q3.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q3.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q3.** Écrire un algorithme de tri d''un tableau.
+
+**Q3.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q3.** Écrire un algorithme de recherche dichotomique.
+
+## SECTION 4: STRUCTURES DE DONNÉES
+
+**Q4.** Implémenter une pile et une file.
+
+**Q4.** Parcourir un arbre binaire.
+
+**Q4.** Représenter et parcourir un graphe.
+
+**Q4.** Implémenter une liste chaînée.
+
+**Q4.** Comparer les complexités des structures de données.
+', 'paper', 'paper', 'francophone', 'BEPC',
+    '2024', 'teacher_authored', 'BEPC Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '360aad2d-1081-4b91-1f45-a31988562690', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le bilan est :
+
+A. un tableau qui décrit le patrimoine
+B. un compte de résultat
+C. une facture
+D. un journal
+
+---
+
+**Q2.** L''actif du bilan comprend :
+
+A. les biens et créances
+B. les dettes
+C. les capitaux propres
+D. les charges
+
+---
+
+**Q3.** Le passif du bilan comprend :
+
+A. les dettes et capitaux propres
+B. les biens
+C. les créances
+D. les produits
+
+---
+
+**Q4.** Le compte de résultat présente :
+
+A. les charges et produits
+B. l''actif et le passif
+C. les biens et dettes
+D. les recettes et dépenses
+
+---
+
+**Q5.** Le journal comptable enregistre :
+
+A. les opérations au jour le jour
+B. le bilan
+C. le résultat
+D. les amortissements
+
+---
+
+**Q6.** Le grand livre regroupe :
+
+A. tous les comptes
+B. les factures
+C. les bilans
+D. les résultats
+
+---
+
+**Q7.** La balance est :
+
+A. un récapitulatif des comptes
+B. un bilan
+C. un résultat
+D. un journal
+
+---
+
+**Q8.** Le compte « caisse » est :
+
+A. un compte d''actif
+B. un compte de passif
+C. un compte de charge
+D. un compte de produit
+
+---
+
+**Q9.** Le compte « banque » est :
+
+A. un compte d''actif
+B. un compte de passif
+C. un compte de charge
+D. un compte de produit
+
+---
+
+**Q10.** Le compte « capital » est :
+
+A. un compte de capitaux propres
+B. un compte d''actif
+C. un compte de charge
+D. un compte de produit
+
+---
+
+**Q11.** Le compte « ventes » est :
+
+A. un compte de produit
+B. un compte de charge
+C. un compte d''actif
+D. un compte de passif
+
+---
+
+**Q12.** Le compte « achats » est :
+
+A. un compte de charge
+B. un compte de produit
+C. un compte d''actif
+D. un compte de passif
+
+---
+
+**Q13.** La TVA est :
+
+A. la taxe sur la valeur ajoutée
+B. une taxe foncière
+C. un impôt sur le revenu
+D. une taxe douanière
+
+---
+
+**Q14.** La TVA collectée est :
+
+A. la TVA sur les ventes
+B. la TVA sur les achats
+C. une taxe
+D. un impôt
+
+---
+
+**Q15.** La TVA déductible est :
+
+A. la TVA sur les achats
+B. la TVA sur les ventes
+C. une taxe
+D. un impôt
+
+---
+
+**Q16.** La TVA à payer est :
+
+A. TVA collectée - TVA déductible
+B. TVA collectée + TVA déductible
+C. TVA déductible - TVA collectée
+D. TVA collectée
+
+---
+
+**Q17.** L''amortissement est :
+
+A. la constatation de la dépréciation d''un bien
+B. une charge
+C. un produit
+D. une dette
+
+---
+
+**Q18.** L''amortissement concerne :
+
+A. les immobilisations
+B. les stocks
+C. les créances
+D. la caisse
+
+---
+
+**Q19.** La provision est :
+
+A. une charge probable
+B. un produit
+C. une dette
+D. un bien
+
+---
+
+**Q20.** Le résultat de l''exercice est :
+
+A. produits - charges
+B. actif - passif
+C. recettes - dépenses
+D. ventes - achats
+
+---
+
+## CORRIGÉ
+
+1. un tableau qui décrit le patrimoine
+2. les biens et créances
+3. les dettes et capitaux propres
+4. les charges et produits
+5. les opérations au jour le jour
+6. tous les comptes
+7. un récapitulatif des comptes
+8. un compte d''actif
+9. un compte d''actif
+10. un compte de capitaux propres
+11. un compte de produit
+12. un compte de charge
+13. la taxe sur la valeur ajoutée
+14. la TVA sur les ventes
+15. la TVA sur les achats
+16. TVA collectée - TVA déductible
+17. la constatation de la dépréciation d''un bien
+18. les immobilisations
+19. une charge probable
+20. produits - charges
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '05556015-d2d8-3da9-3f79-ac932902cdf0', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le bénéfice est :
+
+A. un résultat positif
+B. un résultat négatif
+C. une charge
+D. un produit
+
+---
+
+**Q2.** La perte est :
+
+A. un résultat négatif
+B. un résultat positif
+C. une charge
+D. un produit
+
+---
+
+**Q3.** Le chiffre d''affaires est :
+
+A. le total des ventes
+B. le total des achats
+C. le bénéfice
+D. la perte
+
+---
+
+**Q4.** La facture est :
+
+A. un document commercial
+B. un bilan
+C. un résultat
+D. un journal
+
+---
+
+**Q5.** La facture d''achat est :
+
+A. reçue du fournisseur
+B. envoyée au client
+C. un bilan
+D. un résultat
+
+---
+
+**Q6.** La facture de vente est :
+
+A. envoyée au client
+B. reçue du fournisseur
+C. un bilan
+D. un résultat
+
+---
+
+**Q7.** L''avoir est :
+
+A. une facture de remise
+B. une facture d''achat
+C. un bilan
+D. un résultat
+
+---
+
+**Q8.** Le rabais est :
+
+A. une réduction sur le prix
+B. une taxe
+C. un impôt
+D. une charge
+
+---
+
+**Q9.** La remise est :
+
+A. une réduction commerciale
+B. une taxe
+C. un impôt
+D. une charge
+
+---
+
+**Q10.** L''escompte est :
+
+A. une réduction financière
+B. une réduction commerciale
+C. une taxe
+D. un impôt
+
+---
+
+**Q11.** Le compte « clients » est :
+
+A. un compte de créance
+B. un compte de dette
+C. un compte de charge
+D. un compte de produit
+
+---
+
+**Q12.** Le compte « fournisseurs » est :
+
+A. un compte de dette
+B. un compte de créance
+C. un compte de charge
+D. un compte de produit
+
+---
+
+**Q13.** Le compte « personnel » est :
+
+A. un compte de dette
+B. un compte de créance
+C. un compte de charge
+D. un compte de produit
+
+---
+
+**Q14.** Le compte « État, TVA » est :
+
+A. un compte de tiers
+B. un compte de charge
+C. un compte de produit
+D. un compte de banque
+
+---
+
+**Q15.** Le journal est tenu :
+
+A. chronologiquement
+B. par ordre alphabétique
+C. par montant
+D. au hasard
+
+---
+
+**Q16.** La partie double signifie :
+
+A. chaque opération affecte deux comptes
+B. deux journaux
+C. deux bilans
+D. deux résultats
+
+---
+
+**Q17.** Le débit d''un compte d''actif :
+
+A. augmente le compte
+B. diminue le compte
+C. n''a aucun effet
+D. annule le compte
+
+---
+
+**Q18.** Le crédit d''un compte de passif :
+
+A. augmente le compte
+B. diminue le compte
+C. n''a aucun effet
+D. annule le compte
+
+---
+
+**Q19.** Le débit d''un compte de charge :
+
+A. augmente le compte
+B. diminue le compte
+C. n''a aucun effet
+D. annule le compte
+
+---
+
+**Q20.** Le crédit d''un compte de produit :
+
+A. augmente le compte
+B. diminue le compte
+C. n''a aucun effet
+D. annule le compte
+
+---
+
+## CORRIGÉ
+
+1. un résultat positif
+2. un résultat négatif
+3. le total des ventes
+4. un document commercial
+5. reçue du fournisseur
+6. envoyée au client
+7. une facture de remise
+8. une réduction sur le prix
+9. une réduction commerciale
+10. une réduction financière
+11. un compte de créance
+12. un compte de dette
+13. un compte de dette
+14. un compte de tiers
+15. chronologiquement
+16. chaque opération affecte deux comptes
+17. augmente le compte
+18. augmente le compte
+19. augmente le compte
+20. augmente le compte
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0f553dbb-dd6c-6a4b-327a-a3ced5430ddd', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le solde d''un compte est :
+
+A. la différence entre débit et crédit
+B. le total du débit
+C. le total du crédit
+D. le nombre d''opérations
+
+---
+
+**Q2.** Un compte débiteur a :
+
+A. un solde débiteur
+B. un solde créditeur
+C. un solde nul
+D. aucun solde
+
+---
+
+**Q3.** Un compte créditeur a :
+
+A. un solde créditeur
+B. un solde débiteur
+C. un solde nul
+D. aucun solde
+
+---
+
+**Q4.** Le plan comptable est :
+
+A. la liste normalisée des comptes
+B. un bilan
+C. un résultat
+D. un journal
+
+---
+
+**Q5.** Le système comptable OHADA est utilisé :
+
+A. en Afrique francophone
+B. en Europe
+C. en Amérique
+D. en Asie
+
+---
+
+**Q6.** Le bilan se présente :
+
+A. en deux colonnes (actif et passif)
+B. en une colonne
+C. en trois colonnes
+D. en tableau
+
+---
+
+**Q7.** L''actif immobilisé comprend :
+
+A. les biens durables
+B. les stocks
+C. les créances
+D. la caisse
+
+---
+
+**Q8.** L''actif circulant comprend :
+
+A. les stocks, créances et disponibilités
+B. les biens durables
+C. les capitaux propres
+D. les dettes
+
+---
+
+**Q9.** Les capitaux propres comprennent :
+
+A. le capital et les réserves
+B. les dettes
+C. les biens
+D. les créances
+
+---
+
+**Q10.** Les dettes à long terme sont :
+
+A. les emprunts
+B. les fournisseurs
+C. les clients
+D. la caisse
+
+---
+
+**Q11.** Les dettes à court terme sont :
+
+A. les fournisseurs
+B. les emprunts
+C. le capital
+D. les réserves
+
+---
+
+**Q12.** Le fonds de roulement est :
+
+A. actif circulant - dettes à court terme
+B. actif - passif
+C. produits - charges
+D. ventes - achats
+
+---
+
+**Q13.** Le besoin en fonds de roulement est :
+
+A. stocks + créances - dettes à court terme
+B. actif - passif
+C. produits - charges
+D. ventes - achats
+
+---
+
+**Q14.** La trésorerie nette est :
+
+A. fonds de roulement - besoin en fonds de roulement
+B. actif - passif
+C. produits - charges
+D. ventes - achats
+
+---
+
+**Q15.** Le seuil de rentabilité est :
+
+A. le chiffre d''affaires où le résultat est nul
+B. le bénéfice
+C. la perte
+D. le capital
+
+---
+
+**Q16.** La marge brute est :
+
+A. ventes - coût d''achat
+B. produits - charges
+C. actif - passif
+D. recettes - dépenses
+
+---
+
+**Q17.** Le coût de revient est :
+
+A. le coût total de production
+B. le prix de vente
+C. le bénéfice
+D. la perte
+
+---
+
+**Q18.** Le prix de vente est :
+
+A. coût de revient + marge
+B. coût de revient - marge
+C. coût de revient
+D. marge
+
+---
+
+**Q19.** La liasse fiscale comprend :
+
+A. bilan, compte de résultat et annexes
+B. uniquement le bilan
+C. uniquement le résultat
+D. les factures
+
+---
+
+**Q20.** L''annexe est :
+
+A. un document complémentaire du bilan
+B. un bilan
+C. un résultat
+D. un journal
+
+---
+
+## CORRIGÉ
+
+1. la différence entre débit et crédit
+2. un solde débiteur
+3. un solde créditeur
+4. la liste normalisée des comptes
+5. en Afrique francophone
+6. en deux colonnes (actif et passif)
+7. les biens durables
+8. les stocks, créances et disponibilités
+9. le capital et les réserves
+10. les emprunts
+11. les fournisseurs
+12. actif circulant - dettes à court terme
+13. stocks + créances - dettes à court terme
+14. fonds de roulement - besoin en fonds de roulement
+15. le chiffre d''affaires où le résultat est nul
+16. ventes - coût d''achat
+17. le coût total de production
+18. coût de revient + marge
+19. bilan, compte de résultat et annexes
+20. un document complémentaire du bilan
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'bcec7f7f-c0d3-8b3a-46c2-c838ba0ee8e4', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — Sujet structuré — Série 4',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: DOCUMENTS COMMERCIAUX
+
+**Q1.** Établir une facture avec remise, rabais et escompte.
+
+**Q1.** Établir un avoir.
+
+**Q1.** Remplir un chèque et un bordereau de versement.
+
+**Q1.** Établir un relevé de compte.
+
+**Q1.** Expliquer le rôle des documents commerciaux dans la comptabilité.
+
+## SECTION 2: COMPTABILITÉ GÉNÉRALE
+
+**Q2.** Présenter le bilan d''une entreprise à partir des données fournies.
+
+**Q2.** Enregistrer les opérations courantes dans le journal.
+
+**Q2.** Établir le compte de résultat d''une entreprise.
+
+**Q2.** Calculer la TVA à payer à partir des ventes et achats.
+
+**Q2.** Établir la balance des comptes.
+
+## SECTION 3: ANALYSE COMPTABLE
+
+**Q3.** Calculer le fonds de roulement, le besoin en fonds de roulement et la trésorerie nette.
+
+**Q3.** Analyser la structure financière d''une entreprise.
+
+**Q3.** Calculer les ratios de liquidité et de solvabilité.
+
+**Q3.** Interpréter le résultat d''une entreprise.
+
+**Q3.** Calculer le seuil de rentabilité.
+
+## SECTION 4: GESTION ET COÛTS
+
+**Q4.** Calculer le coût d''achat, le coût de production et le coût de revient.
+
+**Q4.** Établir un tableau de répartition des charges.
+
+**Q4.** Calculer la marge brute et la marge nette.
+
+**Q4.** Analyser les écarts entre prévisions et réalisations.
+
+**Q4.** Calculer le prix de vente à partir du coût de revient et de la marge.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '9b844d46-e29b-2f20-36c0-e7efdd3ef20a', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — Sujet structuré — Série 5',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: COMPTABILITÉ GÉNÉRALE
+
+**Q1.** Présenter le bilan d''une entreprise à partir des données fournies.
+
+**Q1.** Enregistrer les opérations courantes dans le journal.
+
+**Q1.** Établir le compte de résultat d''une entreprise.
+
+**Q1.** Calculer la TVA à payer à partir des ventes et achats.
+
+**Q1.** Établir la balance des comptes.
+
+## SECTION 2: ANALYSE COMPTABLE
+
+**Q2.** Calculer le fonds de roulement, le besoin en fonds de roulement et la trésorerie nette.
+
+**Q2.** Analyser la structure financière d''une entreprise.
+
+**Q2.** Calculer les ratios de liquidité et de solvabilité.
+
+**Q2.** Interpréter le résultat d''une entreprise.
+
+**Q2.** Calculer le seuil de rentabilité.
+
+## SECTION 3: GESTION ET COÛTS
+
+**Q3.** Calculer le coût d''achat, le coût de production et le coût de revient.
+
+**Q3.** Établir un tableau de répartition des charges.
+
+**Q3.** Calculer la marge brute et la marge nette.
+
+**Q3.** Analyser les écarts entre prévisions et réalisations.
+
+**Q3.** Calculer le prix de vente à partir du coût de revient et de la marge.
+
+## SECTION 4: DOCUMENTS COMMERCIAUX
+
+**Q4.** Établir une facture avec remise, rabais et escompte.
+
+**Q4.** Établir un avoir.
+
+**Q4.** Remplir un chèque et un bordereau de versement.
+
+**Q4.** Établir un relevé de compte.
+
+**Q4.** Expliquer le rôle des documents commerciaux dans la comptabilité.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'da40c8d7-8dae-0f88-bc52-671a47dee520', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — Sujet structuré — Série 6',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ANALYSE COMPTABLE
+
+**Q1.** Calculer le fonds de roulement, le besoin en fonds de roulement et la trésorerie nette.
+
+**Q1.** Analyser la structure financière d''une entreprise.
+
+**Q1.** Calculer les ratios de liquidité et de solvabilité.
+
+**Q1.** Interpréter le résultat d''une entreprise.
+
+**Q1.** Calculer le seuil de rentabilité.
+
+## SECTION 2: GESTION ET COÛTS
+
+**Q2.** Calculer le coût d''achat, le coût de production et le coût de revient.
+
+**Q2.** Établir un tableau de répartition des charges.
+
+**Q2.** Calculer la marge brute et la marge nette.
+
+**Q2.** Analyser les écarts entre prévisions et réalisations.
+
+**Q2.** Calculer le prix de vente à partir du coût de revient et de la marge.
+
+## SECTION 3: DOCUMENTS COMMERCIAUX
+
+**Q3.** Établir une facture avec remise, rabais et escompte.
+
+**Q3.** Établir un avoir.
+
+**Q3.** Remplir un chèque et un bordereau de versement.
+
+**Q3.** Établir un relevé de compte.
+
+**Q3.** Expliquer le rôle des documents commerciaux dans la comptabilité.
+
+## SECTION 4: COMPTABILITÉ GÉNÉRALE
+
+**Q4.** Présenter le bilan d''une entreprise à partir des données fournies.
+
+**Q4.** Enregistrer les opérations courantes dans le journal.
+
+**Q4.** Établir le compte de résultat d''une entreprise.
+
+**Q4.** Calculer la TVA à payer à partir des ventes et achats.
+
+**Q4.** Établir la balance des comptes.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Comptabilité — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'd7827120-eea7-5ac0-d135-8097ed47043d', 'fr-stt-economie-comptabilite', 'Comptabilité', 'Probatoire Comptabilité — Sujet structuré — Série 7',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire COMPTABILITÉ SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Comptabilité
+**Subject:** Comptabilité
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GESTION ET COÛTS
+
+**Q1.** Calculer le coût d''achat, le coût de production et le coût de revient.
+
+**Q1.** Établir un tableau de répartition des charges.
+
+**Q1.** Calculer la marge brute et la marge nette.
+
+**Q1.** Analyser les écarts entre prévisions et réalisations.
+
+**Q1.** Calculer le prix de vente à partir du coût de revient et de la marge.
+
+## SECTION 2: DOCUMENTS COMMERCIAUX
+
+**Q2.** Établir une facture avec remise, rabais et escompte.
+
+**Q2.** Établir un avoir.
+
+**Q2.** Remplir un chèque et un bordereau de versement.
+
+**Q2.** Établir un relevé de compte.
+
+**Q2.** Expliquer le rôle des documents commerciaux dans la comptabilité.
+
+## SECTION 3: COMPTABILITÉ GÉNÉRALE
+
+**Q3.** Présenter le bilan d''une entreprise à partir des données fournies.
+
+**Q3.** Enregistrer les opérations courantes dans le journal.
+
+**Q3.** Établir le compte de résultat d''une entreprise.
+
+**Q3.** Calculer la TVA à payer à partir des ventes et achats.
+
+**Q3.** Établir la balance des comptes.
+
+## SECTION 4: ANALYSE COMPTABLE
+
+**Q4.** Calculer le fonds de roulement, le besoin en fonds de roulement et la trésorerie nette.
+
+**Q4.** Analyser la structure financière d''une entreprise.
+
+**Q4.** Calculer les ratios de liquidité et de solvabilité.
+
+**Q4.** Interpréter le résultat d''une entreprise.
+
+**Q4.** Calculer le seuil de rentabilité.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Comptabilité Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'e41b42fb-bb9c-bc8a-f7c1-eccba35e0129', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''économie étudie :
+
+A. la production et la répartition des richesses
+B. la politique
+C. la religion
+D. la culture
+
+---
+
+**Q2.** Les besoins sont :
+
+A. illimités
+B. limités
+C. inexistants
+D. rares
+
+---
+
+**Q3.** Les ressources sont :
+
+A. limitées (rares)
+B. illimitées
+C. inexistantes
+D. abondantes
+
+---
+
+**Q4.** Le problème économique fondamental est :
+
+A. la rareté
+B. l''abondance
+C. la richesse
+D. la pauvreté
+
+---
+
+**Q5.** Les biens économiques sont :
+
+A. rares et utiles
+B. abondants
+C. gratuits
+D. inutiles
+
+---
+
+**Q6.** Les biens libres sont :
+
+A. gratuits et abondants
+B. rares
+C. payants
+D. inutiles
+
+---
+
+**Q7.** La production est :
+
+A. la création de biens et services
+B. la consommation
+C. l''épargne
+D. l''investissement
+
+---
+
+**Q8.** La consommation est :
+
+A. l''utilisation des biens et services
+B. la production
+C. l''épargne
+D. l''investissement
+
+---
+
+**Q9.** L''épargne est :
+
+A. la partie du revenu non consommée
+B. la consommation
+C. la production
+D. l''investissement
+
+---
+
+**Q10.** L''investissement est :
+
+A. l''achat de biens de production
+B. la consommation
+C. l''épargne
+D. la production
+
+---
+
+**Q11.** Le PIB est :
+
+A. la production totale d''un pays
+B. la population
+C. le chômage
+D. l''inflation
+
+---
+
+**Q12.** Le PIB par habitant est :
+
+A. le PIB divisé par la population
+B. le PIB total
+C. la population
+D. le chômage
+
+---
+
+**Q13.** L''inflation est :
+
+A. la hausse générale des prix
+B. la baisse des prix
+C. le chômage
+D. la croissance
+
+---
+
+**Q14.** La déflation est :
+
+A. la baisse générale des prix
+B. la hausse des prix
+C. le chômage
+D. la croissance
+
+---
+
+**Q15.** Le chômage est :
+
+A. l''absence d''emploi pour ceux qui cherchent
+B. le travail
+C. la production
+D. l''inflation
+
+---
+
+**Q16.** Le taux de chômage est :
+
+A. le pourcentage de chômeurs dans la population active
+B. le nombre d''employés
+C. la population
+D. le PIB
+
+---
+
+**Q17.** La population active comprend :
+
+A. les personnes en âge de travailler et qui travaillent ou cherchent
+B. toute la population
+C. les enfants
+D. les retraités
+
+---
+
+**Q18.** L''offre est :
+
+A. la quantité de biens proposés
+B. la quantité demandée
+C. le prix
+D. la production
+
+---
+
+**Q19.** La demande est :
+
+A. la quantité de biens désirés
+B. la quantité offerte
+C. le prix
+D. la production
+
+---
+
+**Q20.** Le prix d''équilibre est :
+
+A. où l''offre égale la demande
+B. le prix le plus bas
+C. le prix le plus haut
+D. le prix fixe
+
+---
+
+## CORRIGÉ
+
+1. la production et la répartition des richesses
+2. illimités
+3. limitées (rares)
+4. la rareté
+5. rares et utiles
+6. gratuits et abondants
+7. la création de biens et services
+8. l''utilisation des biens et services
+9. la partie du revenu non consommée
+10. l''achat de biens de production
+11. la production totale d''un pays
+12. le PIB divisé par la population
+13. la hausse générale des prix
+14. la baisse générale des prix
+15. l''absence d''emploi pour ceux qui cherchent
+16. le pourcentage de chômeurs dans la population active
+17. les personnes en âge de travailler et qui travaillent ou cherchent
+18. la quantité de biens proposés
+19. la quantité de biens désirés
+20. où l''offre égale la demande
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ecd5cda1-6501-054d-c9a4-c301122934c1', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La loi de l''offre et de la demande :
+
+A. le prix varie selon l''offre et la demande
+B. le prix est fixe
+C. le prix baisse toujours
+D. le prix monte toujours
+
+---
+
+**Q2.** Le marché est :
+
+A. le lieu de rencontre de l''offre et de la demande
+B. un magasin
+C. une usine
+D. une banque
+
+---
+
+**Q3.** La concurrence parfaite suppose :
+
+A. beaucoup d''offreurs et de demandeurs
+B. un seul offreur
+C. peu d''offreurs
+D. un monopole
+
+---
+
+**Q4.** Le monopole est :
+
+A. un seul offreur
+B. beaucoup d''offreurs
+C. deux offreurs
+D. aucun offreur
+
+---
+
+**Q5.** L''oligopole est :
+
+A. peu d''offreurs
+B. un seul offreur
+C. beaucoup d''offreurs
+D. aucun offreur
+
+---
+
+**Q6.** La monnaie a pour fonction :
+
+A. d''être un intermédiaire des échanges
+B. de produire
+C. de consommer
+D. d''investir
+
+---
+
+**Q7.** La monnaie fiduciaire est :
+
+A. les billets et pièces
+B. les chèques
+C. les cartes
+D. la monnaie électronique
+
+---
+
+**Q8.** La monnaie scripturale est :
+
+A. les dépôts en banque
+B. les billets
+C. les pièces
+D. l''or
+
+---
+
+**Q9.** La banque centrale :
+
+A. émet la monnaie et contrôle le crédit
+B. prête aux particuliers
+C. produit des biens
+D. consomme
+
+---
+
+**Q10.** Le taux d''intérêt est :
+
+A. le prix de l''argent emprunté
+B. le prix des biens
+C. le salaire
+D. le chômage
+
+---
+
+**Q11.** Le crédit est :
+
+A. un prêt d''argent
+B. une épargne
+C. une consommation
+D. une production
+
+---
+
+**Q12.** La banque commerciale :
+
+A. reçoit les dépôts et accorde des crédits
+B. émet la monnaie
+C. produit des biens
+D. fixe les prix
+
+---
+
+**Q13.** Le budget de l''État est :
+
+A. les recettes et dépenses publiques
+B. le PIB
+C. le chômage
+D. l''inflation
+
+---
+
+**Q14.** Les impôts sont :
+
+A. des prélèvements obligatoires
+B. des dons
+C. des salaires
+D. des épargnes
+
+---
+
+**Q15.** L''impôt direct est :
+
+A. prélevé directement sur le revenu
+B. inclus dans le prix
+C. un don
+D. une épargne
+
+---
+
+**Q16.** L''impôt indirect est :
+
+A. inclus dans le prix (TVA)
+B. prélevé sur le revenu
+C. un don
+D. une épargne
+
+---
+
+**Q17.** La politique budgétaire utilise :
+
+A. le budget de l''État
+B. le taux d''intérêt
+C. la monnaie
+D. le crédit
+
+---
+
+**Q18.** La politique monétaire utilise :
+
+A. le taux d''intérêt et la masse monétaire
+B. le budget
+C. les impôts
+D. les dépenses
+
+---
+
+**Q19.** La croissance économique est :
+
+A. l''augmentation de la production
+B. la baisse de la production
+C. le chômage
+D. l''inflation
+
+---
+
+**Q20.** Le développement est :
+
+A. l''amélioration des conditions de vie
+B. la croissance
+C. le chômage
+D. l''inflation
+
+---
+
+## CORRIGÉ
+
+1. le prix varie selon l''offre et la demande
+2. le lieu de rencontre de l''offre et de la demande
+3. beaucoup d''offreurs et de demandeurs
+4. un seul offreur
+5. peu d''offreurs
+6. d''être un intermédiaire des échanges
+7. les billets et pièces
+8. les dépôts en banque
+9. émet la monnaie et contrôle le crédit
+10. le prix de l''argent emprunté
+11. un prêt d''argent
+12. reçoit les dépôts et accorde des crédits
+13. les recettes et dépenses publiques
+14. des prélèvements obligatoires
+15. prélevé directement sur le revenu
+16. inclus dans le prix (TVA)
+17. le budget de l''État
+18. le taux d''intérêt et la masse monétaire
+19. l''augmentation de la production
+20. l''amélioration des conditions de vie
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0b66b080-97ae-d692-a3f1-cea1627987b0', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le commerce international est :
+
+A. les échanges entre pays
+B. le commerce local
+C. la production
+D. la consommation
+
+---
+
+**Q2.** L''exportation est :
+
+A. la vente de biens à l''étranger
+B. l''achat de biens de l''étranger
+C. la production
+D. la consommation
+
+---
+
+**Q3.** L''importation est :
+
+A. l''achat de biens de l''étranger
+B. la vente à l''étranger
+C. la production
+D. la consommation
+
+---
+
+**Q4.** La balance commerciale est :
+
+A. exportations - importations
+B. PIB - consommation
+C. recettes - dépenses
+D. actif - passif
+
+---
+
+**Q5.** Le protectionnisme est :
+
+A. la protection de l''économie nationale
+B. le libre-échange
+C. l''exportation
+D. l''importation
+
+---
+
+**Q6.** Le libre-échange est :
+
+A. la libre circulation des biens
+B. le protectionnisme
+C. l''exportation
+D. l''importation
+
+---
+
+**Q7.** La mondialisation est :
+
+A. l''interdépendance des économies
+B. l''isolement
+C. le protectionnisme
+D. la guerre
+
+---
+
+**Q8.** L''entreprise est :
+
+A. une unité de production
+B. un consommateur
+C. une banque
+D. un État
+
+---
+
+**Q9.** Le capital de l''entreprise est :
+
+A. les moyens de production
+B. les salaires
+C. les impôts
+D. les ventes
+
+---
+
+**Q10.** Le travail est :
+
+A. un facteur de production
+B. un capital
+C. une ressource naturelle
+D. un impôt
+
+---
+
+**Q11.** Les facteurs de production sont :
+
+A. le travail et le capital
+B. le travail et la consommation
+C. le capital et l''épargne
+D. la production et la vente
+
+---
+
+**Q12.** La productivité est :
+
+A. la production par unité de facteur
+B. la production totale
+C. le chômage
+D. l''inflation
+
+---
+
+**Q13.** Le salaire est :
+
+A. la rémunération du travail
+B. le prix des biens
+C. un impôt
+D. une épargne
+
+---
+
+**Q14.** Le profit est :
+
+A. la rémunération du capital
+B. le salaire
+C. un impôt
+D. une épargne
+
+---
+
+**Q15.** La rente est :
+
+A. la rémunération de la terre
+B. le salaire
+C. le profit
+D. un impôt
+
+---
+
+**Q16.** Le développement durable vise :
+
+A. à satisfaire les besoins sans compromettre l''avenir
+B. la croissance rapide
+C. l''exploitation maximale
+D. la consommation
+
+---
+
+**Q17.** L''économie informelle est :
+
+A. non enregistrée officiellement
+B. officielle
+C. légale
+D. formelle
+
+---
+
+**Q18.** La microfinance :
+
+A. accorde des petits crédits
+B. émet la monnaie
+C. produit des biens
+D. fixe les prix
+
+---
+
+**Q19.** Le secteur primaire comprend :
+
+A. l''agriculture et l''extraction
+B. l''industrie
+C. les services
+D. le commerce
+
+---
+
+**Q20.** Le secteur secondaire comprend :
+
+A. l''industrie
+B. l''agriculture
+C. les services
+D. le commerce
+
+---
+
+## CORRIGÉ
+
+1. les échanges entre pays
+2. la vente de biens à l''étranger
+3. l''achat de biens de l''étranger
+4. exportations - importations
+5. la protection de l''économie nationale
+6. la libre circulation des biens
+7. l''interdépendance des économies
+8. une unité de production
+9. les moyens de production
+10. un facteur de production
+11. le travail et le capital
+12. la production par unité de facteur
+13. la rémunération du travail
+14. la rémunération du capital
+15. la rémunération de la terre
+16. à satisfaire les besoins sans compromettre l''avenir
+17. non enregistrée officiellement
+18. accorde des petits crédits
+19. l''agriculture et l''extraction
+20. l''industrie
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0beb5512-04a2-a4c1-6fea-3de5e425902a', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — Sujet structuré — Série 4',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ÉTAT ET POLITIQUES ÉCONOMIQUES
+
+**Q1.** Expliquer le rôle économique de l''État.
+
+**Q1.** Décrire le budget de l''État.
+
+**Q1.** Expliquer la politique budgétaire.
+
+**Q1.** Expliquer la politique monétaire.
+
+**Q1.** Analyser les effets de l''inflation sur l''économie.
+
+## SECTION 2: CONCEPTS ÉCONOMIQUES
+
+**Q2.** Expliquer le problème économique fondamental de la rareté.
+
+**Q2.** Distinguer les biens économiques et les biens libres.
+
+**Q2.** Expliquer les notions de besoin, de bien et de service.
+
+**Q2.** Décrire les agents économiques et leurs fonctions.
+
+**Q2.** Expliquer le circuit économique.
+
+## SECTION 3: PRODUCTION ET MARCHÉ
+
+**Q3.** Expliquer les facteurs de production.
+
+**Q3.** Décrire le fonctionnement du marché.
+
+**Q3.** Expliquer la loi de l''offre et de la demande.
+
+**Q3.** Distinguer les différentes structures de marché.
+
+**Q3.** Expliquer la notion de productivité.
+
+## SECTION 4: MONNAIE ET FINANCEMENT
+
+**Q4.** Expliquer les fonctions de la monnaie.
+
+**Q4.** Distinguer les formes de la monnaie.
+
+**Q4.** Expliquer le rôle de la banque centrale.
+
+**Q4.** Décrire le rôle des banques commerciales.
+
+**Q4.** Expliquer le mécanisme du crédit.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f1c6d89f-809a-f800-08b0-9d5d1886f53e', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — Sujet structuré — Série 5',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CONCEPTS ÉCONOMIQUES
+
+**Q1.** Expliquer le problème économique fondamental de la rareté.
+
+**Q1.** Distinguer les biens économiques et les biens libres.
+
+**Q1.** Expliquer les notions de besoin, de bien et de service.
+
+**Q1.** Décrire les agents économiques et leurs fonctions.
+
+**Q1.** Expliquer le circuit économique.
+
+## SECTION 2: PRODUCTION ET MARCHÉ
+
+**Q2.** Expliquer les facteurs de production.
+
+**Q2.** Décrire le fonctionnement du marché.
+
+**Q2.** Expliquer la loi de l''offre et de la demande.
+
+**Q2.** Distinguer les différentes structures de marché.
+
+**Q2.** Expliquer la notion de productivité.
+
+## SECTION 3: MONNAIE ET FINANCEMENT
+
+**Q3.** Expliquer les fonctions de la monnaie.
+
+**Q3.** Distinguer les formes de la monnaie.
+
+**Q3.** Expliquer le rôle de la banque centrale.
+
+**Q3.** Décrire le rôle des banques commerciales.
+
+**Q3.** Expliquer le mécanisme du crédit.
+
+## SECTION 4: ÉTAT ET POLITIQUES ÉCONOMIQUES
+
+**Q4.** Expliquer le rôle économique de l''État.
+
+**Q4.** Décrire le budget de l''État.
+
+**Q4.** Expliquer la politique budgétaire.
+
+**Q4.** Expliquer la politique monétaire.
+
+**Q4.** Analyser les effets de l''inflation sur l''économie.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '17042851-2afd-0a94-ec53-05b93c449323', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — Sujet structuré — Série 6',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PRODUCTION ET MARCHÉ
+
+**Q1.** Expliquer les facteurs de production.
+
+**Q1.** Décrire le fonctionnement du marché.
+
+**Q1.** Expliquer la loi de l''offre et de la demande.
+
+**Q1.** Distinguer les différentes structures de marché.
+
+**Q1.** Expliquer la notion de productivité.
+
+## SECTION 2: MONNAIE ET FINANCEMENT
+
+**Q2.** Expliquer les fonctions de la monnaie.
+
+**Q2.** Distinguer les formes de la monnaie.
+
+**Q2.** Expliquer le rôle de la banque centrale.
+
+**Q2.** Décrire le rôle des banques commerciales.
+
+**Q2.** Expliquer le mécanisme du crédit.
+
+## SECTION 3: ÉTAT ET POLITIQUES ÉCONOMIQUES
+
+**Q3.** Expliquer le rôle économique de l''État.
+
+**Q3.** Décrire le budget de l''État.
+
+**Q3.** Expliquer la politique budgétaire.
+
+**Q3.** Expliquer la politique monétaire.
+
+**Q3.** Analyser les effets de l''inflation sur l''économie.
+
+## SECTION 4: CONCEPTS ÉCONOMIQUES
+
+**Q4.** Expliquer le problème économique fondamental de la rareté.
+
+**Q4.** Distinguer les biens économiques et les biens libres.
+
+**Q4.** Expliquer les notions de besoin, de bien et de service.
+
+**Q4.** Décrire les agents économiques et leurs fonctions.
+
+**Q4.** Expliquer le circuit économique.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Probatoire Économie — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ec04c120-0cd8-9f0a-34a2-43d81e81ffbf', 'fr-stt-economie-comptabilite', 'Économie', 'Probatoire Économie — Sujet structuré — Série 7',
+    'french', 'advanced', array['premiere','terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Probatoire ÉCONOMIE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Première
+**Series:** Économie
+**Subject:** Économie
+**Exam:** Probatoire
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: MONNAIE ET FINANCEMENT
+
+**Q1.** Expliquer les fonctions de la monnaie.
+
+**Q1.** Distinguer les formes de la monnaie.
+
+**Q1.** Expliquer le rôle de la banque centrale.
+
+**Q1.** Décrire le rôle des banques commerciales.
+
+**Q1.** Expliquer le mécanisme du crédit.
+
+## SECTION 2: ÉTAT ET POLITIQUES ÉCONOMIQUES
+
+**Q2.** Expliquer le rôle économique de l''État.
+
+**Q2.** Décrire le budget de l''État.
+
+**Q2.** Expliquer la politique budgétaire.
+
+**Q2.** Expliquer la politique monétaire.
+
+**Q2.** Analyser les effets de l''inflation sur l''économie.
+
+## SECTION 3: CONCEPTS ÉCONOMIQUES
+
+**Q3.** Expliquer le problème économique fondamental de la rareté.
+
+**Q3.** Distinguer les biens économiques et les biens libres.
+
+**Q3.** Expliquer les notions de besoin, de bien et de service.
+
+**Q3.** Décrire les agents économiques et leurs fonctions.
+
+**Q3.** Expliquer le circuit économique.
+
+## SECTION 4: PRODUCTION ET MARCHÉ
+
+**Q4.** Expliquer les facteurs de production.
+
+**Q4.** Décrire le fonctionnement du marché.
+
+**Q4.** Expliquer la loi de l''offre et de la demande.
+
+**Q4.** Distinguer les différentes structures de marché.
+
+**Q4.** Expliquer la notion de productivité.
+', 'paper', 'paper', 'francophone', 'Probatoire',
+    '2024', 'teacher_authored', 'Probatoire Économie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '04c113ad-f8c1-1b03-8379-0509888b42cc', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La philosophie signifie étymologiquement :
+
+A. l''amour de la sagesse
+B. la science
+C. la religion
+D. la politique
+
+---
+
+**Q2.** Le premier philosophe grec est souvent considéré :
+
+A. Thalès
+B. Socrate
+C. Platon
+D. Aristote
+
+---
+
+**Q3.** Socrate est connu pour :
+
+A. la maïeutique
+B. la théorie des idées
+C. la logique
+D. le doute
+
+---
+
+**Q4.** Platon a écrit :
+
+A. La République
+B. L''Éthique à Nicomaque
+C. Le Discours de la méthode
+D. Le Contrat social
+
+---
+
+**Q5.** Aristote est le fondateur de :
+
+A. la logique
+B. le scepticisme
+C. l''idéalisme
+D. l''empirisme
+
+---
+
+**Q6.** Descartes est connu pour :
+
+A. le cogito « je pense donc je suis »
+B. la théorie des idées
+C. la logique
+D. le contrat social
+
+---
+
+**Q7.** Le cogito de Descartes est :
+
+A. « je pense donc je suis »
+B. « connais-toi toi-même »
+C. « tout est nombre »
+D. « rien ne se perd »
+
+---
+
+**Q8.** Kant a écrit :
+
+A. La Critique de la raison pure
+B. La République
+C. Le Contrat social
+D. L''Éthique
+
+---
+
+**Q9.** Rousseau a écrit :
+
+A. Le Contrat social
+B. La République
+C. La Critique
+D. Le Discours de la méthode
+
+---
+
+**Q10.** L''empirisme affirme que :
+
+A. toute connaissance vient de l''expérience
+B. la raison est la seule source
+C. les idées sont innées
+D. rien n''est connaissable
+
+---
+
+**Q11.** Le rationalisme affirme que :
+
+A. la raison est la source de la connaissance
+B. l''expérience est la seule source
+C. les idées sont innées
+D. rien n''est connaissable
+
+---
+
+**Q12.** Le scepticisme affirme que :
+
+A. la connaissance certaine est impossible
+B. tout est connaissable
+C. la raison est la source
+D. l''expérience est la source
+
+---
+
+**Q13.** L''éthique étudie :
+
+A. les principes moraux
+B. la nature
+C. la société
+D. la connaissance
+
+---
+
+**Q14.** La morale est :
+
+A. l''ensemble des règles de conduite
+B. la science
+C. la politique
+D. la religion
+
+---
+
+**Q15.** Le devoir est :
+
+A. une obligation morale
+B. un droit
+C. un choix
+D. une liberté
+
+---
+
+**Q16.** La liberté est :
+
+A. la capacité d''agir selon sa volonté
+B. l''absence de choix
+C. une contrainte
+D. un devoir
+
+---
+
+**Q17.** Le libre arbitre est :
+
+A. la liberté de choisir
+B. l''absence de choix
+C. une contrainte
+D. un devoir
+
+---
+
+**Q18.** La responsabilité est :
+
+A. répondre de ses actes
+B. un droit
+C. une liberté
+D. un choix
+
+---
+
+**Q19.** La justice est :
+
+A. le respect des droits de chacun
+B. la force
+C. la vengeance
+D. l''égalité
+
+---
+
+**Q20.** L''égalité signifie :
+
+A. les mêmes droits pour tous
+B. les mêmes richesses
+C. la même force
+D. le même âge
+
+---
+
+## CORRIGÉ
+
+1. l''amour de la sagesse
+2. Thalès
+3. la maïeutique
+4. La République
+5. la logique
+6. le cogito « je pense donc je suis »
+7. « je pense donc je suis »
+8. La Critique de la raison pure
+9. Le Contrat social
+10. toute connaissance vient de l''expérience
+11. la raison est la source de la connaissance
+12. la connaissance certaine est impossible
+13. les principes moraux
+14. l''ensemble des règles de conduite
+15. une obligation morale
+16. la capacité d''agir selon sa volonté
+17. la liberté de choisir
+18. répondre de ses actes
+19. le respect des droits de chacun
+20. les mêmes droits pour tous
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '418a2048-3104-149e-a1d9-48650fa64abf', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''équité est :
+
+A. la justice adaptée aux situations
+B. l''égalité stricte
+C. la force
+D. la vengeance
+
+---
+
+**Q2.** La vérité est :
+
+A. la conformité avec la réalité
+B. une opinion
+C. une croyance
+D. une illusion
+
+---
+
+**Q3.** L''opinion est :
+
+A. une croyance non démontrée
+B. une vérité
+C. une certitude
+D. un fait
+
+---
+
+**Q4.** La démonstration est :
+
+A. une preuve logique
+B. une opinion
+C. une croyance
+D. une illusion
+
+---
+
+**Q5.** Le doute méthodique de Descartes :
+
+A. douter de tout pour trouver la vérité
+B. ne jamais douter
+C. croire sans preuve
+D. refuser la raison
+
+---
+
+**Q6.** La conscience est :
+
+A. la connaissance de soi et du monde
+B. l''inconscience
+C. la mémoire
+D. l''imagination
+
+---
+
+**Q7.** L''inconscient est :
+
+A. ce qui échappe à la conscience
+B. la conscience
+C. la mémoire
+D. l''imagination
+
+---
+
+**Q8.** Freud a développé :
+
+A. la psychanalyse
+B. la logique
+C. l''idéalisme
+D. l''empirisme
+
+---
+
+**Q9.** La perception est :
+
+A. la connaissance par les sens
+B. la raison
+C. la mémoire
+D. l''imagination
+
+---
+
+**Q10.** L''imagination est :
+
+A. la capacité de créer des images
+B. la perception
+C. la raison
+D. la mémoire
+
+---
+
+**Q11.** La mémoire est :
+
+A. la capacité de conserver le passé
+B. l''imagination
+C. la perception
+D. la raison
+
+---
+
+**Q12.** Le langage est :
+
+A. un système de signes pour communiquer
+B. la pensée
+C. la perception
+D. la mémoire
+
+---
+
+**Q13.** Le travail est :
+
+A. une activité de transformation de la nature
+B. un loisir
+C. une contrainte
+D. un jeu
+
+---
+
+**Q14.** La technique est :
+
+A. l''ensemble des moyens de production
+B. la science
+C. l''art
+D. la religion
+
+---
+
+**Q15.** L''art est :
+
+A. la création de la beauté
+B. la technique
+C. la science
+D. la religion
+
+---
+
+**Q16.** La beauté est :
+
+A. ce qui plaît universellement
+B. ce qui est utile
+C. ce qui est vrai
+D. ce qui est bon
+
+---
+
+**Q17.** La religion est :
+
+A. un système de croyances
+B. une science
+C. une technique
+D. un art
+
+---
+
+**Q18.** La foi est :
+
+A. une croyance sans preuve
+B. une certitude
+C. une démonstration
+D. une opinion
+
+---
+
+**Q19.** La politique est :
+
+A. l''organisation de la vie en société
+B. la religion
+C. la science
+D. l''art
+
+---
+
+**Q20.** L''État est :
+
+A. une organisation politique de la société
+B. une famille
+C. une entreprise
+D. une religion
+
+---
+
+## CORRIGÉ
+
+1. la justice adaptée aux situations
+2. la conformité avec la réalité
+3. une croyance non démontrée
+4. une preuve logique
+5. douter de tout pour trouver la vérité
+6. la connaissance de soi et du monde
+7. ce qui échappe à la conscience
+8. la psychanalyse
+9. la connaissance par les sens
+10. la capacité de créer des images
+11. la capacité de conserver le passé
+12. un système de signes pour communiquer
+13. une activité de transformation de la nature
+14. l''ensemble des moyens de production
+15. la création de la beauté
+16. ce qui plaît universellement
+17. un système de croyances
+18. une croyance sans preuve
+19. l''organisation de la vie en société
+20. une organisation politique de la société
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'a6bcf0ea-8fec-6c20-b459-fdc9d51a1ed3', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le contrat social de Rousseau :
+
+A. l''accord des citoyens pour vivre ensemble
+B. un contrat commercial
+C. une loi
+D. un décret
+
+---
+
+**Q2.** La souveraineté est :
+
+A. le pouvoir suprême de l''État
+B. un droit
+C. une liberté
+D. un devoir
+
+---
+
+**Q3.** La démocratie est :
+
+A. le pouvoir du peuple
+B. le pouvoir d''un seul
+C. le pouvoir des riches
+D. le pouvoir des militaires
+
+---
+
+**Q4.** La philosophie africaine :
+
+A. réfléchit sur les réalités africaines
+B. est une religion
+C. est une science
+D. est un art
+
+---
+
+**Q5.** L''ubuntu est :
+
+A. une valeur africaine de solidarité
+B. une religion
+C. une science
+D. un art
+
+---
+
+**Q6.** La sagesse est :
+
+A. la connaissance pratique de la vie
+B. la science
+C. la richesse
+D. le pouvoir
+
+---
+
+**Q7.** Le bonheur est :
+
+A. le but de la vie selon les philosophes
+B. la richesse
+C. le pouvoir
+D. la gloire
+
+---
+
+**Q8.** L''hédonisme affirme que :
+
+A. le plaisir est le bien suprême
+B. le devoir est suprême
+C. la raison est suprême
+D. la foi est suprême
+
+---
+
+**Q9.** Le stoïcisme affirme que :
+
+A. la vertu est le bien suprême
+B. le plaisir est suprême
+C. la richesse est suprême
+D. le pouvoir est suprême
+
+---
+
+**Q10.** L''utilitarisme affirme que :
+
+A. l''utile est le critère du bien
+B. le devoir est suprême
+C. le plaisir est suprême
+D. la foi est suprême
+
+---
+
+**Q11.** L''éthique de Kant repose sur :
+
+A. l''impératif catégorique
+B. le plaisir
+C. l''utilité
+D. la foi
+
+---
+
+**Q12.** L''impératif catégorique de Kant :
+
+A. agis selon une maxime universalisable
+B. agis pour ton plaisir
+C. agis pour ton intérêt
+D. agis par peur
+
+---
+
+**Q13.** La raison est :
+
+A. la faculté de penser et de juger
+B. la mémoire
+C. l''imagination
+D. la perception
+
+---
+
+**Q14.** L''intelligence est :
+
+A. la capacité de comprendre et résoudre
+B. la mémoire
+C. l''imagination
+D. la perception
+
+---
+
+**Q15.** La philosophie des sciences étudie :
+
+A. les fondements de la science
+B. la religion
+C. l''art
+D. la politique
+
+---
+
+**Q16.** La science est :
+
+A. une connaissance méthodique et vérifiable
+B. une opinion
+C. une croyance
+D. une illusion
+
+---
+
+**Q17.** L''hypothèse scientifique est :
+
+A. une supposition à vérifier
+B. une certitude
+C. une opinion
+D. une croyance
+
+---
+
+**Q18.** L''expérience scientifique :
+
+A. vérifie les hypothèses
+B. crée des opinions
+C. est inutile
+D. est une croyance
+
+---
+
+**Q19.** La philosophie morale étudie :
+
+A. les principes du bien et du mal
+B. la nature
+C. la société
+D. la connaissance
+
+---
+
+**Q20.** Le temps est :
+
+A. une réalité mesurable et vécue
+B. une illusion
+C. un objet
+D. une idée
+
+---
+
+## CORRIGÉ
+
+1. l''accord des citoyens pour vivre ensemble
+2. le pouvoir suprême de l''État
+3. le pouvoir du peuple
+4. réfléchit sur les réalités africaines
+5. une valeur africaine de solidarité
+6. la connaissance pratique de la vie
+7. le but de la vie selon les philosophes
+8. le plaisir est le bien suprême
+9. la vertu est le bien suprême
+10. l''utile est le critère du bien
+11. l''impératif catégorique
+12. agis selon une maxime universalisable
+13. la faculté de penser et de juger
+14. la capacité de comprendre et résoudre
+15. les fondements de la science
+16. une connaissance méthodique et vérifiable
+17. une supposition à vérifier
+18. vérifie les hypothèses
+19. les principes du bien et du mal
+20. une réalité mesurable et vécue
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '07ce38a9-2eae-bd96-123e-b0f93c4e72a4', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: LA SOCIÉTÉ ET L''ÉTAT
+
+**Q1.** Dissertation : « Pourquoi obéir aux lois ? »
+
+**Q1.** Expliquer la théorie du contrat social de Rousseau.
+
+**Q1.** Dissertation : « L''État garantit-il la justice ? »
+
+**Q1.** Expliquer la notion de souveraineté.
+
+**Q1.** Dissertation : « La démocratie est-elle le meilleur régime ? »
+
+## SECTION 2: LA CONSCIENCE ET L''INCONSCIENT
+
+**Q2.** Dissertation : « La conscience fait-elle de l''homme un être libre ? »
+
+**Q2.** Expliquer la différence entre la conscience et l''inconscient selon Freud.
+
+**Q2.** Commenter : « Je pense donc je suis » de Descartes.
+
+**Q2.** Dissertation : « Peut-on connaître autrui ? »
+
+**Q2.** Expliquer le rôle de la mémoire dans la constitution du sujet.
+
+## SECTION 3: LA RAISON ET LE VRAI
+
+**Q3.** Dissertation : « La vérité dépend-elle de nous ? »
+
+**Q3.** Distinguer la vérité de l''opinion.
+
+**Q3.** Expliquer la méthode cartésienne du doute.
+
+**Q3.** Dissertation : « La science nous libère-t-elle ? »
+
+**Q3.** Commenter : « Connais-toi toi-même » de Socrate.
+
+## SECTION 4: LA MORALE ET LA LIBERTÉ
+
+**Q4.** Dissertation : « Être libre, est-ce faire ce que l''on veut ? »
+
+**Q4.** Expliquer la notion de devoir moral.
+
+**Q4.** Dissertation : « La liberté et la responsabilité sont-elles liées ? »
+
+**Q4.** Commenter l''impératif catégorique de Kant.
+
+**Q4.** Dissertation : « Le bonheur est-il le but de la vie ? »
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'bc166e9f-60d5-9eaf-c5c2-0fc50ffb6782', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: LA CONSCIENCE ET L''INCONSCIENT
+
+**Q1.** Dissertation : « La conscience fait-elle de l''homme un être libre ? »
+
+**Q1.** Expliquer la différence entre la conscience et l''inconscient selon Freud.
+
+**Q1.** Commenter : « Je pense donc je suis » de Descartes.
+
+**Q1.** Dissertation : « Peut-on connaître autrui ? »
+
+**Q1.** Expliquer le rôle de la mémoire dans la constitution du sujet.
+
+## SECTION 2: LA RAISON ET LE VRAI
+
+**Q2.** Dissertation : « La vérité dépend-elle de nous ? »
+
+**Q2.** Distinguer la vérité de l''opinion.
+
+**Q2.** Expliquer la méthode cartésienne du doute.
+
+**Q2.** Dissertation : « La science nous libère-t-elle ? »
+
+**Q2.** Commenter : « Connais-toi toi-même » de Socrate.
+
+## SECTION 3: LA MORALE ET LA LIBERTÉ
+
+**Q3.** Dissertation : « Être libre, est-ce faire ce que l''on veut ? »
+
+**Q3.** Expliquer la notion de devoir moral.
+
+**Q3.** Dissertation : « La liberté et la responsabilité sont-elles liées ? »
+
+**Q3.** Commenter l''impératif catégorique de Kant.
+
+**Q3.** Dissertation : « Le bonheur est-il le but de la vie ? »
+
+## SECTION 4: LA SOCIÉTÉ ET L''ÉTAT
+
+**Q4.** Dissertation : « Pourquoi obéir aux lois ? »
+
+**Q4.** Expliquer la théorie du contrat social de Rousseau.
+
+**Q4.** Dissertation : « L''État garantit-il la justice ? »
+
+**Q4.** Expliquer la notion de souveraineté.
+
+**Q4.** Dissertation : « La démocratie est-elle le meilleur régime ? »
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'd53ec416-6953-ae26-e006-19c6fc33bb4c', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: LA RAISON ET LE VRAI
+
+**Q1.** Dissertation : « La vérité dépend-elle de nous ? »
+
+**Q1.** Distinguer la vérité de l''opinion.
+
+**Q1.** Expliquer la méthode cartésienne du doute.
+
+**Q1.** Dissertation : « La science nous libère-t-elle ? »
+
+**Q1.** Commenter : « Connais-toi toi-même » de Socrate.
+
+## SECTION 2: LA MORALE ET LA LIBERTÉ
+
+**Q2.** Dissertation : « Être libre, est-ce faire ce que l''on veut ? »
+
+**Q2.** Expliquer la notion de devoir moral.
+
+**Q2.** Dissertation : « La liberté et la responsabilité sont-elles liées ? »
+
+**Q2.** Commenter l''impératif catégorique de Kant.
+
+**Q2.** Dissertation : « Le bonheur est-il le but de la vie ? »
+
+## SECTION 3: LA SOCIÉTÉ ET L''ÉTAT
+
+**Q3.** Dissertation : « Pourquoi obéir aux lois ? »
+
+**Q3.** Expliquer la théorie du contrat social de Rousseau.
+
+**Q3.** Dissertation : « L''État garantit-il la justice ? »
+
+**Q3.** Expliquer la notion de souveraineté.
+
+**Q3.** Dissertation : « La démocratie est-elle le meilleur régime ? »
+
+## SECTION 4: LA CONSCIENCE ET L''INCONSCIENT
+
+**Q4.** Dissertation : « La conscience fait-elle de l''homme un être libre ? »
+
+**Q4.** Expliquer la différence entre la conscience et l''inconscient selon Freud.
+
+**Q4.** Commenter : « Je pense donc je suis » de Descartes.
+
+**Q4.** Dissertation : « Peut-on connaître autrui ? »
+
+**Q4.** Expliquer le rôle de la mémoire dans la constitution du sujet.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Philosophie — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'b8194cec-cc42-198f-43c2-f22b972ed5ac', 'fr-philo-bac-liberte', 'Philosophie', 'Baccalauréat Philosophie — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi']::text[], 'published',
+    '# CAMEROON Baccalauréat PHILOSOPHIE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Philosophie
+**Subject:** Philosophie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: LA MORALE ET LA LIBERTÉ
+
+**Q1.** Dissertation : « Être libre, est-ce faire ce que l''on veut ? »
+
+**Q1.** Expliquer la notion de devoir moral.
+
+**Q1.** Dissertation : « La liberté et la responsabilité sont-elles liées ? »
+
+**Q1.** Commenter l''impératif catégorique de Kant.
+
+**Q1.** Dissertation : « Le bonheur est-il le but de la vie ? »
+
+## SECTION 2: LA SOCIÉTÉ ET L''ÉTAT
+
+**Q2.** Dissertation : « Pourquoi obéir aux lois ? »
+
+**Q2.** Expliquer la théorie du contrat social de Rousseau.
+
+**Q2.** Dissertation : « L''État garantit-il la justice ? »
+
+**Q2.** Expliquer la notion de souveraineté.
+
+**Q2.** Dissertation : « La démocratie est-elle le meilleur régime ? »
+
+## SECTION 3: LA CONSCIENCE ET L''INCONSCIENT
+
+**Q3.** Dissertation : « La conscience fait-elle de l''homme un être libre ? »
+
+**Q3.** Expliquer la différence entre la conscience et l''inconscient selon Freud.
+
+**Q3.** Commenter : « Je pense donc je suis » de Descartes.
+
+**Q3.** Dissertation : « Peut-on connaître autrui ? »
+
+**Q3.** Expliquer le rôle de la mémoire dans la constitution du sujet.
+
+## SECTION 4: LA RAISON ET LE VRAI
+
+**Q4.** Dissertation : « La vérité dépend-elle de nous ? »
+
+**Q4.** Distinguer la vérité de l''opinion.
+
+**Q4.** Expliquer la méthode cartésienne du doute.
+
+**Q4.** Dissertation : « La science nous libère-t-elle ? »
+
+**Q4.** Commenter : « Connais-toi toi-même » de Socrate.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Philosophie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '3126c9c7-4826-3315-595b-791cb9e93b86', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Les SES étudient :
+
+A. l''économie, la sociologie et la science politique
+B. la biologie
+C. la chimie
+D. la physique
+
+---
+
+**Q2.** La sociologie étudie :
+
+A. les faits sociaux
+B. les atomes
+C. les cellules
+D. les planètes
+
+---
+
+**Q3.** La science politique étudie :
+
+A. le pouvoir et l''État
+B. les atomes
+C. les cellules
+D. les planètes
+
+---
+
+**Q4.** Le fait social selon Durkheim :
+
+A. des manières d''agir extérieures à l''individu
+B. des faits biologiques
+C. des faits physiques
+D. des faits chimiques
+
+---
+
+**Q5.** Durkheim a étudié :
+
+A. le suicide
+B. les atomes
+C. les cellules
+D. les planètes
+
+---
+
+**Q6.** Weber a étudié :
+
+A. l''éthique protestante et le capitalisme
+B. le suicide
+C. les atomes
+D. les cellules
+
+---
+
+**Q7.** Marx a analysé :
+
+A. la lutte des classes
+B. le suicide
+C. les atomes
+D. les planètes
+
+---
+
+**Q8.** La socialisation est :
+
+A. l''apprentissage des normes et valeurs
+B. la biologie
+C. la chimie
+D. la physique
+
+---
+
+**Q9.** Les normes sociales sont :
+
+A. des règles de conduite
+B. des lois physiques
+C. des réactions chimiques
+D. des cellules
+
+---
+
+**Q10.** Les valeurs sont :
+
+A. des idéaux partagés
+B. des lois
+C. des prix
+D. des salaires
+
+---
+
+**Q11.** La stratification sociale est :
+
+A. la hiérarchie des groupes sociaux
+B. la géologie
+C. la biologie
+D. la chimie
+
+---
+
+**Q12.** Les classes sociales selon Marx :
+
+A. bourgeoisie et prolétariat
+B. riches et pauvres
+C. jeunes et vieux
+D. hommes et femmes
+
+---
+
+**Q13.** La mobilité sociale est :
+
+A. le changement de position sociale
+B. le déplacement géographique
+C. la croissance
+D. l''inflation
+
+---
+
+**Q14.** L''ascenseur social est :
+
+A. la mobilité sociale ascendante
+B. un moyen de transport
+C. une machine
+D. un bâtiment
+
+---
+
+**Q15.** La famille est :
+
+A. une institution sociale
+B. une entreprise
+C. un État
+D. une religion
+
+---
+
+**Q16.** La socialisation primaire se fait :
+
+A. dans la famille
+B. à l''école
+C. au travail
+D. à la retraite
+
+---
+
+**Q17.** La socialisation secondaire se fait :
+
+A. à l''école, au travail
+B. dans la famille
+C. à la naissance
+D. dans le ventre
+
+---
+
+**Q18.** L''école est :
+
+A. une instance de socialisation
+B. une entreprise
+C. un État
+D. une religion
+
+---
+
+**Q19.** Les médias sont :
+
+A. des instances de socialisation
+B. des entreprises
+C. des États
+D. des religions
+
+---
+
+**Q20.** La culture est :
+
+A. l''ensemble des valeurs et pratiques d''un groupe
+B. la biologie
+C. la chimie
+D. la physique
+
+---
+
+## CORRIGÉ
+
+1. l''économie, la sociologie et la science politique
+2. les faits sociaux
+3. le pouvoir et l''État
+4. des manières d''agir extérieures à l''individu
+5. le suicide
+6. l''éthique protestante et le capitalisme
+7. la lutte des classes
+8. l''apprentissage des normes et valeurs
+9. des règles de conduite
+10. des idéaux partagés
+11. la hiérarchie des groupes sociaux
+12. bourgeoisie et prolétariat
+13. le changement de position sociale
+14. la mobilité sociale ascendante
+15. une institution sociale
+16. dans la famille
+17. à l''école, au travail
+18. une instance de socialisation
+19. des instances de socialisation
+20. l''ensemble des valeurs et pratiques d''un groupe
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f667b080-e8ed-d192-f966-2881a76e45ea', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La socialisation différenciée :
+
+A. varie selon le genre, la classe
+B. est identique pour tous
+C. n''existe pas
+D. est biologique
+
+---
+
+**Q2.** Le capital social est :
+
+A. le réseau de relations
+B. l''argent
+C. les biens
+D. les machines
+
+---
+
+**Q3.** Le capital culturel est :
+
+A. les connaissances et diplômes
+B. l''argent
+C. les biens
+D. les machines
+
+---
+
+**Q4.** Bourdieu a développé :
+
+A. la notion de capital culturel
+B. la théorie des idées
+C. la logique
+D. le cogito
+
+---
+
+**Q5.** La déviance est :
+
+A. la transgression des normes
+B. la conformité
+C. la socialisation
+D. l''intégration
+
+---
+
+**Q6.** L''anomie selon Durkheim :
+
+A. l''absence de normes
+B. l''excès de normes
+C. la conformité
+D. l''intégration
+
+---
+
+**Q7.** Le contrôle social est :
+
+A. les mécanismes qui assurent la conformité
+B. la liberté totale
+C. l''anarchie
+D. la déviance
+
+---
+
+**Q8.** La délinquance est :
+
+A. la transgression de la loi
+B. la conformité
+C. la socialisation
+D. l''intégration
+
+---
+
+**Q9.** Le chômage est :
+
+A. l''absence d''emploi pour les actifs
+B. le travail
+C. la production
+D. l''inflation
+
+---
+
+**Q10.** Le taux de chômage est :
+
+A. chômeurs / population active
+B. chômeurs / population totale
+C. employés / population
+D. actifs / population
+
+---
+
+**Q11.** Le halo du chômage est :
+
+A. les personnes proches du chômage
+B. les employés
+C. les retraités
+D. les enfants
+
+---
+
+**Q12.** La précarité est :
+
+A. l''instabilité de l''emploi
+B. la stabilité
+C. la richesse
+D. le chômage
+
+---
+
+**Q13.** Le CDI est :
+
+A. un contrat à durée indéterminée
+B. un contrat court
+C. un stage
+D. un intérim
+
+---
+
+**Q14.** Le CDD est :
+
+A. un contrat à durée déterminée
+B. un contrat permanent
+C. un stage
+D. un intérim
+
+---
+
+**Q15.** Le salaire est :
+
+A. la rémunération du travail
+B. le profit
+C. la rente
+D. un impôt
+
+---
+
+**Q16.** Le SMIG est :
+
+A. le salaire minimum
+B. le salaire moyen
+C. le salaire maximum
+D. le profit
+
+---
+
+**Q17.** La productivité est :
+
+A. la production par unité de facteur
+B. la production totale
+C. le chômage
+D. l''inflation
+
+---
+
+**Q18.** La croissance économique est :
+
+A. l''augmentation de la production
+B. la baisse de la production
+C. le chômage
+D. l''inflation
+
+---
+
+**Q19.** Le PIB est :
+
+A. la production totale d''un pays
+B. la population
+C. le chômage
+D. l''inflation
+
+---
+
+**Q20.** Le développement est :
+
+A. l''amélioration des conditions de vie
+B. la croissance
+C. le chômage
+D. l''inflation
+
+---
+
+## CORRIGÉ
+
+1. varie selon le genre, la classe
+2. le réseau de relations
+3. les connaissances et diplômes
+4. la notion de capital culturel
+5. la transgression des normes
+6. l''absence de normes
+7. les mécanismes qui assurent la conformité
+8. la transgression de la loi
+9. l''absence d''emploi pour les actifs
+10. chômeurs / population active
+11. les personnes proches du chômage
+12. l''instabilité de l''emploi
+13. un contrat à durée indéterminée
+14. un contrat à durée déterminée
+15. la rémunération du travail
+16. le salaire minimum
+17. la production par unité de facteur
+18. l''augmentation de la production
+19. la production totale d''un pays
+20. l''amélioration des conditions de vie
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '754b25ca-8a85-c685-b12b-97e433746242', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''IDH mesure :
+
+A. le développement humain
+B. la production
+C. le chômage
+D. l''inflation
+
+---
+
+**Q2.** L''IDH comprend :
+
+A. santé, éducation, revenu
+B. production, chômage, inflation
+C. population, surface, climat
+D. exportations, importations, PIB
+
+---
+
+**Q3.** La mondialisation est :
+
+A. l''interdépendance des économies
+B. l''isolement
+C. le protectionnisme
+D. la guerre
+
+---
+
+**Q4.** Le commerce international :
+
+A. les échanges entre pays
+B. le commerce local
+C. la production
+D. la consommation
+
+---
+
+**Q5.** La balance commerciale est :
+
+A. exportations - importations
+B. PIB - consommation
+C. recettes - dépenses
+D. actif - passif
+
+---
+
+**Q6.** Le protectionnisme :
+
+A. protège l''économie nationale
+B. favorise le libre-échange
+C. augmente les importations
+D. supprime les frontières
+
+---
+
+**Q7.** Le libre-échange :
+
+A. la libre circulation des biens
+B. le protectionnisme
+C. l''isolement
+D. la guerre
+
+---
+
+**Q8.** L''État-providence :
+
+A. intervient dans l''économie et le social
+B. ne fait rien
+C. produit des biens
+D. consomme
+
+---
+
+**Q9.** La protection sociale :
+
+A. protège contre les risques sociaux
+B. protège les frontières
+C. augmente les impôts
+D. réduit les salaires
+
+---
+
+**Q10.** La sécurité sociale :
+
+A. couvre les risques sociaux
+B. est une entreprise
+C. est un État
+D. est une religion
+
+---
+
+**Q11.** Les cotisations sociales :
+
+A. financent la protection sociale
+B. sont des salaires
+C. sont des profits
+D. sont des rentes
+
+---
+
+**Q12.** La redistribution :
+
+A. transfère des revenus
+B. produit des biens
+C. consomme
+D. investit
+
+---
+
+**Q13.** Les inégalités sont :
+
+A. des différences d''accès aux ressources
+B. des égalités
+C. des libertés
+D. des devoirs
+
+---
+
+**Q14.** L''égalité des chances :
+
+A. donne les mêmes opportunités
+B. donne les mêmes revenus
+C. supprime les différences
+D. est impossible
+
+---
+
+**Q15.** La discrimination est :
+
+A. un traitement inégal injustifié
+B. une égalité
+C. une liberté
+D. un devoir
+
+---
+
+**Q16.** Le genre :
+
+A. les rôles sociaux liés au sexe
+B. le sexe biologique
+C. l''âge
+D. la classe
+
+---
+
+**Q17.** Les inégalités de genre :
+
+A. des différences entre hommes et femmes
+B. des égalités
+C. des libertés
+D. des devoirs
+
+---
+
+**Q18.** La pauvreté est :
+
+A. le manque de ressources
+B. la richesse
+C. l''égalité
+D. la liberté
+
+---
+
+**Q19.** Le seuil de pauvreté :
+
+A. le niveau de revenu sous lequel on est pauvre
+B. le salaire moyen
+C. le PIB
+D. le chômage
+
+---
+
+**Q20.** Le développement durable :
+
+A. satisfait les besoins sans compromettre l''avenir
+B. la croissance rapide
+C. l''exploitation maximale
+D. la consommation
+
+---
+
+## CORRIGÉ
+
+1. le développement humain
+2. santé, éducation, revenu
+3. l''interdépendance des économies
+4. les échanges entre pays
+5. exportations - importations
+6. protège l''économie nationale
+7. la libre circulation des biens
+8. intervient dans l''économie et le social
+9. protège contre les risques sociaux
+10. couvre les risques sociaux
+11. financent la protection sociale
+12. transfère des revenus
+13. des différences d''accès aux ressources
+14. donne les mêmes opportunités
+15. un traitement inégal injustifié
+16. les rôles sociaux liés au sexe
+17. des différences entre hommes et femmes
+18. le manque de ressources
+19. le niveau de revenu sous lequel on est pauvre
+20. satisfait les besoins sans compromettre l''avenir
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '38f96a9d-fe98-1cd3-6338-56672831fc8f', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ÉTAT, PROTECTION SOCIALE ET MONDIALISATION
+
+**Q1.** Expliquer le rôle de l''État-providence.
+
+**Q1.** Analyser le système de protection sociale.
+
+**Q1.** Expliquer les effets de la mondialisation sur les économies.
+
+**Q1.** Dissertation : « La mondialisation profite-t-elle à tous ? »
+
+**Q1.** Analyser les inégalités de développement dans le monde.
+
+## SECTION 2: SOCIALISATION ET CULTURE
+
+**Q2.** Expliquer le processus de socialisation et ses instances.
+
+**Q2.** Analyser la socialisation différenciée selon le genre et la classe sociale.
+
+**Q2.** Expliquer la notion de capital culturel selon Bourdieu.
+
+**Q2.** Dissertation : « La socialisation détermine-t-elle entièrement l''individu ? »
+
+**Q2.** Analyser le rôle des médias dans la socialisation.
+
+## SECTION 3: STRATIFICATION ET MOBILITÉ
+
+**Q3.** Expliquer les différentes formes de stratification sociale.
+
+**Q3.** Analyser la mobilité sociale et ses déterminants.
+
+**Q3.** Expliquer la notion de classes sociales selon Marx et Weber.
+
+**Q3.** Dissertation : « L''école favorise-t-elle la mobilité sociale ? »
+
+**Q3.** Analyser les inégalités sociales et leurs causes.
+
+## SECTION 4: ÉCONOMIE ET EMPLOI
+
+**Q4.** Expliquer les causes et conséquences du chômage.
+
+**Q4.** Analyser les formes de l''emploi et la précarité.
+
+**Q4.** Expliquer la notion de productivité et ses effets sur l''emploi.
+
+**Q4.** Dissertation : « La croissance économique crée-t-elle des emplois ? »
+
+**Q4.** Analyser les politiques de l''emploi.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ffe42863-baee-43d2-bb18-4f7f2a921a98', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: SOCIALISATION ET CULTURE
+
+**Q1.** Expliquer le processus de socialisation et ses instances.
+
+**Q1.** Analyser la socialisation différenciée selon le genre et la classe sociale.
+
+**Q1.** Expliquer la notion de capital culturel selon Bourdieu.
+
+**Q1.** Dissertation : « La socialisation détermine-t-elle entièrement l''individu ? »
+
+**Q1.** Analyser le rôle des médias dans la socialisation.
+
+## SECTION 2: STRATIFICATION ET MOBILITÉ
+
+**Q2.** Expliquer les différentes formes de stratification sociale.
+
+**Q2.** Analyser la mobilité sociale et ses déterminants.
+
+**Q2.** Expliquer la notion de classes sociales selon Marx et Weber.
+
+**Q2.** Dissertation : « L''école favorise-t-elle la mobilité sociale ? »
+
+**Q2.** Analyser les inégalités sociales et leurs causes.
+
+## SECTION 3: ÉCONOMIE ET EMPLOI
+
+**Q3.** Expliquer les causes et conséquences du chômage.
+
+**Q3.** Analyser les formes de l''emploi et la précarité.
+
+**Q3.** Expliquer la notion de productivité et ses effets sur l''emploi.
+
+**Q3.** Dissertation : « La croissance économique crée-t-elle des emplois ? »
+
+**Q3.** Analyser les politiques de l''emploi.
+
+## SECTION 4: ÉTAT, PROTECTION SOCIALE ET MONDIALISATION
+
+**Q4.** Expliquer le rôle de l''État-providence.
+
+**Q4.** Analyser le système de protection sociale.
+
+**Q4.** Expliquer les effets de la mondialisation sur les économies.
+
+**Q4.** Dissertation : « La mondialisation profite-t-elle à tous ? »
+
+**Q4.** Analyser les inégalités de développement dans le monde.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '546c1c3b-1eed-7c25-db1f-1a250acd23b2', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: STRATIFICATION ET MOBILITÉ
+
+**Q1.** Expliquer les différentes formes de stratification sociale.
+
+**Q1.** Analyser la mobilité sociale et ses déterminants.
+
+**Q1.** Expliquer la notion de classes sociales selon Marx et Weber.
+
+**Q1.** Dissertation : « L''école favorise-t-elle la mobilité sociale ? »
+
+**Q1.** Analyser les inégalités sociales et leurs causes.
+
+## SECTION 2: ÉCONOMIE ET EMPLOI
+
+**Q2.** Expliquer les causes et conséquences du chômage.
+
+**Q2.** Analyser les formes de l''emploi et la précarité.
+
+**Q2.** Expliquer la notion de productivité et ses effets sur l''emploi.
+
+**Q2.** Dissertation : « La croissance économique crée-t-elle des emplois ? »
+
+**Q2.** Analyser les politiques de l''emploi.
+
+## SECTION 3: ÉTAT, PROTECTION SOCIALE ET MONDIALISATION
+
+**Q3.** Expliquer le rôle de l''État-providence.
+
+**Q3.** Analyser le système de protection sociale.
+
+**Q3.** Expliquer les effets de la mondialisation sur les économies.
+
+**Q3.** Dissertation : « La mondialisation profite-t-elle à tous ? »
+
+**Q3.** Analyser les inégalités de développement dans le monde.
+
+## SECTION 4: SOCIALISATION ET CULTURE
+
+**Q4.** Expliquer le processus de socialisation et ses instances.
+
+**Q4.** Analyser la socialisation différenciée selon le genre et la classe sociale.
+
+**Q4.** Expliquer la notion de capital culturel selon Bourdieu.
+
+**Q4.** Dissertation : « La socialisation détermine-t-elle entièrement l''individu ? »
+
+**Q4.** Analyser le rôle des médias dans la socialisation.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '43830d73-63e9-7290-733e-3c363cf84bf6', 'fr-bac-ses', 'Sciences Économiques et Sociales', 'Baccalauréat Sciences Économiques et Sociales — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['ses']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Sciences Économiques et Sociales
+**Subject:** Sciences Économiques et Sociales
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ÉCONOMIE ET EMPLOI
+
+**Q1.** Expliquer les causes et conséquences du chômage.
+
+**Q1.** Analyser les formes de l''emploi et la précarité.
+
+**Q1.** Expliquer la notion de productivité et ses effets sur l''emploi.
+
+**Q1.** Dissertation : « La croissance économique crée-t-elle des emplois ? »
+
+**Q1.** Analyser les politiques de l''emploi.
+
+## SECTION 2: ÉTAT, PROTECTION SOCIALE ET MONDIALISATION
+
+**Q2.** Expliquer le rôle de l''État-providence.
+
+**Q2.** Analyser le système de protection sociale.
+
+**Q2.** Expliquer les effets de la mondialisation sur les économies.
+
+**Q2.** Dissertation : « La mondialisation profite-t-elle à tous ? »
+
+**Q2.** Analyser les inégalités de développement dans le monde.
+
+## SECTION 3: SOCIALISATION ET CULTURE
+
+**Q3.** Expliquer le processus de socialisation et ses instances.
+
+**Q3.** Analyser la socialisation différenciée selon le genre et la classe sociale.
+
+**Q3.** Expliquer la notion de capital culturel selon Bourdieu.
+
+**Q3.** Dissertation : « La socialisation détermine-t-elle entièrement l''individu ? »
+
+**Q3.** Analyser le rôle des médias dans la socialisation.
+
+## SECTION 4: STRATIFICATION ET MOBILITÉ
+
+**Q4.** Expliquer les différentes formes de stratification sociale.
+
+**Q4.** Analyser la mobilité sociale et ses déterminants.
+
+**Q4.** Expliquer la notion de classes sociales selon Marx et Weber.
+
+**Q4.** Dissertation : « L''école favorise-t-elle la mobilité sociale ? »
+
+**Q4.** Analyser les inégalités sociales et leurs causes.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences Économiques et Sociales Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0f8fb9fe-7950-d8ee-1e9e-8feb9c008d23', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La dérivée de $x^3$ est :
+
+A. $3x^2$
+B. $x^2$
+C. $3x$
+D. $3x^3$
+
+---
+
+**Q2.** La dérivée de $\sin(x)$ est :
+
+A. $\cos(x)$
+B. $-\cos(x)$
+C. $\sin(x)$
+D. $-\sin(x)$
+
+---
+
+**Q3.** La dérivée de $\cos(x)$ est :
+
+A. $-\sin(x)$
+B. $\sin(x)$
+C. $\cos(x)$
+D. $-\cos(x)$
+
+---
+
+**Q4.** La dérivée de $e^x$ est :
+
+A. $e^x$
+B. $x e^x$
+C. $e^{x-1}$
+D. $\ln(x)$
+
+---
+
+**Q5.** La dérivée de $\ln(x)$ est :
+
+A. $\frac{1}{x}$
+B. $x$
+C. $\ln(x)$
+D. $\frac{1}{\ln(x)}$
+
+---
+
+**Q6.** L''intégrale de $x^2$ est :
+
+A. $\frac{x^3}{3} + C$
+B. $\frac{x^2}{2} + C$
+C. $x^3 + C$
+D. $2x + C$
+
+---
+
+**Q7.** L''intégrale de $\cos(x)$ est :
+
+A. $\sin(x) + C$
+B. $-\sin(x) + C$
+C. $\cos(x) + C$
+D. $-\cos(x) + C$
+
+---
+
+**Q8.** L''intégrale de $\frac{1}{x}$ est :
+
+A. $\ln|x| + C$
+B. $x + C$
+C. $\frac{1}{x^2} + C$
+D. $e^x + C$
+
+---
+
+**Q9.** La limite de $\frac{\sin(x)}{x}$ quand $x \to 0$ est :
+
+A. 1
+B. 0
+C. $\infty$
+D. n''existe pas
+
+---
+
+**Q10.** La limite de $\frac{1}{x}$ quand $x \to \infty$ est :
+
+A. 0
+B. $\infty$
+C. 1
+D. n''existe pas
+
+---
+
+**Q11.** La fonction $f(x) = x^2$ est :
+
+A. paire
+B. impaire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q12.** La fonction $f(x) = x^3$ est :
+
+A. impaire
+B. paire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q13.** La dérivée de $x^n$ est :
+
+A. $n x^{n-1}$
+B. $x^{n-1}$
+C. $n x^n$
+D. $(n-1)x^n$
+
+---
+
+**Q14.** L''équation $x^2 - 4 = 0$ a pour solutions :
+
+A. $x = 2$ et $x = -2$
+B. $x = 2$
+C. $x = 4$
+D. $x = 16$
+
+---
+
+**Q15.** Le discriminant de $ax^2 + bx + c = 0$ est :
+
+A. $b^2 - 4ac$
+B. $b^2 + 4ac$
+C. $4ac - b^2$
+D. $b - 4ac$
+
+---
+
+**Q16.** Si $\Delta > 0$, l''équation du second degré a :
+
+A. deux solutions réelles
+B. une solution
+C. aucune solution
+D. une solution complexe
+
+---
+
+**Q17.** Si $\Delta = 0$, l''équation du second degré a :
+
+A. une solution double
+B. deux solutions
+C. aucune solution
+D. deux solutions complexes
+
+---
+
+**Q18.** Si $\Delta < 0$, l''équation du second degré a :
+
+A. aucune solution réelle
+B. deux solutions réelles
+C. une solution
+D. une solution double
+
+---
+
+**Q19.** La dérivée de $\tan(x)$ est :
+
+A. $\frac{1}{\cos^2(x)}$
+B. $\sin(x)$
+C. $\cos(x)$
+D. $-\frac{1}{\sin^2(x)}$
+
+---
+
+**Q20.** L''intégrale de $e^x$ est :
+
+A. $e^x + C$
+B. $\frac{e^x}{x} + C$
+C. $x e^x + C$
+D. $\ln(x) + C$
+
+---
+
+## CORRIGÉ
+
+1. $3x^2$
+2. $\cos(x)$
+3. $-\sin(x)$
+4. $e^x$
+5. $\frac{1}{x}$
+6. $\frac{x^3}{3} + C$
+7. $\sin(x) + C$
+8. $\ln|x| + C$
+9. 1
+10. 0
+11. paire
+12. impaire
+13. $n x^{n-1}$
+14. $x = 2$ et $x = -2$
+15. $b^2 - 4ac$
+16. deux solutions réelles
+17. une solution double
+18. aucune solution réelle
+19. $\frac{1}{\cos^2(x)}$
+20. $e^x + C$
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '15455566-861f-036c-278e-f9223d3b1aa1', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La fonction exponentielle $e^x$ est :
+
+A. strictement croissante
+B. strictement décroissante
+C. constante
+D. périodique
+
+---
+
+**Q2.** La fonction logarithme $\ln(x)$ est définie pour :
+
+A. $x > 0$
+B. $x \geq 0$
+C. $x \neq 0$
+D. tout $x$
+
+---
+
+**Q3.** $\ln(1)$ est égal à :
+
+A. 0
+B. 1
+C. $e$
+D. $-1$
+
+---
+
+**Q4.** $\ln(e)$ est égal à :
+
+A. 1
+B. 0
+C. $e$
+D. $-1$
+
+---
+
+**Q5.** $e^0$ est égal à :
+
+A. 1
+B. 0
+C. $e$
+D. $-1$
+
+---
+
+**Q6.** La dérivée de $\frac{1}{x}$ est :
+
+A. $-\frac{1}{x^2}$
+B. $\frac{1}{x^2}$
+C. $-\frac{1}{x}$
+D. $\ln(x)$
+
+---
+
+**Q7.** L''intégrale de $\sin(x)$ est :
+
+A. $-\cos(x) + C$
+B. $\cos(x) + C$
+C. $\sin(x) + C$
+D. $-\sin(x) + C$
+
+---
+
+**Q8.** La limite de $\frac{x^2 - 1}{x - 1}$ quand $x \to 1$ est :
+
+A. 2
+B. 0
+C. 1
+D. $\infty$
+
+---
+
+**Q9.** La fonction $f(x) = \frac{1}{x}$ est :
+
+A. impaire
+B. paire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q10.** Le nombre dérivé de $f$ en $a$ est :
+
+A. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
+B. $f(a)$
+C. $\frac{f(a)}{a}$
+D. $f''(a) \times a$
+
+---
+
+**Q11.** La tangente à la courbe en $a$ a pour pente :
+
+A. $f''(a)$
+B. $f(a)$
+C. $a$
+D. $f''(a) \times a$
+
+---
+
+**Q12.** L''équation de la tangente en $a$ est :
+
+A. $y = f''(a)(x - a) + f(a)$
+B. $y = f(a)x$
+C. $y = f''(a)x$
+D. $y = f(a) + x$
+
+---
+
+**Q13.** La fonction $f(x) = x^2$ est croissante sur :
+
+A. $[0, +\infty[$
+B. $]-\infty, 0]$
+C. $\mathbb{R}$
+D. $]-\infty, +\infty[$
+
+---
+
+**Q14.** La fonction $f(x) = x^2$ est décroissante sur :
+
+A. $]-\infty, 0]$
+B. $[0, +\infty[$
+C. $\mathbb{R}$
+D. nulle part
+
+---
+
+**Q15.** Le point d''inflexion est :
+
+A. où la courbure change
+B. le maximum
+C. le minimum
+D. l''origine
+
+---
+
+**Q16.** La dérivée seconde de $x^3$ est :
+
+A. $6x$
+B. $3x^2$
+C. $3x$
+D. $6$
+
+---
+
+**Q17.** La fonction $f(x) = e^x$ a pour limite en $+\infty$ :
+
+A. $+\infty$
+B. 0
+C. 1
+D. $e$
+
+---
+
+**Q18.** La fonction $f(x) = e^x$ a pour limite en $-\infty$ :
+
+A. 0
+B. $+\infty$
+C. 1
+D. $e$
+
+---
+
+**Q19.** La fonction $f(x) = \ln(x)$ a pour limite en $+\infty$ :
+
+A. $+\infty$
+B. 0
+C. 1
+D. $-\infty$
+
+---
+
+**Q20.** La fonction $f(x) = \ln(x)$ a pour limite en $0^+$ :
+
+A. $-\infty$
+B. $+\infty$
+C. 0
+D. 1
+
+---
+
+## CORRIGÉ
+
+1. strictement croissante
+2. $x > 0$
+3. 0
+4. 1
+5. 1
+6. $-\frac{1}{x^2}$
+7. $-\cos(x) + C$
+8. 2
+9. impaire
+10. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
+11. $f''(a)$
+12. $y = f''(a)(x - a) + f(a)$
+13. $[0, +\infty[$
+14. $]-\infty, 0]$
+15. où la courbure change
+16. $6x$
+17. $+\infty$
+18. 0
+19. $+\infty$
+20. $-\infty$
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '8a5fca89-4a0e-1afc-07b6-c7dbcc0cb9f4', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''asymptote horizontale de $f(x) = \frac{1}{x}$ est :
+
+A. $y = 0$
+B. $x = 0$
+C. $y = 1$
+D. $y = x$
+
+---
+
+**Q2.** L''asymptote verticale de $f(x) = \frac{1}{x}$ est :
+
+A. $x = 0$
+B. $y = 0$
+C. $x = 1$
+D. $y = 1$
+
+---
+
+**Q3.** La suite $u_n = 2n + 1$ est :
+
+A. arithmétique
+B. géométrique
+C. ni l''un ni l''autre
+D. constante
+
+---
+
+**Q4.** La suite $u_n = 3 \times 2^n$ est :
+
+A. géométrique
+B. arithmétique
+C. ni l''un ni l''autre
+D. constante
+
+---
+
+**Q5.** La raison de la suite $u_n = 2n + 1$ est :
+
+A. 2
+B. 1
+C. 3
+D. n
+
+---
+
+**Q6.** La raison de la suite $u_n = 3 \times 2^n$ est :
+
+A. 2
+B. 3
+C. 6
+D. n
+
+---
+
+**Q7.** La somme des $n$ premiers termes d''une suite arithmétique de raison $r$ est :
+
+A. $\frac{n(u_1 + u_n)}{2}$
+B. $n \times r$
+C. $u_1 \times r^n$
+D. $\frac{n}{2} \times r$
+
+---
+
+**Q8.** La somme des $n$ premiers termes d''une suite géométrique de raison $q$ est :
+
+A. $u_1 \frac{1 - q^n}{1 - q}$
+B. $n \times u_1$
+C. $u_1 \times q^n$
+D. $\frac{n(u_1 + u_n)}{2}$
+
+---
+
+**Q9.** La probabilité d''un événement certain est :
+
+A. 1
+B. 0
+C. 0,5
+D. $\infty$
+
+---
+
+**Q10.** La probabilité d''un événement impossible est :
+
+A. 0
+B. 1
+C. 0,5
+D. $\infty$
+
+---
+
+**Q11.** La somme des probabilités d''un univers est :
+
+A. 1
+B. 0
+C. 0,5
+D. $\infty$
+
+---
+
+**Q12.** Deux événements incompatibles :
+
+A. ne peuvent pas se produire ensemble
+B. se produisent toujours ensemble
+C. sont certains
+D. sont impossibles
+
+---
+
+**Q13.** La probabilité de $A \cup B$ si $A$ et $B$ sont incompatibles est :
+
+A. $P(A) + P(B)$
+B. $P(A) \times P(B)$
+C. $P(A) - P(B)$
+D. $P(A) / P(B)$
+
+---
+
+**Q14.** La probabilité conditionnelle $P(A|B)$ est :
+
+A. $\frac{P(A \cap B)}{P(B)}$
+B. $P(A) \times P(B)$
+C. $P(A) + P(B)$
+D. $\frac{P(B)}{P(A)}$
+
+---
+
+**Q15.** L''espérance d''une variable aléatoire est :
+
+A. la moyenne pondérée
+B. le maximum
+C. le minimum
+D. la variance
+
+---
+
+**Q16.** La variance mesure :
+
+A. la dispersion
+B. la moyenne
+C. le maximum
+D. le minimum
+
+---
+
+**Q17.** L''écart-type est :
+
+A. la racine carrée de la variance
+B. la variance
+C. la moyenne
+D. le maximum
+
+---
+
+**Q18.** La loi binomiale $B(n, p)$ a pour espérance :
+
+A. $np$
+B. $n + p$
+C. $n - p$
+D. $p^n$
+
+---
+
+**Q19.** La loi normale est :
+
+A. une loi continue
+B. une loi discrète
+C. une loi constante
+D. une loi nulle
+
+---
+
+**Q20.** La courbe de la loi normale est :
+
+A. en cloche
+B. linéaire
+C. exponentielle
+D. constante
+
+---
+
+## CORRIGÉ
+
+1. $y = 0$
+2. $x = 0$
+3. arithmétique
+4. géométrique
+5. 2
+6. 2
+7. $\frac{n(u_1 + u_n)}{2}$
+8. $u_1 \frac{1 - q^n}{1 - q}$
+9. 1
+10. 0
+11. 1
+12. ne peuvent pas se produire ensemble
+13. $P(A) + P(B)$
+14. $\frac{P(A \cap B)}{P(B)}$
+15. la moyenne pondérée
+16. la dispersion
+17. la racine carrée de la variance
+18. $np$
+19. une loi continue
+20. en cloche
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '70ed2dfd-630f-0963-acf0-9e5e36039c08', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: APPLICATIONS
+
+**Q1.** Un capital de 100 000 FCFA est placé à 5% par an. Calculer la valeur acquise après 3 ans (intérêts composés).
+
+**Q1.** Un emprunt de 500 000 FCFA est remboursé par annuités constantes sur 5 ans à 6%. Calculer l''annuité.
+
+**Q1.** Modéliser une situation économique par une fonction et l''optimiser.
+
+**Q1.** Calculer le coût marginal à partir d''une fonction de coût total.
+
+**Q1.** Résoudre un problème d''optimisation : maximiser une aire sous contrainte.
+
+## SECTION 2: ANALYSE
+
+**Q2.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$.
+
+**Q2.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q2.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q2.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q2.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 3: ALGÈBRE ET SUITES
+
+**Q3.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q3.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q3.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q3.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q3.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 4: PROBABILITÉS ET STATISTIQUES
+
+**Q4.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q4.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q4.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q4.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q4.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '883dc5e2-5e42-e0ef-684e-c42b1a745fd9', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ANALYSE
+
+**Q1.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$.
+
+**Q1.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q1.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q1.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q1.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 2: ALGÈBRE ET SUITES
+
+**Q2.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q2.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q2.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q2.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q2.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 3: PROBABILITÉS ET STATISTIQUES
+
+**Q3.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q3.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q3.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q3.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q3.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 4: APPLICATIONS
+
+**Q4.** Un capital de 100 000 FCFA est placé à 5% par an. Calculer la valeur acquise après 3 ans (intérêts composés).
+
+**Q4.** Un emprunt de 500 000 FCFA est remboursé par annuités constantes sur 5 ans à 6%. Calculer l''annuité.
+
+**Q4.** Modéliser une situation économique par une fonction et l''optimiser.
+
+**Q4.** Calculer le coût marginal à partir d''une fonction de coût total.
+
+**Q4.** Résoudre un problème d''optimisation : maximiser une aire sous contrainte.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '28292bcb-670e-4cfd-d60e-4668717d610c', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ALGÈBRE ET SUITES
+
+**Q1.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q1.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q1.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q1.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q1.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 2: PROBABILITÉS ET STATISTIQUES
+
+**Q2.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q2.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q2.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q2.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q2.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 3: APPLICATIONS
+
+**Q3.** Un capital de 100 000 FCFA est placé à 5% par an. Calculer la valeur acquise après 3 ans (intérêts composés).
+
+**Q3.** Un emprunt de 500 000 FCFA est remboursé par annuités constantes sur 5 ans à 6%. Calculer l''annuité.
+
+**Q3.** Modéliser une situation économique par une fonction et l''optimiser.
+
+**Q3.** Calculer le coût marginal à partir d''une fonction de coût total.
+
+**Q3.** Résoudre un problème d''optimisation : maximiser une aire sous contrainte.
+
+## SECTION 4: ANALYSE
+
+**Q4.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$.
+
+**Q4.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q4.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q4.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q4.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '5cf4c5a1-9743-339f-9951-7f11b6135394', 'fr-bac-maths-appliquees', 'Mathématiques Appliquées', 'Baccalauréat Mathématiques Appliquées — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['acc','cg','fig','ses']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** Mathématiques Appliquées
+**Subject:** Mathématiques Appliquées
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PROBABILITÉS ET STATISTIQUES
+
+**Q1.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q1.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q1.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q1.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q1.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 2: APPLICATIONS
+
+**Q2.** Un capital de 100 000 FCFA est placé à 5% par an. Calculer la valeur acquise après 3 ans (intérêts composés).
+
+**Q2.** Un emprunt de 500 000 FCFA est remboursé par annuités constantes sur 5 ans à 6%. Calculer l''annuité.
+
+**Q2.** Modéliser une situation économique par une fonction et l''optimiser.
+
+**Q2.** Calculer le coût marginal à partir d''une fonction de coût total.
+
+**Q2.** Résoudre un problème d''optimisation : maximiser une aire sous contrainte.
+
+## SECTION 3: ANALYSE
+
+**Q3.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$.
+
+**Q3.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q3.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q3.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q3.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 4: ALGÈBRE ET SUITES
+
+**Q4.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q4.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q4.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q4.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q4.** Factoriser et résoudre : $x^3 - 4x = 0$.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Appliquées Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'fb64949e-5d41-fffc-3d90-463fafdb96cc', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''unité de la force est :
+
+A. le newton
+B. le joule
+C. le watt
+D. le pascal
+
+---
+
+**Q2.** La formule de l''énergie cinétique est :
+
+A. Ec = ½ mv²
+B. Ec = mv
+C. Ec = mgh
+D. Ec = ½ mgh
+
+---
+
+**Q3.** La loi de Coulomb s''écrit :
+
+A. F = k·q₁q₂/r²
+B. F = k·r²/q₁q₂
+C. F = q₁q₂·r²
+D. F = k·q₁q₂·r
+
+---
+
+**Q4.** L''unité de la charge électrique est :
+
+A. le coulomb
+B. le volt
+C. l''ampère
+D. l''ohm
+
+---
+
+**Q5.** La force de Lorentz s''exerce sur :
+
+A. une charge en mouvement dans un champ
+B. une charge immobile
+C. un aimant
+D. un conducteur
+
+---
+
+**Q6.** La loi de Faraday concerne :
+
+A. l''induction électromagnétique
+B. la gravitation
+C. l''optique
+D. la thermique
+
+---
+
+**Q7.** La loi de Lenz stipule que :
+
+A. le courant induit s''oppose à sa cause
+B. le courant induit favorise sa cause
+C. il n''y a pas de courant induit
+D. le courant est nul
+
+---
+
+**Q8.** L''unité de la fréquence est :
+
+A. le hertz
+B. le watt
+C. le volt
+D. l''ohm
+
+---
+
+**Q9.** La période T et la fréquence f sont liées par :
+
+A. T = 1/f
+B. T = f
+C. T = 2f
+D. T = f²
+
+---
+
+**Q10.** La longueur d''onde λ et la fréquence f sont liées par :
+
+A. λ = v/f
+B. λ = v·f
+C. λ = f/v
+D. λ = v+f
+
+---
+
+**Q11.** La vitesse de la lumière dans le vide est environ :
+
+A. 3×10⁸ m/s
+B. 3×10⁶ m/s
+C. 3×10¹⁰ m/s
+D. 300 m/s
+
+---
+
+**Q12.** L''optique géométrique étudie :
+
+A. la propagation de la lumière
+B. les ondes sonores
+C. les forces
+D. l''électricité
+
+---
+
+**Q13.** La loi de Snell-Descartes concerne :
+
+A. la réfraction
+B. la gravitation
+C. l''induction
+D. la thermique
+
+---
+
+**Q14.** L''indice de réfraction du vide est :
+
+A. 1
+B. 0
+C. 1,5
+D. 3
+
+---
+
+**Q15.** La vergence d''une lentille s''exprime en :
+
+A. dioptries
+B. newtons
+C. watts
+D. ohms
+
+---
+
+**Q16.** La relation de conjugaison concerne :
+
+A. les lentilles
+B. les forces
+C. les charges
+D. les ondes
+
+---
+
+**Q17.** La quantité de mouvement est :
+
+A. p = mv
+B. p = m/v
+C. p = v/m
+D. p = m+v
+
+---
+
+**Q18.** Le théorème de l''énergie cinétique :
+
+A. ΔEc = W
+B. ΔEc = P
+C. ΔEc = F
+D. ΔEc = m
+
+---
+
+**Q19.** Le travail d''une force constante est :
+
+A. W = F·d·cos(θ)
+B. W = F·d
+C. W = F/d
+D. W = d/F
+
+---
+
+**Q20.** L''unité du travail est :
+
+A. le joule
+B. le watt
+C. le newton
+D. le pascal
+
+---
+
+## CORRIGÉ
+
+1. le newton
+2. Ec = ½ mv²
+3. F = k·q₁q₂/r²
+4. le coulomb
+5. une charge en mouvement dans un champ
+6. l''induction électromagnétique
+7. le courant induit s''oppose à sa cause
+8. le hertz
+9. T = 1/f
+10. λ = v/f
+11. 3×10⁸ m/s
+12. la propagation de la lumière
+13. la réfraction
+14. 1
+15. dioptries
+16. les lentilles
+17. p = mv
+18. ΔEc = W
+19. W = F·d·cos(θ)
+20. le joule
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ca1ae60a-ecfb-0c1d-3f3d-738e1b084ba1', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La puissance est :
+
+A. P = W/t
+B. P = W·t
+C. P = t/W
+D. P = W+t
+
+---
+
+**Q2.** L''unité de la puissance est :
+
+A. le watt
+B. le joule
+C. le newton
+D. le volt
+
+---
+
+**Q3.** Le moment d''une force s''exprime en :
+
+A. N·m
+B. N/m
+C. N·m²
+D. N
+
+---
+
+**Q4.** L''équilibre d''un solide exige :
+
+A. la somme des forces et moments nulle
+B. une force nulle
+C. un moment nul
+D. une vitesse nulle
+
+---
+
+**Q5.** Le champ gravitationnel est :
+
+A. g = G·M/r²
+B. g = G·M·r²
+C. g = r²/G·M
+D. g = G·r²/M
+
+---
+
+**Q6.** La constante de gravitation G vaut :
+
+A. 6,67×10⁻¹¹ N·m²/kg²
+B. 9,8 N/kg
+C. 3×10⁸ m/s
+D. 1,6×10⁻¹⁹ C
+
+---
+
+**Q7.** Le mouvement uniforme a :
+
+A. une vitesse constante
+B. une accélération constante
+C. une vitesse nulle
+D. une accélération nulle
+
+---
+
+**Q8.** Le mouvement uniformément accéléré a :
+
+A. une accélération constante
+B. une vitesse constante
+C. une vitesse nulle
+D. une accélération nulle
+
+---
+
+**Q9.** L''accélération est :
+
+A. a = Δv/Δt
+B. a = Δv·Δt
+C. a = Δt/Δv
+D. a = v·t
+
+---
+
+**Q10.** L''unité de l''accélération est :
+
+A. m/s²
+B. m/s
+C. m
+D. s
+
+---
+
+**Q11.** La radioactivité α émet :
+
+A. un noyau d''hélium
+B. un électron
+C. un photon
+D. un neutron
+
+---
+
+**Q12.** La radioactivité β⁻ émet :
+
+A. un électron
+B. un positron
+C. un photon
+D. un neutron
+
+---
+
+**Q13.** La radioactivité γ émet :
+
+A. un photon
+B. un électron
+C. un proton
+D. un neutron
+
+---
+
+**Q14.** La demi-vie est :
+
+A. le temps pour que la moitié se désintègre
+B. le temps total de désintégration
+C. la moitié de la masse
+D. la moitié de l''énergie
+
+---
+
+**Q15.** L''énergie de liaison est :
+
+A. l''énergie pour séparer les nucléons
+B. l''énergie cinétique
+C. l''énergie potentielle
+D. l''énergie thermique
+
+---
+
+**Q16.** Le défaut de masse est :
+
+A. la différence entre masse des nucléons et du noyau
+B. la masse totale
+C. la masse des électrons
+D. la masse nulle
+
+---
+
+**Q17.** L''équivalence masse-énergie est :
+
+A. E = mc²
+B. E = mc
+C. E = m/c²
+D. E = c²/m
+
+---
+
+**Q18.** La fission nucléaire :
+
+A. divise un noyau lourd
+B. fusionne des noyaux légers
+C. émet des électrons
+D. absorbe des photons
+
+---
+
+**Q19.** La fusion nucléaire :
+
+A. fusionne des noyaux légers
+B. divise un noyau lourd
+C. émet des électrons
+D. absorbe des photons
+
+---
+
+**Q20.** Le circuit RLC série :
+
+A. contient résistance, bobine et condensateur
+B. contient uniquement une résistance
+C. contient uniquement une bobine
+D. contient uniquement un condensateur
+
+---
+
+## CORRIGÉ
+
+1. P = W/t
+2. le watt
+3. N·m
+4. la somme des forces et moments nulle
+5. g = G·M/r²
+6. 6,67×10⁻¹¹ N·m²/kg²
+7. une vitesse constante
+8. une accélération constante
+9. a = Δv/Δt
+10. m/s²
+11. un noyau d''hélium
+12. un électron
+13. un photon
+14. le temps pour que la moitié se désintègre
+15. l''énergie pour séparer les nucléons
+16. la différence entre masse des nucléons et du noyau
+17. E = mc²
+18. divise un noyau lourd
+19. fusionne des noyaux légers
+20. contient résistance, bobine et condensateur
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '73130f6c-69f8-f2c1-1e9f-527ec5ecebc3', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La résonance dans un circuit RLC :
+
+A. l''impédance est minimale
+B. l''impédance est maximale
+C. le courant est nul
+D. la tension est nulle
+
+---
+
+**Q2.** L''impédance Z d''un circuit :
+
+A. Z = U/I
+B. Z = U·I
+C. Z = I/U
+D. Z = U+I
+
+---
+
+**Q3.** L''unité de l''impédance est :
+
+A. l''ohm
+B. le volt
+C. l''ampère
+D. le watt
+
+---
+
+**Q4.** Le facteur de puissance est :
+
+A. cos(φ)
+B. sin(φ)
+C. tan(φ)
+D. φ
+
+---
+
+**Q5.** L''énergie électrique est :
+
+A. E = P·t
+B. E = P/t
+C. E = t/P
+D. E = P+t
+
+---
+
+**Q6.** L''effet photoélectrique :
+
+A. émission d''électrons par la lumière
+B. absorption de photons
+C. émission de photons
+D. réflexion
+
+---
+
+**Q7.** Le photon a une énergie :
+
+A. E = h·f
+B. E = h/f
+C. E = f/h
+D. E = h+f
+
+---
+
+**Q8.** La constante de Planck h vaut :
+
+A. 6,63×10⁻³⁴ J·s
+B. 6,67×10⁻¹¹
+C. 9,8
+D. 3×10⁸
+
+---
+
+**Q9.** L''effet Doppler concerne :
+
+A. le changement de fréquence d''une onde
+B. la réfraction
+C. la réflexion
+D. l''absorption
+
+---
+
+**Q10.** Les ondes mécaniques :
+
+A. nécessitent un milieu
+B. se propagent dans le vide
+C. sont des particules
+D. sont des charges
+
+---
+
+**Q11.** Les ondes électromagnétiques :
+
+A. se propagent dans le vide
+B. nécessitent un milieu
+C. sont des particules
+D. sont des charges
+
+---
+
+**Q12.** Le son est :
+
+A. une onde mécanique
+B. une onde électromagnétique
+C. une particule
+D. une charge
+
+---
+
+**Q13.** La vitesse du son dans l''air est environ :
+
+A. 340 m/s
+B. 3×10⁸ m/s
+C. 1500 m/s
+D. 100 m/s
+
+---
+
+**Q14.** L''intensité sonore se mesure en :
+
+A. décibels
+B. watts
+C. newtons
+D. pascals
+
+---
+
+**Q15.** Le champ électrique E s''exprime en :
+
+A. V/m
+B. V
+C. A
+D. Ω
+
+---
+
+**Q16.** Le potentiel électrique s''exprime en :
+
+A. volts
+B. ampères
+C. ohms
+D. watts
+
+---
+
+**Q17.** La capacité d''un condensateur s''exprime en :
+
+A. farads
+B. ohms
+C. henrys
+D. volts
+
+---
+
+**Q18.** L''inductance d''une bobine s''exprime en :
+
+A. henrys
+B. farads
+C. ohms
+D. volts
+
+---
+
+**Q19.** Le flux magnétique s''exprime en :
+
+A. webers
+B. teslas
+C. henrys
+D. farads
+
+---
+
+**Q20.** Le champ magnétique s''exprime en :
+
+A. teslas
+B. webers
+C. henrys
+D. farads
+
+---
+
+## CORRIGÉ
+
+1. l''impédance est minimale
+2. Z = U/I
+3. l''ohm
+4. cos(φ)
+5. E = P·t
+6. émission d''électrons par la lumière
+7. E = h·f
+8. 6,63×10⁻³⁴ J·s
+9. le changement de fréquence d''une onde
+10. nécessitent un milieu
+11. se propagent dans le vide
+12. une onde mécanique
+13. 340 m/s
+14. décibels
+15. V/m
+16. volts
+17. farads
+18. henrys
+19. webers
+20. teslas
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '28fccfc2-af51-50ff-f9f9-847ed50aefcd', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PHYSIQUE MODERNE ET NUCLÉAIRE
+
+**Q1.** Expliquer les différents types de radioactivité (α, β, γ).
+
+**Q1.** Calculer l''énergie de liaison et le défaut de masse d''un noyau.
+
+**Q1.** Écrire et équilibrer une réaction de fission nucléaire.
+
+**Q1.** Expliquer le principe de la fusion nucléaire.
+
+**Q1.** Appliquer l''effet photoélectrique et calculer l''énergie des photons.
+
+## SECTION 2: MÉCANIQUE
+
+**Q2.** Un solide de masse 2 kg glisse sur un plan incliné de 30°. Calculer les forces en jeu et l''accélération.
+
+**Q2.** Une voiture de 1 200 kg passe de 0 à 90 km/h en 10 s. Calculer l''accélération et la force résultante.
+
+**Q2.** Un projectile est lancé avec une vitesse initiale. Étudier son mouvement et calculer sa portée.
+
+**Q2.** Appliquer le théorème de l''énergie cinétique à un solide en mouvement.
+
+**Q2.** Calculer le moment d''une force et déterminer l''équilibre d''un solide.
+
+## SECTION 3: ÉLECTRICITÉ ET MAGNÉTISME
+
+**Q3.** Étudier un circuit RLC série et déterminer la fréquence de résonance.
+
+**Q3.** Calculer l''impédance d''un circuit et le déphasage courant-tension.
+
+**Q3.** Appliquer la loi de Coulomb à deux charges ponctuelles.
+
+**Q3.** Calculer la force de Lorentz sur une charge en mouvement.
+
+**Q3.** Expliquer le phénomène d''induction électromagnétique et appliquer la loi de Faraday.
+
+## SECTION 4: ONDES ET OPTIQUE
+
+**Q4.** Étudier la propagation d''une onde et calculer sa vitesse, période et longueur d''onde.
+
+**Q4.** Appliquer les lois de Snell-Descartes à la réfraction.
+
+**Q4.** Déterminer la vergence d''une lentille et la position de l''image.
+
+**Q4.** Expliquer l''effet Doppler et ses applications.
+
+**Q4.** Étudier les interférences et la diffraction des ondes.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '235afd6d-6924-8819-765e-f6c8857f8498', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: MÉCANIQUE
+
+**Q1.** Un solide de masse 2 kg glisse sur un plan incliné de 30°. Calculer les forces en jeu et l''accélération.
+
+**Q1.** Une voiture de 1 200 kg passe de 0 à 90 km/h en 10 s. Calculer l''accélération et la force résultante.
+
+**Q1.** Un projectile est lancé avec une vitesse initiale. Étudier son mouvement et calculer sa portée.
+
+**Q1.** Appliquer le théorème de l''énergie cinétique à un solide en mouvement.
+
+**Q1.** Calculer le moment d''une force et déterminer l''équilibre d''un solide.
+
+## SECTION 2: ÉLECTRICITÉ ET MAGNÉTISME
+
+**Q2.** Étudier un circuit RLC série et déterminer la fréquence de résonance.
+
+**Q2.** Calculer l''impédance d''un circuit et le déphasage courant-tension.
+
+**Q2.** Appliquer la loi de Coulomb à deux charges ponctuelles.
+
+**Q2.** Calculer la force de Lorentz sur une charge en mouvement.
+
+**Q2.** Expliquer le phénomène d''induction électromagnétique et appliquer la loi de Faraday.
+
+## SECTION 3: ONDES ET OPTIQUE
+
+**Q3.** Étudier la propagation d''une onde et calculer sa vitesse, période et longueur d''onde.
+
+**Q3.** Appliquer les lois de Snell-Descartes à la réfraction.
+
+**Q3.** Déterminer la vergence d''une lentille et la position de l''image.
+
+**Q3.** Expliquer l''effet Doppler et ses applications.
+
+**Q3.** Étudier les interférences et la diffraction des ondes.
+
+## SECTION 4: PHYSIQUE MODERNE ET NUCLÉAIRE
+
+**Q4.** Expliquer les différents types de radioactivité (α, β, γ).
+
+**Q4.** Calculer l''énergie de liaison et le défaut de masse d''un noyau.
+
+**Q4.** Écrire et équilibrer une réaction de fission nucléaire.
+
+**Q4.** Expliquer le principe de la fusion nucléaire.
+
+**Q4.** Appliquer l''effet photoélectrique et calculer l''énergie des photons.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '216c166e-f0c4-59fb-fa64-9379e11a56d1', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ÉLECTRICITÉ ET MAGNÉTISME
+
+**Q1.** Étudier un circuit RLC série et déterminer la fréquence de résonance.
+
+**Q1.** Calculer l''impédance d''un circuit et le déphasage courant-tension.
+
+**Q1.** Appliquer la loi de Coulomb à deux charges ponctuelles.
+
+**Q1.** Calculer la force de Lorentz sur une charge en mouvement.
+
+**Q1.** Expliquer le phénomène d''induction électromagnétique et appliquer la loi de Faraday.
+
+## SECTION 2: ONDES ET OPTIQUE
+
+**Q2.** Étudier la propagation d''une onde et calculer sa vitesse, période et longueur d''onde.
+
+**Q2.** Appliquer les lois de Snell-Descartes à la réfraction.
+
+**Q2.** Déterminer la vergence d''une lentille et la position de l''image.
+
+**Q2.** Expliquer l''effet Doppler et ses applications.
+
+**Q2.** Étudier les interférences et la diffraction des ondes.
+
+## SECTION 3: PHYSIQUE MODERNE ET NUCLÉAIRE
+
+**Q3.** Expliquer les différents types de radioactivité (α, β, γ).
+
+**Q3.** Calculer l''énergie de liaison et le défaut de masse d''un noyau.
+
+**Q3.** Écrire et équilibrer une réaction de fission nucléaire.
+
+**Q3.** Expliquer le principe de la fusion nucléaire.
+
+**Q3.** Appliquer l''effet photoélectrique et calculer l''énergie des photons.
+
+## SECTION 4: MÉCANIQUE
+
+**Q4.** Un solide de masse 2 kg glisse sur un plan incliné de 30°. Calculer les forces en jeu et l''accélération.
+
+**Q4.** Une voiture de 1 200 kg passe de 0 à 90 km/h en 10 s. Calculer l''accélération et la force résultante.
+
+**Q4.** Un projectile est lancé avec une vitesse initiale. Étudier son mouvement et calculer sa portée.
+
+**Q4.** Appliquer le théorème de l''énergie cinétique à un solide en mouvement.
+
+**Q4.** Calculer le moment d''une force et déterminer l''équilibre d''un solide.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Physique — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '56a2a516-d34b-1533-8832-5d316ae82f90', 'fr-math-bac-analyse', 'Physique', 'Baccalauréat Physique — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat PHYSIQUE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Physique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ONDES ET OPTIQUE
+
+**Q1.** Étudier la propagation d''une onde et calculer sa vitesse, période et longueur d''onde.
+
+**Q1.** Appliquer les lois de Snell-Descartes à la réfraction.
+
+**Q1.** Déterminer la vergence d''une lentille et la position de l''image.
+
+**Q1.** Expliquer l''effet Doppler et ses applications.
+
+**Q1.** Étudier les interférences et la diffraction des ondes.
+
+## SECTION 2: PHYSIQUE MODERNE ET NUCLÉAIRE
+
+**Q2.** Expliquer les différents types de radioactivité (α, β, γ).
+
+**Q2.** Calculer l''énergie de liaison et le défaut de masse d''un noyau.
+
+**Q2.** Écrire et équilibrer une réaction de fission nucléaire.
+
+**Q2.** Expliquer le principe de la fusion nucléaire.
+
+**Q2.** Appliquer l''effet photoélectrique et calculer l''énergie des photons.
+
+## SECTION 3: MÉCANIQUE
+
+**Q3.** Un solide de masse 2 kg glisse sur un plan incliné de 30°. Calculer les forces en jeu et l''accélération.
+
+**Q3.** Une voiture de 1 200 kg passe de 0 à 90 km/h en 10 s. Calculer l''accélération et la force résultante.
+
+**Q3.** Un projectile est lancé avec une vitesse initiale. Étudier son mouvement et calculer sa portée.
+
+**Q3.** Appliquer le théorème de l''énergie cinétique à un solide en mouvement.
+
+**Q3.** Calculer le moment d''une force et déterminer l''équilibre d''un solide.
+
+## SECTION 4: ÉLECTRICITÉ ET MAGNÉTISME
+
+**Q4.** Étudier un circuit RLC série et déterminer la fréquence de résonance.
+
+**Q4.** Calculer l''impédance d''un circuit et le déphasage courant-tension.
+
+**Q4.** Appliquer la loi de Coulomb à deux charges ponctuelles.
+
+**Q4.** Calculer la force de Lorentz sur une charge en mouvement.
+
+**Q4.** Expliquer le phénomène d''induction électromagnétique et appliquer la loi de Faraday.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Physique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '973196eb-c2fe-629d-0645-f389792142fd', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le nombre d''Avogadro est :
+
+A. 6,02×10²³
+B. 6,67×10⁻¹¹
+C. 3×10⁸
+D. 9,8
+
+---
+
+**Q2.** La mole est :
+
+A. l''unité de quantité de matière
+B. l''unité de masse
+C. l''unité de volume
+D. l''unité de température
+
+---
+
+**Q3.** La masse molaire s''exprime en :
+
+A. g/mol
+B. g
+C. mol
+D. kg
+
+---
+
+**Q4.** Le volume molaire d''un gaz dans les CNTP est :
+
+A. 22,4 L/mol
+B. 1 L/mol
+C. 6,02 L/mol
+D. 100 L/mol
+
+---
+
+**Q5.** La concentration molaire est :
+
+A. C = n/V
+B. C = n·V
+C. C = V/n
+D. C = n+V
+
+---
+
+**Q6.** La concentration massique est :
+
+A. Cm = m/V
+B. Cm = m·V
+C. Cm = V/m
+D. Cm = m+V
+
+---
+
+**Q7.** Le pH d''une solution est :
+
+A. pH = -log[H⁺]
+B. pH = log[H⁺]
+C. pH = [H⁺]
+D. pH = 1/[H⁺]
+
+---
+
+**Q8.** Une solution neutre a un pH :
+
+A. égal à 7
+B. inférieur à 7
+C. supérieur à 7
+D. égal à 0
+
+---
+
+**Q9.** La constante d''acidité Ka :
+
+A. mesure la force d''un acide
+B. mesure la température
+C. mesure la masse
+D. mesure le volume
+
+---
+
+**Q10.** Un acide fort :
+
+A. se dissocie totalement
+B. se dissocie partiellement
+C. ne se dissocie pas
+D. est basique
+
+---
+
+**Q11.** Une base faible :
+
+A. se dissocie partiellement
+B. se dissocie totalement
+C. ne se dissocie pas
+D. est acide
+
+---
+
+**Q12.** La réaction d''oxydoréduction :
+
+A. échange des électrons
+B. échange des protons
+C. échange des neutrons
+D. échange de la chaleur
+
+---
+
+**Q13.** L''oxydation est :
+
+A. une perte d''électrons
+B. un gain d''électrons
+C. un gain de protons
+D. une perte de protons
+
+---
+
+**Q14.** La réduction est :
+
+A. un gain d''électrons
+B. une perte d''électrons
+C. un gain de protons
+D. une perte de protons
+
+---
+
+**Q15.** L''oxydant est :
+
+A. l''espèce qui capte des électrons
+B. l''espèce qui cède des électrons
+C. l''espèce neutre
+D. l''espèce chargée
+
+---
+
+**Q16.** Le réducteur est :
+
+A. l''espèce qui cède des électrons
+B. l''espèce qui capte des électrons
+C. l''espèce neutre
+D. l''espèce chargée
+
+---
+
+**Q17.** Le nombre d''oxydation :
+
+A. mesure l''état d''oxydation
+B. mesure la masse
+C. mesure le volume
+D. mesure la température
+
+---
+
+**Q18.** L''électrolyse :
+
+A. transforme l''énergie électrique en chimique
+B. produit de l''électricité
+C. est une combustion
+D. est une distillation
+
+---
+
+**Q19.** La pile électrochimique :
+
+A. transforme l''énergie chimique en électrique
+B. consomme de l''électricité
+C. est une électrolyse
+D. est une combustion
+
+---
+
+**Q20.** L''anode est :
+
+A. l''électrode où a lieu l''oxydation
+B. l''électrode où a lieu la réduction
+C. l''électrode neutre
+D. le pôle négatif
+
+---
+
+## CORRIGÉ
+
+1. 6,02×10²³
+2. l''unité de quantité de matière
+3. g/mol
+4. 22,4 L/mol
+5. C = n/V
+6. Cm = m/V
+7. pH = -log[H⁺]
+8. égal à 7
+9. mesure la force d''un acide
+10. se dissocie totalement
+11. se dissocie partiellement
+12. échange des électrons
+13. une perte d''électrons
+14. un gain d''électrons
+15. l''espèce qui capte des électrons
+16. l''espèce qui cède des électrons
+17. mesure l''état d''oxydation
+18. transforme l''énergie électrique en chimique
+19. transforme l''énergie chimique en électrique
+20. l''électrode où a lieu l''oxydation
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '4acebf3c-d9f2-a942-59c2-d31b12859d4c', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La cathode est :
+
+A. l''électrode où a lieu la réduction
+B. l''électrode où a lieu l''oxydation
+C. l''électrode neutre
+D. le pôle positif
+
+---
+
+**Q2.** La cinétique chimique étudie :
+
+A. la vitesse des réactions
+B. l''équilibre
+C. la thermodynamique
+D. la structure
+
+---
+
+**Q3.** La vitesse d''une réaction :
+
+A. diminue avec le temps
+B. augmente avec le temps
+C. est constante
+D. est nulle
+
+---
+
+**Q4.** Un catalyseur :
+
+A. accélère la réaction sans être consommé
+B. ralentit la réaction
+C. est consommé
+D. n''a aucun effet
+
+---
+
+**Q5.** La température :
+
+A. augmente la vitesse de réaction
+B. diminue la vitesse
+C. n''a aucun effet
+D. arrête la réaction
+
+---
+
+**Q6.** L''équilibre chimique :
+
+A. les vitesses directe et inverse sont égales
+B. la réaction s''arrête
+C. les concentrations sont nulles
+D. la réaction est totale
+
+---
+
+**Q7.** La constante d''équilibre K :
+
+A. caractérise l''équilibre
+B. mesure la vitesse
+C. mesure la température
+D. mesure la masse
+
+---
+
+**Q8.** Le principe de Le Chatelier :
+
+A. un système réagit pour s''opposer à une perturbation
+B. un système ne réagit pas
+C. un système accélère
+D. un système s''arrête
+
+---
+
+**Q9.** La thermochimie étudie :
+
+A. les échanges de chaleur
+B. la vitesse
+C. l''équilibre
+D. la structure
+
+---
+
+**Q10.** Une réaction exothermique :
+
+A. libère de la chaleur
+B. absorbe de la chaleur
+C. ne dégage rien
+D. est froide
+
+---
+
+**Q11.** Une réaction endothermique :
+
+A. absorbe de la chaleur
+B. libère de la chaleur
+C. ne dégage rien
+D. est chaude
+
+---
+
+**Q12.** L''enthalpie de réaction ΔH :
+
+A. mesure la chaleur échangée
+B. mesure la vitesse
+C. mesure la masse
+D. mesure le volume
+
+---
+
+**Q13.** La chimie organique étudie :
+
+A. les composés du carbone
+B. les métaux
+C. les gaz rares
+D. les sels
+
+---
+
+**Q14.** Le carbone a une valence :
+
+A. 4
+B. 2
+C. 3
+D. 1
+
+---
+
+**Q15.** L''isomérie :
+
+A. même formule brute, structure différente
+B. formule différente
+C. même structure
+D. même masse
+
+---
+
+**Q16.** Les alcanes ont pour formule générale :
+
+A. CnH₂n₊₂
+B. CnH₂n
+C. CnH₂n₋₂
+D. CnHn
+
+---
+
+**Q17.** Les alcènes ont pour formule générale :
+
+A. CnH₂n
+B. CnH₂n₊₂
+C. CnH₂n₋₂
+D. CnHn
+
+---
+
+**Q18.** Les alcynes ont pour formule générale :
+
+A. CnH₂n₋₂
+B. CnH₂n
+C. CnH₂n₊₂
+D. CnHn
+
+---
+
+**Q19.** Le groupe fonctionnel des alcools est :
+
+A. -OH
+B. -COOH
+C. -CHO
+D. -NH₂
+
+---
+
+**Q20.** Le groupe fonctionnel des acides carboxyliques est :
+
+A. -COOH
+B. -OH
+C. -CHO
+D. -NH₂
+
+---
+
+## CORRIGÉ
+
+1. l''électrode où a lieu la réduction
+2. la vitesse des réactions
+3. diminue avec le temps
+4. accélère la réaction sans être consommé
+5. augmente la vitesse de réaction
+6. les vitesses directe et inverse sont égales
+7. caractérise l''équilibre
+8. un système réagit pour s''opposer à une perturbation
+9. les échanges de chaleur
+10. libère de la chaleur
+11. absorbe de la chaleur
+12. mesure la chaleur échangée
+13. les composés du carbone
+14. 4
+15. même formule brute, structure différente
+16. CnH₂n₊₂
+17. CnH₂n
+18. CnH₂n₋₂
+19. -OH
+20. -COOH
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '62ae16ae-d18b-fb47-dff2-21c5ee131fbc', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le groupe fonctionnel des aldéhydes est :
+
+A. -CHO
+B. -OH
+C. -COOH
+D. -NH₂
+
+---
+
+**Q2.** Le groupe fonctionnel des amines est :
+
+A. -NH₂
+B. -OH
+C. -COOH
+D. -CHO
+
+---
+
+**Q3.** L''estérification :
+
+A. acide + alcool → ester + eau
+B. acide + base → sel
+C. alcool → alcène
+D. alcane → alcool
+
+---
+
+**Q4.** L''hydrolyse d''un ester :
+
+A. ester + eau → acide + alcool
+B. ester → alcool
+C. ester → acide
+D. ester → sel
+
+---
+
+**Q5.** La saponification :
+
+A. ester + base → savon + alcool
+B. acide + alcool → ester
+C. alcool → alcène
+D. alcane → alcool
+
+---
+
+**Q6.** La polymérisation :
+
+A. assemble des monomères
+B. divise des polymères
+C. est une combustion
+D. est une distillation
+
+---
+
+**Q7.** Le monomère est :
+
+A. l''unité de base du polymère
+B. le polymère
+C. le produit final
+D. un catalyseur
+
+---
+
+**Q8.** La distillation :
+
+A. sépare les constituants d''un mélange
+B. mélange deux liquides
+C. solidifie
+D. cristallise
+
+---
+
+**Q9.** La chromatographie :
+
+A. sépare les constituants d''un mélange
+B. mélange
+C. solidifie
+D. cristallise
+
+---
+
+**Q10.** Le titrage :
+
+A. détermine une concentration
+B. mesure la masse
+C. mesure le volume
+D. mesure la température
+
+---
+
+**Q11.** Le point d''équivalence :
+
+A. les réactifs sont en proportions stœchiométriques
+B. la réaction s''arrête
+C. le pH est nul
+D. la température est maximale
+
+---
+
+**Q12.** La spectrophotométrie :
+
+A. mesure l''absorbance
+B. mesure la masse
+C. mesure le volume
+D. mesure la température
+
+---
+
+**Q13.** La loi de Beer-Lambert :
+
+A. A = ε·l·C
+B. A = ε·l/C
+C. A = C/ε·l
+D. A = ε·C/l
+
+---
+
+**Q14.** L''absorbance est :
+
+A. proportionnelle à la concentration
+B. inversement proportionnelle
+C. constante
+D. nulle
+
+---
+
+**Q15.** Le tableau d''avancement :
+
+A. suit l''évolution d''une réaction
+B. mesure la vitesse
+C. mesure la température
+D. mesure la masse
+
+---
+
+**Q16.** L''avancement maximal :
+
+A. quand le réactif limitant est consommé
+B. quand la réaction s''arrête
+C. quand le pH est nul
+D. quand la température est maximale
+
+---
+
+**Q17.** Le réactif limitant :
+
+A. est entièrement consommé
+B. reste en excès
+C. est le catalyseur
+D. est le produit
+
+---
+
+**Q18.** Le rendement d''une réaction :
+
+A. quantité obtenue / quantité théorique
+B. quantité théorique / obtenue
+C. quantité obtenue × théorique
+D. quantité théorique
+
+---
+
+**Q19.** La chimie verte :
+
+A. réduit l''impact environnemental
+B. augmente les déchets
+C. utilise des toxiques
+D. est polluante
+
+---
+
+**Q20.** L''atome de carbone peut former :
+
+A. 4 liaisons
+B. 2 liaisons
+C. 3 liaisons
+D. 1 liaison
+
+---
+
+## CORRIGÉ
+
+1. -CHO
+2. -NH₂
+3. acide + alcool → ester + eau
+4. ester + eau → acide + alcool
+5. ester + base → savon + alcool
+6. assemble des monomères
+7. l''unité de base du polymère
+8. sépare les constituants d''un mélange
+9. sépare les constituants d''un mélange
+10. détermine une concentration
+11. les réactifs sont en proportions stœchiométriques
+12. mesure l''absorbance
+13. A = ε·l·C
+14. proportionnelle à la concentration
+15. suit l''évolution d''une réaction
+16. quand le réactif limitant est consommé
+17. est entièrement consommé
+18. quantité obtenue / quantité théorique
+19. réduit l''impact environnemental
+20. 4 liaisons
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'a578cbb6-a537-0c93-75b0-0bd1ddae4e08', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CHIMIE ORGANIQUE
+
+**Q1.** Nommer et représenter les alcanes, alcènes et alcynes.
+
+**Q1.** Identifier les groupes fonctionnels des composés organiques.
+
+**Q1.** Écrire et équilibrer une réaction d''estérification.
+
+**Q1.** Expliquer la saponification et ses applications.
+
+**Q1.** Décrire la polymérisation et ses applications.
+
+## SECTION 2: CHIMIE GÉNÉRALE ET QUANTITATIVE
+
+**Q2.** Calculer la quantité de matière, la masse et le volume d''un gaz dans les CNTP.
+
+**Q2.** Préparer une solution de concentration donnée par dissolution et par dilution.
+
+**Q2.** Déterminer la concentration d''une solution par titrage.
+
+**Q2.** Établir un tableau d''avancement pour une réaction chimique.
+
+**Q2.** Calculer le rendement d''une réaction.
+
+## SECTION 3: ACIDES, BASES ET ÉQUILIBRES
+
+**Q3.** Calculer le pH d''une solution d''acide fort et d''une base forte.
+
+**Q3.** Expliquer la notion d''équilibre acido-basique et calculer Ka.
+
+**Q3.** Déterminer le pH d''une solution tampon.
+
+**Q3.** Étudier l''équilibre chimique et appliquer le principe de Le Chatelier.
+
+**Q3.** Réaliser un titrage acido-basique et déterminer le point d''équivalence.
+
+## SECTION 4: OXYDORÉDUCTION ET ÉLECTROCHIMIE
+
+**Q4.** Équilibrer une équation d''oxydoréduction.
+
+**Q4.** Déterminer les nombres d''oxydation dans une réaction.
+
+**Q4.** Expliquer le fonctionnement d''une pile électrochimique.
+
+**Q4.** Décrire le processus d''électrolyse.
+
+**Q4.** Calculer la quantité d''électricité et la masse déposée lors d''une électrolyse.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'caa762e3-cc01-d9ba-6df6-88be57369737', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CHIMIE GÉNÉRALE ET QUANTITATIVE
+
+**Q1.** Calculer la quantité de matière, la masse et le volume d''un gaz dans les CNTP.
+
+**Q1.** Préparer une solution de concentration donnée par dissolution et par dilution.
+
+**Q1.** Déterminer la concentration d''une solution par titrage.
+
+**Q1.** Établir un tableau d''avancement pour une réaction chimique.
+
+**Q1.** Calculer le rendement d''une réaction.
+
+## SECTION 2: ACIDES, BASES ET ÉQUILIBRES
+
+**Q2.** Calculer le pH d''une solution d''acide fort et d''une base forte.
+
+**Q2.** Expliquer la notion d''équilibre acido-basique et calculer Ka.
+
+**Q2.** Déterminer le pH d''une solution tampon.
+
+**Q2.** Étudier l''équilibre chimique et appliquer le principe de Le Chatelier.
+
+**Q2.** Réaliser un titrage acido-basique et déterminer le point d''équivalence.
+
+## SECTION 3: OXYDORÉDUCTION ET ÉLECTROCHIMIE
+
+**Q3.** Équilibrer une équation d''oxydoréduction.
+
+**Q3.** Déterminer les nombres d''oxydation dans une réaction.
+
+**Q3.** Expliquer le fonctionnement d''une pile électrochimique.
+
+**Q3.** Décrire le processus d''électrolyse.
+
+**Q3.** Calculer la quantité d''électricité et la masse déposée lors d''une électrolyse.
+
+## SECTION 4: CHIMIE ORGANIQUE
+
+**Q4.** Nommer et représenter les alcanes, alcènes et alcynes.
+
+**Q4.** Identifier les groupes fonctionnels des composés organiques.
+
+**Q4.** Écrire et équilibrer une réaction d''estérification.
+
+**Q4.** Expliquer la saponification et ses applications.
+
+**Q4.** Décrire la polymérisation et ses applications.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'd24d4f8b-6a93-e764-6594-89a18a688cf6', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ACIDES, BASES ET ÉQUILIBRES
+
+**Q1.** Calculer le pH d''une solution d''acide fort et d''une base forte.
+
+**Q1.** Expliquer la notion d''équilibre acido-basique et calculer Ka.
+
+**Q1.** Déterminer le pH d''une solution tampon.
+
+**Q1.** Étudier l''équilibre chimique et appliquer le principe de Le Chatelier.
+
+**Q1.** Réaliser un titrage acido-basique et déterminer le point d''équivalence.
+
+## SECTION 2: OXYDORÉDUCTION ET ÉLECTROCHIMIE
+
+**Q2.** Équilibrer une équation d''oxydoréduction.
+
+**Q2.** Déterminer les nombres d''oxydation dans une réaction.
+
+**Q2.** Expliquer le fonctionnement d''une pile électrochimique.
+
+**Q2.** Décrire le processus d''électrolyse.
+
+**Q2.** Calculer la quantité d''électricité et la masse déposée lors d''une électrolyse.
+
+## SECTION 3: CHIMIE ORGANIQUE
+
+**Q3.** Nommer et représenter les alcanes, alcènes et alcynes.
+
+**Q3.** Identifier les groupes fonctionnels des composés organiques.
+
+**Q3.** Écrire et équilibrer une réaction d''estérification.
+
+**Q3.** Expliquer la saponification et ses applications.
+
+**Q3.** Décrire la polymérisation et ses applications.
+
+## SECTION 4: CHIMIE GÉNÉRALE ET QUANTITATIVE
+
+**Q4.** Calculer la quantité de matière, la masse et le volume d''un gaz dans les CNTP.
+
+**Q4.** Préparer une solution de concentration donnée par dissolution et par dilution.
+
+**Q4.** Déterminer la concentration d''une solution par titrage.
+
+**Q4.** Établir un tableau d''avancement pour une réaction chimique.
+
+**Q4.** Calculer le rendement d''une réaction.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Chimie — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '76a6972f-148c-35dd-02b9-a878f5b8672b', 'fr-math-bac-analyse', 'Chimie', 'Baccalauréat Chimie — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat CHIMIE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Chimie
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: OXYDORÉDUCTION ET ÉLECTROCHIMIE
+
+**Q1.** Équilibrer une équation d''oxydoréduction.
+
+**Q1.** Déterminer les nombres d''oxydation dans une réaction.
+
+**Q1.** Expliquer le fonctionnement d''une pile électrochimique.
+
+**Q1.** Décrire le processus d''électrolyse.
+
+**Q1.** Calculer la quantité d''électricité et la masse déposée lors d''une électrolyse.
+
+## SECTION 2: CHIMIE ORGANIQUE
+
+**Q2.** Nommer et représenter les alcanes, alcènes et alcynes.
+
+**Q2.** Identifier les groupes fonctionnels des composés organiques.
+
+**Q2.** Écrire et équilibrer une réaction d''estérification.
+
+**Q2.** Expliquer la saponification et ses applications.
+
+**Q2.** Décrire la polymérisation et ses applications.
+
+## SECTION 3: CHIMIE GÉNÉRALE ET QUANTITATIVE
+
+**Q3.** Calculer la quantité de matière, la masse et le volume d''un gaz dans les CNTP.
+
+**Q3.** Préparer une solution de concentration donnée par dissolution et par dilution.
+
+**Q3.** Déterminer la concentration d''une solution par titrage.
+
+**Q3.** Établir un tableau d''avancement pour une réaction chimique.
+
+**Q3.** Calculer le rendement d''une réaction.
+
+## SECTION 4: ACIDES, BASES ET ÉQUILIBRES
+
+**Q4.** Calculer le pH d''une solution d''acide fort et d''une base forte.
+
+**Q4.** Expliquer la notion d''équilibre acido-basique et calculer Ka.
+
+**Q4.** Déterminer le pH d''une solution tampon.
+
+**Q4.** Étudier l''équilibre chimique et appliquer le principe de Le Chatelier.
+
+**Q4.** Réaliser un titrage acido-basique et déterminer le point d''équivalence.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Chimie Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '23819241-d44e-1a22-8d4a-bf829ecb050b', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La dérivée de $x^3$ est :
+
+A. $3x^2$
+B. $x^2$
+C. $3x$
+D. $3x^3$
+
+---
+
+**Q2.** La dérivée de $\sin(x)$ est :
+
+A. $\cos(x)$
+B. $-\cos(x)$
+C. $\sin(x)$
+D. $-\sin(x)$
+
+---
+
+**Q3.** La dérivée de $\cos(x)$ est :
+
+A. $-\sin(x)$
+B. $\sin(x)$
+C. $\cos(x)$
+D. $-\cos(x)$
+
+---
+
+**Q4.** La dérivée de $e^x$ est :
+
+A. $e^x$
+B. $x e^x$
+C. $e^{x-1}$
+D. $\ln(x)$
+
+---
+
+**Q5.** La dérivée de $\ln(x)$ est :
+
+A. $\frac{1}{x}$
+B. $x$
+C. $\ln(x)$
+D. $\frac{1}{\ln(x)}$
+
+---
+
+**Q6.** L''intégrale de $x^2$ est :
+
+A. $\frac{x^3}{3} + C$
+B. $\frac{x^2}{2} + C$
+C. $x^3 + C$
+D. $2x + C$
+
+---
+
+**Q7.** L''intégrale de $\cos(x)$ est :
+
+A. $\sin(x) + C$
+B. $-\sin(x) + C$
+C. $\cos(x) + C$
+D. $-\cos(x) + C$
+
+---
+
+**Q8.** L''intégrale de $\frac{1}{x}$ est :
+
+A. $\ln|x| + C$
+B. $x + C$
+C. $\frac{1}{x^2} + C$
+D. $e^x + C$
+
+---
+
+**Q9.** La limite de $\frac{\sin(x)}{x}$ quand $x \to 0$ est :
+
+A. 1
+B. 0
+C. $\infty$
+D. n''existe pas
+
+---
+
+**Q10.** La limite de $\frac{1}{x}$ quand $x \to \infty$ est :
+
+A. 0
+B. $\infty$
+C. 1
+D. n''existe pas
+
+---
+
+**Q11.** La fonction $f(x) = x^2$ est :
+
+A. paire
+B. impaire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q12.** La fonction $f(x) = x^3$ est :
+
+A. impaire
+B. paire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q13.** La dérivée de $x^n$ est :
+
+A. $n x^{n-1}$
+B. $x^{n-1}$
+C. $n x^n$
+D. $(n-1)x^n$
+
+---
+
+**Q14.** L''équation $x^2 - 4 = 0$ a pour solutions :
+
+A. $x = 2$ et $x = -2$
+B. $x = 2$
+C. $x = 4$
+D. $x = 16$
+
+---
+
+**Q15.** Le discriminant de $ax^2 + bx + c = 0$ est :
+
+A. $b^2 - 4ac$
+B. $b^2 + 4ac$
+C. $4ac - b^2$
+D. $b - 4ac$
+
+---
+
+**Q16.** Si $\Delta > 0$, l''équation du second degré a :
+
+A. deux solutions réelles
+B. une solution
+C. aucune solution
+D. une solution complexe
+
+---
+
+**Q17.** Si $\Delta = 0$, l''équation du second degré a :
+
+A. une solution double
+B. deux solutions
+C. aucune solution
+D. deux solutions complexes
+
+---
+
+**Q18.** Si $\Delta < 0$, l''équation du second degré a :
+
+A. aucune solution réelle
+B. deux solutions réelles
+C. une solution
+D. une solution double
+
+---
+
+**Q19.** La dérivée de $\tan(x)$ est :
+
+A. $\frac{1}{\cos^2(x)}$
+B. $\sin(x)$
+C. $\cos(x)$
+D. $-\frac{1}{\sin^2(x)}$
+
+---
+
+**Q20.** L''intégrale de $e^x$ est :
+
+A. $e^x + C$
+B. $\frac{e^x}{x} + C$
+C. $x e^x + C$
+D. $\ln(x) + C$
+
+---
+
+## CORRIGÉ
+
+1. $3x^2$
+2. $\cos(x)$
+3. $-\sin(x)$
+4. $e^x$
+5. $\frac{1}{x}$
+6. $\frac{x^3}{3} + C$
+7. $\sin(x) + C$
+8. $\ln|x| + C$
+9. 1
+10. 0
+11. paire
+12. impaire
+13. $n x^{n-1}$
+14. $x = 2$ et $x = -2$
+15. $b^2 - 4ac$
+16. deux solutions réelles
+17. une solution double
+18. aucune solution réelle
+19. $\frac{1}{\cos^2(x)}$
+20. $e^x + C$
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'e1a6bfbd-94a8-c56e-191c-31a07146eb1e', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La fonction exponentielle $e^x$ est :
+
+A. strictement croissante
+B. strictement décroissante
+C. constante
+D. périodique
+
+---
+
+**Q2.** La fonction logarithme $\ln(x)$ est définie pour :
+
+A. $x > 0$
+B. $x \geq 0$
+C. $x \neq 0$
+D. tout $x$
+
+---
+
+**Q3.** $\ln(1)$ est égal à :
+
+A. 0
+B. 1
+C. $e$
+D. $-1$
+
+---
+
+**Q4.** $\ln(e)$ est égal à :
+
+A. 1
+B. 0
+C. $e$
+D. $-1$
+
+---
+
+**Q5.** $e^0$ est égal à :
+
+A. 1
+B. 0
+C. $e$
+D. $-1$
+
+---
+
+**Q6.** La dérivée de $\frac{1}{x}$ est :
+
+A. $-\frac{1}{x^2}$
+B. $\frac{1}{x^2}$
+C. $-\frac{1}{x}$
+D. $\ln(x)$
+
+---
+
+**Q7.** L''intégrale de $\sin(x)$ est :
+
+A. $-\cos(x) + C$
+B. $\cos(x) + C$
+C. $\sin(x) + C$
+D. $-\sin(x) + C$
+
+---
+
+**Q8.** La limite de $\frac{x^2 - 1}{x - 1}$ quand $x \to 1$ est :
+
+A. 2
+B. 0
+C. 1
+D. $\infty$
+
+---
+
+**Q9.** La fonction $f(x) = \frac{1}{x}$ est :
+
+A. impaire
+B. paire
+C. ni paire ni impaire
+D. constante
+
+---
+
+**Q10.** Le nombre dérivé de $f$ en $a$ est :
+
+A. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
+B. $f(a)$
+C. $\frac{f(a)}{a}$
+D. $f''(a) \times a$
+
+---
+
+**Q11.** La tangente à la courbe en $a$ a pour pente :
+
+A. $f''(a)$
+B. $f(a)$
+C. $a$
+D. $f''(a) \times a$
+
+---
+
+**Q12.** L''équation de la tangente en $a$ est :
+
+A. $y = f''(a)(x - a) + f(a)$
+B. $y = f(a)x$
+C. $y = f''(a)x$
+D. $y = f(a) + x$
+
+---
+
+**Q13.** La fonction $f(x) = x^2$ est croissante sur :
+
+A. $[0, +\infty[$
+B. $]-\infty, 0]$
+C. $\mathbb{R}$
+D. $]-\infty, +\infty[$
+
+---
+
+**Q14.** La fonction $f(x) = x^2$ est décroissante sur :
+
+A. $]-\infty, 0]$
+B. $[0, +\infty[$
+C. $\mathbb{R}$
+D. nulle part
+
+---
+
+**Q15.** Le point d''inflexion est :
+
+A. où la courbure change
+B. le maximum
+C. le minimum
+D. l''origine
+
+---
+
+**Q16.** La dérivée seconde de $x^3$ est :
+
+A. $6x$
+B. $3x^2$
+C. $3x$
+D. $6$
+
+---
+
+**Q17.** La fonction $f(x) = e^x$ a pour limite en $+\infty$ :
+
+A. $+\infty$
+B. 0
+C. 1
+D. $e$
+
+---
+
+**Q18.** La fonction $f(x) = e^x$ a pour limite en $-\infty$ :
+
+A. 0
+B. $+\infty$
+C. 1
+D. $e$
+
+---
+
+**Q19.** La fonction $f(x) = \ln(x)$ a pour limite en $+\infty$ :
+
+A. $+\infty$
+B. 0
+C. 1
+D. $-\infty$
+
+---
+
+**Q20.** La fonction $f(x) = \ln(x)$ a pour limite en $0^+$ :
+
+A. $-\infty$
+B. $+\infty$
+C. 0
+D. 1
+
+---
+
+## CORRIGÉ
+
+1. strictement croissante
+2. $x > 0$
+3. 0
+4. 1
+5. 1
+6. $-\frac{1}{x^2}$
+7. $-\cos(x) + C$
+8. 2
+9. impaire
+10. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
+11. $f''(a)$
+12. $y = f''(a)(x - a) + f(a)$
+13. $[0, +\infty[$
+14. $]-\infty, 0]$
+15. où la courbure change
+16. $6x$
+17. $+\infty$
+18. 0
+19. $+\infty$
+20. $-\infty$
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '5399969a-c75c-1347-91da-aed9a25a77b5', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''asymptote horizontale de $f(x) = \frac{1}{x}$ est :
+
+A. $y = 0$
+B. $x = 0$
+C. $y = 1$
+D. $y = x$
+
+---
+
+**Q2.** L''asymptote verticale de $f(x) = \frac{1}{x}$ est :
+
+A. $x = 0$
+B. $y = 0$
+C. $x = 1$
+D. $y = 1$
+
+---
+
+**Q3.** La suite $u_n = 2n + 1$ est :
+
+A. arithmétique
+B. géométrique
+C. ni l''un ni l''autre
+D. constante
+
+---
+
+**Q4.** La suite $u_n = 3 \times 2^n$ est :
+
+A. géométrique
+B. arithmétique
+C. ni l''un ni l''autre
+D. constante
+
+---
+
+**Q5.** La raison de la suite $u_n = 2n + 1$ est :
+
+A. 2
+B. 1
+C. 3
+D. n
+
+---
+
+**Q6.** La raison de la suite $u_n = 3 \times 2^n$ est :
+
+A. 2
+B. 3
+C. 6
+D. n
+
+---
+
+**Q7.** La somme des $n$ premiers termes d''une suite arithmétique de raison $r$ est :
+
+A. $\frac{n(u_1 + u_n)}{2}$
+B. $n \times r$
+C. $u_1 \times r^n$
+D. $\frac{n}{2} \times r$
+
+---
+
+**Q8.** La somme des $n$ premiers termes d''une suite géométrique de raison $q$ est :
+
+A. $u_1 \frac{1 - q^n}{1 - q}$
+B. $n \times u_1$
+C. $u_1 \times q^n$
+D. $\frac{n(u_1 + u_n)}{2}$
+
+---
+
+**Q9.** La probabilité d''un événement certain est :
+
+A. 1
+B. 0
+C. 0,5
+D. $\infty$
+
+---
+
+**Q10.** La probabilité d''un événement impossible est :
+
+A. 0
+B. 1
+C. 0,5
+D. $\infty$
+
+---
+
+**Q11.** La somme des probabilités d''un univers est :
+
+A. 1
+B. 0
+C. 0,5
+D. $\infty$
+
+---
+
+**Q12.** Deux événements incompatibles :
+
+A. ne peuvent pas se produire ensemble
+B. se produisent toujours ensemble
+C. sont certains
+D. sont impossibles
+
+---
+
+**Q13.** La probabilité de $A \cup B$ si $A$ et $B$ sont incompatibles est :
+
+A. $P(A) + P(B)$
+B. $P(A) \times P(B)$
+C. $P(A) - P(B)$
+D. $P(A) / P(B)$
+
+---
+
+**Q14.** La probabilité conditionnelle $P(A|B)$ est :
+
+A. $\frac{P(A \cap B)}{P(B)}$
+B. $P(A) \times P(B)$
+C. $P(A) + P(B)$
+D. $\frac{P(B)}{P(A)}$
+
+---
+
+**Q15.** L''espérance d''une variable aléatoire est :
+
+A. la moyenne pondérée
+B. le maximum
+C. le minimum
+D. la variance
+
+---
+
+**Q16.** La variance mesure :
+
+A. la dispersion
+B. la moyenne
+C. le maximum
+D. le minimum
+
+---
+
+**Q17.** L''écart-type est :
+
+A. la racine carrée de la variance
+B. la variance
+C. la moyenne
+D. le maximum
+
+---
+
+**Q18.** La loi binomiale $B(n, p)$ a pour espérance :
+
+A. $np$
+B. $n + p$
+C. $n - p$
+D. $p^n$
+
+---
+
+**Q19.** La loi normale est :
+
+A. une loi continue
+B. une loi discrète
+C. une loi constante
+D. une loi nulle
+
+---
+
+**Q20.** La courbe de la loi normale est :
+
+A. en cloche
+B. linéaire
+C. exponentielle
+D. constante
+
+---
+
+## CORRIGÉ
+
+1. $y = 0$
+2. $x = 0$
+3. arithmétique
+4. géométrique
+5. 2
+6. 2
+7. $\frac{n(u_1 + u_n)}{2}$
+8. $u_1 \frac{1 - q^n}{1 - q}$
+9. 1
+10. 0
+11. 1
+12. ne peuvent pas se produire ensemble
+13. $P(A) + P(B)$
+14. $\frac{P(A \cap B)}{P(B)}$
+15. la moyenne pondérée
+16. la dispersion
+17. la racine carrée de la variance
+18. $np$
+19. une loi continue
+20. en cloche
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '910641e2-c81f-2c33-3ad5-cc950d9735ff', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉOMÉTRIE ET COMPLEXES
+
+**Q1.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q1.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q1.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q1.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q1.** Résoudre un problème de géométrie dans l''espace.
+
+## SECTION 2: ANALYSE
+
+**Q2.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q2.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q2.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q2.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q2.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 3: ALGÈBRE ET SUITES
+
+**Q3.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q3.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q3.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q3.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q3.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 4: PROBABILITÉS ET STATISTIQUES
+
+**Q4.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q4.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q4.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q4.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q4.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'b0ac4782-684d-d472-4bed-488a80376f09', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ANALYSE
+
+**Q1.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q1.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q1.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q1.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q1.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 2: ALGÈBRE ET SUITES
+
+**Q2.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q2.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q2.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q2.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q2.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 3: PROBABILITÉS ET STATISTIQUES
+
+**Q3.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q3.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q3.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q3.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q3.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 4: GÉOMÉTRIE ET COMPLEXES
+
+**Q4.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q4.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q4.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q4.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q4.** Résoudre un problème de géométrie dans l''espace.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'fdd86dc0-0124-5b59-f073-bd1475f4eab0', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ALGÈBRE ET SUITES
+
+**Q1.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q1.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q1.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q1.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q1.** Factoriser et résoudre : $x^3 - 4x = 0$.
+
+## SECTION 2: PROBABILITÉS ET STATISTIQUES
+
+**Q2.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q2.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q2.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q2.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q2.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 3: GÉOMÉTRIE ET COMPLEXES
+
+**Q3.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q3.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q3.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q3.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q3.** Résoudre un problème de géométrie dans l''espace.
+
+## SECTION 4: ANALYSE
+
+**Q4.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q4.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q4.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q4.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q4.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Mathématiques — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'ea783c69-5824-7f12-e6a7-a686676040b9', 'fr-math-bac-analyse', 'Mathématiques', 'Baccalauréat Mathématiques — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['c','d','e','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat MATHÉMATIQUES SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, E, TI
+**Subject:** Mathématiques
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PROBABILITÉS ET STATISTIQUES
+
+**Q1.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d''obtenir 2 boules rouges.
+
+**Q1.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+
+**Q1.** Calculer la moyenne, la variance et l''écart-type de la série : 2, 4, 6, 8, 10.
+
+**Q1.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+
+**Q1.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+
+## SECTION 2: GÉOMÉTRIE ET COMPLEXES
+
+**Q2.** Résoudre une équation dans l''ensemble des nombres complexes.
+
+**Q2.** Calculer le module et l''argument d''un nombre complexe.
+
+**Q2.** Déterminer l''image d''un point par une transformation géométrique.
+
+**Q2.** Calculer un produit scalaire et une norme dans l''espace.
+
+**Q2.** Résoudre un problème de géométrie dans l''espace.
+
+## SECTION 3: ANALYSE
+
+**Q3.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+
+**Q3.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+
+**Q3.** Calculer l''intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+
+**Q3.** Déterminer l''équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d''abscisse 1.
+
+**Q3.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+
+## SECTION 4: ALGÈBRE ET SUITES
+
+**Q4.** Résoudre l''équation $x^2 - 5x + 6 = 0$.
+
+**Q4.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+
+**Q4.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+
+**Q4.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+
+**Q4.** Factoriser et résoudre : $x^3 - 4x = 0$.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Mathématiques Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '06db3f57-fb13-38dc-2da5-c7cc5f7a4f76', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le commentaire composé consiste à :
+
+A. analyser un texte
+B. résumer un texte
+C. inventer un texte
+D. traduire un texte
+
+---
+
+**Q2.** La dissertation :
+
+A. développe une réflexion argumentée
+B. résume un texte
+C. décrit un lieu
+D. raconte une histoire
+
+---
+
+**Q3.** La contraction de texte :
+
+A. réduit un texte en respectant l''essentiel
+B. développe un texte
+C. traduit un texte
+D. invente un texte
+
+---
+
+**Q4.** Le registre lyrique exprime :
+
+A. les sentiments personnels
+B. la peur
+C. le rire
+D. la colère
+
+---
+
+**Q5.** Le registre tragique :
+
+A. la fatalité et la mort
+B. la joie
+C. le comique
+D. l''ironie
+
+---
+
+**Q6.** Le registre comique :
+
+A. provoque le rire
+B. provoque la peur
+C. exprime la tristesse
+D. exprime la colère
+
+---
+
+**Q7.** Le registre épique :
+
+A. héroïsme et grandeur
+B. le rire
+C. la peur
+D. la tristesse
+
+---
+
+**Q8.** Le registre pathétique :
+
+A. susciter l''émotion et la pitié
+B. provoquer le rire
+C. exprimer la colère
+D. décrire
+
+---
+
+**Q9.** Le registre ironique :
+
+A. dire le contraire de ce qu''on pense
+B. exprimer la joie
+C. décrire
+D. raconter
+
+---
+
+**Q10.** La tragédie classique respecte :
+
+A. la règle des trois unités
+B. aucune règle
+C. la liberté totale
+D. le comique
+
+---
+
+**Q11.** La règle des trois unités :
+
+A. temps, lieu, action
+B. temps, lieu, personnage
+C. action, personnage, décor
+D. temps, action, dialogue
+
+---
+
+**Q12.** La catharsis :
+
+A. la purgation des passions
+B. le rire
+C. la peur
+D. la colère
+
+---
+
+**Q13.** Le théâtre de l''absurde :
+
+A. l''absurdité de la condition humaine
+B. le réalisme
+C. le romantisme
+D. le classicisme
+
+---
+
+**Q14.** Le romantisme :
+
+A. l''expression des sentiments
+B. la raison
+C. la mesure
+D. le classicisme
+
+---
+
+**Q15.** Le réalisme :
+
+A. la représentation fidèle de la réalité
+B. l''idéalisation
+C. le rêve
+D. le fantastique
+
+---
+
+**Q16.** Le naturalisme :
+
+A. l''application de la méthode scientifique
+B. l''idéalisation
+C. le rêve
+D. le fantastique
+
+---
+
+**Q17.** Le symbolisme :
+
+A. les symboles et les correspondances
+B. le réalisme
+C. le naturalisme
+D. le classicisme
+
+---
+
+**Q18.** Le surréalisme :
+
+A. l''inconscient et le rêve
+B. la raison
+C. la mesure
+D. le classicisme
+
+---
+
+**Q19.** La poésie lyrique :
+
+A. exprime les sentiments
+B. raconte une histoire
+C. décrit
+D. argumente
+
+---
+
+**Q20.** Le sonnet :
+
+A. 14 vers
+B. 12 vers
+C. 10 vers
+D. 16 vers
+
+---
+
+## CORRIGÉ
+
+1. analyser un texte
+2. développe une réflexion argumentée
+3. réduit un texte en respectant l''essentiel
+4. les sentiments personnels
+5. la fatalité et la mort
+6. provoque le rire
+7. héroïsme et grandeur
+8. susciter l''émotion et la pitié
+9. dire le contraire de ce qu''on pense
+10. la règle des trois unités
+11. temps, lieu, action
+12. la purgation des passions
+13. l''absurdité de la condition humaine
+14. l''expression des sentiments
+15. la représentation fidèle de la réalité
+16. l''application de la méthode scientifique
+17. les symboles et les correspondances
+18. l''inconscient et le rêve
+19. exprime les sentiments
+20. 14 vers
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '3f167916-76f1-2ff6-1172-d8e9cd7a277d', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''alexandrin :
+
+A. 12 syllabes
+B. 10 syllabes
+C. 8 syllabes
+D. 14 syllabes
+
+---
+
+**Q2.** Le décasyllabe :
+
+A. 10 syllabes
+B. 12 syllabes
+C. 8 syllabes
+D. 14 syllabes
+
+---
+
+**Q3.** L''octosyllabe :
+
+A. 8 syllabes
+B. 10 syllabes
+C. 12 syllabes
+D. 14 syllabes
+
+---
+
+**Q4.** La rime plate :
+
+A. aabb
+B. abab
+C. abba
+D. aaaa
+
+---
+
+**Q5.** La rime croisée :
+
+A. abab
+B. aabb
+C. abba
+D. aaaa
+
+---
+
+**Q6.** La rime embrassée :
+
+A. abba
+B. aabb
+C. abab
+D. aaaa
+
+---
+
+**Q7.** L''enjambement :
+
+A. le rejet d''un mot à la ligne suivante
+B. la fin du vers
+C. la rime
+D. la césure
+
+---
+
+**Q8.** La métaphore filée :
+
+A. une métaphore prolongée
+B. une comparaison
+C. une hyperbole
+D. une litote
+
+---
+
+**Q9.** L''oxymore :
+
+A. l''union de termes contradictoires
+B. une comparaison
+C. une hyperbole
+D. une litote
+
+---
+
+**Q10.** L''antithèse :
+
+A. l''opposition de deux idées
+B. l''union de contraires
+C. une exagération
+D. une atténuation
+
+---
+
+**Q11.** Le chiasme :
+
+A. une structure croisée
+B. une répétition
+C. une exagération
+D. une atténuation
+
+---
+
+**Q12.** L''anaphore :
+
+A. la répétition d''un mot en début de phrase
+B. une exagération
+C. une atténuation
+D. une comparaison
+
+---
+
+**Q13.** La gradation :
+
+A. une progression croissante ou décroissante
+B. une répétition
+C. une exagération
+D. une atténuation
+
+---
+
+**Q14.** L''euphémisme :
+
+A. atténue une réalité désagréable
+B. exagère
+C. compare
+D. oppose
+
+---
+
+**Q15.** La métonymie :
+
+A. remplace un terme par un autre lié
+B. compare
+C. exagère
+D. atténue
+
+---
+
+**Q16.** La synecdoque :
+
+A. la partie pour le tout
+B. le tout pour la partie
+C. une comparaison
+D. une exagération
+
+---
+
+**Q17.** Le discours narratif :
+
+A. raconte une histoire
+B. argumente
+C. décrit
+D. explique
+
+---
+
+**Q18.** Le discours argumentatif :
+
+A. convainc et persuade
+B. raconte
+C. décrit
+D. explique
+
+---
+
+**Q19.** Le discours descriptif :
+
+A. décrit un lieu, une personne
+B. raconte
+C. argumente
+D. explique
+
+---
+
+**Q20.** Le discours explicatif :
+
+A. explique un phénomène
+B. raconte
+C. convainc
+D. décrit
+
+---
+
+## CORRIGÉ
+
+1. 12 syllabes
+2. 10 syllabes
+3. 8 syllabes
+4. aabb
+5. abab
+6. abba
+7. le rejet d''un mot à la ligne suivante
+8. une métaphore prolongée
+9. l''union de termes contradictoires
+10. l''opposition de deux idées
+11. une structure croisée
+12. la répétition d''un mot en début de phrase
+13. une progression croissante ou décroissante
+14. atténue une réalité désagréable
+15. remplace un terme par un autre lié
+16. la partie pour le tout
+17. raconte une histoire
+18. convainc et persuade
+19. décrit un lieu, une personne
+20. explique un phénomène
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '2ab689c2-238d-511d-2bbb-ce060b99d1a4', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le point de vue interne :
+
+A. le narrateur voit par les yeux d''un personnage
+B. le narrateur voit tout
+C. le narrateur est absent
+D. le narrateur juge
+
+---
+
+**Q2.** Le point de vue omniscient :
+
+A. le narrateur sait tout
+B. le narrateur voit par un personnage
+C. le narrateur est absent
+D. le narrateur juge
+
+---
+
+**Q3.** Le point de vue externe :
+
+A. le narrateur observe de l''extérieur
+B. le narrateur sait tout
+C. le narrateur voit par un personnage
+D. le narrateur juge
+
+---
+
+**Q4.** Le narrateur interne :
+
+A. est un personnage de l''histoire
+B. est extérieur
+C. est omniscient
+D. est absent
+
+---
+
+**Q5.** Le narrateur externe :
+
+A. n''est pas un personnage
+B. est un personnage
+C. est omniscient
+D. est le héros
+
+---
+
+**Q6.** La focalisation zéro :
+
+A. le narrateur omniscient
+B. le narrateur interne
+C. le narrateur externe
+D. le narrateur absent
+
+---
+
+**Q7.** La focalisation interne :
+
+A. le narrateur voit par un personnage
+B. le narrateur omniscient
+C. le narrateur externe
+D. le narrateur absent
+
+---
+
+**Q8.** La focalisation externe :
+
+A. le narrateur observe de l''extérieur
+B. le narrateur omniscient
+C. le narrateur interne
+D. le narrateur absent
+
+---
+
+**Q9.** Le classicisme :
+
+A. la mesure et la raison
+B. l''expression des sentiments
+C. le rêve
+D. l''absurde
+
+---
+
+**Q10.** Le siècle des Lumières :
+
+A. la raison et la critique
+B. le sentiment
+C. le rêve
+D. l''absurde
+
+---
+
+**Q11.** L''humanisme :
+
+A. la confiance en l''homme
+B. la foi
+C. le doute
+D. l''absurde
+
+---
+
+**Q12.** Le baroque :
+
+A. le mouvement et l''instabilité
+B. la mesure
+C. la raison
+D. le classicisme
+
+---
+
+**Q13.** La littérature africaine :
+
+A. reflète les réalités africaines
+B. est européenne
+C. est asiatique
+D. est américaine
+
+---
+
+**Q14.** La négritude :
+
+A. la valorisation de la culture noire
+B. le rejet de la culture
+C. la colonisation
+D. l''esclavage
+
+---
+
+**Q15.** Senghor est :
+
+A. un poète de la négritude
+B. un romancier
+C. un dramaturge
+D. un essayiste
+
+---
+
+**Q16.** Le roman :
+
+A. un récit en prose
+B. un poème
+C. une pièce de théâtre
+D. un essai
+
+---
+
+**Q17.** La nouvelle :
+
+A. un récit court
+B. un roman
+C. un poème
+D. une pièce
+
+---
+
+**Q18.** L''essai :
+
+A. une réflexion argumentée
+B. un récit
+C. un poème
+D. une pièce
+
+---
+
+**Q19.** La fable :
+
+A. un récit allégorique avec morale
+B. un roman
+C. une pièce
+D. un essai
+
+---
+
+**Q20.** La satire :
+
+A. critique les défauts
+B. loue les qualités
+C. raconte
+D. décrit
+
+---
+
+## CORRIGÉ
+
+1. le narrateur voit par les yeux d''un personnage
+2. le narrateur sait tout
+3. le narrateur observe de l''extérieur
+4. est un personnage de l''histoire
+5. n''est pas un personnage
+6. le narrateur omniscient
+7. le narrateur voit par un personnage
+8. le narrateur observe de l''extérieur
+9. la mesure et la raison
+10. la raison et la critique
+11. la confiance en l''homme
+12. le mouvement et l''instabilité
+13. reflète les réalités africaines
+14. la valorisation de la culture noire
+15. un poète de la négritude
+16. un récit en prose
+17. un récit court
+18. une réflexion argumentée
+19. un récit allégorique avec morale
+20. critique les défauts
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '94bce295-19e5-e2e8-8b95-0f65f88778df', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: EXPRESSION ÉCRITE ET ORALE
+
+**Q1.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q1.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q1.** Préparer et présenter un exposé oral.
+
+**Q1.** Rédiger un compte rendu de lecture.
+
+**Q1.** Écrire un dialogue argumentatif entre deux personnages.
+
+## SECTION 2: COMMENTAIRE COMPOSÉ
+
+**Q2.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q2.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q2.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q2.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q2.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+
+## SECTION 3: DISSERTATION
+
+**Q3.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q3.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q3.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q3.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q3.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+
+## SECTION 4: CONTRACTION ET SUIVI DE TEXTE
+
+**Q4.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q4.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q4.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q4.** Analyser la structure d''un texte et dégager son plan.
+
+**Q4.** Reformuler les idées d''un texte sans le recopier.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '23e8977b-6017-83b6-6783-daa9a2f9e3a9', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: COMMENTAIRE COMPOSÉ
+
+**Q1.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q1.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q1.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q1.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q1.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+
+## SECTION 2: DISSERTATION
+
+**Q2.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q2.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q2.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q2.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q2.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+
+## SECTION 3: CONTRACTION ET SUIVI DE TEXTE
+
+**Q3.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q3.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q3.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q3.** Analyser la structure d''un texte et dégager son plan.
+
+**Q3.** Reformuler les idées d''un texte sans le recopier.
+
+## SECTION 4: EXPRESSION ÉCRITE ET ORALE
+
+**Q4.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q4.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q4.** Préparer et présenter un exposé oral.
+
+**Q4.** Rédiger un compte rendu de lecture.
+
+**Q4.** Écrire un dialogue argumentatif entre deux personnages.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '0e483f75-1b80-abdb-4ee9-e398f11b6ee3', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: DISSERTATION
+
+**Q1.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q1.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q1.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q1.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q1.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+
+## SECTION 2: CONTRACTION ET SUIVI DE TEXTE
+
+**Q2.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q2.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q2.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q2.** Analyser la structure d''un texte et dégager son plan.
+
+**Q2.** Reformuler les idées d''un texte sans le recopier.
+
+## SECTION 3: EXPRESSION ÉCRITE ET ORALE
+
+**Q3.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q3.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q3.** Préparer et présenter un exposé oral.
+
+**Q3.** Rédiger un compte rendu de lecture.
+
+**Q3.** Écrire un dialogue argumentatif entre deux personnages.
+
+## SECTION 4: COMMENTAIRE COMPOSÉ
+
+**Q4.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q4.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q4.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q4.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q4.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Français — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '420820a2-7a2f-3b3d-2178-c0ba3fed5d39', 'fr-lycee-francais-methodes-bac', 'Français', 'Baccalauréat Français — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['a1','a2','a4','abi','c','d']::text[], 'published',
+    '# CAMEROON Baccalauréat FRANÇAIS SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** A1, A2, A4, ABI, C, D
+**Subject:** Français
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: CONTRACTION ET SUIVI DE TEXTE
+
+**Q1.** Contracter un texte en respectant le nombre de mots imposé.
+
+**Q1.** Résumer un texte argumentatif en conservant les idées essentielles.
+
+**Q1.** Suivre un texte et répondre à des questions de compréhension.
+
+**Q1.** Analyser la structure d''un texte et dégager son plan.
+
+**Q1.** Reformuler les idées d''un texte sans le recopier.
+
+## SECTION 2: EXPRESSION ÉCRITE ET ORALE
+
+**Q2.** Rédiger un paragraphe argumentatif sur un sujet donné.
+
+**Q2.** Écrire une lettre ouverte sur un sujet de société.
+
+**Q2.** Préparer et présenter un exposé oral.
+
+**Q2.** Rédiger un compte rendu de lecture.
+
+**Q2.** Écrire un dialogue argumentatif entre deux personnages.
+
+## SECTION 3: COMMENTAIRE COMPOSÉ
+
+**Q3.** Commenter un texte poétique en analysant la forme et le fond.
+
+**Q3.** Commenter un extrait de roman en étudiant la narration et les personnages.
+
+**Q3.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+
+**Q3.** Analyser les procédés stylistiques d''un texte argumentatif.
+
+**Q3.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+
+## SECTION 4: DISSERTATION
+
+**Q4.** Dissertation : « La littérature doit-elle être engagée ? »
+
+**Q4.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+
+**Q4.** Dissertation : « La poésie est-elle l''expression des sentiments ? »
+
+**Q4.** Dissertation : « Le roman reflète-t-il la réalité ? »
+
+**Q4.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Français Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '1180db4d-49b8-894c-e457-bc3e14acb6e8', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Un algorithme est :
+
+A. une suite d''instructions
+B. un périphérique
+C. une mémoire
+D. un composant
+
+---
+
+**Q2.** La variable est :
+
+A. un espace mémoire nommé
+B. un périphérique
+C. une mémoire
+D. un composant
+
+---
+
+**Q3.** Le type entier :
+
+A. représente des nombres entiers
+B. représente des nombres décimaux
+C. représente du texte
+D. représente un booléen
+
+---
+
+**Q4.** Le type réel :
+
+A. représente des nombres décimaux
+B. représente des entiers
+C. représente du texte
+D. représente un booléen
+
+---
+
+**Q5.** Le type chaîne :
+
+A. représente du texte
+B. représente des entiers
+C. représente des décimaux
+D. représente un booléen
+
+---
+
+**Q6.** Le type booléen :
+
+A. vrai ou faux
+B. des nombres
+C. du texte
+D. des caractères
+
+---
+
+**Q7.** La structure conditionnelle :
+
+A. si... alors... sinon
+B. pour... faire
+C. tant que... faire
+D. répéter... jusqu''à
+
+---
+
+**Q8.** La boucle « pour » :
+
+A. répète un nombre fixe de fois
+B. répète tant qu''une condition est vraie
+C. est une condition
+D. est une variable
+
+---
+
+**Q9.** La boucle « tant que » :
+
+A. répète tant qu''une condition est vraie
+B. répète un nombre fixe de fois
+C. est une condition
+D. est une variable
+
+---
+
+**Q10.** L''opérateur de comparaison est :
+
+A. =
+B. +
+C. *
+D. /
+
+---
+
+**Q11.** L''opérateur d''affectation :
+
+A. attribue une valeur à une variable
+B. compare deux valeurs
+C. additionne
+D. multiplie
+
+---
+
+**Q12.** Le tableau :
+
+A. une collection de valeurs
+B. une variable
+C. une condition
+D. une boucle
+
+---
+
+**Q13.** L''indice d''un tableau commence à :
+
+A. 0 ou 1
+B. 10
+C. -1
+D. n''importe où
+
+---
+
+**Q14.** La fonction :
+
+A. un bloc de code réutilisable
+B. une variable
+C. une condition
+D. une boucle
+
+---
+
+**Q15.** Le paramètre d''une fonction :
+
+A. une donnée d''entrée
+B. une sortie
+C. une condition
+D. une boucle
+
+---
+
+**Q16.** La récursivité :
+
+A. une fonction qui s''appelle elle-même
+B. une boucle
+C. une condition
+D. une variable
+
+---
+
+**Q17.** La complexité algorithmique :
+
+A. mesure l''efficacité
+B. mesure la taille
+C. mesure la vitesse du processeur
+D. mesure la mémoire
+
+---
+
+**Q18.** Le tri à bulles :
+
+A. un algorithme de tri
+B. une recherche
+C. une boucle
+D. une condition
+
+---
+
+**Q19.** La recherche dichotomique :
+
+A. recherche dans un tableau trié
+B. recherche aléatoire
+C. un tri
+D. une boucle
+
+---
+
+**Q20.** La structure de données Pile :
+
+A. LIFO (dernier entré, premier sorti)
+B. FIFO (premier entré, premier sorti)
+C. une file
+D. un tableau
+
+---
+
+## CORRIGÉ
+
+1. une suite d''instructions
+2. un espace mémoire nommé
+3. représente des nombres entiers
+4. représente des nombres décimaux
+5. représente du texte
+6. vrai ou faux
+7. si... alors... sinon
+8. répète un nombre fixe de fois
+9. répète tant qu''une condition est vraie
+10. =
+11. attribue une valeur à une variable
+12. une collection de valeurs
+13. 0 ou 1
+14. un bloc de code réutilisable
+15. une donnée d''entrée
+16. une fonction qui s''appelle elle-même
+17. mesure l''efficacité
+18. un algorithme de tri
+19. recherche dans un tableau trié
+20. LIFO (dernier entré, premier sorti)
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'b87c4e32-2371-5196-f73a-cefeea818338', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** La structure de données File :
+
+A. FIFO (premier entré, premier sorti)
+B. LIFO (dernier entré, premier sorti)
+C. une pile
+D. un tableau
+
+---
+
+**Q2.** L''arbre binaire :
+
+A. une structure hiérarchique
+B. une pile
+C. une file
+D. un tableau
+
+---
+
+**Q3.** Le graphe :
+
+A. un ensemble de nœuds et d''arêtes
+B. une pile
+C. une file
+D. un tableau
+
+---
+
+**Q4.** La base de données :
+
+A. un ensemble structuré de données
+B. un fichier
+C. un programme
+D. un périphérique
+
+---
+
+**Q5.** Le SGBD :
+
+A. système de gestion de base de données
+B. un fichier
+C. un programme
+D. un périphérique
+
+---
+
+**Q6.** Le langage SQL :
+
+A. interroge les bases de données
+B. crée des pages web
+C. est un système d''exploitation
+D. est un périphérique
+
+---
+
+**Q7.** La requête SELECT :
+
+A. interroge les données
+B. insère des données
+C. supprime des données
+D. modifie des données
+
+---
+
+**Q8.** La requête INSERT :
+
+A. insère des données
+B. interroge les données
+C. supprime des données
+D. modifie des données
+
+---
+
+**Q9.** La requête UPDATE :
+
+A. modifie des données
+B. interroge les données
+C. insère des données
+D. supprime des données
+
+---
+
+**Q10.** La requête DELETE :
+
+A. supprime des données
+B. interroge les données
+C. insère des données
+D. modifie des données
+
+---
+
+**Q11.** La clé primaire :
+
+A. identifie de façon unique une ligne
+B. est une colonne
+C. est une table
+D. est une requête
+
+---
+
+**Q12.** La clé étrangère :
+
+A. relie deux tables
+B. identifie une ligne
+C. est une colonne
+D. est une requête
+
+---
+
+**Q13.** Le réseau informatique :
+
+A. connecte des ordinateurs
+B. est un fichier
+C. est un programme
+D. est une mémoire
+
+---
+
+**Q14.** Le protocole :
+
+A. règle de communication
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q15.** Le protocole TCP/IP :
+
+A. la base d''Internet
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q16.** L''adresse IP :
+
+A. identifie un ordinateur sur un réseau
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q17.** Le DNS :
+
+A. traduit les noms en adresses IP
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q18.** Le HTML :
+
+A. langage de création de pages web
+B. un système d''exploitation
+C. un protocole
+D. une base de données
+
+---
+
+**Q19.** Le CSS :
+
+A. met en forme les pages web
+B. crée le contenu
+C. est un système d''exploitation
+D. est un protocole
+
+---
+
+**Q20.** Le JavaScript :
+
+A. rend les pages web interactives
+B. crée le contenu
+C. met en forme
+D. est un système d''exploitation
+
+---
+
+## CORRIGÉ
+
+1. FIFO (premier entré, premier sorti)
+2. une structure hiérarchique
+3. un ensemble de nœuds et d''arêtes
+4. un ensemble structuré de données
+5. système de gestion de base de données
+6. interroge les bases de données
+7. interroge les données
+8. insère des données
+9. modifie des données
+10. supprime des données
+11. identifie de façon unique une ligne
+12. relie deux tables
+13. connecte des ordinateurs
+14. règle de communication
+15. la base d''Internet
+16. identifie un ordinateur sur un réseau
+17. traduit les noms en adresses IP
+18. langage de création de pages web
+19. met en forme les pages web
+20. rend les pages web interactives
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '8143826d-d981-309f-8014-ceae67c207a5', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le client-serveur :
+
+A. un modèle de communication
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q2.** Le cloud computing :
+
+A. le stockage et le calcul à distance
+B. un fichier
+C. un programme
+D. une mémoire
+
+---
+
+**Q3.** La cybersécurité :
+
+A. protège les systèmes
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q4.** Le chiffrement :
+
+A. protège les données
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q5.** L''authentification :
+
+A. vérifie l''identité
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q6.** Le pare-feu :
+
+A. protège le réseau
+B. crée des virus
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q7.** L''intelligence artificielle :
+
+A. simule l''intelligence humaine
+B. est un jeu
+C. est un fichier
+D. est une mémoire
+
+---
+
+**Q8.** Le machine learning :
+
+A. l''apprentissage automatique
+B. est un jeu
+C. est un fichier
+D. est une mémoire
+
+---
+
+**Q9.** Le système d''exploitation :
+
+A. gère les ressources de l''ordinateur
+B. est un fichier
+C. est un jeu
+D. est une mémoire
+
+---
+
+**Q10.** Le processus :
+
+A. un programme en cours d''exécution
+B. un fichier
+C. un jeu
+D. une mémoire
+
+---
+
+**Q11.** Le thread :
+
+A. un fil d''exécution
+B. un fichier
+C. un jeu
+D. une mémoire
+
+---
+
+**Q12.** La mémoire virtuelle :
+
+A. étend la mémoire physique
+B. est un fichier
+C. est un jeu
+D. est un périphérique
+
+---
+
+**Q13.** Le compilateur :
+
+A. traduit le code en langage machine
+B. exécute le code
+C. est un fichier
+D. est un jeu
+
+---
+
+**Q14.** L''interpréteur :
+
+A. exécute le code ligne par ligne
+B. traduit tout le code
+C. est un fichier
+D. est un jeu
+
+---
+
+**Q15.** Le débogage :
+
+A. corrige les erreurs
+B. crée des erreurs
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q16.** Le test unitaire :
+
+A. teste une unité de code
+B. teste tout le système
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q17.** La documentation :
+
+A. explique le code
+B. est inutile
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q18.** Le versionnage :
+
+A. gère les versions du code
+B. est inutile
+C. est un jeu
+D. est un fichier
+
+---
+
+**Q19.** Git est :
+
+A. un outil de versionnage
+B. un jeu
+C. un fichier
+D. une mémoire
+
+---
+
+**Q20.** Le dépôt (repository) :
+
+A. stocke le code versionné
+B. est un jeu
+C. est un fichier
+D. est une mémoire
+
+---
+
+## CORRIGÉ
+
+1. un modèle de communication
+2. le stockage et le calcul à distance
+3. protège les systèmes
+4. protège les données
+5. vérifie l''identité
+6. protège le réseau
+7. simule l''intelligence humaine
+8. l''apprentissage automatique
+9. gère les ressources de l''ordinateur
+10. un programme en cours d''exécution
+11. un fil d''exécution
+12. étend la mémoire physique
+13. traduit le code en langage machine
+14. exécute le code ligne par ligne
+15. corrige les erreurs
+16. teste une unité de code
+17. explique le code
+18. gère les versions du code
+19. un outil de versionnage
+20. stocke le code versionné
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '30bcb479-232a-6127-dfce-4fb23dd32139', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: RÉSEAUX ET WEB
+
+**Q1.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q1.** Créer une page web en HTML et CSS.
+
+**Q1.** Expliquer le modèle client-serveur.
+
+**Q1.** Décrire les principes de la cybersécurité.
+
+**Q1.** Expliquer le fonctionnement du cloud computing.
+
+## SECTION 2: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q2.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q2.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q2.** Écrire un algorithme de tri d''un tableau.
+
+**Q2.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q2.** Écrire un algorithme de recherche dichotomique.
+
+## SECTION 3: STRUCTURES DE DONNÉES
+
+**Q3.** Implémenter une pile et une file.
+
+**Q3.** Parcourir un arbre binaire.
+
+**Q3.** Représenter et parcourir un graphe.
+
+**Q3.** Implémenter une liste chaînée.
+
+**Q3.** Comparer les complexités des structures de données.
+
+## SECTION 4: BASES DE DONNÉES
+
+**Q4.** Créer une base de données et ses tables.
+
+**Q4.** Écrire des requêtes SQL pour interroger les données.
+
+**Q4.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q4.** Définir les clés primaires et étrangères.
+
+**Q4.** Normaliser une base de données.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'a5497200-6404-14bf-a7ed-ddfdfd62061b', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q1.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q1.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q1.** Écrire un algorithme de tri d''un tableau.
+
+**Q1.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q1.** Écrire un algorithme de recherche dichotomique.
+
+## SECTION 2: STRUCTURES DE DONNÉES
+
+**Q2.** Implémenter une pile et une file.
+
+**Q2.** Parcourir un arbre binaire.
+
+**Q2.** Représenter et parcourir un graphe.
+
+**Q2.** Implémenter une liste chaînée.
+
+**Q2.** Comparer les complexités des structures de données.
+
+## SECTION 3: BASES DE DONNÉES
+
+**Q3.** Créer une base de données et ses tables.
+
+**Q3.** Écrire des requêtes SQL pour interroger les données.
+
+**Q3.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q3.** Définir les clés primaires et étrangères.
+
+**Q3.** Normaliser une base de données.
+
+## SECTION 4: RÉSEAUX ET WEB
+
+**Q4.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q4.** Créer une page web en HTML et CSS.
+
+**Q4.** Expliquer le modèle client-serveur.
+
+**Q4.** Décrire les principes de la cybersécurité.
+
+**Q4.** Expliquer le fonctionnement du cloud computing.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'bc29da20-fa6d-73c0-3048-30dd8fc5954f', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: STRUCTURES DE DONNÉES
+
+**Q1.** Implémenter une pile et une file.
+
+**Q1.** Parcourir un arbre binaire.
+
+**Q1.** Représenter et parcourir un graphe.
+
+**Q1.** Implémenter une liste chaînée.
+
+**Q1.** Comparer les complexités des structures de données.
+
+## SECTION 2: BASES DE DONNÉES
+
+**Q2.** Créer une base de données et ses tables.
+
+**Q2.** Écrire des requêtes SQL pour interroger les données.
+
+**Q2.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q2.** Définir les clés primaires et étrangères.
+
+**Q2.** Normaliser une base de données.
+
+## SECTION 3: RÉSEAUX ET WEB
+
+**Q3.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q3.** Créer une page web en HTML et CSS.
+
+**Q3.** Expliquer le modèle client-serveur.
+
+**Q3.** Décrire les principes de la cybersécurité.
+
+**Q3.** Expliquer le fonctionnement du cloud computing.
+
+## SECTION 4: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q4.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q4.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q4.** Écrire un algorithme de tri d''un tableau.
+
+**Q4.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q4.** Écrire un algorithme de recherche dichotomique.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Informatique — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '8cbb086c-0d40-4430-bbca-ff14597259f7', 'fr-lycee-info-algo-systemes', 'Informatique', 'Baccalauréat Informatique — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['ti','c','d','e']::text[], 'published',
+    '# CAMEROON Baccalauréat INFORMATIQUE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** TI, C, D, E
+**Subject:** Informatique
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: BASES DE DONNÉES
+
+**Q1.** Créer une base de données et ses tables.
+
+**Q1.** Écrire des requêtes SQL pour interroger les données.
+
+**Q1.** Écrire des requêtes SQL pour insérer, modifier et supprimer.
+
+**Q1.** Définir les clés primaires et étrangères.
+
+**Q1.** Normaliser une base de données.
+
+## SECTION 2: RÉSEAUX ET WEB
+
+**Q2.** Expliquer le fonctionnement d''un réseau et les protocoles.
+
+**Q2.** Créer une page web en HTML et CSS.
+
+**Q2.** Expliquer le modèle client-serveur.
+
+**Q2.** Décrire les principes de la cybersécurité.
+
+**Q2.** Expliquer le fonctionnement du cloud computing.
+
+## SECTION 3: ALGORITHMIQUE ET PROGRAMMATION
+
+**Q3.** Écrire un algorithme pour calculer la somme des n premiers entiers.
+
+**Q3.** Écrire un algorithme pour déterminer si un nombre est premier.
+
+**Q3.** Écrire un algorithme de tri d''un tableau.
+
+**Q3.** Écrire une fonction récursive pour calculer la factorielle.
+
+**Q3.** Écrire un algorithme de recherche dichotomique.
+
+## SECTION 4: STRUCTURES DE DONNÉES
+
+**Q4.** Implémenter une pile et une file.
+
+**Q4.** Parcourir un arbre binaire.
+
+**Q4.** Représenter et parcourir un graphe.
+
+**Q4.** Implémenter une liste chaînée.
+
+**Q4.** Comparer les complexités des structures de données.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Informatique Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 1
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '921cca5b-379a-213c-2d87-f58517707ad3', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 1',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE P1 SET 1
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''ADN est composé de :
+
+A. nucléotides
+B. acides aminés
+C. glucides
+D. lipides
+
+---
+
+**Q2.** Les nucléotides de l''ADN contiennent :
+
+A. A, T, G, C
+B. A, U, G, C
+C. A, T, G, U
+D. A, U, T, C
+
+---
+
+**Q3.** L''ARN contient :
+
+A. l''uracile au lieu de la thymine
+B. la thymine au lieu de l''uracile
+C. les mêmes bases que l''ADN
+D. aucune base
+
+---
+
+**Q4.** La réplication de l''ADN est :
+
+A. semi-conservative
+B. conservative
+C. dispersive
+D. nulle
+
+---
+
+**Q5.** La transcription :
+
+A. ADN → ARN
+B. ARN → protéine
+C. ADN → protéine
+D. protéine → ADN
+
+---
+
+**Q6.** La traduction :
+
+A. ARN → protéine
+B. ADN → ARN
+C. ADN → protéine
+D. protéine → ARN
+
+---
+
+**Q7.** Le codon est :
+
+A. un triplet de nucléotides
+B. un acide aminé
+C. un gène
+D. un chromosome
+
+---
+
+**Q8.** Le gène est :
+
+A. un segment d''ADN
+B. une protéine
+C. un chromosome
+D. un acide aminé
+
+---
+
+**Q9.** La mutation :
+
+A. modifie la séquence d''ADN
+B. est toujours nocive
+C. est toujours bénéfique
+D. n''a aucun effet
+
+---
+
+**Q10.** Le caryotype humain a :
+
+A. 46 chromosomes
+B. 23 chromosomes
+C. 48 chromosomes
+D. 44 chromosomes
+
+---
+
+**Q11.** Les chromosomes sexuels chez l''homme sont :
+
+A. XY
+B. XX
+C. YY
+D. X
+
+---
+
+**Q12.** Les chromosomes sexuels chez la femme sont :
+
+A. XX
+B. XY
+C. YY
+D. X
+
+---
+
+**Q13.** La méiose produit :
+
+A. 4 cellules haploïdes
+B. 2 cellules diploïdes
+C. 4 cellules diploïdes
+D. 2 cellules haploïdes
+
+---
+
+**Q14.** La mitose produit :
+
+A. 2 cellules diploïdes identiques
+B. 4 cellules haploïdes
+C. 2 cellules haploïdes
+D. 4 cellules diploïdes
+
+---
+
+**Q15.** Le brassage génétique :
+
+A. crée de la diversité
+B. élimine la diversité
+C. est nul
+D. est constant
+
+---
+
+**Q16.** L''immunité innée :
+
+A. est non spécifique
+B. est spécifique
+C. est acquise
+D. est absente
+
+---
+
+**Q17.** L''immunité adaptative :
+
+A. est spécifique
+B. est non spécifique
+C. est innée
+D. est absente
+
+---
+
+**Q18.** Les lymphocytes B produisent :
+
+A. des anticorps
+B. des antigènes
+C. des globules rouges
+D. des plaquettes
+
+---
+
+**Q19.** Les lymphocytes T :
+
+A. détruisent les cellules infectées
+B. produisent des anticorps
+C. transportent l''oxygène
+D. coagulent le sang
+
+---
+
+**Q20.** L''antigène est :
+
+A. une substance reconnue comme étrangère
+B. un anticorps
+C. un globule
+D. une hormone
+
+---
+
+## CORRIGÉ
+
+1. nucléotides
+2. A, T, G, C
+3. l''uracile au lieu de la thymine
+4. semi-conservative
+5. ADN → ARN
+6. ARN → protéine
+7. un triplet de nucléotides
+8. un segment d''ADN
+9. modifie la séquence d''ADN
+10. 46 chromosomes
+11. XY
+12. XX
+13. 4 cellules haploïdes
+14. 2 cellules diploïdes identiques
+15. crée de la diversité
+16. est non spécifique
+17. est spécifique
+18. des anticorps
+19. détruisent les cellules infectées
+20. une substance reconnue comme étrangère
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 2
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '30ea9491-2bdb-fd07-3e34-351965e40913', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 2',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE P1 SET 2
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** L''anticorps est :
+
+A. une protéine qui neutralise l''antigène
+B. un antigène
+C. un globule
+D. une hormone
+
+---
+
+**Q2.** La vaccination :
+
+A. stimule l''immunité adaptative
+B. détruit les anticorps
+C. est inutile
+D. affaiblit l''immunité
+
+---
+
+**Q3.** Le VIH :
+
+A. détruit les lymphocytes T
+B. produit des anticorps
+C. est une bactérie
+D. est un parasite
+
+---
+
+**Q4.** Le SIDA est causé par :
+
+A. le VIH
+B. une bactérie
+C. un parasite
+D. un champignon
+
+---
+
+**Q5.** La neurotransmission :
+
+A. transmet l''influx nerveux
+B. produit des hormones
+C. transporte l''oxygène
+D. coagule le sang
+
+---
+
+**Q6.** Le neurone :
+
+A. transmet l''influx nerveux
+B. produit des hormones
+C. transporte l''oxygène
+D. coagule le sang
+
+---
+
+**Q7.** La synapse :
+
+A. zone de contact entre neurones
+B. le corps du neurone
+C. l''axone
+D. la dendrite
+
+---
+
+**Q8.** Les hormones :
+
+A. sont des messagers chimiques
+B. sont des neurones
+C. sont des globules
+D. sont des anticorps
+
+---
+
+**Q9.** Le système endocrinien :
+
+A. produit des hormones
+B. transmet l''influx nerveux
+C. transporte l''oxygène
+D. coagule le sang
+
+---
+
+**Q10.** La glycémie est :
+
+A. le taux de glucose dans le sang
+B. le taux de sel
+C. le taux de protéines
+D. le taux de lipides
+
+---
+
+**Q11.** L''insuline :
+
+A. diminue la glycémie
+B. augmente la glycémie
+C. n''a aucun effet
+D. est un glucide
+
+---
+
+**Q12.** Le glucagon :
+
+A. augmente la glycémie
+B. diminue la glycémie
+C. n''a aucun effet
+D. est un glucide
+
+---
+
+**Q13.** Le diabète :
+
+A. trouble de la régulation de la glycémie
+B. une maladie du cœur
+C. une maladie des reins
+D. une maladie des poumons
+
+---
+
+**Q14.** La reproduction sexuée :
+
+A. fait intervenir deux gamètes
+B. un seul gamète
+C. aucun gamète
+D. des spores
+
+---
+
+**Q15.** La fécondation :
+
+A. fusion de deux gamètes
+B. division cellulaire
+C. production de gamètes
+D. respiration
+
+---
+
+**Q16.** La contraception :
+
+A. évite une grossesse
+B. favorise la grossesse
+C. guérit une maladie
+D. stimule la croissance
+
+---
+
+**Q17.** Les IST :
+
+A. sont transmises sexuellement
+B. sont héréditaires
+C. sont alimentaires
+D. sont respiratoires
+
+---
+
+**Q18.** Le préservatif :
+
+A. protège contre les IST et le VIH
+B. protège uniquement la grossesse
+C. est inutile
+D. est dangereux
+
+---
+
+**Q19.** La tectonique des plaques :
+
+A. explique les séismes et volcans
+B. explique la photosynthèse
+C. explique la digestion
+D. explique la respiration
+
+---
+
+**Q20.** Le séisme :
+
+A. rupture des roches en profondeur
+B. éruption volcanique
+C. pluie
+D. vent
+
+---
+
+## CORRIGÉ
+
+1. une protéine qui neutralise l''antigène
+2. stimule l''immunité adaptative
+3. détruit les lymphocytes T
+4. le VIH
+5. transmet l''influx nerveux
+6. transmet l''influx nerveux
+7. zone de contact entre neurones
+8. sont des messagers chimiques
+9. produit des hormones
+10. le taux de glucose dans le sang
+11. diminue la glycémie
+12. augmente la glycémie
+13. trouble de la régulation de la glycémie
+14. fait intervenir deux gamètes
+15. fusion de deux gamètes
+16. évite une grossesse
+17. sont transmises sexuellement
+18. protège contre les IST et le VIH
+19. explique les séismes et volcans
+20. rupture des roches en profondeur
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 3
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '1e5a2482-d808-5410-7f68-824300cf79b1', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — QCM (Épreuve 1) — Série 3',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE P1 SET 3
+
+## Multiple Choice Question Bank
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Choisis la bonne réponse A, B, C ou D pour chaque question.
+- Reporte clairement tes réponses sur la feuille de réponses fournie.
+- Chaque question vaut le même nombre de points. Aucun point n''est retiré pour une mauvaise réponse.
+- Utilise le corrigé à la fin de l''épreuve pour vérifier tes réponses.
+
+---
+
+## QUESTIONS
+
+**Q1.** Le volcan :
+
+A. remontée du magma
+B. séisme
+C. pluie
+D. vent
+
+---
+
+**Q2.** Les roches magmatiques :
+
+A. refroidissement du magma
+B. sédimentation
+C. métamorphisme
+D. érosion
+
+---
+
+**Q3.** Les roches sédimentaires :
+
+A. accumulation de sédiments
+B. refroidissement du magma
+C. métamorphisme
+D. éruption
+
+---
+
+**Q4.** Les roches métamorphiques :
+
+A. transformation sous pression/température
+B. refroidissement du magma
+C. sédimentation
+D. érosion
+
+---
+
+**Q5.** Le fossile :
+
+A. reste d''être vivant conservé
+B. une roche
+C. un minéral
+D. un volcan
+
+---
+
+**Q6.** La datation relative :
+
+A. ordonne les événements dans le temps
+B. donne un âge absolu
+C. mesure la température
+D. mesure la masse
+
+---
+
+**Q7.** La datation absolue :
+
+A. donne un âge en années
+B. ordonne les événements
+C. mesure la température
+D. mesure la masse
+
+---
+
+**Q8.** La dérive des continents :
+
+A. les continents se déplacent
+B. les continents sont fixes
+C. les océans disparaissent
+D. la Terre est plate
+
+---
+
+**Q9.** L''expansion océanique :
+
+A. les fonds océaniques s''écartent
+B. les océans rétrécissent
+C. les continents se rapprochent
+D. la Terre rétrécit
+
+---
+
+**Q10.** La subduction :
+
+A. plongement d''une plaque sous une autre
+B. écartement des plaques
+C. collision
+D. érosion
+
+---
+
+**Q11.** La biodiversité :
+
+A. variété des êtres vivants
+B. quantité d''eau
+C. température
+D. pression
+
+---
+
+**Q12.** L''évolution :
+
+A. transformation des espèces au fil du temps
+B. fixité des espèces
+C. disparition des espèces
+D. création
+
+---
+
+**Q13.** La sélection naturelle :
+
+A. survit des individus adaptés
+B. survit des individus faibles
+C. tous survivent
+D. aucun ne survit
+
+---
+
+**Q14.** L''adaptation :
+
+A. caractère favorisant la survie
+B. un défaut
+C. un hasard
+D. une maladie
+
+---
+
+**Q15.** L''écosystème :
+
+A. biotope + biocénose
+B. uniquement les plantes
+C. uniquement les animaux
+D. uniquement l''eau
+
+---
+
+**Q16.** La chaîne alimentaire :
+
+A. commence par un producteur
+B. commence par un prédateur
+C. commence par un décomposeur
+D. n''a pas de début
+
+---
+
+**Q17.** Le réchauffement climatique :
+
+A. augmentation des gaz à effet de serre
+B. baisse de température
+C. augmentation de l''oxygène
+D. baisse du CO₂
+
+---
+
+**Q18.** Le développement durable :
+
+A. satisfait les besoins sans compromettre l''avenir
+B. exploite au maximum
+C. consomme
+D. pollue
+
+---
+
+**Q19.** La génétique des populations :
+
+A. étudie la fréquence des allèles
+B. étudie les fossiles
+C. étudie les roches
+D. étudie le climat
+
+---
+
+**Q20.** La loi de Hardy-Weinberg :
+
+A. décrit l''équilibre génétique
+B. décrit l''évolution
+C. décrit la sélection
+D. décrit la mutation
+
+---
+
+## CORRIGÉ
+
+1. remontée du magma
+2. refroidissement du magma
+3. accumulation de sédiments
+4. transformation sous pression/température
+5. reste d''être vivant conservé
+6. ordonne les événements dans le temps
+7. donne un âge en années
+8. les continents se déplacent
+9. les fonds océaniques s''écartent
+10. plongement d''une plaque sous une autre
+11. variété des êtres vivants
+12. transformation des espèces au fil du temps
+13. survit des individus adaptés
+14. caractère favorisant la survie
+15. biotope + biocénose
+16. commence par un producteur
+17. augmentation des gaz à effet de serre
+18. satisfait les besoins sans compromettre l''avenir
+19. étudie la fréquence des allèles
+20. décrit l''équilibre génétique
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre QCM',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 4
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'aa6ab21b-f7d0-5e08-4dda-267fe5c60ad2', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 4',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 4
+
+## Structural Question Bank - Set 4
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉOLOGIE ET ÉVOLUTION
+
+**Q1.** Expliquer la théorie de la tectonique des plaques.
+
+**Q1.** Décrire les différents types de roches et leur formation.
+
+**Q1.** Expliquer les méthodes de datation relative et absolue.
+
+**Q1.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q1.** Expliquer les preuves de l''évolution des espèces.
+
+## SECTION 2: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q2.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q2.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q2.** Résoudre un exercice de génétique mendélienne.
+
+**Q2.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q2.** Analyser un caryotype et identifier les anomalies.
+
+## SECTION 3: IMMUNOLOGIE
+
+**Q3.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q3.** Expliquer le rôle des lymphocytes B et T.
+
+**Q3.** Décrire le fonctionnement de la vaccination.
+
+**Q3.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q3.** Expliquer les réactions de rejet de greffe.
+
+## SECTION 4: PHYSIOLOGIE ET RÉGULATION
+
+**Q4.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q4.** Expliquer la régulation de la glycémie.
+
+**Q4.** Décrire le fonctionnement du système endocrinien.
+
+**Q4.** Expliquer la régulation de la température corporelle.
+
+**Q4.** Décrire le fonctionnement de la reproduction humaine.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 5
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'f4fc0aa0-3e90-9af1-256d-692c55730150', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 5',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 5
+
+## Structural Question Bank - Set 5
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q1.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q1.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q1.** Résoudre un exercice de génétique mendélienne.
+
+**Q1.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q1.** Analyser un caryotype et identifier les anomalies.
+
+## SECTION 2: IMMUNOLOGIE
+
+**Q2.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q2.** Expliquer le rôle des lymphocytes B et T.
+
+**Q2.** Décrire le fonctionnement de la vaccination.
+
+**Q2.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q2.** Expliquer les réactions de rejet de greffe.
+
+## SECTION 3: PHYSIOLOGIE ET RÉGULATION
+
+**Q3.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q3.** Expliquer la régulation de la glycémie.
+
+**Q3.** Décrire le fonctionnement du système endocrinien.
+
+**Q3.** Expliquer la régulation de la température corporelle.
+
+**Q3.** Décrire le fonctionnement de la reproduction humaine.
+
+## SECTION 4: GÉOLOGIE ET ÉVOLUTION
+
+**Q4.** Expliquer la théorie de la tectonique des plaques.
+
+**Q4.** Décrire les différents types de roches et leur formation.
+
+**Q4.** Expliquer les méthodes de datation relative et absolue.
+
+**Q4.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q4.** Expliquer les preuves de l''évolution des espèces.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 6
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    '2db85f63-a74c-45c7-d79b-6ef1431fff73', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 6',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 6
+
+## Structural Question Bank - Set 6
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: IMMUNOLOGIE
+
+**Q1.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q1.** Expliquer le rôle des lymphocytes B et T.
+
+**Q1.** Décrire le fonctionnement de la vaccination.
+
+**Q1.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q1.** Expliquer les réactions de rejet de greffe.
+
+## SECTION 2: PHYSIOLOGIE ET RÉGULATION
+
+**Q2.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q2.** Expliquer la régulation de la glycémie.
+
+**Q2.** Décrire le fonctionnement du système endocrinien.
+
+**Q2.** Expliquer la régulation de la température corporelle.
+
+**Q2.** Décrire le fonctionnement de la reproduction humaine.
+
+## SECTION 3: GÉOLOGIE ET ÉVOLUTION
+
+**Q3.** Expliquer la théorie de la tectonique des plaques.
+
+**Q3.** Décrire les différents types de roches et leur formation.
+
+**Q3.** Expliquer les méthodes de datation relative et absolue.
+
+**Q3.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q3.** Expliquer les preuves de l''évolution des espèces.
+
+## SECTION 4: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q4.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q4.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q4.** Résoudre un exercice de génétique mendélienne.
+
+**Q4.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q4.** Analyser un caryotype et identifier les anomalies.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+
+-- Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 7
+INSERT INTO public.course_documents (
+    id, topic_id, subject, title, language, level, class_levels, series, status,
+    markdown_content, content_kind, doc_type, curriculum_path, exam,
+    content_year, source_type, source_reference, permission_status, review_status,
+    content_version, change_note
+)
+VALUES (
+    'd07b02e6-6ed9-4392-faad-4a1daa792e45', 'fr-svt-bac-genetique', 'Sciences de la Vie et de la Terre', 'Baccalauréat Sciences de la Vie et de la Terre — Sujet structuré — Série 7',
+    'french', 'advanced', array['terminale']::text[], array['c','d','ti']::text[], 'published',
+    '# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE SET 7
+
+## Structural Question Bank - Set 7
+
+**Level:** Advanced Level (Lycée)
+**Class:** Terminale
+**Series:** C, D, TI
+**Subject:** Sciences de la Vie et de la Terre
+**Exam:** Baccalauréat
+
+**Instructions:**
+
+- Réponds à toutes les questions de manière claire et organisée.
+- Montre tous les calculs et raisonnements lorsque c''est nécessaire.
+- Utilise la terminologie et les normes de présentation de l''examen camerounais.
+- Les schémas, tableaux et graphiques doivent être inclus lorsque c''est utile.
+
+---
+
+## SECTION 1: PHYSIOLOGIE ET RÉGULATION
+
+**Q1.** Décrire le fonctionnement du système nerveux et la transmission synaptique.
+
+**Q1.** Expliquer la régulation de la glycémie.
+
+**Q1.** Décrire le fonctionnement du système endocrinien.
+
+**Q1.** Expliquer la régulation de la température corporelle.
+
+**Q1.** Décrire le fonctionnement de la reproduction humaine.
+
+## SECTION 2: GÉOLOGIE ET ÉVOLUTION
+
+**Q2.** Expliquer la théorie de la tectonique des plaques.
+
+**Q2.** Décrire les différents types de roches et leur formation.
+
+**Q2.** Expliquer les méthodes de datation relative et absolue.
+
+**Q2.** Décrire les mécanismes de l''évolution et la sélection naturelle.
+
+**Q2.** Expliquer les preuves de l''évolution des espèces.
+
+## SECTION 3: GÉNÉTIQUE ET BIOLOGIE MOLÉCULAIRE
+
+**Q3.** Décrire la structure de l''ADN et expliquer la réplication.
+
+**Q3.** Expliquer le mécanisme de la transcription et de la traduction.
+
+**Q3.** Résoudre un exercice de génétique mendélienne.
+
+**Q3.** Expliquer les différents types de mutations et leurs conséquences.
+
+**Q3.** Analyser un caryotype et identifier les anomalies.
+
+## SECTION 4: IMMUNOLOGIE
+
+**Q4.** Décrire les mécanismes de l''immunité innée et adaptative.
+
+**Q4.** Expliquer le rôle des lymphocytes B et T.
+
+**Q4.** Décrire le fonctionnement de la vaccination.
+
+**Q4.** Expliquer l''infection par le VIH et le développement du SIDA.
+
+**Q4.** Expliquer les réactions de rejet de greffe.
+', 'paper', 'paper', 'francophone', 'Baccalauréat',
+    '2024', 'teacher_authored', 'Baccalauréat Sciences de la Vie et de la Terre Sujet structuré',
+    'approved', 'approved', '1.0.0', 'French paper parity migration'
+)
+ON CONFLICT (id) DO UPDATE SET
+    topic_id = EXCLUDED.topic_id, subject = EXCLUDED.subject, title = EXCLUDED.title,
+    language = EXCLUDED.language, level = EXCLUDED.level, class_levels = EXCLUDED.class_levels,
+    series = EXCLUDED.series, status = EXCLUDED.status, markdown_content = EXCLUDED.markdown_content,
+    content_kind = EXCLUDED.content_kind, doc_type = EXCLUDED.doc_type,
+    curriculum_path = EXCLUDED.curriculum_path, exam = EXCLUDED.exam,
+    content_year = EXCLUDED.content_year, source_type = EXCLUDED.source_type,
+    source_reference = EXCLUDED.source_reference, permission_status = EXCLUDED.permission_status,
+    review_status = EXCLUDED.review_status, content_version = EXCLUDED.content_version,
+    change_note = EXCLUDED.change_note, updated_at = NOW();
+
+COMMIT;
+
+NOTIFY pgrst, 'reload schema';

@@ -123,9 +123,7 @@ function CoursesPage() {
           index,
           course,
           stats: courseStats.get(course.id)!,
-          href: course.isLocked
-            ? `/pricing`
-            : `/course/${course.id}#${slugifyHeading(topic)}`,
+          href: course.isLocked ? `/pricing` : `/course/${course.id}#${slugifyHeading(topic)}`,
         }));
       }),
     [courses, courseStats],
@@ -195,128 +193,131 @@ function CoursesPage() {
         )}
 
         {loaded && topics.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
-              <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground" />
-              <h2 className="mt-4 text-base font-medium">{t("courses.emptyTitle")}</h2>
-              <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-                {t("courses.emptyDescription")}
-              </p>
-              <Button asChild className="mt-5">
-                <Link to="/library">{t("dashboard.openLibrary")}</Link>
-              </Button>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {inProgress && (
-                <section className="rounded-xl border border-accent/30 bg-gradient-to-br from-accent/15 via-accent/5 to-transparent p-5">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 text-xs text-accent">
-                        <PlayCircle className="h-3.5 w-3.5" />
-                        {t("courses.continueLearning")}
-                      </div>
-                      <h2 className="mt-1.5 break-words text-lg font-medium leading-snug">
-                        {inProgress.course.title}
-                      </h2>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {inProgress.stats.bestDepth}% read · {inProgress.stats.lessons} lessons ·{" "}
-                        {formatDuration(inProgress.stats.totalTime)} studied
-                      </p>
-                      <div className="mt-3 h-1.5 max-w-sm overflow-hidden rounded-full bg-secondary">
-                        <div
-                          className="h-full rounded-full bg-accent transition-[width] duration-500"
-                          style={{ width: `${Math.min(100, inProgress.stats.bestDepth)}%` }}
-                        />
-                      </div>
+          <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+            <GraduationCap className="mx-auto h-10 w-10 text-muted-foreground" />
+            <h2 className="mt-4 text-base font-medium">{t("courses.emptyTitle")}</h2>
+            <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
+              {t("courses.emptyDescription")}
+            </p>
+            <Button asChild className="mt-5">
+              <Link to="/library">{t("dashboard.openLibrary")}</Link>
+            </Button>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {inProgress && (
+              <section className="rounded-xl border border-accent/30 bg-gradient-to-br from-accent/15 via-accent/5 to-transparent p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 text-xs text-accent">
+                      <PlayCircle className="h-3.5 w-3.5" />
+                      {t("courses.continueLearning")}
                     </div>
-                    <Button asChild size="sm" className="shrink-0">
-                      <Link to="/course/$documentId" params={{ documentId: inProgress.course.id }}>
-                        {t("courses.continueCourse")}
-                      </Link>
-                    </Button>
+                    <h2 className="mt-1.5 break-words text-lg font-medium leading-snug">
+                      {inProgress.course.title}
+                    </h2>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {inProgress.stats.bestDepth}% read · {inProgress.stats.lessons} lessons ·{" "}
+                      {formatDuration(inProgress.stats.totalTime)} studied
+                    </p>
+                    <div className="mt-3 h-1.5 max-w-sm overflow-hidden rounded-full bg-secondary">
+                      <div
+                        className="h-full rounded-full bg-accent transition-[width] duration-500"
+                        style={{ width: `${Math.min(100, inProgress.stats.bestDepth)}%` }}
+                      />
+                    </div>
                   </div>
-                </section>
-              )}
+                  <Button asChild size="sm" className="shrink-0">
+                    <Link to="/course/$documentId" params={{ documentId: inProgress.course.id }}>
+                      {t("courses.continueCourse")}
+                    </Link>
+                  </Button>
+                </div>
+              </section>
+            )}
 
-              <SearchBox
-                value={q}
-                onChange={setQ}
-                onClear={clearSearch}
-                placeholder={t("courses.searchPlaceholder")}
-                label={t("courses.searchPlaceholder")}
-              />
+            <SearchBox
+              value={q}
+              onChange={setQ}
+              onClear={clearSearch}
+              placeholder={t("courses.searchPlaceholder")}
+              label={t("courses.searchPlaceholder")}
+            />
 
-              {searchActive ? (
-                <TopicResults topics={filteredTopics} query={q} onClear={clearSearch} />
-              ) : !subject ? (
-                <section className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
-                    <Badge variant="secondary">{subjectCards.length}</Badge>
-                  </div>
-                  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                    {subjectCards.map((item) => (
-                      <button
-                        key={item.name}
-                        type="button"
-                        onClick={() => setSubject(item.name)}
-                        className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
-                      >
-                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
-                            <BookOpen className="h-5 w-5" />
-                          </div>
-                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
-                            {item.subjectMastery}% mastery
-                          </Badge>
+            {searchActive ? (
+              <TopicResults topics={filteredTopics} query={q} onClear={clearSearch} />
+            ) : !subject ? (
+              <section className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
+                  <Badge variant="secondary">{subjectCards.length}</Badge>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {subjectCards.map((item) => (
+                    <button
+                      key={item.name}
+                      type="button"
+                      onClick={() => setSubject(item.name)}
+                      className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
+                    >
+                      <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
+                          <BookOpen className="h-5 w-5" />
                         </div>
-                        <h3 className="mt-4 break-words text-base font-medium leading-snug">
-                          {item.name}
-                        </h3>
-                        <p className="mt-2 text-xs text-muted-foreground">
-                          {item.topics} topics · {item.courses} course
-                          {item.courses === 1 ? "" : "s"}
-                        </p>
-                        {item.bestDepth > 0 && (
-                          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
-                            <div
-                              className="h-full rounded-full bg-accent transition-[width] duration-500"
-                              style={{ width: `${Math.min(100, item.bestDepth)}%` }}
-                            />
-                          </div>
-                        )}
-                      </button>
-                    ))}
+                        <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                          {item.subjectMastery}% mastery
+                        </Badge>
+                      </div>
+                      <h3 className="mt-4 break-words text-base font-medium leading-snug">
+                        {item.name}
+                      </h3>
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        {t("courses.topics").replace("{count}", String(item.topics))} ·{" "}
+                        {item.courses} course
+                        {item.courses === 1 ? "" : "s"}
+                      </p>
+                      {item.bestDepth > 0 && (
+                        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-secondary">
+                          <div
+                            className="h-full rounded-full bg-accent transition-[width] duration-500"
+                            style={{ width: `${Math.min(100, item.bestDepth)}%` }}
+                          />
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ) : filteredTopics.length > 0 ? (
+              <section className="space-y-3">
+                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setSubject(null)}
+                    >
+                      <ArrowLeft className="mr-1.5 h-4 w-4" />
+                      {t("courses.subjects")}
+                    </Button>
+                    <Badge variant="secondary">
+                      {t("courses.topics").replace("{count}", String(filteredTopics.length))}
+                    </Badge>
                   </div>
-                </section>
-              ) : filteredTopics.length > 0 ? (
-                <section className="space-y-3">
-                  <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setSubject(null)}
-                      >
-                        <ArrowLeft className="mr-1.5 h-4 w-4" />
-                        Subjects
-                      </Button>
-                      <Badge variant="secondary">{filteredTopics.length} topics</Badge>
-                    </div>
-                    <h2 className="text-lg font-medium">{subject}</h2>
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {filteredTopics.map((topic) => (
-                      <TopicCard key={topic.id} topic={topic} />
-                    ))}
-                  </div>
-                </section>
-              ) : (
-                <EmptyFiltered onClear={() => setSubject(null)} label={t("courses.emptyTitle")} />
-              )}
-            </div>
-          )}
+                  <h2 className="text-lg font-medium">{subject}</h2>
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {filteredTopics.map((topic) => (
+                    <TopicCard key={topic.id} topic={topic} />
+                  ))}
+                </div>
+              </section>
+            ) : (
+              <EmptyFiltered onClear={() => setSubject(null)} label={t("courses.emptyTitle")} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );
