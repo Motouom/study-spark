@@ -26,6 +26,12 @@ type DifficultyEntry = {
   difficultyScore: number;
 };
 
+type LearningPathDocument = {
+  id: string;
+  title: string;
+  subject: string;
+};
+
 type LearningPathDay = {
   day: number;
   title: string;
@@ -62,6 +68,35 @@ function validateAiLearningPath(days: LearningPathDay[], fixedDays: LearningPath
       );
     }
   });
+}
+
+async function listAllowedLearningPathDocuments(
+  supabase: ReturnType<typeof getAuthenticatedSupabase>,
+): Promise<LearningPathDocument[]> {
+  const metaResult = await supabase.rpc("list_allowed_course_documents_meta");
+  const documentsResult = metaResult.error
+    ? await supabase.rpc("list_allowed_course_documents")
+    : metaResult;
+
+  if (documentsResult.error) {
+    console.warn("AI learning path could not load allowed documents", documentsResult.error);
+    return [];
+  }
+
+  return ((documentsResult.data ?? []) as Record<string, unknown>[])
+    .filter(
+      (row) =>
+        !row.content_kind ||
+        row.content_kind === "paper" ||
+        row.content_kind === "course" ||
+        row.content_kind === "cheatsheet",
+    )
+    .map((row) => ({
+      id: String(row.id),
+      title: String(row.title ?? ""),
+      subject: String(row.subject ?? ""),
+    }))
+    .filter((row) => row.id && row.title);
 }
 
 // Rank papers by how much difficulty the learner has shown in them: review
@@ -204,7 +239,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             { data: checkpoints },
             { data: reflections },
             { data: questionProgress },
-            { data: documents },
+            documents,
           ] = await Promise.all([
             supabase
               .from("student_profiles")
@@ -231,10 +266,7 @@ export const Route = createFileRoute("/api/ai/learning-path")({
               .select("document_id,question_number,status,duration_seconds,updated_at")
               .eq("user_id", user.id)
               .order("updated_at", { ascending: false }),
-            supabase
-              .from("course_documents")
-              .select("id,title,subject,level,class_levels,series,status")
-              .eq("status", "published"),
+            listAllowedLearningPathDocuments(supabase),
           ]);
 
           const documentsById = new Map((documents ?? []).map((item) => [item.id, item]));
