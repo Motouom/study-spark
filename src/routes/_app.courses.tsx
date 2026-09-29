@@ -11,7 +11,7 @@ import {
   formatDuration,
   useStructuralProgress,
 } from "@/hooks/use-structural-progress";
-import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
+import { useTopicUnderstandingOverview } from "@/hooks/use-topic-understanding-progress";
 import { slugifyHeading } from "@/components/ProtectedMarkdown";
 import {
   ArrowLeft,
@@ -29,6 +29,14 @@ import { useMemo, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { classLabel, type ClassLevel } from "@/lib/study-reference-data";
 
+function countTrackableTopics(markdown: string | null | undefined) {
+  if (!markdown) return 0;
+  const headings = [...markdown.matchAll(/^## (.+)$/gm)]
+    .map((match) => match[1].trim())
+    .filter((title) => !/^(how to use this course|practice questions?|answers?)$/i.test(title));
+  return Math.max(1, headings.length);
+}
+
 export const Route = createFileRoute("/_app/courses")({
   head: () => ({ meta: [{ title: "Courses — StudySpark" }] }),
   component: CoursesPage,
@@ -39,20 +47,24 @@ function CoursesPage() {
   const { profile } = useStudyProfile();
   const { documents, loaded, error } = useStudyContent(profile);
   const { progress } = useStructuralProgress();
-  const readingProgress = usePaperStudyOverview();
+  const topicProgress = useTopicUnderstandingOverview();
   const [subject, setSubject] = useState<string | null>(null);
   const [q, setQ] = useState("");
 
+  // Best topic-understanding percentage per course (only topics marked
+  // "understood" count; "need review" topics do not contribute).
   const bestDepthByDoc = useMemo(() => {
     const map = new Map<string, number>();
-    for (const session of readingProgress.sessions) {
-      map.set(
-        session.documentId,
-        Math.max(map.get(session.documentId) ?? 0, session.maxScrollPercent),
-      );
+    for (const document of documents) {
+      if (document.contentKind !== "course") continue;
+      const totalTopics = countTrackableTopics(document.markdownContent);
+      const understood = topicProgress.progress.filter(
+        (item) => item.documentId === document.id && item.status === "understood",
+      ).length;
+      map.set(document.id, totalTopics > 0 ? Math.round((understood / totalTopics) * 100) : 0);
     }
     return map;
-  }, [readingProgress.sessions]);
+  }, [documents, topicProgress.progress]);
 
   const courses = useMemo(
     () =>

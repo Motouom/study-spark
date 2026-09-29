@@ -9,6 +9,15 @@ import type { CourseDocument } from "@/hooks/use-study-content";
 import { ArrowLeft, BookMarked, FileText, ListChecks, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useTopicUnderstandingOverview } from "@/hooks/use-topic-understanding-progress";
+
+function countTrackableTopics(markdown: string | null | undefined) {
+  if (!markdown) return 0;
+  const headings = [...markdown.matchAll(/^## (.+)$/gm)]
+    .map((match) => match[1].trim())
+    .filter((title) => !/^(how to use this course|practice questions?|answers?)$/i.test(title));
+  return Math.max(1, headings.length);
+}
 
 export const Route = createFileRoute("/_app/cheatsheets")({
   head: () => ({ meta: [{ title: "Cheatsheets — StudySpark" }] }),
@@ -19,8 +28,22 @@ function CheatsheetsPage() {
   const { t } = useI18n();
   const { profile } = useStudyProfile();
   const { documents } = useStudyContent(profile, { includeContent: false });
+  const topicProgress = useTopicUnderstandingOverview();
   const [subject, setSubject] = useState<string | null>(null);
   const [q, setQ] = useState("");
+
+  const progressByDoc = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const document of documents) {
+      if (document.contentKind !== "cheatsheet") continue;
+      const totalTopics = countTrackableTopics(document.markdownContent);
+      const understood = topicProgress.progress.filter(
+        (item) => item.documentId === document.id && item.status === "understood",
+      ).length;
+      map.set(document.id, totalTopics > 0 ? Math.round((understood / totalTopics) * 100) : 0);
+    }
+    return map;
+  }, [documents, topicProgress.progress]);
 
   const cheatsheets = useMemo(
     () =>
@@ -68,90 +91,91 @@ function CheatsheetsPage() {
       <PageHeader title={t("cheatsheets.title")} description={t("cheatsheets.description")} />
       <div className="px-4 py-6 md:px-10 md:py-8">
         {cheatsheets.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
-              <BookMarked className="mx-auto h-10 w-10 text-muted-foreground" />
-              <h2 className="mt-4 text-base font-medium">{t("cheatsheets.emptyTitle")}</h2>
-              <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-                {t("cheatsheets.emptyDescription")}
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              <SearchBox
-                value={q}
-                onChange={setQ}
-                onClear={clearSearch}
-                placeholder={t("cheatsheets.searchPlaceholder")}
-              />
+          <div className="rounded-xl border border-dashed border-border bg-card p-12 text-center">
+            <BookMarked className="mx-auto h-10 w-10 text-muted-foreground" />
+            <h2 className="mt-4 text-base font-medium">{t("cheatsheets.emptyTitle")}</h2>
+            <p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
+              {t("cheatsheets.emptyDescription")}
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <SearchBox
+              value={q}
+              onChange={setQ}
+              onClear={clearSearch}
+              placeholder={t("cheatsheets.searchPlaceholder")}
+            />
 
-              {searchActive ? (
-                <CheatsheetResults sheets={filteredSheets} query={q} onClear={clearSearch} />
-              ) : !subject ? (
-                <section className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
-                    <Badge variant="secondary">{subjectCards.length}</Badge>
-                  </div>
-                  <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-                    {subjectCards.map((item) => (
-                      <button
-                        key={item.name}
-                        type="button"
-                        onClick={() => setSubject(item.name)}
-                        className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
-                      >
-                        <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
-                            <BookMarked className="h-5 w-5" />
-                          </div>
-                          <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
-                            {item.total} {t("common.topic")}
-                          </Badge>
+            {searchActive ? (
+              <CheatsheetResults sheets={filteredSheets} query={q} onClear={clearSearch} />
+            ) : !subject ? (
+              <section className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">{t("common.subjects")}</h2>
+                  <Badge variant="secondary">{subjectCards.length}</Badge>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {subjectCards.map((item) => (
+                    <button
+                      key={item.name}
+                      type="button"
+                      onClick={() => setSubject(item.name)}
+                      className="rounded-xl border border-border bg-card p-5 text-left transition-shadow hover:shadow-card"
+                    >
+                      <div className="flex min-w-0 flex-wrap items-start justify-between gap-3">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary">
+                          <BookMarked className="h-5 w-5" />
                         </div>
-                        <h3 className="mt-4 min-w-0 break-words text-base font-medium leading-snug">
-                          {item.name} {t("common.cheatsheets")}
-                        </h3>
-                        <p className="mt-2 text-xs text-muted-foreground">
-                          {item.free} {t("common.availableNow")} · {item.total - item.free}{" "}
-                          {t("common.premium")}
-                        </p>
-                      </button>
-                    ))}
+                        <Badge variant="secondary" className="shrink-0 whitespace-nowrap">
+                          {item.total} {t("common.topic")}
+                        </Badge>
+                      </div>
+                      <h3 className="mt-4 min-w-0 break-words text-base font-medium leading-snug">
+                        {item.name} {t("common.cheatsheets")}
+                      </h3>
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        {item.free} {t("common.availableNow")} · {item.total - item.free}{" "}
+                        {t("common.premium")}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ) : filteredSheets.length > 0 ? (
+              <section className="space-y-3">
+                <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setSubject(null)}
+                    >
+                      <ArrowLeft className="mr-1.5 h-4 w-4" />
+                      {t("common.subjects")}
+                    </Button>
+                    <Badge variant="secondary">
+                      {filteredSheets.length} {t("common.topic")}
+                    </Badge>
                   </div>
-                </section>
-              ) : filteredSheets.length > 0 ? (
-                <section className="space-y-3">
-                  <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setSubject(null)}
-                      >
-                        <ArrowLeft className="mr-1.5 h-4 w-4" />
-                        {t("common.subjects")}
-                      </Button>
-                      <Badge variant="secondary">
-                        {filteredSheets.length} {t("common.topic")}
-                      </Badge>
-                    </div>
-                    <h2 className="text-lg font-medium">{subject}</h2>
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {filteredSheets.map((sheet) => (
-                      <CheatsheetCard key={sheet.id} sheet={sheet} />
-                    ))}
-                  </div>
-                </section>
-              ) : (
-                <EmptyFiltered
-                  onClear={() => setSubject(null)}
-                  label={t("cheatsheets.emptyTitle")}
-                />
-              )}
-            </div>
-          )}
+                  <h2 className="text-lg font-medium">{subject}</h2>
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {filteredSheets.map((sheet) => (
+                    <CheatsheetCard
+                      key={sheet.id}
+                      sheet={sheet}
+                      progressPercent={progressByDoc.get(sheet.id) ?? 0}
+                    />
+                  ))}
+                </div>
+              </section>
+            ) : (
+              <EmptyFiltered onClear={() => setSubject(null)} label={t("cheatsheets.emptyTitle")} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );
@@ -220,14 +244,20 @@ function CheatsheetResults({
       </div>
       <div className="grid gap-3 md:grid-cols-2">
         {sheets.map((sheet) => (
-          <CheatsheetCard key={sheet.id} sheet={sheet} />
+          <CheatsheetCard key={sheet.id} sheet={sheet} progressPercent={0} />
         ))}
       </div>
     </section>
   );
 }
 
-function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
+function CheatsheetCard({
+  sheet,
+  progressPercent,
+}: {
+  sheet: CourseDocument;
+  progressPercent: number;
+}) {
   const { t } = useI18n();
   return (
     <Link
@@ -257,6 +287,20 @@ function CheatsheetCard({ sheet }: { sheet: CourseDocument }) {
         {sheet.subject} · {sheet.language === "french" ? "Français" : "English"} ·{" "}
         {t("common.quickRevision")}
       </p>
+      {progressPercent > 0 && (
+        <div className="mt-3">
+          <div className="flex items-center justify-between text-xs text-muted-foreground">
+            <span>{t("common.progress")}</span>
+            <span>{progressPercent}%</span>
+          </div>
+          <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-secondary">
+            <div
+              className="h-full rounded-full bg-accent transition-[width] duration-500"
+              style={{ width: `${Math.min(100, progressPercent)}%` }}
+            />
+          </div>
+        </div>
+      )}
       <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
         <div className="rounded-lg bg-secondary/40 p-3">
           <div className="flex items-center gap-1.5 text-muted-foreground">

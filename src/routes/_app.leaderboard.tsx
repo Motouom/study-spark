@@ -313,7 +313,6 @@ function LeaderboardPage() {
                   <span className="text-right">Score</span>
                   <span className="text-right">Passed</span>
                   <span className="text-right">Understood</span>
-                  <span className="text-right">Started</span>
                   <span className="text-right">Days</span>
                 </div>
                 <div className="divide-y divide-border">
