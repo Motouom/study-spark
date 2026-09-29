@@ -582,7 +582,19 @@ export const Route = createFileRoute("/api/ai/learning-path")({
                   maxTokens: 1400,
                 });
                 console.log(`[AI LearningPath] user=${user.id} — generateAiText succeeded.`);
-                days = parseAiLearningPath(planText);
+                days = parseAiLearningPath(planText).map((day, index) => {
+                  const expectedPaper = deterministicDays[index]?.paper ?? day.paper;
+                  if (day.paper !== expectedPaper) {
+                    console.log(
+                      `[AI LearningPath] Forced paper back from "${day.paper}" to "${expectedPaper}" before validation`,
+                    );
+                  }
+                  return {
+                    ...day,
+                    day: deterministicDays[index]?.day ?? day.day,
+                    paper: expectedPaper,
+                  };
+                });
                 validateAiLearningPath(days, deterministicDays);
                 break;
               } catch (parseOrProviderError) {
@@ -597,18 +609,6 @@ export const Route = createFileRoute("/api/ai/learning-path")({
             if (!days) {
               throw lastAiError ?? new Error("AI enrichment returned no usable days.");
             }
-
-            // Force-fix: ensure AI didn't change any paper titles
-            days = days.map((day, index) => {
-              const expectedPaper = deterministicDays[index]?.paper ?? day.paper;
-              if (day.paper !== expectedPaper) {
-                console.log(
-                  `[AI LearningPath] Forced paper back from "${day.paper}" to "${expectedPaper}"`,
-                );
-                return { ...day, paper: expectedPaper };
-              }
-              return day;
-            });
 
             return Response.json({ days, source: "ai" });
           } catch (aiError) {
