@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@cloudflare/vite-plugin':
-        specifier: ^1.25.5
-        version: 1.60.2(@types/node@22.20.4)(vite@7.3.6(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.33.0))(wrangler@4.141.0(@types/node@22.20.4))
       '@hookform/resolvers':
         specifier: ^5.2.2
         version: 5.9.1(@standard-schema/spec@1.1.0)(react-hook-form@7.89.0(@types/react@19.3.0)(react@19.3.0))(zod@3.25.76)
@@ -354,12 +351,6 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/vite-plugin@1.60.2':
-    resolution: {integrity: sha512-scyKSUBOAXNJDLDD5y1qDUPBgbmGOE8v7zgTHjeYXE1VLxYGTHewhu4rUXXctJg0t2Lsp2ciW5feM858UZ5qTQ==}
-    hasBin: true
-    peerDependencies:
-      vite: ^6.1.0 || ^7.0.0 || ^8.0.0
-      wrangler: ^4.141.0
 
   '@cloudflare/workerd-darwin-64@1.20260925.1':
     resolution: {integrity: sha512-GFDjFo5jfmg98iiy73DOZjHRV+lPWaeGeJ6MbtUIVyostkh9L69KliaAWVytBHCSp36o3NNZOQ0CN8VrqO3+8A==}
@@ -4536,19 +4527,6 @@ snapshots:
     optionalDependencies:
       workerd: 1.20260925.1
 
-  '@cloudflare/vite-plugin@1.60.2(@types/node@22.20.4)(vite@7.3.6(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.33.0))(wrangler@4.141.0(@types/node@22.20.4))':
-    dependencies:
-      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20260925.1)
-      miniflare: 5.20260925.0-alpha(@types/node@22.20.4)
-      unenv: 2.0.0-rc.24
-      vite: 7.3.6(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.33.0)
-      workerd: 1.20260925.1
-      wrangler: 4.141.0(@types/node@22.20.4)
-      ws: 8.21.0
-    transitivePeerDependencies:
-      - '@types/node'
-      - bufferutil
-      - utf-8-validate
 
   '@cloudflare/workerd-darwin-64@1.20260925.1':
     optional: true
@@ -4976,7 +4954,6 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
       - bufferutil
-      - utf-8-validate
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true
@@ -5993,7 +5970,6 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
       - bufferutil
-      - utf-8-validate
 
   '@tanstack/devtools-client@0.0.8':
     dependencies:
@@ -6004,7 +5980,6 @@ snapshots:
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
-      - utf-8-validate
 
   '@tanstack/devtools-event-client@0.5.0': {}
 
@@ -6019,7 +5994,6 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
       - bufferutil
-      - utf-8-validate
 
   '@tanstack/history@1.162.4': {}
 
@@ -7681,7 +7655,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
-      - utf-8-validate
 
   minimatch@10.2.6:
     dependencies:
@@ -8493,7 +8466,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
-      - utf-8-validate
 
   ws@8.21.0: {}
 
