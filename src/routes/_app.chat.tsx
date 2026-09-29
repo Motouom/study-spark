@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Bot, Loader2, Send, Sparkles, UserRound } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { normalizeLegacyLatex } from "@/components/ProtectedMarkdown";
@@ -23,12 +22,32 @@ type ChatMessage = {
   source?: "ai" | "fallback";
 };
 
-const STARTERS = [
-  "Explain the topic I should revise first today.",
-  "How should I correct my failed questions?",
-  "Make a simple revision plan for Physics this evening.",
-  "Explain a hard Chemistry formula step by step.",
-];
+const CHAT_HISTORY_KEY = "studyspark.study-chat.history.v1";
+const CHAT_HISTORY_LIMIT = 10;
+
+function limitChatHistory(messages: ChatMessage[]) {
+  return messages.slice(-CHAT_HISTORY_LIMIT);
+}
+
+function loadChatHistory() {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = window.localStorage.getItem(CHAT_HISTORY_KEY);
+    if (!stored) return [];
+    const parsed = JSON.parse(stored) as ChatMessage[];
+    if (!Array.isArray(parsed)) return [];
+    return limitChatHistory(
+      parsed.filter(
+        (message) =>
+          typeof message?.id === "string" &&
+          (message.role === "user" || message.role === "assistant") &&
+          typeof message.content === "string",
+      ),
+    );
+  } catch {
+    return [];
+  }
+}
 
 function StudyChatMarkdown({ children }: { children: string }) {
   return (
@@ -121,24 +140,16 @@ async function askStudyChat(message: string, history: ChatMessage[]) {
 }
 
 function StudyChatPage() {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: "welcome",
-      role: "assistant",
-      content:
-        "Ask me about a topic, a failed question, a formula, or what to revise next. I will use your StudySpark progress where it helps.",
-    },
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => loadChatHistory());
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   const canSend = input.trim().length >= 3 && !pending;
-  const sourceLabel = useMemo(() => {
-    const last = [...messages].reverse().find((item) => item.role === "assistant" && item.source);
-    if (!last?.source) return "Ready";
-    return last.source === "ai" ? "AI ready" : "Local fallback";
+
+  useEffect(() => {
+    window.localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(limitChatHistory(messages)));
   }, [messages]);
 
   async function sendMessage(value = input) {
@@ -150,7 +161,7 @@ function StudyChatPage() {
       role: "user",
       content: question,
     };
-    const nextMessages = [...messages, userMessage];
+    const nextMessages = limitChatHistory([...messages, userMessage]);
     setMessages(nextMessages);
     setInput("");
     setError(null);
@@ -158,31 +169,35 @@ function StudyChatPage() {
 
     try {
       const result = await askStudyChat(question, nextMessages);
-      setMessages((current) => [
-        ...current,
-        {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          content: result.note ? `${result.answer}\n\n${result.note}` : result.answer,
-          source: result.source,
-        },
-      ]);
+      setMessages((current) =>
+        limitChatHistory([
+          ...current,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content: result.note ? `${result.answer}\n\n${result.note}` : result.answer,
+            source: result.source,
+          },
+        ]),
+      );
     } catch (err) {
       const message =
         err instanceof Error
           ? err.message
           : "Study chat could not answer right now. Please try again.";
       setError(message);
-      setMessages((current) => [
-        ...current,
-        {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          source: "fallback",
-          content:
-            "I could not answer that from the AI service right now. Try again in a moment, or ask with the subject, topic, and question number so I can help more directly.",
-        },
-      ]);
+      setMessages((current) =>
+        limitChatHistory([
+          ...current,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            source: "fallback",
+            content:
+              "I could not answer that from the AI service right now. Try again in a moment, or ask with the subject, topic, and question number so I can help more directly.",
+          },
+        ]),
+      );
     } finally {
       setPending(false);
       window.setTimeout(() => inputRef.current?.focus(), 0);
@@ -191,33 +206,10 @@ function StudyChatPage() {
 
   return (
     <>
-      <PageHeader
-        title="Study chat"
-        description="Ask StudySpark questions about topics, formulas, failed questions, and what to revise next."
-      >
-        <Badge variant={sourceLabel === "AI ready" ? "success" : "secondary"}>{sourceLabel}</Badge>
-      </PageHeader>
+      <PageHeader title="Study chat" />
 
       <div className="mx-auto flex min-h-[calc(100dvh-9rem)] w-full max-w-5xl flex-col px-4 py-4 sm:px-6 md:px-10">
         <section className="flex min-h-0 flex-1 flex-col rounded-lg border border-border bg-card">
-          <div className="border-b border-border px-4 py-3">
-            <div className="flex flex-wrap items-center gap-2">
-              {STARTERS.map((starter) => (
-                <button
-                  key={starter}
-                  type="button"
-                  onClick={() => {
-                    setInput(starter);
-                    inputRef.current?.focus();
-                  }}
-                  className="rounded-full border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {starter}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4">
             {messages.map((message) => {
               const assistant = message.role === "assistant";
@@ -300,10 +292,6 @@ function StudyChatPage() {
                 Send
               </Button>
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
-              For best answers, include the subject, topic, and question number. Do not paste
-              passwords or private payment details.
-            </p>
           </form>
         </section>
       </div>
