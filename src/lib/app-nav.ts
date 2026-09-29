@@ -1,4 +1,12 @@
-import { LayoutDashboard, Library, Brain, PlayCircle, BookMarked, Users } from "lucide-react";
+import {
+  LayoutDashboard,
+  Library,
+  Brain,
+  PlayCircle,
+  BookMarked,
+  Users,
+  MessageCircle,
+} from "lucide-react";
 import type { TranslationKey } from "@/lib/i18n";
 
 export const NAV = [
@@ -7,6 +15,7 @@ export const NAV = [
   { to: "/learning-path", labelKey: "common.learningPath", icon: Brain },
   { to: "/courses", labelKey: "common.courses", icon: PlayCircle },
   { to: "/cheatsheets", labelKey: "common.cheatsheets", icon: BookMarked },
+  { to: "/chat", labelKey: "common.chat", icon: MessageCircle },
   { to: "/leaderboard", labelKey: "common.leaderboard", icon: Users },
 ] as const satisfies ReadonlyArray<{
   to: string;

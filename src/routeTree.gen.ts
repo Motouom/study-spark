@@ -19,6 +19,7 @@ import { Route as RefundRouteImport } from './routes/refund'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AppAchievementsRouteImport } from './routes/_app.achievements'
+import { Route as AppChatRouteImport } from './routes/_app.chat'
 import { Route as AppCheatsheetsRouteImport } from './routes/_app.cheatsheets'
 import { Route as AppCoursesRouteImport } from './routes/_app.courses'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
@@ -48,6 +49,7 @@ import { Route as FrTarifsRouteImport } from './routes/fr.tarifs'
 import { Route as FrTermsRouteImport } from './routes/fr.terms'
 import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
+import { Route as ApiAiChatRouteImport } from './routes/api.ai.chat'
 import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
 import { Route as ApiAiHealthRouteImport } from './routes/api.ai.health'
 import { Route as ApiAiLearningPathRouteImport } from './routes/api.ai.learning-path'
@@ -104,6 +106,11 @@ const TermsRoute = TermsRouteImport.update({
 const AppAchievementsRoute = AppAchievementsRouteImport.update({
   id: '/achievements',
   path: '/achievements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppChatRoute = AppChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCheatsheetsRoute = AppCheatsheetsRouteImport.update({
@@ -255,6 +262,11 @@ const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => AppQuizRoute,
 } as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai/chat',
+  path: '/api/ai/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAiFormatPaperRoute = ApiAiFormatPaperRouteImport.update({
   id: '/api/ai/format-paper',
   path: '/api/ai/format-paper',
@@ -308,6 +320,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninRoute
   '/terms': typeof TermsRoute
   '/achievements': typeof AppAchievementsRoute
+  '/chat': typeof AppChatRoute
   '/cheatsheets': typeof AppCheatsheetsRoute
   '/courses': typeof AppCoursesRoute
   '/dashboard': typeof AppDashboardRoute
@@ -337,6 +350,7 @@ export interface FileRoutesByFullPath {
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
   '/api/ai/health': typeof ApiAiHealthRoute
   '/api/ai/learning-path': typeof ApiAiLearningPathRoute
@@ -355,6 +369,7 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninRoute
   '/terms': typeof TermsRoute
   '/achievements': typeof AppAchievementsRoute
+  '/chat': typeof AppChatRoute
   '/cheatsheets': typeof AppCheatsheetsRoute
   '/courses': typeof AppCoursesRoute
   '/dashboard': typeof AppDashboardRoute
@@ -384,6 +399,7 @@ export interface FileRoutesByTo {
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
   '/api/ai/health': typeof ApiAiHealthRoute
   '/api/ai/learning-path': typeof ApiAiLearningPathRoute
@@ -405,6 +421,7 @@ export interface FileRoutesById {
   '/signin': typeof SigninRoute
   '/terms': typeof TermsRoute
   '/_app/achievements': typeof AppAchievementsRoute
+  '/_app/chat': typeof AppChatRoute
   '/_app/cheatsheets': typeof AppCheatsheetsRoute
   '/_app/courses': typeof AppCoursesRoute
   '/_app/dashboard': typeof AppDashboardRoute
@@ -434,6 +451,7 @@ export interface FileRoutesById {
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
   '/_app/quiz/setup': typeof AppQuizSetupRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
   '/api/ai/health': typeof ApiAiHealthRoute
   '/api/ai/learning-path': typeof ApiAiLearningPathRoute
@@ -455,6 +473,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/terms'
     | '/achievements'
+    | '/chat'
     | '/cheatsheets'
     | '/courses'
     | '/dashboard'
@@ -484,6 +503,7 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/'
     | '/course/$documentId'
     | '/quiz/setup'
+    | '/api/ai/chat'
     | '/api/ai/format-paper'
     | '/api/ai/health'
     | '/api/ai/learning-path'
@@ -502,6 +522,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/terms'
     | '/achievements'
+    | '/chat'
     | '/cheatsheets'
     | '/courses'
     | '/dashboard'
@@ -531,6 +552,7 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x'
     | '/course/$documentId'
     | '/quiz/setup'
+    | '/api/ai/chat'
     | '/api/ai/format-paper'
     | '/api/ai/health'
     | '/api/ai/learning-path'
@@ -551,6 +573,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/terms'
     | '/_app/achievements'
+    | '/_app/chat'
     | '/_app/cheatsheets'
     | '/_app/courses'
     | '/_app/dashboard'
@@ -580,6 +603,7 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/'
     | '/_app/course/$documentId'
     | '/_app/quiz/setup'
+    | '/api/ai/chat'
     | '/api/ai/format-paper'
     | '/api/ai/health'
     | '/api/ai/learning-path'
@@ -601,6 +625,7 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   TermsRoute: typeof TermsRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
   ApiAiFormatPaperRoute: typeof ApiAiFormatPaperRoute
   ApiAiHealthRoute: typeof ApiAiHealthRoute
   ApiAiLearningPathRoute: typeof ApiAiLearningPathRoute
@@ -681,6 +706,13 @@ declare module '@tanstack/react-router' {
       path: '/achievements'
       fullPath: '/achievements'
       preLoaderRoute: typeof AppAchievementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/chat': {
+      id: '/_app/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof AppChatRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/cheatsheets': {
@@ -886,6 +918,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppQuizSetupRouteImport
       parentRoute: typeof AppQuizRoute
     }
+    '/api/ai/chat': {
+      id: '/api/ai/chat'
+      path: '/api/ai/chat'
+      fullPath: '/api/ai/chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ai/format-paper': {
       id: '/api/ai/format-paper'
       path: '/api/ai/format-paper'
@@ -958,6 +997,7 @@ const AppQuizRouteWithChildren =
 
 interface AppRouteChildren {
   AppAchievementsRoute: typeof AppAchievementsRoute
+  AppChatRoute: typeof AppChatRoute
   AppCheatsheetsRoute: typeof AppCheatsheetsRoute
   AppCoursesRoute: typeof AppCoursesRoute
   AppDashboardRoute: typeof AppDashboardRoute
@@ -977,6 +1017,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppAchievementsRoute: AppAchievementsRoute,
+  AppChatRoute: AppChatRoute,
   AppCheatsheetsRoute: AppCheatsheetsRoute,
   AppCoursesRoute: AppCoursesRoute,
   AppDashboardRoute: AppDashboardRoute,
@@ -1048,6 +1089,7 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   TermsRoute: TermsRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
   ApiAiFormatPaperRoute: ApiAiFormatPaperRoute,
   ApiAiHealthRoute: ApiAiHealthRoute,
   ApiAiLearningPathRoute: ApiAiLearningPathRoute,
