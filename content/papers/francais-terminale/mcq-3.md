@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat FRANÇAIS P1 SET 3
+# CAMEROON BAC FRANÇAIS — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** A1, A2, A4, ABI, C, D
-**Subject:** Français
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** A1, A2, A4, ABI, C, D
+**Matière :** Français
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cette épreuve comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le point de vue interne :
+**Question 1.** Dans _Une si longue lettre_ de Mariama Bâ, la narratrice, Ramatoulaye, s'adresse à son amie Aïssatou pour confier sa révolte contre la polygamie. Ce genre littéraire, fondé sur la confidence adressée à un destinataire, est :
 
-A. le narrateur voit par les yeux d'un personnage
-B. le narrateur voit tout
-C. le narrateur est absent
-D. le narrateur juge
-
----
-
-**Q2.** Le point de vue omniscient :
-
-A. le narrateur sait tout
-B. le narrateur voit par un personnage
-C. le narrateur est absent
-D. le narrateur juge
+A. Le roman épistolaire
+B. L'autobiographie
+C. La nouvelle fantastique
+D. Le théâtre
 
 ---
 
-**Q3.** Le point de vue externe :
+**Question 2.** La figure de style qui consiste à exagérer une réalité pour la rendre plus frappante, comme dans « Je meurs de faim », s'appelle :
 
-A. le narrateur observe de l'extérieur
-B. le narrateur sait tout
-C. le narrateur voit par un personnage
-D. le narrateur juge
-
----
-
-**Q4.** Le narrateur interne :
-
-A. est un personnage de l'histoire
-B. est extérieur
-C. est omniscient
-D. est absent
+A. La litote
+B. L'hyperbole
+C. L'euphémisme
+D. L'anaphore
 
 ---
 
-**Q5.** Le narrateur externe :
+**Question 3.** Le mouvement littéraire du XVIIIᵉ siècle, celui des philosophes des Lumières (Voltaire, Rousseau, Diderot), se caractérise par :
 
-A. n'est pas un personnage
-B. est un personnage
-C. est omniscient
-D. est le héros
-
----
-
-**Q6.** La focalisation zéro :
-
-A. le narrateur omniscient
-B. le narrateur interne
-C. le narrateur externe
-D. le narrateur absent
+A. La soumission totale à l'autorité royale et religieuse
+B. La lutte contre l'obscurantisme, la défense de la raison, de la liberté et de la tolérance
+C. Le retour à une poésie pure et impersonnelle
+D. L'exploration exclusive de l'inconscient
 
 ---
 
-**Q7.** La focalisation interne :
+**Question 4.** Dans la phrase : « Les pompiers éteignirent le feu avant qu'il ne se propageât », la valeur temporelle du subjonctif « se propageât » est :
 
-A. le narrateur voit par un personnage
-B. le narrateur omniscient
-C. le narrateur externe
-D. le narrateur absent
-
----
-
-**Q8.** La focalisation externe :
-
-A. le narrateur observe de l'extérieur
-B. le narrateur omniscient
-C. le narrateur interne
-D. le narrateur absent
+A. L'antériorité
+B. La postériorité
+C. La simultanéité
+D. Le futur
 
 ---
 
-**Q9.** Le classicisme :
+**Question 5.** Le registre tragique se manifeste principalement par :
 
-A. la mesure et la raison
-B. l'expression des sentiments
-C. le rêve
-D. l'absurde
-
----
-
-**Q10.** Le siècle des Lumières :
-
-A. la raison et la critique
-B. le sentiment
-C. le rêve
-D. l'absurde
+A. La présence d'un héros impuissant face à un destin fatal qui l'écrase
+B. Le rire provoqué par des situations burlesques
+C. L'émotion et la pitié devant la misère ordinaire
+D. L'exagération des exploits guerriers
 
 ---
 
-**Q11.** L'humanisme :
+**Question 6.** Dans _L'Étranger_ d'Albert Camus, la phrase « Aujourd'hui, maman est morte » ouvre le récit. Le mouvement littéraire du XXᵉ siècle qui interroge l'absurdité de la condition humaine et l'absence de sens du monde, auquel Camus est associé, est :
 
-A. la confiance en l'homme
-B. la foi
-C. le doute
-D. l'absurde
-
----
-
-**Q12.** Le baroque :
-
-A. le mouvement et l'instabilité
-B. la mesure
-C. la raison
-D. le classicisme
+A. Le surréalisme
+B. L'existentialisme (et l'absurde)
+C. Le naturalisme
+D. Le Parnasse
 
 ---
 
-**Q13.** La littérature africaine :
+**Question 7.** La métonymie, figure de substitution, est illustrée par :
 
-A. reflète les réalités africaines
-B. est européenne
-C. est asiatique
-D. est américaine
-
----
-
-**Q14.** La négritude :
-
-A. la valorisation de la culture noire
-B. le rejet de la culture
-C. la colonisation
-D. l'esclavage
+A. « Boire un verre » pour désigner le liquide contenu
+B. « Il est brave comme un lion »
+C. « Je t'aime jusqu'à la mort »
+D. « Partir, c'est mourir un peu »
 
 ---
 
-**Q15.** Senghor est :
+**Question 8.** Le classicisme du XVIIᵉ siècle, représenté par Racine, Molière et La Fontaine, prône :
 
-A. un poète de la négritude
-B. un romancier
-C. un dramaturge
-D. un essayiste
-
----
-
-**Q16.** Le roman :
-
-A. un récit en prose
-B. un poème
-C. une pièce de théâtre
-D. un essai
+A. La libre expression des sentiments sans contrainte
+B. La mesure, la raison, la vraisemblance et le respect des règles
+C. La rupture totale avec l'Antiquité
+D. La description scientifique de la société
 
 ---
 
-**Q17.** La nouvelle :
+**Question 9.** Dans la phrase : « Je pense, donc je suis », de Descartes, le lien logique « donc » exprime :
 
-A. un récit court
-B. un roman
-C. un poème
-D. une pièce
-
----
-
-**Q18.** L'essai :
-
-A. une réflexion argumentée
-B. un récit
-C. un poème
-D. une pièce
+A. La cause
+B. La conséquence
+C. L'opposition
+D. Le but
 
 ---
 
-**Q19.** La fable :
+**Question 10.** La contraction de texte au Baccalauréat consiste à :
 
-A. un récit allégorique avec morale
-B. un roman
-C. une pièce
-D. un essai
-
----
-
-**Q20.** La satire :
-
-A. critique les défauts
-B. loue les qualités
-C. raconte
-D. décrit
+A. Développer librement ses idées sur un sujet
+B. Réduire un texte en ne gardant que les idées essentielles, sans jugement personnel
+C. Recopier intégralement le texte en changeant quelques mots
+D. Traduire le texte dans une autre langue
 
 ---
 
 ## CORRIGÉ
 
-1. le narrateur voit par les yeux d'un personnage
-2. le narrateur sait tout
-3. le narrateur observe de l'extérieur
-4. est un personnage de l'histoire
-5. n'est pas un personnage
-6. le narrateur omniscient
-7. le narrateur voit par un personnage
-8. le narrateur observe de l'extérieur
-9. la mesure et la raison
-10. la raison et la critique
-11. la confiance en l'homme
-12. le mouvement et l'instabilité
-13. reflète les réalités africaines
-14. la valorisation de la culture noire
-15. un poète de la négritude
-16. un récit en prose
-17. un récit court
-18. une réflexion argumentée
-19. un récit allégorique avec morale
-20. critique les défauts
+1. A. Le roman épistolaire
+2. B. L'hyperbole
+3. B. La lutte contre l'obscurantisme, la défense de la raison, de la liberté et de la tolérance
+4. B. La postériorité
+5. A. La présence d'un héros impuissant face à un destin fatal qui l'écrase
+6. B. L'existentialisme (et l'absurde)
+7. A. « Boire un verre » pour désigner le liquide contenu
+8. B. La mesure, la raison, la vraisemblance et le respect des règles
+9. B. La conséquence
+10. B. Réduire un texte en ne gardant que les idées essentielles, sans jugement personnel

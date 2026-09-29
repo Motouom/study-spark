@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat INFORMATIQUE P1 SET 2
+# CAMEROON BEPC INFORMATIQUE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** TI, C, D, E
-**Subject:** Informatique
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Informatique
+**Durée :** 30 minutes
+**Coefficient :** 1
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La structure de données File :
+**Question 1.** La partie de l'ordinateur considérée comme le « cerveau », qui exécute les instructions des programmes, est :
 
-A. FIFO (premier entré, premier sorti)
-B. LIFO (dernier entré, premier sorti)
-C. une pile
-D. un tableau
-
----
-
-**Q2.** L'arbre binaire :
-
-A. une structure hiérarchique
-B. une pile
-C. une file
-D. un tableau
+A. Le processeur (CPU)
+B. L'écran
+C. La souris
+D. L'imprimante
 
 ---
 
-**Q3.** Le graphe :
+**Question 2.** Un fichier de 2 mégaoctets (Mo) équivaut approximativement à :
 
-A. un ensemble de nœuds et d'arêtes
-B. une pile
-C. une file
-D. un tableau
-
----
-
-**Q4.** La base de données :
-
-A. un ensemble structuré de données
-B. un fichier
-C. un programme
-D. un périphérique
+A. 2 048 kilo-octets (Ko)
+B. 2 000 bits
+C. 20 octets
+D. 2 048 bits
 
 ---
 
-**Q5.** Le SGBD :
+**Question 3.** Le logiciel qui permet de faire des calculs, d'organiser des données dans des tableaux et de créer des graphiques est :
 
-A. système de gestion de base de données
-B. un fichier
-C. un programme
-D. un périphérique
-
----
-
-**Q6.** Le langage SQL :
-
-A. interroge les bases de données
-B. crée des pages web
-C. est un système d'exploitation
-D. est un périphérique
+A. Un traitement de texte
+B. Un tableur
+C. Un navigateur web
+D. Un système d'exploitation
 
 ---
 
-**Q7.** La requête SELECT :
+**Question 4.** Windows, macOS, Linux, Android et iOS sont des exemples de :
 
-A. interroge les données
-B. insère des données
-C. supprime des données
-D. modifie des données
-
----
-
-**Q8.** La requête INSERT :
-
-A. insère des données
-B. interroge les données
-C. supprime des données
-D. modifie des données
+A. Logiciels de bureautique
+B. Systèmes d'exploitation
+C. Moteurs de recherche
+D. Antivirus
 
 ---
 
-**Q9.** La requête UPDATE :
+**Question 5.** Lequel de ces éléments est un périphérique de sortie ?
 
-A. modifie des données
-B. interroge les données
-C. insère des données
-D. supprime des données
-
----
-
-**Q10.** La requête DELETE :
-
-A. supprime des données
-B. interroge les données
-C. insère des données
-D. modifie des données
+A. Le clavier
+B. La souris
+C. Le microphone
+D. L'imprimante
 
 ---
 
-**Q11.** La clé primaire :
+**Question 6.** Pour rechercher des informations sur Internet en tapant des mots-clés, on utilise de préférence :
 
-A. identifie de façon unique une ligne
-B. est une colonne
-C. est une table
-D. est une requête
-
----
-
-**Q12.** La clé étrangère :
-
-A. relie deux tables
-B. identifie une ligne
-C. est une colonne
-D. est une requête
+A. Un moteur de recherche (ex. Google, Bing)
+B. Un traitement de texte
+C. Une imprimante
+D. Un tableur
 
 ---
 
-**Q13.** Le réseau informatique :
+**Question 7.** Un programme malveillant qui se propage d'ordinateur en ordinateur et peut endommager les données s'appelle :
 
-A. connecte des ordinateurs
-B. est un fichier
-C. est un programme
-D. est une mémoire
-
----
-
-**Q14.** Le protocole :
-
-A. règle de communication
-B. un fichier
-C. un programme
-D. une mémoire
+A. Un virus informatique
+B. Un antivirus
+C. Un navigateur
+D. Un système d'exploitation
 
 ---
 
-**Q15.** Le protocole TCP/IP :
+**Question 8.** Le logiciel qui protège un ordinateur contre les virus s'appelle :
 
-A. la base d'Internet
-B. un fichier
-C. un programme
-D. une mémoire
-
----
-
-**Q16.** L'adresse IP :
-
-A. identifie un ordinateur sur un réseau
-B. un fichier
-C. un programme
-D. une mémoire
+A. Un tableur
+B. Un antivirus
+C. Un lecteur multimédia
+D. Un navigateur
 
 ---
 
-**Q17.** Le DNS :
+**Question 9.** L'envoi d'un message électronique à une adresse se fait grâce au service :
 
-A. traduit les noms en adresses IP
-B. un fichier
-C. un programme
-D. une mémoire
-
----
-
-**Q18.** Le HTML :
-
-A. langage de création de pages web
-B. un système d'exploitation
-C. un protocole
-D. une base de données
+A. L'e-mail (courrier électronique)
+B. Le traitement de texte
+C. Le stockage local
+D. L'imprimante
 
 ---
 
-**Q19.** Le CSS :
+**Question 10.** Dans un algorithme, la structure « Si ... Alors ... Sinon » permet de :
 
-A. met en forme les pages web
-B. crée le contenu
-C. est un système d'exploitation
-D. est un protocole
-
----
-
-**Q20.** Le JavaScript :
-
-A. rend les pages web interactives
-B. crée le contenu
-C. met en forme
-D. est un système d'exploitation
+A. Répéter une instruction plusieurs fois
+B. Prendre une décision selon une condition
+C. Terminer le programme
+D. Stocker une valeur
 
 ---
 
 ## CORRIGÉ
 
-1. FIFO (premier entré, premier sorti)
-2. une structure hiérarchique
-3. un ensemble de nœuds et d'arêtes
-4. un ensemble structuré de données
-5. système de gestion de base de données
-6. interroge les bases de données
-7. interroge les données
-8. insère des données
-9. modifie des données
-10. supprime des données
-11. identifie de façon unique une ligne
-12. relie deux tables
-13. connecte des ordinateurs
-14. règle de communication
-15. la base d'Internet
-16. identifie un ordinateur sur un réseau
-17. traduit les noms en adresses IP
-18. langage de création de pages web
-19. met en forme les pages web
-20. rend les pages web interactives
+1. A — Le processeur (CPU)
+2. A — 2 048 kilo-octets (Ko)
+3. B — Un tableur
+4. B — Systèmes d'exploitation
+5. D — L'imprimante
+6. A — Un moteur de recherche
+7. A — Un virus informatique
+8. B — Un antivirus
+9. A — L'e-mail (courrier électronique)
+10. B — Prendre une décision selon une condition

@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES P1 SET 3
+# CAMEROON BAC SES — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Sciences Économiques et Sociales
-**Subject:** Sciences Économiques et Sociales
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** Sciences Économiques et Sociales (SES)
+**Matière :** Sciences Économiques et Sociales
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'IDH mesure :
+**Question 1.** La socialisation secondaire se distingue de la socialisation primaire par le fait qu'elle :
 
-A. le développement humain
-B. la production
-C. le chômage
+A. se déroule après l'enfance, à l'école, au travail ou dans les groupes de pairs
+B. se produit uniquement dans le ventre maternel
+C. concerne exclusivement la petite enfance
+D. ne fait intervenir aucune instance sociale
+
+---
+
+**Question 2.** Selon Durkheim, la solidarité organique, caractéristique des sociétés modernes, repose sur :
+
+A. la complémentarité et l'interdépendance des individus spécialisés
+B. la similitude et la ressemblance entre tous les individus
+C. la parenté et le clan
+D. la soumission à une autorité religieuse unique
+
+---
+
+**Question 3.** La notion de « moyennisation » de la société, développée notamment par Henri Mendras, renvoie à :
+
+A. la réduction des distances entre les classes sociales au profit d'une classe moyenne élargie
+B. l'augmentation des inégalités entre les classes
+C. la disparition complète des inégalités sociales
+D. la division croissante de la société en deux blocs opposés
+
+---
+
+**Question 4.** Les « classes sociales » chez Marx se définissent fondamentalement par :
+
+A. la place occupée dans les rapports de production
+B. le niveau de diplôme
+C. l'âge des individus
+D. la région de naissance
+
+---
+
+**Question 5.** La population active regroupe :
+
+A. les personnes en âge de travailler, occupées ou au chômage, qui exercent ou cherchent un emploi
+B. uniquement les personnes ayant un emploi rémunéré
+C. tous les habitants d'un pays
+D. les personnes de moins de 15 ans
+
+---
+
+**Question 6.** Le « halo du chômage » désigne :
+
+A. les personnes qui souhaitent travailler mais ne sont pas comptées comme chômeurs (découragés, etc.)
+B. l'ensemble des travailleurs à temps partiel
+C. les retraités qui reprennent une activité
+D. les travailleurs indépendants non déclarés
+
+---
+
+**Question 7.** Une politique de relance keynésienne vise à :
+
+A. stimuler la demande globale pour réduire le chômage
+B. réduire les dépenses publiques en toutes circonstances
+C. augmenter les impôts pour freiner la consommation
+D. restreindre la masse monétaire pour lutter contre l'inflation
+
+---
+
+**Question 8.** La « courbe de Lorenz » et le « coefficient de Gini » servent à mesurer :
+
+A. l'inégalité de la répartition des revenus (ou des richesses)
+B. le taux de croissance du PIB
+C. le niveau de chômage
 D. l'inflation
 
 ---
 
-**Q2.** L'IDH comprend :
+**Question 9.** La TVA (Taxe sur la Valeur Ajoutée) est un impôt :
 
-A. santé, éducation, revenu
-B. production, chômage, inflation
-C. population, surface, climat
-D. exportations, importations, PIB
-
----
-
-**Q3.** La mondialisation est :
-
-A. l'interdépendance des économies
-B. l'isolement
-C. le protectionnisme
-D. la guerre
+A. indirect, payé par le consommateur lors d'un achat
+B. direct, prélevé sur le revenu des salariés
+C. local, payé uniquement par les entreprises
+D. progressif, calculé sur le patrimoine
 
 ---
 
-**Q4.** Le commerce international :
+**Question 10.** Les FMN (Firmes Multinationales) contribuent à la mondialisation principalement en :
 
-A. les échanges entre pays
-B. le commerce local
-C. la production
-D. la consommation
-
----
-
-**Q5.** La balance commerciale est :
-
-A. exportations - importations
-B. PIB - consommation
-C. recettes - dépenses
-D. actif - passif
-
----
-
-**Q6.** Le protectionnisme :
-
-A. protège l'économie nationale
-B. favorise le libre-échange
-C. augmente les importations
-D. supprime les frontières
-
----
-
-**Q7.** Le libre-échange :
-
-A. la libre circulation des biens
-B. le protectionnisme
-C. l'isolement
-D. la guerre
-
----
-
-**Q8.** L'État-providence :
-
-A. intervient dans l'économie et le social
-B. ne fait rien
-C. produit des biens
-D. consomme
-
----
-
-**Q9.** La protection sociale :
-
-A. protège contre les risques sociaux
-B. protège les frontières
-C. augmente les impôts
-D. réduit les salaires
-
----
-
-**Q10.** La sécurité sociale :
-
-A. couvre les risques sociaux
-B. est une entreprise
-C. est un État
-D. est une religion
-
----
-
-**Q11.** Les cotisations sociales :
-
-A. financent la protection sociale
-B. sont des salaires
-C. sont des profits
-D. sont des rentes
-
----
-
-**Q12.** La redistribution :
-
-A. transfère des revenus
-B. produit des biens
-C. consomme
-D. investit
-
----
-
-**Q13.** Les inégalités sont :
-
-A. des différences d'accès aux ressources
-B. des égalités
-C. des libertés
-D. des devoirs
-
----
-
-**Q14.** L'égalité des chances :
-
-A. donne les mêmes opportunités
-B. donne les mêmes revenus
-C. supprime les différences
-D. est impossible
-
----
-
-**Q15.** La discrimination est :
-
-A. un traitement inégal injustifié
-B. une égalité
-C. une liberté
-D. un devoir
-
----
-
-**Q16.** Le genre :
-
-A. les rôles sociaux liés au sexe
-B. le sexe biologique
-C. l'âge
-D. la classe
-
----
-
-**Q17.** Les inégalités de genre :
-
-A. des différences entre hommes et femmes
-B. des égalités
-C. des libertés
-D. des devoirs
-
----
-
-**Q18.** La pauvreté est :
-
-A. le manque de ressources
-B. la richesse
-C. l'égalité
-D. la liberté
-
----
-
-**Q19.** Le seuil de pauvreté :
-
-A. le niveau de revenu sous lequel on est pauvre
-B. le salaire moyen
-C. le PIB
-D. le chômage
-
----
-
-**Q20.** Le développement durable :
-
-A. satisfait les besoins sans compromettre l'avenir
-B. la croissance rapide
-C. l'exploitation maximale
-D. la consommation
+A. organisant la production à l'échelle mondiale et en réalisant des IDE (investissements directs à l'étranger)
+B. fermant leurs marchés aux échanges internationaux
+C. limitant leurs activités à leur pays d'origine
+D. refusant toute coopération avec d'autres entreprises
 
 ---
 
 ## CORRIGÉ
 
-1. le développement humain
-2. santé, éducation, revenu
-3. l'interdépendance des économies
-4. les échanges entre pays
-5. exportations - importations
-6. protège l'économie nationale
-7. la libre circulation des biens
-8. intervient dans l'économie et le social
-9. protège contre les risques sociaux
-10. couvre les risques sociaux
-11. financent la protection sociale
-12. transfère des revenus
-13. des différences d'accès aux ressources
-14. donne les mêmes opportunités
-15. un traitement inégal injustifié
-16. les rôles sociaux liés au sexe
-17. des différences entre hommes et femmes
-18. le manque de ressources
-19. le niveau de revenu sous lequel on est pauvre
-20. satisfait les besoins sans compromettre l'avenir
+1. A — se déroule après l'enfance, à l'école, au travail ou dans les groupes de pairs
+2. A — la complémentarité et l'interdépendance des individus spécialisés
+3. A — la réduction des distances entre les classes sociales au profit d'une classe moyenne élargie
+4. A — la place occupée dans les rapports de production
+5. A — les personnes en âge de travailler, occupées ou au chômage
+6. A — les personnes qui souhaitent travailler mais ne sont pas comptées comme chômeurs
+7. A — stimuler la demande globale pour réduire le chômage
+8. A — l'inégalité de la répartition des revenus (ou des richesses)
+9. A — indirect, payé par le consommateur lors d'un achat
+10. A — organisant la production à l'échelle mondiale et en réalisant des IDE

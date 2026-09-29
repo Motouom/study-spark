@@ -1,223 +1,124 @@
-# CAMEROON Probatoire COMPTABILITÉ P1 SET 1
+# CAMEROON PROBATOIRE/BAC COMPTABILITÉ — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Première
-**Series:** Comptabilité
-**Subject:** Comptabilité
-**Exam:** Probatoire
+**Niveau :** Première / Terminale — Probatoire / Baccalauréat
+**Séries :** ACC, CG, FIG, SES
+**Matière :** Comptabilité
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé détaillé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le bilan est :
+**Question 1.** Une entreprise achète des marchandises pour un montant HT de 800 000 FCFA soumis à une TVA de 19,25%. Quel est le montant de la TVA ?
 
-A. un tableau qui décrit le patrimoine
-B. un compte de résultat
-C. une facture
-D. un journal
-
----
-
-**Q2.** L'actif du bilan comprend :
-
-A. les biens et créances
-B. les dettes
-C. les capitaux propres
-D. les charges
+A. 154 000 FCFA
+B. 152 000 FCFA
+C. 160 000 FCFA
+D. 148 000 FCFA
 
 ---
 
-**Q3.** Le passif du bilan comprend :
+**Question 2.** Un véhicule est acheté 6 000 000 FCFA et amorti linéairement sur 5 ans. Quelle est l'annuité d'amortissement ?
 
-A. les dettes et capitaux propres
-B. les biens
-C. les créances
-D. les produits
-
----
-
-**Q4.** Le compte de résultat présente :
-
-A. les charges et produits
-B. l'actif et le passif
-C. les biens et dettes
-D. les recettes et dépenses
+A. 1 200 000 FCFA
+B. 1 500 000 FCFA
+C. 600 000 FCFA
+D. 1 000 000 FCFA
 
 ---
 
-**Q5.** Le journal comptable enregistre :
+**Question 3.** Le compte de résultat d'une entreprise fait apparaître des produits de 15 000 000 FCFA et des charges de 11 500 000 FCFA. Le résultat de l'exercice est :
 
-A. les opérations au jour le jour
-B. le bilan
-C. le résultat
-D. les amortissements
-
----
-
-**Q6.** Le grand livre regroupe :
-
-A. tous les comptes
-B. les factures
-C. les bilans
-D. les résultats
+A. une perte de 3 500 000 FCFA
+B. un bénéfice de 3 500 000 FCFA
+C. un bénéfice de 26 500 000 FCFA
+D. une perte de 26 500 000 FCFA
 
 ---
 
-**Q7.** La balance est :
+**Question 4.** Une facture comporte un montant HT de 500 000 FCFA, une remise de 10% puis un escompte de 2%. Quel est le net à payer (hors TVA) ?
 
-A. un récapitulatif des comptes
-B. un bilan
-C. un résultat
-D. un journal
-
----
-
-**Q8.** Le compte « caisse » est :
-
-A. un compte d'actif
-B. un compte de passif
-C. un compte de charge
-D. un compte de produit
+A. 441 000 FCFA
+B. 450 000 FCFA
+C. 490 000 FCFA
+D. 435 000 FCFA
 
 ---
 
-**Q9.** Le compte « banque » est :
+**Question 5.** Selon le système comptable OHADA, le compte « Fournisseurs » appartient à :
 
-A. un compte d'actif
-B. un compte de passif
-C. un compte de charge
-D. un compte de produit
-
----
-
-**Q10.** Le compte « capital » est :
-
-A. un compte de capitaux propres
-B. un compte d'actif
-C. un compte de charge
-D. un compte de produit
+A. la classe 4 (comptes de tiers)
+B. la classe 2 (immobilisations)
+C. la classe 5 (trésorerie)
+D. la classe 6 (charges)
 
 ---
 
-**Q11.** Le compte « ventes » est :
+**Question 6.** Le fonds de roulement net global (FRNG) est égal à :
 
-A. un compte de produit
-B. un compte de charge
-C. un compte d'actif
-D. un compte de passif
-
----
-
-**Q12.** Le compte « achats » est :
-
-A. un compte de charge
-B. un compte de produit
-C. un compte d'actif
-D. un compte de passif
+A. ressources durables − emplois durables
+B. actif circulant − passif circulant
+C. trésorerie active − trésorerie passive
+D. capitaux propres + dettes
 
 ---
 
-**Q13.** La TVA est :
+**Question 7.** Une vente de 250 000 FCFA HT au taux de 19,25% donne un montant TTC de :
 
-A. la taxe sur la valeur ajoutée
-B. une taxe foncière
-C. un impôt sur le revenu
-D. une taxe douanière
-
----
-
-**Q14.** La TVA collectée est :
-
-A. la TVA sur les ventes
-B. la TVA sur les achats
-C. une taxe
-D. un impôt
+A. 298 125 FCFA
+B. 269 250 FCFA
+C. 295 000 FCFA
+D. 310 000 FCFA
 
 ---
 
-**Q15.** La TVA déductible est :
+**Question 8.** L'enregistrement d'un achat de marchandises payé par chèque se fait au journal par :
 
-A. la TVA sur les achats
-B. la TVA sur les ventes
-C. une taxe
-D. un impôt
-
----
-
-**Q16.** La TVA à payer est :
-
-A. TVA collectée - TVA déductible
-B. TVA collectée + TVA déductible
-C. TVA déductible - TVA collectée
-D. TVA collectée
+A. Débit : Achats ; Crédit : Banque
+B. Débit : Banque ; Crédit : Achats
+C. Débit : Caisse ; Crédit : Achats
+D. Débit : Ventes ; Crédit : Banque
 
 ---
 
-**Q17.** L'amortissement est :
+**Question 9.** Une provision pour dépréciation des stocks est comptabilisée :
 
-A. la constatation de la dépréciation d'un bien
-B. une charge
-C. un produit
-D. une dette
-
----
-
-**Q18.** L'amortissement concerne :
-
-A. les immobilisations
-B. les stocks
-C. les créances
-D. la caisse
+A. au crédit du compte de provisions
+B. au débit du compte de provisions
+C. uniquement au débit de la banque
+D. au crédit des ventes
 
 ---
 
-**Q19.** La provision est :
+**Question 10.** Une entreprise vend 1 200 unités d'un produit à 2 500 FCFA l'unité. Son chiffre d'affaires est de :
 
-A. une charge probable
-B. un produit
-C. une dette
-D. un bien
-
----
-
-**Q20.** Le résultat de l'exercice est :
-
-A. produits - charges
-B. actif - passif
-C. recettes - dépenses
-D. ventes - achats
+A. 3 000 000 FCFA
+B. 2 500 000 FCFA
+C. 30 000 000 FCFA
+D. 300 000 FCFA
 
 ---
 
 ## CORRIGÉ
 
-1. un tableau qui décrit le patrimoine
-2. les biens et créances
-3. les dettes et capitaux propres
-4. les charges et produits
-5. les opérations au jour le jour
-6. tous les comptes
-7. un récapitulatif des comptes
-8. un compte d'actif
-9. un compte d'actif
-10. un compte de capitaux propres
-11. un compte de produit
-12. un compte de charge
-13. la taxe sur la valeur ajoutée
-14. la TVA sur les ventes
-15. la TVA sur les achats
-16. TVA collectée - TVA déductible
-17. la constatation de la dépréciation d'un bien
-18. les immobilisations
-19. une charge probable
-20. produits - charges
+1. **A. 154 000 FCFA.** TVA = 800 000 × 0,1925 = 154 000 FCFA.
+2. **A. 1 200 000 FCFA.** Annuité = 6 000 000 ÷ 5 = 1 200 000 FCFA par an.
+3. **B. un bénéfice de 3 500 000 FCFA.** Résultat = Produits − Charges = 15 000 000 − 11 500 000 = +3 500 000 FCFA.
+4. **A. 441 000 FCFA.** Remise 10% : 500 000 × 0,90 = 450 000 ; escompte 2% : 450 000 × 0,98 = 441 000 FCFA.
+5. **A. la classe 4 (comptes de tiers).** Les fournisseurs sont des comptes de tiers.
+6. **A. ressources durables − emplois durables.** FRNG = Capitaux permanents − Actif immobilisé.
+7. **A. 298 125 FCFA.** TTC = 250 000 × 1,1925 = 298 125 FCFA.
+8. **A. Débit : Achats ; Crédit : Banque.** Achat payé par chèque : les achats augmentent (débit) et la banque diminue (crédit).
+9. **A. au crédit du compte de provisions.** Une dotation augmente les provisions au crédit.
+10. **A. 3 000 000 FCFA.** CA = 1 200 × 2 500 = 3 000 000 FCFA.

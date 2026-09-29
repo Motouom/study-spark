@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES P1 SET 1
+# CAMEROON BAC SES — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Sciences Économiques et Sociales
-**Subject:** Sciences Économiques et Sociales
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** Sciences Économiques et Sociales (SES)
+**Matière :** Sciences Économiques et Sociales
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Les SES étudient :
+**Question 1.** La socialisation primaire désigne le processus par lequel un individu intériorise les normes et valeurs de son groupe. Elle se déroule principalement :
 
-A. l'économie, la sociologie et la science politique
-B. la biologie
-C. la chimie
-D. la physique
-
----
-
-**Q2.** La sociologie étudie :
-
-A. les faits sociaux
-B. les atomes
-C. les cellules
-D. les planètes
+A. pendant l'enfance, au sein de la famille et des proches
+B. uniquement à l'âge adulte, sur le lieu de travail
+C. exclusivement à l'école secondaire
+D. après la retraite, dans les associations de loisirs
 
 ---
 
-**Q3.** La science politique étudie :
+**Question 2.** Un jeune garçon à qui l'on offre des camions et des voitures tandis que sa sœur reçoit des poupées illustre un phénomène de socialisation qualifié de :
 
-A. le pouvoir et l'État
-B. les atomes
-C. les cellules
-D. les planètes
-
----
-
-**Q4.** Le fait social selon Durkheim :
-
-A. des manières d'agir extérieures à l'individu
-B. des faits biologiques
-C. des faits physiques
-D. des faits chimiques
+A. socialisation professionnelle
+B. socialisation différenciée selon le genre
+C. socialisation politique
+D. socialisation secondaire anticipatrice
 
 ---
 
-**Q5.** Durkheim a étudié :
+**Question 3.** Pour Émile Durkheim, un « fait social » se caractérise par le fait qu'il est :
 
-A. le suicide
-B. les atomes
-C. les cellules
-D. les planètes
-
----
-
-**Q6.** Weber a étudié :
-
-A. l'éthique protestante et le capitalisme
-B. le suicide
-C. les atomes
-D. les cellules
+A. biologique et héréditaire
+B. extérieur à l'individu et doué d'un pouvoir de contrainte
+C. le résultat exclusif des choix individuels
+D. une création purement psychologique de l'esprit
 
 ---
 
-**Q7.** Marx a analysé :
+**Question 4.** La stratification sociale désigne :
 
-A. la lutte des classes
-B. le suicide
-C. les atomes
-D. les planètes
-
----
-
-**Q8.** La socialisation est :
-
-A. l'apprentissage des normes et valeurs
-B. la biologie
-C. la chimie
-D. la physique
+A. la répartition inégale et hiérarchisée des individus en groupes sociaux
+B. l'étude géologique des couches du sous-sol
+C. l'organisation des classes d'un établissement scolaire
+D. le classement des pays selon leur superficie
 
 ---
 
-**Q9.** Les normes sociales sont :
+**Question 5.** Selon Karl Marx, la société capitaliste est structurée par une opposition fondamentale entre :
 
-A. des règles de conduite
-B. des lois physiques
-C. des réactions chimiques
-D. des cellules
-
----
-
-**Q10.** Les valeurs sont :
-
-A. des idéaux partagés
-B. des lois
-C. des prix
-D. des salaires
+A. les travailleurs du secteur public et ceux du privé
+B. la bourgeoisie (propriétaires des moyens de production) et le prolétariat (vendeurs de force de travail)
+C. les citadins et les ruraux
+D. les producteurs et les consommateurs
 
 ---
 
-**Q11.** La stratification sociale est :
+**Question 6.** On parle de mobilité sociale intergénérationnelle lorsque l'on observe :
 
-A. la hiérarchie des groupes sociaux
-B. la géologie
-C. la biologie
-D. la chimie
-
----
-
-**Q12.** Les classes sociales selon Marx :
-
-A. bourgeoisie et prolétariat
-B. riches et pauvres
-C. jeunes et vieux
-D. hommes et femmes
+A. un changement de position sociale entre les parents et leurs enfants
+B. un déplacement géographique d'un individu au cours de sa vie
+C. un changement de métier d'un individu au sein de sa carrière
+D. une évolution du niveau de vie d'une même famille sur plusieurs générations sans changement de statut
 
 ---
 
-**Q13.** La mobilité sociale est :
+**Question 7.** Le chômage est qualifié de « keynésien » lorsqu'il résulte principalement :
 
-A. le changement de position sociale
-B. le déplacement géographique
-C. la croissance
-D. l'inflation
-
----
-
-**Q14.** L'ascenseur social est :
-
-A. la mobilité sociale ascendante
-B. un moyen de transport
-C. une machine
-D. un bâtiment
+A. d'une insuffisance de la demande globale (demande effective)
+B. d'un refus des travailleurs d'accepter les salaires proposés
+C. d'une inadéquation entre les qualifications offertes et demandées
+D. d'une baisse volontaire de la population active
 
 ---
 
-**Q15.** La famille est :
+**Question 8.** L'État-providence se distingue de l'État-gendarme par le fait qu'il :
 
-A. une institution sociale
-B. une entreprise
-C. un État
-D. une religion
-
----
-
-**Q16.** La socialisation primaire se fait :
-
-A. dans la famille
-B. à l'école
-C. au travail
-D. à la retraite
+A. intervient dans l'économie et met en place une protection sociale
+B. se limite strictement à la défense et à la police
+C. supprime toutes les formes de redistribution
+D. refuse de lever des impôts
 
 ---
 
-**Q17.** La socialisation secondaire se fait :
+**Question 9.** La mondialisation désigne :
 
-A. à l'école, au travail
-B. dans la famille
-C. à la naissance
-D. dans le ventre
-
----
-
-**Q18.** L'école est :
-
-A. une instance de socialisation
-B. une entreprise
-C. un État
-D. une religion
+A. le processus d'interdépendance croissante des économies et des sociétés à l'échelle planétaire
+B. la découverte de nouveaux continents
+C. la mise en place d'un gouvernement mondial unique
+D. la fermeture des frontières aux échanges commerciaux
 
 ---
 
-**Q19.** Les médias sont :
+**Question 10.** Selon Pierre Bourdieu, le « capital culturel » désigne :
 
-A. des instances de socialisation
-B. des entreprises
-C. des États
-D. des religions
-
----
-
-**Q20.** La culture est :
-
-A. l'ensemble des valeurs et pratiques d'un groupe
-B. la biologie
-C. la chimie
-D. la physique
+A. l'ensemble des ressources culturelles (diplômes, savoirs, pratiques) transmises notamment par la famille
+B. les biens financiers et matériels possédés par un individu
+C. le réseau de relations sociales utiles d'un individu
+D. le patrimoine artistique national d'un État
 
 ---
 
 ## CORRIGÉ
 
-1. l'économie, la sociologie et la science politique
-2. les faits sociaux
-3. le pouvoir et l'État
-4. des manières d'agir extérieures à l'individu
-5. le suicide
-6. l'éthique protestante et le capitalisme
-7. la lutte des classes
-8. l'apprentissage des normes et valeurs
-9. des règles de conduite
-10. des idéaux partagés
-11. la hiérarchie des groupes sociaux
-12. bourgeoisie et prolétariat
-13. le changement de position sociale
-14. la mobilité sociale ascendante
-15. une institution sociale
-16. dans la famille
-17. à l'école, au travail
-18. une instance de socialisation
-19. des instances de socialisation
-20. l'ensemble des valeurs et pratiques d'un groupe
+1. A — pendant l'enfance, au sein de la famille et des proches
+2. B — socialisation différenciée selon le genre
+3. B — extérieur à l'individu et doué d'un pouvoir de contrainte
+4. A — la répartition inégale et hiérarchisée des individus en groupes sociaux
+5. B — la bourgeoisie et le prolétariat
+6. A — un changement de position sociale entre les parents et leurs enfants
+7. A — d'une insuffisance de la demande globale
+8. A — intervient dans l'économie et met en place une protection sociale
+9. A — le processus d'interdépendance croissante des économies et des sociétés à l'échelle planétaire
+10. A — l'ensemble des ressources culturelles transmises notamment par la famille

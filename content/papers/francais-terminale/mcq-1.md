@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat FRANÇAIS P1 SET 1
+# CAMEROON BAC FRANÇAIS — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** A1, A2, A4, ABI, C, D
-**Subject:** Français
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** A1, A2, A4, ABI, C, D
+**Matière :** Français
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cette épreuve comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le commentaire composé consiste à :
+**Question 1.** Dans _Le Cid_ de Corneille, Rodrigue doit choisir entre son amour pour Chimène et l'honneur de sa famille. Ce conflit intérieur, propre au théâtre classique, porte le nom de :
 
-A. analyser un texte
-B. résumer un texte
-C. inventer un texte
-D. traduire un texte
-
----
-
-**Q2.** La dissertation :
-
-A. développe une réflexion argumentée
-B. résume un texte
-C. décrit un lieu
-D. raconte une histoire
+A. Le quiproquo
+B. Le dilemme cornélien
+C. La catharsis
+D. La péripétie
 
 ---
 
-**Q3.** La contraction de texte :
+**Question 2.** Dans le vers de Victor Hugo, « La nature est un temple où de vivants piliers / Laissent parfois sortir de confuses paroles », le procédé consistant à attribuer la parole aux « piliers » relève de :
 
-A. réduit un texte en respectant l'essentiel
-B. développe un texte
-C. traduit un texte
-D. invente un texte
-
----
-
-**Q4.** Le registre lyrique exprime :
-
-A. les sentiments personnels
-B. la peur
-C. le rire
-D. la colère
+A. La personnification
+B. La métonymie
+C. L'hypallage
+D. La synesthésie
 
 ---
 
-**Q5.** Le registre tragique :
+**Question 3.** Le courant littéraire qui, au XIXᵉ siècle, privilégie l'expression des sentiments personnels, le « moi » et la communion avec la nature, en réaction contre les règles strictes du classicisme, est :
 
-A. la fatalité et la mort
-B. la joie
-C. le comique
-D. l'ironie
-
----
-
-**Q6.** Le registre comique :
-
-A. provoque le rire
-B. provoque la peur
-C. exprime la tristesse
-D. exprime la colère
+A. Le naturalisme
+B. Le Parnasse
+C. Le romantisme
+D. Le surréalisme
 
 ---
 
-**Q7.** Le registre épique :
+**Question 4.** Dans la phrase : « Cette femme, dont j'admire la sagesse, a traversé bien des épreuves », le mot « dont » est :
 
-A. héroïsme et grandeur
-B. le rire
-C. la peur
-D. la tristesse
-
----
-
-**Q8.** Le registre pathétique :
-
-A. susciter l'émotion et la pitié
-B. provoquer le rire
-C. exprimer la colère
-D. décrire
+A. Un pronom relatif, complément du nom « sagesse »
+B. Une conjonction de subordination
+C. Un pronom démonstratif
+D. Un adjectif possessif
 
 ---
 
-**Q9.** Le registre ironique :
+**Question 5.** Le registre épique se reconnaît notamment par :
 
-A. dire le contraire de ce qu'on pense
-B. exprimer la joie
-C. décrire
-D. raconter
-
----
-
-**Q10.** La tragédie classique respecte :
-
-A. la règle des trois unités
-B. aucune règle
-C. la liberté totale
-D. le comique
+A. La peur et l'angoisse devant la fatalité
+B. L'exagération des actions, l'ampleur du combat et la grandeur des héros
+C. Le rire provoqué par des situations comiques
+D. L'expression discrète et pudique des sentiments
 
 ---
 
-**Q11.** La règle des trois unités :
+**Question 6.** Dans _La Bruyère, Les Caractères_, l'auteur peint « un homme né sans sentiments, qui n'a que son intérêt » pour critiquer l'hypocrisie. Ce procédé, qui consiste à dire une chose pour en faire entendre une autre, souvent pour critiquer, s'appelle :
 
-A. temps, lieu, action
-B. temps, lieu, personnage
-C. action, personnage, décor
-D. temps, action, dialogue
-
----
-
-**Q12.** La catharsis :
-
-A. la purgation des passions
-B. le rire
-C. la peur
-D. la colère
+A. L'antithèse
+B. La litote
+C. L'ironie
+D. La prétérition
 
 ---
 
-**Q13.** Le théâtre de l'absurde :
+**Question 7.** Au théâtre, la règle des trois unités imposée par le classicisme concerne :
 
-A. l'absurdité de la condition humaine
-B. le réalisme
-C. le romantisme
-D. le classicisme
-
----
-
-**Q14.** Le romantisme :
-
-A. l'expression des sentiments
-B. la raison
-C. la mesure
-D. le classicisme
+A. L'action, le lieu et le temps
+B. Le décor, les costumes et la musique
+C. Le dialogue, la tirade et le monologue
+D. L'exposition, le nœud et le dénouement
 
 ---
 
-**Q15.** Le réalisme :
+**Question 8.** Identifie la figure de style présente dans : « Il ne mange rien » pour dire « il est très gourmand » :
 
-A. la représentation fidèle de la réalité
-B. l'idéalisation
-C. le rêve
-D. le fantastique
-
----
-
-**Q16.** Le naturalisme :
-
-A. l'application de la méthode scientifique
-B. l'idéalisation
-C. le rêve
-D. le fantastique
+A. L'hyperbole
+B. L'euphémisme
+C. L'antithèse
+D. La litote
 
 ---
 
-**Q17.** Le symbolisme :
+**Question 9.** Le naturalisme, dont Émile Zola est le chef de file, se caractérise par :
 
-A. les symboles et les correspondances
-B. le réalisme
-C. le naturalisme
-D. le classicisme
-
----
-
-**Q18.** Le surréalisme :
-
-A. l'inconscient et le rêve
-B. la raison
-C. la mesure
-D. le classicisme
+A. L'idéalisation de la nature et du sentiment
+B. L'application des méthodes scientifiques d'observation et d'expérimentation au roman
+C. La fuite dans le rêve et l'inconscient
+D. La recherche de la beauté pure et impersonnelle
 
 ---
 
-**Q19.** La poésie lyrique :
+**Question 10.** Dans le vers de Baudelaire, « Je suis belle, ô mortels ! comme un rêve de pierre », la comparaison met en jeu :
 
-A. exprime les sentiments
-B. raconte une histoire
-C. décrit
-D. argumente
-
----
-
-**Q20.** Le sonnet :
-
-A. 14 vers
-B. 12 vers
-C. 10 vers
-D. 16 vers
+A. L'outil de comparaison « comme »
+B. Une métaphore sans outil de comparaison
+C. Une hyperbole
+D. Une métonymie
 
 ---
 
 ## CORRIGÉ
 
-1. analyser un texte
-2. développe une réflexion argumentée
-3. réduit un texte en respectant l'essentiel
-4. les sentiments personnels
-5. la fatalité et la mort
-6. provoque le rire
-7. héroïsme et grandeur
-8. susciter l'émotion et la pitié
-9. dire le contraire de ce qu'on pense
-10. la règle des trois unités
-11. temps, lieu, action
-12. la purgation des passions
-13. l'absurdité de la condition humaine
-14. l'expression des sentiments
-15. la représentation fidèle de la réalité
-16. l'application de la méthode scientifique
-17. les symboles et les correspondances
-18. l'inconscient et le rêve
-19. exprime les sentiments
-20. 14 vers
+1. B. Le dilemme cornélien
+2. A. La personnification
+3. C. Le romantisme
+4. A. Un pronom relatif, complément du nom « sagesse »
+5. B. L'exagération des actions, l'ampleur du combat et la grandeur des héros
+6. C. L'ironie
+7. A. L'action, le lieu et le temps
+8. D. La litote
+9. B. L'application des méthodes scientifiques d'observation et d'expérimentation au roman
+10. A. L'outil de comparaison « comme »

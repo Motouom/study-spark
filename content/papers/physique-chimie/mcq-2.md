@@ -1,223 +1,124 @@
-# CAMEROON BEPC PHYSIQUE-CHIMIE P1 SET 2
+# CAMEROON BEPC PHYSIQUE-CHIMIE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Physique-Chimie
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Physique-Chimie
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La puissance électrique se calcule par :
+**Question 1.** Un conducteur ohmique est soumis à une tension de 6 V et il est parcouru par un courant de 0,5 A. Sa résistance vaut :
 
-A. P = U × I
-B. P = U / I
-C. P = I / U
-D. P = U + I
-
----
-
-**Q2.** L'unité de la puissance est :
-
-A. le watt
-B. le joule
-C. le volt
-D. l'ampère
+A. 3 Ω
+B. 12 Ω
+C. 30 Ω
+D. 1,2 Ω
 
 ---
 
-**Q3.** Le poids d'un corps se calcule par :
+**Question 2.** Deux résistances R₁ = 8 Ω et R₂ = 4 Ω sont branchées en série. La résistance équivalente est :
 
-A. P = m × g
-B. P = m / g
-C. P = g / m
-D. P = m + g
-
----
-
-**Q4.** La valeur de g (accélération de pesanteur) sur Terre est environ :
-
-A. 9,8 N/kg
-B. 10 N/kg
-C. 98 N/kg
-D. 0,98 N/kg
+A. 12 Ω
+B. 2,7 Ω
+C. 32 Ω
+D. 4 Ω
 
 ---
 
-**Q5.** Une solution basique a un pH :
+**Question 3.** Un cycliste roule à la vitesse de 5 m/s. Exprimée en km/h, cette vitesse vaut :
 
-A. supérieur à 7
-B. inférieur à 7
-C. égal à 7
-D. égal à 14
-
----
-
-**Q6.** Le symbole chimique de l'oxygène est :
-
-A. O
-B. O₂
-C. Ox
-D. Og
+A. 18 km/h
+B. 1,8 km/h
+C. 50 km/h
+D. 0,5 km/h
 
 ---
 
-**Q7.** La distillation permet de :
+**Question 4.** Un mobile parcourt 400 m en 20 s. Sa vitesse moyenne est :
 
-A. séparer les constituants d'un mélange homogène
-B. mélanger deux liquides
-C. solidifier un liquide
-D. filtrer un solide
-
----
-
-**Q8.** L'aimant attire :
-
-A. le fer
-B. le cuivre
-C. l'aluminium
-D. le verre
+A. 20 m/s
+B. 8 m/s
+C. 0,05 m/s
+D. 2 m/s
 
 ---
 
-**Q9.** Le courant alternatif change de sens :
+**Question 5.** La masse volumique de l'eau est :
 
-A. périodiquement
-B. jamais
-C. une seule fois
-D. aléatoirement
-
----
-
-**Q10.** L'unité de la fréquence est :
-
-A. le hertz
-B. le watt
-C. le volt
-D. l'ohm
+A. 1 000 kg/m³
+B. 100 kg/m³
+C. 10 000 kg/m³
+D. 1 kg/m³
 
 ---
 
-**Q11.** Le symbole chimique du carbone est :
+**Question 6.** L'atome est électriquement neutre car :
 
-A. C
-B. Ca
-C. Co
-D. Cr
-
----
-
-**Q12.** La fusion est le passage de :
-
-A. solide à liquide
-B. liquide à gaz
-C. gaz à liquide
-D. solide à gaz
+A. le nombre de protons est égal au nombre d'électrons
+B. il ne contient aucune charge
+C. les neutrons neutralisent les protons
+D. les protons sont plus nombreux que les électrons
 
 ---
 
-**Q13.** La vaporisation est le passage de :
+**Question 7.** Lors d'une réaction chimique, la masse totale des réactifs est :
 
-A. liquide à gaz
-B. solide à liquide
-C. gaz à solide
-D. liquide à solide
-
----
-
-**Q14.** Le symbole chimique de l'azote est :
-
-A. N
-B. Az
-C. Na
-D. Ni
+A. égale à la masse totale des produits
+B. supérieure à celle des produits
+C. inférieure à celle des produits
+D. toujours nulle
 
 ---
 
-**Q15.** Un isolant électrique est :
+**Question 8.** Le symbole chimique de l'hydrogène est :
 
-A. le plastique
-B. le cuivre
-C. le fer
-D. l'aluminium
-
----
-
-**Q16.** Un conducteur électrique est :
-
-A. le cuivre
-B. le verre
-C. le plastique
-D. le bois
+A. H
+B. He
+C. H₂
+D. O
 
 ---
 
-**Q17.** L'énergie potentielle de pesanteur se calcule par :
+**Question 9.** L'énergie potentielle de pesanteur d'un objet de masse 4 kg placé à 5 m de hauteur (g = 10 N/kg) est :
 
-A. Ep = mgh
-B. Ep = ½ mv²
-C. Ep = mv
-D. Ep = mgh²
-
----
-
-**Q18.** Le symbole chimique du fer est :
-
-A. Fe
-B. F
-C. Fr
-D. Ir
+A. 200 J
+B. 20 J
+C. 100 J
+D. 400 J
 
 ---
 
-**Q19.** La condensation est le passage de :
+**Question 10.** La fusion d'un corps pur est le passage :
 
-A. gaz à liquide
-B. liquide à gaz
-C. solide à liquide
-D. gaz à solide
-
----
-
-**Q20.** L'unité de la charge électrique est :
-
-A. le coulomb
-B. le volt
-C. l'ampère
-D. l'ohm
+A. de l'état solide à l'état liquide
+B. de l'état liquide à l'état gazeux
+C. de l'état gazeux à l'état liquide
+D. de l'état solide à l'état gazeux
 
 ---
 
 ## CORRIGÉ
 
-1. P = U × I
-2. le watt
-3. P = m × g
-4. 9,8 N/kg
-5. supérieur à 7
-6. O
-7. séparer les constituants d'un mélange homogène
-8. le fer
-9. périodiquement
-10. le hertz
-11. C
-12. solide à liquide
-13. liquide à gaz
-14. N
-15. le plastique
-16. le cuivre
-17. Ep = mgh
-18. Fe
-19. gaz à liquide
-20. le coulomb
+1. **12 Ω** — $R = \frac{U}{I} = \frac{6}{0,5} = 12$ Ω.
+2. **12 Ω** — En série : $R_{eq} = R_1 + R_2 = 8 + 4 = 12$ Ω.
+3. **18 km/h** — $5 \text{ m/s} = 5 \times 3,6 = 18$ km/h.
+4. **20 m/s** — $v = \frac{400}{20} = 20$ m/s.
+5. **1 000 kg/m³**
+6. **le nombre de protons est égal au nombre d'électrons**
+7. **égale à la masse totale des produits** (loi de conservation de la masse).
+8. **H**
+9. **200 J** — $E_p = mgh = 4 \times 10 \times 5 = 200$ J.
+10. **de l'état solide à l'état liquide**

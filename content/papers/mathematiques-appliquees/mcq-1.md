@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES P1 SET 1
+# CAMEROON BAC MATHÉMATIQUES APPLIQUÉES — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Mathématiques Appliquées
-**Subject:** Mathématiques Appliquées
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** ACC / CG / FIG / SES
+**Matière :** Mathématiques Appliquées
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La dérivée de $x^3$ est :
+**Question 1.** La dérivée de la fonction $f(x) = 3x^2 - 5x + 2$ est :
 
-A. $3x^2$
-B. $x^2$
-C. $3x$
-D. $3x^3$
-
----
-
-**Q2.** La dérivée de $\sin(x)$ est :
-
-A. $\cos(x)$
-B. $-\cos(x)$
-C. $\sin(x)$
-D. $-\sin(x)$
+A. $6x + 5$
+B. $6x - 5$
+C. $3x - 5$
+D. $6x - 2$
 
 ---
 
-**Q3.** La dérivée de $\cos(x)$ est :
+**Question 2.** Un capital de 200 000 FCFA est placé à intérêts composés au taux annuel de 5%. La valeur acquise après une année est :
 
-A. $-\sin(x)$
-B. $\sin(x)$
-C. $\cos(x)$
-D. $-\cos(x)$
-
----
-
-**Q4.** La dérivée de $e^x$ est :
-
-A. $e^x$
-B. $x e^x$
-C. $e^{x-1}$
-D. $\ln(x)$
+A. 210 000 FCFA
+B. 250 000 FCFA
+C. 205 000 FCFA
+D. 220 000 FCFA
 
 ---
 
-**Q5.** La dérivée de $\ln(x)$ est :
+**Question 3.** On lance deux dés équilibrés. La probabilité d'obtenir une somme égale à 7 est :
 
-A. $\frac{1}{x}$
-B. $x$
-C. $\ln(x)$
-D. $\frac{1}{\ln(x)}$
-
----
-
-**Q6.** L'intégrale de $x^2$ est :
-
-A. $\frac{x^3}{3} + C$
-B. $\frac{x^2}{2} + C$
-C. $x^3 + C$
-D. $2x + C$
+A. $\frac{1}{12}$
+B. $\frac{1}{36}$
+C. $\frac{1}{6}$
+D. $\frac{1}{4}$
 
 ---
 
-**Q7.** L'intégrale de $\cos(x)$ est :
-
-A. $\sin(x) + C$
-B. $-\sin(x) + C$
-C. $\cos(x) + C$
-D. $-\cos(x) + C$
-
----
-
-**Q8.** L'intégrale de $\frac{1}{x}$ est :
-
-A. $\ln|x| + C$
-B. $x + C$
-C. $\frac{1}{x^2} + C$
-D. $e^x + C$
-
----
-
-**Q9.** La limite de $\frac{\sin(x)}{x}$ quand $x \to 0$ est :
-
-A. 1
-B. 0
-C. $\infty$
-D. n'existe pas
-
----
-
-**Q10.** La limite de $\frac{1}{x}$ quand $x \to \infty$ est :
+**Question 4.** La limite de $\frac{2x^2 + 3x - 1}{x^2 + 1}$ quand $x$ tend vers $+\infty$ est :
 
 A. 0
-B. $\infty$
+B. $+\infty$
 C. 1
-D. n'existe pas
+D. 2
 
 ---
 
-**Q11.** La fonction $f(x) = x^2$ est :
+**Question 5.** La suite $(u_n)$ définie par $u_n = 5 \times 3^n$ est :
 
-A. paire
-B. impaire
-C. ni paire ni impaire
-D. constante
-
----
-
-**Q12.** La fonction $f(x) = x^3$ est :
-
-A. impaire
-B. paire
-C. ni paire ni impaire
-D. constante
+A. arithmétique de raison 5
+B. géométrique de raison 3
+C. arithmétique de raison 3
+D. géométrique de raison 5
 
 ---
 
-**Q13.** La dérivée de $x^n$ est :
+**Question 6.** Le coût marginal est la dérivée du coût total. Pour $C(x) = 3x^2 + 40x + 100$, le coût marginal en $x = 2$ est :
 
-A. $n x^{n-1}$
-B. $x^{n-1}$
-C. $n x^n$
-D. $(n-1)x^n$
-
----
-
-**Q14.** L'équation $x^2 - 4 = 0$ a pour solutions :
-
-A. $x = 2$ et $x = -2$
-B. $x = 2$
-C. $x = 4$
-D. $x = 16$
+A. 156
+B. 40
+C. 52
+D. 46
 
 ---
 
-**Q15.** Le discriminant de $ax^2 + bx + c = 0$ est :
+**Question 7.** La moyenne de la série statistique de valeurs $x_i = 2 ; 4 ; 6 ; 8 ; 10$ est :
 
-A. $b^2 - 4ac$
-B. $b^2 + 4ac$
-C. $4ac - b^2$
-D. $b - 4ac$
-
----
-
-**Q16.** Si $\Delta > 0$, l'équation du second degré a :
-
-A. deux solutions réelles
-B. une solution
-C. aucune solution
-D. une solution complexe
+A. 7
+B. 5
+C. 8
+D. 6
 
 ---
 
-**Q17.** Si $\Delta = 0$, l'équation du second degré a :
+**Question 8.** L'intégrale $\int_0^1 (3x^2 + 2x) \, dx$ est égale à :
 
-A. une solution double
-B. deux solutions
-C. aucune solution
-D. deux solutions complexes
-
----
-
-**Q18.** Si $\Delta < 0$, l'équation du second degré a :
-
-A. aucune solution réelle
-B. deux solutions réelles
-C. une solution
-D. une solution double
+A. 1
+B. 2
+C. 3
+D. $\frac{5}{2}$
 
 ---
 
-**Q19.** La dérivée de $\tan(x)$ est :
+**Question 9.** Une variable aléatoire $X$ suit la loi binomiale $B(10 ; 0,4)$. Son espérance $E(X)$ est :
 
-A. $\frac{1}{\cos^2(x)}$
-B. $\sin(x)$
-C. $\cos(x)$
-D. $-\frac{1}{\sin^2(x)}$
+A. 6
+B. 2,4
+C. 4
+D. 0,4
 
 ---
 
-**Q20.** L'intégrale de $e^x$ est :
+**Question 10.** L'équation de la tangente à la courbe de $f(x) = x^2$ au point d'abscisse $1$ est :
 
-A. $e^x + C$
-B. $\frac{e^x}{x} + C$
-C. $x e^x + C$
-D. $\ln(x) + C$
+A. $y = 2x + 1$
+B. $y = x + 1$
+C. $y = 2x - 1$
+D. $y = x$
 
 ---
 
 ## CORRIGÉ
 
-1. $3x^2$
-2. $\cos(x)$
-3. $-\sin(x)$
-4. $e^x$
-5. $\frac{1}{x}$
-6. $\frac{x^3}{3} + C$
-7. $\sin(x) + C$
-8. $\ln|x| + C$
-9. 1
-10. 0
-11. paire
-12. impaire
-13. $n x^{n-1}$
-14. $x = 2$ et $x = -2$
-15. $b^2 - 4ac$
-16. deux solutions réelles
-17. une solution double
-18. aucune solution réelle
-19. $\frac{1}{\cos^2(x)}$
-20. $e^x + C$
+1. **B.** $f'(x) = 3 \times 2x - 5 = 6x - 5$.
+2. **A.** Valeur acquise $= 200\,000 \times (1 + 0,05) = 210\,000$ FCFA.
+3. **C.** Cas favorables (1;6),(2;5),(3;4),(4;3),(5;2),(6;1) : 6 cas sur 36, donc $\frac{6}{36} = \frac{1}{6}$.
+4. **D.** En factorisant par $x^2$ au numérateur et au dénominateur, la limite vaut $\frac{2}{1} = 2$.
+5. **B.** $u_{n+1} = 5 \times 3^{n+1} = 3 \times u_n$ : suite géométrique de raison 3 et premier terme $u_0 = 5$.
+6. **C.** $C'(x) = 6x + 40$ ; en $x = 2$ : $C'(2) = 12 + 40 = 52$.
+7. **D.** $\bar{x} = \frac{2+4+6+8+10}{5} = \frac{30}{5} = 6$.
+8. **B.** Une primitive est $x^3 + x^2$ ; en 1 elle vaut $1+1=2$, en 0 elle vaut 0, donc $\int_0^1 (3x^2+2x)\,dx = 2$.
+9. **C.** $E(X) = np = 10 \times 0,4 = 4$.
+10. **C.** $f(1) = 1$, $f'(x) = 2x$ donc $f'(1) = 2$ ; tangente : $y = f(1) + f'(1)(x-1) = 1 + 2(x-1) = 2x - 1$.

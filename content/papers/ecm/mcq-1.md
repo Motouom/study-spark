@@ -1,223 +1,124 @@
-# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE P1 SET 1
+# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Éducation à la Citoyenneté et à la Morale
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Éducation à la Citoyenneté et à la Morale (ECM)
+**Durée :** 30 minutes
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La capitale du Cameroun est :
+**Question 1.** Au Cameroun, le pouvoir législatif (voter les lois) est exercé par :
 
-A. Yaoundé
-B. Douala
-C. Bafoussam
-D. Garoua
-
----
-
-**Q2.** Le drapeau camerounais a :
-
-A. trois couleurs
-B. deux couleurs
-C. quatre couleurs
-D. cinq couleurs
+A. Le Président de la République
+B. Le Parlement, composé de l'Assemblée nationale et du Sénat
+C. La Cour suprême
+D. Le Premier Ministre
 
 ---
 
-**Q3.** Les couleurs du drapeau camerounais sont :
+**Question 2.** La devise de la République du Cameroun est :
 
-A. vert, rouge, jaune
-B. bleu, blanc, rouge
-C. vert, blanc, rouge
-D. jaune, noir, vert
-
----
-
-**Q4.** L'hymne national du Cameroun s'appelle :
-
-A. Ô Cameroun, berceau de nos ancêtres
-B. La Marseillaise
-C. God Bless Africa
-D. L'Internationale
+A. « Unité – Progrès – Démocratie »
+B. « Paix – Travail – Patrie »
+C. « Liberté – Égalité – Fraternité »
+D. « Travail – Famille – Patrie »
 
 ---
 
-**Q5.** La devise du Cameroun est :
+**Question 3.** À partir de quel âge un citoyen camerounais peut-il exercer son droit de vote ?
 
-A. Paix - Travail - Patrie
-B. Liberté - Égalité - Fraternité
-C. Unité - Progrès - Justice
-D. Dieu et Patrie
-
----
-
-**Q6.** Le président actuel du Cameroun est :
-
-A. Paul Biya
-B. Ahmadou Ahidjo
-C. Ruben Um Nyobé
-D. Ernest Ouandié
+A. 16 ans révolus
+B. 18 ans révolus
+C. 21 ans révolus
+D. 25 ans révolus
 
 ---
 
-**Q7.** Le Cameroun est une :
+**Question 4.** L'organisme chargé d'organiser et de superviser les élections au Cameroun est :
 
-A. République
-B. monarchie
-C. empire
-D. fédération
-
----
-
-**Q8.** Le pouvoir législatif est exercé par :
-
-A. l'Assemblée nationale et le Sénat
-B. le président
-C. le gouvernement
-D. la justice
+A. Elections Cameroon (ELECAM)
+B. Le Conseil constitutionnel
+C. L'Organisation des Nations Unies (ONU)
+D. Le Ministère de la Défense
 
 ---
 
-**Q9.** Le pouvoir exécutif est exercé par :
+**Question 5.** Le drapeau camerounais est composé de :
 
-A. le président et le gouvernement
-B. l'Assemblée nationale
-C. le Sénat
-D. les tribunaux
-
----
-
-**Q10.** Le pouvoir judiciaire est exercé par :
-
-A. les tribunaux
-B. le président
-C. le gouvernement
-D. l'Assemblée
+A. Trois bandes verticales vertes, rouges et jaunes avec une étoile jaune au centre
+B. Trois bandes verticales bleues, blanches et rouges
+C. Deux bandes horizontales noires et rouges
+D. Trois bandes horizontales vertes, jaunes et rouges avec une étoile blanche
 
 ---
 
-**Q11.** La séparation des pouvoirs vise à :
+**Question 6.** Laquelle de ces valeurs est une valeur morale reconnue en Éducation à la Citoyenneté ?
 
-A. éviter la concentration des pouvoirs
-B. concentrer le pouvoir
-C. supprimer les pouvoirs
-D. créer un seul pouvoir
-
----
-
-**Q12.** Le droit de vote s'acquiert au Cameroun à :
-
-A. 18 ans
-B. 16 ans
-C. 21 ans
-D. 20 ans
+A. La paresse
+B. L'honnêteté
+C. L'égoïsme
+D. La tricherie
 
 ---
 
-**Q13.** Le suffrage universel signifie :
+**Question 7.** Le devoir du citoyen qui consiste à contribuer aux dépenses de l'État en versant une somme d'argent s'appelle :
 
-A. tous les citoyens votent
-B. seuls les riches votent
-C. seuls les hommes votent
-D. seuls les instruits votent
-
----
-
-**Q14.** Le vote est :
-
-A. un droit et un devoir
-B. un privilège
-C. une obligation
-D. un choix
+A. Le devoir de défense de la patrie
+B. Le devoir fiscal
+C. Le devoir de tolérance
+D. Le devoir de solidarité
 
 ---
 
-**Q15.** La démocratie est :
+**Question 8.** Protéger l'environnement (ne pas jeter les ordures dans la nature, planter des arbres) est :
 
-A. le gouvernement du peuple par le peuple
-B. le gouvernement d'un seul
-C. le gouvernement des riches
-D. le gouvernement des militaires
-
----
-
-**Q16.** Les droits de l'homme sont :
-
-A. les droits fondamentaux de chaque personne
-B. des privilèges
-C. des obligations
-D. des interdictions
+A. Un devoir civique et moral de chaque citoyen
+B. Un simple choix personnel sans importance
+C. Une obligation qui ne concerne que les entreprises
+D. Une responsabilité exclusive de l'État
 
 ---
 
-**Q17.** La Déclaration universelle des droits de l'homme a été adoptée en :
+**Question 9.** Le Premier Ministre du Cameroun est :
 
-A. 1948
-B. 1789
-C. 1960
-D. 1919
-
----
-
-**Q18.** Le droit à l'éducation est :
-
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
+A. Le chef de l'État
+B. Le chef du Gouvernement, chargé de coordonner l'action ministérielle
+C. Le président de l'Assemblée nationale
+D. Le président de la Cour suprême
 
 ---
 
-**Q19.** Le droit à la santé est :
+**Question 10.** La Cour suprême au Cameroun est :
 
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
-
----
-
-**Q20.** Le devoir du citoyen est :
-
-A. de respecter les lois
-B. de ne rien faire
-C. de s'enrichir
-D. de fuir
+A. L'organe chargé de voter la loi
+B. La plus haute juridiction qui juge en dernier ressort
+C. Le conseil des ministres
+D. L'assemblée des députés
 
 ---
 
 ## CORRIGÉ
 
-1. Yaoundé
-2. trois couleurs
-3. vert, rouge, jaune
-4. Ô Cameroun, berceau de nos ancêtres
-5. Paix - Travail - Patrie
-6. Paul Biya
-7. République
-8. l'Assemblée nationale et le Sénat
-9. le président et le gouvernement
-10. les tribunaux
-11. éviter la concentration des pouvoirs
-12. 18 ans
-13. tous les citoyens votent
-14. un droit et un devoir
-15. le gouvernement du peuple par le peuple
-16. les droits fondamentaux de chaque personne
-17. 1948
-18. un droit fondamental
-19. un droit fondamental
-20. de respecter les lois
+1. B. Le Parlement, composé de l'Assemblée nationale et du Sénat
+2. B. « Paix – Travail – Patrie »
+3. B. 18 ans révolus
+4. A. Elections Cameroon (ELECAM)
+5. A. Trois bandes verticales vertes, rouges et jaunes avec une étoile jaune au centre
+6. B. L'honnêteté
+7. B. Le devoir fiscal
+8. A. Un devoir civique et moral de chaque citoyen
+9. B. Le chef du Gouvernement, chargé de coordonner l'action ministérielle
+10. B. La plus haute juridiction qui juge en dernier ressort

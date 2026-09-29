@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 2
+# CAMEROON BEPC MATHÉMATIQUES — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Mathématiques
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Mathématiques
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La fonction exponentielle $e^x$ est :
+**Question 1.** La moyenne de la série 4, 6, 8, 10, 12 est :
 
-A. strictement croissante
-B. strictement décroissante
-C. constante
-D. périodique
-
----
-
-**Q2.** La fonction logarithme $\ln(x)$ est définie pour :
-
-A. $x > 0$
-B. $x \geq 0$
-C. $x \neq 0$
-D. tout $x$
+A. 8
+B. 7
+C. 9
+D. 10
 
 ---
 
-**Q3.** $\ln(1)$ est égal à :
+**Question 2.** Un capital de 100 000 FCFA est placé à 5% par an. Quel est l'intérêt simple après 2 ans ?
 
-A. 0
-B. 1
-C. $e$
-D. $-1$
-
----
-
-**Q4.** $\ln(e)$ est égal à :
-
-A. 1
-B. 0
-C. $e$
-D. $-1$
+A. 10 000 FCFA
+B. 5 000 FCFA
+C. 20 000 FCFA
+D. 15 000 FCFA
 
 ---
 
-**Q5.** $e^0$ est égal à :
+**Question 3.** Le volume d'un cylindre de rayon 3 cm et de hauteur 10 cm (π ≈ 3,14) est :
 
-A. 1
-B. 0
-C. $e$
-D. $-1$
-
----
-
-**Q6.** La dérivée de $\frac{1}{x}$ est :
-
-A. $-\frac{1}{x^2}$
-B. $\frac{1}{x^2}$
-C. $-\frac{1}{x}$
-D. $\ln(x)$
+A. 282,6 cm³
+B. 94,2 cm³
+C. 188,4 cm³
+D. 282,6 cm²
 
 ---
 
-**Q7.** L'intégrale de $\sin(x)$ est :
+**Question 4.** Résoudre : $\frac{2x}{3} = 8$.
 
-A. $-\cos(x) + C$
-B. $\cos(x) + C$
-C. $\sin(x) + C$
-D. $-\sin(x) + C$
-
----
-
-**Q8.** La limite de $\frac{x^2 - 1}{x - 1}$ quand $x \to 1$ est :
-
-A. 2
-B. 0
-C. 1
-D. $\infty$
+A. $x = 12$
+B. $x = 24$
+C. $x = 6$
+D. $x = 4$
 
 ---
 
-**Q9.** La fonction $f(x) = \frac{1}{x}$ est :
+**Question 5.** Un élève obtient les notes 12, 15, 9 et 14. Quelle note doit-il obtenir au 5e devoir pour avoir une moyenne de 13 ?
 
-A. impaire
-B. paire
-C. ni paire ni impaire
-D. constante
-
----
-
-**Q10.** Le nombre dérivé de $f$ en $a$ est :
-
-A. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
-B. $f(a)$
-C. $\frac{f(a)}{a}$
-D. $f'(a) \times a$
+A. 15
+B. 13
+C. 14
+D. 16
 
 ---
 
-**Q11.** La tangente à la courbe en $a$ a pour pente :
+**Question 6.** Le prix d'un article passe de 2 500 FCFA à 2 000 FCFA. Quel est le pourcentage de réduction ?
 
-A. $f'(a)$
-B. $f(a)$
-C. $a$
-D. $f'(a) \times a$
-
----
-
-**Q12.** L'équation de la tangente en $a$ est :
-
-A. $y = f'(a)(x - a) + f(a)$
-B. $y = f(a)x$
-C. $y = f'(a)x$
-D. $y = f(a) + x$
+A. 20%
+B. 25%
+C. 15%
+D. 10%
 
 ---
 
-**Q13.** La fonction $f(x) = x^2$ est croissante sur :
+**Question 7.** L'équation de la droite passant par l'origine et de pente 3 est :
 
-A. $[0, +\infty[$
-B. $]-\infty, 0]$
-C. $\mathbb{R}$
-D. $]-\infty, +\infty[$
-
----
-
-**Q14.** La fonction $f(x) = x^2$ est décroissante sur :
-
-A. $]-\infty, 0]$
-B. $[0, +\infty[$
-C. $\mathbb{R}$
-D. nulle part
+A. $y = 3x$
+B. $y = x + 3$
+C. $y = 3x + 1$
+D. $x = 3y$
 
 ---
 
-**Q15.** Le point d'inflexion est :
+**Question 8.** Un sac contient 5 boules rouges, 3 vertes et 2 bleues. On tire une boule au hasard. Quelle est la probabilité de tirer une boule verte ?
 
-A. où la courbure change
-B. le maximum
-C. le minimum
-D. l'origine
-
----
-
-**Q16.** La dérivée seconde de $x^3$ est :
-
-A. $6x$
-B. $3x^2$
-C. $3x$
-D. $6$
+A. $\frac{3}{10}$
+B. $\frac{1}{3}$
+C. $\frac{3}{5}$
+D. $\frac{1}{5}$
 
 ---
 
-**Q17.** La fonction $f(x) = e^x$ a pour limite en $+\infty$ :
+**Question 9.** Le périmètre d'un cercle de rayon 7 cm (π ≈ 3,14) est :
 
-A. $+\infty$
-B. 0
-C. 1
-D. $e$
-
----
-
-**Q18.** La fonction $f(x) = e^x$ a pour limite en $-\infty$ :
-
-A. 0
-B. $+\infty$
-C. 1
-D. $e$
+A. 43,96 cm
+B. 21,98 cm
+C. 153,86 cm
+D. 14 cm
 
 ---
 
-**Q19.** La fonction $f(x) = \ln(x)$ a pour limite en $+\infty$ :
+**Question 10.** Résoudre : $x^2 - 9 = 0$.
 
-A. $+\infty$
-B. 0
-C. 1
-D. $-\infty$
-
----
-
-**Q20.** La fonction $f(x) = \ln(x)$ a pour limite en $0^+$ :
-
-A. $-\infty$
-B. $+\infty$
-C. 0
-D. 1
+A. $x = 3$ ou $x = -3$
+B. $x = 3$
+C. $x = 9$
+D. $x = 4,5$
 
 ---
 
 ## CORRIGÉ
 
-1. strictement croissante
-2. $x > 0$
-3. 0
-4. 1
-5. 1
-6. $-\frac{1}{x^2}$
-7. $-\cos(x) + C$
-8. 2
-9. impaire
-10. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
-11. $f'(a)$
-12. $y = f'(a)(x - a) + f(a)$
-13. $[0, +\infty[$
-14. $]-\infty, 0]$
-15. où la courbure change
-16. $6x$
-17. $+\infty$
-18. 0
-19. $+\infty$
-20. $-\infty$
+1. 8
+2. 10 000 FCFA
+3. 282,6 cm³
+4. $x = 12$
+5. 15
+6. 20%
+7. $y = 3x$
+8. $\frac{3}{10}$
+9. 43,96 cm
+10. $x = 3$ ou $x = -3$

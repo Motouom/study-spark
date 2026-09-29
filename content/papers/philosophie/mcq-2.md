@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat PHILOSOPHIE P1 SET 2
+# CAMEROON BAC PHILOSOPHIE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Philosophie
-**Subject:** Philosophie
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** A1 / A2 / A4 / ABI
+**Matière :** Philosophie
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'équité est :
+**Question 1.** La vérité, au sens classique (théorie de la correspondance), se définit comme :
 
-A. la justice adaptée aux situations
-B. l'égalité stricte
-C. la force
-D. la vengeance
-
----
-
-**Q2.** La vérité est :
-
-A. la conformité avec la réalité
-B. une opinion
-C. une croyance
-D. une illusion
+A. l'adéquation de l'esprit et de la chose, c'est-à-dire l'accord de la pensée avec le réel
+B. le simple sentiment subjectif d'être dans le vrai
+C. la cohérence interne des rêves du sujet
+D. l'opinion la plus répandue dans une société
 
 ---
 
-**Q3.** L'opinion est :
+**Question 2.** On distingue la vérité de la certitude en ce que :
 
-A. une croyance non démontrée
-B. une vérité
-C. une certitude
-D. un fait
-
----
-
-**Q4.** La démonstration est :
-
-A. une preuve logique
-B. une opinion
-C. une croyance
-D. une illusion
+A. la vérité est objective et se rapporte au réel, tandis que la certitude est un état subjectif de l'esprit
+B. la certitude est toujours fausse
+C. la vérité dépend uniquement de l'opinion
+D. la certitude est le critère de la vérité scientifique
 
 ---
 
-**Q5.** Le doute méthodique de Descartes :
+**Question 3.** Pour Descartes, l'erreur provient :
 
-A. douter de tout pour trouver la vérité
-B. ne jamais douter
-C. croire sans preuve
-D. refuser la raison
-
----
-
-**Q6.** La conscience est :
-
-A. la connaissance de soi et du monde
-B. l'inconscience
-C. la mémoire
-D. l'imagination
+A. de l'usage de la volonté, infinie, qui juge au-delà des limites de l'entendement, fini
+B. de la méchanceté des sens
+C. de la paresse de la raison
+D. d'une volonté trop faible et indécise
 
 ---
 
-**Q7.** L'inconscient est :
+**Question 4.** Selon Popper, une proposition est scientifique lorsqu'elle est :
 
-A. ce qui échappe à la conscience
-B. la conscience
-C. la mémoire
-D. l'imagination
-
----
-
-**Q8.** Freud a développé :
-
-A. la psychanalyse
-B. la logique
-C. l'idéalisme
-D. l'empirisme
+A. réfutable, c'est-à-dire susceptible d'être contredite par l'expérience
+B. toujours vraie et définitive
+C. conforme aux croyances religieuses
+D. acceptée par la majorité des savants sans preuve
 
 ---
 
-**Q9.** La perception est :
+**Question 5.** Le rationalisme, représenté par Descartes, affirme que :
 
-A. la connaissance par les sens
-B. la raison
-C. la mémoire
-D. l'imagination
-
----
-
-**Q10.** L'imagination est :
-
-A. la capacité de créer des images
-B. la perception
-C. la raison
-D. la mémoire
+A. la raison est la source principale de la connaissance, l'expérience venant l'achever
+B. toute connaissance vient exclusivement des sens
+C. aucune connaissance n'est possible
+D. la vérité est relative à chaque culture
 
 ---
 
-**Q11.** La mémoire est :
+**Question 6.** Pour Aristote, la logique est :
 
-A. la capacité de conserver le passé
-B. l'imagination
-C. la perception
-D. la raison
-
----
-
-**Q12.** Le langage est :
-
-A. un système de signes pour communiquer
-B. la pensée
-C. la perception
-D. la mémoire
+A. l'outil (organon) qui permet de raisonner correctement, notamment à travers le syllogisme
+B. une branche de la biologie
+C. une doctrine morale
+D. une forme de rhétorique trompeuse
 
 ---
 
-**Q13.** Le travail est :
+**Question 7.** Le syllogisme « Tous les hommes sont mortels ; or Socrate est un homme ; donc Socrate est mortel » illustre :
 
-A. une activité de transformation de la nature
-B. un loisir
-C. une contrainte
-D. un jeu
-
----
-
-**Q14.** La technique est :
-
-A. l'ensemble des moyens de production
-B. la science
-C. l'art
-D. la religion
+A. un raisonnement déductif valide
+B. une induction à partir de cas particuliers
+C. une hypothèse réfutable
+D. un sophisme volontaire
 
 ---
 
-**Q15.** L'art est :
+**Question 8.** Pour Kant, la connaissance scientifique suppose la combinaison de deux éléments :
 
-A. la création de la beauté
-B. la technique
-C. la science
-D. la religion
-
----
-
-**Q16.** La beauté est :
-
-A. ce qui plaît universellement
-B. ce qui est utile
-C. ce qui est vrai
-D. ce qui est bon
+A. la sensibilité (l'intuition) et l'entendement (les concepts)
+B. la foi et l'intuition mystique
+C. l'opinion et le préjugé
+D. la mémoire et l'imagination
 
 ---
 
-**Q17.** La religion est :
+**Question 9.** L'opinion (doxa) se distingue du savoir en ce qu'elle est :
 
-A. un système de croyances
-B. une science
-C. une technique
-D. un art
-
----
-
-**Q18.** La foi est :
-
-A. une croyance sans preuve
-B. une certitude
-C. une démonstration
-D. une opinion
+A. une croyance non fondée, souvent variable selon les individus et les milieux
+B. une connaissance certaine démontrée
+C. une vérité universelle évidente
+D. un raisonnement scientifique vérifié
 
 ---
 
-**Q19.** La politique est :
+**Question 10.** Pour Bacon, les « idoles » sont :
 
-A. l'organisation de la vie en société
-B. la religion
-C. la science
-D. l'art
-
----
-
-**Q20.** L'État est :
-
-A. une organisation politique de la société
-B. une famille
-C. une entreprise
-D. une religion
+A. des préjugés qui faussent la connaissance et dont il faut se libérer
+B. des statues de la Grèce antique
+C. des idées innées données par Dieu
+D. des concepts mathématiques purs
 
 ---
 
 ## CORRIGÉ
 
-1. la justice adaptée aux situations
-2. la conformité avec la réalité
-3. une croyance non démontrée
-4. une preuve logique
-5. douter de tout pour trouver la vérité
-6. la connaissance de soi et du monde
-7. ce qui échappe à la conscience
-8. la psychanalyse
-9. la connaissance par les sens
-10. la capacité de créer des images
-11. la capacité de conserver le passé
-12. un système de signes pour communiquer
-13. une activité de transformation de la nature
-14. l'ensemble des moyens de production
-15. la création de la beauté
-16. ce qui plaît universellement
-17. un système de croyances
-18. une croyance sans preuve
-19. l'organisation de la vie en société
-20. une organisation politique de la société
+1. A — l'adéquation de l'esprit et de la chose, c'est-à-dire l'accord de la pensée avec le réel
+2. A — la vérité est objective et se rapporte au réel, tandis que la certitude est un état subjectif de l'esprit
+3. A — de l'usage de la volonté, infinie, qui juge au-delà des limites de l'entendement, fini
+4. A — réfutable, c'est-à-dire susceptible d'être contredite par l'expérience
+5. A — la raison est la source principale de la connaissance, l'expérience venant l'achever
+6. A — l'outil (organon) qui permet de raisonner correctement, notamment à travers le syllogisme
+7. A — un raisonnement déductif valide
+8. A — la sensibilité (l'intuition) et l'entendement (les concepts)
+9. A — une croyance non fondée, souvent variable selon les individus et les milieux
+10. A — des préjugés qui faussent la connaissance et dont il faut se libérer

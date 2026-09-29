@@ -1,223 +1,128 @@
-# CAMEROON BEPC ANGLAIS P1 SET 3
+# CAMEROON BEPC ANGLAIS — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Anglais
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Anglais (English as a Foreign Language)
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** The time « 8:15 » is :
+**Question 1.** Choose the correct present perfect: "I \_\_\_ my keys; I cannot find them anywhere."
 
-A. quarter past eight
-B. eight fifteen
-C. quarter eight
-D. fifteen eight
-
----
-
-**Q2.** « Good morning » is said :
-
-A. in the morning
-B. at night
-C. in the afternoon
-D. in the evening
+A. lost
+B. have lost
+C. lose
+D. am losing
 
 ---
 
-**Q3.** « Thank you » means :
+**Question 2.** Choose the correct word: "She is a very \_\_\_ girl; she always tells the truth."
 
-A. merci
-B. bonjour
-C. au revoir
-D. s'il vous plaît
-
----
-
-**Q4.** « Please » means :
-
-A. s'il vous plaît
-B. merci
-C. bonjour
-D. excusez-moi
+A. lazy
+B. dishonest
+C. honest
+D. rude
 
 ---
 
-**Q5.** The color of the sky is :
+**Question 3.** Choose the correct reported speech: "I am hungry," Paul said.
 
-A. blue
-B. red
-C. green
-D. black
-
----
-
-**Q6.** The color of blood is :
-
-A. red
-B. blue
-C. green
-D. yellow
+A. Paul said that he is hungry.
+B. Paul said that he was hungry.
+C. Paul said that I was hungry.
+D. Paul said that he will be hungry.
 
 ---
 
-**Q7.** « I am hungry » means :
+**Question 4.** Choose the correct preposition: "The plane is flying \_\_\_ the clouds."
 
-A. j'ai faim
-B. j'ai soif
-C. j'ai sommeil
-D. j'ai chaud
-
----
-
-**Q8.** « I am thirsty » means :
-
-A. j'ai soif
-B. j'ai faim
-C. j'ai sommeil
-D. j'ai froid
+A. between
+B. over
+C. under
+D. beside
 
 ---
 
-**Q9.** The day after Monday is :
+**Question 5.** Choose the correct plural form: "There are many \_\_\_ in the village."
 
-A. Tuesday
-B. Wednesday
-C. Sunday
-D. Friday
-
----
-
-**Q10.** The first month of the year is :
-
-A. January
-B. February
-C. March
-D. December
+A. sheep
+B. sheeps
+C. sheepes
+D. sheepen
 
 ---
 
-**Q11.** « She is taller than me » means :
+**Question 6.** Choose the correct question word: "\_\_\_ do you go to school? — By bus."
 
-A. elle est plus grande que moi
-B. elle est plus petite que moi
-C. elle est aussi grande que moi
-D. elle est grande
-
----
-
-**Q12.** The past tense of « have » is :
-
-A. had
-B. haved
-C. has
-D. having
+A. Where
+B. When
+C. How
+D. Why
 
 ---
 
-**Q13.** « I have lived here ___ 2010. »
+**Question 7.** Choose the correct possessive pronoun: "This bag is not mine; it is \_\_\_."
 
-A. since
-B. for
-C. from
-D. at
-
----
-
-**Q14.** « I have lived here ___ five years. »
-
-A. for
-B. since
-C. from
-D. at
+A. her
+B. hers
+C. she
+D. herself
 
 ---
 
-**Q15.** The present perfect of « finish » (I) is :
+**Question 8.** Choose the correct past simple: "They \_\_\_ to Douala last month to visit their uncle."
 
-A. I have finished
-B. I finished
-C. I finish
-D. I am finishing
-
----
-
-**Q16.** « ___ you like some tea? »
-
-A. Would
-B. Do
-C. Are
-D. Is
+A. go
+B. gone
+C. went
+D. goes
 
 ---
 
-**Q17.** The word « beautiful » is :
+**Question 9.** Comprehension: Read the text, then answer.
 
-A. an adjective
-B. a noun
-C. a verb
-D. an adverb
+_"A healthy diet is important for students. They should eat fruits, vegetables and cereals every day. They must also drink enough water and do physical exercise. Eating too much junk food makes children tired and unable to concentrate in class."_
 
----
+**What happens when children eat too much junk food?**
 
-**Q18.** The word « quickly » is :
-
-A. an adverb
-B. an adjective
-C. a noun
-D. a verb
+A. They become very strong.
+B. They become tired and cannot concentrate.
+C. They sleep well.
+D. They grow faster.
 
 ---
 
-**Q19.** The word « happiness » is :
+**Question 10.** Choose the correct article: "My mother bought \_\_\_ umbrella yesterday because it was raining."
 
-A. a noun
-B. an adjective
-C. a verb
-D. an adverb
-
----
-
-**Q20.** « I am going to the market » — the market is :
-
-A. a place
-B. a person
-C. a thing
-D. an idea
+A. a
+B. an
+C. the
+D. some
 
 ---
 
 ## CORRIGÉ
 
-1. quarter past eight
-2. in the morning
-3. merci
-4. s'il vous plaît
-5. blue
-6. red
-7. j'ai faim
-8. j'ai soif
-9. Tuesday
-10. January
-11. elle est plus grande que moi
-12. had
-13. since
-14. for
-15. I have finished
-16. Would
-17. an adjective
-18. an adverb
-19. a noun
-20. a place
+1. have lost
+2. honest
+3. Paul said that he was hungry.
+4. over
+5. sheep
+6. How
+7. hers
+8. went
+9. They become tired and cannot concentrate.
+10. an

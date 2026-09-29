@@ -1,223 +1,144 @@
-# CAMEROON Baccalauréat INFORMATIQUE P1 SET 1
+# CAMEROON BAC INFORMATIQUE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** TI, C, D, E
-**Subject:** Informatique
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** TI, C, D, E
+**Matière :** Informatique
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Un algorithme est :
+**Question 1.** On exécute l'algorithme suivant :
 
-A. une suite d'instructions
-B. un périphérique
-C. une mémoire
-D. un composant
+```
+n ← 5
+s ← 0
+Pour i allant de 1 à n :
+    s ← s + i * 2
+Fin Pour
+```
 
----
+Quelle est la valeur finale de `s` ?
 
-**Q2.** La variable est :
-
-A. un espace mémoire nommé
-B. un périphérique
-C. une mémoire
-D. un composant
-
----
-
-**Q3.** Le type entier :
-
-A. représente des nombres entiers
-B. représente des nombres décimaux
-C. représente du texte
-D. représente un booléen
+A. 15
+B. 30
+C. 25
+D. 20
 
 ---
 
-**Q4.** Le type réel :
+**Question 2.** Une fonction récursive permettant de calculer la factorielle d'un entier positif `n` doit impérativement contenir :
 
-A. représente des nombres décimaux
-B. représente des entiers
-C. représente du texte
-D. représente un booléen
-
----
-
-**Q5.** Le type chaîne :
-
-A. représente du texte
-B. représente des entiers
-C. représente des décimaux
-D. représente un booléen
+A. une condition d'arrêt (cas de base) et un appel récursif
+B. une boucle `Pour`
+C. une variable globale
+D. un tableau de valeurs
 
 ---
 
-**Q6.** Le type booléen :
+**Question 3.** La structure de données qui fonctionne selon le principe « dernier entré, premier sorti » (LIFO) est :
 
-A. vrai ou faux
-B. des nombres
-C. du texte
-D. des caractères
-
----
-
-**Q7.** La structure conditionnelle :
-
-A. si... alors... sinon
-B. pour... faire
-C. tant que... faire
-D. répéter... jusqu'à
+A. la pile
+B. la file
+C. le tableau
+D. la liste chaînée simple
 
 ---
 
-**Q8.** La boucle « pour » :
+**Question 4.** Dans une base de données relationnelle, la clé primaire d'une table :
 
-A. répète un nombre fixe de fois
-B. répète tant qu'une condition est vraie
-C. est une condition
-D. est une variable
-
----
-
-**Q9.** La boucle « tant que » :
-
-A. répète tant qu'une condition est vraie
-B. répète un nombre fixe de fois
-C. est une condition
-D. est une variable
+A. identifie de manière unique chaque enregistrement de la table
+B. référence une clé d'une autre table
+C. peut contenir des valeurs nulles et dupliquées
+D. est toujours un champ de type numérique
 
 ---
 
-**Q10.** L'opérateur de comparaison est :
+**Question 5.** Quelle requête SQL permet d'obtenir la liste des élèves dont la moyenne est supérieure à 10, triés par ordre décroissant de moyenne ?
 
-A. =
-B. +
-C. *
-D. /
-
----
-
-**Q11.** L'opérateur d'affectation :
-
-A. attribue une valeur à une variable
-B. compare deux valeurs
-C. additionne
-D. multiplie
+A. `SELECT * FROM eleves WHERE moyenne > 10 ORDER BY moyenne DESC;`
+B. `SELECT * FROM eleves WHERE moyenne > 10 ORDER BY moyenne ASC;`
+C. `SELECT moyenne FROM eleves WHERE moyenne > 10 GROUP BY moyenne;`
+D. `SELECT * FROM eleves HAVING moyenne > 10 ORDER BY moyenne DESC;`
 
 ---
 
-**Q12.** Le tableau :
+**Question 6.** L'adresse IP d'un ordinateur sur un réseau IPv4 est composée de :
 
-A. une collection de valeurs
-B. une variable
-C. une condition
-D. une boucle
-
----
-
-**Q13.** L'indice d'un tableau commence à :
-
-A. 0 ou 1
-B. 10
-C. -1
-D. n'importe où
+A. 4 octets, soit 32 bits
+B. 6 octets, soit 48 bits
+C. 2 octets, soit 16 bits
+D. 8 octets, soit 64 bits
 
 ---
 
-**Q14.** La fonction :
+**Question 7.** Le protocole de la couche application utilisé pour le transfert de fichiers entre un client et un serveur est :
 
-A. un bloc de code réutilisable
-B. une variable
-C. une condition
-D. une boucle
-
----
-
-**Q15.** Le paramètre d'une fonction :
-
-A. une donnée d'entrée
-B. une sortie
-C. une condition
-D. une boucle
+A. FTP
+B. TCP
+C. IP
+D. UDP
 
 ---
 
-**Q16.** La récursivité :
+**Question 8.** La recherche dichotomique dans un tableau trié de 1024 éléments nécessite au maximum, dans le pire des cas :
 
-A. une fonction qui s'appelle elle-même
-B. une boucle
-C. une condition
-D. une variable
-
----
-
-**Q17.** La complexité algorithmique :
-
-A. mesure l'efficacité
-B. mesure la taille
-C. mesure la vitesse du processeur
-D. mesure la mémoire
+A. 10 comparaisons
+B. 512 comparaisons
+C. 1024 comparaisons
+D. 1023 comparaisons
 
 ---
 
-**Q18.** Le tri à bulles :
+**Question 9.** Parmi les attaques informatiques suivantes, laquelle consiste à inciter une victime à révéler des informations confidentielles (identifiants, mots de passe) en se faisant passer pour un organisme de confiance ?
 
-A. un algorithme de tri
-B. une recherche
-C. une boucle
-D. une condition
-
----
-
-**Q19.** La recherche dichotomique :
-
-A. recherche dans un tableau trié
-B. recherche aléatoire
-C. un tri
-D. une boucle
+A. le phishing (hameçonnage)
+B. le ver informatique
+C. le déni de service distribué (DDoS)
+D. le cheval de Troie
 
 ---
 
-**Q20.** La structure de données Pile :
+**Question 10.** On considère le fragment de code suivant en pseudo-code :
 
-A. LIFO (dernier entré, premier sorti)
-B. FIFO (premier entré, premier sorti)
-C. une file
-D. un tableau
+```
+Si x > 10 Alors
+    y ← x - 5
+Sinon
+    y ← x + 5
+Fin Si
+```
+
+Si `x = 7`, quelle est la valeur de `y` ?
+
+A. 12
+B. 2
+C. 7
+D. 5
 
 ---
 
 ## CORRIGÉ
 
-1. une suite d'instructions
-2. un espace mémoire nommé
-3. représente des nombres entiers
-4. représente des nombres décimaux
-5. représente du texte
-6. vrai ou faux
-7. si... alors... sinon
-8. répète un nombre fixe de fois
-9. répète tant qu'une condition est vraie
-10. =
-11. attribue une valeur à une variable
-12. une collection de valeurs
-13. 0 ou 1
-14. un bloc de code réutilisable
-15. une donnée d'entrée
-16. une fonction qui s'appelle elle-même
-17. mesure l'efficacité
-18. un algorithme de tri
-19. recherche dans un tableau trié
-20. LIFO (dernier entré, premier sorti)
+1. B — La boucle additionne `2, 4, 6, 8, 10` ; la somme vaut 30.
+2. A — Une fonction récursive exige un cas de base et un appel récursif pour éviter une boucle infinie.
+3. A — La pile suit la règle LIFO (Last In, First Out).
+4. A — La clé primaire identifie chaque ligne de façon unique (non nulle, non dupliquée).
+5. A — `WHERE` filtre, `ORDER BY ... DESC` trie par ordre décroissant.
+6. A — Une adresse IPv4 = 4 octets = 32 bits.
+7. A — FTP (File Transfer Protocol) sert au transfert de fichiers.
+8. A — log₂(1024) = 10 comparaisons au maximum.
+9. A — Le phishing est une escroquerie par usurpation d'identité pour soutirer des données.
+10. A — `x = 7` n'est pas supérieur à 10, donc `y = 7 + 5 = 12`.

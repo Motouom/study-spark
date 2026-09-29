@@ -1,223 +1,133 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 3
+# CAMEROON BAC MATHÉMATIQUES — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Mathématiques
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** C, D, E, TI
+**Matière :** Mathématiques
+**Durée :** 1 heure
+**Coefficient :** selon série
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé détaillé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'asymptote horizontale de $f(x) = \frac{1}{x}$ est :
+**Question 1.** La limite $\lim\limits_{x \to 0} \frac{\sin(3x)}{x}$ vaut :
 
-A. $y = 0$
-B. $x = 0$
-C. $y = 1$
-D. $y = x$
-
----
-
-**Q2.** L'asymptote verticale de $f(x) = \frac{1}{x}$ est :
-
-A. $x = 0$
-B. $y = 0$
-C. $x = 1$
-D. $y = 1$
+A. $3$
+B. $1$
+C. $0$
+D. $\frac{1}{3}$
 
 ---
 
-**Q3.** La suite $u_n = 2n + 1$ est :
+**Question 2.** La fonction $f(x) = \frac{1}{x}$ admet, en $x = 1$, une limite égale à :
 
-A. arithmétique
-B. géométrique
-C. ni l'un ni l'autre
-D. constante
-
----
-
-**Q4.** La suite $u_n = 3 \times 2^n$ est :
-
-A. géométrique
-B. arithmétique
-C. ni l'un ni l'autre
-D. constante
+A. $1$
+B. $+\infty$
+C. $0$
+D. n'existe pas
 
 ---
 
-**Q5.** La raison de la suite $u_n = 2n + 1$ est :
+**Question 3.** Le conjugué du nombre complexe $z = 3 - 4i$ est :
 
-A. 2
-B. 1
-C. 3
-D. n
-
----
-
-**Q6.** La raison de la suite $u_n = 3 \times 2^n$ est :
-
-A. 2
-B. 3
-C. 6
-D. n
+A. $3 + 4i$
+B. $-3 + 4i$
+C. $3 - 4i$
+D. $-3 - 4i$
 
 ---
 
-**Q7.** La somme des $n$ premiers termes d'une suite arithmétique de raison $r$ est :
+**Question 4.** Le produit $z \cdot \bar{z}$ pour $z = 3 - 4i$ vaut :
 
-A. $\frac{n(u_1 + u_n)}{2}$
-B. $n \times r$
-C. $u_1 \times r^n$
-D. $\frac{n}{2} \times r$
-
----
-
-**Q8.** La somme des $n$ premiers termes d'une suite géométrique de raison $q$ est :
-
-A. $u_1 \frac{1 - q^n}{1 - q}$
-B. $n \times u_1$
-C. $u_1 \times q^n$
-D. $\frac{n(u_1 + u_n)}{2}$
+A. $25$
+B. $7$
+C. $5$
+D. $-7$
 
 ---
 
-**Q9.** La probabilité d'un événement certain est :
+**Question 5.** Une fonction $f$ dérivable sur $\mathbb{R}$ vérifie $f'(x) = 6x^2 + 2x$. Une primitive de $f'$ est :
 
-A. 1
-B. 0
-C. 0,5
-D. $\infty$
-
----
-
-**Q10.** La probabilité d'un événement impossible est :
-
-A. 0
-B. 1
-C. 0,5
-D. $\infty$
+A. $2x^3 + x^2 + C$
+B. $3x^2 + 1$
+C. $x^3 + x^2$
+D. $6x + 2$
 
 ---
 
-**Q11.** La somme des probabilités d'un univers est :
+**Question 6.** La valeur de $\displaystyle\int_{-1}^{1} x^3\, dx$ est :
 
-A. 1
-B. 0
-C. 0,5
-D. $\infty$
-
----
-
-**Q12.** Deux événements incompatibles :
-
-A. ne peuvent pas se produire ensemble
-B. se produisent toujours ensemble
-C. sont certains
-D. sont impossibles
+A. $0$
+B. $2$
+C. $\frac{1}{2}$
+D. $-2$
 
 ---
 
-**Q13.** La probabilité de $A \cup B$ si $A$ et $B$ sont incompatibles est :
+**Question 7.** Soit le repère orthonormé $(O; \vec{i}, \vec{j}, \vec{k})$. Les points $A(1;0;0)$, $B(0;1;0)$ et $C(0;0;1)$. Le vecteur $\overrightarrow{AB}$ a pour coordonnées :
 
-A. $P(A) + P(B)$
-B. $P(A) \times P(B)$
-C. $P(A) - P(B)$
-D. $P(A) / P(B)$
-
----
-
-**Q14.** La probabilité conditionnelle $P(A|B)$ est :
-
-A. $\frac{P(A \cap B)}{P(B)}$
-B. $P(A) \times P(B)$
-C. $P(A) + P(B)$
-D. $\frac{P(B)}{P(A)}$
+A. $(-1\,; 1\,; 0)$
+B. $(1\,; -1\,; 0)$
+C. $(0\,; 1\,; 1)$
+D. $(-1\,; -1\,; 0)$
 
 ---
 
-**Q15.** L'espérance d'une variable aléatoire est :
+**Question 8.** L'aire du domaine délimité par la courbe de $f(x) = x^2$, l'axe des abscisses et les droites $x = 0$ et $x = 2$ vaut :
 
-A. la moyenne pondérée
-B. le maximum
-C. le minimum
-D. la variance
-
----
-
-**Q16.** La variance mesure :
-
-A. la dispersion
-B. la moyenne
-C. le maximum
-D. le minimum
+A. $\frac{8}{3}$
+B. $4$
+C. $\frac{4}{3}$
+D. $2$
 
 ---
 
-**Q17.** L'écart-type est :
+**Question 9.** L'équation $e^{2x} = 5$ a pour solution (dans $\mathbb{R}$) :
 
-A. la racine carrée de la variance
-B. la variance
-C. la moyenne
-D. le maximum
-
----
-
-**Q18.** La loi binomiale $B(n, p)$ a pour espérance :
-
-A. $np$
-B. $n + p$
-C. $n - p$
-D. $p^n$
+A. $x = \frac{\ln 5}{2}$
+B. $x = \ln(5/2)$
+C. $x = 2\ln 5$
+D. $x = \ln 5$
 
 ---
 
-**Q19.** La loi normale est :
+**Question 10.** Le coefficient de corrélation linéaire $r$ entre deux variables vérifie toujours :
 
-A. une loi continue
-B. une loi discrète
-C. une loi constante
-D. une loi nulle
-
----
-
-**Q20.** La courbe de la loi normale est :
-
-A. en cloche
-B. linéaire
-C. exponentielle
-D. constante
+A. $-1 \le r \le 1$
+B. $0 \le r \le 1$
+C. $r \ge 0$
+D. $r = 1$
 
 ---
 
 ## CORRIGÉ
 
-1. $y = 0$
-2. $x = 0$
-3. arithmétique
-4. géométrique
-5. 2
-6. 2
-7. $\frac{n(u_1 + u_n)}{2}$
-8. $u_1 \frac{1 - q^n}{1 - q}$
-9. 1
-10. 0
-11. 1
-12. ne peuvent pas se produire ensemble
-13. $P(A) + P(B)$
-14. $\frac{P(A \cap B)}{P(B)}$
-15. la moyenne pondérée
-16. la dispersion
-17. la racine carrée de la variance
-18. $np$
-19. une loi continue
-20. en cloche
+**1. Réponse A.** $\frac{\sin(3x)}{x} = 3 \times \frac{\sin(3x)}{3x}$, et $\frac{\sin u}{u} \to 1$ quand $u \to 0$ ; donc la limite est $3 \times 1 = 3$.
+
+**2. Réponse A.** En $x = 1$, $f(1) = 1$, la fonction est continue, la limite vaut $1$.
+
+**3. Réponse A.** Le conjugué de $a + bi$ est $a - bi$, donc de $3 - 4i$ est $3 + 4i$.
+
+**4. Réponse A.** $z \cdot \bar{z} = |z|^2 = 3^2 + (-4)^2 = 9 + 16 = 25$.
+
+**5. Réponse A.** Une primitive de $6x^2 + 2x$ est $\frac{6x^3}{3} + \frac{2x^2}{2} = 2x^3 + x^2$, plus une constante.
+
+**6. Réponse A.** $x^3$ est impaire, donc son intégrale sur $[-1; 1]$ symétrique est nulle : $0$.
+
+**7. Réponse A.** $\overrightarrow{AB} = B - A = (0-1\,; 1-0\,; 0-0) = (-1\,; 1\,; 0)$.
+
+**8. Réponse A.** $\displaystyle\int_0^2 x^2\, dx = \left[\frac{x^3}{3}\right]_0^2 = \frac{8}{3}$.
+
+**9. Réponse A.** $2x = \ln 5 \Rightarrow x = \frac{\ln 5}{2}$.
+
+**10. Réponse A.** Le coefficient de corrélation linéaire est toujours compris entre $-1$ et $1$.

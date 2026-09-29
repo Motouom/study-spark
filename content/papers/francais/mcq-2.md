@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat FRANÇAIS P1 SET 2
+# CAMEROON BEPC FRANÇAIS — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** A1, A2, A4, ABI, C, D
-**Subject:** Français
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Français
+**Durée :** 1 heure
+**Coefficient :** 1
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'alexandrin :
+**Question 1.** Dans la phrase « Le chien **qui** aboie ne mord pas. », « qui » est :
 
-A. 12 syllabes
-B. 10 syllabes
-C. 8 syllabes
-D. 14 syllabes
-
----
-
-**Q2.** Le décasyllabe :
-
-A. 10 syllabes
-B. 12 syllabes
-C. 8 syllabes
-D. 14 syllabes
+A. un pronom relatif
+B. un déterminant démonstratif
+C. une conjonction de coordination
+D. un pronom personnel
 
 ---
 
-**Q3.** L'octosyllabe :
+**Question 2.** Conjugué au futur simple, « nous finir » devient :
 
-A. 8 syllabes
-B. 10 syllabes
-C. 12 syllabes
-D. 14 syllabes
-
----
-
-**Q4.** La rime plate :
-
-A. aabb
-B. abab
-C. abba
-D. aaaa
+A. nous finissions
+B. nous finirons
+C. nous finîmes
+D. nous finissions
 
 ---
 
-**Q5.** La rime croisée :
+**Question 3.** Le groupe de mots « **avec prudence** » dans « Il conduit avec prudence. » est :
 
-A. abab
-B. aabb
-C. abba
-D. aaaa
-
----
-
-**Q6.** La rime embrassée :
-
-A. abba
-B. aabb
-C. abab
-D. aaaa
+A. un complément d'objet direct
+B. un complément circonstanciel de manière
+C. un complément du nom
+D. un attribut du sujet
 
 ---
 
-**Q7.** L'enjambement :
+**Question 4.** La phrase « Ses yeux sont deux étoiles. » contient une figure de style appelée :
 
-A. le rejet d'un mot à la ligne suivante
-B. la fin du vers
-C. la rime
-D. la césure
-
----
-
-**Q8.** La métaphore filée :
-
-A. une métaphore prolongée
-B. une comparaison
-C. une hyperbole
-D. une litote
+A. une comparaison
+B. une métaphore
+C. une allégorie
+D. une hyperbole
 
 ---
 
-**Q9.** L'oxymore :
+**Question 5.** Quel est le participe passé du verbe « prendre » ?
 
-A. l'union de termes contradictoires
-B. une comparaison
-C. une hyperbole
-D. une litote
-
----
-
-**Q10.** L'antithèse :
-
-A. l'opposition de deux idées
-B. l'union de contraires
-C. une exagération
-D. une atténuation
+A. prenant
+B. pris
+C. prise
+D. prendu
 
 ---
 
-**Q11.** Le chiasme :
+**Question 6.** Dans « Il fait très chaud **aujourd'hui**. », le mot en gras est un :
 
-A. une structure croisée
-B. une répétition
-C. une exagération
-D. une atténuation
-
----
-
-**Q12.** L'anaphore :
-
-A. la répétition d'un mot en début de phrase
-B. une exagération
-C. une atténuation
-D. une comparaison
+A. adjectif
+B. adverbe
+C. déterminant
+D. nom
 
 ---
 
-**Q13.** La gradation :
+**Question 7.** La forme correcte de l'accord du participe passé est :
 
-A. une progression croissante ou décroissante
-B. une répétition
-C. une exagération
-D. une atténuation
-
----
-
-**Q14.** L'euphémisme :
-
-A. atténue une réalité désagréable
-B. exagère
-C. compare
-D. oppose
+A. Elle s'est lavée les mains
+B. Elle s'est lavé les mains
+C. Elle s'est lavés les mains
+D. Elle s'est lavées les mains
 
 ---
 
-**Q15.** La métonymie :
+**Question 8.** Le contraire du mot « généreux » est :
 
-A. remplace un terme par un autre lié
-B. compare
-C. exagère
-D. atténue
-
----
-
-**Q16.** La synecdoque :
-
-A. la partie pour le tout
-B. le tout pour la partie
-C. une comparaison
-D. une exagération
+A. avare
+B. gentil
+C. courageux
+D. honnête
 
 ---
 
-**Q17.** Le discours narratif :
+**Question 9.** Dans « Il travaille **pour** réussir. », la subordonnée exprime :
 
-A. raconte une histoire
-B. argumente
-C. décrit
-D. explique
-
----
-
-**Q18.** Le discours argumentatif :
-
-A. convainc et persuade
-B. raconte
-C. décrit
-D. explique
+A. la cause
+B. le but
+C. la conséquence
+D. la condition
 
 ---
 
-**Q19.** Le discours descriptif :
+**Question 10.** « Le vent **souffle** doucement dans les arbres. » — le mot en gras est conjugué au :
 
-A. décrit un lieu, une personne
-B. raconte
-C. argumente
-D. explique
-
----
-
-**Q20.** Le discours explicatif :
-
-A. explique un phénomène
-B. raconte
-C. convainc
-D. décrit
+A. présent de l'indicatif
+B. imparfait de l'indicatif
+C. passé simple
+D. futur simple
 
 ---
 
 ## CORRIGÉ
 
-1. 12 syllabes
-2. 10 syllabes
-3. 8 syllabes
-4. aabb
-5. abab
-6. abba
-7. le rejet d'un mot à la ligne suivante
-8. une métaphore prolongée
-9. l'union de termes contradictoires
-10. l'opposition de deux idées
-11. une structure croisée
-12. la répétition d'un mot en début de phrase
-13. une progression croissante ou décroissante
-14. atténue une réalité désagréable
-15. remplace un terme par un autre lié
-16. la partie pour le tout
-17. raconte une histoire
-18. convainc et persuade
-19. décrit un lieu, une personne
-20. explique un phénomène
+1. A — « qui » est un pronom relatif qui introduit la proposition relative « qui aboie ».
+2. B — au futur simple, « nous finirons ».
+3. B — « avec prudence » répond à la question « comment ? » : complément circonstanciel de manière.
+4. B — « Ses yeux sont deux étoiles » est une métaphore (assimilation directe, sans outil de comparaison).
+5. B — le participe passé de « prendre » est « pris ».
+6. B — « aujourd'hui » est un adverbe de temps.
+7. B — « Elle s'est lavé les mains » : le COD « les mains » est placé après, le participe reste invariable.
+8. A — le contraire de « généreux » est « avare ».
+9. B — « pour réussir » exprime le but.
+10. A — « souffle » est au présent de l'indicatif.

@@ -1,223 +1,128 @@
-# CAMEROON BEPC ANGLAIS P1 SET 1
+# CAMEROON BEPC ANGLAIS — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Anglais
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Anglais (English as a Foreign Language)
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** The plural of « book » is :
+**Question 1.** Choose the correct form of the verb: "My brother and I \_\_\_ football every Saturday."
 
-A. books
-B. bookes
-C. book
-D. bookies
-
----
-
-**Q2.** The past tense of « go » is :
-
-A. went
-B. goed
-C. gone
-D. going
+A. plays
+B. play
+C. playing
+D. is playing
 
 ---
 
-**Q3.** The past participle of « eat » is :
+**Question 2.** Put the verb in the correct tense: "Look! It \_\_\_ (rain) outside."
 
-A. eaten
-B. ate
-C. eated
-D. eating
-
----
-
-**Q4.** « She ___ a student. » (present of to be)
-
-A. is
-B. are
-C. am
-D. be
+A. rains
+B. rained
+C. is raining
+D. has rained
 
 ---
 
-**Q5.** « They ___ playing football. » (present continuous)
+**Question 3.** Choose the correct relative pronoun: "The lady \_\_\_ you met yesterday is my aunt."
 
-A. are
-B. is
-C. am
-D. be
-
----
-
-**Q6.** The opposite of « big » is :
-
-A. small
-B. large
-C. huge
-D. tall
+A. who
+B. whom
+C. which
+D. whose
 
 ---
 
-**Q7.** The synonym of « happy » is :
+**Question 4.** Choose the correct modal: "You \_\_\_ wear a uniform to school; it is compulsory."
 
-A. glad
-B. sad
-C. angry
-D. tired
-
----
-
-**Q8.** « I ___ to school every day. » (present simple)
-
-A. go
-B. goes
-C. going
-D. gone
+A. must
+B. can
+C. may
+D. could
 
 ---
 
-**Q9.** « He ___ his homework. » (present simple, 3rd person)
+**Question 5.** Choose the correct word: "He speaks English very \_\_\_, so everyone understands him."
 
-A. does
-B. do
-C. doing
-D. done
-
----
-
-**Q10.** The plural of « child » is :
-
-A. children
-B. childs
-C. childes
-D. childrens
+A. good
+B. well
+C. better
+D. best
 
 ---
 
-**Q11.** The plural of « man » is :
+**Question 6.** Read the sentence and choose the correct answer: "The market is \_\_\_ the bank and the post office."
 
-A. men
-B. mans
-C. menes
-D. man
-
----
-
-**Q12.** The plural of « woman » is :
-
-A. women
-B. womans
-C. womens
-D. woman
+A. among
+B. between
+C. under
+D. above
 
 ---
 
-**Q13.** The plural of « foot » is :
+**Question 7.** The opposite of « polite » is :
 
-A. feet
-B. foots
-C. feets
-D. foot
-
----
-
-**Q14.** The plural of « tooth » is :
-
-A. teeth
-B. tooths
-C. teeths
-D. tooth
+A. rude
+B. kind
+C. friendly
+D. gentle
 
 ---
 
-**Q15.** « There ___ a book on the table. »
+**Question 8.** Choose the correct question tag: "You have finished your homework, \_\_\_?"
 
-A. is
-B. are
-C. am
-D. be
-
----
-
-**Q16.** « There ___ many students in the class. »
-
-A. are
-B. is
-C. am
-D. be
+A. don't you
+B. haven't you
+C. isn't it
+D. aren't you
 
 ---
 
-**Q17.** The comparative of « tall » is :
+**Question 9.** Comprehension: Read the text, then answer.
 
-A. taller
-B. more tall
-C. tallest
-D. most tall
+_"Mbella works as a farmer in the North West region. Every morning he goes to his field and plants maize and groundnuts. He sells his harvest at the local market every month. He is saving money to build a new house for his family."_
 
----
+**What does Mbella do every month?**
 
-**Q18.** The superlative of « tall » is :
-
-A. tallest
-B. taller
-C. more tall
-D. most tall
+A. He plants maize.
+B. He sells his harvest at the market.
+C. He builds a new house.
+D. He goes to school.
 
 ---
 
-**Q19.** « I have ___ apple. »
+**Question 10.** Choose the correct preposition: "The students are very interested \_\_\_ learning English."
 
-A. an
-B. a
-C. the
-D. some
-
----
-
-**Q20.** « He is ___ engineer. »
-
-A. an
-B. a
-C. the
-D. some
+A. on
+B. at
+C. in
+D. for
 
 ---
 
 ## CORRIGÉ
 
-1. books
-2. went
-3. eaten
-4. is
-5. are
-6. small
-7. glad
-8. go
-9. does
-10. children
-11. men
-12. women
-13. feet
-14. teeth
-15. is
-16. are
-17. taller
-18. tallest
-19. an
-20. an
+1. play
+2. is raining
+3. whom
+4. must
+5. well
+6. between
+7. rude
+8. haven't you
+9. He sells his harvest at the market.
+10. in

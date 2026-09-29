@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat PHILOSOPHIE P1 SET 1
+# CAMEROON BAC PHILOSOPHIE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Philosophie
-**Subject:** Philosophie
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** A1 / A2 / A4 / ABI
+**Matière :** Philosophie
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La philosophie signifie étymologiquement :
+**Question 1.** Descartes, dans _Les Méditations métaphysiques_, utilise un doute radical afin de :
 
-A. l'amour de la sagesse
-B. la science
-C. la religion
-D. la politique
-
----
-
-**Q2.** Le premier philosophe grec est souvent considéré :
-
-A. Thalès
-B. Socrate
-C. Platon
-D. Aristote
+A. refuser toute certitude, y compris celle de sa propre existence
+B. trouver une première vérité indubitable sur laquelle fonder la connaissance
+C. prouver que seule la matière existe
+D. démontrer que la foi est supérieure à la raison
 
 ---
 
-**Q3.** Socrate est connu pour :
+**Question 2.** Pour Freud, l'inconscient est principalement :
 
-A. la maïeutique
-B. la théorie des idées
-C. la logique
-D. le doute
-
----
-
-**Q4.** Platon a écrit :
-
-A. La République
-B. L'Éthique à Nicomaque
-C. Le Discours de la méthode
-D. Le Contrat social
+A. un ensemble de désirs refoulés qui s'expriment par le rêve, le lapsus et l'acte manqué
+B. la partie de la psyché identique à la conscience
+C. un simple synonyme de l'oubli volontaire
+D. une faculté morale qui distingue le bien du mal
 
 ---
 
-**Q5.** Aristote est le fondateur de :
+**Question 3.** « Je pense, donc je suis » signifie pour Descartes que :
 
-A. la logique
-B. le scepticisme
-C. l'idéalisme
-D. l'empirisme
-
----
-
-**Q6.** Descartes est connu pour :
-
-A. le cogito « je pense donc je suis »
-B. la théorie des idées
-C. la logique
-D. le contrat social
+A. l'essence de l'homme est de penser et son existence est certaine dès qu'il pense
+B. l'homme existe seulement lorsqu'il dort
+C. la pensée est une illusion produite par les sens
+D. l'existence précède toujours la pensée chez les animaux
 
 ---
 
-**Q7.** Le cogito de Descartes est :
+**Question 4.** La différence essentielle entre la conscience spontanée et la conscience réfléchie est que :
 
-A. « je pense donc je suis »
-B. « connais-toi toi-même »
-C. « tout est nombre »
-D. « rien ne se perd »
-
----
-
-**Q8.** Kant a écrit :
-
-A. La Critique de la raison pure
-B. La République
-C. Le Contrat social
-D. L'Éthique
+A. la première est une conscience immédiate du monde, la seconde une conscience qui se prend elle-même pour objet
+B. la première est morale, la seconde est scientifique
+C. la première est erronée, la seconde est vraie
+D. la première appartient aux animaux, la seconde aux hommes
 
 ---
 
-**Q9.** Rousseau a écrit :
+**Question 5.** Le « cogito » cartésien est formulé dans :
 
-A. Le Contrat social
-B. La République
-C. La Critique
-D. Le Discours de la méthode
-
----
-
-**Q10.** L'empirisme affirme que :
-
-A. toute connaissance vient de l'expérience
-B. la raison est la seule source
-C. les idées sont innées
-D. rien n'est connaissable
+A. _Le Discours de la méthode_
+B. _L'Éthique à Nicomaque_
+C. _Le Banquet_
+D. _La Politique_
 
 ---
 
-**Q11.** Le rationalisme affirme que :
+**Question 6.** Pour Bergson, la durée désigne :
 
-A. la raison est la source de la connaissance
-B. l'expérience est la seule source
-C. les idées sont innées
-D. rien n'est connaissable
-
----
-
-**Q12.** Le scepticisme affirme que :
-
-A. la connaissance certaine est impossible
-B. tout est connaissable
-C. la raison est la source
-D. l'expérience est la source
+A. le temps vécu par la conscience, qui est continu et qualitatif
+B. le temps mesuré par les horloges, divisible et homogène
+C. l'espace homogène que parcourent les corps
+D. le temps objectif indépendant de tout sujet
 
 ---
 
-**Q13.** L'éthique étudie :
+**Question 7.** L'inconscient freudien est découvert à partir de faits comme :
 
-A. les principes moraux
-B. la nature
-C. la société
-D. la connaissance
-
----
-
-**Q14.** La morale est :
-
-A. l'ensemble des règles de conduite
-B. la science
-C. la politique
-D. la religion
+A. le rêve, le lapsus et l'acte manqué
+B. le syllogisme et le raisonnement
+C. la sensation et la perception
+D. l'intuition et le pressentiment
 
 ---
 
-**Q15.** Le devoir est :
+**Question 8.** Selon Sartre, « l'existence précède l'essence » signifie que :
 
-A. une obligation morale
-B. un droit
-C. un choix
-D. une liberté
-
----
-
-**Q16.** La liberté est :
-
-A. la capacité d'agir selon sa volonté
-B. l'absence de choix
-C. une contrainte
-D. un devoir
+A. l'homme n'est pas défini d'avance : il se construit par ses choix et ses actes
+B. l'homme possède une nature fixe donnée par Dieu
+C. l'homme est déterminé entièrement par son milieu social
+D. la liberté humaine est une illusion de la conscience
 
 ---
 
-**Q17.** Le libre arbitre est :
+**Question 9.** La conscience morale peut se définir comme :
 
-A. la liberté de choisir
-B. l'absence de choix
-C. une contrainte
-D. un devoir
-
----
-
-**Q18.** La responsabilité est :
-
-A. répondre de ses actes
-B. un droit
-C. une liberté
-D. un choix
+A. la capacité de juger ses propres actes selon des valeurs du bien et du mal
+B. la simple perception des objets extérieurs
+C. la connaissance scientifique des lois de la nature
+D. l'ensemble des habitudes héritées des parents sans réflexion
 
 ---
 
-**Q19.** La justice est :
+**Question 10.** Pour Platon, dans le mythe de la caverne, les prisonniers représentent :
 
-A. le respect des droits de chacun
-B. la force
-C. la vengeance
-D. l'égalité
-
----
-
-**Q20.** L'égalité signifie :
-
-A. les mêmes droits pour tous
-B. les mêmes richesses
-C. la même force
-D. le même âge
+A. les hommes ignorants qui prennent les apparences pour la réalité
+B. les philosophes qui connaissent déjà les idées
+C. les animaux prisonniers de leurs instincts
+D. les dieux retenus captifs par les mortels
 
 ---
 
 ## CORRIGÉ
 
-1. l'amour de la sagesse
-2. Thalès
-3. la maïeutique
-4. La République
-5. la logique
-6. le cogito « je pense donc je suis »
-7. « je pense donc je suis »
-8. La Critique de la raison pure
-9. Le Contrat social
-10. toute connaissance vient de l'expérience
-11. la raison est la source de la connaissance
-12. la connaissance certaine est impossible
-13. les principes moraux
-14. l'ensemble des règles de conduite
-15. une obligation morale
-16. la capacité d'agir selon sa volonté
-17. la liberté de choisir
-18. répondre de ses actes
-19. le respect des droits de chacun
-20. les mêmes droits pour tous
+1. B — trouver une première vérité indubitable sur laquelle fonder la connaissance
+2. A — un ensemble de désirs refoulés qui s'expriment par le rêve, le lapsus et l'acte manqué
+3. A — l'essence de l'homme est de penser et son existence est certaine dès qu'il pense
+4. A — la première est une conscience immédiate du monde, la seconde une conscience qui se prend elle-même pour objet
+5. A — _Le Discours de la méthode_
+6. A — le temps vécu par la conscience, qui est continu et qualitatif
+7. A — le rêve, le lapsus et l'acte manqué
+8. A — l'homme n'est pas défini d'avance : il se construit par ses choix et ses actes
+9. A — la capacité de juger ses propres actes selon des valeurs du bien et du mal
+10. A — les hommes ignorants qui prennent les apparences pour la réalité

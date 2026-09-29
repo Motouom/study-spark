@@ -1,66 +1,125 @@
-# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE SET 7
+# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE — ÉPREUVE 2 — SÉRIE 7
 
-## Structural Question Bank - Set 7
+## Épreuve de rédaction
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Histoire-Géographie
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Histoire-Géographie
+**Durée :** 2 heures
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes générales :**
 
-- Réponds à toutes les questions de manière claire et organisée.
-- Montre tous les calculs et raisonnements lorsque c'est nécessaire.
-- Utilise la terminologie et les normes de présentation de l'examen camerounais.
-- Les schémas, tableaux et graphiques doivent être inclus lorsque c'est utile.
+- L'épreuve comporte 4 sections et 20 exercices. Chaque exercice vaut 5 points.
+- Traite toutes les questions de manière claire, organisée et complète.
+- Utilise la terminologie et la présentation en vigueur au BEPC camerounais.
+- Fais des phrases complètes et justifie tes réponses par des faits et des dates.
+- Un barème indicatif est proposé pour chaque question (sous-questions entre parenthèses).
 
 ---
 
-## SECTION 1: GÉOGRAPHIE PHYSIQUE
+## SECTION 1 : HISTOIRE DU CAMEROUN
 
-**Q1.** Décrire le relief du Cameroun.
+**Exercice 1 — La découverte et l'arrivée des Européens (5 points)**
+1.1. (2 pts) Explique les premières relations entre les Européens (Portugais, Espagnols) et la côte camerounaise.
+1.2. (3 pts) Analyse l'évolution du commerce côtier (traite atlantique, puis commerce légitime) jusqu'au XIXe siècle.
 
-**Q1.** Expliquer les différents climats du Cameroun.
+**Exercice 2 — La mise sous protectorat allemand (5 points)**
+2.1. (2 pts) Explique les raisons de la colonisation du Cameroun par l'Allemagne.
+2.2. (3 pts) Décris les étapes de l'occupation et de la conquête du territoire par les Allemands.
 
-**Q1.** Décrire les principaux fleuves du Cameroun.
+**Exercice 3 — Le développement économique sous le mandat (5 points)**
+3.1. (2 pts) Compare la politique agricole française et britannique dans leurs mandats.
+3.2. (3 pts) Explique le rôle des ports, routes et villes dans l'économie coloniale du Cameroun.
 
-**Q1.** Expliquer la répartition de la végétation au Cameroun.
+**Exercice 4 — Les partis politiques et l'évolution politique (5 points)**
+4.1. (2 pts) Présente les principaux partis politiques camerounais de la période coloniale.
+4.2. (3 pts) Analyse la rivalité entre l'UPC et le gouvernement camerounais dans les années 1950.
 
-**Q1.** Décrire les ressources naturelles du Cameroun.
+**Exercice 5 — La place du Cameroun dans le monde (5 points)**
+5.1. (2 pts) Présente les principales organisations internationales auxquelles le Cameroun adhère.
+5.2. (3 pts) Analyse le rôle du Cameroun dans l'Afrique centrale (CEMAC, CEEAC) et au sein de la Francophonie.
 
-## SECTION 2: GÉOGRAPHIE HUMAINE ET ÉCONOMIQUE
+---
 
-**Q2.** Expliquer la répartition de la population au Cameroun.
+## SECTION 2 : HISTOIRE GÉNÉRALE
 
-**Q2.** Décrire les principales activités économiques du Cameroun.
+**Exercice 6 — La colonisation : causes et formes (5 points)**
+6.1. (2 pts) Explique les causes économiques, politiques et religieuses de la colonisation.
+6.2. (3 pts) Décris les différentes formes d'administration coloniale (directe, indirecte, assimilation).
 
-**Q2.** Expliquer les causes et conséquences de l'exode rural.
+**Exercice 7 — Les conséquences de la colonisation (5 points)**
+7.1. (2 pts) Présente les conséquences économiques et sociales de la colonisation.
+7.2. (3 pts) Analyse les conséquences politiques et culturelles et les débuts de la contestation coloniale.
 
-**Q2.** Décrire les principaux produits d'exportation du Cameroun.
+**Exercice 8 — La traite négrière et ses abolitions (5 points)**
+8.1. (2 pts) Explique les étapes du « commerce triangulaire ».
+8.2. (3 pts) Présente le mouvement abolitionniste et l'abolition de la traite et de l'esclavage.
 
-**Q2.** Expliquer les problèmes de développement au Cameroun et les solutions.
+**Exercice 9 — La guerre froide (5 points)**
+9.1. (2 pts) Explique les causes de la guerre froide après 1945.
+9.2. (3 pts) Décris les grandes étapes de la guerre froide (blocus de Berlin, crise de Cuba, détente) jusqu'à sa fin.
 
-## SECTION 3: HISTOIRE DU CAMEROUN
+**Exercice 10 — L'Afrique indépendante (5 points)**
+10.1. (2 pts) Analyse les difficultés des jeunes États africains après l'indépendance.
+10.2. (3 pts) Explique les espoirs et les réalisations de l'unité africaine (OUA puis Union africaine).
 
-**Q3.** Raconter les étapes de la colonisation du Cameroun par l'Allemagne.
+---
 
-**Q3.** Expliquer le partage du Cameroun entre la France et l'Angleterre après la Première Guerre mondiale.
+## SECTION 3 : GÉOGRAPHIE PHYSIQUE DU CAMEROUN
 
-**Q3.** Décrire le processus d'indépendance du Cameroun en 1960.
+**Exercice 11 — La position et les frontières du Cameroun (5 points)**
+11.1. (2 pts) Décris la position géographique du Cameroun (coordonnées, littoral, frontières).
+11.2. (3 pts) Explique pourquoi le Cameroun est appelé « l'Afrique en miniature ».
 
-**Q3.** Expliquer la réunification du Cameroun en 1961.
+**Exercice 12 — Le plateau de l'Adamaoua (5 points)**
+12.1. (2 pts) Décris le relief, le climat et la végétation de l'Adamaoua.
+12.2. (3 pts) Explique le rôle de l'Adamaoua (château d'eau, élevage) pour le Cameroun.
 
-**Q3.** Décrire l'évolution politique du Cameroun de 1960 à nos jours.
+**Exercice 13 — Les plaines et bassins du Nord (5 points)**
+13.1. (2 pts) Décris la plaine du Tchad et le bassin de la Bénoué.
+13.2. (3 pts) Analyse les risques naturels dans le nord du Cameroun (sécheresse, désertification).
 
-## SECTION 4: HISTOIRE GÉNÉRALE
+**Exercice 14 — Le climat et les activités humaines (5 points)**
+14.1. (2 pts) Montre l'influence du climat sur les activités agricoles au Cameroun.
+14.2. (3 pts) Explique comment les populations s'adaptent aux contraintes climatiques (irrigation, cultures adaptées).
 
-**Q4.** Expliquer les causes et conséquences de la Première Guerre mondiale.
+**Exercice 15 — Les milieux naturels et leur protection (5 points)**
+15.1. (2 pts) Présente les principaux parcs et réserves naturels du Cameroun.
+15.2. (3 pts) Analyse les menaces sur les milieux naturels (déforestation, braconnage) et les solutions de protection.
 
-**Q4.** Expliquer les causes et conséquences de la Deuxième Guerre mondiale.
+---
 
-**Q4.** Décrire la traite négrière transatlantique et ses conséquences.
+## SECTION 4 : GÉOGRAPHIE HUMAINE ET ÉCONOMIQUE
 
-**Q4.** Expliquer le processus de décolonisation de l'Afrique.
+**Exercice 16 — La structure de la population (5 points)**
+16.1. (2 pts) Analyse la pyramide des âges du Cameroun (jeunesse de la population).
+16.2. (3 pts) Explique les conséquences de la jeunesse de la population (école, emploi, santé).
 
-**Q4.** Décrire la création et le rôle de l'ONU.
+**Exercice 17 — Le secteur primaire (5 points)**
+17.1. (2 pts) Présente les activités du secteur primaire (agriculture, élevage, pêche, forêt, mines).
+17.2. (3 pts) Analyse l'importance du secteur primaire dans l'économie camerounaise.
+
+**Exercice 18 — Le secteur tertiaire (5 points)**
+18.1. (2 pts) Décris les activités du secteur tertiaire (commerce, transports, services).
+18.2. (3 pts) Explique le rôle des banques, de l'éducation et de la santé dans le développement.
+
+**Exercice 19 — Les échanges et l'intégration régionale (5 points)**
+19.1. (2 pts) Présente les échanges commerciaux du Cameroun avec ses voisins.
+19.2. (3 pts) Analyse l'importance de l'intégration régionale (CEMAC) pour le commerce camerounais.
+
+**Exercice 20 — Bilan et perspectives de développement (5 points)**
+20.1. (2 pts) Fais le bilan des forces et des faiblesses du développement camerounais.
+20.2. (3 pts) Propose une stratégie de développement pour l'émergence du Cameroun (Vision 2035).
+
+---
+
+## BARÈME RÉCAPITULATIF
+
+| Section                    | Exercices        | Points  |
+| -------------------------- | ---------------- | ------- |
+| Histoire du Cameroun       | 1 à 5            | 25      |
+| Histoire générale          | 6 à 10           | 25      |
+| Géographie physique        | 11 à 15          | 25      |
+| Géographie humaine/économ. | 16 à 20          | 25      |
+| **Total**                  | **20 exercices** | **100** |

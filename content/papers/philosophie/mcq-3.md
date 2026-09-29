@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat PHILOSOPHIE P1 SET 3
+# CAMEROON BAC PHILOSOPHIE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Philosophie
-**Subject:** Philosophie
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** A1 / A2 / A4 / ABI
+**Matière :** Philosophie
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le contrat social de Rousseau :
+**Question 1.** L'impératif catégorique de Kant s'énonce :
 
-A. l'accord des citoyens pour vivre ensemble
-B. un contrat commercial
-C. une loi
-D. un décret
-
----
-
-**Q2.** La souveraineté est :
-
-A. le pouvoir suprême de l'État
-B. un droit
-C. une liberté
-D. un devoir
+A. « Agis de telle sorte que tu traites l'humanité, en ta personne et en celle d'autrui, toujours comme une fin, jamais comme un moyen »
+B. « Poursuis ton plaisir sans considération pour autrui »
+C. « Obéis toujours à tes désirs les plus forts »
+D. « Fais ce que tu veux, pourvu que personne ne te voie »
 
 ---
 
-**Q3.** La démocratie est :
+**Question 2.** Pour Épicure, le bonheur (ataraxie) consiste :
 
-A. le pouvoir du peuple
-B. le pouvoir d'un seul
-C. le pouvoir des riches
-D. le pouvoir des militaires
-
----
-
-**Q4.** La philosophie africaine :
-
-A. réfléchit sur les réalités africaines
-B. est une religion
-C. est une science
-D. est un art
+A. dans l'absence de trouble de l'âme, obtenue par la modération des désirs et la connaissance
+B. dans la satisfaction de tous les plaisirs sans limite
+C. dans la richesse et le pouvoir
+D. dans l'ascèse totale qui rejette tout plaisir
 
 ---
 
-**Q5.** L'ubuntu est :
+**Question 3.** Pour Sartre, « l'homme est condamné à être libre » signifie que :
 
-A. une valeur africaine de solidarité
-B. une religion
-C. une science
-D. un art
-
----
-
-**Q6.** La sagesse est :
-
-A. la connaissance pratique de la vie
-B. la science
-C. la richesse
-D. le pouvoir
+A. l'homme ne peut pas ne pas choisir, il est responsable de ses actes sans excuse
+B. l'homme est prisonnier de son destin
+C. la liberté est une punition infligée par Dieu
+D. l'homme est libre uniquement en société
 
 ---
 
-**Q7.** Le bonheur est :
+**Question 4.** Le déterminisme affirme que :
 
-A. le but de la vie selon les philosophes
-B. la richesse
-C. le pouvoir
-D. la gloire
-
----
-
-**Q8.** L'hédonisme affirme que :
-
-A. le plaisir est le bien suprême
-B. le devoir est suprême
-C. la raison est suprême
-D. la foi est suprême
+A. tout événement, y compris nos actes, a des causes qui le rendent nécessaire
+B. l'homme choisit toujours librement sans influence aucune
+C. le hasard gouverne entièrement le monde
+D. seule la volonté divine décide sans cause
 
 ---
 
-**Q9.** Le stoïcisme affirme que :
+**Question 5.** Pour Rousseau, le contrat social fonde la société sur :
 
-A. la vertu est le bien suprême
-B. le plaisir est suprême
-C. la richesse est suprême
-D. le pouvoir est suprême
-
----
-
-**Q10.** L'utilitarisme affirme que :
-
-A. l'utile est le critère du bien
-B. le devoir est suprême
-C. le plaisir est suprême
-D. la foi est suprême
+A. la volonté générale et la souveraineté du peuple
+B. la force du plus fort
+C. la propriété privée comme but suprême
+D. l'autorité divine des rois
 
 ---
 
-**Q11.** L'éthique de Kant repose sur :
+**Question 6.** Selon Marx, dans le système capitaliste, le travailleur est aliéné car :
 
-A. l'impératif catégorique
-B. le plaisir
-C. l'utilité
-D. la foi
-
----
-
-**Q12.** L'impératif catégorique de Kant :
-
-A. agis selon une maxime universalisable
-B. agis pour ton plaisir
-C. agis pour ton intérêt
-D. agis par peur
+A. il ne possède pas le produit de son travail et le travail lui devient étranger, contraint
+B. il travaille trop peu
+C. il est libre de posséder tous les moyens de production
+D. le travail lui procure le bonheur absolu
 
 ---
 
-**Q13.** La raison est :
+**Question 7.** La distinction entre la morale et l'éthique est souvent présentée ainsi :
 
-A. la faculté de penser et de juger
-B. la mémoire
-C. l'imagination
-D. la perception
-
----
-
-**Q14.** L'intelligence est :
-
-A. la capacité de comprendre et résoudre
-B. la mémoire
-C. l'imagination
-D. la perception
+A. la morale est un ensemble de règles concrètes, l'éthique une réflexion critique sur les valeurs et les fins
+B. la morale est une science, l'éthique une religion
+C. la morale est individuelle, l'éthique est toujours collective
+D. elles sont strictement identiques
 
 ---
 
-**Q15.** La philosophie des sciences étudie :
+**Question 8.** Pour Spinoza, la véritable liberté est :
 
-A. les fondements de la science
-B. la religion
-C. l'art
-D. la politique
-
----
-
-**Q16.** La science est :
-
-A. une connaissance méthodique et vérifiable
-B. une opinion
-C. une croyance
-D. une illusion
+A. la compréhension de la nécessité des choses, la connaissance qui libère des passions
+B. le libre arbitre absolu sans cause
+C. l'obéissance aveugle à ses désirs
+D. la liberté de faire n'importe quoi
 
 ---
 
-**Q17.** L'hypothèse scientifique est :
+**Question 9.** Le « contrat social » de Rousseau part de l'idée que :
 
-A. une supposition à vérifier
-B. une certitude
-C. une opinion
-D. une croyance
-
----
-
-**Q18.** L'expérience scientifique :
-
-A. vérifie les hypothèses
-B. crée des opinions
-C. est inutile
-D. est une croyance
+A. l'homme naît libre et que la société doit garantir cette liberté par un pacte
+B. l'homme naît esclave et doit le rester
+C. la société est naturelle et antérieure à tout pacte
+D. la propriété est antérieure à toute organisation sociale
 
 ---
 
-**Q19.** La philosophie morale étudie :
+**Question 10.** La justice, au sens de la justice sociale, renvoie notamment à :
 
-A. les principes du bien et du mal
-B. la nature
-C. la société
-D. la connaissance
-
----
-
-**Q20.** Le temps est :
-
-A. une réalité mesurable et vécue
-B. une illusion
-C. un objet
-D. une idée
+A. la juste répartition des biens, des droits et des devoirs entre les membres de la société
+B. la vengeance privée exercée par les victimes
+C. la force brute du plus fort
+D. l'égalité absolue de tous les revenus sans exception
 
 ---
 
 ## CORRIGÉ
 
-1. l'accord des citoyens pour vivre ensemble
-2. le pouvoir suprême de l'État
-3. le pouvoir du peuple
-4. réfléchit sur les réalités africaines
-5. une valeur africaine de solidarité
-6. la connaissance pratique de la vie
-7. le but de la vie selon les philosophes
-8. le plaisir est le bien suprême
-9. la vertu est le bien suprême
-10. l'utile est le critère du bien
-11. l'impératif catégorique
-12. agis selon une maxime universalisable
-13. la faculté de penser et de juger
-14. la capacité de comprendre et résoudre
-15. les fondements de la science
-16. une connaissance méthodique et vérifiable
-17. une supposition à vérifier
-18. vérifie les hypothèses
-19. les principes du bien et du mal
-20. une réalité mesurable et vécue
+1. A — « Agis de telle sorte que tu traites l'humanité, en ta personne et en celle d'autrui, toujours comme une fin, jamais comme un moyen »
+2. A — dans l'absence de trouble de l'âme, obtenue par la modération des désirs et la connaissance
+3. A — l'homme ne peut pas ne pas choisir, il est responsable de ses actes sans excuse
+4. A — tout événement, y compris nos actes, a des causes qui le rendent nécessaire
+5. A — la volonté générale et la souveraineté du peuple
+6. A — il ne possède pas le produit de son travail et le travail lui devient étranger, contraint
+7. A — la morale est un ensemble de règles concrètes, l'éthique une réflexion critique sur les valeurs et les fins
+8. A — la compréhension de la nécessité des choses, la connaissance qui libère des passions
+9. A — l'homme naît libre et que la société doit garantir cette liberté par un pacte
+10. A — la juste répartition des biens, des droits et des devoirs entre les membres de la société

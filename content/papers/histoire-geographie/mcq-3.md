@@ -1,223 +1,124 @@
-# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE P1 SET 3
+# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Histoire-Géographie
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Histoire-Géographie
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La population du Cameroun est d'environ :
+**Question 1.** La traite négrière transatlantique consistait à :
 
-A. 27 millions
-B. 10 millions
-C. 50 millions
-D. 5 millions
-
----
-
-**Q2.** La densité de population est la plus forte :
-
-A. dans les grandes villes
-B. dans le désert
-C. en montagne
-D. en forêt dense
+A. Déporter des millions d'Africains vers les Amériques comme esclaves
+B. Échanger du sel contre de l'or au Sahara
+C. Vendre des produits agricoles en Europe
+D. Recruter des travailleurs volontaires pour les plantations
 
 ---
 
-**Q3.** L'exode rural est :
+**Question 2.** Quel système d'administration les Britanniques ont-ils appliqué dans leur partie du Cameroun ?
 
-A. le départ des campagnes vers les villes
-B. le départ des villes vers les campagnes
-C. l'immigration
-D. l'émigration
-
----
-
-**Q4.** Le taux de natalité est :
-
-A. le nombre de naissances pour 1000 habitants
-B. le nombre de décès
-C. la croissance
-D. la densité
+A. L'assimilation directe
+B. L'indirect rule (administration indirecte par les chefs)
+C. Le code de l'indigénat
+D. La colonisation de peuplement
 
 ---
 
-**Q5.** Le taux de mortalité est :
+**Question 3.** Rudolf Duala Manga Bell, pendu en 1914, a protesté contre :
 
-A. le nombre de décès pour 1000 habitants
-B. le nombre de naissances
-C. la densité
-D. la croissance
-
----
-
-**Q6.** L'accroissement naturel est :
-
-A. natalité - mortalité
-B. natalité + mortalité
-C. immigration - émigration
-D. densité × surface
+A. La spoliation des terres douala par les Allemands
+B. Le travail forcé dans les plantations françaises
+C. L'exploitation du pétrole offshore
+D. La construction du barrage de Song Loulou
 
 ---
 
-**Q7.** La savane se trouve principalement :
+**Question 4.** Le référendum du 20 mai 1972 a conduit au Cameroun à :
 
-A. au nord du Cameroun
-B. au sud du Cameroun
-C. à l'ouest
-D. sur le littoral
-
----
-
-**Q8.** La forêt dense se trouve principalement :
-
-A. au sud du Cameroun
-B. au nord
-C. à l'extrême-nord
-D. sur les hauts plateaux
+A. L'indépendance nationale
+B. La réunification
+C. La création d'un État unitaire (fin du fédéralisme)
+D. La mise en place d'un État fédéral
 
 ---
 
-**Q9.** Le climat soudano-sahélien se trouve :
+**Question 5.** La savane arbustive, végétation de transition, se rencontre dans quelle zone du Cameroun ?
 
-A. au nord du Cameroun
-B. au sud
-C. à l'ouest
-D. sur le littoral
-
----
-
-**Q10.** Le climat équatorial se trouve :
-
-A. au sud du Cameroun
-B. au nord
-C. à l'extrême-nord
-D. sur les hauts plateaux
+A. Le Sud forestier
+B. Le plateau de l'Adamaoua
+C. La plaine côtière du littoral
+D. Les hautes montagnes de l'Ouest
 
 ---
 
-**Q11.** Le climat tropical humide se trouve :
+**Question 6.** Quel est le principal produit minier exporté par le Cameroun ?
 
-A. dans le centre du Cameroun
-B. au nord
-C. au sud
-D. sur le littoral
-
----
-
-**Q12.** L'agriculture vivrière produit :
-
-A. du manioc, maïs et banane
-B. du cacao et café
-C. du coton et arachide
-D. du pétrole
+A. Le fer de Mbalam
+B. La bauxite de Minim-Martap
+C. Le pétrole brut
+D. Le diamant de Mobilong
 
 ---
 
-**Q13.** L'agriculture de rente produit :
+**Question 7.** La croissance de la population camerounaise est d'environ :
 
-A. du cacao, café et coton
-B. du manioc et maïs
-C. de la banane plantain
-D. des légumes
-
----
-
-**Q14.** Le pétrole est exploité :
-
-A. dans le bassin du Rio del Rey
-B. au mont Cameroun
-C. à Yaoundé
-D. à Bafoussam
+A. 0,5 % par an
+B. 2,6 % par an
+C. 8 % par an
+D. 15 % par an
 
 ---
 
-**Q15.** Le tourisme au Cameroun est favorisé par :
+**Question 8.** Quelle est la cause de la montée du fascisme et du nazisme en Europe dans les années 1930 ?
 
-A. la diversité des paysages
-B. le désert
-C. la neige
-D. les glaciers
-
----
-
-**Q16.** Le parc national de Waza se trouve :
-
-A. à l'extrême-nord
-B. au sud
-C. à l'ouest
-D. sur le littoral
+A. La prospérité économique de la période
+B. La crise économique de 1929 et le mécontentement social
+C. La victoire de la Première Guerre mondiale
+D. Le développement des colonies
 
 ---
 
-**Q17.** Le parc national de Korup se trouve :
+**Question 9.** L'ONU, créée en 1945, a remplacé :
 
-A. au sud-ouest
-B. au nord
-C. à l'est
-D. au centre
-
----
-
-**Q18.** La déforestation est :
-
-A. la destruction de la forêt
-B. la plantation d'arbres
-C. la protection de la forêt
-D. la culture
+A. La Société des Nations (SDN)
+B. La CEE
+C. L'OTAN
+D. La conférence de Berlin
 
 ---
 
-**Q19.** Le développement durable vise :
+**Question 10.** La décolonisation massive de l'Afrique, avec l'indépendance de nombreux pays, s'est produite principalement dans les années :
 
-A. à satisfaire les besoins sans compromettre l'avenir
-B. la croissance rapide
-C. l'exploitation maximale
-D. la consommation
-
----
-
-**Q20.** La mondialisation est :
-
-A. l'interdépendance croissante des économies
-B. l'isolement des pays
-C. la guerre
-D. la colonisation
+A. 1880-1890
+B. 1914-1918
+C. 1945-1949
+D. 1960 (les « années 1960 »)
 
 ---
 
 ## CORRIGÉ
 
-1. 27 millions
-2. dans les grandes villes
-3. le départ des campagnes vers les villes
-4. le nombre de naissances pour 1000 habitants
-5. le nombre de décès pour 1000 habitants
-6. natalité - mortalité
-7. au nord du Cameroun
-8. au sud du Cameroun
-9. au nord du Cameroun
-10. au sud du Cameroun
-11. dans le centre du Cameroun
-12. du manioc, maïs et banane
-13. du cacao, café et coton
-14. dans le bassin du Rio del Rey
-15. la diversité des paysages
-16. à l'extrême-nord
-17. au sud-ouest
-18. la destruction de la forêt
-19. à satisfaire les besoins sans compromettre l'avenir
-20. l'interdépendance croissante des économies
+1. A
+2. B
+3. A
+4. C
+5. B
+6. C
+7. B
+8. B
+9. A
+10. D

@@ -1,223 +1,125 @@
-# CAMEROON Baccalauréat PHYSIQUE P1 SET 2
+# CAMEROON BAC PHYSIQUE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Physique
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C / D / E / TI
+**Matière :** Physique
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
+- Données utiles : $g = 10 \text{ m}\cdot\text{s}^{-2}$ ; $e = 1,6 \times 10^{-19} \text{ C}$ ; $c = 3 \times 10^8 \text{ m}\cdot\text{s}^{-1}$ ; $h = 6,6 \times 10^{-34} \text{ J}\cdot\text{s}$ ; $k = 9 \times 10^9 \text{ SI}$ ; $N_A = 6,02 \times 10^{23} \text{ mol}^{-1}$.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La puissance est :
+**Question 1.** Une sphère de masse $m = 200 \text{ g}$ est suspendue à l'équilibre. Quel est le poids de cette sphère ?
 
-A. P = W/t
-B. P = W·t
-C. P = t/W
-D. P = W+t
-
----
-
-**Q2.** L'unité de la puissance est :
-
-A. le watt
-B. le joule
-C. le newton
-D. le volt
+A. 2 N
+B. 20 N
+C. 0,2 N
+D. 200 N
 
 ---
 
-**Q3.** Le moment d'une force s'exprime en :
+**Question 2.** Un ressort de constante de raideur $k = 500 \text{ N/m}$ est allongé de 4 cm. Quelle est la valeur de la force de rappel exercée par le ressort ?
 
-A. N·m
-B. N/m
-C. N·m²
-D. N
-
----
-
-**Q4.** L'équilibre d'un solide exige :
-
-A. la somme des forces et moments nulle
-B. une force nulle
-C. un moment nul
-D. une vitesse nulle
+A. 20 N
+B. 125 N
+C. 2 N
+D. 500 N
 
 ---
 
-**Q5.** Le champ gravitationnel est :
+**Question 3.** L'énergie cinétique d'un corps de masse 2 kg se déplaçant à la vitesse de 10 m/s est :
 
-A. g = G·M/r²
-B. g = G·M·r²
-C. g = r²/G·M
-D. g = G·r²/M
-
----
-
-**Q6.** La constante de gravitation G vaut :
-
-A. 6,67×10⁻¹¹ N·m²/kg²
-B. 9,8 N/kg
-C. 3×10⁸ m/s
-D. 1,6×10⁻¹⁹ C
+A. 100 J
+B. 20 J
+C. 200 J
+D. 50 J
 
 ---
 
-**Q7.** Le mouvement uniforme a :
+**Question 4.** Deux charges ponctuelles $q_1 = 2 \ \mu\text{C}$ et $q_2 = 3 \ \mu\text{C}$ sont distantes de 0,3 m dans le vide. La force électrostatique entre elles est ($k = 9 \times 10^9 \text{ SI}$) :
 
-A. une vitesse constante
-B. une accélération constante
-C. une vitesse nulle
-D. une accélération nulle
-
----
-
-**Q8.** Le mouvement uniformément accéléré a :
-
-A. une accélération constante
-B. une vitesse constante
-C. une vitesse nulle
-D. une accélération nulle
+A. 0,6 N
+B. 0,2 N
+C. 60 N
+D. 6 N
 
 ---
 
-**Q9.** L'accélération est :
+**Question 5.** La constante de temps $\tau$ d'un circuit RC comportant $R = 5 \times 10^3 \ \Omega$ et $C = 2 \times 10^{-6} \text{ F}$ vaut :
 
-A. a = Δv/Δt
-B. a = Δv·Δt
-C. a = Δt/Δv
-D. a = v·t
-
----
-
-**Q10.** L'unité de l'accélération est :
-
-A. m/s²
-B. m/s
-C. m
-D. s
+A. 0,01 s
+B. 100 s
+C. 0,1 s
+D. 10 s
 
 ---
 
-**Q11.** La radioactivité α émet :
+**Question 6.** Deux ondes cohérentes produisent une interférence destructive en un point. La différence de marche $\delta$ en ce point vaut :
 
-A. un noyau d'hélium
-B. un électron
-C. un photon
-D. un neutron
-
----
-
-**Q12.** La radioactivité β⁻ émet :
-
-A. un électron
-B. un positron
-C. un photon
-D. un neutron
+A. $(2k+1)\frac{\lambda}{2}$
+B. $k\lambda$
+C. $2k\lambda$
+D. $\frac{\lambda}{4}$
 
 ---
 
-**Q13.** La radioactivité γ émet :
+**Question 7.** Dans un mouvement circulaire uniforme, le vecteur accélération est :
 
-A. un photon
-B. un électron
-C. un proton
-D. un neutron
-
----
-
-**Q14.** La demi-vie est :
-
-A. le temps pour que la moitié se désintègre
-B. le temps total de désintégration
-C. la moitié de la masse
-D. la moitié de l'énergie
+A. centripète (dirigé vers le centre)
+B. tangent au cercle
+C. nul
+D. dirigé radialement vers l'extérieur
 
 ---
 
-**Q15.** L'énergie de liaison est :
+**Question 8.** La demi-vie d'un isotope radioactif est $T = 20$ jours. Après 60 jours, la fraction de noyaux non désintégrés restante est :
 
-A. l'énergie pour séparer les nucléons
-B. l'énergie cinétique
-C. l'énergie potentielle
-D. l'énergie thermique
-
----
-
-**Q16.** Le défaut de masse est :
-
-A. la différence entre masse des nucléons et du noyau
-B. la masse totale
-C. la masse des électrons
-D. la masse nulle
+A. $\frac{1}{8}$
+B. $\frac{1}{4}$
+C. $\frac{1}{2}$
+D. $\frac{3}{4}$
 
 ---
 
-**Q17.** L'équivalence masse-énergie est :
+**Question 9.** Une lentille convergente a une distance focale $f' = 25 \text{ cm}$. Sa vergence est :
 
-A. E = mc²
-B. E = mc
-C. E = m/c²
-D. E = c²/m
-
----
-
-**Q18.** La fission nucléaire :
-
-A. divise un noyau lourd
-B. fusionne des noyaux légers
-C. émet des électrons
-D. absorbe des photons
+A. 4 $\delta$
+B. 0,04 $\delta$
+C. 25 $\delta$
+D. 0,25 $\delta$
 
 ---
 
-**Q19.** La fusion nucléaire :
+**Question 10.** Le défaut de masse $\Delta m$ d'un noyau correspond à :
 
-A. fusionne des noyaux légers
-B. divise un noyau lourd
-C. émet des électrons
-D. absorbe des photons
-
----
-
-**Q20.** Le circuit RLC série :
-
-A. contient résistance, bobine et condensateur
-B. contient uniquement une résistance
-C. contient uniquement une bobine
-D. contient uniquement un condensateur
+A. $E = \Delta m \cdot c^2$
+B. $E = \Delta m \cdot c$
+C. $E = \Delta m \cdot c^{-2}$
+D. $E = \frac{\Delta m}{c^2}$
 
 ---
 
 ## CORRIGÉ
 
-1. P = W/t
-2. le watt
-3. N·m
-4. la somme des forces et moments nulle
-5. g = G·M/r²
-6. 6,67×10⁻¹¹ N·m²/kg²
-7. une vitesse constante
-8. une accélération constante
-9. a = Δv/Δt
-10. m/s²
-11. un noyau d'hélium
-12. un électron
-13. un photon
-14. le temps pour que la moitié se désintègre
-15. l'énergie pour séparer les nucléons
-16. la différence entre masse des nucléons et du noyau
-17. E = mc²
-18. divise un noyau lourd
-19. fusionne des noyaux légers
-20. contient résistance, bobine et condensateur
+1. **A — 2 N.** $P = mg = 0,2 \times 10 = 2 \text{ N}$.
+2. **A — 20 N.** $F = kx = 500 \times 0,04 = 20 \text{ N}$.
+3. **A — 100 J.** $E_c = \frac{1}{2}mv^2 = \frac{1}{2} \times 2 \times 10^2 = 100 \text{ J}$.
+4. **A — 0,6 N.** $F = k\frac{|q_1 q_2|}{r^2} = 9 \times 10^9 \times \frac{2 \times 10^{-6} \times 3 \times 10^{-6}}{0,3^2} = \frac{9 \times 10^9 \times 6 \times 10^{-12}}{0,09} = 0,6 \text{ N}$.
+5. **A — 0,01 s.** $\tau = RC = 5 \times 10^3 \times 2 \times 10^{-6} = 0,01 \text{ s}$.
+6. **A — $(2k+1)\frac{\lambda}{2}$.** C'est la condition d'interférence destructive.
+7. **A — centripète.** Dans le MCU, l'accélération est normale, dirigée vers le centre.
+8. **A — $\frac{1}{8}$.** $60/20 = 3$ périodes, donc $\left(\frac{1}{2}\right)^3 = \frac{1}{8}$.
+9. **A — 4 $\delta$.** $V = \frac{1}{f'} = \frac{1}{0,25} = 4 \ \delta$.
+10. **A — $E = \Delta m \cdot c^2$.** Relation d'équivalence masse-énergie d'Einstein.

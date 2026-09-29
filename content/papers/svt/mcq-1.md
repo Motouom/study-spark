@@ -1,223 +1,124 @@
-# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE P1 SET 1
+# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Sciences de la Vie et de la Terre
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Sciences de la Vie et de la Terre (SVT)
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'unité de base du vivant est :
+**Question 1.** Au cours d'un TP, un élève observe au microscope une cellule qui possède une grande vacuole centrale, des chloroplastes et une paroi cellulosique. Il s'agit d'une cellule :
 
-A. la cellule
-B. l'atome
-C. la molécule
-D. l'organe
-
----
-
-**Q2.** La photosynthèse se déroule dans :
-
-A. les chloroplastes
-B. les mitochondries
-C. le noyau
-D. la membrane
+A. animale, car elle possède des chloroplastes
+B. végétale, car elle possède une paroi cellulosique et des chloroplastes
+C. bactérienne, car elle n'a pas de noyau
+D. sanguine, car elle est petite et arrondie
 
 ---
 
-**Q3.** Le dioxygène est produit par :
+**Question 2.** Une pomme de terre coupée en morceaux est placée dans un verre d'eau distillée pendant une nuit. Le matin, les morceaux sont devenus fermes et gonflés. Ce phénomène, où l'eau pénètre dans les cellules à travers la membrane, s'appelle :
 
-A. la photosynthèse
-B. la respiration
-C. la digestion
-D. la fermentation
-
----
-
-**Q4.** L'organe de la respiration chez l'homme est :
-
-A. le poumon
-B. le cœur
-C. le foie
-D. le rein
+A. la diffusion
+B. la respiration cellulaire
+C. l'osmose
+D. la photosynthèse
 
 ---
 
-**Q5.** Le sang est pompé par :
+**Question 3.** L'équation bilan de la respiration cellulaire, qui se déroule dans les mitochondries, est :
 
-A. le cœur
-B. le poumon
-C. le cerveau
-D. le foie
-
----
-
-**Q6.** L'unité de filtration du rein est :
-
-A. le néphron
-B. le neurone
-C. l'alvéole
-D. le glomérule
+A. $6CO_2 + 6H_2O \xrightarrow{\text{lumière}} C_6H_{12}O_6 + 6O_2$
+B. $C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O + \text{énergie}$
+C. $C_6H_{12}O_6 \rightarrow 2C_3H_6O_3 + \text{énergie}$
+D. $6O_2 + C_6H_{12}O_6 \rightarrow 6CO_2 + 6H_2O + \text{chlorophylle}$
 
 ---
 
-**Q7.** La cellule nerveuse s'appelle :
+**Question 4.** Lors d'un don de sang, un patient du groupe AB peut recevoir du sang de n'importe quel groupe, car il est appelé :
 
-A. le neurone
-B. le néphron
-C. le globule
-D. le gamète
-
----
-
-**Q8.** L'ADN se trouve dans :
-
-A. le noyau
-B. le cytoplasme
-C. la membrane
-D. la paroi
+A. donneur universel
+B. receveur universel
+C. groupe rhésus négatif
+D. groupe incompatible
 
 ---
 
-**Q9.** La reproduction sexuée fait intervenir :
+**Question 5.** Chez l'être humain, la fécondation (fusion du spermatozoïde et de l'ovule) se déroule normalement dans :
 
-A. deux gamètes
-B. un seul gamète
-C. aucun gamète
-D. des spores
-
----
-
-**Q10.** Le gamète mâle chez l'homme est :
-
-A. le spermatozoïde
-B. l'ovule
-C. le globule rouge
-D. le neurone
+A. l'utérus
+B. le vagin
+C. la trompe de Fallope (oviducte)
+D. l'ovaire
 
 ---
 
-**Q11.** Le gamète femelle chez la femme est :
+**Question 6.** Un couple de parents ayant les yeux marrons (génotype $Aa$) a eu un enfant aux yeux bleus (génotype $aa$). La probabilité que leur prochain enfant ait les yeux bleus est :
 
-A. l'ovule
-B. le spermatozoïde
-C. le globule blanc
-D. le neurone
-
----
-
-**Q12.** L'écosystème est constitué de :
-
-A. le biotope et la biocénose
-B. uniquement des plantes
-C. uniquement des animaux
-D. uniquement de l'eau
+A. 0 %
+B. 25 %
+C. 50 %
+D. 100 %
 
 ---
 
-**Q13.** Le prédateur est un être qui :
+**Question 7.** Dans un écosystème forestier, on observe la chaîne alimentaire suivante : feuilles → chenille → mésange → épervier. Le rôle des feuilles dans cette chaîne est celui de :
 
-A. chasse et se nourrit d'autres êtres
-B. est chassé
-C. se nourrit de plantes
-D. décompose la matière
-
----
-
-**Q14.** La chaîne alimentaire commence par :
-
-A. un producteur
-B. un consommateur
-C. un décomposeur
-D. un prédateur
+A. consommateur primaire
+B. consommateur secondaire
+C. décomposeur
+D. producteur
 
 ---
 
-**Q15.** Le décomposeur transforme la matière organique en :
+**Question 8.** Le paludisme est une maladie très répandue au Cameroun. Elle est transmise à l'homme par :
 
-A. matière minérale
-B. matière organique
-C. énergie
-D. gaz carbonique
-
----
-
-**Q16.** La fécondation est la fusion de :
-
-A. deux gamètes
-B. deux cellules somatiques
-C. deux neurones
-D. deux globules
+A. la piqûre du moustique anophèle femelle
+B. l'eau non potable
+C. les aliments contaminés
+D. le contact direct avec une personne malade
 
 ---
 
-**Q17.** Le groupe sanguin universel donneur est :
+**Question 9.** Une roche contient des fossiles marins (coquilles, ammonites) en très grand nombre. Cette observation permet d'affirmer que :
 
-A. O
-B. A
-C. B
-D. AB
-
----
-
-**Q18.** Le groupe sanguin universel receveur est :
-
-A. AB
-B. O
-C. A
-D. B
+A. la région a toujours été une montagne
+B. la région était autrefois recouverte par la mer
+C. la roche est d'origine volcanique
+D. les fossiles sont apparus récemment
 
 ---
 
-**Q19.** La vaccination consiste à :
+**Question 10.** Un élève souffrant d'une infection bactérienne reçoit un traitement. Le médicament le plus efficace contre les bactéries est :
 
-A. injecter un antigène atténué
-B. injecter des anticorps
-C. prendre des antibiotiques
-D. faire une transfusion
-
----
-
-**Q20.** L'antibiotique agit contre :
-
-A. les bactéries
-B. les virus
-C. les parasites
-D. les champignons
+A. un vaccin
+B. un antibiotique
+C. un antiviral
+D. un antipaludéen
 
 ---
 
 ## CORRIGÉ
 
-1. la cellule
-2. les chloroplastes
-3. la photosynthèse
-4. le poumon
-5. le cœur
-6. le néphron
-7. le neurone
-8. le noyau
-9. deux gamètes
-10. le spermatozoïde
-11. l'ovule
-12. le biotope et la biocénose
-13. chasse et se nourrit d'autres êtres
-14. un producteur
-15. matière minérale
-16. deux gamètes
-17. O
-18. AB
-19. injecter un antigène atténué
-20. les bactéries
+1. B — cellule végétale (paroi cellulosique et chloroplastes)
+2. C — l'osmose
+3. B — respiration cellulaire
+4. B — receveur universel
+5. C — la trompe de Fallope
+6. B — 25 %
+7. D — producteur
+8. A — moustique anophèle femelle
+9. B — la région était autrefois recouverte par la mer
+10. B — un antibiotique

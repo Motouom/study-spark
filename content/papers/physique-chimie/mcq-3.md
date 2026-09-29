@@ -1,223 +1,124 @@
-# CAMEROON BEPC PHYSIQUE-CHIMIE P1 SET 3
+# CAMEROON BEPC PHYSIQUE-CHIMIE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Physique-Chimie
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Physique-Chimie
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le symbole chimique de l'hydrogène est :
+**Question 1.** L'énergie électrique consommée par un appareil de puissance 1 500 W fonctionnant pendant 2 heures est :
 
-A. H
-B. Hy
-C. He
-D. Hg
-
----
-
-**Q2.** La dilution consiste à :
-
-A. ajouter de l'eau à une solution
-B. concentrer une solution
-C. chauffer une solution
-D. refroidir une solution
+A. 3 kWh
+B. 0,75 kWh
+C. 30 kWh
+D. 3 000 kWh
 
 ---
 
-**Q3.** Le symbole chimique du calcium est :
+**Question 2.** Dans un montage en dérivation (parallèle), la tension aux bornes de chaque branche est :
 
-A. Ca
-B. C
-C. Cl
-D. Cr
-
----
-
-**Q4.** Un aimant possède :
-
-A. deux pôles
-B. un pôle
-C. trois pôles
-D. aucun pôle
+A. la même que celle aux bornes du générateur
+B. divisée par le nombre de branches
+C. nulle
+D. toujours plus grande que celle du générateur
 
 ---
 
-**Q5.** La sublimation est le passage de :
+**Question 3.** Un objet de masse 500 g a un poids de (g = 10 N/kg) :
 
-A. solide à gaz
-B. gaz à liquide
-C. liquide à solide
-D. gaz à solide
-
----
-
-**Q6.** Le symbole chimique du sodium est :
-
-A. Na
-B. So
-C. S
-D. N
+A. 5 N
+B. 50 N
+C. 0,5 N
+D. 5 000 N
 
 ---
 
-**Q7.** L'énergie mécanique est la somme de :
+**Question 4.** Un train parcourt 120 km à la vitesse moyenne de 80 km/h. La durée du trajet est :
 
-A. l'énergie cinétique et potentielle
-B. l'énergie thermique et électrique
-C. l'énergie chimique et nucléaire
-D. l'énergie lumineuse et sonore
-
----
-
-**Q8.** Le symbole chimique du chlore est :
-
-A. Cl
-B. Ch
-C. C
-D. Cr
+A. 1,5 h
+B. 2 h
+C. 0,67 h
+D. 1 h
 
 ---
 
-**Q9.** Un circuit électrique fermé permet :
+**Question 5.** La formule permettant de calculer la pression est :
 
-A. le passage du courant
-B. l'arrêt du courant
-C. la coupure du courant
-D. aucun courant
-
----
-
-**Q10.** Le symbole chimique du potassium est :
-
-A. K
-B. P
-C. Po
-D. Ka
+A. $P = \frac{F}{S}$
+B. $P = F \times S$
+C. $P = \frac{S}{F}$
+D. $P = F + S$
 
 ---
 
-**Q11.** La masse se mesure avec :
+**Question 6.** Un corps dont la masse volumique est 800 kg/m³ placé dans l'eau (1 000 kg/m³) :
 
-A. une balance
-B. un thermomètre
-C. un baromètre
-D. un voltmètre
-
----
-
-**Q12.** Le symbole chimique du zinc est :
-
-A. Zn
-B. Z
-C. Zi
-D. Zr
+A. flotte
+B. coule
+C. reste en suspension
+D. se dissout
 
 ---
 
-**Q13.** L'unité de la masse en SI est :
+**Question 7.** Une solution de pH égal à 7 est :
 
-A. le kilogramme
-B. le gramme
-C. la tonne
-D. le newton
-
----
-
-**Q14.** Le symbole chimique du cuivre est :
-
-A. Cu
-B. Co
-C. C
-D. Cp
+A. neutre
+B. acide
+C. basique
+D. très concentrée
 
 ---
 
-**Q15.** La solidification est le passage de :
+**Question 8.** L'équation-bilan de la réaction entre l'acide chlorhydrique et la soude s'écrit :
 
-A. liquide à solide
-B. solide à liquide
-C. gaz à liquide
-D. liquide à gaz
-
----
-
-**Q16.** Le symbole chimique de l'aluminium est :
-
-A. Al
-B. A
-C. Am
-D. Ar
+A. $HCl + NaOH \rightarrow H_2O + NaCl$
+B. $HCl + NaOH \rightarrow H_2 + NaCl$
+C. $HCl + NaOH \rightarrow Cl_2 + Na$
+D. $HCl + NaOH \rightarrow H_2O + Na$
 
 ---
 
-**Q17.** L'ampèremètre se branche :
+**Question 9.** L'unité SI de l'énergie est :
 
-A. en série
-B. en dérivation
-C. en parallèle
-D. n'importe comment
-
----
-
-**Q18.** Le voltmètre se branche :
-
-A. en dérivation
-B. en série
-C. en parallèle
-D. n'importe comment
+A. le joule
+B. le watt
+C. le newton
+D. le pascal
 
 ---
 
-**Q19.** Le symbole chimique du plomb est :
+**Question 10.** Un rayon lumineux frappe un miroir plan avec un angle d'incidence de 40°. L'angle de réflexion est :
 
-A. Pb
-B. Pl
-C. P
-D. Po
-
----
-
-**Q20.** La lumière se propage :
-
-A. en ligne droite
-B. en courbe
-C. en zigzag
-D. en cercle
+A. 40°
+B. 50°
+C. 90°
+D. 140°
 
 ---
 
 ## CORRIGÉ
 
-1. H
-2. ajouter de l'eau à une solution
-3. Ca
-4. deux pôles
-5. solide à gaz
-6. Na
-7. l'énergie cinétique et potentielle
-8. Cl
-9. le passage du courant
-10. K
-11. une balance
-12. Zn
-13. le kilogramme
-14. Cu
-15. liquide à solide
-16. Al
-17. en série
-18. en dérivation
-19. Pb
-20. en ligne droite
+1. **3 kWh** — $E = P \times t = 1,5 \text{ kW} \times 2 \text{ h} = 3$ kWh.
+2. **la même que celle aux bornes du générateur** — Loi des tensions en dérivation.
+3. **5 N** — $P = mg = 0,5 \times 10 = 5$ N (500 g = 0,5 kg).
+4. **1,5 h** — $t = \frac{d}{v} = \frac{120}{80} = 1,5$ h.
+5. **$P = \frac{F}{S}$**
+6. **flotte** — car $\rho_{\text{corps}} < \rho_{\text{eau}}$.
+7. **neutre**
+8. **$HCl + NaOH \rightarrow H_2O + NaCl$** — Réaction acide-base (neutralisation).
+9. **le joule**
+10. **40°** — L'angle de réflexion est égal à l'angle d'incidence.

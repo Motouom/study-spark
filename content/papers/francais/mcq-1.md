@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat FRANÇAIS P1 SET 1
+# CAMEROON BEPC FRANÇAIS — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** A1, A2, A4, ABI, C, D
-**Subject:** Français
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Français
+**Durée :** 1 heure
+**Coefficient :** 1
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le commentaire composé consiste à :
+**Question 1.** Dans la phrase « Les élèves **révisent** leurs leçons chaque soir. », le mot en gras est :
 
-A. analyser un texte
-B. résumer un texte
-C. inventer un texte
-D. traduire un texte
-
----
-
-**Q2.** La dissertation :
-
-A. développe une réflexion argumentée
-B. résume un texte
-C. décrit un lieu
-D. raconte une histoire
+A. un nom
+B. un verbe conjugué
+C. un adjectif qualificatif
+D. un adverbe
 
 ---
 
-**Q3.** La contraction de texte :
+**Question 2.** Dans la phrase « Le petit garçon joue dans la cour. », « petit » est :
 
-A. réduit un texte en respectant l'essentiel
-B. développe un texte
-C. traduit un texte
-D. invente un texte
-
----
-
-**Q4.** Le registre lyrique exprime :
-
-A. les sentiments personnels
-B. la peur
-C. le rire
-D. la colère
+A. un adjectif qualificatif épithète
+B. un déterminant possessif
+C. un adverbe de manière
+D. un pronom relatif
 
 ---
 
-**Q5.** Le registre tragique :
+**Question 3.** Le complément d'objet direct (COD) de la phrase « Amina mange **une mangue** mûre. » est :
 
-A. la fatalité et la mort
-B. la joie
-C. le comique
-D. l'ironie
-
----
-
-**Q6.** Le registre comique :
-
-A. provoque le rire
-B. provoque la peur
-C. exprime la tristesse
-D. exprime la colère
+A. Amina
+B. mange
+C. une mangue
+D. mûre
 
 ---
 
-**Q7.** Le registre épique :
+**Question 4.** Quel est le mode et le temps du verbe « viendrait » dans « Je souhaiterais qu'il **viendrait** demain. » ?
 
-A. héroïsme et grandeur
-B. le rire
-C. la peur
-D. la tristesse
-
----
-
-**Q8.** Le registre pathétique :
-
-A. susciter l'émotion et la pitié
-B. provoquer le rire
-C. exprimer la colère
-D. décrire
+A. indicatif futur simple
+B. conditionnel présent
+C. subjonctif présent
+D. indicatif imparfait
 
 ---
 
-**Q9.** Le registre ironique :
+**Question 5.** La phrase « Il pleut des cordes. » est une figure de style appelée :
 
-A. dire le contraire de ce qu'on pense
-B. exprimer la joie
-C. décrire
-D. raconter
-
----
-
-**Q10.** La tragédie classique respecte :
-
-A. la règle des trois unités
-B. aucune règle
-C. la liberté totale
-D. le comique
+A. une métaphore
+B. une comparaison
+C. une hyperbole
+D. une métonymie
 
 ---
 
-**Q11.** La règle des trois unités :
+**Question 6.** Quel mot est correctement orthographié ?
 
-A. temps, lieu, action
-B. temps, lieu, personnage
-C. action, personnage, décor
-D. temps, action, dialogue
-
----
-
-**Q12.** La catharsis :
-
-A. la purgation des passions
-B. le rire
-C. la peur
-D. la colère
+A. Les élèvent sont sages
+B. Les élèves sont sages
+C. Les élève sont sages
+D. Les élèves son sages
 
 ---
 
-**Q13.** Le théâtre de l'absurde :
+**Question 7.** Le pluriel du mot « un cheval » est :
 
-A. l'absurdité de la condition humaine
-B. le réalisme
-C. le romantisme
-D. le classicisme
-
----
-
-**Q14.** Le romantisme :
-
-A. l'expression des sentiments
-B. la raison
-C. la mesure
-D. le classicisme
+A. des chevals
+B. des chevaux
+C. des cheveaux
+D. des chevaus
 
 ---
 
-**Q15.** Le réalisme :
+**Question 8.** Dans la phrase « **Quand** il arrive, il salue tout le monde. », le mot en gras indique :
 
-A. la représentation fidèle de la réalité
-B. l'idéalisation
-C. le rêve
-D. le fantastique
-
----
-
-**Q16.** Le naturalisme :
-
-A. l'application de la méthode scientifique
-B. l'idéalisation
-C. le rêve
-D. le fantastique
+A. le temps
+B. le lieu
+C. la cause
+D. le but
 
 ---
 
-**Q17.** Le symbolisme :
+**Question 9.** Le synonyme du mot « courir » est :
 
-A. les symboles et les correspondances
-B. le réalisme
-C. le naturalisme
-D. le classicisme
-
----
-
-**Q18.** Le surréalisme :
-
-A. l'inconscient et le rêve
-B. la raison
-C. la mesure
-D. le classicisme
+A. marcher
+B. galoper
+C. s'asseoir
+D. dormir
 
 ---
 
-**Q19.** La poésie lyrique :
+**Question 10.** Dans « Elle chante **aussi bien que** sa sœur. », on a affaire à :
 
-A. exprime les sentiments
-B. raconte une histoire
-C. décrit
-D. argumente
-
----
-
-**Q20.** Le sonnet :
-
-A. 14 vers
-B. 12 vers
-C. 10 vers
-D. 16 vers
+A. une comparaison
+B. une métaphore
+C. une personnification
+D. une antithèse
 
 ---
 
 ## CORRIGÉ
 
-1. analyser un texte
-2. développe une réflexion argumentée
-3. réduit un texte en respectant l'essentiel
-4. les sentiments personnels
-5. la fatalité et la mort
-6. provoque le rire
-7. héroïsme et grandeur
-8. susciter l'émotion et la pitié
-9. dire le contraire de ce qu'on pense
-10. la règle des trois unités
-11. temps, lieu, action
-12. la purgation des passions
-13. l'absurdité de la condition humaine
-14. l'expression des sentiments
-15. la représentation fidèle de la réalité
-16. l'application de la méthode scientifique
-17. les symboles et les correspondances
-18. l'inconscient et le rêve
-19. exprime les sentiments
-20. 14 vers
+1. B — « révisent » est un verbe conjugué au présent de l'indicatif.
+2. A — « petit » est un adjectif qualificatif épithète qui qualifie « garçon ».
+3. C — « une mangue » répond à la question « mange quoi ? ».
+4. B — « viendrait » est au conditionnel présent (terminaison -rait).
+5. A — « Il pleut des cordes » est une métaphore (assimilation de la pluie à des cordes, sans outil de comparaison).
+6. B — « Les élèves sont sages » : « élèves » prend un s, « sont » est le verbe être.
+7. B — le pluriel de « cheval » est « chevaux ».
+8. A — « quand » exprime le temps.
+9. B — « galoper » est un synonyme de « courir » (courir à toute allure).
+10. A — l'outil de comparaison « aussi bien que » introduit une comparaison.

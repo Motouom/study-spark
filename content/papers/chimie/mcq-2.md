@@ -1,223 +1,125 @@
-# CAMEROON Baccalauréat CHIMIE P1 SET 2
+# CAMEROON BAC CHIMIE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Chimie
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C, D, E, TI
+**Matière :** Chimie
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
+- **Données utiles :** $M(C)=12\ \text{g/mol}$, $M(H)=1\ \text{g/mol}$, $M(O)=16\ \text{g/mol}$, $M(Na)=23\ \text{g/mol}$, $M(Cl)=35,5\ \text{g/mol}$, $K_e = 10^{-14}$ à 25 °C.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La cathode est :
+**Question 1.** Quelle est la quantité de matière contenue dans 8,8 g de dioxyde de carbone $\text{CO}_2$ ?
 
-A. l'électrode où a lieu la réduction
-B. l'électrode où a lieu l'oxydation
-C. l'électrode neutre
-D. le pôle positif
-
----
-
-**Q2.** La cinétique chimique étudie :
-
-A. la vitesse des réactions
-B. l'équilibre
-C. la thermodynamique
-D. la structure
+A. 0,2 mol
+B. 0,5 mol
+C. 2,0 mol
+D. 0,8 mol
 
 ---
 
-**Q3.** La vitesse d'une réaction :
+**Question 2.** On dissout 0,5 mol de soluté dans 250 mL d'eau. La concentration molaire de la solution est :
 
-A. diminue avec le temps
-B. augmente avec le temps
-C. est constante
-D. est nulle
-
----
-
-**Q4.** Un catalyseur :
-
-A. accélère la réaction sans être consommé
-B. ralentit la réaction
-C. est consommé
-D. n'a aucun effet
+A. 0,5 mol/L
+B. 2,0 mol/L
+C. 0,125 mol/L
+D. 8,0 mol/L
 
 ---
 
-**Q5.** La température :
+**Question 3.** Le pH d'une solution aqueuse d'hydroxyde de sodium $\text{NaOH}$ de concentration $c = 1,0 \times 10^{-2}\ \text{mol/L}$ (base forte totalement dissociée) vaut :
 
-A. augmente la vitesse de réaction
-B. diminue la vitesse
-C. n'a aucun effet
-D. arrête la réaction
-
----
-
-**Q6.** L'équilibre chimique :
-
-A. les vitesses directe et inverse sont égales
-B. la réaction s'arrête
-C. les concentrations sont nulles
-D. la réaction est totale
+A. 2
+B. 7
+C. 12
+D. 14
 
 ---
 
-**Q7.** La constante d'équilibre K :
+**Question 4.** La relation liant le $pK_a$ d'un couple acide/base à sa constante d'acidité $K_a$ est :
 
-A. caractérise l'équilibre
-B. mesure la vitesse
-C. mesure la température
-D. mesure la masse
-
----
-
-**Q8.** Le principe de Le Chatelier :
-
-A. un système réagit pour s'opposer à une perturbation
-B. un système ne réagit pas
-C. un système accélère
-D. un système s'arrête
+A. $pK_a = \log K_a$
+B. $pK_a = -\log K_a$
+C. $pK_a = K_a$
+D. $pK_a = 14 - \log K_a$
 
 ---
 
-**Q9.** La thermochimie étudie :
+**Question 5.** On considère l'équilibre : $\text{N}_2 + 3\text{H}_2 \rightleftharpoons 2\text{NH}_3 + \text{chaleur}$. Pour déplacer l'équilibre dans le sens de la formation de l'ammoniac, on peut :
 
-A. les échanges de chaleur
-B. la vitesse
-C. l'équilibre
-D. la structure
-
----
-
-**Q10.** Une réaction exothermique :
-
-A. libère de la chaleur
-B. absorbe de la chaleur
-C. ne dégage rien
-D. est froide
+A. Augmenter la température
+B. Augmenter la pression
+C. Ajouter un catalyseur
+D. Retirer de l'azote
 
 ---
 
-**Q11.** Une réaction endothermique :
+**Question 6.** Le nombre d'oxydation du manganèse dans l'ion permanganate $\text{MnO}_4^-$ est :
 
-A. absorbe de la chaleur
-B. libère de la chaleur
-C. ne dégage rien
-D. est chaude
-
----
-
-**Q12.** L'enthalpie de réaction ΔH :
-
-A. mesure la chaleur échangée
-B. mesure la vitesse
-C. mesure la masse
-D. mesure le volume
+A. $+2$
+B. $+4$
+C. $+6$
+D. $+7$
 
 ---
 
-**Q13.** La chimie organique étudie :
+**Question 7.** Dans une électrolyse, l'électrode où se produit l'oxydation est appelée :
 
-A. les composés du carbone
-B. les métaux
-C. les gaz rares
-D. les sels
-
----
-
-**Q14.** Le carbone a une valence :
-
-A. 4
-B. 2
-C. 3
-D. 1
+A. La cathode
+B. L'anode
+C. Le pont salin
+D. Le pôle négatif de la pile
 
 ---
 
-**Q15.** L'isomérie :
+**Question 8.** La réaction entre un acide carboxylique et un alcool, en présence d'un catalyseur, qui donne un ester et de l'eau, s'appelle :
 
-A. même formule brute, structure différente
-B. formule différente
-C. même structure
-D. même masse
-
----
-
-**Q16.** Les alcanes ont pour formule générale :
-
-A. CnH₂n₊₂
-B. CnH₂n
-C. CnH₂n₋₂
-D. CnHn
+A. La saponification
+B. L'hydrolyse
+C. L'estérification
+D. La polymérisation
 
 ---
 
-**Q17.** Les alcènes ont pour formule générale :
+**Question 9.** Quelle est la formule brute du butane, alcane à 4 atomes de carbone ?
 
-A. CnH₂n
-B. CnH₂n₊₂
-C. CnH₂n₋₂
-D. CnHn
-
----
-
-**Q18.** Les alcynes ont pour formule générale :
-
-A. CnH₂n₋₂
-B. CnH₂n
-C. CnH₂n₊₂
-D. CnHn
+A. $\text{C}_4\text{H}_8$
+B. $\text{C}_4\text{H}_{10}$
+C. $\text{C}_4\text{H}_6$
+D. $\text{C}_4\text{H}_4$
 
 ---
 
-**Q19.** Le groupe fonctionnel des alcools est :
+**Question 10.** Une réaction dont la vitesse ne dépend que de la concentration d'un seul réactif est d'ordre :
 
-A. -OH
-B. -COOH
-C. -CHO
-D. -NH₂
-
----
-
-**Q20.** Le groupe fonctionnel des acides carboxyliques est :
-
-A. -COOH
-B. -OH
-C. -CHO
-D. -NH₂
+A. zéro
+B. un
+C. deux
+D. trois
 
 ---
 
 ## CORRIGÉ
 
-1. l'électrode où a lieu la réduction
-2. la vitesse des réactions
-3. diminue avec le temps
-4. accélère la réaction sans être consommé
-5. augmente la vitesse de réaction
-6. les vitesses directe et inverse sont égales
-7. caractérise l'équilibre
-8. un système réagit pour s'opposer à une perturbation
-9. les échanges de chaleur
-10. libère de la chaleur
-11. absorbe de la chaleur
-12. mesure la chaleur échangée
-13. les composés du carbone
-14. 4
-15. même formule brute, structure différente
-16. CnH₂n₊₂
-17. CnH₂n
-18. CnH₂n₋₂
-19. -OH
-20. -COOH
+1. A — 0,2 mol ($n = \frac{m}{M} = \frac{8,8}{44} = 0,2$ mol)
+2. B — 2,0 mol/L ($C = \frac{n}{V} = \frac{0,5}{0,250} = 2,0$ mol/L)
+3. C — pH 12 (base forte : $[\text{OH}^-] = c = 10^{-2}$, $\text{pOH} = 2$, $\text{pH} = 14 - 2 = 12$)
+4. B — $pK_a = -\log K_a$
+5. B — Augmenter la pression (réaction produisant moins de moles de gaz, déplacement vers la droite)
+6. D — $+7$ ($x + 4\times(-2) = -1 \Rightarrow x = +7$)
+7. B — L'anode (l'oxydation a lieu à l'anode)
+8. C — L'estérification (réaction de l'acide carboxylique avec un alcool)
+9. B — $\text{C}_4\text{H}_{10}$ (alcanes : $C_nH_{2n+2}$, avec $n=4$)
+10. B — ordre un (la vitesse est proportionnelle à $[A]^1$)

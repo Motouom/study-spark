@@ -1,66 +1,129 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES SET 4
+# CAMEROON BEPC MATHÉMATIQUES — ÉPREUVE 2 — SÉRIE 4
 
-## Structural Question Bank - Set 4
+## Épreuve de problèmes et exercices
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Mathématiques
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Mathématiques
+**Durée :** 2 heures
+**Coefficient :** 4
 
-**Instructions:**
+**Consignes :**
 
 - Réponds à toutes les questions de manière claire et organisée.
-- Montre tous les calculs et raisonnements lorsque c'est nécessaire.
+- Montre tous les calculs et raisonnements.
 - Utilise la terminologie et les normes de présentation de l'examen camerounais.
 - Les schémas, tableaux et graphiques doivent être inclus lorsque c'est utile.
+- La qualité de la rédaction et la clarté des explications sont prises en compte.
 
 ---
 
-## SECTION 1: GÉOMÉTRIE ET COMPLEXES
+## SECTION 1 : STATISTIQUES ET PROBABILITÉS
 
-**Q1.** Résoudre une équation dans l'ensemble des nombres complexes.
+**Exercice 1.** La série suivante donne les notes de 10 élèves : 8, 12, 15, 9, 14, 11, 13, 10, 16, 12. Calculer la moyenne, la médiane et l'étendue.
 
-**Q1.** Calculer le module et l'argument d'un nombre complexe.
+*(5 points)*
 
-**Q1.** Déterminer l'image d'un point par une transformation géométrique.
+**Exercice 1.** Dans un sac, il y a 3 boules rouges, 2 vertes et 5 bleues. On tire une boule au hasard. Calculer la probabilité de tirer une boule verte, puis une boule rouge ou bleue.
 
-**Q1.** Calculer un produit scalaire et une norme dans l'espace.
+*(5 points)*
 
-**Q1.** Résoudre un problème de géométrie dans l'espace.
+**Exercice 1.** Un dé à six faces est lancé. Calculer la probabilité d'obtenir un nombre pair, puis un nombre supérieur à 4.
 
-## SECTION 2: ANALYSE
+*(5 points)*
 
-**Q2.** Étudier les variations de la fonction $f(x) = x^3 - 3x + 2$ et tracer sa courbe.
+**Exercice 1.** Construire un tableau d'effectifs pour la série : 2, 3, 3, 4, 4, 4, 5, 5, 6 et calculer la moyenne pondérée.
 
-**Q2.** Calculer $\lim_{x \to +\infty} \frac{2x^2 + 3x - 1}{x^2 + 1}$.
+*(5 points)*
 
-**Q2.** Calculer l'intégrale $\int_0^1 (3x^2 + 2x) \, dx$.
+**Exercice 1.** La moyenne de 5 nombres est 12. Calculer leur somme, puis la nouvelle moyenne si on ajoute 18.
 
-**Q2.** Déterminer l'équation de la tangente à la courbe de $f(x) = \ln(x)$ au point d'abscisse 1.
+*(5 points)*
 
-**Q2.** Étudier la fonction $f(x) = \frac{x}{x + 1}$ et tracer sa courbe.
+## SECTION 2 : PROBLÈMES CONCRETS
 
-## SECTION 3: ALGÈBRE ET SUITES
+**Exercice 2.** Un champ rectangulaire mesure 120 m sur 80 m. Calculer son aire en hectares (1 ha = 10 000 m²), puis le coût de la clôture à 1 500 FCFA le mètre.
 
-**Q3.** Résoudre l'équation $x^2 - 5x + 6 = 0$.
+*(5 points)*
 
-**Q3.** Étudier la suite $u_n = 2n + 3$ : nature, raison, terme général.
+**Exercice 2.** Une voiture parcourt 240 km en 3 heures. Calculer sa vitesse moyenne en km/h, puis le temps pour parcourir 400 km à cette vitesse.
 
-**Q3.** Étudier la suite $u_n = 3 \times 2^n$ : nature, raison, somme des n premiers termes.
+*(5 points)*
 
-**Q3.** Résoudre le système : $\begin{cases} x + 2y = 5 \\ 3x - y = 1 \end{cases}$.
+**Exercice 2.** Un réservoir contient 1 500 litres. On le remplit à raison de 60 litres par minute. Combien de temps faut-il pour le remplir ?
 
-**Q3.** Factoriser et résoudre : $x^3 - 4x = 0$.
+*(5 points)*
 
-## SECTION 4: PROBABILITÉS ET STATISTIQUES
+**Exercice 2.** Un commerçant achète un article à 5 000 FCFA et le revend à 6 250 FCFA. Calculer le pourcentage de bénéfice.
 
-**Q4.** Une urne contient 5 boules rouges et 3 bleues. On tire 2 boules sans remise. Calculer la probabilité d'obtenir 2 boules rouges.
+*(5 points)*
 
-**Q4.** Une variable aléatoire X suit la loi binomiale B(10 ; 0,4). Calculer son espérance et sa variance.
+**Exercice 2.** Partager 24 000 FCFA entre trois personnes dans le rapport 2 : 3 : 5.
 
-**Q4.** Calculer la moyenne, la variance et l'écart-type de la série : 2, 4, 6, 8, 10.
+*(5 points)*
 
-**Q4.** Deux événements A et B sont indépendants avec P(A) = 0,3 et P(B) = 0,5. Calculer P(A ∩ B).
+## SECTION 3 : ARITHMÉTIQUE ET NOMBRES
 
-**Q4.** Une loi normale a pour moyenne 50 et écart-type 10. Calculer P(40 ≤ X ≤ 60).
+**Exercice 3.** Décomposer 360 et 504 en produits de facteurs premiers, puis calculer leur PGCD et leur PPCM.
+
+*(5 points)*
+
+**Exercice 3.** Un nombre est divisible par 3 et par 5. Donner trois exemples possibles et justifier chaque réponse.
+
+*(5 points)*
+
+**Exercice 3.** Calculer : $\frac{7}{12} + \frac{5}{18} - \frac{1}{4}$ et donner le résultat sous forme irréductible.
+
+*(5 points)*
+
+**Exercice 3.** Un article coûte 8 000 FCFA. Il subit une hausse de 15% puis une baisse de 10%. Calculer le prix final et le pourcentage global de variation.
+
+*(5 points)*
+
+**Exercice 3.** Écrire 0,000 000 25 et 4 500 000 000 en notation scientifique, puis effectuer leur produit.
+
+*(5 points)*
+
+## SECTION 4 : ALGÈBRE ET ÉQUATIONS
+
+**Exercice 4.** Résoudre l'équation : $\frac{2x - 3}{4} = \frac{x + 1}{2}$ et vérifier la solution.
+
+*(5 points)*
+
+**Exercice 4.** Résoudre le système : $\begin{cases} 3x + 2y = 19 \\ 2x - y = 1 \end{cases}$ par la méthode de combinaison.
+
+*(5 points)*
+
+**Exercice 4.** Factoriser : $9x^2 - 16$ puis résoudre $9x^2 - 16 = 0$.
+
+*(5 points)*
+
+**Exercice 4.** Développer et réduire : $(2x + 3)^2 - (x - 1)(x + 1)$.
+
+*(5 points)*
+
+**Exercice 4.** Un père a 40 ans, son fils a 12 ans. Dans combien d'années le père aura-t-il le triple de l'âge du fils ?
+
+*(5 points)*
+
+## SECTION 5 : GÉOMÉTRIE ET MESURES
+
+**Exercice 5.** ABC est un triangle rectangle en A avec AB = 6 cm et AC = 8 cm. Calculer BC, puis l'aire du triangle.
+
+*(5 points)*
+
+**Exercice 5.** Calculer l'aire et le périmètre d'un cercle de rayon 7 cm (π ≈ 3,14).
+
+*(5 points)*
+
+**Exercice 5.** Un triangle a pour angles 40° et 75°. Calculer le troisième angle et préciser la nature du triangle.
+
+*(5 points)*
+
+**Exercice 5.** Calculer le volume d'un cylindre de rayon 3 cm et de hauteur 10 cm (π ≈ 3,14).
+
+*(5 points)*
+
+**Exercice 5.** Deux angles sont complémentaires. L'un mesure 35°. Calculer l'autre et donner son supplément.
+
+*(5 points)*

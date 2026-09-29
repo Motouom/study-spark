@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE P1 SET 3
+# CAMEROON BAC SCIENCES DE LA VIE ET DE LA TERRE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, TI
-**Subject:** Sciences de la Vie et de la Terre
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C, D, TI
+**Matière :** Sciences de la Vie et de la Terre (SVT)
+**Durée :** 30 minutes
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le volcan :
+**Question 1.** Le codage génétique est qualifié de dégénéré car :
 
-A. remontée du magma
-B. séisme
-C. pluie
-D. vent
-
----
-
-**Q2.** Les roches magmatiques :
-
-A. refroidissement du magma
-B. sédimentation
-C. métamorphisme
-D. érosion
+A. plusieurs codons peuvent coder pour le même acide aminé
+B. un codon ne code que pour un seul acide aminé
+C. le code est identique chez tous les êtres vivants
+D. les codons sont lus sans ponctuation
 
 ---
 
-**Q3.** Les roches sédimentaires :
+**Question 2.** Le complexe majeur d'histocompatibilité (CMH) intervient dans la reconnaissance immunitaire en :
 
-A. accumulation de sédiments
-B. refroidissement du magma
-C. métamorphisme
-D. éruption
-
----
-
-**Q4.** Les roches métamorphiques :
-
-A. transformation sous pression/température
-B. refroidissement du magma
-C. sédimentation
-D. érosion
+A. présentant des peptides antigéniques aux lymphocytes T
+B. produisant des anticorps circulants
+C. détruisant directement les virus
+D. activant le complément sans reconnaissance
 
 ---
 
-**Q5.** Le fossile :
+**Question 3.** Le réflexe myotatique (réflexe rotulien) met en jeu une voie nerveuse :
 
-A. reste d'être vivant conservé
-B. une roche
-C. un minéral
-D. un volcan
-
----
-
-**Q6.** La datation relative :
-
-A. ordonne les événements dans le temps
-B. donne un âge absolu
-C. mesure la température
-D. mesure la masse
+A. monosynaptique entre le neurone sensitif et le motoneurone
+B. polysynaptique à trois neurones
+C. purement humorale sans neurone
+D. uniquement corticale
 
 ---
 
-**Q7.** La datation absolue :
+**Question 4.** La régulation de la glycémie utilise un système de rétrocontrôle négatif dans lequel :
 
-A. donne un âge en années
-B. ordonne les événements
-C. mesure la température
-D. mesure la masse
-
----
-
-**Q8.** La dérive des continents :
-
-A. les continents se déplacent
-B. les continents sont fixes
-C. les océans disparaissent
-D. la Terre est plate
+A. l'augmentation du glucose stimule l'insuline qui, en baissant le glucose, freine sa propre sécrétion
+B. l'insuline stimule toujours sa propre sécrétion en boucle positive
+C. le glucagon est sécrété en permanence sans régulation
+D. le glucose sanguin n'influence jamais la sécrétion hormonale
 
 ---
 
-**Q9.** L'expansion océanique :
+**Question 5.** Les séismes se concentrent préférentiellement le long des zones de :
 
-A. les fonds océaniques s'écartent
-B. les océans rétrécissent
-C. les continents se rapprochent
-D. la Terre rétrécit
-
----
-
-**Q10.** La subduction :
-
-A. plongement d'une plaque sous une autre
-B. écartement des plaques
-C. collision
-D. érosion
+A. subduction et dorsales (frontières de plaques)
+B. plaines continentales stables
+C. cratons anciens
+D. bassins sédimentaires profonds
 
 ---
 
-**Q11.** La biodiversité :
+**Question 6.** La loi de Hardy-Weinberg décrit un état d'équilibre génétique atteint dans une population si, entre autres conditions :
 
-A. variété des êtres vivants
-B. quantité d'eau
-C. température
-D. pression
-
----
-
-**Q12.** L'évolution :
-
-A. transformation des espèces au fil du temps
-B. fixité des espèces
-C. disparition des espèces
-D. création
+A. les accouplements se font au hasard (panmixie)
+B. la sélection naturelle est maximale
+C. la dérive génétique est forte
+D. les migrations sont importantes
 
 ---
 
-**Q13.** La sélection naturelle :
+**Question 7.** Les roches métamorphiques résultent de la transformation à l'état solide de roches préexistantes sous l'effet de :
 
-A. survit des individus adaptés
-B. survit des individus faibles
-C. tous survivent
-D. aucun ne survit
-
----
-
-**Q14.** L'adaptation :
-
-A. caractère favorisant la survie
-B. un défaut
-C. un hasard
-D. une maladie
+A. la pression et de la température
+B. la sédimentation et la diagenèse
+C. l'érosion et le transport
+D. la cristallisation d'un magma
 
 ---
 
-**Q15.** L'écosystème :
+**Question 8.** Lors d'une réponse immunitaire secondaire (rappel vaccinal), on observe par rapport à la réponse primaire :
 
-A. biotope + biocénose
-B. uniquement les plantes
-C. uniquement les animaux
-D. uniquement l'eau
-
----
-
-**Q16.** La chaîne alimentaire :
-
-A. commence par un producteur
-B. commence par un prédateur
-C. commence par un décomposeur
-D. n'a pas de début
+A. une production d'anticorps plus rapide et plus importante
+B. une production d'anticorps plus lente et plus faible
+C. aucune production d'anticorps
+D. une production identique
 
 ---
 
-**Q17.** Le réchauffement climatique :
+**Question 9.** Le test de grossesse urinaire repose sur la détection d'une hormone :
 
-A. augmentation des gaz à effet de serre
-B. baisse de température
-C. augmentation de l'oxygène
-D. baisse du CO₂
-
----
-
-**Q18.** Le développement durable :
-
-A. satisfait les besoins sans compromettre l'avenir
-B. exploite au maximum
-C. consomme
-D. pollue
+A. l'hormone chorionique gonadotrope humaine (hCG) produite par l'embryon
+B. la progestérone sécrétée par le corps jaune
+C. l'œstradiol sécrété par les follicules
+D. l'FSH hypophysaire
 
 ---
 
-**Q19.** La génétique des populations :
+**Question 10.** Un parent porteur d'un allèle récessif d'une maladie génétique ne la manifeste pas ; la maladie ne se traduit que chez les individus homozygotes. Ce mode de transmission est :
 
-A. étudie la fréquence des allèles
-B. étudie les fossiles
-C. étudie les roches
-D. étudie le climat
-
----
-
-**Q20.** La loi de Hardy-Weinberg :
-
-A. décrit l'équilibre génétique
-B. décrit l'évolution
-C. décrit la sélection
-D. décrit la mutation
+A. autosomique récessif
+B. autosomique dominant
+C. lié au chromosome Y
+D. mitochondrial
 
 ---
 
 ## CORRIGÉ
 
-1. remontée du magma
-2. refroidissement du magma
-3. accumulation de sédiments
-4. transformation sous pression/température
-5. reste d'être vivant conservé
-6. ordonne les événements dans le temps
-7. donne un âge en années
-8. les continents se déplacent
-9. les fonds océaniques s'écartent
-10. plongement d'une plaque sous une autre
-11. variété des êtres vivants
-12. transformation des espèces au fil du temps
-13. survit des individus adaptés
-14. caractère favorisant la survie
-15. biotope + biocénose
-16. commence par un producteur
-17. augmentation des gaz à effet de serre
-18. satisfait les besoins sans compromettre l'avenir
-19. étudie la fréquence des allèles
-20. décrit l'équilibre génétique
+1. A — La dégénérescence du code génétique signifie qu'un même acide aminé peut être codé par plusieurs codons.
+2. A — Le CMH présente les peptides antigéniques aux lymphocytes T (restriction par le CMH).
+3. A — Le réflexe myotatique est monosynaptique (arc réflexe à deux neurones).
+4. A — Rétrocontrôle négatif : le glucose élevé stimule l'insuline dont l'effet hypoglycémiant freine la sécrétion.
+5. A — Séismes et volcans se concentrent aux frontières de plaques.
+6. A — La panmixie (accouplements au hasard) est une condition de l'équilibre de Hardy-Weinberg.
+7. A — Le métamorphisme est une transformation à l'état solide sous l'action de la pression et de la température.
+8. A — La mémoire immunitaire rend la réponse secondaire plus rapide et plus intense (production accrue d'anticorps).
+9. A — Le test de grossesse détecte la hCG sécrétée par les cellules de l'embryon dès l'implantation.
+10. A — Transmission autosomique récessive : l'allèle ne s'exprime qu'à l'état homozygote.

@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat INFORMATIQUE P1 SET 3
+# CAMEROON BEPC INFORMATIQUE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** TI, C, D, E
-**Subject:** Informatique
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Informatique
+**Durée :** 30 minutes
+**Coefficient :** 1
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le client-serveur :
+**Question 1.** L'informatique est la science qui traite :
 
-A. un modèle de communication
-B. un fichier
-C. un programme
-D. une mémoire
-
----
-
-**Q2.** Le cloud computing :
-
-A. le stockage et le calcul à distance
-B. un fichier
-C. un programme
-D. une mémoire
+A. De l'organisation et du traitement automatique de l'information
+B. Uniquement des calculs mathématiques
+C. De la fabrication des écrans
+D. De la vente des ordinateurs
 
 ---
 
-**Q3.** La cybersécurité :
+**Question 2.** La mémoire de masse (disque dur, SSD, clé USB) sert à :
 
-A. protège les systèmes
-B. crée des virus
-C. est un jeu
-D. est un fichier
-
----
-
-**Q4.** Le chiffrement :
-
-A. protège les données
-B. crée des virus
-C. est un jeu
-D. est un fichier
+A. Conserver durablement les données, même après extinction
+B. Exécuter les calculs de façon temporaire
+C. Afficher les images sur l'écran
+D. Saisir du texte au clavier
 
 ---
 
-**Q5.** L'authentification :
+**Question 3.** Lequel de ces éléments fait partie de l'unité centrale ?
 
-A. vérifie l'identité
-B. crée des virus
-C. est un jeu
-D. est un fichier
-
----
-
-**Q6.** Le pare-feu :
-
-A. protège le réseau
-B. crée des virus
-C. est un jeu
-D. est un fichier
+A. Le processeur et la mémoire vive
+B. L'écran
+C. La souris
+D. L'imprimante
 
 ---
 
-**Q7.** L'intelligence artificielle :
+**Question 4.** L'abréviation « URL » désigne :
 
-A. simule l'intelligence humaine
-B. est un jeu
-C. est un fichier
-D. est une mémoire
-
----
-
-**Q8.** Le machine learning :
-
-A. l'apprentissage automatique
-B. est un jeu
-C. est un fichier
-D. est une mémoire
+A. L'adresse d'une ressource sur Internet (ex. une page web)
+B. Un type de virus
+C. Un logiciel de dessin
+D. Un périphérique de stockage
 
 ---
 
-**Q9.** Le système d'exploitation :
+**Question 5.** Un « smartphone » est :
 
-A. gère les ressources de l'ordinateur
-B. est un fichier
-C. est un jeu
-D. est une mémoire
-
----
-
-**Q10.** Le processus :
-
-A. un programme en cours d'exécution
-B. un fichier
-C. un jeu
-D. une mémoire
+A. Un téléphone mobile intelligent avec système d'exploitation
+B. Une imprimante sans fil
+C. Un écran de télévision
+D. Un serveur d'entreprise
 
 ---
 
-**Q11.** Le thread :
+**Question 6.** Lequel de ces supports de stockage est généralement le plus rapide pour lire les données ?
 
-A. un fil d'exécution
-B. un fichier
-C. un jeu
-D. une mémoire
-
----
-
-**Q12.** La mémoire virtuelle :
-
-A. étend la mémoire physique
-B. est un fichier
-C. est un jeu
-D. est un périphérique
+A. Le disque SSD
+B. La disquette
+C. Le CD-ROM
+D. Le papier
 
 ---
 
-**Q13.** Le compilateur :
+**Question 7.** Une personne reçoit un e-mail d'une banque inconnue lui demandant son code secret en cliquant sur un lien. Cette technique malveillante s'appelle :
 
-A. traduit le code en langage machine
-B. exécute le code
-C. est un fichier
-D. est un jeu
-
----
-
-**Q14.** L'interpréteur :
-
-A. exécute le code ligne par ligne
-B. traduit tout le code
-C. est un fichier
-D. est un jeu
+A. Le phishing (hameçonnage)
+B. La sauvegarde
+C. La mise à jour
+D. Le téléchargement légal
 
 ---
 
-**Q15.** Le débogage :
+**Question 8.** Pour organiser une visioconférence avec sa classe, on peut utiliser un logiciel comme :
 
-A. corrige les erreurs
-B. crée des erreurs
-C. est un jeu
-D. est un fichier
-
----
-
-**Q16.** Le test unitaire :
-
-A. teste une unité de code
-B. teste tout le système
-C. est un jeu
-D. est un fichier
+A. Zoom ou Google Meet
+B. Un traitement de texte
+C. Un antivirus
+D. Un tableur
 
 ---
 
-**Q17.** La documentation :
+**Question 9.** Dans un algorithme, l'instruction « Tant que ... Faire » représente :
 
-A. explique le code
-B. est inutile
-C. est un jeu
-D. est un fichier
-
----
-
-**Q18.** Le versionnage :
-
-A. gère les versions du code
-B. est inutile
-C. est un jeu
-D. est un fichier
+A. Une boucle qui se répète tant qu'une condition est vraie
+B. Une décision
+C. Une variable
+D. Une constante
 
 ---
 
-**Q19.** Git est :
+**Question 10.** Une variable de type « chaîne de caractères » peut contenir :
 
-A. un outil de versionnage
-B. un jeu
-C. un fichier
-D. une mémoire
-
----
-
-**Q20.** Le dépôt (repository) :
-
-A. stocke le code versionné
-B. est un jeu
-C. est un fichier
-D. est une mémoire
+A. Un texte comme « Bonjour »
+B. Uniquement un entier
+C. Uniquement un nombre décimal
+D. Vrai ou Faux
 
 ---
 
 ## CORRIGÉ
 
-1. un modèle de communication
-2. le stockage et le calcul à distance
-3. protège les systèmes
-4. protège les données
-5. vérifie l'identité
-6. protège le réseau
-7. simule l'intelligence humaine
-8. l'apprentissage automatique
-9. gère les ressources de l'ordinateur
-10. un programme en cours d'exécution
-11. un fil d'exécution
-12. étend la mémoire physique
-13. traduit le code en langage machine
-14. exécute le code ligne par ligne
-15. corrige les erreurs
-16. teste une unité de code
-17. explique le code
-18. gère les versions du code
-19. un outil de versionnage
-20. stocke le code versionné
+1. A — De l'organisation et du traitement automatique de l'information
+2. A — Conserver durablement les données, même après extinction
+3. A — Le processeur et la mémoire vive
+4. A — L'adresse d'une ressource sur Internet
+5. A — Un téléphone mobile intelligent avec système d'exploitation
+6. A — Le disque SSD
+7. A — Le phishing (hameçonnage)
+8. A — Zoom ou Google Meet
+9. A — Une boucle qui se répète tant qu'une condition est vraie
+10. A — Un texte comme « Bonjour »

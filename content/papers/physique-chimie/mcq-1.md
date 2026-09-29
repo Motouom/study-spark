@@ -1,142 +1,80 @@
-# CAMEROON BEPC PHYSIQUE-CHIMIE P1 SET 1
+# CAMEROON BEPC PHYSIQUE-CHIMIE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Physique-Chimie
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Physique-Chimie
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'unité de la tension électrique est :
+**Question 1.** Une résistance de 40 Ω est traversée par un courant de 0,3 A. Quelle est la tension à ses bornes ?
 
-A. le volt
-B. l'ampère
-C. l'ohm
-D. le watt
-
----
-
-**Q2.** L'intensité du courant se mesure avec :
-
-A. un ampèremètre
-B. un voltmètre
-C. un ohmmètre
-D. un wattmètre
+A. 12 V
+B. 120 V
+C. 1,2 V
+D. 13,3 V
 
 ---
 
-**Q3.** La formule de la loi d'Ohm est :
+**Question 2.** Une lampe de puissance 100 W est branchée sous une tension de 220 V. Quelle intensité la traverse ?
 
-A. U = R × I
-B. U = R / I
-C. I = U × R
-D. R = U × I
-
----
-
-**Q4.** L'unité de la résistance électrique est :
-
-A. l'ohm
-B. le volt
-C. l'ampère
-D. le joule
+A. 0,45 A
+B. 2,2 A
+C. 0,22 A
+D. 22 A
 
 ---
 
-**Q5.** La masse volumique se calcule par :
+**Question 3.** Un automobiliste parcourt 180 km en 2 heures. Quelle est sa vitesse moyenne ?
 
-A. ρ = m / V
-B. ρ = m × V
-C. ρ = V / m
-D. ρ = m + V
-
----
-
-**Q6.** L'unité de la force est :
-
-A. le newton
-B. le kilogramme
-C. le pascal
-D. le joule
+A. 60 km/h
+B. 90 km/h
+C. 120 km/h
+D. 360 km/h
 
 ---
 
-**Q7.** La pression se calcule par :
+**Question 4.** Le poids d'un corps de masse 5 kg sur Terre (g = 10 N/kg) est :
 
-A. P = F / S
-B. P = F × S
-C. P = S / F
-D. P = F + S
-
----
-
-**Q8.** L'unité de la pression est :
-
-A. le pascal
-B. le newton
-C. le joule
-D. le watt
+A. 5 N
+B. 50 N
+C. 0,5 N
+D. 500 N
 
 ---
 
-**Q9.** Le symbole chimique de l'eau est :
+**Question 5.** Une force de 100 N est appliquée perpendiculairement sur une surface de 2 m². La pression exercée est :
 
-A. H₂O
-B. CO₂
-C. O₂
-D. H₂
-
----
-
-**Q10.** Le pH d'une solution acide est :
-
-A. inférieur à 7
-B. supérieur à 7
-C. égal à 7
-D. égal à 0
+A. 50 Pa
+B. 200 Pa
+C. 20 Pa
+D. 98 Pa
 
 ---
 
-**Q11.** L'énergie cinétique se calcule par :
+**Question 6.** Le noyau d'un atome est constitué de :
 
-A. Ec = ½ mv²
-B. Ec = mv
-C. Ec = mgh
-D. Ec = ½ mgh
-
----
-
-**Q12.** L'unité de l'énergie est :
-
-A. le joule
-B. le watt
-C. le newton
-D. le pascal
+A. protons et neutrons
+B. protons et électrons
+C. neutrons et électrons
+D. uniquement d'électrons
 
 ---
 
-**Q13.** La vitesse se calcule par :
-
-A. v = d / t
-B. v = d × t
-C. v = t / d
-D. v = d + t
-
----
-
-**Q14.** Le symbole chimique du dioxyde de carbone est :
+**Question 7.** La molécule de dioxyde de carbone est représentée par la formule :
 
 A. CO₂
 B. O₂
@@ -145,79 +83,42 @@ D. C₂O
 
 ---
 
-**Q15.** Un corps pur est :
+**Question 8.** Une solution dont le pH est égal à 9 est :
 
-A. constitué d'une seule espèce chimique
-B. un mélange
-C. un alliage
-D. une solution
-
----
-
-**Q16.** La température se mesure avec :
-
-A. un thermomètre
-B. un baromètre
-C. un manomètre
-D. un hygromètre
+A. basique
+B. acide
+C. neutre
+D. sans indication possible
 
 ---
 
-**Q17.** L'unité de la température en SI est :
+**Question 9.** L'énergie cinétique d'un corps de masse 2 kg animé d'une vitesse de 3 m/s vaut :
 
-A. le kelvin
-B. le degré Celsius
-C. le degré Fahrenheit
-D. le joule
-
----
-
-**Q18.** Le courant électrique est un déplacement de :
-
-A. charges électriques
-B. molécules
-C. atomes
-D. neutrons
+A. 9 J
+B. 18 J
+C. 6 J
+D. 4,5 J
 
 ---
 
-**Q19.** Dans un circuit en série, l'intensité est :
+**Question 10.** La quantité de chaleur nécessaire pour élever la température de 3 kg d'eau de 20 °C à 30 °C (c = 4 180 J/kg·K) est :
 
-A. la même partout
-B. différente partout
-C. nulle
-D. maximale au début
-
----
-
-**Q20.** Le symbole chimique du sel de cuisine (chlorure de sodium) est :
-
-A. NaCl
-B. NaCl₂
-C. Na₂Cl
-D. ClNa₂
+A. 125 400 J
+B. 12 540 J
+C. 41 800 J
+D. 125 400 kJ
 
 ---
 
 ## CORRIGÉ
 
-1. le volt
-2. un ampèremètre
-3. U = R × I
-4. l'ohm
-5. ρ = m / V
-6. le newton
-7. P = F / S
-8. le pascal
-9. H₂O
-10. inférieur à 7
-11. Ec = ½ mv²
-12. le joule
-13. v = d / t
-14. CO₂
-15. constitué d'une seule espèce chimique
-16. un thermomètre
-17. le kelvin
-18. charges électriques
-19. la même partout
-20. NaCl
+1. **12 V** — $U = R \times I = 40 \times 0,3 = 12$ V.
+2. **0,45 A** — $I = \frac{P}{U} = \frac{100}{220} \approx 0,45$ A.
+3. **90 km/h** — $v = \frac{d}{t} = \frac{180}{2} = 90$ km/h.
+4. **50 N** — $P = m \times g = 5 \times 10 = 50$ N.
+5. **50 Pa** — $P = \frac{F}{S} = \frac{100}{2} = 50$ Pa.
+6. **protons et neutrons**
+7. **CO₂**
+8. **basique** — pH > 7.
+9. **9 J** — $E_c = \frac{1}{2} mv^2 = \frac{1}{2} \times 2 \times 3^2 = 9$ J.
+10. **125 400 J** — $Q = mc\Delta T = 3 \times 4180 \times 10 = 125\,400$ J.

@@ -1,223 +1,125 @@
-# CAMEROON Baccalauréat PHYSIQUE P1 SET 3
+# CAMEROON BAC PHYSIQUE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Physique
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C / D / E / TI
+**Matière :** Physique
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
+- Données utiles : $g = 10 \text{ m}\cdot\text{s}^{-2}$ ; $e = 1,6 \times 10^{-19} \text{ C}$ ; $c = 3 \times 10^8 \text{ m}\cdot\text{s}^{-1}$ ; $N_A = 6,02 \times 10^{23} \text{ mol}^{-1}$ ; $1 \text{ u} = 931,5 \text{ MeV/c}^2$.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La résonance dans un circuit RLC :
+**Question 1.** Un satellite est en orbite circulaire à vitesse constante autour de la Terre. Son mouvement est :
 
-A. l'impédance est minimale
-B. l'impédance est maximale
-C. le courant est nul
-D. la tension est nulle
-
----
-
-**Q2.** L'impédance Z d'un circuit :
-
-A. Z = U/I
-B. Z = U·I
-C. Z = I/U
-D. Z = U+I
+A. uniforme et circulaire
+B. rectiligne uniforme
+C. uniformément accéléré
+D. accéléré et circulaire
 
 ---
 
-**Q3.** L'unité de l'impédance est :
+**Question 2.** Une bille roule sans glisser sur un plan incliné. Les forces appliquées sur la bille sont : le poids, la réaction et éventuellement la force de frottement. La réaction du support $\vec{R}$ est :
 
-A. l'ohm
-B. le volt
-C. l'ampère
-D. le watt
-
----
-
-**Q4.** Le facteur de puissance est :
-
-A. cos(φ)
-B. sin(φ)
-C. tan(φ)
-D. φ
+A. perpendiculaire au plan
+B. parallèle au plan
+C. opposée au poids
+D. toujours nulle
 
 ---
 
-**Q5.** L'énergie électrique est :
+**Question 3.** L'énergie mécanique d'un système soumis uniquement à des forces conservatives :
 
-A. E = P·t
-B. E = P/t
-C. E = t/P
-D. E = P+t
-
----
-
-**Q6.** L'effet photoélectrique :
-
-A. émission d'électrons par la lumière
-B. absorption de photons
-C. émission de photons
-D. réflexion
+A. se conserve
+B. augmente toujours
+C. diminue toujours
+D. est nulle
 
 ---
 
-**Q7.** Le photon a une énergie :
+**Question 4.** Dans un circuit RLC série en régime sinusoïdal forcé, la résonance se produit lorsque :
 
-A. E = h·f
-B. E = h/f
-C. E = f/h
-D. E = h+f
-
----
-
-**Q8.** La constante de Planck h vaut :
-
-A. 6,63×10⁻³⁴ J·s
-B. 6,67×10⁻¹¹
-C. 9,8
-D. 3×10⁸
+A. la fréquence propre du circuit est atteinte
+B. la tension est maximale
+C. le courant est minimal
+D. la bobine est court-circuitée
 
 ---
 
-**Q9.** L'effet Doppler concerne :
+**Question 5.** La relation de conjugaison des lentilles minces (relation de Descartes) s'écrit :
 
-A. le changement de fréquence d'une onde
-B. la réfraction
-C. la réflexion
-D. l'absorption
-
----
-
-**Q10.** Les ondes mécaniques :
-
-A. nécessitent un milieu
-B. se propagent dans le vide
-C. sont des particules
-D. sont des charges
+A. $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$
+B. $\frac{1}{\overline{OA}} - \frac{1}{\overline{OA'}} = \frac{1}{f'}$
+C. $\overline{OA'} = \overline{OA}$
+D. $\overline{OA} + \overline{OA'} = f'$
 
 ---
 
-**Q11.** Les ondes électromagnétiques :
+**Question 6.** Un électron est accéléré par une tension $U = 1000 \text{ V}$. Son énergie cinétique acquise vaut :
 
-A. se propagent dans le vide
-B. nécessitent un milieu
-C. sont des particules
-D. sont des charges
-
----
-
-**Q12.** Le son est :
-
-A. une onde mécanique
-B. une onde électromagnétique
-C. une particule
-D. une charge
+A. $1,6 \times 10^{-16}$ J
+B. $1,6 \times 10^{-19}$ J
+C. $6,25 \times 10^{21}$ J
+D. 1000 J
 
 ---
 
-**Q13.** La vitesse du son dans l'air est environ :
+**Question 7.** Le phénomène de diffraction est particulièrement observable lorsque :
 
-A. 340 m/s
-B. 3×10⁸ m/s
-C. 1500 m/s
-D. 100 m/s
-
----
-
-**Q14.** L'intensité sonore se mesure en :
-
-A. décibels
-B. watts
-C. newtons
-D. pascals
+A. la dimension de l'obstacle est de l'ordre de la longueur d'onde
+B. la dimension de l'obstacle est très grande devant la longueur d'onde
+C. la longueur d'onde est nulle
+D. l'obstacle est opaque
 
 ---
 
-**Q15.** Le champ électrique E s'exprime en :
+**Question 8.** L'effet photoélectrique prouve que la lumière :
 
-A. V/m
-B. V
-C. A
-D. Ω
-
----
-
-**Q16.** Le potentiel électrique s'exprime en :
-
-A. volts
-B. ampères
-C. ohms
-D. watts
+A. a une nature corpusculaire
+B. a une nature uniquement ondulatoire
+C. ne transporte pas d'énergie
+D. se propage toujours en ligne droite
 
 ---
 
-**Q17.** La capacité d'un condensateur s'exprime en :
+**Question 9.** Dans une désintégration $\beta^-$, le noyau émet :
 
-A. farads
-B. ohms
-C. henrys
-D. volts
-
----
-
-**Q18.** L'inductance d'une bobine s'exprime en :
-
-A. henrys
-B. farads
-C. ohms
-D. volts
+A. un électron et un antineutrino
+B. un positon et un neutrino
+C. une particule $\alpha$
+D. un photon gamma
 
 ---
 
-**Q19.** Le flux magnétique s'exprime en :
+**Question 10.** La fission nucléaire consiste à :
 
-A. webers
-B. teslas
-C. henrys
-D. farads
-
----
-
-**Q20.** Le champ magnétique s'exprime en :
-
-A. teslas
-B. webers
-C. henrys
-D. farads
+A. briser un noyau lourd en noyaux plus légers
+B. fusionner deux noyaux légers
+C. absorber un neutron sans réaction
+D. émettre spontanément un électron
 
 ---
 
 ## CORRIGÉ
 
-1. l'impédance est minimale
-2. Z = U/I
-3. l'ohm
-4. cos(φ)
-5. E = P·t
-6. émission d'électrons par la lumière
-7. E = h·f
-8. 6,63×10⁻³⁴ J·s
-9. le changement de fréquence d'une onde
-10. nécessitent un milieu
-11. se propagent dans le vide
-12. une onde mécanique
-13. 340 m/s
-14. décibels
-15. V/m
-16. volts
-17. farads
-18. henrys
-19. webers
-20. teslas
+1. **A — uniforme et circulaire.** Vitesse constante sur une trajectoire circulaire : MCU.
+2. **A — perpendiculaire au plan.** La réaction normale est perpendiculaire au support.
+3. **A — se conserve.** Forces conservatives → conservation de l'énergie mécanique.
+4. **A — la fréquence propre du circuit est atteinte.** Résonance quand $\omega = \omega_0 = \frac{1}{\sqrt{LC}}$.
+5. **A — $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$.** Relation de Descartes pour les lentilles.
+6. **A — $1,6 \times 10^{-16}$ J.** $E_c = eU = 1,6 \times 10^{-19} \times 1000 = 1,6 \times 10^{-16}$ J.
+7. **A — la dimension de l'obstacle est de l'ordre de la longueur d'onde.** Condition de diffraction nette.
+8. **A — a une nature corpusculaire.** L'effet photoélectrique est expliqué par le modèle photonique.
+9. **A — un électron et un antineutrino.** $\beta^-$ émet un électron et un antineutrino.
+10. **A — briser un noyau lourd en noyaux plus légers.** Définition de la fission.

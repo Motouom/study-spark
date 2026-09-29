@@ -1,223 +1,125 @@
-# CAMEROON Baccalauréat CHIMIE P1 SET 3
+# CAMEROON BAC CHIMIE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Chimie
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C, D, E, TI
+**Matière :** Chimie
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
+- **Données utiles :** $M(C)=12\ \text{g/mol}$, $M(H)=1\ \text{g/mol}$, $M(O)=16\ \text{g/mol}$, $N_A = 6,02 \times 10^{23}\ \text{mol}^{-1}$, $V_m = 22,4\ \text{L/mol}$, $F = 96\ 500\ \text{C/mol}$.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le groupe fonctionnel des aldéhydes est :
+**Question 1.** Le nombre d'entités (atomes, molécules, ions) contenues dans une mole est :
 
-A. -CHO
-B. -OH
-C. -COOH
-D. -NH₂
-
----
-
-**Q2.** Le groupe fonctionnel des amines est :
-
-A. -NH₂
-B. -OH
-C. -COOH
-D. -CHO
+A. $6,02 \times 10^{23}$
+B. $22,4$
+C. $1,6 \times 10^{-19}$
+D. $3 \times 10^{8}$
 
 ---
 
-**Q3.** L'estérification :
+**Question 2.** Le produit ionique de l'eau $K_e$ à 25 °C vaut :
 
-A. acide + alcool → ester + eau
-B. acide + base → sel
-C. alcool → alcène
-D. alcane → alcool
-
----
-
-**Q4.** L'hydrolyse d'un ester :
-
-A. ester + eau → acide + alcool
-B. ester → alcool
-C. ester → acide
-D. ester → sel
+A. $10^{-7}$
+B. $10^{-14}$
+C. $14$
+D. $10^{14}$
 
 ---
 
-**Q5.** La saponification :
+**Question 3.** La combustion complète du propane $\text{C}_3\text{H}_8$ dans le dioxygène produit :
 
-A. ester + base → savon + alcool
-B. acide + alcool → ester
-C. alcool → alcène
-D. alcane → alcool
-
----
-
-**Q6.** La polymérisation :
-
-A. assemble des monomères
-B. divise des polymères
-C. est une combustion
-D. est une distillation
+A. $\text{CO}$ et $\text{H}_2\text{O}$
+B. $\text{CO}_2$ et $\text{H}_2\text{O}$
+C. $\text{C}$ et $\text{H}_2\text{O}$
+D. $\text{CO}_2$ et $\text{H}_2$
 
 ---
 
-**Q7.** Le monomère est :
+**Question 4.** La réaction de saponification consiste à hydrolyser :
 
-A. l'unité de base du polymère
-B. le polymère
-C. le produit final
-D. un catalyseur
-
----
-
-**Q8.** La distillation :
-
-A. sépare les constituants d'un mélange
-B. mélange deux liquides
-C. solidifie
-D. cristallise
+A. Un alcane
+B. Un ester en présence d'une base forte
+C. Un aldéhyde
+D. Un acide fort
 
 ---
 
-**Q9.** La chromatographie :
+**Question 5.** Lors d'une électrolyse, on fait passer un courant de 2 A pendant 96,5 s. La quantité d'électricité transportée est :
 
-A. sépare les constituants d'un mélange
-B. mélange
-C. solidifie
-D. cristallise
-
----
-
-**Q10.** Le titrage :
-
-A. détermine une concentration
-B. mesure la masse
-C. mesure le volume
-D. mesure la température
+A. 48,25 C
+B. 193 C
+C. 965 C
+D. 96,5 C
 
 ---
 
-**Q11.** Le point d'équivalence :
+**Question 6.** Pour une réaction chimique, l'avancement maximal $x_{max}$ est atteint lorsque :
 
-A. les réactifs sont en proportions stœchiométriques
-B. la réaction s'arrête
-C. le pH est nul
-D. la température est maximale
-
----
-
-**Q12.** La spectrophotométrie :
-
-A. mesure l'absorbance
-B. mesure la masse
-C. mesure le volume
-D. mesure la température
+A. La température est maximale
+B. Un des réactifs est totalement consommé
+C. Tous les produits sont en phase gazeuse
+D. La pression est maximale
 
 ---
 
-**Q13.** La loi de Beer-Lambert :
+**Question 7.** L'enthalpie de réaction $\Delta_rH$ d'une réaction exothermique est :
 
-A. A = ε·l·C
-B. A = ε·l/C
-C. A = C/ε·l
-D. A = ε·C/l
-
----
-
-**Q14.** L'absorbance est :
-
-A. proportionnelle à la concentration
-B. inversement proportionnelle
-C. constante
-D. nulle
+A. Positive
+B. Nulle
+C. Négative
+D. Égale à la température
 
 ---
 
-**Q15.** Le tableau d'avancement :
+**Question 8.** Quelle masse de cuivre se dépose à la cathode si 0,5 mol d'électrons est échangée lors du dépôt de $\text{Cu}^{2+} + 2e^- \longrightarrow \text{Cu}$ ? ($M(Cu) = 63,5\ \text{g/mol}$)
 
-A. suit l'évolution d'une réaction
-B. mesure la vitesse
-C. mesure la température
-D. mesure la masse
-
----
-
-**Q16.** L'avancement maximal :
-
-A. quand le réactif limitant est consommé
-B. quand la réaction s'arrête
-C. quand le pH est nul
-D. quand la température est maximale
+A. 31,75 g
+B. 15,9 g
+C. 63,5 g
+D. 127 g
 
 ---
 
-**Q17.** Le réactif limitant :
+**Question 9.** Le composé $\text{CH}_3\text{CH}_2\text{CH}_2\text{CH}_3$ et le composé $\text{CH}_3\text{CH}(\text{CH}_3)\text{CH}_3$ sont :
 
-A. est entièrement consommé
-B. reste en excès
-C. est le catalyseur
-D. est le produit
-
----
-
-**Q18.** Le rendement d'une réaction :
-
-A. quantité obtenue / quantité théorique
-B. quantité théorique / obtenue
-C. quantité obtenue × théorique
-D. quantité théorique
+A. Identiques
+B. Des isomères de position
+C. Des isomères de chaîne
+D. Des polymères
 
 ---
 
-**Q19.** La chimie verte :
+**Question 10.** L'ajout d'un catalyseur à une réaction chimique :
 
-A. réduit l'impact environnemental
-B. augmente les déchets
-C. utilise des toxiques
-D. est polluante
-
----
-
-**Q20.** L'atome de carbone peut former :
-
-A. 4 liaisons
-B. 2 liaisons
-C. 3 liaisons
-D. 1 liaison
+A. Augmente le rendement de la réaction
+B. Modifie la constante d'équilibre
+C. Diminue l'énergie d'activation
+D. Consomme des réactifs
 
 ---
 
 ## CORRIGÉ
 
-1. -CHO
-2. -NH₂
-3. acide + alcool → ester + eau
-4. ester + eau → acide + alcool
-5. ester + base → savon + alcool
-6. assemble des monomères
-7. l'unité de base du polymère
-8. sépare les constituants d'un mélange
-9. sépare les constituants d'un mélange
-10. détermine une concentration
-11. les réactifs sont en proportions stœchiométriques
-12. mesure l'absorbance
-13. A = ε·l·C
-14. proportionnelle à la concentration
-15. suit l'évolution d'une réaction
-16. quand le réactif limitant est consommé
-17. est entièrement consommé
-18. quantité obtenue / quantité théorique
-19. réduit l'impact environnemental
-20. 4 liaisons
+1. A — $6,02 \times 10^{23}$ (nombre d'Avogadro)
+2. B — $10^{-14}$ (produit ionique de l'eau à 25 °C)
+3. B — $\text{CO}_2$ et $\text{H}_2\text{O}$ (combustion complète d'un hydrocarbure)
+4. B — Un ester en présence d'une base forte (la saponification)
+5. B — 193 C ($Q = I \times t = 2 \times 96,5 = 193$ C)
+6. B — Un des réactifs est totalement consommé (réactif limitant épuisé)
+7. C — Négative (une réaction exothermique libère de la chaleur, $\Delta_rH < 0$)
+8. B — 15,9 g (1 mol de Cu nécessite 2 mol d'électrons, donc 0,5 mol d'électrons donne 0,25 mol de Cu : $m = 0,25 \times 63,5 = 15,9$ g)
+9. C — Des isomères de chaîne (même formule brute $\text{C}_4\text{H}_{10}$, chaînes différentes)
+10. C — Diminue l'énergie d'activation (le catalyseur accélère sans modifier l'équilibre)

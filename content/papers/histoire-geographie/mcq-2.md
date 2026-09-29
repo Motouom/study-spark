@@ -1,223 +1,124 @@
-# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE P1 SET 2
+# CAMEROON BEPC HISTOIRE-GÉOGRAPHIE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Histoire-Géographie
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Histoire-Géographie
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le référendum de 1961 a permis :
+**Question 1.** Le plébiscite du 11 février 1961, organisé dans le Cameroun sous administration britannique, a abouti à :
 
-A. la réunification du Cameroun
-B. l'indépendance
-C. la colonisation
-D. la partition
-
----
-
-**Q2.** La République fédérale du Cameroun a été créée en :
-
-A. 1961
-B. 1960
-C. 1972
-D. 1984
+A. La réunification du Cameroun méridional avec la République du Cameroun
+B. L'indépendance totale de toute la partie britannique
+C. L'intégration de la totalité du territoire au Nigeria
+D. Le maintien sous tutelle britannique
 
 ---
 
-**Q3.** Le Cameroun est devenu République unie en :
+**Question 2.** La réunification du Cameroun a été proclamée le :
 
-A. 1972
-B. 1961
-C. 1984
-D. 1960
-
----
-
-**Q4.** Le Cameroun est devenu République du Cameroun en :
-
-A. 1984
-B. 1972
-C. 1961
-D. 1990
+A. 1er janvier 1960
+B. 1er octobre 1961
+C. 20 mai 1972
+D. 12 juillet 1884
 
 ---
 
-**Q5.** Le multipartisme a été rétabli au Cameroun en :
+**Question 3.** Par quelle réforme la France a-t-elle accordé l'autonomie interne au Cameroun en 1956-1958 ?
 
-A. 1990
-B. 1980
-C. 1972
-D. 2000
-
----
-
-**Q6.** L'ONU a été créée en :
-
-A. 1945
-B. 1919
-C. 1939
-D. 1950
+A. Le code de l'indigénat
+B. La loi-cadre Defferre
+C. Le traité de Berlin
+D. La Charte de l'Atlantique
 
 ---
 
-**Q7.** La SDN a été créée en :
+**Question 4.** Quel est le fleuve qui sert de frontière naturelle entre le Cameroun et le Nigeria dans la région du lac Tchad ?
 
-A. 1919
-B. 1945
-C. 1939
-D. 1900
-
----
-
-**Q8.** L'OUA a été créée en :
-
-A. 1963
-B. 1945
-C. 1975
-D. 1955
+A. La Sanaga
+B. Le Nyong
+C. La Bénoué
+D. Le Logone
 
 ---
 
-**Q9.** L'Union africaine a remplacé l'OUA en :
+**Question 5.** Le lac Tchad se situe dans quelle partie du Cameroun ?
 
-A. 2002
-B. 1990
-C. 1980
-D. 2010
-
----
-
-**Q10.** La CEMAC est une organisation :
-
-A. économique et monétaire
-B. politique
-C. militaire
-D. culturelle
+A. L'Extrême-Nord
+B. Le Sud
+C. L'Ouest
+D. Le Littoral
 
 ---
 
-**Q11.** Le siège de la CEMAC est à :
+**Question 6.** Lequel de ces fleuves traverse la ville de Douala ?
 
-A. Yaoundé
-B. Douala
-C. Libreville
-D. N'Djamena
-
----
-
-**Q12.** La monnaie utilisée au Cameroun est :
-
-A. le franc CFA
-B. le dollar
-C. l'euro
-D. le naira
+A. La Sanaga
+B. Le Wouri
+C. Le Logone
+D. Le Mbam
 
 ---
 
-**Q13.** Le Cameroun est membre de :
+**Question 7.** La forêt dense équatoriale couvre principalement :
 
-A. l'ONU, l'UA et la CEMAC
-B. l'OTAN
-C. l'UE
-D. l'ALENA
-
----
-
-**Q14.** Le relief du Cameroun comprend :
-
-A. des montagnes, plateaux et plaines
-B. uniquement des plaines
-C. uniquement des montagnes
-D. uniquement des déserts
+A. La région de l'Extrême-Nord
+B. Le plateau de l'Adamaoua
+C. Le Sud et le Sud-Est du Cameroun
+D. La plaine du lac Tchad
 
 ---
 
-**Q15.** Le lac Tchad se situe au :
+**Question 8.** Quelle est la principale cause de la Première Guerre mondiale (1914-1918) ?
 
-A. nord du Cameroun
-B. sud du Cameroun
-C. est du Cameroun
-D. ouest du Cameroun
-
----
-
-**Q16.** La principale culture d'exportation du Cameroun est :
-
-A. le cacao
-B. le blé
-C. le riz
-D. la pomme de terre
+A. Les rivalités coloniales et nationalistes en Europe, déclenchées par l'attentat de Sarajevo
+B. La crise économique de 1929
+C. La montée du nazisme en Allemagne
+D. Le partage de l'Afrique à la conférence de Berlin
 
 ---
 
-**Q17.** Le Cameroun est un grand producteur de :
+**Question 9.** La Société des Nations (SDN), créée en 1919, avait pour but principal :
 
-A. café et cacao
-B. pétrole et diamant
-C. or et argent
-D. blé et maïs
-
----
-
-**Q18.** Le port le plus important du Cameroun est :
-
-A. Douala
-B. Kribi
-C. Limbé
-D. Garoua
+A. De maintenir la paix mondiale
+B. De coloniser l'Afrique
+C. De développer le commerce international
+D. De créer la Communauté économique européenne
 
 ---
 
-**Q19.** Le barrage de Lagdo se trouve sur :
+**Question 10.** Quel pays a envahi la Pologne en septembre 1939, déclenchant la Deuxième Guerre mondiale ?
 
-A. la Bénoué
-B. la Sanaga
-C. le Wouri
-D. le Nyong
-
----
-
-**Q20.** Le barrage de Song Loulou se trouve sur :
-
-A. la Sanaga
-B. la Bénoué
-C. le Wouri
-D. le Nyong
+A. La France
+B. L'Union soviétique
+C. L'Allemagne nazie
+D. Le Japon
 
 ---
 
 ## CORRIGÉ
 
-1. la réunification du Cameroun
-2. 1961
-3. 1972
-4. 1984
-5. 1990
-6. 1945
-7. 1919
-8. 1963
-9. 2002
-10. économique et monétaire
-11. Yaoundé
-12. le franc CFA
-13. l'ONU, l'UA et la CEMAC
-14. des montagnes, plateaux et plaines
-15. nord du Cameroun
-16. le cacao
-17. café et cacao
-18. Douala
-19. la Bénoué
-20. la Sanaga
+1. A
+2. B
+3. B
+4. D
+5. A
+6. B
+7. C
+8. A
+9. A
+10. C

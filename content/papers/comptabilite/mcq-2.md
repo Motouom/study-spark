@@ -1,223 +1,124 @@
-# CAMEROON Probatoire COMPTABILITÉ P1 SET 2
+# CAMEROON PROBATOIRE/BAC COMPTABILITÉ — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Première
-**Series:** Comptabilité
-**Subject:** Comptabilité
-**Exam:** Probatoire
+**Niveau :** Première / Terminale — Probatoire / Baccalauréat
+**Séries :** ACC, CG, FIG, SES
+**Matière :** Comptabilité
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé détaillé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le bénéfice est :
+**Question 1.** Le bilan d'une entreprise présente un actif total de 40 000 000 FCFA et des dettes de 12 000 000 FCFA. Le montant des capitaux propres est de :
 
-A. un résultat positif
-B. un résultat négatif
-C. une charge
-D. un produit
-
----
-
-**Q2.** La perte est :
-
-A. un résultat négatif
-B. un résultat positif
-C. une charge
-D. un produit
+A. 28 000 000 FCFA
+B. 52 000 000 FCFA
+C. 12 000 000 FCFA
+D. 40 000 000 FCFA
 
 ---
 
-**Q3.** Le chiffre d'affaires est :
+**Question 2.** Une immobilisation corporelle achetée 3 500 000 FCFA a une valeur résiduelle nulle et est amortie sur 7 ans. L'amortissement annuel est de :
 
-A. le total des ventes
-B. le total des achats
-C. le bénéfice
-D. la perte
-
----
-
-**Q4.** La facture est :
-
-A. un document commercial
-B. un bilan
-C. un résultat
-D. un journal
+A. 500 000 FCFA
+B. 350 000 FCFA
+C. 700 000 FCFA
+D. 400 000 FCFA
 
 ---
 
-**Q5.** La facture d'achat est :
+**Question 3.** Le coût d'achat d'une marchandise est de 200 000 FCFA, le coût de distribution de 40 000 FCFA et le prix de vente de 300 000 FCFA. La marge brute est de :
 
-A. reçue du fournisseur
-B. envoyée au client
-C. un bilan
-D. un résultat
-
----
-
-**Q6.** La facture de vente est :
-
-A. envoyée au client
-B. reçue du fournisseur
-C. un bilan
-D. un résultat
+A. 100 000 FCFA
+B. 60 000 FCFA
+C. 260 000 FCFA
+D. 40 000 FCFA
 
 ---
 
-**Q7.** L'avoir est :
+**Question 4.** La TVA à verser à l'État se calcule par :
 
-A. une facture de remise
-B. une facture d'achat
-C. un bilan
-D. un résultat
-
----
-
-**Q8.** Le rabais est :
-
-A. une réduction sur le prix
-B. une taxe
-C. un impôt
-D. une charge
+A. TVA collectée − TVA déductible
+B. TVA collectée + TVA déductible
+C. TVA déductible − TVA collectée
+D. TVA collectée × TVA déductible
 
 ---
 
-**Q9.** La remise est :
+**Question 5.** Le seuil de rentabilité d'une entreprise dont les charges fixes sont de 6 000 000 FCFA et le taux de marge sur coût variable de 40% est de :
 
-A. une réduction commerciale
-B. une taxe
-C. un impôt
-D. une charge
-
----
-
-**Q10.** L'escompte est :
-
-A. une réduction financière
-B. une réduction commerciale
-C. une taxe
-D. un impôt
+A. 15 000 000 FCFA
+B. 24 000 000 FCFA
+C. 2 400 000 FCFA
+D. 6 000 000 FCFA
 
 ---
 
-**Q11.** Le compte « clients » est :
+**Question 6.** Dans le cadre du système comptable OHADA, le compte « Matériel de transport » est :
 
-A. un compte de créance
-B. un compte de dette
-C. un compte de charge
-D. un compte de produit
-
----
-
-**Q12.** Le compte « fournisseurs » est :
-
-A. un compte de dette
-B. un compte de créance
-C. un compte de charge
-D. un compte de produit
+A. une immobilisation corporelle
+B. une charge
+C. un produit
+D. un compte de trésorerie
 
 ---
 
-**Q13.** Le compte « personnel » est :
+**Question 7.** Une créance client de 2 000 000 FCFA est réglée par chèque. L'écriture au journal est :
 
-A. un compte de dette
-B. un compte de créance
-C. un compte de charge
-D. un compte de produit
-
----
-
-**Q14.** Le compte « État, TVA » est :
-
-A. un compte de tiers
-B. un compte de charge
-C. un compte de produit
-D. un compte de banque
+A. Débit : Banque ; Crédit : Clients
+B. Débit : Clients ; Crédit : Banque
+C. Débit : Caisse ; Crédit : Banque
+D. Débit : Clients ; Crédit : Ventes
 
 ---
 
-**Q15.** Le journal est tenu :
+**Question 8.** Une facture d'avoir est émise par le fournisseur pour :
 
-A. chronologiquement
-B. par ordre alphabétique
-C. par montant
-D. au hasard
-
----
-
-**Q16.** La partie double signifie :
-
-A. chaque opération affecte deux comptes
-B. deux journaux
-C. deux bilans
-D. deux résultats
+A. réduire ou annuler une dette envers le client
+B. augmenter la dette du client
+C. constater une vente supplémentaire
+D. enregistrer un emprunt
 
 ---
 
-**Q17.** Le débit d'un compte d'actif :
+**Question 9.** Le besoin en fonds de roulement (BFR) est égal à :
 
-A. augmente le compte
-B. diminue le compte
-C. n'a aucun effet
-D. annule le compte
-
----
-
-**Q18.** Le crédit d'un compte de passif :
-
-A. augmente le compte
-B. diminue le compte
-C. n'a aucun effet
-D. annule le compte
+A. emplois cycliques − ressources cycliques
+B. ressources durables − emplois durables
+C. trésorerie active − trésorerie passive
+D. actif total − passif total
 
 ---
 
-**Q19.** Le débit d'un compte de charge :
+**Question 10.** Une entreprise réalise un chiffre d'affaires de 18 000 000 FCFA avec une marge sur coût variable de 30%. Sa marge sur coût variable (MCV) est de :
 
-A. augmente le compte
-B. diminue le compte
-C. n'a aucun effet
-D. annule le compte
-
----
-
-**Q20.** Le crédit d'un compte de produit :
-
-A. augmente le compte
-B. diminue le compte
-C. n'a aucun effet
-D. annule le compte
+A. 5 400 000 FCFA
+B. 12 600 000 FCFA
+C. 540 000 FCFA
+D. 3 000 000 FCFA
 
 ---
 
 ## CORRIGÉ
 
-1. un résultat positif
-2. un résultat négatif
-3. le total des ventes
-4. un document commercial
-5. reçue du fournisseur
-6. envoyée au client
-7. une facture de remise
-8. une réduction sur le prix
-9. une réduction commerciale
-10. une réduction financière
-11. un compte de créance
-12. un compte de dette
-13. un compte de dette
-14. un compte de tiers
-15. chronologiquement
-16. chaque opération affecte deux comptes
-17. augmente le compte
-18. augmente le compte
-19. augmente le compte
-20. augmente le compte
+1. **A. 28 000 000 FCFA.** Capitaux propres = Actif − Dettes = 40 000 000 − 12 000 000 = 28 000 000 FCFA.
+2. **A. 500 000 FCFA.** Annuité = 3 500 000 ÷ 7 = 500 000 FCFA.
+3. **A. 100 000 FCFA.** Marge brute = Prix de vente − Coût d'achat = 300 000 − 200 000 = 100 000 FCFA.
+4. **A. TVA collectée − TVA déductible.** L'État reçoit la différence entre la TVA facturée sur les ventes et celle payée sur les achats.
+5. **A. 15 000 000 FCFA.** Seuil = Charges fixes ÷ Taux de MCV = 6 000 000 ÷ 0,40 = 15 000 000 FCFA.
+6. **A. une immobilisation corporelle.** Le matériel de transport est une immobilisation de la classe 2.
+7. **A. Débit : Banque ; Crédit : Clients.** Le règlement d'une créance augmente la banque et diminue la créance client.
+8. **A. réduire ou annuler une dette envers le client.** L'avoir est émis suite à un retour de marchandises ou une erreur de facturation.
+9. **A. emplois cycliques − ressources cycliques.** BFR = Actif circulant − Passif circulant.
+10. **A. 5 400 000 FCFA.** MCV = 18 000 000 × 0,30 = 5 400 000 FCFA.

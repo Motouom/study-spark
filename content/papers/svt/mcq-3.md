@@ -1,223 +1,124 @@
-# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE P1 SET 3
+# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Sciences de la Vie et de la Terre
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Sciences de la Vie et de la Terre (SVT)
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le basalte est une roche :
+**Question 1.** Au cours de la division cellulaire (mitose), le nombre de chromosomes d'une cellule mère qui se divise pour donner deux cellules filles :
 
-A. volcanique
-B. sédimentaire
-C. métamorphique
-D. organique
-
----
-
-**Q2.** Le granite est une roche :
-
-A. plutonique
-B. volcanique
-C. sédimentaire
-D. métamorphique
+A. est doublé dans chaque cellule fille
+B. est identique dans chaque cellule fille (conservation)
+C. est divisé par deux dans chaque cellule fille
+D. disparaît dans les cellules filles
 
 ---
 
-**Q3.** Le calcaire est une roche :
+**Question 2.** Une personne fait une digestion d'un morceau de pain (riche en amidon). La transformation de l'amidon en glucose, réalisée grâce aux enzymes, se produit principalement dans :
 
-A. sédimentaire
-B. volcanique
-C. plutonique
-D. métamorphique
-
----
-
-**Q4.** Le fossile est :
-
-A. un reste d'être vivant conservé
-B. une roche
-C. un minéral
-D. un volcan
+A. l'estomac uniquement
+B. la bouche et l'intestin grêle
+C. le gros intestin
+D. le foie
 
 ---
 
-**Q5.** La tectonique des plaques explique :
+**Question 3.** Le groupe sanguin O est appelé « donneur universel » car :
 
-A. les séismes et volcans
-B. la photosynthèse
-C. la digestion
-D. la respiration
-
----
-
-**Q6.** Le séisme est dû à :
-
-A. la rupture des roches en profondeur
-B. la pluie
-C. le vent
-D. la chaleur
+A. il possède les antigènes A et B sur ses globules rouges
+B. il ne possède ni antigène A ni antigène B sur ses globules rouges
+C. il possède les anticorps anti-A et anti-B
+D. il est le plus rare
 
 ---
 
-**Q7.** L'échelle de Richter mesure :
+**Question 4.** Chez l'homme, la cellule reproductrice mâle (spermatozoïde) possède :
 
-A. la magnitude d'un séisme
-B. la température
-C. la pression
-D. l'altitude
-
----
-
-**Q8.** Le volcanisme est lié à :
-
-A. la remontée du magma
-B. la pluie
-C. le vent
-D. la neige
+A. 46 chromosomes
+B. 23 chromosomes
+C. 44 chromosomes
+D. 92 chromosomes
 
 ---
 
-**Q9.** L'érosion est :
+**Question 5.** L'unité de l'hérédité, qui est un fragment d'ADN portant l'information pour un caractère, est :
 
-A. l'usure des roches
-B. la formation des roches
-C. la fusion des roches
-D. la cristallisation
-
----
-
-**Q10.** Le sol est formé par :
-
-A. l'altération des roches
-B. la photosynthèse
-C. la respiration
-D. la transpiration
+A. le gène
+B. le chromosome
+C. le nucléotide
+D. la protéine
 
 ---
 
-**Q11.** L'humus est :
+**Question 6.** Dans une savane, on observe des herbes, des antilopes et des lions. Le niveau trophique (niveau alimentaire) des lions, qui se nourrissent des antilopes, est celui de :
 
-A. de la matière organique décomposée
-B. une roche
-C. un minéral
-D. de l'eau
-
----
-
-**Q12.** La couche d'ozone protège contre :
-
-A. les UV
-B. les rayons X
-C. les infrarouges
-D. la lumière visible
+A. producteur
+B. consommateur primaire
+C. consommateur secondaire
+D. décomposeur
 
 ---
 
-**Q13.** L'effet de serre est dû à :
+**Question 7.** La déforestation massive en forêt équatoriale camerounaise a pour conséquence directe :
 
-A. l'accumulation de CO₂
-B. la couche d'ozone
-C. les UV
-D. la pluie
-
----
-
-**Q14.** Le réchauffement climatique est causé par :
-
-A. l'augmentation des gaz à effet de serre
-B. la diminution de l'oxygène
-C. l'augmentation de l'azote
-D. la baisse du CO₂
+A. l'augmentation de la pluviométrie
+B. la diminution de la biodiversité et l'érosion des sols
+C. l'augmentation de la fertilité des sols
+D. la réduction du dioxyde de carbone dans l'air
 
 ---
 
-**Q15.** La biodiversité est :
+**Question 8.** Un élève se coupe le doigt avec un objet rouillé. Le médecin lui administre un vaccin antitétanique. Le rôle de ce vaccin est de :
 
-A. la variété des êtres vivants
-B. la quantité d'eau
-C. la température
-D. la pression
-
----
-
-**Q16.** L'espèce menacée est :
-
-A. une espèce en danger de disparition
-B. une espèce abondante
-C. une espèce nouvelle
-D. une espèce domestique
+A. tuer directement les bactéries du tétanos
+B. stimuler l'organisme à produire des anticorps contre la toxine tétanique
+C. remplacer les globules rouges perdus
+D. réduire la douleur de la blessure
 
 ---
 
-**Q17.** La contraception permet :
+**Question 9.** Les sédiments déposés au fond des océans se transforment progressivement en roches :
 
-A. d'éviter une grossesse
-B. de favoriser la grossesse
-C. de guérir une maladie
-D. de stimuler la croissance
-
----
-
-**Q18.** Le préservatif protège contre :
-
-A. les IST et le VIH
-B. la grossesse uniquement
-C. le diabète
-D. le paludisme
+A. magmatiques (volcaniques)
+B. métamorphiques
+C. sédimentaires
+D. plutoniques
 
 ---
 
-**Q19.** Le paludisme est transmis par :
+**Question 10.** Dans un étang, les algues microscopiques (phytoplancton) sont consommées par de petits crustacés (zooplancton), eux-mêmes mangés par les poissons. Si on supprime tout le phytoplancton, la conséquence la plus directe sera :
 
-A. le moustique
-B. la mouche
-C. le rat
-D. le pou
-
----
-
-**Q20.** Le plasmodium est :
-
-A. le parasite du paludisme
-B. un virus
-C. une bactérie
-D. un champignon
+A. l'augmentation du nombre de poissons
+B. la disparition progressive du zooplancton puis des poissons
+C. l'augmentation du zooplancton
+D. aucune conséquence
 
 ---
 
 ## CORRIGÉ
 
-1. volcanique
-2. plutonique
-3. sédimentaire
-4. un reste d'être vivant conservé
-5. les séismes et volcans
-6. la rupture des roches en profondeur
-7. la magnitude d'un séisme
-8. la remontée du magma
-9. l'usure des roches
-10. l'altération des roches
-11. de la matière organique décomposée
-12. les UV
-13. l'accumulation de CO₂
-14. l'augmentation des gaz à effet de serre
-15. la variété des êtres vivants
-16. une espèce en danger de disparition
-17. d'éviter une grossesse
-18. les IST et le VIH
-19. le moustique
-20. le parasite du paludisme
+1. B — identique dans chaque cellule fille (conservation)
+2. B — la bouche et l'intestin grêle
+3. B — il ne possède ni antigène A ni antigène B
+4. B — 23 chromosomes
+5. A — le gène
+6. C — consommateur secondaire
+7. B — diminution de la biodiversité et érosion des sols
+8. B — stimuler l'organisme à produire des anticorps
+9. C — sédimentaires
+10. B — disparition progressive du zooplancton puis des poissons

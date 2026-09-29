@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 3
+# CAMEROON BEPC MATHÉMATIQUES — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Mathématiques
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Mathématiques
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'asymptote horizontale de $f(x) = \frac{1}{x}$ est :
+**Question 1.** Un maçon utilise 3 sacs de ciment pour 12 m² de mur. Combien de sacs faut-il pour 20 m² ?
 
-A. $y = 0$
-B. $x = 0$
-C. $y = 1$
-D. $y = x$
-
----
-
-**Q2.** L'asymptote verticale de $f(x) = \frac{1}{x}$ est :
-
-A. $x = 0$
-B. $y = 0$
-C. $x = 1$
-D. $y = 1$
+A. 5 sacs
+B. 4 sacs
+C. 6 sacs
+D. 7 sacs
 
 ---
 
-**Q3.** La suite $u_n = 2n + 1$ est :
+**Question 2.** La somme des angles d'un triangle est :
 
-A. arithmétique
-B. géométrique
-C. ni l'un ni l'autre
-D. constante
-
----
-
-**Q4.** La suite $u_n = 3 \times 2^n$ est :
-
-A. géométrique
-B. arithmétique
-C. ni l'un ni l'autre
-D. constante
+A. 180°
+B. 90°
+C. 360°
+D. 270°
 
 ---
 
-**Q5.** La raison de la suite $u_n = 2n + 1$ est :
+**Question 3.** Un article coûte 5 000 FCFA. On applique une remise de 10% puis une hausse de 10%. Quel est le prix final ?
 
-A. 2
-B. 1
-C. 3
-D. n
+A. 4 950 FCFA
+B. 5 000 FCFA
+C. 5 050 FCFA
+D. 4 900 FCFA
 
 ---
 
-**Q6.** La raison de la suite $u_n = 3 \times 2^n$ est :
+**Question 4.** Le nombre 0,75 en pourcentage est :
 
-A. 2
-B. 3
+A. 75%
+B. 7,5%
+C. 0,75%
+D. 750%
+
+---
+
+**Question 5.** Un triangle rectangle a des côtés de 6 cm et 8 cm. Quelle est la longueur de l'hypoténuse ?
+
+A. 10 cm
+B. 14 cm
+C. 12 cm
+D. 9 cm
+
+---
+
+**Question 6.** Résoudre : $5x - 2 = 3x + 8$.
+
+A. $x = 5$
+B. $x = 3$
+C. $x = 10$
+D. $x = 6$
+
+---
+
+**Question 7.** Un élève lit 15 pages en 20 minutes. Combien de pages lira-t-il en 1 heure ?
+
+A. 45 pages
+B. 40 pages
+C. 50 pages
+D. 60 pages
+
+---
+
+**Question 8.** L'aire d'un losange de diagonales 6 cm et 8 cm est :
+
+A. 24 cm²
+B. 48 cm²
+C. 14 cm²
+D. 28 cm²
+
+---
+
+**Question 9.** Le PPCM de 4 et 6 est :
+
+A. 12
+B. 24
 C. 6
-D. n
+D. 2
 
 ---
 
-**Q7.** La somme des $n$ premiers termes d'une suite arithmétique de raison $r$ est :
+**Question 10.** Un commerçant vend un article à 6 250 FCFA alors qu'il l'a acheté 5 000 FCFA. Quel est le pourcentage de bénéfice ?
 
-A. $\frac{n(u_1 + u_n)}{2}$
-B. $n \times r$
-C. $u_1 \times r^n$
-D. $\frac{n}{2} \times r$
-
----
-
-**Q8.** La somme des $n$ premiers termes d'une suite géométrique de raison $q$ est :
-
-A. $u_1 \frac{1 - q^n}{1 - q}$
-B. $n \times u_1$
-C. $u_1 \times q^n$
-D. $\frac{n(u_1 + u_n)}{2}$
-
----
-
-**Q9.** La probabilité d'un événement certain est :
-
-A. 1
-B. 0
-C. 0,5
-D. $\infty$
-
----
-
-**Q10.** La probabilité d'un événement impossible est :
-
-A. 0
-B. 1
-C. 0,5
-D. $\infty$
-
----
-
-**Q11.** La somme des probabilités d'un univers est :
-
-A. 1
-B. 0
-C. 0,5
-D. $\infty$
-
----
-
-**Q12.** Deux événements incompatibles :
-
-A. ne peuvent pas se produire ensemble
-B. se produisent toujours ensemble
-C. sont certains
-D. sont impossibles
-
----
-
-**Q13.** La probabilité de $A \cup B$ si $A$ et $B$ sont incompatibles est :
-
-A. $P(A) + P(B)$
-B. $P(A) \times P(B)$
-C. $P(A) - P(B)$
-D. $P(A) / P(B)$
-
----
-
-**Q14.** La probabilité conditionnelle $P(A|B)$ est :
-
-A. $\frac{P(A \cap B)}{P(B)}$
-B. $P(A) \times P(B)$
-C. $P(A) + P(B)$
-D. $\frac{P(B)}{P(A)}$
-
----
-
-**Q15.** L'espérance d'une variable aléatoire est :
-
-A. la moyenne pondérée
-B. le maximum
-C. le minimum
-D. la variance
-
----
-
-**Q16.** La variance mesure :
-
-A. la dispersion
-B. la moyenne
-C. le maximum
-D. le minimum
-
----
-
-**Q17.** L'écart-type est :
-
-A. la racine carrée de la variance
-B. la variance
-C. la moyenne
-D. le maximum
-
----
-
-**Q18.** La loi binomiale $B(n, p)$ a pour espérance :
-
-A. $np$
-B. $n + p$
-C. $n - p$
-D. $p^n$
-
----
-
-**Q19.** La loi normale est :
-
-A. une loi continue
-B. une loi discrète
-C. une loi constante
-D. une loi nulle
-
----
-
-**Q20.** La courbe de la loi normale est :
-
-A. en cloche
-B. linéaire
-C. exponentielle
-D. constante
+A. 25%
+B. 20%
+C. 30%
+D. 15%
 
 ---
 
 ## CORRIGÉ
 
-1. $y = 0$
-2. $x = 0$
-3. arithmétique
-4. géométrique
-5. 2
-6. 2
-7. $\frac{n(u_1 + u_n)}{2}$
-8. $u_1 \frac{1 - q^n}{1 - q}$
-9. 1
-10. 0
-11. 1
-12. ne peuvent pas se produire ensemble
-13. $P(A) + P(B)$
-14. $\frac{P(A \cap B)}{P(B)}$
-15. la moyenne pondérée
-16. la dispersion
-17. la racine carrée de la variance
-18. $np$
-19. une loi continue
-20. en cloche
+1. 5 sacs
+2. 180°
+3. 4 950 FCFA
+4. 75%
+5. 10 cm
+6. $x = 5$
+7. 45 pages
+8. 24 cm²
+9. 12
+10. 25%

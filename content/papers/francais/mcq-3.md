@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat FRANÇAIS P1 SET 3
+# CAMEROON BEPC FRANÇAIS — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** A1, A2, A4, ABI, C, D
-**Subject:** Français
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Français
+**Durée :** 1 heure
+**Coefficient :** 1
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le point de vue interne :
+**Question 1.** Dans la phrase « Nous **sommes** arrivés à l'heure. », le verbe est conjugué au :
 
-A. le narrateur voit par les yeux d'un personnage
-B. le narrateur voit tout
-C. le narrateur est absent
-D. le narrateur juge
-
----
-
-**Q2.** Le point de vue omniscient :
-
-A. le narrateur sait tout
-B. le narrateur voit par un personnage
-C. le narrateur est absent
-D. le narrateur juge
+A. passé composé
+B. plus-que-parfait
+C. futur antérieur
+D. présent de l'indicatif
 
 ---
 
-**Q3.** Le point de vue externe :
+**Question 2.** Le nom « la beauté » est formé à partir de l'adjectif :
 
-A. le narrateur observe de l'extérieur
-B. le narrateur sait tout
-C. le narrateur voit par un personnage
-D. le narrateur juge
-
----
-
-**Q4.** Le narrateur interne :
-
-A. est un personnage de l'histoire
-B. est extérieur
-C. est omniscient
-D. est absent
+A. beau
+B. belle
+C. bête
+D. beurré
 
 ---
 
-**Q5.** Le narrateur externe :
+**Question 3.** Dans la phrase « Le professeur **dont** tu parles est gentil. », « dont » est :
 
-A. n'est pas un personnage
-B. est un personnage
-C. est omniscient
-D. est le héros
-
----
-
-**Q6.** La focalisation zéro :
-
-A. le narrateur omniscient
-B. le narrateur interne
-C. le narrateur externe
-D. le narrateur absent
+A. un pronom relatif
+B. une préposition
+C. un déterminant
+D. une conjonction de subordination
 
 ---
 
-**Q7.** La focalisation interne :
+**Question 4.** La figure de style dans « Ce héros a un cœur de lion. » est :
 
-A. le narrateur voit par un personnage
-B. le narrateur omniscient
-C. le narrateur externe
-D. le narrateur absent
-
----
-
-**Q8.** La focalisation externe :
-
-A. le narrateur observe de l'extérieur
-B. le narrateur omniscient
-C. le narrateur interne
-D. le narrateur absent
+A. une métaphore
+B. une comparaison
+C. une répétition
+D. une antithèse
 
 ---
 
-**Q9.** Le classicisme :
+**Question 5.** Quelle est la forme correcte de l'impératif présent du verbe « aller » à la 2e personne du singulier ?
 
-A. la mesure et la raison
-B. l'expression des sentiments
-C. le rêve
-D. l'absurde
-
----
-
-**Q10.** Le siècle des Lumières :
-
-A. la raison et la critique
-B. le sentiment
-C. le rêve
-D. l'absurde
+A. vas
+B. va
+C. va-t'en
+D. allons
 
 ---
 
-**Q11.** L'humanisme :
+**Question 6.** Le mot « inutile » est formé avec le préfixe :
 
-A. la confiance en l'homme
-B. la foi
-C. le doute
-D. l'absurde
-
----
-
-**Q12.** Le baroque :
-
-A. le mouvement et l'instabilité
-B. la mesure
-C. la raison
-D. le classicisme
+A. in-
+B. un-
+C. im-
+D. dé-
 
 ---
 
-**Q13.** La littérature africaine :
+**Question 7.** Dans la phrase « **Quoiqu'il** soit fatigué, il continue. », la subordonnée exprime :
 
-A. reflète les réalités africaines
-B. est européenne
-C. est asiatique
-D. est américaine
-
----
-
-**Q14.** La négritude :
-
-A. la valorisation de la culture noire
-B. le rejet de la culture
-C. la colonisation
-D. l'esclavage
+A. la concession
+B. la cause
+C. la conséquence
+D. le temps
 
 ---
 
-**Q15.** Senghor est :
+**Question 8.** Le pluriel de « un travail » est :
 
-A. un poète de la négritude
-B. un romancier
-C. un dramaturge
-D. un essayiste
-
----
-
-**Q16.** Le roman :
-
-A. un récit en prose
-B. un poème
-C. une pièce de théâtre
-D. un essai
+A. des travails
+B. des travaux
+C. des travailes
+D. des travaus
 
 ---
 
-**Q17.** La nouvelle :
+**Question 9.** L'attribut du sujet dans « Mon frère est **devenu** médecin. » est :
 
-A. un récit court
-B. un roman
-C. un poème
-D. une pièce
-
----
-
-**Q18.** L'essai :
-
-A. une réflexion argumentée
-B. un récit
-C. un poème
-D. une pièce
+A. mon frère
+B. est devenu
+C. médecin
+D. est
 
 ---
 
-**Q19.** La fable :
+**Question 10.** Dans « Elle parle **lentement** pour se faire comprendre. », « lentement » est un adverbe de :
 
-A. un récit allégorique avec morale
-B. un roman
-C. une pièce
-D. un essai
-
----
-
-**Q20.** La satire :
-
-A. critique les défauts
-B. loue les qualités
-C. raconte
-D. décrit
+A. manière
+B. temps
+C. lieu
+D. quantité
 
 ---
 
 ## CORRIGÉ
 
-1. le narrateur voit par les yeux d'un personnage
-2. le narrateur sait tout
-3. le narrateur observe de l'extérieur
-4. est un personnage de l'histoire
-5. n'est pas un personnage
-6. le narrateur omniscient
-7. le narrateur voit par un personnage
-8. le narrateur observe de l'extérieur
-9. la mesure et la raison
-10. la raison et la critique
-11. la confiance en l'homme
-12. le mouvement et l'instabilité
-13. reflète les réalités africaines
-14. la valorisation de la culture noire
-15. un poète de la négritude
-16. un récit en prose
-17. un récit court
-18. une réflexion argumentée
-19. un récit allégorique avec morale
-20. critique les défauts
+1. A — « nous sommes arrivés » est au passé composé (auxiliaire être + participe passé).
+2. A — « la beauté » dérive de l'adjectif « beau ».
+3. A — « dont » est un pronom relatif (complément du nom « parles »).
+4. A — « un cœur de lion » est une métaphore (courage assimilé à celui du lion, sans outil de comparaison).
+5. B — à l'impératif présent, la 2e personne du singulier d'« aller » est « va » (sans s).
+6. A — le préfixe « in- » forme « inutile ».
+7. A — « quoique » introduit une subordonnée de concession.
+8. B — le pluriel de « travail » est « travaux ».
+9. C — « médecin » est l'attribut du sujet, relié par le verbe d'état « est devenu ».
+10. A — « lentement » est un adverbe de manière (répond à « comment ? »).

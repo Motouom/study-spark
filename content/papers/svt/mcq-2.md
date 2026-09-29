@@ -1,223 +1,124 @@
-# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE P1 SET 2
+# CAMEROON BEPC SCIENCES DE LA VIE ET DE LA TERRE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Sciences de la Vie et de la Terre
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Sciences de la Vie et de la Terre (SVT)
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le virus du SIDA s'appelle :
+**Question 1.** Lors d'une course de 400 m, un élève remarque que son cœur bat plus vite et qu'il respire plus fort. L'augmentation de la fréquence cardiaque a pour rôle principal de :
 
-A. le VIH
-B. le VHB
-C. le VHC
-D. le VPH
-
----
-
-**Q2.** La digestion commence dans :
-
-A. la bouche
-B. l'estomac
-C. l'intestin
-D. l'œsophage
+A. ralentir la circulation du sang
+B. augmenter l'apport d'oxygène aux muscles
+C. diminuer la production d'énergie
+D. stocker du glucose dans le foie
 
 ---
 
-**Q3.** L'enzyme digestive de la salive est :
+**Question 2.** Le néphron est l'unité fonctionnelle du rein. La fonction principale du rein est de :
 
-A. l'amylase
-B. la pepsine
-C. la lipase
-D. la trypsine
-
----
-
-**Q4.** La bile est produite par :
-
-A. le foie
-B. l'estomac
-C. le pancréas
-D. la vésicule
+A. produire les globules rouges
+B. filtrer le sang et former l'urine en éliminant les déchets
+C. digérer les aliments
+D. transporter le dioxygène
 
 ---
 
-**Q5.** L'insuline est produite par :
+**Question 3.** Au niveau des alvéoles pulmonaires, le dioxygène passe du sang vers l'air alvéolaire et le dioxyde de carbone passe de l'air vers le sang. Ce mouvement de gaz s'explique par :
 
-A. le pancréas
-B. le foie
-C. le rein
-D. la thyroïde
-
----
-
-**Q6.** Le diabète est dû à un problème de :
-
-A. l'insuline
-B. l'adrénaline
-C. la thyroxine
-D. l'œstrogène
+A. un transport actif nécessitant de l'énergie
+B. une différence de concentration (gradient) entre les deux milieux
+C. la contraction du diaphragme
+D. la présence de globules blancs
 
 ---
 
-**Q7.** La cellule végétale possède en plus de la cellule animale :
+**Question 4.** Chez une femme, un ovule mature est libéré par l'ovaire environ au milieu du cycle menstruel. Ce phénomène de libération de l'ovule s'appelle :
 
-A. une paroi et des chloroplastes
-B. un noyau
-C. une membrane
-D. des mitochondries
-
----
-
-**Q8.** La mitose permet :
-
-A. la division cellulaire
-B. la formation des gamètes
-C. la respiration
-D. la digestion
+A. la menstruation
+B. la nidation
+C. l'ovulation
+D. la fécondation
 
 ---
 
-**Q9.** La méiose permet :
+**Question 5.** Dans un croisement entre deux souris noires hétérozygotes ($Nn$), où l'allèle noir $N$ domine l'allèle blanc $n$, la proportion de souris blanches ($nn$) dans la descendance F2 est de :
 
-A. la formation des gamètes
-B. la division cellulaire
-C. la croissance
-D. la régénération
-
----
-
-**Q10.** Le chromosome est constitué de :
-
-A. ADN et protéines
-B. ARN et lipides
-C. glucides et protéines
-D. eau et sels minéraux
+A. 1/4
+B. 1/2
+C. 3/4
+D. 0
 
 ---
 
-**Q11.** Le nombre de chromosomes chez l'homme est :
+**Question 6.** Un agriculteur remarque que ses plants de haricots poussent mieux en présence de certaines bactéries présentes dans leurs racines. Ces bactéries, qui vivent en association bénéfique avec les plantes, sont appelées :
 
-A. 46
-B. 44
-C. 48
-D. 23
-
----
-
-**Q12.** Le caryotype humain normal possède :
-
-A. 23 paires de chromosomes
-B. 46 paires
-C. 22 paires
-D. 24 paires
+A. des parasites
+B. des prédateurs
+C. des symbiotes (symbiose)
+D. des décomposeurs
 
 ---
 
-**Q13.** La transpiration se fait par :
+**Question 7.** Le choléra, maladie diarrhéique très grave, se transmet principalement par :
 
-A. la peau
-B. le rein
-C. le poumon
-D. le foie
-
----
-
-**Q14.** L'homéostasie est :
-
-A. le maintien de l'équilibre interne
-B. la croissance
-C. la reproduction
-D. la digestion
+A. la piqûre d'insecte
+B. l'eau et les aliments contaminés par la bactérie Vibrio cholerae
+C. l'air respiré
+D. une transfusion sanguine
 
 ---
 
-**Q15.** Le réflexe est :
+**Question 8.** La tectonique des plaques explique la formation des montagnes, les séismes et le volcanisme. Le Cameroun possède une chaîne volcanique, dont le mont Cameroun, qui est :
 
-A. une réponse rapide et involontaire
-B. une réponse lente
-C. une action volontaire
-D. une pensée
-
----
-
-**Q16.** L'arc réflexe passe par :
-
-A. la moelle épinière
-B. le cerveau
-C. le cervelet
-D. le bulbe
+A. un volcan éteint
+B. un volcan actif
+C. une montagne de plissement ancienne
+D. un pli anticlinal
 
 ---
 
-**Q17.** Le cervelet contrôle :
+**Question 9.** La respiration cutanée est le mode de respiration principal chez :
 
-A. l'équilibre
-B. la mémoire
-C. la respiration
-D. la digestion
-
----
-
-**Q18.** Le bulbe rachidien contrôle :
-
-A. la respiration
-B. la mémoire
-C. l'équilibre
-D. la vision
+A. l'homme
+B. le ver de terre (lombric)
+C. la moule
+D. le poisson
 
 ---
 
-**Q19.** La géologie étudie :
+**Question 10.** Le SIDA est causé par un virus qui affaiblit le système immunitaire en détruisant principalement :
 
-A. la Terre
-B. les étoiles
-C. les plantes
-D. les animaux
-
----
-
-**Q20.** Les roches magmatiques proviennent :
-
-A. du refroidissement du magma
-B. de la sédimentation
-C. du métamorphisme
-D. de l'érosion
+A. les globules rouges
+B. les lymphocytes T (globules blancs)
+C. les plaquettes
+D. les neurones
 
 ---
 
 ## CORRIGÉ
 
-1. le VIH
-2. la bouche
-3. l'amylase
-4. le foie
-5. le pancréas
-6. l'insuline
-7. une paroi et des chloroplastes
-8. la division cellulaire
-9. la formation des gamètes
-10. ADN et protéines
-11. 46
-12. 23 paires de chromosomes
-13. la peau
-14. le maintien de l'équilibre interne
-15. une réponse rapide et involontaire
-16. la moelle épinière
-17. l'équilibre
-18. la respiration
-19. la Terre
-20. du refroidissement du magma
+1. B — augmenter l'apport d'oxygène aux muscles
+2. B — filtrer le sang et former l'urine
+3. B — différence de concentration (gradient)
+4. C — l'ovulation
+5. A — 1/4
+6. C — symbiotes
+7. B — eau et aliments contaminés
+8. B — volcan actif
+9. B — le ver de terre (lombric)
+10. B — les lymphocytes T

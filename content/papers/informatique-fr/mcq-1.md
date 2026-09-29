@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat INFORMATIQUE P1 SET 1
+# CAMEROON BEPC INFORMATIQUE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** TI, C, D, E
-**Subject:** Informatique
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Informatique
+**Durée :** 30 minutes
+**Coefficient :** 1
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Un algorithme est :
+**Question 1.** L'ensemble des composants physiques et visibles d'un ordinateur (écran, clavier, souris, processeur) s'appelle :
 
-A. une suite d'instructions
-B. un périphérique
-C. une mémoire
-D. un composant
-
----
-
-**Q2.** La variable est :
-
-A. un espace mémoire nommé
-B. un périphérique
-C. une mémoire
-D. un composant
+A. Le logiciel
+B. Le matériel (hardware)
+C. Le système d'exploitation
+D. Un programme
 
 ---
 
-**Q3.** Le type entier :
+**Question 2.** Quelle est l'unité de base de l'information en informatique, qui ne peut prendre que les valeurs 0 ou 1 ?
 
-A. représente des nombres entiers
-B. représente des nombres décimaux
-C. représente du texte
-D. représente un booléen
-
----
-
-**Q4.** Le type réel :
-
-A. représente des nombres décimaux
-B. représente des entiers
-C. représente du texte
-D. représente un booléen
+A. L'octet
+B. Le kilo-octet
+C. Le bit
+D. Le mégaoctet
 
 ---
 
-**Q5.** Le type chaîne :
+**Question 3.** Un octet est composé de :
 
-A. représente du texte
-B. représente des entiers
-C. représente des décimaux
-D. représente un booléen
-
----
-
-**Q6.** Le type booléen :
-
-A. vrai ou faux
-B. des nombres
-C. du texte
-D. des caractères
+A. 2 bits
+B. 8 bits
+C. 16 bits
+D. 4 bits
 
 ---
 
-**Q7.** La structure conditionnelle :
+**Question 4.** Le programme qui permet de consulter des pages sur le World Wide Web s'appelle :
 
-A. si... alors... sinon
-B. pour... faire
-C. tant que... faire
-D. répéter... jusqu'à
-
----
-
-**Q8.** La boucle « pour » :
-
-A. répète un nombre fixe de fois
-B. répète tant qu'une condition est vraie
-C. est une condition
-D. est une variable
+A. Un navigateur web
+B. Un antivirus
+C. Un tableur
+D. Un compilateur
 
 ---
 
-**Q9.** La boucle « tant que » :
+**Question 5.** Lequel de ces éléments est un périphérique d'entrée ?
 
-A. répète tant qu'une condition est vraie
-B. répète un nombre fixe de fois
-C. est une condition
-D. est une variable
-
----
-
-**Q10.** L'opérateur de comparaison est :
-
-A. =
-B. +
-C. *
-D. /
+A. L'imprimante
+B. L'écran
+C. Le clavier
+D. Le haut-parleur
 
 ---
 
-**Q11.** L'opérateur d'affectation :
+**Question 6.** La mémoire vive (RAM) d'un ordinateur :
 
-A. attribue une valeur à une variable
-B. compare deux valeurs
-C. additionne
-D. multiplie
-
----
-
-**Q12.** Le tableau :
-
-A. une collection de valeurs
-B. une variable
-C. une condition
-D. une boucle
+A. Stocke les données de façon permanente
+B. Perd son contenu lorsque l'ordinateur est éteint
+C. Sert uniquement à imprimer des documents
+D. Est un périphérique de sortie
 
 ---
 
-**Q13.** L'indice d'un tableau commence à :
+**Question 7.** Un élève souhaite stocker durablement sa dissertation pour la rapporter à l'école. Le support le plus adapté est :
 
-A. 0 ou 1
-B. 10
-C. -1
-D. n'importe où
-
----
-
-**Q14.** La fonction :
-
-A. un bloc de code réutilisable
-B. une variable
-C. une condition
-D. une boucle
+A. La clé USB
+B. La mémoire RAM
+C. Le registre du processeur
+D. Le cache du navigateur
 
 ---
 
-**Q15.** Le paramètre d'une fonction :
+**Question 8.** Quelle adresse est correctement écrite pour un site web ?
 
-A. une donnée d'entrée
-B. une sortie
-C. une condition
-D. une boucle
-
----
-
-**Q16.** La récursivité :
-
-A. une fonction qui s'appelle elle-même
-B. une boucle
-C. une condition
-D. une variable
+A. www.google.fr
+B. google.www.com
+C. fr://www.google
+D. www@google.fr
 
 ---
 
-**Q17.** La complexité algorithmique :
+**Question 9.** Pour accéder à sa messagerie électronique, une personne doit obligatoirement posséder :
 
-A. mesure l'efficacité
-B. mesure la taille
-C. mesure la vitesse du processeur
-D. mesure la mémoire
-
----
-
-**Q18.** Le tri à bulles :
-
-A. un algorithme de tri
-B. une recherche
-C. une boucle
-D. une condition
+A. Une adresse e-mail et un mot de passe
+B. Un numéro de téléphone fixe
+C. Une imprimante
+D. Un logiciel de traitement de texte
 
 ---
 
-**Q19.** La recherche dichotomique :
+**Question 10.** Lequel de ces gestes protège le mieux un compte en ligne ?
 
-A. recherche dans un tableau trié
-B. recherche aléatoire
-C. un tri
-D. une boucle
-
----
-
-**Q20.** La structure de données Pile :
-
-A. LIFO (dernier entré, premier sorti)
-B. FIFO (premier entré, premier sorti)
-C. une file
-D. un tableau
+A. Utiliser le même mot de passe partout
+B. Choisir un mot de passe long, complexe et différent pour chaque compte
+C. Écrire son mot de passe sur un post-it collé à l'écran
+D. Communiquer son mot de passe à ses amis
 
 ---
 
 ## CORRIGÉ
 
-1. une suite d'instructions
-2. un espace mémoire nommé
-3. représente des nombres entiers
-4. représente des nombres décimaux
-5. représente du texte
-6. vrai ou faux
-7. si... alors... sinon
-8. répète un nombre fixe de fois
-9. répète tant qu'une condition est vraie
-10. =
-11. attribue une valeur à une variable
-12. une collection de valeurs
-13. 0 ou 1
-14. un bloc de code réutilisable
-15. une donnée d'entrée
-16. une fonction qui s'appelle elle-même
-17. mesure l'efficacité
-18. un algorithme de tri
-19. recherche dans un tableau trié
-20. LIFO (dernier entré, premier sorti)
+1. B — Le matériel (hardware)
+2. C — Le bit
+3. B — 8 bits
+4. A — Un navigateur web
+5. C — Le clavier
+6. B — Perd son contenu lorsque l'ordinateur est éteint
+7. A — La clé USB
+8. A — www.google.fr
+9. A — Une adresse e-mail et un mot de passe
+10. B — Choisir un mot de passe long, complexe et différent pour chaque compte

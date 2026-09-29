@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 1
+# CAMEROON BEPC MATHÉMATIQUES — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Mathématiques
-**Exam:** Baccalauréat
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Mathématiques
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La dérivée de $x^3$ est :
+**Question 1.** Un commerçant achète 25 cahiers à 350 FCFA l'unité. Il les revend tous à 425 FCFA l'unité. Quel est son bénéfice total ?
 
-A. $3x^2$
-B. $x^2$
-C. $3x$
-D. $3x^3$
-
----
-
-**Q2.** La dérivée de $\sin(x)$ est :
-
-A. $\cos(x)$
-B. $-\cos(x)$
-C. $\sin(x)$
-D. $-\sin(x)$
+A. 1 875 FCFA
+B. 8 750 FCFA
+C. 10 625 FCFA
+D. 1 750 FCFA
 
 ---
 
-**Q3.** La dérivée de $\cos(x)$ est :
+**Question 2.** Dans une classe de 30 élèves, 40% sont des filles. Combien y a-t-il de garçons ?
 
-A. $-\sin(x)$
-B. $\sin(x)$
-C. $\cos(x)$
-D. $-\cos(x)$
-
----
-
-**Q4.** La dérivée de $e^x$ est :
-
-A. $e^x$
-B. $x e^x$
-C. $e^{x-1}$
-D. $\ln(x)$
+A. 18
+B. 12
+C. 20
+D. 15
 
 ---
 
-**Q5.** La dérivée de $\ln(x)$ est :
+**Question 3.** Un réservoir d'eau a la forme d'un pavé droit de 2 m de long, 1,5 m de large et 1 m de haut. Quelle est sa capacité en litres ?
 
-A. $\frac{1}{x}$
-B. $x$
-C. $\ln(x)$
-D. $\frac{1}{\ln(x)}$
-
----
-
-**Q6.** L'intégrale de $x^2$ est :
-
-A. $\frac{x^3}{3} + C$
-B. $\frac{x^2}{2} + C$
-C. $x^3 + C$
-D. $2x + C$
+A. 3 000 L
+B. 300 L
+C. 30 000 L
+D. 3,5 L
 
 ---
 
-**Q7.** L'intégrale de $\cos(x)$ est :
+**Question 4.** Résoudre l'équation : $3x - 7 = 2x + 5$.
 
-A. $\sin(x) + C$
-B. $-\sin(x) + C$
-C. $\cos(x) + C$
-D. $-\cos(x) + C$
-
----
-
-**Q8.** L'intégrale de $\frac{1}{x}$ est :
-
-A. $\ln|x| + C$
-B. $x + C$
-C. $\frac{1}{x^2} + C$
-D. $e^x + C$
-
----
-
-**Q9.** La limite de $\frac{\sin(x)}{x}$ quand $x \to 0$ est :
-
-A. 1
-B. 0
-C. $\infty$
-D. n'existe pas
-
----
-
-**Q10.** La limite de $\frac{1}{x}$ quand $x \to \infty$ est :
-
-A. 0
-B. $\infty$
-C. 1
-D. n'existe pas
-
----
-
-**Q11.** La fonction $f(x) = x^2$ est :
-
-A. paire
-B. impaire
-C. ni paire ni impaire
-D. constante
-
----
-
-**Q12.** La fonction $f(x) = x^3$ est :
-
-A. impaire
-B. paire
-C. ni paire ni impaire
-D. constante
-
----
-
-**Q13.** La dérivée de $x^n$ est :
-
-A. $n x^{n-1}$
-B. $x^{n-1}$
-C. $n x^n$
-D. $(n-1)x^n$
-
----
-
-**Q14.** L'équation $x^2 - 4 = 0$ a pour solutions :
-
-A. $x = 2$ et $x = -2$
+A. $x = 12$
 B. $x = 2$
-C. $x = 4$
-D. $x = 16$
+C. $x = -2$
+D. $x = 5$
 
 ---
 
-**Q15.** Le discriminant de $ax^2 + bx + c = 0$ est :
+**Question 5.** Un article coûte 8 000 FCFA. Il subit une hausse de 15%. Quel est son nouveau prix ?
 
-A. $b^2 - 4ac$
-B. $b^2 + 4ac$
-C. $4ac - b^2$
-D. $b - 4ac$
-
----
-
-**Q16.** Si $\Delta > 0$, l'équation du second degré a :
-
-A. deux solutions réelles
-B. une solution
-C. aucune solution
-D. une solution complexe
+A. 9 200 FCFA
+B. 8 150 FCFA
+C. 9 000 FCFA
+D. 8 800 FCFA
 
 ---
 
-**Q17.** Si $\Delta = 0$, l'équation du second degré a :
+**Question 6.** Le PGCD de 24 et 36 est :
 
-A. une solution double
-B. deux solutions
-C. aucune solution
-D. deux solutions complexes
-
----
-
-**Q18.** Si $\Delta < 0$, l'équation du second degré a :
-
-A. aucune solution réelle
-B. deux solutions réelles
-C. une solution
-D. une solution double
+A. 12
+B. 6
+C. 18
+D. 72
 
 ---
 
-**Q19.** La dérivée de $\tan(x)$ est :
+**Question 7.** Un train parcourt 240 km en 3 heures. Quelle est sa vitesse moyenne ?
 
-A. $\frac{1}{\cos^2(x)}$
-B. $\sin(x)$
-C. $\cos(x)$
-D. $-\frac{1}{\sin^2(x)}$
+A. 80 km/h
+B. 60 km/h
+C. 120 km/h
+D. 72 km/h
 
 ---
 
-**Q20.** L'intégrale de $e^x$ est :
+**Question 8.** L'aire d'un triangle de base 12 cm et de hauteur 8 cm est :
 
-A. $e^x + C$
-B. $\frac{e^x}{x} + C$
-C. $x e^x + C$
-D. $\ln(x) + C$
+A. 48 cm²
+B. 96 cm²
+C. 24 cm²
+D. 40 cm²
+
+---
+
+**Question 9.** Résoudre le système : $\begin{cases} x + y = 10 \\ x - y = 4 \end{cases}$.
+
+A. $x = 7$, $y = 3$
+B. $x = 3$, $y = 7$
+C. $x = 6$, $y = 4$
+D. $x = 5$, $y = 5$
+
+---
+
+**Question 10.** Un champ rectangulaire mesure 120 m sur 80 m. Quelle est son aire en hectares ?
+
+A. 0,96 ha
+B. 9,6 ha
+C. 96 ha
+D. 9 600 ha
 
 ---
 
 ## CORRIGÉ
 
-1. $3x^2$
-2. $\cos(x)$
-3. $-\sin(x)$
-4. $e^x$
-5. $\frac{1}{x}$
-6. $\frac{x^3}{3} + C$
-7. $\sin(x) + C$
-8. $\ln|x| + C$
-9. 1
-10. 0
-11. paire
-12. impaire
-13. $n x^{n-1}$
-14. $x = 2$ et $x = -2$
-15. $b^2 - 4ac$
-16. deux solutions réelles
-17. une solution double
-18. aucune solution réelle
-19. $\frac{1}{\cos^2(x)}$
-20. $e^x + C$
+1. 1 875 FCFA
+2. 18
+3. 3 000 L
+4. $x = 12$
+5. 9 200 FCFA
+6. 12
+7. 80 km/h
+8. 48 cm²
+9. $x = 7$, $y = 3$
+10. 0,96 ha

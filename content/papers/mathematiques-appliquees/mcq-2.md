@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES P1 SET 2
+# CAMEROON BAC MATHÉMATIQUES APPLIQUÉES — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Mathématiques Appliquées
-**Subject:** Mathématiques Appliquées
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** ACC / CG / FIG / SES
+**Matière :** Mathématiques Appliquées
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La fonction exponentielle $e^x$ est :
+**Question 1.** La dérivée de la fonction $f(x) = x^3 - 4x^2 + 7$ est :
 
-A. strictement croissante
-B. strictement décroissante
-C. constante
-D. périodique
-
----
-
-**Q2.** La fonction logarithme $\ln(x)$ est définie pour :
-
-A. $x > 0$
-B. $x \geq 0$
-C. $x \neq 0$
-D. tout $x$
+A. $3x^2 - 8x$
+B. $x^2 - 8x$
+C. $3x^2 - 4x$
+D. $3x^2 - 8x + 7$
 
 ---
 
-**Q3.** $\ln(1)$ est égal à :
+**Question 2.** L'équation du second degré $x^2 - 5x + 6 = 0$ a pour solutions :
 
-A. 0
-B. 1
-C. $e$
-D. $-1$
+A. $x = 2$ et $x = 3$
+B. $x = -2$ et $x = -3$
+C. $x = 1$ et $x = 6$
+D. $x = 5$ et $x = 1$
 
 ---
 
-**Q4.** $\ln(e)$ est égal à :
+**Question 3.** Une marchandise de 40 000 FCFA subit une baisse de 20%. Son nouveau prix est :
 
-A. 1
+A. 48 000 FCFA
+B. 32 000 FCFA
+C. 38 000 FCFA
+D. 30 000 FCFA
+
+---
+
+**Question 4.** La somme des $n$ premiers termes d'une suite arithmétique de premier terme 2 et de raison 3, pour $n = 10$, est :
+
+A. 155
+B. 32
+C. 290
+D. 1550
+
+---
+
+**Question 5.** La variance de la série : 2, 4, 6, 8, 10 est :
+
+A. 6
+B. 8
+C. 10
+D. 4
+
+---
+
+**Question 6.** La limite de $\frac{3x - 1}{x + 2}$ quand $x$ tend vers $+\infty$ est :
+
+A. 3
 B. 0
-C. $e$
-D. $-1$
-
----
-
-**Q5.** $e^0$ est égal à :
-
-A. 1
-B. 0
-C. $e$
-D. $-1$
-
----
-
-**Q6.** La dérivée de $\frac{1}{x}$ est :
-
-A. $-\frac{1}{x^2}$
-B. $\frac{1}{x^2}$
-C. $-\frac{1}{x}$
-D. $\ln(x)$
-
----
-
-**Q7.** L'intégrale de $\sin(x)$ est :
-
-A. $-\cos(x) + C$
-B. $\cos(x) + C$
-C. $\sin(x) + C$
-D. $-\sin(x) + C$
-
----
-
-**Q8.** La limite de $\frac{x^2 - 1}{x - 1}$ quand $x \to 1$ est :
-
-A. 2
-B. 0
-C. 1
-D. $\infty$
-
----
-
-**Q9.** La fonction $f(x) = \frac{1}{x}$ est :
-
-A. impaire
-B. paire
-C. ni paire ni impaire
-D. constante
-
----
-
-**Q10.** Le nombre dérivé de $f$ en $a$ est :
-
-A. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
-B. $f(a)$
-C. $\frac{f(a)}{a}$
-D. $f'(a) \times a$
-
----
-
-**Q11.** La tangente à la courbe en $a$ a pour pente :
-
-A. $f'(a)$
-B. $f(a)$
-C. $a$
-D. $f'(a) \times a$
-
----
-
-**Q12.** L'équation de la tangente en $a$ est :
-
-A. $y = f'(a)(x - a) + f(a)$
-B. $y = f(a)x$
-C. $y = f'(a)x$
-D. $y = f(a) + x$
-
----
-
-**Q13.** La fonction $f(x) = x^2$ est croissante sur :
-
-A. $[0, +\infty[$
-B. $]-\infty, 0]$
-C. $\mathbb{R}$
-D. $]-\infty, +\infty[$
-
----
-
-**Q14.** La fonction $f(x) = x^2$ est décroissante sur :
-
-A. $]-\infty, 0]$
-B. $[0, +\infty[$
-C. $\mathbb{R}$
-D. nulle part
-
----
-
-**Q15.** Le point d'inflexion est :
-
-A. où la courbure change
-B. le maximum
-C. le minimum
-D. l'origine
-
----
-
-**Q16.** La dérivée seconde de $x^3$ est :
-
-A. $6x$
-B. $3x^2$
-C. $3x$
-D. $6$
-
----
-
-**Q17.** La fonction $f(x) = e^x$ a pour limite en $+\infty$ :
-
-A. $+\infty$
-B. 0
-C. 1
-D. $e$
-
----
-
-**Q18.** La fonction $f(x) = e^x$ a pour limite en $-\infty$ :
-
-A. 0
-B. $+\infty$
-C. 1
-D. $e$
-
----
-
-**Q19.** La fonction $f(x) = \ln(x)$ a pour limite en $+\infty$ :
-
-A. $+\infty$
-B. 0
-C. 1
-D. $-\infty$
-
----
-
-**Q20.** La fonction $f(x) = \ln(x)$ a pour limite en $0^+$ :
-
-A. $-\infty$
-B. $+\infty$
-C. 0
+C. $+\infty$
 D. 1
+
+---
+
+**Question 7.** Une urne contient 3 boules rouges et 5 boules vertes, indiscernables au toucher. On tire une boule au hasard. La probabilité d'obtenir une boule verte est :
+
+A. $\frac{3}{8}$
+B. $\frac{5}{8}$
+C. $\frac{5}{3}$
+D. $\frac{1}{8}$
+
+---
+
+**Question 8.** La dérivée de la fonction $f(x) = \frac{1}{x}$ est :
+
+A. $\frac{1}{x^2}$
+B. $-\frac{1}{x^2}$
+C. $\ln x$
+D. $-\frac{1}{x}$
+
+---
+
+**Question 9.** Une variable aléatoire $X$ suit la loi binomiale $B(20 ; 0,25)$. Sa variance $V(X)$ est :
+
+A. 5
+B. 20
+C. 3,75
+D. 0,25
+
+---
+
+**Question 10.** Le bénéfice d'une entreprise est donné par $B(x) = -x^2 + 60x - 500$ pour $x$ unités produites. Le bénéfice maximal est atteint pour :
+
+A. $x = 60$
+B. $x = 20$
+C. $x = 30$
+D. $x = 50$
 
 ---
 
 ## CORRIGÉ
 
-1. strictement croissante
-2. $x > 0$
-3. 0
-4. 1
-5. 1
-6. $-\frac{1}{x^2}$
-7. $-\cos(x) + C$
-8. 2
-9. impaire
-10. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
-11. $f'(a)$
-12. $y = f'(a)(x - a) + f(a)$
-13. $[0, +\infty[$
-14. $]-\infty, 0]$
-15. où la courbure change
-16. $6x$
-17. $+\infty$
-18. 0
-19. $+\infty$
-20. $-\infty$
+1. **A.** $f'(x) = 3x^2 - 4 \times 2x = 3x^2 - 8x$.
+2. **A.** $\Delta = 25 - 24 = 1$ ; $x = \frac{5 \pm 1}{2}$ donc $x = 2$ et $x = 3$.
+3. **B.** Baisse de 20% : nouveau prix $= 40\,000 \times (1 - 0,20) = 40\,000 \times 0,8 = 32\,000$ FCFA.
+4. **A.** $S_{10} = \frac{n(u_1 + u_n)}{2}$ avec $u_1 = 2$ et $u_{10} = 2 + 9 \times 3 = 29$ ; donc $S_{10} = \frac{10(2+29)}{2} = 155$.
+5. **B.** Moyenne $= 6$ ; variance $= \frac{(2-6)^2+(4-6)^2+(6-6)^2+(8-6)^2+(10-6)^2}{5} = \frac{16+4+0+4+16}{5} = \frac{40}{5} = 8$.
+6. **A.** En factorisant par $x$ : $\frac{3 - \frac{1}{x}}{1 + \frac{2}{x}}$ tend vers $\frac{3}{1} = 3$.
+7. **B.** $P(\text{verte}) = \frac{5}{3+5} = \frac{5}{8}$.
+8. **B.** $f(x) = x^{-1}$ donc $f'(x) = -x^{-2} = -\frac{1}{x^2}$.
+9. **C.** $V(X) = np(1-p) = 20 \times 0,25 \times 0,75 = 3,75$.
+10. **C.** $B'(x) = -2x + 60 = 0$ donne $x = 30$ (maximum car $B$ est concave).

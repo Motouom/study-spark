@@ -1,223 +1,125 @@
-# CAMEROON Baccalauréat CHIMIE P1 SET 1
+# CAMEROON BAC CHIMIE — ÉPREUVE 1 (QCM) — SÉRIE 1
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Chimie
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C, D, E, TI
+**Matière :** Chimie
+**Durée :** 1 heure
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
+- **Données utiles :** $M(C)=12\ \text{g/mol}$, $M(H)=1\ \text{g/mol}$, $M(O)=16\ \text{g/mol}$, $M(Na)=23\ \text{g/mol}$, $M(Cl)=35,5\ \text{g/mol}$, $V_m = 22,4\ \text{L/mol}$ (CNTP).
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Le nombre d'Avogadro est :
+**Question 1.** Quelle est la masse molaire de l'acide éthanoïque de formule brute $\text{CH}_3\text{COOH}$ ?
 
-A. 6,02×10²³
-B. 6,67×10⁻¹¹
-C. 3×10⁸
-D. 9,8
-
----
-
-**Q2.** La mole est :
-
-A. l'unité de quantité de matière
-B. l'unité de masse
-C. l'unité de volume
-D. l'unité de température
+A. 44 g/mol
+B. 60 g/mol
+C. 58 g/mol
+D. 76 g/mol
 
 ---
 
-**Q3.** La masse molaire s'exprime en :
+**Question 2.** Quel est le volume occupé par 1,5 mol de dioxyde de carbone $\text{CO}_2$ dans les conditions normales de température et de pression ?
 
-A. g/mol
-B. g
-C. mol
-D. kg
-
----
-
-**Q4.** Le volume molaire d'un gaz dans les CNTP est :
-
-A. 22,4 L/mol
-B. 1 L/mol
-C. 6,02 L/mol
-D. 100 L/mol
+A. 22,4 L
+B. 15,0 L
+C. 33,6 L
+D. 67,2 L
 
 ---
 
-**Q5.** La concentration molaire est :
+**Question 3.** Le pH d'une solution aqueuse de chlorure d'hydrogène de concentration $c = 1,0 \times 10^{-3}\ \text{mol/L}$ (acide fort totalement dissocié) vaut :
 
-A. C = n/V
-B. C = n·V
-C. C = V/n
-D. C = n+V
-
----
-
-**Q6.** La concentration massique est :
-
-A. Cm = m/V
-B. Cm = m·V
-C. Cm = V/m
-D. Cm = m+V
+A. 3
+B. 11
+C. 1
+D. 7
 
 ---
 
-**Q7.** Le pH d'une solution est :
+**Question 4.** La concentration en ions hydronium $[\text{H}_3\text{O}^+]$ d'une solution dont le pH est égal à 5 est :
 
-A. pH = -log[H⁺]
-B. pH = log[H⁺]
-C. pH = [H⁺]
-D. pH = 1/[H⁺]
-
----
-
-**Q8.** Une solution neutre a un pH :
-
-A. égal à 7
-B. inférieur à 7
-C. supérieur à 7
-D. égal à 0
+A. $1,0 \times 10^{5}\ \text{mol/L}$
+B. $5,0 \times 10^{-1}\ \text{mol/L}$
+C. $1,0 \times 10^{-5}\ \text{mol/L}$
+D. $1,0 \times 10^{-9}\ \text{mol/L}$
 
 ---
 
-**Q9.** La constante d'acidité Ka :
+**Question 5.** Le nombre d'oxydation de l'azote dans l'ion nitrate $\text{NO}_3^-$ est :
 
-A. mesure la force d'un acide
-B. mesure la température
-C. mesure la masse
-D. mesure le volume
-
----
-
-**Q10.** Un acide fort :
-
-A. se dissocie totalement
-B. se dissocie partiellement
-C. ne se dissocie pas
-D. est basique
+A. $+3$
+B. $+5$
+C. $-3$
+D. $+7$
 
 ---
 
-**Q11.** Une base faible :
+**Question 6.** Quelle est la masse de 0,25 mol de chlorure de sodium $\text{NaCl}$ ?
 
-A. se dissocie partiellement
-B. se dissocie totalement
-C. ne se dissocie pas
-D. est acide
-
----
-
-**Q12.** La réaction d'oxydoréduction :
-
-A. échange des électrons
-B. échange des protons
-C. échange des neutrons
-D. échange de la chaleur
+A. 58,5 g
+B. 14,6 g
+C. 29,3 g
+D. 2,34 g
 
 ---
 
-**Q13.** L'oxydation est :
+**Question 7.** On dissout 5,85 g de $\text{NaCl}$ dans de l'eau pour obtenir 500 mL de solution. La concentration massique de cette solution est :
 
-A. une perte d'électrons
-B. un gain d'électrons
-C. un gain de protons
-D. une perte de protons
-
----
-
-**Q14.** La réduction est :
-
-A. un gain d'électrons
-B. une perte d'électrons
-C. un gain de protons
-D. une perte de protons
+A. 5,85 g/L
+B. 11,7 g/L
+C. 2,93 g/L
+D. 0,117 g/L
 
 ---
 
-**Q15.** L'oxydant est :
+**Question 8.** Dans la réaction d'oxydoréduction : $\text{Zn} + 2\text{H}^+ \longrightarrow \text{Zn}^{2+} + \text{H}_2$, le réducteur est :
 
-A. l'espèce qui capte des électrons
-B. l'espèce qui cède des électrons
-C. l'espèce neutre
-D. l'espèce chargée
-
----
-
-**Q16.** Le réducteur est :
-
-A. l'espèce qui cède des électrons
-B. l'espèce qui capte des électrons
-C. l'espèce neutre
-D. l'espèce chargée
+A. $\text{Zn}^{2+}$
+B. $\text{H}^+$
+C. $\text{Zn}$
+D. $\text{H}_2$
 
 ---
 
-**Q17.** Le nombre d'oxydation :
+**Question 9.** Une réaction doit produire théoriquement 2,0 mol de produit. On n'en récupère que 1,5 mol. Le rendement de la réaction est :
 
-A. mesure l'état d'oxydation
-B. mesure la masse
-C. mesure le volume
-D. mesure la température
-
----
-
-**Q18.** L'électrolyse :
-
-A. transforme l'énergie électrique en chimique
-B. produit de l'électricité
-C. est une combustion
-D. est une distillation
+A. 25 %
+B. 50 %
+C. 75 %
+D. 133 %
 
 ---
 
-**Q19.** La pile électrochimique :
+**Question 10.** Quel groupe fonctionnel est présent dans la molécule d'éthanal de formule $\text{CH}_3\text{CHO}$ ?
 
-A. transforme l'énergie chimique en électrique
-B. consomme de l'électricité
-C. est une électrolyse
-D. est une combustion
-
----
-
-**Q20.** L'anode est :
-
-A. l'électrode où a lieu l'oxydation
-B. l'électrode où a lieu la réduction
-C. l'électrode neutre
-D. le pôle négatif
+A. La fonction acide carboxylique
+B. La fonction aldéhyde
+C. La fonction cétone
+D. La fonction alcool
 
 ---
 
 ## CORRIGÉ
 
-1. 6,02×10²³
-2. l'unité de quantité de matière
-3. g/mol
-4. 22,4 L/mol
-5. C = n/V
-6. Cm = m/V
-7. pH = -log[H⁺]
-8. égal à 7
-9. mesure la force d'un acide
-10. se dissocie totalement
-11. se dissocie partiellement
-12. échange des électrons
-13. une perte d'électrons
-14. un gain d'électrons
-15. l'espèce qui capte des électrons
-16. l'espèce qui cède des électrons
-17. mesure l'état d'oxydation
-18. transforme l'énergie électrique en chimique
-19. transforme l'énergie chimique en électrique
-20. l'électrode où a lieu l'oxydation
+1. B — 60 g/mol ($M = 2\times12 + 4\times1 + 2\times16 = 60$)
+2. C — 33,6 L ($V = n \times V_m = 1,5 \times 22,4 = 33,6$ L)
+3. A — pH 3 (acide fort : $[\text{H}_3\text{O}^+] = c = 10^{-3}$, donc $\text{pH} = 3$)
+4. C — $1,0 \times 10^{-5}$ mol/L ($[\text{H}_3\text{O}^+] = 10^{-\text{pH}}$)
+5. B — $+5$ ($x + 3\times(-2) = -1 \Rightarrow x = +5$)
+6. B — 14,6 g ($m = n \times M = 0,25 \times 58,5 = 14,625 \approx 14,6$ g)
+7. B — 11,7 g/L ($C_m = \frac{m}{V} = \frac{5,85}{0,5} = 11,7$ g/L)
+8. C — Zn (le zinc cède des électrons : $Zn \rightarrow Zn^{2+} + 2e^-$)
+9. C — 75 % ($\eta = \frac{1,5}{2,0} \times 100 = 75\%$)
+10. B — La fonction aldéhyde (le groupe $\text{-CHO}$)

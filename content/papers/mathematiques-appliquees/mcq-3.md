@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES APPLIQUÉES P1 SET 3
+# CAMEROON BAC MATHÉMATIQUES APPLIQUÉES — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Mathématiques Appliquées
-**Subject:** Mathématiques Appliquées
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** ACC / CG / FIG / SES
+**Matière :** Mathématiques Appliquées
+**Durée :** 1 heure
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'asymptote horizontale de $f(x) = \frac{1}{x}$ est :
+**Question 1.** L'intégrale $\int_1^2 \frac{1}{x} \, dx$ est égale à :
 
-A. $y = 0$
-B. $x = 0$
+A. $\ln 2$
+B. $\ln \frac{1}{2}$
+C. 1
+D. $-\ln 2$
+
+---
+
+**Question 2.** Un capital de 500 000 FCFA est placé à intérêts composés au taux de 8% par an. Après 2 ans, la valeur acquise est (arrondie au franc) :
+
+A. 583 200 FCFA
+B. 580 000 FCFA
+C. 583 000 FCFA
+D. 540 000 FCFA
+
+---
+
+**Question 3.** La dérivée de $f(x) = e^{2x}$ est :
+
+A. $e^{2x}$
+B. $2e^{2x}$
+C. $2x e^{2x}$
+D. $e^x$
+
+---
+
+**Question 4.** La médiane de la série ordonnée : 3 ; 5 ; 7 ; 9 ; 11 ; 13 est :
+
+A. 8
+B. 7
+C. 9
+D. 7,5
+
+---
+
+**Question 5.** On tire simultanément deux cartes d'un jeu de 32 cartes. La probabilité d'obtenir deux as est :
+
+A. $\frac{4}{32} \times \frac{3}{31}$
+B. $\frac{4}{32} \times \frac{4}{31}$
+C. $\frac{2}{32}$
+D. $\frac{1}{32} \times \frac{1}{32}$
+
+---
+
+**Question 6.** La suite $(u_n)$ définie par $u_{n+1} = u_n + 4$ et $u_0 = 3$ a pour terme général :
+
+A. $u_n = 3 \times 4^n$
+B. $u_n = 3 + 4n$
+C. $u_n = 4 + 3n$
+D. $u_n = 7n$
+
+---
+
+**Question 7.** La dérivée de $f(x) = \ln(2x + 1)$ est :
+
+A. $\frac{1}{2x+1}$
+B. $\frac{2}{2x+1}$
+C. $2 \ln(2x+1)$
+D. $\frac{1}{2}$
+
+---
+
+**Question 8.** Pour une fonction de demande $p(x) = 100 - 2x$, la recette $R(x) = x \cdot p(x)$ est maximale pour :
+
+A. $x = 25$
+B. $x = 50$
+C. $x = 100$
+D. $x = 20$
+
+---
+
+**Question 9.** Si $P(A) = 0,4$ et $P(B) = 0,5$, et si A et B sont indépendants, alors $P(A \cup B)$ est :
+
+A. 0,9
+B. 0,2
+C. 0,7
+D. 0,8
+
+---
+
+**Question 10.** L'équation de la tangente à la courbe de $f(x) = \ln x$ au point d'abscisse 1 est :
+
+A. $y = x$
+B. $y = x - 1$
 C. $y = 1$
-D. $y = x$
-
----
-
-**Q2.** L'asymptote verticale de $f(x) = \frac{1}{x}$ est :
-
-A. $x = 0$
-B. $y = 0$
-C. $x = 1$
-D. $y = 1$
-
----
-
-**Q3.** La suite $u_n = 2n + 1$ est :
-
-A. arithmétique
-B. géométrique
-C. ni l'un ni l'autre
-D. constante
-
----
-
-**Q4.** La suite $u_n = 3 \times 2^n$ est :
-
-A. géométrique
-B. arithmétique
-C. ni l'un ni l'autre
-D. constante
-
----
-
-**Q5.** La raison de la suite $u_n = 2n + 1$ est :
-
-A. 2
-B. 1
-C. 3
-D. n
-
----
-
-**Q6.** La raison de la suite $u_n = 3 \times 2^n$ est :
-
-A. 2
-B. 3
-C. 6
-D. n
-
----
-
-**Q7.** La somme des $n$ premiers termes d'une suite arithmétique de raison $r$ est :
-
-A. $\frac{n(u_1 + u_n)}{2}$
-B. $n \times r$
-C. $u_1 \times r^n$
-D. $\frac{n}{2} \times r$
-
----
-
-**Q8.** La somme des $n$ premiers termes d'une suite géométrique de raison $q$ est :
-
-A. $u_1 \frac{1 - q^n}{1 - q}$
-B. $n \times u_1$
-C. $u_1 \times q^n$
-D. $\frac{n(u_1 + u_n)}{2}$
-
----
-
-**Q9.** La probabilité d'un événement certain est :
-
-A. 1
-B. 0
-C. 0,5
-D. $\infty$
-
----
-
-**Q10.** La probabilité d'un événement impossible est :
-
-A. 0
-B. 1
-C. 0,5
-D. $\infty$
-
----
-
-**Q11.** La somme des probabilités d'un univers est :
-
-A. 1
-B. 0
-C. 0,5
-D. $\infty$
-
----
-
-**Q12.** Deux événements incompatibles :
-
-A. ne peuvent pas se produire ensemble
-B. se produisent toujours ensemble
-C. sont certains
-D. sont impossibles
-
----
-
-**Q13.** La probabilité de $A \cup B$ si $A$ et $B$ sont incompatibles est :
-
-A. $P(A) + P(B)$
-B. $P(A) \times P(B)$
-C. $P(A) - P(B)$
-D. $P(A) / P(B)$
-
----
-
-**Q14.** La probabilité conditionnelle $P(A|B)$ est :
-
-A. $\frac{P(A \cap B)}{P(B)}$
-B. $P(A) \times P(B)$
-C. $P(A) + P(B)$
-D. $\frac{P(B)}{P(A)}$
-
----
-
-**Q15.** L'espérance d'une variable aléatoire est :
-
-A. la moyenne pondérée
-B. le maximum
-C. le minimum
-D. la variance
-
----
-
-**Q16.** La variance mesure :
-
-A. la dispersion
-B. la moyenne
-C. le maximum
-D. le minimum
-
----
-
-**Q17.** L'écart-type est :
-
-A. la racine carrée de la variance
-B. la variance
-C. la moyenne
-D. le maximum
-
----
-
-**Q18.** La loi binomiale $B(n, p)$ a pour espérance :
-
-A. $np$
-B. $n + p$
-C. $n - p$
-D. $p^n$
-
----
-
-**Q19.** La loi normale est :
-
-A. une loi continue
-B. une loi discrète
-C. une loi constante
-D. une loi nulle
-
----
-
-**Q20.** La courbe de la loi normale est :
-
-A. en cloche
-B. linéaire
-C. exponentielle
-D. constante
+D. $y = \ln x$
 
 ---
 
 ## CORRIGÉ
 
-1. $y = 0$
-2. $x = 0$
-3. arithmétique
-4. géométrique
-5. 2
-6. 2
-7. $\frac{n(u_1 + u_n)}{2}$
-8. $u_1 \frac{1 - q^n}{1 - q}$
-9. 1
-10. 0
-11. 1
-12. ne peuvent pas se produire ensemble
-13. $P(A) + P(B)$
-14. $\frac{P(A \cap B)}{P(B)}$
-15. la moyenne pondérée
-16. la dispersion
-17. la racine carrée de la variance
-18. $np$
-19. une loi continue
-20. en cloche
+1. **A.** Une primitive de $\frac{1}{x}$ est $\ln x$ ; $\ln 2 - \ln 1 = \ln 2$.
+2. **A.** $500\,000 \times (1,08)^2 = 500\,000 \times 1,1664 = 583\,200$ FCFA.
+3. **B.** $(e^{u})' = u' e^{u}$ avec $u = 2x$ et $u' = 2$, donc $f'(x) = 2e^{2x}$.
+4. **A.** Pour une série paire (6 valeurs), la médiane est la moyenne des deux valeurs centrales : $\frac{7+9}{2} = 8$.
+5. **A.** Sans remise : $P = \frac{4}{32} \times \frac{3}{31}$.
+6. **B.** Suite arithmétique de raison 4 et premier terme 3 : $u_n = 3 + 4n$.
+7. **B.** $( \ln u)' = \frac{u'}{u}$ avec $u = 2x+1$ et $u' = 2$ : $f'(x) = \frac{2}{2x+1}$.
+8. **A.** $R(x) = 100x - 2x^2$ ; $R'(x) = 100 - 4x = 0$ donne $x = 25$.
+9. **C.** Indépendants : $P(A \cap B) = 0,4 \times 0,5 = 0,2$ ; $P(A \cup B) = 0,4 + 0,5 - 0,2 = 0,7$.
+10. **B.** $f(1) = 0$, $f'(x) = \frac{1}{x}$ donc $f'(1) = 1$ ; tangente : $y = 0 + 1(x-1) = x - 1$.

@@ -1,66 +1,159 @@
-# CAMEROON Baccalauréat SCIENCES ÉCONOMIQUES ET SOCIALES SET 7
+# CAMEROON BAC SES — ÉPREUVE 2 — SÉRIE 7
 
-## Structural Question Bank - Set 7
+## Épreuve de dissertation et d'analyse documentaire
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** Sciences Économiques et Sociales
-**Subject:** Sciences Économiques et Sociales
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** Sciences Économiques et Sociales (SES)
+**Matière :** Sciences Économiques et Sociales
+**Durée :** 4 heures
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes :**
 
-- Réponds à toutes les questions de manière claire et organisée.
-- Montre tous les calculs et raisonnements lorsque c'est nécessaire.
-- Utilise la terminologie et les normes de présentation de l'examen camerounais.
-- Les schémas, tableaux et graphiques doivent être inclus lorsque c'est utile.
+- L'épreuve comporte 4 sections. Dans chaque section, réponds à toutes les questions.
+- Rédige des réponses organisées, argumentées et illustrées d'exemples.
+- Mobilise les notions, auteurs et faits précis du programme.
+- Chaque exercice vaut 5 points. La qualité de l'expression et de la structuration est prise en compte.
+- Un plan en deux ou trois parties est attendu pour les dissertations.
 
 ---
 
-## SECTION 1: ÉCONOMIE ET EMPLOI
+# SECTION 1 : SOCIALISATION ET CULTURE
 
-**Q1.** Expliquer les causes et conséquences du chômage.
+**Exercice 1.** (5 points)
 
-**Q1.** Analyser les formes de l'emploi et la précarité.
+1. Définis le processus de socialisation et ses instances principales. (2 pt)
+2. Explique la distinction entre socialisation primaire et secondaire. (1,5 pt)
+3. Montre, avec un exemple, comment la socialisation secondaire peut transformer des acquis de la socialisation primaire. (1,5 pt)
 
-**Q1.** Expliquer la notion de productivité et ses effets sur l'emploi.
+**Exercice 2.** (5 points)
 
-**Q1.** Dissertation : « La croissance économique crée-t-elle des emplois ? »
+1. Analyse la socialisation différenciée selon le genre. (2 pt)
+2. Montre comment les jouets, les vêtements et les activités scolaires contribuent à cette socialisation. (2 pt)
+3. Discute des évolutions récentes des stéréotypes de genre. (1 pt)
 
-**Q1.** Analyser les politiques de l'emploi.
+**Exercice 3.** (5 points)
 
-## SECTION 2: ÉTAT, PROTECTION SOCIALE ET MONDIALISATION
+1. Définis les normes et les valeurs et montre leur lien. (2 pt)
+2. Explique le rôle des sanctions (formelles et informelles) dans le respect des normes. (2 pt)
+3. Rédige une courte dissertation sur le sujet : « L'individu est-il libre face à la socialisation ? » (1 pt)
 
-**Q2.** Expliquer le rôle de l'État-providence.
+**Exercice 4.** (5 points)
 
-**Q2.** Analyser le système de protection sociale.
+1. Définis la culture et ses principales composantes. (2 pt)
+2. Distingue culture savante, culture populaire et culture de masse. (2 pt)
+3. Analyse le rôle des industries culturelles dans la mondialisation de la culture. (1 pt)
 
-**Q2.** Expliquer les effets de la mondialisation sur les économies.
+**Exercice 5.** (5 points)
 
-**Q2.** Dissertation : « La mondialisation profite-t-elle à tous ? »
+1. Explique le rôle de l'école dans la socialisation. (2 pt)
+2. Montre comment l'école transmet des valeurs et une culture commune. (1,5 pt)
+3. Analyse les limites de l'école comme instance de socialisation (inégalités, échec scolaire). (1,5 pt)
 
-**Q2.** Analyser les inégalités de développement dans le monde.
+---
 
-## SECTION 3: SOCIALISATION ET CULTURE
+# SECTION 2 : STRATIFICATION ET MOBILITÉ
 
-**Q3.** Expliquer le processus de socialisation et ses instances.
+**Exercice 6.** (5 points)
 
-**Q3.** Analyser la socialisation différenciée selon le genre et la classe sociale.
+1. Définis la stratification sociale. (1,5 pt)
+2. Compare les approches de Marx et de Weber des classes sociales. (2,5 pt)
+3. Montre l'utilité de la nomenclature des PCS pour décrire la société. (1 pt)
 
-**Q3.** Expliquer la notion de capital culturel selon Bourdieu.
+**Exercice 7.** (5 points)
 
-**Q3.** Dissertation : « La socialisation détermine-t-elle entièrement l'individu ? »
+1. Définis la mobilité sociale intergénérationnelle et intragénérationnelle. (2 pt)
+2. Distingue mobilité ascendante, descendante et horizontale. (1,5 pt)
+3. Explique ce qu'est la « fluidité sociale » et ce qu'elle révèle sur l'égalité des chances. (1,5 pt)
 
-**Q3.** Analyser le rôle des médias dans la socialisation.
+**Exercice 8.** (5 points)
 
-## SECTION 4: STRATIFICATION ET MOBILITÉ
+1. Explique la notion de reproduction sociale. (2 pt)
+2. Analyse le rôle du capital culturel, économique et social dans la reproduction. (2 pt)
+3. Discute des facteurs de mobilité qui contredisent la reproduction. (1 pt)
 
-**Q4.** Expliquer les différentes formes de stratification sociale.
+**Exercice 9.** (5 points)
 
-**Q4.** Analyser la mobilité sociale et ses déterminants.
+1. Définis la moyennisation de la société. (1,5 pt)
+2. Présente les arguments en faveur de la moyennisation (élévation du niveau de vie, massification scolaire). (2 pt)
+3. Présente les arguments contre (persistance des inégalités de patrimoine, de santé). (1,5 pt)
 
-**Q4.** Expliquer la notion de classes sociales selon Marx et Weber.
+**Exercice 10.** (5 points)
 
-**Q4.** Dissertation : « L'école favorise-t-elle la mobilité sociale ? »
+1. Distingue inégalités économiques et inégalités sociales. (1,5 pt)
+2. Analyse les causes des inégalités de destin (école, héritage, discrimination). (2 pt)
+3. Rédige une courte dissertation sur le sujet : « Les inégalités sociales compromettent-elles la cohésion sociale ? » (1,5 pt)
 
-**Q4.** Analyser les inégalités sociales et leurs causes.
+---
+
+# SECTION 3 : ÉCONOMIE ET EMPLOI
+
+**Exercice 11.** (5 points)
+
+1. Définis le chômage et la population active. (1,5 pt)
+2. Distingue chômage conjoncturel et chômage structurel. (1,5 pt)
+3. Analyse les causes keynésiennes et classiques du chômage. (2 pt)
+
+**Exercice 12.** (5 points)
+
+1. Définis la productivité du travail et la productivité globale des facteurs. (2 pt)
+2. Analyse les effets des gains de productivité sur l'emploi. (2 pt)
+3. Discute de la « destruction créatrice » de Schumpeter appliquée à l'emploi. (1 pt)
+
+**Exercice 13.** (5 points)
+
+1. Définis l'emploi atypique et la précarité. (2 pt)
+2. Analyse les causes de la flexibilisation du travail. (1,5 pt)
+3. Montre les conséquences de la précarité sur les travailleurs et la société. (1,5 pt)
+
+**Exercice 14.** (5 points)
+
+1. Définis le PIB et la croissance économique. (1,5 pt)
+2. Analyse les sources de la croissance (travail, capital, progrès technique). (2 pt)
+3. Montre les limites du PIB comme mesure du bien-être. (1,5 pt)
+
+**Exercice 15.** (5 points)
+
+1. Distingue politiques de relance et politiques de rigueur. (2 pt)
+2. Analyse les politiques de l'emploi actives et passives. (2 pt)
+3. Rédige une courte dissertation sur le sujet : « La croissance est-elle nécessaire et suffisante pour réduire le chômage ? » (1 pt)
+
+---
+
+# SECTION 4 : ÉTAT ET MONDIALISATION
+
+**Exercice 16.** (5 points)
+
+1. Définis l'État-providence et ses fonctions. (2 pt)
+2. Présente les modèles bismarckien et beveridgien de protection sociale. (2 pt)
+3. Analyse les difficultés de financement de l'État-providence. (1 pt)
+
+**Exercice 17.** (5 points)
+
+1. Définis la redistribution et distingue redistribution verticale et horizontale. (2 pt)
+2. Présente les principaux instruments de redistribution (impôts, prestations sociales). (2 pt)
+3. Discute de l'efficacité de la redistribution pour réduire les inégalités. (1 pt)
+
+**Exercice 18.** (5 points)
+
+1. Définis la mondialisation, les FMN et les IDE. (2 pt)
+2. Analyse les effets de la mondialisation sur les pays développés (emploi, industrie). (1,5 pt)
+3. Analyse les effets de la mondialisation sur les pays en développement. (1,5 pt)
+
+**Exercice 19.** (5 points)
+
+1. Explique la théorie des avantages comparatifs de Ricardo. (2 pt)
+2. Montre comment elle justifie la spécialisation et le libre-échange. (2 pt)
+3. Analyse les limites de cette théorie (mobilité des capitaux, inégalités). (1 pt)
+
+**Exercice 20.** (5 points)
+
+1. Définis le libre-échange et le protectionnisme (barrières tarifaires et non tarifaires). (2 pt)
+2. Présente les arguments en faveur du libre-échange et en faveur du protectionnisme. (2 pt)
+3. Rédige une courte dissertation sur le sujet : « La mondialisation conduit-elle à une uniformisation du monde ? » (1 pt)
+
+---
+
+## BARÈME GLOBAL
+
+Chaque exercice est noté sur 5 points. Le total de l'épreuve est sur 100 points. Le correcteur valorisera la rigueur de la définition des notions, la qualité des exemples, la mobilisation des auteurs (Durkheim, Marx, Weber, Bourdieu, Mendras, Schumpeter, Keynes, Ricardo) et la clarté de l'argumentation.

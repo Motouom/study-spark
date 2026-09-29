@@ -1,223 +1,124 @@
-# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE P1 SET 3
+# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE — ÉPREUVE 1 (QCM) — SÉRIE 3
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Éducation à la Citoyenneté et à la Morale
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Éducation à la Citoyenneté et à la Morale (ECM)
+**Durée :** 30 minutes
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'OMS s'occupe de :
+**Question 1.** Le développement durable est un développement qui :
 
-A. la santé
-B. l'éducation
-C. la culture
-D. l'économie
-
----
-
-**Q2.** La citoyenneté mondiale signifie :
-
-A. se sentir responsable du monde
-B. être citoyen d'un seul pays
-C. ne pas avoir de pays
-D. voyager
+A. Répond aux besoins du présent sans compromettre ceux des générations futures
+B. Épuise toutes les ressources naturelles
+C. Ne concerne que les pays riches
+D. Ignore la protection de l'environnement
 
 ---
 
-**Q3.** Le bénévolat est :
+**Question 2.** Lequel de ces gestes est un geste écologique citoyen ?
 
-A. un engagement volontaire
-B. un travail payé
-C. une obligation
-D. une interdiction
-
----
-
-**Q4.** L'association caritative :
-
-A. aide les personnes dans le besoin
-B. fait du profit
-C. divise
-D. isole
+A. Jeter les ordures dans la rivière
+B. Trier les déchets et économiser l'eau et l'énergie
+C. Brûler les déchets plastiques dans la cour
+D. Défricher les forêts sans replanter
 
 ---
 
-**Q5.** Le don de sang est :
+**Question 3.** La solidarité consiste à :
 
-A. un acte de solidarité
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q6.** La laïcité signifie :
-
-A. la séparation de l'État et des religions
-B. une religion d'État
-C. l'athéisme
-D. l'interdiction des religions
+A. S'enrichir au détriment des autres
+B. Aider et soutenir les personnes en difficulté
+C. Ignorer les besoins de ses voisins
+D. Revendiquer toujours ses propres intérêts
 
 ---
 
-**Q7.** La liberté de religion est :
+**Question 4.** Laquelle de ces affirmations définit le mieux la tolérance ?
 
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
-
----
-
-**Q8.** La liberté d'expression est :
-
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
+A. Imposer sa religion aux autres
+B. Accepter et respecter les différences des autres
+C. Refuser tout dialogue avec autrui
+D. Se moquer des croyances des autres
 
 ---
 
-**Q9.** La liberté de la presse est :
+**Question 5.** Les principales causes de la délinquance juvénile peuvent être :
 
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
-
----
-
-**Q10.** L'abus de la liberté d'expression est :
-
-A. interdit
-B. autorisé
-C. un droit
-D. un devoir
+A. La pauvreté, l'échec scolaire et le manque d'encadrement
+B. La réussite et la bonne éducation
+C. La pratique régulière du sport
+D. Le respect des lois
 
 ---
 
-**Q11.** La diffamation est :
+**Question 6.** Le VIH/SIDA se transmet principalement par :
 
-A. interdite
-B. autorisée
-C. un droit
-D. un devoir
-
----
-
-**Q12.** Le respect de la vie privée est :
-
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
+A. Les poignées de main et les éternuements
+B. Les rapports sexuels non protégés, le sang et de la mère à l'enfant
+C. Les piqûres de moustique
+D. Le partage des repas
 
 ---
 
-**Q13.** La protection des données personnelles est :
+**Question 7.** Le respect des feux de signalisation et du code de la route est :
 
-A. un droit
-B. un privilège
-C. une option
-D. une interdiction
-
----
-
-**Q14.** Le cyberharcèlement est :
-
-A. interdit
-B. autorisé
-C. un droit
-D. un devoir
+A. Un acte de civisme et de sécurité pour tous
+B. Une perte de temps inutile
+C. Réservé uniquement aux conducteurs professionnels
+D. Facultatif en dehors des grandes villes
 
 ---
 
-**Q15.** L'utilisation responsable d'Internet est :
+**Question 8.** La conscience morale permet à une personne de :
 
-A. un devoir
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q16.** Le civisme numérique signifie :
-
-A. un comportement responsable en ligne
-B. l'anonymat total
-C. la liberté totale
-D. l'isolement
+A. Distinguer le bien du mal et agir en conséquence
+B. Tricher sans remords
+C. Ignorer les valeurs de la société
+D. Satisfaire uniquement ses propres désirs
 
 ---
 
-**Q17.** La participation aux élections est :
+**Question 9.** L'égalité entre l'homme et la femme signifie que :
 
-A. un devoir civique
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q18.** Le respect des symboles de la République est :
-
-A. un devoir civique
-B. un choix
-C. une option
-D. une interdiction
+A. L'homme et la femme ont les mêmes droits fondamentaux
+B. La femme doit obéir à l'homme en tout
+C. Seul l'homme peut travailler
+D. La femme n'a pas droit à l'éducation
 
 ---
 
-**Q19.** La patrie est :
+**Question 10.** Participer à la vie démocratique du pays, c'est notamment :
 
-A. le pays auquel on appartient
-B. un continent
-C. une ville
-D. une région
-
----
-
-**Q20.** Le patriotisme est :
-
-A. l'amour de sa patrie
-B. la haine des autres
-C. l'indifférence
-D. la fuite
+A. S'abstenir de voter
+B. S'inscrire sur les listes électorales et voter aux élections
+C. Se désintéresser des affaires publiques
+D. Critiquer sans proposer
 
 ---
 
 ## CORRIGÉ
 
-1. la santé
-2. se sentir responsable du monde
-3. un engagement volontaire
-4. aide les personnes dans le besoin
-5. un acte de solidarité
-6. la séparation de l'État et des religions
-7. un droit fondamental
-8. un droit fondamental
-9. un droit fondamental
-10. interdit
-11. interdite
-12. un droit fondamental
-13. un droit
-14. interdit
-15. un devoir
-16. un comportement responsable en ligne
-17. un devoir civique
-18. un devoir civique
-19. le pays auquel on appartient
-20. l'amour de sa patrie
+1. A. Répond aux besoins du présent sans compromettre ceux des générations futures
+2. B. Trier les déchets et économiser l'eau et l'énergie
+3. B. Aider et soutenir les personnes en difficulté
+4. B. Accepter et respecter les différences des autres
+5. A. La pauvreté, l'échec scolaire et le manque d'encadrement
+6. B. Les rapports sexuels non protégés, le sang et de la mère à l'enfant
+7. A. Un acte de civisme et de sécurité pour tous
+8. A. Distinguer le bien du mal et agir en conséquence
+9. A. L'homme et la femme ont les mêmes droits fondamentaux
+10. B. S'inscrire sur les listes électorales et voter aux élections

@@ -1,223 +1,133 @@
-# CAMEROON Baccalauréat MATHÉMATIQUES P1 SET 2
+# CAMEROON BAC MATHÉMATIQUES — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, E, TI
-**Subject:** Mathématiques
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** C, D, E, TI
+**Matière :** Mathématiques
+**Durée :** 1 heure
+**Coefficient :** selon série
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé détaillé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** La fonction exponentielle $e^x$ est :
+**Question 1.** Soit la suite arithmétique $(u_n)$ de premier terme $u_0 = 5$ et de raison $r = 3$. Le terme $u_{10}$ vaut :
 
-A. strictement croissante
-B. strictement décroissante
-C. constante
-D. périodique
-
----
-
-**Q2.** La fonction logarithme $\ln(x)$ est définie pour :
-
-A. $x > 0$
-B. $x \geq 0$
-C. $x \neq 0$
-D. tout $x$
+A. $35$
+B. $38$
+C. $33$
+D. $30$
 
 ---
 
-**Q3.** $\ln(1)$ est égal à :
+**Question 2.** La somme des 20 premiers termes de la suite géométrique $(v_n)$ de premier terme $v_1 = 2$ et de raison $q = 2$ vaut :
 
-A. 0
-B. 1
-C. $e$
-D. $-1$
-
----
-
-**Q4.** $\ln(e)$ est égal à :
-
-A. 1
-B. 0
-C. $e$
-D. $-1$
+A. $2^{21} - 2$
+B. $2^{20} - 1$
+C. $2^{20} - 2$
+D. $2^{19} - 2$
 
 ---
 
-**Q5.** $e^0$ est égal à :
+**Question 3.** Le discriminant de l'équation $x^2 - 5x + 6 = 0$ vaut :
 
-A. 1
-B. 0
-C. $e$
-D. $-1$
-
----
-
-**Q6.** La dérivée de $\frac{1}{x}$ est :
-
-A. $-\frac{1}{x^2}$
-B. $\frac{1}{x^2}$
-C. $-\frac{1}{x}$
-D. $\ln(x)$
+A. $1$
+B. $25$
+C. $-1$
+D. $49$
 
 ---
 
-**Q7.** L'intégrale de $\sin(x)$ est :
+**Question 4.** Les solutions de l'équation $x^2 - 5x + 6 = 0$ sont :
 
-A. $-\cos(x) + C$
-B. $\cos(x) + C$
-C. $\sin(x) + C$
-D. $-\sin(x) + C$
-
----
-
-**Q8.** La limite de $\frac{x^2 - 1}{x - 1}$ quand $x \to 1$ est :
-
-A. 2
-B. 0
-C. 1
-D. $\infty$
+A. $2$ et $3$
+B. $-2$ et $-3$
+C. $1$ et $6$
+D. $5$ et $6$
 
 ---
 
-**Q9.** La fonction $f(x) = \frac{1}{x}$ est :
+**Question 5.** Une urne contient 3 boules rouges et 5 boules vertes. On tire une boule au hasard. La probabilité d'obtenir une boule rouge est :
 
-A. impaire
-B. paire
-C. ni paire ni impaire
-D. constante
-
----
-
-**Q10.** Le nombre dérivé de $f$ en $a$ est :
-
-A. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
-B. $f(a)$
-C. $\frac{f(a)}{a}$
-D. $f'(a) \times a$
+A. $\frac{3}{8}$
+B. $\frac{5}{8}$
+C. $\frac{3}{5}$
+D. $\frac{1}{3}$
 
 ---
 
-**Q11.** La tangente à la courbe en $a$ a pour pente :
+**Question 6.** Une variable aléatoire $X$ suit la loi binomiale $\mathcal{B}(10\,; 0,4)$. Son espérance $E(X)$ vaut :
 
-A. $f'(a)$
-B. $f(a)$
-C. $a$
-D. $f'(a) \times a$
-
----
-
-**Q12.** L'équation de la tangente en $a$ est :
-
-A. $y = f'(a)(x - a) + f(a)$
-B. $y = f(a)x$
-C. $y = f'(a)x$
-D. $y = f(a) + x$
+A. $4$
+B. $2,4$
+C. $10$
+D. $0,4$
 
 ---
 
-**Q13.** La fonction $f(x) = x^2$ est croissante sur :
+**Question 7.** La variance d'une variable aléatoire $X$ suivant $\mathcal{B}(10\,; 0,4)$ vaut :
 
-A. $[0, +\infty[$
-B. $]-\infty, 0]$
-C. $\mathbb{R}$
-D. $]-\infty, +\infty[$
-
----
-
-**Q14.** La fonction $f(x) = x^2$ est décroissante sur :
-
-A. $]-\infty, 0]$
-B. $[0, +\infty[$
-C. $\mathbb{R}$
-D. nulle part
+A. $2,4$
+B. $4$
+C. $6$
+D. $1,6$
 
 ---
 
-**Q15.** Le point d'inflexion est :
+**Question 8.** Résoudre dans $\mathbb{R}$ : $\ln(x) + \ln(x - 2) = \ln(3)$. La solution est :
 
-A. où la courbure change
-B. le maximum
-C. le minimum
-D. l'origine
-
----
-
-**Q16.** La dérivée seconde de $x^3$ est :
-
-A. $6x$
-B. $3x^2$
-C. $3x$
-D. $6$
+A. $x = 3$
+B. $x = 1$
+C. $x = -1$
+D. $x = -3$
 
 ---
 
-**Q17.** La fonction $f(x) = e^x$ a pour limite en $+\infty$ :
+**Question 9.** La valeur de $e^{2\ln(3)}$ est :
 
-A. $+\infty$
-B. 0
-C. 1
-D. $e$
-
----
-
-**Q18.** La fonction $f(x) = e^x$ a pour limite en $-\infty$ :
-
-A. 0
-B. $+\infty$
-C. 1
-D. $e$
+A. $9$
+B. $6$
+C. $3^2 = 9$
+D. $\sqrt{3}$
 
 ---
 
-**Q19.** La fonction $f(x) = \ln(x)$ a pour limite en $+\infty$ :
+**Question 10.** Deux événements $A$ et $B$ sont indépendants avec $P(A) = 0,3$ et $P(B) = 0,5$. Alors $P(A \cap B)$ vaut :
 
-A. $+\infty$
-B. 0
-C. 1
-D. $-\infty$
-
----
-
-**Q20.** La fonction $f(x) = \ln(x)$ a pour limite en $0^+$ :
-
-A. $-\infty$
-B. $+\infty$
-C. 0
-D. 1
+A. $0,15$
+B. $0,8$
+C. $0,2$
+D. $0,03$
 
 ---
 
 ## CORRIGÉ
 
-1. strictement croissante
-2. $x > 0$
-3. 0
-4. 1
-5. 1
-6. $-\frac{1}{x^2}$
-7. $-\cos(x) + C$
-8. 2
-9. impaire
-10. $\lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$
-11. $f'(a)$
-12. $y = f'(a)(x - a) + f(a)$
-13. $[0, +\infty[$
-14. $]-\infty, 0]$
-15. où la courbure change
-16. $6x$
-17. $+\infty$
-18. 0
-19. $+\infty$
-20. $-\infty$
+**1. Réponse A.** $u_n = u_0 + nr$, donc $u_{10} = 5 + 10 \times 3 = 35$.
+
+**2. Réponse A.** Somme des $n$ premiers termes : $S_n = v_1 \frac{q^n - 1}{q - 1} = 2\frac{2^{20} - 1}{2 - 1} = 2^{21} - 2$.
+
+**3. Réponse A.** $\Delta = b^2 - 4ac = (-5)^2 - 4 \times 1 \times 6 = 25 - 24 = 1$.
+
+**4. Réponse A.** $\Delta = 1$, racines $\frac{5 \pm 1}{2}$ : $x = 3$ ou $x = 2$.
+
+**5. Réponse A.** Il y a 8 boules au total, 3 rouges : $P = \frac{3}{8}$.
+
+**6. Réponse A.** $E(X) = np = 10 \times 0,4 = 4$.
+
+**7. Réponse A.** $V(X) = np(1-p) = 10 \times 0,4 \times 0,6 = 2,4$.
+
+**8. Réponse A.** $\ln(x(x-2)) = \ln 3 \Rightarrow x(x-2) = 3 \Rightarrow x^2 - 2x - 3 = 0$, racines $3$ et $-1$. On garde $x = 3$ (car $x > 2$ pour le domaine).
+
+**9. Réponse A.** $e^{2\ln 3} = e^{\ln(3^2)} = e^{\ln 9} = 9$.
+
+**10. Réponse A.** Pour des événements indépendants, $P(A \cap B) = P(A) \times P(B) = 0,3 \times 0,5 = 0,15$.

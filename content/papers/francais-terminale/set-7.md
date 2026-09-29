@@ -1,66 +1,72 @@
-# CAMEROON Baccalauréat FRANÇAIS SET 7
+# CAMEROON BAC FRANÇAIS — ÉPREUVE 2 — SÉRIE 7
 
-## Structural Question Bank - Set 7
+## Épreuve de Français
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** A1, A2, A4, ABI, C, D
-**Subject:** Français
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Séries :** A1, A2, A4, ABI, C, D
+**Matière :** Français
+**Durée :** 4 heures
+**Coefficient :** 3
 
-**Instructions:**
+**Consignes générales :**
 
-- Réponds à toutes les questions de manière claire et organisée.
-- Montre tous les calculs et raisonnements lorsque c'est nécessaire.
-- Utilise la terminologie et les normes de présentation de l'examen camerounais.
-- Les schémas, tableaux et graphiques doivent être inclus lorsque c'est utile.
+- L'épreuve comporte quatre sections : le commentaire composé, la dissertation, la contraction et le suivi de texte, et l'expression écrite et orale.
+- Chaque section comporte cinq exercices notés sur 5 points.
+- Réponds de manière claire, organisée et en français correct, en respectant la méthode demandée.
+- Indique toujours le numéro de la section et de l'exercice avant ta réponse.
 
 ---
 
-## SECTION 1: CONTRACTION ET SUIVI DE TEXTE
+## SECTION 1 : LE COMMENTAIRE COMPOSÉ (5 points par exercice)
 
-**Q1.** Contracter un texte en respectant le nombre de mots imposé.
+**Exercice 1.** Commente le poème « Demain, dès l'aube » de Victor Hugo. Analyse l'expression du deuil et du souvenir, la progression du voyage et le registre lyrique. Suis la structure : introduction, développement, conclusion.
 
-**Q1.** Résumer un texte argumentatif en conservant les idées essentielles.
+**Exercice 2.** Étudie un extrait de _La Vie devant soi_ de Romain Gary (ou d'un roman camerounais) mettant en scène un enfant. Analyse la naïveté du regard, l'émotion et le registre pathétique. Présente un commentaire composé complet.
 
-**Q1.** Suivre un texte et répondre à des questions de compréhension.
+**Exercice 3.** Commente une scène de _Antigone_ (Sophocle ou Anouilh) où Antigone s'oppose à Créon. Étudie le conflit entre la loi humaine et la loi morale, le registre tragique. Structure ton analyse selon la méthode.
 
-**Q1.** Analyser la structure d'un texte et dégager son plan.
+**Exercice 4.** Analyse un extrait de _Le Blanc de l'Algérie_ ou d'un texte de presse où l'auteur exprime une opinion. Étudie les procédés argumentatifs (thèse, arguments, exemples, ironie). Suis le plan du commentaire composé.
 
-**Q1.** Reformuler les idées d'un texte sans le recopier.
+**Exercice 5.** Commente la scène d'exposition d'une pièce de théâtre étudiée en classe. Analyse la présentation des personnages, la situation et les enjeux. Respecte la structure du commentaire composé.
 
-## SECTION 2: EXPRESSION ÉCRITE ET ORALE
+---
 
-**Q2.** Rédiger un paragraphe argumentatif sur un sujet donné.
+## SECTION 2 : LA DISSERTATION (5 points par exercice)
 
-**Q2.** Écrire une lettre ouverte sur un sujet de société.
+**Exercice 1.** Sujet : « L'œuvre littéraire a-t-elle pour fonction de plaire ou d'instruire ? » Discute cette question en t'appuyant sur des œuvres de genres différents (fable, roman, théâtre). Suis le plan dialectique.
 
-**Q2.** Préparer et présenter un exposé oral.
+**Exercice 2.** Sujet : « La littérature africaine est-elle condamnée à dénoncer le passé colonial ? » Propose une réflexion nuancée sur les missions de la littérature africaine d'hier et d'aujourd'hui. Rédige une dissertation complète.
 
-**Q2.** Rédiger un compte rendu de lecture.
+**Exercice 3.** Sujet : « Le silence peut-il être plus éloquent que la parole au théâtre ? » Réfléchis au rôle du non-dit, des didascalies et du sous-texte. Argumente avec des exemples précis.
 
-**Q2.** Écrire un dialogue argumentatif entre deux personnages.
+**Exercice 4.** Sujet : « L'auteur doit-il toujours donner une morale explicite à son œuvre ? » Confronte les points de vue et montre les fonctions de l'implicite. Illustre par des exemples. Respecte la méthode.
 
-## SECTION 3: COMMENTAIRE COMPOSÉ
+**Exercice 5.** Sujet : « Peut-on considérer le journal intime comme une œuvre littéraire à part entière ? » Discute cette affirmation en t'appuyant sur l'autobiographie et ses enjeux. Développe une réflexion argumentée.
 
-**Q3.** Commenter un texte poétique en analysant la forme et le fond.
+---
 
-**Q3.** Commenter un extrait de roman en étudiant la narration et les personnages.
+## SECTION 3 : LA CONTRACTION ET LE SUIVI DE TEXTE (5 points par exercice)
 
-**Q3.** Commenter une scène de théâtre en analysant le dialogue et les didascalies.
+**Exercice 1.** On te donne un texte de 320 mots sur les bienfaits de la lecture. Contracte-le au quart (80 mots) en respectant le nombre de mots, les idées essentielles et la reformulation.
 
-**Q3.** Analyser les procédés stylistiques d'un texte argumentatif.
+**Exercice 2.** À partir d'un extrait d'un discours sur la citoyenneté, réalise une contraction de 80 mots (± 10 %). Conserve la thèse et la hiérarchie des arguments.
 
-**Q3.** Commenter un texte en respectant la méthode (introduction, développement, conclusion).
+**Exercice 3.** Suivi de texte : lis un extrait de _Mission terminée_ de Mongo Beti, réponds aux questions de compréhension et de vocabulaire, puis contracte le passage en 60 mots.
 
-## SECTION 4: DISSERTATION
+**Exercice 4.** On te donne un texte argumentatif sur l'importance du sport. Dégage le plan (1 pt), résume chaque partie (2 pts), puis contracte l'ensemble en respectant le nombre de mots (2 pts).
 
-**Q4.** Dissertation : « La littérature doit-elle être engagée ? »
+**Exercice 5.** Suivi de texte : à partir d'un extrait de _Le Pauvre Christ de Bomba_ de Mongo Beti, identifie les procédés de la satire et de l'ironie, réponds aux questions, puis reformule les idées essentielles.
 
-**Q4.** Dissertation : « Le théâtre est-il le miroir de la société ? »
+---
 
-**Q4.** Dissertation : « La poésie est-elle l'expression des sentiments ? »
+## SECTION 4 : L'EXPRESSION ÉCRITE ET ORALE (5 points par exercice)
 
-**Q4.** Dissertation : « Le roman reflète-t-il la réalité ? »
+**Exercice 1.** Rédige une lettre ouverte à un responsable politique pour dénoncer la corruption. Choisis un ton argumentatif, développe des exemples et formule des propositions (5 pts).
 
-**Q4.** Dissertation : « La littérature africaine a-t-elle une mission ? »
+**Exercice 2.** Prépare un exposé oral sur « Les valeurs de la solidarité africaine ». Structure ton introduction, ton développement et ta conclusion, avec un langage adapté à l'oral (5 pts).
+
+**Exercice 3.** Rédige un récit d'environ 20 lignes racontant une scène de marché. Soigne les descriptions, les dialogues et la progression du récit (5 pts).
+
+**Exercice 4.** Rédige un paragraphe argumentatif pour défendre l'égalité entre les filles et les garçons à l'école. Utilise des arguments logiques et des exemples concrets (5 pts).
+
+**Exercice 5.** Rédige un dialogue argumentatif entre un élève et son enseignant sur l'importance de la ponctualité. Fais ressortir deux points de vue et une résolution (5 pts).

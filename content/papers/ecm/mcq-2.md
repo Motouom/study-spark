@@ -1,223 +1,124 @@
-# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE P1 SET 2
+# CAMEROON BEPC ÉDUCATION À LA CITOYENNETÉ ET À LA MORALE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Ordinary Level (Collège)
-**Class:** Troisième
-**Series:** Tronc Commun
-**Subject:** Éducation à la Citoyenneté et à la Morale
-**Exam:** BEPC
+**Niveau :** Troisième — BEPC
+**Série :** Tronc Commun
+**Matière :** Éducation à la Citoyenneté et à la Morale (ECM)
+**Durée :** 30 minutes
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** Payer ses impôts est :
+**Question 1.** La Convention internationale relative aux droits de l'enfant (CIDE) a été adoptée par les Nations Unies en :
 
-A. un devoir civique
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q2.** Le service national est :
-
-A. un devoir civique
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q3.** La corruption est :
-
-A. un acte illégal
-B. un acte légal
-C. un devoir
-D. un droit
-
----
-
-**Q4.** La lutte contre la corruption est :
-
-A. un devoir de chaque citoyen
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q5.** L'égalité entre hommes et femmes est :
-
-A. un droit fondamental
-B. un privilège
-C. une option
-D. une interdiction
-
----
-
-**Q6.** La tolérance signifie :
-
-A. accepter les différences
-B. rejeter les autres
-C. se moquer
-D. ignorer
-
----
-
-**Q7.** Le respect des autres est :
-
-A. une valeur citoyenne
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q8.** La solidarité signifie :
-
-A. s'entraider
-B. s'isoler
-C. se concurrencer
-D. s'ignorer
-
----
-
-**Q9.** La paix est :
-
-A. l'absence de conflit et la sécurité
-B. la guerre
-C. la violence
-D. le chaos
-
----
-
-**Q10.** Le dialogue est :
-
-A. un moyen de résoudre les conflits
-B. une source de conflit
-C. une violence
-D. une fuite
-
----
-
-**Q11.** La violence est :
-
-A. interdite et condamnée
-B. autorisée
-C. un droit
-D. un devoir
-
----
-
-**Q12.** Le harcèlement scolaire est :
-
-A. interdit
-B. autorisé
-C. un droit
-D. un devoir
-
----
-
-**Q13.** La protection de l'environnement est :
-
-A. un devoir de chaque citoyen
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q14.** Le tri des déchets est :
-
-A. un geste écologique
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q15.** L'économie d'eau est :
-
-A. un geste écologique
-B. un choix
-C. une option
-D. une interdiction
-
----
-
-**Q16.** La Constitution est :
-
-A. la loi fondamentale d'un pays
-B. une loi ordinaire
-C. un décret
-D. un arrêté
-
----
-
-**Q17.** La Constitution camerounaise actuelle date de :
-
-A. 1996
+A. 1948
 B. 1960
-C. 1972
-D. 1984
+C. 1989
+D. 1996
 
 ---
 
-**Q18.** Le Cameroun est membre de :
+**Question 2.** Lequel de ces droits est un droit de l'enfant reconnu par la Convention ?
 
-A. l'ONU, l'UA et la CEMAC
-B. l'OTAN
-C. l'UE
-D. l'ALENA
-
----
-
-**Q19.** L'ONU a pour but :
-
-A. de maintenir la paix dans le monde
-B. de faire la guerre
-C. de coloniser
-D. de diviser
+A. Le droit de travailler avant 10 ans
+B. Le droit à l'éducation
+C. Le droit de conduire un véhicule
+D. Le droit de voter
 
 ---
 
-**Q20.** L'UNESCO s'occupe de :
+**Question 3.** Être citoyen camerounais signifie avant tout :
 
-A. l'éducation, la science et la culture
-B. la guerre
-C. l'économie
-D. la santé
+A. Être né sur le territoire camerounais et payer un impôt
+B. Avoir des droits civils et politiques et des devoirs envers l'État
+C. Avoir un emploi dans l'administration
+D. Habiter à Yaoundé ou Douala
+
+---
+
+**Question 4.** Laquelle de ces actions est un devoir du citoyen camerounais ?
+
+A. Ne pas s'inscrire sur les listes électorales
+B. Respecter la Constitution et les lois de la République
+C. Refuser de payer ses impôts
+D. Ignorer les symboles de la République
+
+---
+
+**Question 5.** Le Conseil constitutionnel au Cameroun a pour rôle principal de :
+
+A. Voter les lois
+B. Contrôler la conformité des lois et des élections à la Constitution
+C. Diriger l'armée
+D. Gérer les communes
+
+---
+
+**Question 6.** La décentralisation au Cameroun consiste à :
+
+A. Supprimer toutes les collectivités locales
+B. Rapprocher l'administration des citoyens en confiant des compétences aux communes et régions
+C. Donner tous les pouvoirs au Président
+D. Créer un système de monarchie
+
+---
+
+**Question 7.** L'hymne national du Cameroun s'intitule :
+
+A. « Ô Cameroun, berceau de nos ancêtres »
+B. « La Marseillaise »
+C. « Debout la patrie »
+D. « Ô Cameroun, terre de nos enfants »
+
+---
+
+**Question 8.** Qu'est-ce que la démocratie ?
+
+A. Le gouvernement d'un seul homme
+B. Le gouvernement du peuple, par le peuple et pour le peuple
+C. Le règne de l'armée
+D. L'absence de lois
+
+---
+
+**Question 9.** Laquelle de ces situations constitue une violation des droits de l'enfant ?
+
+A. Un enfant qui va à l'école chaque jour
+B. Un enfant soumis au travail forcé
+C. Un enfant qui joue avec ses amis
+D. Un enfant qui est vacciné
+
+---
+
+**Question 10.** Pour lutter contre la corruption, un citoyen responsable doit :
+
+A. Offrir des pots-de-vin pour accélérer ses dossiers
+B. Refuser de payer et de recevoir des pots-de-vin, et dénoncer les faits
+C. Fermer les yeux sur la malversation
+D. Participer à la fraude électorale
 
 ---
 
 ## CORRIGÉ
 
-1. un devoir civique
-2. un devoir civique
-3. un acte illégal
-4. un devoir de chaque citoyen
-5. un droit fondamental
-6. accepter les différences
-7. une valeur citoyenne
-8. s'entraider
-9. l'absence de conflit et la sécurité
-10. un moyen de résoudre les conflits
-11. interdite et condamnée
-12. interdit
-13. un devoir de chaque citoyen
-14. un geste écologique
-15. un geste écologique
-16. la loi fondamentale d'un pays
-17. 1996
-18. l'ONU, l'UA et la CEMAC
-19. de maintenir la paix dans le monde
-20. l'éducation, la science et la culture
+1. C. 1989
+2. B. Le droit à l'éducation
+3. B. Avoir des droits civils et politiques et des devoirs envers l'État
+4. B. Respecter la Constitution et les lois de la République
+5. B. Contrôler la conformité des lois et des élections à la Constitution
+6. B. Rapprocher l'administration des citoyens en confiant des compétences aux communes et régions
+7. A. « Ô Cameroun, berceau de nos ancêtres »
+8. B. Le gouvernement du peuple, par le peuple et pour le peuple
+9. B. Un enfant soumis au travail forcé
+10. B. Refuser de payer et de recevoir des pots-de-vin, et dénoncer les faits

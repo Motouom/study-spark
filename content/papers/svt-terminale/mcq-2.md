@@ -1,223 +1,124 @@
-# CAMEROON Baccalauréat SCIENCES DE LA VIE ET DE LA TERRE P1 SET 2
+# CAMEROON BAC SCIENCES DE LA VIE ET DE LA TERRE — ÉPREUVE 1 (QCM) — SÉRIE 2
 
-## Multiple Choice Question Bank
+## Épreuve de QCM
 
-**Level:** Advanced Level (Lycée)
-**Class:** Terminale
-**Series:** C, D, TI
-**Subject:** Sciences de la Vie et de la Terre
-**Exam:** Baccalauréat
+**Niveau :** Terminale — Baccalauréat
+**Série :** C, D, TI
+**Matière :** Sciences de la Vie et de la Terre (SVT)
+**Durée :** 30 minutes
+**Coefficient :** 2
 
-**Instructions:**
+**Consignes :**
 
-- Choisis la bonne réponse A, B, C ou D pour chaque question.
-- Reporte clairement tes réponses sur la feuille de réponses fournie.
-- Chaque question vaut le même nombre de points. Aucun point n'est retiré pour une mauvaise réponse.
-- Utilise le corrigé à la fin de l'épreuve pour vérifier tes réponses.
+- Cet exercice comporte 10 questions à choix multiples (QCM).
+- Pour chaque question, une seule réponse est correcte parmi A, B, C et D.
+- Reporte tes réponses sur la feuille prévue à cet effet.
+- Chaque bonne réponse vaut 1 point. Aucun point n'est retiré pour une mauvaise réponse.
+- Le corrigé se trouve à la fin de l'épreuve.
 
 ---
 
 ## QUESTIONS
 
-**Q1.** L'anticorps est :
+**Question 1.** La réplication de l'ADN est dite semi-conservative, ce qui signifie que chaque molécule fille est constituée :
 
-A. une protéine qui neutralise l'antigène
-B. un antigène
-C. un globule
-D. une hormone
-
----
-
-**Q2.** La vaccination :
-
-A. stimule l'immunité adaptative
-B. détruit les anticorps
-C. est inutile
-D. affaiblit l'immunité
+A. d'un brin parental et d'un brin nouvellement synthétisé
+B. de deux brins entièrement nouveaux
+C. de deux brins entièrement parentaux
+D. de brins fragmentés au hasard
 
 ---
 
-**Q3.** Le VIH :
+**Question 2.** Lors d'un croisement entre deux individus hétérozygotes (Aa × Aa), la proportion phénotypique attendue dans la descendance pour un caractère à dominance complète est :
 
-A. détruit les lymphocytes T
-B. produit des anticorps
-C. est une bactérie
-D. est un parasite
-
----
-
-**Q4.** Le SIDA est causé par :
-
-A. le VIH
-B. une bactérie
-C. un parasite
-D. un champignon
+A. 3/4 phénotype dominant, 1/4 phénotype récessif
+B. 1/2 dominant, 1/2 récessif
+C. 1/4 dominant, 3/4 récessif
+D. tous les descendants de phénotype dominant
 
 ---
 
-**Q5.** La neurotransmission :
+**Question 3.** La phagocytose, première ligne de défense cellulaire, est assurée principalement par :
 
-A. transmet l'influx nerveux
-B. produit des hormones
-C. transporte l'oxygène
-D. coagule le sang
-
----
-
-**Q6.** Le neurone :
-
-A. transmet l'influx nerveux
-B. produit des hormones
-C. transporte l'oxygène
-D. coagule le sang
+A. les macrophages et les polynucléaires neutrophiles
+B. les lymphocytes B uniquement
+C. les lymphocytes T cytotoxiques uniquement
+D. les plaquettes sanguines
 
 ---
 
-**Q7.** La synapse :
+**Question 4.** La mémoire immunitaire est assurée par :
 
-A. zone de contact entre neurones
-B. le corps du neurone
-C. l'axone
-D. la dendrite
-
----
-
-**Q8.** Les hormones :
-
-A. sont des messagers chimiques
-B. sont des neurones
-C. sont des globules
-D. sont des anticorps
+A. des lymphocytes à longue durée de vie (mémoire) spécifiques de l'antigène
+B. des anticorps circulants en très grande quantité
+C. des macrophages phagocytaires
+D. le complément activé en permanence
 
 ---
 
-**Q9.** Le système endocrinien :
+**Question 5.** Le diabète de type 1 (insulino-dépendant) résulte d'une :
 
-A. produit des hormones
-B. transmet l'influx nerveux
-C. transporte l'oxygène
-D. coagule le sang
-
----
-
-**Q10.** La glycémie est :
-
-A. le taux de glucose dans le sang
-B. le taux de sel
-C. le taux de protéines
-D. le taux de lipides
+A. destruction des cellules β des îlots de Langerhans du pancréas
+B. insensibilité des cellules cibles à l'insuline
+C. surproduction de glucagon
+D. hyperactivité de la thyroïde
 
 ---
 
-**Q11.** L'insuline :
+**Question 6.** Les dorsales océaniques sont des zones de divergence où :
 
-A. diminue la glycémie
-B. augmente la glycémie
-C. n'a aucun effet
-D. est un glucide
-
----
-
-**Q12.** Le glucagon :
-
-A. augmente la glycémie
-B. diminue la glycémie
-C. n'a aucun effet
-D. est un glucide
+A. de la croûte océanique nouvelle est créée par remontée de magma
+B. de la croûte océanique est détruite par subduction
+C. les plaques continentales entrent en collision
+D. les sédiments s'accumulent sans déformation
 
 ---
 
-**Q13.** Le diabète :
+**Question 7.** La théorie de la dérive des continents proposée par Alfred Wegener reposait principalement sur :
 
-A. trouble de la régulation de la glycémie
-B. une maladie du cœur
-C. une maladie des reins
-D. une maladie des poumons
-
----
-
-**Q14.** La reproduction sexuée :
-
-A. fait intervenir deux gamètes
-B. un seul gamète
-C. aucun gamète
-D. des spores
+A. la complémentarité des côtes et la distribution des fossiles
+B. l'étude des séismes profonds
+C. l'observation des dorsales océaniques
+D. la mesure du magnétisme des basaltes
 
 ---
 
-**Q15.** La fécondation :
+**Question 8.** Une aneuploïdie comme la trisomie 21 résulte d'une :
 
-A. fusion de deux gamètes
-B. division cellulaire
-C. production de gamètes
-D. respiration
-
----
-
-**Q16.** La contraception :
-
-A. évite une grossesse
-B. favorise la grossesse
-C. guérit une maladie
-D. stimule la croissance
+A. non-disjonction des chromosomes homologues lors de la méiose
+B. mutation ponctuelle d'un gène
+C. duplication d'un gène
+D. translocation équilibrée sans perte de matériel
 
 ---
 
-**Q17.** Les IST :
+**Question 9.** La fécondation rétablit la diploïdie (2n) car elle correspond à :
 
-A. sont transmises sexuellement
-B. sont héréditaires
-C. sont alimentaires
-D. sont respiratoires
-
----
-
-**Q18.** Le préservatif :
-
-A. protège contre les IST et le VIH
-B. protège uniquement la grossesse
-C. est inutile
-D. est dangereux
+A. la fusion de deux gamètes haploïdes (n) qui restaure le nombre de chromosomes de l'espèce
+B. la division d'une cellule diploïde en deux cellules haploïdes
+C. la multiplication des cellules germinales par mitose
+D. la fusion de deux cellules diploïdes
 
 ---
 
-**Q19.** La tectonique des plaques :
+**Question 10.** Le gène codant pour la β-globine, dont la mutation provoque la drépanocytose, est localisé sur :
 
-A. explique les séismes et volcans
-B. explique la photosynthèse
-C. explique la digestion
-D. explique la respiration
-
----
-
-**Q20.** Le séisme :
-
-A. rupture des roches en profondeur
-B. éruption volcanique
-C. pluie
-D. vent
+A. le chromosome 11
+B. le chromosome X
+C. le chromosome Y
+D. l'ADN mitochondrial uniquement
 
 ---
 
 ## CORRIGÉ
 
-1. une protéine qui neutralise l'antigène
-2. stimule l'immunité adaptative
-3. détruit les lymphocytes T
-4. le VIH
-5. transmet l'influx nerveux
-6. transmet l'influx nerveux
-7. zone de contact entre neurones
-8. sont des messagers chimiques
-9. produit des hormones
-10. le taux de glucose dans le sang
-11. diminue la glycémie
-12. augmente la glycémie
-13. trouble de la régulation de la glycémie
-14. fait intervenir deux gamètes
-15. fusion de deux gamètes
-16. évite une grossesse
-17. sont transmises sexuellement
-18. protège contre les IST et le VIH
-19. explique les séismes et volcans
-20. rupture des roches en profondeur
+1. A — La réplication semi-conservative conserve un brin parental par molécule fille (expérience de Meselson et Stahl).
+2. A — Croisement Aa × Aa : génotypes AA, Aa, Aa, aa ; 3/4 portent l'allèle dominant.
+3. A — Macrophages et polynucléaires neutrophiles assurent la phagocytose de l'immunité innée.
+4. A — Les lymphocytes mémoire spécifiques assurent une réponse secondaire plus rapide et intense.
+5. A — Le diabète de type 1 résulte de la destruction auto-immune des cellules β productrices d'insuline.
+6. A — Les dorsales créent de la lithosphère océanique par accrétion magmatique.
+7. A — Wegener s'appuyait sur la complémentarité des côtes et les fossiles (arguments paléontologiques et morphologiques).
+8. A — La trisomie 21 provient d'une non-disjonction, créant un gamète à 24 chromosomes.
+9. A — La fusion de deux gamètes haploïdes (n) rétablit le caryotype diploïde (2n).
+10. A — Le gène de la β-globine (HBB) est porté par le chromosome 11 ; la mutation E6V est responsable de la drépanocytose.
