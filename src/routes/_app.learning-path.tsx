@@ -189,7 +189,7 @@ function LearningPathPage() {
                   <div className="mt-4 rounded-lg border border-border bg-secondary/20 p-3">
                     <div className="mb-3 flex items-center justify-between gap-3">
                       <div className="text-xs uppercase tracking-wider text-muted-foreground">
-                        {aiPath.source === "ai" ? "AI generated" : "Local fallback"}
+                        {aiPath.source === "ai" ? "AI generated" : "StudySpark generated"}
                       </div>
                       <Badge variant="secondary">7 days</Badge>
                     </div>
