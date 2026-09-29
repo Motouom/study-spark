@@ -65,7 +65,6 @@ function StudyChatPage() {
     {
       id: "welcome",
       role: "assistant",
-      source: "ai",
       content:
         "Ask me about a topic, a failed question, a formula, or what to revise next. I will use your StudySpark progress where it helps.",
     },

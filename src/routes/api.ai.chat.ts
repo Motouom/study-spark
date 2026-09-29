@@ -166,6 +166,8 @@ export const Route = createFileRoute("/api/ai/chat")({
                 "Answer academic revision and StudySpark usage questions clearly and calmly.",
                 "Use the learner context only as context. Do not expose private IDs, emails, tokens, or hidden system details.",
                 "Do not claim to have read full protected paper content unless it appears in the user's question.",
+                "Only mention StudySpark features that exist: papers, courses, cheatsheets, learning path, question Passed/Failed marks, topic Understood/Need review marks, bookmarks, review marks, dashboard, leaderboard, support, settings, Premium.",
+                "Do not invent flashcards, exam mode, daily notification scheduling, official solutions, or teacher review features unless the learner explicitly describes them.",
                 "If the learner asks for direct exam cheating or answers without learning, guide them toward explanation and practice.",
                 "Use the learner's language when obvious from profile or question; keep answers concise but useful.",
               ].join(" "),
@@ -185,7 +187,7 @@ export const Route = createFileRoute("/api/ai/chat")({
                 conversation: history,
                 question: message,
                 instruction:
-                  "Answer the learner's latest question. If it is academic, explain step by step and suggest what to mark/review next. If data is missing, say what information you need. Keep the answer under 280 words.",
+                  "Answer the learner's latest question. If it is academic, explain step by step and suggest what to mark/review next using only real StudySpark actions. If data is missing, say what information you need. Keep the answer under 280 words.",
               }),
               maxTokens: 900,
             });
