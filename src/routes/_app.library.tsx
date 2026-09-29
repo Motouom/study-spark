@@ -24,7 +24,7 @@ import {
 import { useMemo, useState } from "react";
 import { useStudyProfile } from "@/hooks/use-study-profile";
 import { useStudyContent, type CourseDocument } from "@/hooks/use-study-content";
-import { usePaperStudyOverview } from "@/hooks/use-paper-study-progress";
+import { countStructuralQuestions, useStructuralProgress } from "@/hooks/use-structural-progress";
 import { supabaseConfigured } from "@/lib/supabase";
 import { useI18n } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
@@ -50,20 +50,21 @@ function LibraryPage() {
     : SUBJECTS;
   const [q, setQ] = useState("");
   const [subject, setSubject] = useState<Subject | null>(null);
-  const readingProgress = usePaperStudyOverview();
+  const structuralProgress = useStructuralProgress();
 
-  // Best depth per paper across sessions (each visit creates a new session
-  // row, so the latest row alone would read 0%).
+  // Best question-passage percentage per paper (only passed questions count;
+  // failed/started questions do not contribute to progress).
   const bestByDoc = useMemo(() => {
     const map = new Map<string, number>();
-    for (const session of readingProgress.sessions) {
-      map.set(
-        session.documentId,
-        Math.max(map.get(session.documentId) ?? 0, session.maxScrollPercent),
-      );
+    for (const document of courseDocuments) {
+      const totalQuestions = countStructuralQuestions(document.markdownContent);
+      const passed = structuralProgress.progress.filter(
+        (item) => item.documentId === document.id && item.status === "passed",
+      ).length;
+      map.set(document.id, totalQuestions > 0 ? Math.round((passed / totalQuestions) * 100) : 0);
     }
     return map;
-  }, [readingProgress.sessions]);
+  }, [courseDocuments, structuralProgress.progress]);
 
   const subjectProgress = useMemo(() => {
     const bySubject = new Map<string, { total: number; reached: number }>();
