@@ -200,7 +200,7 @@ the corresponding feature fails silently or with a 500 error.
 | `OPENROUTER_API_KEY` | AI features | OpenRouter dashboard |
 | `AI_MODEL` | AI features | Default: `openrouter/free` |
 | `AI_BASE_URL` | AI features | Default: `https://openrouter.ai/api/v1` |
-| `APP_PUBLIC_URL` | Payment redirects, AI headers | `https://study-spark-237.vercel.app` (production) |
+| `APP_PUBLIC_URL` | Payment redirects, AI headers | `https://studyspark.cm` (production) |
 
 ### 4.2 Where secrets are stored
 
@@ -245,7 +245,7 @@ the corresponding feature fails silently or with a 500 error.
    verify endpoint:
 
 ```bash
-curl -X POST https://study-spark-237.vercel.app/api/payments/fapshi/verify \
+curl -X POST https://studyspark.cm/api/payments/fapshi/verify \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <learner-auth-token>" \
   -d '{"transactionId": "<fapshi-transaction-id>"}'
@@ -272,7 +272,7 @@ suspected:
 ### 5.3 Webhook not reaching the server
 
 1. Confirm the Fapshi webhook URL is exactly:
-   `https://study-spark-237.vercel.app/api/payments/fapshi/webhook`
+   `https://studyspark.cm/api/payments/fapshi/webhook`
 2. Confirm `FAPSHI_WEBHOOK_SECRET` in Vercel matches the Fapshi dashboard.
 3. Check Vercel function logs for `POST /api/payments/fapshi/webhook`.
 4. Test with a sandbox payment to confirm end-to-end flow.
@@ -299,7 +299,7 @@ suspected:
 3. Confirm Supabase Auth provider settings have the matching Google client ID
    and secret.
 4. Confirm the Supabase site URL and redirect allowlist include:
-   `https://study-spark-237.vercel.app/auth/callback`
+   `https://studyspark.cm/auth/callback`
 
 ### 6.2 All learners signed out unexpectedly
 

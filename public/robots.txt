@@ -22,4 +22,4 @@ Disallow: /streak
 Disallow: /support
 Disallow: /signin
 
-Sitemap: https://study-spark-237.vercel.app/sitemap.xml
+Sitemap: https://studyspark.cm/sitemap.xml

@@ -13,7 +13,7 @@
 | Owner / DRI |  |
 | Build SHA | `git rev-parse HEAD` |
 | Vercel deployment URL |  |
-| Canonical URL under test | `https://study-spark-237.vercel.app` (until custom domain replaces it) |
+| Canonical URL under test | `https://studyspark.cm` (until custom domain replaces it) |
 | Supabase project ref | `ekqlqsyirsakdxonxmis` |
 
 Related docs: `docs/deployment-runbook.md`, `docs/supabase-migrations.md`, `docs/supabase-auth-setup.md`, `docs/arc42.md`, `docs/qa/bilingual-mobile-ux/`, `docs/analytics-launch-queries.md`.
@@ -34,7 +34,7 @@ Related docs: `docs/deployment-runbook.md`, `docs/supabase-migrations.md`, `docs
 |---|---|---|---|
 | Single production Vercel project `study-spark` connected to `Motouom/study-spark@main` | Vercel Dashboard → Project → Settings → Git |  |  |
 | Exactly one production deployment per push to `main` | Push harmless commit, count deployments |  |  |
-| `APP_PUBLIC_URL=https://study-spark-237.vercel.app` (or custom domain when live) | Vercel Env Vars + `src/lib/seo.ts:1` `SITE_URL` + `vercel.json` |  |  |
+| `APP_PUBLIC_URL=https://studyspark.cm` (or custom domain when live) | Vercel Env Vars + `src/lib/seo.ts:1` `SITE_URL` + `vercel.json` |  |  |
 | `canonicalUrl("/")`, `alternateLinks("/","/fr")` return production URL | View source `<link rel="canonical">` on `/`, `/pricing`, `/terms`, `/fr/terms` |  |  |
 | `public/sitemap.xml` and `public/robots.txt` point to canonical, private routes blocked | `curl https://<canonical>/sitemap.xml`, `curl .../robots.txt` |  |  |
 | Custom domain (when ready, see #8) — DNS, SSL, HSTS, redirect `www` → apex | `dig`, `curl -I https://<custom>` |  |  |
@@ -131,7 +131,7 @@ See `deployment-runbook.md` §8:
 - [ ] `public/service-worker.js` `CACHE_VERSION` bumped if offline assets changed, offline page `/offline.html` cached, authenticated/API/AI/payment routes **not** cached (shared phone protection).
 - [ ] Install prompt: `public/pwa-install-prompt.js` shows nudge after `beforeinstallprompt` with delay, dismiss 7d, later 8h, hidden in standalone.
 - [ ] Offline: airplane mode → navigate shows StudySpark offline message, not blank.
-- [ ] Android Chrome → Install → opens within `study-spark-237.vercel.app` scope.
+- [ ] Android Chrome → Install → opens within `studyspark.cm` scope.
 
 ## 11) Analytics
 
@@ -258,9 +258,9 @@ supabase link --project-ref ekqlqsyirsakdxonxmis
 supabase migration list --linked
 supabase db query --linked --file database/supabase/<file>.sql
 # verification queries: see docs/supabase-migrations.md
-curl -I https://study-spark-237.vercel.app/terms
-curl https://study-spark-237.vercel.app/sitemap.xml
-curl https://study-spark-237.vercel.app/robots.txt
+curl -I https://studyspark.cm/terms
+curl https://studyspark.cm/sitemap.xml
+curl https://studyspark.cm/robots.txt
 ```
 
 Public URLs to check: `/`, `/fr`, `/pricing`, `/fr/tarifs`, `/terms`, `/privacy`, `/refund`, `/fr/terms`, `/fr/privacy`, `/fr/refund`, `/signin`, `/dashboard`, `/library`, `/progress`, `/settings`, `/support`, `/_app` shell.

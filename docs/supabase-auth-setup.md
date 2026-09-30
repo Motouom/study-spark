@@ -56,7 +56,7 @@ For production, configure one of these before launch:
 
 2. If no custom domain is available yet, finish Google OAuth consent branding and verification:
    app name `StudySpark`, app logo, support email, developer contact email, application home page
-   `https://study-spark-237.vercel.app`, privacy policy URL, and terms URL. Google may still show
+   `https://studyspark.cm`, privacy policy URL, and terms URL. Google may still show
    the Supabase callback domain until the OAuth app/domain is verified.
 
 Do not try to hide this with client code. The account chooser is served by Google and must be fixed
@@ -68,14 +68,14 @@ In Supabase Dashboard > Authentication > URL Configuration:
 
 - Set the local site URL to `http://127.0.0.1:8082` while developing on the current Vite server.
 - Add `http://127.0.0.1:8082/auth/callback` to redirect URLs.
-- Set the production site URL to `https://study-spark-237.vercel.app`.
-- Add `https://study-spark-237.vercel.app/auth/callback` to redirect URLs.
+- Set the production site URL to `https://studyspark.cm`.
+- Add `https://studyspark.cm/auth/callback` to redirect URLs.
 
 Supabase should receive the app callback URL:
 
 ```text
 http://127.0.0.1:8082/auth/callback
-https://study-spark-237.vercel.app/auth/callback
+https://studyspark.cm/auth/callback
 ```
 
 ## Important note

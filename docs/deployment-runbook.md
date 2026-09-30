@@ -23,7 +23,7 @@ Vercel team: motouoms-projects
 Vercel project: study-spark
 Git repository: Motouom/study-spark
 Production branch: main
-Production URL: https://study-spark-237.vercel.app
+Production URL: https://studyspark.cm
 ```
 
 Ignore or remove these duplicate StudySpark projects after confirming they no longer hold needed domains, environment variables, analytics, or deployment history:
@@ -37,12 +37,12 @@ any other Vercel project connected to Motouom/study-spark on main
 External services must point to the canonical production URL:
 
 ```text
-APP_PUBLIC_URL=https://study-spark-237.vercel.app
-Fapshi webhook=https://study-spark-237.vercel.app/api/payments/fapshi/webhook
-Supabase site URL=https://study-spark-237.vercel.app
-Supabase redirect URL=https://study-spark-237.vercel.app/auth/callback
+APP_PUBLIC_URL=https://studyspark.cm
+Fapshi webhook=https://studyspark.cm/api/payments/fapshi/webhook
+Supabase site URL=https://studyspark.cm
+Supabase redirect URL=https://studyspark.cm/auth/callback
 Google OAuth redirect URL=https://ekqlqsyirsakdxonxmis.supabase.co/auth/v1/callback
-Sitemap=https://study-spark-237.vercel.app/sitemap.xml
+Sitemap=https://studyspark.cm/sitemap.xml
 ```
 
 ### Duplicate Vercel Project Cleanup
@@ -88,7 +88,7 @@ Use `Production and Preview` unless a value must differ per environment.
 For production, set:
 
 ```text
-APP_PUBLIC_URL=https://study-spark-237.vercel.app
+APP_PUBLIC_URL=https://studyspark.cm
 ```
 
 ## 4. Supabase Setup
@@ -114,14 +114,14 @@ supabase migration list --linked
 7. Configure allowed redirect URLs:
 
 ```text
-https://study-spark-237.vercel.app/auth/callback
+https://studyspark.cm/auth/callback
 http://127.0.0.1:8082/auth/callback
 ```
 
 8. Set the production site URL:
 
 ```text
-https://study-spark-237.vercel.app
+https://studyspark.cm
 ```
 
 9. Confirm RLS policies are enabled for learner-owned data.
@@ -167,7 +167,7 @@ After applying SQL:
 3. Set the webhook URL:
 
 ```text
-https://study-spark-237.vercel.app/api/payments/fapshi/webhook
+https://studyspark.cm/api/payments/fapshi/webhook
 ```
 
 4. Set the webhook secret to the same value stored as `FAPSHI_WEBHOOK_SECRET` in Vercel.
@@ -187,7 +187,7 @@ Only the canonical `study-spark` Vercel project should build and deploy automati
 
 After deployment:
 
-- Open the public landing page at `https://study-spark-237.vercel.app`.
+- Open the public landing page at `https://studyspark.cm`.
 - Confirm the install prompt shows `StudySpark`, the StudySpark icon, and the Cameroon GCE practice description.
 - Leave the public page open long enough to confirm the StudySpark install nudge appears only when the browser reports the app is installable.
 - Open `/pricing`.
@@ -201,7 +201,7 @@ After deployment:
 - Request AI progress analysis and confirm either AI or fallback content appears.
 - Start a sandbox Fapshi payment and verify the payment return path.
 - Confirm private pages are not listed in `public/sitemap.xml`.
-- In Android Chrome, install the app and confirm it opens within the `study-spark-237.vercel.app` scope.
+- In Android Chrome, install the app and confirm it opens within the `studyspark.cm` scope.
 - Turn network offline and confirm navigation shows the StudySpark offline message instead of a blank page.
 - Confirm Vercel shows one new production deployment for the pushed commit, not multiple deployments across duplicate projects.
 
@@ -253,7 +253,7 @@ Actions:
 
 - Keep only the canonical `study-spark` project connected to Git.
 - Disconnect Git deployments from duplicate projects before deleting them.
-- Confirm `APP_PUBLIC_URL`, Supabase Auth URLs, Fapshi webhook, sitemap, and robots all point to `https://study-spark-237.vercel.app`.
+- Confirm `APP_PUBLIC_URL`, Supabase Auth URLs, Fapshi webhook, sitemap, and robots all point to `https://studyspark.cm`.
 - Push a harmless commit and confirm Vercel shows one production deployment.
 
 ### Blank page after deploy
