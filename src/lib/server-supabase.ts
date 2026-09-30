@@ -68,3 +68,38 @@ export function getAuthenticatedSupabase(request: Request) {
     },
   });
 }
+
+const LEGACY_ROLE_MAP: Record<string, string> = {
+  reviewer: "moderator",
+  admin: "content_admin",
+  super_admin: "platform_admin",
+};
+
+/**
+ * Resolves a user's effective roles server-side. Reads the DB-assigned roles
+ * via the `current_user_roles()` RPC (service role), falling back to the legacy
+ * JWT app_metadata.role when the RPC is unavailable. Returns the raw role ids.
+ */
+export async function getUserRoles(user: User): Promise<string[]> {
+  const legacy = user.app_metadata?.role;
+  const legacyRoles = legacy && LEGACY_ROLE_MAP[legacy] ? [LEGACY_ROLE_MAP[legacy]] : [];
+
+  try {
+    const supabase = getServiceSupabase();
+    const { data, error } = await supabase.rpc("current_user_roles");
+    if (error) throw error;
+    if (Array.isArray(data) && data.length > 0) {
+      return data.filter((role): role is string => typeof role === "string");
+    }
+  } catch {
+    // Fall through to the legacy JWT role.
+  }
+
+  return legacyRoles;
+}
+
+/** True if the user has any of the given roles (server-side). */
+export async function userHasAnyRole(user: User, roles: string[]): Promise<boolean> {
+  const userRoles = await getUserRoles(user);
+  return userRoles.some((role) => roles.includes(role));
+}

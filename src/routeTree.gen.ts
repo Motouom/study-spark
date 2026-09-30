@@ -36,11 +36,14 @@ import { Route as AppStreakRouteImport } from './routes/_app.streak'
 import { Route as AppSupportRouteImport } from './routes/_app.support'
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as ControlPanel9k3xIndexRouteImport } from './routes/control-panel-9k3x.index'
+import { Route as ControlPanel9k3xAbuseRouteImport } from './routes/control-panel-9k3x.abuse'
 import { Route as ControlPanel9k3xCheatsheetsRouteImport } from './routes/control-panel-9k3x.cheatsheets'
 import { Route as ControlPanel9k3xCoursesRouteImport } from './routes/control-panel-9k3x.courses'
+import { Route as ControlPanel9k3xDataExportRouteImport } from './routes/control-panel-9k3x.data-export'
 import { Route as ControlPanel9k3xIntegrationsRouteImport } from './routes/control-panel-9k3x.integrations'
 import { Route as ControlPanel9k3xLogsRouteImport } from './routes/control-panel-9k3x.logs'
 import { Route as ControlPanel9k3xQuestionsRouteImport } from './routes/control-panel-9k3x.questions'
+import { Route as ControlPanel9k3xRolesRouteImport } from './routes/control-panel-9k3x.roles'
 import { Route as ControlPanel9k3xSettingsRouteImport } from './routes/control-panel-9k3x.settings'
 import { Route as ControlPanel9k3xUsersRouteImport } from './routes/control-panel-9k3x.users'
 import { Route as FrPrivacyRouteImport } from './routes/fr.privacy'
@@ -49,6 +52,7 @@ import { Route as FrTarifsRouteImport } from './routes/fr.tarifs'
 import { Route as FrTermsRouteImport } from './routes/fr.terms'
 import { Route as AppCourseDocumentIdRouteImport } from './routes/_app.course.$documentId'
 import { Route as AppQuizSetupRouteImport } from './routes/_app.quiz.setup'
+import { Route as ApiAccountDataExportRouteImport } from './routes/api.account.data-export'
 import { Route as ApiAiChatRouteImport } from './routes/api.ai.chat'
 import { Route as ApiAiFormatPaperRouteImport } from './routes/api.ai.format-paper'
 import { Route as ApiAiHealthRouteImport } from './routes/api.ai.health'
@@ -193,6 +197,11 @@ const ControlPanel9k3xIndexRoute = ControlPanel9k3xIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
+const ControlPanel9k3xAbuseRoute = ControlPanel9k3xAbuseRouteImport.update({
+  id: '/abuse',
+  path: '/abuse',
+  getParentRoute: () => ControlPanel9k3xRoute,
+} as any)
 const ControlPanel9k3xCheatsheetsRoute =
   ControlPanel9k3xCheatsheetsRouteImport.update({
     id: '/cheatsheets',
@@ -204,6 +213,12 @@ const ControlPanel9k3xCoursesRoute = ControlPanel9k3xCoursesRouteImport.update({
   path: '/courses',
   getParentRoute: () => ControlPanel9k3xRoute,
 } as any)
+const ControlPanel9k3xDataExportRoute =
+  ControlPanel9k3xDataExportRouteImport.update({
+    id: '/data-export',
+    path: '/data-export',
+    getParentRoute: () => ControlPanel9k3xRoute,
+  } as any)
 const ControlPanel9k3xIntegrationsRoute =
   ControlPanel9k3xIntegrationsRouteImport.update({
     id: '/integrations',
@@ -221,6 +236,11 @@ const ControlPanel9k3xQuestionsRoute =
     path: '/questions',
     getParentRoute: () => ControlPanel9k3xRoute,
   } as any)
+const ControlPanel9k3xRolesRoute = ControlPanel9k3xRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => ControlPanel9k3xRoute,
+} as any)
 const ControlPanel9k3xSettingsRoute =
   ControlPanel9k3xSettingsRouteImport.update({
     id: '/settings',
@@ -261,6 +281,11 @@ const AppQuizSetupRoute = AppQuizSetupRouteImport.update({
   id: '/setup',
   path: '/setup',
   getParentRoute: () => AppQuizRoute,
+} as any)
+const ApiAccountDataExportRoute = ApiAccountDataExportRouteImport.update({
+  id: '/api/account/data-export',
+  path: '/api/account/data-export',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAiChatRoute = ApiAiChatRouteImport.update({
   id: '/api/ai/chat',
@@ -336,11 +361,14 @@ export interface FileRoutesByFullPath {
   '/streak': typeof AppStreakRoute
   '/support': typeof AppSupportRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/abuse': typeof ControlPanel9k3xAbuseRoute
   '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
+  '/control-panel-9k3x/data-export': typeof ControlPanel9k3xDataExportRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
+  '/control-panel-9k3x/roles': typeof ControlPanel9k3xRolesRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/fr/privacy': typeof FrPrivacyRoute
@@ -350,6 +378,7 @@ export interface FileRoutesByFullPath {
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
+  '/api/account/data-export': typeof ApiAccountDataExportRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
   '/api/ai/health': typeof ApiAiHealthRoute
@@ -385,11 +414,14 @@ export interface FileRoutesByTo {
   '/streak': typeof AppStreakRoute
   '/support': typeof AppSupportRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/abuse': typeof ControlPanel9k3xAbuseRoute
   '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
+  '/control-panel-9k3x/data-export': typeof ControlPanel9k3xDataExportRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
+  '/control-panel-9k3x/roles': typeof ControlPanel9k3xRolesRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/fr/privacy': typeof FrPrivacyRoute
@@ -399,6 +431,7 @@ export interface FileRoutesByTo {
   '/control-panel-9k3x': typeof ControlPanel9k3xIndexRoute
   '/course/$documentId': typeof AppCourseDocumentIdRoute
   '/quiz/setup': typeof AppQuizSetupRoute
+  '/api/account/data-export': typeof ApiAccountDataExportRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
   '/api/ai/health': typeof ApiAiHealthRoute
@@ -437,11 +470,14 @@ export interface FileRoutesById {
   '/_app/streak': typeof AppStreakRoute
   '/_app/support': typeof AppSupportRoute
   '/auth/callback': typeof AuthCallbackRoute
+  '/control-panel-9k3x/abuse': typeof ControlPanel9k3xAbuseRoute
   '/control-panel-9k3x/cheatsheets': typeof ControlPanel9k3xCheatsheetsRoute
   '/control-panel-9k3x/courses': typeof ControlPanel9k3xCoursesRoute
+  '/control-panel-9k3x/data-export': typeof ControlPanel9k3xDataExportRoute
   '/control-panel-9k3x/integrations': typeof ControlPanel9k3xIntegrationsRoute
   '/control-panel-9k3x/logs': typeof ControlPanel9k3xLogsRoute
   '/control-panel-9k3x/questions': typeof ControlPanel9k3xQuestionsRoute
+  '/control-panel-9k3x/roles': typeof ControlPanel9k3xRolesRoute
   '/control-panel-9k3x/settings': typeof ControlPanel9k3xSettingsRoute
   '/control-panel-9k3x/users': typeof ControlPanel9k3xUsersRoute
   '/fr/privacy': typeof FrPrivacyRoute
@@ -451,6 +487,7 @@ export interface FileRoutesById {
   '/control-panel-9k3x/': typeof ControlPanel9k3xIndexRoute
   '/_app/course/$documentId': typeof AppCourseDocumentIdRoute
   '/_app/quiz/setup': typeof AppQuizSetupRoute
+  '/api/account/data-export': typeof ApiAccountDataExportRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/ai/format-paper': typeof ApiAiFormatPaperRoute
   '/api/ai/health': typeof ApiAiHealthRoute
@@ -489,11 +526,14 @@ export interface FileRouteTypes {
     | '/streak'
     | '/support'
     | '/auth/callback'
+    | '/control-panel-9k3x/abuse'
     | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
+    | '/control-panel-9k3x/data-export'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
+    | '/control-panel-9k3x/roles'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
     | '/fr/privacy'
@@ -503,6 +543,7 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/'
     | '/course/$documentId'
     | '/quiz/setup'
+    | '/api/account/data-export'
     | '/api/ai/chat'
     | '/api/ai/format-paper'
     | '/api/ai/health'
@@ -538,11 +579,14 @@ export interface FileRouteTypes {
     | '/streak'
     | '/support'
     | '/auth/callback'
+    | '/control-panel-9k3x/abuse'
     | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
+    | '/control-panel-9k3x/data-export'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
+    | '/control-panel-9k3x/roles'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
     | '/fr/privacy'
@@ -552,6 +596,7 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x'
     | '/course/$documentId'
     | '/quiz/setup'
+    | '/api/account/data-export'
     | '/api/ai/chat'
     | '/api/ai/format-paper'
     | '/api/ai/health'
@@ -589,11 +634,14 @@ export interface FileRouteTypes {
     | '/_app/streak'
     | '/_app/support'
     | '/auth/callback'
+    | '/control-panel-9k3x/abuse'
     | '/control-panel-9k3x/cheatsheets'
     | '/control-panel-9k3x/courses'
+    | '/control-panel-9k3x/data-export'
     | '/control-panel-9k3x/integrations'
     | '/control-panel-9k3x/logs'
     | '/control-panel-9k3x/questions'
+    | '/control-panel-9k3x/roles'
     | '/control-panel-9k3x/settings'
     | '/control-panel-9k3x/users'
     | '/fr/privacy'
@@ -603,6 +651,7 @@ export interface FileRouteTypes {
     | '/control-panel-9k3x/'
     | '/_app/course/$documentId'
     | '/_app/quiz/setup'
+    | '/api/account/data-export'
     | '/api/ai/chat'
     | '/api/ai/format-paper'
     | '/api/ai/health'
@@ -625,6 +674,7 @@ export interface RootRouteChildren {
   SigninRoute: typeof SigninRoute
   TermsRoute: typeof TermsRoute
   AuthCallbackRoute: typeof AuthCallbackRoute
+  ApiAccountDataExportRoute: typeof ApiAccountDataExportRoute
   ApiAiChatRoute: typeof ApiAiChatRoute
   ApiAiFormatPaperRoute: typeof ApiAiFormatPaperRoute
   ApiAiHealthRoute: typeof ApiAiHealthRoute
@@ -827,6 +877,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ControlPanel9k3xIndexRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
+    '/control-panel-9k3x/abuse': {
+      id: '/control-panel-9k3x/abuse'
+      path: '/abuse'
+      fullPath: '/control-panel-9k3x/abuse'
+      preLoaderRoute: typeof ControlPanel9k3xAbuseRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
     '/control-panel-9k3x/cheatsheets': {
       id: '/control-panel-9k3x/cheatsheets'
       path: '/cheatsheets'
@@ -839,6 +896,13 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/control-panel-9k3x/courses'
       preLoaderRoute: typeof ControlPanel9k3xCoursesRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/data-export': {
+      id: '/control-panel-9k3x/data-export'
+      path: '/data-export'
+      fullPath: '/control-panel-9k3x/data-export'
+      preLoaderRoute: typeof ControlPanel9k3xDataExportRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
     '/control-panel-9k3x/integrations': {
@@ -860,6 +924,13 @@ declare module '@tanstack/react-router' {
       path: '/questions'
       fullPath: '/control-panel-9k3x/questions'
       preLoaderRoute: typeof ControlPanel9k3xQuestionsRouteImport
+      parentRoute: typeof ControlPanel9k3xRoute
+    }
+    '/control-panel-9k3x/roles': {
+      id: '/control-panel-9k3x/roles'
+      path: '/roles'
+      fullPath: '/control-panel-9k3x/roles'
+      preLoaderRoute: typeof ControlPanel9k3xRolesRouteImport
       parentRoute: typeof ControlPanel9k3xRoute
     }
     '/control-panel-9k3x/settings': {
@@ -917,6 +988,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/quiz/setup'
       preLoaderRoute: typeof AppQuizSetupRouteImport
       parentRoute: typeof AppQuizRoute
+    }
+    '/api/account/data-export': {
+      id: '/api/account/data-export'
+      path: '/api/account/data-export'
+      fullPath: '/api/account/data-export'
+      preLoaderRoute: typeof ApiAccountDataExportRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/ai/chat': {
       id: '/api/ai/chat'
@@ -1038,22 +1116,28 @@ const AppRouteChildren: AppRouteChildren = {
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface ControlPanel9k3xRouteChildren {
+  ControlPanel9k3xAbuseRoute: typeof ControlPanel9k3xAbuseRoute
   ControlPanel9k3xCheatsheetsRoute: typeof ControlPanel9k3xCheatsheetsRoute
   ControlPanel9k3xCoursesRoute: typeof ControlPanel9k3xCoursesRoute
+  ControlPanel9k3xDataExportRoute: typeof ControlPanel9k3xDataExportRoute
   ControlPanel9k3xIntegrationsRoute: typeof ControlPanel9k3xIntegrationsRoute
   ControlPanel9k3xLogsRoute: typeof ControlPanel9k3xLogsRoute
   ControlPanel9k3xQuestionsRoute: typeof ControlPanel9k3xQuestionsRoute
+  ControlPanel9k3xRolesRoute: typeof ControlPanel9k3xRolesRoute
   ControlPanel9k3xSettingsRoute: typeof ControlPanel9k3xSettingsRoute
   ControlPanel9k3xUsersRoute: typeof ControlPanel9k3xUsersRoute
   ControlPanel9k3xIndexRoute: typeof ControlPanel9k3xIndexRoute
 }
 
 const ControlPanel9k3xRouteChildren: ControlPanel9k3xRouteChildren = {
+  ControlPanel9k3xAbuseRoute: ControlPanel9k3xAbuseRoute,
   ControlPanel9k3xCheatsheetsRoute: ControlPanel9k3xCheatsheetsRoute,
   ControlPanel9k3xCoursesRoute: ControlPanel9k3xCoursesRoute,
+  ControlPanel9k3xDataExportRoute: ControlPanel9k3xDataExportRoute,
   ControlPanel9k3xIntegrationsRoute: ControlPanel9k3xIntegrationsRoute,
   ControlPanel9k3xLogsRoute: ControlPanel9k3xLogsRoute,
   ControlPanel9k3xQuestionsRoute: ControlPanel9k3xQuestionsRoute,
+  ControlPanel9k3xRolesRoute: ControlPanel9k3xRolesRoute,
   ControlPanel9k3xSettingsRoute: ControlPanel9k3xSettingsRoute,
   ControlPanel9k3xUsersRoute: ControlPanel9k3xUsersRoute,
   ControlPanel9k3xIndexRoute: ControlPanel9k3xIndexRoute,
@@ -1089,6 +1173,7 @@ const rootRouteChildren: RootRouteChildren = {
   SigninRoute: SigninRoute,
   TermsRoute: TermsRoute,
   AuthCallbackRoute: AuthCallbackRoute,
+  ApiAccountDataExportRoute: ApiAccountDataExportRoute,
   ApiAiChatRoute: ApiAiChatRoute,
   ApiAiFormatPaperRoute: ApiAiFormatPaperRoute,
   ApiAiHealthRoute: ApiAiHealthRoute,

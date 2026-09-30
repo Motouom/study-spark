@@ -11,21 +11,21 @@ export const Route = createFileRoute("/control-panel-9k3x/settings")({
 
 const ROLE_MATRIX = [
   {
-    role: "reviewer",
+    role: "moderator",
     canRead: true,
     canWriteContent: false,
     canManagePlans: false,
     canManageSettings: false,
   },
   {
-    role: "admin",
+    role: "content_admin",
     canRead: true,
     canWriteContent: true,
     canManagePlans: false,
     canManageSettings: false,
   },
   {
-    role: "super_admin",
+    role: "platform_admin",
     canRead: true,
     canWriteContent: true,
     canManagePlans: true,
@@ -122,29 +122,27 @@ function AdminSettings() {
         <section className="rounded-xl border border-border bg-card p-5 lg:col-span-3">
           <h2 className="mb-3 text-sm font-medium">Role assignment and recovery process</h2>
           <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
-            <li>Sign in to the Supabase dashboard as a project owner.</li>
             <li>
-              Open <strong>Authentication → Users</strong> and find the target account.
+              Roles are stored in the <code className="rounded bg-secondary px-1">user_roles</code>{" "}
+              table and managed from the <strong>Roles</strong> page (platform admins only).
             </li>
             <li>
-              Click the user → Edit → under <strong>App Metadata</strong>, set{" "}
-              <code className="rounded bg-secondary px-1">{`{"role": "admin"}`}</code> (or{" "}
-              <code className="rounded bg-secondary px-1">reviewer</code> /{" "}
-              <code className="rounded bg-secondary px-1">super_admin</code>).
+              Legacy JWT roles still work:{" "}
+              <code className="rounded bg-secondary px-1">super_admin</code> → platform_admin,{" "}
+              <code className="rounded bg-secondary px-1">admin</code> → content_admin,{" "}
+              <code className="rounded bg-secondary px-1">reviewer</code> → moderator.
             </li>
             <li>
-              Save. The change takes effect on the next JWT refresh (up to 1 hour) or immediately
-              after sign-out and sign-in.
+              Role changes take effect immediately — they are read from the database, not the JWT.
             </li>
             <li>
-              To revoke: set <code className="rounded bg-secondary px-1">{`{"role": null}`}</code>{" "}
-              or remove the key entirely.
+              To revoke: remove the assignment from the <strong>Roles</strong> page.
             </li>
           </ol>
           <div className="mt-4 rounded-lg border border-warning/30 bg-warning/10 p-3 text-xs text-warning-foreground">
-            <strong>Emergency owner recovery:</strong> If all super_admin accounts are locked out, a
-            Supabase project owner can restore access directly from the Supabase dashboard using the
-            steps above without requiring a code change or deployment.
+            <strong>Emergency owner recovery:</strong> If all platform_admin accounts are locked
+            out, a Supabase project owner can restore access directly from the Supabase dashboard
+            using the steps above without requiring a code change or deployment.
           </div>
         </section>
 

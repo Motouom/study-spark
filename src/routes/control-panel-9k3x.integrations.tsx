@@ -163,8 +163,11 @@ function Integrations() {
           status="connected"
           description="Admin access is controlled through Supabase app metadata and database-side role checks."
         >
-          <Row label="Allowed roles" value="admin, reviewer, super_admin" />
-          <Row label="Role source" value="auth.users.raw_app_meta_data.role" />
+          <Row
+            label="Allowed roles"
+            value="teacher, school_admin, content_admin, moderator, platform_admin"
+          />
+          <Row label="Role source" value="user_roles table (migration 070)" />
           <Row label="Admin writes" value="Supabase RPC only" />
           <Row label="Audit trail" value="admin_audit_logs" />
         </Panel>

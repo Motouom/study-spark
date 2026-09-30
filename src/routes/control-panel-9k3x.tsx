@@ -62,6 +62,9 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/control-panel-9k3x/courses", label: "Courses", icon: PlayCircle },
   { to: "/control-panel-9k3x/cheatsheets", label: "Cheatsheets", icon: BookMarked },
   { to: "/control-panel-9k3x/integrations", label: "Integrations", icon: Plug },
+  { to: "/control-panel-9k3x/roles", label: "Roles", icon: Shield },
+  { to: "/control-panel-9k3x/abuse", label: "Abuse reports", icon: Shield },
+  { to: "/control-panel-9k3x/data-export", label: "Data export", icon: Shield },
   { to: "/control-panel-9k3x/logs", label: "Audit logs", icon: ScrollText },
   { to: "/control-panel-9k3x/settings", label: "Settings", icon: SettingsIcon },
 ];
@@ -126,7 +129,7 @@ function AdminAccessDenied({
         <div className="rounded-xl border border-border bg-card p-6 shadow-elevated">
           <p className="text-sm text-muted-foreground">
             {message ??
-              "Sign in with an account whose Supabase app metadata role is admin, reviewer, or super_admin."}
+              "Sign in with an account that has a staff role (teacher, school admin, content admin, moderator, or platform admin)."}
           </p>
           <div className="mt-4 rounded-lg border border-border bg-secondary/30 p-3 text-xs">
             <div className="flex justify-between gap-3">
