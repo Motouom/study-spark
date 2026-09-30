@@ -23,6 +23,72 @@ function cleanText(value: unknown, maxLength: number) {
 
 function localStudyAnswer(question: string) {
   const lower = question.toLowerCase();
+  if (
+    /\b(trig|trigonometry|trigonom[eé]trie)\b.*\b(formula|formulae|formulas|identit|relation)/i.test(
+      lower,
+    ) ||
+    /\b(formula|formulae|formulas|identit|relation)\b.*\b(trig|trigonometry|trigonom[eé]trie)/i.test(
+      lower,
+    )
+  ) {
+    return [
+      "## Trigonometry formulae",
+      "",
+      "### Reciprocal identities",
+      "$$\\sin x=\\frac{1}{\\csc x},\\quad \\cos x=\\frac{1}{\\sec x},\\quad \\tan x=\\frac{1}{\\cot x}$$",
+      "$$\\csc x=\\frac{1}{\\sin x},\\quad \\sec x=\\frac{1}{\\cos x},\\quad \\cot x=\\frac{1}{\\tan x}$$",
+      "",
+      "### Quotient identities",
+      "$$\\tan x=\\frac{\\sin x}{\\cos x},\\quad \\cot x=\\frac{\\cos x}{\\sin x}$$",
+      "",
+      "### Pythagorean identities",
+      "$$\\sin^2x+\\cos^2x=1$$",
+      "$$1+\\tan^2x=\\sec^2x$$",
+      "$$1+\\cot^2x=\\csc^2x$$",
+      "",
+      "### Complementary-angle identities",
+      "$$\\sin(90^\\circ-x)=\\cos x,\\quad \\cos(90^\\circ-x)=\\sin x$$",
+      "$$\\tan(90^\\circ-x)=\\cot x$$",
+      "",
+      "### Negative-angle identities",
+      "$$\\sin(-x)=-\\sin x,\\quad \\cos(-x)=\\cos x,\\quad \\tan(-x)=-\\tan x$$",
+      "",
+      "### Compound-angle formulae",
+      "$$\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B$$",
+      "$$\\sin(A-B)=\\sin A\\cos B-\\cos A\\sin B$$",
+      "$$\\cos(A+B)=\\cos A\\cos B-\\sin A\\sin B$$",
+      "$$\\cos(A-B)=\\cos A\\cos B+\\sin A\\sin B$$",
+      "$$\\tan(A+B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}$$",
+      "$$\\tan(A-B)=\\frac{\\tan A-\\tan B}{1+\\tan A\\tan B}$$",
+      "",
+      "### Double-angle formulae",
+      "$$\\sin 2A=2\\sin A\\cos A$$",
+      "$$\\cos 2A=\\cos^2A-\\sin^2A=2\\cos^2A-1=1-2\\sin^2A$$",
+      "$$\\tan 2A=\\frac{2\\tan A}{1-\\tan^2A}$$",
+      "",
+      "### Half-angle formulae",
+      "$$\\sin^2\\frac{A}{2}=\\frac{1-\\cos A}{2},\\quad \\cos^2\\frac{A}{2}=\\frac{1+\\cos A}{2}$$",
+      "$$\\tan\\frac{A}{2}=\\frac{\\sin A}{1+\\cos A}=\\frac{1-\\cos A}{\\sin A}$$",
+      "",
+      "### Product-to-sum formulae",
+      "$$2\\sin A\\cos B=\\sin(A+B)+\\sin(A-B)$$",
+      "$$2\\cos A\\cos B=\\cos(A+B)+\\cos(A-B)$$",
+      "$$2\\sin A\\sin B=\\cos(A-B)-\\cos(A+B)$$",
+      "",
+      "### Sum-to-product formulae",
+      "$$\\sin A+\\sin B=2\\sin\\frac{A+B}{2}\\cos\\frac{A-B}{2}$$",
+      "$$\\sin A-\\sin B=2\\cos\\frac{A+B}{2}\\sin\\frac{A-B}{2}$$",
+      "$$\\cos A+\\cos B=2\\cos\\frac{A+B}{2}\\cos\\frac{A-B}{2}$$",
+      "$$\\cos A-\\cos B=-2\\sin\\frac{A+B}{2}\\sin\\frac{A-B}{2}$$",
+      "",
+      "### Sine and cosine rules",
+      "$$\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}$$",
+      "$$a^2=b^2+c^2-2bc\\cos A$$",
+      "",
+      "Mark this topic as Understood only after you can use these identities in simplification, proof, and equation questions without checking the list.",
+    ].join("\n");
+  }
+
   if (/study|revise|plan|prepare|read|paper|question|fail|pass|understand/.test(lower)) {
     return [
       "Start from the exact item you struggled with, then mark it honestly as Passed, Failed, Understood, or Need review.",
@@ -169,7 +235,10 @@ export const Route = createFileRoute("/api/ai/chat")({
                 "Only mention StudySpark features that exist: papers, courses, cheatsheets, learning path, question Passed/Failed marks, topic Understood/Need review marks, bookmarks, review marks, dashboard, leaderboard, support, settings, Premium.",
                 "Do not invent flashcards, exam mode, daily notification scheduling, official solutions, or teacher review features unless the learner explicitly describes them.",
                 "If the learner asks for direct exam cheating or answers without learning, guide them toward explanation and practice.",
-                "Use the learner's language when obvious from profile or question; keep answers concise but useful.",
+                "Use the learner's language when obvious from profile or question; keep answers complete enough to satisfy the request.",
+                "If the learner asks for formulae, formulas, identities, definitions, laws, or rules, give the actual formulae directly in Markdown with proper LaTeX math. Do not answer with generic advice.",
+                "For broad formula requests, organize by category, include the core formulae first, and add a brief note on when to use them.",
+                "Never say you need a subject/topic if the learner has already named one.",
               ].join(" "),
               prompt: JSON.stringify({
                 learner: profile
@@ -187,9 +256,9 @@ export const Route = createFileRoute("/api/ai/chat")({
                 conversation: history,
                 question: message,
                 instruction:
-                  "Answer the learner's latest question. If it is academic, explain step by step and suggest what to mark/review next using only real StudySpark actions. If data is missing, say what information you need. Keep the answer under 280 words.",
+                  "Answer the learner's latest question. If it is academic, answer the academic content first. For formula requests, list the actual formulae using Markdown headings and LaTeX display math, then add a short study action. Suggest what to mark/review next using only real StudySpark actions. Keep ordinary answers under 400 words, but allow up to 900 words for broad formula lists.",
               }),
-              maxTokens: 900,
+              maxTokens: 1800,
             });
 
             return Response.json({ answer: answer.trim(), source: "ai" });
