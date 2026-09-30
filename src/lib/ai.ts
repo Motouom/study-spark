@@ -7,6 +7,7 @@ export type AiFailureKind =
   | "timeout"
   | "parse_failure"
   | "empty_response"
+  | "moderation"
   | "network"
   | "quota_exhausted";
 

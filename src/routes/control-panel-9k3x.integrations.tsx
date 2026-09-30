@@ -1,14 +1,121 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Database, KeyRound, Lock, RefreshCw, ShieldCheck } from "lucide-react";
-import { supabaseConfigured } from "@/lib/supabase";
+import {
+  Brain,
+  CheckCircle2,
+  Database,
+  KeyRound,
+  Lock,
+  RefreshCw,
+  ShieldCheck,
+} from "lucide-react";
+import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { useAdminData } from "@/hooks/use-admin-data";
-import type { ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/control-panel-9k3x/integrations")({
   component: Integrations,
 });
+
+type AiHealth = {
+  ok: boolean;
+  providers: Record<string, { configured: boolean; dailyCap: number; model: string }>;
+  quota: { configured: boolean; mode: string; message: string };
+  priorityOrder: string[];
+};
+
+async function fetchAiHealth(): Promise<AiHealth> {
+  if (!supabase) throw new Error("Supabase is not configured.");
+  const { data } = await supabase.auth.getSession();
+  const response = await fetch("/api/ai/health", {
+    headers: {
+      Authorization: `Bearer ${data.session?.access_token ?? ""}`,
+    },
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.error ?? "AI health check failed.");
+  return payload as AiHealth;
+}
+
+function AiHealthPanel() {
+  const [health, setHealth] = useState<AiHealth | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      setHealth(await fetchAiHealth());
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "AI health check failed.");
+      setHealth(null);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
+
+  const configuredCount = health
+    ? Object.values(health.providers).filter((provider) => provider.configured).length
+    : 0;
+
+  return (
+    <Panel
+      icon={Brain}
+      title="AI providers"
+      status={health ? (health.ok ? "connected" : "missing") : "missing"}
+      description="AI learning path, progress insights, chat, and paper formatting rely on these providers."
+    >
+      {loading && !health && (
+        <p className="text-sm text-muted-foreground">Checking AI provider health…</p>
+      )}
+      {error && (
+        <p className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-xs text-destructive">
+          {error}
+        </p>
+      )}
+      {health && (
+        <>
+          <Row
+            label="Status"
+            value={health.ok ? `Healthy (${configuredCount} configured)` : "Not configured"}
+          />
+          <Row label="Priority order" value={health.priorityOrder.join(" → ")} />
+          <Row
+            label="Quota tracking"
+            value={health.quota.configured ? health.quota.mode : "disabled"}
+          />
+          {Object.entries(health.providers).map(([name, provider]) => (
+            <Row
+              key={name}
+              label={name}
+              value={
+                provider.configured
+                  ? `Configured · ${provider.model} · cap ${provider.dailyCap}`
+                  : "Missing key"
+              }
+            />
+          ))}
+          {!health.ok && (
+            <p className="rounded-lg border border-warning/30 bg-warning/10 p-3 text-xs text-warning-foreground">
+              No AI provider key is configured, so learners will receive local fallback plans and
+              insights instead of AI-generated content.
+            </p>
+          )}
+        </>
+      )}
+      <Button variant="outline" size="sm" onClick={() => void load()}>
+        <RefreshCw className="mr-1.5 h-3.5 w-3.5" />
+        Re-check
+      </Button>
+    </Panel>
+  );
+}
 
 function Integrations() {
   const { documents, learners, logs, loading, reload } = useAdminData();
@@ -29,6 +136,8 @@ function Integrations() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <AiHealthPanel />
+
         <Panel
           icon={Database}
           title="Supabase"
