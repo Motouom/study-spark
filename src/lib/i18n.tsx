@@ -14,7 +14,7 @@ export type TranslationKey = keyof typeof en;
 
 const STORAGE_KEY = "studyspark.locale";
 
-const en = {
+export const en = {
   "common.accountPayments": "Account and payments",
   "common.advancedSearch": "Advanced search",
   "common.availableNow": "available now",
@@ -517,7 +517,7 @@ const en = {
     "Your plan, level, and subjects are attached automatically so we can help faster.",
 } as const;
 
-const fr: Partial<Record<TranslationKey, string>> = {
+export const fr: Partial<Record<TranslationKey, string>> = {
   "common.accountPayments": "Compte et paiements",
   "common.advancedSearch": "Recherche avancée",
   "common.availableNow": "disponibles maintenant",

@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { EducationSystem, StudentProfile } from "@/lib/study-reference-data";
-import { educationSystemForLanguage } from "@/lib/study-reference-data";
+import type { StudentProfile } from "@/lib/study-reference-data";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import { getSupabaseDisplayName, useSupabaseUser } from "@/hooks/use-supabase-user";
+import { normalizeProfile, profileFromRow, profileKey, type ProfileRow } from "@/lib/profile";
 
-const PROFILE_PREFIX = "studyspark.profile.";
 const SAVE_TIMEOUT_MS = 12000;
 const PROFILE_CHANGED_EVENT = "studyspark:profile-changed";
 const SUBSCRIPTION_REFRESH_KEY = "studyspark.subscription-refreshed-at";
@@ -15,32 +14,9 @@ type ProfileChangedDetail = {
   profile: StudentProfile | null;
 };
 
-type ProfileRow = {
-  name: string;
-  language: string;
-  education_system?: string | null;
-  country: string;
-  region: string;
-  city: string;
-  location_verified: boolean;
-  location_latitude: number | null;
-  location_longitude: number | null;
-  location_verified_at: string | null;
-  level: string;
-  class_level: string;
-  series: string;
-  subjects: string[] | null;
-  plan?: string | null;
-  premium_until?: string | null;
-};
-
-function profileKey(userId: string) {
-  return `${PROFILE_PREFIX}${userId}`;
-}
-
 export function clearStudySparkLocalData() {
   for (const key of Object.keys(localStorage)) {
-    if (key.startsWith(PROFILE_PREFIX) || key === SUBSCRIPTION_REFRESH_KEY) {
+    if (key.startsWith(profileKey("")) || key === SUBSCRIPTION_REFRESH_KEY) {
       localStorage.removeItem(key);
     }
   }
@@ -65,52 +41,6 @@ function readLocalProfile(userId: string) {
     localStorage.removeItem(profileKey(userId));
     return null;
   }
-}
-
-function normalizeProfile(profile: Partial<StudentProfile>): StudentProfile {
-  const language = profile.language ?? "english";
-  const educationSystem = profile.educationSystem ?? educationSystemForLanguage(language);
-  const defaultClassLevel = educationSystem === "francophone" ? "troisieme" : "form_5";
-  const defaultSeries = educationSystem === "francophone" ? "tronc_commun" : "science";
-  return {
-    name: profile.name ?? "",
-    language,
-    educationSystem,
-    country: profile.country ?? "Cameroon",
-    region: profile.region ?? "Not set",
-    city: profile.city ?? "",
-    locationVerified: profile.locationVerified ?? false,
-    locationLatitude: profile.locationLatitude ?? null,
-    locationLongitude: profile.locationLongitude ?? null,
-    locationVerifiedAt: profile.locationVerifiedAt ?? null,
-    level: profile.level ?? "ordinary",
-    classLevel: profile.classLevel ?? defaultClassLevel,
-    series: profile.series ?? defaultSeries,
-    subjects: profile.subjects ?? [],
-    plan: profile.plan ?? "free",
-    premiumUntil: profile.premiumUntil ?? null,
-  };
-}
-
-function profileFromRow(row: ProfileRow): StudentProfile {
-  return normalizeProfile({
-    name: row.name,
-    language: row.language as StudentProfile["language"],
-    educationSystem: row.education_system as EducationSystem | undefined,
-    country: row.country,
-    region: row.region,
-    city: row.city,
-    locationVerified: row.location_verified,
-    locationLatitude: row.location_latitude,
-    locationLongitude: row.location_longitude,
-    locationVerifiedAt: row.location_verified_at,
-    level: row.level as StudentProfile["level"],
-    classLevel: row.class_level as StudentProfile["classLevel"],
-    series: row.series as StudentProfile["series"],
-    subjects: (row.subjects ?? []) as StudentProfile["subjects"],
-    plan: row.plan === "premium" ? "premium" : "free",
-    premiumUntil: row.premium_until ?? null,
-  });
 }
 
 function withTimeout<T>(promise: Promise<T>, message: string): Promise<T> {
