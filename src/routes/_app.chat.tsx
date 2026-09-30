@@ -238,7 +238,7 @@ function StudyChatPage() {
                     {assistant && message.source && (
                       <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
                         <Sparkles className="h-3 w-3" />
-                        {message.source === "ai" ? "AI answer" : "Local fallback"}
+                        {message.source === "ai" ? "AI answer" : "StudySpark answer"}
                       </div>
                     )}
                   </div>

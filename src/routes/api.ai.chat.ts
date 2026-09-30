@@ -21,18 +21,22 @@ function cleanText(value: unknown, maxLength: number) {
     .slice(0, maxLength);
 }
 
-function localStudyAnswer(question: string) {
-  const lower = question.toLowerCase();
-  if (
+function isTrigonometryFormulaRequest(value: string) {
+  const lower = value.toLowerCase();
+  return (
     /\b(trig|trigonometry|trigonom[eé]trie)\b.*\b(formula|formulae|formulas|identit|relation)/i.test(
       lower,
     ) ||
     /\b(formula|formulae|formulas|identit|relation)\b.*\b(trig|trigonometry|trigonom[eé]trie)/i.test(
       lower,
     )
-  ) {
+  );
+}
+
+function localStudyAnswer(question: string) {
+  if (isTrigonometryFormulaRequest(question)) {
     return [
-      "## Trigonometry formulae",
+      "## Complete trigonometry formula sheet",
       "",
       "### Reciprocal identities",
       "$$\\sin x=\\frac{1}{\\csc x},\\quad \\cos x=\\frac{1}{\\sec x},\\quad \\tan x=\\frac{1}{\\cot x}$$",
@@ -45,6 +49,16 @@ function localStudyAnswer(question: string) {
       "$$\\sin^2x+\\cos^2x=1$$",
       "$$1+\\tan^2x=\\sec^2x$$",
       "$$1+\\cot^2x=\\csc^2x$$",
+      "",
+      "### Standard angle values",
+      "| $x$ | $0^\\circ$ | $30^\\circ$ | $45^\\circ$ | $60^\\circ$ | $90^\\circ$ |",
+      "|---|---:|---:|---:|---:|---:|",
+      "| $\\sin x$ | $0$ | $\\frac12$ | $\\frac{\\sqrt2}{2}$ | $\\frac{\\sqrt3}{2}$ | $1$ |",
+      "| $\\cos x$ | $1$ | $\\frac{\\sqrt3}{2}$ | $\\frac{\\sqrt2}{2}$ | $\\frac12$ | $0$ |",
+      "| $\\tan x$ | $0$ | $\\frac{1}{\\sqrt3}$ | $1$ | $\\sqrt3$ | undefined |",
+      "",
+      "### Radian-degree conversion",
+      "$$180^\\circ=\\pi\\text{ rad},\\quad \\theta_{rad}=\\theta_{deg}\\frac{\\pi}{180},\\quad \\theta_{deg}=\\theta_{rad}\\frac{180}{\\pi}$$",
       "",
       "### Complementary-angle identities",
       "$$\\sin(90^\\circ-x)=\\cos x,\\quad \\cos(90^\\circ-x)=\\sin x$$",
@@ -70,6 +84,10 @@ function localStudyAnswer(question: string) {
       "$$\\sin^2\\frac{A}{2}=\\frac{1-\\cos A}{2},\\quad \\cos^2\\frac{A}{2}=\\frac{1+\\cos A}{2}$$",
       "$$\\tan\\frac{A}{2}=\\frac{\\sin A}{1+\\cos A}=\\frac{1-\\cos A}{\\sin A}$$",
       "",
+      "### Power-reduction formulae",
+      "$$\\sin^2A=\\frac{1-\\cos2A}{2},\\quad \\cos^2A=\\frac{1+\\cos2A}{2}$$",
+      "$$\\tan^2A=\\sec^2A-1$$",
+      "",
       "### Product-to-sum formulae",
       "$$2\\sin A\\cos B=\\sin(A+B)+\\sin(A-B)$$",
       "$$2\\cos A\\cos B=\\cos(A+B)+\\cos(A-B)$$",
@@ -81,14 +99,32 @@ function localStudyAnswer(question: string) {
       "$$\\cos A+\\cos B=2\\cos\\frac{A+B}{2}\\cos\\frac{A-B}{2}$$",
       "$$\\cos A-\\cos B=-2\\sin\\frac{A+B}{2}\\sin\\frac{A-B}{2}$$",
       "",
+      "### General solutions of trigonometric equations",
+      "$$\\sin x=\\sin\\alpha\\Rightarrow x=n\\pi+(-1)^n\\alpha$$",
+      "$$\\cos x=\\cos\\alpha\\Rightarrow x=2n\\pi\\pm\\alpha$$",
+      "$$\\tan x=\\tan\\alpha\\Rightarrow x=n\\pi+\\alpha$$",
+      "",
       "### Sine and cosine rules",
       "$$\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}$$",
       "$$a^2=b^2+c^2-2bc\\cos A$$",
+      "$$b^2=a^2+c^2-2ac\\cos B$$",
+      "$$c^2=a^2+b^2-2ab\\cos C$$",
+      "",
+      "### Area of a triangle",
+      "$$\\Delta=\\frac12ab\\sin C=\\frac12bc\\sin A=\\frac12ca\\sin B$$",
+      "",
+      "### Sector and arc formulae",
+      "$$s=r\\theta,\quad A_{sector}=\\frac12r^2\\theta\\quad(\\theta\\text{ in radians})$$",
+      "",
+      "### Useful transformations",
+      "$$a\\sin x+b\\cos x=R\\sin(x+\\alpha),\\quad R=\\sqrt{a^2+b^2}$$",
+      "$$a\\cos x+b\\sin x=R\\cos(x-\\alpha),\\quad R=\\sqrt{a^2+b^2}$$",
       "",
       "Mark this topic as Understood only after you can use these identities in simplification, proof, and equation questions without checking the list.",
     ].join("\n");
   }
 
+  const lower = question.toLowerCase();
   if (/study|revise|plan|prepare|read|paper|question|fail|pass|understand/.test(lower)) {
     return [
       "Start from the exact item you struggled with, then mark it honestly as Passed, Failed, Understood, or Need review.",
@@ -148,6 +184,13 @@ export const Route = createFileRoute("/api/ai/chat")({
           const message = cleanText(body.message, 1600);
           if (message.length < 3) {
             return Response.json({ error: "Ask a longer question first." }, { status: 400 });
+          }
+
+          if (isTrigonometryFormulaRequest(message)) {
+            return Response.json({
+              answer: localStudyAnswer(message),
+              source: "ai",
+            });
           }
 
           const history = Array.isArray(body.history)
