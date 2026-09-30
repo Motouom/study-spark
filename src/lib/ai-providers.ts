@@ -332,13 +332,9 @@ async function callOpenAiCompatible(
       });
     }
     if (isProviderNonAnswer(content)) {
-      throw new AiProviderError(
-        "empty_response",
-        `${config.name} returned a moderation non-answer.`,
-        {
-          retryable: true,
-        },
-      );
+      throw new AiProviderError("moderation", `${config.name} returned a moderation non-answer.`, {
+        retryable: true,
+      });
     }
     return { content, provider: config.name };
   } catch (error) {

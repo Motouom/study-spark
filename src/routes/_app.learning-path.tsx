@@ -34,6 +34,7 @@ function LearningPathPage() {
   const [aiPath, setAiPath] = useState<{
     days: AiLearningPathDay[];
     source: "ai" | "fallback";
+    message?: string;
   } | null>(null);
   const startedIds = new Set(progress.sessions.map((item) => item.documentId));
   const reviewDocumentIds = new Set([
@@ -170,7 +171,11 @@ function LearningPathPage() {
                     onClick={async () => {
                       try {
                         const result = await ai.generateLearningPath();
-                        setAiPath({ days: result.days, source: result.source });
+                        setAiPath({
+                          days: result.days,
+                          source: result.source,
+                          message: result.message,
+                        });
                       } catch {
                         setAiPath(null);
                       }
@@ -193,6 +198,11 @@ function LearningPathPage() {
                       </div>
                       <Badge variant="secondary">7 days</Badge>
                     </div>
+                    {aiPath.source === "fallback" && aiPath.message && (
+                      <p className="mb-3 rounded-lg border border-border bg-background/60 p-3 text-xs text-muted-foreground">
+                        {aiPath.message}
+                      </p>
+                    )}
                     <p className="mb-3 text-xs text-muted-foreground">
                       Prioritized hardest-first from your review marks, reading depth, and
                       self-reported confidence.
