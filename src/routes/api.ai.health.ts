@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { getAiQuotaStatus, getMultiAiConfigStatus } from "@/lib/ai-providers";
-import { getAuthenticatedUser } from "@/lib/server-supabase";
+import { getAuthenticatedUser, userHasAnyRole } from "@/lib/server-supabase";
 
 export const Route = createFileRoute("/api/ai/health")({
   server: {
@@ -8,8 +8,12 @@ export const Route = createFileRoute("/api/ai/health")({
       GET: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
-          const role = user.app_metadata?.role;
-          if (role !== "admin" && role !== "reviewer" && role !== "super_admin") {
+          const authorized = await userHasAnyRole(user, [
+            "content_admin",
+            "moderator",
+            "platform_admin",
+          ]);
+          if (!authorized) {
             return Response.json({ error: "Admin access required." }, { status: 403 });
           }
 

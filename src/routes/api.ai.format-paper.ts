@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { aiConfigured, generateAiText, logAiFailure } from "@/lib/ai";
-import { getAuthenticatedUser } from "@/lib/server-supabase";
+import { getAuthenticatedUser, userHasAnyRole } from "@/lib/server-supabase";
 import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 function removeEmojis(value: string) {
@@ -34,8 +34,12 @@ export const Route = createFileRoute("/api/ai/format-paper")({
           const user = await getAuthenticatedUser(request);
           const limiter = await rateLimit(`ai:format-paper:${user.id}`, 20, 60 * 60 * 1000);
           if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
-          const role = user.app_metadata?.role;
-          if (role !== "admin" && role !== "reviewer" && role !== "super_admin") {
+          const authorized = await userHasAnyRole(user, [
+            "content_admin",
+            "moderator",
+            "platform_admin",
+          ]);
+          if (!authorized) {
             return Response.json({ error: "Admin access required." }, { status: 403 });
           }
 

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { getAuthenticatedUser, getServiceSupabase } from "@/lib/server-supabase";
+import { rateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const Route = createFileRoute("/api/payments/history")({
   server: {
@@ -7,6 +8,9 @@ export const Route = createFileRoute("/api/payments/history")({
       GET: async ({ request }) => {
         try {
           const user = await getAuthenticatedUser(request);
+          const limiter = await rateLimit(`payments:history:${user.id}`, 30, 60 * 60 * 1000);
+          if (!limiter.allowed) return rateLimitResponse(limiter.retryAfterSeconds);
+
           const supabase = getServiceSupabase();
 
           const { data, error } = await supabase

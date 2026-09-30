@@ -122,6 +122,54 @@ export type ProtectedContentEvent = {
 export type TopicDraft = Omit<AdminTopic, "questionCount">;
 export type CourseDocumentDraft = Omit<AdminCourseDocument, "id" | "updatedAt"> & { id?: string };
 
+export type AppRole = {
+  id: string;
+  label: string;
+  description: string;
+  isStaff: boolean;
+  rank: number;
+};
+
+export type UserRoleAssignment = {
+  userId: string;
+  role: string;
+  schoolId: string | null;
+  grantedBy: string | null;
+  createdAt: string;
+};
+
+export type AbuseReport = {
+  id: string;
+  reporterId: string;
+  targetType: string;
+  targetId: string;
+  category: string;
+  description: string;
+  status: string;
+  moderatorNotes: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GuardianLink = {
+  id: string;
+  guardianId: string;
+  studentId: string;
+  relationship: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DataExportRequest = {
+  id: string;
+  userId: string;
+  status: string;
+  requestedAt: string;
+  completedAt: string | null;
+  downloadUrl: string | null;
+};
+
 type AdminDataState = {
   topics: AdminTopic[];
   documents: AdminCourseDocument[];
@@ -417,6 +465,61 @@ export function useAdminData() {
     [load],
   );
 
+  // ─── Role-based security (issue #100) ─────────────────────────────────────
+
+  const listRoles = useCallback(async () => {
+    return rpc<Record<string, unknown>[]>("admin_list_roles");
+  }, []);
+
+  const listUserRoles = useCallback(async (userId: string) => {
+    return rpc<Record<string, unknown>[]>("admin_list_user_roles", { p_user_id: userId });
+  }, []);
+
+  const assignRole = useCallback(async (userId: string, role: string, schoolId?: string | null) => {
+    await rpc("admin_assign_role", {
+      p_user_id: userId,
+      p_role: role,
+      p_school_id: schoolId ?? null,
+    });
+  }, []);
+
+  const removeRole = useCallback(async (userId: string, role: string) => {
+    await rpc("admin_remove_role", { p_user_id: userId, p_role: role });
+  }, []);
+
+  const listAbuseReports = useCallback(async (status?: string | null) => {
+    return rpc<Record<string, unknown>[]>("admin_list_abuse_reports", {
+      p_status: status ?? null,
+    });
+  }, []);
+
+  const updateAbuseReport = useCallback(async (reportId: string, status: string, notes: string) => {
+    await rpc("admin_update_abuse_report", {
+      p_report_id: reportId,
+      p_status: status,
+      p_notes: notes,
+    });
+  }, []);
+
+  const listGuardianLinks = useCallback(async () => {
+    return rpc<Record<string, unknown>[]>("admin_list_guardian_links");
+  }, []);
+
+  const listDataExportRequests = useCallback(async () => {
+    return rpc<Record<string, unknown>[]>("admin_list_data_export_requests");
+  }, []);
+
+  const linkGuardian = useCallback(
+    async (guardianId: string, studentId: string, relationship: string) => {
+      await rpc("admin_link_guardian", {
+        p_guardian_id: guardianId,
+        p_student_id: studentId,
+        p_relationship: relationship,
+      });
+    },
+    [],
+  );
+
   return useMemo(
     () => ({
       ...state,
@@ -428,17 +531,35 @@ export function useAdminData() {
       deleteCourseDocument,
       resolveContentIssueReport,
       setLearnerPlan,
+      listRoles,
+      listUserRoles,
+      assignRole,
+      removeRole,
+      listAbuseReports,
+      updateAbuseReport,
+      listGuardianLinks,
+      linkGuardian,
+      listDataExportRequests,
     }),
     [
       archiveCourseDocument,
+      assignRole,
       deleteCourseDocument,
+      linkGuardian,
+      listAbuseReports,
+      listDataExportRequests,
+      listGuardianLinks,
+      listRoles,
+      listUserRoles,
       load,
+      removeRole,
       saveCourseDocument,
       saveTopic,
       setLearnerPlan,
       resolveContentIssueReport,
       state,
       unpublishCourseDocument,
+      updateAbuseReport,
     ],
   );
 }
