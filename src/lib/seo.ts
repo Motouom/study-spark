@@ -1,4 +1,4 @@
-export const SITE_URL = "https://study-spark-237.vercel.app";
+export const SITE_URL = "https://studyspark.cm";
 export const SITE_NAME = "StudySpark";
 export const OG_IMAGE_URL = `${SITE_URL}/og-image.png`;
 

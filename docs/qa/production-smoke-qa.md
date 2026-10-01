@@ -8,7 +8,7 @@
 | -------------------- | ------------------------------------ |
 | Date                 | 2026-09-29                           |
 | Environment          | Production                           |
-| Canonical URL        | `https://study-spark-237.vercel.app` |
+| Canonical URL        | `https://studyspark.cm` |
 | Supabase project ref | `ekqlqsyirsakdxonxmis`               |
 | Branch               | `fix/production-smoke-qa`            |
 
@@ -19,7 +19,7 @@
 ### 1. Latest production deployment serving current `main`
 
 - [ ] **Manual** — Vercel Dashboard → Deployment → confirm latest deployment SHA matches `git rev-parse HEAD` on `main`.
-- [ ] **Manual** — `curl -I https://study-spark-237.vercel.app` returns 200 and current build.
+- [ ] **Manual** — `curl -I https://studyspark.cm` returns 200 and current build.
 
 ### 2. Sign in + full authenticated learner flow
 

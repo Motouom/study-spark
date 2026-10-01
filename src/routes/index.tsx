@@ -150,9 +150,7 @@ function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-destructive/40" />
               <span className="h-2.5 w-2.5 rounded-full bg-warning/60" />
               <span className="h-2.5 w-2.5 rounded-full bg-success/60" />
-              <span className="ml-3 text-xs text-muted-foreground">
-                study-spark-237.vercel.app/dashboard
-              </span>
+              <span className="ml-3 text-xs text-muted-foreground">studyspark.cm/dashboard</span>
             </div>
             <div className="grid grid-cols-1 gap-4 p-6 md:grid-cols-3">
               <PreviewStat icon={<Flame className="h-4 w-4" />} label="Day streak" value="0" />
